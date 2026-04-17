@@ -8,17 +8,22 @@ create table public.profiles (
 
 -- Auto-create profile on signup
 create or replace function public.handle_new_user()
-returns trigger as $$
+returns trigger
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
 begin
   insert into public.profiles (id, role, name)
   values (
     new.id,
     case when new.email = current_setting('app.astrologer_email', true) then 'astrologer' else 'client' end,
     coalesce(new.raw_user_meta_data->>'full_name', new.email)
-  );
+  )
+  on conflict (id) do nothing;
   return new;
 end;
-$$ language plpgsql security definer;
+$$;
 
 create trigger on_auth_user_created
   after insert on auth.users
@@ -34,8 +39,8 @@ create table public.charts (
   birth_place  text not null,
   birth_lat    numeric,
   birth_lng    numeric,
-  ayanamsa     text not null default 'lahiri',
-  house_system text not null default 'sripathi',
+  ayanamsa     text default 'lahiri',
+  house_system text default 'sripathi',
   created_at   timestamptz default now()
 );
 
@@ -69,7 +74,7 @@ create table public.documents (
 create table public.conversations (
   id         uuid primary key default gen_random_uuid(),
   chart_id   uuid not null references public.charts(id) on delete cascade,
-  user_id    uuid not null references public.profiles(id),
+  user_id    uuid not null references public.profiles(id) on delete cascade,
   module     text not null check (module in ('build', 'consume')),
   title      text,
   created_at timestamptz default now()
@@ -97,6 +102,39 @@ create table public.reports (
   updated_at   timestamptz default now(),
   unique(chart_id, domain)
 );
+
+-- ─── Indexes ──────────────────────────────────────────────────────────────────
+
+create index on public.charts(client_id);
+create index on public.conversations(chart_id);
+create index on public.conversations(user_id);
+create index on public.messages(conversation_id);
+create index on public.messages(conversation_id, created_at);
+
+-- ─── updated_at trigger ───────────────────────────────────────────────────────
+
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+set search_path = public, pg_temp
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+create trigger trg_pyramid_layers_updated_at
+  before update on public.pyramid_layers
+  for each row execute procedure public.set_updated_at();
+
+create trigger trg_documents_updated_at
+  before update on public.documents
+  for each row execute procedure public.set_updated_at();
+
+create trigger trg_reports_updated_at
+  before update on public.reports
+  for each row execute procedure public.set_updated_at();
 
 -- ─── RLS ──────────────────────────────────────────────────────────────────────
 
@@ -157,11 +195,7 @@ create policy "conversations: astrologer all" on public.conversations
   );
 create policy "messages: astrologer all" on public.messages
   for all using (
-    exists (
-      select 1 from public.conversations c
-      join public.profiles p on p.id = auth.uid() and p.role = 'astrologer'
-      where c.id = conversation_id
-    )
+    exists (select 1 from public.profiles where id = auth.uid() and role = 'astrologer')
   );
 
 -- Storage bucket (run in Supabase dashboard Storage tab)
