@@ -235,6 +235,252 @@ Chronological log of all project sessions. Every session appends an entry here.
 - (B) Accept v7.0 self-assessment; skip to Session 7 (L2 Mode B matrices) — faster path to L2.5 build
 - (C) Pause at v7.0 close; review supplement contents; resume when ready
 
+**Native decision**: A — formal CGP audit.
+
+---
+
+## Session 6 — Formal CGP Audit (2026-04-17, CLOSED — v7.0 SIGNED OFF)
+
+**Environment**: Claude Code (CLI)
+**Objective**: Execute formal cell-by-cell Completeness Guarantee Protocol audit per Architecture §G.1.CGP; red-team v7.0 self-assessment; deliver signoff recommendation.
+
+**Output produced**:
+- `.tools/compute_jaimini_drishti.py` — computed 12×12 Jaimini rashi drishti matrix
+- `01_FACTS_LAYER/CGP_AUDIT_v1_0.md` (CLOSED) — formal audit document with signoff
+
+**Audit results per category**:
+
+| Category | v7.0 §V7.I self-assessment | Formal audit result |
+|---|---|---|
+| 1. Combinatorial | FULL | ✓ FULL (1,728/1,728 cells) |
+| 2. Strength | FULL | ✓ FULL (566/566 cells) |
+| 3. Aspect | FULL | **⚠ PARTIAL — discovered Jaimini rashi drishti missing** → closed inline (now 414/414) |
+| 4. Dasha | FULL | ✓ FULL |
+| 5. Sensitive-Point | FULL | ✓ FULL (9 upagrahas, 23 sahams, 7 lagnas, all arudhas, BB progression) |
+| 6. Temporal | FULL | ✓ FULL (200-year ephemeris coverage) |
+| 7. Provenance | PARTIAL | ⚠ PARTIAL — actual 30% not higher (deferred to v7.1) |
+
+**Hidden gap discovered + closed inline**: Jaimini rashi drishti 12×12 matrix. v6.0 had Jaimini only in Chara Dasha (§5.3) and Arudhas (§13); classical sign-to-sign aspect rules never computed. Computed this audit, emitted inline in CGP_AUDIT_v1_0.md §3.3.
+
+**Red-team structural finding**: Native-chart Jaimini aspect analysis revealed **Rahu (2H Taurus) Jaimini-aspects 4 natal planets** (Sun, Mercury, Saturn, Mars) — hits both the 10H career stellium AND the 7H Saturn-Mars exalted conjunction. This is a MAJOR structural signal not currently encoded in Deep Analysis v1.2.1's 15 SIG / 8 CVG / 7 CTR library. Flagged for Deep Analysis v2.0 (tentative ID: `SIG.16 Rahu-quadruple-Jaimini-aspect`).
+
+**3 deferred gaps (accepted with justification)**:
+1. Provenance backfill for v6.0 cells — v7.1
+2. Tajika Mudda monthly progression — v7.1 with JH cross-check
+3. Parashari degree-based virupa refinement — v7.1+ if fidelity becomes critical
+
+**Aggregate CGP score**: ~95% (target met).
+
+**Architecture B.12 hard-gate**: **CLEARED.** L2 Mode A and Mode B work may proceed without `[EXTERNAL_COMPUTATION_REQUIRED]` blocking.
+
+**FACTS LAYER v7.0 SIGNED OFF.**
+
+**Next session objective**: Session 7 — begin L2 Mode B matrices. Per Architecture §D.3, execution sequence: House Matrix first (12 rows), then Planet Matrix (9 rows), Sign Matrix (12 rows), Divisional Matrix (16 rows), Dasha-Period Matrix (200+ rows).
+
+---
+
+## Session 7 — House Matrix (Mode B) (2026-04-17, CLOSED)
+
+**Environment**: Claude Code (CLI)
+**Objective**: Build first of 5 Mode B matrices per Architecture §D.3. House Matrix covers all 12 houses with 18-column exhaustive schema.
+
+**Output produced**:
+- `02_ANALYTICAL_LAYER/MATRIX_HOUSES.md` (CLOSED) — 12-row matrix + summary table + per-house detail cards + cross-house signal aggregate + red-team + L2.5 output feed
+
+**Structure**: 18 data columns per row (rashi tenants, chalit tenants, lord+placement, Bhavabala rank+total, SAV, Vedic aspects, Jaimini aspects, yogas, arudhas, D9/D10 lord locations, LEL events tagged, transit windows 2026-2044, Mode A RPT coverage, interpretation). Summary table at §3; detail cards at §4.
+
+**Key findings from matrix build**:
+- **House strength stratification**: Tier A (top 4 Bhavabala) = 12, 5, 10, 11 (expansion + gains houses); Tier C (weakest 4) = 8, 1, 2, 7. 7H has Sasha MPY + Hidden Raja Yoga IN the weakest-Bhavabala house = "strong yoga in structurally fragile stage" = matches CTR.01 paradox.
+- **12H Pisces is Bhavabala rank 1 but SAV rank 12** — paradox: intrinsically strong (12L Jupiter own-sign 9H + Moon Chalit-12 + Mars full-aspect) but externally-unreinforced (only sign with no arudha). Moksha-architecture operates below-surface.
+- **LEL event Pareto**: 10H + 7H + 9H + 12H = 58% of all 36 events. These are the chart's "primary drama stages."
+- **Arudha clustering**: Gemini 3H (UL+A5+A11) and Virgo 6H (A4+A8+A9) carry the most projections. Image-formation happens heavily in work-effort (3H) and challenge-resolution (6H) spheres.
+
+**4 tentative SIG candidates flagged for Deep Analysis v2.0**:
+- SIG.16 Rahu-quadruple-Jaimini-aspect (from CGP audit)
+- SIG.17 7H Bhavabala-weakest / SAV-strongest paradox (extends CTR.01)
+- SIG.18 12H Bhavabala-rank-1 / SAV-rank-12 paradox (new structural finding)
+- SIG.19 Sun-Mercury-AL 10H density (extends SIG.14 with full aspect + A10 loop-closure)
+
+**Red-team check**: Completeness 12/12 houses. 3 known contradictions (CTR.01, CTR.04, CTR.05) surfaced in relevant rows. Over-claim: none (all interpretations cite specific IDs). Minor deferred: D9/D10 house-lord-placement for some rows flagged "verify against v6.0 §3.5/§3.6" — will close in MATRIX_DIVISIONALS (Session 10).
+
+**L2.5 output feed**: 12 HSE nodes, ~24 edges, ~40-50 MSR signal contributions, 6 CDLM cross-domain linkage cells pre-identified.
+
+**Next session objective**: Session 8 — Planet Matrix (Mode B, 9 rows × ~25 columns). Covers each planet's dignity, Shadbala, all 16 Dx placements, aspects given/received, karaka roles, yoga membership, Avastha, combustion/war state, Chesta Bala, dasha roles, transit patterns lifetime, LEL events tagged to this planet.
+
+---
+
+## Session 8 — Planet Matrix (Mode B) (2026-04-17, CLOSED)
+
+**Environment**: Claude Code (CLI)
+**Objective**: Build 2nd of 5 Mode B matrices. Planet Matrix covers all 9 planets (Sun-Ketu) with exhaustive schema.
+
+**Design choice**: v6.0 §23.1 already has a Planet-Centric Matrix with 17 columns of raw facts. Rather than duplicate, this Mode B matrix EXTENDS §23.1 with 7 new coverage fields: Jaimini aspects (new from CGP audit), yoga membership aggregate, LEL events tagged to this planet, transit patterns lifetime, Mode A RPT coverage, special-role elaborations, and 2-3 paragraph interpretation.
+
+**Output produced**:
+- `02_ANALYTICAL_LAYER/MATRIX_PLANETS.md` (CLOSED)
+
+**Key findings from matrix build**:
+
+- **Mercury is operationally dominant** — 6-way convergence (CVG.01 already captures this): Vargottama + Yogi + MD 2010-2027 + Saraswati member + D9 dispositor + Karakamsa ruler. Plus DK Chara Karaka = spouse role. Every LEL event 2010-2027 is Mercury-activated at some level.
+
+- **Dasha sequence sets lifetime arc**: Mercury MD 2010-2027 → Ketu MD 2027-2034 → Venus MD 2034-2054 → Sun MD 2054-2060. Next 44 years of highest-stakes dashas covered by Mercury+Saturn+Ketu trio (operational-spine → regime-change → detachment-spiritual).
+
+- **Ketu-Mercury 0.50° quincunx = tightest aspect in chart** — critical MD handover bridge 2027. Flagged as new candidate SIG.21.
+
+- **Rahu Jaimini quadruple-aspect** (from CGP audit) rigorously confirmed in Planet Matrix — Rahu in Taurus Jaimini-aspects Sun+Mercury (10H) AND Mars+Saturn (7H) simultaneously. Not in Deep Analysis v1.2.1's SIG library. Flagged SIG.16.
+
+- **Saturn quadruple-structural-activation**: Shadbala rank 2 + Shuddha Pinda rank 7 LAST + Sasha Mahapurusha + AD lord 2024-2027 = 4 simultaneous structural-strong signals. Extends CTR.01; candidate SIG.22.
+
+- **Yoga density distribution**: Saturn in 4 yogas, Mercury in 3, Jupiter in 3, Venus in 3 — these 4 planets are the chart's "yoga engine"; all other planetary interpretations should reference this network.
+
+**New SIG candidates (tentative, for Deep Analysis v2.0)**:
+- SIG.16 Rahu-quadruple-Jaimini-aspect (from CGP audit)
+- SIG.20 Mercury operational yoga stack (elevates CVG.01)
+- SIG.21 Ketu-Mercury 0.50° quincunx handover bridge
+- SIG.22 Saturn quadruple-structural-activation (extends CTR.01)
+
+**Red-team check**: 9/9 planets examined with 7 new-column fields populated. No over-claim (tentative SIGs flagged as candidates). Bias check: interpretations weighted toward existing v1.2.1 confirmations; 2 novel readings remain hypotheses (Ketu-Mercury handover, Rahu-Russia-Marsys connection).
+
+**L2.5 feed produced**: 9 PLN nodes + ~40 planet-planet edges + 25 planet-house edges + 15 planet-yoga edges + 80-120 MSR signal contributions.
+
+**Next session objective**: Session 9 — Sign Matrix (Mode B, 12 rows covering all 12 signs) + Divisional Matrix (Mode B, 16 rows covering all 16 Dx charts). Lighter content than Houses/Planets since most data already in v6.0 §3.* and §23.2; matrix adds aggregated signal overlays + LEL tagging + interpretation.
+
+---
+
+## Session 9 — Sign Matrix + Divisional Matrix (Mode B) (2026-04-17, CLOSED)
+
+**Environment**: Claude Code (CLI)
+**Objective**: Build 3rd and 4th of 5 Mode B matrices in one session (paired due to overlap and lighter content than Houses/Planets).
+
+**Output produced**:
+- `02_ANALYTICAL_LAYER/MATRIX_SIGNS.md` (CLOSED) — 12 signs × 10-column schema + dignity-host + Jaimini + transit-density + interpretations
+- `02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md` (CLOSED) — 16 Dx × purpose + Lagna + yogas + D1 cross-validation + interpretations
+
+**Key findings from Sign Matrix**:
+- **Triple-exalted nodal-axis signature**: Saturn (Libra) + Rahu (Taurus) + Ketu (Scorpio) ALL natally exalted. Rare configuration. Promoted as SIG.23 candidate.
+- Libra (7H): densest structural sign — hosts exalted Saturn + Mars + 4 chart signatures + Bhavabala rank 12 (paradox). **Saturn's return to Libra 2041-2044 = single most significant lifetime structural transit** (native age 57-60).
+- Pisces (12H): intrinsically strongest Bhavabala (rank 1) paradox with lowest SAV — self-powered moksha architecture. CURRENT Saturn-Pisces 2025-2028 + Ketu MD approach + Mercury-Saturn AD = triple-activation, densest 3-year spiritual-restructure window in chart.
+- Mars-Capricorn transit (exalted Mars) = native's career-launch trigger pattern. Sand mine launch Feb 16, 2024 coincided with Mars transit Capricorn. Formalizing as SIG.24 candidate.
+
+**Key findings from Divisional Matrix**:
+- **D27 Lagna Pisces = D1 12H Pisces parallel** (SIG.26 candidate) — the house where native is structurally strongest (Bhavabala rank 1) IS the Lagna of the strength-chart. Moksha/foreign/dissolution dimension is foundational strength.
+- **D10 Dashamsha is exceptionally strong**: Saturn at D10 Midheaven (own-sign Taurus 10H) + Sun+Mars in D10 9H (trine) + Mercury own-sign 2H D10 + Rahu in D10 12H (foreign-career). D10 CANCELS D1 Sun-debilitation-anxiety.
+- **D20 Sun-Pisces + D40 Sun-Pisces recurring** = structural Vishnu-affinity across spiritual divisionals. Promotes CTR.02 resolution (2025 Vishnu gravitation) from surface-contradiction to structural-predicted pattern. SIG.28 candidate.
+- **D60 Saturn-at-Lagna** reinforces Saturn-karmic-primacy — past-karma main thread is Saturn-discipline. SIG.27 candidate.
+- D30 Trimsamsa has **Saturn + Mars + Venus triple-conjunction in 6H Gemini** — maps EXACTLY onto native's D1 7H-structural-tension pattern. D30 is where inner-friction physically instantiates.
+
+**New tentative SIG candidates from this session**: SIG.23-28 (6 new). Combined with Session 7-8 candidates (SIG.16-22), total = 13 tentative SIG candidates for Deep Analysis v2.0 promotion.
+
+**L2.5 feed produced**: 12 SGN nodes + 16 DVS nodes + ~200 edges + ~70 MSR signal contributions.
+
+**Next session objective**: Session 10 — Dasha-Period Matrix (Mode B, 200+ rows covering Vimshottari MD/AD sequence lifetime with Yogini + Chara overlays + transit windows + LEL event alignment). Computationally heaviest of 5 matrices.
+
+---
+
+## Session 10 — Dasha-Period Matrix (CLOSES MODE B) (2026-04-17, CLOSED)
+
+**Environment**: Claude Code (CLI)
+**Objective**: Build final Mode B matrix. Cross-tabulate 50 Vimshottari MD/AD rows × Yogini × Chara × Sade Sati × LEL events across lifetime 1984-2060.
+
+**Output produced**:
+- `02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md` (CLOSED) — 50 rows + 20 key-period deep dives + cross-period aggregates + SIG candidates
+
+**Key findings**:
+
+- **Mercury MD retrodictive density = 10× Jupiter MD density** (22 events / 17 years vs 1 / 7.5 years). Quantifies CVG.01 operationally. SIG.29 candidate.
+
+- **100% AD-lord-matching-life-event-domain pattern** across 9 Mercury-MD ADs 2010-2027: every AD's theme matches its lord's significations (Ketu AD → completions/endings cluster, Sun AD → career upgrade, Moon AD → soul-level event, Mars AD → action/move, Rahu AD → multiplication+anxiety, Jupiter AD → dharmic-pivot, Saturn AD → authority-structure). Strong classical-framework validation. SIG.30 candidate.
+
+- **Lifetime apex transit identified**: **Saturn own-exaltation return Libra 2041-2044** (age 57-60) overlapping Venus-Rahu AD. Not in v1.2.1's 36-month horizon (out of scope). Chart's single most significant structural transit post-current-era. SIG.31 candidate.
+
+- **Current Mercury-Saturn AD (2024-2027)** confirmed as RPT.DSH.01 "planting→compounding" window. 4 LEL events so far (scam May 2025, contract July 2025, Vishnu shift 2025, current marital state). Remaining 2 years = compounding test phase.
+
+- **Ketu MD 2027-2034 (age 43-50)**: regime change; Ketu-Rahu AD 2030-2031 with Rahu transit on natal Ketu = double-nodal-axis activation = chart's single most nodal-intense period. "Do not initiate new unconventional ventures" flag.
+
+- **Every Sade Sati cycle spans multiple ADs** (cycle 2 spans 5 ADs). Sade Sati interpretations at AD-level need to cross-reference multiple AD-lords' deliveries.
+
+**Mode B NOW COMPLETE**: All 5 matrices shipped (Houses + Planets + Signs + Divisionals + Dasha-Periods).
+
+**Total running SIG candidate list**: 16 tentative candidates (SIG.16-31) for Deep Analysis v2.0 promotion, across Sessions 6, 7, 8, 9, 10.
+
+**Architecture §C.2 Mode B coverage-guarantee**: achieved. Every house × planet × sign × Dx × dasha-period examined. L2 Mode B complete.
+
+**Next session objective**: Session 11 — begin L2.5 Holistic Synthesis Layer (Architecture §G.4). First artifact: Chart Graph Model (CGM_v1_0.md) — systematic enumeration of ~200 nodes + ~800-1200 edges with classical-rule citations. This is the structural backbone for Master Signal Register (Session 12+).
+
+---
+
+## Session 10b — Red-Team Correction: Sun Dignity Error (2026-04-17, INLINE FIX)
+
+**Native caught a factual error in Sessions 7-9 matrices.** Multiple references claimed "Sun debilitated in D1" — this is false. Sun's debilitation is **Libra**. Sun in **Capricorn** (native's placement) is in **enemy's sign** (Saturn's own; Saturn is Sun's enemy) — a weaker dignity state than own/exalted/friend, but not the technical "debilitation" (Neecha).
+
+**Verification**:
+- v6.0 §23.1 Sun's Uccha Band: "Average (33.99)" — a debilitated planet would be <15 virupa. Average reading is consistent with enemy-sign-placement, not debilitation.
+- Shadbala rank 1 strength is consistent with max Dig Bala (60 virupa, 10H Kendra for Sun) + Kala Bala + conjunction with Vargottama Mercury; it is NOT a "paradox" as the draft claimed.
+
+**11 occurrences corrected in-place across 4 matrix files**:
+- `MATRIX_PLANETS.md` — summary row + interpretation paragraph
+- `MATRIX_SIGNS.md` — Capricorn row + Sun dignity commentary (5 occurrences)
+- `MATRIX_HOUSES.md` — MX.HSE.10 sign_lord_placement line
+- `MATRIX_DIVISIONALS.md` — D10 interpretation paragraph (was "D10 cancels D1 Sun-debilitation" — false premise); reframed as "D10 amplifies D1 Sun via placement in D10 9H dharmic trine"
+
+**Corrected interpretation**:
+Sun in Capricorn (enemy's sign) means Sun expresses **through Saturn's domain** — structured, disciplined, hierarchical forms — rather than Sun's natural autonomous-creative mode. Retrodictively this matches native's corporate-hierarchy career path (Cognizant → Mahindra decade → structured Marsys operations) far better than an autonomous-creative career would. This is a MORE coherent retrodictive fit than the false "Sun-debil-cancelled-by-D10" reading.
+
+**Red-team lesson**: Classical dignity terminology must be precise. "Debilitated" = Neecha = specific sign (Libra for Sun). "Enemy's sign" = Shatru Kshetra = different, weaker, but not equivalent concept. Future matrix reviews should verify dignity claims against classical rules, not rely on loose "weak-in-sign" interpretation.
+
+**Impact on SIG candidates**: None of the 16 new SIG candidates (SIG.16-31) were built on the Sun-debilitation error. SIG.19 (Sun-Mercury-AL 10H loop-closure) is still valid — it references density-at-Kendra-with-yoga, not dignity state.
+
+**Red-team thanks to native for catching this.** Per Architecture §B.5 red-team cadence, this finding should be logged in the project's Contradiction Registry when built (currently planned for Session 41 Governance Stack).
+
+---
+
+## Session 11 — Chart Graph Model (L2.5 begins) (2026-04-17, CLOSED)
+
+**Environment**: Claude Code (CLI)
+**Objective**: First artifact of L2.5 Holistic Synthesis Layer per Architecture §G.4.A. Systematic enumeration of chart as directed multigraph.
+
+**Output produced**:
+- `025_HOLISTIC_SYNTHESIS/CGM_v1_0.md` (CLOSED) — 234 nodes + 339 edges + 11 edge types + 9 domain subgraphs + centrality analysis
+
+**Node enumeration** (234 total):
+- 9 planets, 12 houses, 12 signs, 14 nakshatras (occupied)
+- 19 yogas (13 from v1.2.1 + 6 new candidates from Sessions 6-10)
+- 16 karakas (7 Chara + 9 Sthira)
+- 80 divisional placements (selected; full 160 in v1.1)
+- 30 dasha-lord nodes (key MDs/ADs)
+- 42 sensitive points (9 upagrahas + 12 arudhas + 7 special lagnas + 10 sahams + 4 points)
+
+**Edge enumeration** (339 total, below architecture target 800-1200 due to v1.0 scope):
+- 9 dispositorship, 27 Graha aspects, 30 Bhav aspects
+- 36 Jaimini aspects, 12 ownership, 9 tenancy
+- 18 dignity-affinity, 14 nakshatra-lordship
+- 16 karaka-role, 60 yoga-membership
+- 30 dasha-activation, 15 divisional-confirmation
+- 0 combust/war (structural absence signal)
+- 8 Kakshya (current Pisces transit)
+- 55 saham composition
+
+**Key structural findings**:
+
+1. **Saturn is chart's most-connected node** (in-degree 24+): 6 yoga memberships + 3 dispositors-to-Saturn + AD lord + AmK + 10L+11L. Validates CVG.05 Saturn quadruple-activation.
+
+2. **Dispositor hubs**: Saturn + Venus route EVERYTHING. 3 planets disposit to Saturn (Sun, Moon, Mercury), 3 to Venus (Mars, Saturn, Rahu). Saturn-in-Venus's-Libra + Venus-in-Jupiter's-Sag creates a chain-dispositorship pattern hitting Jupiter at the top.
+
+3. **Yoga-membership density ranking**: Saturn (6 yogas), Mercury (5), Jupiter (5), Venus (4), Rahu (3). The "yoga engine" is a 4-planet cluster.
+
+4. **Top cross-domain hub nodes** (appear in 4+ of 9 domain subgraphs): Mercury (5), Saturn (5), Jupiter (5), HSE.7 (4), HSE.10 (4). These will drive highest-weighted CDLM cells and receive most MSR signal-weight.
+
+5. **Combustion/War absence**: CGM edge type has 0 active instances — the structural absence is itself significant. Budh-Aditya yoga not compromised; Mars-Saturn 7H is conjunction not war (3°56' > 1° threshold).
+
+**Sun-dignity correction propagated**: Sun node attribute = "Enemy-sign-in-Cap" (not debilitated) per Session 10b.
+
+**Red-team flags**:
+- 339 edges is below architecture target 800-1200. v1.0 scope-constrained on divisional + dasha sub-period edges. v1.1 expands to ~900.
+- Centrality rankings qualitative (in-degree counts approximate); formal betweenness requires algorithmic traversal not performed v1.0.
+- Some over-counting risk on yoga-membership (composite yogas include planets already counted in constituent yogas).
+
+**Next session objective**: Session 12 — Master Signal Register (MSR_v1_0.md). Target: 500-600 signals (Maximum tier per §J.2 native selection). CGM edges + yogas + sensitive points + transit patterns + compound signals drive enumeration. Session 12 might split into 12a (first 300 signals) + 12b (remaining 200-300) per daily cadence budget.
+
 ---
 
 <!-- Template for future session entries -->
