@@ -52,15 +52,108 @@ const DOCUMENT_MAP: Array<{
   layer: string
   name: string
 }> = [
-  // L1 — add actual file paths from 01_FACTS_LAYER/
+  // ── L1 — Facts Layer ────────────────────────────────────────────────────────
   {
     localPath: '../01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md',
     layer: 'L1',
     name: 'forensic_data',
   },
-  // L2.5 — add MSR and CGM when available
-  // { localPath: '../025_HOLISTIC_SYNTHESIS/MSR_v1_0.md', layer: 'L2.5', name: 'msr' },
-  // Add more as needed
+  {
+    localPath: '../01_FACTS_LAYER/FORENSIC_DATA_v7_0_SUPPLEMENT.md',
+    layer: 'L1',
+    name: 'forensic_data_v7_supplement',
+  },
+  {
+    localPath: '../01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md',
+    layer: 'L1',
+    name: 'life_event_log',
+  },
+  {
+    localPath: '../01_FACTS_LAYER/EVENT_CHART_STATES_v1_0.md',
+    layer: 'L1',
+    name: 'event_chart_states',
+  },
+  {
+    localPath: '../01_FACTS_LAYER/CGP_AUDIT_v1_0.md',
+    layer: 'L1',
+    name: 'cgp_audit',
+  },
+  {
+    localPath: '../01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md',
+    layer: 'L1',
+    name: 'sade_sati_cycles',
+  },
+  {
+    localPath: '../01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md',
+    layer: 'L1',
+    name: 'external_computation_spec',
+  },
+
+  // ── L2 — Analytical Layer ───────────────────────────────────────────────────
+  {
+    localPath: '../02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md',
+    layer: 'L2',
+    name: 'deep_analysis',
+  },
+  {
+    localPath: '../02_ANALYTICAL_LAYER/MATRIX_HOUSES.md',
+    layer: 'L2',
+    name: 'matrix_houses',
+  },
+  {
+    localPath: '../02_ANALYTICAL_LAYER/MATRIX_PLANETS.md',
+    layer: 'L2',
+    name: 'matrix_planets',
+  },
+  {
+    localPath: '../02_ANALYTICAL_LAYER/MATRIX_SIGNS.md',
+    layer: 'L2',
+    name: 'matrix_signs',
+  },
+  {
+    localPath: '../02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md',
+    layer: 'L2',
+    name: 'matrix_dasha_periods',
+  },
+  {
+    localPath: '../02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md',
+    layer: 'L2',
+    name: 'matrix_divisionals',
+  },
+
+  // ── L2.5 — Holistic Synthesis Layer ─────────────────────────────────────────
+  {
+    localPath: '../025_HOLISTIC_SYNTHESIS/CGM_v1_0.md',
+    layer: 'L2.5',
+    name: 'cgm',
+  },
+  {
+    localPath: '../025_HOLISTIC_SYNTHESIS/MSR_v1_0.md',
+    layer: 'L2.5',
+    name: 'msr',
+  },
+  {
+    localPath: '../025_HOLISTIC_SYNTHESIS/CDLM_v1_0.md',
+    layer: 'L2.5',
+    name: 'cdlm',
+  },
+  {
+    localPath: '../025_HOLISTIC_SYNTHESIS/RM_v1_0.md',
+    layer: 'L2.5',
+    name: 'rm',
+  },
+  {
+    localPath: '../025_HOLISTIC_SYNTHESIS/UCN_v1_0.md',
+    layer: 'L2.5',
+    name: 'ucn',
+  },
+
+  // ── L3 — Domain Reports ──────────────────────────────────────────────────────
+  {
+    localPath: '../03_DOMAIN_REPORTS/FINANCIAL_REPORT_Abhisek_Mohanty.md',
+    layer: 'L3',
+    name: 'report_financial',
+  },
 ]
 
 // ── Main ──────────────────────────────────────────────────────────────────────

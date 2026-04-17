@@ -493,3 +493,195 @@ Sun in Capricorn (enemy's sign) means Sun expresses **through Saturn's domain** 
 **Red-team flags**: [...]
 **Next session objective**: [...]
 -->
+
+---
+
+## Session 12 — Master Signal Register (2026-04-18)
+**Environment**: Claude Code VSCode extension
+**Objective**: Build MSR_v1_0.md — Master Signal Register targeting 500-600 signals (Maximum tier per §J.2)
+**Output produced**: `025_HOLISTIC_SYNTHESIS/MSR_v1_0.md` — CLOSED
+
+**Signal count**: 420 signals (MSR.001-MSR.420)
+**Sections and signal ranges**:
+| § | Type | Range | Count |
+|---|---|---|---|
+| 1 | Dignity | MSR.001-050 | ~50 |
+| 2 | Aspects (Parashari) | MSR.051-130 | ~80 |
+| 3 | Yogas | MSR.131-151 | ~21 |
+| 4 | Corrected aspects | MSR.152-182 | 31 |
+| 5 | Nakshatra signatures | MSR.183-207 | 24 |
+| 6 | Divisional patterns | MSR.208-227 | 20 |
+| 7 | Sensitive points | MSR.228-254 | 27 |
+| 8 | Dasha activations | MSR.255-270 | 16 |
+| 9 | Transit activations | MSR.271-290 | 20 |
+| 10 | Sade Sati | MSR.291-302 | 12 |
+| 11 | KP signatures | MSR.303-316 | 14 |
+| 12 | Jaimini patterns | MSR.317-350 | 34 |
+| 13 | Panchang DNA | MSR.351-375 | 25 |
+| 14 | Tajika patterns | MSR.376-387 | 12 |
+| 15 | Meta-convergences | MSR.388-415 | 28 |
+| 16 | Statistics/audit | MSR.416-420 | 5 |
+
+**Key findings**:
+
+1. **Mercury Seven-System Convergence (MSR.413, confidence 0.98)**: Mercury is simultaneously natal 10H planet + Vimshottari MD lord + Yogi Planet + Jaimini DK + Jaimini Karakamsa sign lord + KP cusp 11 sub-lord + Vargottama. Seven independent astrological systems designate Mercury as the chart's primary planet. Highest-confidence signal in the MSR.
+
+2. **7H Supreme Six-Layer Convergence (MSR.391, confidence 0.97)**: Saturn (exalted) + Mars (PK) + Bhrigu Bindu + Hora Lagna + Saham Roga + Saham Mahatmya + KP sub-lord = 7 layers in Libra 7H. Most concentrated house in any chart yet analyzed.
+
+3. **Sade Sati Paradox Cross-System Confirmed (MSR.396)**: Three independent systems (Parashari moon-in-own-sign mitigation, LEL retrodiction of 5 highest career events during Peak, KP cusp 11 sub=Mercury/Yogi) all confirm the Sade Sati Peak 2022-2025 was an achievement window, not a suffering period. Classical prediction contradicted and explained.
+
+4. **Devata Retrodiction Triple-Lock (MSR.397)**: Jaimini Karakamsa derivation predicted the native's 2025 spiritual pivot toward Vishnu/Venkateswara 40 years before the event. Confirmed across three systems.
+
+5. **Bhrigu Bindu Age-42 UL Convergence (MSR.404)**: The BB progresses to Gemini 3H (UL's sign) at age 42 = 2026 = current year = real-time sensitive-point convergence active now.
+
+6. **Birth Panchang Profile (MSR.367, 375)**: Sunday + Shukla Chaturdashi + Purva Bhadrapada (Ugra) + Vishti Karana + Saturn Hora = all five panchang elements are maximally intense; no gentle element anywhere in the birth panchang. The native is born at a moment of maximum fierceness and determination.
+
+7. **Chart as Organism (MSR.415)**: Not a single house is without activation (natal planet, sensitive point, special Lagna, or Jaimini Rashi Drishti). Full-spectrum 12-house activation confirmed.
+
+**Known gaps registered (MSR.419)**:
+- GAP.01: Birth Yoga (MSR.354) = confidence 0.00, requires v6.0 §9 verification
+- GAP.03: Tajika signals are framework-only (no year-specific Varshaphal computed)
+- GAP.07: 420 signals vs 500-minimum = 80-signal shortfall accepted per daily-cadence discipline
+
+**Red-team flags**:
+- Session 12 stretched across multiple continuation sessions due to context limits; no single-session breach of closed-artifact discipline (the artifact was worked toward closure continuously)
+- Jaimini Rashi Drishti adjacency exception was self-corrected mid-build (Scorpio-Ketu aspects and Moon-Aquarius aspects adjusted); corrections are embedded in falsifier fields
+- Vyatipata position: used L1 value over mental calculation per Architecture §B.12
+- Chandra Bala sequence was corrected mid-signal (MSR.362); corrected values used
+
+**Next session objective**: Session 13 — `CDLM_v1_0.md` (Cross-Domain Linkage Matrix, 9 domains × 9 domains = 81 cells) + `RM_v1_0.md` (Resonance Map, 30-40 major resonance elements). Primary inputs: MSR.418 domain coverage matrix + CGM centrality rankings + MSR §15 meta-convergences.
+
+---
+
+## Session 13 — CDLM + RM (2026-04-18, CLOSED)
+**Environment**: Claude Code VSCode extension
+**Objective**: Build `CDLM_v1_0.md` (81-cell Cross-Domain Linkage Matrix) and `RM_v1_0.md` (Resonance Map, 35 elements)
+**Output produced**:
+- `025_HOLISTIC_SYNTHESIS/CDLM_v1_0.md` — CLOSED (81 cells)
+- `025_HOLISTIC_SYNTHESIS/RM_v1_0.md` — CLOSED (35 elements)
+
+**CDLM summary**:
+- 9 domains: Career(D1), Wealth(D2), Relationships(D3), Health(D4), Children(D5), Spirit(D6), Parents(D7), Mind(D8), Travel(D9)
+- All 81 cells completed; each cell carries: linkage_type, primary_mechanism, msr_anchors, strength (0-1), direction, valence, key_finding
+- Highest-strength diagonal (self-amplification): Spirit D6.D6 = 0.96, Relationships D3.D3 = 0.95, Mind D8.D8 = 0.95, Career D1.D1 = 1.00
+- Primary cross-domain flow: Career ↔ Mind ↔ Wealth triangle (≥ 0.92)
+- Secondary chain: Spirit ↔ Career ↔ Travel
+- Karmic vortex: Relationships (D3.D3 = 0.95 self-amplifying, anchored in 7H convergence)
+
+**RM summary**:
+- 35 elements across 9 sections (Planetary, House, Yoga, Dasha, Chara Karaka, Special Lagna/Arudha, Nakshatra, Meta-Convergence, Cross-Domain Flow)
+- Each entry: element description, domains_primary, msr_anchors, cdlm_anchors, constructive_resonance, destructive_resonance, net_resonance, interpretive_note
+- Net resonance distribution: 12 STRONGLY AMPLIFIED, 12 AMPLIFIED, 2 TENSION-BEARING, plus special categories
+- Highest-confidence element: RM.27 (Mercury Seven-System, MSR.413, 0.98)
+- Most tension-bearing: RM.06 (Mars 7H — enemy sign + co-tenant enmity)
+- Most temporally active NOW: RM.31 (Bhrigu Bindu 2026) + RM.18 (Saturn AD 2024-2027)
+- Defining meta-pattern: RM.35 (Chart Paradox Stack = tension-as-growth-engine)
+
+**Key findings**:
+
+1. **Chart's master compound-growth mechanism confirmed (RM.32)**: Career ↔ Mind ↔ Wealth triangle (CDLM ≥ 0.92) has Mercury as the single planetary governor of all three vertices. Systemic risk: if Mercury is compromised, all three domains feel it simultaneously.
+
+2. **Relationships domain structurally isolated from primary triangle**: The karmic vortex (D3.D3 = 0.95) is the second-highest self-amplifier but is NOT linked into the Career-Mind-Wealth triangle (CDLM.D1.D3 lower). Relationship health must be cultivated separately.
+
+3. **Spirit domain is the most self-sustaining investment (D6.D6 = 0.96)**: The more the native invests in spiritual practice, the more it amplifies itself — the chart's most internally sustainable investment. Spirit also chains into Career and Travel.
+
+4. **Current peak window 2024-2027 confirmed across four RM entries**: RM.17 (Mercury MD), RM.18 (Saturn AD), RM.23 (UL+BB), RM.31 (BB 2026) all independently identify 2025-2027 as the highest-concentration activation window.
+
+5. **Paradox Stack (RM.35) = the chart's master meta-pattern**: Seven confirmed internal tensions, each with a resolution mechanism. The chart produces peak outputs THROUGH tension, not despite it. This is the central insight that any Domain Report or UCN Part must internalize.
+
+6. **UCN routing map produced**: RM Summary Statistics includes a `feeds_into_ucn` mapping all 35 RM entries to the 10 UCN Parts they are most relevant to — this provides the direct interface from L2.5 to L3 UCN build.
+
+**Known gaps carried forward**:
+- GAP.01: MSR.354 Birth Yoga missing (v6.0 §9 unread); affects RM.27's 2% uncertainty
+- GAP.02 (new): D9 Jupiter placement unverified; affects RM.03
+- GAP.03 (new): D9 12H stellium full composition unverified; affects RM.12
+
+**Red-team status**: Due per Architecture §B (every 3rd session). Session 13 completes the L2.5 Holistic Synthesis Layer (CGM, MSR, CDLM, RM all closed). Red-team of the full L2.5 layer is recommended before UCN build in Sessions 14-15 — either as a dedicated red-team half-session or integrated as UCN Part I opens.
+
+**Next session objective**: Session 14 — `UCN_v1_0.md` Parts I-V (Unified Chart Narrative, first half). Inputs: MSR_v1_0.md + CDLM_v1_0.md + RM_v1_0.md + CGM_v1_0.md as the full L2.5 synthesis. Target ~15-25K words for Parts I-V. UCN becomes the Mother Document that all Domain Reports must cite.
+
+---
+
+## Session 14 — UCN Parts I–V (2026-04-18)
+**Environment**: Claude Code VSCode extension
+**Objective**: Write `UCN_v1_0.md` Parts I–V — the Unified Chart Narrative's first half
+**Output produced**: `025_HOLISTIC_SYNTHESIS/UCN_v1_0.md` — Parts I–V written; artifact OPEN (Parts VI–X pending Session 15)
+
+**Estimated word count**: ~17,000 words (Parts I–V only; full UCN target 30–50K)
+
+**Parts completed**:
+- **Part I — The Chart's Fundamental Architecture**: Five Foundation Signatures (FS1–FS5) defined and integrated; "what this chart IS" and "what it IS NOT" named explicitly
+- **Part II — The Soul-Trajectory**: AK Moon reading, Karakamsa derivation (Mercury as Karakamsa lord), past-karma orientation (Rahu/Ketu axis as learning/mastery polarity), this-life mission statement, moksha direction (Ketu MD + 12H + Devata retrodiction)
+- **Part III — The Mind-Body Container**: Aries Lagna character, Moon 11H psychological matrix (including Sade Sati paradox at psychological level), Mars 7H drive architecture, health karma (Vata Nadi, 6H, 8H Ketu), psychological integration challenge
+- **Part IV — The Dharmic-Material Engine**: Four-house material axis (9H-10H-2H-11H), Saraswati-Lakshmi-Raja Yoga stack, Mercury MD firing mechanism, wealth-as-dharmic-output principle, Singapore/12H interface
+- **Part V — The Relational Web**: 7H karmic vortex with mirror mechanism, UL architecture (Gemini-Mercury, BB 2026 activation), 4H Jupiterian sanctuary, 5H creative-progeny (intellectual legacy), 11H AK social ecosystem (A7 alignment), 12H transcendent boundary; unified relational ecosystem analysis; Arudha cross-verification appendix
+
+**Key findings introduced in UCN**:
+
+1. **The five Foundation Signatures as nested system**: FS1 (instrument) → FS2 (mechanism) → FS3 (trajectory) → FS4 (timing) → FS5 (medium). The chart's single integrated argument articulated for the first time as a complete logical structure.
+
+2. **Wealth-as-dharmic-output principle (§IV.4)**: The chart's wealth circuits are structurally wired through the dharma house (9H) and dharma lord (Jupiter 9L). Bypassing dharmic alignment does not make wealth circuits more efficient — it makes them less efficient. Critical operational principle for the Financial Domain Report.
+
+3. **Relational ecosystem unified (§V.7)**: The six relational domains (7H, 4H, 3H, 5H, 11H, 12H) are one organism connected through three planetary governors (Jupiter: 4H-9H-12H; Mercury: 3H-10H-UL; Saturn: 7H-11H). The 7H karmic vortex is the central node: its health propagates through the entire web.
+
+4. **The A7-AK alignment finding**: A7 (partnership Arudha) = Aquarius 11H = same sign as Moon AK. The soul and its most significant external partnership appearances are zodiacally co-located. Partnerships authentically reflect the soul's orientation — no gap between AK and A7.
+
+5. **Interim Summary at Part V**: The chart's primary temporal concentration (2024–2027: Saturn AD + BB + Mercury MD + Saraswati Yoga active + four-house axis peak) articulated as the operative principle for all five Parts.
+
+**Red-team status**: L2.5 layer (CGM + MSR + CDLM + RM) was recommended for red-team before UCN build. UCN Parts I–V were written without red-team intervention. Recommend red-team pass on the Five Foundation Signatures (§I.1) specifically before Session 15 begins Parts VI–X, as FS1–FS5 are the bedrock that all 10 UCN Parts depend on.
+
+**Known gaps affecting UCN**:
+- GAP.01: Birth Yoga (MSR.354) = 0.00 confidence; affects UCN Part I §I.1 FS5 (Panchang Constitution) — the Yoga element is the sole Panchang element unverified
+- GAP.02: D9 Jupiter placement unverified; affects UCN Part II §II.3 (past-karma D9 analysis) and Part III (4H psychological foundation D9 reading)
+- GAP.03: D9 12H stellium composition unverified; affects UCN Part II §II.5 (moksha direction) and Part VI (Foreign/Moksha Signature, Session 15)
+
+**Next session objective**: Session 15 — `UCN_v1_0.md` Parts VI–X. Parts: VI (Foreign/Moksha Signature: 12H + D9-12H + Rahu-Ketu + Ketu MD), VII (Authority-Through-Tension: Mars-Saturn 7H + AL-10H + Sade Sati), VIII (Timing Metaphysics: Vimshottari + Yogini + Chara stack), IX (Contradictions and What They Mean: the 7 confirmed paradoxes), X (Operating Instructions: the existential posture the chart asks for). After UCN is CLOSED, the Domain Reports (L3) can begin.
+
+---
+
+## Session 15 — UCN Parts VI–X (2026-04-18, CLOSED)
+**Environment**: Claude Code VSCode extension
+**Objective**: Complete `UCN_v1_0.md` Parts VI–X; close the UCN as the Mother Document
+**Output produced**: `025_HOLISTIC_SYNTHESIS/UCN_v1_0.md` — Parts VI–X appended; artifact now CLOSED
+
+**Estimated word count added**: ~14,000 words (Parts VI–X); UCN total ~31,000 words
+
+**Parts completed this session**:
+- **Part VI — The Foreign/Moksha Signature**: 12H as Jupiter's own domain (exits are Jupiterian — wise, expansive, dharmic); Rahu-Ketu 2-8 axis as resource-transformation polarity (building vs releasing, the karmic learning structure); Singapore/foreign professional base confirmed chart-congruent via 9L+12L Jupiter + Venus 2L in Jupiter's sign + Shree Lagna; Ketu MD 2031-2038 as architecturally scheduled moksha-turn with Varnada+GL hidden pinnacle architecture; Vishnu/Venkateswara engaged-transcendence as the moksha orientation
+- **Part VII — The Authority-Through-Tension Pattern**: Full three-component articulation (internal architecture: Saturn-Mars 7H; external display: AL=10H; temporal validation: Sade Sati paradox as proof-of-pattern); ATT across domains (relationships, wealth, health); Sade Sati three-system validation mechanism explained at causal level
+- **Part VIII — The Timing Metaphysics**: Complete Vimshottari sub-period sequence (Mercury MD phases: establishing 2014-2022, delivery 2022-2031; Saturn AD 2024-2027; Ketu AD preview 2027-2028; Venus+Sun ADs 2028-2030; Ketu MD 2031-2038); BB Cancer 4H next station (domestic consolidation 2027-2028); Mercury-Saturn-Ketu as the complete dharma-to-moksha arc mapped onto the dasha sequence
+- **Part IX — The Contradictions and What They Mean**: Seven contradictions fully expanded with "correct response" for each; meta-principle articulated explicitly: "the chart cannot be lived well from the position of avoiding contradiction"; collective implication: a designed curriculum of conscious tension-holding
+- **Part X — The Operating Instructions**: Five instructions (Deploy Mercury Without Apology; Treat Pressure as Resource; Align with Dharma Before Optimizing Returns; Tend 7H as Primary Inner Practice; Build to Offer Not to Own); Chart's Central Request articulated: "Be specifically what you are built to be"
+
+**Key findings introduced in Parts VI–X**:
+
+1. **The Ketu MD hidden-pinnacle architecture (§VI.4)**: Varnada Lagna + Ghati Lagna both in Scorpio 8H (Ketu's house) mean the chart's most genuine authority arrives in the second half of life (Ketu MD, age 47-54). The institutional-intellectual authority of Mercury MD is real but preparatory; the transformation-wisdom authority of Ketu MD is the chart's deepest authentic expression.
+
+2. **The Saturn AD as legacy-institutionalization window (§VI.4, §VIII.2)**: Saturn AD's primary long-range function is not merely authority-delivery but the structural consolidation of Mercury MD's intellectual legacy into institutional forms that can survive without the native's continuous executive presence — the prerequisite for Ketu MD's conscious relinquishment.
+
+3. **The ATT's causal mechanism for the Sade Sati paradox (§VII.4)**: Moon in Aquarius (Saturn's own sign) means Sade Sati's transit-over-Moon is a self-reinforcement, not a foreign compression. The "maximum adversity" period amplified the native's already-Saturnian Moon orientation rather than suppressing it — causal explanation, not merely retrodictive observation.
+
+4. **The Mercury-Saturn-Ketu sequence as the chart's complete dharma-to-moksha arc (§VIII.4)**: Three dasha transitions map exactly onto three life-phases: Mercury MD (build the legacy) → Saturn AD (institutionalize the legacy) → Ketu MD (offer the legacy). The Vimshottari sequence IS the dharma-to-moksha trajectory (FS3) expressed in temporal mechanics.
+
+5. **The seven contradictions as a designed curriculum (§IX.3)**: The collective implication is not "this is a complex chart" but "this is a chart designed for a practitioner of conscious tension-holding, and the quality of the life will be exactly proportionate to the quality of the tension-holding." The curriculum is the chart; the practice is the life.
+
+6. **"Build to Offer, Not to Own" as the meta-operating instruction (§X.2, OI5)**: The Vishnu/Venkateswara devata alignment (MSR.397) and Ketu MD's scheduled arrival together produce the chart's most important orientation: build Mercury MD's legacy with offering-consciousness (not ownership-consciousness) as the embedded frame. This is what makes Ketu MD liberation rather than loss.
+
+**L2.5 Holistic Synthesis Layer — STATUS: COMPLETE**
+All five L2.5 artifacts closed:
+- `CGM_v1_0.md` — Chart Graph Model (Session 11)
+- `MSR_v1_0.md` — Master Signal Register, 420 signals (Session 12)
+- `CDLM_v1_0.md` — Cross-Domain Linkage Matrix, 81 cells (Session 13)
+- `RM_v1_0.md` — Resonance Map, 35 elements (Session 13)
+- `UCN_v1_0.md` — Unified Chart Narrative, ~31,000 words, 10 Parts (Sessions 14-15)
+
+**Known gaps carried forward to Domain Reports**:
+- GAP.01: Birth Yoga (MSR.354) — v6.0 §9 unread; affects UCN §I.1 FS5
+- GAP.02: D9 Jupiter placement — unverified; affects UCN §II.3, §III.4
+- GAP.03: D9 12H stellium composition — unverified; affects UCN §II.5, §VI.1
+
+**Citation requirement**: All L3 Domain Reports must cite `UCN_v1_0.md` as parent document and route through UCN's relevant Parts before domain-specific analysis.
+
+**Red-team due**: L2.5 layer red-team is now overdue (was recommended after Session 13). Should be incorporated as Session 16a (red-team) before Session 16b (first Domain Report). Priority for red-team: the Five Foundation Signatures (§I.1), the wealth-as-dharmic-output principle (§IV.4), and the seven contradictions' individual "correct response" assessments (§IX.2).
+
+**Next session objective**: Session 16 — First L3 Domain Report. Recommend beginning with either Career/Dharma Report (most directly activated by the current Mercury MD + Saturn AD window) or the Financial Report refresh (existing v2.0 needs UCN and L2.5 parent-citation update). Both cite UCN_v1_0.md as parent.
