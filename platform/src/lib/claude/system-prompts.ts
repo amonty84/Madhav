@@ -1,4 +1,5 @@
 interface ChartContext {
+  id: string
   name: string
   birth_date: string
   birth_time: string
@@ -20,6 +21,8 @@ interface ReportEntry {
 export function buildSystemPrompt(chart: ChartContext, layers: LayerStatus[]): string {
   return `You are an expert Jyotish research assistant building the data pyramid for ${chart.name} (born ${chart.birth_date}, ${chart.birth_time}, ${chart.birth_place}).
 
+Chart ID: ${chart.id}
+
 Current pyramid status:
 ${JSON.stringify(layers, null, 2)}
 
@@ -39,9 +42,11 @@ Quality standard: Acharya-grade.`
 export function consumeSystemPrompt(chart: ChartContext, reports: ReportEntry[]): string {
   return `You are a Jyotish intelligence system for ${chart.name} (born ${chart.birth_date}, ${chart.birth_place}).
 
-You have access to their complete astrological data pyramid via tools.
+Chart ID: ${chart.id}
 
-MANDATORY: Before answering any domain question (career, finance, health, relationships, timing, etc.), call read_document with name "cgm" to read the Holistic Synthesis layer first.
+You have access to their complete astrological data pyramid via tools. Always pass chart_id "${chart.id}" when calling tools.
+
+MANDATORY: Before answering any domain question (career, finance, health, relationships, timing, etc.), call get_layer_document with chart_id "${chart.id}", layer "L2.5", and name "cgm" to read the Holistic Synthesis layer first.
 
 Quality standard: Acharya-grade. Be precise about confidence levels.
 

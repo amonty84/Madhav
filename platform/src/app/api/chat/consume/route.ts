@@ -2,22 +2,14 @@ import { streamText } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import { NextResponse } from 'next/server'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { buildTools } from '@/lib/claude/build-tools'
-import { buildSystemPrompt } from '@/lib/claude/system-prompts'
+import { consumeTools } from '@/lib/claude/consume-tools'
+import { consumeSystemPrompt } from '@/lib/claude/system-prompts'
 import type { ModelMessage } from 'ai'
 
-async function requireAstrologer() {
+export async function POST(request: Request) {
   const sb = await createClient()
   const { data: { user } } = await sb.auth.getUser()
-  if (!user) return null
-  const { data: prof } = await sb.from('profiles').select('role').eq('id', user.id).single()
-  if (prof?.role !== 'astrologer') return null
-  return user
-}
-
-export async function POST(request: Request) {
-  const user = await requireAstrologer()
-  if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   let body: { chartId?: string; messages?: ModelMessage[] }
   try {
@@ -32,23 +24,35 @@ export async function POST(request: Request) {
   }
 
   const service = createServiceClient()
-  const [chartResult, layersResult] = await Promise.all([
-    service.from('charts').select('id, name, birth_date, birth_time, birth_place').eq('id', chartId).single(),
-    service.from('pyramid_layers').select('layer, sublayer, status').eq('chart_id', chartId),
-  ])
-  if (!chartResult.data) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
-  if (layersResult.error) return NextResponse.json({ error: layersResult.error.message }, { status: 500 })
-  const chart = chartResult.data
-  const layers = layersResult.data ?? []
 
-  const systemPrompt = buildSystemPrompt(chart, layers)
+  // Verify ownership: astrologer can access any chart; client only their own
+  const [chartResult, profileResult] = await Promise.all([
+    service.from('charts').select('id, name, birth_date, birth_time, birth_place, client_id').eq('id', chartId).single(),
+    service.from('profiles').select('role').eq('id', user.id).single(),
+  ])
+
+  if (!chartResult.data) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
+  const chart = chartResult.data
+  const role = profileResult.data?.role
+
+  if (role !== 'astrologer' && chart.client_id !== user.id) {
+    return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+  }
+
+  const { data: reports } = await service
+    .from('reports')
+    .select('domain, title, version')
+    .eq('chart_id', chartId)
+    .order('domain')
+
+  const systemPrompt = consumeSystemPrompt(chart, reports ?? [])
 
   const result = streamText({
     model: anthropic('claude-sonnet-4-6'),
     system: systemPrompt,
     messages,
-    tools: buildTools,
-    maxOutputTokens: 16384,
+    tools: consumeTools,
+    maxOutputTokens: 8192,
     providerOptions: {
       anthropic: { cacheControl: { type: 'ephemeral' } },
     },
