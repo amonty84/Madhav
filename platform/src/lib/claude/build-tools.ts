@@ -81,7 +81,10 @@ export const buildTools = {
           .insert({ chart_id, layer, name, storage_path, version: '1.0' })
           .select('id, name, storage_path, version')
           .single()
-        if (insertError || !row) return { error: insertError?.message ?? 'Insert failed' }
+        if (insertError || !row) {
+          await supabase.storage.from('chart-documents').remove([storage_path])
+          return { error: insertError?.message ?? 'Insert failed' }
+        }
 
         return { id: row.id, name: row.name, storage_path: row.storage_path, version: row.version }
       } catch (e) {
@@ -111,6 +114,7 @@ export const buildTools = {
 
         const oldVersion = row.version
         const oldMajor = parseInt(oldVersion.split('.')[0], 10)
+        if (isNaN(oldMajor)) return { error: `Cannot parse version: ${oldVersion}` }
         const newVersion = `${oldMajor + 1}.0`
         const newPath = row.storage_path.replace(`_v${oldVersion}.md`, `_v${newVersion}.md`)
 

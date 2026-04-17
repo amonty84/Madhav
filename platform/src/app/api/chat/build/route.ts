@@ -32,16 +32,16 @@ export async function POST(request: Request) {
   }
 
   const service = createServiceClient()
-  const [{ data: chart }, { data: layers }] = await Promise.all([
+  const [chartResult, layersResult] = await Promise.all([
     service.from('charts').select('name, birth_date, birth_time, birth_place').eq('id', chartId).single(),
     service.from('pyramid_layers').select('layer, sublayer, status').eq('chart_id', chartId),
   ])
+  if (!chartResult.data) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
+  if (layersResult.error) return NextResponse.json({ error: layersResult.error.message }, { status: 500 })
+  const chart = chartResult.data
+  const layers = layersResult.data ?? []
 
-  if (!chart) {
-    return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
-  }
-
-  const systemPrompt = buildSystemPrompt(chart, layers ?? [])
+  const systemPrompt = buildSystemPrompt(chart, layers)
 
   const result = streamText({
     model: anthropic('claude-sonnet-4-6'),
