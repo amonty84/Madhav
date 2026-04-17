@@ -55,7 +55,7 @@ export const consumeTools = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.PYTHON_SIDECAR_API_KEY}`,
+            'x-api-key': process.env.PYTHON_SIDECAR_API_KEY ?? '',
           },
           body: JSON.stringify({
             birth_date: chart.birth_date,
@@ -238,7 +238,7 @@ export const consumeTools = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.PYTHON_SIDECAR_API_KEY}`,
+            'x-api-key': process.env.PYTHON_SIDECAR_API_KEY ?? '',
           },
           body: JSON.stringify({ from_date, to_date, lat: chart.birth_lat, lng: chart.birth_lng }),
         })

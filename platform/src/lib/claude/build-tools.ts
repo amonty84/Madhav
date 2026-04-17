@@ -229,7 +229,7 @@ export const buildTools = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.PYTHON_SIDECAR_API_KEY}`,
+            'x-api-key': process.env.PYTHON_SIDECAR_API_KEY ?? '',
           },
           body: JSON.stringify({ birth_date, birth_time, lat, lng, ut_offset }),
         })
@@ -254,7 +254,7 @@ export const buildTools = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.PYTHON_SIDECAR_API_KEY}`,
+            'x-api-key': process.env.PYTHON_SIDECAR_API_KEY ?? '',
           },
           body: JSON.stringify(params),
         })
