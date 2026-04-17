@@ -165,23 +165,33 @@ async function getAstrologerClientId(): Promise<string> {
   const { data: users, error } = await supabase.auth.admin.listUsers()
   if (error) throw new Error(`Failed to list users: ${error.message}`)
 
-  const user = users.users.find(u => u.email === astrologerEmail)
+  let user = users.users.find(u => u.email === astrologerEmail)
+
   if (!user) {
-    throw new Error(
-      `Astrologer user (${astrologerEmail}) not found. Sign up first at /login.`
-    )
+    console.log(`  Creating auth user for ${astrologerEmail}…`)
+    const { data: created, error: createError } = await supabase.auth.admin.createUser({
+      email: astrologerEmail,
+      email_confirm: true,
+      user_metadata: { full_name: 'Abhisek Mohanty' },
+    })
+    if (createError || !created.user) {
+      throw new Error(`Failed to create astrologer user: ${createError?.message}`)
+    }
+    user = created.user
+    console.log(`  ✓ Auth user created: ${user.id}`)
   }
 
-  // The astrologer owns this chart — use their profile as client_id
-  // (in the app, each client has their own profile; here astrologer is the "client")
-  const { data: profile } = await supabase
+  // Upsert profile with role='astrologer' — handles both first-run and re-run.
+  // The trigger may assign 'client' role if app.astrologer_email isn't set,
+  // so we always force the correct role here.
+  const { error: profileError } = await supabase
     .from('profiles')
-    .select('id, role')
-    .eq('id', user.id)
-    .single()
+    .upsert({ id: user.id, role: 'astrologer', name: 'Abhisek Mohanty' }, { onConflict: 'id' })
 
-  if (!profile) throw new Error('Astrologer profile not found')
-  return profile.id
+  if (profileError) throw new Error(`Failed to upsert astrologer profile: ${profileError.message}`)
+
+  console.log(`✓ Astrologer profile ready: ${user.id}`)
+  return user.id
 }
 
 async function createOrGetChart(clientId: string): Promise<string> {
