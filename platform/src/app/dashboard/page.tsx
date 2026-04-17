@@ -42,7 +42,7 @@ export default async function DashboardPage() {
   for (const chart of charts ?? []) {
     const chartLayers = (layers ?? []).filter((l) => l.chart_id === chart.id)
     const complete = chartLayers.filter((l) => l.status === 'complete').length
-    pyramidPercents.set(chart.id, Math.round((complete / Math.max(chartLayers.length, 6)) * 100))
+    pyramidPercents.set(chart.id, Math.round((complete / 6) * 100))
   }
 
   const chartsWithPercent = (charts ?? []).map((c) => ({

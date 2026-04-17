@@ -16,13 +16,13 @@ export default async function ClientLayout({
   if (!user) redirect('/login')
 
   const service = createServiceClient()
-  const { data: chart } = await service
-    .from('charts')
-    .select('name, birth_date')
-    .eq('id', id)
-    .single()
+  const [{ data: profile }, { data: chart }] = await Promise.all([
+    service.from('profiles').select('role').eq('id', user.id).single(),
+    service.from('charts').select('name, birth_date, client_id').eq('id', id).single(),
+  ])
 
   if (!chart) redirect('/dashboard')
+  if (profile?.role !== 'astrologer' && chart.client_id !== user.id) redirect('/dashboard')
 
   return (
     <div className="min-h-screen flex flex-col">
