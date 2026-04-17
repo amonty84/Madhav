@@ -29,12 +29,19 @@ export async function middleware(request: NextRequest) {
   const isPublicRoute = request.nextUrl.pathname === '/'
 
   if (!user && !isAuthRoute && !isPublicRoute) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    if (request.nextUrl.pathname.startsWith('/api/')) {
+      return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+    }
+    const redirect = NextResponse.redirect(new URL('/login', request.url))
+    supabaseResponse.cookies.getAll().forEach((c) =>
+      redirect.cookies.set(c.name, c.value)
+    )
+    return redirect
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api/auth).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api/auth/).*)'],
 }
