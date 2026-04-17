@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault()
@@ -28,10 +28,16 @@ export default function LoginPage() {
   }
 
   async function handleGoogle() {
-    await supabase.auth.signInWithOAuth({
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/api/auth/callback` },
     })
+    if (error) {
+      toast.error(error.message)
+      setLoading(false)
+    }
+    // on success browser navigates to OAuth provider — no need to unset loading
   }
 
   return (
@@ -68,7 +74,7 @@ export default function LoginPage() {
                   <span className="bg-background px-2 text-muted-foreground">or</span>
                 </div>
               </div>
-              <Button variant="outline" className="w-full" onClick={handleGoogle}>
+              <Button variant="outline" className="w-full" onClick={handleGoogle} disabled={loading}>
                 Continue with Google
               </Button>
             </>
