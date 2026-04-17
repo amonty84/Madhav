@@ -114,6 +114,10 @@ export const buildTools = {
         const newVersion = `${oldMajor + 1}.0`
         const newPath = row.storage_path.replace(`_v${oldVersion}.md`, `_v${newVersion}.md`)
 
+        if (newPath === row.storage_path) {
+          return { error: 'storage_path does not match expected version suffix pattern' }
+        }
+
         const { error: uploadError } = await supabase
           .storage
           .from('chart-documents')
@@ -165,6 +169,13 @@ export const buildTools = {
           .from('chart-documents')
           .upload(row.storage_path, combined, { contentType: 'text/markdown', upsert: true })
         if (uploadError) return { error: uploadError.message }
+
+        const { error: updateError } = await supabase
+          .from('documents')
+          .update({ updated_at: new Date().toISOString() })
+          .eq('chart_id', chart_id)
+          .eq('name', name)
+        if (updateError) return { error: updateError.message }
 
         return { name, bytes_appended: content.length }
       } catch (e) {

@@ -41,7 +41,7 @@ export function consumeSystemPrompt(chart: ChartContext, reports: ReportEntry[])
 
 You have access to their complete astrological data pyramid via tools.
 
-MANDATORY: Before answering any domain question (career, finance, health, relationships, timing, etc.), call get_layer_document with layer L2.5 and name cgm to read the Holistic Synthesis layer first.
+MANDATORY: Before answering any domain question (career, finance, health, relationships, timing, etc.), call read_document with name "cgm" to read the Holistic Synthesis layer first.
 
 Quality standard: Acharya-grade. Be precise about confidence levels.
 
