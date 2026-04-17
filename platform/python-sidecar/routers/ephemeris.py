@@ -4,8 +4,6 @@ import swisseph as swe
 
 router = APIRouter()
 
-swe.set_sid_mode(swe.SIDM_LAHIRI)
-
 PLANETS = [
     ('Sun', swe.SUN),
     ('Moon', swe.MOON),
@@ -50,11 +48,31 @@ class PlanetPosition(BaseModel):
     speed: float
 
 
+def _position_from_lon(lon: float, speed: float, name: str) -> PlanetPosition:
+    lon = lon % 360
+    sign_idx = int(lon / 30)
+    deg_in_sign = lon % 30
+    nak_idx = int(lon / (360 / 27))
+    pada = int((lon % (360 / 27)) / (360 / 108)) + 1
+    return PlanetPosition(
+        planet=name,
+        longitude=round(lon, 4),
+        sign=SIGNS[sign_idx],
+        deg_in_sign=round(deg_in_sign, 4),
+        nakshatra=NAKSHATRAS[nak_idx],
+        pada=pada,
+        retrograde=speed < 0,
+        speed=round(speed, 6),
+    )
+
+
 @router.post("")
 def compute_natal_positions(req: EphemerisRequest) -> dict:
+    # Set Lahiri ayanamsa per-invocation to guard against global state mutation
+    swe.set_sid_mode(swe.SIDM_LAHIRI)
+
     h, m = map(int, req.birth_time.split(':'))
-    decimal_hour_local = h + m / 60.0
-    decimal_hour_ut = decimal_hour_local - req.ut_offset
+    decimal_hour_ut = h + m / 60.0 - req.ut_offset
 
     parts = req.birth_date.split('-')
     year, month, day = int(parts[0]), int(parts[1]), int(parts[2])
@@ -64,49 +82,20 @@ def compute_natal_positions(req: EphemerisRequest) -> dict:
 
     positions = []
     rahu_long = None
+    rahu_speed = None
 
     for name, code in PLANETS:
         pos, _ = swe.calc_ut(jd, code, flags)
-        lon = pos[0] % 360
-        speed = pos[3]
-        retrograde = speed < 0
-
-        sign_idx = int(lon / 30)
-        deg_in_sign = lon % 30
-        sign = SIGNS[sign_idx]
-
-        nak_idx = int(lon / (360 / 27))
-        pada = int((lon % (360 / 27)) / (360 / 108)) + 1
-        nakshatra = NAKSHATRAS[nak_idx]
-
-        positions.append(PlanetPosition(
-            planet=name,
-            longitude=round(lon, 4),
-            sign=sign,
-            deg_in_sign=round(deg_in_sign, 4),
-            nakshatra=nakshatra,
-            pada=pada,
-            retrograde=retrograde,
-            speed=round(speed, 6),
-        ))
+        lon, speed = pos[0], pos[3]
+        positions.append(_position_from_lon(lon, speed, name))
         if name == 'Rahu':
             rahu_long = lon
+            rahu_speed = speed
 
-    # Ketu = Rahu + 180
+    # Ketu: opposite Rahu, moves at same rate in opposite direction
     if rahu_long is not None:
-        ketu_long = (rahu_long + 180) % 360
-        sign_idx = int(ketu_long / 30)
-        nak_idx = int(ketu_long / (360 / 27))
-        pada = int((ketu_long % (360 / 27)) / (360 / 108)) + 1
-        positions.append(PlanetPosition(
-            planet='Ketu',
-            longitude=round(ketu_long, 4),
-            sign=SIGNS[sign_idx],
-            deg_in_sign=round(ketu_long % 30, 4),
-            nakshatra=NAKSHATRAS[nak_idx],
-            pada=pada,
-            retrograde=True,
-            speed=0.0,
-        ))
+        ketu_long = rahu_long + 180
+        ketu_speed = -(rahu_speed or 0.0)
+        positions.append(_position_from_lon(ketu_long, ketu_speed, 'Ketu'))
 
     return {"jd": jd, "positions": [p.model_dump() for p in positions]}
