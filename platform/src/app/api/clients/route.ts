@@ -19,9 +19,9 @@ export async function POST(request: Request) {
   const supabase = createServiceClient()
 
   // Invite client user via Supabase Auth admin
-  const { data: authUser } = await supabase.auth.admin.inviteUserByEmail(client_email)
-  if (!authUser.user) {
-    return NextResponse.json({ error: 'Could not create client user' }, { status: 400 })
+  const { data: authUser, error: inviteError } = await supabase.auth.admin.inviteUserByEmail(client_email)
+  if (inviteError || !authUser.user) {
+    return NextResponse.json({ error: inviteError?.message ?? 'Could not create client user' }, { status: 400 })
   }
 
   const client_id = authUser.user.id
@@ -43,7 +43,8 @@ export async function POST(request: Request) {
     { chart_id: chart.id, layer: 'L3', sublayer: 'domain_reports' },
     { chart_id: chart.id, layer: 'L4', sublayer: 'query_interface' },
   ]
-  await supabase.from('pyramid_layers').insert(layers)
+  const { error: layerError } = await supabase.from('pyramid_layers').insert(layers)
+  if (layerError) return NextResponse.json({ error: layerError.message }, { status: 500 })
 
   return NextResponse.json(chart)
 }

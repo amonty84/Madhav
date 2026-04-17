@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ClientCard } from './ClientCard'
 import type { Chart } from '@/lib/supabase/types'
 
@@ -9,7 +10,7 @@ export function ClientRoster({ charts }: Props) {
   if (charts.length === 0) {
     return (
       <div className="text-center py-16 text-muted-foreground">
-        No clients yet. <a href="/clients/new" className="underline text-primary">Add your first client.</a>
+        No clients yet. <Link href="/clients/new" className="underline text-primary">Add your first client.</Link>
       </div>
     )
   }
