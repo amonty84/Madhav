@@ -2,9 +2,9 @@
 document: CAREER & DHARMA DOMAIN REPORT
 subject: Abhisek Mohanty
 scope: Career, professional dharma, vocational identity, institutional positioning, entrepreneurial arc, dharmic purpose
-version: 1.0.1
-date: 2026-04-18
-session: 16 (original); reconciled via FIX_SESSION_001 (2026-04-18)
+version: 1.1
+date: 2026-04-19
+session: 16 (original); reconciled via FIX_SESSION_001 (2026-04-18); lifted to v1.1 via GAP_RESOLUTION_SESSION (2026-04-19)
 parent_UCN_version: UCN_v1_1.md (Mother Document v1.1, Jupiter-placement corrected)
 reconciliation_note: "Jupiter placement corrected throughout per RED_TEAM_L2_5_v1_0 + UCN v1.1. Original v1.0 of this report cited Jupiter in Cancer 4H (exalted) — this was based on pre-corrected UCN v1.0. Actual placement: Jupiter in Sagittarius 9H (own sign, swakshetra). Aspects from 9H: 5th→1H (Lagna), 7th→3H (UL house), 9th→5H (creativity). Jupiter does NOT aspect 10H directly; the 9H→10H relationship operates via adjacency/lordship, not drishti. Saraswati Yoga preserved (Mercury Kendra + Jupiter Trikona + Venus Trikona). Raja Yoga derivation updated from DKA-Kendra-variant to Bhagya-Yoga-own-sign variant (9L in own 9H). See FIX_SESSION_001_COMPLETION.md for complete change log."
 parent_L2_artifacts:
@@ -13,13 +13,22 @@ parent_L2_artifacts:
   - MATRIX_DASHA_PERIODS.md (DP.MD.MERCURY primary)
   - MATRIX_DIVISIONALS.md (DVS.D10 Dashamsha primary)
 parent_L2_5_artifacts:
-  - MSR_v1_0.md (MSR.413 Mercury-convergence; MSR.391 7H-convergence; MSR.396 Sade Sati Paradox)
+  - MSR_v2_0.md (MSR.413 Mercury-convergence; MSR.391 7H-convergence; MSR.396 Sade Sati Paradox)
   - CDLM_v1_0.md (CDLM.D1.D1 = 1.00; CDLM.D1.D2 = 0.92; CDLM.D1.D8 Career-Mind)
   - RM_v1_0.md (RM.01 Mercury 10H; RM.02 Saturn AD; RM.32 Career-Mind-Wealth triangle)
   - CGM_v1_0.md (PLN.MERCURY centrality rank 1; HSE.10 centrality rank 4)
-source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v6_0_ABHISEK_MOHANTY.md + FORENSIC_DATA_v7_0_SUPPLEMENT.md
-status: SUPERSEDED
-superseded_by: REPORT_CAREER_DHARMA_v1_1.md (2026-04-19; v8.0 lagna/saham corrections)
+source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v8_0_ABHISEK_MOHANTY.md (authoritative; v6.0+v7.0 superseded)
+status: CURRENT
+changelog:
+  - version: 1.1
+    date: 2026-04-19
+    session: GAP_RESOLUTION_SESSION
+    changes:
+      - "Shree Lagna corrected throughout: 9H Sagittarius → 7H Libra Vishakha (Lakshmi-Through-Relationship architecture per RM_v2_0 RM.20)"
+      - "Roga Saham corrected: 7H → 2H Taurus with Rahu; health mechanism revised"
+      - "Hidden-pinnacle concept replaced: Varnada+Ghati were NOT in 8H (FALSIFIED per FORENSIC_v8_0 §12.1); Ghati = 9H Sagittarius; Varnada = 4H Cancer; Ketu MD arc preserved via Ketu-8H exaltation"
+      - "MSR citation updated: v1_0 → v2_0"
+      - "Sources: FORENSIC_v8_0 §12.1; RM_v2_0 RM.20/RM.21A/RM.21B"
 source_event_log: LIFE_EVENT_LOG_v1_2.md (36 events; confidence 0.89)
 length_target: ~25-35K words (acharya-grade)
 calibration: Honest, chart-first reveal; cross-domain linkages mandatory (CDLM)
@@ -30,10 +39,10 @@ red_team_status: Pending (to be incorporated in Session 18 red-team pass)
 ---
 
 # Career & Dharma Domain Report — Abhisek Mohanty
-## `REPORT_CAREER_DHARMA_v1_0.md`
+## `REPORT_CAREER_DHARMA_v1_1.md`
 
 **Aries Lagna | 1984-02-05 | 10:43 IST | Bhubaneswar, Odisha**
-**Version 1.0 | 2026-04-18 | Session 16**
+**Version 1.1 | 2026-04-19 | GAP_RESOLUTION_SESSION**
 
 ---
 
@@ -151,7 +160,7 @@ Five structural facts establish the career architecture's foundation:
 
 **Second**, Mercury's seven-system convergence (MSR.413, confidence 0.98) is the chart's single highest-confidence analytical finding. In seventeen years of the current Mahadasha, every institutional career success retrodictively traces to Mercury's activation. The native who deploys Mercury fully — intellectual mastery, communicative precision, knowledge-synthesis in institutional contexts — is working in maximal alignment with the chart's design.
 
-**Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupiter + Venus in kendra/trikona) bestows the intellectual foundation; the Lakshmi Yoga signature (Shree Lagna in 9H, Venus 2L in 9H) wires wealth to dharmic career output; the triple Raja Yoga (Jupiter 9L in own sign 9H Trikona, Sun 5L in 10H Kendra, Saturn 10L exalted 7H Kendra) provides the formal classical authority-authorization.
+**Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupiter + Venus in kendra/trikona) bestows the intellectual foundation; the Lakshmi Yoga signature (Shree Lagna in 7H Libra Vishakha, Venus 2L in 9H) wires wealth through the relationship domain into dharmic career output (RM_v2_0 RM.20); the triple Raja Yoga (Jupiter 9L in own sign 9H Trikona, Sun 5L in 10H Kendra, Saturn 10L exalted 7H Kendra) provides the formal classical authority-authorization.
 
 **Fourth**, the Sade Sati Paradox (MSR.396, three-system confirmation) is the career's empirical validation. The period 2022–2025 — classically predicted to be career-suppressive — was retrodictively documented as the most consequential career period of the native's life to date. This is not coincidence but architecture: the Authority-Through-Tension Pattern (UCN Part VII) produces maximum career output when institutional pressure is maximum. Pressure is the generator, not the suppressant.
 
@@ -183,7 +192,7 @@ Before entering the career-specific analysis, the Cross-Domain Linkage Matrix (C
 | Career → Wealth | Feeds | 0.92 | Unidirectional | Income is inseparable from professional reputation; Mercury career = Mercury wealth vehicle |
 | Career ↔ Mind | Amplifies | 0.94 | Bidirectional | Career-Mind-Wealth triangle (RM.32); Mercury governs all three vertices simultaneously |
 | Career ↔ Relationships | Mirrors | 0.88 | Bidirectional | Saturn governs both 10H (lord) and 7H (tenant); career-discipline IS relationship-karma |
-| Career → Health | Constrains | 0.71 | Career→Health | Career intensity (Saturn demanding quality) + Saham Roga in 7H = health cost of professional peak |
+| Career → Health | Constrains | 0.71 | Career→Health | Career intensity (Saturn demanding quality) + Roga Saham in 2H Taurus (with Rahu) = health cost accumulates through resource-depletion and Rahu-amplified lifestyle excess, not through direct 7H partnership-domain friction (FORENSIC_v8_0 §12.1) |
 | Career ↔ Spirit | Feeds | 0.82 | Bidirectional | Professional excellence IS dharmic practice; career feeds spiritual evolution and vice versa |
 | Career ↔ Parents | Mirrors | 0.74 | Bidirectional | Pitri Saham in 10H encodes father-karma in career house |
 | Career → Children | Constrains | 0.65 | Career→Children | Avayogi PK Mars in career-partnership zone; children come after career stabilization |
@@ -270,11 +279,11 @@ The yoga fires during Mercury Mahadasha because Mercury is the yoga's central me
 
 ### §6.2 Lakshmi Yoga Signature: Wealth Through Dharma
 
-The Shree Lagna (SL) falls in Sagittarius 9H in this chart (computed per v6.0 §12.1). Shree Lagna is the sensitive point associated with Lakshmi's presence — its placement indicates where material abundance enters the chart and through what planetary vehicle. SL = 9H + Venus (2L, the wealth lord) co-occupying 9H = the entry point for wealth is the dharmic house, occupied by the wealth planet.
+The Shree Lagna (SL) falls in Libra 7H Vishakha nakshatra in this chart (corrected per FORENSIC_v8_0 §12.1; the v6.0 position of 9H Sagittarius is SUPERSEDED). Shree Lagna is the sensitive point associated with Lakshmi's presence — its placement indicates where material abundance enters the chart and through what domain vehicle. SL = 7H Libra Vishakha, while Venus (2L, the wealth lord) occupies 9H Sagittarius = the entry point for wealth is the partnership/relationship domain (7H), with the wealth planet positioned in the dharma house (9H) as the bridge. This is the Lakshmi-Through-Relationship architecture (RM_v2_0 RM.20).
 
-This is the foundation of the wealth-as-dharmic-output principle: the Lakshmi-entrance-mechanism is positioned in the dharma house, not in the wealth house directly. The implication for career: professional work that is dharmically aligned (Jupiter-authorized, Saraswati-executed, Saturn-structured) automatically activates the Lakshmi channel. Work that bypasses the dharma house — that optimizes for income at the cost of dharmic integrity — does not reach the Lakshmi entry-point, and the wealth channel underperforms.
+This corrected architecture recasts the wealth-entry principle: Lakshmi enters through the 7H (partnerships, collaborations, public facing engagements, Venus-governed relational domain), not directly through the 9H dharma house. Venus in 9H serves as the architectural bridge — the wealth lord's dharmic positioning means that the relational channel through which Lakshmi flows is imbued with dharmic intent and Jupiter's 9H authorization. The mechanism is: relationship-quality and collaborative integrity (7H) → dharmic grounding of those relationships via Venus's 9H position → Lakshmi activation.
 
-For career decision-making: the question that should precede any major professional choice is not "does this maximize income?" but "does this deploy Mercury's intellectual capacity in Saturn's structured institutional frameworks in Jupiter-authorized dharmic directions?" When the answer to that composite question is yes, the Lakshmi channel opens. When the answer is partial or no, the channel narrows.
+For career decision-making: the question that should precede any major professional choice is not merely "does this align with dharma?" but also "does this build or deploy the right quality of partnerships and collaborative structures?" The Lakshmi channel in this chart opens most fully when Mercury's intellectual capacity is deployed within Saturn's institutional frameworks AND through high-integrity partnerships (7H). Solitary career action, even if dharmically pure, misses the 7H entry-point. The relational dimension is architecturally non-negotiable in this chart's wealth-manifestation sequence.
 
 ### §6.3 The Raja Yoga Triple-Stack
 
@@ -525,7 +534,7 @@ The correct navigation: treat Ketu AD as the Mercury MD's intellectual-deepening
 ### §10.4 Venus AD and Sun AD: The Recognition Phase (2028–2030)
 
 Venus AD (approximately 2028–2029): Venus as 2L (wealth lord) in 9H Sagittarius activates the Lakshmi Yoga signature's most direct material and relational expression. Within Mercury MD, Venus AD is the sub-period when:
-- The dharmic wealth pathway (Shree Lagna in 9H, Venus 2L in 9H) is most directly activated
+- The Lakshmi-Through-Relationship pathway (Shree Lagna 7H Libra Vishakha + Venus 2L in 9H) is most directly activated: Lakshmi enters through the relationship domain (7H), with Venus's dharmic positioning (9H) as the bridge (RM_v2_0 RM.20)
 - Significant partnerships may be crystallized at the Venus level (Venus as 7L, MK)
 - Institutional recognition of the Mercury MD's intellectual legacy may become most publicly visible
 - The Saraswati Yoga fires with Venus's aesthetic-grace component most fully expressed
@@ -567,7 +576,7 @@ Ketu MD begins in August 2031. Ketu in 8H Scorpio — the moksha node in the hou
 
 **The regime change is architectural, not circumstantial**: Ketu MD is not a period when career becomes difficult or irrelevant. It is a period when the quality of career relationship changes: from building-and-holding (Mercury MD's orientation) to offering-and-deepening (Ketu MD's orientation). The Ketu MD career is not smaller than the Mercury MD career; it is differently oriented. Instead of building institutional structures, Ketu MD's career operates through transmission — teaching, research, consultation, the passing-forward of what Mercury MD built.
 
-**The hidden pinnacle architecture**: Varnada Lagna + Ghati Lagna both in Scorpio 8H (Ketu's house). This means the chart's most genuine authority — the authority that operates from wisdom rather than institutional position — arrives during Ketu MD. The Mercury MD's institutional authority is real and valuable, but it is preparatory. Ketu MD's transformation-wisdom authority is the chart's deepest authentic expression `(UCN §VI.4)`.
+**The Ketu MD architecture (corrected per v8.0):** The v6.0 "hidden pinnacle" claim that Varnada+Ghati Lagnas were both in Scorpio 8H is FALSIFIED — neither lagna is in 8H. The correct positions: Ghati Lagna = 9H Sagittarius (Jupiter's own sign, the dharma house). Varnada Lagna = 4H Cancer (Moon's own sign, the emotional foundation house). The corrected architecture for Ketu MD: Ghati Lagna in 9H means the chart's genuine institutional authority in Ketu MD arrives through dharmic mastery, teaching, and principled wisdom — through Jupiter's 9H domain, not through Ketu's 8H. Varnada Lagna in 4H Cancer means the chart's fulfillment dimension in Ketu MD operates through emotional depth, domestic rootedness, and ancestral healing — through Moon's 4H domain. Ketu MD remains a transformation arc via Ketu's own exaltation in Scorpio 8H: Ketu activates 8H inquiry, renunciation, and depth of occult investigation through Ketu's placement, not through Varnada or Ghati. See RM_v2_0 RM.21A (Ghati 9H) and RM.21B (Varnada 4H).
 
 **Career form in Ketu MD**: Advisory, consultancy, research, teaching, intellectual transmission. The Marsys organizational structure (built during Mercury MD) should be sufficiently institutionalized by 2031 to operate without requiring the native's full executive attention — freeing Ketu MD's energy for the deeper work.
 
@@ -776,7 +785,7 @@ Specifically:
 
 **Sasha Mahapurusha Yoga**: Saturn exalted in Kendra (7H Libra). One of the five classical great-person yogas.
 
-**Shree Lagna (SL)**: The sensitive point associated with Lakshmi's presence, indicating how material abundance enters the chart. SL = 9H in this chart.
+**Shree Lagna (SL)**: The sensitive point associated with Lakshmi's presence, indicating how material abundance enters the chart. SL = 7H Libra Vishakha in this chart (corrected per FORENSIC_v8_0 §12.1; the v6.0 position of 9H Sagittarius is SUPERSEDED). The Lakshmi-Through-Relationship architecture (RM_v2_0 RM.20): abundance enters through the partnership/relationship domain (7H), with Venus 2L in 9H as the dharmic bridge.
 
 **Vargottama**: A planet holding the same sign in D1 (natal) and D9 (Navamsha) — the soul-lens confirms the circumstantial promise. Mercury is Vargottama.
 
@@ -809,7 +818,7 @@ Specifically:
 | 10H Bhavabala rank 3 | MATRIX_HOUSES.md MX.HSE.10 |
 | Saturn AmK designation | v6.0 §5.3 Jaimini karakas |
 | Saraswati Yoga confirmation | MSR.131, v6.0 §11.3 |
-| Lakshmi Yoga signature | MSR.228+, v6.0 §12.1 (Shree Lagna) |
+| Lakshmi Yoga signature | MSR.228+, FORENSIC_v8_0 §12.1 (Shree Lagna 7H Libra Vishakha; RM_v2_0 RM.20) |
 | D10 Dashamsha career analysis | MATRIX_DIVISIONALS.md (DVS.D10) |
 | Sade Sati Paradox (three-system) | MSR.396, UCN §VII.4 |
 | ATT (Authority-Through-Tension) | UCN §I.1 FS2, §VII |
