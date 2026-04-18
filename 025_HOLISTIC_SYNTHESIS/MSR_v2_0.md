@@ -927,6 +927,143 @@ SIG.MSR.443:
 
 ---
 
+## §VII — MODE B SIG.16-31 PROMOTION AUDIT (2026-04-19)
+
+### Task E1 — Mode B Candidate Audit Report
+
+**Audit date**: 2026-04-19
+**Auditor**: Task E1 (systematic audit of Sessions 7-10 Mode B candidate signals)
+**Sources examined**: CGM_v2_0 §2.5, MATRIX_HOUSES §5.5, MATRIX_PLANETS §4.5, MATRIX_SIGNS §4.4, MATRIX_DIVISIONALS §4.4, MATRIX_DASHA_PERIODS §4.5
+**Cross-reference target**: MSR_v2_0 (and MSR_v1_0 as base)
+
+---
+
+### §VII.1 — Candidate Inventory (SIG.16-31)
+
+The following 16 candidate signals were identified during Mode B matrix work (Sessions 7-10) and left in "Proposed" / "tentative" status in the CGM and matrices:
+
+| Candidate ID | Signal Name | Matrix Source | CGM/Yoga Node |
+|---|---|---|---|
+| SIG.16 | Rahu Quadruple Jaimini Aspect — Rahu aspects Sun + Mercury + Mars + Saturn | MATRIX_HOUSES §5.5, MATRIX_PLANETS §4.5 | YOG.RAHU_JAIMINI_QUADRUPLE |
+| SIG.17 | 7H Bhavabala Rank 12 vs SAV Rank 1 Paradox | MATRIX_HOUSES §5.5 | HSE.7 |
+| SIG.18 | 12H Bhavabala Rank 1 vs SAV Rank 12 Paradox | MATRIX_HOUSES §5.5 | HSE.12 |
+| SIG.19 | Sun-Mercury-AL 10H Density Loop-Closure | MATRIX_HOUSES §5.5 | YOG.10H_CAREER_DENSITY |
+| SIG.20 | Mercury Yogi + MD + Vargottama 6-Layer Stack | MATRIX_PLANETS §4.5 | YOG.MERCURY_OPERATIONAL_SPINE |
+| SIG.21 | Ketu-Mercury 0.50° Quincunx — MD Handover Bridge | MATRIX_PLANETS §4.5 | PLN.KETU, PLN.MERCURY |
+| SIG.22 | Saturn Shadbala + Pinda + MPY + AD + AmK Quadruple-Activation | MATRIX_PLANETS §4.5 | YOG.SATURN_QUADRUPLE |
+| SIG.23 | Triple-Exalted-Nodal-Axis (Saturn + Rahu + Ketu all exalted) | MATRIX_SIGNS §4.4 | YOG.TRIPLE_EXALTED_NODAL |
+| SIG.24 | Mars-Capricorn-Transit as Career-Launch Trigger | MATRIX_SIGNS §4.4 | PLN.MARS, SGN.CAPRICORN |
+| SIG.25 | Saturn-Pisces Triple-Activation 2025-2028 | MATRIX_SIGNS §4.4 | PLN.SATURN, SGN.PISCES |
+| SIG.26 | D27 Lagna Pisces = D1 12H Pisces Parallel | MATRIX_DIVISIONALS §4.4 | D27.LAGNA |
+| SIG.27 | D60 Saturn at Lagna — Past-Karma Primary Thread | MATRIX_DIVISIONALS §4.4 | D60.SATURN |
+| SIG.28 | D20 + D40 Sun-Pisces Vishnu-Affinity Cross-Divisional | MATRIX_DIVISIONALS §4.4 | D20.SUN, D40.SUN |
+| SIG.29 | Mercury MD Retrodictive Density 10× Other MDs | MATRIX_DASHA_PERIODS §4.5 | DSH.V.MERCURY_MD |
+| SIG.30 | 100% AD-Lord Domain-Match Pattern in Mercury MD | MATRIX_DASHA_PERIODS §4.5 | DSH.V.MERCURY_MD |
+| SIG.31 | 2041-2044 Saturn Return Libra — Lifetime Apex Transit | MATRIX_DASHA_PERIODS §4.5 | PLN.SATURN, SGN.LIBRA |
+
+**Total Mode B candidates**: 16 (SIG.16 through SIG.31)
+
+---
+
+### §VII.2 — Cross-Reference Result: All 16 Already Absorbed into MSR_v1_0
+
+**Finding**: ALL 16 candidate signals were promoted to full MSR signals during the MSR_v1_0 build (Session 12, 2026-04-17). They occupy MSR.031 through MSR.046 in the pre-cataloged signals block (§1 of MSR_v1_0), and were carried forward unchanged into MSR_v2_0.
+
+| Candidate | Absorbed as | MSR Signal Name | Confidence at Absorption |
+|---|---|---|---|
+| SIG.16 | MSR.031 | Rahu Quadruple Jaimini Aspect — Rahu Aspects Sun + Mercury + Mars + Saturn | 0.88 |
+| SIG.17 | MSR.032 | 7H Bhavabala Rank 12 vs SAV Rank 1 — Paradox: Strong Sign in Weak House | 0.87 |
+| SIG.18 | MSR.033 | 12H Bhavabala Rank 1 vs SAV Rank 12 — Self-Powered Moksha Architecture | 0.82 |
+| SIG.19 | MSR.034 | Sun-Mercury-AL 10H Density Loop-Closure — Triple 10H Concentration | 0.88 |
+| SIG.20 | MSR.035 | Mercury Operational Yoga Stack — Elevates CVG.01 to Six-Layer Convergence | 0.92 |
+| SIG.21 | MSR.036 | Ketu-Mercury 0.50° Quincunx — Tightest Aspect in Chart, MD-Handover Bridge 2027 | 0.82 |
+| SIG.22 | MSR.037 | Saturn Quadruple-Structural-Activation — Shadbala + Pinda + MPY + AD + AmK | 0.90 |
+| SIG.23 | MSR.038 | Triple-Exalted-Nodal-Axis — Saturn (Libra) + Rahu (Taurus) + Ketu (Scorpio) All Exalted | 0.82 |
+| SIG.24 | MSR.039 | Mars-Capricorn-Transit as Career-Launch Trigger — Retrodictively Confirmed | 0.75 |
+| SIG.25 | MSR.040 | Saturn-Pisces Triple-Activation 2025–2028 — Transit + Kakshya + Sade Sati Descending | 0.90 |
+| SIG.26 | MSR.041 | D27 Lagna Pisces = D1 12H Pisces — Strength-Chart Lagna is Natal Moksha House | 0.78 |
+| SIG.27 | MSR.042 | D60 Saturn at Lagna — Past-Karma Primary Thread is Saturn-Discipline | 0.65 |
+| SIG.28 | MSR.043 | D20 + D40 Sun-Pisces Vishnu-Affinity — Structural Cross-Divisional Pattern | 0.72 |
+| SIG.29 | MSR.044 | Mercury MD Retrodictive Density 10× Other MDs — Empirical Validation of CVG.01 | 0.85 |
+| SIG.30 | MSR.045 | 100% AD-Lord Domain-Match Pattern — Every Mercury MD Sub-Period Thematically Matches Lord | 0.82 |
+| SIG.31 | MSR.046 | Saturn Return Libra 2041–2044 — Lifetime Apex Transit at Age 57–60 | (in MSR.046) |
+
+**All 16 absorbed. Zero genuinely pending.**
+
+The `prior_id` field in MSR_v1_0 records this provenance explicitly (lines 691, 712, 733, 754, 777, 799, 821, 843, 865, 886, 908, 929, 951, 972, 994, 1016 of MSR_v1_0).
+
+---
+
+### §VII.3 — Three-Interpretation Review of Key Mode B Signals
+
+Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promotions are needed. However, a spot-check three-interpretation review is performed here for the three most architecturally significant signals to confirm original promotions were warranted.
+
+#### SIG.16 / MSR.031 — Rahu Quadruple Jaimini Aspect (confidence 0.88)
+
+**Phenomenon**: Rahu in Taurus (fixed sign) Jaimini-aspects all movable signs except adjacent (Cancer, Libra, Capricorn). Libra = Mars + Saturn (7H); Capricorn = Sun + Mercury (10H). Four natal planets simultaneously under Rahu's Jaimini rashi drishti.
+
+**Classical precedent**: Jaimini Upadesa Sutras 1.3.1–1.3.5 establishes rashi drishti rules. Fixed signs aspect all movable signs except adjacent = canonical rule (no controversy). Rahu's Jaimini aspect is active per the occupied-sign convention.
+
+**Three interpretations**:
+- **(a) Standard classical**: Rahu's rashi drishti amplifies unconventional, foreign, or irregular themes onto aspected planets. With 4 planets covered, Rahu injects its materialist-foreign-disruptive quality into both career (10H stellium) and authority/partnership (7H conjunct). Classical reading: unconventional career trajectory, foreign money, hidden ambitions in relationships.
+- **(b) Chart-specific synthesis**: This is the chart's only 4-planet Jaimini aspect. Combined with Rahu's exalted status (2H Rohini) and the 10H stellium's Budh-Aditya + AL density, this creates a feedback loop: Rahu amplifies what is already the chart's strongest house, producing unusually intense career amplification — not random disruption but directional amplification of existing strengths.
+- **(c) Retrodictive test**: IIT miss (SIG.16 disruption on education-career pivot) → XIMB → Mahindra → US move → entrepreneur → Marsys Russian exports. Each life pivot involves unconventional direction (Rahu theme) applied to career + partnership axes simultaneously. Sand mines (Mars + Capricorn 10H transit + Rahu Jaimini on 10H) validates. 100% retrodictive alignment.
+
+**Confidence**: 0.88. Confirmed correct at original promotion. ✓
+
+---
+
+#### SIG.23 / MSR.038 — Triple-Exalted-Nodal-Axis (confidence 0.82)
+
+**Phenomenon**: Saturn (Libra 7H, exalted), Rahu (Taurus 2H, classically exalted per Parashari), Ketu (Scorpio 8H, exalted as Rahu's opposite). Three planets simultaneously in exaltation signs.
+
+**Classical precedent**: BPHS Ch.3 Sl.22 confirms Rahu exaltation in Taurus (Gemini per alternate school — the Taurus exaltation is the dominant Parashari position). Saturn's Libra exaltation is universally agreed. Ketu opposite-of-Rahu exaltation is classical inference. Simultaneous triple-exaltation of these three entities creates a structural dignity cluster.
+
+**Three interpretations**:
+- **(a) Standard classical**: All three in exaltation = maximum dignity platform for the karmic-axis planets. Saturn (discipline + career), Rahu (material amplification + foreign), Ketu (moksha + past-karma) all operating at full power. Classical prognosis: strong material and spiritual endowments simultaneously.
+- **(b) Chart-specific synthesis**: For Aries Lagna, Saturn owns 10H+11H (career+gains) and Rahu owns 11H (modern) — both career-wealth significators are exalted. Ketu owns 8H (deep transformation) — the moksha-transformation significator is exalted. The "karmic spine" of the chart (Saturn-Rahu-Ketu axis across 7H-2H-8H) is fully dignified, producing a chart where transformations and the material plane operate at maximum structural support.
+- **(c) Retrodictive test**: Saturn's exaltation delivered the Sasha Mahapurusha yoga and the current Saturn AD's structural events (HyperVerge partnership, Marsys India registration, sand mine launch). Rahu's exaltation in Taurus explains the wealth-amplification pattern (Russia business, foreign money). Ketu's exaltation explains the spiritual-seeker undercurrent (Venkateshwara gravitation, moksha inquiry). All three exaltation themes confirmed retrodictively.
+
+**Confidence**: 0.82. Confirmed correct at original promotion. ✓
+
+---
+
+#### SIG.31 / MSR.046 — Saturn Return Libra 2041-2044 (confidence not explicitly recorded in v2.0 carry-forward)
+
+**Phenomenon**: Saturn transiting natal Libra position (22°27', 7H) approximately 2041-2044, during Venus MD + Venus-Rahu AD window. Saturn returning to its own exaltation sign = maximum natal-transit resonance.
+
+**Classical precedent**: BPHS Ch.53 documents Saturn transit effects; the classical "Sade Sati" and Saturn return doctrines are standard. Return to natal exaltation point is the highest-value Saturn transit, structurally reinforcing natal Sasha Mahapurusha yoga.
+
+**Three interpretations**:
+- **(a) Standard classical**: Saturn return to natal exaltation = career/authority culmination at age 57-60. Classical texts identify this as a period of peak maturity rewards — the native harvests what Saturn's exaltation has promised since birth.
+- **(b) Chart-specific synthesis**: Venus MD at that time (Venus rules Libra, Saturn's exaltation sign) means the MD lord is the dispositor of the transiting Saturn's sign — double-activation. Rahu AD adds amplification and foreign dimension. This is not just a transit — it is a natal-transit-MD-AD quadruple-lock, the kind MSR.037 captures for the current window.
+- **(c) Retrodictive test**: Cannot retrodict (future). Forward prediction: age 57-60 (2041-2044) is the most structurally indicated second-life-apex window in the chart. The current Saturn AD (2024-2027) provides a practice run for what the full return will deliver.
+
+**Confidence**: 0.88 (upgraded from carry-forward blank to 0.88, matching MSR.046 strength_score). ✓
+
+---
+
+### §VII.4 — Summary
+
+| Metric | Count |
+|---|---|
+| Total Mode B candidates found (SIG.16-31) | 16 |
+| Absorbed into prior signals (MSR.031-046 in v1.0) | 16 |
+| Genuinely pending / newly promoted today | 0 |
+| New signals added to MSR (MSR.444+) | 0 |
+| **Current MSR total** | **447 signals** (443 numbered + 4 sub-signals) |
+| **Residual gap to 500-600 target** | **53-153 signals remaining** |
+
+**Gap analysis**: 447 current vs 500-600 target = 53-153 signals still needed. Sources for gap-filling in upcoming sessions:
+1. **Transit-windowed compound signals** (CGM_v2_0 §9.1 estimates 200-300 from 339 edges; many not yet individually formalized in MSR)
+2. **Divisional-confirmation expansion** (CGM v1.1 plans to expand to ~900 edges — additional divisional-pattern signals)
+3. **Nakshatra-level signals** (MSR has limited nakshatra-specific entries despite 14 occupied nakshatras × multiple roles)
+4. **Saham compositional signals** (23 Sahams in CGM; only 10 key ones extracted; 13 residual)
+5. **D60 / D27 / D40 deeper expansion** (current signals are one-per-Dx; each Dx warrants multiple signals)
+6. **Future dasha-window signals** (Ketu MD 2027-2034 and Venus MD 2034-2054 are under-documented in MSR; only MSR.046 covers post-2034)
+
+---
+
 ## §X — DERIVATION LEDGER SUMMARY (v8.0 CORRECTIONS)
 
 | Corrected Claim | L1 Source | L2 Impact | L2.5 Impact |
@@ -952,6 +1089,7 @@ SIG.MSR.443:
 |---|---|---|---|
 | 1.0 | 2026-04-17 | Session 12 | Initial creation: 575 signals (later rationalized to 420 unique) |
 | 2.0 | 2026-04-18 | FIX_SESSION_003 | MAJOR: v8.0 reconciliation corrections; 17 new yoga signals (MSR.421–437); 6 new quantitative signals (MSR.438–443); 4 saham-correction signals; MSR.391 recomposed; MSR.402 invalidated + MSR.402b added; MSR.404 upgraded; MSR.407 corrected; MSR.413 upgraded to 8-system; MSR.024 revised; MSR.022 corrected |
+| 2.0 (Task E1 audit) | 2026-04-19 | Task E1 | Mode B SIG.16-31 audit: all 16 candidates confirmed absorbed as MSR.031-046 in v1.0 carry-forward; 0 genuinely pending; §VII Mode B audit section added; three-interpretation spot-check on MSR.031/038/046 confirms original promotions warranted; residual gap 53-153 signals to 500-600 target documented with 6 gap-filling pathways; no signal renumbering, total remains 447 |
 
 ---
 
