@@ -1,43 +1,52 @@
 'use client'
 import { useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from 'sonner'
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
-  const supabase = useMemo(() => createClient(), [])
+type Mode = 'signin' | 'signup'
 
-  async function handleMagicLink(e: React.FormEvent) {
+export default function LoginPage() {
+  const [mode, setMode] = useState<Mode>('signin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const supabase = useMemo(() => createClient(), [])
+  const router = useRouter()
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/api/auth/callback` },
-    })
-    setLoading(false)
-    if (error) {
-      toast.error(error.message)
-    } else {
-      setSent(true)
-    }
-  }
 
-  async function handleGoogle() {
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/api/auth/callback` },
-    })
-    if (error) {
-      toast.error(error.message)
-      setLoading(false)
+    if (mode === 'signin') {
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) {
+        toast.error(error.message)
+        setLoading(false)
+      } else {
+        router.push('/dashboard')
+        router.refresh()
+      }
+    } else {
+      const { error } = await supabase.auth.signUp({ email, password })
+      if (error) {
+        toast.error(error.message)
+        setLoading(false)
+      } else {
+        toast.success('Account created — signing you in…')
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+        if (signInError) {
+          toast.error(signInError.message)
+          setLoading(false)
+        } else {
+          router.push('/dashboard')
+          router.refresh()
+        }
+      }
     }
-    // on success browser navigates to OAuth provider — no need to unset loading
   }
 
   return (
@@ -45,40 +54,59 @@ export default function LoginPage() {
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>AM-JIS Platform</CardTitle>
-          <CardDescription>Sign in to access the Jyotish Intelligence System</CardDescription>
+          <CardDescription>
+            {mode === 'signin' ? 'Sign in to your account' : 'Create a new account'}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {sent ? (
-            <p className="text-sm text-muted-foreground text-center">
-              Check your email for the magic link.
-            </p>
-          ) : (
-            <>
-              <form onSubmit={handleMagicLink} className="space-y-3">
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? 'Sending…' : 'Send magic link'}
-                </Button>
-              </form>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">or</span>
-                </div>
-              </div>
-              <Button variant="outline" className="w-full" onClick={handleGoogle} disabled={loading}>
-                Continue with Google
-              </Button>
-            </>
-          )}
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+              minLength={6}
+            />
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? '…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-muted-foreground">
+            {mode === 'signin' ? (
+              <>
+                No account?{' '}
+                <button
+                  type="button"
+                  className="underline underline-offset-2 hover:text-foreground"
+                  onClick={() => setMode('signup')}
+                >
+                  Create one
+                </button>
+              </>
+            ) : (
+              <>
+                Already have an account?{' '}
+                <button
+                  type="button"
+                  className="underline underline-offset-2 hover:text-foreground"
+                  onClick={() => setMode('signin')}
+                >
+                  Sign in
+                </button>
+              </>
+            )}
+          </p>
         </CardContent>
       </Card>
     </div>
