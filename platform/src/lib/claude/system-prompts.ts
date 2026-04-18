@@ -39,7 +39,21 @@ Operating principles:
 Quality standard: Acharya-grade.`
 }
 
-export function consumeSystemPrompt(chart: ChartContext, reports: ReportEntry[]): string {
+export type ConsumeStyle = 'acharya' | 'brief' | 'client'
+
+const STYLE_SUFFIX: Record<ConsumeStyle, string> = {
+  acharya: '',
+  brief:
+    '\n\nStyle: Respond in 1–2 short paragraphs. Lead with the answer. Skip preamble. Keep Jyotish rigor but minimize prose.',
+  client:
+    '\n\nStyle: Speak to the native directly, in plain language. Avoid Sanskrit / technical Jyotish terms (no graha, dasha, lagna jargon). Explain implications, not mechanics.',
+}
+
+export function consumeSystemPrompt(
+  chart: ChartContext,
+  reports: ReportEntry[],
+  style: ConsumeStyle = 'acharya'
+): string {
   return `You are a Jyotish intelligence system for ${chart.name} (born ${chart.birth_date}, ${chart.birth_place}).
 
 Chart ID: ${chart.id}
@@ -51,5 +65,5 @@ MANDATORY: Before answering any domain question (career, finance, health, relati
 Quality standard: Acharya-grade. Be precise about confidence levels.
 
 Available reports:
-${reports.map(r => `- ${r.domain}: ${r.title} (v${r.version})`).join('\n')}`
+${reports.map(r => `- ${r.domain}: ${r.title} (v${r.version})`).join('\n')}${STYLE_SUFFIX[style]}`
 }

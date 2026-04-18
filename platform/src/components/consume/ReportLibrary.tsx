@@ -11,36 +11,38 @@ interface Props {
 
 export function ReportLibrary({ reports, selectedDomain, onSelect }: Props) {
   return (
-    <aside className="w-[220px] shrink-0 border-r flex flex-col overflow-hidden">
-      <div className="px-3 py-2 border-b">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-          Reports
-        </p>
+    <div className="flex flex-col">
+      <div className="px-4 py-3 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
+        Report library
       </div>
-
-      <div className="flex-1 overflow-y-auto p-1">
+      <div className="px-2 pb-2">
         {reports.length === 0 && (
-          <p className="text-xs text-muted-foreground text-center py-4 px-2">
-            No reports yet
+          <p className="px-3 py-6 text-center text-xs text-muted-foreground">
+            No reports yet.
           </p>
         )}
-        {reports.map(report => (
-          <button
-            key={report.id}
-            type="button"
-            onClick={() => onSelect(report.domain)}
-            className={cn(
-              'w-full text-left rounded px-2 py-1.5 text-xs transition-colors',
-              selectedDomain === report.domain
-                ? 'bg-primary/10 text-primary font-medium'
-                : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-            )}
-          >
-            <span className="block font-medium capitalize">{report.domain}</span>
-            <span className="block text-[10px] opacity-70 truncate">{report.title}</span>
-          </button>
-        ))}
+        <ul className="space-y-0.5">
+          {reports.map(report => (
+            <li key={report.id}>
+              <button
+                type="button"
+                onClick={() => onSelect(report.domain)}
+                className={cn(
+                  'w-full rounded-lg px-3 py-2 text-left text-sm transition-colors',
+                  selectedDomain === report.domain
+                    ? 'bg-muted text-foreground'
+                    : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'
+                )}
+              >
+                <span className="block font-medium capitalize">{report.domain}</span>
+                <span className="mt-0.5 block text-[11px] text-muted-foreground/80 line-clamp-1">
+                  {report.title}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
-    </aside>
+    </div>
   )
 }

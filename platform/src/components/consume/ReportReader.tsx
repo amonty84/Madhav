@@ -1,45 +1,43 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { Markdown } from '@/components/chat/Markdown'
 
 interface Props {
   chartId: string
   domain: string
-  onClose: () => void
+  onBack: () => void
 }
 
-export function ReportReader({ chartId, domain, onClose }: Props) {
-  const [content, setContent] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    setLoading(true)
-    setError(null)
-    setContent(null)
-    fetch(`/api/reports/${chartId}/${domain}`)
-      .then(res => {
-        if (!res.ok) throw new Error(res.statusText)
-        return res.json()
-      })
-      .then(data => setContent(data.content))
-      .catch(err => setError(String(err)))
-      .finally(() => setLoading(false))
-  }, [chartId, domain])
+export function ReportReader({ chartId, domain, onBack }: Props) {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['report', chartId, domain],
+    queryFn: async ({ signal }) => {
+      const res = await fetch(`/api/reports/${chartId}/${domain}`, { signal })
+      if (!res.ok) throw new Error(res.statusText || 'Failed to load report')
+      return res.json() as Promise<{ content: string }>
+    },
+    staleTime: 5 * 60 * 1000,
+  })
 
   return (
-    <div className="border-b bg-muted/20 flex flex-col max-h-[40vh]">
-      <div className="flex items-center justify-between px-4 py-2 border-b">
-        <p className="text-sm font-medium capitalize">{domain} Report</p>
-        <Button variant="ghost" size="sm" onClick={onClose}>✕</Button>
+    <div className="flex h-full flex-col">
+      <div className="flex items-center gap-2 border-b border-border/60 px-3 py-2">
+        <button
+          type="button"
+          onClick={onBack}
+          aria-label="Back to reports"
+          className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+        >
+          <ArrowLeft className="size-4" />
+        </button>
+        <p className="truncate text-sm font-medium capitalize">{domain} report</p>
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
-        {loading && <p className="text-sm text-muted-foreground">Loading…</p>}
-        {error && <p className="text-sm text-destructive">{error}</p>}
-        {content && (
-          <pre className="text-xs leading-relaxed whitespace-pre-wrap font-sans">{content}</pre>
-        )}
+      <div className="flex-1 overflow-y-auto px-6 py-6">
+        {isLoading && <p className="text-sm text-muted-foreground">Loading…</p>}
+        {error && <p className="text-sm text-destructive">{String(error)}</p>}
+        {data?.content && <Markdown>{data.content}</Markdown>}
       </div>
     </div>
   )
