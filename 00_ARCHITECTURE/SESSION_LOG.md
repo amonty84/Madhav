@@ -1306,3 +1306,67 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 - (B) Domain report for remaining domains (REPORT_PSYCHOLOGY_MIND update, REPORT_CHILDREN update, REPORT_TRAVEL update, REPORT_PARENTS update)
 - (C) Query the corrected corpus — test architecture against specific life questions
 - (D) JH Ayurdasaya export to close LONGEVITY.GAP.01 completely
+
+---
+
+## GAP_RESOLUTION_SESSION (2026-04-19)
+**Environment**: Claude Code (CLI, working dir `/Users/Dev/Vibe-Coding/Apps/Madhav`)
+**Objective**: Close all 8 internally-resolvable corpus gaps from post-FIX_SESSION_003_deferred gap list
+
+### Artifacts Produced
+
+**Phase A — 5 Domain Reports → v1.1:**
+- `03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md` (NEW — CURRENT) — Shree Lagna 9H→7H, Roga Saham 7H→2H, hidden-pinnacle concept replaced
+- `03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md` (NEW — CURRENT) — Shree Lagna 9H→7H
+- `03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_1.md` (NEW — CURRENT) — GAP.02 resolved (D9 Jupiter = Gemini confirmed)
+- `03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md` (NEW — CURRENT) — GAP.05 substantially resolved (D7 corroborated)
+- `03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md` (NEW — CURRENT) — v8.0 review pass; confirmed clean
+
+**Phase B — Temporal + Remedial:**
+- `04_REMEDIAL/REMEDIAL_CODEX_v2_0_PART1.md` (NEW — CURRENT) — Shree Lagna 9H→7H, Jupiter 4H→9H corrections
+- `04_REMEDIAL/REMEDIAL_CODEX_v2_0_PART2.md` (NEW — CURRENT) — Shree Lagna 9H→7H, Jupiter 4H→9H corrections
+- `05_TEMPORAL/LIFETIME_TIMELINE_v1_0.md` (EDITED in-place) — Varnada+Ghati hidden-pinnacle concept replaced; Ketu MD arc preserved via Ketu-8H
+- `05_TEMPORAL/HEATMAP_VARSHPHAL_v1_0.md` (AUDITED — no changes required)
+
+**Phase C — Engine-Level Gaps:**
+- GAP.07 RESOLVED in FORENSIC_ASTROLOGICAL_DATA_v8_0.md — JH canonical for Shadbala; Saturn #1
+- GAP.08 RESOLVED in FORENSIC_ASTROLOGICAL_DATA_v8_0.md — FORENSIC BAV/SAV canonical; JH Moon row reference only
+- GAP.09 RESOLVED in FORENSIC_ASTROLOGICAL_DATA_v8_0.md — FORENSIC dasha dates canonical; ±7-9d cusp zone documented
+
+**Phase D — CGM v2.0:**
+- `025_HOLISTIC_SYNTHESIS/CGM_v2_0.md` (NEW — CURRENT) — LAG.HORA 7H→3H, LAG.GHATI 8H→9H, LAG.VARNADA 8H→4H, LAG.SHREE 9H→7H; all edges updated; CGM_v1_0 marked SUPERSEDED
+
+**Phase E — MSR Mode B:**
+- `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` (EDITED in-place) — §VII Mode B Audit section added; SIG.16-31 confirmed absorbed as MSR.031-046; residual gap documented
+
+**Phase F — Provenance:**
+- `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` (EDITED in-place) — §0 Provenance Registry added; 7 corrected signals documented; 413+ confirmed; CGP Provenance: COMPLETE
+
+**Governance:**
+- `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` (UPDATED in-place) — version registry updated; GAP.07/08/09 RESOLVED; aggregate counts updated; §8 amendment log added
+
+### Gap Closures
+
+1. **GAP.07** — RESOLVED: JH canonical for Shadbala; Saturn #1 (8.79r)
+2. **GAP.08** — RESOLVED: FORENSIC BAV/SAV canonical; JH Moon row reference only
+3. **GAP.09** — RESOLVED: FORENSIC dasha dates canonical for retrodictive fit; ±7-9d cusp zone documented
+4. **SIG.16-31 Mode B** — CONFIRMED ABSORBED: All 16 candidates in MSR.031-046; no new promotions needed
+5. **Provenance** — COMPLETE: §0 Registry added to MSR_v2_0; 7 corrected, 413+ confirmed
+
+### Corpus Integrity Statement
+
+All 8 internally-resolvable gaps are now closed. The corpus is self-consistent at L1 (FORENSIC_v8_0), L2.5 (CDLM_v1_1, RM_v2_0, MSR_v2_0, CGM_v2_0), and L3 (5 domain reports at v1.1; REPORT_FINANCIAL_v2_1, REPORT_HEALTH_LONGEVITY_v1_1, REPORT_RELATIONSHIPS_v1_1, REPORT_SPIRITUAL_v1_1 from prior sessions). The hidden-pinnacle concept (based on FALSIFIED lagna positions) has been removed from all L3/L4 documents.
+
+### Remaining Open Items
+
+- **Item 9**: External acharya review — kit ready at ACHARYA_ENGAGEMENT_KIT.md; requires native to initiate contact
+- **Item 10**: 6 empirical falsifier tests — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated
+- **MSR signal gap**: 443 signals vs 500-600 target; 53-157 short; pathways documented in MSR_v2_0 §VII.4
+
+### Next Session Objective
+
+Choose from:
+- (A) UCN v4.0 — incorporate all corrections from FIX_SESSION_003 + deferred + GAP_RESOLUTION into UCN
+- (B) Query the corrected corpus — test architecture against specific life questions
+- (C) MSR expansion — push toward 500-600 signal target using §VII.4 pathways
+- (D) External acharya engagement — initiate review using ACHARYA_ENGAGEMENT_KIT.md
