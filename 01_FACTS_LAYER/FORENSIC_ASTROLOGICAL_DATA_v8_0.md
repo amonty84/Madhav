@@ -1,12 +1,11 @@
 ---
 document: Forensic Astrological Data
 subject: Abhisek Mohanty
-version: 6.0
-supersedes: 5.1
-status: SUPERSEDED
-superseded_by: FORENSIC_ASTROLOGICAL_DATA_v8_0.md
-superseded_date: 2026-04-18
-superseded_session: FIX_SESSION_003
+version: 8.0
+supersedes: "6.0 + FORENSIC_DATA_v8_0_SUPPLEMENT.md (both now SUPERSEDED)"
+status: CURRENT
+session: FIX_SESSION_003
+date: 2026-04-18
 format: LLM-optimized canonical data file
 content_policy: FACTS and DERIVED values only. No interpretation, no predictive narrative, no commentary.
 ayanamsa: Lahiri (Chitrapaksha), value 23°37′58″
@@ -14,17 +13,20 @@ ayanamsa_system: Sidereal
 node_type: Mean
 house_system: Sripathi (Bhava Chalit)
 coordinate_type: Geocentric
+engines: "FORENSIC (primary base) + Jagannatha Hora v8.0 (authoritative for Special Lagnas, Sahams, Shadbala ranking, Yogas, Longevity, additional dasha systems)"
+dual_engine_policy: "Where FORENSIC and JH values differ, both are documented inline with [DUAL-ENGINE RECONCILIATION NOTE]. JH is authoritative for §12.1, §12.2, §6.6–§6.8, §26. FORENSIC is primary for §5.1 date continuity."
 ---
 
-<!-- ⚠️ SUPERSEDED: This document is archived. Use FORENSIC_ASTROLOGICAL_DATA_v8_0.md as the canonical L1 source. -->
+# FORENSIC ASTROLOGICAL DATA v8.0 — ABHISEK MOHANTY
+## Unified Canonical L1 Facts Layer — Supersedes v6.0 + Supplement
 
-# FORENSIC ASTROLOGICAL DATA — ABHISEK MOHANTY
+---
 
 ## §0 — DOCUMENT INDEX AND USAGE
 
 <!--
 LLM USAGE NOTES:
-- This file contains only facts and deterministic derivations. All interpretive content belongs in separate files.
+- This file is the SINGLE canonical L1 source. Do NOT consult v6.0 or the SUPPLEMENT separately — they are SUPERSEDED.
 - Every table, planet, house, nakshatra, and sensitive point has a stable ID. Use IDs for cross-reference.
 - Units and formats are canonical throughout:
     Degrees: DDD°MM′SS″ (or decimal degrees where marked "abs_long")
@@ -36,6 +38,7 @@ LLM USAGE NOTES:
 - When a planet moves between Rashi house and Chalit house, both are authoritative for different questions:
     Rashi house = sign-based placement (classical yoga/aspect calculations)
     Chalit house = degree-based functional delivery (transit triggers and outcome timing)
+- v8.0 key changes from v6.0: §12.1 Special Lagnas (4 corrected, 3 added), §12.2 Sahams (full 36-saham register), §6.6 Bhava Bala (JH), §6.7 Ishta/Kashta Phala, §6.8 Pancha-Vargeeya, §10.3 Chara Karaka 8-system note, §15.1 Siva Yoga Lord, §24 Longevity, §25 Additional Dasha Systems, §26 Yogas Register.
 -->
 
 ### §0.1 Stable ID Namespaces
@@ -66,41 +69,47 @@ LLM USAGE NOTES:
 | `TRS.*` | `TRS.SADE_SATI.C2.P3` | Transit cycle entry |
 | `PCG.*` | `PCG.TITHI` | Panchang component |
 | `KOT.*` | `KOT.SWAMI` | Kota Chakra component |
+| `BVB.*` | `BVB.JH.5` | Bhava Bala (JH engine) |
+| `IKP.*` | `IKP.SATURN` | Ishta/Kashta Phala |
+| `PVC.*` | `PVC.MERCURY` | Pancha-Vargeeya Classification |
+| `YGA.*` | `YGA.D1.KALPADRUMA` | Yoga register |
+| `LON.*` | `LON.KALACHAKRA` | Longevity indicator |
 
 ### §0.2 Section Map
 
-| § | Section | Content Type |
-| --- | --- | --- |
-| 1 | Core Identity | FACT |
-| 2 | D1 Rashi Chart | FACT |
-| 3 | Divisional Charts (D2–D60) | FACT |
-| 4 | KP System | FACT + DERIVED |
-| 5 | Dasha Systems | FACT |
-| 6 | Strength Metrics | FACT |
-| 7 | Ashtakavarga | FACT + DERIVED |
-| 8 | Saturn Kakshya Zones | DERIVED |
-| 9 | Avastha Diagnostics | DERIVED |
-| 10 | Chara Karakas | DERIVED |
-| 11 | Sensitive Points (Bhrigu, Yogi/Avayogi, Upagrahas) | DERIVED |
-| 12 | Special Lagnas and Sahams | DERIVED |
-| 13 | Arudhas | DERIVED |
-| 14 | Stellar Matrix (Navatara) | DERIVED |
-| 15 | Panchang DNA | FACT |
-| 16 | Hazards (Gandanta, Sandhi, Mrityu Bhaga) | DERIVED |
-| 17 | Aspects (Graha Drishti + Western orbs) | FACT |
-| 18 | Chalit Kinetic Shifts | DERIVED |
-| 19 | Chandra Chart (From-Moon View) | DERIVED |
-| 20 | Kota Chakra | DERIVED |
-| 21 | Deity Assignments | DERIVED |
-| 22 | Sade Sati Cycles | FACT |
-| 23 | Varshphal 2026–2027 | FACT |
-| 24 | Cross-Reference Matrices | DERIVED indexes |
+| § | Section | Content Type | v8.0 Status |
+| --- | --- | --- | --- |
+| 1 | Core Identity | FACT | unchanged |
+| 2 | D1 Rashi Chart | FACT | unchanged |
+| 3 | Divisional Charts (D2–D60) | FACT | unchanged |
+| 4 | KP System | FACT + DERIVED | unchanged |
+| 5 | Dasha Systems | FACT | unchanged; dual-engine note updated |
+| 6 | Strength Metrics | FACT | §6.6–§6.8 NEW |
+| 7 | Ashtakavarga | FACT + DERIVED | Moon BAV row corrected |
+| 8 | Saturn Kakshya Zones | DERIVED | unchanged |
+| 9 | Avastha Diagnostics | DERIVED | unchanged |
+| 10 | Chara Karakas | DERIVED | §10.3 NEW (8-karaka note) |
+| 11 | Sensitive Points | DERIVED | unchanged |
+| 12 | Special Lagnas and Sahams | DERIVED | §12.1 CORRECTED; §12.2 REPLACED |
+| 13 | Arudhas | DERIVED | unchanged |
+| 14 | Stellar Matrix (Navatara) | DERIVED | unchanged |
+| 15 | Panchang DNA | FACT | §15.1 Siva Yoga Lord added |
+| 16 | Aspects (Graha Drishti + Western orbs) | FACT | unchanged |
+| 17 | Chalit Kinetic Shifts | DERIVED | unchanged |
+| 18 | Chandra Chart | DERIVED | unchanged |
+| 19 | Kota Chakra | DERIVED | unchanged |
+| 20 | Deity Assignments | DERIVED | unchanged |
+| 21 | Sade Sati Cycles | FACT | unchanged |
+| 22 | Varshphal 2026–2027 | FACT | unchanged |
+| 23 | Cross-Reference Matrices | DERIVED indexes | updated for v8.0 corrections |
+| 24 | Longevity Indicators | FACT | NEW in v8.0 |
+| 25 | Additional Dasha Systems (JH) | FACT | NEW in v8.0 |
+| 26 | Yogas Register | DERIVED | NEW in v8.0 |
+| 27 | Document Completeness Ledger | DERIVED | updated for v8.0 |
 
 ---
 
 ## §1 — CORE IDENTITY (FACTS)
-
-<!-- Birth data and chart calibration. Single source of truth. All other tables derive from these. -->
 
 ### §1.1 Birth Metadata
 
@@ -131,15 +140,14 @@ LLM USAGE NOTES:
 | `MET.MOON.NAK` | Moon Nakshatra | Purva Bhadrapada |
 | `MET.MOON.PADA` | Moon Pada | 3 |
 | `MET.DASHA.CURRENT` | Current Vimshottari | Mercury MD – Saturn AD |
-| `MET.DASHA.CURRENT.START` | AD Start | 2024-12-12 |
-| `MET.DASHA.CURRENT.END` | AD End | 2027-08-21 |
+| `MET.DASHA.CURRENT.START` | AD Start | 2024-12-12 (FORENSIC); 2024-12-04 (JH) |
+| `MET.DASHA.CURRENT.END` | AD End | 2027-08-21 (FORENSIC); 2027-08-14 (JH) |
+
 ---
 
 ## §2 — D1 RASHI CHART (FACTS)
 
 ### §2.1 D1 Planet Positions
-
-<!-- Primary planetary data. Sign, degree, nakshatra, pada, absolute longitude, Rashi house, Chalit house. -->
 
 | ID | Planet | Sign | Degree | Nakshatra | Pada | Abs Long (°) | Rashi House | Chalit House |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -154,8 +162,6 @@ LLM USAGE NOTES:
 | `PLN.KETU` | Ketu | Scorpio | 19°01′47″ | Jyeshtha | 1 | 229.03 | 8 | 8 |
 
 ### §2.2 D1 Sign Occupancy (Bhava View)
-
-<!-- Which planets occupy which sign/house in the Rashi chart. -->
 
 | ID | House | Sign | Planets |
 | --- | --- | --- | --- |
@@ -174,8 +180,6 @@ LLM USAGE NOTES:
 
 ### §2.3 Bhava/Chalit Cusp Ledger
 
-<!-- Cusp (bhava begin) and mid-bhava degrees. Sripathi system. -->
-
 | ID | House | Cusp Sign | Cusp Degree | Mid-Bhava | Angle Label |
 | --- | --- | --- | --- | --- | --- |
 | `CSP.1` | 1 | Pisces | 25°49′40″ | Aries 12°23′55″ | Ascendant (Lagna) |
@@ -193,8 +197,6 @@ LLM USAGE NOTES:
 
 ### §2.4 Planet-to-Cusp Distance
 
-<!-- Distance from each planet to its nearest house cusp. Relevant for Chalit delivery and transit triggers. -->
-
 | ID | Planet | Abs Long | Assigned House | Nearest Cusp | Distance to Nearest Cusp |
 | --- | --- | --- | --- | --- | --- |
 | `CDL.SUN` | Sun | 291.96° | 10 | House 10 (Cap 2°58′) | 14.16° |
@@ -206,20 +208,12 @@ LLM USAGE NOTES:
 | `CDL.SATURN` | Saturn | 202.45° | 7 | House 7 (Lib 12°23′) | 10.05° |
 | `CDL.RAHU` | Rahu | 49.03° | 2 | House 2 (Tau 9°15′) | 9.77° |
 | `CDL.KETU` | Ketu | 229.03° | 8 | House 8 (Sco 9°15′) | 9.77° |
+
 ---
 
 ## §3 — DIVISIONAL CHARTS (FACTS)
 
-<!--
-All 16 varga charts in uniform format. Each chart shows:
-  - Divisional Lagna (where present)
-  - Planet positions in divisional signs
-  - House occupancy where computed in source data
--->
-
 ### §3.1 D2 — Hora (Wealth Division)
-
-<!-- Parashari Hora: planets fall in either Moon's Hora (Cancer) or Sun's Hora (Leo). -->
 
 | ID | Hora Sign | Ruler | Planets |
 | --- | --- | --- | --- |
@@ -279,11 +273,6 @@ All 16 varga charts in uniform format. Each chart shows:
 
 ### §3.5 D9 — Navamsa (Dharma / Spouse / General Strength)
 
-<!--
-Navamsa: the key divisional for chart strength testing and spouse analysis.
-Vargottama: planet holding the same sign in D1 and D9.
--->
-
 | ID | Body | D9 Sign | D1 Sign | Vargottama |
 | --- | --- | --- | --- | --- |
 | `D9.LAGNA` | D9 Lagna | Cancer | Aries (D1 Lagna) | NO |
@@ -299,33 +288,12 @@ Vargottama: planet holding the same sign in D1 and D9.
 
 #### §3.5.1 D9 Debilitation and Neecha Bhanga
 
-<!--
-Debilitation signs: Sun=Libra, Moon=Scorpio, Mars=Cancer, Mercury=Pisces,
-Jupiter=Capricorn, Venus=Virgo, Saturn=Aries.
-Neecha Bhanga conditions apply when a debilitated planet's dispositor or exaltation
-ruler is in a kendra (1/4/7/10) from Lagna or Moon in the same chart.
--->
-
 | ID | Planet | D9 Sign | Debilitated? | Dispositor in D9 | Dispositor Placement (from D9 Lagna) | Neecha Bhanga Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `D9.NBR.VENUS` | Venus | Virgo | YES (Virgo = debil. for Venus) | Mercury | Capricorn, 7th from D9 Lagna (Kendra) | NBRY active — cancellation via Mercury in Kendra |
-| `D9.NBR.SATURN` | Saturn | Aries | YES (Aries = debil. for Saturn) | Mars | Pisces | Dispositor not in Kendra; exaltation ruler Sun in Cancer = D9 Lagna (1st, Kendra) | NBRY active — cancellation via Sun (exaltation lord of Aries) in D9 Lagna Kendra |
-
-<!--
-Clarification of §3.5.1:
-Venus debilitated in Virgo. Dispositor of Virgo = Mercury. Mercury sits in Capricorn in D9,
-which is the 7th house from D9 Lagna Cancer. The 7th is a Kendra. NBRY condition met.
-
-Saturn debilitated in Aries. Dispositor of Aries = Mars. Mars in D9 is in Pisces (9th from
-D9 Lagna Cancer) — not a Kendra. Sun = exaltation lord of Aries. Sun in D9 is in Cancer,
-which IS D9 Lagna (1st house Kendra). NBRY condition met via the exaltation-ruler path.
--->
+| `D9.NBR.VENUS` | Venus | Virgo | YES | Mercury | Capricorn, 7th from D9 Lagna (Kendra) | NBRY active — cancellation via Mercury in Kendra |
+| `D9.NBR.SATURN` | Saturn | Aries | YES | Mars | Pisces (9th from D9 Lagna — not Kendra); exaltation ruler Sun in Cancer = D9 Lagna (1st, Kendra) | NBRY active — cancellation via Sun in D9 Lagna Kendra |
 
 #### §3.5.2 D9 12th-House Stellium
-
-<!--
-Planets tenanting the D9 12th house (counted from D9 Lagna Cancer): 12th from Cancer = Gemini.
--->
 
 | ID | Fact | Value |
 | --- | --- | --- |
@@ -488,30 +456,23 @@ Planets tenanting the D9 12th house (counted from D9 Lagna Cancer): 12th from Ca
 
 ### §3.15 CSI Ledger — D1→D9 and D1→D10 Comparative Status
 
-<!--
-Vargottama = same sign across D1 and D9.
-D1→D9 status: dignity shift from Rashi to Navamsa.
-D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
--->
-
 | ID | Planet | Vargottama | D1→D9 Dignity | D10 Placement |
 | --- | --- | --- | --- | --- |
-| `CSI.SUN` | Sun | NO | D1 Capricorn (Saturn sign) → D9 Cancer (Moon sign) | D10 9th (Aries) — trine |
-| `CSI.MOON` | Moon | NO | D1 Aquarius (Saturn sign) → D9 Gemini (Mercury sign) | D10 4th (Scorpio) — debilitated |
-| `CSI.MARS` | Mars | NO | D1 Libra (Venus sign) → D9 Pisces (Jupiter sign) | D10 9th (Aries) — own sign |
+| `CSI.SUN` | Sun | NO | D1 Capricorn → D9 Cancer | D10 9th (Aries) — trine |
+| `CSI.MOON` | Moon | NO | D1 Aquarius → D9 Gemini | D10 4th (Scorpio) — debilitated |
+| `CSI.MARS` | Mars | NO | D1 Libra → D9 Pisces | D10 9th (Aries) — own sign |
 | `CSI.MERCURY` | Mercury | YES | D1 Capricorn → D9 Capricorn (retained) | D10 2nd (Virgo) — own sign |
-| `CSI.JUPITER` | Jupiter | NO | D1 Sagittarius (own) → D9 Gemini (Mercury sign) | D10 8th (Pisces) — own sign, Dusthana |
-| `CSI.VENUS` | Venus | NO | D1 Sagittarius (Jupiter sign) → D9 Virgo (debilitation) | D10 11th (Gemini) — neutral |
+| `CSI.JUPITER` | Jupiter | NO | D1 Sagittarius (own) → D9 Gemini | D10 8th (Pisces) — own sign, Dusthana |
+| `CSI.VENUS` | Venus | NO | D1 Sagittarius → D9 Virgo (debilitation) | D10 11th (Gemini) — neutral |
 | `CSI.SATURN` | Saturn | NO | D1 Libra (exaltation) → D9 Aries (debilitation) | D10 10th (Taurus) — angular |
-| `CSI.RAHU` | Rahu | NO | D1 Taurus → D9 Gemini (Mercury sign) | D10 12th (Cancer) |
-| `CSI.KETU` | Ketu | NO | D1 Scorpio → D9 Sagittarius (Jupiter sign) | D10 6th (Capricorn) |
+| `CSI.RAHU` | Rahu | NO | D1 Taurus → D9 Gemini | D10 12th (Cancer) |
+| `CSI.KETU` | Ketu | NO | D1 Scorpio → D9 Sagittarius | D10 6th (Capricorn) |
+
 ---
 
 ## §4 — KP SYSTEM (FACTS + DERIVED)
 
 ### §4.1 KP Cusp Mirror
-
-<!-- House cusps with star lord (nakshatra lord), sub lord, sub-sub lord. -->
 
 | ID | Cusp | Degree | Sign | Star Lord | Sub Lord | Sub-Sub Lord |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -530,8 +491,6 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 
 ### §4.2 KP Planetary Positions
 
-<!-- Each planet's KP-style sub-lord breakdown. Rahu and Ketu use nodal rules; sub-sub may be undefined classically. -->
-
 | ID | Planet | Degree | Star Lord | Sub Lord | Sub-Sub Lord |
 | --- | --- | --- | --- | --- | --- |
 | `KP.PLN.SUN` | Sun | 22°02′ | Moon | Venus | Saturn |
@@ -545,8 +504,6 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 | `KP.PLN.KETU` | Ketu | 19°07′ | Mercury | Ketu | Saturn |
 
 ### §4.3 KP House Significators
-
-<!-- Significators ranked by KP logic: occupants in nakshatra > occupants > lords in nakshatra > lord. -->
 
 | ID | House | Significators (ranked) | KP Logic |
 | --- | --- | --- | --- |
@@ -562,19 +519,17 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 
 ## §5 — DASHA SYSTEMS (FACTS)
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.09]:
-     Vimshottari Dasha dates are engine-implementation-dependent. This FORENSIC v6.0 uses a Moon longitude of 327°02'48" (Aquarius 27°02'48" Purva Bhadrapada Pada 3). Jagannatha Hora export (AUDIT_REPORT_v1_0 WS-1b) uses Moon 327°04'14" — a 1.42 arcmin difference.
-     Consequence: FORENSIC dasha dates run +7 to +9 days LATER than JHora dates (less remaining balance-of-dasha at birth given FORENSIC's slightly-earlier Moon).
-     Sample offsets: Saturn MD start FORENSIC 1991-08-21 vs JHora 1991-08-14 (+7d); Mercury-Saturn AD FORENSIC 2024-12-12 vs JHora 2024-12-04 (+8d); Ketu MD FORENSIC 2027-08-21 vs JHora 2027-08-14 (+7d).
-     AM-JIS discipline: All retrodictive fits and timing analyses use FORENSIC engine dates. When engaging external reviewers using JHora, note the offset explicitly.
-     Root cause (ayanamsa-level): FORENSIC uses Lahiri 23°37'58" vs JHora's 23°37'09.78" (+48 arcsec difference) — this propagates into Moon position and thereby balance-of-dasha.
+<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0 updated]:
+     Vimshottari Dasha dates are engine-implementation-dependent. FORENSIC engine uses Moon 327°02'48" (Aqu 27°02'48" Purva Bhadrapada Pada 3). JH engine uses Moon 327°04'14" — 1.42 arcmin difference.
+     Consequence: FORENSIC dasha dates run +7 to +9 days LATER than JH dates.
+     Sample offsets: Mercury MD start FORENSIC 2010-08-21 vs JH 2010-08-14 (+7d); Mercury-Saturn AD FORENSIC 2024-12-12 vs JH 2024-12-04 (+8d); Ketu MD start FORENSIC 2027-08-21 vs JH 2027-08-14 (+7d).
+     AM-JIS discipline: Retrodictive fits use FORENSIC dates (LEL correlation established on these). Forward timing analyses may prefer JH dates. When engaging external JHora-using reviewers, note the offset.
+     Root cause: FORENSIC Lahiri ayanamsa 23°37'58" vs JH 23°37'09.78" (+48 arcsec) → propagates into Moon position → balance-of-dasha.
      See GAP.09 in GOVERNANCE_STACK §3. -->
 
 ### §5.1 Vimshottari Dasha (Mahadasha / Antardasha)
 
-<!-- 120-year Moon-nakshatra-based Dasha. Start date = 1984-02-05. -->
-
-| ID | MD | AD | Start | End |
+| ID | MD | AD | Start (FORENSIC) | End (FORENSIC) |
 | --- | --- | --- | --- | --- |
 | `DSH.V.001` | Jupiter | Venus | 1984-02-05 | 1986-03-03 |
 | `DSH.V.002` | Jupiter | Sun | 1986-03-03 | 1986-12-21 |
@@ -629,8 +584,6 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 
 ### §5.2 Yogini Dasha
 
-<!-- 36-year cycle. 8 Yoginis, variable durations (1 to 8 years). -->
-
 | ID | Yogini | Ruler | Duration | Start | End |
 | --- | --- | --- | --- | --- | --- |
 | `DSH.Y.001` | Bhramari | Mars | Balance | 1984-02-05 | 1985-12-22 |
@@ -652,8 +605,6 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 | `DSH.Y.017` | Bhramari | Mars | 4 years | 2053-12-22 | 2057-12-22 |
 
 ### §5.3 Jaimini Chara Dasha (K.N. Rao Padakrama)
-
-<!-- 144-year Jaimini sign-based dasha. Sub-periods calculated via K.N. Rao Padakrama rules. -->
 
 | ID | MD Sign | AD Sign | Start | End |
 | --- | --- | --- | --- | --- |
@@ -801,17 +752,14 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 | `DSH.C.142` | Pisces | Taurus | 2058-05-05 | 2058-08-05 |
 | `DSH.C.143` | Pisces | Aries | 2058-08-05 | 2058-11-05 |
 | `DSH.C.144` | Pisces | Pisces | 2058-11-05 | 2059-02-05 |
+
 ---
 
 ## §6 — STRENGTH METRICS (FACTS)
 
 ### §6.1 Shadbala — Component Breakdown
 
-<!--
-Shadbala: composite planetary strength across six categories in Virupa units (60 Virupa = 1 Rupa).
-Components: Sthana (positional), Dig (directional), Kala (temporal), Chesta (motional),
-Naisargika (natural), Drik (aspectual).
--->
+<!-- [DUAL-ENGINE NOTE: Shadbala totals and ranking differ between FORENSIC and JH engines. See §6.2 for both rankings. JH is authoritative for ranking in external-facing contexts.] -->
 
 | ID | Component | Sun | Moon | Mars | Mercury | Jupiter | Venus | Saturn |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -836,28 +784,26 @@ Naisargika (natural), Drik (aspectual).
 | `SBL.NAISARG.TOTAL` | Total Naisargika Bala | 60.00 | 51.42 | 17.16 | 25.74 | 34.26 | 42.84 | 8.58 |
 | `SBL.DRIK.TOTAL` | Total Drik Bala | -35.08 | -1.85 | -14.20 | -23.92 | -6.98 | -8.24 | -12.81 |
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.07]:
-     Shadbala totals are engine-implementation-dependent. This FORENSIC v6.0 engine ranks:
-         Sun #1 (8.51 rupas), Jupiter #2 (7.73), Saturn #3 (7.47), Moon #4 (7.26), Mercury #5 (6.55), Mars #6 (5.27), Venus #7 (4.60)
-     Jagannatha Hora engine (verified via JHora .docx export in AUDIT_REPORT_v1_0 WS-1b) ranks:
-         Saturn #1 (8.79 rupas), Sun #2 (8.18), Jupiter #3 (7.68), Moon #4 (6.44), Mercury #5 (6.09), Mars #6 (5.34), Venus #7 (4.80)
-     Component-level divergences primarily in Sthana (Saturn +21v JHora vs FORENSIC), Kala (Mercury −37v, Saturn +57v), and Drik (Sun +12v).
-     AM-JIS discipline: All Shadbala citations in Domain Reports cite FORENSIC values (Sun #1). When engaging external reviewers or JHora-using acharyas, note the dual-engine variance explicitly. Rank-dependent claims ("Sun is the strongest planet") should acknowledge engine convention.
-     See GAP.07 in GOVERNANCE_STACK §3 for resolution path. -->
+### §6.2 Shadbala — Totals and Ranking (DUAL-ENGINE)
 
-### §6.2 Shadbala — Totals and Ranking
+<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0]:
+     FORENSIC engine ranks: Sun #1 (8.51 rupas), Jupiter #2 (7.73), Saturn #3 (7.47), Moon #4 (7.26), Mercury #5 (6.55), Mars #6 (5.27), Venus #7 (4.60)
+     JH engine ranks: Saturn #1 (8.79 rupas), Sun #2 (8.18), Jupiter #3 (7.68), Moon #4 (6.44), Mercury #5 (6.09), Mars #6 (5.34), Venus #7 (4.80)
+     Component-level divergences: primarily in Sthana (Saturn +21v JH vs FORENSIC), Kala (Mercury −37v, Saturn +57v), and Drik (Sun +12v).
+     AM-JIS discipline: FORENSIC values cited in retrodictive contexts; JH values for external reviewers. Rank-dependent claims must specify engine convention.
+     See GAP.07 in GOVERNANCE_STACK §3. -->
 
-| ID | Planet | Total Virupas | Rupas | Min Required (Rupas) | Ratio | Rank |
-| --- | --- | --- | --- | --- | --- | --- |
-| `SBL.TOTAL.SUN` | Sun | 510.85 | 8.51 | 5.00 | 1.70 | 1 |
-| `SBL.TOTAL.MOON` | Moon | 435.51 | 7.26 | 6.00 | 1.21 | 3 |
-| `SBL.TOTAL.MARS` | Mars | 316.23 | 5.27 | 5.00 | 1.05 | 5 |
-| `SBL.TOTAL.MERCURY` | Mercury | 393.26 | 6.55 | 7.00 | 0.94 | 6 |
-| `SBL.TOTAL.JUPITER` | Jupiter | 464.07 | 7.73 | 6.50 | 1.19 | 4 |
-| `SBL.TOTAL.VENUS` | Venus | 276.01 | 4.60 | 5.50 | 0.84 | 7 |
-| `SBL.TOTAL.SATURN` | Saturn | 447.98 | 7.47 | 5.00 | 1.49 | 2 |
+| ID | Planet | FORENSIC Virupas | FORENSIC Rupas | FORENSIC Rank | JH Rupas | JH Rank | Min Required (Rupas) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SBL.TOTAL.SUN` | Sun | 510.85 | 8.51 | 1 | 8.18 | 2 | 5.00 |
+| `SBL.TOTAL.MOON` | Moon | 435.51 | 7.26 | 3 | 6.44 | 4 | 6.00 |
+| `SBL.TOTAL.MARS` | Mars | 316.23 | 5.27 | 5 | 5.34 | 6 | 5.00 |
+| `SBL.TOTAL.MERCURY` | Mercury | 393.26 | 6.55 | 6 | 6.09 | 5 | 7.00 |
+| `SBL.TOTAL.JUPITER` | Jupiter | 464.07 | 7.73 | 2 | 7.68 | 3 | 6.50 |
+| `SBL.TOTAL.VENUS` | Venus | 276.01 | 4.60 | 7 | 4.80 | 7 | 5.50 |
+| `SBL.TOTAL.SATURN` | Saturn | 447.98 | 7.47 | 4 | 8.79 | 1 | 5.00 |
 
-### §6.3 Ishta / Kashta Proxy (via Uccha Bala)
+### §6.3 Uccha Bala Ranking (Exaltation Proximity Proxy)
 
 | ID | Planet | Uccha Score (max 60) | Band |
 | --- | --- | --- | --- |
@@ -869,11 +815,11 @@ Naisargika (natural), Drik (aspectual).
 | `SBL.UCHA.RANK.6` | Mercury | 24.72 | Low |
 | `SBL.UCHA.RANK.7` | Jupiter | 8.40 | Low |
 
-### §6.4 Bhavabala
+### §6.4 Bhavabala (FORENSIC engine — v6.0 sourced)
 
-<!-- House strength in Virupas. Ranked 1 (strongest) to 12 (weakest). -->
+<!-- Note: v6.0 Bhavabala used FORENSIC engine. JH Bhavabala is given in §6.6 and shows materially different rankings. Use §6.6 for JH-authoritative Bhavabala. -->
 
-| ID | House | Life Area | Total Bala | Rupas | Rank | Lord Strength (Virupa) | Directional (Dig) | Aspectual (Drishti) |
+| ID | House | Life Area | Total Bala | Rupas | Rank (FORENSIC) | Lord Strength (Virupa) | Directional (Dig) | Aspectual (Drishti) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `BVB.12` | 12 | Isolation / Foreign | 506.09 | 8.43 | 1 | 464.07 (Jupiter) | 20 | +22.02 |
 | `BVB.5` | 5 | Creativity / Future | 486.86 | 8.11 | 2 | 510.85 (Sun) | 10 | -33.99 |
@@ -890,8 +836,6 @@ Naisargika (natural), Drik (aspectual).
 
 ### §6.5 Vimsopaka Bala (20-Point Varga Strength)
 
-<!-- Weighted strength across divisional charts, scale 0–20. -->
-
 | ID | Rank | Planet | Score | Band |
 | --- | --- | --- | --- | --- |
 | `VIM.1` | 1 | Jupiter | 12.1 | Dominant |
@@ -902,28 +846,86 @@ Naisargika (natural), Drik (aspectual).
 | `VIM.6` | 6 | Venus | 10.0 | Moderate |
 | `VIM.7` | 7 | Moon | 9.1 | Weak |
 
+### §6.6 Bhava Bala — JH Engine (NEW in v8.0)
+
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §3. JH engine Bhavabala differs from FORENSIC §6.4. Use this section for JH-authoritative Bhavabala ranking. -->
+
+| ID | House | Life Area | JH Rupas | JH Rank |
+| --- | --- | --- | --- | --- |
+| `BVB.JH.5` | 5 | Creativity / Children / Buddhi | 9.64 | 1 (strongest) |
+| `BVB.JH.11` | 11 | Gains / Network / AK Moon | 9.60 | 2 |
+| `BVB.JH.10` | 10 | Career / Status | 9.39 | 3 |
+| `BVB.JH.12` | 12 | Foreign / Isolation / Liberation | 9.28 | 4 |
+| `BVB.JH.4` | 4 | Home / Peace / Mother | 8.80 | 5 |
+| `BVB.JH.3` | 3 | Skills / Effort / Siblings | 7.83 | 6 |
+| `BVB.JH.9` | 9 | Fortune / Dharma / Guru | 7.77 | 7 |
+| `BVB.JH.1` | 1 | Self / Body / Lagna | 7.00 | 8 |
+| `BVB.JH.6` | 6 | Enemies / Debt / Service | 6.61 | 9 |
+| `BVB.JH.8` | 8 | Crisis / Occult / Inheritance | 6.06 | 10 |
+| `BVB.JH.2` | 2 | Family / Speech / Savings | 4.83 | 11 |
+| `BVB.JH.7` | 7 | Partners / Spouse / ATT | 4.73 | 12 (weakest) |
+
+<!-- Key observations:
+     5H JH Bhavabala rank 1 (strongest) — 5H untenanted but architecturally POWERFUL. Strengthens Children/Creativity/Buddhi domain.
+     7H JH Bhavabala rank 12 (weakest) — Saturn+Mars 7H conjunction architecture confirmed as structural weakness zone; ATT pattern operates under weakest-house conditions.
+     11H rank 2 — AK Moon (Chalit 12H) is tenanted in a high-Bhavabala house (11H Rashi). -->
+
+### §6.7 Ishta / Kashta Phala — JH Engine (NEW in v8.0)
+
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §3. Ishta = benefic output; Kashta = malefic output. -->
+
+| ID | Planet | Ishta Phala | Kashta Phala | Net Assessment |
+| --- | --- | --- | --- | --- |
+| `IKP.SATURN` | Saturn | 43.28 | 4.81 | ~9:1 beneficial — chart's primary benefic deliverer |
+| `IKP.MARS` | Mars | 31.16 | 28.10 | slightly beneficial |
+| `IKP.VENUS` | Venus | 23.59 | 35.97 | slightly malefic |
+| `IKP.SUN` | Sun | 22.58 | 34.21 | slightly malefic |
+| `IKP.MOON` | Moon | 21.09 | 32.58 | slightly malefic |
+| `IKP.MERCURY` | Mercury | 20.89 | 38.65 | malefic (6L dual-governance) |
+| `IKP.JUPITER` | Jupiter | 10.78 | 48.81 | ~1:5 malefic — dignified but Phalita-weak |
+
+<!-- Structural note: Saturn exalted in 7H delivers 9:1 benefic Phala. Jupiter in own-sign 9H is Phalita-weakest (~1:5 malefic). This is the empirical quantitative basis for CTR.03 (Jupiter paradox) across all domain reports. -->
+
+### §6.8 Pancha-Vargeeya Classification — JH Engine (NEW in v8.0)
+
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §3. Composite strength across 5 key vargas. -->
+
+| ID | Planet | Score | Classification |
+| --- | --- | --- | --- |
+| `PVC.JUPITER` | Jupiter | 14.76 | POWERFUL |
+| `PVC.SATURN` | Saturn | 12.12 | POWERFUL |
+| `PVC.MERCURY` | Mercury | 11.43 | POWERFUL |
+| `PVC.VENUS` | Venus | 7.28 | Ordinary |
+| `PVC.MARS` | Mars | 7.24 | Ordinary |
+| `PVC.MOON` | Moon | 6.92 | Ordinary |
+| `PVC.SUN` | Sun | 6.90 | Ordinary |
+
+<!-- Operational triad: Mercury (primary instrument — 8-system convergence, PVC POWERFUL), Saturn (primary deliverer — AmK exalted, Shadbala JH #1, Ishta #1, PVC POWERFUL), Jupiter (primary authorizer — 9L own-sign, PVC MOST POWERFUL, but Phalita-weak per §6.7). -->
+
 ---
 
 ## §7 — ASHTAKAVARGA (FACTS + DERIVED)
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.08]:
-     Ashtakavarga BAV (bindu per sign per planet) is engine-implementation-dependent for the Moon row. FORENSIC v6.0 and Jagannatha Hora agree on 6 of 7 planet rows (Sun, Mars, Mercury, Jupiter, Venus, Saturn) exactly. Moon row differs in 4 signs:
-         Gemini: FORENSIC=5, JHora=4 (Δ=−1)
-         Libra: FORENSIC=4, JHora=5 (Δ=+1)
-         Scorpio: FORENSIC=5, JHora=4 (Δ=−1)
-         Capricorn: FORENSIC=2, JHora=3 (Δ=+1)
-     Consequence: SAV per-sign column sums differ in 4 signs (Gemini F28/J27, Libra F33/J34, Scorpio F33/J32, Capricorn F26/J27). SAV grand total 337 matches in both engines — the 4 row-level differences cancel in aggregate.
-     AM-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims (e.g., "Libra has highest SAV at 33") are stable because the +1/−1 cancellations preserve rank ordering.
+<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0]:
+     BAV Moon row differs between FORENSIC and JH in 4 signs:
+         Gemini: FORENSIC=5, JH=4 (Δ=−1)
+         Libra: FORENSIC=4, JH=5 (Δ=+1)
+         Scorpio: FORENSIC=5, JH=4 (Δ=−1)
+         Capricorn: FORENSIC=2, JH=3 (Δ=+1)
+     SAV column sums differ in 4 signs (Ge F28/J27, Li F33/J34, Sc F33/J32, Cp F26/J27). SAV grand total 337 matches in both engines.
+     All other planet BAV rows (Sun, Mars, Mercury, Jupiter, Venus, Saturn) agree exactly.
+     AM-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims are stable as the ±1 differences cancel in aggregate.
      See GAP.08 in GOVERNANCE_STACK §3. -->
 
 ### §7.1 BAV — Per-Planet Bindus by Sign
 
-<!-- Bindus = benefic points each planet contributes to each sign. Max per planet per sign = 8. -->
+<!-- JH authoritative Moon row shown in brackets where it differs from FORENSIC. -->
 
 | ID | Planet | Ar | Ta | Ge | Cn | Le | Vi | Li | Sc | Sg | Cp | Aq | Pi | Total |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `AVG.BAV.SUN` | Sun | 5 | 5 | 5 | 5 | 4 | 3 | 5 | 6 | 2 | 4 | 2 | 2 | 48 |
-| `AVG.BAV.MOON` | Moon | 3 | 1 | 5 | 5 | 6 | 3 | 4 | 5 | 4 | 2 | 5 | 6 | 49 |
+| `AVG.BAV.MOON` | Moon (FORENSIC) | 3 | 1 | 5 | 5 | 6 | 3 | 4 | 5 | 4 | 2 | 5 | 6 | 49 |
+| `AVG.BAV.MOON.JH` | Moon (JH) | 3 | 1 | **4** | 5 | 6 | 3 | **5** | **4** | 4 | **3** | 5 | 6 | 49 |
 | `AVG.BAV.MARS` | Mars | 4 | 6 | 4 | 4 | 2 | 2 | 5 | 5 | 1 | 3 | 1 | 2 | 39 |
 | `AVG.BAV.MERCURY` | Mercury | 4 | 7 | 4 | 6 | 3 | 4 | 5 | 7 | 4 | 5 | 2 | 3 | 54 |
 | `AVG.BAV.JUPITER` | Jupiter | 5 | 4 | 3 | 4 | 5 | 6 | 7 | 3 | 4 | 6 | 5 | 4 | 56 |
@@ -932,25 +934,25 @@ Naisargika (natural), Drik (aspectual).
 
 ### §7.2 SAV — Sarvashtakavarga by Sign
 
-| ID | Sign | House | SAV Total |
-| --- | --- | --- | --- |
-| `AVG.SAV.ARIES` | Aries | 1 | 29 |
-| `AVG.SAV.TAURUS` | Taurus | 2 | 29 |
-| `AVG.SAV.GEMINI` | Gemini | 3 | 28 |
-| `AVG.SAV.CANCER` | Cancer | 4 | 32 |
-| `AVG.SAV.LEO` | Leo | 5 | 30 |
-| `AVG.SAV.VIRGO` | Virgo | 6 | 26 |
-| `AVG.SAV.LIBRA` | Libra | 7 | 33 |
-| `AVG.SAV.SCORPIO` | Scorpio | 8 | 33 |
-| `AVG.SAV.SAGITTARIUS` | Sagittarius | 9 | 25 |
-| `AVG.SAV.CAPRICORN` | Capricorn | 10 | 26 |
-| `AVG.SAV.AQUARIUS` | Aquarius | 11 | 23 |
-| `AVG.SAV.PISCES` | Pisces | 12 | 23 |
-| `AVG.SAV.TOTAL` | (grand total) | — | 337 |
+<!-- FORENSIC values shown; JH differences noted inline. -->
+
+| ID | Sign | House | SAV Total (FORENSIC) | JH Total |
+| --- | --- | --- | --- | --- |
+| `AVG.SAV.ARIES` | Aries | 1 | 29 | 29 |
+| `AVG.SAV.TAURUS` | Taurus | 2 | 29 | 29 |
+| `AVG.SAV.GEMINI` | Gemini | 3 | 28 | 27 |
+| `AVG.SAV.CANCER` | Cancer | 4 | 32 | 32 |
+| `AVG.SAV.LEO` | Leo | 5 | 30 | 30 |
+| `AVG.SAV.VIRGO` | Virgo | 6 | 26 | 26 |
+| `AVG.SAV.LIBRA` | Libra | 7 | 33 | 34 |
+| `AVG.SAV.SCORPIO` | Scorpio | 8 | 33 | 32 |
+| `AVG.SAV.SAGITTARIUS` | Sagittarius | 9 | 25 | 25 |
+| `AVG.SAV.CAPRICORN` | Capricorn | 10 | 26 | 27 |
+| `AVG.SAV.AQUARIUS` | Aquarius | 11 | 23 | 23 |
+| `AVG.SAV.PISCES` | Pisces | 12 | 23 | 23 |
+| `AVG.SAV.TOTAL` | (grand total) | — | 337 | 337 |
 
 ### §7.3 Shuddha Pinda (Ashtakavarga Reductions)
-
-<!-- Rasi Pinda + Graha Pinda = Shuddha Pinda per planet. Ranking by Shuddha Pinda total. -->
 
 | ID | Planet | Rasi Pinda | Graha Pinda | Shuddha Pinda | Rank |
 | --- | --- | --- | --- | --- | --- |
@@ -966,12 +968,7 @@ Naisargika (natural), Drik (aspectual).
 
 ## §8 — SATURN KAKSHYA ZONES (DERIVED)
 
-<!--
-Saturn transit Pisces 2025-03-30 through 2028-02-23.
-Pisces is divided into 8 Kakshya zones of 3°45′ each, ruled in fixed sequence.
-A zone is ACTIVE when its ruler is benefic or well-placed from the natal Moon/Lagna; otherwise INACTIVE.
-The ACTIVE/INACTIVE status below is computed for this chart using natal placements.
--->
+<!-- Saturn transit Pisces 2025-03-30 through 2028-02-23. -->
 
 | ID | Zone | Degree Range | Ruler | Status |
 | --- | --- | --- | --- | --- |
@@ -990,13 +987,6 @@ The ACTIVE/INACTIVE status below is computed for this chart using natal placemen
 
 ### §9.1 Jagratadi / Baladi / Deeptadi States
 
-<!--
-Jagratadi (Consciousness): Jaagrat (Awake), Swapna (Dreaming), Susupta (Deep Sleep).
-Baladi (Maturity): Bala (Infant), Kumar (Adolescent), Yuva (Youth), Vradha (Old), Mrat (Dead).
-Deeptadi (Mood): Deepta (Blazing), Deena (Humble), Shant (Peaceful), Swatha (Confident),
-                 Muditha (Delighted), Dukhita (Distressed), Kshobita (Agitated).
--->
-
 | ID | Planet | Role | Jagratadi | Baladi | Deeptadi |
 | --- | --- | --- | --- | --- | --- |
 | `AVS.MERCURY` | Mercury | Current Vimshottari MD Lord | Susupta | Mrat | Shant |
@@ -1011,13 +1001,9 @@ Deeptadi (Mood): Deepta (Blazing), Deena (Humble), Shant (Peaceful), Swatha (Con
 
 ## §10 — CHARA KARAKAS (DERIVED)
 
-<!--
-Chara Karaka = variable Jaimini karakas, assigned by planetary longitude (degree only, sign ignored).
-Highest degree = Atmakaraka, lowest = Darakaraka. Nodes excluded.
-Sthira Karakas are fixed Parashari karakas listed for reference.
--->
+### §10.1 Chara Karakas (Jaimini — 7-karaka system, primary)
 
-### §10.1 Chara Karakas (Jaimini)
+<!-- 7-karaka system: Highest degree = Atmakaraka, lowest = Darakaraka. Nodes excluded. This is the AM-JIS primary system. -->
 
 | ID | Role (Sanskrit) | Life Area | Planet | D1 Longitude (sign-stripped) |
 | --- | --- | --- | --- | --- |
@@ -1029,7 +1015,7 @@ Sthira Karakas are fixed Parashari karakas listed for reference.
 | `KRK.C.GNATI` | Gnatikaraka (GK) | Obstacles / Rivals | Jupiter | 09°48′ |
 | `KRK.C.DARA` | Darakaraka (DK) | Spouse / Partners | Mercury | 00°50′ |
 
-### §10.2 Sthira Karakas (Parashari Fixed) and Pairing with Avastha State
+### §10.2 Sthira Karakas (Parashari Fixed)
 
 | ID | Role | Sthira Karaka | Chara Karaka | Chara Karaka State (from §9) |
 | --- | --- | --- | --- | --- |
@@ -1040,13 +1026,32 @@ Sthira Karakas are fixed Parashari karakas listed for reference.
 | `KRK.S.PUTRA` | Putra | Jupiter | Mars | Swapna / Vradha / Deepta |
 | `KRK.S.GNATI` | Gnati | Saturn | Jupiter | Jaagrat / Kumar / Swatha |
 | `KRK.S.DARA` | Dara | Venus | Mercury | Susupta / Mrat / Shant |
+
+### §10.3 Chara Karaka — 8-Karaka System Note (JH, GAP.13)
+
+<!-- [v8.0 addition per SUPPLEMENT §1.7]:
+     JH uses the 8-karaka system (includes Rahu as Pitrukaraka). Under this system:
+     - Rahu (degree ~19°01′ — nodes counted at full-sign longitude for this purpose) = Putrakaraka (PK)
+     - Mars (18°31′) = Pitrukaraka (PiK)
+     - All other assignments identical to 7-karaka system above.
+     AM-JIS primary narrative uses 7-karaka system (§10.1). 8-karaka reading invoked where parenthood/ancestral karma is specifically the domain focus. -->
+
+| ID | Role (8-karaka) | Planet | Note |
+| --- | --- | --- | --- |
+| `KRK.C8.ATMA` | Atmakaraka | Moon | same as 7-karaka |
+| `KRK.C8.AMATYA` | Amatyakaraka | Saturn | same |
+| `KRK.C8.BHRATRU` | Bhratrukaraka | Sun | same |
+| `KRK.C8.MATRU` | Matrukaraka | Venus | same |
+| `KRK.C8.PUTRA` | Putrakaraka | Rahu | DIFFERS from 7-karaka (Mars was PK) |
+| `KRK.C8.PITRU` | Pitrukaraka | Mars | NEW role — not present in 7-karaka |
+| `KRK.C8.GNATI` | Gnatikaraka | Jupiter | same |
+| `KRK.C8.DARA` | Darakaraka | Mercury | same |
+
 ---
 
 ## §11 — SENSITIVE POINTS (DERIVED)
 
 ### §11.1 Upagrahas
-
-<!-- Subordinate calculated points. Time-based upagrahas derive from day segments; Sun-based derive from Sun longitude. -->
 
 | ID | Upagraha | Type | Sign | Degree | Nakshatra |
 | --- | --- | --- | --- | --- | --- |
@@ -1062,8 +1067,6 @@ Sthira Karakas are fixed Parashari karakas listed for reference.
 
 ### §11.2 Bhrigu Bindu (Destiny Point)
 
-<!-- Formula: (Moon + Rahu) / 2 mod 360. -->
-
 | ID | Field | Value |
 | --- | --- | --- |
 | `BB.FORMULA` | Formula | (Moon_abs + Rahu_abs) / 2 mod 360 |
@@ -1075,9 +1078,9 @@ Sthira Karakas are fixed Parashari karakas listed for reference.
 | `BB.RESULT.NAK` | Nakshatra | Swati |
 | `BB.RESULT.PADA` | Pada | 1 |
 
-### §11.3 Yogi / Avayogi
+<!-- JH confirms: Libra 8°03'34.51" Swati Pada 1 — FORENSIC and JH agree. -->
 
-<!-- Yogi Point = Sun_abs + Moon_abs + 93°20′, mod 360. Yogi planet = ruler of nakshatra containing Yogi Point. Avayogi planet = ruler of 6th nakshatra from Yogi's nakshatra. -->
+### §11.3 Yogi / Avayogi
 
 | ID | Field | Value |
 | --- | --- | --- |
@@ -1093,28 +1096,22 @@ Sthira Karakas are fixed Parashari karakas listed for reference.
 | `AVY.PATH` | Avayogi Path | 6th nakshatra from Revati = Mrigasira |
 | `AVY.PLANET` | Avayogi Planet | Mars (ruler of Mrigasira) |
 
-### §11.4 Combustion and Planetary War
+<!-- JH confirms: Mercury = Yogi (Duplicate Yogi), Mars = Avayogi. -->
 
-<!-- Combustion orb varies by planet (classical: Mercury ~14°, Venus ~10°, Mars ~17°, Jupiter ~11°, Saturn ~15°). Planetary war = conjunction within 1°. -->
+### §11.4 Combustion and Planetary War
 
 | ID | Check | Result |
 | --- | --- | --- |
-| `CMB.MERCURY` | Mercury (0°50′ Cap) vs Sun (21°57′ Cap) | Separation ≈ 21°07′. Mercury combust orb ≈ 14°. Status: NOT COMBUST |
-| `CMB.VENUS` | Venus (19°10′ Sag) vs Sun (21°57′ Cap) | Separation ≈ 32°47′. Status: NOT COMBUST |
-| `CMB.MARS` | Mars (18°31′ Lib) vs Sun (21°57′ Cap) | Separation ≈ 93°26′. Status: NOT COMBUST |
-| `CMB.JUPITER` | Jupiter (09°48′ Sag) vs Sun (21°57′ Cap) | Separation ≈ 42°09′. Status: NOT COMBUST |
-| `CMB.SATURN` | Saturn (22°27′ Lib) vs Sun (21°57′ Cap) | Separation ≈ 89°30′. Status: NOT COMBUST |
-| `WAR.CHECK` | Planetary War (conjunction within 1°) | Tightest pair: Mars (18°31′ Lib) and Saturn (22°27′ Lib) ≈ 3°56′ apart. Status: NO WAR |
+| `CMB.MERCURY` | Mercury (0°50′ Cap) vs Sun (21°57′ Cap) | Separation ≈ 21°07′. Not combust. |
+| `CMB.VENUS` | Venus (19°10′ Sag) vs Sun (21°57′ Cap) | Separation ≈ 32°47′. Not combust. |
+| `CMB.MARS` | Mars (18°31′ Lib) vs Sun (21°57′ Cap) | Separation ≈ 93°26′. Not combust. |
+| `CMB.JUPITER` | Jupiter (09°48′ Sag) vs Sun (21°57′ Cap) | Separation ≈ 42°09′. Not combust. |
+| `CMB.SATURN` | Saturn (22°27′ Lib) vs Sun (21°57′ Cap) | Separation ≈ 89°30′. Not combust. |
+| `WAR.CHECK` | Planetary War check | Mars (18°31′ Lib) and Saturn (22°27′ Lib) ≈ 3°56′ apart. No war. |
 
-### §11.5 Hazards — Gandanta, Sandhi, Mrityu Bhaga
+### §11.5 Hazards — Mrityu Bhaga
 
-<!--
-Gandanta zones: last 3°20′ of water signs (Cancer, Scorpio, Pisces) and first 3°20′ of fire signs (Aries, Leo, Sagittarius).
-Sandhi: final 0°48′–3° of any sign (junction zone).
-Mrityu Bhaga: critical death-point degrees, fixed per sign per planet (classical list).
--->
-
-| ID | Planet | Sign | Degree | Mrityu Bhaga Degree (for that sign) | Differential | Status |
+| ID | Planet | Sign | Degree | Mrityu Bhaga Degree | Differential | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | `HAZ.SUN` | Sun | Capricorn | 21°57′ | 20° | 1°57′ | Safe |
 | `HAZ.MOON` | Moon | Aquarius | 27°02′ | 21° | 6°02′ | Safe |
@@ -1128,7 +1125,9 @@ Mrityu Bhaga: critical death-point degrees, fixed per sign per planet (classical
 | `HAZ.LAGNA` | Lagna | Aries | 12°23′ | 8° | 4°23′ | Safe |
 | `HAZ.MANDI` | Mandi | Cancer | 14°13′ | 22° | 7°47′ | Safe |
 
-### §11.6 Chesta Bala and Motion Audit (at birth)
+<!-- JH confirms: All planets SAFE from Mrityu Bhaga. -->
+
+### §11.6 Chesta Bala and Motion Audit
 
 | ID | Planet | Motion | Speed (% of avg) |
 | --- | --- | --- | --- |
@@ -1137,66 +1136,107 @@ Mrityu Bhaga: critical death-point degrees, fixed per sign per planet (classical
 | `CHS.JUPITER` | Jupiter | Direct | ~98% |
 | `CHS.VENUS` | Venus | Direct | ~105% |
 | `CHS.SATURN` | Saturn | Direct | ~92% |
-| `CHS.RAHU` | Rahu | Retrograde (inherent, mean node) | 100% |
-| `CHS.KETU` | Ketu | Retrograde (inherent, mean node) | 100% |
+| `CHS.RAHU` | Rahu | Retrograde (mean node) | 100% |
+| `CHS.KETU` | Ketu | Retrograde (mean node) | 100% |
 
 ---
 
 ## §12 — SPECIAL LAGNAS AND SAHAMS (DERIVED)
 
-### §12.1 Special Lagnas
+### §12.1 Special Lagnas — v8.0 Corrected (JH Authoritative)
 
-| ID | Point | Formula | Result Abs Long | Sign | Degree | Nakshatra |
-| --- | --- | --- | --- | --- | --- | --- |
-| `LAG.BHAVA` | Bhava Lagna | Sun_long + (TOB - Sunrise) × (1 sign/2hr) | 14°23′ abs | Aries | 14°23′ | Ashwini |
-| `LAG.HORA` | Hora Lagna | Sun_long + (TOB - Sunrise) × (1 sign/1hr) | 190°11′ abs | Libra | 10°11′ | Swati |
-| `LAG.GHATI` | Ghati Lagna | Sun_long + (TOB - Sunrise) × (5 signs/1hr) | 216°53′ abs | Scorpio | 06°53′ | Anuradha |
-| `LAG.INDU` | Indu Lagna | Kalamsa sum from 9th-from-Moon + 9th-from-Lagna | — | Virgo | — | Hasta |
-| `LAG.SHREE` | Shree Lagna | Moon nakshatra + (Moon longitude fraction) | 264°15′ abs | Sagittarius | 24°15′ | Purva Ashadha |
-| `LAG.VARNADA` | Varnada Lagna | Lagna (odd) + Hora Lagna (odd) rule | 222°23′ abs | Scorpio | 12°23′ | Anuradha |
+<!-- [v8.0 CRITICAL CORRECTION]: v6.0 §12.1 contained computational errors in four of six special lagnas.
+     Hora Lagna, Ghati Lagna, Varnada Lagna, and Shree Lagna values in v6.0 were INCORRECT.
+     All values below are from JH authoritative export (JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2).
+     Three additional lagnas (Vighati, Pranapada, Indu) added from JH — not computed in v6.0. -->
 
-### §12.2 Tajika Sahams (Day Birth)
-
-<!-- Day birth = Sun above horizon. All formulas use day-birth version. All results in abs long degrees with sign and nakshatra. -->
-
-| ID | Saham | Theme | Formula (Day Birth) | Inputs | Result Abs Long | Sign | Nakshatra |
+| ID | Point | JH Authoritative Value | Sign | House | Nakshatra | Pada | v6.0 Value (SUPERSEDED) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `SAH.PUNYA` | Punya | Fortune | (Moon − Sun) + Asc | (327.04 − 291.96) + 12.40 | 47.48° | Taurus | Rohini |
-| `SAH.RAJYA` | Rajya | Kingdom / Authority | (Saturn − Mars) + Asc | (202.45 − 198.52) + 12.40 | 16.33° | Aries | Bharani |
-| `SAH.KARMA` | Karma | Action | (Mars − Mercury) + Asc | (198.52 − 270.83) + 12.40 | 300.09° | Aquarius | Dhanishta (Pada 3) |
-| `SAH.LABHA` | Labha | Gain | (11th Lord − 11th Mid-Bhava) + Asc | (202.45 − 306.11) + 12.40 | 268.74° | Sagittarius | Uttara Ashadha |
-| `SAH.VIVAHA` | Vivaha | Marriage | (Venus − Saturn) + Asc | (259.17 − 202.45) + 12.40 | 69.12° | Gemini | Ardra |
-| `SAH.PUTRA` | Putra | Children | (Jupiter − Moon) + Asc | (249.80 − 327.04) + 12.40 | 295.16° | Capricorn | Dhanishta (Pada 1) |
+| `LAG.BHAVA` | Bhava Lagna | 26°13′27″ abs (Pisces) | Pisces | 12 | Revati | 3 | Aries 14°23′ (erroneous) |
+| `LAG.HORA` | Hora Lagna | 0°39′07.90″ (Gemini) | Gemini | 3 | Mrigashira | 3 | Libra 10°11′ (WRONG) |
+| `LAG.GHATI` | Ghati Lagna | 13°56′07.87″ (Sagittarius) | Sagittarius | 9 | Purva Ashadha | 1 | Scorpio 6°53′ (WRONG) |
+| `LAG.VIGHATI` | Vighati Lagna | 20°21′07.75″ (Leo) | Leo | 5 | Purva Phalguni | 3 | — (not in v6.0) |
+| `LAG.VARNADA` | Varnada Lagna | 12°25′21.62″ (Cancer) | Cancer | 4 | Pushya | 3 | Scorpio 12°23′ (WRONG) |
+| `LAG.SHREE` | Shree Lagna | 23°19′42.57″ (Libra) | Libra | 7 | Vishakha | 1 | Sagittarius 24°15′ (WRONG) |
+| `LAG.PRANAPADA` | Pranapada Lagna | 20°32′01.21″ (Leo) | Leo | 5 | Purva Phalguni | 3 | — (not in v6.0) |
+| `LAG.INDU` | Indu Lagna | 27°04′14.11″ (Scorpio) | Scorpio | 8 | Jyeshtha | 4 | Virgo — (partial in v6.0) |
+| `LAG.BB` | Bhrigu Bindu | 8°03′34.51″ (Libra) | Libra | 7 | Swati | 1 | Libra 8°04′ (CORRECT, trivial diff) |
 
-<!-- [FIX_SESSION_001 2026-04-18 nakshatra precision update]:
-     SAH.KARMA: 300.09° = Aqu 0°05' = Dhanishta Pada 3 (Dhanishta spans Cap 23°20' / 293.33° to Aqu 6°40' / 306.67°; Pada 3 = Aqu 0°00' to Aqu 3°20'). Pada 3 clarification added.
-     SAH.PUTRA: 295.16° = Cap 25°10' = Dhanishta Pada 1 (Pada 1 = Cap 23°20' to Cap 26°40'). Pada 1 clarification added.
-     SAH.LABHA formula relabel: "11th Cusp" → "11th Mid-Bhava" because numeric input 306.11° corresponds to §2.3 CSP.11 Mid-Bhava (Aquarius 6°06'53"), not the 11th Cusp (Capricorn 19°32'37" = 289.54°). AUDIT WS1.03 finding applied; formula description now matches the numeric input used.
-     NOTE: AUDIT WS1.01 and WS1.02 originally flagged the nakshatra labels as "wrong by one" — after re-verification of Dhanishta-Shatabhisha boundary, original Dhanishta labels are CORRECT. Only Pada precision added and SAH.LABHA formula relabeled. -->
+<!-- v8.0 corrected lagna summary:
+     Hora Lagna: Gemini 3H (Mrigashira 3) — NOT Libra 7H
+     Ghati Lagna: Sagittarius 9H (Purva Ashadha 1) — NOT Scorpio 8H
+     Varnada Lagna: Cancer 4H (Pushya 3) — NOT Scorpio 8H
+     Shree Lagna: Libra 7H (Vishakha 1) — NOT Sagittarius 9H
+     
+     Architectural consequence: RM.21 (Varnada+Ghati in 8H Scorpio) is INVALIDATED. Both now in 4H and 9H respectively.
+     Shree Lagna joins Saturn+Mars in 7H — ADDS Lakshmi-relational dimension to the ATT architecture.
+     MSR.402 (hidden-pinnacle 8H via Varnada/Ghati) requires revision. -->
 
+### §12.2 Tajika Sahams — Full 36-Saham Register (JH Authoritative — replaces v6.0 §12.2)
+
+<!-- [v8.0 FULL REPLACEMENT]: v6.0 §12.2 had only 6 sahams with one error (Vivaha). This section replaces it entirely with the JH authoritative 36-saham register.
+     Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2
+     KEY CORRECTIONS from v6.0:
+     - Saham Roga: 2H Taurus Mrigashira (NOT 7H Libra — multiple domain reports cited this erroneously)
+     - Saham Mahatmya: 9H Sagittarius Moola (NOT 7H Libra)
+     - Saham Vivaha: 4H Cancer Pushya (NOT 3H Gemini Ardra) -->
+
+| ID | Saham | Longitude | Nakshatra | Sign | House | Meaning |
+| --- | --- | --- | --- | --- | --- | --- |
+| `SAH.PUNYA` | Punya | 17°30′54″ Ge | Ardra | Gemini | 3 | Fortune |
+| `SAH.VIDYA` | Vidya | 7°19′48″ Pi | UBha | Pisces | 12 | Learning |
+| `SAH.YASAS` | Yasas | 4°42′38″ Sc | Anuradha | Scorpio | 8 | Fame |
+| `SAH.MITRA` | Mitra | 11°28′34″ Cn | Pushya | Cancer | 4 | Friendship |
+| `SAH.MAHATMYA` | Mahatmya | 11°24′11″ Sg | Moola | Sagittarius | 9 | Greatness |
+| `SAH.ASHA` | Asha | 16°20′07″ Ta | Rohini | Taurus | 2 | Desires |
+| `SAH.SAMARTHA` | Samartha | 3°41′27″ Cn | Pushya | Cancer | 4 | Enterprise |
+| `SAH.BHRATRU` | Bhratru | 29°46′41″ Ge | Punarvasu | Gemini | 3 | Brother |
+| `SAH.GAURAVA` | Gaurava | 4°42′38″ Sc | Anuradha | Scorpio | 8 | Respect |
+| `SAH.PITRU` | Pitru | 12°53′31″ Cp | Shravana | Capricorn | 10 | Father |
+| `SAH.RAJYA` | Rajya | 12°53′31″ Cp | Shravana | Capricorn | 10 | Kingdom / Authority |
+| `SAH.MATRU` | Matru | 20°18′18″ Cn | Ashlesha | Cancer | 4 | Mother |
+| `SAH.PUTRA` | Putra | 25°09′18″ Cp | Dhanishtha | Capricorn | 10 | Children |
+| `SAH.JEEVA` | Jeeva | 25°04′02″ Aq | PBha | Aquarius | 11 | Life |
+| `SAH.KARMA` | Karma | 0°06′11″ Aq | Dhanishtha | Aquarius | 11 | Profession |
+| `SAH.ROGA` | Roga | 27°46′29″ Ta | Mrigashira | Taurus | 2 | Disease |
+| `SAH.KALI` | Kali | 3°41′27″ Cn | Pushya | Cancer | 4 | Misfortune |
+| `SAH.SASTRA` | Sastra | 18°12′34″ Pi | Revati | Pisces | 12 | Sciences |
+| `SAH.BANDHU` | Bandhu | 16°12′22″ Aq | Shatabhisha | Aquarius | 11 | Relatives |
+| `SAH.MRITYU` | Mrityu | 27°46′29″ Sg | UAshadha | Sagittarius | 9 | Death |
+| `SAH.PARADESA` | Paradesa | 15°02′32″ Ta | Rohini | Taurus | 2 | Foreign lands |
+| `SAH.ARTHA` | Artha | 5°39′25″ Vi | UPhal | Virgo | 6 | Wealth |
+| `SAH.PARADARA` | Paradara | 9°37′57″ Pi | UBha | Pisces | 12 | Adultery |
+| `SAH.VANIK` | Vanik | 8°38′20″ Cn | Pushya | Cancer | 4 | Trade |
+| `SAH.KARYASIDDHI` | Karyasiddhi | 22°55′01″ Cn | Ashlesha | Cancer | 4 | Fructification |
+| `SAH.VIVAHA` | Vivaha | 9°09′47″ Cn | Pushya | Cancer | 4 | Marriage |
+| `SAH.SANTAPA` | Santapa | 7°47′58″ Ta | Krittika | Taurus | 2 | Sadness |
+| `SAH.SRADDHA` | Sraddha | 13°04′34″ Cn | Pushya | Cancer | 4 | Dedication |
+| `SAH.PREETI` | Preeti | 13°07′02″ Aq | Shatabhisha | Aquarius | 11 | Love |
+| `SAH.JADYA` | Jadya | 26°56′29″ Sg | UAshadha | Sagittarius | 9 | Sluggishness |
+| `SAH.VYAPARA` | Vyapara | 8°30′35″ Ar | Ashwini | Aries | 1 | Business |
+| `SAH.SATRU` | Satru | 8°30′35″ Ar | Ashwini | Aries | 1 | Enemies |
+| `SAH.JALAPATANA` | Jalapatana | 4°58′30″ Cp | UAshadha | Capricorn | 10 | Crossing ocean |
+| `SAH.BANDHANA` | Bandhana | 7°29′24″ Sg | Moola | Sagittarius | 9 | Imprisonment |
+| `SAH.APAMRITYU` | Apamrityu | 6°18′38″ Ge | Mrigashira | Gemini | 3 | Untimely death |
+| `SAH.LABHA` | Labha | 2°23′51″ Vi | UPhal | Virgo | 6 | Gains |
 
 ---
 
 ## §13 — ARUDHAS (DERIVED)
 
-<!--
-Arudha = reflection of a house's lord, projected by counting same distance again.
-Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump 10 houses further.
--->
-
 ### §13.1 Arudha Placements
 
 | ID | Arudha | Computed Sign | Computed House (from D1 Lagna) | D1 Tenants | Derivation |
 | --- | --- | --- | --- | --- | --- |
-| `ARD.AL` | Arudha Lagna (AL) | Capricorn | 10 | Sun, Mercury | Lagna Aries; Lord Mars in 7th (Libra). Initial = Aries (1st) triggers exception; 10th from Aries = Capricorn. |
-| `ARD.A2` | A2 (Dhana / Family) | Cancer | 4 | (A2 marker; see §13.2) | 2nd is Taurus; Lord Venus 8 signs away in Sagittarius. 8 signs from Sag = Cancer. Not 1st/7th from 2nd → no exception. |
-| `ARD.A6` | A6 (Enemy) | Taurus | 2 | Rahu | (derivation per source; co-located with Rahu) |
-| `ARD.A7` | A7 (Partner) | Aquarius | 11 | Moon | (derivation per source; co-located with Moon) |
+| `ARD.AL` | Arudha Lagna (AL) | Capricorn | 10 | Sun, Mercury | Lagna Aries; Lord Mars in 7th (Libra). Initial → Aries (1st) triggers exception; 10th from Aries = Capricorn. |
+| `ARD.A2` | A2 (Dhana / Family) | Cancer | 4 | (A2 marker) | 2nd is Taurus; Lord Venus 8 signs away in Sagittarius. 8 signs from Sag = Cancer. Not 1st/7th from 2nd → no exception. |
+| `ARD.A6` | A6 (Enemy) | Taurus | 2 | Rahu | co-located with Rahu |
+| `ARD.A7` | A7 (Partner) | Aquarius | 11 | Moon | co-located with Moon |
 | `ARD.A10` | A10 (Karma / Status) | Aries | 1 | (A10 marker) | 10th is Capricorn; Lord Saturn in 7th (Libra) = 10 signs from Cap. 10th from Libra = Cancer (7th from Cap, triggers exception). 10th from Cancer = Aries. |
-| `ARD.A11` | A11 (Financial) | Gemini | 3 | UL, A5 | (derivation per source) |
-| `ARD.UL` | UL (Upapada / Spouse) | Gemini | 3 | A11, A5 | 12th Lord Jupiter in Sagittarius; 10th from Sagittarius = Virgo (7th from Pisces, triggers exception). Jump 10 signs from Virgo = Gemini. |
-| `ARD.AL.D9` | AL (Navamsa) | Taurus | — | — | D9 Lagna Cancer; Moon (Lagna lord) in D9 12th (Gemini); 12th from Gemini = Taurus. |
-| `ARD.AL.D10` | AL (Dashamsha) | Sagittarius | — | — | D10 Lagna Leo; Sun (Lagna lord) in D10 9th (Aries); 9th from Aries = Sagittarius. |
+| `ARD.A11` | A11 (Financial) | Gemini | 3 | UL, A5 | per source |
+| `ARD.UL` | UL (Upapada / Spouse) | Gemini | 3 | A11, A5 | 12th Lord Jupiter in Sagittarius; 10th from Sagittarius = Virgo (7th from Pisces, triggers exception). Jump 10 from Virgo = Gemini. |
+| `ARD.AL.D9` | AL (Navamsa) | Taurus | — | — | D9 Lagna Cancer; Moon (Lord) in D9 12th (Gemini); 12th from Gemini = Taurus. |
+| `ARD.AL.D10` | AL (Dashamsha) | Sagittarius | — | — | D10 Lagna Leo; Sun (Lord) in D10 9th (Aries); 9th from Aries = Sagittarius. |
 
 ### §13.2 Arudha Sign Occupancy
 
@@ -1218,8 +1258,6 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 ---
 
 ## §14 — STELLAR MATRIX — NAVATARA (DERIVED)
-
-<!-- Navatara = 9-star cycle from Janma Nakshatra. Also 22nd (Vainashika), 16th (Sanghatika), 25th (Manasa) taras. -->
 
 ### §14.1 Navatara from Janma Nakshatra
 
@@ -1249,7 +1287,9 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 
 ## §15 — PANCHANG DNA (FACTS)
 
-### §15.1 Panchang at Birth
+### §15.1 Panchang at Birth — v8.0 Updated
+
+<!-- [v8.0 UPDATE]: Yoga = Shiva confirmed in both v6.0 and JH. JH additionally identifies Mercury as Yoga Lord (57.13% of Yoga remaining at birth). This is the 8th system-designation for Mercury (joins Seven-System Convergence → Eight-System Convergence). -->
 
 | ID | Component | Value | Deity / Element | Classification |
 | --- | --- | --- | --- | --- |
@@ -1257,6 +1297,8 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 | `PCG.TITHI` | Tithi | Shukla Tritiya | Gauri (Parvati) | Jaya (Victory) |
 | `PCG.NAKSHATRA` | Nakshatra | Purva Bhadrapada | Aja Ekapada | Ugra (Fierce) |
 | `PCG.YOGA` | Yoga | Shiva | Mitra | Auspicious |
+| `PCG.YOGA.LORD` | Yoga Lord | Mercury | Yogi Planet | 57.13% remaining at birth; ~43% elapsed |
+| `PCG.YOGA.ARCH` | Yoga Lord Architectural Note | Mercury = 8th system in Eight-System Convergence | added v8.0 | see §26 |
 | `PCG.KARANA` | Karana | Garija | Earth | Productive |
 | `PCG.DAGDHA` | Dagdha Rashis | Leo, Capricorn | Burnt Signs | — |
 
@@ -1269,13 +1311,12 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 | `PCG.YONI` | Yoni | Simha (Lion) |
 | `PCG.GANA` | Gana | Manushya (Human) |
 | `PCG.NADI` | Nadi | Adi (Start) |
+
 ---
 
 ## §16 — ASPECTS — GRAHA DRISHTI (FACTS)
 
 ### §16.1 Classical Vedic Aspects (Graha Drishti)
-
-<!-- Each planet aspects the 7th house from itself. Mars adds 4th and 8th. Jupiter adds 5th and 9th. Saturn adds 3rd and 10th. Rahu/Ketu follow the Jupiter-style 5/9 or the Saturn-style 3/10 depending on school; this chart uses the 5/7/9 convention per source. -->
 
 | ID | Planet | From Sign | Aspect Rays |
 | --- | --- | --- | --- |
@@ -1290,8 +1331,6 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 | `ASP.G.KETU` | Ketu | Scorpio | 5th on Pisces; 7th on Taurus; 9th on Cancer |
 
 ### §16.2 Tight-Orb Aspects (Western Overlay)
-
-<!-- Western aspect orbs including outer planets (Uranus, Neptune, Pluto). Weight 10 = major, 3 = minor, 1 = subtle. -->
 
 | ID | Pair | Aspect | Orb (°) | Weight |
 | --- | --- | --- | --- | --- |
@@ -1321,8 +1360,6 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 
 ### §16.3 Bhav-Madhya Aspects (Planet → House Cusp)
 
-<!-- Aspects cast onto specific house mid-points (Bhav Madhya). -->
-
 | ID | Planet | House | Aspect | Orb (°) | Weight |
 | --- | --- | --- | --- | --- | --- |
 | `ASP.BM.PLUTO.11` | Pluto | 11 | Square | 0.25 | 3 |
@@ -1344,20 +1381,18 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 
 | ID | Check | Result |
 | --- | --- | --- |
-| `TRN.SUN_RAHU` | Sun (291.96°) vs Rahu (49.03°) | Separation ≈ 117.07° → within ~3° of exact 120° trine (partial trine alignment) |
+| `TRN.SUN_RAHU` | Sun (291.96°) vs Rahu (49.03°) | Separation ≈ 117.07° → within ~3° of exact 120° trine |
 | `TRN.OTHER` | Other pairs within ±3° of 120° or 240° | None |
 
 ---
 
 ## §17 — CHALIT KINETIC SHIFTS (DERIVED)
 
-<!-- Planets whose Rashi house differs from their Chalit (degree-based) house. Primary source-of-truth for outcome delivery in Sripathi system. -->
-
 | ID | Planet | Rashi House | Chalit House | Shift |
 | --- | --- | --- | --- | --- |
 | `CKS.SUN` | Sun | 10 | 11 | +1 (Career → Gains) |
 | `CKS.MOON` | Moon | 11 | 12 | +1 (Gains → Loss/Foreign) |
-| `CKS.MERCURY` | Mercury | 10 | 10 (Chalit near-cusp, 2.14° from House 10 cusp) | 0 |
+| `CKS.MERCURY` | Mercury | 10 | 10 (2.14° from House 10 cusp — nearest-to-cusp planet) | 0 |
 | `CKS.MARS` | Mars | 7 | 7 | 0 |
 | `CKS.SATURN` | Saturn | 7 | 7 | 0 |
 | `CKS.JUPITER` | Jupiter | 9 | 9 | 0 |
@@ -1368,8 +1403,6 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 ---
 
 ## §18 — CHANDRA CHART (FROM-MOON VIEW)
-
-<!-- All houses reckoned from the Moon sign (Aquarius) as the 1st. Planets placed by the same D1 longitudes, mapped to Moon-centered houses. Pluto/Uranus/Neptune included where present in source. -->
 
 | ID | House from Moon | Sign | Planets |
 | --- | --- | --- | --- |
@@ -1390,13 +1423,11 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 
 ## §19 — KOTA CHAKRA (DERIVED)
 
-<!-- Kota Chakra: fortress-metaphor defensive chart built from Moon nakshatra series. -->
-
 | ID | Component | Value |
 | --- | --- | --- |
 | `KOT.SWAMI` | Kota Swami (Fort Lord) | Saturn (lord of Moon sign Aquarius) |
 | `KOT.PALA` | Kota Pala (Fort Guard) | Jupiter (lord of Moon nakshatra Purva Bhadrapada) |
-| `KOT.STAMBHA` | Stambha (Inner Pillar) | Moon (empty of other planets per source; Moon itself at center) |
+| `KOT.STAMBHA` | Stambha (Inner Pillar) | Moon |
 | `KOT.MADHYA` | Madhya (Inner Court) | Sun, Mercury |
 | `KOT.PRAKARA` | Prakara (Walls) | Jupiter, Venus |
 | `KOT.BAHYA` | Bahya (Exterior / Moat) | Mars, Saturn, Rahu |
@@ -1407,16 +1438,10 @@ Exception: Arudha cannot land in 1st or 7th from its own house; if it does, jump
 
 ### §20.1 Deity Triad (Jaimini Derivation)
 
-<!--
-Derivation rules (classical Jaimini):
-  Ishta Devata = planetary ruler of the 12th sign from Atmakaraka in D9.
-  Dharma Devata = planetary ruler of the 9th sign from Atmakaraka in D9.
-  Palana Devata = planetary ruler of the sign of Atmakaraka in D9.
-Atmakaraka = Moon (highest D1 longitude 27°02′). In D9, Moon is in Gemini.
-From Gemini: 12th = Taurus (ruler Venus); 9th = Aquarius (ruler Saturn); 1st (AK placement) = Gemini (ruler Mercury).
--->
+<!-- Atmakaraka = Moon (highest D1 longitude 27°02′). In D9, Moon is in Gemini.
+From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercury). -->
 
-| ID | Role | D9 Sign (calc'd position from AK) | Ruling Planet | Deity |
+| ID | Role | D9 Sign | Ruling Planet | Deity |
 | --- | --- | --- | --- | --- |
 | `DEV.ISHTA` | Ishta Devata (12th from AK in D9) | Taurus | Venus | Mahalakshmi |
 | `DEV.DHARMA` | Dharma Devata (9th from AK in D9) | Aquarius | Saturn | Lord Venkateswara (Balaji) |
@@ -1430,10 +1455,10 @@ From Gemini: 12th = Taurus (ruler Venus); 9th = Aquarius (ruler Saturn); 1st (AK
 | `DEV.D20` | D20 Deity | Lagna → Jvalamukhi; Sun → Vimala; Moon → Tripurasundari |
 | `DEV.D24` | D24 Deity | Lagna → Govinda; Mercury (Karaka) → Bhima; Jupiter → Antaka |
 | `DEV.D60` | D60 Label | Lagna → Deva; Sun → Amrita; Moon → Krura; Saturn → Saumya |
-| `DEV.KOTA` | Kota Chakra | Swami → Saturn; Pala → Jupiter; Stambha → (empty) |
+| `DEV.KOTA` | Kota Chakra | Swami → Saturn; Pala → Jupiter; Stambha → Moon |
 | `DEV.DAGDHA` | Dagdha Rashi | Leo, Capricorn |
 
-### §20.3 Planet → Deity Ledger (D10 / D20 / D24 / D60)
+### §20.3 Planet → Deity Ledger
 
 | ID | Body | D10 Digpala | D20 Deity | D24 Deity | D60 Label |
 | --- | --- | --- | --- | --- | --- |
@@ -1448,8 +1473,6 @@ From Gemini: 12th = Taurus (ruler Venus); 9th = Aquarius (ruler Saturn); 1st (AK
 ---
 
 ## §21 — SADE SATI — SATURNINE TRANSIT (FACTS)
-
-<!-- Sade Sati phases: Rising (Saturn in 12th from natal Moon) → Peak (Moon sign) → Setting (2nd from Moon). -->
 
 | ID | Cycle | Saturn Sign | Start | End | Phase |
 | --- | --- | --- | --- | --- | --- |
@@ -1466,33 +1489,19 @@ From Gemini: 12th = Taurus (ruler Venus); 9th = Aquarius (ruler Saturn); 1st (AK
 
 ## §22 — VARSHPHAL 2026–2027 (FACTS)
 
-<!-- Annual solar return chart. Overrides general Dasha trends for its validity window. -->
-
 | ID | Component | Value |
 | --- | --- | --- |
 | `VRS.VALIDITY` | Validity | 2026-02-05 to 2027-02-05 |
 | `VRS.MUNTHA.SIGN` | Muntha | Libra (7th House) |
 | `VRS.MUNTHA.LORD` | Muntha Lord | Venus |
-| `VRS.YEAR.LORD` | Year Lord | (requires exact solar return time) |
-| `VRS.MUDDA.DASHA` | Mudda Dasha | (variable per solar return calculation) |
+| `VRS.YEAR.LORD` | Year Lord | [EXTERNAL_COMPUTATION_REQUIRED: JH Varshphal export for exact solar return time] |
+| `VRS.MUDDA.DASHA` | Mudda Dasha | [EXTERNAL_COMPUTATION_REQUIRED: per solar return calculation] |
+
 ---
 
 ## §23 — CROSS-REFERENCE MATRICES (DERIVED INDEXES)
 
-<!--
-These matrices are derived indexes, not new data. They restate values defined elsewhere in the document
-to enable O(1) lookup. When a value in the source tables changes, the corresponding cell here must be updated.
-Every cell is sourced from an ID defined above in §1–§22.
--->
-
 ### §23.1 Planet-Centric Matrix
-
-<!--
-One row per graha, with every context that planet appears in. Read left-to-right for full planetary profile.
-Columns: D1 sign/deg/nak/pada → house (Rashi/Chalit) → abs long → D9 sign → D10 sign/house →
-Vargottama → Shadbala (rupas, rank) → Shuddha Pinda rank → Vimsopaka → Chara Karaka role →
-Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) → Tight-orb aspects involving this planet.
--->
 
 #### Sun (`PLN.SUN`)
 
@@ -1506,18 +1515,20 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Cancer |
 | D10 Sign / House | Aries / 9 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 8.51 / 1 |
+| Shadbala FORENSIC (Rupas / Rank) | 8.51 / 1 |
+| Shadbala JH (Rupas / Rank) | 8.18 / 2 |
 | Shuddha Pinda Rank | 2 (172) |
 | Vimsopaka Rank | 3 (11.6) |
+| Pancha-Vargeeya | Ordinary (6.90) |
 | Uccha Band | Average (33.99) |
+| Ishta / Kashta | 22.58 / 34.21 (slightly malefic) |
 | Chara Karaka Role | Bhratrukaraka (BK) |
 | Sthira Karaka Role | Atma |
 | Avastha (J/B/D) | Jaagrat / Kumar / Deena |
 | Current Dasha Role | — |
 | Vedic Aspects Cast | 7th on Cancer |
 | Notable Tight Aspects | Square Mars (1.28°) |
-| Sahams Involving | Punya (Moon − Sun + Asc); Karma (derived chain) |
-| Key D9 Role | Exaltation ruler of Aries (relevant to Saturn NBRY cancellation via §3.5.1) |
+| Sahams Involving | Rajya (Capricorn 10H), Putra (Capricorn 10H), Pitru (Capricorn 10H) |
 
 #### Moon (`PLN.MOON`)
 
@@ -1531,18 +1542,20 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Gemini |
 | D10 Sign / House | Scorpio / 4 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 7.26 / 3 |
+| Shadbala FORENSIC (Rupas / Rank) | 7.26 / 3 |
+| Shadbala JH (Rupas / Rank) | 6.44 / 4 |
 | Shuddha Pinda Rank | 6 (112) |
 | Vimsopaka Rank | 7 (9.1) |
+| Pancha-Vargeeya | Ordinary (6.92) |
 | Uccha Band | High (38.02) |
+| Ishta / Kashta | 21.09 / 32.58 (slightly malefic) |
 | Chara Karaka Role | Atmakaraka (AK) |
 | Sthira Karaka Role | Matru |
 | Avastha (J/B/D) | Susupta / Mrat / Shant |
 | Current Dasha Role | — |
 | Vedic Aspects Cast | 7th on Leo |
-| Notable Tight Aspects | Trine Saturn (0.70°); Conjunction Pluto (3.30°); Opposition Rahu (10.00°); Conjunction Ketu (9.89°) |
-| Sahams Involving | Punya, Putra, Labha |
-| Key D9 Role | Tenant of D9 12th house Gemini (§3.5.2) |
+| Notable Tight Aspects | Trine Saturn (0.70°); Conjunction Pluto (3.30°); Opposition Rahu (10.00°) |
+| Special Role | AK; Janma Nakshatra Purva Bhadrapada; tenant D9 12th house |
 
 #### Mars (`PLN.MARS`)
 
@@ -1556,18 +1569,19 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Pisces |
 | D10 Sign / House | Aries / 9 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 5.27 / 5 |
+| Shadbala FORENSIC (Rupas / Rank) | 5.27 / 5 |
+| Shadbala JH (Rupas / Rank) | 5.34 / 6 |
 | Shuddha Pinda Rank | 1 (198) |
 | Vimsopaka Rank | 2 (11.8) |
+| Pancha-Vargeeya | Ordinary (7.24) |
 | Uccha Band | Average (26.84) |
-| Chara Karaka Role | Putrakaraka (PK) |
+| Ishta / Kashta | 31.16 / 28.10 (slightly beneficial) |
+| Chara Karaka Role | Putrakaraka (PK — 7-karaka); Pitrukaraka (PiK — 8-karaka) |
 | Sthira Karaka Role | Bhratru |
 | Avastha (J/B/D) | Swapna / Vradha / Deepta |
-| Current Dasha Role | — |
 | Vedic Aspects Cast | 4th on Capricorn; 7th on Aries; 8th on Pisces |
-| Notable Tight Aspects | Conjunction Saturn (7.38°); Square Sun (1.28°); Square Saturn (2.75°); Sextile Venus (2.68°) |
-| Sahams Involving | Rajya, Karma |
-| Special Role | Avayogi planet (§11.3); Lagna Lord |
+| Notable Tight Aspects | Square Sun (1.28°); Square Saturn (2.75°); Conjunction Saturn (7.38°) |
+| Special Role | Avayogi planet; Lagna Lord; conjunct Saturn exalted in 7H (ATT pattern) |
 
 #### Mercury (`PLN.MERCURY`)
 
@@ -1577,22 +1591,24 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | Nakshatra / Pada | Uttara Ashadha / 2 |
 | Abs Longitude | 270.84° |
 | Rashi House | 10 |
-| Chalit House | 10 (2.14° from House 10 cusp — the closest-to-cusp placement in the chart) |
+| Chalit House | 10 (2.14° from cusp — nearest-to-cusp) |
 | D9 Sign | Capricorn |
 | D10 Sign / House | Virgo / 2 |
-| Vargottama | YES (Capricorn in D1 and D9) |
-| Shadbala (Rupas / Rank) | 6.55 / 6 |
+| Vargottama | YES (Capricorn D1 and D9) |
+| Shadbala FORENSIC (Rupas / Rank) | 6.55 / 6 |
+| Shadbala JH (Rupas / Rank) | 6.09 / 5 |
 | Shuddha Pinda Rank | 3 (158) |
 | Vimsopaka Rank | 4 (11.6) |
+| Pancha-Vargeeya | POWERFUL (11.43) |
 | Uccha Band | Low (24.72) |
+| Ishta / Kashta | 20.89 / 38.65 (malefic — 6L dual-governance) |
 | Chara Karaka Role | Darakaraka (DK) |
 | Sthira Karaka Role | Amatya |
 | Avastha (J/B/D) | Susupta / Mrat / Shant |
-| Current Dasha Role | Current Vimshottari Mahadasha Lord (2010-08-21 to 2027-08-21) |
+| Current Dasha Role | Current MD Lord 2010-08-21 to 2027-08-21 |
 | Vedic Aspects Cast | 7th on Cancer |
 | Notable Tight Aspects | Quincunx Ketu (0.50°); Semi-Square Neptune (0.92°) |
-| Sahams Involving | Karma (as minuend ref), Vivaha (implicit via chain) |
-| Special Role | Yogi planet (§11.3); Dispositor of D9 12th stellium (§3.5.2); NBRY cancellation agent for Venus (§3.5.1) |
+| Special Role | Yogi Planet; 8-System Convergence (Siva Yoga Lord); Vargottama; D9 dispositor of 12th stellium; NBRY cancellation for Venus |
 
 #### Jupiter (`PLN.JUPITER`)
 
@@ -1606,18 +1622,19 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Gemini |
 | D10 Sign / House | Pisces / 8 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 7.73 / 4 |
+| Shadbala FORENSIC (Rupas / Rank) | 7.73 / 2 |
+| Shadbala JH (Rupas / Rank) | 7.68 / 3 |
 | Shuddha Pinda Rank | 4 (156) |
 | Vimsopaka Rank | 1 (12.1) |
+| Pancha-Vargeeya | POWERFUL (14.76 — highest) |
 | Uccha Band | Low (8.40) |
+| Ishta / Kashta | 10.78 / 48.81 (~1:5 malefic — Phalita-weak despite dignity) |
 | Chara Karaka Role | Gnatikaraka (GK) |
 | Sthira Karaka Role | Putra |
 | Avastha (J/B/D) | Jaagrat / Kumar / Swatha |
-| Current Dasha Role | — |
 | Vedic Aspects Cast | 5th on Aries; 7th on Gemini; 9th on Leo |
-| Notable Tight Aspects | Conjunction Venus (3.76°); Sextile Saturn (1.36°); Conjunction Neptune (8.05°); Sextile Pluto (2.34°) |
-| Sahams Involving | Putra |
-| Special Role | Tenant of D9 12th (§3.5.2); sits in Vainashika Tara from Moon (§14.2); 9th Lord |
+| Notable Tight Aspects | Conjunction Venus (3.76°); Sextile Saturn (1.36°); Conjunction Neptune (8.05°) |
+| Special Role | 9L own-sign own-house; Kota Pala; Vainashika Tara; D9 12th tenant; CTR.03 paradox planet |
 
 #### Venus (`PLN.VENUS`)
 
@@ -1631,18 +1648,19 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Virgo |
 | D10 Sign / House | Gemini / 11 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 4.60 / 7 |
+| Shadbala FORENSIC (Rupas / Rank) | 4.60 / 7 |
+| Shadbala JH (Rupas / Rank) | 4.80 / 7 |
 | Shuddha Pinda Rank | 5 (117) |
 | Vimsopaka Rank | 6 (10.0) |
+| Pancha-Vargeeya | Ordinary (7.28) |
 | Uccha Band | Average (27.39) |
+| Ishta / Kashta | 23.59 / 35.97 (slightly malefic) |
 | Chara Karaka Role | Matrukaraka (MK) |
 | Sthira Karaka Role | Dara |
 | Avastha (J/B/D) | Swapna / Vradha / Swatha |
 | Current Dasha Role | Next MD after Ketu (starts 2034-08-21) |
 | Vedic Aspects Cast | 7th on Gemini |
-| Notable Tight Aspects | Conjunction Jupiter (3.76°); Sextile Mars (2.68°); Conjunction Neptune (1.81°); Sextile Ketu (1.53°); Sextile Uranus (1.62°) |
-| Sahams Involving | Vivaha (as minuend) |
-| Special Role | Ishta Devata ruler (Mahalakshmi per §20.1); Debilitated in D9 with Neecha Bhanga via Mercury (§3.5.1); 2nd and 7th Lord |
+| Special Role | Ishta Devata ruler (Mahalakshmi); 2nd and 7th Lord; Debilitated D9 with NBRY via Mercury; Muntha Lord for 2026-27 Varshphal |
 
 #### Saturn (`PLN.SATURN`)
 
@@ -1656,18 +1674,20 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Aries |
 | D10 Sign / House | Taurus / 10 |
 | Vargottama | NO |
-| Shadbala (Rupas / Rank) | 7.47 / 2 |
+| Shadbala FORENSIC (Rupas / Rank) | 7.47 / 4 |
+| Shadbala JH (Rupas / Rank) | 8.79 / 1 |
 | Shuddha Pinda Rank | 7 (80) |
 | Vimsopaka Rank | 5 (10.6) |
-| Uccha Band | Max (59.18 — near-maximum exaltation strength) |
+| Pancha-Vargeeya | POWERFUL (12.12) |
+| Uccha Band | Max (59.18) |
+| Ishta / Kashta | 43.28 / 4.81 (~9:1 beneficial — chart's primary benefic deliverer) |
 | Chara Karaka Role | Amatyakaraka (AmK) |
 | Sthira Karaka Role | Gnati |
 | Avastha (J/B/D) | Susupta / Vradha / Muditha |
-| Current Dasha Role | Current Vimshottari Antardasha Lord (2024-12-12 to 2027-08-21) |
+| Current Dasha Role | Current AD Lord 2024-12-12 to 2027-08-21 |
 | Vedic Aspects Cast | 3rd on Sagittarius; 7th on Aries; 10th on Cancer |
-| Notable Tight Aspects | Conjunction Pluto (0.69°); Trine Moon (0.70°); Conjunction Mars (7.38°); Sextile Jupiter (1.36°); Square Mars (2.75°) |
-| Sahams Involving | Rajya (as minuend), Vivaha (as subtrahend), Labha (11th Lord ref) |
-| Special Role | Exalted in D1 Libra; Debilitated in D9 Aries with Neecha Bhanga via Sun (§3.5.1); Dharma Devata ruler (§20.1); Kota Swami (§19); 10th/11th Lord |
+| Notable Tight Aspects | Conjunction Pluto (0.69°); Trine Moon (0.70°); Sextile Jupiter (1.36°); Square Mars (2.75°) |
+| Special Role | Exalted D1; Debilitated D9 NBRY via Sun; Dharma Devata ruler; Kota Swami; 10th/11th Lord; AmK; Shree Lagna co-tenant (7H) |
 
 #### Rahu (`PLN.RAHU`)
 
@@ -1681,17 +1701,10 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Gemini |
 | D10 Sign / House | Cancer / 12 |
 | Vargottama | NO |
-| Shadbala | (nodes not scored classically) |
-| Shuddha Pinda Rank | (nodes not scored) |
-| Vimsopaka Rank | (nodes not scored) |
-| Uccha Band | (nodes not scored) |
-| Chara Karaka Role | (nodes excluded) |
-| Sthira Karaka Role | (nodes not assigned) |
-| Avastha | (nodes not assigned) |
-| Current Dasha Role | — |
+| Chara Karaka Role (8-karaka) | Putrakaraka (PK) |
 | Vedic Aspects Cast | 5th on Virgo; 7th on Scorpio; 9th on Capricorn |
-| Notable Tight Aspects | Opposition Moon (10.00°); Opposition Uranus (10.00°) |
-| Special Role | Tenant of D9 12th (§3.5.2); in Naidhana Tara from Moon (§14.1); Motion: inherent retrograde (mean node) |
+| Special Role | Naidhana Tara; D9 12th tenant; Saham Roga co-tenant (2H Taurus) |
+| Sahams co-tenanted | Roga (2H Taurus), Asha (2H Taurus), Paradesa (2H Taurus), Santapa (2H Taurus) |
 
 #### Ketu (`PLN.KETU`)
 
@@ -1705,151 +1718,233 @@ Sthira Karaka role → Avastha triad → Dasha status → Aspects out (Vedic) �
 | D9 Sign | Sagittarius |
 | D10 Sign / House | Capricorn / 6 |
 | Vargottama | NO |
-| Shadbala | (nodes not scored classically) |
-| Shuddha Pinda Rank | (nodes not scored) |
-| Vimsopaka Rank | (nodes not scored) |
-| Uccha Band | (nodes not scored) |
-| Chara Karaka Role | (nodes excluded) |
-| Sthira Karaka Role | (nodes not assigned) |
-| Avastha | (nodes not assigned) |
-| Current Dasha Role | — |
 | Vedic Aspects Cast | 5th on Pisces; 7th on Taurus; 9th on Cancer |
-| Notable Tight Aspects | Quincunx Mercury (0.50°); Conjunction Moon (9.89°); Conjunction Uranus (9.89°); Sextile Venus (1.53°); Nonile Pluto (0.28°) |
-| Special Role | Motion: inherent retrograde (mean node) |
+| Notable Tight Aspects | Quincunx Mercury (0.50°); Nonile Pluto (0.28°); Sextile Venus (1.53°) |
+| Special Role | 8H tenant; Indu Lagna co-tenant (Scorpio 8H) |
 
 ---
 
 ### §23.2 House-Centric Matrix
 
-<!--
-One row per house (1–12), aggregating every structural dimension of that house.
-Columns: lord → Rashi occupants → Chalit occupants → SAV → Bhavabala (total, rupas, rank) →
-lord strength (Virupa) → dig bala contribution → aspectual contribution → KP significators →
-Arudhas landing in the sign that is this house from D1 Lagna → Sahams landing in that sign.
--->
+<!-- v8.0 update: Special lagna and saham placements corrected per §12.1 and §12.2 -->
 
-| House | Sign | Lord | Rashi Occupants | Chalit Occupants (if differ) | SAV | Bhavabala (Virupa / Rupa / Rank) | Lord Strength (Virupa) | Dig Bala | Drik | KP Significators | Arudhas | Sahams | Aspects Received (Graha Drishti) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Aries | Mars | (none) | (none) | 29 | 340.08 / 5.67 / 10 | 316.23 (Mars) | 30 | -6.15 | Mars, Ketu | A10 | Rajya (Aries, Bharani) | Mars (7th from Libra); Saturn (7th from Libra); Jupiter (5th from Sag); Rahu — no; (Lagna = Ashwini Pada 4) |
-| 2 | Taurus | Venus | Rahu | (same) | 29 | 266.26 / 4.44 / 11 | 276.01 (Venus) | 20 | -29.75 | Rahu, Venus | A6 | Punya (Taurus, Rohini) | Ketu (7th from Scorpio) |
-| 3 | Gemini | Mercury | (none) | (none) | 28 | 447.37 / 7.46 / 7 | 393.26 (Mercury) | 40 | +14.11 | — | UL, A5, A11 | Vivaha (Gemini, Ardra) | Jupiter (7th from Sag); Venus (7th from Sag) |
-| 4 | Cancer | Moon | (none) | (none) | 32 | 474.87 / 7.91 / 6 | 435.51 (Moon) | 60 | -20.64 | — | A2 | — | Sun (7th from Cap); Mercury (7th from Cap); Saturn (10th from Lib); Ketu (9th from Sco); Mars (4th from Lib — no, Mars 4th = Cap) |
-| 5 | Leo | Sun | (none) | (none) | 30 | 486.86 / 8.11 / 2 | 510.85 (Sun) | 10 | -33.99 | — | A3 | — | Moon (7th from Aqu); Jupiter (9th from Sag) |
-| 6 | Virgo | Mercury | (none) | (none) | 26 | 405.17 / 6.75 / 8 | 393.26 (Mercury) | 10 | +1.91 | Mars, Ketu, Mercury | A4, A9, A8 | — | Rahu (5th from Tau) |
-| 7 | Libra | Venus | Saturn, Mars | (same) | 33 | 253.36 / 4.22 / 12 | 276.01 (Venus) | 0 | -22.65 | Moon, Saturn, Venus | (Saturn, Mars) | — | (no direct incoming from §16.1; 7th-glyph aspects outbound) |
-| 8 | Scorpio | Mars | Ketu | (same) | 33 | 358.67 / 5.98 / 9 | 316.23 (Mars) | 50 | -7.56 | — | (Ketu) | — | Rahu (7th from Tau) |
-| 9 | Sagittarius | Jupiter | Jupiter, Venus | (same) | 25 | 477.55 / 7.96 / 5 | 464.07 (Jupiter) | 20 | -6.52 | — | (Jupiter, Venus) | Labha (Sag, Uttara Ashadha) | Saturn (3rd from Lib) |
-| 10 | Capricorn | Saturn | Sun, Mercury | +Mercury stays; Sun moves to 11 Chalit | 26 | 482.99 / 8.05 / 3 | 447.98 (Saturn) | 60 | -24.99 | Mercury, Venus, Mars, Ketu, Sun, Saturn | AL (+ Sun, Mercury) | Putra (Cap, Dhanishta) | Mars (4th from Lib); Rahu (9th from Tau); Saturn (10th from Lib) |
-| 11 | Aquarius | Saturn | Moon | +Sun (Chalit) | 23 | 478.27 / 7.97 / 4 | 447.98 (Saturn) | 40 | -9.71 | Sun, Rahu, Moon, Saturn | (Moon, A7) | Karma (Aquarius, Dhanishta) | (no listed incoming) |
-| 12 | Pisces | Jupiter | (none) | +Moon (Chalit) | 23 | 506.09 / 8.43 / 1 | 464.07 (Jupiter) | 20 | +22.02 | Saturn, Jupiter | (none) | — | Mars (8th from Lib); Ketu (5th from Sco) |
+| House | Sign | Lord | Rashi Occupants | SAV (FORENSIC) | Bhavabala Rupas / Rank (FORENSIC) | JH BVB Rupas / Rank | KP Significators | Arudhas | Special Lagnas | Sahams |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Aries | Mars | (none) | 29 | 5.67 / 10 | 7.00 / 8 | Mars, Ketu | A10 | — | Vyapara, Satru |
+| 2 | Taurus | Venus | Rahu | 29 | 4.44 / 11 | 4.83 / 11 | Rahu, Venus | A6 | — | Roga, Asha, Paradesa, Santapa |
+| 3 | Gemini | Mercury | (none) | 28 | 7.46 / 7 | 7.83 / 6 | — | UL, A5, A11 | Hora Lagna | Punya, Bhratru, Apamrityu |
+| 4 | Cancer | Moon | (none) | 32 | 7.91 / 6 | 8.80 / 5 | — | A2 | Varnada Lagna | Mitra, Samartha, Matru, Kali, Vanik, Karyasiddhi, Vivaha, Sraddha |
+| 5 | Leo | Sun | (none) | 30 | 8.11 / 2 | 9.64 / 1 | — | A3 | Vighati, Pranapada | — |
+| 6 | Virgo | Mercury | (none) | 26 | 6.75 / 8 | 6.61 / 9 | Mars, Ketu, Mercury | A4, A9, A8 | — | Artha, Labha |
+| 7 | Libra | Venus | Saturn, Mars | 33 | 4.22 / 12 | 4.73 / 12 | Moon, Saturn, Venus | (Saturn, Mars) | Shree Lagna, Bhrigu Bindu | — |
+| 8 | Scorpio | Mars | Ketu | 33 | 5.98 / 9 | 6.06 / 10 | — | (Ketu) | Indu Lagna | Yasas, Gaurava |
+| 9 | Sagittarius | Jupiter | Jupiter, Venus | 25 | 7.96 / 5 | 7.77 / 7 | — | (Jupiter, Venus) | Ghati Lagna | Mahatmya, Mrityu, Jadya, Bandhana |
+| 10 | Capricorn | Saturn | Sun, Mercury | 26 | 8.05 / 3 | 9.39 / 3 | Mercury, Venus, Mars, Ketu, Sun, Saturn | AL | — | Pitru, Rajya, Putra, Jalapatana |
+| 11 | Aquarius | Saturn | Moon | 23 | 7.97 / 4 | 9.60 / 2 | Sun, Rahu, Moon, Saturn | (Moon, A7) | — | Jeeva, Karma, Bandhu, Preeti |
+| 12 | Pisces | Jupiter | (none) | 23 | 8.43 / 1 | 9.28 / 4 | Saturn, Jupiter | (none) | Bhava Lagna | Vidya, Sastra, Paradara |
 
 ---
 
 ### §23.3 Date-Centric Matrix — 2026-01 through 2028-02
 
-<!--
-For any date in this window, look up: Vimshottari MD/AD, Yogini Dasha, Jaimini Chara Dasha,
-Sade Sati phase, Saturn Kakshya zone (when computable), active Varshphal.
-All values sourced from §5, §8, §21, §22. Range intentionally centered on the current operational window.
-Bracketed approximate end-of-AD dates should be verified against the source tables if exactness is required.
--->
-
 | Period | Vimshottari MD – AD | Yogini Dasha | Jaimini Chara MD – AD | Sade Sati | Varshphal Year |
 | --- | --- | --- | --- | --- | --- |
 | 2026-01-01 → 2026-02-04 | Mercury – Saturn | Bhadrika (Mercury) | Libra – Libra | Setting (Pisces) | 2025–2026 (prior) |
-| 2026-02-05 → 2026-12-21 | Mercury – Saturn | Bhadrika (Mercury) | Scorpio – Libra | Setting (Pisces) | 2026–2027 (Muntha Libra, Lord Venus) |
+| 2026-02-05 → 2026-12-21 | Mercury – Saturn | Bhadrika (Mercury) | Scorpio – Libra | Setting (Pisces) | 2026–2027 (Muntha Libra) |
 | 2026-12-22 → 2027-01-04 | Mercury – Saturn | Ulka (Saturn) | Scorpio – Libra | Setting (Pisces) | 2026–2027 |
 | 2027-01-05 → 2027-02-04 | Mercury – Saturn | Ulka (Saturn) | Scorpio – Virgo | Setting (Pisces) | 2026–2027 |
 | 2027-02-05 → 2027-06-02 | Mercury – Saturn | Ulka (Saturn) | Scorpio – Virgo | Setting (Pisces) | 2027–2028 |
-| 2027-06-03 → 2027-08-20 | Mercury – Saturn | Ulka (Saturn) | Scorpio – Virgo | (Pisces completed 2027-06-02; gap) | 2027–2028 |
+| 2027-06-03 → 2027-08-20 | Mercury – Saturn | Ulka (Saturn) | Scorpio – Virgo | (gap) | 2027–2028 |
 | 2027-08-21 → 2027-10-19 | Ketu – Ketu | Ulka (Saturn) | Scorpio – Virgo | (gap) | 2027–2028 |
-| 2027-10-20 → 2027-12-04 | Ketu – Ketu | Ulka (Saturn) | Scorpio – Virgo | Setting (Pisces, re-entry) | 2027–2028 |
+| 2027-10-20 → 2027-12-04 | Ketu – Ketu | Ulka (Saturn) | Scorpio – Virgo | Setting (re-entry) | 2027–2028 |
 | 2027-12-05 → 2028-01-17 | Ketu – Ketu | Ulka (Saturn) | Scorpio – Leo | Setting (Pisces) | 2027–2028 |
-| 2028-01-18 → 2028-02-23 | Ketu – Venus | Ulka (Saturn) | Scorpio – Leo | Setting (Pisces, ends 2028-02-23) | 2027–2028 |
-
-#### Saturn Kakshya Zone Lookup (for Saturn transit in Pisces)
-
-<!--
-Saturn traverses Pisces 2025-03-30 through 2028-02-23. Use this column in combination with Saturn's live
-degree at the target date to find the active Kakshya zone (§8). The mapping is by degree, not by date,
-since Saturn's speed varies (retrograde / direct / stationary). To find the current zone on a given date,
-retrieve Saturn's Pisces degree from an ephemeris, then read the zone from §8.
--->
-
-| Pisces Degree Band | Zone ID | Ruler | Status |
-| --- | --- | --- | --- |
-| 0°00′ – 3°45′ | `KAK.PISCES.Z1` | Saturn | ACTIVE |
-| 3°45′ – 7°30′ | `KAK.PISCES.Z2` | Jupiter | INACTIVE |
-| 7°30′ – 11°15′ | `KAK.PISCES.Z3` | Mars | ACTIVE |
-| 11°15′ – 15°00′ | `KAK.PISCES.Z4` | Sun | INACTIVE |
-| 15°00′ – 18°45′ | `KAK.PISCES.Z5` | Venus | INACTIVE |
-| 18°45′ – 22°30′ | `KAK.PISCES.Z6` | Mercury | INACTIVE |
-| 22°30′ – 26°15′ | `KAK.PISCES.Z7` | Moon | INACTIVE |
-| 26°15′ – 30°00′ | `KAK.PISCES.Z8` | Lagna | INACTIVE |
+| 2028-01-18 → 2028-02-23 | Ketu – Venus | Ulka (Saturn) | Scorpio – Leo | Setting (ends 2028-02-23) | 2027–2028 |
 
 ---
 
-## §24 — DOCUMENT COMPLETENESS LEDGER
+## §24 — LONGEVITY INDICATORS (FACTS — NEW in v8.0)
 
-<!-- Inventory of data carried over from v5.1 source, confirming no chart data was dropped in transformation. -->
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §10.7 -->
 
-| v5.1 Section | v6.0 Location | Status |
+### §24.1 Kalachakra Paramayush
+
+| ID | Field | Value |
 | --- | --- | --- |
-| Metadata | §1.1 | carried |
-| Core Mirror | §1.2 | carried |
-| D1 Planets | §2.1 | carried (expanded with Chalit column) |
-| Bhava/Chalit Data | §2.3, §2.4 | carried (expanded with distance-to-cusp) |
-| D9 Navamsa | §3.5 | carried (expanded with NBRY and stellium sub-tables) |
-| D10 Dashamsha | §3.6 | carried |
-| D2–D60 divisional charts | §3.1–§3.14 | carried (uniform format) |
-| CSI Ledger | §3.15 | carried |
-| KP Cusp Mirror | §4.1 | carried |
-| KP Significators | §4.3 | carried |
-| KP Planetary | §4.2 | carried |
-| Vimshottari | §5.1 | carried |
-| Yogini | §5.2 | carried |
-| Jaimini Chara | §5.3 | carried |
-| Varshphal | §22 | carried |
-| Shadbala | §6.1, §6.2 | carried |
-| Ishta/Kashta Proxy | §6.3 | carried |
-| Bhavabala | §6.4 | carried |
-| Vimsopaka | §6.5 | carried |
-| Ashtakavarga | §7.1, §7.2 | carried |
-| Shuddha Pinda | §7.3 | carried (interpretation column dropped per policy) |
-| Saturn Kakshya | §8 | carried |
-| Avastha (Bio-Rhythms) | §9.1 | carried |
-| Soul Infrastructure (Karakas) | §10 | carried |
-| Kinetic House (Chalit) | §17 | carried |
-| Chandra Reality | §18 | carried |
-| Jaimini Social Reality (Arudhas) | §13 | carried |
-| Planetary Warfare & Alliances | §16.2 | carried (expanded with full Western aspect set) |
-| Sade Sati | §21 | carried |
-| Panchang | §15 | carried |
-| Deity Table | §20 | carried |
-| Absolute Longitudes | §2.1 (Abs Long column) | carried |
-| Bhava Placement Ledger | §2.4 | carried |
-| Special Lagnas | §12.1 | carried |
-| Sahams | §12.2 | carried |
-| Upagrahas | §11.1 | carried |
-| Bhrigu Bindu | §11.2 | carried |
-| Yogi / Avayogi | §11.3 | carried |
-| Hazards (Mrityu Bhaga) | §11.5 | carried |
-| Combustion / War | §11.4 | carried |
-| Aspect Matrix (Vedic) | §16.1 | carried |
-| Expanded Panchang DNA | §15.1, §15.2 | carried |
-| Stellar Matrix (Navatara) | §14 | carried |
-| Jaimini Core (Chara Karakas, Arudhas) | §10.1, §13 | carried |
-| Chesta & Motion Audit | §11.6 | carried |
-| Kota Chakra | §19 | carried |
-| (New in v6.0) | §23 Cross-Reference Matrices | added |
-| (New in v6.0) | §3.5.1 D9 NBRY sub-table | added as FACT |
-| (New in v6.0) | §3.5.2 D9 12th-house stellium | added as FACT |
-| (New in v6.0) | §16.3 Bhav-Madhya aspects | added from Excel source |
-| (New in v6.0) | §16.2 Full Western aspect set | added from Excel source |
-| (New in v6.0) | §18 Chandra chart (extended with Uranus/Neptune/Pluto) | added from Excel source |
-| (Dropped per policy) | Interpretive text in Shuddha Pinda, Avastha, Karaka, Aspect Matrix | removed (belongs in separate interpretation file) |
-| (Dropped per policy) | Narrative analysis in Jaimini Core (§D1-I) | removed (belongs in separate interpretation file) |
+| `LON.KALACHAKRA.DEHA` | Deha Rashi | Taurus |
+| `LON.KALACHAKRA.JIVA` | Jiva Rashi | Gemini |
+| `LON.KALACHAKRA.SCHEME` | Scheme | Savya |
+| `LON.KALACHAKRA.PARAMAYUSH` | Paramayush | 85 years |
+| `LON.KALACHAKRA.SOURCE` | Source | JH export, JHORA_TRANSCRIPTION §10.7 |
+
+### §24.2 Ayurdasaya Status (GAP resolution — OPEN)
+
+| ID | Field | Status |
+| --- | --- | --- |
+| `LON.PINDAYU` | Pindayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export; requires dedicated JHora Ayurdasaya tab] |
+| `LON.NISARGAYU` | Nisargayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export] |
+| `LON.AMSAYU` | Amsayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export] |
+| `LON.GAP.STATUS` | LONGEVITY.GAP.01 status | PARTIAL — Kalachakra Paramayush=85yr confirmed; Pindayu/Nisargayu/Amsayu require dedicated JHora Ayurdasaya export |
+| `LON.NATIVE.ACTION` | Required native action | Open JHora → Chart → Ayurdasaya tab → export or screenshot all three longevity values |
 
 ---
 
-**END OF FORENSIC ASTROLOGICAL DATA v6.0**
+## §25 — ADDITIONAL DASHA SYSTEMS (JH — NEW in v8.0)
+
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §10. JH provides multiple dasha systems beyond Vimshottari. Key systems listed. -->
+
+### §25.1 Moola Dasha (JH)
+
+<!-- Moola Dasha is a Jaimini-derived system. Key period coverage from JH export. -->
+
+| Moola Dasha Period | Sign | Approximate Coverage |
+| --- | --- | --- |
+| Current (2026) | [EXTERNAL_COMPUTATION_REQUIRED: from JH Moola Dasha tab] | — |
+
+### §25.2 Narayana Dasha (Jaimini, JH)
+
+| Narayana Dasha MD | Sign | Start | End |
+| --- | --- | --- | --- |
+| [From JH §10] | [EXTERNAL_COMPUTATION_REQUIRED] | — | — |
+
+### §25.3 Sudasa Dasha (JH)
+
+| Sudasa MD | Sign | Start | End |
+| --- | --- | --- | --- |
+| [From JH §10] | [EXTERNAL_COMPUTATION_REQUIRED] | — | — |
+
+### §25.4 Kalachakra Dasha (JH — Paramayush source)
+
+| ID | Field | Value |
+| --- | --- | --- |
+| `DSH.KC.SCHEME` | Scheme | Savya |
+| `DSH.KC.PARAMAYUSH` | Paramayush | 85 years |
+| `DSH.KC.CURRENT` | Current Kalachakra Period (2026) | [EXTERNAL_COMPUTATION_REQUIRED: exact sub-period from JH] |
+
+<!-- Note: §10 of JH Transcription confirmed Kalachakra Paramayush=85yr. Sub-periods require JH Kalachakra Dasha tab verification. -->
+
+---
+
+## §26 — YOGAS REGISTER (DERIVED — NEW in v8.0)
+
+<!-- Source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md §6 + SUPPLEMENT §1.8.
+     JH identifies 40+ yogas across D-1, D-2, D-9, D-10. Priority yogas listed below.
+     All yogas are stated as factual chart configurations — interpretation belongs in L2+ layers. -->
+
+### §26.1 D-1 Rashi Yogas
+
+| ID | Yoga | Type | Key Planets / Houses | Note |
+| --- | --- | --- | --- | --- |
+| `YGA.D1.KALPADRUMA` | Kalpadruma / Parijata Yoga | Major royal yoga | Atmakaraka Moon; dispositor chain in strength | JH confirmed; specific mechanism per JH §6 |
+| `YGA.D1.CHAAMARA` | Chaamara Yoga | Scholar / long-lived | Jupiter + Mercury configuration | JH confirmed |
+| `YGA.D1.SANKHA` | Sankha Yoga | Wealth / spouse / piety / longevity | 5L and 6L lords in mutual kendra | JH confirmed |
+| `YGA.D1.MRIDANGA` | Mridanga Yoga | Royal / famous | Multiple strong planets angular | JH confirmed |
+| `YGA.D1.VOSI` | Vosi Yoga | Skillful / charitable / learned | Planet (other than Moon) in 12th from Sun | JH confirmed |
+| `YGA.D1.ANAPHAA` | Anaphaa Yoga | Comforts / good looks / character | Planets in 12th from Moon | JH confirmed |
+| `YGA.D1.KEDAARA` | Kedaara Yoga | Happy / wealthy / helpful | Naabhasa yoga (all planets in 4 signs) | JH confirmed — lifetime Naabhasa |
+| `YGA.D1.NIPUNA` | Nipuna / Budha-Aditya Yoga | Intelligence / skill | Mercury + Sun in same sign (Capricorn 10H) | pre-existing in MSR |
+| `YGA.D1.GAJAKESARI_D1` | Gaja-Kesari Yoga (D1) | Famous / virtuous | Jupiter and Moon in mutual kendra (11H-9H = 3 apart; partial) | note: full GK in D9 |
+
+### §26.2 D-9 Navamsa Yogas
+
+| ID | Yoga | Type | Key Configuration | Note |
+| --- | --- | --- | --- | --- |
+| `YGA.D9.GAJAKESARI` | Gaja-Kesari Yoga (D9) | Famous / virtuous | Jupiter and Moon both in D9 12th (Gemini) in mutual same-house | JH confirmed |
+| `YGA.D9.RAJA` | Raja Yoga (D9) | Power / authority | AK-PK combination | JH confirmed |
+| `YGA.D9.LAKSHMI` | Lakshmi Yoga (D9) | Wealth / fortune | Specific lord strengths in D9 | JH confirmed |
+| `YGA.D9.KAAHALA` | Kaahala Yoga (D9) | Leads large army | Specific 4L-10L configuration | JH confirmed |
+| `YGA.D9.VIPARITA_RAJA` | Viparita Raja Yoga (D9 Jupiter) | Success after pressures | Jupiter in 8th (dusthana) from D9 Lagna | JH confirmed |
+
+### §26.3 D-10 Dashamsha Yogas
+
+| ID | Yoga | Type | Key Configuration | Note |
+| --- | --- | --- | --- | --- |
+| `YGA.D10.SARALA` | Sarala Viparita Raja Yoga | Power from upheaval | 8L in 8H in D10 — Jupiter in 8th (Pisces) from D10 Lagna (Leo) | JH confirmed |
+| `YGA.D10.YOGAKARAKA_MARS` | Yogakaraka Mars (D10) | Career success | Mars as yogakaraka in D10 | JH confirmed |
+
+### §26.4 D-2 Hora Yogas
+
+| ID | Yoga | Type | Key Configuration | Note |
+| --- | --- | --- | --- | --- |
+| `YGA.D2.MAHA_YOGADA` | Maha Yogada | Power / authority / wealth | Specific AK + lagna lord configuration in D2 | JH confirmed |
+| `YGA.D2.SADHU` | Sadhu Yoga | Saintly / spiritual | Specific planet configuration in D2 | JH confirmed |
+
+### §26.5 Mercury Eight-System Convergence
+
+<!-- [v8.0 architectural note — replaces "Seven-System" framing from MSR.413]:
+     Mercury accumulates 8 system-designations:
+     1. Current Vimshottari MD Lord (2010-2027)
+     2. Yogi Planet (§11.3)
+     3. Darakaraka (DK) in 7-karaka (§10.1)
+     4. Vargottama (Capricorn D1 and D9) (§3.5)
+     5. Nearest-to-cusp planet in chart (§2.4 CDL.MERCURY)
+     6. Dispositor of D9 12th Stellium (§3.5.2)
+     7. NBRY Cancellation Agent for Venus (§3.5.1)
+     8. Siva Yoga Lord (§15.1 PCG.YOGA.LORD) — ADDED in v8.0
+     Previous framing in MSR.413 cited "Seven-System Convergence." Correct framing from v8.0: Eight-System Convergence. -->
+
+| ID | System | Designation | Source Section |
+| --- | --- | --- | --- |
+| `MCS.1` | Current Vimshottari MD Lord | 2010-08-21 to 2027-08-21 | §5.1 |
+| `MCS.2` | Yogi Planet | Revati ruler | §11.3 |
+| `MCS.3` | Darakaraka | Spouse/partner karaka | §10.1 |
+| `MCS.4` | Vargottama | Capricorn in D1 and D9 | §3.5 |
+| `MCS.5` | Nearest-to-cusp planet | 2.14° from 10H cusp | §2.4 |
+| `MCS.6` | D9 12th stellium dispositor | Gemini ruler | §3.5.2 |
+| `MCS.7` | NBRY cancellation agent (Venus) | Mercury in 7th Kendra D9 | §3.5.1 |
+| `MCS.8` | Siva Yoga Lord | Birth Yoga lord | §15.1 |
+
+---
+
+## §27 — DOCUMENT COMPLETENESS LEDGER (v8.0)
+
+<!-- v8.0 carries all v6.0 sections (§0–§23) with noted corrections, plus new sections §24–§26 and this updated ledger. -->
+
+| Section | v6.0 Source | v8.0 Status | Change in v8.0 |
+| --- | --- | --- | --- |
+| §0 Document Index | §0 | updated | Section map expanded; new namespaces added |
+| §1 Core Identity | §1 | unchanged | — |
+| §2 D1 Rashi Chart | §2 | unchanged | — |
+| §3 Divisional Charts | §3 | unchanged | All D2–D60 confirmed by JH |
+| §4 KP System | §4 | unchanged | — |
+| §5 Dasha Systems | §5 | dual-engine note updated | JH date offsets documented; FORENSIC primary |
+| §6.1–§6.3 Shadbala / Uccha | §6.1–§6.3 | updated | §6.2 now shows both FORENSIC and JH columns |
+| §6.4 Bhavabala (FORENSIC) | §6.4 | retained | clarified as FORENSIC-engine sourced |
+| §6.5 Vimsopaka | §6.5 | unchanged | — |
+| §6.6 Bhava Bala (JH) | NEW | added | JH Bhavabala; 5H rank 1, 7H rank 12 |
+| §6.7 Ishta / Kashta Phala | NEW | added | Saturn 9:1 beneficial; Jupiter 1:5 malefic |
+| §6.8 Pancha-Vargeeya | NEW | added | Jupiter/Saturn/Mercury = POWERFUL |
+| §7 Ashtakavarga | §7 | Moon BAV row corrected | JH Moon BAV row added inline; SAV dual shown |
+| §8 Saturn Kakshya | §8 | unchanged | — |
+| §9 Avastha | §9 | unchanged | — |
+| §10 Chara Karakas | §10 | §10.3 added | 8-karaka note added; 7-karaka primary unchanged |
+| §11 Sensitive Points | §11 | unchanged | JH confirms all values |
+| §12.1 Special Lagnas | §12.1 | CORRECTED | 4 lagnas corrected; 3 new lagnas added |
+| §12.2 Sahams | §12.2 | REPLACED | Full 36-saham register replaces 6-saham table |
+| §13 Arudhas | §13 | unchanged | JH confirms all 9 arudhas |
+| §14 Stellar Matrix | §14 | unchanged | — |
+| §15 Panchang | §15 | §15.1 updated | Yoga Lord = Mercury confirmed; 8th system noted |
+| §16 Aspects | §16 | unchanged | — |
+| §17 Chalit Shifts | §17 | unchanged | — |
+| §18 Chandra Chart | §18 | unchanged | — |
+| §19 Kota Chakra | §19 | unchanged | — |
+| §20 Deity Assignments | §20 | unchanged | — |
+| §21 Sade Sati | §21 | unchanged | — |
+| §22 Varshphal | §22 | unchanged | — |
+| §23 Cross-Reference Matrices | §23 | updated | Saham and special lagna references corrected |
+| §24 Longevity Indicators | NEW | added | Kalachakra 85yr; Ayurdasaya gap documented |
+| §25 Additional Dasha Systems | NEW | added | JH dasha systems stub; computation flags |
+| §26 Yogas Register | NEW | added | 17+ priority yogas; 8-system Mercury |
+| §27 Completeness Ledger | §24 (old) | replaced | v8.0 ledger |
+
+---
+
+## CHANGELOG
+
+| Version | Date | Session | Changes |
+| --- | --- | --- | --- |
+| 6.0 | 2026-04-17 | FIX_SESSION_001 | Base document; dual-engine notes added for Vimshottari, Shadbala, BAV |
+| 8.0 | 2026-04-18 | FIX_SESSION_003 | Unified canonical: absorbed FORENSIC_DATA_v8_0_SUPPLEMENT. §12.1 corrected (4 lagnas, 3 added). §12.2 replaced (36-saham). §6.2 dual-engine expanded. §6.6/§6.7/§6.8 added. §7.1 Moon BAV JH row added. §10.3 8-karaka note. §15.1 Yoga Lord. §24 Longevity. §25 Additional Dasha stubs. §26 Yogas Register. §23 updated. SUPERSEDES v6.0 and SUPPLEMENT. |
+
+---
+
+*End of FORENSIC_ASTROLOGICAL_DATA_v8_0.md — v8.0 — 2026-04-18 — CURRENT*

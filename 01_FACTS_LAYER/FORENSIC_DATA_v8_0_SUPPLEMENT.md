@@ -1,12 +1,17 @@
 ---
 artifact: FORENSIC_DATA_v8_0_SUPPLEMENT.md
 version: 8.0 (supplement/override layer)
-status: CLOSED
+status: SUPERSEDED
+superseded_by: FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+superseded_date: 2026-04-18
+superseded_session: FIX_SESSION_003
 date: 2026-04-18
 supersedes: "Specific sections of FORENSIC_ASTROLOGICAL_DATA_v6.0 per V8_0_RECONCILIATION_REPORT §2"
 parent_authoritative_source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md
-scope: "Override layer for FORENSIC v6.0 values that disagree with Jagannatha Hora authoritative data. Until a full v8.0 rewrite is executed, readers consult v6.0 + this supplement together. Values in this supplement OVERRIDE v6.0 where overlap exists."
+scope: "Override layer for FORENSIC v6.0 values that disagree with Jagannatha Hora authoritative data. SUPERSEDED — all corrections now integrated into FORENSIC_ASTROLOGICAL_DATA_v8_0.md."
 ---
+
+<!-- ⚠️ SUPERSEDED: All corrections from this supplement have been integrated into FORENSIC_ASTROLOGICAL_DATA_v8_0.md. Use v8.0 as the canonical L1 source. -->
 
 # FORENSIC_DATA v8.0 SUPPLEMENT — JH-Authoritative Overrides
 ## Abhisek Mohanty — 1984-02-05 10:43 IST Bhubaneswar
