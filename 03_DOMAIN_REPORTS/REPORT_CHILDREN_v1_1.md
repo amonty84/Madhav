@@ -1,11 +1,9 @@
 ---
-document: REPORT_CHILDREN_v1_0.md
-version: 1.0
-status: SUPERSEDED
-superseded_by: REPORT_CHILDREN_v1_1.md
-superseded_date: 2026-04-19
-session: 22
-date_closed: 2026-04-18
+document: REPORT_CHILDREN_v1_1.md
+version: 1.1
+status: CLOSED
+session: 22 (original); v1.1 revision 2026-04-19
+date_closed: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D5 — Children, Creativity, Buddhi (Intellectual Discrimination)
 parent_UCN_version: UCN_v1_1.md (v1.1, Session 21)
@@ -16,9 +14,9 @@ primary_cdlm_row: D5
 organizing_principle: The 5H is empty in D1 but supervised by Jupiter's 9th special aspect from own-sign 9H — children/creativity domain compensates natal emptiness through dharmic effort; Jupiter as Sthira Putra karaka governs the domain from maximum dignity
 ---
 
-# REPORT_CHILDREN_v1_0 — Children, Creativity, and Buddhi Domain Report
+# REPORT_CHILDREN_v1_1 — Children, Creativity, and Buddhi Domain Report
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 22 | 2026-04-18 | Version 1.0 | CLOSED
+### Session 22 | 2026-04-18 | Version 1.1 | CLOSED (revised 2026-04-19)
 
 ---
 
@@ -185,7 +183,7 @@ For devotional practice:
 
 - GAP.01 Birth Yoga — not material to D5
 - GAP.02 D9 Jupiter placement — directly material; if Jupiter D9 in Gemini (per CSI), Jupiter's D9 Navamsa position is in Mercury's sign, continuing the Mercury-Jupiter-5H-creativity alignment at Navamsa level; pending verification
-- **GAP.05 (NEW)**: D7 (Saptamsha, children divisional chart) not examined. The D7 provides Navamsa-level detail for the children domain. Facts Layer v6.0 does not include full D7 chart. Requires Jagannatha Hora export. Children-domain claims are D1-based; D7 confirmation pending.
+- **GAP.05 — SUBSTANTIALLY RESOLVED 2026-04-18**: JHora D7 confirmed present per AUDIT_REPORT_v1_0 WS-1b; D7 structural reads match FORENSIC §3.4 (correct planetary placements corroborated). Precise degree comparison for all D7 positions remains pending but structural D1-based domain claims are corroborated. Confidence upgrade: unverified → substantially confirmed.
 
 ### §14 — Source Attribution
 
@@ -208,4 +206,15 @@ For literal children, the architectural prerequisite is relationship-crystalliza
 
 ---
 
-*End of REPORT_CHILDREN_v1_0.md — Session 22 — 2026-04-18 — CLOSED*
+---
+
+## CHANGELOG
+
+| Version | Date | Author | Summary |
+|---|---|---|---|
+| 1.0 | 2026-04-18 | Session 22 | Initial closed artifact |
+| 1.1 | 2026-04-19 | Revision pass | GAP.05 substantially resolved per AUDIT_REPORT_v1_0 WS-1b (JHora D7 confirmed; structural reads match FORENSIC §3.4). Reviewed against FORENSIC_v8_0; no special-lagna position corrections required — report confirmed clean. |
+
+---
+
+*End of REPORT_CHILDREN_v1_1.md — Session 22 — 2026-04-18 — v1.1 revised 2026-04-19 — CLOSED*
