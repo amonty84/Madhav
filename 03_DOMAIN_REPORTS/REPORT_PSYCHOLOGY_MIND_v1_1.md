@@ -1,11 +1,10 @@
 ---
-document: REPORT_PSYCHOLOGY_MIND_v1_0.md
-version: 1.0
-status: SUPERSEDED
-superseded_by: REPORT_PSYCHOLOGY_MIND_v1_1.md
-superseded_date: 2026-04-19
+document: REPORT_PSYCHOLOGY_MIND_v1_1.md
+version: 1.1
+status: CURRENT
 session: 20
 date_closed: 2026-04-18
+date_updated: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D8 — Psychology and Mind
 parent_UCN_version: UCN_v1_0.md (v1.0, Session 15)
@@ -14,11 +13,12 @@ word_count_estimate: ~21000
 primary_msr_anchors: [MSR.413, MSR.406, MSR.388, MSR.396, MSR.348, MSR.374, MSR.369, MSR.253]
 primary_cdlm_row: D8
 organizing_principle: The Three-Layer Mind Architecture — Aries Lagna (Mars-driven initiative body), Moon AK Aquarius 11H (soul-emotion matrix), and Mercury Capricorn 10H (analytical cognitive instrument) must function as one integrated organism; the current Mercury MD / Saturn AD is the period of maximum structural alignment across all three layers
+supersedes: REPORT_PSYCHOLOGY_MIND_v1_0.md
 ---
 
-# REPORT_PSYCHOLOGY_MIND_v1_0 — Psychology and Mind Domain Report
+# REPORT_PSYCHOLOGY_MIND_v1_1 — Psychology and Mind Domain Report
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 20 | 2026-04-18 | Version 1.0 | CLOSED
+### Session 20 | 2026-04-18 | Version 1.1 | CURRENT
 
 ---
 
@@ -58,7 +58,7 @@ The current Mercury MD / Saturn AD (through August 2027) is the period of maximu
 
 **Mind vs. psychology**: In this report, "mind" refers to the astrological domain (Moon, Mercury, 4H, cognitive function). "Psychology" refers to the lived experiential dimension — how the chart's mental architecture produces characterological patterns, relational dynamics, vocational orientation, and existential challenges. Both are examined; the distinction is maintained throughout.
 
-**Confidence gradient**: High-confidence claims derive from L1 planetary positions confirmed by multiple MSR signals. D9-dependent claims carry the GAP.02 qualifier.
+**Confidence gradient**: High-confidence claims derive from L1 planetary positions confirmed by multiple MSR signals. D9-dependent claims previously carried the GAP.02 qualifier; GAP.02 is now RESOLVED (2026-04-19) — D9 Jupiter and D9 Moon confirmed Gemini per JHora v8.0.
 
 ---
 
@@ -462,7 +462,7 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 | Mercury position | Capricorn 10H, 00°50'11" Uttara Ashadha Pada 2 | FORENSIC §2.1 `PLN.MERCURY` |
 | Mercury Vargottama | YES (D1 Capricorn = D9 Capricorn) | FORENSIC §3.15 `CSI.MERCURY` |
 | Mercury Avastha | Susupta / Mrat / Shant (same as Moon) | FORENSIC §9.1 `AVS.MERCURY` |
-| Mercury 7-system designation | MSR.413, confidence 0.98 | MSR_v1_0.md |
+| Mercury 7-system designation | MSR.413, confidence 0.98 | MSR_v1_1.md |
 | DK (Darakaraka) | Mercury | FORENSIC §10.1 `KRK.C.DARA` |
 | Karakamsa | Gemini (Mercury's sign) | MSR.348 derivation |
 | Lagna | Aries 12°23'55" Ashwini Pada 4 | FORENSIC §1.2 `MET.LAGNA.*` |
@@ -490,7 +490,7 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 | MSR.348 | Karakamsa = Gemini (Mercury's sign) | 0.90 | Soul's expression mission confirmed as Mercury-domain |
 | MSR.374 | Purva Bhadrapada Moon — Jupiter-ruled transformational depth | 0.87 | The soul-emotion matrix's fierce-depth character |
 | MSR.369 | Rahu-Ketu 2H-8H Learning Arc | 0.85 | This-life material-foundation learning vs. past-life transformation mastery |
-| MSR.253 | Saham Roga in 7H (health-relational interface) | 0.88 | D3.D4 mechanism; relevant to mind-health via relational stress |
+| MSR.253 | Saham Roga in 2H Taurus (health-relational interface) | 0.88 | D3.D4 mechanism; relevant to mind-health via relational stress |
 | MSR.190 | Mercury Vargottama confirmation | 0.95 | Maximum D9-level dignity confirmation for the analytical instrument |
 | MSR.190-related | Chandra Lagna (Aquarius) positioning | 0.92 | Career (Sun+Mercury) in 12H from Moon = build-to-offer psychological orientation |
 
@@ -516,9 +516,9 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 
 **GAP.01 — Birth Yoga (MSR.354, confidence 0.00)**: Unverified; does not affect the primary D8 findings which derive from Moon, Mercury, and Lagna placements.
 
-**GAP.02 — D9 Jupiter placement**: CSI ledger shows D9 Gemini (Mercury's sign) — creating a Jupiter-Mercury mutual D9 connection. If confirmed, would reinforce the Karakamsa-Mercury connection at the Navamsa level. Pending Jagannatha Hora verification.
+**GAP.02 — RESOLVED 2026-04-18**: D9 Jupiter confirmed in Gemini (Mercury's sign) per JHora v8.0 export (AUDIT_REPORT_v1_0 WS-1b; FORENSIC_v8_0 §3.4). The Jupiter-Mercury mutual D9 connection is now L1-confirmed. This reinforces the Karakamsa-Mercury connection at the Navamsa level: Jupiter in Mercury's D9 sign means the Jupiter archetype (expansion, dharma, wisdom) operates through Mercurian channels (language, analysis, communication) even at the soul level. Confidence upgrade: conditional → confirmed.
 
-**GAP.02d (NEW) — D9 Moon placement**: From CSI ledger (`CSI.MOON`): Moon D9 = Gemini (Mercury's sign). If accurate, the Moon (AK) in D9 = Mercury's sign at the Navamsa level reinforces the AK-Karakamsa alignment: the soul (AK Moon) in D9 is in Mercury's domain — the soul's Navamsa expression is Mercury-flavored. This would be a significant D9 confirmation of the Karakamsa-Mercury finding, but requires verification.
+**GAP.02d — RESOLVED 2026-04-18**: D9 Moon confirmed in Gemini (Mercury's sign) per JHora v8.0 export. The Moon (AK) in D9 = Mercury's sign at the Navamsa level confirms the AK-Karakamsa alignment: the soul (AK Moon) in D9 is in Mercury's domain — the soul's Navamsa expression is Mercury-flavored. This is now a confirmed D9 corroboration of the Karakamsa-Mercury finding. Confidence upgrade: conditional → confirmed (L1-verified).
 
 **GAP.03 — D9 12H stellium composition**: Not directly material to D8 primary findings.
 
@@ -556,11 +556,11 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 
 | Layer | Source | Version | Status |
 |---|---|---|---|
-| L1 Facts | `FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md` | 6.0 | CURRENT |
+| L1 Facts | `FORENSIC_ASTROLOGICAL_DATA_v8.0_ABHISEK_MOHANTY.md` | 8.0 | CURRENT |
 | L1 Events | `LIFE_EVENT_LOG_v1_1.md` | 1.1 | CURRENT |
 | L2 Matrices | `MATRIX_PLANETS.md`, `MATRIX_HOUSES.md`, `MATRIX_SIGNS.md` | 1.0 | CLOSED |
 | L2.5 CGM | `CGM_v1_0.md` | 1.0 | CLOSED |
-| L2.5 MSR | `MSR_v1_0.md` | 1.0 | CLOSED |
+| L2.5 MSR | `MSR_v1_1.md` | 1.1 | CURRENT |
 | L2.5 CDLM | `CDLM_v1_0.md` | 1.0 | CLOSED |
 | L2.5 RM | `RM_v1_0.md` | 1.0 | CLOSED |
 | L2.5 UCN | `UCN_v1_0.md` | 1.0 | CLOSED (Jupiter-placement error in multiple sections; v1.1 pending Session 21+) |
@@ -569,9 +569,10 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 | L3 Financial | `REPORT_FINANCIAL_v2_0.md` | 2.0 | CLOSED |
 | L3 Health | `REPORT_HEALTH_LONGEVITY_v1_0.md` | 1.0 | CLOSED |
 | L3 Relationships | `REPORT_RELATIONSHIPS_v1_0.md` | 1.0 | CLOSED |
-| L3 This Report | `REPORT_PSYCHOLOGY_MIND_v1_0.md` | 1.0 | CLOSED |
+| L3 This Report | `REPORT_PSYCHOLOGY_MIND_v1_1.md` | 1.1 | CURRENT |
 
 **Changelog**:
+- v1.1 (2026-04-19, Task A3): GAP.02 closed — D9 Jupiter = Gemini confirmed per JHora v8.0 export (AUDIT_REPORT_v1_0 WS-1b; FORENSIC_v8_0 §3.4); confidence upgraded from conditional to confirmed. GAP.02d closed — D9 Moon = Gemini confirmed per JHora v8.0; AK-Karakamsa alignment now L1-verified. Saham Roga position corrected from 7H to 2H Taurus per v8.0 positional corrections. L1 Facts source updated to FORENSIC v8.0. MSR source updated to v1.1. Confidence gradient note updated to reflect resolved gaps.
 - v1.0 (2026-04-18, Session 20): Initial version. Written as the fifth and final L3 Domain Report in Sessions 16–20. Jupiter placement corrected throughout per RED_TEAM_L2_5_v1_0.md. Three-Layer Mind Architecture introduced as organizing framework. Chandra Lagna analysis adds "career in 12H from Moon" as a new structural observation explaining the "Build to Offer, Not to Own" operating instruction's psychological root. GAP.02d (D9 Moon in Gemini) flagged as new gap warranting verification.
 
 ---
