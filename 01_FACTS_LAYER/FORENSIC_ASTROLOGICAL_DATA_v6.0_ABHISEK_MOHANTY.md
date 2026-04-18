@@ -556,6 +556,14 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
 
 ## §5 — DASHA SYSTEMS (FACTS)
 
+<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.09]:
+     Vimshottari Dasha dates are engine-implementation-dependent. This FORENSIC v6.0 uses a Moon longitude of 327°02'48" (Aquarius 27°02'48" Purva Bhadrapada Pada 3). Jagannatha Hora export (AUDIT_REPORT_v1_0 WS-1b) uses Moon 327°04'14" — a 1.42 arcmin difference.
+     Consequence: FORENSIC dasha dates run +7 to +9 days LATER than JHora dates (less remaining balance-of-dasha at birth given FORENSIC's slightly-earlier Moon).
+     Sample offsets: Saturn MD start FORENSIC 1991-08-21 vs JHora 1991-08-14 (+7d); Mercury-Saturn AD FORENSIC 2024-12-12 vs JHora 2024-12-04 (+8d); Ketu MD FORENSIC 2027-08-21 vs JHora 2027-08-14 (+7d).
+     AM-JIS discipline: All retrodictive fits and timing analyses use FORENSIC engine dates. When engaging external reviewers using JHora, note the offset explicitly.
+     Root cause (ayanamsa-level): FORENSIC uses Lahiri 23°37'58" vs JHora's 23°37'09.78" (+48 arcsec difference) — this propagates into Moon position and thereby balance-of-dasha.
+     See GAP.09 in GOVERNANCE_STACK §3. -->
+
 ### §5.1 Vimshottari Dasha (Mahadasha / Antardasha)
 
 <!-- 120-year Moon-nakshatra-based Dasha. Start date = 1984-02-05. -->
@@ -822,6 +830,15 @@ Naisargika (natural), Drik (aspectual).
 | `SBL.NAISARG.TOTAL` | Total Naisargika Bala | 60.00 | 51.42 | 17.16 | 25.74 | 34.26 | 42.84 | 8.58 |
 | `SBL.DRIK.TOTAL` | Total Drik Bala | -35.08 | -1.85 | -14.20 | -23.92 | -6.98 | -8.24 | -12.81 |
 
+<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.07]:
+     Shadbala totals are engine-implementation-dependent. This FORENSIC v6.0 engine ranks:
+         Sun #1 (8.51 rupas), Jupiter #2 (7.73), Saturn #3 (7.47), Moon #4 (7.26), Mercury #5 (6.55), Mars #6 (5.27), Venus #7 (4.60)
+     Jagannatha Hora engine (verified via JHora .docx export in AUDIT_REPORT_v1_0 WS-1b) ranks:
+         Saturn #1 (8.79 rupas), Sun #2 (8.18), Jupiter #3 (7.68), Moon #4 (6.44), Mercury #5 (6.09), Mars #6 (5.34), Venus #7 (4.80)
+     Component-level divergences primarily in Sthana (Saturn +21v JHora vs FORENSIC), Kala (Mercury −37v, Saturn +57v), and Drik (Sun +12v).
+     AM-JIS discipline: All Shadbala citations in Domain Reports cite FORENSIC values (Sun #1). When engaging external reviewers or JHora-using acharyas, note the dual-engine variance explicitly. Rank-dependent claims ("Sun is the strongest planet") should acknowledge engine convention.
+     See GAP.07 in GOVERNANCE_STACK §3 for resolution path. -->
+
 ### §6.2 Shadbala — Totals and Ranking
 
 | ID | Planet | Total Virupas | Rupas | Min Required (Rupas) | Ratio | Rank |
@@ -882,6 +899,16 @@ Naisargika (natural), Drik (aspectual).
 ---
 
 ## §7 — ASHTAKAVARGA (FACTS + DERIVED)
+
+<!-- [DUAL-ENGINE RECONCILIATION NOTE added 2026-04-18 FIX_SESSION_002 per GAP.08]:
+     Ashtakavarga BAV (bindu per sign per planet) is engine-implementation-dependent for the Moon row. FORENSIC v6.0 and Jagannatha Hora agree on 6 of 7 planet rows (Sun, Mars, Mercury, Jupiter, Venus, Saturn) exactly. Moon row differs in 4 signs:
+         Gemini: FORENSIC=5, JHora=4 (Δ=−1)
+         Libra: FORENSIC=4, JHora=5 (Δ=+1)
+         Scorpio: FORENSIC=5, JHora=4 (Δ=−1)
+         Capricorn: FORENSIC=2, JHora=3 (Δ=+1)
+     Consequence: SAV per-sign column sums differ in 4 signs (Gemini F28/J27, Libra F33/J34, Scorpio F33/J32, Capricorn F26/J27). SAV grand total 337 matches in both engines — the 4 row-level differences cancel in aggregate.
+     AM-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims (e.g., "Libra has highest SAV at 33") are stable because the +1/−1 cancellations preserve rank ordering.
+     See GAP.08 in GOVERNANCE_STACK §3. -->
 
 ### §7.1 BAV — Per-Planet Bindus by Sign
 
@@ -1130,10 +1157,17 @@ Mrityu Bhaga: critical death-point degrees, fixed per sign per planet (classical
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `SAH.PUNYA` | Punya | Fortune | (Moon − Sun) + Asc | (327.04 − 291.96) + 12.40 | 47.48° | Taurus | Rohini |
 | `SAH.RAJYA` | Rajya | Kingdom / Authority | (Saturn − Mars) + Asc | (202.45 − 198.52) + 12.40 | 16.33° | Aries | Bharani |
-| `SAH.KARMA` | Karma | Action | (Mars − Mercury) + Asc | (198.52 − 270.83) + 12.40 | 300.09° | Aquarius | Dhanishta |
-| `SAH.LABHA` | Labha | Gain | (11th Lord − 11th Cusp) + Asc | (202.45 − 306.11) + 12.40 | 268.74° | Sagittarius | Uttara Ashadha |
+| `SAH.KARMA` | Karma | Action | (Mars − Mercury) + Asc | (198.52 − 270.83) + 12.40 | 300.09° | Aquarius | Dhanishta (Pada 3) |
+| `SAH.LABHA` | Labha | Gain | (11th Lord − 11th Mid-Bhava) + Asc | (202.45 − 306.11) + 12.40 | 268.74° | Sagittarius | Uttara Ashadha |
 | `SAH.VIVAHA` | Vivaha | Marriage | (Venus − Saturn) + Asc | (259.17 − 202.45) + 12.40 | 69.12° | Gemini | Ardra |
-| `SAH.PUTRA` | Putra | Children | (Jupiter − Moon) + Asc | (249.80 − 327.04) + 12.40 | 295.16° | Capricorn | Dhanishta |
+| `SAH.PUTRA` | Putra | Children | (Jupiter − Moon) + Asc | (249.80 − 327.04) + 12.40 | 295.16° | Capricorn | Dhanishta (Pada 1) |
+
+<!-- [FIX_SESSION_001 2026-04-18 nakshatra precision update]:
+     SAH.KARMA: 300.09° = Aqu 0°05' = Dhanishta Pada 3 (Dhanishta spans Cap 23°20' / 293.33° to Aqu 6°40' / 306.67°; Pada 3 = Aqu 0°00' to Aqu 3°20'). Pada 3 clarification added.
+     SAH.PUTRA: 295.16° = Cap 25°10' = Dhanishta Pada 1 (Pada 1 = Cap 23°20' to Cap 26°40'). Pada 1 clarification added.
+     SAH.LABHA formula relabel: "11th Cusp" → "11th Mid-Bhava" because numeric input 306.11° corresponds to §2.3 CSP.11 Mid-Bhava (Aquarius 6°06'53"), not the 11th Cusp (Capricorn 19°32'37" = 289.54°). AUDIT WS1.03 finding applied; formula description now matches the numeric input used.
+     NOTE: AUDIT WS1.01 and WS1.02 originally flagged the nakshatra labels as "wrong by one" — after re-verification of Dhanishta-Shatabhisha boundary, original Dhanishta labels are CORRECT. Only Pada precision added and SAH.LABHA formula relabeled. -->
+
 
 ---
 

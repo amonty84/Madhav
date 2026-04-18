@@ -40,9 +40,14 @@ The corpus contains ~700,000 words across 40+ artifacts. This registry tracks:
 
 **Truth**: Jupiter is in Sagittarius 9H (own sign). Aspects: 1H (5th), 3H (7th), 5H (9th). Does NOT aspect 4H, 8H, 10H, 12H.
 
-**Resolution**: UCN v1.1 (Session 21) corrected; downstream Domain Reports 18-26 used corrected position; cross-report audit (Session 27) confirmed no residual errors.
+**Resolution**: UCN v1.1 (Session 21) corrected the mother document. AUDIT_REPORT_v1_0 (2026-04-18) and FIX_SESSION_001 (2026-04-18) subsequently corrected residuals in:
+- REPORT_CAREER_DHARMA_v1_0 (11 residual Jupiter-4H claims in §5.4, §6.1, §6.3, §6.5, §8.3)
+- MSR_v1_0 MSR.014, .019, .034 (invalid Jupiter-5th-aspect-from-9H-onto-10H claims)
+- RM_v1_0 — marked SUPERSEDED pending full rebuild (10+ residual Jupiter-from-4H aspect chains)
 
-**Status**: RESOLVED — UCN v1.1.
+**Status**: **PARTIALLY RESOLVED → RESOLVED post FIX_SESSION_001 (2026-04-18)**.
+
+**Process-failure note**: The project's own red-team (RED_TEAM_L3 §2.2, Session 24) and cross-report coherence audit (CROSS_REPORT_COHERENCE_AUDIT §6, Session 27) both declared "no residual Jupiter-4H claims" — these were false negatives caught by the independent AUDIT_REPORT_v1_0 (Session 45 equivalent). Future red-teams should use mechanical grep verification over sampled spot-checks.
 
 ---
 
@@ -66,9 +71,9 @@ The corpus contains ~700,000 words across 40+ artifacts. This registry tracks:
 
 **Contradiction**: D1 maximum relational strength vs. D9 dual debilitations.
 
-**Status**: NOT A LOGICAL CONTRADICTION but an architectural tension. Classical resolution: D1 shows potential; D9 shows what must be built through effort. UCN §IX Contradiction #7 addresses this; REPORT_RELATIONSHIPS §29 flags GAP.02b/02c for resolution.
+**Status**: RESOLVED post AUDIT_REPORT_v1_0 (2026-04-18). Jagannatha Hora external verification CONFIRMS D9 placements: Venus Virgo (debilitated), Saturn Aries (debilitated), Moon Gemini (Mercury's sign). This is NOT A LOGICAL CONTRADICTION but a documented architectural tension. Classical resolution: D1 shows potential; D9 shows what must be built through effort. UCN §IX Contradiction #7 addresses this correctly. GAP.02b/02c/02d are now CONFIRMED-AS-STATED (no Neecha Bhanga via dispositor-in-Kendra detected per v6.0 §3.5.1).
 
-**Action required**: Facts Layer v8.0 — verify Jagannatha Hora D9 computation; check for Neecha Bhanga (cancellation of debilitation) conditions.
+**Prior action (now completed)**: Facts Layer external verification via Jagannatha Hora export (executed in audit). Future Facts Layer v8.0 may add Neecha Bhanga detailed analysis but current state is no longer "open contradiction" — it is "confirmed architectural tension with documented resolution posture."
 
 ---
 
@@ -92,12 +97,17 @@ These contradictions are the chart's curriculum — not problems to solve but pa
 
 ## §5 — TENSIONS ACROSS DOMAIN REPORTS (NOT CONTRADICTIONS)
 
-Cross-report tensions identified in CROSS_REPORT_COHERENCE_AUDIT (Session 27):
+Cross-report tensions identified in CROSS_REPORT_COHERENCE_AUDIT (Session 27), corrected post AUDIT_REPORT_v1_0:
 
-- D1.D3 (Career) cites 0.88 while D3.D1 (Relationships) cites 0.91 — minor numerical variance in bidirectional cells; not a contradiction, likely reflects different directional strength computation in the CDLM source
-- D2.D6 vs D6.D2 similarly have minor variance
+**[CORRECTED 2026-04-18 FIX_SESSION_001]**: Prior entry cited "D1.D3=0.88 vs D3.D1=0.91" — this was stale. Current CDLM_v1_0 has both D1.D3=0.91 and D3.D1=0.91 (symmetric). Actual documented asymmetries per audit WS-3a:
 
-**Status**: Acceptable variance. Flagged for CDLM v2.0 normalization if pursued.
+- D1↔D2: 0.92 vs 0.88 (Δ 0.04) — Career→Wealth vs Wealth→Career directional mechanism differs
+- D1↔D8: 0.91 vs 0.94 (Δ 0.03) — Career↔Mind bidirectional with asymmetric strength
+- D2↔D8: 0.86 vs 0.92 (Δ 0.06) — Wealth↔Mind
+- D4↔D8: 0.78 vs 0.72 (Δ 0.06) — Health↔Mind
+- (23 more pairs with smaller Δ)
+
+**Status**: Acceptable directional asymmetry (row→col vs col→row mechanisms legitimately differ). Flagged for CDLM §0 schema note in future v2.0 to explain scoring convention.
 
 ---
 

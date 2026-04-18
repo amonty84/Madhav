@@ -35,12 +35,19 @@ Color-coded window-by-window activation summary. High/Med/Low = activation inten
 
 Per FORENSIC §23 Varshphal data + current 2026 birthday solar return chart:
 
-**Muntha** (annual progression of Lagna): Cycles through signs annually. For 2026-2027 (age 42-43 solar year), Muntha is in a position that needs Jagannatha Hora confirmation; approximate position at age 42 = Muntha in Taurus/Gemini.
+**Muntha** (annual progression of Lagna) [CORRECTED 2026-04-18 FIX_SESSION_002 — per FORENSIC §22 authoritative L1 values]:
 
-**Key Varsha features (inferred from chart structure)**:
-- Year lord (Varshesha): Likely Mercury or Saturn (given current dasha)
-- 2026 solar return will contain the BB-UL convergence peak (approximately April-October)
-- Year's primary theme: Institutionalization of partnership-image and intellectual legacy
+- **VRS.MUNTHA.SIGN**: Libra
+- **VRS.MUNTHA.HOUSE**: 7th
+- **VRS.MUNTHA.LORD**: Venus
+- **Source**: `FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md:1441-1442` (verified 2026-04-18)
+
+The Muntha's placement in the native's 7H (relational axis) for 2026–27 is a structurally coherent reinforcement of the triple-timing BB-UL window documented across the Domain Reports. Venus as Muntha-lord for the year — simultaneously 2L (wealth) + 7L (partnership) + Matrukaraka (Chara) — wires the year's Muntha-activation to the chart's relational-wealth-maternal significance cluster. The year 2026-27 is architecturally oriented around Venus-governed themes: partnership-image crystallization, relational-aesthetic engagement, wealth-through-relationship channels.
+
+**Key Varsha features**:
+- **Year lord (Varshesha)**: `[EXTERNAL_COMPUTATION_REQUIRED: Varshesha requires exact solar return time; FORENSIC §22 explicitly notes "VRS.YEAR.LORD = (requires exact solar return time)"; JHora exports provided do not include Varshphal data. Resolve via Facts Layer v8.0 upgrade with JHora Varshphal export.]` [CORRECTED 2026-04-18 FIX_SESSION_002: Prior v1.0 guess "Likely Mercury or Saturn (given current dasha)" was a fabricated L2+ interpolation against Architecture §B.11; replaced with explicit external-computation marker.]
+- 2026 solar return will contain the BB-UL convergence peak (approximately April–October)
+- Year's primary theme: Institutionalization of partnership-image and intellectual legacy — coherent with Muntha Libra 7H Venus-lord architecture
 
 ### §2.1 — 2026-27 Varsha Recommendations
 

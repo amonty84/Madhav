@@ -1,17 +1,20 @@
 ---
 document: REPORT_TRAVEL_v1_0.md
-version: 1.0
+version: 1.0.1
 status: CLOSED
-session: 26
+session: 26 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18)
 date_closed: 2026-04-18
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D9 — Travel, Foreign Residence, Pilgrimage
 parent_UCN_version: UCN_v1_1.md
 red_team_applied: YES
 word_count_estimate: ~11000
-primary_msr_anchors: [MSR.381, MSR.392, MSR.399, MSR.407]
-primary_cdlm_row: D9
+primary_msr_anchors: [MSR.381, MSR.392, MSR.399, MSR.407, MSR.335, MSR.413, MSR.397]
+primary_cdlm_row: D9 (all 9 cells cited in §10 Citation Index below)
+primary_ucn_sections: [UCN §IV.5 Singapore-as-dharmic-base, UCN §VI.1 foreign-moksha, UCN §VI.3 Venkateshwara-pilgrimage]
+primary_l1_sections: [FORENSIC §2.1 PLN.JUPITER (12L, 9L in own sign), FORENSIC §11.3 YOG.POINT (12H), FORENSIC §12.1 LAG.SHREE + Saham Paradesa, FORENSIC §13 ARD.UL]
 organizing_principle: Foreign residence (Singapore) is architecturally endorsed by the chart's Saham Paradesa in 1H + Yogi Point in 12H + Jupiter's 12L ownership from own-sign 9H. The native's identity IS a traveler-abroad; the career-defining event (2007 Singapore move) aligns with this structural identity
+reconciliation: "FIX_SESSION_002 2026-04-18 — Citation density upgrade per AUDIT WS2.08. Original v1.0 had 2 citations (below Domain Report protocol). Added structured §10 Citation Index mapping major claims to source artifacts. Citation count increased from 2 to ~25 via index."
 ---
 
 # REPORT_TRAVEL_v1_0 — Travel and Foreign Residence Domain Report
@@ -113,4 +116,67 @@ Changing the residence (returning to India, moving to another foreign location) 
 
 ---
 
-*End of REPORT_TRAVEL_v1_0.md — Session 26 — 2026-04-18 — CLOSED*
+---
+
+## §10 — CITATION INDEX (added 2026-04-18 FIX_SESSION_002)
+
+Per Domain Report protocol: every major claim must cite UCN §, MSR.*, CDLM.*, or L1 source. This index provides the traceability the v1.0 original deferred.
+
+### 10.1 L1 Facts citations
+
+| Claim | L1 Source | ID |
+|---|---|---|
+| Jupiter in 9H own sign Sagittarius (9L + 12L) | FORENSIC §2.1 | PLN.JUPITER |
+| Yogi Point at 12H Pisces 22°20' Revati | FORENSIC §11.3 | YOG.POINT.* |
+| Shree Lagna in 9H Sagittarius | FORENSIC §12.1 | LAG.SHREE |
+| UL (Upapada) Gemini 3H | FORENSIC §13.1 | ARD.UL |
+| Saham Paradesa in 1H Aries (foreign lot) | FORENSIC §12.2 | SAH.PARADESA |
+| 9H SAV = 25 bindus | FORENSIC §7.2 | AVG.SAV.SAGITTARIUS |
+| 12H untenanted | FORENSIC §2.2 | HSE.12 |
+| Singapore move 2007 (EVT.2007) | LEL_v1_1 | EVT.2007 |
+
+### 10.2 L2.5 MSR citations
+
+| Claim | MSR Signal | Confidence |
+|---|---|---|
+| Saham Paradesa in Lagna = foreign-identity fusion | MSR.399 | 0.85 |
+| Yogi Point 12H = fortune-in-foreign-domain | MSR.392 | 0.87 |
+| 12L Jupiter from own-sign 9H = dharma-lord-ruling-moksha-house | MSR.381 | 0.83 |
+| Jupiter+Venus 9H Laxmi-Narayana-adjacent = pilgrimage architecture | MSR.407 | 0.87 |
+| Mercury Seven-System + Singapore knowledge-economy fit | MSR.413 | 0.98 |
+| Venkateshwara devata derivation (Dharma Devata = Venkateshwara) | MSR.397 | 0.91 |
+| 12H moksha + Ketu 5th aspect on 12H = moksha-domain-doubly-marked | MSR.335 | 0.80 |
+
+### 10.3 L2.5 CDLM citations (full D9 row)
+
+| Cell | Strength | Mechanism |
+|---|---|---|
+| CDLM.D9.D1 | 0.90 | Travel feeds career — Singapore move was career-defining |
+| CDLM.D9.D2 | 0.85 | Foreign residence feeds wealth via Mercury-Yogi 12H activation |
+| CDLM.D9.D3 | 0.68 | UL in 3H (short-journey house); spouse may be travel-connected |
+| CDLM.D9.D4 | 0.60 | Moderate — foreign context can support or stress health |
+| CDLM.D9.D5 | 0.62 | Heavy travel competes with family-expansion; moderate asymmetry |
+| CDLM.D9.D6 | 0.85 | Foreign = spiritual (12H moksha + 9H dharma shared axis) bidirectional |
+| CDLM.D9.D7 | 0.65 | Parental blessing enables foreign residence |
+| CDLM.D9.D8 | 0.78 | Travel amplifies mind (Mercury thrives in Singapore's multilingual environment) |
+| CDLM.D9.D9 | 0.90 | Self-amplification — four-mechanism foreign-architecture |
+
+### 10.4 UCN citations
+
+| Claim | UCN Section |
+|---|---|
+| Singapore as chart-congruent dharmic base | UCN §IV.5 |
+| Foreign-Moksha Signature (12H Jupiter lordship + Yogi Point) | UCN §VI.1 |
+| Venkateshwara-pilgrimage alignment | UCN §VI.3 |
+| Wealth-as-dharmic-output principle (Singapore-career case) | UCN §IV.4 |
+
+### 10.5 Cross-Domain Report references
+
+- REPORT_CAREER_DHARMA_v1_0 (2007 Singapore move as career-defining event)
+- REPORT_FINANCIAL_v2_0 (foreign wealth architecture via Yogi Point)
+- REPORT_SPIRITUAL_v1_0 (Venkateshwara pilgrimage context)
+- REPORT_RELATIONSHIPS_v1_0 (UL 3H Gemini short-journey-house)
+
+---
+
+*End of REPORT_TRAVEL_v1_0.md — Session 26 — 2026-04-18 — CLOSED (citation-density upgrade FIX_SESSION_002)*

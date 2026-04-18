@@ -43,7 +43,9 @@ A legitimate analytical corpus articulates what would refute its claims. This re
 
 **Falsifier**: If Cycle 3 Sade Sati (approximately 2046-2053, Peak 2049-2052) produces the classical adversity profile rather than continued Saturn-amplification (achievement/structural-authority), then the mechanism is chart-specific only to Cycle 2 and not a universal chart-feature. Alternative falsifier: if the 2022-2025 retrodictive evidence is re-analyzed and the "achievement" events are shown to have been actually external (not the native's effort) rather than Saturnian self-expression.
 
-**Current status**: UNFALSIFIED. Cycle 3 test is decades away.
+**Falsifier maturation window**: 2049–2052 (Cycle 3 Peak phase, native age 65–68).
+
+**Current status**: UNFALSIFIED. Cycle 3 test is ~23 years away. [ADDED 2026-04-18 FIX_SESSION_001: explicit maturation window per AUDIT WS5.01.]
 
 ### §2.4 — MSR.397 (Devata Retrodiction Triple-Lock: Venkateshwara)
 
@@ -75,7 +77,7 @@ A legitimate analytical corpus articulates what would refute its claims. This re
 
 **Falsifier**: If 2026 passes without significant partnership-image crystallization events (new commitments, structural clarification of relational status, major partnership-image shifts) AND no such events occur within ±6 months of the window, the BB-UL crystallization claim is questionable for this chart.
 
-**Current status**: WINDOW OPEN. Awaiting 2026 empirical observation.
+**Current status**: **WINDOW ACTIVE — in-period observation 2026-04 to 2026-10 (today is 2026-04-18).** [UPDATED 2026-04-18 FIX_SESSION_001: Status changed from "WINDOW OPEN" to "WINDOW ACTIVE" because the current date is within the observation window per AUDIT WS5.02. Native to maintain event-log through October 2026; falsifier closure assessment due Nov 2026.]
 
 ### §2.8 — D3.D3 Self-Amplifying Karmic Vortex (CDLM)
 

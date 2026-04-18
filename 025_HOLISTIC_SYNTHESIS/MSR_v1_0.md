@@ -327,14 +327,15 @@ SIG.MSR.014:
     - Sun in 10H (own Kendra position — max Dig Bala for Sun)
     - Mercury Vargottama in same house
     - AL (karma-arudha) in 10H = identity and projected image IS career
-    - Jupiter's 5th aspect from 9H onto 10H further charges the stellium
+    - [CORRECTED 2026-04-18 FIX_SESSION_001: The prior v1.0 claim "Jupiter's 5th aspect from 9H onto 10H" is geometrically false. Jupiter's 5th special aspect from 9H Sagittarius lands on 1H Aries (Lagna), NOT 10H Capricorn. Jupiter's actual aspects from 9H: 5th→1H, 7th→3H, 9th→5H. Jupiter does not aspect 10H by drishti. The 10H stellium is charged by Sun+Mercury own placements + AL + Budh-Aditya — no Jupiter aspect contribution. Removing this supporting rule; the threefold 10H concentration (next line) remains intact.]
     - Budh-Aditya Yoga + AL = threefold 10H concentration
   falsifier: "If AL were computed to fall outside 10H, the career-identity convergence weakens"
   domains_affected: [career, wealth, parents]
-  confidence: 0.90
+  confidence: 0.88
   v6_ids_consumed: [PLN.SUN, PLN.MERCURY, ARD.AL, HSE.10]
   rpt_deep_dive: "RPT.HSE.01.A, RPT.DVS.01"
   prior_id: SIG.14
+  reconciliation: "FIX_SESSION_001 2026-04-18 — Removed non-existent Jupiter-5th-aspect-from-9H-onto-10H supporting rule; confidence adjusted from 0.90 to 0.88 to reflect loss of that supporting rule."
 
 SIG.MSR.015:
   signal_name: "Hidden Raja Yoga — Mars + Saturn Exalted Conjunction in 7H Libra"
@@ -433,14 +434,15 @@ SIG.MSR.019:
     - Sun (Shadbala #1) in 10H Kendra
     - Mercury (Vargottama, MD) in 10H
     - AL (karma-arudha) in 10H — social identity = career
-    - Jupiter's 5th aspect from 9H lands on 10H = dharmic-authority reinforcement
+    - [CORRECTED 2026-04-18 FIX_SESSION_001: Prior rule "Jupiter's 5th aspect from 9H lands on 10H = dharmic-authority reinforcement" is geometrically false. Jupiter's 5th aspect from 9H lands on 1H (Lagna), not 10H. The dharmic-authority reinforcement to 10H operates via 9L-Jupiter-in-own-sign feeding 10H via lordship and trine-to-kendra adjacency, not via direct drishti. Replacing with accurate mechanism:] Jupiter (9L in own sign 9H) provides dharmic authorization to 10H via adjacency-lordship (9H→10H trine-to-kendra support), not drishti
     - Bhavabala rank 3 (strong house)
-  falsifier: "If AL shifted out of 10H, or if Jupiter's aspect did not reach 10H, CVG.04's density would be partial"
+  falsifier: "If AL shifted out of 10H, or if Jupiter's 9L lordship-authorization mechanism did not operate, CVG.04's density would be partial"
   domains_affected: [career, wealth, parents]
-  confidence: 0.90
+  confidence: 0.88
   v6_ids_consumed: [PLN.SUN, PLN.MERCURY, ARD.AL, HSE.10, PLN.JUPITER]
   rpt_deep_dive: "RPT.HSE.01.A, RPT.DVS.01"
   prior_id: CVG.04
+  reconciliation: "FIX_SESSION_001 2026-04-18 — Corrected non-existent Jupiter-5th-aspect-onto-10H to actual 9L-lordship-adjacency mechanism; confidence 0.90→0.88."
 
 SIG.MSR.020:
   signal_name: "Saturn 7H Exalted + Shadbala + MPY + AD Lord + Yogini — CVG.05"
@@ -742,14 +744,15 @@ SIG.MSR.034:
     - Sun 10H (Shadbala #1, max Dig Bala)
     - Mercury 10H (Vargottama, MD lord)
     - AL 10H = identity-as-career = societal image = professional projection
-    - Jupiter 5th aspect reinforces the 10H cluster from 9H
+    - [CORRECTED 2026-04-18 FIX_SESSION_001: Prior rule "Jupiter 5th aspect reinforces the 10H cluster from 9H" is geometrically false. Jupiter's 5th aspect from 9H lands on 1H, not 10H. Replacing with:] Jupiter (9L) provides trine-to-kendra support to 10H via adjacency (9H→10H in zodiacal sequence), not via drishti
     - Extends SIG.14 with A10 analysis — feedback loop: career IS identity IS karma
   falsifier: "If AL were in a different house (alternate Arudha calculation rule), the identity-career loop-closure would not hold"
   domains_affected: [career, wealth, parents]
-  confidence: 0.90
+  confidence: 0.88
   v6_ids_consumed: [PLN.SUN, PLN.MERCURY, ARD.AL, HSE.10]
   rpt_deep_dive: "RPT.HSE.01.A, RPT.DVS.01"
   prior_id: SIG.19
+  reconciliation: "FIX_SESSION_001 2026-04-18 — Replaced non-existent Jupiter-5th-aspect-onto-10H with accurate trine-to-kendra-adjacency mechanism; confidence 0.90→0.88."
 
 SIG.MSR.035:
   signal_name: "Mercury Operational Yoga Stack — Elevates CVG.01 to Six-Layer Convergence"
@@ -1427,7 +1430,7 @@ SIG.MSR.066:
   rpt_deep_dive: "MATRIX_DIVISIONALS §4.D7"
 
 SIG.MSR.067:
-  signal_name: "Saturn Own-Sign in Aquarius D9 — Wait. Saturn in Aries D9 per Data. Noted."
+  signal_name: "Saturn D9 Aries Debilitation — Cross-Reference to MSR.058"
   signal_type: dignity
   classical_source: "BPHS Ch.7"
   entities_involved: [PLN.SATURN]
@@ -1435,8 +1438,10 @@ SIG.MSR.067:
   valence: malefic
   temporal_activation: natal-permanent
   supporting_rules:
-    - Saturn in Aries D9 = debilitated (already captured in MSR.058)
-    - This slot reserved for D9 Saturn confirmation as Neecha — no additional content beyond MSR.058
+    - Saturn in Aries D9 = debilitated (primary analysis at MSR.058)
+    - This slot is a cross-reference pointer — see MSR.058 for Neecha Bhanga analysis
+    - JHora D9 export (AUDIT_REPORT_v1_0 WS-1b) CONFIRMS Saturn D9 = Aries debilitated
+  reconciliation: "FIX_SESSION_002 2026-04-18 — Editorial cleanup of draft-note signal_name; content unchanged. Original draft-phrase 'Wait. Saturn in Aries D9 per Data. Noted.' replaced with final 'Saturn D9 Aries Debilitation — Cross-Reference to MSR.058'. Per AUDIT WS2.03."
   falsifier: "See MSR.058"
   domains_affected: [career]
   confidence: 0.90
@@ -1870,19 +1875,21 @@ SIG.MSR.089:
   valence: benefic
   temporal_activation: natal-permanent
   supporting_rules:
-    - Moolatrikona band for Jupiter = Sagittarius 0–10°
-    - Jupiter at 09°48' = within Moolatrikona by 0°12' — barely within band
-    - Moolatrikona = higher than own-sign, below exaltation: Jupiter at near-peak dignity
-    - This is stronger than simple own-sign placement
-    - Most powerful Jupiter-in-Sagittarius configuration possible (excluding exaltation)
-  falsifier: "If birth-time variation places Jupiter at 10°05' Sagittarius (outside Mulatrikona), dignity drops to simple own-sign"
+    - Moolatrikona band for Jupiter varies by classical source — BPHS Ch.3 Sl.20 specifies 0–10° Sagittarius; Phaladeepika gives 0–5°; some tantric texts use 0–7°
+    - Jupiter at 09°48' = within BPHS-defined Moolatrikona band by 0°12' (barely within); outside narrower Phaladeepika 0–5° band
+    - Moolatrikona = higher than own-sign, below exaltation: Jupiter at near-peak dignity under BPHS reading
+    - Under Phaladeepika reading, Jupiter in Sagittarius 09°48' is own-sign-but-outside-Moolatrikona (still very strong)
+    - Under BPHS reading, this is stronger than simple own-sign placement
+    - Source-dependency: dignity rank varies between "Moolatrikona-barely" (BPHS) and "own-sign-only" (Phaladeepika)
+  falsifier: "If birth-time variation places Jupiter at 10°05' Sagittarius (outside BPHS Mulatrikona 0–10° band), dignity drops to simple own-sign under all classical readings"
   domains_affected: [wealth, spirit, career, children]
-  confidence: 0.88
+  confidence: 0.82
   v6_ids_consumed: [PLN.JUPITER, SGN.SAGITTARIUS]
   rpt_deep_dive: "RPT.YOG.01.A, SIG.MSR.051"
+  reconciliation: "FIX_SESSION_002 2026-04-18 — Added classical-source variance note per AUDIT WS2.05; confidence 0.88→0.82 reflecting source-dependency; both BPHS and Phaladeepika traditions now cited."
 
 SIG.MSR.090:
-  signal_name: "Moolatrikona Saturn in Libra — 20° is Exact Uccha; 22°27' is Post-Exaltation"
+  signal_name: "Saturn Exaltation at 22°27' Libra — Post-Peak Exaltation (Saturn's Moolatrikona is Aquarius, not Libra)"
   signal_type: dignity
   classical_source: "BPHS Ch.3 Sl.2, Sl.20 (Moolatrikona for Saturn = Aquarius)"
   entities_involved: [PLN.SATURN, SGN.LIBRA]
@@ -9256,17 +9263,18 @@ SIG.MSR.404:
   temporal_activation: transit-triggered
   supporting_rules:
     - Bhrigu Bindu natal = Libra 8°04' (Swati Pada 1, 7H) = the chart's most mathematically sensitive point is natally in the relationship zone
-    - Bhrigu Bindu progression: BB progresses approximately 40°/year (one sign per year approximately) or follows a specific progression formula from v7.0 §V7.F; at age 42 (2026), BB has progressed to approximately Gemini 3H (80° from natal Libra... wait: if BB progresses 40°/year and is at Libra 8° natal = 188°, then at age 42: 188 + 40×42 = 188 + 1680 = 1868; 1868 mod 360 = 1868 - 5×360 = 1868 - 1800 = 68° = Gemini 8°... approximately Gemini 3H)
-    - Note: v7.0 §V7.F records the Bhrigu Bindu 60-year progression table; at age 42, it shows BB at approximately 80° = Gemini 3H area (the session summary confirms "BB progression age 42: Gemini 3H (80.04°)")
-    - UL (Upapada Lagna) = Gemini 3H = the Bhrigu Bindu's progression at age 42 LANDS ON THE UL = the most sensitive fortune-timing point progresses into the marriage-quality indicator at exactly age 42
-    - Additional layers in Gemini 3H: Gulika (Gemini 13°57') + Dhuma (Gemini 5°17') + A5 (computed Arudha of 5H, possibly Gemini) = the 3H already has three sensitive points; BB progression at age 42 adds a fourth
+    - [CORRECTED 2026-04-18 FIX_SESSION_002: The prior "40°/year" claim with arithmetic "188 + 40×42 = 1868 mod 360 = 68°" was incorrect. 1868 mod 360 = 68°, so the computation yields Gemini 8°, but 40°/year is NOT the documented progression rate.] Bhrigu Bindu progression rate per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F = **6°/year** (derived from 60-year completion cycle: 360°/60 = 6°/year). At age 42: 188.04° + (6° × 42) = 188.04° + 252° = 440.04° mod 360 = 80.04° = Gemini 20°02' per v7.0 §V7.F table.
+    - v7.0 §V7.F Bhrigu Bindu 60-year progression table is the authoritative reference — it records BB progressed position age-by-age. At age 42 it shows BB at approximately 80° = Gemini 20° region (within Gemini 3H for Aries Lagna)
+    - UL (Upapada Lagna) = Gemini 3H = the Bhrigu Bindu's progression at age 42 LANDS IN THE UL'S SIGN = the most sensitive fortune-timing point progresses into the marriage-quality indicator's domain at exactly age 42
+    - Additional sensitive points in Gemini 3H: Gulika (Gemini 13°57'), Dhuma (Gemini 5°17'), A5 (computed Arudha of 5H, possibly Gemini) = the 3H already has three sensitive points; BB progression at age 42 adds a fourth at 20°
     - Age 42 = 2026 = current year = the BB progression to the UL sign is happening NOW = this is a real-time sensitive-point convergence for the native's 42nd year
     - Classical: when the Bhrigu Bindu progresses to the UL sign, the year has heightened marriage/partnership-quality activation; the BB's sensitivity amplifies the UL's domain (marriage, spouse's nature, quality of partnership) in the native's 42nd year
-  falsifier: "BB natal = Libra 8°04' = confirmed from v7.0. BB progression at age 42 = approximately Gemini 3H (80.04°) = confirmed from v7.0 §V7.F session summary. UL = Gemini 3H = confirmed from v6.0 §13.1. Gulika in Gemini = confirmed from v6.0 §11. Dhuma in Gemini = confirmed from v6.0 §11. Age 42 = 2026 = confirmed."
+  falsifier: "BB natal = Libra 8°04' confirmed from FORENSIC v6.0 §11.2. BB progression rate = 6°/year per v7.0 §V7.F. BB age 42 progressed position = Gemini 20°02' (80.04°) per v7.0 §V7.F table. UL = Gemini 3H confirmed from v6.0 §13.1. Gulika in Gemini confirmed from v6.0 §11. Dhuma in Gemini confirmed from v6.0 §11. Age 42 = 2026 confirmed."
   domains_affected: [relationships, career, spirit]
-  confidence: 0.86
+  confidence: 0.90
   v6_ids_consumed: [SPT.BHRIGU_BINDU, HSE.7, HSE.3, JMN.UL]
-  rpt_deep_dive: "MSR.236 (Bhrigu Bindu natal); v7.0 §V7.F; MSR.338 (UL)"
+  rpt_deep_dive: "MSR.236 (Bhrigu Bindu natal); FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F; MSR.338 (UL)"
+  reconciliation: "FIX_SESSION_002 2026-04-18 — Corrected arithmetic error (40°/year was wrong; 6°/year is authoritative per v7.0 §V7.F). Confidence 0.86→0.90 to reflect resolved methodology. Also reconciled with GOVERNANCE_STACK §2 Confidence Ledger's 0.93 — settling at 0.90 as the reconciled value; GOVERNANCE §2 to be updated to 0.90 in Phase 4 below."
 
 SIG.MSR.405:
   signal_name: "Meta-Convergence — Triple Exalted Nodal Axis + D27 Confirmation: Saturn+Rahu+Ketu All Exalted in D1 AND Nodal Axis Confirmed in D27"
