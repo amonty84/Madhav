@@ -129,7 +129,7 @@ Key confidence ratings across the corpus (updated FIX_SESSION_003):
 | Birth Yoga | **0.95** | GAP.01-resolved | **Birth Yoga = Siva confirmed per JH TRANS §0** |
 | Special Lagna placements | **0.95** | JH TRANS §2.1 | **All four corrected by JH v8.0 direct computation** |
 | Saham placements (full register) | **0.93** | FORENSIC SUPP §1.3 | **All 36 Sahams registered per JH v8.0** |
-| Pindayu/Nisargayu/Amsayu longevity | 0.00 | LONGEVITY.GAP.01-partial | [EXTERNAL_COMPUTATION_REQUIRED] — still unresolved |
+| Kalachakra Paramayush 85 years | 0.85 | LONGEVITY.GAP.01-closed | Adopted as authoritative longevity anchor; further methods intentionally excluded |
 
 ---
 
@@ -146,7 +146,7 @@ All gaps across all artifacts:
 | GAP.02d | D9 Moon Gemini (Mercury's sign) | REPORT_PSYCHOLOGY_MIND | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
 | GAP.03 | D9 12H stellium composition | UCN §II.5, §VI.1 | Jagannatha Hora D9 export (partial — precise degree comparison pending) |
 | GAP.05 | D7 Saptamsha chart not examined | REPORT_CHILDREN | **SUBSTANTIALLY RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora D7 present; matches FORENSIC §3.4) |
-| LONGEVITY.GAP.01 | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | Jagannatha Hora longevity export — **OPEN** (not in current JHora .docx) |
+| LONGEVITY.GAP.01 | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **CLOSED (intentionally excluded)** — Kalachakra Paramayush 85 years is the adopted longevity anchor; Pindayu/Nisargayu/Amsayu methods not pursued per native direction |
 | BB progression method | Not explicitly documented | LIFETIME_TIMELINE §4.4, MSR.404 | **PARTIALLY RESOLVED 2026-04-18** — FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F uses 6°/year; LIFETIME_TIMELINE internal contradiction corrected in FIX_SESSION_001 |
 | Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | Jagannatha Hora Varshphal export — **OPEN** (not in current JHora .docx). NOTE: FORENSIC §22 DOES state Muntha = Libra 7H, Lord Venus for current Varsha — HEATMAP_VARSHPHAL corrected in FIX_SESSION_001 to cite that L1 fact; Varshesha remains [EXTERNAL_COMPUTATION_REQUIRED] |
 | **GAP.06 (NEW)** | MSR-ASPECT correction applied in FIX_SESSION_001 — Jupiter's 5th aspect from 9H lands on 1H (Lagna), not 10H; MSR.014/.019/.034 corrected but any future MSR signals must not reintroduce | MSR_v1_0 | Mechanical grep in future red-team sweeps |
@@ -157,7 +157,7 @@ All gaps across all artifacts:
 
 **Aggregate (post-V8.0 RECONCILIATION 2026-04-18)**: 19 known gaps tracked (added GAP.11-14 from V8_0_RECONCILIATION). Resolution status:
 - 11 RESOLVED or substantially resolved (GAP.01 Birth Yoga now resolved via JH; GAP.02, 02b, 02c, 02d, 03, 05 all confirmed via JH; GAP.06, BB progression, GAP.10 Saham labels).
-- 4 PARTIALLY RESOLVED (LONGEVITY.GAP.01 — Kalachakra Paramayush 85 years known, Pindayu/Nisargayu pending; Varshphal — Muntha known from v6.0 §22, Varshesha pending).
+- 3 PARTIALLY RESOLVED (Varshphal — Muntha known from v6.0 §22, Varshesha pending; GAP.03 D9 12H stellium precise degree comparison pending; GAP.13 Chara Karaka dual-system noted).
 - 4 NEW CRITICAL gaps (GAP.11-14) added by V8.0 reconciliation:
 
 | Gap ID | Description | Affected | Resolution path |
@@ -166,20 +166,20 @@ All gaps across all artifacts:
 | **GAP.12** | **Saham placement errors** — Roga/Mahatmya/Vivaha placements disagree with JH; MSR.391 composition invalid | MSR.391, REPORT_HEALTH, REPORT_RELATIONSHIPS | **RESOLVED FIX_SESSION_003** — MSR_v2_0 corrections; REPORT_HEALTH_LONGEVITY_v1_1, REPORT_RELATIONSHIPS_v1_1 refreshed |
 | **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | OPEN — dual-karaka-system note applied in MSR_v2_0; both valid classically; full resolution deferred |
 | **GAP.14** | **17 classical yogas missing from MSR v1.0** | MSR v2.0 | **RESOLVED FIX_SESSION_003** — All 17 yogas promoted to MSR_v2_0 signals MSR.421-437 |
-| **LONGEVITY.GAP.01** | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **SUBSTANTIALLY RESOLVED FIX_SESSION_003** — Kalachakra Paramayush = 85 years (Savya scheme) confirmed from JH TRANS §10.7; Pindayu/Nisargayu/Amsayu still [EXTERNAL_COMPUTATION_REQUIRED] |
+| **LONGEVITY.GAP.01** | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **CLOSED (intentionally excluded)** — Kalachakra Paramayush 85 years adopted as authoritative longevity anchor; Pindayu/Nisargayu/Amsayu methods not pursued per native direction |
 
 **FIX_SESSION_003 gap resolution summary:**
 - GAP.11: RESOLVED (special lagna corrections cascade complete)
 - GAP.12: RESOLVED (saham corrections cascade complete)
 - GAP.13: OPEN (dual-karaka noted; full resolution deferred)
 - GAP.14: RESOLVED (17 yogas in MSR v2.0)
-- LONGEVITY.GAP.01: SUBSTANTIALLY RESOLVED (Kalachakra 85 years; Pindayu/Nisargayu/Amsayu still pending)
+- LONGEVITY.GAP.01: CLOSED (intentionally excluded per native direction; Kalachakra 85 years is the adopted anchor)
 
 **Current single highest-leverage remaining actions** (updated FIX_SESSION_003_deferred 2026-04-18):
 1. ~~Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md~~ — **DONE FIX_SESSION_003_deferred**: FORENSIC_ASTROLOGICAL_DATA_v8_0.md created (1,950 lines); v6.0 and SUPPLEMENT marked SUPERSEDED
 2. ~~CDLM_v1_1 refresh~~ — **DONE FIX_SESSION_003_deferred**: CDLM_v1_1.md created (1,135 lines); 9 cells corrected; v1.0 marked SUPERSEDED
 3. ~~RM rebuild~~ — **DONE FIX_SESSION_003_deferred**: RM_v2_0.md created (32 elements); 8 element blocks corrected; RM.21 split into RM.21A+RM.21B; RM_v1_1 marked SUPERSEDED
-4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution — a complete JHora Varshphal + Ayurdasaya export remains the single highest-leverage future data-acquisition action (§9.6 added to REPORT_HEALTH_LONGEVITY_v1_1 documenting gap status)
+4. ~~Future JH Ayurdasaya export~~ — **CLOSED (intentionally excluded)**: Kalachakra Paramayush 85 years is the adopted longevity anchor; no further longevity computation methods to be pursued
 
 ---
 
