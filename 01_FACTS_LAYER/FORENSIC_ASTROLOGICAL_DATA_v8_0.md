@@ -519,13 +519,7 @@ LLM USAGE NOTES:
 
 ## §5 — DASHA SYSTEMS (FACTS)
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0 updated]:
-     Vimshottari Dasha dates are engine-implementation-dependent. FORENSIC engine uses Moon 327°02'48" (Aqu 27°02'48" Purva Bhadrapada Pada 3). JH engine uses Moon 327°04'14" — 1.42 arcmin difference.
-     Consequence: FORENSIC dasha dates run +7 to +9 days LATER than JH dates.
-     Sample offsets: Mercury MD start FORENSIC 2010-08-21 vs JH 2010-08-14 (+7d); Mercury-Saturn AD FORENSIC 2024-12-12 vs JH 2024-12-04 (+8d); Ketu MD start FORENSIC 2027-08-21 vs JH 2027-08-14 (+7d).
-     AM-JIS discipline: Retrodictive fits use FORENSIC dates (LEL correlation established on these). Forward timing analyses may prefer JH dates. When engaging external JHora-using reviewers, note the offset.
-     Root cause: FORENSIC Lahiri ayanamsa 23°37'58" vs JH 23°37'09.78" (+48 arcsec) → propagates into Moon position → balance-of-dasha.
-     See GAP.09 in GOVERNANCE_STACK §3. -->
+**RESOLVED (GAP.09 — 2026-04-19):** Vimshottari dasha date offset between FORENSIC (later) and JH (earlier) is closed. Offsets: +7 to +9 days (FORENSIC later), rooted in 1.4 arcmin Moon longitude difference at birth. Policy: **FORENSIC dasha dates are canonical for AM-JIS retrodictive fit**. Sessions 16-25 matched all LEL events against FORENSIC dates with good retrodictive alignment. JH dates are NOT used for dasha period boundaries in AM-JIS. Note: the ±7-9 day window falls within the "dasha cusp zone"; precise-date claims within 10 days of a period transition should acknowledge both possible dates. See GOVERNANCE_STACK §3 GAP.09.
 
 ### §5.1 Vimshottari Dasha (Mahadasha / Antardasha)
 
@@ -759,7 +753,7 @@ LLM USAGE NOTES:
 
 ### §6.1 Shadbala — Component Breakdown
 
-<!-- [DUAL-ENGINE NOTE: Shadbala totals and ranking differ between FORENSIC and JH engines. See §6.2 for both rankings. JH is authoritative for ranking in external-facing contexts.] -->
+<!-- [DUAL-ENGINE NOTE: Shadbala totals and ranking differ between FORENSIC and JH engines. See §6.2 for both rankings and the RESOLVED policy statement.] -->
 
 | ID | Component | Sun | Moon | Mars | Mercury | Jupiter | Venus | Saturn |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -786,12 +780,7 @@ LLM USAGE NOTES:
 
 ### §6.2 Shadbala — Totals and Ranking (DUAL-ENGINE)
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0]:
-     FORENSIC engine ranks: Sun #1 (8.51 rupas), Jupiter #2 (7.73), Saturn #3 (7.47), Moon #4 (7.26), Mercury #5 (6.55), Mars #6 (5.27), Venus #7 (4.60)
-     JH engine ranks: Saturn #1 (8.79 rupas), Sun #2 (8.18), Jupiter #3 (7.68), Moon #4 (6.44), Mercury #5 (6.09), Mars #6 (5.34), Venus #7 (4.80)
-     Component-level divergences: primarily in Sthana (Saturn +21v JH vs FORENSIC), Kala (Mercury −37v, Saturn +57v), and Drik (Sun +12v).
-     AM-JIS discipline: FORENSIC values cited in retrodictive contexts; JH values for external reviewers. Rank-dependent claims must specify engine convention.
-     See GAP.07 in GOVERNANCE_STACK §3. -->
+**RESOLVED (GAP.07 — 2026-04-19):** Shadbala engine divergence between FORENSIC and JH is closed. JH is the authoritative engine for Shadbala ranking per project discipline (FORENSIC_v8_0 frontmatter). Canonical ranking: **Saturn #1 (8.79 rupas JH), Sun #2 (8.18 rupas JH), Jupiter #3 (7.68 rupas JH), Moon #4 (6.44 rupas JH), Mercury #5 (6.09 rupas JH), Mars #6 (5.34 rupas JH), Venus #7 (4.80 rupas JH)**. FORENSIC engine Shadbala values are retained in the table above for reference but are not authoritative for any rank-based claim. Domain reports and MSR signals cite JH ranking. See GOVERNANCE_STACK §3 GAP.07.
 
 | ID | Planet | FORENSIC Virupas | FORENSIC Rupas | FORENSIC Rank | JH Rupas | JH Rank | Min Required (Rupas) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -906,16 +895,7 @@ LLM USAGE NOTES:
 
 ## §7 — ASHTAKAVARGA (FACTS + DERIVED)
 
-<!-- [DUAL-ENGINE RECONCILIATION NOTE — v8.0]:
-     BAV Moon row differs between FORENSIC and JH in 4 signs:
-         Gemini: FORENSIC=5, JH=4 (Δ=−1)
-         Libra: FORENSIC=4, JH=5 (Δ=+1)
-         Scorpio: FORENSIC=5, JH=4 (Δ=−1)
-         Capricorn: FORENSIC=2, JH=3 (Δ=+1)
-     SAV column sums differ in 4 signs (Ge F28/J27, Li F33/J34, Sc F33/J32, Cp F26/J27). SAV grand total 337 matches in both engines.
-     All other planet BAV rows (Sun, Mars, Mercury, Jupiter, Venus, Saturn) agree exactly.
-     AM-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims are stable as the ±1 differences cancel in aggregate.
-     See GAP.08 in GOVERNANCE_STACK §3. -->
+**RESOLVED (GAP.08 — 2026-04-19):** Moon BAV row divergence between FORENSIC and JH engines is closed. FORENSIC and JH differ in 4 signs (Gemini, Libra, Scorpio, Capricorn — ±1 bindu each; grand total 337 matches). Policy: **FORENSIC BAV/SAV values are the AM-JIS canonical values** throughout all domain reports and MSR signals. JH Moon BAV row is retained as reference row `AVG.BAV.MOON.JH` in the table. Rank-dependent claims are unaffected — ±1 differences cancel in aggregate. See GOVERNANCE_STACK §3 GAP.08.
 
 ### §7.1 BAV — Per-Planet Bindus by Sign
 
@@ -1944,6 +1924,7 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 | --- | --- | --- | --- |
 | 6.0 | 2026-04-17 | FIX_SESSION_001 | Base document; dual-engine notes added for Vimshottari, Shadbala, BAV |
 | 8.0 | 2026-04-18 | FIX_SESSION_003 | Unified canonical: absorbed FORENSIC_DATA_v8_0_SUPPLEMENT. §12.1 corrected (4 lagnas, 3 added). §12.2 replaced (36-saham). §6.2 dual-engine expanded. §6.6/§6.7/§6.8 added. §7.1 Moon BAV JH row added. §10.3 8-karaka note. §15.1 Yoga Lord. §24 Longevity. §25 Additional Dasha stubs. §26 Yogas Register. §23 updated. SUPERSEDES v6.0 and SUPPLEMENT. |
+| 8.0-updated-GAP_RESOLUTION | 2026-04-19 | GAP_RESOLUTION_SESSION | GAP.07/08/09 closed — Shadbala/BAV/dasha engine divergence policies formalized as resolved text |
 
 ---
 
