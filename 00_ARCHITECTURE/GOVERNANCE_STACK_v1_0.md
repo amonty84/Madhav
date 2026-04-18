@@ -116,7 +116,7 @@ All gaps across all artifacts:
 
 | Gap ID | Description | Affected Artifacts | Resolution Path |
 |---|---|---|---|
-| GAP.01 | Birth Yoga (MSR.354) unverified — v6.0 §9 not read | UCN §I.1 FS5 | Facts Layer v8.0 |
+| GAP.01 | Birth Yoga (MSR.354) unverified | UCN §I.1 FS5 | **RESOLVED 2026-04-18** per V8_0_RECONCILIATION JH data — Birth Yoga = **Siva** (Mercury-ruled, auspicious); Mercury's 8th system-designation as Yoga Lord |
 | GAP.02 | D9 Jupiter placement unverified | UCN §II.3, UCN §III.4 | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms D9 Jupiter Gemini) |
 | GAP.02b | D9 Venus Virgo (debilitation of 7L) | REPORT_RELATIONSHIPS | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
 | GAP.02c | D9 Saturn Aries (debilitation of primary 7H tenant) | REPORT_RELATIONSHIPS | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
@@ -132,7 +132,23 @@ All gaps across all artifacts:
 | **GAP.09 (NEW)** | Vimshottari dasha dates offset +7 to +9 days between FORENSIC and JHora (FORENSIC later) — rooted in 1.4 arcmin Moon difference at birth | FORENSIC §5.1 | Dual-engine note; retrodictive fit uses FORENSIC dates |
 | **GAP.10 (NEW)** | Saham Karma nakshatra labeled "Dhanishta" but 300.09° = Shatabhisha Pada 1; Saham Putra labeled "Dhanishta" but 295.16° = Shravana Pada 4 | FORENSIC §12.2 lines 1133, 1136 | Label corrections (applied in FIX_SESSION_001 Priority 6) |
 
-**Aggregate (post-FIX_SESSION_001 2026-04-18)**: 15 known gaps tracked. 5 RESOLVED via JHora external verification (GAP.02, 02b, 02c, 02d, 05 substantial). 2 PARTIALLY RESOLVED (BB progression, Varshphal Muntha). 5 new gaps registered (GAP.06-10). 3 remain OPEN (GAP.01 Birth Yoga, GAP.03 D9 12H precise degrees, LONGEVITY.GAP.01 Ayurdasaya). Still the single highest-leverage future data-acquisition action: a complete JHora Varshphal + Ayurdasaya export.
+**Aggregate (post-V8.0 RECONCILIATION 2026-04-18)**: 19 known gaps tracked (added GAP.11-14 from V8_0_RECONCILIATION). Resolution status:
+- 11 RESOLVED or substantially resolved (GAP.01 Birth Yoga now resolved via JH; GAP.02, 02b, 02c, 02d, 03, 05 all confirmed via JH; GAP.06, BB progression, GAP.10 Saham labels).
+- 4 PARTIALLY RESOLVED (LONGEVITY.GAP.01 — Kalachakra Paramayush 85 years known, Pindayu/Nisargayu pending; Varshphal — Muntha known from v6.0 §22, Varshesha pending).
+- 4 NEW CRITICAL gaps (GAP.11-14) added by V8.0 reconciliation:
+
+| Gap ID | Description | Affected | Resolution path |
+|---|---|---|---|
+| **GAP.11** | **Special Lagnas v6.0 computational errors** — Hora/Ghati/Varnada/Shree Lagnas all WRONG in v6.0 §12.1 | MSR.391, MSR.402, MSR.404, MSR.407, UCN §V §VI, REPORT_RELATIONSHIPS, REPORT_SPIRITUAL, REPORT_FINANCIAL | Facts Layer v8.0 (corrected values in v8.0 SUPPLEMENT); downstream artifact refreshes |
+| **GAP.12** | **Saham placement errors** — Roga/Mahatmya/Vivaha placements disagree with JH; MSR.391 composition invalid | MSR.391, REPORT_HEALTH, REPORT_RELATIONSHIPS | MSR v2.0 correction; Domain Report refreshes |
+| **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | Dual-karaka-system note in all affected signals; both valid classically |
+| **GAP.14** | **17 classical yogas missing from MSR v1.0** — Kalpadruma, Gaja-Kesari, Sarala, Chaamara, Sankha, Mridanga, Maha Yogada, Sadhu, Vosi, Anaphaa, Kaahala, Raja/Lakshmi, Yogakaraka, Raja AK-PK, Viparita Raja Yoga (Ju), Kedaara (Naabhasa), and others | MSR v2.0 | Promote to MSR v2.0 signals |
+
+**Current single highest-leverage remaining actions**:
+1. Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md (currently supplement + v6.0 + transcription); fully integrate
+2. MSR v2.0 with 17 new yoga signals + MSR.391 correction + MSR.402 invalidation
+3. UCN v3.0 incorporating all reconciliation findings
+4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution Still the single highest-leverage future data-acquisition action: a complete JHora Varshphal + Ayurdasaya export.
 
 ---
 

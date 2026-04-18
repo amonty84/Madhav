@@ -1030,3 +1030,73 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 **Corpus state post UCN v2.0**: All L2.5 promotions from L3 synthesis are now at mother-document level. All process-learnings from AUDIT_REPORT are captured as operating instructions. All dual-engine variances are explicitly acknowledged. UCN v2.0 is the synthesis-ceiling achievable without Facts Layer v8.0 data.
 
 **Corpus integrity**: PASS. AM-JIS Phase 1-6 architecturally + editorially + synthetically COMPLETE. Future UCN v3.0 scheduled post-Facts-Layer-v8.0 + external acharya review (no target date).
+
+---
+
+## V8.0 Reconciliation — Jagannatha Hora Ground-Truth Integration (2026-04-18, CLOSED)
+
+**Context**: Native provided complete Jagannatha Hora export as PDF. This is the Facts Layer v8.0 source material previously flagged in `EXTERNAL_COMPUTATION_SPEC_v2_0.md`. Execution of the spec's native-action Stream 1.
+
+**Artifacts produced** (3 new):
+- `01_FACTS_LAYER/JHORA_TRANSCRIPTION_v8_0_SOURCE.md` — faithful transcription of JH authoritative data
+- `00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md` — comprehensive discrepancy analysis
+- `01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md` — override layer for v6.0 specific values
+
+**Artifacts modified**:
+- `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` — GAP.01 RESOLVED (Birth Yoga = Siva, Mercury-ruled); 4 new CRITICAL gaps added (GAP.11-14)
+
+**Critical findings**:
+
+1. **GAP.01 RESOLVED**: **Birth Yoga = Siva** (Mercury-ruled). Auspicious yoga. Mercury now has **8-system designation** (Seven-System Convergence + Siva Yoga Lord).
+
+2. **5 material computational errors in v6.0 §12.1-12.2 identified**:
+   - Hora Lagna: v6.0 said Libra 10°11' 7H → ACTUALLY Gemini 0°39' 3H (129°32' off)
+   - Ghati Lagna: v6.0 said Scorpio 6°53' 8H → ACTUALLY Sagittarius 13°56' 9H (36°40' off)
+   - Shree Lagna: v6.0 said Sagittarius 24°15' 9H → ACTUALLY Libra 23°19' 7H (60°56' off)
+   - Varnada Lagna: v6.0 said Scorpio 12°23' 8H → ACTUALLY Cancer 12°25' 4H (120° off)
+   - Vivaha Saham: v6.0 said Gemini Ardra 3H → ACTUALLY Cancer 9°09' Pushya 4H
+
+3. **MSR.391 "7H Six-Layer Convergence" composition ERROR**: Claimed Roga+Mahatmya in 7H Libra, but JH shows:
+   - Roga actually in 2H Taurus Mrigashira
+   - Mahatmya actually in 9H Sagittarius Moola
+   - Hora Lagna (previously claimed as 7H layer) actually in 3H
+   - **Real 7H composition**: Saturn + Mars + BB + **Shree Lagna (NEW — was wrongly placed in 9H)** + KP sub-lord = 5 layers, different composition
+   - 7H becomes a **wealth-relational-Lakshmi-anchor** house (Shree Lagna in 7H), not a "six-layer disease-greatness crucible"
+   - MSR.391 confidence: 0.97 → 0.92 (revised)
+
+4. **MSR.402 "Hidden-Pinnacle 8H Architecture" MATERIALLY INVALIDATED**:
+   - Claimed Varnada+Ghati Lagnas both in 8H Scorpio
+   - JH: Varnada in 4H Cancer; Ghati in 9H Sagittarius
+   - **Ketu MD 2031-2038 reframe needed** — still moksha-oriented via Ketu exalted 8H, but not via "Varnada+Ghati 8H hidden pinnacle"
+
+5. **17 classical yogas NEW** (missing from MSR v1.0): Kalpadruma/Parijata (major royal yoga), Gaja-Kesari (in D-9), Sarala, Chaamara, Sankha, Mridanga, Maha Yogada, Sadhu, Vosi, Anaphaa, Kaahala, Raja/Lakshmi, Yogakaraka Mars, Raja AK-PK, Viparita Raja Yoga (Ju), Kedaara Naabhasa, Nipuna confirmed.
+
+6. **GAP.02, 02b, 02c, 02d, 03, 05 all CONFIRMED** via JH D-9 and D-7 full data.
+
+7. **LONGEVITY.GAP.01 PARTIAL**: Kalachakra Paramayush = 85 years (Savya scheme). Full Pindayu/Nisargayu/Amsayu pending separate Ayurdasaya export (not in provided PDF).
+
+8. **GAP.07 Shadbala engine**: JH confirms Saturn #1 (8.79 rupas), Sun #2, Jupiter #3. v6.0 ranks Sun #1. Dual-engine note authoritative.
+
+9. **New quantitative findings from JH**:
+   - Saturn Ishta Phala 43.28 / Kashta 4.81 = ~9:1 beneficial (chart's most-beneficial-by-Phala planet) — reinforces AmK role
+   - Jupiter Ishta 10.78 / Kashta 48.81 = ~1:5 malefic — quantitative proof of CTR.03 "visible but not compounding"
+   - Pancha-Vargeeya Powerful classification: Jupiter (14.76, highest), Saturn (12.12), Mercury (11.43) — the operational triad
+   - Bhava Bala: **5H rank 1 (strongest)**, 7H rank 12 (weakest) — confirms 7H paradox; reveals 5H architectural strength (strengthens Compensated-Emptiness for Children domain)
+
+10. **Chara Karaka 7-vs-8 system** (GAP.13): JH uses 8-karaka (Rahu=PK, Mars=PiK). v6.0 uses 7-karaka (Mars=PK). Both classically valid.
+
+**Corpus integrity post-v8.0**:
+- Most architectural principles intact (Mercury primary, Saturn AmK, Jupiter 9L own-sign, Ketu 8H, Moon AK 11H, ATT pattern, Mercury MD→Ketu MD trajectory, Sade Sati Paradox, BB-UL 2026)
+- 5 specific MSR signals require correction (.391, .402, .404 upgrade, .407 reframe, .343 dual-karaka note)
+- UCN §VI.4 Seven → Six-Mechanism Spiritual
+- REPORT_RELATIONSHIPS "Supreme Six-Layer" → Five-Layer (with Shree Lagna addition)
+- **Chart is architecturally STRONGER than pre-v8.0 corpus framed** (Mercury 8-system, new 17 yogas, 5H Bhavabala rank 1, Shree Lagna in 7H wealth-relational anchor, Gaja-Kesari Yoga in D-9)
+
+**Next actions** (deferred to FIX_SESSION_003):
+1. Full FORENSIC_ASTROLOGICAL_DATA_v8.0.md rewrite (rather than supplement + v6.0)
+2. MSR v2.0 with 17 new yoga signals + corrections
+3. UCN v3.0 integrating all v8.0 findings
+4. Affected Domain Report refreshes (Relationships, Spiritual, Financial, Health)
+5. FALSIFIER_REGISTRY and CONTRADICTION_REGISTRY updates for v8.0 findings
+
+**Corpus status**: PASS-WITH-V8-CORRECTIONS-PENDING. Facts Layer v8.0 source is now available and documented. Downstream corpus requires systematic revision in FIX_SESSION_003+.
