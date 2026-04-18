@@ -1006,4 +1006,27 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 - Phase 7 (Living Project — maintenance schedule active)
 - Facts Layer v8.0 upgrade (native-triggered)
 - External acharya validation (native-initiated)
-- UCN v2.0 formalization (future session; draft in place)
+- UCN v2.0 formalization — **COMPLETED 2026-04-18 post FIX_SESSION_002** (UCN_v2_0.md CLOSED; DRAFT superseded/removed)
+
+---
+
+## UCN v2.0 Finalization (2026-04-18, CLOSED)
+
+**Context**: Post FIX_SESSION_002, native directed continuation with "Go ahead." Interpreted as authorization to finalize the most substantive deferred deliverable — UCN v2.0.
+
+**Action**: Expanded `UCN_v2_0_DRAFT.md` into closed `UCN_v2_0.md` (additive layer supplementing UCN v1.0 + v1.1, not replacing them). DRAFT file removed.
+
+**UCN v2.0 scope** (~7,000 new words, corpus UCN total ~44,000 across v1.0+v1.1+v2.0):
+- §I supplement — Jupiter placement clean articulation (own-sign-own-house, correct aspects 1H/3H/5H, Moolatrikona convention dependency)
+- §VI.4 refinement — Seven-Mechanism Spiritual Amplification formalized (why D6.D6=0.96 self-amplification derives from 7 independently-verifiable classical mechanisms)
+- §X OI6 — Mechanical Verification Discipline (new operating instruction derived from AUDIT false-negative process failure)
+- §XI NEW — Mercury Pentagram (promoted from REPORT_PSYCHOLOGY §8.2; Mercury governs career+mind+wealth+UL-lord+Karakamsa-lord)
+- §XII NEW — Three-Layer Mind Architecture (promoted from REPORT_PSYCHOLOGY §5-10; Aries Lagna drive + Moon AK Aquarius soul + Mercury Capricorn analytical; Saturn integrating)
+- §XIII NEW — Compensated-Emptiness Principle (promoted from REPORT_CHILDREN §4; chart-reading convention preventing over-pessimizing empty houses)
+- §XIV NEW — BB Progression Methodology (6°/year from 60-year completion cycle formalized; age-by-age table; MSR.404 clarification)
+- §XV NEW — Dual-Engine Reconciliation Meta-Note (Shadbala/Ashtakavarga/Vimshottari variance between FORENSIC and JHora; AM-JIS adopts FORENSIC consistently while documenting JHora variance transparently)
+- §XVI, XVII — metadata + changelog
+
+**Corpus state post UCN v2.0**: All L2.5 promotions from L3 synthesis are now at mother-document level. All process-learnings from AUDIT_REPORT are captured as operating instructions. All dual-engine variances are explicitly acknowledged. UCN v2.0 is the synthesis-ceiling achievable without Facts Layer v8.0 data.
+
+**Corpus integrity**: PASS. AM-JIS Phase 1-6 architecturally + editorially + synthetically COMPLETE. Future UCN v3.0 scheduled post-Facts-Layer-v8.0 + external acharya review (no target date).
