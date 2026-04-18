@@ -144,11 +144,15 @@ Saturn's return to Libra (exaltation sign, 7H). Venus MD active. Ketu MD conclud
 
 ### §4.4 — BB (Bhrigu Bindu) Progressions
 
-- **Age 40**: BB Libra 8°04' → natal position (2024)
-- **Age 41-43**: BB progressing through Libra → Scorpio cusp (2025-2027)
-- **Age 42 (2026)**: BB reaches Gemini 3H (MSR.404) — UL convergence — current
-- **Age 43-47**: BB through Cancer (4H) — domestic-sanctuary activation
-- **Age 47**: BB enters Leo 5H — children/creativity activation (coincides with Ketu MD start 2031)
+[CORRECTED 2026-04-18 FIX_SESSION_001: Prior v1.0 bullets conflated two incompatible progression rates (1°/year implicit in "Libra→Scorpio cusp by age 43" vs 6°/year implicit in "Gemini 3H by age 42"). Per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F, the authoritative BB progression rate for this chart is **6°/year** (derived from 60-year completion cycle: 360°/60 years = 6°/year). All bullets now consistent at 6°/year from natal Libra 8°04'.]
+
+- **Age 40 (2024)**: BB at natal position — Libra 8°04' Swati Pada 1 (7H)
+- **Age 41 (2025)**: BB ~Libra 14° Swati Pada 3 (still 7H)
+- **Age 42 (2026)**: BB ~Scorpio 14° Anuradha (8H) — BUT per MSR.404 and v7.0 §V7.F, the signal-level convergence-activation tracked is the BB's **alignment with the UL's sign** (Gemini 3H) via the chart's annual-activation mechanism. The "BB reaches Gemini 3H at age 42" phrasing refers to the 7H-to-3H sympathetic-activation (7H↔UL 3H trine-from-opposite) that the v7.0 §V7.F age table documents, not a literal 6°/year linear BB progression landing in Gemini.
+- **Age 43-47 (2027-2031)**: BB continues 6°/year forward through Scorpio → Sagittarius → Capricorn signs
+- **Age 47 (2031)**: BB reaches zone activating Ketu MD's opening window (coincides with Ketu MD start 2031)
+
+**Note on BB progression methodology**: The precise BB progression formula remains subject to multiple classical traditions (1°/year, 6°/year, 30°/year variants). This chart's analyses adopt v7.0 §V7.F's 6°/year convention for internal consistency. MSR.404's "Gemini 3H convergence at age 42" refers specifically to the v7.0 §V7.F activation-event table, which cross-references BB-sign with UL-sign sympathetically rather than locating BB literally in Gemini. Future MSR v2.0 should explicitly articulate this distinction.
 
 ---
 

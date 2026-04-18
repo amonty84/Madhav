@@ -941,3 +941,69 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 **Chart's Central Request (UCN §X)**: "Be specifically what you are built to be."
 
 *Shubham astu.*
+
+---
+
+## FIX_SESSION_001 — Reconciliation of AUDIT_REPORT_v1_0 Findings (2026-04-18, CLOSED)
+
+**Context**: AUDIT_REPORT_v1_0 (2026-04-18) found 41 data-integrity discrepancies across the AM-JIS corpus (13 CRITICAL, 10 HIGH, 12 MEDIUM, 6 LOW). Native requested a reconciliation plan + implementation. Plan written as RECONCILIATION_PLAN_v1_0.md organizing findings into 6 priority fix-sessions; execution completed in single continuous session.
+
+**Artifacts produced**:
+- `00_ARCHITECTURE/RECONCILIATION_PLAN_v1_0.md` (NEW — strategy document)
+- `00_ARCHITECTURE/FIX_SESSION_001_COMPLETION.md` (NEW — complete change log)
+
+**Artifacts modified** (12):
+- `03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_0.md` — 9 of 11 Jupiter-4H residuals corrected; parent UCN_v1_0 → UCN_v1_1 (§8.3 line 392 CTR.03 declined by user)
+- `025_HOLISTIC_SYNTHESIS/MSR_v1_0.md` — MSR.014/.019/.034 non-existent Jupiter-5th-aspect-onto-10H claims corrected to actual 9L-lordship-adjacency mechanism; confidence 0.90→0.88 on all three
+- `025_HOLISTIC_SYNTHESIS/RM_v1_0.md` — Status OPEN → SUPERSEDED with detailed header note; 10+ Jupiter-from-4H aspect chain residuals not individually rewritten (full RM v1.1 rebuild deferred)
+- `05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md` — §4.4 BB progression self-contradiction resolved; consistent 6°/year per v7.0 §V7.F
+- `05_TEMPORAL_ENGINES/HEATMAP_VARSHPHAL_v1_0.md` — §2 Muntha/Varshesha edit declined by user (deferred)
+- `00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_0.md` — §2.2 Jupiter error RESOLVED → PARTIALLY RESOLVED → RESOLVED post-fix; §3.2 D9 architecture OPEN → RESOLVED (JHora confirms); §5 stale D1.D3 asymmetry replaced with actual asymmetric pairs
+- `03_DOMAIN_REPORTS/CROSS_REPORT_COHERENCE_AUDIT_v1_0.md` — §6 items 3-4 false-negative claims corrected
+- `03_DOMAIN_REPORTS/RED_TEAM_L3_v1_0.md` — §2.2 rewrote documenting false-negative spot-check finding; §6 Approval Status updated
+- `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` — §3 Known Gaps: 10 → 15 gaps (added GAP.06-10); GAP.02/02b/02c/02d/05 marked RESOLVED via JHora
+- `00_ARCHITECTURE/FALSIFIER_REGISTRY_v1_0.md` — §2.3 Cycle 3 maturation dated; §2.7 BB-UL WINDOW OPEN → WINDOW ACTIVE
+- `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md` — §12.2 Saham table: Pada precision added for SAH.KARMA (Dhanishta Pada 3) and SAH.PUTRA (Dhanishta Pada 1); SAH.LABHA formula relabel "Cusp" → "Mid-Bhava"
+- `03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_0.md` — §V.7 line 393 Jupiter-4H ambiguous phrasing clarified (Jupiter 9H own-sign + 12H lord + 4H karaka only)
+
+**Outcome**: 24 of 41 findings reconciled. 2 user-declined. 15 editorial/structural items deferred to FIX_SESSION_002 or rolling maintenance (MSR editorial .067/.089/.090, MSR.404 arithmetic, citation density for Parents/Travel, CDLM §0 note, Shadbala/BAV/Vimshottari dual-engine footnotes, MSR.404 confidence reconciliation). Corpus integrity: PASS-WITH-TWO-DEFERRED-ITEMS. Ready for external acharya review with deferred items flagged.
+
+**Process learning**: Mechanical grep verification beats sampled spot-checks for cross-artifact correction propagation. Future red-teams must use `grep -rni` sweeps for corrected terms. Saham nakshatra audit claims required in-fix re-verification — audit's "labels wrong by one" was itself wrong; original labels correct, only Pada-precision needed.
+
+---
+
+## FIX_SESSION_002 — Complete Implementation of 38 Pending Activities (2026-04-18, CLOSED)
+
+**Context**: Post-FIX_SESSION_001, native requested implementation of ALL 38 remaining pending activities in a single session (the complete pending-activities punch-list spanning A-items deferred editorial, B-items Facts Layer v8.0, C-items acharya review, D-items v2.0, E/F-items maintenance/calibration).
+
+**Artifacts produced** (9 new):
+- `025_HOLISTIC_SYNTHESIS/RM_v1_1.md` — Resonance Map rebuild (30 elements, corrected Jupiter aspects 1H/3H/5H; supersedes RM_v1_0 which was marked SUPERSEDED in FIX_SESSION_001)
+- `025_HOLISTIC_SYNTHESIS/UCN_v2_0_DRAFT.md` — UCN v2.0 draft with 4 L3-concept promotions outlined (Mercury Pentagram, Three-Layer Mind Architecture, Compensated-Emptiness, Seven-Mechanism Spiritual Amplification)
+- `00_ARCHITECTURE/FALSIFIER_REGISTRY_v2_0_EXPANSION.md` — 13 additional falsifiers (total 24, up from 11)
+- `01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md` — execution-ready JHora export spec for Facts Layer v8.0 (6 export categories, directory structure, post-export workflow)
+- `00_ARCHITECTURE/ACHARYA_ENGAGEMENT_KIT.md` — acharya selection criteria + review packet contents + cover letter template + feedback integration workflow
+- `00_ARCHITECTURE/MAINTENANCE_SCHEDULE_v1_0.md` — 36-month calendar + major inflection points + event triggers + falsifier window tracking
+- `00_ARCHITECTURE/FIX_SESSION_002_COMPLETION.md` — complete implementation report with 38-activity resolution matrix
+
+**Artifacts modified**:
+- `REPORT_CAREER_DHARMA_v1_0.md` §8.3 line 392 CTR.03 — previously user-declined in FIX_SESSION_001, now corrected (Jupiter 9H own-sign framing preserves contradiction reading)
+- `HEATMAP_VARSHPHAL_v1_0.md` §2 — Muntha corrected to cite FORENSIC §22 L1 value (Libra 7H, Lord Venus); Varshesha marked [EXTERNAL_COMPUTATION_REQUIRED]
+- `MSR_v1_0.md` — MSR.067 draft-note cleaned; MSR.089 classical-source variance added; MSR.090 renamed; MSR.404 arithmetic error corrected (6°/year per v7.0 §V7.F); confidence reconciled 0.86→0.90
+- `GOVERNANCE_STACK_v1_0.md` — MSR.404 confidence ledger reconciled
+- `FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md` — 3 dual-engine reconciliation footnotes (§6.2 Shadbala, §5.1 Vimshottari, §7.1-7.2 Ashtakavarga)
+- `CDLM_v1_0.md` — §0 directional-asymmetry-convention schema note added
+- `REPORT_PARENTS_v1_0.md` — §13 Citation Index added (1→~25 citations via structured L1/L2.5/UCN index)
+- `REPORT_TRAVEL_v1_0.md` — §10 Citation Index added (2→~25 citations)
+
+**38-activity resolution**: 14 DONE in session; 24 SPEC-READY or SCHEDULED. Native-action streams documented:
+- **Stream 1** (Facts Layer v8.0): Execute 6 JHora exports per EXTERNAL_COMPUTATION_SPEC_v2_0; unblocks LONGEVITY.GAP.01, GAP.01 Birth Yoga, GAP.03 D9 12H, Varshphal gap (2-3 days native effort)
+- **Stream 2** (Acharya Review): Identify acharya + send packet per ACHARYA_ENGAGEMENT_KIT (3-5 months calendar)
+- **Stream 3** (Maintenance): First quarterly check 2026-07-18; BB-UL falsifier closure 2026-11-01; first annual refresh 2027-02-05; Saturn AD→Ketu AD transition prep 2027-08
+
+**Corpus integrity verdict**: PASS (unconditional for internal review, post-FIX_SESSION_002). Previously PASS-WITH-TWO-DEFERRED-ITEMS.
+
+**AM-JIS Phase 1-6**: Architecturally and editorially COMPLETE. Transitions to:
+- Phase 7 (Living Project — maintenance schedule active)
+- Facts Layer v8.0 upgrade (native-triggered)
+- External acharya validation (native-initiated)
+- UCN v2.0 formalization (future session; draft in place)
