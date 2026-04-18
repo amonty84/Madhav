@@ -1220,3 +1220,89 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 - (C) RM rebuild (L2.5 cleanup)
 - (D) Query the corpus — test the corrected architecture against specific life questions
 
+
+---
+
+## FIX_SESSION_003_deferred — Deferred Items 1-4 (2026-04-18)
+**Environment**: Claude Code (CLI, working dir `/Users/Dev/Vibe-Coding/Apps/Madhav`)
+**Objective**: Execute the four deferred items from FIX_SESSION_003 that were explicitly carried forward
+
+### Task 1 — FORENSIC_ASTROLOGICAL_DATA_v8_0.md (unified canonical L1)
+**File**: `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` (NEW — CURRENT — 1,950 lines)
+- Unified L1 superseding v6.0 + SUPPLEMENT
+- Base: all v6.0 content carried forward
+- Applied: all SUPPLEMENT corrections (seven L1 errors corrected in-document)
+- Added: JH TRANSCRIPTION sections (§6.6 Bhava Bala, §6.7 Ishta/Kashta, §6.8 Pancha-Vargeeya, §12.1 Special Lagnas v8.0, §24 Longevity, §26 Yogas Register)
+- Special Lagnas table: Hora→3H, Ghati→9H, Varnada→4H, Shree→7H; three new lagnas (Vighati 5H, Pranapada 5H, Indu 8H)
+- Frontmatter: version 8.0, status CURRENT, session FIX_SESSION_003
+- `FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md` → status: SUPERSEDED
+- `FORENSIC_DATA_v8_0_SUPPLEMENT.md` → status: SUPERSEDED
+
+### Task 2 — CDLM_v1_1.md (corrected Cross-Domain Linkage Matrix)
+**File**: `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md` (NEW — CURRENT — 1,135 lines)
+- All 81 cells carried forward from v1.0
+- 9 cells corrected:
+  - D1.D4: Roga Saham 7H mechanism removed; rebuilt via Mercury 6L-10L dual-role
+  - D2.D2: Shree Lagna 9H→7H Libra; mechanism updated
+  - D2.D3: Shree Lagna 9H→7H; link actually strengthened (Lakshmi in relationship house)
+  - D3.D3: six-layer→five-layer (Hora Lagna→3H; Roga/Mahatmya Sahams→2H/9H; Shree Lagna 7H added); strength 0.95→0.93
+  - D3.D4: Roga 7H mechanism removed; rebuilt via Mars-Saturn Vata-Pitta; strength 0.76→0.68
+  - D4.D3: PRIMARY — type mirrors→constrains; direction bidirectional→row→col; strength 0.78→0.61; mechanism rebuilt
+  - D6.D1: Shree Lagna 9H→7H; mechanism updated; strength maintained 0.89
+  - D6.D2: Shree Lagna 9H→7H; spirit-wealth path more indirect; strength 0.88→0.84
+  - D6.D6: seven→six mechanisms (Ghati→9H; Varnada→4H; Shree Lagna 7H added); strength 0.96→0.94
+- Summary table updated: D4.D3 now 0.61→ (was 0.78↔)
+- `CDLM_v1_0.md` → status: SUPERSEDED
+
+### Task 3 — RM_v2_0.md (rebuilt Resonance Map)
+**File**: `025_HOLISTIC_SYNTHESIS/RM_v2_0.md` (NEW — CURRENT — 32 elements)
+- 30 elements from v1.1 (23 unchanged + 7 corrected) + 2 new elements
+- Corrected elements:
+  - RM.01: seven-system→eight-system (Siva Yoga Lord = 8th designation)
+  - RM.08: Saham Roga 7H reference removed; Roga 2H Taurus co-tenancy with Rahu added
+  - RM.14: PRIMARY — 7H six-layer→five-layer; Hora Lagna/Roga/Mahatmya removed; Shree Lagna 7H added
+  - RM.15: Shree Lagna removed from 9H; Ghati Lagna 9H added; Saham Mahatmya 9H added
+  - RM.20: FULL REWRITE — Shree Lagna 9H→7H Libra Vishakha; domains updated; Lakshmi-through-relationship architecture
+  - RM.21: FULLY INVALIDATED → split into RM.21A (Ghati 9H) and RM.21B (Varnada 4H)
+  - RM.26: fourfold→threefold (Varnada/Ghati removed from 8H; Indu Lagna 8H added)
+  - RM.28: Shree Lagna reference corrected 9H→7H in Lakshmi Yoga
+- New elements: RM.21A (Ghati Lagna 9H Sagittarius), RM.21B (Varnada Lagna 4H Cancer)
+- New meta-pattern: "Lakshmi-Through-Relationship" (Shree Lagna 7H architecture)
+- `RM_v1_1.md` → status: SUPERSEDED
+
+### Task 4 — §9.6 added to REPORT_HEALTH_LONGEVITY_v1_1.md
+**File**: `03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md` (EDITED in-place)
+- §9.6 "Longevity Computation Status" added after §9.5
+- Computation registry: Kalachakra=85yr CONFIRMED; Pindayu/Nisargayu/Amsayu/Jaimini all [EXTERNAL_COMPUTATION_REQUIRED]
+- Ayurdasaya gap documented: available in JH Ayurdasaya tab (separate from standard export); closure condition specified
+- LONGEVITY.GAP.01 status: partially resolved; Kalachakra confirmed; three Parashari methods pending
+- Convergence noted: Kalachakra (85yr) and qualitative (65-85+yr) both point to 85-year upper range
+
+### Task 5 — GOVERNANCE_STACK and SESSION_LOG updated
+**File**: `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` (UPDATED in-place)
+- Version: 1.0-updated-FIX_SESSION_003_deferred
+- §1 L1 registry: FORENSIC_ASTROLOGICAL_DATA_v8_0 added as CURRENT; v6.0 and SUPPLEMENT marked SUPERSEDED
+- §1 L2.5 registry: CDLM_v1_1 and RM_v2_0 added as CURRENT; predecessors marked SUPERSEDED
+- §3 highest-leverage actions: items 1-3 marked DONE; item 4 (Ayurdasaya) remains
+
+**Key outcomes of FIX_SESSION_003_deferred:**
+
+1. **L1 is now unified.** FORENSIC_ASTROLOGICAL_DATA_v8_0.md is the single canonical Facts Layer document. Practitioners no longer need to cross-reference v6.0 + SUPPLEMENT + JH transcription — all corrections are integrated in one 1,950-line file.
+
+2. **CDLM is now architecturally consistent with v8.0.** The nine corrected cells remove all references to incorrect saham/lagna placements. The most important correction is D4.D3: Health→Relationships is no longer a 0.78 bidirectional mirror (the "mirror" was based on Roga Saham being in 7H — false) but a 0.61 unidirectional constraint (the real mechanism: Saturn Sade Sati dual-domain + Venus 2L-7L indirect channel).
+
+3. **RM is architecturally consistent with v8.0.** The most significant change: RM.20 (Shree Lagna) is completely rewritten — Lakshmi's grace routes through the relationship domain (7H), not the dharma domain (9H). This is the defining structural shift of the correction cycle. RM.21's invalidation (Varnada+Ghati were both NOT in 8H) is replaced by two new elements that correctly place these lagnas in their confirmed houses.
+
+4. **Longevity computation status is now formally documented.** §9.6 in the Health Report provides a clear registry of what is known (Kalachakra 85yr) and what remains outstanding (Pindayu/Nisargayu/Amsayu via JH Ayurdasaya tab), with explicit closure conditions.
+
+**Corpus integrity post-FIX_SESSION_003_deferred:**
+- All four deferred items from FIX_SESSION_003 are now closed
+- L1 unified (v8.0), L2.5 CDLM corrected (v1.1), L2.5 RM corrected (v2.0)
+- The L2.5 layer is now self-consistent: CDLM v1.1 and RM v2.0 cite the same corrected placements as FORENSIC v8.0
+- The primary remaining open item is the JH Ayurdasaya export for full longevity computation
+
+**Next session objective:** The FIX cycle is complete. Phase consolidation — choose one of:
+- (A) Begin UCN v4.0 (additive layer incorporating all FIX_SESSION_003 + deferred corrections into UCN)
+- (B) Domain report for remaining domains (REPORT_PSYCHOLOGY_MIND update, REPORT_CHILDREN update, REPORT_TRAVEL update, REPORT_PARENTS update)
+- (C) Query the corrected corpus — test architecture against specific life questions
+- (D) JH Ayurdasaya export to close LONGEVITY.GAP.01 completely

@@ -3,7 +3,10 @@ artifact: RM_v1_1.md
 artifact_type: Resonance Map
 layer: L2.5 — Holistic Synthesis
 version: 1.1
-status: CLOSED
+status: SUPERSEDED
+superseded_by: RM_v2_0.md
+superseded_date: 2026-04-18
+superseded_session: FIX_SESSION_003_deferred
 date_opened: 2026-04-18
 date_closed: 2026-04-18
 supersedes: RM_v1_0.md (marked SUPERSEDED in FIX_SESSION_001 due to 10+ Jupiter-from-4H residual aspect chains)

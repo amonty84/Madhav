@@ -1,10 +1,10 @@
 ---
 artifact: GOVERNANCE_STACK_v1_0.md
-version: 1.0-updated-FIX_SESSION_003
+version: 1.0-updated-FIX_SESSION_003_deferred
 status: CURRENT (updated in-place; next version will be v2.0)
-session: 35 (created); FIX_SESSION_003 (version registry and gap status updated)
+session: 35 (created); FIX_SESSION_003 (version registry and gap status updated); FIX_SESSION_003_deferred (deferred items 1-4 completed 2026-04-18)
 date_closed: 2026-04-18
-date_updated: 2026-04-18 (FIX_SESSION_003)
+date_updated: 2026-04-18 (FIX_SESSION_003_deferred)
 scope: "Project-wide governance stack: version registry, confidence ledger, known-gaps consolidation, change-control protocol"
 architecture_ref: "§G.9 Governance"
 ---
@@ -23,7 +23,9 @@ All closed artifacts as of Session 35:
 
 | Artifact | Version | Status | Last Updated |
 |---|---|---|---|
-| FORENSIC_ASTROLOGICAL_DATA_v6.0 | 6.0 | CURRENT | Session 1 (inherited) |
+| FORENSIC_ASTROLOGICAL_DATA_v6.0 | 6.0 | **SUPERSEDED** | Session 1 (inherited); superseded by v8.0 in FIX_SESSION_003_deferred |
+| FORENSIC_DATA_v8_0_SUPPLEMENT | 8.0-supp | **SUPERSEDED** | Integrated into v8.0; superseded in FIX_SESSION_003_deferred |
+| **FORENSIC_ASTROLOGICAL_DATA_v8_0** | **8.0** | **CURRENT** | **FIX_SESSION_003_deferred — unified L1; all corrections integrated; 1,950 lines** |
 | LIFE_EVENT_LOG_v1_1 | 1.1 | CURRENT | Session 2 |
 | EXTERNAL_COMPUTATION_SPEC | 1.0 | CLOSED (pending native execution) | Session 3 |
 | CGP_AUDIT_v1_0 | 1.0 | CLOSED | Session 6 |
@@ -46,12 +48,15 @@ All closed artifacts as of Session 35:
 | CGM_v1_0 | 1.0 | CLOSED | No change |
 | MSR_v1_0 | 1.0 | **SUPERSEDED** | Superseded by MSR_v2_0 |
 | **MSR_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003 — 420 original signals carried forward + corrections + 17 new yoga signals + quantitative metric signals MSR.438-443** |
-| CDLM_v1_0 | 1.0 | CLOSED (D4.D3 flag) | D4.D3 flagged for v1.1 revision (0.78→0.61); full CDLM refresh deferred |
-| RM_v1_0 | 1.0 | CLOSED | No change |
+| CDLM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CDLM_v1_1 in FIX_SESSION_003_deferred |
+| **CDLM_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 9 cells corrected; D4.D3 0.78↔→0.61→; Shree Lagna 7H; Hora Lagna 3H; Roga/Mahatmya Sahams correct houses; 1,135 lines** |
+| RM_v1_0 | 1.0 | CLOSED (SUPERSEDED by v1.1) | Superseded in FIX_SESSION_001 |
 | UCN_v1_0 | 1.0 | CLOSED (superseded in part by v1.1) | No change |
 | UCN_v1_1 | 1.1 | CLOSED (superseded in part by v2.0) | Superseded by UCN v2.0 additions |
 | UCN_v2_0 | 2.0 | CLOSED (superseded in part by v3.0) | Superseded by UCN v3.0 additions |
 | **UCN_v3_0** | **3.0** | **CURRENT (additive layer)** | **NEW FIX_SESSION_003 — §§XVII–XXV; read v1.0+v1.1+v2.0+v3.0 in sequence** |
+| RM_v1_1 | 1.1 | **SUPERSEDED** | Superseded by RM_v2_0 in FIX_SESSION_003_deferred |
+| **RM_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 8 element blocks corrected; Shree Lagna 7H; Ghati 9H; Varnada 4H; RM.21 split into RM.21A+RM.21B; 32 elements total** |
 | RED_TEAM_L2_5_v1_0 | 1.0 | CLOSED | No change |
 
 ### L3 — Domain Reports
@@ -170,11 +175,11 @@ All gaps across all artifacts:
 - GAP.14: RESOLVED (17 yogas in MSR v2.0)
 - LONGEVITY.GAP.01: SUBSTANTIALLY RESOLVED (Kalachakra 85 years; Pindayu/Nisargayu/Amsayu still pending)
 
-**Current single highest-leverage remaining actions**:
-1. Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md (currently supplement + v6.0 + transcription); fully integrate all corrections into single L1 document
-2. CDLM_v1_1 refresh: update D4.D3 from 0.78→0.61; update D3.D4 correspondingly; update any CDLM cells affected by special lagna corrections
-3. RM_v1_0 rebuild (marked SUPERSEDED pending rebuild since FIX_SESSION_001; 10+ residual Jupiter-from-4H aspect chains)
-4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution — a complete JHora Varshphal + Ayurdasaya export remains the single highest-leverage future data-acquisition action
+**Current single highest-leverage remaining actions** (updated FIX_SESSION_003_deferred 2026-04-18):
+1. ~~Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md~~ — **DONE FIX_SESSION_003_deferred**: FORENSIC_ASTROLOGICAL_DATA_v8_0.md created (1,950 lines); v6.0 and SUPPLEMENT marked SUPERSEDED
+2. ~~CDLM_v1_1 refresh~~ — **DONE FIX_SESSION_003_deferred**: CDLM_v1_1.md created (1,135 lines); 9 cells corrected; v1.0 marked SUPERSEDED
+3. ~~RM rebuild~~ — **DONE FIX_SESSION_003_deferred**: RM_v2_0.md created (32 elements); 8 element blocks corrected; RM.21 split into RM.21A+RM.21B; RM_v1_1 marked SUPERSEDED
+4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution — a complete JHora Varshphal + Ayurdasaya export remains the single highest-leverage future data-acquisition action (§9.6 added to REPORT_HEALTH_LONGEVITY_v1_1 documenting gap status)
 
 ---
 
