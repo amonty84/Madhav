@@ -1,16 +1,17 @@
 ---
 artifact: GOVERNANCE_STACK_v1_0.md
-version: 1.0
-status: CLOSED
-session: 35
+version: 1.0-updated-FIX_SESSION_003
+status: CURRENT (updated in-place; next version will be v2.0)
+session: 35 (created); FIX_SESSION_003 (version registry and gap status updated)
 date_closed: 2026-04-18
+date_updated: 2026-04-18 (FIX_SESSION_003)
 scope: "Project-wide governance stack: version registry, confidence ledger, known-gaps consolidation, change-control protocol"
 architecture_ref: "§G.9 Governance"
 ---
 
 # GOVERNANCE_STACK_v1_0
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 35 | 2026-04-18 | CLOSED
+### Session 35 | 2026-04-18 | Updated FIX_SESSION_003 | 2026-04-18
 
 ---
 
@@ -40,32 +41,39 @@ All closed artifacts as of Session 35:
 
 ### L2.5 — Holistic Synthesis
 
-| Artifact | Version | Status |
-|---|---|---|
-| CGM_v1_0 | 1.0 | CLOSED |
-| MSR_v1_0 | 1.0 | CLOSED |
-| CDLM_v1_0 | 1.0 | CLOSED |
-| RM_v1_0 | 1.0 | CLOSED |
-| UCN_v1_0 | 1.0 | CLOSED (superseded in part by v1.1) |
-| UCN_v1_1 | 1.1 | CURRENT |
-| RED_TEAM_L2_5_v1_0 | 1.0 | CLOSED |
+| Artifact | Version | Status | FIX_SESSION_003 note |
+|---|---|---|---|
+| CGM_v1_0 | 1.0 | CLOSED | No change |
+| MSR_v1_0 | 1.0 | **SUPERSEDED** | Superseded by MSR_v2_0 |
+| **MSR_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003 — 420 original signals carried forward + corrections + 17 new yoga signals + quantitative metric signals MSR.438-443** |
+| CDLM_v1_0 | 1.0 | CLOSED (D4.D3 flag) | D4.D3 flagged for v1.1 revision (0.78→0.61); full CDLM refresh deferred |
+| RM_v1_0 | 1.0 | CLOSED | No change |
+| UCN_v1_0 | 1.0 | CLOSED (superseded in part by v1.1) | No change |
+| UCN_v1_1 | 1.1 | CLOSED (superseded in part by v2.0) | Superseded by UCN v2.0 additions |
+| UCN_v2_0 | 2.0 | CLOSED (superseded in part by v3.0) | Superseded by UCN v3.0 additions |
+| **UCN_v3_0** | **3.0** | **CURRENT (additive layer)** | **NEW FIX_SESSION_003 — §§XVII–XXV; read v1.0+v1.1+v2.0+v3.0 in sequence** |
+| RED_TEAM_L2_5_v1_0 | 1.0 | CLOSED | No change |
 
 ### L3 — Domain Reports
 
-| Artifact | Version | Status |
-|---|---|---|
-| REPORT_CAREER_DHARMA_v1_0 | 1.0 | CLOSED |
-| REPORT_FINANCIAL_v1_0 | 1.0 | CLOSED (superseded by v2.0) |
-| REPORT_FINANCIAL_v2_0 | 2.0 | CURRENT |
-| REPORT_HEALTH_LONGEVITY_v1_0 | 1.0 | CLOSED |
-| REPORT_RELATIONSHIPS_v1_0 | 1.0 | CLOSED |
-| REPORT_PSYCHOLOGY_MIND_v1_0 | 1.0 | CLOSED |
-| REPORT_CHILDREN_v1_0 | 1.0 | CLOSED |
-| REPORT_SPIRITUAL_v1_0 | 1.0 | CLOSED |
-| REPORT_PARENTS_v1_0 | 1.0 | CLOSED |
-| REPORT_TRAVEL_v1_0 | 1.0 | CLOSED |
-| RED_TEAM_L3_v1_0 | 1.0 | CLOSED |
-| CROSS_REPORT_COHERENCE_AUDIT_v1_0 | 1.0 | CLOSED |
+| Artifact | Version | Status | FIX_SESSION_003 note |
+|---|---|---|---|
+| REPORT_CAREER_DHARMA_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_FINANCIAL_v1_0 | 1.0 | CLOSED (superseded by v2.0) | No change |
+| REPORT_FINANCIAL_v2_0 | 2.0 | **SUPERSEDED** | Superseded by v2.1 |
+| **REPORT_FINANCIAL_v2_1** | **2.1** | **CURRENT** | **NEW FIX_SESSION_003 — Shree Lagna 7H added; two-channel Lakshmi architecture; Hora Lagna corrected to 3H** |
+| REPORT_HEALTH_LONGEVITY_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
+| **REPORT_HEALTH_LONGEVITY_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Roga Saham 2H; Mahatmya 9H; Kalachakra 85 years (partial LONGEVITY.GAP.01 resolution)** |
+| REPORT_RELATIONSHIPS_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
+| **REPORT_RELATIONSHIPS_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Five-layer 7H; Shree Lagna added; Vivaha Saham 4H; Gemini nexus upgraded** |
+| REPORT_PSYCHOLOGY_MIND_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_CHILDREN_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_SPIRITUAL_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
+| **REPORT_SPIRITUAL_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Six-mechanism (not seven); Varnada/Ghati 8H removed; Ketu MD reframe** |
+| REPORT_PARENTS_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_TRAVEL_v1_0 | 1.0 | CLOSED | No change |
+| RED_TEAM_L3_v1_0 | 1.0 | CLOSED | No change |
+| CROSS_REPORT_COHERENCE_AUDIT_v1_0 | 1.0 | CLOSED | No change |
 
 ### L4/L5 — Remedial, Temporal, Query Interface
 
@@ -81,32 +89,42 @@ All closed artifacts as of Session 35:
 
 ### Architecture / Governance
 
-| Artifact | Version | Status |
-|---|---|---|
-| PROJECT_ARCHITECTURE_v2_1 | 2.1 | CURRENT |
-| AM_JIS_BOOTSTRAP_HANDOFF | 1.0 | CURRENT |
-| SESSION_LOG | Rolling | CURRENT |
-| GOVERNANCE_STACK_v1_0 | 1.0 | CURRENT (this artifact) |
+| Artifact | Version | Status | FIX_SESSION_003 note |
+|---|---|---|---|
+| PROJECT_ARCHITECTURE_v2_1 | 2.1 | CURRENT | No change |
+| AM_JIS_BOOTSTRAP_HANDOFF | 1.0 | CURRENT | No change |
+| SESSION_LOG | Rolling | CURRENT | FIX_SESSION_003 entry appended |
+| GOVERNANCE_STACK_v1_0 | 1.0-updated | CURRENT (this artifact) | Updated in-place FIX_SESSION_003 |
+| FALSIFIER_REGISTRY_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
+| **FALSIFIER_REGISTRY_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — MSR.402 FALSIFIED; HL-in-7H FALSIFIED; §2.2 five-layer; §2.9 six-mechanism; §2.10 hidden-pinnacle mechanism FALSIFIED** |
+| CONTRADICTION_REGISTRY_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
+| **CONTRADICTION_REGISTRY_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Seven L1 errors resolved; two new architectural contradictions #8 (7H Bhava Bala Paradox) and #9 (Jupiter Ishta/Kashta Paradox); UCN §IX now nine contradictions** |
+| FORENSIC_DATA_v8_0_SUPPLEMENT | 8.0-supp | CURRENT | Added pre-session; authoritative override for seven L1 errors |
+| JHORA_TRANSCRIPTION_v8_0_SOURCE | 8.0-trans | CURRENT | Added pre-session; primary JH export L1 source |
+| V8_0_RECONCILIATION_REPORT | 1.0 | CURRENT | Added pre-session; impact analysis for all downstream corrections |
 
 ---
 
 ## §2 — CONFIDENCE LEDGER
 
-Key confidence ratings across the corpus:
+Key confidence ratings across the corpus (updated FIX_SESSION_003):
 
-| Finding | Confidence | Source |
-|---|---|---|
-| Mercury Seven-System Convergence | 0.98 | MSR.413 |
-| 7H Supreme Six-Layer Convergence | 0.97 | MSR.391 |
-| Sade Sati Paradox cross-system confirmed | 0.95 | MSR.396 |
-| BB-UL 2026 crystallization | 0.90 | MSR.404 (confidence reconciled from 0.86/0.93 → 0.90 in FIX_SESSION_002 after resolution of BB progression method per v7.0 §V7.F 6°/year) |
-| Devata Retrodiction Triple-Lock | 0.91 | MSR.397 |
-| Spiritual Seven-Mechanism Amplification | 0.96 | CDLM.D6.D6 |
-| Mind Domain Self-Amplification | 0.95 | CDLM.D8.D8 |
-| Relationships Karmic Vortex | 0.95 | CDLM.D3.D3 |
-| D9 readings (all) | 0.00 | GAP.02/02b/02c/02d unresolved |
-| Ayurdasaya longevity | 0.00 | LONGEVITY.GAP.01 unresolved |
-| Birth Yoga (Panchang §I.1 FS5) | 0.00 | GAP.01 unresolved |
+| Finding | Confidence | Source | FIX_SESSION_003 update |
+|---|---|---|---|
+| Mercury **Eight**-System Convergence | **0.99** | MSR.413-updated | Count elevated 7→8 (Birth Yoga = Siva = Mercury-ruled) |
+| 7H Supreme **Five**-Layer Convergence | **0.95** | MSR.391-corrected | Count corrected 6→5 (Roga/Mahatmya Saham not in 7H; Shree Lagna confirmed 7H) |
+| Sade Sati Paradox cross-system confirmed | 0.95 | MSR.396 | No change |
+| BB-UL 2026 crystallization | 0.90 | MSR.404 | No change |
+| Devata Retrodiction Triple-Lock | 0.91 | MSR.397 | No change |
+| Spiritual **Six**-Mechanism Amplification | **0.91** | CDLM.D6.D6 | Revised 7→6 mechanism; 0.96→0.91 (Varnada+Ghati 8H mechanism removed) |
+| Mind Domain Self-Amplification | 0.95 | CDLM.D8.D8 | No change |
+| Relationships Karmic Vortex | **0.92** | CDLM.D3.D3 | 5-layer composition confirmed; D4.D3 revised to 0.61 |
+| D9 readings (structural) | **0.88** | GAP.02-resolved | D9 Jupiter/Venus/Saturn/Moon positions confirmed per JH v8.0 |
+| Kalachakra Paramayush | **0.85** | LONGEVITY.GAP.01-partial | **85 years (Savya scheme) confirmed per JH TRANS §10.7** |
+| Birth Yoga | **0.95** | GAP.01-resolved | **Birth Yoga = Siva confirmed per JH TRANS §0** |
+| Special Lagna placements | **0.95** | JH TRANS §2.1 | **All four corrected by JH v8.0 direct computation** |
+| Saham placements (full register) | **0.93** | FORENSIC SUPP §1.3 | **All 36 Sahams registered per JH v8.0** |
+| Pindayu/Nisargayu/Amsayu longevity | 0.00 | LONGEVITY.GAP.01-partial | [EXTERNAL_COMPUTATION_REQUIRED] — still unresolved |
 
 ---
 
@@ -139,16 +157,24 @@ All gaps across all artifacts:
 
 | Gap ID | Description | Affected | Resolution path |
 |---|---|---|---|
-| **GAP.11** | **Special Lagnas v6.0 computational errors** — Hora/Ghati/Varnada/Shree Lagnas all WRONG in v6.0 §12.1 | MSR.391, MSR.402, MSR.404, MSR.407, UCN §V §VI, REPORT_RELATIONSHIPS, REPORT_SPIRITUAL, REPORT_FINANCIAL | Facts Layer v8.0 (corrected values in v8.0 SUPPLEMENT); downstream artifact refreshes |
-| **GAP.12** | **Saham placement errors** — Roga/Mahatmya/Vivaha placements disagree with JH; MSR.391 composition invalid | MSR.391, REPORT_HEALTH, REPORT_RELATIONSHIPS | MSR v2.0 correction; Domain Report refreshes |
-| **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | Dual-karaka-system note in all affected signals; both valid classically |
-| **GAP.14** | **17 classical yogas missing from MSR v1.0** — Kalpadruma, Gaja-Kesari, Sarala, Chaamara, Sankha, Mridanga, Maha Yogada, Sadhu, Vosi, Anaphaa, Kaahala, Raja/Lakshmi, Yogakaraka, Raja AK-PK, Viparita Raja Yoga (Ju), Kedaara (Naabhasa), and others | MSR v2.0 | Promote to MSR v2.0 signals |
+| **GAP.11** | **Special Lagnas v6.0 computational errors** — Hora/Ghati/Varnada/Shree Lagnas all WRONG in v6.0 §12.1 | MSR.391, MSR.402, MSR.404, MSR.407, UCN §V §VI, REPORT_RELATIONSHIPS, REPORT_SPIRITUAL, REPORT_FINANCIAL | **RESOLVED FIX_SESSION_003** — All corrections applied in MSR_v2_0, UCN_v3_0, four domain report refreshes |
+| **GAP.12** | **Saham placement errors** — Roga/Mahatmya/Vivaha placements disagree with JH; MSR.391 composition invalid | MSR.391, REPORT_HEALTH, REPORT_RELATIONSHIPS | **RESOLVED FIX_SESSION_003** — MSR_v2_0 corrections; REPORT_HEALTH_LONGEVITY_v1_1, REPORT_RELATIONSHIPS_v1_1 refreshed |
+| **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | OPEN — dual-karaka-system note applied in MSR_v2_0; both valid classically; full resolution deferred |
+| **GAP.14** | **17 classical yogas missing from MSR v1.0** | MSR v2.0 | **RESOLVED FIX_SESSION_003** — All 17 yogas promoted to MSR_v2_0 signals MSR.421-437 |
+| **LONGEVITY.GAP.01** | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **SUBSTANTIALLY RESOLVED FIX_SESSION_003** — Kalachakra Paramayush = 85 years (Savya scheme) confirmed from JH TRANS §10.7; Pindayu/Nisargayu/Amsayu still [EXTERNAL_COMPUTATION_REQUIRED] |
+
+**FIX_SESSION_003 gap resolution summary:**
+- GAP.11: RESOLVED (special lagna corrections cascade complete)
+- GAP.12: RESOLVED (saham corrections cascade complete)
+- GAP.13: OPEN (dual-karaka noted; full resolution deferred)
+- GAP.14: RESOLVED (17 yogas in MSR v2.0)
+- LONGEVITY.GAP.01: SUBSTANTIALLY RESOLVED (Kalachakra 85 years; Pindayu/Nisargayu/Amsayu still pending)
 
 **Current single highest-leverage remaining actions**:
-1. Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md (currently supplement + v6.0 + transcription); fully integrate
-2. MSR v2.0 with 17 new yoga signals + MSR.391 correction + MSR.402 invalidation
-3. UCN v3.0 incorporating all reconciliation findings
-4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution Still the single highest-leverage future data-acquisition action: a complete JHora Varshphal + Ayurdasaya export.
+1. Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md (currently supplement + v6.0 + transcription); fully integrate all corrections into single L1 document
+2. CDLM_v1_1 refresh: update D4.D3 from 0.78→0.61; update D3.D4 correspondingly; update any CDLM cells affected by special lagna corrections
+3. RM_v1_0 rebuild (marked SUPERSEDED pending rebuild since FIX_SESSION_001; 10+ residual Jupiter-from-4H aspect chains)
+4. Future JH Ayurdasaya export for LONGEVITY.GAP.01 full resolution — a complete JHora Varshphal + Ayurdasaya export remains the single highest-leverage future data-acquisition action
 
 ---
 
@@ -205,4 +231,16 @@ Current log span: Sessions 1-35. Log is current through Session 35.
 
 ---
 
-*End of GOVERNANCE_STACK_v1_0.md — Session 35 — 2026-04-18 — CLOSED*
+---
+
+## §7 — FIX_SESSION_003 AMENDMENT LOG
+
+**Date:** 2026-04-18
+**Session:** FIX_SESSION_003
+**Changes applied to this document:**
+1. Header status updated to reflect in-place update
+2. §1 Version Registry: Added MSR_v2_0 (CURRENT), UCN_v3_0 (CURRENT), REPORT_FINANCIAL_v2_1 (CURRENT), REPORT_HEALTH_LONGEVITY_v1_1 (CURRENT), REPORT_RELATIONSHIPS_v1_1 (CURRENT), REPORT_SPIRITUAL_v1_1 (CURRENT), FALSIFIER_REGISTRY_v1_1 (CURRENT), CONTRADICTION_REGISTRY_v1_1 (CURRENT); marked superseded artifacts
+3. §2 Confidence Ledger: Updated Mercury count (7→8), 7H layer count (6→5), Spiritual mechanism count (7→6), added resolved gaps (Birth Yoga, Special Lagnas, Kalachakra)
+4. §3 Known Gaps: GAP.11 RESOLVED, GAP.12 RESOLVED, GAP.14 RESOLVED, LONGEVITY.GAP.01 SUBSTANTIALLY RESOLVED; updated remaining actions
+
+*End of GOVERNANCE_STACK_v1_0.md — Session 35 — updated FIX_SESSION_003 — 2026-04-18*

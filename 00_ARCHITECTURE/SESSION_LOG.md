@@ -1100,3 +1100,123 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 5. FALSIFIER_REGISTRY and CONTRADICTION_REGISTRY updates for v8.0 findings
 
 **Corpus status**: PASS-WITH-V8-CORRECTIONS-PENDING. Facts Layer v8.0 source is now available and documented. Downstream corpus requires systematic revision in FIX_SESSION_003+.
+
+---
+
+## FIX_SESSION_003 — v8.0 Correction Cascade (2026-04-18, CLOSED)
+
+**Environment**: Claude Code (CLI, `/Users/Dev/Vibe-Coding/Apps/Madhav`)
+**Objective**: Systematic propagation of v8.0 JH reconciliation findings to all downstream artifacts; nine tasks covering L2.5 Holistic Synthesis, L3 Domain Reports, and governance registries.
+
+**Source data used**:
+- `01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md` — authoritative override for seven L1 errors
+- `01_FACTS_LAYER/JHORA_TRANSCRIPTION_v8_0_SOURCE.md` — primary JH export L1 source
+- `00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md` — impact analysis for all downstream corrections
+
+**Output produced (9 tasks completed)**:
+
+### Task 1 — MSR_v2_0.md
+**File**: `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` (NEW — CURRENT; supersedes MSR_v1_0)
+- 420 original signals carried forward with exceptions
+- Corrected signals: MSR.391 (5-layer, not 6), MSR.402b (Varnada Cancer 4H), MSR.402c (Ghati Sagittarius 9H), MSR.404-corrected (HL Gemini 3H), MSR.407 (Shree Lagna Libra 7H), MSR.413-updated (Mercury 8-system)
+- 17 new yoga signals: MSR.421-437 (Kalpadruma, Gaja-Kesari D-9, Sarala D-10, Chaamara, Sankha, Mridanga, Maha Yogada D-2, Sadhu D-2, Vosi, Anaphaa, Kaahala D-9, Raja-Lakshmi D-9, Yogakaraka Mars, Raja AK-PK, Viparita Raja Yoga Jupiter D-9, Kedaara Naabhasa, Birth Yoga Siva)
+- Quantitative metric signals: MSR.438-443 (Bhava Bala 5H rank 1, 7H rank 12, Saturn Ishta 9:1, Jupiter Kashta 1:5, Pancha-Vargeeya operational triad, Kalachakra 85 years)
+- Saham correction signals: MSR.391a-c (Roga 2H, Mahatmya 9H, Vivaha 4H)
+
+### Task 2 — UCN_v3_0.md
+**File**: `025_HOLISTIC_SYNTHESIS/UCN_v3_0.md` (NEW — CURRENT additive layer; read v1.0+v1.1+v2.0+v3.0 in sequence)
+- §XVII: 7H Five-Layer Wealth-Relational-Lakshmi Anchor (corrects prior six-layer claims)
+- §XVIII: Six-Mechanism Spiritual Architecture (supersedes UCN v2.0 §VI.4 seven-mechanism)
+- §XIX: Ketu MD 2031-2038 Reframe (invalidates Varnada+Ghati 8H hidden-pinnacle)
+- §XX: Mercury Eight-System Designation (Birth Yoga = Siva = 8th system)
+- §XXI: Gaja-Kesari D-9 Yoga
+- §XXII: Full Yoga Constellation (17 yogas confirmed)
+- §XXIII: Ishta/Kashta Quantitative Reinforcement (Operational Triad architecture confirmed by metrics)
+- §XXIV-XXV: Metadata and changelog
+
+### Task 3 — REPORT_RELATIONSHIPS_v1_1.md
+**File**: `03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md` (NEW — CURRENT; supersedes v1.0)
+- §6.2 revised: Five-layer composition (not six); Shree Lagna added as Layer 4
+- Vivaha Saham corrected: Cancer 4H (not Gemini 3H)
+- Gemini 3H nexus upgraded: four elements including Hora Lagna
+- D3.D4 mechanism revised: Roga Saham no longer in 7H
+- MSR.391 confidence updated to 0.92
+
+### Task 4 — REPORT_SPIRITUAL_v1_1.md
+**File**: `03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md` (NEW — CURRENT; supersedes v1.0)
+- §2 Seven-Mechanism revised to Six-Mechanism
+- Varnada+Ghati 8H mechanism removed as FALSIFIED
+- Shree Lagna removed from 9H (now correctly 7H; spiritual implications noted)
+- Ketu MD reframe: dharmic-depth authority (not 8H hidden pinnacle)
+
+### Task 5 — REPORT_FINANCIAL_v2_1.md
+**File**: `03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md` (NEW — CURRENT; supersedes v2.0)
+- Two-channel Lakshmi architecture established: 9H (dharmic) + 7H (relational/Shree Lagna)
+- Hora Lagna corrected: Gemini 3H (communication-wealth axis, not 7H)
+- Saturn Ishta/Kashta 9:1 quantitative data integrated
+- Maha Yogada D-2 yoga added
+- Saturn "Dramatic-Not-Compound" paradox resolved by Ishta/Kashta metric
+
+### Task 6 — REPORT_HEALTH_LONGEVITY_v1_1.md
+**File**: `03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md` (NEW — CURRENT; supersedes v1.0)
+- §6.5 (Roga Saham): corrected from Libra 7H to Taurus 2H (Mrigashira) — speech-intake-family health nexus
+- §6.7 (Mahatmya Saham): new finding — Sagittarius 9H (Purva Ashadha) adds dharmic-resilience health buffer
+- §7.4 revised: 2H Speech-Wealth Health Nexus replaces 7H relational-health mirror
+- §8.4 revised: D4.D3 = 0.61 (reduced from 0.78; structural basis removed)
+- §9.1 extended: Kalachakra Paramayush 85 years — LONGEVITY.GAP.01 substantially resolved
+- §9.5 new: Kalachakra Paramayush architecture — 85-year staging framework
+
+### Task 7 — FALSIFIER_REGISTRY_v1_1.md
+**File**: `00_ARCHITECTURE/FALSIFIER_REGISTRY_v1_1.md` (NEW — CURRENT; supersedes v1.0)
+- MSR.402 (Varnada+Ghati 8H): **FALSIFIED** per JH v8.0 direct computation
+- HL-in-7H claim: **FALSIFIED** per JH v8.0 (new §2.13)
+- §2.1 (Mercury): Count elevated 7→8 systems
+- §2.2 (MSR.391): Composition corrected 6→5 layers; falsifier conditions updated
+- §2.9 (Spiritual): Seven→six mechanism; self-amplification 0.96→0.91
+- §2.10 (Ketu MD): Hidden-pinnacle mechanism FALSIFIED; revised claim (dharmic-depth authority) registered as OPEN until 2031
+- Summary table: 2 claims falsified, 3 revised, remainder unfalsified
+
+### Task 8 — CONTRADICTION_REGISTRY_v1_1.md
+**File**: `00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_1.md` (NEW — CURRENT; supersedes v1.0)
+- §2.3 new: Seven L1 errors — resolved by FIX_SESSION_003 cascade
+- §4.1 new: Architectural Contradiction #8 — 7H Bhava Bala Paradox (rank 12 weakest house + maximum yoga density; UCN §IX now has nine contradictions)
+- §4.2 new: Architectural Contradiction #9 — Jupiter Ishta/Kashta Paradox (worst Kashta 48.81 + highest Pancha-Vargeeya 14.76; defines Operational Triad's Jupiter-as-authorizer prescription)
+- §5 updated: D4.D3 asymmetry flagged for next CDLM revision
+- UCN §IX expanded from seven to nine architectural contradictions
+
+### Task 9 — GOVERNANCE_STACK_v1_0.md (in-place edit)
+**File**: `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` (UPDATED in-place)
+- §1 Version Registry: All new/superseded artifacts recorded
+- §2 Confidence Ledger: Mercury 8-system 0.99, 7H 5-layer 0.95, Spiritual 6-mechanism 0.91, Kalachakra 0.85, Birth Yoga 0.95, Special Lagnas 0.95, Sahams 0.93
+- §3 Known Gaps: GAP.11 RESOLVED, GAP.12 RESOLVED, GAP.14 RESOLVED, LONGEVITY.GAP.01 SUBSTANTIALLY RESOLVED; remaining actions updated
+
+**Key findings from FIX_SESSION_003:**
+
+1. **Corpus is architecturally stronger post-correction.** The seven L1 errors, when corrected, reveal: Shree Lagna (Lakshmi's seat) confirmed in the chart's most powerful 7H yoga-density house; Mahatmya Saham in Jupiter's own 9H domain confirming dharmic eminence; Ghati Lagna in 9H similarly confirming dharmic empowerment; Hora Lagna in Mercury's own 3H confirming the Mercury-communication-wealth axis. The corrections consistently move the picture toward greater coherence and strength, not away from it.
+
+2. **Two claims definitively falsified:** MSR.402 (Varnada+Ghati in 8H) and HL-in-7H. Both were computational errors in v6.0's special lagna calculations. No analytical claim in the corpus survived unfalsified that rested solely on these placements.
+
+3. **Jupiter paradox quantified for first time.** The Ishta/Kashta data (1:5 malefic despite highest Pancha-Vargeeya) provides the first quantitative explanation for CTR.03 (Jupiter "visible but not compounding"). This paradox becomes Architectural Contradiction #9 and defines the Operational Triad's core operating principle: Jupiter authorizes, Saturn delivers.
+
+4. **Two new architectural contradictions registered.** UCN §IX grows from seven to nine. Both new contradictions (#8 Bhava Bala Paradox, #9 Jupiter Ishta/Kashta Paradox) are quantitatively grounded — the first time UCN §IX has machine-verifiable entries rather than purely qualitative chart observations.
+
+5. **Kalachakra 85-year staging confirmed.** LONGEVITY.GAP.01's partial resolution provides the first longevity quantity for the corpus. The 85-year Kalachakra Paramayush converges exactly with the qualitative architectural reading (Madhyayu-to-Purnayu: 65–85+ years). The alignment of independent methods increases confidence in the longevity picture.
+
+**Corpus integrity post-FIX_SESSION_003:**
+- All seven L1 errors propagated to downstream artifacts — systematic cascade complete
+- Primary chart architecture (Mercury 8-system, Saturn AmK, Jupiter 9L, Ketu 8H, Moon AK, ATT pattern, Mercury MD → Ketu MD trajectory) remains intact and strengthened
+- MSR.402 falsified; MSR.391 composition corrected; no other major claims falsified
+- 17 new yoga signals promoted to MSR v2.0 — chart's yoga density significantly elevated
+
+**Pending from this session's scope (deferred):**
+1. Full FORENSIC_ASTROLOGICAL_DATA_v8.0.md rewrite (currently three-part: v6.0 + v7.0 supplement + v8.0 supplement + JH transcription)
+2. CDLM_v1_1 refresh: D4.D3 correction (0.78→0.61) + D3.D4 corresponding revision + any cells affected by special lagna corrections
+3. RM_v1_0 rebuild (marked SUPERSEDED since FIX_SESSION_001; 10+ residual Jupiter-from-4H aspect chains)
+4. Full Pindayu/Nisargayu/Amsayu longevity computation (requires JH Ayurdasaya export)
+
+**Next session objective:** Phase consolidation — choose one of:
+- (A) FORENSIC_DATA_v8.0.md full integration (L1 cleanup)
+- (B) CDLM_v1_1 revision (L2.5 cleanup)
+- (C) RM rebuild (L2.5 cleanup)
+- (D) Query the corpus — test the corrected architecture against specific life questions
+
