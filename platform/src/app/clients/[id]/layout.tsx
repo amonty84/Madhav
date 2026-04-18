@@ -1,6 +1,4 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { buttonVariants } from '@/components/ui/button'
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 export default async function ClientLayout({
@@ -18,30 +16,11 @@ export default async function ClientLayout({
   const service = createServiceClient()
   const [{ data: profile }, { data: chart }] = await Promise.all([
     service.from('profiles').select('role').eq('id', user.id).single(),
-    service.from('charts').select('name, birth_date, client_id').eq('id', id).single(),
+    service.from('charts').select('client_id').eq('id', id).single(),
   ])
 
   if (!chart) redirect('/dashboard')
   if (profile?.role !== 'astrologer' && chart.client_id !== user.id) redirect('/dashboard')
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      <header className="border-b px-4 py-3 flex items-center gap-4">
-        <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">
-          ← Dashboard
-        </Link>
-        <span className="font-medium">{chart.name}</span>
-        <span className="text-xs text-muted-foreground">{chart.birth_date}</span>
-        <div className="ml-auto flex gap-2">
-          <Link href={`/clients/${id}/build`} className={buttonVariants({ variant: 'ghost', size: 'sm' })}>
-            Build
-          </Link>
-          <Link href={`/clients/${id}/consume`} className={buttonVariants({ variant: 'ghost', size: 'sm' })}>
-            Consume
-          </Link>
-        </div>
-      </header>
-      <main className="flex-1 flex flex-col">{children}</main>
-    </div>
-  )
+  return <div className="flex h-[100dvh] flex-col">{children}</div>
 }
