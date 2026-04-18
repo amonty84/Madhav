@@ -255,6 +255,52 @@ The Kalachakra Paramayush of 85 years places the natural completion marker in th
 
 ---
 
+## §9.6 — Longevity Computation Status (as of FIX_SESSION_003_deferred, 2026-04-18)
+
+**This section is new — added in FIX_SESSION_003 deferred items pass.**
+
+### Computation Registry
+
+The following table is the authoritative registry of all classical longevity computation methods for this nativity, their current resolution status, and their source:
+
+| Method | System | Status | Value | Source |
+|--------|--------|--------|-------|--------|
+| Kalachakra Paramayush | Kalachakra (time-wheel) | **CONFIRMED** | **85 years — Savya scheme** | JH TRANS §10.7 (JHORA_TRANSCRIPTION_v8_0_SOURCE.md) |
+| Pindayu | Parashari — planetary-strength-based longevity | **[EXTERNAL_COMPUTATION_REQUIRED]** | — | Not in JH standard export; requires dedicated Ayurdasaya tab |
+| Nisargayu | Parashari — natural/intrinsic longevity | **[EXTERNAL_COMPUTATION_REQUIRED]** | — | Not in JH standard export; requires dedicated Ayurdasaya tab |
+| Amsayu | Parashari — divisional-chart longevity | **[EXTERNAL_COMPUTATION_REQUIRED]** | — | Not in JH standard export; requires dedicated Ayurdasaya tab |
+| Jaimini Longevity | Jaimini methodology | **[EXTERNAL_COMPUTATION_REQUIRED]** | — | Not retrieved in v8.0 export |
+
+### The Ayurdasaya Gap (LONGEVITY.GAP.01 — Revised Status)
+
+**Gap name**: LONGEVITY.GAP.01 — Ayurdasaya incomplete
+
+**Original gap** (v1.0): No classical longevity computation was available. The gap was total.
+
+**Current status** (v1.1 after FIX_SESSION_003): **Partially resolved.**
+
+The Kalachakra Paramayush (85 years, Savya scheme) is confirmed from direct JH export. This is one of the five standard classical longevity indicators. Four remain outstanding.
+
+**What is available**: Kalachakra is the "time-wheel" system computed from the Moon's nakshatra and its Savya/Apsavya orientation. Its delivery via JH export is clean and does not require additional planetary strength data. The 85-year figure is high-confidence.
+
+**What is NOT available**: Pindayu, Nisargayu, and Amsayu are the three Parashari longevity methods that require precise Shadbala (planetary strength) inputs applied through classical formulas. These are NOT available in the JH standard chart export — they require JH's dedicated **Ayurdasaya** tab (a separate computation module within JH). The gap here is a data-retrieval gap, not a conceptual gap.
+
+**Closure condition**: LONGEVITY.GAP.01 will be fully resolved when the JH Ayurdasaya tab data is retrieved and transcribed. At that point, all three Parashari methods (Pindayu, Nisargayu, Amsayu) can be computed and their average taken as the classical Parashari longevity indicator.
+
+### Implication for Longevity Assessment
+
+Until the three Parashari methods are computed, the complete longevity picture is:
+
+- **Kalachakra** says: maximum 85 years (confirmed)
+- **Qualitative architecture** says: Madhyayu-to-Purnayu, 65–85+ years (confirmed in v1.0)
+- **Convergence**: both lines of evidence point to the 85-year upper range as the structural target
+
+The Pindayu/Nisargayu/Amsayu methods could confirm, modify upward, or modify downward the Kalachakra figure. Until computed, the 85-year Kalachakra value is the only quantitative anchor. Practitioners should treat it as the best available quantitative indicator while acknowledging the Ayurdasaya gap.
+
+**Priority for future session**: Retrieve JH Ayurdasaya tab data (Pindayu, Nisargayu, Amsayu values). This will close LONGEVITY.GAP.01 completely and enable a full five-method classical longevity synthesis.
+
+---
+
 ## §17v — CDLM D4 Source Data Revised Table
 
 **SUPERSEDES §17 of v1.0.**
