@@ -1,14 +1,18 @@
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+import { redirect, notFound } from 'next/navigation'
 import { ConsumeChat } from '@/components/consume/ConsumeChat'
-import { listConversations } from '@/lib/conversations'
+import {
+  getConversation,
+  listConversations,
+  loadConversationMessages,
+} from '@/lib/conversations'
 
-export default async function ConsumePage({
+export default async function ConsumeConversationPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string; conversationId: string }>
 }) {
-  const { id } = await params
+  const { id, conversationId } = await params
 
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -21,11 +25,20 @@ export default async function ConsumePage({
   ])
 
   if (!chart) redirect('/dashboard')
-  if (profile?.role !== 'astrologer' && chart.client_id !== user.id) redirect('/dashboard')
+  const isAstrologer = profile?.role === 'astrologer'
+  if (!isAstrologer && chart.client_id !== user.id) redirect('/dashboard')
 
-  const [{ data: reports }, conversations] = await Promise.all([
+  const conversation = await getConversation({
+    id: conversationId,
+    userId: user.id,
+    isAstrologer,
+  })
+  if (!conversation || conversation.chart_id !== id) notFound()
+
+  const [{ data: reports }, conversations, messages] = await Promise.all([
     service.from('reports').select('*').eq('chart_id', id).order('domain'),
     listConversations({ chartId: id, userId: user.id, module: 'consume' }),
+    loadConversationMessages(conversationId),
   ])
 
   const chartMeta = [chart.birth_date, chart.birth_place].filter(Boolean).join(' · ')
@@ -44,6 +57,8 @@ export default async function ConsumePage({
         user_id: c.user_id,
         module: c.module,
       }))}
+      currentConversationId={conversationId}
+      initialMessages={messages}
     />
   )
 }
