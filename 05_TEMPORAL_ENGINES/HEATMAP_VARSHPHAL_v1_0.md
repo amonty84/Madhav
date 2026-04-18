@@ -1,9 +1,14 @@
 ---
 artifact: HEATMAP_VARSHPHAL_v1_0.md
-version: 1.0
+version: 1.0.1
 status: CLOSED
 session: 31
 date_closed: 2026-04-18
+corrections:
+  - correction_id: CORR.HV.01
+    date: 2026-04-19
+    source: "FORENSIC_v8_0 §12.1; RM_v2_0 RM.21A/RM.21B"
+    summary: "Audit confirmed no stale Varnada/Ghati 8H or hidden-pinnacle references in this artifact. Version bumped to 1.0.1 for provenance parity with LIFETIME_TIMELINE_v1_0.1 correction cascade."
 native: Abhisek Mohanty
 scope: "Near-term (36-month) heatmap + Varshphal analysis for 2026-27 and 2027-28 solar return cycles"
 parent: LIFETIME_TIMELINE_v1_0, UCN_v1_1

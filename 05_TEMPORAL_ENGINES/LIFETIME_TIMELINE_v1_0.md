@@ -1,9 +1,14 @@
 ---
 artifact: LIFETIME_TIMELINE_v1_0.md
-version: 1.0
+version: 1.0.1
 status: CLOSED
 session: 30
 date_closed: 2026-04-18
+corrections:
+  - correction_id: CORR.TL.01
+    date: 2026-04-19
+    source: "FORENSIC_v8_0 §12.1; RM_v2_0 RM.21A/RM.21B"
+    summary: "§2 Phase 4 — 'hidden-pinnacle' framing based on Varnada+Ghati in 8H FALSIFIED. Corrected: Ghati Lagna=9H Sagittarius, Varnada Lagna=4H Cancer. Ketu MD arc preserved via Ketu-8H exaltation; lagna-based framing removed."
 native: Abhisek Mohanty
 scope: "Life-arc from birth (1984) through Saturn Libra return (2044) — key dasha transitions, major-event windows, structural inflection points"
 parent: MATRIX_DASHA_PERIODS.md, UCN_v1_1.md, Domain Reports
@@ -67,7 +72,7 @@ Life arc from 1984 birth through Saturn's Libra return 2041-2044 (age 57-60). Co
 
 ### Phase 4: Ketu MD — Moksha-Turn Arc (2031-2038, age 47-54)
 
-**Ketu MD is the chart's hidden-pinnacle activation period.** Ketu exalted in 8H + Varnada+Ghati Lagnas in Scorpio 8H = the chart's deepest authentic authority manifests during Ketu MD.
+**Ketu MD is the chart's deep-transformation activation period.** Ketu exalted in Scorpio 8H = Ketu MD activates 8H transformation depth, renunciation, and occult inquiry via Ketu's own placement. NOTE: The v6.0 claim that "Varnada+Ghati Lagnas are both in Scorpio 8H" is FALSIFIED per FORENSIC_v8_0 §12.1. Correct positions: Ghati Lagna = 9H Sagittarius (Jupiter's sign; genuine authority through dharmic mastery and teaching); Varnada Lagna = 4H Cancer (Moon's sign; fulfillment through emotional depth and ancestral grounding). The Ketu MD transformation arc is preserved via Ketu-8H exaltation. The lagna-based framing is corrected. See RM_v2_0 RM.21A (Ghati 9H) and RM.21B (Varnada 4H).
 
 | Ketu MD Sub-phase | Years | Age | Character (projected) |
 |---|---|---|---|
