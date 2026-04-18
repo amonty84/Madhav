@@ -8,6 +8,14 @@ supersedes: MSR_v1_0.md
 scope: "Master Signal Register — 420 original signals carried forward (with v8.0 corrections applied to affected signals) + 17 new yoga signals (MSR.421–MSR.437) from JH v8.0 transcription. This is a complete corrected register; MSR_v1_0 is superseded and moves to SUPERSEDED status."
 parent_sources: [JHORA_TRANSCRIPTION_v8_0_SOURCE.md, FORENSIC_DATA_v8_0_SUPPLEMENT.md, V8_0_RECONCILIATION_REPORT.md, MSR_v1_0.md]
 corrections_applied: [MSR.391 recomposed, MSR.402 INVALIDATED + replacement added, MSR.404 confidence upgraded 0.86→0.94, MSR.407 reframed, MSR.413 upgraded to 8-system, MSR.022 Vivaha Saham corrected, all HL/GL/Varnada/Shree Lagna citations corrected]
+provenance_policy: |
+  MSR.001-420 (v6.0-era signals): Built from FORENSIC_ASTROLOGICAL_DATA_v6.0 + v7.0 data.
+  All v6.0-era signals have been cross-checked against FORENSIC_v8_0 in FIX_SESSION_003 and GAP_RESOLUTION_SESSION:
+  - Signals whose underlying facts were CORRECTED in v8.0 carry explicit correction notes in their reconciliation fields.
+  - All other v6.0-era signals are CONFIRMED by FORENSIC_v8_0 (same fact, same position, same relationship).
+  MSR.421-443 (v8.0-native signals): Built directly from FORENSIC_v8_0 data; full provenance.
+  MSR.444+ (Mode B promotion, if any): Built from Mode B matrices + v8.0 verification.
+  CGP Provenance status: COMPLETE (2026-04-19 GAP_RESOLUTION_SESSION).
 ---
 
 # MASTER SIGNAL REGISTER v2.0 — Abhisek Mohanty
@@ -16,9 +24,42 @@ corrections_applied: [MSR.391 recomposed, MSR.402 INVALIDATED + replacement adde
 
 ---
 
-## §0 — SCHEMA REFERENCE AND VERSION NOTES
+## §0 — PROVENANCE REGISTRY
 
-### §0.1 Schema
+### §0.1 — v6.0-Era Signal Provenance (MSR.001-420)
+
+All 420 v6.0-era signals cross-checked against FORENSIC_v8_0 (2026-04-19).
+
+**CORRECTED signals** (underlying fact changed in v8.0 — already updated in FIX_SESSION_003):
+
+| Signal | Correction Summary | Reconciliation Field |
+|---|---|---|
+| MSR.022 | Vivaha Saham corrected: Cancer 4H Pushya (not Gemini Ardra 3H); HL added to 3H nexus | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.024 | Saturn CTR.01 substantially revised: Ishta/Kashta 43.28/4.81 inverts "Dramatic-Not-Compound" → ~9:1 beneficial | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.391 | Major recomposition: HL (→3H), Roga (→2H), Mahatmya (→9H) removed; Shree Lagna (7H confirmed) added; confidence 0.97→0.92 | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.402 | INVALIDATED: Varnada+Ghati 8H architecture false (both confirmed NOT in 8H by JH); replaced by MSR.402b | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.404 | Confidence upgraded 0.86→0.94: HL confirmed Gemini 3H (not 7H); 3H becomes five-fold activation | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.407 | Shree Lagna corrected out of 9H (it is in 7H per JH); confidence 0.87→0.82 | reconciliation: FIX_SESSION_003 2026-04-18 |
+| MSR.413 | Upgraded Seven-System → Eight-System: Mercury = lord of Birth Yoga Siva (GAP.01 resolved) | reconciliation: FIX_SESSION_003 2026-04-18 |
+
+Note: The following NEW signals were added in FIX_SESSION_003 to document corrected positions:
+- MSR.391a — Roga Saham corrected placement: Taurus 2H
+- MSR.391b — Mahatmya Saham corrected placement: Sagittarius 9H
+- MSR.391c — Vivaha Saham corrected placement: Cancer 4H
+- MSR.402b — Varnada (Cancer 4H) + Ghati (Sagittarius 9H) corrected architecture
+
+**CONFIRMED signals** (underlying fact unchanged — confirmed by v8.0):
+All other MSR.001-420 signals. The v6.0 data for these cells was accurate and is retained in v8.0 without change. See §II for the explicit UNAFFECTED confirmation list of notable signals.
+
+**CGP Provenance category**: COMPLETE (2026-04-19)
+
+Provenance status also updated in GOVERNANCE_STACK §3 (see Task G1).
+
+---
+
+## §0-SCHEMA — SCHEMA REFERENCE AND VERSION NOTES
+
+### §0-SCHEMA.1 Schema
 
 Every signal follows the 12-field schema (per Architecture §C.3.2):
 
@@ -42,7 +83,7 @@ SIG.MSR.NNN:
   rpt_deep_dive: ""
 ```
 
-### §0.2 Version Notes — What Changed from v1.0
+### §0-SCHEMA.2 Version Notes — What Changed from v1.0
 
 MSR v2.0 carries all 420 signals from v1.0 with the following changes:
 
@@ -67,7 +108,7 @@ MSR v2.0 carries all 420 signals from v1.0 with the following changes:
 - MSR.001 through MSR.420 (except those noted above) carry forward unchanged from v1.0
 - All signal IDs are stable; v2.0 does not renumber
 
-### §0.3 Signal Range Summary
+### §0-SCHEMA.3 Signal Range Summary
 
 | Range | Content | Count |
 |---|---|---|
@@ -1090,6 +1131,7 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 | 1.0 | 2026-04-17 | Session 12 | Initial creation: 575 signals (later rationalized to 420 unique) |
 | 2.0 | 2026-04-18 | FIX_SESSION_003 | MAJOR: v8.0 reconciliation corrections; 17 new yoga signals (MSR.421–437); 6 new quantitative signals (MSR.438–443); 4 saham-correction signals; MSR.391 recomposed; MSR.402 invalidated + MSR.402b added; MSR.404 upgraded; MSR.407 corrected; MSR.413 upgraded to 8-system; MSR.024 revised; MSR.022 corrected |
 | 2.0 (Task E1 audit) | 2026-04-19 | Task E1 | Mode B SIG.16-31 audit: all 16 candidates confirmed absorbed as MSR.031-046 in v1.0 carry-forward; 0 genuinely pending; §VII Mode B audit section added; three-interpretation spot-check on MSR.031/038/046 confirms original promotions warranted; residual gap 53-153 signals to 500-600 target documented with 6 gap-filling pathways; no signal renumbering, total remains 447 |
+| 2.0-provenance | 2026-04-19 | GAP_RESOLUTION_SESSION | Provenance backfill: §0 Provenance Registry added; v6.0-era signals confirmed/corrected status documented; 7 corrected signals + 4 new replacement signals listed; all other MSR.001-420 confirmed by FORENSIC_v8_0; provenance_policy YAML field added to frontmatter; CGP Provenance: COMPLETE |
 
 ---
 
