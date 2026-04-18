@@ -14,6 +14,7 @@ interface Props {
   rightPanelBadge?: number
   headerTitle?: string
   headerMeta?: string
+  headerActions?: ReactNode
   desktopSidebarCollapsed: boolean
   mobileSidebarOpen: boolean
   onToggleDesktopSidebar: () => void
@@ -29,6 +30,7 @@ export function ChatShell({
   rightPanelBadge,
   headerTitle,
   headerMeta,
+  headerActions,
   desktopSidebarCollapsed,
   mobileSidebarOpen,
   onToggleDesktopSidebar,
@@ -101,6 +103,7 @@ export function ChatShell({
             )}
           </div>
           <div className="ml-auto flex items-center gap-1">
+            {headerActions}
             {rightPanel && (
               <button
                 type="button"

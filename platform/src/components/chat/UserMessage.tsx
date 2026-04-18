@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { UIMessage } from 'ai'
 import { motion, useReducedMotion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
-import { FileText } from 'lucide-react'
+import { FileText, ChevronLeft, ChevronRight } from 'lucide-react'
 import { MessageActions } from './MessageActions'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -30,9 +30,18 @@ function getFileParts(message: UIMessage): FilePart[] {
 interface Props {
   message: UIMessage
   onEditSubmit?: (id: string, text: string) => void
+  branchTotal?: number
+  branchCurrent?: number
+  onStepBranch?: (delta: -1 | 1) => void
 }
 
-export function UserMessage({ message, onEditSubmit }: Props) {
+export function UserMessage({
+  message,
+  onEditSubmit,
+  branchTotal,
+  branchCurrent,
+  onStepBranch,
+}: Props) {
   const text = getText(message)
   const files = getFileParts(message)
   const [editing, setEditing] = useState(false)
@@ -118,7 +127,32 @@ export function UserMessage({ message, onEditSubmit }: Props) {
             <p className="whitespace-pre-wrap break-words">{text}</p>
           </div>
         )}
-        <div className="opacity-0 transition-opacity duration-150 group-hover/message:opacity-100 focus-within:opacity-100">
+        <div className="flex items-center gap-2 opacity-0 transition-opacity duration-150 group-hover/message:opacity-100 focus-within:opacity-100 has-[:focus]:opacity-100 data-[branch]:opacity-100" data-branch={branchTotal && branchTotal > 1 ? '' : undefined}>
+          {branchTotal && branchTotal > 1 && typeof branchCurrent === 'number' && onStepBranch && (
+            <div className="flex items-center gap-0.5 rounded-md border border-border bg-background px-1 py-0.5 text-[11px] text-muted-foreground">
+              <button
+                type="button"
+                onClick={() => onStepBranch(-1)}
+                disabled={branchCurrent <= 0}
+                aria-label="Previous version"
+                className="inline-flex size-5 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
+              >
+                <ChevronLeft className="size-3" />
+              </button>
+              <span className="tabular-nums px-0.5">
+                {branchCurrent + 1}/{branchTotal}
+              </span>
+              <button
+                type="button"
+                onClick={() => onStepBranch(1)}
+                disabled={branchCurrent >= branchTotal - 1}
+                aria-label="Next version"
+                className="inline-flex size-5 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
+              >
+                <ChevronRight className="size-3" />
+              </button>
+            </div>
+          )}
           <MessageActions
             onCopy={text ? copy : undefined}
             onEdit={onEditSubmit && text ? () => setEditing(true) : undefined}

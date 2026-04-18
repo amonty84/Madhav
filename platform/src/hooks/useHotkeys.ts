@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 
 interface Bindings {
+  onPalette?: () => void
   onNewChat?: () => void
   onToggleSidebar?: () => void
   onShortcutsHelp?: () => void
@@ -22,6 +23,11 @@ export function useHotkeys(bindings: Bindings) {
     function onKey(e: KeyboardEvent) {
       const mod = e.metaKey || e.ctrlKey
       if (mod && e.key.toLowerCase() === 'k' && !e.shiftKey) {
+        e.preventDefault()
+        bindings.onPalette?.()
+        return
+      }
+      if (mod && e.shiftKey && e.key.toLowerCase() === 'o') {
         e.preventDefault()
         bindings.onNewChat?.()
         return

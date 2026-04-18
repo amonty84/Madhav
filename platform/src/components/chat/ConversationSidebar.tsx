@@ -10,6 +10,8 @@ import {
   Plus,
   PanelLeft,
   ArrowLeft,
+  Search,
+  X,
 } from 'lucide-react'
 import {
   isToday,
@@ -76,7 +78,16 @@ export function ConversationSidebar({
 }: Props) {
   const router = useRouter()
   const pathname = usePathname()
-  const groups = useMemo(() => groupByDate(conversations), [conversations])
+  const [query, setQuery] = useState('')
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return conversations
+    return conversations.filter(c => (c.title ?? 'new chat').toLowerCase().includes(q))
+  }, [conversations, query])
+
+  const groups = useMemo(() => groupByDate(filtered), [filtered])
+  const searching = query.trim().length > 0
 
   async function handleRename(id: string) {
     const current = conversations.find(c => c.id === id)
@@ -141,11 +152,43 @@ export function ConversationSidebar({
         </button>
       </div>
 
+      <div className="px-3 pb-2">
+        <div className="relative">
+          <Search
+            className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
+            aria-hidden
+          />
+          <input
+            type="search"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search conversations…"
+            aria-label="Search conversations"
+            className="w-full rounded-md border border-border/60 bg-background/50 py-1.5 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30"
+          />
+          {searching && (
+            <button
+              type="button"
+              onClick={() => setQuery('')}
+              aria-label="Clear search"
+              className="absolute right-1.5 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              <X className="size-3" />
+            </button>
+          )}
+        </div>
+      </div>
+
       <ScrollArea className="flex-1">
         <div className="px-2 pb-4">
           {conversations.length === 0 && (
             <p className="px-3 py-6 text-center text-xs text-muted-foreground">
               No conversations yet.
+            </p>
+          )}
+          {conversations.length > 0 && filtered.length === 0 && (
+            <p className="px-3 py-6 text-center text-xs text-muted-foreground">
+              No conversations match &ldquo;{query}&rdquo;.
             </p>
           )}
           {groups.map(([label, rows]) => (

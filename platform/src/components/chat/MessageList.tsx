@@ -5,6 +5,11 @@ import { UserMessage } from './UserMessage'
 import { AssistantMessage } from './AssistantMessage'
 import type { Rating } from '@/hooks/useFeedback'
 
+interface BranchStat {
+  total: number
+  current: number
+}
+
 interface Props {
   messages: UIMessage[]
   isStreaming: boolean
@@ -12,6 +17,8 @@ interface Props {
   onEditUserMessage?: (id: string, text: string) => void
   ratings?: Record<string, Rating>
   onRate?: (messageId: string, rating: Rating) => void
+  branchStats?: Record<string, BranchStat>
+  onStepBranch?: (messageId: string, delta: -1 | 1) => void
 }
 
 export function MessageList({
@@ -21,13 +28,25 @@ export function MessageList({
   onEditUserMessage,
   ratings,
   onRate,
+  branchStats,
+  onStepBranch,
 }: Props) {
   return (
     <div className="flex flex-col gap-6 py-6">
       {messages.map((message, i) => {
         const isLast = i === messages.length - 1
         if (message.role === 'user') {
-          return <UserMessage key={message.id} message={message} onEditSubmit={onEditUserMessage} />
+          const stat = branchStats?.[message.id]
+          return (
+            <UserMessage
+              key={message.id}
+              message={message}
+              onEditSubmit={onEditUserMessage}
+              branchTotal={stat?.total}
+              branchCurrent={stat?.current}
+              onStepBranch={onStepBranch ? d => onStepBranch(message.id, d) : undefined}
+            />
+          )
         }
         if (message.role === 'assistant') {
           return (

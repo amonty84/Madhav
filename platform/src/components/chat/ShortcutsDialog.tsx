@@ -14,7 +14,8 @@ interface Props {
 }
 
 const SHORTCUTS: { keys: string[]; label: string }[] = [
-  { keys: ['⌘', 'K'], label: 'New chat' },
+  { keys: ['⌘', 'K'], label: 'Command palette' },
+  { keys: ['⌘', '⇧', 'O'], label: 'New chat' },
   { keys: ['⌘', 'B'], label: 'Toggle sidebar' },
   { keys: ['⌘', '/'], label: 'Show keyboard shortcuts' },
   { keys: ['↵'], label: 'Send message' },
