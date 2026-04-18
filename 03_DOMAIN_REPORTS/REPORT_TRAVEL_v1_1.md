@@ -1,9 +1,9 @@
 ---
-document: REPORT_TRAVEL_v1_0.md
-version: 1.0.1
-status: SUPERSEDED
-session: 26 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18)
-date_closed: 2026-04-18
+document: REPORT_TRAVEL_v1_1.md
+version: 1.1
+status: CURRENT
+session: 26 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18); v8.0 correction via Task A2 (2026-04-19)
+date_closed: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D9 — Travel, Foreign Residence, Pilgrimage
 parent_UCN_version: UCN_v1_1.md
@@ -12,14 +12,19 @@ word_count_estimate: ~11000
 primary_msr_anchors: [MSR.381, MSR.392, MSR.399, MSR.407, MSR.335, MSR.413, MSR.397]
 primary_cdlm_row: D9 (all 9 cells cited in §10 Citation Index below)
 primary_ucn_sections: [UCN §IV.5 Singapore-as-dharmic-base, UCN §VI.1 foreign-moksha, UCN §VI.3 Venkateshwara-pilgrimage]
-primary_l1_sections: [FORENSIC §2.1 PLN.JUPITER (12L, 9L in own sign), FORENSIC §11.3 YOG.POINT (12H), FORENSIC §12.1 LAG.SHREE + Saham Paradesa, FORENSIC §13 ARD.UL]
+primary_l1_sections: [FORENSIC §2.1 PLN.JUPITER (12L, 9L in own sign), FORENSIC §11.3 YOG.POINT (12H), FORENSIC_v8_0 §12.1 LAG.SHREE + Saham Paradesa, FORENSIC §13 ARD.UL]
 organizing_principle: Foreign residence (Singapore) is architecturally endorsed by the chart's Saham Paradesa in 1H + Yogi Point in 12H + Jupiter's 12L ownership from own-sign 9H. The native's identity IS a traveler-abroad; the career-defining event (2007 Singapore move) aligns with this structural identity
 reconciliation: "FIX_SESSION_002 2026-04-18 — Citation density upgrade per AUDIT WS2.08. Original v1.0 had 2 citations (below Domain Report protocol). Added structured §10 Citation Index mapping major claims to source artifacts. Citation count increased from 2 to ~25 via index."
+changelog:
+  - version: 1.1
+    date: 2026-04-19
+    change: "Shree Lagna corrected 9H Sagittarius → 7H Libra Vishakha per FORENSIC_v8_0 §12.1 (RM.20). §3 9H bullet updated: SL removed from 9H planet list; new §3 SL note added. §10.1 citation table row corrected. Narrative clarification: 9H travel via Jupiter+Venus remains valid; SL's contribution routes through 7H partnership gateway."
+    source: FORENSIC_v8_0 §12.1; RM_v2_0 RM.20
 ---
 
-# REPORT_TRAVEL_v1_0 — Travel and Foreign Residence Domain Report
+# REPORT_TRAVEL_v1_1 — Travel and Foreign Residence Domain Report
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 26 | 2026-04-18 | CLOSED
+### Session 26 (original) | v1.1 correction 2026-04-19 | CURRENT
 
 ---
 
@@ -55,8 +60,12 @@ Three structural facts confirm foreign residence as chart-congruent:
 
 **9H Sagittarius (long travel, pilgrimage, dharma)**:
 - Jupiter (9L own sign) + Venus (7L, 2L, MK)
-- Shree Lagna in 9H
 - The dharmic-foreign-pilgrimage domain at maximum benefic density
+- *Note (v1.1 correction)*: Shree Lagna is NOT in 9H. Per FORENSIC_v8_0 §12.1, Shree Lagna = 7H Libra Vishakha. The dharmic-pilgrimage quality of 9H is fully sustained by Jupiter+Venus; SL's wealth-activation routes through the 7H partnership gateway (see §3 7H note below).
+
+**7H Libra (partnerships, Shree Lagna)**:
+- Saturn (7L exalted — FORENSIC §2.1) + A7 Arudha
+- **Shree Lagna in 7H Libra Vishakha** (FORENSIC_v8_0 §12.1 | LAG.SHREE): Lagna of prosperity anchored in partnership domain. Wealth activates through collaborative travel, shared journeys, and relational encounters abroad — not through solo-pilgrimage architecture. SL in 7H means the native's prosperity signature is most fully expressed when traveling with or toward significant partners (professional, personal, dharmic).
 
 **12H Pisces (foreign residence, isolation, moksha)**:
 - Untenanted in D1
@@ -128,7 +137,7 @@ Per Domain Report protocol: every major claim must cite UCN §, MSR.*, CDLM.*, o
 |---|---|---|
 | Jupiter in 9H own sign Sagittarius (9L + 12L) | FORENSIC §2.1 | PLN.JUPITER |
 | Yogi Point at 12H Pisces 22°20' Revati | FORENSIC §11.3 | YOG.POINT.* |
-| Shree Lagna in 9H Sagittarius | FORENSIC §12.1 | LAG.SHREE |
+| Shree Lagna in 7H Libra Vishakha (v1.1 corrected from stale 9H) | FORENSIC_v8_0 §12.1 | LAG.SHREE |
 | UL (Upapada) Gemini 3H | FORENSIC §13.1 | ARD.UL |
 | Saham Paradesa in 1H Aries (foreign lot) | FORENSIC §12.2 | SAH.PARADESA |
 | 9H SAV = 25 bindus | FORENSIC §7.2 | AVG.SAV.SAGITTARIUS |
@@ -179,4 +188,4 @@ Per Domain Report protocol: every major claim must cite UCN §, MSR.*, CDLM.*, o
 
 ---
 
-*End of REPORT_TRAVEL_v1_0.md — Session 26 — 2026-04-18 — CLOSED (citation-density upgrade FIX_SESSION_002)*
+*End of REPORT_TRAVEL_v1_1.md — Session 26 (original) | v1.1 correction 2026-04-19 — Shree Lagna corrected 9H→7H Libra Vishakha per FORENSIC_v8_0 §12.1 | CURRENT*
