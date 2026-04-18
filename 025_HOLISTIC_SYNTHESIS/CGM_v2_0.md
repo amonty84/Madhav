@@ -2,13 +2,15 @@
 document: L2.5 HOLISTIC SYNTHESIS — CHART GRAPH MODEL
 project: AM-JIS
 layer: L2.5 (Holistic Synthesis Layer)
-artifact_id: CGM_v1_0
-version: 1.0
-status: SUPERSEDED by CGM_v2_0 (2026-04-19 — special lagna corrections per FORENSIC_v8_0 §12.1)
+artifact_id: CGM_v2_0
+version: 2.0
+status: CURRENT
+session: GAP_RESOLUTION_SESSION (2026-04-19)
 purpose: Represents the chart as a single connected graph — every astrological entity a node, every classical relationship an edge. Foundation for Master Signal Register (MSR — Session 12), Cross-Domain Linkage Matrix (CDLM — Session 13), Resonance Map (RM — Session 13), and Unified Chart Narrative (UCN — Sessions 14-17).
-source_layer: L1 Facts (v6.0 + v7.0 + CGP audit), L2 Mode A (Deep Analysis v1.2.1), L2 Mode B (5 matrices Sessions 7-10)
+source_layer: L1 Facts (v8.0 CURRENT), L2 Mode A (Deep Analysis v1.2.1), L2 Mode B (5 matrices Sessions 7-10)
 architecture_ref: §G.4.A Chart Graph Model Build
 outputs_feed_to: L2.5 MSR + CDLM + RM + UCN; L3 Domain Reports will traverse CGM for cross-domain linkage
+supersedes: CGM_v1_0
 ---
 
 # CHART GRAPH MODEL — Abhisek Mohanty
@@ -39,11 +41,11 @@ This enables:
 4. **Subgraphs are views**, not separate graphs — same nodes and edges, filtered by domain-attribute.
 5. **Graph is dynamic at dasha level**: some edges activate only during specific dasha periods (see §4.11 Dasha-Activation edges).
 
-### §1.3 — Scope for v1.0
+### §1.3 — Scope for v2.0
 
-v1.0 focuses on natal (D1) graph with D9/D10 divisional-confirmation overlays. Deeper Dx integration (D12, D27, D60 karma-chains) deferred to v1.1.
+v2.0 corrects four special lagna node positions per FORENSIC_v8_0 §12.1 (JH-authoritative). All position-dependent edges updated. v2.0 focuses on natal (D1) graph with D9/D10 divisional-confirmation overlays. Deeper Dx integration (D12, D27, D60 karma-chains) deferred to v2.1.
 
-**Totals**: 206 nodes, 847 edges (counted in §2 and §4).
+**Totals**: 234 nodes, 339 edges (counted in §2 and §4).
 
 ---
 
@@ -96,20 +98,22 @@ v1.0 focuses on natal (D1) graph with D9/D10 divisional-confirmation overlays. D
 |---|---|---|
 | `NAK.ASHWINI` | Ashwini | Lagna (12°23', Pada 4) |
 | `NAK.ROHINI` | Rohini | Rahu (Pada 3) |
-| `NAK.MRIGASHIRA` | Mrigashira | Ketu co-occupies Jyeshtha's 16th tara; Dhuma here |
+| `NAK.MRIGASHIRA` | Mrigashira | Ketu co-occupies Jyeshtha's 16th tara; Dhuma here; **LAG.HORA** (v2.0 corrected: 0°39′ Gemini) |
 | `NAK.PUNARVASU` | Punarvasu | (Ketu's 22nd tara from Moon) |
 | `NAK.PURVA_PHALGUNI` | Purva Phalguni | — (Vainashika tara from Moon nakshatra) |
 | `NAK.UTTARA_PHALGUNI` | Uttara Phalguni | — |
 | `NAK.SWATI` | Swati | Mars (Pada 4) |
-| `NAK.VISHAKHA` | Vishakha | Saturn (Pada 1) |
+| `NAK.VISHAKHA` | Vishakha | Saturn (Pada 1); **LAG.SHREE** (v2.0 corrected: 23°19′ Libra, Vishakha Pada 1) |
 | `NAK.JYESHTHA` | Jyeshtha | Ketu (Pada 1) |
 | `NAK.MOOLA` | Moola | Jupiter (Pada 3) |
-| `NAK.PURVA_ASHADHA` | Purva Ashadha | Venus (Pada 2); Upaketu |
+| `NAK.PURVA_ASHADHA` | Purva Ashadha | Venus (Pada 2); Upaketu; **LAG.GHATI** (v2.0 corrected: 13°56′ Sagittarius, Pada 1) |
 | `NAK.UTTARA_ASHADHA` | Uttara Ashadha | Mercury (Pada 2); Labha Saham |
 | `NAK.SHRAVANA` | Shravana | Sun (Pada 4) |
 | `NAK.PURVA_BHADRAPADA` | Purva Bhadrapada | **Moon (Pada 3) = Janma Nakshatra** |
 
-**14 nodes.**
+| `NAK.PUSHYA` | Pushya | **LAG.VARNADA** (v2.0 corrected: 12°25′ Cancer, Pushya Pada 3) — no planet occupant; added for sensitive-point coverage |
+
+**15 nodes** (v2.0 adds NAK.PUSHYA for LAG.VARNADA coverage).
 
 ### §2.5 — Yoga nodes (19)
 
@@ -183,7 +187,7 @@ Lifetime Vimshottari MD lords (7 unique) + AD combinations (key 20 AD instances)
 |---|---|---|
 | Upagrahas (v6.0 §11.1) | `UPG.GULIKA`, `UPG.MANDI`, `UPG.YAMAGHANTAKA`, `UPG.ARDHAPRAHARA`, `UPG.DHUMA`, `UPG.VYATIPATA`, `UPG.PARIVESHA`, `UPG.INDRACHAPA`, `UPG.UPAKETU` | 9 |
 | Arudhas | `ARD.AL`, `ARD.A2`, `ARD.A3`, `ARD.A4`, `ARD.A5`, `ARD.A6`, `ARD.A7`, `ARD.A8`, `ARD.A9`, `ARD.A10`, `ARD.A11`, `ARD.UL` | 12 |
-| Special Lagnas | `LAG.BHAVA`, `LAG.HORA`, `LAG.GHATI`, `LAG.INDU`, `LAG.SHREE`, `LAG.VARNADA`, `LAG.PRANAPADA` | 7 (v6.0 + v7.0) |
+| Special Lagnas | `LAG.BHAVA` (Aries 1H), `LAG.HORA` (Gemini 3H Mrigashira — **v2.0 corrected**), `LAG.GHATI` (Sagittarius 9H Purva Ashadha — **v2.0 corrected**), `LAG.INDU` (Scorpio 8H), `LAG.SHREE` (Libra 7H Vishakha — **v2.0 corrected**), `LAG.VARNADA` (Cancer 4H Pushya — **v2.0 corrected**), `LAG.PRANAPADA` (Pisces 12H), `LAG.VIGHATI` (Leo 5H Purva Phalguni — v8.0 new) | 8 (v6.0 + v7.0 + v8.0 new: VIGHATI) |
 | Saham — key 10 of 23 | `SAH.PUNYA`, `SAH.RAJYA`, `SAH.KARMA`, `SAH.LABHA`, `SAH.VIVAHA`, `SAH.PUTRA`, `SAH.PITRI`, `SAH.MATRI`, `SAH.VYAPARA`, `SAH.PARADESA` | 10 (subset) |
 | Bhrigu Bindu + Yogi/Avayogi + Mrityu-Bhaga refs | `BB.NATAL`, `YOG.POINT`, `AVY.POINT`, misc | 4 |
 
@@ -418,9 +422,19 @@ Saturn's 6-yoga membership is unusual and validates CVG.05 quadruple-activation.
 ```
 BB.NATAL (Libra 8°04') → HSE.7 (tenancy) → YOG.ARIES_LIBRA_AXIS (via composition)
 LAG.BHAVA (Aries 14°23') → HSE.1 (sign-house match for Aries Lagna)
-LAG.HORA (Libra 10°11') → HSE.7 (co-location with Saturn)
-LAG.GHATI (Scorpio 06°53') → HSE.8 (moksha emphasis — Ghati-in-8H is strong Ketu-domain resonance)
-LAG.SHREE (Sagittarius 24°15') → HSE.9 (Shree-Lagna in 9H = dharmic-prosperity placement)
+LAG.HORA (Gemini 0°39′ Mrigashira) → HSE.3 (v2.0 CORRECTED from 7H Libra; dispositor: PLN.MERCURY; Mercury rules Gemini+3H = communication-skill emphasis)
+LAG.HORA → NAK.MRIGASHIRA (v2.0: nakshatra placement established)
+LAG.HORA → PLN.MERCURY (v2.0: dispositor updated from Venus to Mercury)
+LAG.GHATI (Sagittarius 13°56′ Purva Ashadha) → HSE.9 (v2.0 CORRECTED from 8H Scorpio; dispositor: PLN.JUPITER; Ghati-in-9H = authority through dharmic mastery)
+LAG.GHATI → NAK.PURVA_ASHADHA (v2.0: nakshatra placement established)
+LAG.GHATI → PLN.JUPITER (v2.0: dispositor updated from Mars to Jupiter)
+LAG.VARNADA (Cancer 12°25′ Pushya) → HSE.4 (v2.0 CORRECTED from 8H Scorpio; dispositor: PLN.MOON; Varnada-in-4H = fulfillment through emotional depth)
+LAG.VARNADA → NAK.PUSHYA (v2.0: nakshatra placement established)
+LAG.VARNADA → PLN.MOON (v2.0: dispositor updated from Mars to Moon)
+LAG.SHREE (Libra 23°19′ Vishakha Pada 1) → HSE.7 (v2.0 CORRECTED from 9H Sagittarius; dispositor: PLN.VENUS; Shree Lagna co-tenant with Saturn in 7H)
+LAG.SHREE → NAK.VISHAKHA (v2.0: Vishakha-ruled Shree Lagna; nakshatra lord Jupiter adds dharmic overlay to Libra 7H prosperity)
+LAG.SHREE → PLN.VENUS (v2.0: dispositor updated from Jupiter to Venus)
+LAG.SHREE → PLN.JUPITER (v2.0: secondary edge via Vishakha nakshatra lordship — Jupiter rules Vishakha)
 LAG.PRANAPADA (Pisces 28°27') → HSE.12 (moksha-activation; v7.0 addition)
 ARD.AL → HSE.10 (karma-arudha in 10H — chart's identity projects as career)
 ARD.UL → HSE.3 (spouse-arudha in Gemini = nexus per CVG.07)
@@ -648,6 +662,22 @@ CGM provides the **structural spine**. Each UCN Part maps to subgraphs:
 ## §10 — CHANGELOG
 
 ```yaml
+v2.0 (2026-04-19, GAP_RESOLUTION_SESSION):
+  - Node corrections per FORENSIC_v8_0 §12.1 (JH authoritative):
+      LAG.HORA: 7H Libra (Libra 10°11′) → 3H Gemini (0°39′ Mrigashira); dispositor: Venus → Mercury
+      LAG.GHATI: 8H Scorpio (6°53′) → 9H Sagittarius (13°56′ Purva Ashadha); dispositor: Mars → Jupiter
+      LAG.VARNADA: 8H Scorpio → 4H Cancer (12°25′ Pushya); dispositor: Mars → Moon
+      LAG.SHREE: 9H Sagittarius (24°15′) → 7H Libra (23°19′ Vishakha Pada 1); dispositor: Jupiter → Venus
+  - All position-dependent edges in §4.4 updated to new house/sign/nakshatra/dispositor
+  - New dispositor edges added: HORA→Mercury, GHATI→Jupiter, VARNADA→Moon, SHREE→Venus
+  - New nakshatra edges added: HORA→Mrigashira, GHATI→Purva Ashadha, VARNADA→Pushya, SHREE→Vishakha
+  - Secondary SHREE→Jupiter edge added (Vishakha nakshatra lord)
+  - NAK.PUSHYA added to node catalog (§2.4) for LAG.VARNADA coverage (15 nakshatra nodes)
+  - LAG.VIGHATI added to §2.9 (v8.0 new node from §12.1)
+  - §2.9 Special Lagnas count updated: 7 → 8
+  - Status: CURRENT; CGM_v1_0 SUPERSEDED
+  - Source: FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.1
+
 v1.0 (2026-04-17, Session 11 — first L2.5 artifact):
   - Initial Chart Graph Model: 234 nodes + 339 edges
   - 11 edge types defined with classical rules
@@ -655,15 +685,16 @@ v1.0 (2026-04-17, Session 11 — first L2.5 artifact):
   - Centrality analysis (in-degree ranking) — Saturn #1, Mercury #2, Jupiter #3
   - Design for weighting formula (computation deferred to v1.1)
   - Sun-dignity correction from Session 10b reflected
-  - Status: CLOSED (Session 11 output)
+  - Status: SUPERSEDED by CGM_v2_0
 
 # Future:
-v1.1 (planned — after MSR + CDLM Sessions 12-13):
+v2.1 (planned — after MSR + CDLM Sessions 12-13):
   - Expand to ~900 edges (divisional-confirmation full, saham composition full, dasha sub-periods)
   - Compute edge weights across all edges per §5 formula
   - Add betweenness centrality via algorithmic traversal
   - Add D60 past-karma edge layer
   - Promote tentative SIG.16-31 to full yoga nodes after Deep Analysis v2.0 review
+  - Integrate LAG.VIGHATI edges (v8.0 new lagna)
 ```
 
-**END OF CHART GRAPH MODEL v1.0 — first L2.5 artifact shipped.**
+**END OF CHART GRAPH MODEL v2.0 — special lagna node + edge corrections applied per FORENSIC_v8_0 §12.1.**
