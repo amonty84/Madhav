@@ -1,17 +1,20 @@
 ---
 document: REPORT_PARENTS_v1_0.md
-version: 1.0
+version: 1.0.1
 status: CLOSED
-session: 25
+session: 25 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18)
 date_closed: 2026-04-18
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D7 — Parents
 parent_UCN_version: UCN_v1_1.md
 red_team_applied: YES
 word_count_estimate: ~10500
-primary_msr_anchors: [MSR.342, MSR.394, MSR.407, MSR.374]
-primary_cdlm_row: D7
+primary_msr_anchors: [MSR.342, MSR.394, MSR.407, MSR.374, MSR.391, MSR.320, MSR.330]
+primary_cdlm_row: D7 (all 9 cells cited in §13 Citation Index below)
+primary_ucn_sections: [UCN §III.4 4H mother-governance, UCN §IV.1 9H father-dharma, UCN §V.7 relational ecosystem]
+primary_l1_sections: [FORENSIC §2.1 PLN.JUPITER/VENUS/SUN/MOON, FORENSIC §10.1 Chara Karakas GK/MK, FORENSIC §11.5 HAZ.MANDI, LEL §4 parental events]
 organizing_principle: The 9H (Jupiter + Venus) holds both father's house and dharma/spirit; both parents' primary significators (Jupiter GK = father; Venus MK = mother) are in the dharmic trine in own-sign/exalted-ish placements. The parental dharmic transmission is architecturally strong, even though father deceased 2018 and father's kidney illness arc 2013-2018 was a significant family event.
+reconciliation: "FIX_SESSION_002 2026-04-18 — Citation density upgrade per AUDIT WS2.08. Original v1.0 had 1 citation (below Domain Report protocol). Added structured §13 Citation Index mapping each major claim to its L1/L2.5/UCN source; inline citation markers preserved where already present. Citation count increased from 1 to ~25 via the index."
 ---
 
 # REPORT_PARENTS_v1_0 — Parents Domain Report
@@ -99,8 +102,73 @@ The parental domain is not primarily a challenge-domain in this chart. It is:
 - Currently quiet at the timing level (no acute activation)
 - Architecturally supportive (1H-5H-9H dharmic continuity)
 
-The practical orientation: continue honoring the paternal dharmic transmission (Vishnu/Venkateshwara devotion is the dharmic continuation of the father's values set — LEL noted father was dharmically oriented); maintain mother's quality of life with attention to the 4H Mandi-shadow (subtle background disturbance in domestic/emotional-security domain that benefits from deliberate attention).
+The practical orientation: continue honoring the paternal dharmic transmission (Vishnu/Venkateshwara devotion is the dharmic continuation of the father's values set — LEL noted father was dharmically oriented; cross-ref UCN §VI.3 devata-alignment; MSR.397 Devata Retrodiction Triple-Lock); maintain mother's quality of life with attention to the 4H Mandi-shadow (subtle background disturbance in domestic/emotional-security domain that benefits from deliberate attention; cross-ref FORENSIC §11.5 HAZ.MANDI; MSR.225 Mandi-in-4H).
 
 ---
 
-*End of REPORT_PARENTS_v1_0.md — Session 25 — 2026-04-18 — CLOSED*
+## §13 — CITATION INDEX (added 2026-04-18 FIX_SESSION_002)
+
+Per Domain Report protocol (`03_DOMAIN_REPORTS/CLAUDE.md`): every major claim cites UCN §, MSR.*, CDLM.*, or L1 source. The v1.0 original of this report deferred full inline citation density. This index provides the missing traceability.
+
+### 13.1 L1 Facts citations
+
+| Claim | L1 Source | ID |
+|---|---|---|
+| Jupiter 9H Sagittarius own sign (father's house) | FORENSIC §2.1 | PLN.JUPITER |
+| Venus 9H Sagittarius with Jupiter (mother-significator in dharmic trine) | FORENSIC §2.1 | PLN.VENUS |
+| Sun in 10H Capricorn (father-karaka in career house) | FORENSIC §2.1 | PLN.SUN |
+| Moon in 11H Aquarius (mother-lord from community house) | FORENSIC §2.1 | PLN.MOON |
+| Mandi in Cancer 4H (background malefic in mother's house) | FORENSIC §11.5 | HAZ.MANDI |
+| Jupiter = GK by Chara Karaka | FORENSIC §10.1 | KRK.C.GNATI |
+| Venus = MK by Chara Karaka | FORENSIC §10.1 | KRK.C.MATRU |
+| Sun = BK by Chara Karaka (sibling-resources) | FORENSIC §10.1 | KRK.C.BHRATRU |
+| Father deceased 2018-02-05 (native's birthday) | LEL_v1_1 | EVT.2018.02.05 |
+| Father's kidney disease arc 2013-2018 | LEL_v1_1 | EVT.2013 onward |
+
+### 13.2 L2.5 MSR citations
+
+| Claim | MSR Signal | Confidence |
+|---|---|---|
+| Mother's Jaimini Rashi Drishti to Cancer 4H from Aquarius 11H | MSR.320 | 0.82 |
+| Paternal dharmic transmission pattern (1H-5H-9H trine chain) | MSR.394 | 0.85 |
+| 9H Jupiter+Venus as Laxmi-Narayana-adjacent architecture | MSR.407 | 0.87 |
+| MK Venus in 9H as mother-significator in dharmic domain | MSR.342 | 0.80 |
+| Devata Retrodiction Triple-Lock (Vishnu/Venkateshwara) | MSR.397 | 0.91 |
+| Purva Bhadrapada Moon (mother-significator's nakshatra) | MSR.374 | 0.87 |
+| 4H SAV value and Mandi-shadow interaction | MSR.225 | 0.75 |
+| AK-DK-A7 alignment (Moon-Mercury-11H spouse-image) | MSR.330 | 0.88 |
+
+### 13.3 L2.5 CDLM citations (full D7 row)
+
+| Cell | Strength | Mechanism |
+|---|---|---|
+| CDLM.D7.D1 | 0.71 | Parents → career dharmic foundation (9H→10H) |
+| CDLM.D7.D2 | 0.68 | Parental wealth-transmission (Venus 2L in 9H) |
+| CDLM.D7.D3 | 0.60 | Moderate; relationships partially constrain parental domain |
+| CDLM.D7.D4 | 0.65 | Parental health lineage; Mandi 4H subtle shadow |
+| CDLM.D7.D5 | 0.75 | Parents feed children domain (1H-5H-9H axis) |
+| CDLM.D7.D6 | 0.82 | Parent-spirit fusion in 9H |
+| CDLM.D7.D7 | 0.70 | Self-amplification moderate |
+| CDLM.D7.D8 | 0.70 | Philosophical mind has parental roots |
+| CDLM.D7.D9 | 0.65 | Parents' blessing enables foreign residence |
+
+### 13.4 UCN citations
+
+| Claim | UCN Section |
+|---|---|
+| 4H sanctuary / mother-governance from 11H Moon | UCN §III.4 |
+| 9H father-dharma architecture (Jupiter+Venus) | UCN §IV.1 |
+| 1H-5H-9H generational dharmic trine chain | UCN §IV.2 (Children Report §7 cross-ref) |
+| Relational ecosystem placing parents in dharmic trine | UCN §V.7 |
+| Devata derivation and parental values-continuity | UCN §VI.3 |
+
+### 13.5 Cross-Domain Report references
+
+- REPORT_CHILDREN_v1_0 §7 (1H-5H-9H dharmic trine detailed)
+- REPORT_SPIRITUAL_v1_0 §7 (Jupiter-Venus 9H Laxmi-Narayana-adjacent)
+- REPORT_RELATIONSHIPS_v1_0 §17 (4H inner sanctuary / Mandi shadow)
+- REPORT_HEALTH_LONGEVITY_v1_0 (parental health lineage; 4H-6H interaction)
+
+---
+
+*End of REPORT_PARENTS_v1_0.md — Session 25 — 2026-04-18 — CLOSED (citation-density upgrade FIX_SESSION_002)*

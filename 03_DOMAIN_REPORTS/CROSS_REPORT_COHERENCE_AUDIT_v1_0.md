@@ -150,9 +150,9 @@ This is a material observation: the remaining Known Gaps are not independent iss
 
 2. **Facts Layer v8.0 priority**: Jagannatha Hora export is the single highest-leverage data acquisition for resolving 7 known gaps simultaneously.
 
-3. **Sessions 16-17 residual check**: Confirmed no residual Jupiter-4H claims in Career and Financial reports (see RED_TEAM_L3 §2.2). No refresh needed.
+3. **Sessions 16-17 residual check**: ~~Confirmed no residual Jupiter-4H claims in Career and Financial reports~~ **[CORRECTED 2026-04-18 FIX_SESSION_001]**: This claim was a false negative. AUDIT_REPORT_v1_0 (2026-04-18) exhaustively found 11 residual Jupiter-4H claims in REPORT_CAREER_DHARMA_v1_0 (lines 54, 151, 230-238, 262, 280, 298, 300, 392). Financial Report v2.0 remains clean. Career Report refreshed in FIX_SESSION_001 (2026-04-18) to correct all 11 residuals; parent UCN version bumped to v1.1. See CONTRADICTION_REGISTRY §2.2 for the process-failure note.
 
-4. **Cross-report status**: All 9 Domain Reports APPROVED post cross-coherence audit. No contradictions requiring correction.
+4. **Cross-report status**: ~~All 9 Domain Reports APPROVED post cross-coherence audit~~ **[CORRECTED 2026-04-18 FIX_SESSION_001]**: 8 of 9 Domain Reports APPROVED post-audit; REPORT_CAREER_DHARMA_v1_0 required FIX_SESSION_001 refresh due to residual Jupiter-4H claims. Post-refresh, all 9 Domain Reports APPROVED.
 
 ---
 

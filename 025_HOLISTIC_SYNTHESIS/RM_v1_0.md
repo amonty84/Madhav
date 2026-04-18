@@ -3,18 +3,34 @@ artifact: RM_v1_0.md
 artifact_type: Resonance Map
 layer: L2.5 — Holistic Synthesis
 version: 1.0
-status: OPEN
+status: SUPERSEDED
 date_opened: 2026-04-18
-session: 13
+date_superseded: 2026-04-18
+session: 13 (original); SUPERSEDED via FIX_SESSION_001 (2026-04-18)
+supersession_reason: "Contains 10+ residual Jupiter-from-4H aspect chains that contradict the corrected Jupiter placement (Sagittarius 9H own sign) per UCN v1.1. Element blocks for HSE_1, HSE_4_CANCER, PLN_SUN, PLN_RAHU, PLN_KETU, PLN_MOON, and constructive-resonance segments are affected (lines 64, 129, 248, 398, 450, 564, 606, 651, 683-705, 989 per AUDIT_REPORT_v1_0 §5.2). Full rewrite deferred to future RM v1.1 rebuild."
+downstream_consumers: "UCN v1.1 (mother document) and all L3 Domain Reports operate independently of RM_v1_0; no active consumer depends on RM's specific aspect-chain claims. RM v1.0 preserved for reference only."
 parent_artifacts: [MSR_v1_0.md, CDLM_v1_0.md, CGM_v1_0.md]
-feeds_into: [UCN_v1_0.md, Domain Reports L3]
+feeds_into: [UCN_v1_0.md (SUPERSEDED in part by v1.1), Domain Reports L3 (now independent of RM)]
 native: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 elements_planned: 35
 elements_completed: 0
 schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
+rebuild_priority: MEDIUM (schedule for post-Facts-Layer-v8.0 rebuild using corrected Jupiter-from-9H aspect chains: 5th→1H, 7th→3H, 9th→5H)
 ---
 
 # AM-JIS — Resonance Map v1.0 (`RM_v1_0.md`)
+
+> **⚠️ SUPERSEDED 2026-04-18 — DO NOT USE FOR CURRENT ANALYSIS**
+>
+> This artifact contains **10+ residual Jupiter-from-4H aspect chain claims** that are geometrically false under the corrected Jupiter placement (Sagittarius 9H own sign, per UCN v1.1). Specifically, element blocks at lines 64, 129, 248, 398, 450, 564, 606, 651, 683–705, and 989 assert Jupiter aspects on 10H, 8H, 7H, and 12H from "4H" — Jupiter in 9H Sagittarius does NOT produce any of these aspects. Jupiter's actual aspects from 9H are: 5th special aspect → 1H (Lagna), 7th full aspect → 3H (UL house), 9th special aspect → 5H (creativity/children).
+>
+> **Consumers**: UCN v1.1 (mother document) and all 9 L3 Domain Reports operate independently of RM_v1_0. No active consumer depends on RM's specific aspect-chain claims. This artifact is preserved only as historical reference.
+>
+> **For current resonance analysis**, use UCN_v1_1.md directly or consult the Domain Reports (REPORT_CAREER_DHARMA_v1_0, REPORT_FINANCIAL_v2_0, REPORT_HEALTH_LONGEVITY_v1_0, REPORT_RELATIONSHIPS_v1_0, REPORT_PSYCHOLOGY_MIND_v1_0, REPORT_CHILDREN_v1_0, REPORT_SPIRITUAL_v1_0, REPORT_PARENTS_v1_0, REPORT_TRAVEL_v1_0).
+>
+> **Rebuild plan**: RM v1.1 rebuild scheduled post-Facts-Layer-v8.0 upgrade; rebuild must use corrected Jupiter-from-9H aspect chains throughout. Pending.
+
+---
 
 ## Purpose
 

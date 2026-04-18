@@ -390,7 +390,10 @@ The instruction for the relational domain under Ketu MD: invest in depth, not br
 
 ### §16 — The Relational Ecosystem: UCN §V.7 Applied
 
-UCN §V.7 established that the six relational domains in this chart (7H, 4H, 3H, 5H, 11H, 12H) are one organism — not six independent spheres but a single integrated relational web governed by three planetary governors (Jupiter: 4H-9H via lordship/aspect; Mercury: 3H-10H-UL; Saturn: 7H-11H). This section expands that framework for each relational house in turn.
+UCN §V.7 established that the six relational domains in this chart (7H, 4H, 3H, 5H, 11H, 12H) are one organism — not six independent spheres but a single integrated relational web governed by three planetary governors (Jupiter: 9H own-sign residence + 12H lordship + karaka role for 4H-happiness [Jupiter as natural 4H significator]; Mercury: 3H UL-lord + 10H resident + DK-spouse-significator; Saturn: 7H exalted tenant + 11H lordship). This section expands that framework for each relational house in turn.
+
+<!-- [FIX_SESSION_001 2026-04-18]: Prior phrasing "Jupiter: 4H-9H via lordship/aspect" was ambiguous and risked being read as Jupiter residing in or directly aspecting 4H (which is false — Jupiter is in 9H Sagittarius and does not aspect 4H). Clarified to: Jupiter is in 9H own-sign, rules 12H via Pisces lordship, and relates to 4H only as the natural Sthira karaka for 4H-happiness/mother (not by tenancy or by drishti). -->
+
 
 ---
 

@@ -59,6 +59,23 @@ CDLM.Dx.Dy:
 - **compensates**: Domain A's weakness is offset by Domain B's strength
 - **contradicts**: Domain A and Domain B are in structural tension in this chart
 
+### Directional Asymmetry Convention (added 2026-04-18 FIX_SESSION_002)
+
+CDLM cells can carry asymmetric strengths across the diagonal — i.e., `CDLM.Dx.Dy.strength` ≠ `CDLM.Dy.Dx.strength` for some pairs. This is by design, not error. The asymmetry reflects genuine mechanistic differences in directional flow:
+
+- `Dx → Dy` strength quantifies how strongly the row-domain influences the column-domain
+- `Dy → Dx` strength quantifies the reverse flow
+- These can legitimately differ when the underlying mechanism is asymmetric
+
+**Example**: CDLM.D1.D2 (Career → Wealth) = 0.92; CDLM.D2.D1 (Wealth → Career) = 0.88. Career drives wealth more directly than wealth drives career — the asymmetry captures the primacy of the Career→Wealth mechanism in this chart.
+
+**Reading convention**:
+- If `direction: row→col` on both sides (D1.D2 and D2.D1), the cells are two independent directional links, not redundant
+- If `direction: bidirectional`, strengths should be identical (any divergence indicates transcription error)
+- 27 of 36 off-diagonal pairs exhibit asymmetry in this CDLM (Δ ∈ [0.01, 0.06]) per AUDIT_REPORT_v1_0 WS-3a
+
+**Validation**: CONTRADICTION_REGISTRY §5 (as of 2026-04-18) lists the specific asymmetric pairs. Future CDLM v2.0 may normalize to strict symmetry if practitioners prefer, but v1.0 preserves directional fidelity.
+
 ---
 
 ## THE 81-CELL CDLM

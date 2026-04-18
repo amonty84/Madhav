@@ -2,10 +2,11 @@
 document: CAREER & DHARMA DOMAIN REPORT
 subject: Abhisek Mohanty
 scope: Career, professional dharma, vocational identity, institutional positioning, entrepreneurial arc, dharmic purpose
-version: 1.0
+version: 1.0.1
 date: 2026-04-18
-session: 16
-parent_UCN_version: UCN_v1_0.md (Mother Document, Session 14-15)
+session: 16 (original); reconciled via FIX_SESSION_001 (2026-04-18)
+parent_UCN_version: UCN_v1_1.md (Mother Document v1.1, Jupiter-placement corrected)
+reconciliation_note: "Jupiter placement corrected throughout per RED_TEAM_L2_5_v1_0 + UCN v1.1. Original v1.0 of this report cited Jupiter in Cancer 4H (exalted) — this was based on pre-corrected UCN v1.0. Actual placement: Jupiter in Sagittarius 9H (own sign, swakshetra). Aspects from 9H: 5th→1H (Lagna), 7th→3H (UL house), 9th→5H (creativity). Jupiter does NOT aspect 10H directly; the 9H→10H relationship operates via adjacency/lordship, not drishti. Saraswati Yoga preserved (Mercury Kendra + Jupiter Trikona + Venus Trikona). Raja Yoga derivation updated from DKA-Kendra-variant to Bhagya-Yoga-own-sign variant (9L in own 9H). See FIX_SESSION_001_COMPLETION.md for complete change log."
 parent_L2_artifacts:
   - MATRIX_HOUSES.md (MX.HSE.10 primary)
   - MATRIX_PLANETS.md (MX.PLN.MERCURY, MX.PLN.SATURN, MX.PLN.JUPITER)
@@ -51,7 +52,7 @@ red_team_status: Pending (to be incorporated in Session 18 red-team pass)
   - §5.1 The Sun-Mercury Stellium
   - §5.2 The Arudha Lagna in 10H: Career = Identity
   - §5.3 The Dispositor Chain: 10L Saturn Exalted 7H
-  - §5.4 The Jupiter Authorization: Dharmic License from 4H
+  - §5.4 The Jupiter Authorization: Dharmic License from 9H (own sign)
   - §5.5 The D10 Dashamsha: Career Confirmed at Soul-Lens Level
 - §6. The Yoga Authorization Stack
   - §6.1 Saraswati Yoga: The Intelligence Triad
@@ -148,7 +149,7 @@ Five structural facts establish the career architecture's foundation:
 
 **Second**, Mercury's seven-system convergence (MSR.413, confidence 0.98) is the chart's single highest-confidence analytical finding. In seventeen years of the current Mahadasha, every institutional career success retrodictively traces to Mercury's activation. The native who deploys Mercury fully — intellectual mastery, communicative precision, knowledge-synthesis in institutional contexts — is working in maximal alignment with the chart's design.
 
-**Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupiter + Venus in kendra/trikona) bestows the intellectual foundation; the Lakshmi Yoga signature (Shree Lagna in 9H, Venus 2L in 9H) wires wealth to dharmic career output; the triple Raja Yoga (Jupiter 9L in 4H, Sun 5L in 10H, Saturn 10L exalted 7H) provides the formal classical authority-authorization.
+**Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupiter + Venus in kendra/trikona) bestows the intellectual foundation; the Lakshmi Yoga signature (Shree Lagna in 9H, Venus 2L in 9H) wires wealth to dharmic career output; the triple Raja Yoga (Jupiter 9L in own sign 9H Trikona, Sun 5L in 10H Kendra, Saturn 10L exalted 7H Kendra) provides the formal classical authority-authorization.
 
 **Fourth**, the Sade Sati Paradox (MSR.396, three-system confirmation) is the career's empirical validation. The period 2022–2025 — classically predicted to be career-suppressive — was retrodictively documented as the most consequential career period of the native's life to date. This is not coincidence but architecture: the Authority-Through-Tension Pattern (UCN Part VII) produces maximum career output when institutional pressure is maximum. Pressure is the generator, not the suppressant.
 
@@ -227,15 +228,15 @@ The practical implications for career trajectory:
 
 Saturn's placement in the 7H — the house of partnerships and the chart's most loaded house (MSR.391, 0.97 confidence) — means the career's structural backbone runs through the relational domain. The native's most consequential career relationships (institutional partners, collaborative ventures, business co-founders, key clients) are not incidental to career outcomes but ARE the career architecture. Marsys as an entrepreneurial venture is the chart's own prediction: the career authority operating through the partnership house, built through the Saturn-Mars tension that the 7H encodes.
 
-### §5.4 The Jupiter Authorization: Dharmic License from 4H
+### §5.4 The Jupiter Authorization: Dharmic License from 9H (own sign)
 
-Jupiter in Cancer 4H is exalted — the chart's highest classical dignity after Saturn's. As 9L (lord of the dharma house, Sagittarius) and 12L (lord of the moksha house, Pisces), Jupiter's exaltation in the psychological foundation (4H) provides the dharmic authorization for the career engine.
+Jupiter in Sagittarius 9H is in own sign (swakshetra) — a structurally superior configuration than simple exaltation in another sign, because a planet in its own house AND own sign operates from its most natural foundation with no external hosting required. As 9L (lord of the dharma house, Sagittarius) and 12L (lord of the moksha house, Pisces), Jupiter in own-house-own-sign provides the dharmic authorization for the career engine from the chart's dharmic trine (9H) — the precise architectural position the classical texts associate with dharma-driven vocational destiny.
 
-Jupiter aspects the 10H from 4H by its 7th-house aspect — the full-degree aspect that carries Jupiter's complete dharmic quality into the career chamber. This means: the career house receives the permanent dharmic gaze of the chart's most auspicious planet from its most auspicious position. Every action taken in the career domain is dharmi-authorized by Jupiter's exalted aspect. The career is not merely professionally valid; it is dharmically sanctioned at the highest classical level.
+Jupiter does NOT directly aspect the 10H from 9H. The 9H→10H relationship operates through three structural mechanisms: (a) **adjacency** — the 9H of dharma directly precedes the 10H of karma in sequence, so the dharma house "feeds" the karma house by zodiacal order; (b) **lordship** — Jupiter as 9L owns the dharma domain from which the 10H career must flow; (c) **trine-to-kendra support** — the 9H Trikona stabilizes the 10H Kendra by the classical Trikona-Kendra support principle (Trikona houses 1-5-9 purify and support Kendra houses 1-4-7-10). Jupiter's actual drishti from 9H goes to 1H (5th special aspect — Lagna), 3H (7th full aspect — UL house), and 5H (9th special aspect — creativity/progeny). The career house (10H) receives Jupiter's dharmic authorization via lordship and trine-kendra mechanics, not via direct planetary aspect.
 
 This creates the operative principle named in UCN §IV.4: **wealth as dharmic output**. Career success in this chart flows FROM dharmic alignment, not TOWARD it. When the native does the correct Mercury-governed, Jupiter-authorized dharmic work — intellectual mastery deployed in institutional frameworks for outcomes larger than personal gain — the career architecture operates at maximum efficiency. When the native attempts to optimize career outcomes by bypassing the dharmic upstream junction — pursuing income through misaligned work, compromising intellectual integrity for institutional convenience, or treating the career as merely a financial mechanism — the Jupiter-dharma connection becomes misaligned, and the architecture underperforms despite the chart's inherent career-supporting configurations.
 
-The dharmic alignment prerequisite is not a moral instruction; it is an architectural observation. Jupiter's exalted aspect on 10H is the circuit through which career energy flows. Bypassing it creates resistance, not efficiency.
+The dharmic alignment prerequisite is not a moral instruction; it is an architectural observation. Jupiter's 9L ownership of the 10H-upstream dharma house IS the circuit through which career energy flows — not a direct 10H drishti, but a lordship-and-trine-to-kendra flow. Bypassing it creates resistance, not efficiency.
 
 ### §5.5 The D10 Dashamsha: Career Confirmed at Soul-Lens Level
 
@@ -259,7 +260,7 @@ The D10 Dashamsha cancels one common misreading of the D1: Sun in Capricorn (Sat
 
 ### §6.1 Saraswati Yoga: The Intelligence Triad
 
-Saraswati Yoga is produced by the three planets of intellectual, artistic, and dharmic excellence — Mercury, Jupiter, and Venus — all occupying Kendra or Trikona houses simultaneously. In this chart: Mercury in 10H Kendra, Jupiter in 4H Kendra, Venus in 9H Trikona. The yoga is classically formed and unbroken.
+Saraswati Yoga is produced by the three planets of intellectual, artistic, and dharmic excellence — Mercury, Jupiter, and Venus — all occupying Kendra or Trikona houses simultaneously. In this chart: Mercury in 10H Kendra, Jupiter in 9H Trikona (own sign Sagittarius), Venus in 9H Trikona. The yoga is classically formed and unbroken — the Kendra leg is supplied by Mercury in 10H, and both Trikona legs (Jupiter + Venus) land together in the 9H dharmic trine, producing a Trikona-loaded variant of the yoga that intensifies its dharmic-intellectual character.
 
 Saraswati Yoga bestows what classical texts describe as exceptional intelligence, eloquence, creative capacity, pedagogical skill, and the ability to earn through knowledge. The goddess Saraswati is the patron of precisely what Mercury's seven-system convergence identifies as this chart's primary vehicle: intellectual synthesis, communicative excellence, and structured knowledge-deployment. The yoga names the instrument (Saraswati's faculty) and the Mercury convergence names its primary planet (Mercury). Together they point at the same architectural truth: this is a chart built for intellectual excellence as its career delivery mechanism.
 
@@ -277,7 +278,7 @@ For career decision-making: the question that should precede any major professio
 
 Three independent Raja Yogas constitute the chart's formal authority authorization:
 
-**Raja Yoga 1 — Jupiter 9L exalted in 4H Kendra**: A Trikona lord (9L) in a Kendra house (4H) at maximum dignity is the classic Dharma-Karma Adhipati Raja Yoga variant. This yoga produces native professional authority that is simultaneously dharma-backed (9H origin) and structurally grounded (4H Kendra expression). The native's authority in professional contexts has a specifically dharmic quality: it is perceived as legitimate not merely because of institutional position but because of principled alignment with a larger framework.
+**Raja Yoga 1 — Jupiter 9L in own sign 9H (Bhagya Yoga variant)**: The 9L (Trikona lord) in its own house AND own sign (Sagittarius) produces a Bhagya Yoga / 9L-in-own-house configuration — a classical Raja Yoga variant distinct from the Dharma-Karma Adhipati Kendra configuration but structurally equivalent in authority-conferring potency. Jupiter owning the dharma house, dwelling in the dharma house, in the dharma-sign, at Trikona dignity, is the purest possible expression of dharmic authority. The native's authority in professional contexts has a specifically dharmic quality: it is perceived as legitimate not merely because of institutional position but because of principled alignment with a larger framework. (Note: the classical DKA-Kendra-variant would require Jupiter in a Kendra rather than its own Trikona; that variant does not form here, but the Bhagya-own-sign-own-house variant is architecturally at least as strong.)
 
 **Raja Yoga 2 — Sun 5L in 10H Kendra**: Another Trikona lord (5L) in a Kendra (10H). Sun as 5L brings the dharma of the intellect, creative intelligence, and the capacity to build intellectual structures. In 10H, this dharma of mind expresses through public career visibility. The yoga means: creative intellectual capacity (5H) becomes professional output (10H), which is the exact description of Mercury-MD-era career building.
 
@@ -295,9 +296,9 @@ The yoga's non-combustion verification is important. Mercury's combustion by Sun
 
 ### §6.5 The Modified Dharma-Karma Adhipati Yoga
 
-Both Jupiter (9L) and Saturn (10L) aspect the 10H career house simultaneously — Jupiter from 4H by 7th-house aspect, Saturn by lordship and by indirect association. When the lords of the 9th house (dharma) and the 10th house (karma/career) are in strong relation to each other and to the career house, the classical texts identify this as a Dharma-Karma Adhipati Yoga — one of the most prized yogas in Parashari Jyotish, bestowing both dharmic legitimacy and career achievement in the same configuration.
+Both Jupiter (9L) and Saturn (10L) are strongly configured with respect to the 10H career house, though not through direct mutual drishti. Jupiter (9L) operates on the 10H through lordship-adjacency (9H directly precedes 10H zodiacally; 9L-in-9H feeds 10L-in-Kendra through the Trikona-to-Kendra support principle). Saturn (10L) operates from its exalted Kendra position in 7H with structural authority flowing bidirectionally into its 10H domain of lordship. When the lords of the 9th house (dharma) and the 10th house (karma/career) are in strong relation to each other and to the career house, the classical texts identify this as a Dharma-Karma Adhipati Yoga — one of the most prized yogas in Parashari Jyotish, bestowing both dharmic legitimacy and career achievement in the same configuration.
 
-Here the yoga takes a modified form (the two lords are not conjunct, but both strongly positioned and both related to the 10H), but its spirit is intact: dharmic authorization and career achievement are structurally co-present. The career does not operate despite dharmic demands; it IS the dharmic assignment. The yoga's modified form is actually architecturally more sophisticated than the classical conjunction: Jupiter's exaltation from 4H (stability) and Saturn's exaltation from 7H (partnership) together provide a two-directional authorization for the career — from the psychological foundation (4H) and from the relational structure (7H) simultaneously.
+Here the yoga takes a modified form (the two lords are not conjunct, and neither directly aspects the 10H by planetary drishti), but its spirit is intact: dharmic authorization (9L Jupiter in own sign 9H) and career achievement (10L Saturn exalted in 7H Kendra) are structurally co-present, each operating at maximum dignity in its respective trikonal/kendra position. The career does not operate despite dharmic demands; it IS the dharmic assignment. The yoga's modified form is architecturally sophisticated: Jupiter's own-sign-own-house in 9H (dharmic foundation) and Saturn's exaltation in 7H Kendra (partnership-relational structure) together provide a two-directional authorization for the career — from the dharmic trine (9H) and from the relational kendra (7H) simultaneously, both at classical-maximum dignity.
 
 ---
 
@@ -389,7 +390,7 @@ The correct navigation is to recognize and prepare for episodic authority delive
 
 ### §8.3 Jupiter's Uccha-Bala Weakness (CTR.03): Dharma Visible but Not Compounding
 
-Jupiter is exalted in Cancer 4H and is the chart's most auspicious planet by position and dignity. But Jupiter's Uccha Bala (the Shadbala sub-strength measuring exaltation-force at the specific degree) ranks last among the seven planets — 7 of 7 (v6.0 §23.1). Jupiter is positionally in exaltation but positionally near the far end of the exaltation sign, producing a dignity-strong but Uccha-Bala-weak reading.
+Jupiter is in own sign Sagittarius 9H (swakshetra-in-swabhava — own-sign-in-own-house, the purest classical dignity available through own-sign-own-house placement) and is, by sign-dignity, the chart's most auspicious planet after Saturn's 7H exaltation. But Jupiter's Uccha Bala (the Shadbala sub-strength measuring proximity to the exaltation point at Cancer 5°) ranks last among the seven planets — 7 of 7 (v6.0 §23.1). Jupiter is at maximum zodiacal distance from its exaltation point (Cancer 5°), producing a dignity-strong-by-sign (own-house + own-sign) but Uccha-Bala-weak-by-metric reading. This is the contradiction CTR.03 tracks: visible dharmic dignity without the compounding Uccha-Bala amplification that exaltation would have added. [CORRECTED 2026-04-18 FIX_SESSION_002: Prior v1.0 claim "Jupiter is exalted in Cancer 4H" was a residual from the pre-red-team UCN v1.0 Jupiter-placement error. Jupiter is in own-sign Sagittarius 9H, not exalted in Cancer 4H. The CTR.03 contradiction reading (visible dignity without Uccha-Bala compounding) is preserved but the architectural premise is now correct — the dignity is own-sign-own-house rather than exaltation; the Uccha Bala weakness rank 7 is the same metric in both interpretations.]
 
 CTR.03 documents the consequence: Jupiter's dharmic and expansion-driving qualities are visible in the chart and in the life (dharmic career orientation, institutional successes in Jupiter-flavored contexts, consistent dharmic legibility of the career path) but do not compound automatically. Jupiter does not quietly work in the background to produce accumulating career growth when the native is not actively engaged. The 9H dharma engine requires active fueling.
 

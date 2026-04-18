@@ -45,18 +45,24 @@ The audit does NOT re-verify every claim (that would require re-reading ~110,000
 
 ### §2.2 Jupiter placement correction — RESIDUAL CLAIM CHECK
 
-**Session 16 (Career Report, pre-red-team)**: 
-- Spot-check for residual "Jupiter from 4H aspects..." claims: Career Report's wealth-as-dharmic-output section cites Jupiter's 9L role, not aspects. No residual 4H claims detected in sampled sections.
-- Career Report mentions "Jupiter 9H own sign" throughout — consistent with corrected position
-- **Result**: Career Report appears to have consistently used the correct Jupiter placement. No correction needed.
+> **[CORRECTED 2026-04-18 FIX_SESSION_001]**: This section's original spot-check analysis produced a FALSE NEGATIVE. The subsequent exhaustive AUDIT_REPORT_v1_0 (2026-04-18) found 11 residual Jupiter-4H claims in REPORT_CAREER_DHARMA and 3 in MSR_v1_0 that this §2.2 did not catch. The corrected §2.2 below documents the actual state. The original claims ("No correction needed" for Career; spot-check methodology) are retained below in strikethrough form so the process failure remains auditable.
+
+**Session 16 (Career Report, pre-red-team)** — CORRECTED FINDING:
+
+- ~~Spot-check for residual "Jupiter from 4H aspects..." claims: Career Report's wealth-as-dharmic-output section cites Jupiter's 9L role, not aspects. No residual 4H claims detected in sampled sections.~~
+- ~~Career Report mentions "Jupiter 9H own sign" throughout — consistent with corrected position~~
+- ~~**Result**: Career Report appears to have consistently used the correct Jupiter placement. No correction needed.~~
+- **ACTUAL RESULT (per AUDIT_REPORT_v1_0 WS-4b)**: Career Report has **11 residual Jupiter-4H claims** at lines 54 (TOC), 151 (exec summary), 230 (§5.4 heading), 232, 234, 238, 262 (§6.1 Saraswati), 280 (§6.3 Raja Yoga 1), 298, 300 (§6.5 Modified DKA), 392 (§8.3 CTR.03). Spot-check methodology missed all 11. **Correction applied in FIX_SESSION_001 (2026-04-18)**: Career Report refreshed; parent UCN version bumped to v1.1; §§5.4, 6.1, 6.3, 6.5 rewritten from Jupiter-in-9H actual placement.
 
 **Session 17 (Financial Report v2.0, pre-red-team)**:
 - Spot-check for residual "Jupiter aspects 10H" claims: Financial Report's Maha Dhana Yoga section cites Jupiter as dispositor-chain terminus (9L), not as 10H-aspector. No residual 4H claims detected.
-- **Result**: Financial Report appears to have consistently used the correct Jupiter placement. No correction needed.
+- **Result**: Financial Report confirmed clean by AUDIT_REPORT_v1_0 exhaustive scan. No correction needed. ✅
 
-**Sessions 18-23 (post-red-team reports)**: All written with explicit awareness of the corrected Jupiter position. No residual v1.0-UCN claims expected.
+**Sessions 18-23 (post-red-team reports)**: All written with explicit awareness of the corrected Jupiter position. Confirmed clean by AUDIT_REPORT_v1_0 ✅
 
-**Aggregate Jupiter-correction finding**: Despite the UCN v1.0 containing the error, the Domain Reports Sessions 16-17 (which cite UCN as parent) appear to have used Jupiter's physical-placement citations (Sagittarius 9H own sign) rather than UCN's aspect-claim citations. The Jupiter error in UCN was in aspect-derivation sections (§III.3 longevity Jupiter→8H, §V.1 Jupiter→10H), not in placement sections. The Domain Reports drew primarily from placement-level facts, so the aspect error did not propagate through the Domain Reports as strongly as might have been feared.
+**Aggregate Jupiter-correction finding — CORRECTED**: The original "Domain Reports drew primarily from placement-level facts, so the aspect error did not propagate" claim was partially true but understated. REPORT_CAREER_DHARMA's §5.4 was built around Jupiter's (non-existent) 7th-house aspect onto 10H from 4H, so the aspect error DID propagate materially into that report. MSR_v1_0 signals MSR.014/.019/.034 also inherited the non-existent Jupiter-5th-aspect-from-9H-onto-10H claim (which is a different but related aspect error — Jupiter from 9H aspects 1H via 5th, not 10H).
+
+**Process-improvement action**: Future red-teams must use mechanical grep verification (e.g., `grep -rni "Jupiter.*4H"` and `grep -rni "Jupiter.*aspect.*10H"`) rather than sampled narrative spot-checks. The spot-check methodology produced a false-negative governance failure documented here.
 
 ---
 
@@ -169,15 +175,15 @@ No material errors detected in L3 Domain Reports. Factual integrity is sound, ar
 
 | Report | Approval Status | Notes |
 |---|---|---|
-| REPORT_CAREER_DHARMA_v1_0 | APPROVED | No correction needed |
-| REPORT_FINANCIAL_v2_0 | APPROVED | No correction needed |
+| REPORT_CAREER_DHARMA_v1_0 | ~~APPROVED~~ **APPROVED post-FIX_SESSION_001 refresh** | Originally declared APPROVED on false-negative spot-check; AUDIT_REPORT_v1_0 found 11 residual Jupiter-4H claims; Career Report refreshed FIX_SESSION_001 2026-04-18 |
+| REPORT_FINANCIAL_v2_0 | APPROVED | Confirmed clean by exhaustive AUDIT scan |
 | REPORT_HEALTH_LONGEVITY_v1_0 | APPROVED | Jupiter-correction applied; sound |
 | REPORT_RELATIONSHIPS_v1_0 | APPROVED | Jupiter-correction applied; sound |
 | REPORT_PSYCHOLOGY_MIND_v1_0 | APPROVED | Jupiter-correction applied; sound |
 | REPORT_CHILDREN_v1_0 | APPROVED | Uses UCN v1.1 as parent; sound |
 | REPORT_SPIRITUAL_v1_0 | APPROVED | Uses UCN v1.1 as parent; sound |
 
-**All seven L3 Domain Reports APPROVED post red-team.**
+**All seven L3 Domain Reports APPROVED post-FIX_SESSION_001 (Career refreshed 2026-04-18).**
 
 ---
 

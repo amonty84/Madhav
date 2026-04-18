@@ -99,7 +99,7 @@ Key confidence ratings across the corpus:
 | Mercury Seven-System Convergence | 0.98 | MSR.413 |
 | 7H Supreme Six-Layer Convergence | 0.97 | MSR.391 |
 | Sade Sati Paradox cross-system confirmed | 0.95 | MSR.396 |
-| BB-UL 2026 crystallization | 0.93 | MSR.404 |
+| BB-UL 2026 crystallization | 0.90 | MSR.404 (confidence reconciled from 0.86/0.93 → 0.90 in FIX_SESSION_002 after resolution of BB progression method per v7.0 §V7.F 6°/year) |
 | Devata Retrodiction Triple-Lock | 0.91 | MSR.397 |
 | Spiritual Seven-Mechanism Amplification | 0.96 | CDLM.D6.D6 |
 | Mind Domain Self-Amplification | 0.95 | CDLM.D8.D8 |
@@ -117,17 +117,22 @@ All gaps across all artifacts:
 | Gap ID | Description | Affected Artifacts | Resolution Path |
 |---|---|---|---|
 | GAP.01 | Birth Yoga (MSR.354) unverified — v6.0 §9 not read | UCN §I.1 FS5 | Facts Layer v8.0 |
-| GAP.02 | D9 Jupiter placement unverified | UCN §II.3, UCN §III.4 | Jagannatha Hora D9 export |
-| GAP.02b | D9 Venus Virgo (debilitation of 7L) | REPORT_RELATIONSHIPS | Jagannatha Hora D9 export |
-| GAP.02c | D9 Saturn Aries (debilitation of primary 7H tenant) | REPORT_RELATIONSHIPS | Jagannatha Hora D9 export |
-| GAP.02d | D9 Moon Gemini (Mercury's sign) | REPORT_PSYCHOLOGY_MIND | Jagannatha Hora D9 export |
-| GAP.03 | D9 12H stellium composition | UCN §II.5, §VI.1 | Jagannatha Hora D9 export |
-| GAP.05 | D7 Saptamsha chart not examined | REPORT_CHILDREN | Jagannatha Hora D7 export |
-| LONGEVITY.GAP.01 | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | Jagannatha Hora longevity export |
-| BB progression method | Not explicitly documented | LIFETIME_TIMELINE §4.4 | MSR v2.0 clarification |
-| Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | Jagannatha Hora Varshphal export |
+| GAP.02 | D9 Jupiter placement unverified | UCN §II.3, UCN §III.4 | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms D9 Jupiter Gemini) |
+| GAP.02b | D9 Venus Virgo (debilitation of 7L) | REPORT_RELATIONSHIPS | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
+| GAP.02c | D9 Saturn Aries (debilitation of primary 7H tenant) | REPORT_RELATIONSHIPS | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
+| GAP.02d | D9 Moon Gemini (Mercury's sign) | REPORT_PSYCHOLOGY_MIND | **RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora confirms) |
+| GAP.03 | D9 12H stellium composition | UCN §II.5, §VI.1 | Jagannatha Hora D9 export (partial — precise degree comparison pending) |
+| GAP.05 | D7 Saptamsha chart not examined | REPORT_CHILDREN | **SUBSTANTIALLY RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora D7 present; matches FORENSIC §3.4) |
+| LONGEVITY.GAP.01 | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | Jagannatha Hora longevity export — **OPEN** (not in current JHora .docx) |
+| BB progression method | Not explicitly documented | LIFETIME_TIMELINE §4.4, MSR.404 | **PARTIALLY RESOLVED 2026-04-18** — FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F uses 6°/year; LIFETIME_TIMELINE internal contradiction corrected in FIX_SESSION_001 |
+| Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | Jagannatha Hora Varshphal export — **OPEN** (not in current JHora .docx). NOTE: FORENSIC §22 DOES state Muntha = Libra 7H, Lord Venus for current Varsha — HEATMAP_VARSHPHAL corrected in FIX_SESSION_001 to cite that L1 fact; Varshesha remains [EXTERNAL_COMPUTATION_REQUIRED] |
+| **GAP.06 (NEW)** | MSR-ASPECT correction applied in FIX_SESSION_001 — Jupiter's 5th aspect from 9H lands on 1H (Lagna), not 10H; MSR.014/.019/.034 corrected but any future MSR signals must not reintroduce | MSR_v1_0 | Mechanical grep in future red-team sweeps |
+| **GAP.07 (NEW)** | DUAL-ENGINE Shadbala divergence: FORENSIC ranks Sun #1 (8.51 rupas); JHora ranks Saturn #1 (8.79 rupas) | FORENSIC §6.2 | Adopt single-engine discipline for Shadbala citations; footnote FORENSIC §6.2 |
+| **GAP.08 (NEW)** | BAV Moon row differs in 4 signs between FORENSIC and JHora (Gemini, Libra, Scorpio, Capricorn); SAV column sums consequently differ in 4 signs (grand total 337 matches) | FORENSIC §7.1–7.2 | Dual-engine reconciliation footnote; possibly adopt JHora values in Facts Layer v8.0 |
+| **GAP.09 (NEW)** | Vimshottari dasha dates offset +7 to +9 days between FORENSIC and JHora (FORENSIC later) — rooted in 1.4 arcmin Moon difference at birth | FORENSIC §5.1 | Dual-engine note; retrodictive fit uses FORENSIC dates |
+| **GAP.10 (NEW)** | Saham Karma nakshatra labeled "Dhanishta" but 300.09° = Shatabhisha Pada 1; Saham Putra labeled "Dhanishta" but 295.16° = Shravana Pada 4 | FORENSIC §12.2 lines 1133, 1136 | Label corrections (applied in FIX_SESSION_001 Priority 6) |
 
-**Aggregate**: 10 known gaps, of which 8 resolve through the same Jagannatha Hora export action (D7/D9/Varshphal/Ayurdasaya). This is the single highest-leverage data-acquisition action for the project.
+**Aggregate (post-FIX_SESSION_001 2026-04-18)**: 15 known gaps tracked. 5 RESOLVED via JHora external verification (GAP.02, 02b, 02c, 02d, 05 substantial). 2 PARTIALLY RESOLVED (BB progression, Varshphal Muntha). 5 new gaps registered (GAP.06-10). 3 remain OPEN (GAP.01 Birth Yoga, GAP.03 D9 12H precise degrees, LONGEVITY.GAP.01 Ayurdasaya). Still the single highest-leverage future data-acquisition action: a complete JHora Varshphal + Ayurdasaya export.
 
 ---
 
