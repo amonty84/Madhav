@@ -1,17 +1,17 @@
 ---
 artifact: GOVERNANCE_STACK_v1_0.md
-version: 1.0-updated-FIX_SESSION_003_deferred
+version: 1.0-updated-GAP_RESOLUTION_SESSION
 status: CURRENT (updated in-place; next version will be v2.0)
-session: 35 (created); FIX_SESSION_003 (version registry and gap status updated); FIX_SESSION_003_deferred (deferred items 1-4 completed 2026-04-18)
+session: 35 (created); FIX_SESSION_003 (version registry and gap status updated); FIX_SESSION_003_deferred (deferred items 1-4 completed 2026-04-18); GAP_RESOLUTION_SESSION (all 8 internally-resolvable gaps closed 2026-04-19)
 date_closed: 2026-04-18
-date_updated: 2026-04-18 (FIX_SESSION_003_deferred)
+date_updated: 2026-04-19 (GAP_RESOLUTION_SESSION)
 scope: "Project-wide governance stack: version registry, confidence ledger, known-gaps consolidation, change-control protocol"
 architecture_ref: "§G.9 Governance"
 ---
 
 # GOVERNANCE_STACK_v1_0
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 35 | 2026-04-18 | Updated FIX_SESSION_003 | 2026-04-18
+### Session 35 | 2026-04-18 | Updated FIX_SESSION_003 | 2026-04-18 | Updated GAP_RESOLUTION_SESSION | 2026-04-19
 
 ---
 
@@ -45,9 +45,10 @@ All closed artifacts as of Session 35:
 
 | Artifact | Version | Status | FIX_SESSION_003 note |
 |---|---|---|---|
-| CGM_v1_0 | 1.0 | CLOSED | No change |
+| CGM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CGM_v2_0 in GAP_RESOLUTION_SESSION |
+| **CGM_v2_0** | **2.0** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — LAG.HORA 7H→3H, LAG.GHATI 8H→9H, LAG.VARNADA 8H→4H, LAG.SHREE 9H→7H; all edges updated** |
 | MSR_v1_0 | 1.0 | **SUPERSEDED** | Superseded by MSR_v2_0 |
-| **MSR_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003 — 420 original signals carried forward + corrections + 17 new yoga signals + quantitative metric signals MSR.438-443** |
+| **MSR_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003 — 420 original signals carried forward + corrections + 17 new yoga signals + quantitative metric signals MSR.438-443; §0 Provenance Registry added; §VII Mode B audit added; CGP Provenance: COMPLETE (GAP_RESOLUTION_SESSION)** |
 | CDLM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CDLM_v1_1 in FIX_SESSION_003_deferred |
 | **CDLM_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 9 cells corrected; D4.D3 0.78↔→0.61→; Shree Lagna 7H; Hora Lagna 3H; Roga/Mahatmya Sahams correct houses; 1,135 lines** |
 | RM_v1_0 | 1.0 | CLOSED (SUPERSEDED by v1.1) | Superseded in FIX_SESSION_001 |
@@ -63,7 +64,8 @@ All closed artifacts as of Session 35:
 
 | Artifact | Version | Status | FIX_SESSION_003 note |
 |---|---|---|---|
-| REPORT_CAREER_DHARMA_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_CAREER_DHARMA_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 in GAP_RESOLUTION_SESSION |
+| **REPORT_CAREER_DHARMA_v1_1** | **1.1** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — Shree Lagna 9H→7H, Roga Saham 7H→2H, hidden-pinnacle concept replaced** |
 | REPORT_FINANCIAL_v1_0 | 1.0 | CLOSED (superseded by v2.0) | No change |
 | REPORT_FINANCIAL_v2_0 | 2.0 | **SUPERSEDED** | Superseded by v2.1 |
 | **REPORT_FINANCIAL_v2_1** | **2.1** | **CURRENT** | **NEW FIX_SESSION_003 — Shree Lagna 7H added; two-channel Lakshmi architecture; Hora Lagna corrected to 3H** |
@@ -71,12 +73,16 @@ All closed artifacts as of Session 35:
 | **REPORT_HEALTH_LONGEVITY_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Roga Saham 2H; Mahatmya 9H; Kalachakra 85 years (partial LONGEVITY.GAP.01 resolution)** |
 | REPORT_RELATIONSHIPS_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
 | **REPORT_RELATIONSHIPS_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Five-layer 7H; Shree Lagna added; Vivaha Saham 4H; Gemini nexus upgraded** |
-| REPORT_PSYCHOLOGY_MIND_v1_0 | 1.0 | CLOSED | No change |
-| REPORT_CHILDREN_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_PSYCHOLOGY_MIND_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 in GAP_RESOLUTION_SESSION |
+| **REPORT_PSYCHOLOGY_MIND_v1_1** | **1.1** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — GAP.02 resolved (D9 Jupiter = Gemini confirmed)** |
+| REPORT_CHILDREN_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 in GAP_RESOLUTION_SESSION |
+| **REPORT_CHILDREN_v1_1** | **1.1** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — GAP.05 substantially resolved (D7 corroborated)** |
 | REPORT_SPIRITUAL_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 |
 | **REPORT_SPIRITUAL_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003 — Six-mechanism (not seven); Varnada/Ghati 8H removed; Ketu MD reframe** |
-| REPORT_PARENTS_v1_0 | 1.0 | CLOSED | No change |
-| REPORT_TRAVEL_v1_0 | 1.0 | CLOSED | No change |
+| REPORT_PARENTS_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 in GAP_RESOLUTION_SESSION |
+| **REPORT_PARENTS_v1_1** | **1.1** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — v8.0 review pass; confirmed clean** |
+| REPORT_TRAVEL_v1_0 | 1.0 | **SUPERSEDED** | Superseded by v1.1 in GAP_RESOLUTION_SESSION |
+| **REPORT_TRAVEL_v1_1** | **1.1** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — Shree Lagna 9H→7H** |
 | RED_TEAM_L3_v1_0 | 1.0 | CLOSED | No change |
 | CROSS_REPORT_COHERENCE_AUDIT_v1_0 | 1.0 | CLOSED | No change |
 
@@ -84,9 +90,11 @@ All closed artifacts as of Session 35:
 
 | Artifact | Version | Status |
 |---|---|---|
-| REMEDIAL_CODEX_v1_0_PART1 | 1.0 | CLOSED |
-| REMEDIAL_CODEX_v1_0_PART2 | 1.0 | CLOSED |
-| LIFETIME_TIMELINE_v1_0 | 1.0 | CLOSED |
+| REMEDIAL_CODEX_v1_0_PART1 | 1.0 | **SUPERSEDED** | Superseded by v2.0 in GAP_RESOLUTION_SESSION |
+| REMEDIAL_CODEX_v1_0_PART2 | 1.0 | **SUPERSEDED** | Superseded by v2.0 in GAP_RESOLUTION_SESSION |
+| **REMEDIAL_CODEX_v2_0_PART1** | **2.0** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — Shree Lagna 9H→7H, Jupiter 4H→9H corrections** |
+| **REMEDIAL_CODEX_v2_0_PART2** | **2.0** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — Shree Lagna 9H→7H, Jupiter 4H→9H corrections** |
+| LIFETIME_TIMELINE_v1_0 | 1.0 | CURRENT (corrected in-place GAP_RESOLUTION_SESSION — Varnada+Ghati hidden-pinnacle concept replaced; Ketu MD arc preserved via Ketu-8H) |
 | HEATMAP_VARSHPHAL_v1_0 | 1.0 | CLOSED |
 | RED_TEAM_PHASE5_v1_0 | 1.0 | CLOSED |
 | QUERY_PROMPT_LIBRARY_v1_0 | 1.0 | CLOSED |
@@ -150,13 +158,13 @@ All gaps across all artifacts:
 | BB progression method | Not explicitly documented | LIFETIME_TIMELINE §4.4, MSR.404 | **PARTIALLY RESOLVED 2026-04-18** — FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F uses 6°/year; LIFETIME_TIMELINE internal contradiction corrected in FIX_SESSION_001 |
 | Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | Jagannatha Hora Varshphal export — **OPEN** (not in current JHora .docx). NOTE: FORENSIC §22 DOES state Muntha = Libra 7H, Lord Venus for current Varsha — HEATMAP_VARSHPHAL corrected in FIX_SESSION_001 to cite that L1 fact; Varshesha remains [EXTERNAL_COMPUTATION_REQUIRED] |
 | **GAP.06 (NEW)** | MSR-ASPECT correction applied in FIX_SESSION_001 — Jupiter's 5th aspect from 9H lands on 1H (Lagna), not 10H; MSR.014/.019/.034 corrected but any future MSR signals must not reintroduce | MSR_v1_0 | Mechanical grep in future red-team sweeps |
-| **GAP.07 (NEW)** | DUAL-ENGINE Shadbala divergence: FORENSIC ranks Sun #1 (8.51 rupas); JHora ranks Saturn #1 (8.79 rupas) | FORENSIC §6.2 | Adopt single-engine discipline for Shadbala citations; footnote FORENSIC §6.2 |
-| **GAP.08 (NEW)** | BAV Moon row differs in 4 signs between FORENSIC and JHora (Gemini, Libra, Scorpio, Capricorn); SAV column sums consequently differ in 4 signs (grand total 337 matches) | FORENSIC §7.1–7.2 | Dual-engine reconciliation footnote; possibly adopt JHora values in Facts Layer v8.0 |
-| **GAP.09 (NEW)** | Vimshottari dasha dates offset +7 to +9 days between FORENSIC and JHora (FORENSIC later) — rooted in 1.4 arcmin Moon difference at birth | FORENSIC §5.1 | Dual-engine note; retrodictive fit uses FORENSIC dates |
+| **GAP.07** | DUAL-ENGINE Shadbala divergence: FORENSIC ranks Sun #1 (8.51 rupas); JHora ranks Saturn #1 (8.79 rupas) | FORENSIC §6.2 | **RESOLVED 2026-04-19** — JH canonical for Shadbala citations; Saturn #1 (8.79r); FORENSIC §6.2 footnoted |
+| **GAP.08** | BAV Moon row differs in 4 signs between FORENSIC and JHora (Gemini, Libra, Scorpio, Capricorn); SAV column sums consequently differ in 4 signs (grand total 337 matches) | FORENSIC §7.1–7.2 | **RESOLVED 2026-04-19** — FORENSIC BAV/SAV canonical; JH Moon row reference only; reconciliation note in FORENSIC |
+| **GAP.09** | Vimshottari dasha dates offset +7 to +9 days between FORENSIC and JHora (FORENSIC later) — rooted in 1.4 arcmin Moon difference at birth | FORENSIC §5.1 | **RESOLVED 2026-04-19** — FORENSIC dasha dates canonical for retrodictive fit; ±7-9d cusp zone documented in FORENSIC |
 | **GAP.10 (NEW)** | Saham Karma nakshatra labeled "Dhanishta" but 300.09° = Shatabhisha Pada 1; Saham Putra labeled "Dhanishta" but 295.16° = Shravana Pada 4 | FORENSIC §12.2 lines 1133, 1136 | Label corrections (applied in FIX_SESSION_001 Priority 6) |
 
-**Aggregate (post-V8.0 RECONCILIATION 2026-04-18)**: 19 known gaps tracked (added GAP.11-14 from V8_0_RECONCILIATION). Resolution status:
-- 11 RESOLVED or substantially resolved (GAP.01 Birth Yoga now resolved via JH; GAP.02, 02b, 02c, 02d, 03, 05 all confirmed via JH; GAP.06, BB progression, GAP.10 Saham labels).
+**Aggregate (post-GAP_RESOLUTION_SESSION 2026-04-19)**: 19 known gaps tracked + SIG.16-31 Mode B. Resolution status:
+- 14 RESOLVED or substantially resolved (GAP.01, GAP.02, 02b, 02c, 02d, 03, 05, 06, BB progression, GAP.10 Saham labels, **GAP.07 2026-04-19**, **GAP.08 2026-04-19**, **GAP.09 2026-04-19**, **SIG.16-31 Mode B CONFIRMED ABSORBED 2026-04-19**).
 - 3 PARTIALLY RESOLVED (Varshphal — Muntha known from v6.0 §22, Varshesha pending; GAP.03 D9 12H stellium precise degree comparison pending; GAP.13 Chara Karaka dual-system noted).
 - 4 NEW CRITICAL gaps (GAP.11-14) added by V8.0 reconciliation:
 
@@ -175,11 +183,28 @@ All gaps across all artifacts:
 - GAP.14: RESOLVED (17 yogas in MSR v2.0)
 - LONGEVITY.GAP.01: CLOSED (intentionally excluded per native direction; Kalachakra 85 years is the adopted anchor)
 
-**Current single highest-leverage remaining actions** (updated FIX_SESSION_003_deferred 2026-04-18):
+**GAP_RESOLUTION_SESSION gap resolution summary (2026-04-19):**
+- GAP.07: RESOLVED — JH canonical for Shadbala; Saturn #1 (8.79r)
+- GAP.08: RESOLVED — FORENSIC BAV/SAV canonical; JH Moon row reference only
+- GAP.09: RESOLVED — FORENSIC dasha dates canonical for retrodictive fit; ±7-9d cusp zone documented
+- SIG.16-31 Mode B: CONFIRMED ABSORBED — all 16 candidates found in MSR.031-046; no new promotions needed
+- Provenance: COMPLETE — §0 Provenance Registry added to MSR_v2_0; 7 corrected signals documented, 413+ confirmed
+
+**Current single highest-leverage remaining actions** (updated GAP_RESOLUTION_SESSION 2026-04-19):
 1. ~~Build FORENSIC_ASTROLOGICAL_DATA_v8.0.md~~ — **DONE FIX_SESSION_003_deferred**: FORENSIC_ASTROLOGICAL_DATA_v8_0.md created (1,950 lines); v6.0 and SUPPLEMENT marked SUPERSEDED
 2. ~~CDLM_v1_1 refresh~~ — **DONE FIX_SESSION_003_deferred**: CDLM_v1_1.md created (1,135 lines); 9 cells corrected; v1.0 marked SUPERSEDED
 3. ~~RM rebuild~~ — **DONE FIX_SESSION_003_deferred**: RM_v2_0.md created (32 elements); 8 element blocks corrected; RM.21 split into RM.21A+RM.21B; RM_v1_1 marked SUPERSEDED
 4. ~~Future JH Ayurdasaya export~~ — **CLOSED (intentionally excluded)**: Kalachakra Paramayush 85 years is the adopted longevity anchor; no further longevity computation methods to be pursued
+5. ~~5 domain reports → v1.1~~ — **DONE GAP_RESOLUTION_SESSION**: REPORT_CAREER_DHARMA, TRAVEL, PSYCHOLOGY_MIND, CHILDREN, PARENTS all at v1.1
+6. ~~Remedial Codex v2.0~~ — **DONE GAP_RESOLUTION_SESSION**: REMEDIAL_CODEX_v2_0_PART1 + PART2 created; Jupiter 4H→9H + Shree Lagna corrections applied
+7. ~~Lifetime Timeline hidden-pinnacle correction~~ — **DONE GAP_RESOLUTION_SESSION**: Varnada+Ghati hidden-pinnacle concept replaced; Ketu MD arc preserved via Ketu-8H
+8. ~~CGM v2.0~~ — **DONE GAP_RESOLUTION_SESSION**: all four special lagna nodes corrected; all edges updated
+9. ~~GAP.07/08/09 closure~~ — **DONE GAP_RESOLUTION_SESSION**: all three engine-level gaps formally closed
+10. ~~MSR Mode B audit~~ — **DONE GAP_RESOLUTION_SESSION**: SIG.16-31 all confirmed absorbed as MSR.031-046
+11. ~~Provenance backfill~~ — **DONE GAP_RESOLUTION_SESSION**: §0 Provenance Registry in MSR_v2_0; CGP Provenance COMPLETE
+12. **External acharya review** — OPEN: Item 9 — ACHARYA_ENGAGEMENT_KIT.md ready; requires native to initiate contact
+13. **6 empirical falsifier tests** — OPEN: Item 10 — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated, native-executed
+14. **MSR signal gap** — OPEN: 443 signals vs 500-600 target; 53-157 short; pathways documented in MSR_v2_0 §VII.4
 
 ---
 
@@ -248,4 +273,20 @@ Current log span: Sessions 1-35. Log is current through Session 35.
 3. §2 Confidence Ledger: Updated Mercury count (7→8), 7H layer count (6→5), Spiritual mechanism count (7→6), added resolved gaps (Birth Yoga, Special Lagnas, Kalachakra)
 4. §3 Known Gaps: GAP.11 RESOLVED, GAP.12 RESOLVED, GAP.14 RESOLVED, LONGEVITY.GAP.01 SUBSTANTIALLY RESOLVED; updated remaining actions
 
-*End of GOVERNANCE_STACK_v1_0.md — Session 35 — updated FIX_SESSION_003 — 2026-04-18*
+---
+
+## §8 — GAP_RESOLUTION_SESSION AMENDMENT LOG
+
+**Date:** 2026-04-19
+**Session:** GAP_RESOLUTION_SESSION
+**Changelog entry:** 1.0-updated-GAP_RESOLUTION_SESSION (2026-04-19): All 8 internally-resolvable gaps closed; version registry updated.
+**Changes applied to this document:**
+1. Header version updated to 1.0-updated-GAP_RESOLUTION_SESSION; date_updated 2026-04-19
+2. §1 L2.5 registry: CGM_v1_0 marked SUPERSEDED; CGM_v2_0 added as CURRENT; MSR_v2_0 description updated to note §0 Provenance Registry and §VII Mode B audit
+3. §1 L3 registry: REPORT_CAREER_DHARMA, TRAVEL, PSYCHOLOGY_MIND, CHILDREN, PARENTS v1.0 versions marked SUPERSEDED; v1.1 versions added as CURRENT
+4. §1 L4/L5 registry: REMEDIAL_CODEX_v1_0_PART1/PART2 marked SUPERSEDED; v2.0 PART1/PART2 added as CURRENT; LIFETIME_TIMELINE_v1_0 noted as corrected in-place
+5. §3 Known Gaps: GAP.07, GAP.08, GAP.09 marked RESOLVED 2026-04-19; SIG.16-31 Mode B CONFIRMED ABSORBED
+6. §3 Aggregate counts updated: 14 resolved (was 11); GAP_RESOLUTION_SESSION summary block added
+7. §3 Highest-leverage actions: items 5-11 marked DONE; items 12-14 (acharya, falsifier tests, MSR gap) added as remaining open
+
+*End of GOVERNANCE_STACK_v1_0.md — Session 35 — updated FIX_SESSION_003 — 2026-04-18 — updated GAP_RESOLUTION_SESSION — 2026-04-19*
