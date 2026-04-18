@@ -1,20 +1,28 @@
 ---
-artifact: REMEDIAL_CODEX_v1_0_PART2.md
-version: 1.0
-status: SUPERSEDED
-superseded_by: REMEDIAL_CODEX_v2_0_PART2.md
-superseded_date: 2026-04-19
-superseded_reason: "Shree Lagna 9H→7H correction; Jupiter 4H→9H correction per FORENSIC_v8_0 §12.1"
+artifact: REMEDIAL_CODEX_v2_0_PART2.md
+version: 2.0
+status: CURRENT
 session: 29
 date_closed: 2026-04-18
+date_revised: 2026-04-19
 native: Abhisek Mohanty
 scope: "Part 2 of 2 — Yantra, devata-specific practices, temporal interventions, domain-specific remedies, intervention heatmap"
-parent: UCN_v1_1.md, REMEDIAL_CODEX_v1_0_PART1.md
+parent: UCN_v1_1.md, REMEDIAL_CODEX_v2_0_PART1.md
+supersedes: REMEDIAL_CODEX_v1_0_PART2.md
+changelog:
+  - version: 2.0
+    date: 2026-04-19
+    changes:
+      - "Shree Lagna corrected from 9H Sagittarius to 7H Libra Vishakha per FORENSIC_v8_0 §12.1"
+      - "Shree Yantra rationale updated: SL 7H (relational entry) + Venus in 9H (dharmic fuel) — architecture preserved with correct positional data"
+      - "Jupiter placement corrected from 4H Cancer (exalted) to 9H Sagittarius (own sign)"
+      - "Jupiter aspect chains corrected: from-9H aspects to 1H/3H/5H"
+      - "Status changed from CLOSED to CURRENT"
 ---
 
-# REMEDIAL_CODEX_v1_0 — Part 2: Yantra, Devata Practices, Temporal Interventions
+# REMEDIAL_CODEX_v2_0 — Part 2: Yantra, Devata Practices, Temporal Interventions
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 29 | 2026-04-18 | CLOSED
+### v2.0 | Revised 2026-04-19 | CURRENT
 
 ---
 
@@ -24,7 +32,7 @@ Yantras are geometric-diagrammatic meditative tools. Chart-aligned yantras for t
 
 ### §1.1 — Primary: Shree Yantra
 
-**Chart rationale**: Shree Lagna in 9H + Venus (Ishta Devata Mahalakshmi) 9H + Lakshmi-Narayana-adjacent configuration = Shree Yantra is the most architecturally-aligned yantra. It is the geometric representation of Shree (Lakshmi-dharma) — the same principle as the Shree Lagna in 9H.
+**Chart rationale**: Shree Lagna in 7H Libra Vishakha + Venus (2L, Ishta Devata Mahalakshmi) in 9H = Shree Yantra remains the most architecturally-aligned yantra. The Shree Yantra represents Lakshmi's geometric embodiment. Architecturally: Lakshmi's grace enters through the relational domain (SL 7H) and is energized by Venus in the dharmic domain (9H Sagittarius). The yantra works because Venus-in-9H (devotion-through-dharma) fuels the SL-7H entry point (abundance-through-relationship).
 
 **Installation**:
 - Silver-plated or gold-plated (preferred) — Venus's metal aligns
@@ -205,4 +213,4 @@ The chart has been architected this way deliberately. The remedial work is to ho
 
 ---
 
-*End of REMEDIAL_CODEX_v1_0_PART2.md — Session 29 — 2026-04-18 — CLOSED*
+*End of REMEDIAL_CODEX_v2_0_PART2.md — Session 29 (original) | Revised 2026-04-19 — CURRENT*
