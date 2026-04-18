@@ -1,22 +1,30 @@
 ---
-artifact: REMEDIAL_CODEX_v1_0_PART1.md
-version: 1.0
-status: SUPERSEDED
-superseded_by: REMEDIAL_CODEX_v2_0_PART1.md
-superseded_date: 2026-04-19
-superseded_reason: "Shree Lagna 9H→7H correction; Jupiter 4H→9H correction per FORENSIC_v8_0 §12.1"
+artifact: REMEDIAL_CODEX_v2_0_PART1.md
+version: 2.0
+status: CURRENT
 session: 28
 date_closed: 2026-04-18
+date_revised: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 scope: "Part 1 of 2 — Planetary propitiation, gemology, mantra practice, daily dinacharya"
 parent: UCN_v1_1.md, L3 Domain Reports (Sessions 16-26)
 architecture_ref: "§G.6 Remedial Codex"
+supersedes: REMEDIAL_CODEX_v1_0_PART1.md
 disclaimer: "Remedial recommendations are structural based on chart architecture, not prescriptive commands. Individual choices belong to the native. Consult a qualified acharya/ayurvedic physician before adopting gem/mantra practices at scale."
+changelog:
+  - version: 2.0
+    date: 2026-04-19
+    changes:
+      - "Shree Lagna corrected from 9H Sagittarius to 7H Libra Vishakha per FORENSIC_v8_0 §12.1"
+      - "Shree Sukta rationale updated: SL 7H routes Lakshmi's grace through partnerships/relationships domain, not dharma domain"
+      - "Jupiter placement corrected from 4H Cancer (exalted) to 9H Sagittarius (own sign) throughout"
+      - "Jupiter aspect chains corrected: from-9H aspects to 1H/3H/5H, not from-4H to any house"
+      - "Status changed from CLOSED to CURRENT"
 ---
 
-# REMEDIAL_CODEX_v1_0 — Part 1: Planetary Propitiation, Gemology, Mantra, Dinacharya
+# REMEDIAL_CODEX_v2_0 — Part 1: Planetary Propitiation, Gemology, Mantra, Dinacharya
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 28 | 2026-04-18 | CLOSED
+### v2.0 | Revised 2026-04-19 | CURRENT
 
 ---
 
@@ -62,7 +70,7 @@ Remedial practice in this chart follows three principles derived from the L2.5 s
 
 **Practices**:
 - **Mahalakshmi Ashtakam**: Friday morning, Venus's vara. Lakshmi Ishta Devata activation through explicit Ishta-alignment practice.
-- **Shree Sukta**: Weekly recitation (Friday preferred). The Shree Lagna in 9H is activated directly by Shree Sukta practice.
+- **Shree Sukta**: Weekly recitation (Friday preferred). The Shree Lagna in 7H Libra Vishakha is activated directly by Shree Sukta practice. Shree Lagna 7H routes Lakshmi's grace through the domain of partnerships and relationships (7H), not the dharma domain (9H). Venus, the 7H lord and Mahalakshmi's own planet, is the primary vehicle. The Shree Sukta practice connects to Venus and to the relational field as the entry point for abundance.
 - **Temple visit (Lakshmi shrines)**: Friday preferred. Venkateshwara temples (Tirumala form combines Vishnu + Lakshmi alignment through Vishnu's consort) are ideal given the triple-devata alignment.
 - **Dana**: White rice, sugar, white flowers, silver items on Friday. Modest, not elaborate.
 - **Practice of aesthetic beauty appreciation**: Venus governs aesthetic quality. Deliberate engagement with music, classical art forms, refined aesthetic environments is Venus-strengthening.
@@ -304,5 +312,5 @@ Based on Pitta-Vata constitution (Health Report) and Mercury-Moon Susupta Avasth
 
 ---
 
-*End of REMEDIAL_CODEX_v1_0_PART1.md — Session 28 — 2026-04-18 — CLOSED*
+*End of REMEDIAL_CODEX_v2_0_PART1.md — Session 28 (original) | Revised 2026-04-19 — CURRENT*
 *Part 2 continues with: Yantra, temple/devata-specific practices, temporal interventions, relationship & family-specific remedies, intervention heat-map.*
