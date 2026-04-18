@@ -1,11 +1,9 @@
 ---
-document: REPORT_PARENTS_v1_0.md
-version: 1.0.1
-status: SUPERSEDED
-superseded_by: REPORT_PARENTS_v1_1.md
-superseded_date: 2026-04-19
-session: 25 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18)
-date_closed: 2026-04-18
+document: REPORT_PARENTS_v1_1.md
+version: 1.1
+status: CLOSED
+session: 25 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18); v1.1 review pass 2026-04-19
+date_closed: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D7 — Parents
 parent_UCN_version: UCN_v1_1.md
@@ -19,9 +17,9 @@ organizing_principle: The 9H (Jupiter + Venus) holds both father's house and dha
 reconciliation: "FIX_SESSION_002 2026-04-18 — Citation density upgrade per AUDIT WS2.08. Original v1.0 had 1 citation (below Domain Report protocol). Added structured §13 Citation Index mapping each major claim to its L1/L2.5/UCN source; inline citation markers preserved where already present. Citation count increased from 1 to ~25 via the index."
 ---
 
-# REPORT_PARENTS_v1_0 — Parents Domain Report
+# REPORT_PARENTS_v1_1 — Parents Domain Report
 ## Abhisek Mohanty Jyotish Intelligence System
-### Session 25 | 2026-04-18 | CLOSED
+### Session 25 | 2026-04-18 | Version 1.1 | CLOSED (revised 2026-04-19)
 
 ---
 
@@ -173,4 +171,16 @@ Per Domain Report protocol (`03_DOMAIN_REPORTS/CLAUDE.md`): every major claim ci
 
 ---
 
-*End of REPORT_PARENTS_v1_0.md — Session 25 — 2026-04-18 — CLOSED (citation-density upgrade FIX_SESSION_002)*
+---
+
+## CHANGELOG
+
+| Version | Date | Author | Summary |
+|---|---|---|---|
+| 1.0 | 2026-04-18 | Session 25 | Initial closed artifact |
+| 1.0.1 | 2026-04-18 | FIX_SESSION_002 | Citation density upgrade — structured §13 Citation Index added; citation count increased from 1 to ~25 |
+| 1.1 | 2026-04-19 | Revision pass | Reviewed against FORENSIC_v8_0; no special-lagna position corrections required — report confirmed clean |
+
+---
+
+*End of REPORT_PARENTS_v1_1.md — Session 25 — 2026-04-18 — v1.1 reviewed 2026-04-19 — CLOSED*
