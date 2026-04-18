@@ -1,4 +1,4 @@
-import { streamText } from 'ai'
+import { streamText, stepCountIs } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import { NextResponse } from 'next/server'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
@@ -48,6 +48,7 @@ export async function POST(request: Request) {
     system: systemPrompt,
     messages,
     tools: buildTools,
+    stopWhen: stepCountIs(5),
     maxOutputTokens: 16384,
     providerOptions: {
       anthropic: { cacheControl: { type: 'ephemeral' } },
