@@ -213,6 +213,7 @@ Superseded versions are collected in §8 (Archival). Tooling and process files a
 | `corpus_verification_report_v1_0.md` | Worker-verified findings (0 live errors confirmed) |
 | `corpus_verification_report_v1_0.json` | Machine-readable verification output |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | Agent brief for corpus cleanup task (completed) |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | Agent brief for comprehensive 8-layer corpus verification (MSR merge + citation graph + 24 invariants) |
 | `AM_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
 | `SESSION_RESUME_PROMPT.md` | Session resume context prompt |
 | `.tools/build_lel_v1_2.py` | Life Event Log builder |
@@ -238,8 +239,8 @@ Superseded versions are collected in §8 (Archival). Tooling and process files a
 | L4 Remedial Codex | 2 | 2 |
 | L5–L6 Temporal/Query | 5 | — |
 | Architecture/Governance | 17 | — |
-| Tooling & Process | 16 | — |
-| **Total** | **73** | **29** |
+| Tooling & Process | 17 | — |
+| **Total** | **74** | **29** |
 
 ---
 
