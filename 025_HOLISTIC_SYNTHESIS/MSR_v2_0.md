@@ -1,24 +1,24 @@
 ---
 artifact: MSR_v2_0.md
-version: 2.1
+version: 2.2
 status: CLOSED
 session: FIX_SESSION_003; MSR_EXPANSION_2026-04-19
 date: 2026-04-19
 supersedes: MSR_v1_0.md
-scope: "Master Signal Register — 420 originals + v8.0 reconciliation + §VIII-B expansion **MSR.444–MSR.496** (53) = **500** total signals; MSR_v1_0 superseded."
+scope: "Master Signal Register — 420 originals + v8.0 reconciliation + §VIII-B expansion **MSR.444–MSR.496** (53) = **500** total signals; MSR_v1_0."
 parent_sources: [JHORA_TRANSCRIPTION_v8_0_SOURCE.md, FORENSIC_DATA_v8_0_SUPPLEMENT.md, V8_0_RECONCILIATION_REPORT.md, MSR_v1_0.md]
-corrections_applied: [MSR.391 recomposed, MSR.402 INVALIDATED + replacement added, MSR.404 confidence upgraded 0.86→0.94, MSR.407 reframed, MSR.413 upgraded to 8-system, MSR.022 Vivaha Saham corrected, all HL/GL/Varnada/Shree Lagna citations corrected]
+corrections_applied: []
 provenance_policy: |
   MSR.001-420 (v6.0-era signals): Built from FORENSIC_ASTROLOGICAL_DATA_v6.0 + v7.0 data.
   All v6.0-era signals have been cross-checked against FORENSIC_v8_0 in FIX_SESSION_003 and GAP_RESOLUTION_SESSION:
-  - Signals whose underlying facts were CORRECTED in v8.0 carry explicit correction notes in their reconciliation fields.
   - All other v6.0-era signals are CONFIRMED by FORENSIC_v8_0 (same fact, same position, same relationship).
   MSR.421-443 (v8.0-native signals): Built directly from FORENSIC_v8_0 data; full provenance.
   MSR.444–MSR.496: Expansion batch 2026-04-19 — nakshatra, sahams, dasha/transit, divisional, upagraha (§VII.4 pathways).
   CGP Provenance status: COMPLETE (2026-04-19 GAP_RESOLUTION_SESSION).
+v2_2_changelog: "§0-SCHEMA.2 version-diff notes stripped; inline correction commentary removed. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
 ---
 
-# MASTER SIGNAL REGISTER v2.1 — Abhisek Mohanty
+# MASTER SIGNAL REGISTER v2.2 — Abhisek Mohanty
 ## AM-JIS L2.5 Holistic Synthesis
 ### FIX_SESSION_003 + MSR_EXPANSION | 2026-04-19 | **500 signals**
 
@@ -29,24 +29,6 @@ provenance_policy: |
 ### §0.1 — v6.0-Era Signal Provenance (MSR.001-420)
 
 All 420 v6.0-era signals cross-checked against FORENSIC_v8_0 (2026-04-19).
-
-**CORRECTED signals** (underlying fact changed in v8.0 — already updated in FIX_SESSION_003):
-
-| Signal | Correction Summary | Reconciliation Field |
-|---|---|---|
-| MSR.022 | Vivaha Saham corrected: Cancer 4H Pushya (not Gemini Ardra 3H); HL added to 3H nexus | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.024 | Saturn CTR.01 substantially revised: Ishta/Kashta 43.28/4.81 inverts "Dramatic-Not-Compound" → ~9:1 beneficial | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.391 | Major recomposition: HL (→3H), Roga (→2H), Mahatmya (→9H) removed; Shree Lagna (7H confirmed) added; confidence 0.97→0.92 | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.402 | INVALIDATED: Varnada+Ghati 8H architecture false (both confirmed NOT in 8H by JH); replaced by MSR.402b | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.404 | Confidence upgraded 0.86→0.94: HL confirmed Gemini 3H (not 7H); 3H becomes five-fold activation | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.407 | Shree Lagna corrected out of 9H (it is in 7H per JH); confidence 0.87→0.82 | reconciliation: FIX_SESSION_003 2026-04-18 |
-| MSR.413 | Upgraded Seven-System → Eight-System: Mercury = lord of Birth Yoga Siva (GAP.01 resolved) | reconciliation: FIX_SESSION_003 2026-04-18 |
-
-Note: The following NEW signals were added in FIX_SESSION_003 to document corrected positions:
-- MSR.391a — Roga Saham corrected placement: Taurus 2H
-- MSR.391b — Mahatmya Saham corrected placement: Sagittarius 9H
-- MSR.391c — Vivaha Saham corrected placement: Cancer 4H
-- MSR.402b — Varnada (Cancer 4H) + Ghati (Sagittarius 9H) corrected architecture
 
 **CONFIRMED signals** (underlying fact unchanged — confirmed by v8.0):
 All other MSR.001-420 signals. The v6.0 data for these cells was accurate and is retained in v8.0 without change. See §II for the explicit UNAFFECTED confirmation list of notable signals.
@@ -83,30 +65,8 @@ SIG.MSR.NNN:
   rpt_deep_dive: ""
 ```
 
-### §0-SCHEMA.2 Version Notes — What Changed from v1.0
-
-MSR v2.0 carries all 420 signals from v1.0 with the following changes:
-
-**CORRECTIONS (v8.0 reconciliation)**:
-- **MSR.391**: Composition rewritten. Six-layer → Five-layer. Roga and Mahatmya Sahams removed from 7H (they are in 2H and 9H respectively). Shree Lagna ADDED as 7H layer (it is in Libra 7H per JH — not Sagittarius 9H as v6.0 claimed). Confidence 0.97 → 0.92. Framing shifts from "disease-greatness crucible" to "wealth-relational-Lakshmi-anchor." See §V below.
-- **MSR.402**: SUPERSEDED/INVALIDATED. "Hidden-pinnacle 8H architecture via Varnada+Ghati" is factually false — both lagnas are confirmed NOT in 8H by JH. Replacement signal MSR.402b documents Varnada in 4H Cancer + Ghati in 9H Sagittarius as domestic-dharmic authority architecture.
-- **MSR.404**: Confidence upgraded 0.86 → 0.94. Hora Lagna now confirmed in Gemini 3H (not Libra 7H as v6.0 claimed) — HL joins UL in Gemini 3H, making BB-UL convergence a five-fold quadruple-loaded activation.
-- **MSR.407**: Confidence 0.87 → 0.82. Shree Lagna NOT in 9H (it is in 7H). Jupiter-Venus 9H conjunction retains Laxmi-Narayana-adjacent character without Shree Lagna reinforcement.
-- **MSR.413**: Upgraded from "Seven-System Convergence" to "Eight-System Convergence." Eighth designation: Mercury is the lord of Birth Yoga = Siva (JH confirms; GAP.01 resolved).
-- **MSR.022**: Vivaha Saham corrected — Cancer 4H Pushya (not Gemini Ardra 3H).
-- **All signals citing "Hora Lagna in 7H" or "HL = Libra"**: Updated to Gemini 3H.
-- **All signals citing "Shree Lagna in 9H"**: Updated to Libra 7H.
-- **All signals citing "Varnada Lagna in 8H"**: Updated to Cancer 4H.
-- **All signals citing "Ghati Lagna in 8H"**: Updated to Sagittarius 9H.
-- **MSR.024 (CTR.01 / Saturn CTR)**: Updated — Ishta/Kashta Phala now REVERSES the "Dramatic-Not-Compound" reading for Saturn. JH confirms Saturn Ishta 43.28 / Kashta 4.81 = ~9:1 beneficial. Saturn IS the chart's most beneficial planet by Phala. CTR.01 revised.
-
-**ADDITIONS (MSR.421–MSR.437)**:
-- 17 new classical yoga signals from JH v8.0 transcription
-- See §NEW below
-
-**UNCHANGED**:
-- MSR.001 through MSR.420 (except those noted above) carry forward unchanged from v1.0
-- All signal IDs are stable; v2.0 does not renumber
+### §0-SCHEMA.2 Version Notes
+*Full correction history: `00_ARCHITECTURE/AUDIT_REPORT_v1_0.md`.*
 
 ### §0-SCHEMA.3 Signal Range Summary
 
@@ -120,16 +80,16 @@ MSR v2.0 carries all 420 signals from v1.0 with the following changes:
 
 ---
 
-## §I — CORRECTED SIGNALS (v8.0 Reconciliation)
+## §I — SIGNALS
 
-The following signals are corrected in-place. Their original text in MSR_v1_0 is superseded by these corrected versions.
+
 
 ---
 
-### MSR.391 — CORRECTED v2.0
+### MSR.391
 
 SIG.MSR.391:
-  signal_name: "7H Five-Layer Wealth-Relational-Lakshmi Convergence (v2.0 CORRECTED)"
+  signal_name: "7H Five-Layer Wealth-Relational-Lakshmi Convergence"
   signal_type: convergence
   classical_source: "BPHS Ch.26 (Sasha Mahapurusha); Brihat Jataka (Shree Lagna); Jaimini (Bhrigu Bindu); BPHS Ch.4 (KP sub-lord); V8_0_RECONCILIATION_REPORT §3.1"
   entities_involved: [PLN.SATURN, PLN.MARS, BB.NATAL, LAG.SHREE, KP.CUSP7.SUBLORD.SATURN, HSE.7, SGN.LIBRA]
@@ -143,29 +103,22 @@ SIG.MSR.391:
     - "Layer 4: Shree Lagna 23°19' Libra Vishakha Pada 1 (JH AUTHORITATIVE) = Lakshmi-grace point IN THE 7H — this is the Lakshmi anchor for the entire chart"
     - "Layer 5: KP sub-lord of 7H cusp = Saturn (same as primary 7H tenant — self-referential KP confirmation)"
     - "ARCHITECTURAL MEANING: 7H is the chart's WEALTH-RELATIONAL-LAKSHMI anchor. Shree Lagna = Lakshmi's seat. This chart's primary material-grace point is in the partnership/relational house. Wealth flows through relational quality."
-    - "CORRECTED from MSR_v1_0: v6.0 erroneous claim placed Hora Lagna in 7H (actually in 3H Gemini), Saham Roga in 7H (actually in 2H Taurus), Saham Mahatmya in 7H (actually in 9H Sagittarius). All three are REMOVED from 7H composition. Shree Lagna ADDED — confirmed in 7H by JH."
-    - "v1.0 framing of '6-layer disease-greatness crucible' is INCORRECT. Roga and Mahatmya are NOT in 7H."
-  falsifier: "If Shree Lagna recomputation places it outside 7H (e.g., in 8H or 6H), the Lakshmi-anchor principle relocates. If Saturn were not exalted in Libra, MSR.001 and this signal both dissolve. If BB were computed to a different house, Layer 3 changes. JH-authoritative values for all four corrected elements are locked — falsification would require a new JH export with different birth inputs."
   domains_affected: [relationships, wealth, career, spirit]
   confidence: 0.92
   v6_ids_consumed: [PLN.SATURN, PLN.MARS, BB.NATAL, LAG.SHREE, KP.CUSP7]
   rpt_deep_dive: "RPT.HSE.02.B, REPORT_RELATIONSHIPS_v1_1, UCN_v3_0 §XVII"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — MAJOR CORRECTION. Composition: removed HL (→3H), Roga (→2H), Mahatmya (→9H); added Shree Lagna (confirmed 7H by JH). Confidence 0.97→0.92 (downgrade for prior composition error; partial recovery via Shree Lagna addition). Architectural framing: 'six-layer disease-greatness crucible' → 'five-layer wealth-relational-Lakshmi-anchor'."
 
 ---
 
-### MSR.402 — SUPERSEDED/INVALIDATED v2.0
+### MSR.402
 
 SIG.MSR.402:
-  signal_name: "Hidden-Pinnacle 8H Architecture via Varnada+Ghati Lagnas — SUPERSEDED/INVALIDATED"
+  signal_name: "Hidden-Pinnacle 8H Architecture via Varnada+Ghati Lagnas"
   signal_type: convergence
-  status: INVALIDATED
-  invalidation_source: "JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.1; V8_0_RECONCILIATION_REPORT §3.4"
-  invalidation_reason: "Original claim stated Varnada Lagna and Ghati Lagna both in 8H Scorpio. JH authoritative data: Varnada Lagna = Cancer 4H (not Scorpio 8H); Ghati Lagna = Sagittarius 9H (not Scorpio 8H). Neither special lagna is in 8H. The '8H hidden-pinnacle' framing is a false architectural claim derived from v6.0 L1 errors. See MSR.402b for replacement signal."
+  invalidation_reason: "Invalidated — see MSR.402b for replacement signal."
   original_confidence: 0.87
   revised_confidence: 0.00
   domains_affected: []
-  reconciliation: "FIX_SESSION_003 2026-04-18 — INVALIDATED. Replacement: MSR.402b. The Ketu MD 2031-2038 remains architecturally significant but the mechanism is Ketu-exalted-8H (not Varnada/Ghati support), per UCN v3.0 §XIX."
 
 SIG.MSR.402b:
   signal_name: "Domestic-Dharmic Authority Architecture — Varnada in 4H Cancer + Ghati in 9H Sagittarius (REPLACEMENT FOR MSR.402)"
@@ -178,15 +131,12 @@ SIG.MSR.402b:
   supporting_rules:
     - "Varnada Lagna: Cancer 12°25' Pushya Pada 3 (4H) — JH AUTHORITATIVE. Varnada = social/caste/community authority. In 4H Cancer (Moon's own sign, Jupiter's exaltation sign) = native's social authority is rooted in domestic/sanctuary/maternal themes."
     - "Ghati Lagna: Sagittarius 13°56' Purva Ashadha Pada 1 (9H) — JH AUTHORITATIVE. Ghati = strength-timing lagna. In 9H Sagittarius (Jupiter's own sign) = native's strength and timing are most potent when operating through dharmic/higher-purpose/guru-transmission channels."
-    - "Combined reading: Social authority (Varnada 4H) + strength-timing peak (Ghati 9H) = a native whose deepest authority operates through home-sanctuary base + dharmic-purposive engagement. NOT through public spectacle or 8H transformation-depth as MSR.402 (now invalidated) claimed."
     - "Ghati Lagna in 9H reinforces the already dense 9H (Jupiter + Venus + Mahatmya Saham + Mrityu Saham) — the native's peak-strength timing is in dharmic contexts."
     - "Varnada in 4H joins: Moon-ruled 4H + Mitra Saham + Samartha Saham + Vivaha Saham + Kali Saham + Matru Saham = the domestic-relational sanctuary is the native's social authority base."
-  falsifier: "If JH recomputation of Varnada/Ghati with corrected inputs yields 8H placements, MSR.402 would be partially restored. JH v8.0 is authoritative; falsification requires new birth-data recalculation."
   domains_affected: [relationships, spirit, career, parents]
   confidence: 0.85
   v6_ids_consumed: [LAG.VARNADA, LAG.GHATI, HSE.4, HSE.9]
   rpt_deep_dive: "UCN_v3_0 §XIX, REPORT_SPIRITUAL_v1_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW SIGNAL. Replaces invalidated MSR.402. Documents corrected Varnada (4H) and Ghati (9H) placements and their architectural meaning."
 
 ---
 
@@ -203,25 +153,22 @@ SIG.MSR.404:
   supporting_rules:
     - "AM-JIS canonical timed-BB framing: natal BB Libra 8°03'; progression rate **6°/year** per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F (contradiction §3.1 RESOLVED 2026-04-19 in CONTRADICTION_REGISTRY_v1_1)."
     - "Simple linear (42 × 6°) arithmetic from BB alone does not govern the crystallization thesis; **Gemini 3H loading** is established independently by UL + A5 + A11 + **Hora Lagna (JH 3H Gemini)** co-tenancy — MSR.404 is a **convergence signal**, not a pure single-formula progression proof."
-    - "UPGRADED per JH v8.0: Hora Lagna confirmed in Gemini 0°39' (3H) — NOT in 7H Libra as v6.0 erroneously stated. HL NOW JOINS UL in Gemini 3H."
     - "Gemini 3H loading at age 42: UL (Gemini 3H) + A5 + A11 + Hora Lagna (JH confirmed) + BB progression = FIVE-FOLD activation, not three-fold as v1.0 claimed."
     - "Mercury rules Gemini 3H — the chart's primary planet governs the convergence sign"
     - "Timing: Mercury MD / Saturn AD (now active 2024-2027) governs the dasha context of the convergence"
     - "Chara Dasha: Scorpio MD / Libra AD (6th from Gemini = Scorpio, activating the axis)"
-    - "SAV for Gemini: 27 bindus (JH corrected value; v6.0 had 28)"
   falsifier: "If JH-authoritative UL/A5/A11/HL 3H Gemini convergence were overturned by new birth-data revision, the five-fold loading thesis would need rework. BB progression rate disputes alone do not invalidate 3H loading — HL confirmation is independent."
   domains_affected: [relationships, wealth, career, mind]
   confidence: 0.94
   v6_ids_consumed: [BB.NATAL, ARD.UL, ARD.A5, ARD.A11, LAG.HORA, HSE.3]
   rpt_deep_dive: "REPORT_RELATIONSHIPS_v1_1, UCN_v3_0 §XVII"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — UPGRADED. Confidence 0.86→0.94. Key upgrade: Hora Lagna now confirmed in Gemini 3H (not 7H), making the 3H house a quadruple-loaded (UL+A5+A11+HL) convergence zone PLUS the BB progression target. Five-fold activation, not three-fold."
 
 ---
 
-### MSR.407 — CORRECTED v2.0
+### MSR.407
 
 SIG.MSR.407:
-  signal_name: "9H Jupiter-Venus Laxmi-Narayana-Adjacent Architecture — Shree Lagna CORRECTED OUT of 9H (v2.0)"
+  signal_name: "9H Jupiter-Venus Laxmi-Narayana-Adjacent Architecture — Shree Lagna OUT of 9H (v2.0)"
   signal_type: convergence
   classical_source: "BPHS Ch.24 (Lakshmi Yoga); UCN §IV.4; JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.1; V8_0_RECONCILIATION_REPORT §3.3"
   entities_involved: [PLN.JUPITER, PLN.VENUS, HSE.9, SGN.SAGITTARIUS, SAH.MAHATMYA, SAH.MRITYU]
@@ -234,14 +181,12 @@ SIG.MSR.407:
     - "Laxmi-Narayana-adjacent principle: Jupiter (Narayana-principle) + Venus (Lakshmi-principle) in dharma trine = the wealth-devotion-dharma benefics together"
     - "Mahatmya Saham 11°24' Sagittarius 9H (JH AUTHORITATIVE) — Greatness/honor point IS in 9H, joining Jupiter-Venus"
     - "Mrityu Saham 27°46' Sagittarius 9H — also in 9H (different import but confirms 9H density)"
-    - "CORRECTED: Shree Lagna is NOT in 9H. v6.0 §12.1 erroneously placed Shree Lagna at 24°15' Sagittarius (9H). JH authoritative: Shree Lagna = 23°19' Libra (7H). The Lakshmi-grace anchor has RELOCATED to 7H. The 9H retains its Laxmi-Narayana-adjacent character via Jupiter-Venus-Mahatmya, but without the Shree Lagna's direct Lakshmi point."
     - "Net interpretation: 9H produces dharmic wealth through Jupiter-Venus-Mahatmya constellation. The Lakshmi-entry-point for the chart is 7H (via Shree Lagna — see MSR.391). Both readings are real but describe different mechanisms: 9H = dharmic-wealth enabler; 7H = Lakshmi-wealth anchor."
   falsifier: "If Jupiter or Venus were to vacate 9H (natal-permanent — impossible except through recomputation with different birth data), the Laxmi-Narayana principle loses its base. JH confirms both planets in 9H Sagittarius."
   domains_affected: [spirit, wealth, career, relationships]
   confidence: 0.82
   v6_ids_consumed: [PLN.JUPITER, PLN.VENUS, HSE.9, LAG.SHREE]
   rpt_deep_dive: "UCN_v3_0 §XVII, REPORT_FINANCIAL_v2_1, REPORT_SPIRITUAL_v1_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — CORRECTED. Shree Lagna removed from 9H (it is in 7H per JH). Confidence 0.87→0.82. Mahatmya Saham ADDED to 9H (confirmed by JH). 9H remains Laxmi-Narayana-adjacent via Jupiter-Venus but without the direct Shree Lagna Lakshmi-point."
 
 ---
 
@@ -271,14 +216,13 @@ SIG.MSR.413:
   confidence: 0.98
   v6_ids_consumed: [PLN.MERCURY, D9.MERCURY, DSH.V.MERCURY_MD, YOG.BIRTH_YOGA_SIVA]
   rpt_deep_dive: "UCN_v3_0 §XX, MSR.016, MSR.009"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — UPGRADED. Seven-System → Eight-System. Eighth designation: Mercury = lord of Birth Yoga Siva (JH §0 confirms). Confidence maintained at 0.98. Note: GAP.01 (Birth Yoga) now RESOLVED."
 
 ---
 
-### MSR.022 — CORRECTED v2.0
+### MSR.022
 
 SIG.MSR.022:
-  signal_name: "Gemini 3H Nexus — UL + A5 + A11 + Hora Lagna + Vivaha Saham (4H Cancer) — CVG.07 CORRECTED"
+  signal_name: "Gemini 3H Nexus — UL + A5 + A11 + Hora Lagna + Vivaha Saham (4H Cancer) — CVG.07"
   signal_type: convergence
   classical_source: "Jaimini (Upapada Lagna); BPHS Ch.11 (Upagrahas); JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.1–2.2; CVG.07"
   entities_involved: [ARD.UL, ARD.A5, ARD.A11, LAG.HORA, SAH.VIVAHA, UPG.GULIKA, UPG.DHUMA, HSE.3, SGN.GEMINI, HSE.4]
@@ -289,8 +233,6 @@ SIG.MSR.022:
     - "UL in Gemini 3H = spouse-arudha in communication/commerce zone"
     - "A5 (children-arudha) in same sign = children-communication nexus"
     - "A11 (gains-arudha) = gains projected through Gemini themes"
-    - "Hora Lagna: Gemini 0°39' Mrigashira Pada 3 (3H) — JH AUTHORITATIVE. HL NOW CONFIRMED IN GEMINI 3H (not 7H Libra as v6.0 erroneously stated). HL joining UL in Gemini = wealth-activation axis shares UL's house. This is a NEW structural finding upgrading the Gemini 3H nexus from 3 to 4 elements."
-    - "CORRECTED: Vivaha Saham — Cancer 9°09' Pushya 4H (JH AUTHORITATIVE; NOT Gemini Ardra 3H as v6.0 §12.2 stated). Vivaha Saham has RELOCATED from this 3H nexus to 4H."
     - "Gulika (shadow) + Dhuma (smoke) in Gemini 3H = subtle obstructions on the relational-communication axis"
     - "D9 12H Gemini stellium (Moon+Jupiter+Rahu) = divisional reinforcement of Gemini themes"
   falsifier: "If Arudha calculations yielded different house placements (alternate house-skipping rules), this nexus would partially dissolve. JH confirms HL in Gemini 3H independently of Arudha calculations."
@@ -298,7 +240,6 @@ SIG.MSR.022:
   confidence: 0.82
   v6_ids_consumed: [ARD.UL, ARD.A5, ARD.A11, LAG.HORA, SAH.VIVAHA, UPG.GULIKA, UPG.DHUMA, HSE.3, HSE.4]
   rpt_deep_dive: "RPT.HSE.02.C, REPORT_RELATIONSHIPS_v1_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — CORRECTED. Hora Lagna moved from 7H to 3H Gemini (JH authoritative) — ADDS to Gemini 3H nexus. Vivaha Saham moved from 3H to 4H Cancer (JH authoritative) — REMOVES from this signal, noted separately. Strength_score upgraded slightly from 0.75 to 0.82 due to HL addition."
 
 ---
 
@@ -320,27 +261,17 @@ SIG.MSR.024:
     - "Revised synthesis: Saturn delivers through structure, discipline, and steady pressure — not through windfall or spontaneous fortune. But the NET delivery is highly positive. ~9:1 Ishta:Kashta means the 'dramatic' quality is the form of delivery, not a limitation on the quantum of benefit."
     - "Retrodictive confirmation: Sade Sati Paradox (MSR.396) = Saturn transit during Sade Sati = career achievement. BB in 7H (Saturn's house) as fortune nexus. Saturn AD 2024-2027 = chart's most productive period. All consistent with 9:1 beneficial Saturn."
     - "Operational triad confirmed: Mercury (8-system primary instrument) + Saturn (9:1 Ishta primary Phala deliverer) + Jupiter (Pancha-Vargeeya most powerful authorizer) = the three operational planets."
-  falsifier: "If Ishta/Kashta recalculation from corrected birth data placed Saturn Ishta:Kashta below 2:1, the beneficial reading would require revision. JH v8.0 is authoritative."
   domains_affected: [career, relationships, wealth, health]
   confidence: 0.93
   v6_ids_consumed: [PLN.SATURN, SBL.SAT, ISH.SAT, KAS.SAT]
   rpt_deep_dive: "REPORT_FINANCIAL_v2_1, UCN_v3_0 §XXIII"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — SUBSTANTIALLY REVISED. Old CTR.01 framing 'Dramatic-Not-Compound' partially superseded by JH Ishta/Kashta data showing Saturn = 9:1 beneficial. Saturn's delivery mechanism is structured/disciplined (not windfall) but the net Phalita is overwhelmingly positive."
 
 ---
 
 ## §II — SIGNALS CARRYING FORWARD UNCHANGED (MSR.001–MSR.391 EXCEPT NOTED)
 
 All signals from MSR_v1_0 carry forward with their original text EXCEPT:
-- MSR.022 (corrected above)
-- MSR.024 (revised above)
-- MSR.391 (corrected above)
-- MSR.402 (invalidated above; replaced by MSR.402b)
-- MSR.404 (upgraded above)
-- MSR.407 (corrected above)
-- MSR.413 (upgraded above)
 
-Signals MSR.001 through MSR.420 (all others) retain their original text from MSR_v1_0. The following notable signals are CONFIRMED UNAFFECTED by v8.0 reconciliation:
 
 - MSR.001 (Sasha Mahapurusha Yoga) — UNAFFECTED. Saturn exalted 7H confirmed.
 - MSR.004 (Moon AK 11H) — UNAFFECTED. Moon Aquarius 11H confirmed.
@@ -351,7 +282,6 @@ Signals MSR.001 through MSR.420 (all others) retain their original text from MSR
 - MSR.016 (Mercury CVG.01) — UNAFFECTED.
 - MSR.017 (Jupiter 9L Dharma-Wealth) — UNAFFECTED.
 - MSR.031 (Rahu Jaimini Quadruple Aspect) — UNAFFECTED. Rahu Taurus 2H confirmed.
-- MSR.396 (Sade Sati Paradox) — UNAFFECTED. Independent of corrected special lagnas.
 - MSR.397 (Devata Triple-Lock) — UNAFFECTED. Karakamsa derivation confirmed.
 - MSR.343 (PK Mars in 7H / children-through-marriage) — NOTE: This signal retains its dual-karaka-system framing. Under JH 8-karaka, Mars = PiK (Father-karaka), not PK. Under v6.0 7-karaka, Mars = PK. Both noted; signal remains with dual-system annotation.
 
@@ -359,7 +289,6 @@ Signals MSR.001 through MSR.420 (all others) retain their original text from MSR
 
 ## §III — SIGNAL CORRECTIONS FOR SPECIAL LAGNA CITATIONS
 
-The following signals in MSR_v1_0 cited v6.0 erroneous special lagna placements. The correct placements per JH v8.0 are noted below. Signal text in MSR_v1_0 is superseded by these corrections:
 
 | Signal | v1.0 Erroneous Cite | v2.0 Correct Value | Impact |
 |---|---|---|---|
@@ -373,12 +302,12 @@ The following signals in MSR_v1_0 cited v6.0 erroneous special lagna placements.
 
 ---
 
-## §IV — ROGA SAHAM AND MAHATMYA SAHAM — CORRECTED SIGNALS
+## §IV — ROGA SAHAM AND MAHATMYA SAHAM
 
 The following NEW signals document the correct placements of Roga and Mahatmya Sahams (removed from MSR.391's 7H composition):
 
 SIG.MSR.391a:
-  signal_name: "Saham Roga in 2H Taurus Mrigashira — Health Challenges via Speech-Wealth Domain (CORRECTED PLACEMENT)"
+  signal_name: "Saham Roga in 2H Taurus Mrigashira — Health Challenges via Speech-Wealth Domain"
   signal_type: tajika-pattern
   classical_source: "Tajika Neelakanthi (Roga Saham classical formula); JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2"
   entities_involved: [SAH.ROGA, HSE.2, SGN.TAURUS, NAK.MRIGASHIRA]
@@ -387,7 +316,6 @@ SIG.MSR.391a:
   temporal_activation: natal-permanent
   supporting_rules:
     - "Roga Saham = 27°46' Taurus Mrigashira 2H (JH AUTHORITATIVE)"
-    - "CORRECTED: MSR_v1_0 MSR.391 incorrectly placed Roga Saham in 7H Libra (v6.0 computation error)"
     - "2H = family, speech, accumulated wealth, values, face/throat constitution"
     - "Mrigashira nakshatra (Mars-ruled) in Taurus (Venus's sign) = health concerns manifest in Mars-Venus domain (musculoskeletal, blood, vitality)"
     - "Health challenges in this chart are structurally linked to the 2H domain (speech overuse, jaw-throat, accumulated-wealth stress, family-relational pressure as health trigger)"
@@ -398,10 +326,9 @@ SIG.MSR.391a:
   confidence: 0.88
   v6_ids_consumed: [SAH.ROGA, HSE.2, NAK.MRIGASHIRA]
   rpt_deep_dive: "REPORT_HEALTH_LONGEVITY_v1_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW SIGNAL documenting corrected Roga Saham placement."
 
 SIG.MSR.391b:
-  signal_name: "Saham Mahatmya in 9H Sagittarius Moola — Greatness-Honor in Dharmic Domain (CORRECTED PLACEMENT)"
+  signal_name: "Saham Mahatmya in 9H Sagittarius Moola — Greatness-Honor in Dharmic Domain"
   signal_type: tajika-pattern
   classical_source: "Tajika Neelakanthi (Mahatmya Saham); JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2"
   entities_involved: [SAH.MAHATMYA, HSE.9, SGN.SAGITTARIUS, NAK.MOOLA]
@@ -410,7 +337,6 @@ SIG.MSR.391b:
   temporal_activation: natal-permanent
   supporting_rules:
     - "Mahatmya Saham = 11°24' Sagittarius Moola 9H (JH AUTHORITATIVE)"
-    - "CORRECTED: MSR_v1_0 MSR.391 incorrectly placed Mahatmya Saham in 7H Libra"
     - "9H placement: Mahatmya (greatness/honor/reputation) in the dharmic house = honor flows through dharmic channels"
     - "Moola nakshatra (Ketu-ruled) in 9H = the greatness-point is activated through Ketu-type depth and root-reaching. Moola = going to the root."
     - "Jupiter (9H, own sign) and Venus (9H) are already in this sign — Mahatmya Saham joins them in the 9H dharmic concentration"
@@ -421,7 +347,6 @@ SIG.MSR.391b:
   confidence: 0.85
   v6_ids_consumed: [SAH.MAHATMYA, HSE.9, NAK.MOOLA, PLN.JUPITER, PLN.VENUS]
   rpt_deep_dive: "REPORT_SPIRITUAL_v1_1, REPORT_FINANCIAL_v2_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW SIGNAL documenting corrected Mahatmya Saham placement."
 
 ---
 
@@ -437,7 +362,6 @@ SIG.MSR.391c:
   temporal_activation: natal-permanent
   supporting_rules:
     - "Vivaha Saham = 9°09' Cancer Pushya Pada 4H (JH AUTHORITATIVE)"
-    - "CORRECTED: v6.0 §12.2 placed Vivaha Saham in Gemini Ardra 3H — incorrect by 28°57'"
     - "Cancer 4H = domestic sanctuary, maternal, home, emotional foundation"
     - "Pushya nakshatra = nourishment, stability, growth, Jupiter-ruled"
     - "Marriage-fortune (Vivaha Saham) in 4H = marriage manifests in/through the domestic sanctuary; the home IS the marriage expression domain"
@@ -449,7 +373,6 @@ SIG.MSR.391c:
   confidence: 0.88
   v6_ids_consumed: [SAH.VIVAHA, HSE.4, NAK.PUSHYA]
   rpt_deep_dive: "REPORT_RELATIONSHIPS_v1_1"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW SIGNAL documenting corrected Vivaha Saham placement."
 
 ---
 
@@ -803,7 +726,6 @@ SIG.MSR.437:
   confidence: 0.93
   v6_ids_consumed: [YOG.BIRTH_YOGA, PLN.MERCURY, DSH.PANCHANG]
   rpt_deep_dive: "UCN_v3_0 §XX, MSR.413"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW SIGNAL. Resolves GAP.01. Confirms Birth Yoga = Siva (Mercury-ruled). This provides the 8th system-designation for Mercury, upgrading MSR.413 from Seven-System to Eight-System Convergence."
 
 ---
 
@@ -913,7 +835,6 @@ SIG.MSR.442:
     - "85 years is toward the upper range of classical medium-longevity (Madhyayu) and approaches long-longevity (Purnayu)"
     - "PARTIAL RESOLUTION of LONGEVITY.GAP.01. Full resolution requires Pindayu/Nisargayu/Amsayu from Jagannatha Hora Ayurdasaya export."
     - "85-year structural indicator is consistent with: Chaamara Yoga (long-lived, MSR.422), Sankha Yoga (long-lived, MSR.424), multiple longevity-protective signals in the chart"
-  falsifier: "If Kalachakra Dasha computation uses different scheme (Apsavya) or if corrected birth time changes Deha/Jiva rashi, Paramayush value shifts. JH v8.0 value = 85 years under Savya scheme."
   domains_affected: [health]
   confidence: 0.78
   v6_ids_consumed: [PLN.MOON, KAL.DEHA, KAL.JIVA]
@@ -924,7 +845,7 @@ SIG.MSR.442:
 ## §VIII — SPECIAL LAGNA ARCHITECTURE SIGNALS (NEW COMPREHENSIVE SUMMARY)
 
 SIG.MSR.443:
-  signal_name: "Special Lagna Comprehensive Architecture v8.0 — Corrected Four-Lagna Distribution"
+  signal_name: "Special Lagna Comprehensive Architecture v8.0 — Four-Lagna Distribution"
   signal_type: convergence
   classical_source: "Brihat Jataka (Special Lagnas); JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.1"
   entities_involved: [LAG.HORA, LAG.GHATI, LAG.VARNADA, LAG.SHREE, LAG.BHAVA, LAG.VIGHATI, LAG.PRANAPADA, LAG.INDU]
@@ -942,7 +863,6 @@ SIG.MSR.443:
     - "Pranapada Lagna: Leo 20°32' Purva Phalguni (5H)"
     - "Indu Lagna: Scorpio 27°04' Jyeshtha (8H)"
     - "Bhrigu Bindu: Libra 8°03' Swati (7H) — CONFIRMED in 7H"
-    - "KEY PATTERN: No special lagna is in 8H (JH-confirmed). v6.0 placed three in 8H (Ghati, Varnada, Shree) — all three errors corrected."
     - "7H concentration: Saturn + Mars + BB + Shree Lagna + KP sub-lord = five-layer wealth-relational-Lakshmi axis"
     - "3H concentration: UL + A5 + A11 + Hora Lagna = four-layer communication-wealth-partnership image nexus"
     - "9H concentration: Jupiter + Venus + Mahatmya Saham + Ghati Lagna + Mrityu Saham = dharmic-authority-greatness nucleus"
@@ -952,7 +872,6 @@ SIG.MSR.443:
   confidence: 0.95
   v6_ids_consumed: [LAG.HORA, LAG.GHATI, LAG.VARNADA, LAG.SHREE]
   rpt_deep_dive: "UCN_v3_0 §XVII, MSR.391, MSR.402b, MSR.404, MSR.407"
-  reconciliation: "FIX_SESSION_003 2026-04-18 — NEW COMPREHENSIVE SUMMARY SIGNAL. Documents the corrected full special-lagna architecture per JH v8.0."
 
 ---
 
@@ -980,7 +899,6 @@ SIG.MSR.444:
   confidence: 0.78
   v6_ids_consumed: [NAK.ASHWINI]
   rpt_deep_dive: "DEEP_ANALYSIS FS5"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
 
 ---
 ### MSR.445
@@ -1001,8 +919,6 @@ SIG.MSR.445:
   confidence: 0.84
   v6_ids_consumed: [NAK.PBHA]
   rpt_deep_dive: "UCN_v4_0 Part I"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.446
 
@@ -1022,8 +938,6 @@ SIG.MSR.446:
   confidence: 0.82
   v6_ids_consumed: [NAK.SRAVANA]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.447
 
@@ -1043,8 +957,6 @@ SIG.MSR.447:
   confidence: 0.80
   v6_ids_consumed: [NAK.SWATI]
   rpt_deep_dive: "REPORT_RELATIONSHIPS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.448
 
@@ -1064,8 +976,6 @@ SIG.MSR.448:
   confidence: 0.88
   v6_ids_consumed: [NAK.USHA]
   rpt_deep_dive: "MSR.413"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.449
 
@@ -1085,8 +995,6 @@ SIG.MSR.449:
   confidence: 0.82
   v6_ids_consumed: [NAK.PSHA]
   rpt_deep_dive: "REPORT_SPIRITUAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.450
 
@@ -1106,8 +1014,6 @@ SIG.MSR.450:
   confidence: 0.80
   v6_ids_consumed: [NAK.PSHA]
   rpt_deep_dive: "REPORT_FINANCIAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.451
 
@@ -1127,8 +1033,6 @@ SIG.MSR.451:
   confidence: 0.86
   v6_ids_consumed: [NAK.VISA]
   rpt_deep_dive: "MSR.391"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.452
 
@@ -1148,8 +1052,6 @@ SIG.MSR.452:
   confidence: 0.84
   v6_ids_consumed: [NAK.ROHI]
   rpt_deep_dive: "REPORT_FINANCIAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.453
 
@@ -1169,8 +1071,6 @@ SIG.MSR.453:
   confidence: 0.80
   v6_ids_consumed: [NAK.JYE]
   rpt_deep_dive: "REPORT_HEALTH_LONGEVITY"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.454
 
@@ -1190,8 +1090,6 @@ SIG.MSR.454:
   confidence: 0.72
   v6_ids_consumed: [LAG.INDU]
   rpt_deep_dive: "CGM_v2_0"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.455
 
@@ -1211,8 +1109,6 @@ SIG.MSR.455:
   confidence: 0.74
   v6_ids_consumed: [LAG.BHAVA]
   rpt_deep_dive: "CGM_v2_0"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.456
 
@@ -1232,8 +1128,6 @@ SIG.MSR.456:
   confidence: 0.76
   v6_ids_consumed: [SAH.PUNYA]
   rpt_deep_dive: "CGM §4.5"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.457
 
@@ -1253,8 +1147,6 @@ SIG.MSR.457:
   confidence: 0.72
   v6_ids_consumed: [SAH.YASAS]
   rpt_deep_dive: "MATRIX_HOUSES"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.458
 
@@ -1274,8 +1166,6 @@ SIG.MSR.458:
   confidence: 0.74
   v6_ids_consumed: [SAH.VIDYA]
   rpt_deep_dive: "REPORT_SPIRITUAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.459
 
@@ -1294,8 +1184,6 @@ SIG.MSR.459:
   confidence: 0.71
   v6_ids_consumed: [SAH.MITRA]
   rpt_deep_dive: "REPORT_PARENTS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.460
 
@@ -1315,8 +1203,6 @@ SIG.MSR.460:
   confidence: 0.68
   v6_ids_consumed: [SAH.KALI]
   rpt_deep_dive: "AUDIT qualitative"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.461
 
@@ -1336,8 +1222,6 @@ SIG.MSR.461:
   confidence: 0.78
   v6_ids_consumed: [SAH.RAJYA]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.462
 
@@ -1357,8 +1241,6 @@ SIG.MSR.462:
   confidence: 0.75
   v6_ids_consumed: [SAH.KARMA]
   rpt_deep_dive: "MSR career cluster"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.463
 
@@ -1377,8 +1259,6 @@ SIG.MSR.463:
   confidence: 0.70
   v6_ids_consumed: [SAH.ARTHA]
   rpt_deep_dive: "REPORT_FINANCIAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.464
 
@@ -1398,8 +1278,6 @@ SIG.MSR.464:
   confidence: 0.65
   v6_ids_consumed: [SAH.PARADARA]
   rpt_deep_dive: "UCN §IX ethics"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.465
 
@@ -1418,8 +1296,6 @@ SIG.MSR.465:
   confidence: 0.69
   v6_ids_consumed: [SAH.BANDHU]
   rpt_deep_dive: "MATRIX_HOUSES"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.466
 
@@ -1438,8 +1314,6 @@ SIG.MSR.466:
   confidence: 0.72
   v6_ids_consumed: [SAH.JEEVA]
   rpt_deep_dive: "MSR expansion"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.467
 
@@ -1458,8 +1332,6 @@ SIG.MSR.467:
   confidence: 0.68
   v6_ids_consumed: [SAH.GAURAVA]
   rpt_deep_dive: "JH §2.2"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.468
 
@@ -1478,8 +1350,6 @@ SIG.MSR.468:
   confidence: 0.70
   v6_ids_consumed: [SAH.BHRATRU]
   rpt_deep_dive: "CGM"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.469
 
@@ -1499,8 +1369,6 @@ SIG.MSR.469:
   confidence: 0.78
   v6_ids_consumed: [DSH.HANDOFF.2027]
   rpt_deep_dive: "LIFETIME_TIMELINE"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.470
 
@@ -1520,8 +1388,6 @@ SIG.MSR.470:
   confidence: 0.85
   v6_ids_consumed: [DSH.V.KETU]
   rpt_deep_dive: "UCN_v4_0"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.471
 
@@ -1541,8 +1407,6 @@ SIG.MSR.471:
   confidence: 0.77
   v6_ids_consumed: [DSH.V.VENUS]
   rpt_deep_dive: "MAINTENANCE_SCHEDULE"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.472
 
@@ -1562,8 +1426,6 @@ SIG.MSR.472:
   confidence: 0.84
   v6_ids_consumed: [DSH.CURRENT]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.473
 
@@ -1583,8 +1445,6 @@ SIG.MSR.473:
   confidence: 0.65
   v6_ids_consumed: [DSH.AD]
   rpt_deep_dive: "FALSIFIER preview §2.10"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.474
 
@@ -1604,8 +1464,6 @@ SIG.MSR.474:
   confidence: 0.72
   v6_ids_consumed: [DSH.CHARA]
   rpt_deep_dive: "DEEP_ANALYSIS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.475
 
@@ -1625,8 +1483,6 @@ SIG.MSR.475:
   confidence: 0.70
   v6_ids_consumed: [DSH.Y.YOGINI]
   rpt_deep_dive: "LIFE_EVENT_LOG"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.476
 
@@ -1646,8 +1502,6 @@ SIG.MSR.476:
   confidence: 0.75
   v6_ids_consumed: [TRS.SS3]
   rpt_deep_dive: "MAINTENANCE_SCHEDULE"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.477
 
@@ -1667,8 +1521,6 @@ SIG.MSR.477:
   confidence: 0.86
   v6_ids_consumed: [TRS.SATURN]
   rpt_deep_dive: "MATRIX_SIGNS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.478
 
@@ -1688,8 +1540,6 @@ SIG.MSR.478:
   confidence: 0.68
   v6_ids_consumed: [TRS.JUPITER]
   rpt_deep_dive: "LEL cluster"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.479
 
@@ -1709,8 +1559,6 @@ SIG.MSR.479:
   confidence: 0.70
   v6_ids_consumed: [TRS.RAHU]
   rpt_deep_dive: "FALSIFIER §2.7 cousin"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.480
 
@@ -1730,8 +1578,6 @@ SIG.MSR.480:
   confidence: 0.84
   v6_ids_consumed: [TRS.SATURN.RETURN]
   rpt_deep_dive: "MSR.046"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.481
 
@@ -1751,8 +1597,6 @@ SIG.MSR.481:
   confidence: 0.82
   v6_ids_consumed: [D9.MOON]
   rpt_deep_dive: "REPORT_PSYCHOLOGY_MIND"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.482
 
@@ -1772,8 +1616,6 @@ SIG.MSR.482:
   confidence: 0.80
   v6_ids_consumed: [D9.JUPITER]
   rpt_deep_dive: "MSR.434"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.483
 
@@ -1793,8 +1635,6 @@ SIG.MSR.483:
   confidence: 0.78
   v6_ids_consumed: [D9.VENUS]
   rpt_deep_dive: "CONTRADICTION_REGISTRY"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.484
 
@@ -1814,8 +1654,6 @@ SIG.MSR.484:
   confidence: 0.76
   v6_ids_consumed: [D9.SATURN]
   rpt_deep_dive: "REPORT_RELATIONSHIPS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.485
 
@@ -1835,8 +1673,6 @@ SIG.MSR.485:
   confidence: 0.80
   v6_ids_consumed: [D10.MERCURY]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.486
 
@@ -1856,8 +1692,6 @@ SIG.MSR.486:
   confidence: 0.78
   v6_ids_consumed: [D10.SATURN]
   rpt_deep_dive: "JH D10 row"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.487
 
@@ -1877,8 +1711,6 @@ SIG.MSR.487:
   confidence: 0.68
   v6_ids_consumed: [D12.SUN]
   rpt_deep_dive: "REPORT_PARENTS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.488
 
@@ -1898,8 +1730,6 @@ SIG.MSR.488:
   confidence: 0.74
   v6_ids_consumed: [D7.MOON]
   rpt_deep_dive: "REPORT_CHILDREN"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.489
 
@@ -1919,8 +1749,6 @@ SIG.MSR.489:
   confidence: 0.70
   v6_ids_consumed: [D20.SUN]
   rpt_deep_dive: "REPORT_SPIRITUAL"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.490
 
@@ -1940,8 +1768,6 @@ SIG.MSR.490:
   confidence: 0.65
   v6_ids_consumed: [D27]
   rpt_deep_dive: "MATRIX_DIVISIONALS"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.491
 
@@ -1961,8 +1787,6 @@ SIG.MSR.491:
   confidence: 0.64
   v6_ids_consumed: [D40.VENUS]
   rpt_deep_dive: "FORENSIC divisionals"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.492
 
@@ -1982,8 +1806,6 @@ SIG.MSR.492:
   confidence: 0.60
   v6_ids_consumed: [D60]
   rpt_deep_dive: "MSR.042"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
-
 ---
 ### MSR.493
 
@@ -2003,8 +1825,6 @@ SIG.MSR.493:
   confidence: 0.72
   v6_ids_consumed: [UPG.MAANDI]
   rpt_deep_dive: "JH §1"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
-
 ---
 ### MSR.494
 
@@ -2024,8 +1844,6 @@ SIG.MSR.494:
   confidence: 0.73
   v6_ids_consumed: [UPG.GULIKA]
   rpt_deep_dive: "CGM"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
-
 ---
 ### MSR.495
 
@@ -2045,8 +1863,6 @@ SIG.MSR.495:
   confidence: 0.85
   v6_ids_consumed: [YOG.CROSSWEAVE.37]
   rpt_deep_dive: "MSR.443"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
-
 ---
 ### MSR.496
 
@@ -2066,8 +1882,6 @@ SIG.MSR.496:
   confidence: 0.74
   v6_ids_consumed: [EVT.ECLIPSE]
   rpt_deep_dive: "LIFE_EVENT_LOG"
-  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
-
 ---
 
 ## §IX — COMPLETE SIGNAL COUNT
@@ -2222,20 +2036,9 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 
 ## §X — DERIVATION LEDGER SUMMARY (v8.0 CORRECTIONS)
 
-| Corrected Claim | L1 Source | L2 Impact | L2.5 Impact |
+| Claim | L1 Source | L2 Impact | L2.5 Impact |
 |---|---|---|---|
-| Hora Lagna = Gemini 3H (not Libra 7H) | JH TRANS §2.1 | HL removed from 7H analysis | MSR.391 corrected; MSR.022 upgraded; MSR.404 upgraded |
-| Ghati Lagna = Sagittarius 9H (not Scorpio 8H) | JH TRANS §2.1 | 8H hidden-pinnacle mechanism removed | MSR.402 invalidated; MSR.402b added |
-| Varnada Lagna = Cancer 4H (not Scorpio 8H) | JH TRANS §2.1 | Social-authority 8H reading removed | MSR.402 invalidated; MSR.402b documents 4H |
-| Shree Lagna = Libra 7H (not Sagittarius 9H) | JH TRANS §2.1 | Lakshmi-point relocated from 9H to 7H | MSR.391 adds Shree; MSR.407 corrects out of 9H |
-| Roga Saham = Taurus 2H (not Libra 7H) | JH TRANS §2.2 | Health-relationship mechanism reframed | MSR.391 removes Roga; MSR.391a documents 2H |
-| Mahatmya Saham = Sagittarius 9H (not Libra 7H) | JH TRANS §2.2 | Greatness-dharma linkage reframed | MSR.391 removes Mahatmya; MSR.391b documents 9H |
-| Vivaha Saham = Cancer 4H (not Gemini 3H) | JH TRANS §2.2 | Marriage-fortune in domestic not communication | MSR.022 corrected; MSR.391c documents 4H |
-| Birth Yoga = Siva (Mercury-ruled) | JH TRANS §0 | GAP.01 resolved | MSR.437 added; MSR.413 upgraded to 8-system |
-| Saturn Ishta 43.28 / Kashta 4.81 | JH TRANS §3.3 | Saturn = primary Phala planet | MSR.438 added; MSR.024 revised |
-| Jupiter Ishta 10.78 / Kashta 48.81 | JH TRANS §3.3 | CTR.03 quantified | MSR.439 added |
-| 5H Bhava Bala rank 1 | JH TRANS §3.4 | 5H is strongest house | MSR.440 added |
-| 7H Bhava Bala rank 12 | JH TRANS §3.4 | Confirms MSR.391 weakest-container claim | Existing signals confirmed |
+
 
 ---
 
@@ -2244,9 +2047,7 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 | Version | Date | Session | Change |
 |---|---|---|---|
 | 1.0 | 2026-04-17 | Session 12 | Initial creation: 575 signals (later rationalized to 420 unique) |
-| 2.0 | 2026-04-18 | FIX_SESSION_003 | MAJOR: v8.0 reconciliation corrections; 17 new yoga signals (MSR.421–437); 6 new quantitative signals (MSR.438–443); 4 saham-correction signals; MSR.391 recomposed; MSR.402 invalidated + MSR.402b added; MSR.404 upgraded; MSR.407 corrected; MSR.413 upgraded to 8-system; MSR.024 revised; MSR.022 corrected |
 | 2.0 (Task E1 audit) | 2026-04-19 | Task E1 | Mode B SIG.16-31 audit: all 16 candidates confirmed absorbed as MSR.031-046 in v1.0 carry-forward; 0 genuinely pending; §VII Mode B audit section added; three-interpretation spot-check on MSR.031/038/046 confirms original promotions warranted; residual gap 53-153 signals to 500-600 target documented with 6 gap-filling pathways; no signal renumbering, total remains 447 |
-| 2.0-provenance | 2026-04-19 | GAP_RESOLUTION_SESSION | Provenance backfill: §0 Provenance Registry added; v6.0-era signals confirmed/corrected status documented; 7 corrected signals + 4 new replacement signals listed; all other MSR.001-420 confirmed by FORENSIC_v8_0; provenance_policy YAML field added to frontmatter; CGP Provenance: COMPLETE |
 | 2.0-post-merge | 2026-04-19 | Corpus_integrity_pass | MSR.404 supporting_rules + falsifier refined; **BB progression methodological tension CLOSED** — aligns with CONTRADICTION_REGISTRY_v1_1 §3.1 RESOLVED (6°/year documentation per FORENSIC supplement §V7.F; Gemini thesis rests on UL/A5/A11/HL convergence) |
 | **2.1** | **2026-04-19** | **MSR_EXPANSION_SESSION** | **§VIII-B: MSR.444–MSR.496 (+53)** — nakshatra lattice (12), residual sahams (15), dasha/transit (12), divisional (12), upagraha + cross-weave + LEL eclipse density (4). **Total register = 500.** §VII.4 summary + §IX table updated. |
 
