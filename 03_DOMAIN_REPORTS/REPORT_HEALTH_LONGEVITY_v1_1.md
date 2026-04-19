@@ -8,7 +8,7 @@ document_metadata:
   supersedes: REPORT_HEALTH_LONGEVITY_v1_0.md (v1.0, Session 18) → SUPERSEDED
   session: FIX_SESSION_003
   date: 2026-04-18
-  parent_UCN_version: UCN_v3_0.md (additive through v3.0)
+  parent_UCN_version: UCN_v4_0.md (v4.0, canonical unified version)
   MSR_version: MSR_v2_0.md
   red_team_applied: YES (Session 18 red-team applied; v8.0 JH reconciliation applied)
   quality_standard: acharya-grade
