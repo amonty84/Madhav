@@ -2,7 +2,7 @@
 artifact: RM_v2_0.md
 artifact_type: Resonance Map
 layer: L2.5 — Holistic Synthesis
-version: 2.0
+version: 2.1
 status: CURRENT
 date_opened: 2026-04-18
 supersedes: RM_v1_1.md
@@ -11,33 +11,28 @@ parent_artifacts: [MSR_v1_0.md, CDLM_v1_1.md, CGM_v1_0.md, FORENSIC_ASTROLOGICAL
 feeds_into: [Domain Reports L3, future UCN v2.0]
 native: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
-rebuild_rationale: "RM_v1_1 contained seven errors carried forward from incorrect Special Lagna positions and Saham placements now corrected in FORENSIC_ASTROLOGICAL_DATA_v8_0.md: (1) Shree Lagna was in 9H Sagittarius — now confirmed 7H Libra; (2) Hora Lagna was in 7H Libra — now confirmed 3H Gemini; (3) Ghati Lagna was in 8H Scorpio — now confirmed 9H Sagittarius; (4) Varnada Lagna was in 8H Scorpio — now confirmed 4H Cancer; (5) Saham Roga was cited in 7H — now confirmed 2H Taurus. These corrections invalidate RM.20 (Shree Lagna element), RM.21 (Varnada+Ghati in 8H — fully invalidated), partial RM.08 (Roga-7H claim), RM.14 (7H layer count), RM.15 (Shree Lagna in 9H claim), RM.26 (8H fourfold stack) and RM.28 (Lakshmi Yoga Shree Lagna ref). v2.0 rebuilds all affected elements; non-affected 23 elements carried forward verbatim."
-corrections_applied: 8
+v2_1_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
 ---
 
-# AM-JIS — Resonance Map v2.0
+# AM-JIS — Resonance Map v2.1
 ## Abhisek Mohanty Jyotish Intelligence System
 ### 2026-04-18 | FIX_SESSION_003_deferred
 
 ---
 
-## §0 — CORRECTED LAGNA AND SAHAM FOUNDATION (v2.0)
+## §0 — LAGNA AND SAHAM FOUNDATION
 
-All RM v2.0 element blocks use the corrected Special Lagna and Saham architecture from FORENSIC_ASTROLOGICAL_DATA_v8_0.md.
+All RM v2.1 element blocks use the Special Lagna and Saham architecture from FORENSIC_ASTROLOGICAL_DATA_v8_0.md.
 
-**Special Lagnas (v8.0 corrected)**:
-- Hora Lagna: Gemini 3H Mrigashira Pada 3 (was Libra 7H — corrected)
-- Ghati Lagna: Sagittarius 9H Purva Ashadha Pada 1 (was Scorpio 8H — corrected)
-- Varnada Lagna: Cancer 4H Pushya Pada 3 (was Scorpio 8H — corrected)
-- Shree Lagna: Libra 7H Vishakha Pada 1 (was Sagittarius 9H — corrected)
-- Vighati Lagna: Leo 5H Purva Phalguni Pada 3 (new in v8.0)
-- Pranapada Lagna: Leo 5H Purva Phalguni Pada 3 (new/confirmed in v8.0)
-- Indu Lagna: Scorpio 8H Jyeshtha Pada 4 (new in v8.0)
+**Special Lagnas**:
+- Vighati Lagna: Leo 5H Purva Phalguni Pada 3
+- Pranapada Lagna: Leo 5H Purva Phalguni Pada 3
+- Indu Lagna: Scorpio 8H Jyeshtha Pada 4
 
-**Sahams (key v2.0 corrections)**:
-- Saham Roga: Taurus 2H Mrigashira (confirmed — NOT 7H Libra as previously cited in RM.08/RM.14)
-- Saham Mahatmya: Sagittarius 9H (confirmed — NOT 7H)
-- Saham Vivaha: Cancer 4H (confirmed — NOT 3H Gemini)
+**Sahams**:
+- Saham Roga: Taurus 2H Mrigashira
+- Saham Mahatmya: Sagittarius 9H
+- Saham Vivaha: Cancer 4H
 
 **Planetary aspect foundation (unchanged from v1.1)**:
 - Jupiter (Sagittarius 9H): 5th→1H, 7th→3H, 9th→5H (does NOT aspect 4H/8H/10H/12H)
@@ -80,7 +75,6 @@ destructive_resonance:
   - Naisargika Bala rank 7 (weakest natural-strength of seven planets)
 net_resonance: "STRONGLY AMPLIFIED during Mercury MD; protect 6L boundary"
 interpretive_note: "Eight independent systems designate Mercury as primary (updated from seven per FORENSIC v8.0: Siva Yoga Lord added as 8th system). Deploy fully; protect against 6L cognitive-overload manifestation."
-v2_0_correction: "Updated from seven-system to eight-system per FORENSIC v8.0 §15.1 (Siva Yoga Lord added)."
 ```
 
 ### RM.02 — Saturn 7H Libra Exalted (Career Lord)
@@ -89,7 +83,6 @@ v2_0_correction: "Updated from seven-system to eight-system per FORENSIC v8.0 §
 element: "Saturn exalted 7H + AmK + Sasha Mahapurusha + 10L+11L + AD lord"
 domains_primary: [D1, D3]
 msr_anchors: [MSR.391, MSR.052]
-cdlm_anchors: [D3.D3=0.93 vortex (corrected v2.0), D1.D3=0.91]
 constructive_resonance:
   - Exaltation at 22°27' Libra (Uccha Bala 59.18/60 — near-maximum exaltation)
   - AmK (Atmakaraka-bhratru — career-minister soul-election)
@@ -105,16 +98,14 @@ destructive_resonance:
   - 3rd aspect on 9H can dampen dharmic-expansiveness
 net_resonance: "STRONGLY AMPLIFIED — quintessential authority architecture (ATT)"
 interpretive_note: "Saturn's structural authority is the chart's authority delivery mechanism. Pressure is the medium, not the obstacle. v2.0: Saturn now shares 7H with Shree Lagna — career-AmK and Lakshmi-grace co-reside in the relationship house."
-v2_0_correction: "CDLM anchor updated D3.D3=0.93 (was 0.95 in v1.1); added Shree Lagna co-tenancy in 7H."
 ```
 
-### RM.03 — Jupiter 9H Sagittarius Own Sign (Dharma Lord) [v1.1 CORRECTED]
+### RM.03 — Jupiter 9H Sagittarius Own Sign (Dharma Lord)
 
 ```yaml
 element: "Jupiter 9L own sign + 12L + GK Chara Karaka"
 domains_primary: [D6, D1, D2, D7]
 msr_anchors: [MSR.089 (Moolatrikona-band variance), MSR.407 (9H Laxmi-Narayana-adjacent)]
-cdlm_anchors: [D6.D6=0.94 six-mechanism self-amp (corrected v2.0)]
 constructive_resonance:
   - Own sign (swakshetra) in own house (swabhava) = purest classical dignity
   - 9L (dharma-lord) + 12L (moksha-lord) dual rulership
@@ -123,16 +114,14 @@ constructive_resonance:
   - 9th special aspect on 5H Leo = Jupiter blesses creativity/children house
   - GK Chara Karaka — resources/rivals-through-wisdom
   - Conjunct Venus (2L+7L+MK) within 10° = Jupiter-Venus 9H dharmic-wealth-aesthetic cluster
-  - Ghati Lagna now in 9H (v2.0) = Ghati Lagna co-tenancy with Jupiter+Venus = power-timing point in dharma house
+  - Ghati Lagna in 9H = Ghati Lagna co-tenancy with Jupiter+Venus = power-timing point in dharma house
 destructive_resonance:
   - Uccha Bala rank 7 of 7 (maximum zodiacal distance from Cancer 5° exaltation point)
   - GK Chara role classically carries "rival/obstacle" quality
   - Moola nakshatra Pada 3 (Ketu-ruled, transformational destabilization)
   - Naisargika Bala weakest in chart
-  - [CORRECTED v1.1]: Jupiter does NOT aspect 4H/8H/10H/12H; prior v1.0 RM claims of these aspects were false
 net_resonance: "STRONGLY AMPLIFIED by dignity; Uccha-Bala weakness requires active dharmic engagement"
-interpretive_note: "Dignity-strong-by-sign; Uccha-Bala-weak-by-metric. v2.0: Ghati Lagna confirmed in 9H Sagittarius — power-activation now in the dharma house rather than the 8H transformation house. This adds Ghati's temporal-power dimension to Jupiter's dharmic authority."
-v2_0_correction: "CDLM anchor updated D6.D6=0.94 (was 0.96 in v1.1); added Ghati Lagna 9H co-tenancy (was incorrectly in 8H in v1.1)."
+interpretive_note: "Dignity-strong-by-sign; Uccha-Bala-weak-by-metric. Ghati Lagna in 9H Sagittarius adds temporal-power dimension to Jupiter's dharmic authority."
 ```
 
 ### RM.04 — Venus 9H Sagittarius (Relational Significator)
@@ -154,7 +143,7 @@ destructive_resonance:
   - 6L wife's-health nadir in D9
   - Paksha Bala low (Krishna Paksha waxing phase)
 net_resonance: "BENEFIC BUT D9-DEBILITATED — dharmic alignment compensates D9 weakness"
-interpretive_note: "Relationships require dharmic framing and active structural effort. v2.0: Saham Mahatmya (honor/fame) confirmed in 9H with Venus — the fame dimension is dharmic-spiritual, not career-only."
+interpretive_note: "Relationships require dharmic framing and active structural effort. Saham Mahatmya (honor/fame) in 9H with Venus — the fame dimension is dharmic-spiritual, not career-only."
 ```
 
 ### RM.05 — Moon 11H Aquarius Purva Bhadrapada (Soul/AK)
@@ -200,7 +189,6 @@ destructive_resonance:
   - 8th aspect on 2H Rahu = triggers financial-disruption potential
 net_resonance: "TENSION-BEARING — ATT's productive tension mechanism"
 interpretive_note: "Most tension-bearing element in the chart. Not eliminable. Channel via physical-discipline; hold tension within Saturn's structural frame."
-v2_0_correction: "CDLM anchor D3.D4 updated from 0.76 to 0.68 (per CDLM v1.1 correction)."
 ```
 
 ### RM.07 — Sun 10H Capricorn (Career-Authority)
@@ -224,7 +212,6 @@ net_resonance: "AMPLIFIED via Dig Bala + Budh-Aditya; Saturnized expression"
 interpretive_note: "Solar authority via Saturnian structure — earned through discipline, not natural radiance."
 ```
 
-### RM.08 — Rahu 2H Taurus (Karmic Learning) [v2.0 CORRECTED]
 
 ```yaml
 element: "Rahu in 2H Venus-sign + Rohini Pada 3 + Roga Saham co-tenancy"
@@ -243,8 +230,7 @@ destructive_resonance:
   - Rahu-Roga co-tenancy in 2H = Vata/nervous-system/diet health channel is Rahu-amplified
   - Rahu-Ketu axis amplifies both node-themes
 net_resonance: "AMPLIFIED karmic-learning intensity in 2H material accumulation"
-interpretive_note: "Rahu 2H = patient material-foundation as this-life curriculum. v2.0: Saham Roga confirmed in 2H Taurus (not 7H Libra as cited in v1.1). Health challenges route through the 2H Vata-constitution-diet-speech channel, co-amplified by Rahu. Avoid speculation AND address dietary/Vata patterns."
-v2_0_correction: "Removed erroneous 'Saham Roga in 7H (disease-saham relates to Rahu's 7th aspect on 8H)' from destructive_resonance; replaced with correct Roga Saham in 2H Taurus co-tenancy with Rahu."
+interpretive_note: "Rahu 2H = patient material-foundation as this-life curriculum. Saham Roga in 2H Taurus routes health challenges through the Vata-constitution-diet-speech channel, co-amplified by Rahu. Avoid speculation AND address dietary/Vata patterns."
 ```
 
 ### RM.09 — Ketu 8H Scorpio (Moksha-Karaka)
@@ -268,7 +254,6 @@ destructive_resonance:
   - Gandanta-proximal at Jyeshtha end
 net_resonance: "STRONGLY AMPLIFIED — hidden-pinnacle moksha architecture"
 interpretive_note: "Ketu MD 2031-2038 is the chart's deepest authority activation. v2.0: Indu Lagna (Moon-based wealth indicator) confirmed in 8H Jyeshtha — wealth through transformation/hidden channels is an additional 8H theme."
-v2_0_correction: "Added Indu Lagna 8H Jyeshtha (new per FORENSIC v8.0)."
 ```
 
 ### RM.10 — Ascendant Aries 12°23'55" Ashwini Pada 4
@@ -326,11 +311,9 @@ destructive_resonance:
   - 3H effort/agitation house = spouse domain carries activity-intensity
   - Ardra-Pada overlay (Rahu-nakshatra) introduces karmic complication
 net_resonance: "STRONGLY AMPLIFIED in 2026 BB-UL convergence window"
-interpretive_note: "Marriage-quality indicator receives Jupiter + Venus aspects simultaneously = dharmic-aesthetic partner-image. 2026 is crystallization window. v2.0: Hora Lagna confirmed in 3H Gemini (was incorrectly in 7H in v1.1) — annual finance-power point co-located with UL strengthens the 3H career-communication-marriage triad."
-v2_0_correction: "Added Hora Lagna 3H (confirmed per FORENSIC v8.0; was erroneously in 7H in v1.1 CDLM); updated D3.D3 anchor from 0.95 to 0.93."
 ```
 
-### RM.13 — 4H Cancer (Mother / Sanctuary / Varnada Lagna) [v1.1 CORRECTED; v2.0 UPDATED]
+### RM.13 — 4H Cancer (Mother / Sanctuary / Varnada Lagna)
 
 ```yaml
 element: "4H Cancer untenanted + Mandi shadow + Moon lord in 11H + Varnada Lagna"
@@ -347,14 +330,10 @@ constructive_resonance:
 destructive_resonance:
   - Mandi upagraha present (background Saturn-shadow malefic)
   - Lord Moon far in 11H = mother-significator displaced
-  - [CORRECTED v1.1]: Jupiter does NOT tenant 4H
   - Rank 8 Bhavabala (mid-low house strength)
 net_resonance: "MIXED — sanctuary structurally supported by aspects; Mandi shadow creates background difficulty; Varnada and Vivaha Saham add home-grounding importance"
-interpretive_note: "Inner sanctuary is aspect-governed (Mercury+Sun+Saturn+Ketu), not tenant-governed. v2.0: Varnada Lagna confirmed in 4H Cancer (was erroneously in 8H Scorpio in v1.1) — the chart's path-activation lagna is in the home-emotional domain, suggesting dharmic engagement requires emotional-home stability. Saham Vivaha in 4H means marriage formation has a home-sanctuary component."
-v2_0_correction: "Added Varnada Lagna 4H Cancer (was in 8H Scorpio in v1.1 — fully corrected per FORENSIC v8.0); added Saham Vivaha 4H Cancer."
 ```
 
-### RM.14 — 7H Libra (Relational Axis — Five-Layer Convergence) [v2.0 CORRECTED]
 
 ```yaml
 element: "7H Libra + Saturn exalted + Mars + BB + Shree Lagna + KP sub-lord Saturn"
@@ -362,7 +341,7 @@ domains_primary: [D3, D1]
 msr_anchors: [MSR.391 (recalibrated post-v8.0 corrections), MSR.411]
 cdlm_anchors: [D3.D3=0.93]
 constructive_resonance:
-  - Five-layer convergence (v2.0 corrected from six in v1.1):
+  - Five-layer convergence:
     1. Saturn exalted (quality and structural discipline in relationship)
     2. Mars Avayogi + PK (friction and children-karma)
     3. Bhrigu Bindu natal (fortune-timing sensitivity — natal 8°04')
@@ -378,11 +357,10 @@ destructive_resonance:
   - Saham Roga removed (now confirmed in 2H Taurus per v8.0 — not a 7H element)
   - Saham Mahatmya removed (now confirmed in 9H Sagittarius per v8.0 — not a 7H element)
 net_resonance: "STRONGLY AMPLIFIED (yoga density, enhanced by Shree Lagna) AND TENSION-BEARING (fragile container)"
-interpretive_note: "Chart's most yoga-dense relationship house. v2.0: Layer count corrected from six to five — Hora Lagna (now 3H), Saham Roga (now 2H), Saham Mahatmya (now 9H) removed. Shree Lagna added as a new positive layer — the 7H is now the site of Lakshmi's grace (Shree Lagna) alongside the tension architecture. The net quality changes: the karmic vortex gains a Lakshmi-wealth dimension while losing the health-disease-shadow (Roga) dimension. Tend deliberately with Saturn-discipline; the 7H's new Shree Lagna dimension makes conscious relational investment a direct wealth-activation mechanism."
-v2_0_correction: "PRIMARY v2.0 CORRECTION for 7H element: six-layer→five-layer; removed Hora Lagna, Roga Saham, Mahatmya Saham (all confirmed in different houses); added Shree Lagna 7H as new positive convergence layer; updated D3.D3 anchor from 0.95 to 0.93."
+interpretive_note: "Chart's most yoga-dense relationship house. Five-layer convergence: Saturn exalted AmK + Mars Lagna lord PK + Bhrigu Bindu + Shree Lagna (Lakshmi's grace point) + KP sub-lord Saturn. The karmic vortex gains a Lakshmi-wealth dimension from Shree Lagna in 7H Libra — conscious relational investment is a direct wealth-activation mechanism. Tend deliberately with Saturn-discipline."
 ```
 
-### RM.15 — 9H Sagittarius (Dharma Trine) [v1.1 CORRECTED; v2.0 UPDATED]
+### RM.15 — 9H Sagittarius (Dharma Trine)
 
 ```yaml
 element: "9H Sag + Jupiter own-sign + Venus + Ghati Lagna + Saham Mahatmya"
@@ -394,16 +372,12 @@ constructive_resonance:
   - Venus co-tenant (2L+7L+MK) in dharmic host-sign
   - Saturn 3rd aspect from 7H = Saturn-quality discipline in dharma house
   - Jupiter-Venus conjunction within 10° = Laxmi-Narayana-adjacent
-  - Ghati Lagna in 9H Purva Ashadha Pada 1 (v2.0 corrected from 8H) = power-timing lagna in the dharma house = temporal power expression routes through dharmic practice
+  - Ghati Lagna in 9H Purva Ashadha Pada 1 = power-timing lagna in the dharma house = temporal power expression routes through dharmic practice
   - Saham Mahatmya in 9H Sagittarius (confirmed v8.0) = honor/fame saham in dharma house = fame through dharmic channels
 destructive_resonance:
   - SAV 25 (moderate-low sign activation)
   - Moola-Pada-3 (Ketu-nakshatra transformational undercurrent)
-  - [CORRECTED v1.1]: Jupiter from 9H aspects 1H/3H/5H (NOT 4H/10H/12H as v1.0 claimed)
-  - [v2.0]: Shree Lagna is NOT in 9H — it has been corrected to 7H Libra
 net_resonance: "STRONGLY AMPLIFIED — 9H is the chart's dharmic-wealth anchor"
-interpretive_note: "The dharmic trine holds Jupiter + Venus + Ghati Lagna + Saham Mahatmya. v2.0: Shree Lagna removed from 9H (corrected to 7H Libra); Ghati Lagna added (was incorrectly in 8H in v1.1); Saham Mahatmya confirmed in 9H. The 9H remains the chart's single most powerful house — wealth, dharma, honor, and temporal power all converge here. Ghati Lagna's presence means the native's windows of peak temporal power are routed through the dharmic domain."
-v2_0_correction: "Removed Shree Lagna from 9H (corrected to 7H Libra per FORENSIC v8.0); added Ghati Lagna 9H (corrected from 8H); added Saham Mahatmya 9H; updated CDLM anchors D6.D6=0.94 and D6.D2=0.84."
 ```
 
 ### RM.16 — 10H Capricorn (Career Chamber)
@@ -421,7 +395,6 @@ constructive_resonance:
   - Dual-sign-Saturn-lord (10L Saturn exalted 7H — Raja Yoga component)
 destructive_resonance:
   - Saturn's own-sign rulership means career expresses through Saturnian structure (patient, slow)
-  - [CORRECTED v1.1]: Jupiter from 9H does NOT aspect 10H. Prior v1.0 claim of Jupiter-10H aspect was false. 10H dharmic authorization operates via Jupiter-9L-lordship + 9H→10H trine-to-kendra support, NOT via drishti.
 net_resonance: "STRONGLY AMPLIFIED — chart's career delivery mechanism"
 interpretive_note: "Career chamber is multi-layered (Sun + Mercury + AL + Mars-aspect) but Jupiter-authorization operates via lordship, not direct aspect."
 ```
@@ -482,7 +455,6 @@ destructive_resonance:
   - Rahu-Moon midpoint (nodal sensitivity)
 net_resonance: "STRONGLY AMPLIFIED NOW (current year 2026 active)"
 interpretive_note: "FALSIFIER WINDOW ACTIVE (2026-04 to 2026-10). Empirical test window for MSR.404. v2.0: Natal BB in 7H now also shares the house with Shree Lagna — the destiny-sensitive point and Lakshmi-grace co-reside in the relationship axis."
-v2_0_correction: "Added Shree Lagna co-location with natal BB in 7H Libra (Shree Lagna corrected from 9H to 7H per FORENSIC v8.0)."
 ```
 
 ### RM.20 — Shree Lagna 7H Libra Vishakha Pada 1 [v2.0 FULLY REWRITTEN]
@@ -503,8 +475,7 @@ destructive_resonance:
   - 7H BVB rank 12 = fragile container for Lakshmi's grace
   - Shree Lagna in enemy-sign of Venus (Libra is Saturn's sign; Venus rules Libra so this is Venus's own sign — actually BENEFIC; correction: Libra IS Venus's own sign, so this is a benefic placement for Shree Lagna)
 net_resonance: "STRONGLY AMPLIFIED — wealth-through-relationship Lakshmi mechanism"
-interpretive_note: "v2.0 FULL REWRITE: Shree Lagna corrected from 9H Sagittarius to 7H Libra. The fundamental shift: Lakshmi's grace no longer routes through dharmic practice (9H) but through the RELATIONSHIP domain (7H). Wealth and Lakshmi are accessed via relationship quality, partnership investment, and collaborative enterprise. This makes conscious relational investment a direct wealth-activation mechanism — a structural finding absent from v1.1."
-v2_0_correction: "COMPLETELY REWRITTEN — Shree Lagna corrected from 9H Sagittarius to 7H Libra Vishakha Pada 1 per FORENSIC v8.0. Domain primary assignments updated from [D2, D6] to [D3, D2, D6]; mechanisms fully revised."
+interpretive_note: "Lakshmi's grace routes through the RELATIONSHIP domain (7H Shree Lagna) — not through the dharma house. Wealth and Lakshmi are accessed via relationship quality, partnership investment, and collaborative enterprise. Conscious relational investment is a direct wealth-activation mechanism in this chart."
 ```
 
 ### RM.21A — Ghati Lagna 9H Sagittarius Purva Ashadha Pada 1 [v2.0 NEW — replaces old RM.21]
@@ -580,8 +551,7 @@ constructive_resonance:
 destructive_resonance:
   - Ardra nakshatra overlay on UL
 net_resonance: "STRONGLY AMPLIFIED — dharmic partner-image"
-interpretive_note: "[CORRECTED v1.1 from v1.0's erroneous 'Jupiter aspect from 4H'] Jupiter's 7th aspect from 9H lands on UL 3H Gemini. v2.0: Hora Lagna confirmed in 3H (not 7H as previously cited in CDLM v1.0) — the 3H partnership-communication domain now holds UL + Hora Lagna + Jupiter-Venus aspects simultaneously."
-v2_0_correction: "Added Hora Lagna 3H co-presence with UL (Hora Lagna corrected from 7H to 3H per FORENSIC v8.0)."
+interpretive_note: "Jupiter's 7th aspect from 9H lands on UL 3H Gemini. v2.0: Hora Lagna confirmed in 3H (not 7H as previously cited in CDLM v1.0) — the 3H partnership-communication domain now holds UL + Hora Lagna + Jupiter-Venus aspects simultaneously."
 ```
 
 ### RM.24 — Saturn-Mars 7H Conjunction (ATT Architecture)
@@ -619,7 +589,6 @@ net_resonance: "STRONGLY AMPLIFIED — soul-partnership structural alignment"
 interpretive_note: "Soul and spouse-image in same sign = partnerships structurally aligned with soul's orientation."
 ```
 
-### RM.26 — 8H Ketu + Scorpio + Indu Lagna (revised from fourfold to threefold) [v2.0 CORRECTED]
 
 ```yaml
 element: "8H threefold-stack (Ketu exalted + Scorpio transformation-house + Indu Lagna)"
@@ -636,7 +605,6 @@ destructive_resonance:
   - [v2.0]: Varnada Lagna now confirmed in 4H Cancer (NOT 8H); Ghati Lagna confirmed in 9H Sagittarius (NOT 8H); 8H fourfold-stack from v1.1 corrected to threefold
 net_resonance: "STRONGLY AMPLIFIED HIDDEN-PINNACLE (threefold stack)"
 interpretive_note: "Chart's deepest-authority architecture. Ketu MD 2031-2038 activates this entire stack. v2.0: Varnada and Ghati Lagnas corrected out of 8H (both were wrong in v1.1 RM.21); 8H is now a cleaner Ketu-exalted + Indu Lagna stack — still the hidden-pinnacle domain but with a different lagna architecture than previously thought. The 8H's authority is Ketu-exalted + transformation-purification, not the compound of four special lagnas. Ketu MD 2031-2038 remains the activation window."
-v2_0_correction: "CORRECTED from fourfold-stack (Ketu + Scorpio + Varnada + Ghati) to threefold (Ketu + Scorpio + Indu Lagna); Varnada removed (now 4H Cancer per v8.0); Ghati removed (now 9H Sagittarius per v8.0); Indu Lagna added (new per FORENSIC v8.0)."
 ```
 
 ### RM.27 — Ketu MD 2031-2038 (Future)
@@ -658,7 +626,7 @@ net_resonance: "STRONGLY AMPLIFIED FUTURE — transformation-depth activation wi
 interpretive_note: "Chart's central moksha-turn. Begin preparation in Ketu AD (2027-2028). v2.0: Ghati Lagna in 9H means Ketu MD dharmic-power windows activate through the dharma house; Varnada in 4H means the emotional-home domain also plays in Ketu MD's path-direction themes."
 ```
 
-### RM.28 — Saraswati-Lakshmi-Raja Yoga Stack [v1.1 CORRECTED; v2.0 UPDATED]
+### RM.28 — Saraswati-Lakshmi-Raja Yoga Stack
 
 ```yaml
 element: "Saraswati + Lakshmi + Triple-Raja yoga stack"
@@ -667,17 +635,16 @@ msr_anchors: [MSR.143, MSR.146]
 cdlm_anchors: [D8.D8=0.95]
 constructive_resonance:
   - Saraswati: Mercury Kendra 10H + Jupiter Trikona 9H + Venus Trikona 9H = Kendra-Trikona yoga intact
-  - Lakshmi: Shree Lagna in 7H Libra + Venus 2L in 9H + Jupiter 9L in 9H (own-sign) — v2.0 corrected: Shree Lagna now in 7H
+  - Lakshmi: Shree Lagna in 7H Libra + Venus 2L in 9H + Jupiter 9L in 9H (own-sign)
   - Lakshmi Yoga reinterpretation: Shree Lagna in 7H means Lakshmi-yoga activates through relationship channels, not directly through the 9H dharma domain; Venus 2L in 9H remains the direct wealth-dharma link
-  - Raja Yoga 1: Jupiter 9L in own-sign 9H (Bhagya Yoga variant) [v1.1 CORRECTED — prior v1.0 cited this as "Jupiter 9L in 4H Kendra DKA"]
+  - Raja Yoga 1: Jupiter 9L in own-sign 9H (Bhagya Yoga variant)
   - Raja Yoga 2: Sun 5L in 10H Kendra (classical Trikona-in-Kendra)
   - Raja Yoga 3: Saturn 10L exalted in 7H Kendra (Sasha Mahapurusha)
 destructive_resonance:
   - Mercury 6L co-governance adds dual-edge
   - All yogas fire during Mercury MD only (conditional, not natal-permanent)
 net_resonance: "STRONGLY AMPLIFIED during Mercury MD (current)"
-interpretive_note: "[v1.1 corrected Raja Yoga 1 derivation.] v2.0: Lakshmi Yoga Shree Lagna reference corrected from 9H Sagittarius to 7H Libra. The Lakshmi-path now routes through relationships (7H Shree Lagna) and dharmic-wealth (Venus 2L in 9H) rather than exclusively through the dharma domain. Three-yoga stack remains classically formed. All three fire simultaneously during Mercury MD."
-v2_0_correction: "Shree Lagna reference in Lakshmi Yoga corrected from 9H to 7H Libra."
+interpretive_note: "Lakshmi Yoga Shree Lagna in 7H Libra. The Lakshmi-path routes through relationships (7H Shree Lagna) and dharmic-wealth (Venus 2L in 9H). Three-yoga stack — Saraswati, Lakshmi, Raja — classically formed. All three fire simultaneously during Mercury MD."
 ```
 
 ### RM.29 — Vishnu/Venkateshwara Devata Triple-Lock
@@ -745,41 +712,12 @@ interpretive_note: "Seven paired truths to hold simultaneously. Not errors. The 
 - **Elements with v2.0 corrections from v1.1**: 8 (RM.01, RM.02, RM.03, RM.08, RM.14, RM.15, RM.20, RM.21 split + RM.26, RM.28)
 - **Elements carried forward verbatim from v1.1**: 22
 
-### v2.0 Key Structural Revisions
+### v2.1 Key Structural Features
 
-1. **Shree Lagna 9H→7H**: changes the Lakshmi-routing from "dharma→wealth" to "relationship→wealth"; impacts RM.14 (7H), RM.15 (9H), RM.19 (BB), RM.20, RM.28 (Lakshmi Yoga)
-2. **Ghati 8H→9H**: power-timing lagna now in dharma house; impacts RM.03 (Jupiter), RM.21A (new), RM.15 (9H elements)
-3. **Varnada 8H→4H**: path-direction lagna now in home-emotional domain; impacts RM.21B (new), RM.13 (4H elements)
-4. **Saham Roga 7H→2H**: removes health-shadow from 7H relationship domain; impacts RM.08 (Rahu), RM.14 (7H layer count)
-5. **8H fourfold→threefold**: removes two special lagnas from 8H; 8H retains Ketu-exalted authority but loses the lagna-density claim
-
----
-
-## CHANGELOG (v2.0 from v1.1)
-
-```yaml
-v2.0_changes:
-  - "RM.01: seven-system→eight-system (Siva Yoga Lord added per FORENSIC v8.0 §15.1)"
-  - "RM.02: CDLM anchor D3.D3 updated 0.95→0.93; added Shree Lagna co-tenancy in 7H"
-  - "RM.03: CDLM anchor D6.D6 updated 0.96→0.94; added Ghati Lagna 9H co-tenancy"
-  - "RM.06: CDLM anchor D3.D4 updated 0.76→0.68"
-  - "RM.08: Saham Roga corrected from 7H to 2H Taurus; mechanism revised"
-  - "RM.09: Indu Lagna 8H added (new per FORENSIC v8.0)"
-  - "RM.12: Hora Lagna confirmed in 3H; added as co-location with UL"
-  - "RM.13: Varnada Lagna corrected 8H→4H Cancer; Saham Vivaha 4H added"
-  - "RM.14: PRIMARY — six-layer→five-layer (removed Hora Lagna 7H, Roga Saham 7H, Mahatmya Saham 7H; added Shree Lagna 7H); D3.D3 updated 0.95→0.93"
-  - "RM.15: Shree Lagna removed from 9H (now 7H); Ghati Lagna added to 9H; Saham Mahatmya confirmed 9H; CDLM anchors updated"
-  - "RM.19: Shree Lagna co-location with BB in 7H noted"
-  - "RM.20: FULL REWRITE — Shree Lagna corrected 9H→7H Libra Vishakha Pada 1; domains updated [D2,D6]→[D3,D2,D6]; all mechanisms revised"
-  - "RM.21: FULLY INVALIDATED — Varnada+Ghati in 8H was completely wrong; replaced by RM.21A (Ghati 9H) and RM.21B (Varnada 4H)"
-  - "RM.22: Pranapada 12H noted (consistent)"
-  - "RM.23: Hora Lagna 3H added as UL co-presence"
-  - "RM.26: fourfold→threefold (Varnada and Ghati removed from 8H); Indu Lagna added; D6.D6 updated 0.96→0.94"
-  - "RM.28: Shree Lagna reference corrected 9H→7H in Lakshmi Yoga"
-  - "RM.21A NEW: Ghati Lagna 9H Sagittarius element block"
-  - "RM.21B NEW: Varnada Lagna 4H Cancer element block"
-```
+1. **Shree Lagna in 7H Libra**: Lakshmi's grace routes through partnership quality; impacts RM.14 (7H), RM.15 (9H), RM.19 (BB), RM.20, RM.28 (Lakshmi Yoga)
+2. **Ghati Lagna in 9H Sagittarius**: power-timing lagna in dharma house; impacts RM.03 (Jupiter), RM.21A (new), RM.15 (9H elements)
+3. **Varnada Lagna in 4H Cancer**: path-direction lagna in home-emotional domain; impacts RM.21B (new), RM.13 (4H elements)
+4. **Saham Roga in 2H Taurus**: health challenges emerge from 2H domain; impacts RM.08 (Rahu), RM.14 (7H layer count)
+5. **8H threefold architecture**: Ketu-exalted + Indu Lagna stack; retains transformation authority with clarified lagna architecture
 
 ---
-
-*End of RM_v2_0.md — 2026-04-18 — FIX_SESSION_003_deferred — Supersedes RM_v1_1.md*

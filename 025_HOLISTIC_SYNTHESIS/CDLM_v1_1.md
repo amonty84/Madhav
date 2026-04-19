@@ -1,6 +1,6 @@
 ---
 artifact: CDLM_v1_1.md
-version: 1.1
+version: 1.2
 status: CURRENT
 session: FIX_SESSION_003_deferred
 date_opened: 2026-04-18
@@ -11,27 +11,12 @@ parent_facts_version: FORENSIC_ASTROLOGICAL_DATA_v8_0.md
 supersedes: CDLM_v1_0.md
 corrections_applied: 9
 correction_basis: "FORENSIC_ASTROLOGICAL_DATA_v8_0.md — Special Lagna positions corrected (Hora Lagna→3H Gemini, Ghati→9H Sagittarius, Varnada→4H Cancer, Shree→7H Libra); Saham Roga confirmed in 2H Taurus (NOT 7H Libra)"
+v1_2_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
 ---
 
 # CDLM_v1_1 — Cross-Domain Linkage Matrix
 ## Abhisek Mohanty Jyotish Intelligence System
-### v1.1 — Corrected per FORENSIC_ASTROLOGICAL_DATA_v8_0.md
-
-### Corrections Summary (9 cells revised)
-
-| Cell | Was | Now | Reason |
-|------|-----|-----|--------|
-| D1.D4 | Roga Saham in 7H mechanism | Roga Saham in 2H Taurus; mechanism revised | v8.0: Roga=2H Taurus confirmed |
-| D2.D2 | Shree Lagna in 9H | Shree Lagna in 7H Libra | v8.0: Shree=Libra 7H |
-| D2.D3 | Shree Lagna in 9H ref | Shree Lagna in 7H Libra | v8.0: Shree=Libra 7H |
-| D3.D3 | six-layer convergence (incl Hora Lagna + Roga/Mahatmya) | five-layer (Hora→3H; Roga/Mahatmya→2H/9H; Shree Lagna→7H added) | v8.0 lagna/saham corrections |
-| D3.D4 | Roga Saham in 7H mechanism; strength 0.76 | Roga in 2H; strength→0.68 | v8.0: Roga=2H Taurus |
-| D4.D3 | mirrors; Roga in 7H; strength 0.78; bidirectional | constrains; indirect mechanism; strength→0.61; row→col | v8.0: Roga=2H Taurus |
-| D6.D1 | Shree Lagna=9H Sagittarius | Shree Lagna=7H Libra | v8.0: Shree=Libra 7H |
-| D6.D2 | Shree Lagna=9H; strength 0.88 | Shree Lagna=7H; strength→0.84 | v8.0: Shree=Libra 7H |
-| D6.D6 | seven mechanisms (incl Ghati+Varnada in 8H); strength 0.96 | six mechanisms (Ghati→9H, Varnada→4H); strength→0.94 | v8.0 lagna corrections |
-
----
+### v1.2 — Cross-Domain Linkage Matrix
 
 ### Purpose
 
@@ -138,7 +123,6 @@ CDLM.D1.D3:
   valence: mixed
   key_finding: "Career and relationships share Saturn as their structural backbone; the native's professional life and partnership life are karmically inseparable — Saturn exalted in 7H means career-discipline IS relationship-karma."
 
-# CORRECTED CELL (v1.1): D1.D4 — removed Saham Roga in 7H mechanism (Roga confirmed in 2H Taurus per v8.0)
 CDLM.D1.D4:
   row_domain: Career
   col_domain: Health
@@ -149,7 +133,6 @@ CDLM.D1.D4:
   direction: row→col
   valence: malefic
   key_finding: "Career pressure (Saturn's demanding quality + Mercury as 6L-10L dual-lord) structurally constrains health — professional intensity drains Mercury's health-domain resources; the 2026 Muntha in 6H is the primary career-health constraint window."
-  v1_1_correction: "Removed 'Saham Roga in 7H (same house as Saturn-career)' from mechanism — Roga Saham confirmed in 2H Taurus per FORENSIC v8.0; mechanism now built on Mercury 6L-10L dual-role and Saturn career-pressure."
 
 CDLM.D1.D5:
   row_domain: Career
@@ -221,7 +204,6 @@ CDLM.D2.D1:
   valence: benefic
   key_finding: "Wealth ambition (Rahu 2H exalted) directly fuels career drive — the native's financial goals and career ambition are the same force expressed in different domains."
 
-# CORRECTED CELL (v1.1): D2.D2 — Shree Lagna corrected from 9H to 7H Libra
 CDLM.D2.D2:
   row_domain: Wealth
   col_domain: Wealth (self-reference)
@@ -232,9 +214,7 @@ CDLM.D2.D2:
   direction: bidirectional
   valence: benefic
   key_finding: "The wealth domain is internally amplified — four independent wealth-mechanisms (Rahu 2H, Shree Lagna 7H, Moon 11H gains, Mercury Yogi) all confirm material abundance potential; Shree Lagna in 7H means Lakshmi's grace flows specifically through partnership channels."
-  v1_1_correction: "Shree Lagna corrected from 9H Sagittarius to 7H Libra per FORENSIC v8.0; mechanism updated — Lakshmi's grace now in the partnership house rather than the dharma house."
 
-# CORRECTED CELL (v1.1): D2.D3 — Shree Lagna corrected from 9H to 7H Libra (strengthens this cell)
 CDLM.D2.D3:
   row_domain: Wealth
   col_domain: Relationships
@@ -245,7 +225,6 @@ CDLM.D2.D3:
   direction: bidirectional
   valence: benefic
   key_finding: "Wealth and relationships are structurally fused — Venus (2L+7L) makes them the same planetary energy; Shree Lagna in 7H Libra places Lakshmi's grace directly in the relationship house, confirming that wealth and relationship quality advance through the same Lakshmi channel."
-  v1_1_correction: "Shree Lagna corrected from 9H to 7H Libra; this actually strengthens the D2↔D3 linkage because Lakshmi's grace is now directly in the relationship house rather than the dharma house; strength maintained at 0.89."
 
 CDLM.D2.D4:
   row_domain: Wealth
@@ -339,7 +318,6 @@ CDLM.D3.D2:
   valence: benefic
   key_finding: "Relationships feed wealth — Venus as 2L+7L means partnership quality directly determines financial outcomes; the spouse (A7 in 11H) is structurally embedded in the gains domain; Shree Lagna in 7H confirms Lakshmi's grace flows through the relationship domain."
 
-# CORRECTED CELL (v1.1): D3.D3 — six-layer→five-layer; Hora Lagna now 3H (not 7H); Roga/Mahatmya Sahams now 2H/9H (not 7H); Shree Lagna added as positive 7H element
 CDLM.D3.D3:
   row_domain: Relationships
   col_domain: Relationships (self-reference)
@@ -350,9 +328,7 @@ CDLM.D3.D3:
   direction: bidirectional
   valence: mixed
   key_finding: "The relationship domain is internally amplifying through five confirmed systems — Saturn exalted (quality), Mars Avayogi (friction), Bhrigu Bindu (sensitivity), Shree Lagna 7H (Lakshmi-grace), and KP sub=Saturn; the layer-count dropped from six to five but gained the Shree Lagna positive dimension; 7H remains the chart's primary karmic processing zone."
-  v1_1_correction: "Corrected from six-layer to five-layer: removed Hora Lagna (now 3H Gemini per v8.0) and Roga+Mahatmya Sahams (now 2H and 9H respectively); added Shree Lagna 7H Libra as a new positive convergence layer; strength adjusted 0.95→0.93 reflecting the net change."
 
-# CORRECTED CELL (v1.1): D3.D4 — Roga Saham mechanism corrected; strength 0.76→0.68
 CDLM.D3.D4:
   row_domain: Relationships
   col_domain: Health
@@ -363,7 +339,6 @@ CDLM.D3.D4:
   direction: row→col
   valence: malefic
   key_finding: "Relationship friction (Mars Avayogi + Saturn conjunction in 7H) constrains health through shared planetary stressors — Mars-Saturn's dual role as both relationship and health stressors (Vata-Pitta imbalance) creates a structural relationship-health link; this link is real but indirect, not through direct Roga Saham placement."
-  v1_1_correction: "Removed 'Saham Roga being in 7H' mechanism — Roga confirmed in 2H Taurus per FORENSIC v8.0; rebuilt mechanism through Mars-Saturn Vata-Pitta dual-role; strength reduced 0.76→0.68 reflecting removal of the direct Roga-in-7H basis."
 
 CDLM.D3.D5:
   row_domain: Relationships
@@ -445,7 +420,6 @@ CDLM.D4.D2:
   valence: malefic
   key_finding: "Health challenges constrain wealth — 8H Ketu's sudden transformation energy + Mandi in 4H create a structural risk that health events can drain financial resources unexpectedly."
 
-# CORRECTED CELL (v1.1): D4.D3 — PRIMARY CORRECTION; linkage_type mirrors→constrains; strength 0.78→0.61; direction bidirectional→row→col; mechanism rebuilt without Roga-in-7H
 CDLM.D4.D3:
   row_domain: Health
   col_domain: Relationships
@@ -456,7 +430,6 @@ CDLM.D4.D3:
   direction: row→col
   valence: mixed
   key_finding: "Health constrains relationships through indirect mechanisms — Saturn's Sade Sati creates simultaneous health-adjustment and relationship-domain stress; Rahu-Roga co-tenancy in 2H Taurus channels health challenges through the Vata/speech/family domain which reaches the relationship sphere via Venus's 2L-7L dual role; this is a real but indirect constraint, not a direct mirror."
-  v1_1_correction: "PRIMARY v1.1 FIX: Linkage type changed mirrors→constrains; strength 0.78→0.61; direction bidirectional→row→col; mechanism completely rebuilt — removed 'Saham Roga in 7H' basis (Roga confirmed in 2H Taurus per FORENSIC v8.0); connection reestablished through Saturn Sade Sati dual-domain stress and Venus 2L-7L indirect channel."
 
 CDLM.D4.D4:
   row_domain: Health
@@ -631,7 +604,6 @@ CDLM.D5.D9:
 
 ### ROW D6: SPIRIT → [All Domains]
 
-# CORRECTED CELL (v1.1): D6.D1 — Shree Lagna corrected from 9H Sagittarius to 7H Libra
 CDLM.D6.D1:
   row_domain: Spirit
   col_domain: Career
@@ -642,9 +614,7 @@ CDLM.D6.D1:
   direction: bidirectional
   valence: benefic
   key_finding: "Spirit feeds career and career feeds spirit — Saturn (AmK, career) in 7H shares the house with Shree Lagna (Lakshmi-grace); Palana Devata Mercury IS the career deliverer; the native's career excellence IS his dharmic-spiritual practice."
-  v1_1_correction: "Shree Lagna corrected from 9H Sagittarius to 7H Libra; mechanism revised — Shree Lagna now in the same house as Saturn AmK (career); this actually creates a direct career-Lakshmi-grace co-tenancy; strength maintained at 0.89."
 
-# CORRECTED CELL (v1.1): D6.D2 — Shree Lagna corrected from 9H to 7H; spirit-wealth path revised; strength 0.88→0.84
 CDLM.D6.D2:
   row_domain: Spirit
   col_domain: Wealth
@@ -655,7 +625,6 @@ CDLM.D6.D2:
   direction: row→col
   valence: benefic
   key_finding: "Spirit feeds wealth — Venus as Ishta Devata (Mahalakshmi) in 9H is the primary spirit-wealth channel; Shree Lagna in 7H means Lakshmi's grace flows through partnerships rather than directly through the spirit domain; the spirit→wealth path is real but now mediated through Venus-Mahalakshmi and partnership channels."
-  v1_1_correction: "Shree Lagna corrected from 9H to 7H Libra; mechanism revised — spirit-wealth path is now Venus-Mahalakshmi direct (9H spirit→Venus 2L→wealth) rather than Shree Lagna in 9H; strength reduced 0.88→0.84 reflecting the slightly more indirect routing."
 
 CDLM.D6.D3:
   row_domain: Spirit
@@ -690,7 +659,6 @@ CDLM.D6.D5:
   valence: benefic
   key_finding: "Spirit feeds children/creativity — Jupiter as 9H GK (own-sign) directly supervises the 5H; spiritual practice activates purva punya (5H) which manifests as children-blessings and creative intelligence."
 
-# CORRECTED CELL (v1.1): D6.D6 — seven mechanisms→six; Ghati+Varnada removed from 8H (Ghati=9H, Varnada=4H per v8.0); Shree Lagna added as 7H mechanism; strength 0.96→0.94
 CDLM.D6.D6:
   row_domain: Spirit
   col_domain: Spirit (self-reference)
@@ -701,7 +669,6 @@ CDLM.D6.D6:
   direction: bidirectional
   valence: benefic
   key_finding: "The spirit domain is the chart's most self-amplifying domain after career — six confirmed spiritual mechanisms (Ketu exalted 8H, Jupiter own-sign 9H, Venus devotional 9H, Shree Lagna 7H, Yogi+Pranapada 12H, Devata system) all reinforce each other; spiritual evolution is structurally unstoppable; Ghati and Varnada lagnas reinforce the 9H dharma and 4H emotional foundation dimensions."
-  v1_1_correction: "Removed Ghati+Varnada from 8H Scorpio spiritual mechanism — per FORENSIC v8.0, Ghati=9H Sagittarius and Varnada=4H Cancer; these reinforce 9H dharma and 4H home-spiritual dimensions; count changed seven→six; Shree Lagna added as 7H Libra mechanism; strength 0.96→0.94."
 
 CDLM.D6.D7:
   row_domain: Spirit
@@ -1069,8 +1036,8 @@ CDLM.D9.D9:
 
 1. **Mind → Career (0.94)**: Mercury in 10H = mind IS career
 2. **Mind → Mind (0.95)**: Mercury eight-system (v8.0) + Moon-AK double-mind resource
-3. **Spirit → Spirit (0.94)**: Six confirmed spiritual mechanisms self-amplifying (corrected from seven)
-4. **Relationships → Relationships (0.93)**: 7H five-layer convergence (corrected from six-layer)
+3. **Spirit → Spirit (0.94)**: Six confirmed spiritual mechanisms self-amplifying
+4. **Relationships → Relationships (0.93)**: 7H five-layer convergence
 5. **Career → Career (1.00)**: Chart's primary domain = self-organizing apex
 6. **Mind → Wealth (0.92)**: Mercury Yogi = mental excellence = financial gains
 7. **Career → Wealth (0.92)**: AL in 10H = career reputation drives wealth
@@ -1083,7 +1050,7 @@ CDLM.D9.D9:
 1. **Children → Health (0.58)**: Weak secondary link through adjacent houses
 2. **Children → Travel (0.60)**: Structural competition for 9H energy
 3. **Health → Travel (0.60)**: Mild 6H-12H axis constraint
-4. **Health → Relationships (0.61)**: Indirect via Saturn Sade Sati + Venus dual-role (corrected from 0.78 mirror)
+4. **Health → Relationships (0.61)**: Indirect via Saturn Sade Sati + Venus dual-role
 5. **Relationships → Parents (0.62)**: Mild parental-proximity constraint
 
 ### Structural Reading: The Chart's Primary Flow
@@ -1092,7 +1059,7 @@ CDLM.D9.D9:
 
 **Secondary current**: Spirit ← → Career ← → Travel → Wealth = the spiritual-career-travel-wealth chain explains the native's entire adult life architecture (dharmic career in a foreign land producing wealth)
 
-**Karmic vortex**: Relationships (0.93 self-amplifying, five-layer) = the 7H five-layer convergence (corrected from six in v1.1, with Shree Lagna added as the positive Lakshmi dimension) means relationship-karma is the chart's deepest karmic processing zone; Shree Lagna in 7H adds a wealth-through-relationship channel to the karmic vortex
+**Karmic vortex**: Relationships (0.93 self-amplifying, five-layer) = the 7H five-layer convergence means relationship-karma is the chart's deepest karmic processing zone; Shree Lagna in 7H adds a wealth-through-relationship channel to the karmic vortex
 
 **Generational axis**: Parents → Spirit → Children = the dharmic generational chain; parental wisdom (9H) feeds spiritual practice (9H same house) which seeds children's purva punya (5H)
 
@@ -1104,7 +1071,7 @@ CDLM.D9.D9:
 
 ```yaml
 artifact: CDLM_v1_1.md
-version: 1.1
+version: 1.2
 status: CURRENT
 date_closed: 2026-04-18
 session: FIX_SESSION_003_deferred
