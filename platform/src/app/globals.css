@@ -143,6 +143,31 @@
   51%, 100% { opacity: 0; }
 }
 
+/* Inline caret trailing the last character of a streaming markdown block.
+   Attached to the deepest leaf of the final block-level child so it sits
+   at the end of the last line rather than on its own row. */
+.chat-stream-caret > *:last-child::after,
+.chat-stream-caret > *:last-child > *:last-child::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  transform: translateY(2px);
+  background-color: color-mix(in oklab, var(--color-foreground) 80%, transparent);
+  vertical-align: baseline;
+  animation: chat-caret 1s steps(1) infinite;
+}
+/* Avoid a doubled caret: hide the outer one when a nested one is present. */
+.chat-stream-caret > *:last-child:has(> *:last-child)::after {
+  content: none;
+}
+/* Don't draw a caret inside code blocks (they have their own styling). */
+.chat-stream-caret pre::after,
+.chat-stream-caret code::after {
+  content: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

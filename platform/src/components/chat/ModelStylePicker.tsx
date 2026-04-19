@@ -1,24 +1,39 @@
 'use client'
 
-import { Check, ChevronDown, Gauge, Sparkles, Zap } from 'lucide-react'
+import { Check, ChevronDown, Gauge, Sparkles, Zap, type LucideIcon } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+  MODELS,
+  PROVIDER_LABEL,
+  getModelMeta,
+  modelsByProvider,
+  type SpeedTier,
+} from '@/lib/models/registry'
 import { cn } from '@/lib/utils'
 
-export type ModelId = 'claude-sonnet-4-6' | 'claude-haiku-4-5' | 'claude-opus-4-7'
+// Model IDs are validated against the registry at runtime. Keeping this alias
+// as `string` avoids a literal-union churn whenever we add/rename a model.
+export type ModelId = string
 export type StyleId = 'acharya' | 'brief' | 'client'
 
-export const MODEL_OPTIONS: { id: ModelId; label: string; hint: string; Icon: typeof Zap }[] = [
-  { id: 'claude-haiku-4-5', label: 'Haiku', hint: 'Fast, lighter reasoning', Icon: Zap },
-  { id: 'claude-sonnet-4-6', label: 'Sonnet', hint: 'Balanced (default)', Icon: Gauge },
-  { id: 'claude-opus-4-7', label: 'Opus', hint: 'Deepest analysis, slower', Icon: Sparkles },
-]
+const ICON_BY_TIER: Record<SpeedTier, LucideIcon> = {
+  fast: Zap,
+  balanced: Gauge,
+  deep: Sparkles,
+}
+
+function TierIcon({ tier, className }: { tier: SpeedTier; className?: string }) {
+  const Icon = ICON_BY_TIER[tier]
+  return <Icon className={className} />
+}
 
 export const STYLE_OPTIONS: { id: StyleId; label: string; hint: string }[] = [
   { id: 'acharya', label: 'Acharya depth', hint: 'Full rigor, technical Jyotish' },
@@ -35,8 +50,9 @@ interface Props {
 }
 
 export function ModelStylePicker({ model, style, onModelChange, onStyleChange, disabled }: Props) {
-  const currentModel = MODEL_OPTIONS.find(m => m.id === model) ?? MODEL_OPTIONS[1]
+  const currentModel = getModelMeta(model) ?? MODELS[0]
   const currentStyle = STYLE_OPTIONS.find(s => s.id === style) ?? STYLE_OPTIONS[0]
+  const grouped = modelsByProvider()
 
   return (
     <DropdownMenu>
@@ -48,46 +64,53 @@ export function ModelStylePicker({ model, style, onModelChange, onStyleChange, d
           disabled && 'pointer-events-none opacity-50'
         )}
       >
-        <currentModel.Icon className="size-3.5" />
+        <TierIcon tier={currentModel.speedTier} className="size-3.5" />
         <span className="font-medium text-foreground">{currentModel.label}</span>
         <span className="hidden sm:inline">· {currentStyle.label}</span>
         <ChevronDown className="size-3" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-64">
-        <DropdownMenuLabel className="text-[11px] uppercase tracking-wider text-muted-foreground">
-          Model
-        </DropdownMenuLabel>
-        {MODEL_OPTIONS.map(opt => (
-          <DropdownMenuItem
-            key={opt.id}
-            onSelect={() => onModelChange(opt.id)}
-            className="flex items-start gap-2"
-          >
-            <opt.Icon className="mt-0.5 size-3.5 shrink-0" />
-            <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium">{opt.label}</div>
-              <div className="text-[11px] text-muted-foreground">{opt.hint}</div>
-            </div>
-            {model === opt.id && <Check className="mt-0.5 size-3.5 shrink-0" />}
-          </DropdownMenuItem>
+      <DropdownMenuContent align="start" className="w-72">
+        {grouped.map((group, gi) => (
+          <DropdownMenuGroup key={group.provider}>
+            {gi > 0 && <DropdownMenuSeparator />}
+            <DropdownMenuLabel className="text-[11px] uppercase tracking-wider text-muted-foreground">
+              {PROVIDER_LABEL[group.provider]}
+            </DropdownMenuLabel>
+            {group.models.map(opt => (
+              <DropdownMenuItem
+                key={opt.id}
+                onClick={() => onModelChange(opt.id)}
+                className="flex items-start gap-2"
+              >
+                <TierIcon tier={opt.speedTier} className="mt-0.5 size-3.5 shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-medium">{opt.label}</div>
+                  <div className="text-[11px] text-muted-foreground">{opt.hint}</div>
+                </div>
+                {model === opt.id && <Check className="mt-0.5 size-3.5 shrink-0" />}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuGroup>
         ))}
         <DropdownMenuSeparator />
-        <DropdownMenuLabel className="text-[11px] uppercase tracking-wider text-muted-foreground">
-          Style
-        </DropdownMenuLabel>
-        {STYLE_OPTIONS.map(opt => (
-          <DropdownMenuItem
-            key={opt.id}
-            onSelect={() => onStyleChange(opt.id)}
-            className="flex items-start gap-2"
-          >
-            <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium">{opt.label}</div>
-              <div className="text-[11px] text-muted-foreground">{opt.hint}</div>
-            </div>
-            {style === opt.id && <Check className="mt-0.5 size-3.5 shrink-0" />}
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-[11px] uppercase tracking-wider text-muted-foreground">
+            Style
+          </DropdownMenuLabel>
+          {STYLE_OPTIONS.map(opt => (
+            <DropdownMenuItem
+              key={opt.id}
+              onClick={() => onStyleChange(opt.id)}
+              className="flex items-start gap-2"
+            >
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium">{opt.label}</div>
+                <div className="text-[11px] text-muted-foreground">{opt.hint}</div>
+              </div>
+              {style === opt.id && <Check className="mt-0.5 size-3.5 shrink-0" />}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   )

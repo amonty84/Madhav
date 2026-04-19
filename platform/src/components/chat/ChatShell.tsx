@@ -58,6 +58,7 @@ export function ChatShell({
       style={{ ['--composer-h' as string]: '128px' }}
     >
       <aside
+        aria-label="Conversations"
         className={cn(
           'hidden h-full shrink-0 border-r border-sidebar-border bg-sidebar transition-[width] duration-200 md:flex',
           desktopSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-[260px]'
@@ -74,7 +75,7 @@ export function ChatShell({
         </SheetContent>
       </Sheet>
 
-      <div className="relative flex h-full flex-1 flex-col overflow-hidden">
+      <main className="relative flex h-full flex-1 flex-col overflow-hidden" aria-label="Chat">
         <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border/60 bg-background/60 px-3 backdrop-blur supports-backdrop-filter:bg-background/40">
           <button
             type="button"
@@ -123,7 +124,7 @@ export function ChatShell({
         </header>
 
         <div className="relative flex min-h-0 flex-1 flex-col">{children}</div>
-      </div>
+      </main>
 
       {rightPanel && (
         <Sheet open={rightOpen} onOpenChange={setRightOpen}>

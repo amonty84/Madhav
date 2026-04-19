@@ -46,6 +46,7 @@ export function UserMessage({
   const files = getFileParts(message)
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(text)
+  const [timestamp] = useState(() => new Date())
   const reduce = useReducedMotion()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -156,6 +157,7 @@ export function UserMessage({
           <MessageActions
             onCopy={text ? copy : undefined}
             onEdit={onEditSubmit && text ? () => setEditing(true) : undefined}
+            timestamp={timestamp}
           />
         </div>
       </div>
