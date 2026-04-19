@@ -1756,15 +1756,17 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 | `LON.KALACHAKRA.PARAMAYUSH` | Paramayush | 85 years |
 | `LON.KALACHAKRA.SOURCE` | Source | JH export, JHORA_TRANSCRIPTION §10.7 |
 
-### §24.2 Ayurdasaya Status (GAP resolution — OPEN)
+### §24.2 Ayurdasaya Status (LONGEVITY.GAP.01 — Kalachakra anchor CLOSED; Parashari trio optional)
+
+**Governance:** AM-JIS adopts **Kalachakra Paramayush = 85 years** as the authoritative longevity anchor per **GOVERNANCE_STACK** (Pindayu/Nisargayu/Amsayu intentionally not pursued unless native requests). Rows below remain **optional** JH exports for scholars who want full Parashari trio comparison — not required for corpus closure.
 
 | ID | Field | Status |
 | --- | --- | --- |
-| `LON.PINDAYU` | Pindayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export; requires dedicated JHora Ayurdasaya tab] |
-| `LON.NISARGAYU` | Nisargayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export] |
-| `LON.AMSAYU` | Amsayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: Not in JH standard export] |
-| `LON.GAP.STATUS` | LONGEVITY.GAP.01 status | PARTIAL — Kalachakra Paramayush=85yr confirmed; Pindayu/Nisargayu/Amsayu require dedicated JHora Ayurdasaya export |
-| `LON.NATIVE.ACTION` | Required native action | Open JHora → Chart → Ayurdasaya tab → export or screenshot all three longevity values |
+| `LON.PINDAYU` | Pindayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional — JHora Ayurdasaya tab if native wants trio parity] |
+| `LON.NISARGAYU` | Nisargayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional] |
+| `LON.AMSAYU` | Amsayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional] |
+| `LON.GAP.STATUS` | LONGEVITY.GAP.01 status | **CLOSED for project purposes** — Kalachakra Paramayush = 85yr; Parashari methods optional |
+| `LON.NATIVE.ACTION` | Optional native action | Only if expanding L1 beyond Kalachakra anchor: JHora → Ayurdasaya tab → export trio |
 
 ---
 

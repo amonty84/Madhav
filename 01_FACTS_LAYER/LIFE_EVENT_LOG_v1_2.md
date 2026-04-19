@@ -2,27 +2,27 @@
 document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: AM-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
-artifact_id: LIFE_EVENT_LOG_v1_0
+artifact_id: LIFE_EVENT_LOG_v1_2
 version: 1.2
-status: CLOSED (Session 4 output — chart_state fields populated from Swiss Ephemeris; retrodictive signal stack strengthened across 36 events)
+status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts)
 supersedes: v1.1 (same-corpus, chart-state-populated)
 author: Claude (Session 2, Claude Code instance)
 date_built: 2026-04-17
 date_range_covered: 1984-02-05 to 2026-04-17
 source_of_events: Native's "Consolidated Life Facts.docx" (extracted 2026-04-17) + Session 2 elicitation (all 19 gap-fill questions answered by native)
 chart_state_sources:
-  vimshottari: FORENSIC_DATA_v6_0 §5.1 DSH.V.*
-  yogini: FORENSIC_DATA_v6_0 §5.2 DSH.Y.*
-  chara: FORENSIC_DATA_v6_0 §5.3 DSH.C.*
-  sade_sati: FORENSIC_DATA_v6_0 §21 TRS.SS.* (Cycle 2 only — Cycle 1 not in v6.0)
-  transits_eclipses_retrograde_ashtakavarga: EXTERNAL_COMPUTATION_REQUIRED (deferred to Session 3+ via Jagannatha Hora)
+  vimshottari: FORENSIC_ASTROLOGICAL_DATA_v8_0.md §5.1 (lineage from prior v6 §5.1 where event blocks cite DSH.V.*)
+  yogini: FORENSIC_ASTROLOGICAL_DATA_v8_0.md §5.2
+  chara: FORENSIC_ASTROLOGICAL_DATA_v8_0.md §5.3
+  sade_sati: SADE_SATI_CYCLES_ALL.md + FORENSIC_ASTROLOGICAL_DATA_v8_0.md §21
+  transits_eclipses_retrograde_ashtakavarga: Swiss Ephemeris self-compute (Session 4) — per-event blocks in this file + EVENT_CHART_STATES_v1_0.md; optional JH cross-check via EXTERNAL_COMPUTATION_SPEC
 retrodictive_signal_source: DEEP_ANALYSIS_Abhisek_Mohanty_v1 (v1.2.1) §D.0.F (SIG.01-15, CVG.01-08, CTR.01-07)
 total_events_logged: 36 (point events, all chart-states populated) + 5 period summaries + 6 chronic patterns
-confidence_self_assessment: 0.89 (v1.2 populates transits, eclipses, retrograde, Ashtakavarga via Swiss Ephemeris self-compute. Native cross-verification invited on key derivations via Jagannatha Hora if desired.)
+confidence_self_assessment: 0.89 (v1.2 populates transits, eclipses, retrograde, Ashtakavarga via Swiss Ephemeris pipelines. Native JH spot-check remains optional.)
 next_steps:
-  - Session 3: Build EXTERNAL_COMPUTATION_SPEC.md requesting Jagannatha Hora exports to resolve `chart_state.transits_of_note` and `eclipses_within_6mo` for each event
-  - Future (v1.1): Expand to 75-100 events; fill remaining gap register items
-  - Future (v2.0): Build Pattern Library (RPT.LFE.01 in Deep Analysis v2.0) from retrodictive yes/partial events
+  - Optional v1.3: Promote eclipse/transit evidence from chart_state into each event's signals_that_matched lists (SESSION_LOG red-team note)
+  - Future: Expand toward 75-100 events; drain §6 gap register
+  - Future (v2.0): Pattern Library (RPT.LFE.01) when Deep Analysis v2.0 exists
 ---
 
 # LIFE EVENT LOG — Abhisek Mohanty (v1.0)

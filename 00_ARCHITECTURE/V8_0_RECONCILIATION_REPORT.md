@@ -273,7 +273,7 @@ Still missing: Pindayu / Nisargayu / Amsayu from separate Ayurdasaya calculation
 | **GAP.13 (NEW)** | **Chara Karaka 7-vs-8 karaka system ambiguity** | — | Documented — AM-JIS adopts 7-karaka primary, notes 8-karaka alternate |
 | **GAP.14 (NEW)** | **17 classical yogas not in MSR v1.0** | — | Flagged for MSR v2.0 addition |
 
-**Total gaps tracked**: 19 (was 15). **Resolved or substantially resolved**: 11. **Open**: 3 (Varshphal, Ayurdasaya specifics, v6.0 special-lagna corrections pending v8.0 build).
+**Total gaps tracked**: 19 (was 15). **Post–FIX_SESSION_003 / GAP_RESOLUTION_SESSION (2026-04-19):** Special-lagna / saham / domain-report / CGM / MSR provenance cascades are **closed** in the live corpus. **Still OPEN or optional:** Varshesha (exact solar return), D9 degree-level GAP.03 fine print, optional Ayurdasaya trio exports — see **GOVERNANCE_STACK_v1_0.md** §3 and **EXTERNAL_COMPUTATION_SPEC_v2_0.md** §0.
 
 ---
 

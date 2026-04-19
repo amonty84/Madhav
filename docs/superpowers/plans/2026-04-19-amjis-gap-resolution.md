@@ -1,5 +1,7 @@
 # AM-JIS Data Model Gap Resolution Plan
 
+> **STATUS — EXECUTED (2026-04-19):** This plan was run to completion in-repo (gap-resolution commits through `GAP_RESOLUTION_SESSION`). **Do not re-execute** wholesale — use **`GOVERNANCE_STACK_v1_0.md`** and **`SESSION_LOG`** for current state. Checkboxes below are **historical** unless you are verifying archaeology.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Close all 8 internally-resolvable corpus gaps left after FIX_SESSION_003_deferred, bringing all domain reports, the Remedial Codex, Lifetime Timeline, CGM, and engine-level gap resolutions into alignment with FORENSIC_ASTROLOGICAL_DATA_v8_0.md.
