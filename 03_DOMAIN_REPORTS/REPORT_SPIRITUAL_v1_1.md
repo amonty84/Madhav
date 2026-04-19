@@ -7,7 +7,7 @@ date_closed: 2026-04-18
 supersedes: REPORT_SPIRITUAL_v1_0.md
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D6 — Spirit, Dharma, Moksha
-parent_UCN_version: UCN_v3_0.md (v3.0, FIX_SESSION_003)
+  parent_UCN_version: UCN_v4_0.md (v4.0, canonical unified version)
 primary_msr_anchors: [MSR.397, MSR.402b, MSR.407 v2.0, MSR.408, MSR.374, MSR.406, MSR.433, MSR.437]
 organizing_principle: "Six-Mechanism Spiritual Amplification (corrected from v1.0 Seven-Mechanism; Varnada+Ghati 8H mechanism removed as factually false)"
 corrections_applied:

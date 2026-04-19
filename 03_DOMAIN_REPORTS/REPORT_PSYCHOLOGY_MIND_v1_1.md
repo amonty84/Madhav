@@ -7,7 +7,7 @@ date_closed: 2026-04-18
 date_updated: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D8 — Psychology and Mind
-parent_UCN_version: UCN_v1_0.md (v1.0, Session 15)
+parent_UCN_version: UCN_v4_0.md (canonical UCN — merged 2026-04-19)
 red_team_applied: YES (RED_TEAM_L2_5_v1_0.md, Session 18) — Jupiter placement corrected per red-team; all Jupiter aspects use corrected 9H position
 word_count_estimate: ~21000
 primary_msr_anchors: [MSR.413, MSR.406, MSR.388, MSR.396, MSR.348, MSR.374, MSR.369, MSR.253]
@@ -556,14 +556,14 @@ The psychological discipline is to cultivate this gift consciously: when the Ari
 
 | Layer | Source | Version | Status |
 |---|---|---|---|
-| L1 Facts | `FORENSIC_ASTROLOGICAL_DATA_v8.0_ABHISEK_MOHANTY.md` | 8.0 | CURRENT |
+| L1 Facts | `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` | 8.0 | CURRENT |
 | L1 Events | `LIFE_EVENT_LOG_v1_1.md` | 1.1 | CURRENT |
 | L2 Matrices | `MATRIX_PLANETS.md`, `MATRIX_HOUSES.md`, `MATRIX_SIGNS.md` | 1.0 | CLOSED |
-| L2.5 CGM | `CGM_v1_0.md` | 1.0 | CLOSED |
-| L2.5 MSR | `MSR_v1_1.md` | 1.1 | CURRENT |
-| L2.5 CDLM | `CDLM_v1_0.md` | 1.0 | CLOSED |
-| L2.5 RM | `RM_v1_0.md` | 1.0 | CLOSED |
-| L2.5 UCN | `UCN_v1_0.md` | 1.0 | CLOSED (Jupiter-placement error in multiple sections; v1.1 pending Session 21+) |
+| L2.5 CGM | `CGM_v2_0.md` | 2.0 | CURRENT |
+| L2.5 MSR | `MSR_v2_0.md` | 2.0 | CURRENT |
+| L2.5 CDLM | `CDLM_v1_1.md` | 1.1 | CURRENT |
+| L2.5 RM | `RM_v2_0.md` | 2.0 | CURRENT |
+| L2.5 UCN | `UCN_v4_0.md` | 4.0 | CURRENT |
 | L2.5 Red-Team | `RED_TEAM_L2_5_v1_0.md` | 1.0 | CLOSED |
 | L3 Career | `REPORT_CAREER_DHARMA_v1_0.md` | 1.0 | CLOSED |
 | L3 Financial | `REPORT_FINANCIAL_v2_0.md` | 2.0 | CLOSED |
@@ -593,4 +593,4 @@ That question lives at the center of this report. The architecture has been desc
 
 ---
 
-*End of REPORT_PSYCHOLOGY_MIND_v1_0.md — Version 1.0 — Session 20 — 2026-04-18 — CLOSED*
+*End of REPORT_PSYCHOLOGY_MIND_v1_1.md — Version 1.1 — Session 20 — 2026-04-19 — CURRENT*

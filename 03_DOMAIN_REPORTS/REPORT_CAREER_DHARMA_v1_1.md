@@ -5,7 +5,7 @@ scope: Career, professional dharma, vocational identity, institutional positioni
 version: 1.1
 date: 2026-04-19
 session: 16 (original); reconciled via FIX_SESSION_001 (2026-04-18); lifted to v1.1 via GAP_RESOLUTION_SESSION (2026-04-19)
-parent_UCN_version: UCN_v1_1.md (Mother Document v1.1, Jupiter-placement corrected)
+parent_UCN_version: UCN_v4_0.md (Mother Document v4.0, canonical unified version)
 reconciliation_note: "Jupiter placement corrected throughout per RED_TEAM_L2_5_v1_0 + UCN v1.1. Original v1.0 of this report cited Jupiter in Cancer 4H (exalted) — this was based on pre-corrected UCN v1.0. Actual placement: Jupiter in Sagittarius 9H (own sign, swakshetra). Aspects from 9H: 5th→1H (Lagna), 7th→3H (UL house), 9th→5H (creativity). Jupiter does NOT aspect 10H directly; the 9H→10H relationship operates via adjacency/lordship, not drishti. Saraswati Yoga preserved (Mercury Kendra + Jupiter Trikona + Venus Trikona). Raja Yoga derivation updated from DKA-Kendra-variant to Bhagya-Yoga-own-sign variant (9L in own 9H). See FIX_SESSION_001_COMPLETION.md for complete change log."
 parent_L2_artifacts:
   - MATRIX_HOUSES.md (MX.HSE.10 primary)
@@ -14,10 +14,10 @@ parent_L2_artifacts:
   - MATRIX_DIVISIONALS.md (DVS.D10 Dashamsha primary)
 parent_L2_5_artifacts:
   - MSR_v2_0.md (MSR.413 Mercury-convergence; MSR.391 7H-convergence; MSR.396 Sade Sati Paradox)
-  - CDLM_v1_0.md (CDLM.D1.D1 = 1.00; CDLM.D1.D2 = 0.92; CDLM.D1.D8 Career-Mind)
-  - RM_v1_0.md (RM.01 Mercury 10H; RM.02 Saturn AD; RM.32 Career-Mind-Wealth triangle)
-  - CGM_v1_0.md (PLN.MERCURY centrality rank 1; HSE.10 centrality rank 4)
-source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v8_0_ABHISEK_MOHANTY.md (authoritative; v6.0+v7.0 superseded)
+  - CDLM_v1_1.md (CDLM.D1.D1 = 1.00; CDLM.D1.D2 = 0.92; CDLM.D1.D8 Career-Mind)
+  - RM_v2_0.md (RM.01 Mercury 10H; RM.02 Saturn AD; RM.32 Career-Mind-Wealth triangle)
+  - CGM_v2_0.md (PLN.MERCURY centrality rank 1; HSE.10 centrality rank 4)
+source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v8_0.md (authoritative; v6.0+v7.0 superseded)
 status: CURRENT
 changelog:
   - version: 1.1
@@ -823,7 +823,7 @@ Specifically:
 | Sade Sati Paradox (three-system) | MSR.396, UCN §VII.4 |
 | ATT (Authority-Through-Tension) | UCN §I.1 FS2, §VII |
 | Bhrigu Bindu 2026 activation | MSR.404, RM.31 |
-| CDLM career cross-domain cells | CDLM_v1_0.md (CDLM.D1.*) |
+| CDLM career cross-domain cells | CDLM_v1_1.md (CDLM.D1.*) |
 | CTR.03 Jupiter Uccha-Bala weakness | MATRIX_PLANETS.md, UCN §IX.2 |
 | Rahu Jaimini quadruple-aspect (SIG.16) | CGP_AUDIT_v1_0.md, MATRIX_PLANETS.md |
 | Saturn Libra return 2041–2044 | MATRIX_SIGNS.md, MATRIX_DASHA_PERIODS.md |
@@ -859,21 +859,22 @@ The chart has done its work. Now the native's voice enters.
 
 ```yaml
 document_metadata:
-  document: REPORT_CAREER_DHARMA_v1_0.md
-  version: 1.0
-  status: CLOSED
-  session: 16
-  date: 2026-04-18
-  parent_UCN_version: UCN_v1_0.md (v1.0)
-  estimated_wordcount: ~18000
+  document: REPORT_CAREER_DHARMA_v1_1.md
+  version: 1.1
+  status: CURRENT
+  session: 16 (original); reconciled via FIX_SESSION_001 (2026-04-18); lifted to v1.1 via GAP_RESOLUTION_SESSION (2026-04-19)
+  date: 2026-04-19
+  parent_UCN_version: UCN_v4_0.md (Mother Document v4.0, canonical unified version)
+  estimated_wordcount: ~25000
   quality_standard: acharya-grade
   red_team_status: pending (Session 18)
   known_gaps:
     - GAP.01: Birth Yoga (MSR.354) unverified
-    - GAP.02: D9 Jupiter placement unverified
+    - GAP.02: D9 Jupiter placement unverified (resolved per FORENSIC_v8_0 §3.4)
     - GAP.03: D9 12H stellium composition unverified
     - D10 Saturn Midheaven claim: verify against v6.0 §3.6
-  next_report: REPORT_FINANCIAL_v2_0.md (Session 17)
+  next_report: REPORT_FINANCIAL_v2_1.md (Session 17)
   changelog:
+    - v1.1 (2026-04-19): Shree Lagna corrected (9H Sag → 7H Libra Vishakha), Roga Saham corrected (7H → 2H Taurus), hidden-pinnacle concept falsified, MSR citations updated to v2_0, CDLM to v1_1, RM to v2_0, CGM to v2_0, source chart data updated to FORENSIC_v8_0
     - v1.0 (2026-04-18): Initial creation, Session 16
 ```
