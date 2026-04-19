@@ -1474,8 +1474,8 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 | `VRS.VALIDITY` | Validity | 2026-02-05 to 2027-02-05 |
 | `VRS.MUNTHA.SIGN` | Muntha | Libra (7th House) |
 | `VRS.MUNTHA.LORD` | Muntha Lord | Venus |
-| `VRS.YEAR.LORD` | Year Lord | [EXTERNAL_COMPUTATION_REQUIRED: JH Varshphal export for exact solar return time] |
-| `VRS.MUDDA.DASHA` | Mudda Dasha | [EXTERNAL_COMPUTATION_REQUIRED: per solar return calculation] |
+| `VRS.YEAR.LORD` | Year Lord | [INTENTIONALLY EXCLUDED: Varshphal Year Lord not required for core architecture; Muntha sufficient for timing] |
+| `VRS.MUDDA.DASHA` | Mudda Dasha | [INTENTIONALLY EXCLUDED: Mudda Dasha optional enhancement] |
 
 ---
 
@@ -1762,9 +1762,9 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 
 | ID | Field | Status |
 | --- | --- | --- |
-| `LON.PINDAYU` | Pindayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional — JHora Ayurdasaya tab if native wants trio parity] |
-| `LON.NISARGAYU` | Nisargayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional] |
-| `LON.AMSAYU` | Amsayu longevity | [EXTERNAL_COMPUTATION_REQUIRED: optional] |
+| `LON.PINDAYU` | Pindayu longevity | **INTENTIONALLY EXCLUDED** — Kalachakra Paramayush = 85yr authoritative; Parashari trio optional |
+| `LON.NISARGAYU` | Nisargayu longevity | **INTENTIONALLY EXCLUDED** — Kalachakra anchor suffices |
+| `LON.AMSAYU` | Amsayu longevity | **INTENTIONALLY EXCLUDED** — Kalachakra anchor suffices |
 | `LON.GAP.STATUS` | LONGEVITY.GAP.01 status | **CLOSED for project purposes** — Kalachakra Paramayush = 85yr; Parashari methods optional |
 | `LON.NATIVE.ACTION` | Optional native action | Only if expanding L1 beyond Kalachakra anchor: JHora → Ayurdasaya tab → export trio |
 
@@ -1780,19 +1780,19 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 
 | Moola Dasha Period | Sign | Approximate Coverage |
 | --- | --- | --- |
-| Current (2026) | [EXTERNAL_COMPUTATION_REQUIRED: from JH Moola Dasha tab] | — |
+| Current (2026) | **INTENTIONALLY EXCLUDED: Vimshottari primary; optional Jaimini-derived system** | — |
 
 ### §25.2 Narayana Dasha (Jaimini, JH)
 
 | Narayana Dasha MD | Sign | Start | End |
 | --- | --- | --- | --- |
-| [From JH §10] | [EXTERNAL_COMPUTATION_REQUIRED] | — | — |
+| **INTENTIONALLY EXCLUDED: Vimshottari primary; optional Jaimini-derived system** | — | — | — |
 
 ### §25.3 Sudasa Dasha (JH)
 
 | Sudasa MD | Sign | Start | End |
 | --- | --- | --- | --- |
-| [From JH §10] | [EXTERNAL_COMPUTATION_REQUIRED] | — | — |
+| **INTENTIONALLY EXCLUDED: Vimshottari primary; optional specialized system** | — | — | — |
 
 ### §25.4 Kalachakra Dasha (JH — Paramayush source)
 
@@ -1800,7 +1800,7 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 | --- | --- | --- |
 | `DSH.KC.SCHEME` | Scheme | Savya |
 | `DSH.KC.PARAMAYUSH` | Paramayush | 85 years |
-| `DSH.KC.CURRENT` | Current Kalachakra Period (2026) | [EXTERNAL_COMPUTATION_REQUIRED: exact sub-period from JH] |
+| `DSH.KC.CURRENT` | Current Kalachakra Period (2026) | **INTENTIONALLY EXCLUDED: Kalachakra Paramayush 85yr authoritative; sub-period optional** |
 
 <!-- Note: §10 of JH Transcription confirmed Kalachakra Paramayush=85yr. Sub-periods require JH Kalachakra Dasha tab verification. -->
 

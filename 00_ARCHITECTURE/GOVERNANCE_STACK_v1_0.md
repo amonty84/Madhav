@@ -157,7 +157,7 @@ All gaps across all artifacts:
 | GAP.05 | D7 Saptamsha chart not examined | REPORT_CHILDREN | **SUBSTANTIALLY RESOLVED 2026-04-18** per AUDIT_REPORT_v1_0 WS-1b (JHora D7 present; matches FORENSIC §3.4) |
 | LONGEVITY.GAP.01 | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **CLOSED (intentionally excluded)** — Kalachakra Paramayush 85 years is the adopted longevity anchor; Pindayu/Nisargayu/Amsayu methods not pursued per native direction |
 | BB progression method | Not explicitly documented | LIFETIME_TIMELINE §4.4, MSR.404 | **PARTIALLY RESOLVED 2026-04-18** — FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F uses 6°/year; LIFETIME_TIMELINE internal contradiction corrected in FIX_SESSION_001 |
-| Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | Jagannatha Hora Varshphal export — **OPEN** (not in current JHora .docx). NOTE: FORENSIC §22 DOES state Muntha = Libra 7H, Lord Venus for current Varsha — HEATMAP_VARSHPHAL corrected in FIX_SESSION_001 to cite that L1 fact; Varshesha remains [EXTERNAL_COMPUTATION_REQUIRED] |
+| Varshphal detail (Muntha, Varshesha) | Not in Facts Layer | HEATMAP_VARSHPHAL | **CLOSED (intentionally excluded)** — FORENSIC v8.0 §22 Muntha = Libra 7H Venus-lord authoritative; Varshesha and Mudda Dasha intentionally excluded per architecture (Vimshottari primary; Varshphal optional enhancement) |
 | **GAP.06 (NEW)** | MSR-ASPECT correction applied in FIX_SESSION_001 — Jupiter's 5th aspect from 9H lands on 1H (Lagna), not 10H; MSR.014/.019/.034 corrected but any future MSR signals must not reintroduce | MSR_v1_0 | Mechanical grep in future red-team sweeps |
 | **GAP.07** | DUAL-ENGINE Shadbala divergence: FORENSIC ranks Sun #1 (8.51 rupas); JHora ranks Saturn #1 (8.79 rupas) | FORENSIC §6.2 | **RESOLVED 2026-04-19** — JH canonical for Shadbala citations; Saturn #1 (8.79r); FORENSIC §6.2 footnoted |
 | **GAP.08** | BAV Moon row differs in 4 signs between FORENSIC and JHora (Gemini, Libra, Scorpio, Capricorn); SAV column sums consequently differ in 4 signs (grand total 337 matches) | FORENSIC §7.1–7.2 | **RESOLVED 2026-04-19** — FORENSIC BAV/SAV canonical; JH Moon row reference only; reconciliation note in FORENSIC |
@@ -165,8 +165,8 @@ All gaps across all artifacts:
 | **GAP.10 (NEW)** | Saham Karma nakshatra labeled "Dhanishta" but 300.09° = Shatabhisha Pada 1; Saham Putra labeled "Dhanishta" but 295.16° = Shravana Pada 4 | FORENSIC §12.2 lines 1133, 1136 | Label corrections (applied in FIX_SESSION_001 Priority 6) |
 
 **Aggregate (post-GAP_RESOLUTION_SESSION 2026-04-19)**: 19 known gaps tracked + SIG.16-31 Mode B. Resolution status:
-- 14 RESOLVED or substantially resolved (GAP.01, GAP.02, 02b, 02c, 02d, 03, 05, 06, BB progression, GAP.10 Saham labels, **GAP.07 2026-04-19**, **GAP.08 2026-04-19**, **GAP.09 2026-04-19**, **SIG.16-31 Mode B CONFIRMED ABSORBED 2026-04-19**).
-- 3 PARTIALLY RESOLVED (Varshphal — Muntha known from v6.0 §22, Varshesha pending; GAP.03 D9 12H stellium precise degree comparison pending; GAP.13 Chara Karaka dual-system noted).
+- 15 RESOLVED or substantially resolved (GAP.01, GAP.02, 02b, 02c, 02d, 03, 05, 06, BB progression, GAP.10 Saham labels, **GAP.07 2026-04-19**, **GAP.08 2026-04-19**, **GAP.09 2026-04-19**, **SIG.16-31 Mode B CONFIRMED ABSORBED 2026-04-19**, **Varshphal detail**).
+- 2 PARTIALLY RESOLVED (GAP.03 D9 12H stellium precise degree comparison pending; GAP.13 Chara Karaka dual-system noted).
 - 4 NEW CRITICAL gaps (GAP.11-14) added by V8.0 reconciliation:
 
 | Gap ID | Description | Affected | Resolution path |
