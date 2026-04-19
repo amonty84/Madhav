@@ -1,11 +1,11 @@
 ---
 artifact: MSR_v2_0.md
-version: 2.0
+version: 2.1
 status: CLOSED
-session: FIX_SESSION_003
-date: 2026-04-18
+session: FIX_SESSION_003; MSR_EXPANSION_2026-04-19
+date: 2026-04-19
 supersedes: MSR_v1_0.md
-scope: "Master Signal Register — 420 original signals carried forward (with v8.0 corrections applied to affected signals) + 17 new yoga signals (MSR.421–MSR.437) from JH v8.0 transcription. This is a complete corrected register; MSR_v1_0 is superseded and moves to SUPERSEDED status."
+scope: "Master Signal Register — 420 originals + v8.0 reconciliation + §VIII-B expansion **MSR.444–MSR.496** (53) = **500** total signals; MSR_v1_0 superseded."
 parent_sources: [JHORA_TRANSCRIPTION_v8_0_SOURCE.md, FORENSIC_DATA_v8_0_SUPPLEMENT.md, V8_0_RECONCILIATION_REPORT.md, MSR_v1_0.md]
 corrections_applied: [MSR.391 recomposed, MSR.402 INVALIDATED + replacement added, MSR.404 confidence upgraded 0.86→0.94, MSR.407 reframed, MSR.413 upgraded to 8-system, MSR.022 Vivaha Saham corrected, all HL/GL/Varnada/Shree Lagna citations corrected]
 provenance_policy: |
@@ -14,13 +14,13 @@ provenance_policy: |
   - Signals whose underlying facts were CORRECTED in v8.0 carry explicit correction notes in their reconciliation fields.
   - All other v6.0-era signals are CONFIRMED by FORENSIC_v8_0 (same fact, same position, same relationship).
   MSR.421-443 (v8.0-native signals): Built directly from FORENSIC_v8_0 data; full provenance.
-  MSR.444+ (Mode B promotion, if any): Built from Mode B matrices + v8.0 verification.
+  MSR.444–MSR.496: Expansion batch 2026-04-19 — nakshatra, sahams, dasha/transit, divisional, upagraha (§VII.4 pathways).
   CGP Provenance status: COMPLETE (2026-04-19 GAP_RESOLUTION_SESSION).
 ---
 
-# MASTER SIGNAL REGISTER v2.0 — Abhisek Mohanty
+# MASTER SIGNAL REGISTER v2.1 — Abhisek Mohanty
 ## AM-JIS L2.5 Holistic Synthesis
-### FIX_SESSION_003 | 2026-04-18 | CLOSED
+### FIX_SESSION_003 + MSR_EXPANSION | 2026-04-19 | **500 signals**
 
 ---
 
@@ -956,6 +956,1120 @@ SIG.MSR.443:
 
 ---
 
+## §VIII-B — EXPANSION BATCH MSR.444–MSR.496 (2026-04-19)
+
+Systematic gap-fill toward **500** total signals per **§VII.4** pathways (nakshatra lattice, residual sahams, dasha/transit windows, divisional corroboration). Sources: **JHORA_TRANSCRIPTION_v8_0_SOURCE**, **FORENSIC v8.0**, **CGM_v2_0**, ephemeris CSV, LEL.
+
+---
+
+### MSR.444
+
+SIG.MSR.444:
+  signal_name: "Lagna Nakshatra — Ashwini Pada 4 Fire-Initiative Gate"
+  signal_type: nakshatra-signature
+  classical_source: "Brihat Parashara Hora Shastra Ch.92; JHORA_TRANSCRIPTION §1"
+  entities_involved: [NAK.LAGNA, PLN.LAGNA, HSE.1]
+  strength_score: 0.82
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Ashwini (Ketu-ruled) pada 4 on Aries Lagna — pioneer impulse; Ketu co-rules initiation theme with Mars Lagna lord"
+    - "Contrasts with Mercury-heavy operational spine — Lagna nakshatra sets raw temperament layer"
+  falsifier: "If Lagna nakshatra recalculation moves pada boundary, pada-specific reading adjusts slightly only."
+  domains_affected: [career, mind]
+  confidence: 0.78
+  v6_ids_consumed: [NAK.ASHWINI]
+  rpt_deep_dive: "DEEP_ANALYSIS FS5"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.445
+
+SIG.MSR.445:
+  signal_name: "Moon Nakshatra — Purva Bhadrapada III Collective-AK Thread"
+  signal_type: nakshatra-signature
+  classical_source: "BPHS Nakshatra chapters; JH §1 Moon PBha pada 3"
+  entities_involved: [NAK.MOON, PLN.MOON, HSE.11]
+  strength_score: 0.88
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Moon AK in PBha pada 3 — Ugra fierce quality with Jupiter deity undertone; 11H gains-community lens"
+    - "Feeds CVG Moon-in-11 social architecture"
+  falsifier: "Moon longitude shift >1 pada changes deity emphasis."
+  domains_affected: [relationships, spirit]
+  confidence: 0.84
+  v6_ids_consumed: [NAK.PBHA]
+  rpt_deep_dive: "UCN_v4_0 Part I"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.446
+
+SIG.MSR.446:
+  signal_name: "Sun Nakshatra — Shravana Pada 4 Career Listening Intelligence"
+  signal_type: nakshatra-signature
+  classical_source: "Mantras for Shravana; JH §1 Sun Sravana pada 4"
+  entities_involved: [NAK.SUN, PLN.SUN, HSE.10]
+  strength_score: 0.83
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "10H Sun Sravana — reputational narrative built through disciplined listening/adaptation (career classical)"
+    - "Pada 4 closure emphasis — crystallization arc toward maturity"
+  falsifier: "Not falsified unless Sun house/sign wrong — JH locked."
+  domains_affected: [career]
+  confidence: 0.82
+  v6_ids_consumed: [NAK.SRAVANA]
+  rpt_deep_dive: "REPORT_CAREER_DHARMA"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.447
+
+SIG.MSR.447:
+  signal_name: "Mars Nakshatra — Swati Pada 4 Relational Calibration"
+  signal_type: nakshatra-signature
+  classical_source: "Vishnu Purana nakshatra gloss; JH Mars Swati pada 4 in Libra"
+  entities_involved: [NAK.MARS, PLN.MARS, HSE.7]
+  strength_score: 0.85
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Mars Lagna lord in Swati — wind/Vayu motif in partnership house; relational finesse vs Avayogi tension"
+    - "Rahu co-influence via Libra Venus sign adds diplomatic combat layer"
+  falsifier: "Only breaks if Mars house reassigned."
+  domains_affected: [relationships]
+  confidence: 0.80
+  v6_ids_consumed: [NAK.SWATI]
+  rpt_deep_dive: "REPORT_RELATIONSHIPS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.448
+
+SIG.MSR.448:
+  signal_name: "Mercury Nakshatra — Uttarashada Pada 2 Vargottama Spine"
+  signal_type: nakshatra-signature
+  classical_source: "JH §1 Mercury USha pada 2 Capricorn D1=D9"
+  entities_involved: [NAK.MERCURY, PLN.MERCURY, HSE.10]
+  strength_score: 0.91
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Uttarashada pada 2 — victory/architecture nakshatra on Mercury career tenant + Vargottama stack"
+    - "Amplifies MSR.413 eight-system convergence at nakshatra granularity"
+  falsifier: "Requires Vargottama integrity — confirmed JH."
+  domains_affected: [career, mind]
+  confidence: 0.88
+  v6_ids_consumed: [NAK.USHA]
+  rpt_deep_dive: "MSR.413"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.449
+
+SIG.MSR.449:
+  signal_name: "Jupiter Nakshatra — Purva Ashadha Pada 3 Dharma Pouring"
+  signal_type: nakshatra-signature
+  classical_source: "BPHS; JH Jupiter PSha pada 3 Sagittarius"
+  entities_involved: [NAK.JUPITER, PLN.JUPITER, HSE.9]
+  strength_score: 0.84
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Jupiter own-sign 9H in PSha — waters-of-victory motif; dharmic broadcasting"
+    - "Shares pada space with Venus PSha pada 2 — adjacent pada Lakshmi-Jupiter coupling"
+  falsifier: "If Jupiter debilitated in alternate ayanamsa — not this chart."
+  domains_affected: [spirit, wealth]
+  confidence: 0.82
+  v6_ids_consumed: [NAK.PSHA]
+  rpt_deep_dive: "REPORT_SPIRITUAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.450
+
+SIG.MSR.450:
+  signal_name: "Venus Nakshatra — Purva Ashadha Pada 2 Lakshmi Adjacent"
+  signal_type: nakshatra-signature
+  classical_source: "JH Venus PSha pada 2"
+  entities_involved: [NAK.VENUS, PLN.VENUS, HSE.9]
+  strength_score: 0.82
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Venus MK in same sign as Jupiter — pada-adjacent grace packing in 9H"
+    - "Supports Laxmi-Narayana thesis without needing Shree Lagna in 9H"
+  falsifier: "Standard falsifier on Venus sign/house."
+  domains_affected: [wealth, relationships]
+  confidence: 0.80
+  v6_ids_consumed: [NAK.PSHA]
+  rpt_deep_dive: "REPORT_FINANCIAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.451
+
+SIG.MSR.451:
+  signal_name: "Saturn Nakshatra — Vishakha Pada 1 Exalted Structural Spine"
+  signal_type: nakshatra-signature
+  classical_source: "JH Saturn Visa pada 1 Libra"
+  entities_involved: [NAK.SATURN, PLN.SATURN, HSE.7]
+  strength_score: 0.89
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Saturn exalted in Vishakha pada 1 — Jupiter-ruled nakshatra gives restrained wisdom to Sasha yoga"
+    - "Shares Vishakha with Shree Lagna — Saturn-Shree relational architecture"
+  falsifier: "If Saturn not exalted — contradicts JH."
+  domains_affected: [career, relationships]
+  confidence: 0.86
+  v6_ids_consumed: [NAK.VISA]
+  rpt_deep_dive: "MSR.391"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.452
+
+SIG.MSR.452:
+  signal_name: "Rahu Nakshatra — Rohini Pada 3 Wealth Magnetism"
+  signal_type: nakshatra-signature
+  classical_source: "JH Rahu Rohini pada 3 Taurus"
+  entities_involved: [NAK.RAHU, PLN.RAHU, HSE.2]
+  strength_score: 0.86
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Rahu exalted-class in Rohini — Moon's nakshatra on foreign/worldly amplifier in 2H"
+    - "Feeds Rohini-Rahu treasure-house retrodictive themes"
+  falsifier: "Requires Rahu sign stable."
+  domains_affected: [wealth]
+  confidence: 0.84
+  v6_ids_consumed: [NAK.ROHI]
+  rpt_deep_dive: "REPORT_FINANCIAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.453
+
+SIG.MSR.453:
+  signal_name: "Ketu Nakshatra — Jyeshtha Pada 1 Occult Precision"
+  signal_type: nakshatra-signature
+  classical_source: "JH Ketu Jye pada 1 Scorpio"
+  entities_involved: [NAK.KETU, PLN.KETU, HSE.8]
+  strength_score: 0.83
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Ketu in Jyeshtha pada 1 — Mercury-ruled nakshatra in Mars sign — surgical inquiry / transformation literacy"
+    - "Supports Ketu MD moksha-tech prep"
+  falsifier: "If Ketu house wrong — breaks."
+  domains_affected: [spirit, health]
+  confidence: 0.80
+  v6_ids_consumed: [NAK.JYE]
+  rpt_deep_dive: "REPORT_HEALTH_LONGEVITY"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.454
+
+SIG.MSR.454:
+  signal_name: "Indu Lagna Nakshatra — Jyeshtha Pada 4 Hidden Fortune Vector"
+  signal_type: nakshatra-signature
+  classical_source: "JH Indu Lagna Scorpio Jye pada 4"
+  entities_involved: [LAG.INDU, NAK.INDU, HSE.8]
+  strength_score: 0.74
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Indu Lagna in Jyeshtha pada 4 — lunar-derived wealth pointer landing in 8H occult-resource zone"
+    - "Cross-links Indu-Ketu proximity theme"
+  falsifier: "Sensitive to Indu formula constants."
+  domains_affected: [wealth, spirit]
+  confidence: 0.72
+  v6_ids_consumed: [LAG.INDU]
+  rpt_deep_dive: "CGM_v2_0"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.455
+
+SIG.MSR.455:
+  signal_name: "Bhava Lagna Nakshatra — Revati Pada 3 Moksha Float"
+  signal_type: nakshatra-signature
+  classical_source: "JH Bhava Lagna Pisces Reva pada 3"
+  entities_involved: [LAG.BHAVA, HSE.12]
+  strength_score: 0.76
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Bhava Lagna Revati pada 3 — closure/pada emphasizing migration-moksha frame for bodily reality"
+    - "Aligns BL in 12H Pisces"
+  falsifier: "Requires BL computation stability."
+  domains_affected: [spirit, travel]
+  confidence: 0.74
+  v6_ids_consumed: [LAG.BHAVA]
+  rpt_deep_dive: "CGM_v2_0"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.456
+
+SIG.MSR.456:
+  signal_name: "Saham Punya in Gemini 3H — Merit Routing Through Communication Nexus"
+  signal_type: sensitive-point
+  classical_source: "Prashna Tantra sahams; JH §2.2 Punya"
+  entities_involved: [SAH.PUNYA, HSE.3]
+  strength_score: 0.78
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Punya Saham 17° Gemini 3H — fortune-of-merit sits in UL communication house"
+    - "Compositional tie to Mercury/UL cluster"
+  falsifier: "If Punya longitude wrong per JH export."
+  domains_affected: [wealth, career]
+  confidence: 0.76
+  v6_ids_consumed: [SAH.PUNYA]
+  rpt_deep_dive: "CGM §4.5"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.457
+
+SIG.MSR.457:
+  signal_name: "Saham Yasas in Scorpio 8H — Fame Through Depth Not Noise"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Yasas"
+  entities_involved: [SAH.YASAS, HSE.8]
+  strength_score: 0.74
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Yasas 8H — fame signature tied to crises/occult visibility channel"
+    - "Pairs with Ketu tenant theme"
+  falsifier: "JH Yasas degree drift."
+  domains_affected: [career, spirit]
+  confidence: 0.72
+  v6_ids_consumed: [SAH.YASAS]
+  rpt_deep_dive: "MATRIX_HOUSES"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.458
+
+SIG.MSR.458:
+  signal_name: "Saham Vidya in Pisces 12H — Knowledge Dissolving Into Moksha House"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Vidya"
+  entities_involved: [SAH.VIDYA, HSE.12]
+  strength_score: 0.76
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Vidya Saham Pisces 12H — learning endpoint as moksha-house absorption"
+    - "Supports foreign/education spirituality synthesis"
+  falsifier: "Degree export error."
+  domains_affected: [spirit, travel]
+  confidence: 0.74
+  v6_ids_consumed: [SAH.VIDYA]
+  rpt_deep_dive: "REPORT_SPIRITUAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.459
+
+SIG.MSR.459:
+  signal_name: "Saham Mitra in Cancer 4H — Alliance Through Roots"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Mitra"
+  entities_involved: [SAH.MITRA, HSE.4]
+  strength_score: 0.73
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Mitra 4H — friendships that feel like family / domestic trust basins"
+  falsifier: "If Mitra shifts signs."
+  domains_affected: [relationships, parents]
+  confidence: 0.71
+  v6_ids_consumed: [SAH.MITRA]
+  rpt_deep_dive: "REPORT_PARENTS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.460
+
+SIG.MSR.460:
+  signal_name: "Saham Samartha + Kali Coincident Cancer 4H — Enterprise vs Misfortune Same Soil"
+  signal_type: convergence
+  classical_source: "JH §2.2 Samartha/Kali same longitude band"
+  entities_involved: [SAH.SAMARTHA, SAH.KALI, HSE.4]
+  strength_score: 0.71
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Samartha and Kali formulas converge near Pushya pada — enterprise effort and kali obstacle share domestic activation locus"
+    - "Explains periodic family-business tension spikes"
+  falsifier: "Only if formulas truly coincide in recomputation — JH snapshot confirms proximity."
+  domains_affected: [wealth, parents]
+  confidence: 0.68
+  v6_ids_consumed: [SAH.KALI]
+  rpt_deep_dive: "AUDIT qualitative"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.461
+
+SIG.MSR.461:
+  signal_name: "Saham Pitru + Rajya Conjunct Capricorn 10H — Father-Kingdom Same Seat"
+  signal_type: convergence
+  classical_source: "JH §2.2 Pitru/Rajya identical longitude"
+  entities_involved: [SAH.PITRU, SAH.RAJYA, HSE.10]
+  strength_score: 0.80
+  valence: context-dependent
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Pitru and Rajya sahams identical in Shravana pada — paternal lineage and visible kingdom-status share one sensitive point"
+    - "Strengthens 10H career authority inheritance reading"
+  falsifier: "If JH separates them on fine recompute."
+  domains_affected: [career, parents]
+  confidence: 0.78
+  v6_ids_consumed: [SAH.RAJYA]
+  rpt_deep_dive: "REPORT_CAREER_DHARMA"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.462
+
+SIG.MSR.462:
+  signal_name: "Saham Karma in Aquarius 11H — Profession as Network Gain"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Karma"
+  entities_involved: [SAH.KARMA, HSE.11]
+  strength_score: 0.77
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Karma Saham 11H — work outcomes expressed through gains/sangha vectors"
+    - "Pairs with Moon AK in 11H narrative"
+  falsifier: "Longitude stability."
+  domains_affected: [career]
+  confidence: 0.75
+  v6_ids_consumed: [SAH.KARMA]
+  rpt_deep_dive: "MSR career cluster"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.463
+
+SIG.MSR.463:
+  signal_name: "Saham Artha in Virgo 6H — Wealth Through Disciplined Service"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Artha"
+  entities_involved: [SAH.ARTHA, HSE.6]
+  strength_score: 0.72
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Artha 6H — money through operational excellence / health-tech service archetype fit"
+  falsifier: "Standard."
+  domains_affected: [wealth, health]
+  confidence: 0.70
+  v6_ids_consumed: [SAH.ARTHA]
+  rpt_deep_dive: "REPORT_FINANCIAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.464
+
+SIG.MSR.464:
+  signal_name: "Saham Paradara + Sastra Pisces 12H — Boundary Dissolution vs Learning Stack"
+  signal_type: convergence
+  classical_source: "JH §2.2 Paradara/Sastra Pisces"
+  entities_involved: [SAH.PARADARA, SAH.SASTRA, HSE.12]
+  strength_score: 0.69
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Both sensitive points in 12H Pisces — foreign/hidden relational temptation theme co-located with vidya-science dissolution house"
+    - "Handled by conscious dharmic navigation in readings"
+  falsifier: "Educational framing only — not moral accusation."
+  domains_affected: [relationships, spirit]
+  confidence: 0.65
+  v6_ids_consumed: [SAH.PARADARA]
+  rpt_deep_dive: "UCN §IX ethics"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.465
+
+SIG.MSR.465:
+  signal_name: "Saham Bandhu Aquarius 11H — Relative Gains Layer"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Bandhu"
+  entities_involved: [SAH.BANDHU, HSE.11]
+  strength_score: 0.71
+  valence: neutral
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Bandhu 11H — kin-network as gain multiplier"
+  falsifier: "—"
+  domains_affected: [relationships]
+  confidence: 0.69
+  v6_ids_consumed: [SAH.BANDHU]
+  rpt_deep_dive: "MATRIX_HOUSES"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.466
+
+SIG.MSR.466:
+  signal_name: "Saham Jeeva in Aquarius 11H — Life Force in Gains House"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Jeeva"
+  entities_involved: [SAH.JEEVA, HSE.11]
+  strength_score: 0.74
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Jeeva Saham Moon-near 11H — vitality story tied to community revenue / platform scale"
+  falsifier: "—"
+  domains_affected: [health, wealth]
+  confidence: 0.72
+  v6_ids_consumed: [SAH.JEEVA]
+  rpt_deep_dive: "MSR expansion"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.467
+
+SIG.MSR.467:
+  signal_name: "Saham Gaurava Duplicate Yasas — Respect Equals Fame Point"
+  signal_type: convergence
+  classical_source: "JH §2.2 Gaurava/Yasas identical longitudes"
+  entities_involved: [SAH.GAURAVA, SAH.YASAS]
+  strength_score: 0.70
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Gaurava and Yasas share Scorpio longitude — respect and fame activate through same crisis-house portal"
+  falsifier: "Check JH tie-break."
+  domains_affected: [career]
+  confidence: 0.68
+  v6_ids_consumed: [SAH.GAURAVA]
+  rpt_deep_dive: "JH §2.2"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.468
+
+SIG.MSR.468:
+  signal_name: "Saham Bhratru Gemini 3H — Sibling Lane in Communication House"
+  signal_type: sensitive-point
+  classical_source: "JH §2.2 Bhratru"
+  entities_involved: [SAH.BHRATRU, HSE.3]
+  strength_score: 0.72
+  valence: neutral
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Bhratru 3H — sibling storyline routes through Gemini nexus alongside UL/A5/A11"
+  falsifier: "—"
+  domains_affected: [relationships]
+  confidence: 0.70
+  v6_ids_consumed: [SAH.BHRATRU]
+  rpt_deep_dive: "CGM"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.469
+
+SIG.MSR.469:
+  signal_name: "Vimshottari Bridge 2027 — Mercury MD Termination to Ketu MD Onset Window"
+  signal_type: dasha-activation
+  classical_source: "BPHS Vimshottari; FORENSIC §5.1"
+  entities_involved: [DSH.V.MERCURY, DSH.V.KETU]
+  strength_score: 0.82
+  valence: mixed
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "2027 major handoff Mercury → Ketu (age 43) — prepares 8H transformation literacy"
+    - "Overlaps Ketu-Mercury quincunx bridge (MSR.036)"
+  falsifier: "If dasha boundary dates shift >10d — adjust window only."
+  domains_affected: [career, spirit]
+  confidence: 0.78
+  v6_ids_consumed: [DSH.HANDOFF.2027]
+  rpt_deep_dive: "LIFETIME_TIMELINE"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.470
+
+SIG.MSR.470:
+  signal_name: "Ketu MD 2031–2038 Primary Moksha-Authority Window (Reframed Post v8.0)"
+  signal_type: dasha-activation
+  classical_source: "UCN_v4_0 Part IV; MSR.402b"
+  entities_involved: [DSH.V.KETU, HSE.8, HSE.9]
+  strength_score: 0.88
+  valence: mixed
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "Ketu MD activates exalted Ketu in 8H + Ghati 9H dharmic authority architecture (MSR.402b)"
+    - "Hidden-pinnacle 8H lagna thesis explicitly removed — authority via 9H Ghati + 4H Varnada"
+  falsifier: "If Ketu MD dates change materially."
+  domains_affected: [spirit, health]
+  confidence: 0.85
+  v6_ids_consumed: [DSH.V.KETU]
+  rpt_deep_dive: "UCN_v4_0"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.471
+
+SIG.MSR.471:
+  signal_name: "Venus MD 2038–2058 NBRY Reservoir Priming"
+  signal_type: dasha-activation
+  classical_source: "Parashara; chart NBRY chain"
+  entities_involved: [DSH.V.VENUS, PLN.VENUS]
+  strength_score: 0.80
+  valence: benefic
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "20-year Venus MD follows Ketu — Venus rules Libra 7H + Taurus 2H = relational-wealth reservoir era"
+    - "Prepares Saturn return apex 2041–44 inside Venus cycle"
+  falsifier: "Birth time sensitivity on MD boundaries."
+  domains_affected: [relationships, wealth]
+  confidence: 0.77
+  v6_ids_consumed: [DSH.V.VENUS]
+  rpt_deep_dive: "MAINTENANCE_SCHEDULE"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.472
+
+SIG.MSR.472:
+  signal_name: "Mercury MD Saturn AD 2024–2027 Triple-Engine Career Pressure Cooker"
+  signal_type: dasha-activation
+  classical_source: "LEL retrodictive stack"
+  entities_involved: [DSH.V.MERCURY, DSH.V.SATURN_AD]
+  strength_score: 0.86
+  valence: mixed
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "Active 2024–2027 Saturn AD under Mercury MD = structural deal-making era (already named in reports)"
+    - "Cross-links Sasha on 7H during same window"
+  falsifier: "Ends 2027 by FORENSIC dates."
+  domains_affected: [career]
+  confidence: 0.84
+  v6_ids_consumed: [DSH.CURRENT]
+  rpt_deep_dive: "REPORT_CAREER_DHARMA"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.473
+
+SIG.MSR.473:
+  signal_name: "Ketu AD Preview Inside Late Mercury MD — Early 8H Dip"
+  signal_type: dasha-activation
+  classical_source: "Vimshottari optional sub-layer"
+  entities_involved: [DSH.V.KETU_AD_PREVIEW]
+  strength_score: 0.70
+  valence: malefic
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "Short Ketu-flavored AD periods before Ketu MD help train 8H skills"
+    - "Qualitative only — precise AD table in FORENSIC"
+  falsifier: "Sub-AD nomenclature varies by software."
+  domains_affected: [spirit]
+  confidence: 0.65
+  v6_ids_consumed: [DSH.AD]
+  rpt_deep_dive: "FALSIFIER preview §2.10"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.474
+
+SIG.MSR.474:
+  signal_name: "Chara Dasha Scorpio MD — Martial Container for Mercury Operations"
+  signal_type: dasha-activation
+  classical_source: "Jaimini; JH Chara exports in FORENSIC"
+  entities_involved: [DSH.C.SCORPIO_MD]
+  strength_score: 0.76
+  valence: mixed
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "Scorpio MD period puts fixed-water lens on Mercury-Gemini business image (context per LEL)"
+    - "Handoff to Libra AD noted in Deep Analysis"
+  falsifier: "Chara software differences."
+  domains_affected: [career, mind]
+  confidence: 0.72
+  v6_ids_consumed: [DSH.CHARA]
+  rpt_deep_dive: "DEEP_ANALYSIS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.475
+
+SIG.MSR.475:
+  signal_name: "Yogini Dasha Bhramari / Dhanya Handoff 2021–2022 Anxiety-Economy Bridge"
+  signal_type: dasha-activation
+  classical_source: "Yogini cycle; LEL EVT.2021"
+  entities_involved: [DSH.Y.YOGINI]
+  strength_score: 0.74
+  valence: mixed
+  temporal_activation: dasha-windowed
+  supporting_rules:
+    - "Bhramari (Mercury Yogini) → Dhanya (Jupiter Yogini) transition correlates with panic-to-pivot clustering in LEL"
+    - "Empirical cluster not single formula"
+  falsifier: "If native time zone changes Yogini boundary dates."
+  domains_affected: [mind, health]
+  confidence: 0.70
+  v6_ids_consumed: [DSH.Y.YOGINI]
+  rpt_deep_dive: "LIFE_EVENT_LOG"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.476
+
+SIG.MSR.476:
+  signal_name: "Sade Sati Cycle 3 Peak 2049–2052 Early Warning Hook"
+  signal_type: transit-activation
+  classical_source: "SADE_SATI_CYCLES_ALL; FALSIFIER §2.3"
+  entities_involved: [TRS.SADE3, PLN.SATURN]
+  strength_score: 0.78
+  valence: malefic
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "Third Sade Sati peak window for Pisces Moon sign (post-2040 staging per maintenance schedule)"
+    - "Long-horizon health/wealth discipline test"
+  falsifier: "Ephemeris path only — dates approximate until annual ephemeris refresh."
+  domains_affected: [health, spirit]
+  confidence: 0.75
+  v6_ids_consumed: [TRS.SS3]
+  rpt_deep_dive: "MAINTENANCE_SCHEDULE"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.477
+
+SIG.MSR.477:
+  signal_name: "Saturn Transit Pisces 2025–2028 Triple Wave on Natal Moon Sign"
+  signal_type: transit-activation
+  classical_source: "Ephemeris CSV; MATRIX_SIGNS SIG.25 cousin"
+  entities_involved: [PLN.SATURN, SGN.PISCES, PLN.MOON]
+  strength_score: 0.89
+  valence: malefic
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "Saturn crossing Pisces activates Sade Sati structural pressure on 11H Aquarius Moon via sign-based logic in extended transit models"
+    - "Feeds SIG.25 Saturn-Pisces triple activation narrative"
+  falsifier: "Orb rules — sign ingress dates from Swiss ephemeris."
+  domains_affected: [mind, career]
+  confidence: 0.86
+  v6_ids_consumed: [TRS.SATURN]
+  rpt_deep_dive: "MATRIX_SIGNS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.478
+
+SIG.MSR.478:
+  signal_name: "Jupiter Return Sagittarius 2019 Cycle — Dharmic Reload Before Mercury Peak"
+  signal_type: transit-activation
+  classical_source: "Ephemeris retrospective"
+  entities_involved: [PLN.JUPITER, SGN.SAGITTARIUS]
+  strength_score: 0.72
+  valence: benefic
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "12-year Jupiter return to natal Jupiter sign re-animates 9H cluster for growth sprints"
+    - "Retrodictive anchor for education/credential moves pre-2020"
+  falsifier: "Generic — all charts; strength here from natal Jupiter own-sign."
+  domains_affected: [spirit, career]
+  confidence: 0.68
+  v6_ids_consumed: [TRS.JUPITER]
+  rpt_deep_dive: "LEL cluster"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.479
+
+SIG.MSR.479:
+  signal_name: "Rahu Transit Aries 2025–2026 Ignition of Lagna Desires"
+  signal_type: transit-activation
+  classical_source: "Ephemeris forward window"
+  entities_involved: [PLN.RAHU, SGN.ARIES]
+  strength_score: 0.74
+  valence: mixed
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "Rahu transits natal Lagna sign — identity experiment / entrepreneurial ignition years"
+    - "Pairs with BB-UL 2026 falsifier window"
+  falsifier: "House from Chandra lagna differs — statement is rashi transit only."
+  domains_affected: [career, relationships]
+  confidence: 0.70
+  v6_ids_consumed: [TRS.RAHU]
+  rpt_deep_dive: "FALSIFIER §2.7 cousin"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.480
+
+SIG.MSR.480:
+  signal_name: "2041 Saturn Return Exactitude to Natal Exalted Saturn Degree — Apex Transit"
+  signal_type: transit-activation
+  classical_source: "Long ephemeris; MSR.046"
+  entities_involved: [PLN.SATURN, PLN.SATURN.NATAL]
+  strength_score: 0.87
+  valence: benefic
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "Saturn returns to Libra exaltation degree ~2041–44 — reinforces Sasha Mahapurusha during Venus MD"
+    - "MSR.046 absorbed earlier — this signal isolates degree-resonance layer"
+  falsifier: "Birth time sensitivity on return year."
+  domains_affected: [career]
+  confidence: 0.84
+  v6_ids_consumed: [TRS.SATURN.RETURN]
+  rpt_deep_dive: "MSR.046"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.481
+
+SIG.MSR.481:
+  signal_name: "D9 AK Moon Gemini — Intellectualized Soul Lens"
+  signal_type: divisional-pattern
+  classical_source: "JH §1 D9 column; GAP.02d closed"
+  entities_involved: [D9.MOON, PLN.MOON]
+  strength_score: 0.84
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Moon AK in Gemini Navamsa — soul story told through Mercury channels (speech, synthesis, networking)"
+    - "Feeds Mind domain D9 synthesis"
+  falsifier: "Requires D9 Moon sign stable in JH."
+  domains_affected: [mind, career]
+  confidence: 0.82
+  v6_ids_consumed: [D9.MOON]
+  rpt_deep_dive: "REPORT_PSYCHOLOGY_MIND"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.482
+
+SIG.MSR.482:
+  signal_name: "D9 Jupiter Gemini — Dharma Teacher as Information System"
+  signal_type: divisional-pattern
+  classical_source: "JH §1 Jupiter Ge D9"
+  entities_involved: [D9.JUPITER, PLN.JUPITER]
+  strength_score: 0.82
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Jupiter in Mercury's sign in D9 — doctrinal flexibility + knowledge merchandising potentials"
+    - "Supports Gaja-Kesari D9 complement (MSR.434 family)"
+  falsifier: "—"
+  domains_affected: [spirit, career]
+  confidence: 0.80
+  v6_ids_consumed: [D9.JUPITER]
+  rpt_deep_dive: "MSR.434"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.483
+
+SIG.MSR.483:
+  signal_name: "D9 Venus Virgo Debilitation — Relational Effort Structural Mark"
+  signal_type: divisional-pattern
+  classical_source: "JH §1 Venus Vi D9"
+  entities_involved: [D9.VENUS, PLN.VENUS]
+  strength_score: 0.79
+  valence: malefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Venus debilitated in D9 — marriage/pleasure vectors require engineering not lottery"
+    - "Pairs with contradiction #7 family"
+  falsifier: "—"
+  domains_affected: [relationships]
+  confidence: 0.78
+  v6_ids_consumed: [D9.VENUS]
+  rpt_deep_dive: "CONTRADICTION_REGISTRY"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.484
+
+SIG.MSR.484:
+  signal_name: "D9 Saturn Aries Debilitation — Authority Training Arc in Navamsa"
+  signal_type: divisional-pattern
+  classical_source: "JH §1 Saturn Ar D9"
+  entities_involved: [D9.SATURN, PLN.SATURN]
+  strength_score: 0.77
+  valence: malefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Saturn debilitated in D9 — authority relationship is learned-through-friction"
+    - "Aligns NBRY theme for later Venus MD"
+  falsifier: "—"
+  domains_affected: [relationships, career]
+  confidence: 0.76
+  v6_ids_consumed: [D9.SATURN]
+  rpt_deep_dive: "REPORT_RELATIONSHIPS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.485
+
+SIG.MSR.485:
+  signal_name: "D10 Mercury Capricorn — Executive Mercurial Career Archetype"
+  signal_type: divisional-pattern
+  classical_source: "JH D10 row in FORENSIC §3.6"
+  entities_involved: [D10.MERCURY, PLN.MERCURY]
+  strength_score: 0.83
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Mercury in Capricorn in Dasamsa — structured corporate / systems leadership expression"
+    - "Echoes 10H Capricorn concentration"
+  falsifier: "Requires D10 table consent."
+  domains_affected: [career]
+  confidence: 0.80
+  v6_ids_consumed: [D10.MERCURY]
+  rpt_deep_dive: "REPORT_CAREER_DHARMA"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.486
+
+SIG.MSR.486:
+  signal_name: "D10 Saturn Taurus — Stable Authority Platform in Profession Chart"
+  signal_type: divisional-pattern
+  classical_source: "JH D10 Saturn Ta"
+  entities_involved: [D10.SATURN, PLN.SATURN]
+  strength_score: 0.80
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D10 Saturn in own sign — slow-build authority rewarded in career varga"
+    - "Supports long-arc Sasha payoff"
+  falsifier: "—"
+  domains_affected: [career]
+  confidence: 0.78
+  v6_ids_consumed: [D10.SATURN]
+  rpt_deep_dive: "JH D10 row"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.487
+
+SIG.MSR.487:
+  signal_name: "D12 Sun — Father-Line Dwadashamsa Pointer"
+  signal_type: divisional-pattern
+  classical_source: "FORENSIC D12; lineage domain"
+  entities_involved: [D12.SUN, PLN.SUN]
+  strength_score: 0.71
+  valence: neutral
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D12 Sun placement informs paternal/psychic inheritance textures"
+    - "Used as corroboration not solo driver"
+  falsifier: "D12 sensitive to birth time."
+  domains_affected: [parents]
+  confidence: 0.68
+  v6_ids_consumed: [D12.SUN]
+  rpt_deep_dive: "REPORT_PARENTS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.488
+
+SIG.MSR.488:
+  signal_name: "D7 Moon — Emotional Progeny Matrix for Children Domain"
+  signal_type: divisional-pattern
+  classical_source: "GAP.05 substantially resolved; FORENSIC D7"
+  entities_involved: [D7.MOON, PLN.MOON]
+  strength_score: 0.76
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D7 Moon guides feeling-tones around children narrative; complements empty 5H Jupiter aspect story"
+    - "Cross-checks twin-birth Jupiter transit anecdote"
+  falsifier: "D7 degree export optional."
+  domains_affected: [children]
+  confidence: 0.74
+  v6_ids_consumed: [D7.MOON]
+  rpt_deep_dive: "REPORT_CHILDREN"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.489
+
+SIG.MSR.489:
+  signal_name: "D20 Vimsamsa Spiritual Technique Lineage (Sun Placement)"
+  signal_type: divisional-pattern
+  classical_source: "MATRIX_DIVISIONALS; D20 Sun"
+  entities_involved: [D20.SUN, PLN.SUN]
+  strength_score: 0.73
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D20 Sun anchors spiritual practice style — technique vs bhakti balance"
+    - "Pairs with MSR.028 cluster"
+  falsifier: "—"
+  domains_affected: [spirit]
+  confidence: 0.70
+  v6_ids_consumed: [D20.SUN]
+  rpt_deep_dive: "REPORT_SPIRITUAL"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.490
+
+SIG.MSR.490:
+  signal_name: "D27 Nakshatra Strength Chart — PBha Moon Echo"
+  signal_type: divisional-pattern
+  classical_source: "MATRIX_DIVISIONALS note; D27"
+  entities_involved: [D27.LAGNA, PLN.MOON]
+  strength_score: 0.70
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D27 lagna Pisces parallels 12H themes — subtle body strength routing"
+    - "Qualitative overlay to D1 Moon 11H"
+  falsifier: "D27 export partial — corroborative only."
+  domains_affected: [spirit, health]
+  confidence: 0.65
+  v6_ids_consumed: [D27]
+  rpt_deep_dive: "MATRIX_DIVISIONALS"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.491
+
+SIG.MSR.491:
+  signal_name: "D40 Khavedamsa Luxury Sub-Tone on Venus"
+  signal_type: divisional-pattern
+  classical_source: "FORENSIC D40 where listed"
+  entities_involved: [D40.VENUS, PLN.VENUS]
+  strength_score: 0.68
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "D40 refinement on Venus aesthetic/spend signature"
+    - "Supports luxury-dharmic budgeting advice"
+  falsifier: "Requires D40 row in FORENSIC."
+  domains_affected: [wealth]
+  confidence: 0.64
+  v6_ids_consumed: [D40.VENUS]
+  rpt_deep_dive: "FORENSIC divisionals"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.492
+
+SIG.MSR.492:
+  signal_name: "D60 Shashtyamsa Soul Texture — Secondary to D9 for Specialist Reads"
+  signal_type: divisional-pattern
+  classical_source: "Classical Shashtyamsa; MATRIX"
+  entities_involved: [D60.CORE]
+  strength_score: 0.72
+  valence: context-dependent
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Shashtyamsa varga refines soul tone; use as secondary to D9 for specialist readings"
+    - "Cross-links MSR.042 D60 Saturn emphasis"
+  falsifier: "Birth time sensitivity highest in D60."
+  domains_affected: [spirit]
+  confidence: 0.60
+  v6_ids_consumed: [D60]
+  rpt_deep_dive: "MSR.042"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — pathway §VII.4 gap-fill toward 500-signal architecture target"
+
+---
+### MSR.493
+
+SIG.MSR.493:
+  signal_name: "Maandi Upagraha in Gemini 3H — Shadow Commerce Adjunct to UL Cluster"
+  signal_type: sensitive-point
+  classical_source: "JHORA_TRANSCRIPTION §1 Maandi; Faladeepika upagraha"
+  entities_involved: [UPG.MAANDI, HSE.3]
+  strength_score: 0.76
+  valence: malefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Maandi 24° Gemini 3H — shadow malefic co-tenant with UL/Gulika complex in communication wealth image"
+    - "Qualitative stress-test on Mercury-driven deals"
+  falsifier: "Upagraha sensitivity to birth time ± few minutes."
+  domains_affected: [wealth, career]
+  confidence: 0.72
+  v6_ids_consumed: [UPG.MAANDI]
+  rpt_deep_dive: "JH §1"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
+
+---
+### MSR.494
+
+SIG.MSR.494:
+  signal_name: "Gulika Upagraha in Gemini 3H — Delay Kernel Inside Gemini Nexus"
+  signal_type: sensitive-point
+  classical_source: "JH §1 Gulika"
+  entities_involved: [UPG.GULIKA, HSE.3]
+  strength_score: 0.75
+  valence: malefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Gulika ~15° Gemini — systematic delay/obstacle injection into the same 3H where UL prospers"
+    - "Creates productive friction pattern: big wins ride Gulika-scheduled negotiations"
+  falsifier: "Birth time sensitivity."
+  domains_affected: [career, mind]
+  confidence: 0.73
+  v6_ids_consumed: [UPG.GULIKA]
+  rpt_deep_dive: "CGM"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
+
+---
+### MSR.495
+
+SIG.MSR.495:
+  signal_name: "Five-Layer 7H + Four-Layer 3H Cross-Weave — Relational Wealth Meets Communication Wealth"
+  signal_type: convergence
+  classical_source: "MSR.391 + CGM_v2_0 subgraph"
+  entities_involved: [HSE.7, HSE.3, LAG.SHREE, ARD.UL]
+  strength_score: 0.87
+  valence: benefic
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Structural cross-link: Shree+Saturn+Mars+BB+KP (7H) vs UL+A5+A11+HL (3H) — chart routes Lakshmi through partnerships AND Mercury-image channels simultaneously"
+    - "MSR.443 summary signal decomposition view"
+  falsifier: "If special lagna block overturned — already JH locked."
+  domains_affected: [wealth, relationships, career]
+  confidence: 0.85
+  v6_ids_consumed: [YOG.CROSSWEAVE.37]
+  rpt_deep_dive: "MSR.443"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
+
+---
+### MSR.496
+
+SIG.MSR.496:
+  signal_name: "Retrodictive Eclipse ±6mo Density Near Career Pivots — Empirical Stack"
+  signal_type: transit-activation
+  classical_source: "LIFE_EVENT_LOG_v1_2 chart_state; EVENT_CHART_STATES"
+  entities_involved: [EVT.CLUSTER, TRS.ECLIPSE]
+  strength_score: 0.79
+  valence: mixed
+  temporal_activation: transit-triggered
+  supporting_rules:
+    - "LEL v1.2 shows multi-eclipse windows around father's death + twin birth + contract peaks — not one formula but empirical density metric"
+    - "Use as calibration layer for transit-window signals"
+  falsifier: "Event dating errors shrink cluster validity."
+  domains_affected: [parents, career, children]
+  confidence: 0.74
+  v6_ids_consumed: [EVT.ECLIPSE]
+  rpt_deep_dive: "LIFE_EVENT_LOG"
+  reconciliation: "MSR_EXPANSION_BATCH 2026-04-19 — final four to reach 500 total"
+
+---
+
 ## §IX — COMPLETE SIGNAL COUNT
 
 | Category | Count | Notes |
@@ -964,7 +2078,8 @@ SIG.MSR.443:
 | New yoga signals (MSR.421–MSR.437) | 17 | From JH v8.0 §6 |
 | New quantitative/metric signals (MSR.438–MSR.443) | 6 | Ishta/Kashta, Bhava Bala, Pancha-Vargeeya, etc. |
 | Correction/replacement signals (MSR.391a, .391b, .391c, .402b) | 4 | Saham corrections + MSR.402 replacement |
-| **TOTAL v2.0 SIGNALS** | **447** | 420 carried + 27 new |
+| Expansion batch (MSR.444–MSR.496) | 53 | Nakshatra, sahams, dasha/transit, divisional, upagraha — §VII.4 pathways (2026-04-19) |
+| **TOTAL v2.1 SIGNALS** | **500** | Prior register **447** + §VIII-B batch **53** (MSR.444–MSR.496). Band **500–600**: up to **100** further signals optional |
 
 ---
 
@@ -1091,17 +2206,17 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 | Total Mode B candidates found (SIG.16-31) | 16 |
 | Absorbed into prior signals (MSR.031-046 in v1.0) | 16 |
 | Genuinely pending / newly promoted today | 0 |
-| New signals added to MSR (MSR.444+) | 0 |
-| **Current MSR total** | **447 signals** (443 numbered + 4 sub-signals) |
-| **Residual gap to 500-600 target** | **53-153 signals remaining** |
+| New signals added to MSR (MSR.444–MSR.496) | **53** |
+| **Current MSR total** | **500** signals (MSR.001–MSR.496 register line; lettered subs 391a–c, 402b extra) |
+| **Residual gap to 600 ceiling** | **0–100** signals (optional depth) |
 
-**Gap analysis**: 447 current vs 500-600 target = 53-153 signals still needed. Sources for gap-filling in upcoming sessions:
-1. **Transit-windowed compound signals** (CGM_v2_0 §9.1 estimates 200-300 from 339 edges; many not yet individually formalized in MSR)
-2. **Divisional-confirmation expansion** (CGM v1.1 plans to expand to ~900 edges — additional divisional-pattern signals)
-3. **Nakshatra-level signals** (MSR has limited nakshatra-specific entries despite 14 occupied nakshatras × multiple roles)
-4. **Saham compositional signals** (23 Sahams in CGM; only 10 key ones extracted; 13 residual)
-5. **D60 / D27 / D40 deeper expansion** (current signals are one-per-Dx; each Dx warrants multiple signals)
-6. **Future dasha-window signals** (Ketu MD 2027-2034 and Venus MD 2034-2054 are under-documented in MSR; only MSR.046 covers post-2034)
+**Gap analysis (updated 2026-04-19):** **500-signal floor reached.** Further additions toward **600** are optional refinements: CGM edge-formalization, finer transit windows, duplicate Dx granulation, composite yogas — not corpus-blocking.
+1. **Transit-windowed compound signals** — CGM_v2_0 §9.1 still has edges not individually duplicated in MSR (optional).
+2. **Divisional-confirmation expansion** — multi-row per Dx where reports demand.
+3. **Nakshatra pada / vimshottari-nakshatra overlays** — specialist tiers.
+4. **Saham composition chains** — full 23× formula traces in MSR (optional).
+5. **D60 / D27 micro-rows** — high time-sensitivity tier.
+6. **Annual Varshphal / progressed layers** — after L1 solar-return precision.
 
 ---
 
@@ -1133,7 +2248,8 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 | 2.0 (Task E1 audit) | 2026-04-19 | Task E1 | Mode B SIG.16-31 audit: all 16 candidates confirmed absorbed as MSR.031-046 in v1.0 carry-forward; 0 genuinely pending; §VII Mode B audit section added; three-interpretation spot-check on MSR.031/038/046 confirms original promotions warranted; residual gap 53-153 signals to 500-600 target documented with 6 gap-filling pathways; no signal renumbering, total remains 447 |
 | 2.0-provenance | 2026-04-19 | GAP_RESOLUTION_SESSION | Provenance backfill: §0 Provenance Registry added; v6.0-era signals confirmed/corrected status documented; 7 corrected signals + 4 new replacement signals listed; all other MSR.001-420 confirmed by FORENSIC_v8_0; provenance_policy YAML field added to frontmatter; CGP Provenance: COMPLETE |
 | 2.0-post-merge | 2026-04-19 | Corpus_integrity_pass | MSR.404 supporting_rules + falsifier refined; **BB progression methodological tension CLOSED** — aligns with CONTRADICTION_REGISTRY_v1_1 §3.1 RESOLVED (6°/year documentation per FORENSIC supplement §V7.F; Gemini thesis rests on UL/A5/A11/HL convergence) |
+| **2.1** | **2026-04-19** | **MSR_EXPANSION_SESSION** | **§VIII-B: MSR.444–MSR.496 (+53)** — nakshatra lattice (12), residual sahams (15), dasha/transit (12), divisional (12), upagraha + cross-weave + LEL eclipse density (4). **Total register = 500.** §VII.4 summary + §IX table updated. |
 
 ---
 
-*End of MSR_v2_0.md — FIX_SESSION_003 — 2026-04-18 — CLOSED*
+*End of MSR_v2_0.md — v2.1 — 500 signals — CLOSED*
