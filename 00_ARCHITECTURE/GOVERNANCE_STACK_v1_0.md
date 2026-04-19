@@ -48,7 +48,7 @@ All closed artifacts as of Session 35:
 | CGM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CGM_v2_0 in GAP_RESOLUTION_SESSION |
 | **CGM_v2_0** | **2.0** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — LAG.HORA 7H→3H, LAG.GHATI 8H→9H, LAG.VARNADA 8H→4H, LAG.SHREE 9H→7H; all edges updated** |
 | MSR_v1_0 | 1.0 | **SUPERSEDED** | Superseded by MSR_v2_0 |
-| **MSR_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003 — 420 original signals carried forward + corrections + 17 new yoga signals + quantitative metric signals MSR.438-443; §0 Provenance Registry added; §VII Mode B audit added; CGP Provenance: COMPLETE (GAP_RESOLUTION_SESSION)** |
+| **MSR_v2_0** | **2.1** | **CURRENT** | **500 signals — v2.1 adds §VIII-B MSR.444–496 (+53 expansion batch 2026-04-19); §0 Provenance; §VII Mode B audit; CGP COMPLETE** |
 | CDLM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CDLM_v1_1 in FIX_SESSION_003_deferred |
 | **CDLM_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 9 cells corrected; D4.D3 0.78↔→0.61→; Shree Lagna 7H; Hora Lagna 3H; Roga/Mahatmya Sahams correct houses; 1,135 lines** |
 | RM_v1_0 | 1.0 | CLOSED (SUPERSEDED by v1.1) | Superseded in FIX_SESSION_001 |
@@ -205,7 +205,7 @@ All gaps across all artifacts:
 11. ~~Provenance backfill~~ — **DONE GAP_RESOLUTION_SESSION**: §0 Provenance Registry in MSR_v2_0; CGP Provenance COMPLETE
 12. **External acharya review** — OPEN: Item 9 — ACHARYA_ENGAGEMENT_KIT.md ready; requires native to initiate contact
 13. **6 empirical falsifier tests** — OPEN: Item 10 — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated, native-executed
-14. **MSR signal gap** — OPEN: **447** signals (per MSR_v2_0 §VII tally) vs 500–600 target; **53–153** short; pathways documented in MSR_v2_0 §VII.4
+14. **MSR signal gap** — **Floor met:** **500** signals in MSR_v2_0 **v2.1** (2026-04-19). Optional stretch toward **600** remains non-blocking (§VII.4 updated).
 
 ---
 

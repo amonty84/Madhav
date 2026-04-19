@@ -1361,7 +1361,7 @@ All 8 internally-resolvable gaps are now closed. The corpus is self-consistent a
 
 - **Item 9**: External acharya review — kit ready at ACHARYA_ENGAGEMENT_KIT.md; requires native to initiate contact
 - **Item 10**: 6 empirical falsifier tests — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated
-- **MSR signal gap**: **447** signals vs 500–600 target; **53–153** short; pathways documented in MSR_v2_0 §VII.4
+- ~~**MSR signal gap**~~ — **CLOSED floor (2026-04-19):** MSR_v2_0 **v2.1** = **500** signals (§VIII-B MSR.444–496). Optional **0–100** toward architecture ceiling **600**.
 
 ### Next Session Objective
 
