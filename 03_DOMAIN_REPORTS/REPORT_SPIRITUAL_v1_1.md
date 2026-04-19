@@ -14,7 +14,7 @@ corrections_applied:
   - "Seven-Mechanism -> Six-Mechanism: Varnada+Ghati 8H mechanism removed (both lagnas confirmed NOT in 8H by JH)"
   - "Varnada Lagna corrected: Cancer 4H (not Scorpio 8H)"
   - "Ghati Lagna corrected: Sagittarius 9H (not Scorpio 8H)"
-  - "Shree Lagna removed from 9H (corrected to 7H — see REPORT_RELATIONSHIPS_v1_1 and UCN_v3_0 §XVII)"
+  - "Shree Lagna removed from 9H (corrected to 7H — see REPORT_RELATIONSHIPS_v1_1 and UCN_v4_0 Part IV §XVII)"
   - "Ketu MD 2031-2038: hidden-pinnacle Varnada+Ghati 8H claim invalidated; correct framing via Ketu-exalted-8H mechanism only"
   - "MSR.407 confidence: 0.87 -> 0.82 (Shree Lagna removed from 9H)"
 ---
@@ -52,7 +52,7 @@ The v1.0 Executive Summary listed five organizing facts and a seven-mechanism am
 4. Devata Triple-Lock (Mercury-Saturn-Venus = Vishnu-Venkateshwara-Mahalakshmi) — CONFIRMED
 5. Karakamsa Gemini (Mercury as Karakamsa lord and MD lord) — CONFIRMED
 
-**REMOVED from organizing facts**: "Shree Lagna in Sagittarius 9H" — v6.0 error. Shree Lagna is in Libra 7H (see REPORT_RELATIONSHIPS_v1_1 §6.2 Layer 4 and UCN_v3_0 §XVII).
+**REMOVED from organizing facts**: "Shree Lagna in Sagittarius 9H" — v6.0 error. Shree Lagna is in Libra 7H (see REPORT_RELATIONSHIPS_v1_1 §6.2 Layer 4 and UCN_v4_0 Part IV §XVII).
 
 **REMOVED from organizing facts**: "Varnada Lagna + Ghati Lagna both in Scorpio 8H" — v6.0 error. Varnada is in Cancer 4H; Ghati is in Sagittarius 9H.
 
@@ -120,7 +120,7 @@ The spirit domain's 0.96 CDLM D6.D6 self-amplification derives from exactly SIX 
 
 **Net result**: Six mechanisms remain. The 0.96 CDLM D6.D6 self-amplification is sustained by six independently-verifiable mechanisms. The reduction from seven to six does not reduce the structural self-amplification — the six remaining mechanisms are all confirmed by JH v8.0.
 
-**MSR reference**: MSR.408 (spiritual architecture signal), UCN_v3_0 §XVIII
+**MSR reference**: MSR.408 (spiritual architecture signal), UCN_v4_0 Part IV §XVIII
 
 ---
 
@@ -149,7 +149,7 @@ Ketu MD remains architecturally significant for the following CORRECT reasons:
 
 **CORRECTED framing**: "Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Not a 'hidden pinnacle' via special lagnas (that claim was false) but a genuine 7-year transformation-depth period via Ketu's own exalted dignity in the transformation house."
 
-**MSR reference**: MSR.402 (INVALIDATED), MSR.402b (replacement: domestic-dharmic authority architecture), UCN_v3_0 §XIX
+**MSR reference**: MSR.402 (INVALIDATED), MSR.402b (replacement: domestic-dharmic authority architecture), UCN_v4_0 Part IV §XIX
 
 ### §10.2 Varnada Lagna and Ghati Lagna: Correct Readings
 
