@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { format } from 'date-fns'
 import { Copy, Check, RotateCw, PenSquare, ThumbsUp, ThumbsDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Rating } from '@/hooks/useFeedback'
@@ -11,10 +12,11 @@ interface Props {
   onEdit?: () => void
   rating?: Rating
   onRate?: (rating: Rating) => void
+  timestamp?: Date
   className?: string
 }
 
-export function MessageActions({ onCopy, onRegenerate, onEdit, rating, onRate, className }: Props) {
+export function MessageActions({ onCopy, onRegenerate, onEdit, rating, onRate, timestamp, className }: Props) {
   const [copied, setCopied] = useState(false)
 
   async function handleCopy() {
@@ -63,6 +65,15 @@ export function MessageActions({ onCopy, onRegenerate, onEdit, rating, onRate, c
             <ThumbsDown className="size-3.5" />
           </ActionButton>
         </>
+      )}
+      {timestamp && (
+        <time
+          dateTime={timestamp.toISOString()}
+          title={format(timestamp, 'PPpp')}
+          className="ml-1 text-[11px] tabular-nums text-muted-foreground/70"
+        >
+          {format(timestamp, 'h:mm a')}
+        </time>
       )}
     </div>
   )

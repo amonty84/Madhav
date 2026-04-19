@@ -180,25 +180,46 @@ export const consumeTools = {
   }),
 
   get_domain_report: tool({
-    description: 'Read a specific L3 domain report (e.g. finance, career, health).',
+    description:
+      'Read a specific L3 domain report. Use the exact domain slug from the system prompt`s Available reports list. Match is case-insensitive.',
     inputSchema: z.object({
       chart_id: z.string().describe('The chart UUID'),
-      domain: z.string().describe('Domain name (e.g. finance, career, health, relationships)'),
+      domain: z
+        .string()
+        .describe('Domain slug from the Available reports list (e.g. finance, career, health, relationships)'),
     }),
     execute: async ({ chart_id, domain }) => {
       try {
         const supabase = createServiceClient()
-        const { data: report, error } = await supabase
+
+        // Case-insensitive match to tolerate the model using a different case
+        // than the DB slug.
+        const { data: report } = await supabase
           .from('reports')
           .select('title, domain, version, storage_path, updated_at')
           .eq('chart_id', chart_id)
-          .eq('domain', domain)
+          .ilike('domain', domain)
           .order('updated_at', { ascending: false })
           .limit(1)
-          .single()
+          .maybeSingle()
 
-        if (error || !report) {
-          return { error: `No report found for domain "${domain}". Available domains may include finance, career, health, relationships.` }
+        if (!report) {
+          // Return the actual domains present for this chart so the model can
+          // re-call with a valid slug instead of guessing.
+          const { data: available } = await supabase
+            .from('reports')
+            .select('domain')
+            .eq('chart_id', chart_id)
+            .order('domain')
+          const domains = [...new Set((available ?? []).map(r => r.domain))]
+          return {
+            error: `No report found for domain "${domain}" on this chart.`,
+            available_domains: domains,
+            hint:
+              domains.length > 0
+                ? `Call get_domain_report again with one of: ${domains.join(', ')}.`
+                : 'This chart has no L3 domain reports yet. Answer from chart facts (get_planetary_positions, get_dasha_periods) and any L2/L2.5 documents.',
+          }
         }
 
         const content = await readDocumentContent(report.storage_path)

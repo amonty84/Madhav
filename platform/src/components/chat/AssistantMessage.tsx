@@ -1,11 +1,12 @@
 'use client'
 
 import type { UIMessage } from 'ai'
+import { useCallback, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
-import { Markdown } from './Markdown'
+import { StreamingMarkdown } from './StreamingMarkdown'
 import { ToolCallCard } from './ToolCallCard'
-import { StreamingDots, StreamingCaret } from './StreamingDots'
+import { StreamingDots } from './StreamingDots'
 import { MessageActions } from './MessageActions'
 import type { Rating } from '@/hooks/useFeedback'
 
@@ -51,18 +52,21 @@ interface Props {
 export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, rating, onRate }: Props) {
   const reduce = useReducedMotion()
   const text = extractText(message)
+  const [timestamp] = useState(() => new Date())
   const hasAnyContent = message.parts.some(p => {
     if (p.type === 'text') return (p as { text: string }).text.length > 0
     if (isToolPart(p)) return true
     if (p.type === 'reasoning') return true
     return false
   })
+  const metadata = (message.metadata ?? {}) as { truncated?: boolean }
+  const wasTruncated = !isStreaming && metadata.truncated === true
 
-  async function copy() {
+  const copy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(text)
-    } catch {}
-  }
+    } catch { }
+  }, [text])
 
   return (
     <motion.div
@@ -71,13 +75,13 @@ export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, r
       transition={{ duration: 0.18, ease: 'easeOut' }}
       className="group/message mx-auto w-full max-w-3xl px-4"
     >
-      <div className="flex gap-3">
-        <div className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border bg-background text-foreground">
-          <Sparkles className="size-3.5" />
+      <div className="flex gap-4">
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full border border-border/40 bg-background text-foreground shadow-sm">
+          <Sparkles className="size-4" />
         </div>
         <div className="min-w-0 flex-1 pt-0.5">
           {!hasAnyContent && isStreaming && isLast && (
-            <div className="py-1.5">
+            <div className="py-2">
               <StreamingDots />
             </div>
           )}
@@ -87,8 +91,7 @@ export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, r
               const streamingThisPart = isStreaming && isLast && isLastTextPart
               return (
                 <div key={idx}>
-                  <Markdown isStreaming={streamingThisPart}>{(part as { text: string }).text}</Markdown>
-                  {streamingThisPart && <StreamingCaret />}
+                  <StreamingMarkdown isStreaming={streamingThisPart}>{(part as { text: string }).text}</StreamingMarkdown>
                 </div>
               )
             }
@@ -118,6 +121,14 @@ export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, r
             }
             return null
           })}
+          {wasTruncated && (
+            <div className="mt-3 rounded-md border border-amber-500/30 bg-amber-500/5 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
+              <p className="font-medium">Response was truncated.</p>
+              <p className="mt-0.5 opacity-80">
+                The model hit its output length cap. Ask it to continue to get the rest.
+              </p>
+            </div>
+          )}
           {!isStreaming && hasAnyContent && (
             <div className="mt-1 -ml-1.5 opacity-0 transition-opacity duration-150 group-hover/message:opacity-100 focus-within:opacity-100">
               <MessageActions
@@ -125,6 +136,7 @@ export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, r
                 onRegenerate={isLast ? onRegenerate : undefined}
                 rating={rating}
                 onRate={onRate}
+                timestamp={timestamp}
               />
             </div>
           )}

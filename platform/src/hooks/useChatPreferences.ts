@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import type { ModelId, StyleId } from '@/components/chat/ModelStylePicker'
+import { DEFAULT_MODEL_ID, isValidModelId } from '@/lib/models/registry'
 
-const DEFAULT_MODEL: ModelId = 'claude-sonnet-4-6'
+const DEFAULT_MODEL: ModelId = DEFAULT_MODEL_ID
 const DEFAULT_STYLE: StyleId = 'acharya'
-const VALID_MODELS: ModelId[] = ['claude-sonnet-4-6', 'claude-haiku-4-5', 'claude-opus-4-7']
 const VALID_STYLES: StyleId[] = ['acharya', 'brief', 'client']
 
 function keyFor(chartId: string) {
@@ -27,7 +27,7 @@ export function useChatPreferences(chartId: string) {
       const parsed = JSON.parse(raw) as Partial<Prefs>
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPrefs({
-        model: VALID_MODELS.includes(parsed.model as ModelId) ? (parsed.model as ModelId) : DEFAULT_MODEL,
+        model: parsed.model && isValidModelId(parsed.model) ? parsed.model : DEFAULT_MODEL,
         style: VALID_STYLES.includes(parsed.style as StyleId) ? (parsed.style as StyleId) : DEFAULT_STYLE,
       })
     } catch {}

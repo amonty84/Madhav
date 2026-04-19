@@ -14,10 +14,13 @@ import {
   FileQuestion,
   BookOpenText,
   User,
+  type LucideIcon,
 } from 'lucide-react'
+import { MODELS, PROVIDER_LABEL, type SpeedTier } from '@/lib/models/registry'
 import { ChatShell } from '@/components/chat/ChatShell'
 import { ConversationSidebar } from '@/components/chat/ConversationSidebar'
-import { MessageList } from '@/components/chat/MessageList'
+import { AdaptiveMessageList } from '@/components/chat/AdaptiveMessageList'
+import { PendingAssistantBubble } from '@/components/chat/PendingAssistantBubble'
 import { Composer, type ComposerHandle } from '@/components/chat/Composer'
 import { WelcomeGreeting } from '@/components/chat/WelcomeGreeting'
 import { ScrollToBottomButton } from '@/components/chat/ScrollToBottomButton'
@@ -32,6 +35,7 @@ import { useFeedback } from '@/hooks/useFeedback'
 import { useChatPreferences } from '@/hooks/useChatPreferences'
 import { useAttachments, type Attachment } from '@/hooks/useAttachments'
 import { useBranches } from '@/hooks/useBranches'
+import { classifyChatError } from '@/lib/chat/classify-error'
 import { ModelStylePicker } from '@/components/chat/ModelStylePicker'
 import { ShareButton } from '@/components/chat/ShareButton'
 import type { Report, ConversationModule } from '@/lib/supabase/types'
@@ -85,8 +89,27 @@ export function ConsumeChat({
     model,
     style,
     onConversationCreated: id => {
-      router.replace(`/clients/${chartId}/consume/${id}`)
-      // Optimistically prepend to the sidebar list; full refresh happens via router.refresh
+      // First-turn URL sync. We deliberately do NOT use router.replace here:
+      // that would re-mount ConsumeChat under the [conversationId] segment,
+      // re-reading initialMessages from the DB. The DB write happens in the
+      // server route's async onFinish (after the client stream finishes), so
+      // the re-mount races against persistence and loses when slow — landing
+      // on empty initialMessages and wiping the conversation from view.
+      //
+      // history.replaceState updates the URL shallowly so the component stays
+      // mounted with its in-memory messages. A subsequent real navigation
+      // (clicking a sidebar item, hard refresh) re-reads from the DB, which
+      // by then has the messages.
+      if (typeof window !== 'undefined') {
+        window.history.replaceState(
+          window.history.state,
+          '',
+          `/clients/${chartId}/consume/${id}`
+        )
+      }
+      // Optimistically prepend to the sidebar list. Title will show null
+      // (rendered as a placeholder) until the next navigation pulls the
+      // server-generated title.
       setConversations(prev => [
         {
           id,
@@ -98,8 +121,6 @@ export function ConsumeChat({
         } as ConversationRow,
         ...prev,
       ])
-      // Trigger a background refresh so we pick up the server-generated title
-      setTimeout(() => router.refresh(), 1500)
     },
   })
 
@@ -149,8 +170,22 @@ export function ConsumeChat({
     },
   })
 
-  const paletteCommands = useMemo<Command[]>(
-    () => [
+  const paletteCommands = useMemo<Command[]>(() => {
+    const iconByTier: Record<SpeedTier, LucideIcon> = {
+      fast: Zap,
+      balanced: Gauge,
+      deep: Sparkles,
+    }
+    const modelCommands: Command[] = MODELS.map(m => ({
+      id: `model-${m.id}`,
+      label: `Model: ${m.label} (${PROVIDER_LABEL[m.provider]})`,
+      icon: iconByTier[m.speedTier],
+      section: 'Model',
+      keywords: `${m.provider} ${m.speedTier} ${m.id} ${m.label}`,
+      run: () => setModel(m.id),
+    }))
+
+    return [
       {
         id: 'new-chat',
         label: 'New chat',
@@ -184,30 +219,7 @@ export function ConsumeChat({
         section: 'Help',
         run: () => setShortcutsOpen(true),
       },
-      {
-        id: 'model-haiku',
-        label: 'Model: Haiku (fast)',
-        icon: Zap,
-        section: 'Model',
-        keywords: 'speed haiku claude-4-5',
-        run: () => setModel('claude-haiku-4-5'),
-      },
-      {
-        id: 'model-sonnet',
-        label: 'Model: Sonnet (balanced)',
-        icon: Gauge,
-        section: 'Model',
-        keywords: 'sonnet claude-4-6',
-        run: () => setModel('claude-sonnet-4-6'),
-      },
-      {
-        id: 'model-opus',
-        label: 'Model: Opus (deepest)',
-        icon: Sparkles,
-        section: 'Model',
-        keywords: 'opus claude-4-7 deep',
-        run: () => setModel('claude-opus-4-7'),
-      },
+      ...modelCommands,
       {
         id: 'style-acharya',
         label: 'Style: Acharya depth',
@@ -232,9 +244,8 @@ export function ConsumeChat({
         keywords: 'plain no sanskrit jargon',
         run: () => setStyle('client'),
       },
-    ],
-    [chartId, router, desktopSidebarCollapsed, setModel, setStyle]
-  )
+    ]
+  }, [chartId, router, desktopSidebarCollapsed, setModel, setStyle])
 
   useEffect(() => {
     if (!session.isStreaming) composerRef.current?.focus()
@@ -242,6 +253,11 @@ export function ConsumeChat({
 
   const displayMessages = branches.viewingMessages ?? session.messages
   const messagesEmpty = displayMessages.length === 0
+  const lastMessage = displayMessages[displayMessages.length - 1]
+  const showPendingAssistant =
+    session.status === 'submitted' &&
+    !branches.isViewingArchived &&
+    lastMessage?.role === 'user'
 
   const sidebar = (
     <ConversationSidebar
@@ -300,16 +316,20 @@ export function ConsumeChat({
               onSuggest={handleSend}
             />
           ) : (
-            <MessageList
-              messages={displayMessages}
-              isStreaming={session.isStreaming && !branches.isViewingArchived}
-              onRegenerate={branches.isViewingArchived ? undefined : handleRegenerate}
-              onEditUserMessage={branches.isViewingArchived ? undefined : handleEdit}
-              ratings={ratings}
-              onRate={branches.isViewingArchived ? undefined : rate}
-              branchStats={branches.stats}
-              onStepBranch={branches.stepBranch}
-            />
+            <>
+              <AdaptiveMessageList
+                messages={displayMessages}
+                isStreaming={session.isStreaming && !branches.isViewingArchived}
+                onRegenerate={branches.isViewingArchived ? undefined : handleRegenerate}
+                onEditUserMessage={branches.isViewingArchived ? undefined : handleEdit}
+                ratings={ratings}
+                onRate={branches.isViewingArchived ? undefined : rate}
+                branchStats={branches.stats}
+                onStepBranch={branches.stepBranch}
+                scrollRef={scrollRef}
+              />
+              {showPendingAssistant && <PendingAssistantBubble />}
+            </>
           )}
           <div ref={bottomRef} className="h-1" />
         </div>
@@ -321,20 +341,32 @@ export function ConsumeChat({
           />
         </div>
 
-        {session.error && (
-          <div className="mx-auto w-full max-w-3xl px-4">
-            <div className="flex items-center justify-between gap-3 rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive">
-              <span>Something went wrong. {session.error.message}</span>
-              <button
-                type="button"
-                onClick={handleRegenerate}
-                className="rounded-md border border-destructive/40 px-2 py-0.5 text-[11px] hover:bg-destructive/20"
+        {session.error && (() => {
+          const err = classifyChatError(session.error)
+          if (!err) return null
+          return (
+            <div className="mx-auto w-full max-w-3xl px-4">
+              <div
+                role="alert"
+                className="flex items-start justify-between gap-3 rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive"
               >
-                Retry
-              </button>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium">{err.title}</p>
+                  <p className="mt-0.5 text-destructive/80">{err.hint}</p>
+                </div>
+                {err.kind !== 'auth' && (
+                  <button
+                    type="button"
+                    onClick={handleRegenerate}
+                    className="shrink-0 rounded-md border border-destructive/40 px-2 py-0.5 text-[11px] hover:bg-destructive/20"
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        })()}
 
         <div className="relative shrink-0 border-t border-border/60 bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60 pb-[env(safe-area-inset-bottom)]">
           {branches.isViewingArchived && (
