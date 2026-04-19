@@ -6,7 +6,7 @@ session: 25 (original); citation-density upgrade via FIX_SESSION_002 (2026-04-18
 date_closed: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D7 — Parents
-parent_UCN_version: UCN_v1_1.md
+parent_UCN_version: UCN_v4_0.md (canonical UCN — merged 2026-04-19)
 red_team_applied: YES
 word_count_estimate: ~10500
 primary_msr_anchors: [MSR.342, MSR.394, MSR.407, MSR.374, MSR.391, MSR.320, MSR.330]

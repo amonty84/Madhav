@@ -8,14 +8,14 @@ document_metadata:
   session: FIX_SESSION_003
   date: 2026-04-18
   supersedes: REPORT_FINANCIAL_v2_0.md
-  parent_UCN_version: UCN_v3_0.md (v3.0, FIX_SESSION_003)
+  parent_UCN_version: UCN_v4_0.md (v4.0, canonical unified version)
   corrections_applied:
     - "Shree Lagna: corrected from 9H Sagittarius to 7H Libra (strengthens relational-wealth architecture)"
     - "Hora Lagna: corrected from 7H Libra to 3H Gemini (HL in UL's house)"
     - "Saturn Ishta/Kashta quantitative: 43.28/4.81 = ~9:1 beneficial added"
     - "Maha Yogada (Jupiter D-2) added to financial yoga constellation"
     - "Two-channel Lakshmi architecture: 9H dharmic-Lakshmi + 7H relational-Lakshmi"
-  source_chart_data: FORENSIC_DATA_v8_0_SUPPLEMENT.md + JHORA_TRANSCRIPTION_v8_0_SOURCE.md
+  source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v8_0.md (authoritative; v6.0+v7.0 superseded)
 ---
 
 # Financial Domain Report — Abhisek Mohanty (v2.1)

@@ -7,7 +7,7 @@ date_closed: 2026-04-18
 supersedes: REPORT_RELATIONSHIPS_v1_0.md
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D3 — Relationships
-parent_UCN_version: UCN_v3_0.md (v3.0, FIX_SESSION_003)
+parent_UCN_version: UCN_v4_0.md (v4.0, canonical unified version)
 primary_msr_anchors: [MSR.391 v2.0, MSR.404 v2.0, MSR.396, MSR.343, MSR.391c, MSR.443]
 organizing_principle: "7H Five-Layer Wealth-Relational-Lakshmi Convergence (corrected from v1.0 six-layer disease-greatness framing)"
 corrections_applied:
