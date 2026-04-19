@@ -1396,3 +1396,27 @@ Choose from:
 **Remaining (unchanged by this session):** Native JH exports for **GAP.03** degree-level D9 / **Varshesha**; **GAP.13** exclusive native choice; **MSR 500–600 expansion**; acharya + falsifier calendar; optional LEL v1.3.
 
 **Next session objective:** (C) MSR expansion §VII.4 **or** (B) corpus query validation **or** native export batch for remaining `[EXTERNAL_COMPUTATION_REQUIRED]` cells.
+
+---
+
+## Session — CLOSURE_AUDIT_PASS (2026-04-19, CLOSED)
+
+**Environment:** Claude Code — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
+
+**Objective:** Audit closed data-building items for premature-vs-appropriate closure; fix any stale cross-references in CURRENT v1.1+ L3 Domain Reports to superseded L2.5 / L1 artifacts.
+
+**Audit verdict:** 14 of 15 closures verified as appropriately delivered. One residual issue: stale body-text references in CURRENT v1.1+ Domain Reports pointing to superseded `UCN_v3_0` / `UCN_v1_0` / `FORENSIC_DATA_v8_0_SUPPLEMENT` (frontmatter metadata was already correct).
+
+**Fixes applied (in-place edits, body-text section pointers only — no semantic change):**
+- `REPORT_HEALTH_LONGEVITY_v1_1.md` — 5 references corrected (FORENSIC_DATA_v8_0_SUPPLEMENT.md §1.3 → FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.2; UCN_v3_0.md §XIX/§XVII → UCN_v4_0.md Part IV §...; parent footer updated)
+- `REPORT_SPIRITUAL_v1_1.md` — 3 references corrected (UCN_v3_0 §XVII/§XVIII/§XIX → UCN_v4_0 Part IV §...)
+- `REPORT_FINANCIAL_v2_1.md` — 2 references corrected (UCN_v3_0 §XVII / §XVII.5 → UCN_v4_0 Part IV §...)
+- `REPORT_CAREER_DHARMA_v1_1.md` — 2 references corrected (§1 corpus narrative refreshed to v8_0/v2_0/v1_1/v4_0 stack; §3 parent reference UCN_v1_0.md → UCN_v4_0.md)
+
+**Note:** v1.0 / v2.0 predecessor reports retain their original references (correctly, as historical artifacts marked SUPERSEDED). Only CURRENT v1.1+ reports were updated.
+
+**Corpus integrity post-CLOSURE_AUDIT_PASS:** All 9 CURRENT L3 Domain Reports (Career, Financial, Health/Longevity, Relationships, Spiritual, Children, Parents, Psychology/Mind, Travel) now reference only CURRENT L1/L2.5 artifacts (FORENSIC_v8_0, MSR_v2_0, CDLM_v1_1, RM_v2_0, CGM_v2_0, UCN_v4_0). Closure cascade is complete with no stale pointers.
+
+**Pending items unchanged:** GAP.03 (degree-level D9 export), GAP.13 (Chara Karaka exclusive choice), MSR 500-600 optional expansion, acharya engagement, 6 empirical falsifier tests, EXTERNAL_COMPUTATION_REQUIRED cells.
+
+**Next session objective:** Unchanged from prior — (C) MSR expansion / (B) corpus query / native export batch.

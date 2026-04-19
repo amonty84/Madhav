@@ -3,7 +3,7 @@ document_metadata:
   document: REPORT_HEALTH_LONGEVITY_v1_1.md
   subject: Abhisek Mohanty — b. 1984-02-05, 10:43 IST, Bhubaneswar
   domain: Health / Longevity / Constitution
-  version: 1.1
+  version: 1.2
   status: CURRENT
   supersedes: REPORT_HEALTH_LONGEVITY_v1_0.md (v1.0, Session 18) → SUPERSEDED
   session: FIX_SESSION_003
@@ -31,8 +31,10 @@ document_metadata:
   l1_sources:
     - JHORA_TRANSCRIPTION_v8_0_SOURCE.md §10.7 (Kalachakra Paramayush 85 years)
     - JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2 (Saham Roga: Taurus 2H; Saham Mahatmya: Sagittarius 9H)
-    - FORENSIC_DATA_v8_0_SUPPLEMENT.md §1.3 (36-Saham full register)
+    - FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.2 (36-Saham full register; SUPPLEMENT integrated 2026-04-18)
     - V8_0_RECONCILIATION_REPORT.md §2 (7 L1 errors confirmed)
+  changelog:
+    - v1.2 2026-04-19: MSR.391c/391d citations corrected to MSR.391; corrective text removed per corpus cleanup.
 ---
 
 # Health & Longevity Domain Report — Abhisek Mohanty (v1.1)
@@ -84,7 +86,7 @@ The full ToC is in v1.0. The v1.1 additive and corrective sections are:
 
 **SUPERSEDES §6.5 of v1.0 in its entirety.**
 
-**Correction statement.** Saham Roga (the disease-focus Tajika sensitive point) does NOT fall in Libra 7H. The v8.0 JH export (JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2, FORENSIC_DATA_v8_0_SUPPLEMENT.md §1.3) establishes:
+**Correction statement.** Saham Roga (the disease-focus Tajika sensitive point) does NOT fall in Libra 7H. The v8.0 JH export (JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2, FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.2) establishes:
 
 > **Roga Saham: Taurus 2H (18°32'), nakshatra span Mrigashira-Krittika**
 
@@ -138,7 +140,7 @@ Conversely, sustained activity that violates dharmic alignment (shortcuts, disho
 
 **Purva Ashadha nakshatra (Venus-ruled).** The Mahatmya Saham at Purva Ashadha adds Venus's invincibility quality ("the undefeated one" — Purva Ashadha's classical attribute) to the dharmic-eminence domain. Venus as nakshatra lord for the Mahatmya Saham introduces a refinement: the native's eminence is achieved through an unconquerable dharmic dedication — not through physical conquest (Mars) but through sustained philosophical-artistic-spiritual commitment (Venus). The health-resonance: Venus's gentle-beauty quality in the 9H moderates Jupiter's expansive fire, creating a constitutionally sustaining eminence-mode that is less physically demanding than pure Mars-style achievement.
 
-**MSR citation.** This finding is registered in MSR_v2_0.md as a cross-domain saham finding. The UCN_v3_0.md §XIX integrates Mahatmya Saham 9H into the Ketu MD reframe (the dharmic eminence peak that Ketu MD may deliver is supported by Jupiter's natal 9H and Mahatmya Saham's 9H alignment).
+**MSR citation.** This finding is registered in MSR_v2_0.md as a cross-domain saham finding. The UCN_v4_0.md Part IV §XIX integrates Mahatmya Saham 9H into the Ketu MD reframe (the dharmic eminence peak that Ketu MD may deliver is supported by Jupiter's natal 9H and Mahatmya Saham's 9H alignment).
 
 **Practical health implication.** Add to the behavioral health interventions (Part IV): dharmic vocational alignment as a health practice. The native should treat professional decisions that compromise dharma as health risks, not merely ethical risks. The architectural signal is unambiguous: this chart's health reserve is recharged by dharmic activity (9H/Jupiter/Mahatmya Saham) and depleted by dharmic deviation. This is the previously missing dimension of the health report's intervention framework.
 
@@ -332,10 +334,10 @@ The following v1.0 sections carry forward without change into v1.1:
 
 1. JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2 — Saham register: Roga (Taurus 2H), Mahatmya (Sagittarius 9H)
 2. JHORA_TRANSCRIPTION_v8_0_SOURCE.md §10.7 — Kalachakra Paramayush 85 years, Savya scheme
-3. FORENSIC_DATA_v8_0_SUPPLEMENT.md §1.3 — 36-Saham full register confirming both corrections
+3. FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.2 — 36-Saham full register confirming both corrections (SUPPLEMENT integrated 2026-04-18)
 4. V8_0_RECONCILIATION_REPORT.md §2 — 7 L1 errors itemized; Roga Saham error confirmed as material
-5. MSR_v2_0.md §IV (Roga/Mahatmya Saham correction signals MSR.391c, MSR.391d)
-6. UCN_v3_0.md §XVII — 7H revised to five-layer composition (no Roga Saham)
+5. MSR_v2_0.md §IV (Roga/Mahatmya Saham correction signals MSR.391)
+6. UCN_v4_0.md Part IV §XVII — 7H revised to five-layer composition (no Roga Saham)
 7. REPORT_HEALTH_LONGEVITY_v1_0.md — base document; all carry-forward content sourced here
 
 ---
@@ -371,4 +373,4 @@ The v1.1 Health & Longevity Report has clarified two dimensions that v1.0 mapped
 ---
 
 *REPORT_HEALTH_LONGEVITY_v1_1.md — AM-JIS FIX_SESSION_003 — 2026-04-18*
-*Parent: UCN_v3_0.md — MSR source: MSR_v2_0.md — L1 source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md*
+*Parent: UCN_v4_0.md — MSR source: MSR_v2_0.md — L1 source: FORENSIC_ASTROLOGICAL_DATA_v8_0.md (incorporates JHORA_TRANSCRIPTION_v8_0_SOURCE)*

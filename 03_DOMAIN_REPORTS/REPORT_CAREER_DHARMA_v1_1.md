@@ -138,7 +138,7 @@ red_team_status: Pending (to be incorporated in Session 18 red-team pass)
 
 ## §1. Cover and Report Scope
 
-This is the Career and Dharma Domain Report for Abhisek Mohanty, born February 5, 1984 at 10:43 IST in Bhubaneswar, Odisha, India. It is derived from the full AM-JIS analytical corpus: the L1 Facts Layer (v6.0 and v7.0 supplement), the L2 Mode B exhaustive matrices (Houses, Planets, Signs, Divisionals, Dasha-Periods), the L2.5 Holistic Synthesis Layer (Chart Graph Model, Master Signal Register with 420 signals, Cross-Domain Linkage Matrix, Resonance Map), and the Unified Chart Narrative (UCN_v1_0.md, 31,000 words, Sessions 14–15). Every significant claim in this report carries a parenthetical reference traceable to its source in this corpus.
+This is the Career and Dharma Domain Report for Abhisek Mohanty, born February 5, 1984 at 10:43 IST in Bhubaneswar, Odisha, India. It is derived from the full AM-JIS analytical corpus: the L1 Facts Layer (FORENSIC_ASTROLOGICAL_DATA_v8_0.md, unified canonical), the L2 Mode B exhaustive matrices (Houses, Planets, Signs, Divisionals, Dasha-Periods), the L2.5 Holistic Synthesis Layer (CGM_v2_0, MSR_v2_0 with 500 signals, CDLM_v1_1, RM_v2_0), and the Unified Chart Narrative (UCN_v4_0.md — canonical merged UCN incorporating v1.0–v3.0). Every significant claim in this report carries a parenthetical reference traceable to its source in this corpus.
 
 **The report's scope**: career, vocation, dharmic purpose, professional identity, institutional positioning, and the relationship between intellectual mission and material achievement. Career in this context means the tenth house and its entire classical web: its tenants (Sun, Mercury), its lord (Saturn), its Arudha (AL = Capricorn 10H), its divisional confirmation (D10 Dashamsha), its dasha activation (Mercury MD, Saturn AD), and its cross-domain linkages (Career feeds Wealth at 0.92; Career amplifies Mind at 0.94; Career constrains Health at 0.71).
 
@@ -172,7 +172,7 @@ The current moment (April 2026) falls squarely within Saturn AD (2024–2027) �
 
 ## §3. How to Read This Report
 
-This report assumes the reader has access to the UCN_v1_0.md as its parent document. Where this report provides focused career-domain depth, the UCN provides the whole-chart context from which that depth must be read. If any section of this report appears to conflict with the UCN's analysis, the UCN governs (Architecture §G.5 constraint: "No Domain Report may contradict UCN without explicit flag-and-resolve").
+This report assumes the reader has access to UCN_v4_0.md (canonical merged UCN) as its parent document. Where this report provides focused career-domain depth, the UCN provides the whole-chart context from which that depth must be read. If any section of this report appears to conflict with the UCN's analysis, the UCN governs (Architecture §G.5 constraint: "No Domain Report may contradict UCN without explicit flag-and-resolve").
 
 The report is written for two simultaneous audiences: the native reading reflectively about his own life trajectory, and a classical Jyotish acharya reviewing the analytical work. Both should find it useful. The native will recognize events and patterns from his biography; the acharya will be able to trace every finding to its classical-chart source.
 
