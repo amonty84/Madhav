@@ -79,7 +79,7 @@ When both channels are active simultaneously (high-quality partnerships in dharm
 
 **CDLM D1.D2 and D2.D1**: The Career↔Wealth linkage (0.92/0.88) is now understood as flowing through BOTH channels: Saturn AmK (career planet) + Shree Lagna (wealth-Lakshmi) are in the same house (7H). Career and Lakshmi-wealth share a house. The CDLM linkage strength is reinforced.
 
-MSR reference: MSR.391 (v2.0 corrected), UCN_v3_0 §XVII
+MSR reference: MSR.391 (v2.0 corrected), UCN_v4_0 Part IV §XVII
 
 ---
 
@@ -162,7 +162,7 @@ JH v8.0 Bhava Bala rankings:
 - 7H: rank 12 (weakest) — CONFIRMED by JH
 - 2H: rank 11 (second weakest) — CONFIRMED by JH
 
-The 7H contains Shree Lagna (Lakshmi's seat) in the chart's weakest house — this is the 7H paradox (UCN §IX, UCN_v3_0 §XVII.5). The Lakshmi-channel requires active maintenance precisely because the structural container is weakest.
+The 7H contains Shree Lagna (Lakshmi's seat) in the chart's weakest house — this is the 7H paradox (UCN §IX, UCN_v4_0 Part IV §XVII.5). The Lakshmi-channel requires active maintenance precisely because the structural container is weakest.
 
 For wealth: the Roga Saham in 2H Taurus (second-weakest house by Bhavabala) means health challenges (when they arise) manifest in the 2H domain — speech overuse, accumulated-wealth stress, family financial pressure. These can create financial drag when 2H is stressed.
 
