@@ -20,10 +20,10 @@ export function useBranches(conversationId: string | undefined) {
 
   // Clear all branch state whenever we switch conversations.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    /* eslint-disable react-hooks/set-state-in-effect -- reset branch UI when switching chats */
     setBranches({})
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setViewing(null)
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [conversationId])
 
   const archiveBranch = useCallback((editId: string, snapshot: UIMessage[]) => {

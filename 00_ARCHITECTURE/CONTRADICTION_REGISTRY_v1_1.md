@@ -80,19 +80,15 @@ The corpus contains ~700,000 words across 40+ artifacts. This registry tracks:
 
 ---
 
-## §3 — OPEN CONTRADICTIONS
+## §3 — RESOLVED COMPUTATIONAL CONTRADICTIONS
 
-*(Carried forward from v1.0 with status updates.)*
+### §3.1 — BB Progression Method — **RESOLVED (2026-04-19)**
 
-### §3.1 — BB Progression Method
+**Prior tension**: A naive 1°/year × 42 year sketch disagreed with narrative placing BB-related activation in the Gemini 3H zone at ~age 42.
 
-**Claim A**: BB progresses 1° per year from natal Libra 8°04'.
+**Resolution**: AM-JIS adopts **6°/year** longitudinal progression for Bhrigu Bindu **documentation purposes** per **FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F**, encoded in **MSR_v2_0 §MSR.404** supporting_rules. The **Gemini 3H crystallization thesis** does not rest on a single simplified BB longitude extrapolation: it is anchored by **UL + A5 + A11 + Hora Lagna (JH-confirmed in Gemini 3H)** co-loading — independent of elementary BB arithmetic.
 
-**Claim B**: At age 42, BB reaches Gemini 3H (MSR.404).
-
-**Contradiction**: 1° per year for 42 years ≠ Gemini (would yield Sagittarius ~20°).
-
-**Status**: OPEN. MSR v2.0 documents this as a methodological gap. The BB progression calculation requires explicit method documentation in MSR or CDLM. Does not change the substantive finding (BB activation around age 42) but the precise sign of BB's progressed position needs documentation. [No change in status from v1.0]
+**Status**: CLOSED. See MSR.404 falsifier + supporting_rules update (same date).
 
 ---
 

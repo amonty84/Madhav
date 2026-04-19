@@ -1,32 +1,41 @@
 ---
-artifact: UCN_v1_0.md
-artifact_type: Unified Chart Narrative — Mother Document
+artifact: UCN_v4_0.md
+artifact_type: Unified Chart Narrative — Canonical Mother Document (single-file)
 layer: L2.5 — Holistic Synthesis
-version: 1.0
-status: SUPERSEDED (standalone reading superseded by UCN_v4_0.md — 2026-04-19 merge)
-date_opened: 2026-04-18
-session_parts_I_V: 14
-session_parts_VI_X: 15
+version: 4.0
+status: CURRENT
+date_closed: 2026-04-19
+session: UCN_v4_0_MERGE_SESSION
 native: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
-parent_artifacts: [MSR_v1_0.md, CDLM_v1_0.md, RM_v1_0.md, CGM_v1_0.md]
-feeds_into: [All L3 Domain Reports, L4 Query Interface]
-total_parts: 10
-parts_complete: I, II, III, IV, V
-parts_pending: VI, VII, VIII, IX, X
-governing_principle: >
-  This document reads the chart as a single living organism. Every Part
-  references other Parts; nothing is isolated. Career threads through the
-  Dharmic-Material Engine, the Authority-Through-Tension Pattern, and the
-  Timing Metaphysics. Relationships thread through the Relational Web, the
-  Soul-Trajectory, and the Contradictions. No Part stands alone.
-citation_requirement: >
-  Every L3 Domain Report must cite this document as parent. No Domain Report
-  may contradict the UCN without an explicit flag-and-resolve entry.
-quality_standard: >
-  Acharya-grade. An independent senior Jyotish reviewer should reach:
-  "this is my own level", "this is above my own level", or "this reveals
-  things I would not have seen on first pass".
+supersedes_reading_sequence: [UCN_v1_0.md, UCN_v1_1.md, UCN_v2_0.md, UCN_v3_0.md]
+parent_lineage: MSR_v2_0.md, CDLM_v1_1.md, RM_v2_0.md, CGM_v2_0.md, FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+scope: >-
+  Single canonical linear document merging UCN v1.0–v3.0 in additive order.
+  Part IV (ex-v3.0) overrides Parts I–III where topics overlap (v8.0 JH-authoritative corrections).
+composition_note: >-
+  Prior standalone files remain in-repo as archival slices; new L3 citations should use **UCN_v4_0.md**.
+quality_standard: Acharya-grade unified narrative per PROJECT_ARCHITECTURE_v2_1 §C.3.
 ---
+
+# UCN v4.0 — Unified Chart Narrative (Canonical)
+
+## §0 — HOW TO READ THIS DOCUMENT
+
+**UCN v4.0** replaces the four-file reading sequence. Content is merged in this order: **Part I** (base) → **Part II** (Jupiter corrections) → **Part III** (additive v2.0 concepts) → **Part IV** (v8.0 reconciliation from former v3.0).
+
+**Precedence:** On conflicting claims, **Part IV wins**, then Part III, then Part II, then Part I.
+
+**v8.0 alignment:** Special lagnas, sahams, and Lakshmi/Shree routing follow **FORENSIC_ASTROLOGICAL_DATA_v8_0.md** and **JHORA_TRANSCRIPTION_v8_0_SOURCE.md**.
+
+---
+
+
+
+---
+
+## PART I — BASE NARRATIVE (UCN v1.0, Sessions 14–15)
+
+*Former artifact: `UCN_v1_0.md`. Sections below retain historical gaps in frontmatter where uncorrected; Part IV overrides on v8.0 topics.*
 
 # Unified Chart Narrative — Abhisek Mohanty
 ## `UCN_v1_0.md` — The Mother Document
@@ -942,3 +951,1144 @@ quality_assessment: >
 changelog:
   - v1.0 (2026-04-18): initial build, Parts I-V in Session 14, Parts VI-X in Session 15. CLOSED.
 ```
+
+
+---
+
+## PART II — JUPITER PLACEMENT CORRECTIONS (UCN v1.1, FIX_SESSION_001)
+
+*Former artifact: `UCN_v1_1.md`.*
+
+# UCN_v1_1 — Unified Chart Narrative (Revision 1.1)
+## Abhisek Mohanty Jyotish Intelligence System
+### Session 21 | 2026-04-18 | CLOSED
+
+---
+
+## PREAMBLE — This Is a Revision Document, Not a Full Rewrite
+
+UCN v1.0 (Sessions 14-15, ~31,000 words, 10 Parts) remains the primary narrative document. This v1.1 revision supersedes v1.0 only in the specific sections enumerated below. All UCN v1.0 content not listed in §CHANGELOG continues to apply as originally written.
+
+**Why a revision rather than a rewrite**: The material error identified in the L2.5 red-team (RED_TEAM_L2_5_v1_0.md, Session 18) is architecturally significant but topically localized. Specifically, the error was a systematic misplacement of Jupiter in "Cancer 4H (exaltation)" throughout sections that touch Jupiter's physical placement and aspects. The majority of UCN v1.0's synthesis (Parts II, IV, V Lagna/7H/11H/12H architecture, VIII timing, X operating instructions) is unaffected.
+
+**Read this document alongside UCN v1.0.** The changelog points you to the specific sections that require v1.1 override.
+
+---
+
+## §CHANGELOG — Changes from v1.0 to v1.1
+
+### Material corrections (Jupiter placement error)
+
+| UCN §Reference | v1.0 Claim (DEPRECATED) | v1.1 Correction |
+|---|---|---|
+| §I.1 FS3 | "Jupiter exalted in Cancer 4H; aspects 8H, 10H, 12H" | **Jupiter in Sagittarius 9H (own sign); aspects 1H, 3H, 5H** |
+| §III.3 (health) | "Jupiter from 4H aspects 8H directly — longevity house protected" | **Jupiter from 9H aspects 1H (Lagna) via 5th special aspect — constitution protected; 8H receives no direct benefic aspect** |
+| §III.4 (4H psychological) | "Jupiter tenants 4H as sanctuary anchor" | **4H Cancer is untenanted; Jupiter exaltation sign is Cancer but Jupiter is not physically there; 4H's Jupiterian character operates through sign-lordship and Jupiter's 4H-exaltation-sign quality, not tenancy** |
+| §V.1 (7H) | "Jupiter from 4H aspects 10H career house" | **Jupiter from 9H does NOT aspect 10H directly; Sun/Mercury in 10H receive no Jupiter aspect** |
+| §V.1 (relational) | "Jupiter 4H aspects 10H — Mercury is blessed by Jupiter" | **Mercury in 10H is not blessed by Jupiter's direct aspect; Mercury's dignity derives from Vargottama + Yogi + Karakamsa lordship, not from Jupiter aspect** |
+| §VI.1 (12H/moksha) | "Jupiter from 4H aspects 12H moksha house" | **Jupiter from 9H does NOT aspect 12H; 12H's Jupiterian character operates through Jupiter's 12L lordship (Jupiter rules Pisces = 12H), not through planetary drishti** |
+| §V.6 (11H Moon) | "Jupiter 4H aspects 11H — Moon is blessed" | **Jupiter does NOT aspect 11H from 9H; Moon in 11H has no direct Jupiter-aspect; Moon's quality derives from Purva Bhadrapada (Jupiter-ruled nakshatra) and sign-lordship relationships** |
+| Foreign-Moksha (§VI.2) | "Jupiter 4H aspect on 12H enables foreign residence blessing" | **Foreign blessing derives from Jupiter's 12L ownership (Pisces = 12H) and Jupiter's placement in own-sign 9H (dharma trine), not from a direct aspect on 12H** |
+
+### §IX.2 Seven Contradictions — Correct-Response Audit (v1.0 content reviewed, no errors found; minor refinements added)
+
+| Contradiction # | v1.0 Correct-Response | v1.1 Audit Result |
+|---|---|---|
+| #1 Mercury MD is 6L and 10L | Deploy Mercury with boundary discipline | APPROVED — refined: add cognitive-load monitoring protocol |
+| #2 Moon AK in social gains house | Soul finds itself through fulfilled purposeful community | APPROVED |
+| #3 7H Bhavabala weakest, highest yoga | Tend 7H deliberately (Saturn-discipline) | APPROVED — reinforced by Relationships Report findings |
+| #4 Saturn delivers fortune (contradicting its malefic nature) | Treat pressure as resource | APPROVED |
+| #5 Jupiter 9L in own sign yet "weak" by some classical readings | Dharmic-alignment before optimization | APPROVED — clarified: "weak" is an overstatement; Jupiter in own sign is dignitied; the "weakness" is relative (Jupiter 5° from Moola gandanta, plus GK Chara role)  |
+| #6 Aries Lagna yet career in structured Capricorn 10H | Let Mars-drive serve Saturn-structure | APPROVED |
+| #7 Venus debilitated in D9 yet 2L+7L in D1 good dignity | Relationships require dharmic framing (9H Venus); D9 debilitation flags partnership structural effort required | APPROVED — reinforced by GAP.02b (D9 Venus Virgo debilitation) finding |
+
+### Gap register update
+
+**New gaps discovered in Sessions 19-20**:
+- **GAP.02b**: D9 Venus = Virgo (debilitation of 7L in marriage chart) — material for Relationships domain
+- **GAP.02c**: D9 Saturn = Aries (debilitation of primary 7H tenant in marriage chart) — material for Relationships domain
+- **GAP.02d**: D9 Moon = Gemini (Mercury's sign); would reinforce Karakamsa-Mercury alignment at Navamsa level — material for Psychology/Mind and Spiritual domains
+
+**All three gaps require Jagannatha Hora export verification before v2.0 UCN build.**
+
+---
+
+## §I.1 FS3 — FOUNDATION SIGNATURE 3: CORRECTED
+
+*(Supersedes UCN v1.0 §I.1 FS3 in full.)*
+
+### FS3 — The Dharma-to-Moksha Trajectory
+
+The third Foundation Signature articulates the chart's long-range karmic direction: the trajectory from dharmic establishment (Mercury MD, Saturn AD) through institutionalization (Saturn AD) to eventual moksha-orientation (Ketu MD 2031-2038).
+
+**Architectural anchors (corrected)**:
+
+1. **Jupiter in Sagittarius 9H (own sign)**: Jupiter, the Guru and dharma significator, resides in its own sign in the 9th house (dharma trine). This is the highest dignity placement for Jupiter — greater than exaltation, since own-sign rulership carries structural authority that exaltation (Cancer for Jupiter) carries only as receptivity. Jupiter's own-sign placement in the 9H means the dharma lord is structurally empowered in the dharma house.
+
+2. **Jupiter's aspects from 9H**: Jupiter casts three aspects:
+   - **5th special aspect → 1H Aries (Lagna)**: Jupiter's dharmic benediction on the identity-body; the Lagna receives Jupiter's wisdom-expansion principle directly.
+   - **7th full aspect → 3H Gemini (UL house)**: Jupiter's dharmic benediction on the partnership-image domain; the UL receives Jupiter's expansive blessing on how the partnership appears in the world.
+   - **9th special aspect → 5H Leo (creativity/children/buddhi)**: Jupiter's dharmic benediction on intelligence, creativity, and progeny; the 5H receives Jupiter's philosophical depth-quality.
+
+3. **What Jupiter does NOT aspect from 9H**: Jupiter's aspect pattern from 9H does NOT include 4H, 8H, 10H, or 12H. The v1.0 claims that "Jupiter aspects the longevity house (8H)," "Jupiter blesses Mercury in 10H," and "Jupiter aspects 12H for foreign blessing" were all consequences of the v1.0 Jupiter-in-4H placement error. In the corrected architecture:
+   - **8H (Scorpio)**: Receives Rahu's 7th aspect from Taurus 2H, Saturn's 10th special aspect from Libra 7H (not from Jupiter), and Ketu's physical tenancy. 8H has no direct benefic aspect.
+   - **10H (Capricorn)**: Receives Mars's 4th special aspect from Libra 7H. Sun and Mercury in 10H derive their dignity from their own placements (Sun Shadbala rank 1 from Dig Bala; Mercury Vargottama + Yogi), not from any Jupiter aspect.
+   - **12H (Pisces)**: Receives Ketu's 5th aspect from Scorpio 8H and no direct benefic aspect. 12H's Jupiterian character operates through Jupiter's lordship of Pisces (Jupiter as 12L), not through Jupiter's planetary drishti.
+
+4. **Jupiter's 9H tenancy with Venus**: Jupiter shares the 9H with Venus (19°10' Purva Ashadha Pada 2). Venus in Jupiter's sign (Sagittarius) + Jupiter in own sign = mutual planetary support through sign-lordship: Venus is hosted by Jupiter's sign; Jupiter's sign is honored by Venus's presence. This is the 9H's dharmic-aesthetic convergence.
+
+5. **Revised dharma-to-moksha trajectory**: The 9H (Jupiter + Venus) is the dharmic pivot; the 12H (Pisces, Jupiter-ruled, untenanted) is the moksha pivot. The structural connection between dharma (9H) and moksha (12H) is via Jupiter's lordship — Jupiter rules both Sagittarius (9H) and Pisces (12H). When Jupiter operates at maximum authority (current Mercury MD's Jupiter AD was the 2022-2024 dharmic-pivot; the Ketu MD 2031-2038 will reactivate Jupiter's 9L-12L through Ketu's moksha-orientation), the dharma-to-moksha bridge is maximally active.
+
+**What this correction preserves from v1.0**:
+
+- The dharma-to-moksha trajectory as FS3 ✓
+- Jupiter as the dharmic authorizer ✓
+- The Vishnu-Venkateshwara devata orientation ✓ (MSR.397)
+- The Ketu MD as scheduled moksha-turn ✓
+- The "Build to Offer, Not to Own" operating instruction ✓
+
+**What this correction adjusts from v1.0**:
+
+- Jupiter's architectural reach via drishti is different (1H, 3H, 5H — not 8H, 10H, 12H)
+- The 4H is not a Jupiter-tenanted sanctuary; it is an untenanted Cancer (Jupiter's exaltation sign) governed by Moon in 11H
+- The 8H longevity and 12H moksha houses do not receive direct Jupiter aspects; their Jupiterian quality derives from Jupiter's 12L lordship and the chart's overall architecture, not planetary drishti
+
+---
+
+## §III.3 — THE HEALTH KARMA AND LONGEVITY ARCHITECTURE: CORRECTED
+
+*(Supersedes UCN v1.0 §III.3.)*
+
+### The corrected longevity picture
+
+The v1.0 claim — "Jupiter from 4H aspects 8H (Ketu + longevity house) with triple aspects; the most auspicious planet gazes on the longevity house directly" — was false. Jupiter does not aspect the 8H from 9H (Jupiter's actual placement). The 8H's aspect-picture is therefore significantly less benefic-dense than v1.0 claimed.
+
+**Corrected 8H aspect-picture**:
+- **Ketu physically in 8H** (Scorpio 19°01' Jyeshtha Pada 1)
+- **Rahu's 7th aspect from 2H** onto Ketu axis in 8H
+- **Saturn's 10th special aspect from 7H** onto 8H (Libra → Cancer per §16.1 `ASP.G.SATURN`: Saturn 10th aspect = Cancer, which is 4H not 8H; so Saturn's 10th aspect reaches 4H Cancer, not 8H. Saturn does NOT aspect 8H directly. The v1.0 claim that Saturn-aspect on 8H is incorrect; Saturn's 10th aspect targets Cancer = 4H per the Sign count)
+- **No direct benefic aspect on 8H**
+
+This is a significantly less protected longevity picture than v1.0 indicated. The longevity house receives only nodal aspect (Rahu-Ketu axis cross-aspect) and no direct benefic planetary aspect.
+
+**What Jupiter DOES protect from 9H**:
+- **1H Lagna (constitution)**: Jupiter's 5th special aspect directly protects the identity-body. This is a genuine and significant protective configuration — but for the container (1H), not for the longevity house (8H).
+- **3H (UL house, communication, effort)**: Jupiter's 7th aspect blesses the partnership-image and effort/communication domain.
+- **5H (creativity, children, buddhi)**: Jupiter's 9th special aspect blesses the intelligence-discrimination faculty.
+
+**Corrected longevity assessment**: The chart does NOT have a "Jupiter-protected longevity house" as v1.0 claimed. The longevity picture is architecturally more reliant on Lagna-constitution protection (where Jupiter does aspect) than on 8H protection (where no benefic aspect reaches). This is why the REPORT_HEALTH_LONGEVITY_v1_0.md (Session 18) emphasized Lagna-level vitality and constitution as the primary longevity mechanism rather than 8H-tenant quality.
+
+**Longevity operating principle (revised)**:
+- Protect the Lagna (1H) as the primary longevity strategy (constitution-maintenance, Vata-Pitta balance, Saturn-discipline preserving physical frame)
+- Do not rely on 8H-Jupiter protection that does not architecturally exist
+- The 8H (Ketu + longevity) is protected only by the nodal axis and by the chart's absence of malefic war/combustion, not by Jupiter's direct aspect
+
+---
+
+## §III.4 — THE 4H PSYCHOLOGICAL SANCTUARY: CORRECTED
+
+*(Supersedes UCN v1.0 §III.4.)*
+
+### Corrected reading of the 4H
+
+The v1.0 claim — "Jupiter tenants 4H as a sanctuary anchor; the inner home is Jupiter's domain" — was false on the tenancy side. Jupiter is not in 4H physically. The 4H (Cancer) is untenanted in D1.
+
+**Corrected 4H architecture**:
+- **4H Cancer**: Untenanted in D1
+- **4H lord**: Moon (Cancer's ruler), positioned in 11H Aquarius (Purva Bhadrapada Pada 3)
+- **Jupiter's relationship to 4H**: Jupiter exalts in Cancer — Cancer is Jupiter's exaltation sign. However, Jupiter is not physically in Cancer. Therefore:
+   - Transits through Cancer (4H) activate Jupiter's exaltation energy
+   - Planets transiting Cancer encounter a Jupiter-exalted environmental quality in the native's 4H domain
+   - The 4H's highest expression is Jupiter-calibrated (wise, expansive, nurturing, dharmic) even though Jupiter is not present
+- **Mandi in 4H**: Upagraha Mandi (Saturn's sub-point) is at Cancer 14°13' (FORENSIC §11.5, `HAZ.MANDI`). The 4H has a Saturn-Mandi background challenge — a subtle, background-level disturbance in the emotional-security domain.
+- **Mercury's 7th aspect on 4H** (from 10H Capricorn): Mercury aspects 4H from the career house with a 7th full aspect. The analytical mind casts its discipline-structured quality onto the emotional-sanctuary domain. The 4H's character is therefore co-shaped by Moon (lord from 11H) + Mandi (Saturn-shadow in residence) + Mercury (7th aspect from 10H) + Jupiter's exaltation-sign-quality as environmental backdrop.
+
+**Corrected psychological implication**: The inner sanctuary is not a warm, Jupiter-tenanted home domain. It is:
+- Moon-governed from a distance (Moon in 11H Aquarius — the sanctuary's lord is in the social-community house, indicating the native's inner foundation is nourished by intellectual community rather than domestic isolation)
+- Disturbed at background level by Mandi's Saturn-shadow
+- Structurally disciplined by Mercury's 7th aspect from 10H (the analytical mind enters the sanctuary and structures it)
+- Potentially elevated to Jupiter-exaltation quality when transits activate Cancer (visiting planets experience Jupiter's exaltation through sign-lordship)
+
+This corrected 4H reading is less warm than v1.0 suggested — the inner sanctuary is architecturally a Moon-Mercury-Saturn complex rather than a Jupiter-cushioned domestic harbor. The practical implication: the native's emotional foundation is built through intellectual community (Moon in 11H), structural discipline (Mercury 7th aspect), and acknowledgment of the Mandi background (a slight chronic undertone of emotional friction in domestic space) — not through a conventional warm-home sanctuary.
+
+---
+
+## §V.1 — THE 7H KARMIC VORTEX: CORRECTED JUPITER REFERENCES
+
+*(Selective corrections to UCN v1.0 §V.1; primary 7H content remains.)*
+
+The 7H (Libra) architecture established in v1.0 — Saturn exalted AmK + Mars (Lagna lord, Avayogi, PK) + BB + HL + Saham Roga + Saham Mahatmya — is unchanged. The Sasha Mahapurusha Yoga, ATT pattern, and six-layer convergence (MSR.391) are unchanged.
+
+**v1.0 Jupiter-aspect claims on 7H that require correction**:
+- v1.0 referenced "Jupiter's aspect from 4H on 10H" as part of the Mercury-blessing architecture linked to the 7H's relational-career integration. This aspect does not exist. Mercury's 10H dignity does NOT derive from Jupiter's aspect.
+- Instead, the corrected architecture: Mercury's 10H dignity derives from (a) Vargottama, (b) Yogi Planet designation, (c) Karakamsa-sign lordship, (d) KP cusp 11 sub-lord, (e) Uttara Ashadha nakshatra (Sun-ruled, giving Sun-Mercury cross-connection through 10H co-tenancy). Mercury is the Seven-System Convergence (MSR.413, 0.98) — and this cross-system designation does NOT include any Jupiter-aspect component.
+
+**The corrected Mercury support architecture**: Mercury is maximally supported by seven independent classical systems, none of which is a direct Jupiter aspect. Mercury stands on its own dignity in 10H without needing Jupiter's external benediction — which is itself architecturally significant. The chart's primary instrument does not require dharmic planetary reinforcement from aspect; it is architecturally self-standing through its multi-system designation.
+
+---
+
+## §VI.1 — FOREIGN/MOKSHA SIGNATURE: CORRECTED
+
+*(Supersedes UCN v1.0 §VI.1 claims about Jupiter aspects on 12H.)*
+
+### Corrected 12H architecture
+
+v1.0 claimed "Jupiter from 4H aspects 12H — the most auspicious planet gazes on the moksha house, blessing the foreign residence with dharmic authorization." This is false by aspect architecture. Jupiter does not aspect 12H from 9H.
+
+**Corrected 12H architecture**:
+- **12H Pisces**: Untenanted
+- **12H lord**: Jupiter (Pisces's ruler), positioned in 9H Sagittarius (own sign)
+- **Jupiter's relationship to 12H**: Jupiter rules Pisces (12L). Jupiter does NOT aspect 12H from 9H via any drishti. But Jupiter's lordship of 12H means Jupiter is structurally the 12L — the planet that governs the foreign/moksha/release domain from a distance.
+- **Ketu's 5th aspect on 12H** (from 8H Scorpio → 12H Pisces): Ketu's 5th special aspect reaches 12H. This is the moksha-karaka (Ketu) aspecting the moksha house. Ketu's 5th aspect + Jupiter's 12L lordship = the only direct aspect on 12H is Ketu's (spiritual/release karaka) and the only planetary governance of 12H is Jupiter's (dharma lord ruling from 9H own sign).
+
+**Corrected foreign/moksha reading**: The foreign blessing is architecturally valid but its mechanism is revised:
+- NOT through Jupiter's direct aspect on 12H (this was the v1.0 error)
+- YES through Jupiter's 12L ownership from the 9H own-sign position (Jupiter ruling 12H from its dharmic throne)
+- YES through the Shree Lagna in 9H (fortune's lagna in dharma trine + Jupiter's own-sign placement = Lakshmi Yoga's dharma-fortune anchor)
+- YES through Ketu's 5th aspect on 12H (moksha-significator directly blessing moksha-house)
+- YES through Venus 2L in 9H (wealth-lord in dharma trine, supported by Jupiter-sign)
+
+The foreign/moksha picture is architecturally real but operates through lordship and through Ketu's aspect, not through Jupiter's direct drishti. The practical implication is unchanged: Singapore-as-dharmic-base remains chart-congruent; the mechanism is revised from "Jupiter-aspect on 12H" to "Jupiter-ownership of 12H from own-sign 9H + Ketu's 5th aspect on 12H + the 2H-8H Rahu-Ketu axis as the transformation polarity enabling foreign residence."
+
+---
+
+## §V.6 — 11H AK SOCIAL ECOSYSTEM: CORRECTED
+
+*(Minor correction to UCN v1.0 §V.6 — Jupiter aspect on 11H.)*
+
+v1.0 referenced "Jupiter's aspect from 4H on 11H" as part of the Moon-AK blessing architecture. This aspect does not exist. Moon AK in 11H has no direct Jupiter aspect from Jupiter's actual 9H position.
+
+**Corrected Moon-AK support architecture**:
+- Moon's nakshatra = Purva Bhadrapada (Jupiter-ruled). The Moon's dignity is supported by Jupiter through nakshatra-rulership, not through direct drishti.
+- Moon is in Aquarius (Saturn's own sign). Saturn's 7th aspect on Moon reaches Leo (5H), not Aquarius (11H). Saturn does not aspect Moon directly.
+- Moon's Jaimini Rashi Drishti: Aquarius (fixed sign) aspects Aries + Cancer + Libra (Taurus-Cancer-Libra is the fixed-sign aspect pattern for Aquarius). So Moon from Aquarius 11H Jaimini-aspects 1H (Aries), 4H (Cancer), and 7H (Libra).
+- Moon's support therefore derives from: (a) Jupiter-ruled nakshatra lordship (Purva Bhadrapada), (b) Saturn-ruled sign lordship (Aquarius), (c) its own AK designation (soul's primary planet), (d) A7 co-location in same sign = soul-partnership alignment, (e) Jaimini aspects to 1H/4H/7H forming the Lagna-Home-Relational triangle.
+
+**What this does NOT change**: Moon AK as soul, Purva Bhadrapada's intense-transformational character, the Aquarian community-orientation, the A7-AK soul-partnership alignment — all of these remain architecturally unchanged.
+
+---
+
+## §IX.2 — SEVEN CONTRADICTIONS CORRECT-RESPONSES: AUDITED
+
+*(Supplements UCN v1.0 §IX.2 with audit-verified refinements.)*
+
+### Audit Result Summary
+
+All seven contradictions' correct-responses in UCN v1.0 §IX.2 are APPROVED post-audit. The following refinements strengthen specific operating instructions without superseding the v1.0 responses:
+
+**Contradiction #1 — Mercury MD is both 6L and 10L**
+
+v1.0 Correct-Response: "Deploy Mercury with boundary discipline — use the 10L function (career excellence) while managing the 6L function (disease/service)."
+
+v1.1 Refinement: **Add cognitive-load monitoring protocol.** Specifically — monitor three signals of 6L activation: (a) persistent mental agitation without situational cause; (b) difficulty with focus in tasks that were previously easy; (c) early anxiety signals (subtle, not acute) before they escalate to somatic expression. The January 2021 episode (LEL EVT.2021.01.XX.01) provides the empirical template: Rahu AD / Mercury PD amplified 6L to the Vata-anxiety threshold. Future periods with Mercury-6L activation (Ketu AD 2027-2028 in Mercury MD, all future Mercury transits through 6H or aspecting 6H) require the monitoring protocol active.
+
+**Contradiction #2 — Moon AK in social gains house (11H)**
+
+v1.0 Correct-Response: "The soul finds itself through fulfilled purposeful community, not through private contemplation alone."
+
+v1.1 Refinement: **Specify the community character.** The 11H Aquarian community is not any community. It is: intelligent, principled, structurally-oriented, purpose-driven, long-term-committed. Casual social engagement does not nourish the Moon-AK in 11H — the casual-social signal is below the soul-resolution threshold. Purposeful community engagement is required to activate the AK-11H fulfillment mechanism.
+
+**Contradiction #3 — 7H Bhavabala weakest, highest yoga density**
+
+v1.0 Correct-Response: "Tend 7H deliberately with Saturn-discipline; yogas do not self-deliver in a Bhavabala-weak house."
+
+v1.1 Refinement: **Reinforced by Relationships Report findings.** The REPORT_RELATIONSHIPS_v1_0.md (Session 19) operationalized this contradiction into specific behavioral protocols: the BB-UL 2026 engagement protocol, the dharmic relational frame, and the Mercury-UL operating instructions. The v1.0 correct-response is APPROVED with the domain report providing the operational expansion.
+
+**Contradiction #4 — Saturn delivers fortune despite being a malefic**
+
+v1.0 Correct-Response: "Treat pressure as resource — Saturn's pressure is the delivery mechanism, not an obstacle to delivery."
+
+v1.1 Refinement: **APPROVED without change.** The Career Domain Report (Session 16) and Financial Domain Report (Session 17) both validate this principle empirically through the Sade Sati Paradox retrodiction (5 highest-stakes career/financial events occurred during the classical "adversity" period).
+
+**Contradiction #5 — Jupiter 9L in own sign yet labeled "weak" by some classical readings**
+
+v1.0 Correct-Response: "Dharmic-alignment before optimization — the dharma lord's full expression requires dharmic contextualization of all efforts."
+
+v1.1 Clarification: **The "weakness" is relative, not absolute.** Jupiter in own sign Sagittarius is dignified (own-sign strength is very high, classically equivalent to approximately 75% of exaltation strength). The "weak Jupiter" framing in some classical readings derives from:
+- Jupiter at 9°48' Moola (gandanta-proximal, though not in gandanta proper — gandanta is 0°-3°20' of Sagittarius; Jupiter at 9°48' is outside gandanta)
+- Jupiter's Chara Karaka role = GK (Gnatikaraka = rivals/obstacles), which classically connotes a "challenged" karaka designation even though sign-dignity is strong
+- Jupiter in Moola nakshatra (Ketu-ruled, transformational), giving Jupiter a destructive-transformational undercurrent even in own sign
+
+The v1.0 correct-response stands: dharmic alignment precedes optimization. The v1.1 refinement: the apparent "weakness" is more accurately described as a dharma-with-transformation quality (Moola's Ketu-ruled Jupiter) rather than actual planetary weakness.
+
+**Contradiction #6 — Aries Lagna yet career in structured Capricorn 10H**
+
+v1.0 Correct-Response: "Let Mars-drive serve Saturn-structure — the Aries initiative is architecturally channeled through Saturn's career house."
+
+v1.1 Refinement: **APPROVED. Reinforced by Psychology/Mind Report (Session 20) Three-Layer Mind Architecture.** The v1.0 response is elaborated at the psychological level in the D8 report's integration challenge: Layer 1 (Aries Lagna Mars-urgency) serving Layer 3 (Capricorn Mercury analytical structure) via Layer 2 (Aquarian Moon's Saturnian integration).
+
+**Contradiction #7 — Venus debilitated in D9 yet 2L+7L with good D1 dignity**
+
+v1.0 Correct-Response: "Relationships require dharmic framing (Venus in 9H) — the D9 debilitation flags that partnership requires explicit structural effort, not default manifestation."
+
+v1.1 Reinforcement: **Strengthened by GAP.02b (D9 Venus Virgo confirmation) and GAP.02c (D9 Saturn Aries debilitation) findings.** Two D9 debilitations (Venus + Saturn) in the relational axis confirm v1.0's correct-response: the relational domain's D1 strength does not self-deliver at the D9 marriage-chart level. Active dharmic framing + Saturn-structural discipline + Mercury-UL operating protocol are required to convert D1 potential into D9 manifestation. Without this active investment, D9 debilitations dominate.
+
+---
+
+## §KNOWN GAPS v1.1 REGISTER
+
+**Gaps resolved**:
+- None resolved in v1.1 revision (all require external computation from Jagannatha Hora)
+
+**Gaps unchanged from v1.0**:
+- GAP.01: Birth Yoga (MSR.354) unverified — v6.0 §9 unread
+- GAP.02: D9 Jupiter placement unverified (CSI suggests Gemini, pending verification)
+- GAP.03: D9 12H stellium composition unverified
+- LONGEVITY.GAP.01: Ayurdasaya not computed
+
+**New gaps discovered in Sessions 19-20 (added to v1.1)**:
+- **GAP.02b**: D9 Venus = Virgo (debilitation of 7L in marriage chart) — material for Relationships
+- **GAP.02c**: D9 Saturn = Aries (debilitation of primary 7H tenant) — material for Relationships
+- **GAP.02d**: D9 Moon = Gemini (Mercury's sign) — reinforces Karakamsa-Mercury alignment; material for Psychology/Mind
+
+**Resolution path**: Facts Layer v8.0 upgrade (planned for a later session) should incorporate Jagannatha Hora export data resolving all D9-dependent gaps. Until v8.0, D9-dependent confidence ratings across all artifacts remain at 0.00 with the corresponding v1.0 assessments flagged as provisional.
+
+---
+
+## §DOWNSTREAM IMPACT — HOW THIS REVISION AFFECTS L3 DOMAIN REPORTS
+
+The L3 Domain Reports produced in Sessions 16-20 used the corrected Jupiter position exclusively (per the Session 18 red-team intervention that predated Session 19 and 20 reports). Therefore:
+
+- **REPORT_CAREER_DHARMA_v1_0.md (Session 16)**: Written before the red-team discovered the Jupiter-placement error. May contain residual v1.0-UCN claims that depend on the erroneous Jupiter-4H placement. Flagged for potential v1.1 refresh in a future session. Priority: LOW (the Career Report's core Mercury-architecture is independent of Jupiter aspects).
+- **REPORT_FINANCIAL_v2_0.md (Session 17)**: Also predates red-team. May contain residual v1.0-UCN dependencies. Priority: LOW (wealth-as-dharmic-output principle derives from Jupiter's 9L lordship, not from disputed aspects).
+- **REPORT_HEALTH_LONGEVITY_v1_0.md (Session 18)**: Written post-red-team; uses corrected Jupiter architecture throughout. No refresh required.
+- **REPORT_RELATIONSHIPS_v1_0.md (Session 19)**: Uses corrected Jupiter architecture. No refresh required.
+- **REPORT_PSYCHOLOGY_MIND_v1_0.md (Session 20)**: Uses corrected Jupiter architecture. No refresh required.
+
+**Sessions 16-17 refresh recommendation**: A focused review pass on Sessions 16 and 17 reports to verify no residual v1.0-UCN Jupiter-4H claims remain. Recommended for Session 27 (Cross-Report Coherence Audit).
+
+---
+
+## §VERSION METADATA
+
+| Attribute | v1.0 | v1.1 |
+|---|---|---|
+| Session | 14-15 | 21 |
+| Date | 2026-04-18 | 2026-04-18 |
+| Parts | 10 (I-X) | 10 (I-X, v1.0 preserved; selective overrides in v1.1) |
+| Word count | ~31,000 | +~6,500 revision content |
+| Status | Superseded (in part) | CLOSED (current) |
+| Corrections | N/A | Jupiter placement (8 sections), §IX.2 audit (7 refinements), 3 new gaps |
+
+---
+
+*End of UCN_v1_1.md — Version 1.1 — Session 21 — 2026-04-18 — CLOSED*
+
+
+---
+
+## PART III — ADDITIVE SYNTHESIS (UCN v2.0)
+
+*Former artifact: `UCN_v2_0.md`. Mercury pentagram, mind architecture, §VI.4 spiritual mechanisms — superseded where Part IV conflicts.*
+
+# UCN v2.0 — Unified Chart Narrative (Additive Layer)
+## Abhisek Mohanty Jyotish Intelligence System
+### 2026-04-18 | CLOSED
+
+---
+
+## §0 — HOW TO READ THIS DOCUMENT
+
+UCN v2.0 is the third layer in a three-version sequence:
+
+| Version | Scope | Status |
+|---|---|---|
+| **UCN_v1_0.md** | Original 10-Part narrative (Sessions 14-15); preserved for continuity | CURRENT except where §CHANGELOG in v1.1 overrides |
+| **UCN_v1_1.md** | Jupiter-placement corrections across 8 sections (Session 21 + FIX_SESSION_001) | CURRENT for the specific corrected sections |
+| **UCN_v2_0.md** | Additive promotions: 4 new concepts + 2 refinements (this file) | CURRENT for promoted/new content |
+
+**Reading convention**: UCN content is the UNION of all three layers. Later versions override earlier where topics overlap. This v2.0 adds Parts XI-XIV and refines §VI.4 and §X — it does NOT replace Parts I-X of v1.0/v1.1.
+
+---
+
+## §I — FS3 REFINEMENT (JUPITER PLACEMENT CORRECTION)
+
+Supplements UCN v1.1 §I.1 FS3 with FIX_SESSION_002-era clean articulation (original v1.1 §I.1 remains the authoritative correction; this is supplementary framing).
+
+### The Jupiter architecture stated cleanly (post all corrections)
+
+**Jupiter's placement**: Sagittarius 9H, 9°48' Moola Pada 3 (FORENSIC §2.1 PLN.JUPITER).
+
+**Jupiter's dignities**:
+- **Swakshetra** (own sign) — own-sign occupation
+- **Swabhava** (own house) — 9L in 9H = lord in own house
+- **Moolatrikona (BPHS convention)**: barely within 0-10° band at 9°48' (Phaladeepika narrower convention places Jupiter outside Moolatrikona at own-sign-only)
+- **Uccha Bala**: rank 7 of 7 — maximum zodiacal distance from Cancer 5° exaltation point
+
+**Jupiter's aspects**:
+- 5th special aspect → 1H Aries (Lagna)
+- 7th full aspect → 3H Gemini (UL house)
+- 9th special aspect → 5H Leo (creativity/children/buddhi)
+- Does NOT aspect 2H, 4H, 6H, 7H, 8H, 10H, 11H, 12H
+
+**Jupiter's rulerships**:
+- 9L (Sagittarius) — dharma lord
+- 12L (Pisces) — moksha lord
+
+**Jupiter's functional meaning in this chart**:
+- **Dharmic authority at maximum sign-dignity** (own-sign-own-house)
+- **Uccha-Bala-weak compounding** (does not automatically compound; requires active engagement)
+- **Blesses identity** via 5th aspect on Lagna
+- **Blesses partnership-image** via 7th aspect on UL
+- **Blesses creativity** via 9th aspect on 5H
+- **Connects to 10H via lordship and trine-to-kendra adjacency**, NOT via direct drishti
+
+### Implications for all downstream reading
+
+Any future analysis must use this clean architecture:
+- Do not claim Jupiter aspects 10H directly (it does not)
+- Do not claim Jupiter aspects 4H, 8H, or 12H directly (it does not)
+- Do not treat Jupiter as tenanting 4H (it does not — Jupiter's exaltation sign is Cancer but Jupiter is physically in Sagittarius)
+- Do treat Jupiter's Lagna-aspect (5th → 1H) as a primary constitutional-blessing mechanism
+- Do treat Jupiter's UL-aspect (7th → 3H) as the primary dharmic-relational-blessing mechanism
+- Do treat Jupiter's 9L lordship + 9H own-sign residence as feeding 10H career via trine-to-kendra adjacency
+
+---
+
+## §VI.4 — REFINEMENT: SEVEN-MECHANISM SPIRITUAL AMPLIFICATION (promoted from Spiritual Report §9)
+
+UCN v1.1 §VI covers Foreign/Moksha Signature. This v2.0 adds a formalization of WHY the D6 (Spirit) domain self-amplifies at 0.96 — the highest CDLM diagonal value in the entire matrix.
+
+### The seven mechanisms
+
+The Spirit domain's extraordinary self-amplification is not ambient-benefic-density. It is the simultaneous operation of seven independently-verifiable classical mechanisms:
+
+1. **Jupiter 9L in own-sign 9H** — dharma lord at maximum sign-dignity in dharma-house
+2. **Venus 9H (Ishta Devata Mahalakshmi)** — devotional significator in dharmic trine, conjunct Jupiter
+3. **Shree Lagna in 9H** — Lakshmi-grace point anchored to dharma house
+4. **Ketu exalted in 8H Scorpio** — moksha-karaka at max dignity in transformation-house
+5. **Varnada Lagna + Ghati Lagna both in Scorpio 8H** — the "hidden-pinnacle" authority architecture that activates in Ketu MD 2031-2038
+6. **Yogi Point in 12H Pisces (Revati)** — fortune-point anchored in moksha-house, in Jupiter's sign, ruled by Mercury (the chart's primary planet)
+7. **Devata Triple-Lock**: Mercury (Palana Devata = Vishnu) + Saturn (Dharma Devata = Venkateshwara form of Vishnu) + Venus (Ishta Devata = Mahalakshmi) — three devatas all aligned with Vishnu-Lakshmi tradition
+
+### Why this matters
+
+No single mechanism produces the 0.96 amplification. The seven act in convergence. Each mechanism independently classically-meaningful; together they produce architectural-level spiritual embedding that cannot be bypassed, only engaged.
+
+### Practical implication
+
+**Spiritual practice is the chart's single highest-leverage intervention** — each practice-unit engages all seven mechanisms simultaneously rather than one at a time. This is a different proposition from "practice is helpful" — it is a mechanical observation about the chart's architecture that practice-investment has extraordinary systemic return in this specific nativity.
+
+### The Ketu MD activation
+
+Mechanism #5 (Varnada + Ghati 8H Scorpio) is the "sleeper" mechanism. It operates passively during Mercury MD — it's there architecturally but not the dominant operational mode. During Ketu MD (2031-2038), mechanism #5 activates as the primary authority mode, turning what was hidden-pinnacle into surface-expression. The transition from Mercury MD (intellectual-institutional authority) to Ketu MD (transformation-depth authority) is not a loss but a deepening — the native's deepest authority mode arrives in the second half of life.
+
+---
+
+## §X — REFINEMENT: OI6 MECHANICAL VERIFICATION DISCIPLINE (additional operating instruction)
+
+UCN v1.1 §X documents 5 operating instructions (OI1-OI5). This v2.0 adds a 6th derived from the governance-failure discovery in AUDIT_REPORT_v1_0.
+
+### OI6 — Maintain Mechanical Verification Discipline
+
+**Context**: AUDIT_REPORT_v1_0 (2026-04-18) found that the corpus's own red-teams (RED_TEAM_L3 Session 24, CROSS_REPORT_COHERENCE_AUDIT Session 27) missed 11 residual Jupiter-4H claims in REPORT_CAREER_DHARMA_v1_0. The red-teams used sampled narrative spot-checks, which missed the residuals. Exhaustive mechanical grep verification found them immediately.
+
+**The instruction**: For any cross-artifact correction-propagation claim (e.g., "the Jupiter correction is complete," "all reports use UCN v1.1"), use mechanical verification (grep/sed sweeps for the corrected terms), not narrative sampling. Narrative sampling produces false-negatives that governance registers as resolved when residuals remain.
+
+**Application to the native**: This is not only a process rule for Claude/red-teams. It generalizes to the native's own decision-support discipline: when applying the chart's operating instructions, verify application mechanically (tangible outputs, concrete behaviors) rather than by narrative self-assessment. "I am tending the 7H with Saturn-discipline" (narrative) ≠ specific verifiable commitments tended consistently over time (mechanical).
+
+**Why this belongs at UCN §X level**: Operating instructions OI1-OI5 are chart-architectural. OI6 is epistemological — how to verify that OI1-OI5 are actually being applied. It is a meta-instruction complementing the others.
+
+---
+
+## §XI — MERCURY PENTAGRAM (promoted from Psychology Report §8.2)
+
+### The concept
+
+Mercury governs five primary life domains simultaneously in this chart. Unlike the Mercury Seven-System Convergence (FS1, which documents seven independent classical-system designations of Mercury), the Mercury Pentagram documents the five life-domains Mercury operationally controls through lordship + karaka role.
+
+### The five domains
+
+1. **Career (D1, via 10L lordship)** — Mercury owns Capricorn 10H; Mercury in 10H = self-occupying-own-house
+2. **Mind (D8, via karaka role)** — Mercury is the classical karaka of buddhi (analytical intelligence) and vak (speech); governs analytical-cognitive domain universally
+3. **Wealth (D2, via Yogi Planet designation)** — Mercury is this chart's Yogi Planet (ruler of Revati, nakshatra of the Yogi Point); Yogi designation = primary fortune-activator
+4. **Partnership-image (D3, via UL lordship)** — UL = Gemini 3H; Gemini's lord = Mercury; Mercury is therefore the UL-lord = partnership-image governor
+5. **Soul-expression (D6, via Karakamsa lordship)** — Karakamsa = Gemini (sign Moon occupies in D9); Gemini's lord = Mercury; Mercury is Karakamsa lord = governs the domain through which the soul chose to express in this lifetime
+
+### Why the Pentagram matters
+
+The Mercury Seven-System Convergence (FS1) documents that seven independent classical analytical frameworks designate Mercury as primary. But that is a statement about analytical-system convergence — it could be interesting without being operationally consequential.
+
+The Mercury Pentagram documents what makes the seven-system convergence operationally consequential: the same Mercury instrument simultaneously governs five life domains. When Mercury operates at high quality:
+- Career delivery peaks
+- Mental clarity is maximum
+- Wealth-channel opens
+- Partnership-image resonates
+- Soul-expression aligns
+
+All five domains synchronize. When Mercury is compromised (cognitive overload, 6L dual-governance stress, boundary breach):
+- All five attenuate simultaneously
+
+This is the mechanical basis for "Mercury protection is the chart's highest-leverage intervention" (from Remedial Codex + Decision Support Playbook).
+
+### The Pentagram vs. the Seven-System Convergence
+
+| Seven-System Convergence (FS1) | Mercury Pentagram (§XI) |
+|---|---|
+| Describes ANALYTICAL-SYSTEM agreement on Mercury | Describes LIFE-DOMAIN governance by Mercury |
+| "Seven classical frameworks designate Mercury as primary" | "Five life domains flow through Mercury" |
+| 7 designating systems: 10H natal, MD lord, Yogi Planet, DK Chara, Karakamsa lord, KP cusp 11 sub-lord, Vargottama | 5 governed domains: Career, Mind, Wealth, Partnership-image, Soul-expression |
+| Confirms: the chart's primary planet is Mercury | Explains: why Mercury protection has systemic return |
+
+Both are true; they describe different layers of the Mercury phenomenon.
+
+---
+
+## §XII — THE THREE-LAYER MIND ARCHITECTURE (promoted from Psychology Report §5-10)
+
+### The concept
+
+UCN v1.1 §III (Mind-Body Container) treats the mind-body as a single unit. This v2.0 refines: there are three simultaneous mind-layers operating through one person, each with a distinct character, integrated via Saturn.
+
+### The three layers
+
+**Layer 1 — Aries Lagna (body-identity mind)**
+- **Principle**: Mars-driven initiative, directness, forward motion
+- **Character**: Pioneering, impatient with ambiguity, action-oriented, defensive when challenged
+- **Dominant planet**: Mars (Lagna lord, in 7H)
+- **Functional role**: Body-identity; the "I" that asserts, defends, initiates
+
+**Layer 2 — Moon AK Aquarius 11H (soul-emotion matrix)**
+- **Principle**: Aquarian detachment, community-oriented depth, Purva Bhadrapada transformational intensity
+- **Character**: Observes from distance, invested in collective purpose, philosophically restless, fierce when convictions engaged
+- **Dominant planet**: Moon (AK, in 11H Aquarius = Saturn's sign, Jupiter-ruled nakshatra)
+- **Functional role**: Soul-level orientation; the "I" that cares about meaning and larger-than-self
+
+**Layer 3 — Mercury Capricorn 10H (analytical cognitive instrument)**
+- **Principle**: Structured analytical precision, career-integrated intelligence
+- **Character**: Disciplined analysis, careful verification, expertise-accumulating, systematic output
+- **Dominant planet**: Mercury (10H, Vargottama, Seven-System Convergence)
+- **Functional role**: Cognitive operational instrument; the "I" that analyzes, produces, delivers
+
+### The integration via Saturn
+
+Saturn is the only planet that architecturally touches all three layers:
+
+- **Layer 1**: Saturn aspects Lagna (7th aspect from 7H Libra → Aries 1H) — structures the Aries fire-impulse with disciplined deliberation
+- **Layer 2**: Saturn RULES Aquarius — the sign of the Moon AK's residence — so the soul-layer operates within a Saturn-framework by sign-lordship
+- **Layer 3**: Saturn RULES Capricorn — the sign of Mercury's residence — so the analytical-layer operates within a Saturn-framework by sign-lordship
+
+Saturn is the integrating principle — the only force common to all three. When Saturn is active at high quality (AmK, exalted in 7H, current AD lord 2024-2027), all three layers integrate: Aries drive channeled through Saturnian structure (Layer 1 integrated), Aquarian soul held in Saturnian long-term commitment (Layer 2), Capricorn analysis delivered in Saturnian disciplined-output (Layer 3).
+
+### The integration challenge
+
+The three layers have different preferred modes:
+- Layer 1 wants speed + directness + agency
+- Layer 2 wants depth + community + meaning
+- Layer 3 wants precision + expertise + systematic delivery
+
+When integrated well, these complement: Aries initiates (Layer 1), analytical precision refines (Layer 3), soul-depth validates alignment (Layer 2). When disintegrated, they conflict: Layer 1's urgency overrides Layer 3's care, or Layer 3's analysis-paralysis starves Layer 1's action, or Layer 2's philosophical purity disconnects from Layer 1's practical urgency.
+
+### Implications for dasha activation
+
+- **Mercury MD (2010-2031)**: Layer 3 is dasha-active; analytical-cognitive delivery is the period's operational emphasis
+- **Ketu MD (2031-2038)**: Layer 2 becomes dasha-dominant; soul-depth + community + meaning take primacy; Layer 3's Mercury instrument continues operating but in a Layer-2-framework
+- **Venus MD (2038-2058)**: Layer 2 continues dominating but with Venus's devotional-aesthetic refinement; the three layers reach their mature integrated expression
+
+The current Saturn AD (within Mercury MD) is the period of maximum Saturn-integration pressure on all three layers simultaneously. This is why 2024-2027 feels architecturally intense — Saturn is actively forcing integration, not just providing passive framework.
+
+---
+
+## §XIII — THE COMPENSATED-EMPTINESS PRINCIPLE (promoted from Children Report §4)
+
+### The concept
+
+Some empty houses (houses with no planetary tenant in D1) are architecturally supported by aspect-coverage or lord-strength. Others are not. The distinction between compensated-emptiness and uncompensated-emptiness is a reading convention that prevents over-pessimizing empty houses.
+
+### The four support mechanisms
+
+An empty house can be compensated by:
+
+1. **Own-sign-lord in strong house**: the lord is placed well, so the house's domain operates remotely through the lord
+2. **Aspect from exalted/own-sign benefic**: a powerful benefic planet casts a drishti onto the empty house
+3. **Supportive Arudha/Saham co-location**: an Arudha or Saham in the empty sign provides additional signal layer
+4. **Trine-to-Kendra adjacency from a strong neighbor**: empty house's neighbors in the trikonal/kendra network provide structural support
+
+### Examples in this chart
+
+**5H Leo (children, creativity, buddhi)** — COMPENSATED:
+- Empty in D1 (no planetary tenant)
+- Aspect mechanism (#2): Jupiter own-sign 9H → 9th special aspect → 5H. This is the strongest possible benefic aspect from the strongest planet, directly hitting the empty 5H.
+- Own-sign-lord (#1): Sun (5L) in 10H Kendra with max Dig Bala — good placement
+- Interpretation: 5H is not weak despite emptiness. It is architecturally supported at high level. Creative-progeny domain activates through dharmic effort (as Jupiter's aspect requires dharmic framing), not through automatic delivery.
+
+**4H Cancer (mother, inner sanctuary)** — PARTIALLY COMPENSATED:
+- Empty in D1
+- Own-sign-lord (#1): Moon (4L) in 11H Aquarius (Saturn's sign). Moon is AK + well-placed for 11H gains-signification but DISPLACED from the 4H sanctuary house. So #1 is weak.
+- Aspect mechanism (#2): Saturn's 10th aspect from 7H → 4H Cancer. Saturn is exalted (powerful) but it's a malefic aspect — doesn't structurally weaken, but adds a Saturnian-discipline quality rather than warm sanctuary quality.
+- Mandi upagraha present: background Saturn-shadow malefic in the sanctuary house
+- Interpretation: 4H is partially supported (Saturn-aspect provides structural framework) but lacks warm-benefic presence. Native's emotional foundation operates through Saturnian intellectual-community (11H Moon) rather than through conventional warm-home sanctuary.
+
+**12H Pisces (moksha, foreign)** — COMPENSATED:
+- Empty in D1
+- Own-sign-lord (#1): Jupiter (12L) in own sign Sagittarius 9H — maximum-possible lord-placement at max dignity
+- Supportive sensitive point (#3): Yogi Point in 12H Pisces Revati — fortune-anchor + Mercury-ruled nakshatra
+- Aspect mechanism (#2): Ketu's 5th aspect from 8H → 12H (moksha-karaka aspecting moksha-house — rare and significant)
+- Interpretation: 12H is architecturally doubly-marked for foreign/moksha activation. Foreign residence (Singapore) is chart-endorsed via multiple mechanisms, not circumstantial.
+
+### Why this matters at UCN level
+
+Without the Compensated-Emptiness Principle, empty houses tend to be read as weaknesses. With it, the reading is proportionate-to-architecture: some empties are genuine weaknesses (uncompensated), some are partially supported, some are architecturally very strong despite emptiness. This is a reading-convention advance that prevents false-pessimistic interpretations.
+
+### Generalization
+
+The principle applies to any chart, not only this native's. UCN v2.0 formalizes it as a chart-reading meta-convention.
+
+---
+
+## §XIV — BB PROGRESSION METHODOLOGY (formal documentation)
+
+UCN v1.1 §VIII (Timing Metaphysics) references the Bhrigu Bindu as a destiny-sensitive point without formalizing its progression formula. This v2.0 documents the formula explicitly.
+
+### The formula
+
+**Natal BB formula**: (Moon longitude + Rahu longitude) / 2, mod 360.
+
+For this chart: (327.05° + 49.03°) / 2 = 188.04° = Libra 8°04' Swati Pada 1 (verified FORENSIC §11.2).
+
+**Progression formula**: 6° per year from natal position.
+
+**Derivation**: 360° / 60-year completion cycle = 6°/year. This is the convention adopted in FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F.
+
+### Age-by-age progressed BB positions (from v7.0 §V7.F)
+
+| Age | Year | Progressed BB | Sign/House from Aries Lagna |
+|---|---|---|---|
+| 0 | 1984 | 188.04° | Libra 8°04' (7H natal) |
+| 10 | 1994 | 248.04° | Sagittarius 8°04' (9H) |
+| 20 | 2004 | 308.04° | Aquarius 8°04' (11H) |
+| 30 | 2014 | 8.04° | Aries 8°04' (1H Lagna) |
+| 40 | 2024 | 68.04° | Gemini 8°04' (3H UL house approach) |
+| 42 | **2026** | **80.04°** | **Gemini 20°02' (3H UL's sign — CURRENT ACTIVATION)** |
+| 50 | 2034 | 128.04° | Leo 8°04' (5H) |
+| 60 | 2044 | 188.04° | Libra 8°04' (7H natal return) |
+
+### MSR.404 clarification
+
+MSR.404 ("BB-UL 2026 crystallization") references BB reaching Gemini at age 42 (80.04°). This is literal — BB at age 42 is in Gemini 3H (UL's sign), producing sympathetic activation with UL's domain. Prior MSR v1.0 arithmetic used an erroneous 40°/year rate; FIX_SESSION_002 corrected to 6°/year.
+
+### Alternative progression conventions
+
+Classical tradition varies:
+- **6°/year (60-year cycle)** — v7.0 §V7.F convention; adopted in AM-JIS
+- **1°/year** — some teachers; yields different progressed positions
+- **30°/year (one sign per year)** — other teachers
+- **Annual-lunation progression** — Tajika-based variant
+
+AM-JIS discipline: 6°/year is the adopted convention. Future external acharya review may recommend alternative; if so, reconciliation would be handled via FIX_SESSION process.
+
+### Why documented at UCN v2.0 level
+
+The BB progression is frequently cited across L3 Domain Reports + Temporal Engines artifacts. Without a single authoritative formula documentation, downstream artifacts risked drift. Formalizing the 6°/year convention here provides the single source of truth for all BB progression references.
+
+---
+
+## §XV — DUAL-ENGINE RECONCILIATION META-NOTE
+
+UCN v1.1 assumed FORENSIC v6.0 values are authoritative. FIX_SESSION_002 revealed three categories of engine-dependent variance that merit UCN-level acknowledgment:
+
+### Shadbala engine variance (GAP.07)
+
+- **FORENSIC engine** ranks: Sun #1, Jupiter #2, Saturn #3
+- **Jagannatha Hora engine** ranks: Saturn #1, Sun #2, Jupiter #3
+- **Convention adopted**: AM-JIS uses FORENSIC values for Shadbala citations
+- **Why this matters at UCN level**: Any UCN claim of the form "Sun is the strongest planet" or "the chart's strongest-Shadbala planet is X" is engine-dependent. Future citations should acknowledge.
+
+### Ashtakavarga Moon-row variance (GAP.08)
+
+- **FORENSIC Moon BAV row** differs from JHora in 4 signs: Gemini, Libra, Scorpio, Capricorn
+- **SAV grand total 337** matches in both engines (row-level differences cancel in aggregate)
+- **Convention adopted**: AM-JIS uses FORENSIC BAV/SAV values
+
+### Vimshottari date variance (GAP.09)
+
+- **FORENSIC dates** run +7 to +9 days LATER than JHora
+- **Root cause**: 1.42 arcmin Moon difference + 48 arcsec ayanamsa difference
+- **Convention adopted**: AM-JIS uses FORENSIC dates; LEL retrodictive fit validates at this engine
+- **Implication**: External reviewers using JHora will see slightly-earlier dates; variance is documented not hidden
+
+### Why at UCN level
+
+These engine variances are not errors in either engine — they reflect legitimate implementation choices. UCN v2.0 formalizes the AM-JIS discipline of using FORENSIC values consistently while documenting the dual-engine variances transparently for external review.
+
+---
+
+## §XVI — VERSION METADATA (v2.0)
+
+| Attribute | Value |
+|---|---|
+| Version | 2.0 |
+| Status | CLOSED |
+| Date | 2026-04-18 |
+| New Parts | XI (Mercury Pentagram), XII (Three-Layer Mind), XIII (Compensated-Emptiness), XIV (BB Progression Methodology), XV (Dual-Engine Reconciliation), XVI (this metadata) |
+| Refinements to v1.1 | §I FS3 (clean articulation), §VI.4 (Seven-Mechanism Spiritual Amplification formalization), §X OI6 (Mechanical Verification Discipline) |
+| Supersession | ADDITIVE to v1.1. v1.0 remains for preserved sections; v1.1 remains for Jupiter corrections; v2.0 adds new content. |
+| Word count | ~7,000 words (v2.0 additions only; corpus UCN total ~44,000 words across v1.0+v1.1+v2.0) |
+| Next UCN | v3.0 planned post-Facts-Layer-v8.0 and external acharya review (no target date) |
+
+---
+
+## §XVII — CHANGELOG (v1.1 → v2.0)
+
+| Change | Source | Integration status |
+|---|---|---|
+| Mercury Pentagram concept | REPORT_PSYCHOLOGY_MIND_v1_0 §8.2 | Promoted to §XI |
+| Three-Layer Mind Architecture | REPORT_PSYCHOLOGY_MIND_v1_0 §5-10 | Promoted to §XII |
+| Compensated-Emptiness Principle | REPORT_CHILDREN_v1_0 §4 | Promoted to §XIII |
+| Seven-Mechanism Spiritual Amplification | REPORT_SPIRITUAL_v1_0 §9 | Refined into §VI.4 addition |
+| BB Progression 6°/year formula | FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F + MSR.404 reconciliation | Formalized in §XIV |
+| Dual-engine reconciliation notes | FORENSIC footnotes §5.1, §6.2, §7.1-7.2 | Formalized in §XV |
+| OI6 Mechanical Verification Discipline | AUDIT_REPORT_v1_0 process-failure finding | Added to §X |
+| Jupiter placement clean articulation | UCN v1.1 §CHANGELOG | Supplemented in §I |
+
+---
+
+*End of UCN_v2_0.md — 2026-04-18 — CLOSED*
+
+
+---
+
+## PART IV — v8.0 FACTS RECONCILIATION (UCN v3.0)
+
+*Former artifact: `UCN_v3_0.md`. **Authoritative on:** 7H five-layer architecture, six-mechanism spiritual, Ketu MD reframe, Mercury eight-system, Shree Lagna 7H, special lagnas.*
+
+# UCN v3.0 — Unified Chart Narrative (Additive Layer)
+## Abhisek Mohanty Jyotish Intelligence System
+### FIX_SESSION_003 | 2026-04-18 | CLOSED
+
+---
+
+## §0 — HOW TO READ THIS DOCUMENT
+
+UCN v3.0 is the fourth layer in a four-version sequence:
+
+| Version | Scope | Status |
+|---|---|---|
+| **UCN_v1_0.md** | Original 10-Part narrative (Sessions 14-15) | SUPERSEDED in part by v1.1 and v2.0; retained for preserved sections |
+| **UCN_v1_1.md** | Jupiter-placement corrections (FIX_SESSION_001) | CURRENT for corrected sections |
+| **UCN_v2_0.md** | Additive: Mercury Pentagram, Three-Layer Mind, Compensated-Emptiness, Seven-Mechanism Spiritual (§VI.4), OI6 | CURRENT for those sections; §VI.4 SUPERSEDED by UCN v3.0 §XVIII |
+| **UCN_v3_0.md** | v8.0 reconciliation corrections (this file) | CURRENT for §XVII–§XXV |
+
+**Reading convention**: UCN content is the UNION of all four layers. Later versions override earlier where topics overlap. UCN v3.0 does NOT replace Parts I-XIV of v1.0/v1.1/v2.0. It adds Parts XVII-XXV (new sections) and supersedes UCN v2.0 §VI.4 (Seven-Mechanism → Six-Mechanism correction).
+
+**Readers**: Always consult v3.0 §XVII-XXV BEFORE citing v1.0/v1.1/v2.0 on the following topics:
+- 7H architectural framing (v3.0 §XVII supersedes any "six-layer" or "Shree Lagna in 9H" claims)
+- Spiritual mechanism count (v3.0 §XVIII supersedes v2.0 §VI.4)
+- Ketu MD 2031-2038 framing (v3.0 §XIX supersedes any "Varnada+Ghati 8H" claims)
+- Mercury system count (v3.0 §XX supersedes v2.0 "Seven-System" references)
+- Special Lagna placement citations (v3.0 §XVII and all sub-sections supersede v6.0 values)
+
+---
+
+## §XVII — 7H ARCHITECTURAL REFRAMING: FIVE-LAYER WEALTH-RELATIONAL-LAKSHMI ANCHOR
+
+### §XVII.1 — The Correction
+
+UCN v1.0/v1.1/v2.0 described the 7H as a "six-layer convergence" or "supreme six-layer karmic vortex" with the following composition:
+1. Saturn exalted
+2. Mars (Lagna lord)
+3. Bhrigu Bindu
+4. Hora Lagna (claimed to be in 7H Libra — v6.0 error)
+5. Saham Roga (claimed to be in 7H Libra — v6.0 error)
+6. Saham Mahatmya (claimed to be in 7H Libra — v6.0 error)
+Plus KP sub-lord Saturn.
+
+**Per JH v8.0 authoritative data (JHORA_TRANSCRIPTION_v8_0_SOURCE §2.1–2.2)**:
+- Hora Lagna is in **Gemini 3H** (not Libra 7H)
+- Saham Roga is in **Taurus 2H** (not Libra 7H)
+- Saham Mahatmya is in **Sagittarius 9H** (not Libra 7H)
+- **Shree Lagna (Lakshmi's grace point) = Libra 23°19' Vishakha Pada 1 = 7H** (v6.0 had it erroneously in Sagittarius 9H)
+
+**Net effect on 7H architecture**: Three elements removed (HL, Roga, Mahatmya); one major element added (Shree Lagna).
+
+### §XVII.2 — The Corrected Five-Layer Architecture
+
+The 7H is now accurately described as carrying five classical layers:
+
+| Layer | Element | Significance |
+|---|---|---|
+| 1 | **Saturn exalted 22°27' Libra** | Sasha Mahapurusha, AmK, 10L+11L — career-authority in relational axis |
+| 2 | **Mars 18°31' Libra** | Lagna lord (1L+8L), Avayogi — self-initiative embedded in partnership |
+| 3 | **Bhrigu Bindu 8°03' Libra** | Fortune-timing nexus — relational events are fortune-crystallization events |
+| 4 | **Shree Lagna 23°19' Libra Vishakha** | Lakshmi-grace point — the chart's primary material-grace seat is in 7H |
+| 5 | **KP 7H cusp sub-lord = Saturn** | Self-referential KP confirmation — Saturn governs 7H by presence AND by KP sublordship |
+
+### §XVII.3 — The New Architectural Meaning
+
+**OLD FRAMING (now superseded)**:
+- "Seven-layer disease-greatness crucible"
+- Roga Saham + Mahatmya Saham = 7H is simultaneously the seat of disease (Roga) and greatness (Mahatmya)
+- 7H activates health challenges through relational friction (Roga in 7H)
+
+**NEW FRAMING (authoritative)**:
+- **"Five-layer wealth-relational-Lakshmi anchor"**
+- Shree Lagna = Lakshmi's seat in the chart. In this chart, Lakshmi's seat is in 7H Libra. Wealth-grace enters this chart through the relational domain.
+- The 7H is NOT a "disease house" (Roga Saham is in 2H Taurus — health challenges manifest via speech/family/wealth domain, not via relational-disease linkage)
+- The 7H is NOT a "greatness crucible" in the old sense (Mahatmya Saham is in 9H Sagittarius — honor/greatness flows through dharmic channels, not through 7H struggle)
+- The 7H IS the chart's **public-wealth interface**: the point where authority (Saturn), initiative (Mars), fortune-timing (BB), Lakshmi-grace (Shree Lagna), and KP confirmation all converge on the relational-partnership axis
+
+### §XVII.4 — Implications for Career and Wealth
+
+The 7H reframing has practical implications across domains:
+
+**Career (D1)**: The relational axis is not a "challenge-domain" separate from career success — it IS a wealth-delivery interface. Business partnerships, public-facing authority, client relationships, and collaborative ventures are structurally ENABLED by the Shree Lagna's presence in 7H. Lakshmi-grace arrives through relational quality, not despite relational complexity.
+
+**Wealth (D2)**: The Maha Dhana Yoga circuit is not ONLY through 9H-Jupiter (dharmic-wealth output). There is now a second Lakshmi-entry-point confirmed: 7H-Shree-Lagna (relational-wealth interface). Wealth flows through both channels: (1) dharmic alignment (9H-Jupiter) and (2) relational excellence (7H-Shree-Lagna). Both are active simultaneously.
+
+**Relationships (D3)**: The 7H's "karmic vortex" nature is retained — BB + Saturn + Mars in 7H remains the chart's highest convergence density. But the karmic curriculum is not primarily about "disease-and-greatness through suffering" — it is about **developing the quality of relationship through which Lakshmi-grace flows**. Partnership quality is structurally prerequisite for material-grace delivery in this chart.
+
+### §XVII.5 — The 7H Bhava Bala Paradox (Confirmed)
+
+JH v8.0 confirms 7H Bhava Bala rank 12 (weakest of all 12 houses). This creates a reinforced paradox:
+- 7H has maximum classical layer density (five-layer wealth-relational-Lakshmi convergence)
+- 7H has minimum structural strength (rank 12 of 12 by Bhava Bala)
+
+The resolution remains: the 7H requires proportionately MORE active cultivation than any other house. The Lakshmi-grace channel exists architecturally but requires intentional maintenance to remain open. Passive relational neglect = Bhava Bala weakness dominates. Active relational cultivation = yoga density delivers. This is the chart's highest-leverage behavioral prescription for wealth and relational outcomes.
+
+**Cross-reference**: MSR.391 (v2.0 corrected), MSR.443, UCN v3.0 §XXIII (7H Bhava Bala rank 12 confirmed)
+
+---
+
+## §XVIII — SPIRITUAL SIX-MECHANISM ARCHITECTURE (SUPERSEDES UCN v2.0 §VI.4)
+
+### §XVIII.1 — The Correction
+
+UCN v2.0 §VI.4 documented "Seven-Mechanism Spiritual Amplification" with these seven mechanisms:
+1. Jupiter 9L in own-sign 9H ✓
+2. Venus 9H (Ishta Devata) ✓
+3. Shree Lagna in 9H ← **WRONG** — Shree Lagna is in 7H, not 9H
+4. Ketu exalted in 8H Scorpio ✓
+5. Varnada + Ghati Lagnas both in 8H Scorpio ← **WRONG** — neither is in 8H
+6. Yogi Point in 12H Pisces ✓
+7. Devata Triple-Lock ✓
+
+Mechanism #3 is corrected (Shree Lagna relocated to 7H — not a spiritual-domain mechanism, though it reinforces the wealth-relational axis).
+
+Mechanism #5 is fully invalidated (Varnada is in 4H Cancer, Ghati is in 9H Sagittarius — neither is in 8H Scorpio).
+
+**Result: Six-Mechanism Spiritual Amplification** (Seven → Six).
+
+### §XVIII.2 — The Six Authoritative Spiritual Mechanisms
+
+The Spirit domain's 0.96 CDLM self-amplification (D6.D6) derives from six independently-verifiable mechanisms:
+
+**Mechanism 1 — Jupiter 9L in Own-Sign 9H**
+The dharma lord (9L = Jupiter) occupies the dharma house (9H) in its own sign (Sagittarius). This is the maximum classical dignity placement for dharmic principle: the lord of dharma IS dharma, dwelling in the house of dharma, in its own sign. No other single placement produces this degree of dharmic self-authorization.
+
+**Mechanism 2 — Venus 9H (Ishta Devata Mahalakshmi)**
+Venus (Ishta Devata = Mahalakshmi, the wealth-devotion goddess) co-resides with Jupiter in 9H. The devotional principle (Venus as Mahalakshmi = the chart's chosen deity's form) operates from the dharmic domain. All spiritual practice is simultaneously devotional-aesthetic and dharmic.
+
+**Mechanism 3 — Ketu Exalted in 8H Scorpio**
+Ketu (moksha-karaka, liberation significator) is at maximum dignity (exaltation) in the transformation-depth house. The moksha agent is at its strongest possible configuration in the moksha-adjacent house. Ketu in 8H is the chart's primary spiritual-liberation architecture for the inner/hidden dimension.
+
+**Mechanism 4 — Yogi Point in 12H Pisces (Revati)**
+The Yogi Point (the chart's primary fortune-spiritual sensitive point) is anchored in the moksha house (12H Pisces). This places the fortune-spiritual-activation point at the moksha axis. Spiritual engagement is simultaneously the chart's highest-fortune activation.
+
+**Mechanism 5 — Devata Triple-Lock: Mercury-Saturn-Venus → Vishnu-Venkateshwara-Mahalakshmi**
+The three classical devatas derived from Karakamsa (Gemini):
+- Palana Devata: Mercury → Vishnu/Narayana (sustaining deity)
+- Dharma Devata: Saturn (Aquarius = 9th from Karakamsa) → Venkateshwara (Vishnu form at Tirumala)
+- Ishta Devata: Venus (Taurus = 12th from Karakamsa) → Mahalakshmi
+All three align with the Vishnu-Lakshmi tradition. MSR.397 (Devata Triple-Lock) confirmed retrodictively by native's 2025 spiritual pivot to Venkateshwara.
+
+**Mechanism 6 — Karakamsa Gemini with Mercury as Karakamsa Lord and MD Lord**
+Karakamsa = Gemini (Moon's D-9 sign). Karakamsa lord = Mercury. Mercury = the chart's primary planet (8-System Convergence, MSR.413). This is the soul's expression domain being governed by the chart's primary planet during the chart's primary dasha period. The alignment of soul-expression domain + primary instrument + primary dasha is a rare three-way timing-soul-instrument convergence.
+
+### §XVIII.3 — What the Six-Mechanism Architecture Means
+
+The reduction from seven to six mechanisms does NOT reduce the 0.96 CDLM D6.D6 self-amplification score. The six remaining mechanisms are all independently verified. The two removed mechanisms (Shree Lagna "in 9H" and Varnada+Ghati "in 8H") were based on erroneous placements.
+
+However, the spiritual ARCHITECTURE is more precisely understood:
+- The 8H spiritual dimension is NOT supported by Varnada and Ghati (those lagnas are elsewhere). It is supported ONLY by Ketu exalted in 8H (Mechanism 3).
+- The Shree Lagna in 7H is a wealth-relational mechanism (see §XVII), not a spiritual-domain mechanism per se. Its presence in the Lakshmi-seat strengthens the devotional-Lakshmi stream but through the relational axis, not through the 9H dharmic axis.
+- The six mechanisms are tighter and more precisely defined than the seven were.
+
+**Practical implication for spiritual practice**: The primary spiritual engagement modes remain:
+1. Jupiter 9H: dharmic study, wisdom-transmission, guru-engagement
+2. Venus 9H: devotional-aesthetic practice, Mahalakshmi puja, beauty as spiritual medium
+3. Ketu 8H: inner transformational work, past-life resolution, hidden-knowledge exploration
+4. 12H Yogi Point: moksha-oriented practice, foreign-contemplative environments, dissolution of ego-identity
+5. Devata system: Venkateshwara + Mahalakshmi as primary devotional recipients
+6. Karakamsa: Mercurial intellectual-spiritual engagement (studying, writing, analytical contemplation)
+
+**Cross-reference**: MSR.408 (spiritual architecture signal), REPORT_SPIRITUAL_v1_1
+
+---
+
+## §XIX — KETU MD 2031-2038 REFRAME
+
+### §XIX.1 — The Invalidated Claim
+
+UCN v2.0 §VI.4 and multiple downstream reports (REPORT_SPIRITUAL_v1_0) framed the Ketu MD (2031-2038) as "hidden-pinnacle activation" via:
+> "Varnada + Ghati Lagnas both in 8H Scorpio = the hidden-pinnacle authority architecture that activates in Ketu MD 2031-2038"
+
+This framing is **invalidated**. Varnada Lagna is in 4H Cancer. Ghati Lagna is in 9H Sagittarius. Neither is in 8H. The "hidden-pinnacle 8H" via special lagnas does not exist as claimed.
+
+### §XIX.2 — The Correct Ketu MD Architecture
+
+Ketu MD 2031-2038 remains architecturally significant for this chart. The correct mechanisms are:
+
+**Mechanism 1 — Ketu Exalted in 8H Scorpio (Primary)**
+Ketu (the MD lord) is natally exalted in 8H Scorpio. During Ketu MD, the native's dasha lord is the exalted-moksha-karaka in the transformation house. This is a moksha-oriented dasha period: the 7-year window when inner transformation, depth-inquiry, and spiritual release are the dominant life register.
+
+**Mechanism 2 — Ketu as Moksha-Karaka in Moksha-Adjacent House**
+The 8H (Scorpio) is Ketu's exaltation sign AND the house of transformation/longevity/hidden knowledge. Ketu in 8H = the liberation significator at maximum dignity in the transformation domain. The Ketu MD activates this for 7 years.
+
+**Mechanism 3 — Mercury MD Preparation → Ketu MD Transition**
+Mercury MD (2010-2027) establishes intellectual-institutional authority. The transition from Mercury MD (analytical Vishnu-devotion, dharmic intellect) to Ketu MD is not a loss but a deepening — what Mercury established at the institutional-external level, Ketu transforms into internal-experiential depth. The native does not lose Mercury's gains; they are re-offered in Ketu's register.
+
+**Mechanism 4 — Ketu MD Saturn AD (Anticipated)**
+Within Ketu MD, the Saturn AD (approximately 2034-2037 range) brings Saturn's 9:1 beneficial Phala into the Ketu-moksha context. Saturn (exalted 7H, AmK) + Ketu's transformation-depth = the period of most concentrated moksha-authority delivery in the first 70 years.
+
+**Mechanism 5 — Jupiter (9L own sign) as Ketu's Dispositor in 9H**
+Ketu in Scorpio is disposited by Mars (Scorpio's ruler). Mars in Libra is disposited by Venus. Venus in Sagittarius is disposited by Jupiter. The ultimate dispositor of Ketu's chain = Jupiter (9L, own sign, 9H). Thus the Ketu MD, despite its 8H placement, ultimately flows through the dharmic authority of Jupiter 9H. Ketu MD = moksha activation governed by dharmic-intelligence (Jupiter 9L) at the final dispositor level.
+
+### §XIX.3 — Recalibrated Ketu MD Description
+
+**Accurate framing**: "Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Exalted Ketu in 8H activates 7 years of transformation-depth, inner work, and liberation orientation. The period is characterized by deepening of the Mercury MD's dharmic-intellectual foundation into experiential-transformational wisdom. Authority during Ketu MD is inner-transformational rather than institutional-external. Peak authority expression comes through the Saturn AD sub-period within Ketu MD. The period is not a hidden-pinnacle via special lagnas (that claim was false) — it is a genuine moksha-depth period via Ketu's own exalted dignity in the transformation house."
+
+**Falsifier of old claim**: The claim that Varnada+Ghati in 8H amplified Ketu MD has been falsified by JH v8.0. Ketu MD's significance rests on Ketu's own exalted placement, not on special-lagna support.
+
+**Cross-reference**: MSR.402 (INVALIDATED), MSR.402b (replacement), REPORT_SPIRITUAL_v1_1
+
+---
+
+## §XX — MERCURY EIGHT-SYSTEM DESIGNATION
+
+### §XX.1 — The Upgrade
+
+UCN v1.0/v1.1/v2.0 consistently referred to "Mercury Seven-System Convergence" (MSR.413 in v1.0). All references to "Seven-System" in prior UCN versions are superseded by "Eight-System" in v3.0.
+
+**The Eighth System — Birth Yoga = Siva (Mercury-Ruled)**
+
+JH v8.0 AUTHORITATIVE (JHORA_TRANSCRIPTION_v8_0_SOURCE.md §0):
+> "Yoga: **Siva** (Me) (57.13% left) ← RESOLVES GAP.01"
+
+- Birth Yoga = Siva
+- Siva Yoga ruling planet = Mercury
+- Siva Yoga is classically auspicious (one of the most beneficial of the 27 Panchang Yogas)
+
+**The complete Eight-System Mercury designation**:
+1. 10H natal tenancy (career apex)
+2. Vimshottari MD lord 2010-2027 (17-year operational window)
+3. Yogi Planet (rules Revati, nakshatra of the Yogi Point)
+4. DK Darakaraka (spouse/business partner significator)
+5. Karakamsa lord (governs Gemini Karakamsa)
+6. KP cusp 11 sub-lord
+7. Vargottama (Capricorn D1 = Capricorn D9)
+8. **Birth Yoga Lord — lord of Siva Yoga (newly confirmed by JH v8.0)**
+
+### §XX.2 — Implications for the Mercury Pentagram
+
+UCN v2.0 §XI documented the Mercury Pentagram (five life-domains Mercury operationally controls). The Eight-System designation adds to the analytical-system convergence without changing the Pentagram's domain-governance framing. Both are true simultaneously:
+- Mercury Pentagram: governs Career, Mind, Wealth, Partnership-image, Soul-expression
+- Mercury Eight-System: seven independent classical frameworks + birth yoga designate Mercury as chart-primary
+
+The Birth Yoga = Siva (Mercury-ruled) is a panchang-level confirmation that the chart's foundational timing context (the yoga active at birth) is Mercury-governed. This is not a trivial addition — the birth yoga governs the native's environmental context from birth. A Mercury-governed birth yoga means Mercury's character permeates the native's earliest developmental environment.
+
+### §XX.3 — Operational Significance
+
+The Siva Yoga (name alone) has dharmic-spiritual resonance independent of its Mercury-lordship. Siva as an auspicious yoga name:
+- Siva = auspiciousness, transformation, awareness, liberation
+- A Mercury-ruled auspicious yoga named Siva = the chart's primary planet governs an auspiciousness-yoga with liberation implications
+- This is consistent with UCN §XVIII's six-mechanism spiritual architecture — Mercury (Karakamsa lord, Palana Devata = Vishnu) + Siva Yoga (birth context, auspicious) = the chart's spiritual and intellectual dimensions share the same primary planet
+
+**Cross-reference**: MSR.413 (v2.0 upgraded), MSR.437 (Birth Yoga signal)
+
+---
+
+## §XXI — GAJA-KESARI YOGA IN D-9: FAMOUS AND VIRTUOUS
+
+### §XXI.1 — The Finding
+
+JH v8.0 (JHORA_TRANSCRIPTION_v8_0_SOURCE §6.2) identifies **Gaja-Kesari Yoga** in the D-9 Navamsa chart with members: Moon and Jupiter.
+
+Classical result: "Famous and virtuous"
+
+### §XXI.2 — D-9 Architecture
+
+In D-9 Navamsa (Cancer Lagna per JH):
+- Moon = Gemini (D-9 12H from Cancer Lagna)
+- Jupiter = Gemini (same D-9 12H, conjunction with Moon)
+- Rahu = Gemini (same — making it a three-planet D-9 12H stellium)
+
+The Gaja-Kesari formation is via the conjunction of Moon and Jupiter in the same D-9 sign (Gemini). They are in the 12H from D-9 Cancer Lagna, but in the same sign = mutual conjunction = Gaja-Kesari by proximity/conjunction standard.
+
+### §XXI.3 — Implications
+
+**D-9 specific**: Gaja-Kesari in D-9 relates to the native's dharmic-soul dimension (D-9 = karma, dharma, marriage, spiritual merit). The "famous and virtuous" quality is the soul's intended expression in this lifetime — not merely worldly fame but fame-through-virtue as a soul-level karmic design.
+
+**Spiritual life**: Gaja-Kesari in D-9 reinforces the Six-Mechanism Spiritual Architecture (§XVIII). The Moon (AK, soul) + Jupiter (9L, dharma) conjunction in D-9 = the soul (AK Moon) and dharma (Jupiter 9L) are architecturally aligned in the soul chart. Spiritual life = living the dharma = expressing the soul.
+
+**Dharmic intellect**: Jupiter in Gemini (D-9 12H) = the dharmic intellect is expressed through Mercurial channels (Gemini = Mercury's sign). Moon in same sign = soul aligns with Mercury's analytical-communicative mode for dharmic expression. This reinforces the Mercury Pentagram's soul-expression domain (Karakamsa Gemini, Mercury-governed soul-expression).
+
+**Retrodictive fit**: The native's career trajectory (analytical advisory + dharmic-values alignment) fits the D-9 Gaja-Kesari famous-and-virtuous arc. The fame is not glamour-fame but expertise-virtue-recognition fame.
+
+### §XXI.4 — Connection to Raja-Lakshmi Yoga (D-9)
+
+JH §6.2 also identifies Raja-Lakshmi Yoga (D-9) with the same Moon-Jupiter members. This means:
+- Gaja-Kesari (famous-virtuous) + Raja-Lakshmi (fortunate-high-achiever) are BOTH formed in D-9 by the same Moon-Jupiter conjunction
+- Double-yoga formation in the soul chart = the fame-and-virtue AND the fortune-achievement qualities are architecturally co-embedded in the D-9
+
+**Cross-reference**: MSR.428 (Gaja-Kesari D-9), MSR.430 (Raja-Lakshmi D-9)
+
+---
+
+## §XXII — CLASSICAL YOGA CONSTELLATION UPDATE
+
+### §XXII.1 — Summary of 17 New Yogas (MSR.421–MSR.437)
+
+JH v8.0 identifies 17 major classical yogas not previously in the MSR. These are now fully documented in MSR v2.0 (§VI). This section provides the integrative architectural summary.
+
+**Complete confirmed yoga roster (all yogas in corpus post-v8.0)**:
+
+| Yoga | Varga | Result | MSR ID |
+|---|---|---|---|
+| Sasha Mahapurusha | D-1 | Leader of free spirit, wandering authority | MSR.001 |
+| Saraswati | D-1 | Very learned, intelligent, famous | MSR.007 |
+| Lakshmi | D-1 | Sustained material prosperity through dharma | MSR.008 |
+| Budha-Aditya (Nipuna) | D-1, D-9 | Skillful, expert, respected | MSR.009 |
+| Anapha (Sun+Mercury) | D-1 | Prosperity, good character, self-reliant | MSR.011 |
+| D-9 NBRY Venus | D-9 | Promoted above own station over time | MSR.002 |
+| D-9 NBRY Saturn | D-9 | Delayed peak effect, elevated eventually | MSR.003 |
+| **Kalpadruma/Parijata** | D-1 | **King, principled, warrior, prosperous** | MSR.421 |
+| **Chaamara** | D-1 | **Long-lived, scholarly, eloquent** | MSR.422 |
+| **Mridanga** | D-1 | **King or equal, happy** | MSR.423 |
+| **Sankha** | D-1 | **Wealth, good spouse-children, long-lived** | MSR.424 |
+| **Vosi** | D-1 | **Skillful, charitable, learned** | MSR.425 |
+| **Anaphaa** | D-1 | **Comforts, good character** | MSR.426 |
+| **Kedaara Naabhasa** | D-1 | **Happy, wealthy, helpful (lifetime)** | MSR.427 |
+| **Gaja-Kesari** | D-9 | **Famous and virtuous** | MSR.428 |
+| **Kaahala** | D-9 | **Strong, bold, leads large enterprise** | MSR.429 |
+| **Raja-Lakshmi** | D-9 | **Fortunate, high achiever** | MSR.430 |
+| **Yogakaraka Mars** | D-9, D-10 | **Success and achievements** | MSR.431 |
+| **Raja AK-PK** | D-9 | **Loyal following and power** | MSR.432 |
+| **Viparita Raja Yoga Ju** | D-9 | **Success after pressures** | MSR.433 |
+| **Sarala Viparita** | D-10 | **Fearless, learned, prosperous** | MSR.434 |
+| **Maha Yogada** | D-2 | **Power, authority and wealth** | MSR.435 |
+| **Sadhu** | D-2 | **Saintly person** | MSR.436 |
+| **Birth Yoga = Siva** | Panchang | **Auspicious yoga, Mercury-ruled** | MSR.437 |
+
+**Bold = new in MSR v2.0**
+
+### §XXII.2 — Integrated Reading of the Yoga Constellation
+
+The 17 new yogas substantially strengthen three architectural narratives:
+
+**1. Royal-Authority Narrative** (Kalpadruma, Mridanga, Raja AK-PK, Sarala, Maha Yogada):
+The chart contains multiple independent royal-authority yogas across D-1, D-9, D-10, and D-2. The Kalpadruma/Parijata Yoga is a particularly high-grade yoga (king, warrior, principled, prosperous) involving four planets (Mars, Venus, Jupiter, Mercury). Combined with Sasha Mahapurusha (already in corpus), the chart carries two major-tier Mahapurusha-class royal authority yogas. This does not mean worldly kingship — it means the quality of authority, character, and principled leadership that these yogas describe.
+
+**2. Long-Life and Wholeness Narrative** (Chaamara, Sankha, Kedaara, Sankha again):
+Three independent yogas confirm long life as a classical result: Chaamara, Sankha, and the broader Kedaara (happy, wealthy, helpful). Combined with Kalachakra Paramayush = 85 years, the corpus now has multiple convergent longevity indicators.
+
+**3. Success-Through-Others'-Difficulties Narrative** (Viparita Raja Yoga Jupiter D-9, Sarala D-10, Viparita Raja Yoga Saturn-Moon D-10):
+Three Viparita-class yogas across two divisional charts. This is a systematic pattern: the chart is architecturally configured to achieve where others fail. The native's opportunity windows are structurally aligned with external pressure periods. This is not mere coincidence — it is classical Viparita Raja Yoga operating across multiple divisional contexts.
+
+### §XXII.3 — Why This Matters
+
+The chart is a more yoga-dense chart than the pre-v8.0 corpus described. The yoga constellation in aggregate reads: a native who carries the qualities of royal principled authority, scholarly excellence, long life with wholesomeness, devotional grace, and structurally-configured success through external difficulty. This is not common yoga density. The 17 new yogas elevate the corpus's confidence in the chart's broad architectural assessment.
+
+---
+
+## §XXIII — ISHTA/KASHTA QUANTITATIVE REINFORCEMENT
+
+### §XXIII.1 — Quantitative Planet Rankings
+
+**From JH v8.0 AUTHORITATIVE (JHORA_TRANSCRIPTION_v8_0_SOURCE §3.3)**:
+
+| Planet | Ishta | Kashta | Net |
+|---|---|---|---|
+| **Saturn** | **43.28** | **4.81** | **~9:1 beneficial — CHART'S PRIMARY PHALA PLANET** |
+| Mars | 31.16 | 28.10 | Slightly beneficial |
+| Venus | 23.59 | 35.97 | Slightly malefic |
+| Sun | 22.58 | 34.21 | Slightly malefic |
+| Moon | 21.09 | 32.58 | Slightly malefic |
+| Mercury | 20.89 | 38.65 | Malefic (6L dual-governance manifesting) |
+| **Jupiter** | **10.78** | **48.81** | **~1:5 malefic — CHART'S PRIMARY PHALITA PARADOX** |
+
+### §XXIII.2 — The Saturn Finding
+
+Saturn's ~9:1 Ishta:Kashta ratio is the corpus's most significant new quantitative finding. It resolves the longstanding question of whether Saturn's exaltation and Shadbala strength translate to actual beneficial outcomes.
+
+**Answer: Yes, overwhelmingly.** Saturn delivers beneficial Phala at 9× the rate of its malefic outputs. The delivery mechanism is structured, disciplined, and Saturnian in character (not spontaneous windfall), but the net quantum is clearly beneficial.
+
+**Operational Triad Confirmation** (from §1.12 FORENSIC_DATA_v8_0_SUPPLEMENT):
+- **Mercury**: Primary instrument (8-system convergence, Pancha-Vargeeya 11.43 POWERFUL)
+- **Saturn**: Primary deliverer (AmK exalted, Shadbala #1 JH, Ishta 43.28 HIGHEST, Pancha-Vargeeya 12.12 POWERFUL)
+- **Jupiter**: Primary authorizer (9L own-sign own-house, Pancha-Vargeeya 14.76 HIGHEST, but Phalita-weakest)
+
+Each planet plays a distinct role that the others cannot substitute:
+- Mercury provides the analytical instrument and the operational mechanism
+- Saturn provides the structural delivery and the actual beneficial outcomes
+- Jupiter provides the dharmic authorization and the classical dignity framework, but does not personally deliver pleasant outcomes to the native at the same rate
+
+### §XXIII.3 — The Jupiter Finding
+
+Jupiter's ~1:5 Ishta:Kashta ratio does NOT mean Jupiter is harmful to the native. It means:
+1. Jupiter's classical dignity (own-sign, Pancha-Vargeeya most powerful) does not translate directly to pleasant personal experience
+2. Jupiter's beneficence flows outward — to the people the native teaches, guides, and serves — more than inwardly to the native's personal comfort
+3. This is the classical 12L (moksha lord) paradox: the planet that rules the dissolution house (12H Pisces) tends toward giving away rather than receiving
+
+**This quantitatively validates CTR.03** (Jupiter Uccha-Bala-weak): the native's Jupiter is dignity-strong but phalita-weak. Strong dharmic engagement (Jupiter's domain) does not automatically produce comfortable outcomes for the native personally. The teaching, the wisdom-sharing, the dharmic generosity — all of which Jupiter generates — benefit recipients more than the native himself directly.
+
+**Behavioral implication**: Do not expect Jupiter-governed activity (dharmic teaching, wisdom-generosity, spiritual service) to produce immediate material comfort for the native. The material comfort comes through Saturn (structured delivery) and Mercury (operational excellence). Jupiter provides the authorization and the purpose, not the personal payoff.
+
+### §XXIII.4 — Bhava Bala Findings
+
+**From JH v8.0 (JHORA_TRANSCRIPTION_v8_0_SOURCE §3.4)**:
+
+| House | Bhava Bala Rank | Significance |
+|---|---|---|
+| **5H** | **1 (STRONGEST)** | **Children/creativity/purva-punya is the chart's structurally strongest house** |
+| 11H | 2 | AK Moon in 11H is in the chart's second-strongest house |
+| 10H | 3 | Career apex is structurally strong (rank 3) |
+| 12H | 4 | Moksha/foreign house is structurally well-supported |
+| **7H** | **12 (WEAKEST)** | **The chart's highest yoga-density house is structurally weakest** |
+
+**5H Bhava Bala rank 1** is a new and significant finding. The children-creativity-intellect house (5H Leo) is the structurally strongest house in the chart despite having no natal planet. This confirms that the "compensated-emptiness" principle (UCN v2.0 §XIII) operates with MAXIMUM structural support — the compensation is not a workaround but a first-rank structural architecture.
+
+**7H Bhava Bala rank 12** is confirmed by JH, validating the existing UCN paradox (§IX, Contradiction #3) and the behavioral discipline prescription: the 7H's yoga density requires active maintenance because its structural strength is minimum.
+
+### §XXIII.5 — Pancha-Vargeeya Classification
+
+**From JH v8.0 (JHORA_TRANSCRIPTION_v8_0_SOURCE §3.5)**:
+
+| Planet | Score | Classification |
+|---|---|---|
+| Jupiter | 14.76 | POWERFUL (highest) |
+| Saturn | 12.12 | POWERFUL |
+| Mercury | 11.43 | POWERFUL |
+| Mars, Venus, Moon, Sun | 6.90–7.28 | Ordinary |
+
+The chart's operationally powerful planets (POWERFUL classification) are EXACTLY the Operational Triad: Jupiter + Saturn + Mercury. The other four planets are Ordinary — not weak but not at the same operational tier.
+
+**This is a remarkable convergence**: The three planets that were previously identified as the chart's primary triad through multiple independent classical arguments (UCN, MSR, UCN v1.1 FS3) are now confirmed as the ONLY Pancha-Vargeeya POWERFUL planets by JH's multi-varga strength computation. The triad identification was accurate; JH provides quantitative confirmation.
+
+---
+
+## §XXIV — METADATA
+
+| Field | Value |
+|---|---|
+| Native | Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar |
+| Session | FIX_SESSION_003 |
+| Date | 2026-04-18 |
+| Status | CLOSED |
+| Parent UCN | UCN_v1_0 + UCN_v1_1 + UCN_v2_0 (read all in sequence) |
+| Key sources | JHORA_TRANSCRIPTION_v8_0_SOURCE, FORENSIC_DATA_v8_0_SUPPLEMENT, V8_0_RECONCILIATION_REPORT |
+| Sections this document SUPERSEDES | UCN v2.0 §VI.4 (Seven-Mechanism → Six-Mechanism); any v1.x or v2.x citation of Shree Lagna in 9H, Varnada/Ghati in 8H, Hora Lagna in 7H |
+
+---
+
+## §XXV — CHANGELOG
+
+| Version | Date | Session | Change |
+|---|---|---|---|
+| 1.0 | 2026-04-15 (approx.) | Session 14-15 | Original 10-Part narrative |
+| 1.1 | 2026-04-17 | FIX_SESSION_001 | Jupiter placement corrections across 8 sections |
+| 2.0 | 2026-04-18 | FIX_SESSION_002 | Additive: Mercury Pentagram (§XI), Three-Layer Mind (§XII), Compensated-Emptiness (§XIII), Seven-Mechanism Spiritual (§VI.4), OI6 (§X), BB progression (§XIV) |
+| 3.0 | 2026-04-18 | FIX_SESSION_003 | v8.0 reconciliation: §XVII (7H reframing), §XVIII (Six-Mechanism Spiritual — supersedes §VI.4), §XIX (Ketu MD reframe), §XX (Mercury 8-system), §XXI (Gaja-Kesari D-9), §XXII (Yoga constellation update), §XXIII (Ishta/Kashta quantitative) |
+
+---
+
+*End of UCN_v3_0.md — FIX_SESSION_003 — 2026-04-18 — CLOSED*

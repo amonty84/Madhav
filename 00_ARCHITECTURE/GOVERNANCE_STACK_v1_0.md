@@ -2,9 +2,9 @@
 artifact: GOVERNANCE_STACK_v1_0.md
 version: 1.0-updated-GAP_RESOLUTION_SESSION
 status: CURRENT (updated in-place; next version will be v2.0)
-session: 35 (created); FIX_SESSION_003 (version registry and gap status updated); FIX_SESSION_003_deferred (deferred items 1-4 completed 2026-04-18); GAP_RESOLUTION_SESSION (all 8 internally-resolvable gaps closed 2026-04-19)
+session: 35 (created); FIX_SESSION_003; FIX_SESSION_003_deferred; GAP_RESOLUTION_SESSION; UCN_MERGE_SESSION + corpus_integrity_pass (2026-04-19)
 date_closed: 2026-04-18
-date_updated: 2026-04-19 (GAP_RESOLUTION_SESSION)
+date_updated: 2026-04-19 (UCN_v4_0 + registry alignment)
 scope: "Project-wide governance stack: version registry, confidence ledger, known-gaps consolidation, change-control protocol"
 architecture_ref: "§G.9 Governance"
 ---
@@ -52,10 +52,11 @@ All closed artifacts as of Session 35:
 | CDLM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CDLM_v1_1 in FIX_SESSION_003_deferred |
 | **CDLM_v1_1** | **1.1** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 9 cells corrected; D4.D3 0.78↔→0.61→; Shree Lagna 7H; Hora Lagna 3H; Roga/Mahatmya Sahams correct houses; 1,135 lines** |
 | RM_v1_0 | 1.0 | CLOSED (SUPERSEDED by v1.1) | Superseded in FIX_SESSION_001 |
-| UCN_v1_0 | 1.0 | CLOSED (superseded in part by v1.1) | No change |
-| UCN_v1_1 | 1.1 | CLOSED (superseded in part by v2.0) | Superseded by UCN v2.0 additions |
-| UCN_v2_0 | 2.0 | CLOSED (superseded in part by v3.0) | Superseded by UCN v3.0 additions |
-| **UCN_v3_0** | **3.0** | **CURRENT (additive layer)** | **NEW FIX_SESSION_003 — §§XVII–XXV; read v1.0+v1.1+v2.0+v3.0 in sequence** |
+| UCN_v1_0 | 1.0 | **SUPERSEDED** | Merged into **UCN_v4_0** (2026-04-19); retain file for archaeology |
+| UCN_v1_1 | 1.1 | **SUPERSEDED** | Merged into **UCN_v4_0** |
+| UCN_v2_0 | 2.0 | **SUPERSEDED** | Merged into **UCN_v4_0** |
+| UCN_v3_0 | 3.0 | **SUPERSEDED** | Merged into **UCN_v4_0** |
+| **UCN_v4_0** | **4.0** | **CURRENT** | **Canonical single-file UCN — linear merge of v1.0→v1.1→v2.0→v3.0; Part IV precedence** |
 | RM_v1_1 | 1.1 | **SUPERSEDED** | Superseded by RM_v2_0 in FIX_SESSION_003_deferred |
 | **RM_v2_0** | **2.0** | **CURRENT** | **NEW FIX_SESSION_003_deferred — 8 element blocks corrected; Shree Lagna 7H; Ghati 9H; Varnada 4H; RM.21 split into RM.21A+RM.21B; 32 elements total** |
 | RED_TEAM_L2_5_v1_0 | 1.0 | CLOSED | No change |
@@ -172,14 +173,14 @@ All gaps across all artifacts:
 |---|---|---|---|
 | **GAP.11** | **Special Lagnas v6.0 computational errors** — Hora/Ghati/Varnada/Shree Lagnas all WRONG in v6.0 §12.1 | MSR.391, MSR.402, MSR.404, MSR.407, UCN §V §VI, REPORT_RELATIONSHIPS, REPORT_SPIRITUAL, REPORT_FINANCIAL | **RESOLVED FIX_SESSION_003** — All corrections applied in MSR_v2_0, UCN_v3_0, four domain report refreshes |
 | **GAP.12** | **Saham placement errors** — Roga/Mahatmya/Vivaha placements disagree with JH; MSR.391 composition invalid | MSR.391, REPORT_HEALTH, REPORT_RELATIONSHIPS | **RESOLVED FIX_SESSION_003** — MSR_v2_0 corrections; REPORT_HEALTH_LONGEVITY_v1_1, REPORT_RELATIONSHIPS_v1_1 refreshed |
-| **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | OPEN — dual-karaka-system note applied in MSR_v2_0; both valid classically; full resolution deferred |
+| **GAP.13** | **Chara Karaka 7-vs-8 system ambiguity** — v6.0 uses 7-karaka; JH uses 8-karaka (Rahu=PK, Mars=PiK) | MSR.343 and any claim citing "PK Mars in 7H" | **INTERIM (2026-04-19)** — Corpus remains **dual-track**: primary lineage = **7-karaka** (FORENSIC / historical MSR); JH **8-karaka** labels cited as cross-check. **Native must eventually choose** exclusive 7 vs 8 or formalize dual-namespace IDs; until then MSR.343 retains explicit dual annotation. |
 | **GAP.14** | **17 classical yogas missing from MSR v1.0** | MSR v2.0 | **RESOLVED FIX_SESSION_003** — All 17 yogas promoted to MSR_v2_0 signals MSR.421-437 |
 | **LONGEVITY.GAP.01** | Ayurdasaya not computed | REPORT_HEALTH_LONGEVITY | **CLOSED (intentionally excluded)** — Kalachakra Paramayush 85 years adopted as authoritative longevity anchor; Pindayu/Nisargayu/Amsayu methods not pursued per native direction |
 
 **FIX_SESSION_003 gap resolution summary:**
 - GAP.11: RESOLVED (special lagna corrections cascade complete)
 - GAP.12: RESOLVED (saham corrections cascade complete)
-- GAP.13: OPEN (dual-karaka noted; full resolution deferred)
+- GAP.13: **INTERIM dual-track** (2026-04-19) — native exclusive choice pending; see §3 gap register row
 - GAP.14: RESOLVED (17 yogas in MSR v2.0)
 - LONGEVITY.GAP.01: CLOSED (intentionally excluded per native direction; Kalachakra 85 years is the adopted anchor)
 
@@ -204,7 +205,7 @@ All gaps across all artifacts:
 11. ~~Provenance backfill~~ — **DONE GAP_RESOLUTION_SESSION**: §0 Provenance Registry in MSR_v2_0; CGP Provenance COMPLETE
 12. **External acharya review** — OPEN: Item 9 — ACHARYA_ENGAGEMENT_KIT.md ready; requires native to initiate contact
 13. **6 empirical falsifier tests** — OPEN: Item 10 — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated, native-executed
-14. **MSR signal gap** — OPEN: 443 signals vs 500-600 target; 53-157 short; pathways documented in MSR_v2_0 §VII.4
+14. **MSR signal gap** — OPEN: **447** signals (per MSR_v2_0 §VII tally) vs 500–600 target; **53–153** short; pathways documented in MSR_v2_0 §VII.4
 
 ---
 

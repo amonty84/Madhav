@@ -1,7 +1,7 @@
 ---
 artifact: UCN_v1_1.md
 version: 1.1
-status: CLOSED
+status: SUPERSEDED (merged into UCN_v4_0.md — retain for diff archaeology)
 session: 21
 date_closed: 2026-04-18
 supersedes: UCN_v1_0.md (v1.0, Sessions 14-15)

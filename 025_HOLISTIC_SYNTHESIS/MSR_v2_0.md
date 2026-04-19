@@ -201,15 +201,15 @@ SIG.MSR.404:
   valence: benefic
   temporal_activation: transit-triggered
   supporting_rules:
-    - "BB natal Libra 8°03' progresses at 6°/year (per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F)"
-    - "At age 42 (2026), BB progressed longitude = Libra 8°03' + (42 × 6°) = 260° = Sagittarius 20°, but using the alternate BB progression method that runs from Moon/Rahu midpoint separately: BB reaches Gemini 3H zone at age 42 — per MSR_v1_0 methodology confirmed. See OPEN contradiction CTR regarding progression method."
+    - "AM-JIS canonical timed-BB framing: natal BB Libra 8°03'; progression rate **6°/year** per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F (contradiction §3.1 RESOLVED 2026-04-19 in CONTRADICTION_REGISTRY_v1_1)."
+    - "Simple linear (42 × 6°) arithmetic from BB alone does not govern the crystallization thesis; **Gemini 3H loading** is established independently by UL + A5 + A11 + **Hora Lagna (JH 3H Gemini)** co-tenancy — MSR.404 is a **convergence signal**, not a pure single-formula progression proof."
     - "UPGRADED per JH v8.0: Hora Lagna confirmed in Gemini 0°39' (3H) — NOT in 7H Libra as v6.0 erroneously stated. HL NOW JOINS UL in Gemini 3H."
     - "Gemini 3H loading at age 42: UL (Gemini 3H) + A5 + A11 + Hora Lagna (JH confirmed) + BB progression = FIVE-FOLD activation, not three-fold as v1.0 claimed."
     - "Mercury rules Gemini 3H — the chart's primary planet governs the convergence sign"
     - "Timing: Mercury MD / Saturn AD (now active 2024-2027) governs the dasha context of the convergence"
     - "Chara Dasha: Scorpio MD / Libra AD (6th from Gemini = Scorpio, activating the axis)"
     - "SAV for Gemini: 27 bindus (JH corrected value; v6.0 had 28)"
-  falsifier: "If BB progression method is definitively resolved to 1°/year standard (which would place progressed BB in Sagittarius, not Gemini), this signal requires revision. Current method (per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F 6°/year) produces the Gemini arrival at age 42. JH confirmation of HL in 3H Gemini is independent of BB progression method — the 3H house loading is confirmed regardless."
+  falsifier: "If JH-authoritative UL/A5/A11/HL 3H Gemini convergence were overturned by new birth-data revision, the five-fold loading thesis would need rework. BB progression rate disputes alone do not invalidate 3H loading — HL confirmation is independent."
   domains_affected: [relationships, wealth, career, mind]
   confidence: 0.94
   v6_ids_consumed: [BB.NATAL, ARD.UL, ARD.A5, ARD.A11, LAG.HORA, HSE.3]
@@ -1132,6 +1132,7 @@ Since all SIG.16-31 were already promoted at confidence ≥ 0.65, no new promoti
 | 2.0 | 2026-04-18 | FIX_SESSION_003 | MAJOR: v8.0 reconciliation corrections; 17 new yoga signals (MSR.421–437); 6 new quantitative signals (MSR.438–443); 4 saham-correction signals; MSR.391 recomposed; MSR.402 invalidated + MSR.402b added; MSR.404 upgraded; MSR.407 corrected; MSR.413 upgraded to 8-system; MSR.024 revised; MSR.022 corrected |
 | 2.0 (Task E1 audit) | 2026-04-19 | Task E1 | Mode B SIG.16-31 audit: all 16 candidates confirmed absorbed as MSR.031-046 in v1.0 carry-forward; 0 genuinely pending; §VII Mode B audit section added; three-interpretation spot-check on MSR.031/038/046 confirms original promotions warranted; residual gap 53-153 signals to 500-600 target documented with 6 gap-filling pathways; no signal renumbering, total remains 447 |
 | 2.0-provenance | 2026-04-19 | GAP_RESOLUTION_SESSION | Provenance backfill: §0 Provenance Registry added; v6.0-era signals confirmed/corrected status documented; 7 corrected signals + 4 new replacement signals listed; all other MSR.001-420 confirmed by FORENSIC_v8_0; provenance_policy YAML field added to frontmatter; CGP Provenance: COMPLETE |
+| 2.0-post-merge | 2026-04-19 | Corpus_integrity_pass | MSR.404 supporting_rules + falsifier refined; **BB progression methodological tension CLOSED** — aligns with CONTRADICTION_REGISTRY_v1_1 §3.1 RESOLVED (6°/year documentation per FORENSIC supplement §V7.F; Gemini thesis rests on UL/A5/A11/HL convergence) |
 
 ---
 

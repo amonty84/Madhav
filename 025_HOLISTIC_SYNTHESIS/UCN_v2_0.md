@@ -3,7 +3,7 @@ artifact: UCN_v2_0.md
 artifact_type: Unified Chart Narrative (Mother Document)
 layer: L2.5 — Holistic Synthesis
 version: 2.0
-status: CLOSED
+status: SUPERSEDED (merged into UCN_v4_0.md — retain for diff archaeology)
 date_closed: 2026-04-18
 supersedes_status: "UCN_v1_0 (original; retained for preserved sections) + UCN_v1_1 (Jupiter-placement corrections; retained as v1.1 override layer) — v2.0 is ADDITIVE to v1.1, not replacement. Native reads v1.0 + v1.1 + v2.0 in sequence for complete current narrative."
 session: FIX_SESSION_002 finalization (2026-04-18)

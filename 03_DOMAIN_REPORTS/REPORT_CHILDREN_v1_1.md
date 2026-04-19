@@ -6,7 +6,7 @@ session: 22 (original); v1.1 revision 2026-04-19
 date_closed: 2026-04-19
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D5 — Children, Creativity, Buddhi (Intellectual Discrimination)
-parent_UCN_version: UCN_v1_1.md (v1.1, Session 21)
+parent_UCN_version: UCN_v4_0.md (canonical UCN — merged 2026-04-19)
 red_team_applied: YES (RED_TEAM_L2_5_v1_0.md)
 word_count_estimate: ~12500
 primary_msr_anchors: [MSR.333, MSR.341, MSR.343, MSR.398, MSR.406, MSR.413, MSR.394]
@@ -26,7 +26,7 @@ organizing_principle: The 5H is empty in D1 but supervised by Jupiter's 9th spec
 
 This report examines the D5 domain in its full classical scope: literal children (progeny, offspring), creative output (artistic, intellectual, generative work), buddhi (intellectual discrimination, the faculty that distinguishes truth from falsehood), purva punya (merit accumulated from past lives), and mantra-devotional practice (5H is also the classical house of ishta-devata mantra practice).
 
-**Architecture position**: Fourth of the remaining Domain Reports; cites UCN_v1_1.md (post-Jupiter-correction) as parent. The children domain is most tightly linked to Wealth (0.74), Spirit (0.78), Mind (0.78), and Relationships (0.76) per CDLM D5 row.
+**Architecture position**: Fourth of the remaining Domain Reports; cites **`UCN_v4_0.md`** as holistic parent (v1–v3 merged). The children domain is most tightly linked to Wealth (0.74), Spirit (0.78), Mind (0.78), and Relationships (0.76) per CDLM D5 row.
 
 ### §2 — Executive Summary
 
@@ -182,17 +182,17 @@ For devotional practice:
 ### §13 — Known Gaps
 
 - GAP.01 Birth Yoga — not material to D5
-- GAP.02 D9 Jupiter placement — directly material; if Jupiter D9 in Gemini (per CSI), Jupiter's D9 Navamsa position is in Mercury's sign, continuing the Mercury-Jupiter-5H-creativity alignment at Navamsa level; pending verification
+- **GAP.02 — RESOLVED 2026-04-18**: D9 Jupiter confirmed in Gemini (Mercury's sign) per JHora v8.0 / AUDIT_REPORT WS-1b; Mercury–Jupiter Navamsa alignment at creativity layer is L1-closed
 - **GAP.05 — SUBSTANTIALLY RESOLVED 2026-04-18**: JHora D7 confirmed present per AUDIT_REPORT_v1_0 WS-1b; D7 structural reads match FORENSIC §3.4 (correct planetary placements corroborated). Precise degree comparison for all D7 positions remains pending but structural D1-based domain claims are corroborated. Confidence upgrade: unverified → substantially confirmed.
 
 ### §14 — Source Attribution
 
 | Layer | Source | Version | Status |
 |---|---|---|---|
-| L1 Facts | FORENSIC_ASTROLOGICAL_DATA_v6.0 | 6.0 | CURRENT |
-| L2.5 UCN | UCN_v1_1 (Jupiter-corrected) | 1.1 | CLOSED |
-| L2.5 CDLM | CDLM_v1_0 (D5 row cited) | 1.0 | CLOSED |
-| L3 Parent | REPORT_RELATIONSHIPS_v1_0 (for D5.D3 substrate) | 1.0 | CLOSED |
+| L1 Facts | FORENSIC_ASTROLOGICAL_DATA_v8_0 | 8.0 | CURRENT |
+| L2.5 UCN | UCN_v4_0 (canonical); v1–v3 archival | 4.0 | CURRENT |
+| L2.5 CDLM | CDLM_v1_1 (D5 row / cross-domain) | 1.1 | CURRENT |
+| L3 Parent | REPORT_RELATIONSHIPS_v1_1 (D5.D3 substrate) | 1.1 | CURRENT |
 
 ---
 
