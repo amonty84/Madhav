@@ -188,7 +188,7 @@ The v1.0 §7.4 was titled "The 7H Relational-Health Mirror (Saham Roga Coinciden
 
 2. **Family tension activates Roga Saham's kutumba dimension.** As noted in §7.4v above, the 2H's kutumba signification means family-specific relational stress (as distinct from professional-relational stress) has a direct 2H/Roga Saham linkage. Family communication difficulties are a 2H health activator.
 
-3. **The D4.D3 = 0.61 CDLM revision.** The strength is downgraded from 0.78 to 0.61. This should be reflected in the CDLM_v1_0.md cell D4.D3 in the next CDLM revision pass (flagged as a pending update for Session FIX_003 or next available CDLM refresh).
+3. **The D4.D3 = 0.61 CDLM revision.** The strength is downgraded from 0.78 to 0.61 — **integrated in `CDLM_v1_1.md`** (GAP_RESOLUTION_SESSION / FIX_SESSION_003_deferred). This report’s §17v table is aligned with that registry; no further CDLM cell edit is pending for this linkage.
 
 **Practical behavioral prescription (revised from v1.0 §15.4).** The v1.0 prescription "treat relational conflict as a health matter" is revised to: **treat family communication stress specifically as a health matter; manage professional relational friction primarily through the Vata-grounding protocol (not by framing 7H tension as a direct disease-point activation).** The relational-health feedback exists but through the nervous system and family channels, not through the 7H disease-architecture that v1.0 described.
 
@@ -254,7 +254,7 @@ The Kalachakra Paramayush of 85 years places the natural completion marker in th
 
 **SUPERSEDES §17 of v1.0.**
 
-Health domain (D4) cross-domain linkages — from CDLM_v1_0.md (as corrected by v8.0 reconciliation):
+Health domain (D4) cross-domain linkages — from **CDLM_v1_1.md** (v8.0 reconciliation; same numeric cells as revised v1.0 readings):
 
 | Cell | Linkage | Strength | Direction | Key finding | v1.1 change |
 |---|---|---|---|---|---|

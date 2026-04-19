@@ -15,16 +15,25 @@ estimated_effort: "2-3 days native effort + 1-2 Claude sessions to incorporate"
 
 ---
 
+## §0 — EXECUTION STATUS (2026-04-19)
+
+**Facts Layer v8.0 is built** (`FORENSIC_ASTROLOGICAL_DATA_v8_0.md`). **GAP.01 (Birth Yoga)** and **core lagna/saham corrections** are **RESOLVED** via JH transcription and reconciliation sessions. **LONGEVITY.GAP.01** is **CLOSED by policy** (Kalachakra 85 years per **GOVERNANCE_STACK**); §2 Export 3 (Ayurdasaya trio) is **optional** unless the native wants Parashari parity rows populated.
+
+**Still valuable native exports:** **GAP.03** (D9 degree-level 12H stellium), **Varshphal / Varshesha** (requires **exact solar-return time**), optional **Moola/Narayana/Kalachakra sub-rows** marked `[EXTERNAL_COMPUTATION_REQUIRED]` in FORENSIC §25+.
+
+---
+
 ## §1 — PURPOSE
 
-Post AUDIT_REPORT_v1_0 and FIX_SESSION_001/002, three gaps remain OPEN requiring Jagannatha Hora exports not yet provided:
+This spec originally listed all JHora exports needed to stand up FORENSIC v8.0. With v8.0 **shipped**, treat §2 as a **checklist for remaining optional cells** — not blocking items except where a Domain Report explicitly depends on a still-empty L1 row.
 
-- **GAP.01** — v6.0 §9 Birth Yoga (Panchang Yoga element for FS5)
-- **GAP.03** — D9 12H stellium precise degree composition
-- **LONGEVITY.GAP.01** — Ayurdasaya (Pindayu / Nisargayu / Amsayu) computation
-- **Varshphal detail** — Muntha progressed position per year + Varshesha for each solar year
+**Remaining high-leverage exports (if not yet done):**
 
-This spec defines exactly what JHora exports are needed. Native executes against this spec; Claude incorporates outputs into FORENSIC_ASTROLOGICAL_DATA_v8.0.
+- **GAP.03** — D9 12H stellium precise degree composition (degree-level verification)
+- **Varshphal detail** — Varshesha / Year Lord — **requires exact solar return timestamp**
+- **Optional** — Ayurdasaya trio (Pindayu/Nisargayu/Amsayu) for §24.2 optional rows only
+
+This spec defines exactly what JHora exports are needed for those cells. Native executes against this spec; Claude incorporates outputs into FORENSIC patch releases.
 
 ---
 

@@ -204,7 +204,7 @@ You are working on AM-JIS (Abhisek Mohanty Jyotish Intelligence System), a multi
 2. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` (governing blueprint; re-read relevant sections as needed)
 
 ## Subject
-Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar. Chart specifics in `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6_0_ABHISEK_MOHANTY.md`.
+Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar. **Canonical L1 chart data:** `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` (the v6.0 forensic file remains as non-authoritative archive in the same folder).
 
 ## Cadence
 Daily sessions. Closed-artifact-per-session discipline. Red-team every 3rd session.

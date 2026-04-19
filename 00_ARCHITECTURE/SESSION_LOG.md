@@ -1361,12 +1361,38 @@ All 8 internally-resolvable gaps are now closed. The corpus is self-consistent a
 
 - **Item 9**: External acharya review — kit ready at ACHARYA_ENGAGEMENT_KIT.md; requires native to initiate contact
 - **Item 10**: 6 empirical falsifier tests — tracked in MAINTENANCE_SCHEDULE_v1_0.md §6; time-gated
-- **MSR signal gap**: 443 signals vs 500-600 target; 53-157 short; pathways documented in MSR_v2_0 §VII.4
+- **MSR signal gap**: **447** signals vs 500–600 target; **53–153** short; pathways documented in MSR_v2_0 §VII.4
 
 ### Next Session Objective
 
 Choose from:
-- (A) UCN v4.0 — incorporate all corrections from FIX_SESSION_003 + deferred + GAP_RESOLUTION into UCN
+- (A) ~~UCN v4.0~~ — **DONE** — see **UCN_MERGE_SESSION** entry below (`UCN_v4_0.md`)
 - (B) Query the corrected corpus — test architecture against specific life questions
 - (C) MSR expansion — push toward 500-600 signal target using §VII.4 pathways
 - (D) External acharya engagement — initiate review using ACHARYA_ENGAGEMENT_KIT.md
+
+---
+
+## Session — UCN_MERGE_SESSION / Corpus Integrity Pass (2026-04-19, CLOSED)
+
+**Environment:** Claude Code — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
+
+**Objective:** Deliver **UCN v4.0** single canonical file; resolve stale L1/L2.5 onboarding; close **CONTRADICTION_REGISTRY §3.1 BB progression** via MSR.404 refinement; align governance/spec snapshots; optional ESLint hygiene on `platform/`.
+
+**Outputs:**
+- **`025_HOLISTIC_SYNTHESIS/UCN_v4_0.md`** — merged linear canonical UCN (v1.0 + v1.1 + v2.0 + v3.0); Part IV precedence
+- **`025_HOLISTIC_SYNTHESIS/UCN_v1_0.md` … `UCN_v3_0.md`** — status set to **SUPERSEDED** for standalone reading (archival)
+- **`025_HOLISTIC_SYNTHESIS/CLAUDE.md`**, **`01_FACTS_LAYER/CLAUDE.md`** — updated to CURRENT artifacts
+- **`01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md`** — YAML consistency (Swiss Ephemeris chart states; artifact_id v1_2; next_steps)
+- **`03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md`**, **`REPORT_HEALTH_LONGEVITY_v1_1.md`** — annex/source alignment (FORENSIC v8.0, CDLM v1.1, UCN v4.0)
+- **`01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` §24.2** — Ayurdasaya rows marked optional vs Kalachakra-closed policy
+- **`01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md` §0**, **`V8_0_RECONCILIATION_REPORT.md`**, **`docs/superpowers/plans/2026-04-19-amjis-gap-resolution.md` banner** — execution-status clarity
+- **`00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md`** — UCN_v4_0 CURRENT; MSR count **447**; GAP.13 interim dual-track note
+- **`00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_1.md` §3** — BB progression → **RESOLVED**
+- **`025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` §MSR.404** — methodology text + changelog row
+- **`CLAUDE.md` (root)** — canonical L1 pointer to FORENSIC v8.0
+- **`platform/`** — removed unused `ScrollArea` import; removed unused eslint-disable directives (`CommandPalette`, `useBranches`)
+
+**Remaining (unchanged by this session):** Native JH exports for **GAP.03** degree-level D9 / **Varshesha**; **GAP.13** exclusive native choice; **MSR 500–600 expansion**; acharya + falsifier calendar; optional LEL v1.3.
+
+**Next session objective:** (C) MSR expansion §VII.4 **or** (B) corpus query validation **or** native export batch for remaining `[EXTERNAL_COMPUTATION_REQUIRED]` cells.

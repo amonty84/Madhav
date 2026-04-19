@@ -1,7 +1,7 @@
 ---
 artifact: UCN_v3_0.md
 version: 3.0
-status: CLOSED
+status: SUPERSEDED (merged into UCN_v4_0.md — retain for diff archaeology)
 session: FIX_SESSION_003
 date: 2026-04-18
 supplements: UCN_v2_0.md

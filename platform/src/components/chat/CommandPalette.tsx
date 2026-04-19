@@ -38,10 +38,11 @@ export function CommandPalette({ open, onOpenChange, commands }: Props) {
 
   useEffect(() => {
     if (!open) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      /* Reset dialog-local state when closed; syncing UI to dialog open prop */
+      /* eslint-disable react-hooks/set-state-in-effect -- intentional reset when dialog closes */
       setQuery('')
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelected(0)
+      /* eslint-enable react-hooks/set-state-in-effect */
       return
     }
     // Give the Dialog a tick to mount, then steal focus to the input.
