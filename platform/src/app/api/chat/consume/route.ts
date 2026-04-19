@@ -1,6 +1,12 @@
-import { streamText, stepCountIs, convertToModelMessages, createIdGenerator, generateText } from 'ai'
+import {
+  streamText,
+  stepCountIs,
+  convertToModelMessages,
+  createIdGenerator,
+  generateText,
+  smoothStream,
+} from 'ai'
 import type { ModelMessage, UIMessage } from 'ai'
-import { anthropic } from '@ai-sdk/anthropic'
 import { NextResponse } from 'next/server'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { consumeTools } from '@/lib/claude/consume-tools'
@@ -11,12 +17,16 @@ import {
   replaceConversationMessages,
   updateConversationTitle,
 } from '@/lib/conversations'
+import {
+  DEFAULT_MODEL_ID,
+  TITLE_MODEL_ID,
+  getModelMeta,
+  isValidModelId,
+  supports,
+} from '@/lib/models/registry'
+import { resolveModel } from '@/lib/models/resolver'
 
-export const maxDuration = 60
-
-const ALLOWED_MODELS = ['claude-sonnet-4-6', 'claude-haiku-4-5', 'claude-opus-4-7'] as const
-type AllowedModel = (typeof ALLOWED_MODELS)[number]
-const DEFAULT_MODEL: AllowedModel = 'claude-sonnet-4-6'
+export const maxDuration = 120
 
 const ALLOWED_STYLES: ConsumeStyle[] = ['acharya', 'brief', 'client']
 
@@ -49,9 +59,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'chartId and messages are required' }, { status: 400 })
   }
 
-  const model: AllowedModel = (ALLOWED_MODELS as readonly string[]).includes(body.model ?? '')
-    ? (body.model as AllowedModel)
-    : DEFAULT_MODEL
+  const modelId = isValidModelId(body.model ?? '') ? (body.model as string) : DEFAULT_MODEL_ID
+  const modelMeta = getModelMeta(modelId)!
   const style: ConsumeStyle = ALLOWED_STYLES.includes(body.style as ConsumeStyle)
     ? (body.style as ConsumeStyle)
     : 'acharya'
@@ -104,38 +113,61 @@ export async function POST(request: Request) {
 
   const systemPrompt = consumeSystemPrompt(chart, reportsResult.data ?? [], style)
 
-  console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms`)
+  console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  model=${modelId}  style=${style}`)
 
-  // Cache the stable prefix (tools + system prompt) with an ephemeral breakpoint.
-  // Anthropic caches everything before the breakpoint, so this covers tool defs
-  // + chart context + reports index on every turn after the first in a 5-min window.
+  // Provider-specific system message handling. Anthropic supports ephemeral
+  // prompt caching on the stable prefix; Gemini does not. Attach cache control
+  // only where it's supported so other providers see a plain system message.
+  const systemMessage: ModelMessage = supports(modelId, 'prompt-caching')
+    ? {
+        role: 'system',
+        content: systemPrompt,
+        providerOptions: {
+          anthropic: { cacheControl: { type: 'ephemeral' } },
+        },
+      }
+    : {
+        role: 'system',
+        content: systemPrompt,
+      }
+
   const modelMessages: ModelMessage[] = [
-    {
-      role: 'system',
-      content: systemPrompt,
-      providerOptions: {
-        anthropic: { cacheControl: { type: 'ephemeral' } },
-      },
-    },
+    systemMessage,
     ...(await convertToModelMessages(messages)),
   ]
 
+  let finishReason: string | undefined
+
+  // Some models (e.g. DeepSeek R1) don't support tool-use reliably; omit tools
+  // entirely for those so the model answers from conversation context alone
+  // rather than emitting malformed tool calls.
+  const toolsForModel = supports(modelId, 'tool-use') ? consumeTools : undefined
+
   const result = streamText({
-    model: anthropic(model),
+    model: resolveModel(modelId),
     messages: modelMessages,
-    tools: consumeTools,
-    stopWhen: stepCountIs(3),
-    maxOutputTokens: 8192,
-    onFinish: ({ providerMetadata, usage }) => {
+    tools: toolsForModel,
+    stopWhen: stepCountIs(5),
+    maxOutputTokens: modelMeta.maxOutputTokens,
+    experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+    onFinish: ({ finishReason: reason, providerMetadata, usage }) => {
+      finishReason = reason
       const meta = providerMetadata?.anthropic as
         | { cacheReadInputTokens?: number; cacheCreationInputTokens?: number }
         | undefined
-      console.log('[consume] stream finish:', {
-        cacheRead: meta?.cacheReadInputTokens ?? 0,
-        cacheCreate: meta?.cacheCreationInputTokens ?? 0,
-        inputTokens: usage?.inputTokens ?? 0,
-        outputTokens: usage?.outputTokens ?? 0,
-      })
+      console.log(
+        `[consume] stream finish: model=${modelId} finishReason=${reason} ` +
+          `cacheRead=${meta?.cacheReadInputTokens ?? 0} ` +
+          `cacheCreate=${meta?.cacheCreationInputTokens ?? 0} ` +
+          `inputTokens=${usage?.inputTokens ?? 0} ` +
+          `outputTokens=${usage?.outputTokens ?? 0}`
+      )
+      if (reason === 'length') {
+        console.warn('[consume] OUTPUT TRUNCATED: hit maxOutputTokens cap', {
+          model: modelId,
+          cap: modelMeta.maxOutputTokens,
+        })
+      }
     },
   })
 
@@ -150,7 +182,14 @@ export async function POST(request: Request) {
     generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
     messageMetadata: ({ part }) => {
       if (part.type === 'start' && isFirstTurn) {
-        return { conversationId: finalConversationId }
+        return { conversationId: finalConversationId, model: modelId }
+      }
+      if (part.type === 'start') {
+        return { model: modelId }
+      }
+      // Emitted after streamText.onFinish has run, so finishReason is set.
+      if (part.type === 'finish' && finishReason === 'length') {
+        return { truncated: true }
       }
     },
     onFinish: async ({ messages: finalMessages }) => {
@@ -189,8 +228,10 @@ async function generateConversationTitle(messages: UIMessage[]): Promise<string 
   if (!text) return null
 
   try {
+    // Pinned to the cheapest fast model regardless of the user's picked chat
+    // model — titles are short and latency-sensitive.
     const { text: title } = await generateText({
-      model: anthropic('claude-haiku-4-5'),
+      model: resolveModel(TITLE_MODEL_ID),
       system:
         'Summarize the user question as a concise 3-6 word chat title. No quotes, no trailing punctuation, Title Case.',
       prompt: text.slice(0, 500),

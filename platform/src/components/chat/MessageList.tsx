@@ -3,6 +3,7 @@
 import type { UIMessage } from 'ai'
 import { UserMessage } from './UserMessage'
 import { AssistantMessage } from './AssistantMessage'
+import { MessageErrorBoundary } from './MessageErrorBoundary'
 import type { Rating } from '@/hooks/useFeedback'
 
 interface BranchStat {
@@ -38,27 +39,29 @@ export function MessageList({
         if (message.role === 'user') {
           const stat = branchStats?.[message.id]
           return (
-            <UserMessage
-              key={message.id}
-              message={message}
-              onEditSubmit={onEditUserMessage}
-              branchTotal={stat?.total}
-              branchCurrent={stat?.current}
-              onStepBranch={onStepBranch ? d => onStepBranch(message.id, d) : undefined}
-            />
+            <MessageErrorBoundary key={message.id} messageId={message.id}>
+              <UserMessage
+                message={message}
+                onEditSubmit={onEditUserMessage}
+                branchTotal={stat?.total}
+                branchCurrent={stat?.current}
+                onStepBranch={onStepBranch ? d => onStepBranch(message.id, d) : undefined}
+              />
+            </MessageErrorBoundary>
           )
         }
         if (message.role === 'assistant') {
           return (
-            <AssistantMessage
-              key={message.id}
-              message={message}
-              isStreaming={isStreaming && isLast}
-              isLast={isLast}
-              onRegenerate={onRegenerate}
-              rating={ratings?.[message.id] ?? null}
-              onRate={onRate ? r => onRate(message.id, r) : undefined}
-            />
+            <MessageErrorBoundary key={message.id} messageId={message.id}>
+              <AssistantMessage
+                message={message}
+                isStreaming={isStreaming && isLast}
+                isLast={isLast}
+                onRegenerate={onRegenerate}
+                rating={ratings?.[message.id] ?? null}
+                onRate={onRate ? r => onRate(message.id, r) : undefined}
+              />
+            </MessageErrorBoundary>
           )
         }
         return null

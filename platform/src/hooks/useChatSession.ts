@@ -41,7 +41,6 @@ export function useChatSession({
     id: conversationId ?? 'new',
     messages: initialMessages,
     transport,
-    experimental_throttle: 16,
     onFinish: ({ message }) => {
       const metadata = message.metadata as { conversationId?: string } | undefined
       const newId = metadata?.conversationId

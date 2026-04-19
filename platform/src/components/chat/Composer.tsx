@@ -142,9 +142,9 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         className={cn(
-          'relative flex flex-col rounded-3xl border border-border bg-background shadow-sm transition-all duration-150',
-          isFocused && 'border-border/80 shadow-md ring-4 ring-ring/10',
-          isDragOver && 'border-ring ring-4 ring-ring/20',
+          'relative flex flex-col rounded-3xl border border-border/70 bg-background shadow-sm transition-all duration-200',
+          isFocused && 'border-border/90 shadow-md ring-4 ring-ring/10',
+          isDragOver && 'border-ring/80 bg-ring/5 ring-4 ring-ring/20 shadow-lg',
           disabled && 'opacity-60'
         )}
       >
@@ -172,7 +172,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
           maxRows={10}
           disabled={disabled}
           className={cn(
-            'w-full resize-none rounded-3xl bg-transparent px-5 py-4 text-[15px] leading-[1.55] text-foreground outline-none placeholder:text-muted-foreground',
+            'w-full resize-none rounded-3xl bg-transparent px-5 py-4 text-[15px] leading-[1.55] text-foreground outline-none placeholder:text-muted-foreground/70 placeholder:transition-colors focus:placeholder:text-muted-foreground/50',
             'disabled:cursor-not-allowed'
           )}
           aria-label="Message composer"
@@ -195,14 +195,14 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
               aria-label="Attach file"
               title="Attach image or PDF"
               disabled={disabled}
-              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:opacity-50"
+              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-all duration-150 hover:bg-muted/80 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:opacity-50"
             >
               <Paperclip className="size-4" />
             </button>
             <p className="hidden sm:block pl-1 text-[11px] text-muted-foreground/70">
-              <kbd className="rounded border border-border bg-muted/50 px-1 py-0.5 font-mono text-[10px]">Enter</kbd>{' '}
+              <kbd className="rounded border border-border/60 bg-muted/50 px-1 py-0.5 font-mono text-[10px] shadow-sm">Enter</kbd>{' '}
               to send ·{' '}
-              <kbd className="rounded border border-border bg-muted/50 px-1 py-0.5 font-mono text-[10px]">Shift+Enter</kbd>{' '}
+              <kbd className="rounded border border-border/60 bg-muted/50 px-1 py-0.5 font-mono text-[10px] shadow-sm">Shift+Enter</kbd>{' '}
               new line
             </p>
           </div>
@@ -212,7 +212,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
                 type="button"
                 onClick={onStop}
                 aria-label="Stop generating"
-                className="inline-flex size-9 items-center justify-center rounded-full bg-foreground text-background transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30"
+                className="inline-flex size-9 items-center justify-center rounded-full bg-foreground text-background transition-all duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30"
               >
                 <Square className="size-3.5 fill-current" />
               </button>
@@ -223,9 +223,9 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
                 disabled={!canSend}
                 aria-label="Send message"
                 className={cn(
-                  'inline-flex size-9 items-center justify-center rounded-full transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30',
+                  'inline-flex size-9 items-center justify-center rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30',
                   canSend
-                    ? 'bg-foreground text-background hover:opacity-90'
+                    ? 'bg-foreground text-background hover:opacity-90 active:scale-95'
                     : 'bg-muted text-muted-foreground/50 cursor-not-allowed'
                 )}
               >
