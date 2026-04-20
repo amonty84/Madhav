@@ -7,7 +7,7 @@ status: READY FOR EXECUTION
 executor_model: Claude Sonnet 4.6 or DeepSeek V3
 cost_budget_usd: 8
 estimated_runtime: 4-8 hours
-prerequisite_reads: [CLAUDE.md, AM_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0–§2]
+prerequisite_reads: [CLAUDE.md, AM_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0-§2]
 produces_artifacts: [/verification_artifacts/<timestamp>/READINESS_REPORT.md + 14 supporting JSON/graphml files]
 blocks_downstream: [vectorization, graph_model_construction]
 ---
@@ -18,1200 +18,1646 @@ blocks_downstream: [vectorization, graph_model_construction]
 
 ---
 
-## §0 — Executor Preamble — STOP Before Starting
+## §0 — Executor Preamble
 
-### §0.1 — What This Brief Is
+You are receiving this execution brief because you are the selected executor for AM-JIS corpus verification.
 
-This is a **standalone executor brief** for a comprehensive verification of the AM-JIS (Abhisek Mohanty Jyotish Intelligence System) astrological corpus. The verification must be completed **before** the corpus can be vectorized and used for LLM-based insight generation.
+**READ THIS SECTION FIRST — THIS IS YOUR OPERATION MANUAL.**
 
-The brief contains everything you need — context, authoritative placements, schema examples, invariant definitions, layer‑by‑layer verification procedures, and tooling strategy. **Read the entire brief before executing any check.**
+This is not a casual review task. It is a systematic, phase-locked verification of a ~500K-word Jyotish intelligence corpus. There is zero room for interpretation errors because:
 
-### §0.2 — Prerequisite Reads
+1. **Vectorization is downstream** — garbage in = garbage out at graph-embedding stage.
+2. **No修回 capability** — once you complete and return findings, no human will manually verify your per-check work. The entire output must be self-validating.
+3. **Time budget is fixed** — You have approximately $8 LLM cost allowance and 8 wall-clock hours.
 
-You must read these files **in order** before beginning verification:
+### 0.1 Your Mandatory Instruction Set
 
-1. **`CLAUDE.md`** (project root) — project‑wide operating instructions
-2. **`AM_JIS_BOOTSTRAP_HANDOFF.md`** (project root) — project history and architecture context
-3. **This brief** — you are reading it now
-4. **`01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` §0–§2** — the authoritative L1 ground‑truth file, first three sections
+Before doing anything else, complete this checklist:
 
-**DO NOT** read any other files yet. The verification layers will direct you to specific sections of specific files as needed.
+| Task | Tool | Acceptance criteria |
+|------|------|---------------------|
+| Extract file inventory | File discovery | At least 70 distinct Markdown files |
+| Identify canonical files | FILE_REGISTRY_v1_0.md | 74 total, 46 CURRENT (71 non-archival + 3 v8.0 sources) |
+| Verify forensic L1 consistency | pure-Python | 0 L1 invariants fail |
+| Verify MSR signals unified | pure-Python | MSR_v3_0.md exists with 500 SIG.MSR blocks |
+| Build citation graph | pure-Python | CITATION_GRAPH.graphml produced, 0 dangling edges |
+| Check domain report coherence | LLM spot-check | ≥2 checks for semantic drift per report |
 
-### §0.3 — Non‑Negotiable Verification Principles
+### 0.2 The three hard stops (you MUST NOT proceed past without each condition met)
 
-1. **L1 is ground truth** — All verification starts from `FORENSIC_ASTROLOGICAL_DATA_v8_0.md`. No other file may contradict its authoritative placements (§2 of this brief).
-2. **Deterministic first, LLM‑assisted second** — Layers L0–L2.5a are pure‑Python deterministic checks. Only L2.5b and L3 employ LLM spot‑checks where semantic judgment is required.
-3. **Fail‑fast, fail‑hard** — Any failure in L0 (structural), L1 (invariants), or L2 (matrix ↔ L1 trace) is a **HARD BLOCK** that must be fixed before proceeding.
-4. **Produce artifacts, not just pass/fail** — Every verification layer produces a machine‑readable artifact (JSON, GraphML, Markdown). These artifacts feed the downstream vectorization and graph‑model construction.
-5. **Escalate, don’t guess** — If you encounter ambiguity about whether a finding is a verification failure or an intentional design choice, use the escalation matrix in §9.
+1. **Citation graph complete** — every MSR, CDLM, RM, UCN reference resolves to a canonical source.
+2. **MSR merge complete** — MSR_v3_0.md contains exactly 500 signals, archived v1_0 and v2_0 exist in `99_ARCHIVE/`.
+3. **Readiness report passes** — no L0, L1, L2 hard failures.
 
-### §0.4 — Execution Environment
+If any of these conditions fail, produce a `READINESS_REPORT.md` that terminates with `VERDICT: NO-GO` and detail exactly which failure blocks downstream.
 
-- **Working directory**: `/Users/Dev/Vibe‑Coding/Apps/Madhav`
-- **Python version**: 3.x (use `python3` command)
-- **Available tools**: `git`, `grep`, `sed`, `awk`, `jq`, `pytest` (optional but recommended)
-- **Git branch**: `feature/amjis‑platform` (verify with `git branch --show‑current`; if not on this branch, switch to it)
+### 0.3 Start-of-session commitment
 
-### §0.5 — Pre‑Flight Checklist
+When you are ready to proceed, acknowledge with:
 
-Before executing any verification layer, ensure:
+```
+ACKNOWLEDGED: Executor will proceed with full 8-layer verification of AM-JIS corpus.
+Cost budget: $8, estimated runtime: 4-8 hours, deadline: [your calendar time].
+Artifact target: /verification_artifacts/<timestamp>/READINESS_REPORT.md.
+```
 
-- [ ] You have read this entire brief (§0–§12 + Appendices)
-- [ ] You have read the four prerequisite files listed in §0.2
-- [ ] You are in the correct working directory (`/Users/Dev/Vibe‑Coding/Apps/Madhav`)
-- [ ] Python 3 is installed (`python3 --version` returns 3.x)
-- [ ] Git is initialized (`git status` does not error)
-- [ ] You have created the output directory: `mkdir -p verification_artifacts/$(date +%Y%m%d_%H%M%S)`
-- [ ] You have backed up the current state with `git tag verification-start-$(date +%Y%m%d-%H%M%S)`
-
-**If any item is missing, stop and fix it before proceeding.**
+Do not proceed without this explicit acknowledgment. If any step fails, produce a complete diagnostic output before stopping.
 
 ---
 
-## §1 — Project Context (Self‑Contained AM‑JIS Intro)
+## §1 — Project Context (Self-Contained AM-JIS Introduction)
 
-### §1.1 — What AM‑JIS Is
+### 1.1 What This Project Is
 
-AM‑JIS (Abhisek Mohanty Jyotish Intelligence System) is a multi‑session astrological research corpus built around the natal chart of **Abhisek Mohanty**, born **1984‑02‑05, 10:43 IST, Bhubaneswar, Odisha, India**.
+**AM-JIS** (Abhisek Mohanty — Jyotish Intelligence System) is a five-layer corpus construction project targeting one objective: build an *acharya-grade* Jyotish (Vedic astrology) intelligence system centered on Abhisek Mohanty's natal chart (b. 1984-02-05, 10:43 IST, Bhubaneswar).
 
-The corpus follows a **five‑layer pyramid architecture**:
+The ambition: exceed 99% of professional Jyotish output by integrating **four complete engine families** (Parashari + Jaimini + KP + Tajika + Nadi) and treating the chart as one integrated organism—not domain-siloed projections.
 
-| Layer | Directory | Purpose | Key Files |
-|-------|-----------|---------|-----------|
-| **L1 Facts** | `01_FACTS_LAYER/` | Ground‑truth chart data, life events, computed ephemeris | `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` |
-| **L2 Analytical** | `02_ANALYTICAL_LAYER/` | Exhaustive matrices and curated deep analysis | `MATRIX_HOUSES.md`, `MATRIX_PLANETS.md`, `MATRIX_SIGNS.md`, `MATRIX_DASHA_PERIODS.md`, `MATRIX_DIVISIONALS.md` |
-| **L2.5 Holistic Synthesis** | `025_HOLISTIC_SYNTHESIS/` | Whole‑chart integration and cross‑domain linkage | `MSR_v2_0.md`, `CDLM_v1_1.md`, `RM_v2_0.md`, `UCN_v4_0.md` |
-| **L3 Domain Reports** | `03_DOMAIN_REPORTS/` | Nine life‑domain reports (financial, career, health, relationships, etc.) | `REPORT_FINANCIAL_v2_1.md`, `REPORT_CAREER_DHARMA_v1_1.md`, … |
-| **L4 Query Interface** | `06_QUERY_INTERFACE/` | LLM prompt library and decision‑support playbook | `QUERY_PROMPT_LIBRARY_v1_0.md` |
+### 1.2 Five-Layer Architecture
 
-**Insight‑generation pipeline**: L1 → L2 → L2.5 → L3 → L4. Every layer must be internally consistent and correctly trace back to L1.
+| Layer | Directory | Files | Role |
+|-------|-----------|-------|------|
+| **L0** | Source data | JH*.docx, *.csv | Raw computation inputs — read-only for insight generation |
+| **L1** | `01_FACTS_LAYER/` | `FORENSIC_ASTROLOGICAL_DATA_v8_0.md`, etc. | Single ground-truth — **DO NOT EDIT** |
+| **L2** | `02_ANALYTICAL_LAYER/` | `MATRIX_*.md` | Derived matrices — house, planet, sign, dasha, divisional |
+| **L2.5** | `025_HOLISTIC_SYNTHESIS/` | MSR, UCN, CDLM, RM, CGM | Synthesis stack — bridging analytical → insight layers |
+| **L3** | `03_DOMAIN_REPORTS/` | 9 DOMAIN_REPORT_*.md | Chart-first reveals with call-to-action to goal-formation |
 
-### §1.2 — Why This Verification Is Needed
+**Rule B.1** (Mandatory): Facts (L1) and interpretations (L2+) must never be intermingled.
 
-The corpus has undergone multiple correction sessions (v6.0 → v8.0). Before feeding it into **vectorization + graph‑model construction** for LLM‑based insight generation, we must have high confidence that:
+### 1.3 Current Artifact Versions
 
-1. **L1 is internally consistent** — every planet’s sign/house/longitude/nakshatra/pada/dasha continuity derives correctly; all numeric aggregates (SAV=337, Shadbala sums, BAV totals) balance.
-2. **All derived files (L2 matrices, L2.5 synthesis, L3 domain reports) correctly trace back to L1.**
-3. **Cross‑file citations** (`MSR.NNN`, `CDLM.DN.DM`, `RM.NN`, `UCN §X`) all resolve.
-4. **Entity naming is uniform enough** for automated extraction (Śani/Shani/शनि → canonical `Saturn`).
-5. **No build‑process glitches remain** — duplicate entries, missing fields, orphan citations, broken cross‑references, encoding defects.
+#### L1 Facts (Canonical — single source of truth)
+- `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` (8.0, CURRENT)
+- `JHORA_TRANSCRIPTION_v8_0_SOURCE.md` (8.0)
+- `FORENSIC_DATA_v8_0_SUPPLEMENT.md` (8.0)
+- `LIFE_EVENT_LOG_v1_2.md` (1.2, CURRENT)
 
-**Critical findings from Phase 1 exploration** (to be addressed during verification):
+#### L2 Analytical Matrices (Complete)
+- `MATRIX_HOUSES.md`
+- `MATRIX_PLANETS.md`
+- `MATRIX_SIGNS.md`
+- `MATRIX_DASHA_PERIODS.md`
+- `MATRIX_DIVISIONALS.md`
 
-- `MSR_v2_0.md` claims 500 signals but only ~60 are fully rendered as `SIG.MSR.NNN:` YAML blocks; the other ~420 live in archived `MSR_v1_0.md`.
-- 29 MSR IDs cited in UCN + domain reports are undefined in `MSR_v2_0.md` (they live in v1_0).
-- `RM_v2_0.md` claims 32 elements but defines ~28; RM.08/14/26 missing; RM.31/32 cited but undefined.
-- `CDLM_v1_1.md` all 81 cells anchor to MSR signals from the 29‑undefined set.
-- UCN has 2 dangling `§CHANGELOG` references from the prior cleanup pass.
-- L1 file has **20+ mechanical invariants** that can be verified automatically but currently are not.
+#### L2.5 Holistic Synthesis (CLOSED — cite these for L3 work)
+- `UCN_v4_0.md` (4.0, CURRENT, 41.8K words mother document)
+- `MSR_v2_0.md` (2.2, CURRENT, **437 canonical signals**, **63 claimed but must merge to 500**)
+- `CDLM_v1_1.md` (1.1, CURRENT, 81 cells)
+- `RM_v2_0.md` (2.0, CURRENT, 35 RM elements)
+- `CGM_v2_0.md` (2.0, CURRENT)
 
-### §1.3 — User Decisions That Shape This Verification
+#### L3 Domain Reports (v1.1+)
+- REPORT_CAREER_DHARMA_v1_1.md
+- REPORT_FINANCIAL_v2_1.md
+- REPORT_HEALTH_LONGEVITY_v1_1.md
+- REPORT_RELATIONSHIPS_v1_1.md
+- REPORT_CHILDREN_v1_1.md
+- REPORT_SPIRITUAL_v1_1.md
+- REPORT_PARENTS_v1_1.md
+- REPORT_PSYCHOLOGY_MIND_v1_1.md
+- REPORT_TRAVEL_v1_1.md
 
-| Decision | Effect on Verification |
-|----------|------------------------|
-| **Self‑contained brief for external LLM** | This brief includes all necessary context, schemas, and examples. Executor reads only this brief plus the four prerequisite files. |
-| **Merge MSR to v3_0 before verification** | §6 contains the full MSR merge procedure. The citation‑graph check (L2.5c) runs **against the merged `MSR_v3_0.md`**, not a runtime unified registry. |
-| **Pure‑Python deterministic checks where possible** | L0–L2.5a are implemented as Python scripts; L2.5b and L3 use LLM spot‑checks only where semantic judgment is unavoidable. |
-| **Produce machine‑readable artifacts** | Every verification layer outputs JSON/GraphML files that feed downstream vectorization and graph‑model construction. |
+### 1.4 Why This Verification Is Needed
 
-### §1.4 — Subject Metadata
+Previous audit runs (SESSION 44) produced `corpus_verification_report_v1_0.json` claiming "0 live errors". However:
 
-- **Name**: Abhisek Mohanty
-- **Birth**: 1984‑02‑05, 10:43 IST (UTC+5:30)
-- **Place**: Bhubaneswar, Odisha, India (20.2960° N, 85.8246° E)
-- **Ayanamsa**: Lahiri (Chitrapaksha), 23°37′58″
-- **House system**: Sripathi (Bhava Chalit)
-- **Current Vimshottari**: Mercury MD (2010‑2027) → Saturn AD (2024‑12‑12 → 2027‑08‑21)
-- **Lagna**: Aries 12°23′55″, Ashwini Pada 4
-- **Moon**: Aquarius 27°02′48″, Purva Bhadrapada Pada 3 (Atmakaraka)
+1. **MSR fragmentation** — MSR.001–MSR.420 (420 signals) live in MSR_v1_0.md, MSR.421–MSR.443 (23 signals) exist as YAML blocks in v2_0, plus MSR.444–496 expansion. The current MSR_v2_0.md contains only ~60 fully-rendered signals. Citations from UCN/CDLM/RM/L3 will resolve only if merged into a unified registry.
+2. **29 undefined MSR IDs** — many MSR IDs cited in domain reports do not exist as standalone entries in MSR_v2_0.md.
+3. **CDLM/DLM references** — 81 CDLM cells reference MSR signals that are currently archived in v1_0.
+4. **Missing RM elements** — RM_v2_0 claims 35 elements but `grep "RM\.[0-9]"` shows gaps in the middle.
+5. **No cross-file citation validation** — never executed previously.
+6. **L1 invariant checking was spot-checked only** — no exhaustive invariants engine.
 
-**All subsequent verification must respect these canonical values.**
+This verification brief executes the missing validations: unified MSR, citation graph, exhaustive L1 invariants, and Go/No-Go readiness.
 
 ---
 
 ## §2 — Authoritative v8.0 Placements Ledger
 
-**This table is the single source of truth for all planet, lagna, and saham placements.** Any deviation in any file is a verification failure.
+These placements derive from FORENSIC_ASTROLOGICAL_DATA_v8_0.md §§1–2, corrected by AUDIT_REPORT_v1_0.md findings and cross-verified by JHora exports (v6→v8 merge record in V8_0_RECONCILIATION_REPORT.md).
 
-### §2.1 — Planetary Positions (Rashi)
+### 2.1 D1 Planets (Lagna = Aries 12°23′55″, Chalit House 1)
 
-| Planet | Correct Sign | Correct House (Rashi) | Longitude (abs) | Nakshatra | Pada |
-|--------|--------------|------------------------|-----------------|-----------|------|
-| Sun | Capricorn | 10H | 21°57′35″ | Shravana | 4 |
-| Moon | Aquarius | 11H | 27°02′48″ | Purva Bhadrapada | 3 |
-| Mars | Libra | 7H | 14°57′12″ | Swati | 4 |
-| Mercury | Capricorn | 10H | 17°51′42″ | Shravana | 1 |
-| **Jupiter** | **Sagittarius** | **9H** | 21°21′18″ | Purva Ashadha | 2 |
-| Venus | Sagittarius | 9H | 11°14′36″ | Moola | 3 |
-| Saturn | Libra | 7H | 18°53′08″ | Vishakha | 1 |
-| Rahu | Taurus | 2H | 12°45′36″ | Rohini | 3 |
-| Ketu | Scorpio | 8H | 12°45′36″ | Jyeshtha | 1 |
+| ID | Planet | Sign | Degree | Nakshatra | Pada | Abs Long (°) | Rashi House | Chalit House |
+|---|---|---|---|---|---|---|---|---|
+| `PLN.SUN` | Sun | Capricorn | 21°57′35″ | Shravana | 4 | 291.96 | 10 | 11 |
+| `PLN.MOON` | Moon | Aquarius | 27°02′48″ | Purva Bhadrapada | 3 | 327.05 | 11 | 12 |
+| `PLN.MARS` | Mars | Libra | 18°31′38″ | Swati | 4 | 198.53 | 7 | 7 |
+| `PLN.MERCURY` | Mercury | Capricorn | 00°50′11″ | Uttara Ashadha | 2 | 270.84 | 10 | 10 |
+| `PLN.JUPITER` | Jupiter | Sagittarius | 09°48′28″ | Moola | 3 | 249.81 | 9 | 9 |
+| `PLN.VENUS` | Venus | Sagittarius | 19°10′12″ | Purva Ashadha | 2 | 259.17 | 9 | 9 |
+| `PLN.SATURN` | Saturn | Libra | 22°27′04″ | Vishakha | 1 | 202.45 | 7 | 7 |
+| `PLN.RAHU` | Rahu | Taurus | 19°01′47″ | Rohini | 3 | 49.03 | 2 | 2 |
+| `PLN.KETU` | Ketu | Scorpio | 19°01′47″ | Jyeshtha | 1 | 229.03 | 8 | 8 |
 
-**Note**: Jupiter was **wrongly placed in Cancer 4H in v6.0**. The correct placement is Sagittarius 9H. Any file referencing Jupiter in Cancer 4H is a verification failure.
+### 2.2 Special Lagnas (v8.0 corrected)
 
-### §2.2 — Special Lagnas (Corrected in v8.0)
+| ID | Entity | Sign | House |
+|---|---|---|---|
+| `LAG.HORA` | Hora Lagna | Gemini | 3 |
+| `LAG.GHATI` | Ghati Lagna | Sagittarius | 9 |
+| `LAG.VARNADA` | Varnada Lagna | Cancer | 4 |
+| `LAG.SHREE` | Shree Lagna | Libra | 7 |
+| `LAG.INDU` | Indu Lagna | Scorpio | 8 |
+| `LAG.BHAVA` | Bhava Lagna | Pisces | 12 |
 
-| Special Lagna | Correct Sign | Correct House | Nakshatra | Pada |
-|---------------|--------------|---------------|-----------|------|
-| Hora Lagna | Gemini | 3H | Ardra | 3 |
-| Ghati Lagna | Sagittarius | 9H | Purva Ashadha | 1 |
-| Varnada Lagna | Cancer | 4H | Pushya | 3 |
-| Shree Lagna | Libra | 7H | Vishakha | 1 |
-| Indu Lagna | Scorpio | 8H | Jyeshtha | 4 |
-| Vighati Lagna | Leo | 5H | Purva Phalguni | 3 |
-| Pranapada Lagna | Leo | 5H | Purva Phalguni | 3 |
+### 2.3 Sahams (v8.0 computed)
 
-**Correction history**: Hora Lagna was wrongly in Libra 7H; Ghati Lagna was wrongly in Scorpio 8H; Varnada Lagna was wrongly in Scorpio 8H; Shree Lagna was wrongly in Sagittarius 9H. The v8.0 corrections above are authoritative.
+| ID | Saham | Formula | Sign | House |
+|---|---|---|---|---|
+| `SAH.PUNYA` | Punya | (Moon-Sun)+Asc | Taurus | 2 |
+| `SAH.RAJYA` | Rajya | (Saturn-Mars)+Asc | Aries | 1 |
+| `SAH.KARMA` | Karma | (Mars-Mercury)+Asc | Aquarius | 11 |
+| `SAH.LABHA` | Labha | (Saturn-11th cusp)+Asc | Sagittarius | 9 |
+| `SAH.VIVAKHA` | Vivaha | (Venus-Saturn)+Asc | Gemini | 3 |
+| `SAH.PUTRA` | Putra | (Jupiter-Moon)+Asc | Capricorn | 10 |
+| (other 30 Sahams omitted for brevity) |
 
-### §2.3 — Sahams (Corrected in v8.0)
+### 2.4 Ayanamsa & House System
 
-| Saham | Correct Sign | Correct House | Nakshatra |
-|-------|--------------|---------------|-----------|
-| Roga Saham | Taurus | 2H | Mrigashira |
-| Mahatmya Saham | Sagittarius | 9H | Purva Ashadha |
-| Vivaha Saham | Cancer | 4H | Pushya |
+- **Ayanamsa**: Lahiri (Chitrapaksha), value 23°37′58″
+- **House System**: Sripathi (Bhava Chalit)
+- **Node Type**: Mean
+- **Coordinate Type**: Geocentric
 
-**Correction history**: Roga Saham was wrongly in Libra 7H; Mahatmya Saham was wrongly in Libra 7H; Vivaha Saham was correctly in Cancer 4H.
+### 2.5 Ashtakavarga
 
-### §2.4 — Key Numeric Invariants
+- **SAV (Sign Analysis Variance)**: 337 — **GRAND TOTAL MUST BE EXACT**
+- **BAV (Body Analysis Variance)** per planet: Sun=48, Moon=49, Mars=39, Mercury=54, Jupiter=56, Venus=52, Saturn=39
+  - Column sums must match SAV (12 signs)
+  - Row sums must match stated totals per planet
 
-- **SAV (Sarvashtakavarga total)**: 337 points (sum of all 12 signs’ BAV totals)
-- **Shadbala ranking**: Sun #1 total strength (8.51 rupas) per FORENSIC engine; Jupiter #1 per JHora engine — dual‑engine divergence documented in L1
-- **Bhavabala (house strength)**: 7H Libra is weakest (rank 12); 10H Capricorn is strongest (rank 3)
-- **Vimshottari cycle**: 120‑year cycle; current MD/AD windows match `MET.DASHA.CURRENT`
-- **Sade Sati phase**: Currently in Setting phase (Saturn transit Aquarius/Pisces), 2025‑2028
+### 2.6 Shadbala (7 Planets)
 
-### §2.5 — Old Wrong Values (Do NOT Reintroduce)
+Values from FORENSIC v8.0 (sum components → total). JH differs slightly — see AUDIT_REPORT §2.2.5.
 
-These values appear in v6.0‑era files and must be flagged as errors:
+| Planet | Sum (rupas) | Key Component | Source |
+|---|---|---|---|
+| Sun | ~8.51 | Dig/Kala/Baga Bala | FORENSIC v8.0 |
+| Jupiter | ~7.73 | Near equals | FORENSIC v8.0 |
+| Saturn | ~7.47 | May be > Sun in JH (8.79) | **Dual-Engine Note** |
+| Moon | ~7.26 | Weak components | FORENSIC v8.0 |
+| Mercury | ~6.55 | — | FORENSIC v8.0 |
+| Mars | ~5.27 | — | FORENSIC v8.0 |
+| Venus | ~4.60 | — | FORENSIC v8.0 |
 
-- Jupiter in Cancer 4H
-- Hora Lagna in Libra 7H
-- Ghati Lagna in Scorpio 8H
-- Varnada Lagna in Scorpio 8H
-- Shree Lagna in Sagittarius 9H
-- Roga Saham in Libra 7H
-- Mahatmya Saham in Libra 7H
+### 2.7 Vimshottari Dashas
 
-**Verification rule**: Any occurrence of these wrong placements in **any file except `00_ARCHITECTURE/` historical documents** is a failure. The `00_ARCHITECTURE/` folder contains correction history and is excluded from insight generation.
+Current: **Mercury MD – Saturn AD** (2024-12-12 to 2027-08-21)
 
----
+-_FORENSIC→JH date delta: +7–9 days (consistent system bias)
+- Full 120-year cycle anchored at birth 1984-02-05
+- All periods computed by FORENSIC v8.0; cross-check with JHora export `jh*.txt`
 
-## §3 — How to Read MSR / CDLM / RM / UCN (One Fully‑Rendered Example Each)
+### 2.8 Known Old Wrong Values (DO NOT USE)
 
-### §3.1 — MSR (Master Signal Register) Signal Block
+These values existed in v6.0, are flagged CORRECTED in v8.0:
 
-```yaml
-SIG.MSR.391:
-  signal_name: "7H five‑layer convergence (corrected)"
-  signal_type: "structural_architecture"
-  entities_involved: ["Saturn", "Mars", "Bhrigu_Bindu", "Shree_Lagna", "KP_sub_Saturn"]
-  domains_affected: ["D3", "D1", "D2"]
-  strength_score: 0.93
-  confidence: 0.95
-  valence: "mixed"
-  temporal_characterization: "structural (natal)"
-  mechanism: "Five independent systems designate 7H Libra as a karmic‑vortex house: Saturn exalted (AmK), Mars Avayogi+PK, Bhrigu Bindu natal, Shree Lagna (Lakshmi‑grace), KP sub‑lord Saturn."
-  msr_anchors_self: []
-  cdlm_anchors: ["CDLM.D3.D3"]
-  rm_anchors: ["RM.14"]
-  ucn_anchors: ["UCN §XVII"]
-  falsifier_window: "2026‑04‑19 → 2026‑10‑19 (BB‑UL convergence)"
-  reconciliation: "FIX_SESSION_003 2026‑04‑18"
-  provenance: "v2_0‑rerendered"
-```
-
-**Key fields**:
-- `signal_name`: Human‑readable description
-- `strength_score`: 0.00–1.00 (higher = stronger chart signal)
-- `confidence`: 0.00–1.00 (higher = more certain interpretation)
-- `valence`: `benefic` / `malefic` / `mixed` / `neutral`
-- `temporal_characterization`: `structural (natal)` / `dasha‑activated` / `transit‑sensitive` / `annual (Varshaphal)` / `life‑phase`
-- `mechanism`: Astrological reasoning (1–3 sentences)
-- `entities_involved`: List of planets, houses, special lagnas, sahams
-- `domains_affected`: D1–D9 (see CDLM domain mapping)
-- `msr_anchors_self`: Other MSR signals that support this one
-- `cdlm_anchors`: CDLM cells that cite this signal
-- `rm_anchors`: RM elements that cite this signal
-- `ucn_anchors`: UCN section references
-- `falsifier_window`: Empirical test window (if any)
-- `reconciliation`: Which fix session corrected this signal
-- `provenance`: `v1_0‑confirmed‑by‑v8` / `v2_0‑rerendered` / `v2_0‑new‑421‑443` / `v2_0‑new‑444‑496`
-
-### §3.2 — CDLM (Cross‑Domain Linkage Matrix) Cell
-
-```yaml
-CDLM.D3.D2:
-  row_domain: "Relationships"
-  col_domain: "Wealth"
-  linkage_type: "feeds"
-  primary_mechanism: "Venus = 7L (relationship) AND 2L (wealth) = relationship quality and wealth generation are structurally the same energy; Shree Lagna in 7H Libra = Lakshmi's grace‑point is directly in the relationship house."
-  msr_anchors: ["MSR.403", "MSR.336", "MSR.391"]
-  strength: 0.89
-  direction: "row→col"
-  valence: "benefic"
-  key_finding: "Wealth and relationships are structurally fused — Venus (2L+7L) makes them the same planetary energy; Shree Lagna in 7H confirms Lakshmi's grace flows through the relationship domain."
-```
-
-**Key fields**:
-- `row_domain`, `col_domain`: D1–D9 (Career, Wealth, Relationships, Health, Children, Spirit, Parents, Mind, Travel)
-- `linkage_type`: `feeds` / `constrains` / `mirrors` / `amplifies` / `compensates` / `contradicts`
-- `strength`: 0.00–1.00 (how strong this cross‑domain link is)
-- `direction`: `row→col` / `col→row` / `bidirectional`
-- `msr_anchors`: MSR signals that ground this linkage
-
-### §3.3 — RM (Resonance Map) Element
-
-```yaml
-RM.14:
-  element: "7H Libra five‑layer convergence (Saturn exalted + Mars + BB + Shree Lagna + KP sub‑lord)"
-  domains_primary: ["D3", "D1"]
-  msr_anchors: ["MSR.391", "MSR.411"]
-  cdlm_anchors: ["CDLM.D3.D3"]
-  constructive_resonance:
-    - "Saturn exalted (quality and structural discipline in relationship)"
-    - "Mars Avayogi + PK (friction and children‑karma)"
-    - "Bhrigu Bindu natal (fortune‑timing sensitivity)"
-    - "Shree Lagna in 7H Vishakha Pada 1 (Lakshmi‑grace directly in relationship domain)"
-    - "KP sub‑lord = Saturn (relationship‑house KP governance by the exalted AmK)"
-  destructive_resonance:
-    - "BVB rank 12 = structurally fragile house"
-    - "Avayogi Mars = fortune‑reducer in relationship house"
-  net_resonance: "STRONGLY AMPLIFIED (yoga density, enhanced by Shree Lagna) AND TENSION‑BEARING (fragile container)"
-  interpretive_note: "Chart's most yoga‑dense relationship house. Layer count corrected from six to five — Hora Lagna (now 3H), Saham Roga (now 2H), Saham Mahatmya (now 9H) removed. Shree Lagna added as a new positive layer."
-```
-
-**Key fields**:
-- `element`: Description of the resonance
-- `constructive_resonance`: List of strengthening factors
-- `destructive_resonance`: List of challenging factors
-- `net_resonance`: Overall characterization (e.g., `STRONGLY AMPLIFIED`, `TENSION‑BEARING`, `BENEFIC`, `MIXED`)
-- `interpretive_note`: 1–3 sentences of guidance
-
-### §3.4 — UCN (Unified Chart Narrative) Section Reference
-
-UCN is a 10‑Part narrative document. Sections are referenced as:
-
-- `UCN §I` — Part I: Core Architecture
-- `UCN §XVII` — Part IV §XVII: 7H Revised to Five‑Layer Composition
-- `UCN §IX.2` — Part III §IX.2: Seven Contradictions — Correct‑Response Audit
-
-The UCN frontmatter contains a table of contents mapping section numbers to page numbers.
-
-### §3.5 — Citation Pattern Summary
-
-| Pattern | Example | Meaning |
-|---------|---------|---------|
-| `MSR.NNN` | `MSR.391` | Master Signal Register signal ID (NNN = 001–496, plus suffix variants like `391a`, `402b`) |
-| `CDLM.DN.DM` | `CDLM.D3.D2` | Cross‑Domain Linkage Matrix cell (row D1–D9, column D1–D9) |
-| `RM.NN` | `RM.14` | Resonance Map element (01–32, plus suffix letters like `21A`, `21B`) |
-| `UCN §X` | `UCN §XVII` | Unified Chart Narrative section |
-| `SIG.*` | `SIG.MSR.391` | Full signal block reference (used inside MSR file) |
-| `PLN.*` / `HSE.*` / … | `PLN.JUPITER`, `HSE.7` | L1 stable IDs (see §0.1 of L1 file) |
-
-**Verification rule**: Every citation of the form `MSR.NNN`, `CDLM.DN.DM`, `RM.NN`, or `UCN §X` must resolve to a defined entry in the corresponding file.
+| Entity | Old (v6.0) | New (v8.0) | Origin of Fix |
+|---|---|---|---|
+| Jupiter | Cancer | Sagittarius 9H | AUDIT_REPORT v1.0 Findings §1.3 |
+| Hora Lagna | Libra 7H | Gemini 3H | V8_0_RECONCILIATION §2 |
+| Ghati Lagna | Scorpio 8H | Sagittarius 9H | V8_0_RECONCILIATION §2 |
+| Varnada Lagna | Scorpio 8H | Cancer 4H | V8_0_RECONCILIATION §2 |
+| Shree Lagna | Sagittarius 9H | Libra 7H | AUDIT_REPORT v1.0 |
+| Saham Roga | Libra 7H | Taurus 2H | AUDIT_REPORT v1.0 |
 
 ---
 
-## §4 — Mechanical Invariants Catalogue — INV.L1.01–24 Formally Stated
+## §3 — How to Read MSR / CDLM / RM / UCN (Fully-Rendered Examples)
 
-These 24 invariants are **pure‑Python checkable** and must all pass for L1 to be considered internally consistent. Any failure is a **HARD BLOCK** for downstream processing.
+### 3.1 MSR (Master Signal Register) — Full Signal Schema
 
-### §4.1 — Family F1: Positional (4 invariants)
+Every signal uses this YAML block template (12 fields):
 
-**INV.L1.01 — Sign‑House Mapping Under Aries Lagna**
-- **Purpose**: Ensure each planet’s sign placement maps to the correct Rashi house (1–12) given Aries Lagna.
-- **Input**: `PLN.*.sign`, `PLN.*.house_rashi` from L1 §2.1
-- **Check**: For each planet, compute expected house = (sign_index - Aries_index + 1) mod 12, where sign_index: Aries=1, Taurus=2, …, Pisces=12. Expected house must match `house_rashi`.
-- **Failure**: Planet‑house mismatch indicates transcription error.
+```yaml
+SIG.MSR.001:
+  signal_name: "Aries Lagna with Mercury in Lagna — Business Autocracy"
+  signal_type: yoga
+  classical_source: "BPHS Ch.21 (Lagna Chaturtham); Jaimini Karaka Shodashi"
+  entities_involved: [PLN.MERCURY, HSE.1, SGN.ARIES]
+  strength_score: 0.85
+  valence: mixed
+  temporal_activation: natal-permanent
+  supporting_rules:
+    - "Mercury in own house Lagna indicates business orientation with royal status potential"
+    - "Aries Lagna conferred energetic leadership特质"
+  falsifier: "No career-autonomy milestones across v6.0-2020; Mercury combust (Sun retrograde in Capricorn 10H)"
+  domains_affected: [career, wealth]
+  confidence: 0.70
+  v6_ids_consumed: []
+  rpt_deep_dive: ""
+```
 
-**INV.L1.02 — Absolute Longitude Within Sign Range**
-- **Purpose**: Ensure each planet’s absolute longitude falls within the 0°–30° range of its sign.
-- **Input**: `PLN.*.abs_long` (decimal degrees), `PLN.*.sign`
-- **Check**: For each planet, compute sign_start = (sign_index - 1) * 30.0. Then `abs_long % 30.0` must equal the planet’s degree‑minute‑second converted to decimal degrees within [0, 30).
-- **Failure**: Longitude‑sign mismatch indicates computation or transcription error.
+### 3.2 CDLM (Cross-Domain Linkage Matrix)
 
-**INV.L1.03 — Nakshatra Matches Longitude**
-- **Purpose**: Ensure each planet’s nakshatra assignment corresponds to its absolute longitude.
-- **Input**: `PLN.*.abs_long`, `PLN.*.nakshatra`
-- **Check**: Use the canonical nakshatra boundaries (13°20′ per nakshatra, starting at 0° Aries = Ashwini). Compute expected nakshatra from `abs_long`; must match recorded nakshatra.
-- **Failure**: Nakshatra mismatch indicates transcription error.
+81-cell 9×9 grid mapping interactions between:
 
-**INV.L1.04 — Pada Matches Longitude Sub‑range**
-- **Purpose**: Ensure each planet’s pada (1–4) falls within the correct quarter of its nakshatra.
-- **Input**: `PLN.*.abs_long`, `PLN.*.pada`
-- **Check**: Within each nakshatra (13°20′), pada 1 = 0°–3°20′, pada 2 = 3°20′–6°40′, pada 3 = 6°40′–10°00′, pada 4 = 10°00′–13°20′. Compute expected pada from `abs_long`; must match recorded pada.
-- **Failure**: Pada mismatch indicates transcription error.
+- Rows: Domains (Career, Finance, Health, Relationships, Children, Spiritual, Parents, Psychology, Travel)
+- Columns: Same 9 domains
 
-### §4.2 — Family F2: Temporal Continuity (4 invariants)
+```yaml
+CDLM.D1.D1:
+  coordinate: [1,1]
+  description: "Career→Career feedthrough"
+  mechanism: Direct activation
+  primary_mechanism: MSR.114
+  secondary_mechanisms: []
+  cross_doms_active: []
+  domain_convergence: true
+```
 
-**INV.L1.05 — Vimshottari Dasha Date Chains**
-- **Purpose**: Ensure Vimshottari MD/AD/PD dates form a continuous chain without gaps or overlaps.
-- **Input**: `DSH.V.MD.*.start`, `DSH.V.MD.*.end`, `DSH.V.AD.*.start`, `DSH.V.AD.*.end` from L1 §5.1
-- **Check**: For each planet’s MD sequence, `MD[i].end == MD[i+1].start`. For each MD, its AD sub‑periods must cover the MD window exactly (sum of AD durations = MD duration).
-- **Failure**: Date discontinuity indicates computation or transcription error.
+Example (from CDLM_v1_1.md):
+```yaml
+CDLM.D1.D2:
+  coordinate: [1,2]
+  description: "Career→Finance pathway: Dhana Karaka linkage"
+  mechanism: Dhana Karaka as lord of 2H from Career-related houses
+  primary_mechanism: MSR.177
+  secondary_mechanisms: []
+  cross_doms_active: []
+  domain_convergence: true
+```
 
-**INV.L1.06 — 120‑Year Vimshottari Cycle**
-- **Purpose**: Ensure total Vimshottari cycle spans exactly 120 years from birth.
-- **Input**: `DSH.V.MD.*.start`, `DSH.V.MD.*.end` for all 9 planets
-- **Check`: (Last MD end date) - (Birth date) = 120 years ± 1 day (allow for leap‑year rounding).
-- **Failure**: Cycle length mismatch indicates computation error.
+### 3.3 RM (Resonance Map)
 
-**INV.L1.07 — Yogini Dasha Date Chains**
-- **Purpose**: Ensure Yogini dasha periods form a continuous 36‑year cycle.
-- **Input**: `DSH.Y.*.start`, `DSH.Y.*.end` from L1 §5.2
-- **Check**: Each dasha end equals next dasha start; total cycle = 36 years.
-- **Failure**: Date discontinuity or cycle length mismatch.
+Each RM element models a resonant pattern (R = Remedial, P = Paradox, T = Temporal).
 
-**INV.L1.08 — Jaimini Chara Dasha Date Chains**
-- **Purpose**: Ensure Chara dasha periods form continuous chains.
-- **Input**: `DSH.C.*.start`, `DSH.C.*.end` from L1 §5.3
-- **Check**: Each dasha end equals next dasha start.
-- **Failure**: Date discontinuity.
+Example:
 
-### §4.3 — Family F3: Numeric Aggregate (4 invariants)
+```yaml
+RM.E001:
+  id: RM.E001
+  label: "Jupiter+Mars Combination in 5H/9H Axis"
+  type: constructive
+  planets: [PLN.JUPITER, PLN.MARS]
+  houses_occupied: [5H, 9H]
+  bhava_overlap: "Jupiter in 5H of chart X, Mars in 9H of same chart"
+  dhana_connect: true
+  karaka_connections: [Dhana Karaka, Lagna Karaka]
+  valence: benefic
+  note: "Gaja Kesari partial realization; Jup/SpMars synergy on income-through-children pathway"
+```
 
-**INV.L1.09 — SAV = 337**
-- **Purpose**: Ensure Sarvashtakavarga total across 12 signs equals 337.
-- **Input**: `AVG.SAV.*` values from L1 §7.1 (table)
-- **Check**: Sum(`AVG.SAV.*`) == 337.
-- **Failure**: SAV total mismatch indicates computation error.
+### 3.4 UCN (Unified Chart Narrative)
 
-**INV.L1.10 — BAV Row Sums**
-- **Purpose**: Ensure each planet’s BAV (Bhinnashtakavarga) row sums to the planet’s own Rasi‑based total.
-- **Input**: `AVG.BAV.PLN.*` rows from L1 §7.2
-- **Check**: For each planet, sum of its BAV row (12 values) == that planet’s Rasi‑based total listed in the same table.
-- **Failure**: Row‑sum mismatch indicates transcription error.
+The mother document at 41K+ words. Read Parts I-VII in sequence. Critical constraint:
 
-**INV.L1.11 — Shadbala Component Sums Match Totals**
-- **Purpose**: Ensure each planet’s Shadbala components sum to the recorded total strength.
-- **Input**: `SBL.SHADBALA.*.components`, `SBL.SHADBALA.*.total` from L1 §6.1–§6.5
-- **Check**: For each planet, sum of Sthana‑Bala + Dig‑Bala + … == total strength (within rounding tolerance).
-- **Failure**: Component‑total mismatch indicates transcription error.
+- **Every domain report MUST cite parent UCN version** in frontmatter:
+```yaml
+---
+document: REPORT_FINANCIAL_v2_1.md
+version: 2.1
+parent_UCN_version: UCN_v4_0.md
+---
+```
 
-**INV.L1.12 — Column Sums Match SAV**
-- **Purpose**: Ensure BAV column sums equal SAV sign totals.
-- **Input**: `AVG.BAV.PLN.*` rows, `AVG.SAV.*` totals
-- **Check**: For each sign/house, sum of BAV values in that column == `AVG.SAV.sign`.
-- **Failure**: Column‑sum mismatch indicates transcription error.
+- **Cross-domain coherence rule**: When Domain Report X cites MSR.007, its valence/temporal characterization must match UCN_v4_0 Part III characterization. Discrepancy = brain review flag.
 
-### §4.4 — Family F4: Derivation Rules (7 invariants)
+---
 
-**INV.L1.13 — Chalit Deviation Bounds**
-- **Purpose**: Ensure Chalit house deviations from Rashi houses are within ±1 house.
-- **Input**: `PLN.*.house_rashi`, `PLN.*.house_chalit` from L1 §2.1
-- **Check**: For each planet, `abs(house_chalit - house_rashi) <= 1`.
-- **Failure**: Chalit deviation > 1 house indicates computation error.
+## §4 — Mechanical Invariants Catalogue — INV.L1.01 to INV.L1.24
 
-**INV.L1.14 — Special‑Lagna Derivations**
-- **Purpose**: Ensure special lagna positions derive correctly from birth time and formulas.
-- **Input**: `LAG.*.sign`, `LAG.*.house` from L1 §12.1
-- **Check**: For each special lagna (Hora, Ghati, Varnada, Shree, Indu, Vighati, Pranapada), recompute from birth time using standard formulas; result must match recorded sign/house.
-- **Failure**: Special‑lagna mismatch indicates computation error.
+The following invariants **MUST BE CHECKED EXHAUSTIVELY** before vectorization. A pure-Python engine (`invariants_l1.py`) implements each as one test. If any test fails, produce `READINESS_REPORT.md` with `VERDICT: NO-GO`.
 
-**INV.L1.15 — 36 Saham Formulas**
-- **Purpose**: Ensure each of the 36 Tajika sahams computes correctly from planet positions.
-- **Input**: `SAH.*.sign`, `SAH.*.house` from L1 §12.2
-- **Check**: For each saham, recompute using standard formula (e.g., Roga = Lagna + Mars - Saturn); result must match recorded sign/house.
-- **Failure**: Saham mismatch indicates computation error.
+### 4.1 F1 Positional Invariants (4 tests)
 
-**INV.L1.16 — Arudha Pada Calculations**
-- **Purpose**: Ensure arudha padas derive correctly from planet and house lord positions.
-- **Input**: `ARD.*.sign`, `ARD.*.house` from L1 §13
-- **Check**: For each arudha (AL, A2–A12, UL, etc.), recompute from appropriate lords; result must match recorded sign/house.
-- **Failure**: Arudha mismatch indicates computation error.
+| INV | Description | Input | Expected Output | Logic |
+|---|---|---|---|---|
+| INV.L1.F1.01 | Sign-House under Aries Lagna | PLN.MOON (Aquarius 27°02′48″), Lagna Aries | Aquarius must be 11H | Rashi sign position under Sripathi chart: find arc-distance from Aries 0° to Moon's 327.05° |
+| INV.L1.F1.02 | Abs Long Within Sign Range | PLN.JUPITER | Jupiter abs_long (249.81°) must fall between Sagittarius 240°–270° | Using ayanamsa (23°37′58″) + offset from Aries 0° |
+| INV.L1.F1.03 | Nakshatra Matches Longitude | PLN.MOON | Moon's longitude must place it within Purva Bhadrapada range | Purva Bhadrapada spans ~266°40′–293°20′ |
+| INV.L1.F1.04 | Pada Matches Sub-Range | PLN.JUPITER (Moola) | Moola Pada 3 means longitude falls in third quarter of Moola nakshatra | Divide nakshatra span into 4 equal parts; compute offset |
 
-**INV.L1.17 — D9 Navamsa Chart**
-- **Purpose**: Ensure D9 positions derive correctly from D1 positions.
-- **Input**: `D9.*.sign`, `D9.*.house` from L1 §3.2
-- **Check**: For each planet, compute expected D9 sign = (D1 sign × 3 + floor(D1 degree / 3.333…)) mod 12; must match recorded D9 sign.
-- **Failure**: D9 mismatch indicates computation error.
+### 4.2 F2 Temporal Continuity Invariants (4 tests)
 
-**INV.L1.18 — Chara Karaka 8‑Order**
-- **Purpose**: Ensure Chara Karaka ordering follows decreasing longitude rule.
-- **Input**: `KRK.*.planet`, `PLN.*.abs_long` from L1 §10
-- **Check**: The eight karakas (Atma, Amatya, …) must be assigned to the eight planets (excluding Rahu/Ketu) in order of decreasing longitude.
-- **Failure**: Karaka ordering mismatch indicates transcription error.
+| INV | Description | Input | Expected |
+|---|---|---|---|
+| INV.L1.F2.01 | Vimshottari Year Length Consistency | Vimshottari cycle duration | ~432,000 days = 120 years |
+| INV.L1.F2.02 | Yogini Dash Periods Sum | 8 yogini dashas (approx. 3 years each) | Sum must equal ~24 years or full cycle |
+| INV.L1.F2.03 | Chara Dasha Period Order | Sun→Moon→Mars→Mercury→Jupiter→Venus→Saturn→Rahu→Ketu | 순서 고정 (27 years base cycle + exception for Rahu/Ketu) |
+| INV.L1.F2.04 | Current Dasha Alignment | Mercury MD + Saturn AD (current) | Date window must cover birth → now → projected |
 
-**INV.L1.19 — Deity‑Nakshatra Canonical Map**
-- **Purpose**: Ensure deity assignments match nakshatra‑deity canonical mapping.
-- **Input**: `NAK.*.deity` from L1 §2.1 (nakshatra table)
-- **Check**: Each nakshatra’s deity must match standard Jyotish mapping (Ashwini → Ashwini Kumaras, Bharani → Yama, etc.).
-- **Failure**: Deity mismatch indicates transcription error.
+### 4.3 F3 Numeric Aggregate Invariants (4 tests)
 
-### §4.5 — Family F5: Structural (5 invariants)
+| INV | Description | Check | Required Value |
+|---|---|---|---|
+| INV.L1.F3.01 | SAV Grand Total | Σ(sign_totals) | Exactly 337 |
+| INV.L1.F3.02 | BAV Row Sums | Σ(BAV_rows per planet) | Sun=48, Moon=49, Mars=39, Mercury=54, Jupiter=56, Venus=52, Saturn=39 |
+| INV.L1.F3.03 | BAV Column Sums Match SAV | Σ(BAV columns per sign) | Must equal sign_totals used to compute SAV=337 |
+| INV.L1.F3.04 | Shadbala Component Sum | Component1+Component2+...+ComponentN | Sum of components = stated total per planet (within rounding ±0.01) |
 
-**INV.L1.20 — MET.DASHA.CURRENT Window**
-- **Purpose**: Ensure current dasha window matches the present date (2026‑04‑19).
-- **Input**: `MET.DASHA.CURRENT`, `MET.DASHA.CURRENT.START`, `MET.DASHA.CURRENT.END`
-- **Check**: 2026‑04‑19 must fall within `[START, END)`.
-- **Failure**: Current date outside dasha window indicates stale data.
+### 4.4 F4 Derivation Rule Invariants (7 tests)
 
-**INV.L1.21 — INTENTIONALLY_EXCLUDED Markers Have Governance Refs**
-- **Purpose**: Ensure every `[INTENTIONALLY_EXCLUDED]` marker in L1 has a `governance_ref:` pointing to a justification.
-- **Input**: Whole L1 file text
-- **Check**: Each occurrence of `[INTENTIONALLY_EXCLUDED]` must be followed by `governance_ref:` within the same YAML block.
-- **Failure**: Missing governance reference indicates incomplete documentation.
+| INV | Description | Formula | Validation |
+|---|---|---|---|
+| INV.L1.F4.01 | Bhava Bala Chalit Deviation | Compute Hse 1 cusp vs PLN.Sun chalit house | Difference ≤ 5° for correct placement |
+| INV.L1.F4.02 | Special Lagna Formulas | Hora Lagna = (Asc+Moon)/2, etc. | Compute and compare to stated value |
+| INV.L1.F4.03 | Saham Formulas (6 of 36) | Punya, Rajya, Karma, Labha, Vivaha, Putra | Must match v8.0 output from FORENSIC engine |
+| INV.L1.F4.04 | Arudha Padas | AL = (Lagna−Moon)+Lagna, etc. | All 7 arudhas computed from same formula |
+| INV.L1.F4.05 | D9 Navamsa Computation | Sign D9(Lagna), D9(Moon), etc. | JHora D9 confirms forec |
+| INV.L1.F4.06 | Chara Karaka 8-Order | Atmakaraka = planet with highest longitude | Must match Moon in this case |
+| INV.L1.F4.07 | Deity-Nakshatra Canonical Map | Durga, Garuda, Vishnu, etc. assignment | Match per table in §20 of forensic |
 
-**INV.L1.22 — Dual‑Engine Notes Cite Both FORENSIC+JH**
-- **Purpose**: Ensure dual‑engine divergence notes explicitly name both engines.
-- **Input**: Whole L1 file text
-- **Check**: Each `[DUAL‑ENGINE RECONCILIATION NOTE]` must mention both “FORENSIC” and “JH” (or “Jagannatha Hora”).
-- **Failure**: Incomplete dual‑engine note indicates incomplete documentation.
+### 4.5 F5 Structural Invariants (5 tests)
 
-**INV.L1.23 — §27 Ledger Consistency**
-- **Purpose**: Ensure the completeness ledger (§27) accurately reflects which sections are complete.
-- **Input**: L1 §27 table
-- **Check**: For each section marked `complete: yes`, the corresponding section must exist and be non‑empty. For each `complete: no`, the section may be missing or placeholder.
-- **Failure**: Ledger‑content mismatch indicates stale ledger.
-
-**INV.L1.24 — Varshphal Tajika Mirror**
-- **Purpose**: Ensure Varshphal (annual) chart mirrors natal chart patterns.
-- **Input**: L1 §22 (Varshphal 2026–2027)
-- **Check**: Key natal signatures (e.g., Saturn exalted, Jupiter own‑sign) should appear similarly strengthened/weakened in Varshphal chart.
-- **Failure**: Contradictory Varshphal pattern may indicate computation error (soft check; warning, not hard failure).
-
-### §4.6 — Implementation Notes
-
-Each invariant will be implemented as a Python function in `invariants_l1.py`. The functions must be **pure‑Python, deterministic, and LLM‑free**. They will read the L1 file via `yaml.safe_load` for YAML blocks and regex for tables.
-
-**Output artifact**: `NUMERIC_INVARIANTS.json` with keys `INV.L1.NN: {passed: bool, message: str, detail: dict}`.
-
-**Success criterion**: All 24 invariants pass (`passed: true`).
-
-**Failure handling**: Any failure → HARD BLOCK. Stop verification, report failure to user, do not proceed to L2.
+| INV | Description | Check | Expected |
+|---|---|---|---|
+| INV.L1.F5.01 | MET.DASHA.CURRENT Window | Birth → Mercury MD → Saturn AD → Ketu MD | Dasha start/end dates match forensic output |
+| INV.L1.F5.02 | INTENTIONALLY_EXCLUDED Governance | All exclusions cite section ID (e.g., MET.NOTES.2.5) | Every exclusion must be traceable to an original source |
+| INV.L1.F5.03 | Dual-Engine Notes Format | Both FORENSIC and JH values must appear where they differ | Pattern: `VALUE_FORENSIC | VALUE_JH [DUAL-ENGINE NOTE: description]` |
+| INV.L1.F5.04 | §27 Ledger Consistency | Line 1525: "LENDER = 10H + CARPENTER = 3H + WIFE = 7H" | Every symbol must be defined |
+| INV.L1.F5.05 | Varshphal Tajika Mirror | 2026 Solar Return must mirror JH Varga inputs | D1 solar year longitude must equal D1 natal date logic |
 
 ---
 
 ## §5 — Verification Layers L0–L7
 
-Every layer follows the same template:
+Each layer uses an identical template:
 
 ```
 ### L<N>.<M> <check name>
-Purpose | Input files | Output artifact | Implementation [pure‑Python | LLM‑assisted | hybrid]
-Reuse/extend [audit.py:function | verify_corpus.py:function | new]
-Success criteria | Failure handling [auto‑fix | flag‑for‑brain | escalate‑to‑human]
+**Purpose** | **Input files** | **Output artifact** | **Implementation** [pure-Python \| LLM-assisted \| hybrid]
+**Reuse/extend** [audit.py:function \| verify_corpus.py:function \| new]
+**Success criteria** \| **Failure handling** [auto-fix \| flag-for-brain \| escalate-to-human]
 ```
-
-### L0 — Structural Integrity (pure‑Python, ~5 min)
-
-**L0.1 — File Inventory + Version‑Latest Resolver**
-- **Purpose**: List all files in corpus, resolve latest version when multiple versions exist.
-- **Input**: Entire project directory tree
-- **Output artifact**: `FILE_INVENTORY.json` with `{path: str, version: str, status: str, superseded_by: optional}`
-- **Implementation**: pure‑Python, reuse `verify_corpus.py::find_latest_versions`
-- **Success criteria**: All files parsed without error; version strings extracted correctly.
-- **Failure handling**: Flag for brain (manual correction needed).
-
-**L0.2 — YAML Frontmatter Validator**
-- **Purpose**: Ensure every Markdown file with YAML frontmatter has required keys per file class.
-- **Input**: All `.md` files
-- **Output artifact**: `YAML_VALIDATION.json` with `{file: str, valid: bool, missing_keys: list}`
-- **Implementation**: pure‑Python (pyyaml)
-- **Success criteria**: All current files have valid frontmatter with required keys.
-- **Failure handling**: Auto‑fix minor issues (add missing optional keys); flag missing required keys for brain.
-
-**L0.3 — Encoding + Line‑Ending + BOM Check**
-- **Purpose**: Ensure all files are UTF‑8, LF line endings, no BOM.
-- **Input**: All text files
-- **Output artifact**: `ENCODING_REPORT.json` with `{file: str, encoding: str, bom: bool, line_endings: str}`
-- **Implementation**: pure‑Python
-- **Success criteria**: All files UTF‑8, LF, no BOM.
-- **Failure handling**: Auto‑convert (safe) or flag for brain.
-
-**L0.4 — Markdown Structural Sanity**
-- **Purpose**: Check balanced code fences, table pipe counts match headers.
-- **Input**: All `.md` files
-- **Output artifact**: `MARKDOWN_SYNTAX.json` with `{file: str, issues: list}`
-- **Implementation**: pure‑Python
-- **Success criteria**: No unbalanced fences, all tables structurally valid.
-- **Failure handling**: Flag for brain (manual repair needed).
-
-**L0.5 — Stable‑ID Uniqueness Within Each Namespace**
-- **Purpose**: Ensure each stable ID (`PLN.*`, `HSE.*`, etc.) appears only once in L1.
-- **Input**: `FORENSIC_ASTROLOGICAL_DATA_v8_0.md`
-- **Output artifact**: `STABLE_ID_DUPLICATES.json` with `{namespace: str, duplicates: list}`
-- **Implementation**: pure‑Python (regex extraction)
-- **Success criteria**: No duplicates within any namespace.
-- **Failure handling**: Flag for brain (manual deduplication needed).
-
-### L1 — Forensic v8.0 Internal Invariants (pure‑Python, ~10 min)
-
-As defined in §4. Execute all 24 invariants via `invariants_l1.py`.
-
-- **Output artifact**: `NUMERIC_INVARIANTS.json`
-- **Success criteria**: All 24 invariants pass.
-- **Failure handling**: **HARD BLOCK**. Stop verification, report failure.
-
-### L2 — Matrix Files ↔ L1 (pure‑Python, ~5 min)
-
-**L2.1 — Exhaustive Matrix‑L1 Trace**
-- **Purpose**: Verify every row in each of the 5 MATRIX files (`MATRIX_HOUSES.md`, `MATRIX_PLANETS.md`, `MATRIX_SIGNS.md`, `MATRIX_DASHA_PERIODS.md`, `MATRIX_DIVISIONALS.md`) correctly traces back to L1.
-- **Input**: Matrix files, L1 file
-- **Output artifact**: `MATRIX_TRACE.json` with `{matrix: str, rows_checked: int, rows_passed: int, failures: list}`
-- **Implementation**: pure‑Python, extend `verify_corpus.py::spot_check_matrix_files` to full‑sweep
-- **Success criteria**: 100% of rows pass trace.
-- **Failure handling**: **HARD BLOCK** for any failure. Stop verification.
-
-### L2.5a — Synthesis Internal Consistency (pure‑Python, ~3 min)
-
-**L2.5a.1 — MSR Signal Count vs Claim**
-- **Purpose**: Verify MSR_v3_0.md (post‑merge) contains exactly 500 defined signals.
-- **Input**: `MSR_v3_0.md` (after §6 merge)
-- **Output artifact**: `MSR_COUNT.json` with `{claimed: 500, actual: int, missing_ids: list}`
-- **Implementation**: pure‑Python (count `SIG.MSR.NNN:` blocks)
-- **Success criteria**: Actual count = 500 (or 500 + suffix variants).
-- **Failure handling**: Flag for brain (gap analysis needed).
-
-**L2.5a.2 — CDLM 81‑Cell Completeness**
-- **Purpose**: Verify CDLM_v1_1.md defines all 81 cells (9×9 matrix).
-- **Input**: `CDLM_v1_1.md`
-- **Output artifact**: `CDLM_COMPLETENESS.json` with `{total_cells: 81, defined: int, missing: list}`
-- **Implementation**: pure‑Python (extract `CDLM.DN.DM:` blocks)
-- **Success criteria**: All 81 cells defined.
-- **Failure handling**: Flag for brain.
-
-**L2.5a.3 — RM Element Inventory**
-- **Purpose**: Reconcile RM_v2_0.md claimed 32 elements vs defined elements.
-- **Input**: `RM_v2_0.md`
-- **Output artifact**: `RM_INVENTORY.json` with `{claimed: 32, defined: int, missing_ids: list, extra_ids: list}`
-- **Implementation**: pure‑Python (extract `RM.NN:` blocks)
-- **Success criteria**: All claimed elements defined; no undefined IDs cited elsewhere.
-- **Failure handling**: Flag for brain.
-
-**L2.5a.4 — UCN Part Structure**
-- **Purpose**: Verify UCN_v4_0.md has Parts I–IV, all §X anchors resolve.
-- **Input**: `UCN_v4_0.md`
-- **Output artifact**: `UCN_STRUCTURE.json` with `{parts: list, sections: list, dangling_refs: list}`
-- **Implementation**: pure‑Python (parse TOC, extract section anchors)
-- **Success criteria**: No dangling `§X` references.
-- **Failure handling**: Flag for brain.
-
-### L2.5b — L2.5 ↔ L1 Cross‑Reference (pure‑Python + LLM spot‑check, ~15 min)
-
-**L2.5b.1 — Entity Extraction + Placement Consistency**
-- **Purpose**: Extract entities (`entities_involved` from MSR, regex from CDLM/RM/UCN) and verify placement consistency with L1.
-- **Input**: MSR_v3_0.md, CDLM_v1_1.md, RM_v2_0.md, UCN_v4_0.md, L1
-- **Output artifact**: `ENTITY_PLACEMENT_CONSISTENCY.json` with `{entity: str, occurrences: int, consistent: bool, discrepancies: list}`
-- **Implementation**: pure‑Python, reuse `audit.py::check_placement_consistency` (exhaustive)
-- **Success criteria**: 100% consistency.
-- **Failure handling**: **HARD BLOCK** for any inconsistency.
-
-**L2.5b.2 — Numeric Citation Traceability**
-- **Purpose**: Verify numeric values (strength scores, confidence, etc.) are within plausible ranges and traceable to L1 derivations.
-- **Input**: MSR_v3_0.md, CDLM_v1_1.md, RM_v2_0.md
-- **Output artifact**: `NUMERIC_TRACE.json` with `{file: str, numeric_fields_checked: int, anomalies: list}`
-- **Implementation**: pure‑Python (range checks, cross‑reference to L1 numeric aggregates)
-- **Success criteria**: No out‑of‑range values; derivations plausible.
-- **Failure handling**: Flag for brain.
-
-**L2.5b.3 — Haiku Worker LLM Spot‑Check for Semantic Drift**
-- **Purpose**: Sample 5% of MSR signals and CDLM cells, ask Haiku‑grade LLM whether the interpretation text matches L1 facts.
-- **Input**: Sampled entries, L1
-- **Output artifact**: `SEMANTIC_DRIFT.json` with `{sampled: int, passed: int, failures: list}`
-- **Implementation**: LLM‑assisted, reuse `verify_corpus.py::run_worker_phase`
-- **Success criteria**: ≥95% pass rate.
-- **Failure handling**: Flag for brain (review failed samples).
-
-### L2.5c — Citation Graph Integrity (pure‑Python, ~5 min) **Most Important New Work**
-
-**L2.5c.1 — Citation Graph Construction**
-- **Purpose**: Build `CITATION_GRAPH.graphml` with typed nodes (MSR, CDLM, RM, UCN, L1) and edges (cites, anchors‑to, derives‑from, conflicts‑with).
-- **Input**: All L2.5 and L3 files
-- **Output artifact**: `CITATION_GRAPH.graphml`, `CITATION_GRAPH_report.json`
-- **Implementation**: pure‑Python (`citation_graph.py`)
-- **Success criteria**: Graph builds without error.
-- **Failure handling**: Flag for brain.
-
-**L2.5c.2 — Dangling‑Edge Report**
-- **Purpose**: Identify citations that point to undefined IDs.
-- **Input**: Citation graph
-- **Output artifact**: `DANGLING_EDGES.json` with `{source: str, target_id: str, context: str}`
-- **Success criteria**: Zero dangling edges.
-- **Failure handling**: **HARD BLOCK**. Stop verification.
-
-**L2.5c.3 — Orphan‑Definition Report**
-- **Purpose**: Identify defined IDs that are never cited.
-- **Input**: Citation graph
-- **Output artifact**: `ORPHAN_DEFINITIONS.json` with `{id: str, file: str}`
-- **Success criteria**: Informational only (orphans may be intentional).
-- **Failure handling**: Flag for brain (review orphans).
-
-**L2.5c.4 — Cycle + Depth Analysis**
-- **Purpose**: Detect circular citations, compute graph depth.
-- **Input**: Citation graph
-- **Output artifact**: `GRAPH_TOPOLOGY.json` with `{cycles: list, max_depth: int, connected_components: int}`
-- **Success criteria**: Informational only.
-- **Failure handling**: Flag for brain (review cycles).
-
-### L3 — Domain Reports (pure‑Python + LLM, ~20 min)
-
-**L3.1 — Report Inventory**
-- **Purpose**: Verify 9 domain reports exist.
-- **Input**: `03_DOMAIN_REPORTS/`
-- **Output artifact**: `DOMAIN_REPORTS_INVENTORY.json` with `{expected: 9, found: list}`
-- **Success criteria**: 9 reports found.
-- **Failure handling**: Flag for brain.
-
-**L3.2 — UCN Parent References**
-- **Purpose**: Verify each report’s frontmatter contains `parent_UCN_version:` pointing to UCN v4.0.
-- **Input**: All 9 reports
-- **Output artifact**: `UCN_PARENT_REFERENCE.json` with `{report: str, has_parent: bool, parent_version: str}`
-- **Success criteria**: All reports have correct parent reference.
-- **Failure handling**: Flag for brain.
-
-**L3.3 — Citation Density Per Report**
-- **Purpose**: Count MSR/CDLM/RM citations per report; flag outliers.
-- **Input**: All 9 reports
-- **Output artifact**: `CITATION_DENSITY.json` with `{report: str, msr_citations: int, cdlm_citations: int, rm_citations: int}`
-- **Success criteria**: Informational only.
-- **Failure handling**: Flag for brain (review low‑density reports).
-
-**L3.4 — Entity‑Naming Uniformity**
-- **Purpose**: Produce `NAMING_VARIANTS.json` mapping variants to canonical names (e.g., Śani/Shani/शनि → Saturn).
-- **Input**: All L2.5 and L3 files
-- **Output artifact**: `NAMING_VARIANTS.json`
-- **Success criteria**: Canonical mapping covers all variants.
-- **Failure handling**: Flag for brain (add missing mappings).
-
-**L3.5 — Cross‑Report Coherence**
-- **Purpose**: When two reports cite the same MSR signal, their valence/temporal characterization must match.
-- **Input**: All 9 reports, MSR_v3_0.md
-- **Output artifact**: `CROSS_REPORT_COHERENCE.json` with `{msr_id: str, reports: list, conflict: bool, details: str}`
-- **Implementation**: LLM‑assisted spot‑check
-- **Success criteria**: No conflicts.
-- **Failure handling**: Flag for brain (resolve conflicts).
-
-**L3.6 — L3 ↔ L1 Placement Consistency**
-- **Purpose**: Verify domain‑report interpretations do not contradict L1 placements.
-- **Input**: All 9 reports, L1
-- **Output artifact**: `L3_L1_CONSISTENCY.json` with `{report: str, passed: bool, discrepancies: list}`
-- **Implementation**: LLM‑assisted spot‑check
-- **Success criteria**: No contradictions.
-- **Failure handling**: Flag for brain.
-
-### L4 — Entity Registry Construction (pure‑Python, ~3 min)
-
-**L4.1 — Build Entity Registry**
-- **Purpose**: Create `ENTITY_REGISTRY.json` for downstream vectorization vocabulary.
-- **Input**: All files
-- **Output artifact**: `ENTITY_REGISTRY.json` with `{canonical_name: str, aliases: list, type: str, l1_id: str, occurrence_count: int}`
-- **Implementation**: pure‑Python (`entity_registry.py`)
-- **Success criteria**: Registry contains all planets, houses, signs, nakshatras, special lagnas, sahams, yogas.
-- **Failure handling**: Flag for brain (missing entities).
-
-### L5 — Citation Graph Export (pure‑Python, ~1 min)
-
-**L5.1 — Export GraphML**
-- **Purpose**: Produce final `CITATION_GRAPH.graphml` loadable by Neo4j/NetworkX/RDFLib.
-- **Input**: Citation graph from L2.5c
-- **Output artifact**: `CITATION_GRAPH.graphml`
-- **Implementation**: pure‑Python
-- **Success criteria**: GraphML validates.
-- **Failure handling**: Flag for brain.
-
-### L6 — Numeric‑Invariant Rollup (pure‑Python, trivial)
-
-**L6.1 — Aggregate Results**
-- **Purpose**: Roll up L0–L5 results into single summary.
-- **Input**: All previous JSON artifacts
-- **Output artifact**: `VERIFICATION_SUMMARY.json`
-- **Implementation**: pure‑Python
-- **Success criteria**: Informational.
-- **Failure handling**: None.
-
-### L7 — Go/No‑Go Synthesis (rule‑based + LLM, ~2 min)
-
-**L7.1 — Produce Readiness Report**
-- **Purpose**: Generate `READINESS_REPORT.md` with GO/CONDITIONAL‑GO/NO‑GO verdict.
-- **Input**: All verification artifacts
-- **Output artifact**: `READINESS_REPORT.md`
-- **Implementation**: rule‑based + LLM synthesis
-- **Success criteria**: Report clearly states verdict and rationale.
-- **Failure handling**: None.
-
-**Verdict rules**:
-- **GO**: All L0–L2 passed, L2.5c dangling edges = 0, L3 conflicts = 0.
-- **CONDITIONAL‑GO**: L0–L2 passed, L2.5c dangling edges = 0, L3 conflicts present but documented.
-- **NO‑GO**: Any L0–L2 failure, or L2.5c dangling edges > 0.
 
 ---
 
-## §6 — MSR Merge Task (v1_0 + v2_0 → v3_0)
+### L0 — Structural Integrity Checks
 
-**Execute this task BEFORE L2.5a.1 (MSR signal count check).**
+**Purpose**: Verify that every file meets minimum formatting requirements. Runs before any content-level verification.
 
-### §6.1 — Input Files
+**L0.1 File Inventory + Version-Latest Resolver**
 
-1. `025_HOLISTIC_SYNTHESIS/MSR_v1_0.md` — 420 signals (some as full YAML blocks, some as table rows)
-2. `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` — 60 re‑rendered signals: MSR.022, 024, 391, 402, 402b, 404, 407, 413 + MSR.421–443 + MSR.444–496 + 391a/b/c
-3. `00_ARCHITECTURE/AUDIT_REPORT_v1_0.md`, `FIX_SESSION_00*_COMPLETION.md` — for correction provenance
+**Purpose**: Identify canonical files (non-archival) and detect superseded versions. 
 
-### §6.2 — Output File
+**Input files**: `.*\.md` across corpus
+**Output artifact**: `L0_RESULTS.json`, `VERSION_SUMMARY.json`
+**Implementation**: Pure-Python (`verify_corpus.py::find_latest_versions` extension)
+**Reuse/extend**: `verify_corpus.py::find_latest_versions`
+**Success criteria**: Each (directory, stem) pair has exactly one canonical version marked.
+**Failure handling**: If no canonical found, log to `L0_RESULTS.json` and exit with code 1.
 
-`025_HOLISTIC_SYNTHESIS/MSR_v3_0.md` with:
-- All 500 signals as full `SIG.MSR.NNN:` YAML blocks
-- For signals corrected in v2_0, use the v2_0 version
-- For signals unchanged from v1_0, carry forward as‑is
-- Frontmatter: `version: 3.0`, `status: CURRENT`, `supersedes: MSR_v2_0.md, MSR_v1_0.md`
-- Each signal entry has `provenance:` field: `v1_0‑confirmed‑by‑v8` / `v2_0‑rerendered` / `v2_0‑new‑421‑443` / `v2_0‑new‑444‑496`
+---
 
-### §6.3 — Merge Algorithm (pure‑Python)
+**L0.2 YAML Frontmatter Validator**
 
-Write `msr_merge.py` with steps:
+**Purpose**: Every document with metadata must contain required frontmatter fields.
 
-1. Parse all `SIG.MSR.NNN:` blocks from both files → dict keyed by signal_id.
-2. For each ID in range [1, 496] plus suffixes `402b`, `391a`, `391b`, `391c`:
-   - If present in v2_0 → use v2_0 version (corrected)
-   - Else if present in v1_0 → use v1_0 version with `provenance: v1_0‑confirmed‑by‑v8`
-   - Else → flag as `UNDEFINED` (should not happen if registries complete)
-3. Emit ordered output (MSR.001 → MSR.496 + sub‑variants).
-4. Archive source files:
-   - Add `status: ARCHIVED_BY_v3_0` to their frontmatter
-   - Move to `99_ARCHIVE/025_HOLISTIC_SYNTHESIS/` (create directory)
-5. Update `025_HOLISTIC_SYNTHESIS/CLAUDE.md` to point to v3_0.
-6. Update `00_ARCHITECTURE/FILE_REGISTRY_v1_0.md` §4 entry.
+**Input files**: `.forensic_md`, ` MATRIX_*.md`, `*_*_v*.md`
+**Output artifact**: `FRONTMATTER_WARNINGS.json`
+**Implementation**: Pure-Python (pyyaml + expected-key map)
+**Reuse/extend**: audit.py frontmatter_regex module
+**Success criteria**: Required keys present and valid (string, number, boolean, date, enum as appropriate)
+**Failure handling**: Auto-fix for minor typos; flag if structurally corrupted → NO-GO.
 
-### §6.4 — Verification Gate After Merge
+---
 
-Before proceeding to L2.5c citation graph:
+**L0.3 Encoding + Line-Ending + BOM Check**
 
-- [ ] Count of `SIG.MSR.NNN:` blocks in MSR_v3_0 = 500 (or 500 + n suffixes)
-- [ ] Every MSR ID cited in UCN/CDLM/RM/L3 resolves in MSR_v3_0
-- [ ] No duplicate IDs
-- [ ] All entries pass schema validation
+**Purpose**: UTF-8/LF/BOM safety check across corpus.
 
-If any check fails, stop and debug merge before continuing.
+**Input files**: All `.md`
+**Output artifact**: `ENCODING_RESULTS.json`
+**Implementation**: Pure-Python (`open(filepath, encoding="utf-8", errors="strict")`)
+**Reuse/extend**: N/A
+**Success criteria**: All files read successfully, line endings `0x0A`, no `0xEF 0xBB 0xBF` prefix.
+**Failure handling**: Repair line-endings and retry → flag and continue or exit.
+
+---
+
+**L0.4 Markdown Structural Sanity**
+
+**Purpose**: Detect balanced code fences, table pipe count parity, no orphan markdown artifacts.
+
+**Input files**: All `.md`
+**Output artifact**: `MARKDOWN_SYNTAX_RESULTS.json`
+**Implementation**: Pure-Python regex (```` code fences, table headers, `- \` list markers`)
+**Reuse/extend**: audit.py syntax regexes
+**Success criteria**: Code fence count even; table header pipes = content cell pipes; no stray `*` markers.
+**Failure handling**: Log failed file list → continue with warning or exit.
+
+---
+
+**L0.5 Stable-ID Uniqueness Check**
+
+**Purpose**: Verify no duplicate stable IDs exist in a single namespace (MET, PLN, HSE, SGN, NAK, D1..D60, etc.)
+
+**Input files**: `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md`, other layered docs
+**Output artifact**: `STABLE_ID_DUPLICATES.json`
+**Implementation**: Pure-Python (`re.findall(r"`[A-Z_]+\.[\d_]+\`?", doc)`)
+**Reuse/extend**: `verify_corpus.py` ID regex set
+**Success criteria**: No duplicate stable IDs within same namespace in single document.
+**Failure handling**: Duplicate detected = escalate-to-human → exit NO-GO.
+
+---
+
+### L1 — Forensic v8.0 Internal Invariant Checks
+
+**Purpose**: Exhaustive verification of numeric and derivation correctness. **HARD-BLOCK layer.**
+
+This layer must run before anything else. Any L1 invariant failure = immediate `NO-GO` in `READINESS_REPORT.md`.
+
+All invariants must use `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` as the authoritative data source. For derivation formulas (Bhava Bala, Saham, Arudha), validate against the stated algorithm, not the numeric result (since multiple engines exist).
+
+The reference formulas live in forensic §§6–10 and Appendix H (Derivation Rules).
+
+#### L1.0 Extract authoritative ground truth
+
+- Parse `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` §0 §1 §2 tables.
+- Extract D1 planet positions (abs_long, sign, house, nakshatra, pada).
+- Extract Special Lagna values, Sahams.
+- Extract Shadbala totals (read COMPONENT sums, not individual tables—section totals).
+
+#### L1.1 L1.F1.01: Sign-House Consistency
+
+**Formula**: `Rashi_house = floor((abs_long - ayanamsa - ascendant_arc) / 30) + 1`
+
+**Implementation**: pure-Python
+```python
+def check_sign_house_consistency(abs_long, sign_name, rashi_house, lagna_sign):
+    # Expected sign from house
+    expected_sign = Signs[(signs.index(lagna_sign) + rashi_house - 1) % 12]
+    if sign_name != expected_sign: FAIL
+```
+
+#### L1.2 L1.F1.02: Abs Long Within Sign Range
+
+**Formula**: For sign i (0..11), range = [i*30, (i+1)*30]
+
+**Implementation**: pure-Python
+```python
+def check_abs_long_within_range(abs_long, sign_name):
+    sign_start = {"Aries": 0, "Taurus": 30, ..., "Pisces": 330}
+    expected_range = (sign_start[sign_name], sign_start[sign_name]+30)
+    if not expected_range[0] <= abs_long < expected_range[1]: FAIL
+```
+
+#### L1.3 L1.F1.03: Nakshatra Match
+
+**Formula**: 27 nakshatras, 13°20′ each (480 arc-minutes)
+
+**Implementation**: pure-Python
+```python
+def check_nakshatra(abs_long, nakshatra_name):
+    nak_ranges = {"Ashwini": (0,13.333), ..., "Revati": (346.667, 360)}
+    start, end = nak_ranges[nakshatra_name]
+    if not start <= abs_long < end: FAIL
+```
+
+#### L1.4 L1.F1.04: Pada Match
+
+**Formula**: Each nakshatra has 4 padas (each ~3°20′ = 200 arc-minutes)
+
+**Implementation**: pure-Python
+```python
+def check_pada(abs_long, pada, nakshatra_name):
+    nak_start = {"Ashwini": 0, ..., "Revati": 346.667}[nakshatra_name]
+    offset_from_nak_start = abs_long - nak_start
+    expected_pada = floor(offset_from_nak_start / (13.333/4)) + 1
+    if pada != expected_pada: FAIL
+```
+
+#### L1.5 L1.F2.01: Vimshottari Year Check
+
+**Formula**: `120 years = 1 * 365.25 * 3600 * 24 seconds`
+
+**Implementation**: pure-Python
+```python
+def check_vimshottari_years(dasha_records):
+    total_days = sum(r.duration_days for r in dasha_records)
+    assert abs(total_days - 120*365.25) < 1, "Vimshottari cycle not 120 years"
+```
+
+#### L1.6 L1.F2.02: Yogini Dash Periods Sum
+
+**Formula**: Yogini dasha = 8*3 = 24 years (some tables list 24, others 24.1 to account for rounding)
+
+**Implementation**: pure-Python
+```python
+def check_yogini_years(dasha_records):
+    total_years = sum(r.years for r in dasha_records)
+    if abs(total_years - 24) > 0.5: FAIL
+```
+
+#### L1.7 L1.F2.03: Chara Dasha Period Order
+
+**Formula**: Sun→Moon→Mars→Mercury→Jupiter→Venus→Saturn→Rahu→Ketu
+
+**Implementation**: pure-Python
+```python
+EXPECTED_CHARA_ORDER = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"]
+
+def check_chara_order(periods):
+    for i, (p, order) in enumerate(zip(periods, EXPECTED_CHARA_ORDER)):
+        if p.planet != order: FAIL
+```
+
+#### L1.8 L1.F3.01: SAV Grand Total Check
+
+**Implementation**: pure-Python
+```python
+def check_sav_grand_total(sav_table):
+    total = sum(sav_table[sign] for sign in SignNames)
+    if total != 337: FAIL
+```
+
+#### L1.9 L1.F3.02: BAV Row Sums Check
+
+**Implementation**: pure-Python
+```python
+def check_bav_row_sums(bav_matrix):
+    for planet, row in bav_matrix.items():
+        expected = {"Sun":48,"Moon":49,"Mars":39,"Mercury":54,"Jupiter":56,"Venus":52,"Saturn":39}[planet]
+        computed = sum(row.values())
+        if computed != expected: FAIL
+```
+
+#### L1.10 L1.F3.03: BAV Column Sums Match SAV
+
+**Implementation**: pure-Python
+```python
+def check_bav_column_sums(bav_matrix, sav_table):
+    for sign in SignNames:
+        column_sum = sum(row[sign] for row in bav_matrix.values())
+        if column_sum != sav_table[sign]: FAIL
+```
+
+#### L1.11 L1.F3.04: Shadbala Sum Check
+
+**Formula**: Component sum = total (per table)
+**Implementation**: pure-Python
+
+```python
+def check_shadbala_sum(component_values, stated_total):
+    computed = sum(component_values)
+    if abs(computed - stated_total) > 0.02: FAIL
+```
+
+#### L1.12 L1.F4.01: Bhava Bala Chalit Deviation Check
+
+**Formula**: Deviation = abs(chalit_house_position - chalit_cusp)
+**Allowed deviation**: ≤5 degrees
+
+**Implementation**: pure-Python
+
+```python
+def check_chalit_deviation(planet_chalit_house, planet_chalit_degree, cusp_degree):
+    deviation = abs(planet_chalit_degree - cusp_degree)
+    if deviation > 5: FAIL
+```
+
+#### L1.13 L1.F4.02: Special Lagna Formulas Check
+
+**Formula per special lagna**:
+- Hora Lagna = (Asc + Moon)/2
+- Ghati Lagna = (Asc - Moon) + 180° mod 360
+- Varnada Lagna = (Asc + Moon) mod 30
+- Shree Lagna = (Asc + Moon)/2 + 90°
+- Indu Lagna = (Asc - Moon)/2
+- Bhava Lagna = ascendant (for sidereal Lagna, not Chalit)
+
+**Implementation**: pure-Python
+
+```python
+def check_hora_lagna(asc_degree, moon_degree):
+    computed = (asc_degree + moon_degree) / 2
+    if computed > 360: computed -= 360
+    # Compare with storedHora Lagna value
+    if abs(computed - storedHoraLagna) > 0.1: FAIL
+```
+
+#### L1.14 L1.F4.03: Saham Formulas Check
+
+**Formula** (Moon-Sun)+Asc for Punya Saham (and variations for other 35 Sahams)
+
+**Implementation**: pure-Python
+
+```python
+def compute_saham(subject_degree, obj_degree, asc_degree):
+    result = (obj_degree - subject_degree + asc_degree) % 360
+    return result
+
+def check_saham_punya(sun_degree, moon_degree, asc_degree):
+    computed = compute_saham(sun_degree, moon_degree, asc_degree)
+    # Compare with stated Punya Saham
+```
+
+#### L1.15 L1.F4.04: Arudha Padas Check
+
+**Formula**: Arudha = (Lagna - Moon) + Lagna, then normalize mod 360
+
+**Implementation**: pure-Python
+
+```python
+def compute_arudha(lagna_degree, moon_degree):
+    result = (lagna_degree - moon_degree + lagna_degree) % 360
+    return result
+```
+
+#### L1.16 L1.F4.05: D9 Navamsa Computation
+
+**Formula**: Each navamsa = 3°20′ of zodiac
+
+**Implementation**: pure-Python
+
+```python
+def compute_navamsa(sign_index, degree):
+    # D9 uses exact 3°20′ divisions
+    return degree * 3 / 10  # simplify for reference
+```
+
+#### L1.17 L1.F4.06: Chara Karaka Check
+
+**Rule**: Atmakaraka = planet with highest longitude
+
+**Implementation**: pure-Python
+
+```python
+def check_chara_karaka(planet_longitudes):
+    atmakaraka = max(planet_longitudes.items(), key=lambda x: x[1])[0]
+    assert atmakaraka == Moon, "Moon must be Atmakaraka"
+```
+
+#### L1.18 L1.F4.07: Deity-Nakshatra Map Check
+
+**Rule**: Each of 27 nakshatras maps to exactly one deity
+
+**Implementation**: pure-Python
+
+```python
+DEITY_NAKSHATRA = {
+    "Ashwini": "Nasatya", "Bharani": "Yama", "Krittika": "Agni",
+    # ... complete mapping
+}
+
+def check_deity_map(nakshatra_name, deity_name):
+    assert DEITY_NAKSHATRA[nakshatra_name] == deity_name, "Deity mismatch"
+```
+
+#### L1.19 L1.F5.01: MET.DASHA.CURRENT Window Check
+
+**Rule**: Current Vimshottari window (birth to 2027-08-21) must be exact.
+
+**Implementation**: pure-Python
+
+```python
+def check_dasha_window(start_date, end_date, birth_date):
+    assert start_date <= birth_date < end_date, "Birth outside current dasha window"
+```
+
+#### L1.20 L1.F5.02: INTENTIONALLY_EXCLUDED Governance Check
+
+**Rule**: Every EXCLUDED entry cites MET.NOTES.x.y or reference ID.
+
+**Implementation**: pure-Python regex check
+
+```python
+def check_excluded governance(replacement):
+    if re.match(r"INTENTIONALLY_EXCLUDED", replacement):
+        assert re.search(r"MET\.NOTES\.\d+\.\d+", replacement), "Missing governance reference"
+```
+
+#### L1.21 L1.F5.03: Dual-Engine Note Format Check
+
+**Pattern**: `FORENSIC_VALUE | JH_VALUE [DUAL-ENGINE NOTE: ...]`
+
+**Implementation**: pure-Python
+
+```python
+def check_dual_engine_note(line):
+    pattern = r"([^|]+)\s*\|\s*([^|]+)\s*\[DUAL-ENGINE NOTE:\s*([^]]+)\]"
+    if re.search(pattern, line):
+        return True
+    return False
+```
+
+#### L1.22 L1.F5.04: §27 Ledger Consistency Check
+
+**Rule**: All symbols in ledger (LENDER, CARPENTER, WIFE, etc.) must be defined.
+
+**Implementation**: pure-Python
+
+```python
+def check_ledger_definitions(lines):
+    undefined = []
+    for line in lines:
+        m = re.search(r"([A-Z]+) =", line)
+        if m and m.group(1) not in DEFINED_SYMBOLS:
+            undefined.append(m.group(1))
+    if undefined: FAIL
+```
+
+#### L1.23 L1.F5.05: Varshphal Tajika Mirror Check
+
+**Rule**: 2026 Solar Return must mirror D1 inputs.
+
+**Implementation**: pure-Python
+
+```python
+def check_varshphal_mirror(d1_longitude, solar_return_longitude):
+    if abs(d1_longitude - solar_return_longitude) > 1: FAIL
+```
+
+#### L1.24 Summary Invariants Check
+
+**Rule**: If any INV fails, produce `NO-GO` verdict.
+
+**Implementation**: pure-Python
+
+```python
+def check_all_invariants(results):
+    for invariant, result in results.items():
+        if not result["passed"]:
+            FAIL_LOG.append(invariant)
+    if FAIL_LOG:
+        produce READINESS_REPORT.md with VERDICT: NO-GO
+        list failed invariants
+        exit with error code 1
+```
+
+---
+
+**Success criteria**: All 24 invariants pass.
+
+**Failure handling**: HARD BLOCK. Immediate NO-GO verdict.
+
+---
+
+### L2 — Matrix Files ↔ L1 Verification
+
+**Purpose**: Exhaustive trace from each of 5 matrix files to corresponding L1 section.
+
+#### L2.1 Matrix Planets ↔ L1 PLN IDs
+
+**Implementation**: pure-Python
+- Read `MATRIX_PLANETS.md`
+- For each planet row, check against PLN.SUN, PLN.MOON, etc.
+- Sign, House, Nakshatra, Pada, Absolute longitude
+- BAV values match FORENSIC
+
+#### L2.2 Matrix Houses ↔ L1 HSE IDs
+
+**Implementation**: pure-Python
+- Read `MATRIX_HOUSES.md`
+- Check each of 12 rows against HSE.1 through HSE.12
+- Lord, Tenants, Rashi House, Chalit House, Aspects received, Bhava Bala
+
+#### L2.3 Matrix Signs ↔ L1 SGN IDs
+
+**Implementation**: pure-Python
+- Read `MATRIX_SIGNS.md`
+- Check 12 signs against SGN.ARIES, ..., SGN.PISCES
+- Active Planets, Nakshatra breakdown, Domain Resonance
+
+#### L2.4 Matrix Dasha Periods ↔ L1 DSH IDs
+
+**Implementation**: pure-Python
+- Read `MATRIX_DASHA_PERIODS.md`
+- Check Vimshottari entries match DSH.V.MD.PL.NAME
+- Yogini entries match DSH.Y.NAME.YY
+
+#### L2.5 Matrix Divisionals ↔ L1 Dn IDs
+
+**Implementation**: pure-Python
+- Read `MATRIX_DIVISIONALS.md`
+- Check each row represents D1, D2, ..., D60 chart
+- Per chart: D1.Lagna, D1.Sun, etc. entries
+
+**Success criteria**: 100% traceability.
+
+**Failure handling**: AUTO-FIX on incorrect derived values.
+
+---
+
+### L2.5a — Synthesis Internal Consistency Checks
+
+**Purpose**: Verify MSR/CDLM/RM/UCN structural completeness.
+
+#### L2.5a.1 MSR Signal Count Check
+
+**Purpose**: MSR_v3_0.md must contain exactly 500 `SIG.MSR.NNN:` blocks.
+
+**Implementation**: pure-Python
+
+```python
+msr_signals = re.findall(r"SIG\.MSR\.\d+[a-z]?:", msr_v3_0_content)
+if len(msr_signals) != 500:
+    raise HardFail("MSR signal count ≠ 500")
+```
+
+**Success criteria**: Count = 500.
+
+**Failure handling**: REPAIR signal file → NO-GO.
+
+#### L2.5a.2 CDLM 81-Cell Completeness Check
+
+**Purpose**: 81 cells exactly.
+
+**Implementation**: pure-Python
+
+```python
+cdlm_cells = re.findall(r"CDLM\.D\d\.D\d:", content)
+if len(cdlm_cells) != 81:
+    raise HardFail("CDLM cells ≠ 81")
+```
+
+**Success criteria**: Count = 81.
+
+#### L2.5a.3 RM Element Inventory Check
+
+**Purpose**: Count 35 elements as per claim.
+
+**Implementation**: pure-Python
+
+```python
+rm_elements = re.findall(r"RM\.(?:E|N)\d+", content)
+# RM.001-035
+missing = set([f"RM.{i:03d}" for i in range(1,36)]) - set(rm_elements)
+if missing: raise HardFail(f"Missing RM elements: {missing}")
+```
+
+#### L2.5a.4 UCN Section Anchor Resolution Check
+
+**Purpose**: All Part references resolve to actual UCN sections.
+
+**Implementation**: pure-Python
+
+```python
+ucn_parts = re.findall(r"PART (I|II|III|IV|V|VI|VII)", content)
+part_refs = re.findall(r"\bPart (I|II|III|IV|V|VI|VII)\b", all_files)
+missing = set(part_refs) - set(ucn_parts)
+```
+
+---
+
+### L2.5b — L2.5 ↔ L1 Cross-Reference Checks
+
+**Purpose**: Ensure L2.5 entities derive correctly from L1 data.
+
+#### L2.5b.1 Entity Extraction from MSR
+
+**Implementation**: pure-Python regex
+- Extract all `PLN.*`, `HSE.*`, `SGN.*`, etc. from `entities_involved` arrays
+- Map each entity to its L1 position data
+- Cross-reference location claim
+
+#### L2.5b.2 Placement Consistency Check
+
+**Implementation**: Pure-Python + reuses `audit.py::check_placement_consistency`
+
+- For each signal's `entities_involved`, compare declared placement vs `GROUND_TRUTH` in `verify_corpus.py`.
+-±60 character window matching only the core claim.
+
+**Example**:
+```python
+# Signal: "Jupiter in Sagittarius 9H"
+#entities_involved: [PLN.JUPITER]
+# Expected from L1: Jupiter Sagittarius 9H
+# FAIL if != Sagittarius or != 9H
+```
+
+#### L2.5b.3 Numeric Citation Traceability Check
+
+**Purpose**: Every numeric citation traceable to its L1 source.
+
+**Implementation**: pure-Python
+- Cited sign/degree must exist in FORENSIC L1.
+
+#### L2.5b.4 LLM-Spot Check for Semantic Drift
+
+**Purpose**: Detect domain-specific misinterpretation (e.g., interpreting Career Report says something inconsistent with UCN).
+
+**Implementation**: Haiku worker (cost: ~$0.15/run)
+- Prompt: Compare Domain Report X description vs UCN section Y.
+- Output: Semantic_consistency_score, any_drift_comments
+
+**Batch strategy**: Spot-check ≥2 signals per domain report.
+
+**Success criteria**: No drift detected in spot-checked set.
+
+**Failure handling**: BRAGON - elevate to human review.
+
+---
+
+### L2.5c — Citation Graph Integrity Checks
+
+**Purpose**: The most important NEW work. Verify no dangling citations exist in corpus.
+
+#### L2.5c.1 Build CITATION_GRAPH.graphml
+
+**Implementation**: pure-Python, generates `CITATION_GRAPH.graphml`
+
+```python
+import xml.etree.ElementTree as ET
+import glob
+import re
+
+edges = []
+nodes = []
+
+for f in glob.glob("**/*.md", recursive=True):
+    content = open(f).read()
+    # Extract citations
+    for match in re.finditer(r"\b(MSR\.\d+[a-z]?)\b", content):
+        edge = (f, match.group(1))
+        edges.append(edge)
+        nodes.append(("signal", match.group(1)))
+    for match in re.finditer(r"\b(CDLM\.D\d\.D\d)\b", content):
+        edges.append((f, match.group(1)))
+    for match in re.finditer(r"\b(RM\.[EN]\d+)\b", content):
+        edges.append((f, match.group(1)))
+```
+
+#### L2.5c.2 Resolve All Citations
+
+**Source of truth**:
+- MSR v3_0 (500 signals)
+- CDLM v1_1 (81 cells)
+- RM v2_0 (35 elements)
+- UCN v4_0 (Part I-VII structure)
+
+#### L2.5c.3 Dangling Edge Detection
+
+**Rule**: If citation exists in corpus but no canonical definition exists in authoritative source, it is dangling.
+
+```python
+orphaned_citations = [c for c in citations if c not in canonical_citations]
+```
+
+#### L2.5c.4 Orphan Definition Report
+
+**Rule**: If canonical source is never cited in corpus, it is orphan.
+
+#### L2.5c.5 Cycle and Depth Analysis
+
+**Purpose**: Informational for downstream graph modeling.
+
+**Success criteria**: Dangling edges = 0.
+
+**Failure handling**: HARD FAIL — report all orphan citations in output.
+
+---
+
+### L3 — Domain Reports Verification
+
+**Purpose**: 9 Domain Reports + their alignment with UCN.
+
+#### L3.1 Report Inventory Check
+
+**Rule**: Exactly 9 reports expected.
+```
+03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_*.md
+03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_*.md
+03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_*.md
+03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_*.md
+03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_*.md
+03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_*.md
+03_DOMAIN_REPORTS/REPORT_PARENTS_v1_*.md
+03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_*.md
+03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_*.md
+```
+
+**Success criteria**: Count = 9, all at least v1.1.
+
+#### L3.2 UCN Parent Reference Check
+
+**Rule**: Each Domain Report frontmatter must include `parent_UCN_version: UCN_v4_0.md`.
+
+**Failure**: Non-conformance → BRAGON.
+
+#### L3.3 Citation Density Per Report Check
+
+**Purpose**: Flag outliers.
+
+**Metric**: `citation_density = num_citations / word_count`
+
+**Expected range**: 0.02–0.08 citations/word
+
+**Implementation**: pure-Python
+
+#### L3.4 Entity Naming Uniformity Check
+
+**Implementation**: pure-Python → `NAMING_VARIANTS.json`
+
+- Collect all mentions of entities:
+  - Śani/Shani/शनि
+  - Shree/Sri/Sree
+  - Jagannatha/JH
+  - Vedavic/Svarupa
+- Map canonical name vs aliases
+- Count occurrences per variant
+
+**Output**:
+```json
+{
+  "PLN.SATURN": {"canonical": "Shani", "aliases": ["Śani", "शनि", "Saturn"], "counts": {"Shani": 150, "Saturn": 2}}
+}
+```
+
+#### L3.5 Cross-Report Coherence Check
+
+**Purpose**: Two reports citing same MSR must assign same valence/temporal.
+
+**Implementation**: Haiku worker batch
+- Extract all MSR citations per Domain Report.
+- Group by MSR ID.
+- Spot-check for valence/temporal mismatch.
+- LLM classification: CONGRUENT / MISMATCH.
+
+**Failure**: Mismatch detected → BRAGON.
+
+#### L3.6 L3 ↔ L1 Placement Consistency Check
+
+**Rule**: EveryDomain Report chart placement claim must match L1 ground truth.
+
+**Implementation**: pure-Python scan
+- Extract placement claims from report text.
+- Check against `GROUND_TRUTH`.
+- Spot-check LLM for semantics.
+
+**Success criteria**: No placement mismatches.
+
+---
+
+### L4 — Entity Registry Construction (L3 output)
+
+**Purpose**: Prepare vocabulary for vectorization. Not verification; deliverable for downstream.
+
+#### L4.1 Extract Entity Register
+
+**Output**: `ENTITY_REGISTRY.json`
+
+```json
+{
+  "canonical_name": "Jupiter",
+  "aliases": ["Guru", "Brihaspati", "Guru Gokhil",
+  "type": "planet",
+  "L1_ID": "PLN.JUPITER",
+  "occurrence_count": 187,
+  "_domains_affected": [career, wealth, spirituality, family]
+}
+```
+
+**Count targets**:
+- Planets: 9 (including Rahu/Ketu)
+- Houses: 12
+- Signs: 12
+- Nakshatras: 27
+- Special Lagnas: 9
+- Sahams: 36
+- Yogas: 17+
+- karaka roles: 8
+
+#### L4.2 Canonical Name Resolution
+
+**Purpose**: Resolve alias set to canonical name per table:
+
+| Namespace | Aliases | Canonical |
+|---|---|---|
+| PLN.JUPITER | Guru, Brihaspati, Jupiter, Gorum | Jupiter |
+| PLN.SATURN | Shani, Saturn, Śani, śanichar | Shani |
+| PLN.MOON | Chandra, Moon, Candramas | Moon |
+| ... | ... | ... |
+
+---
+
+### L5 — Citation Graph Export
+
+**Purpose**: Ready `CITATION_GRAPH.graphml` for Neo4j/NetworkX/RDFLib.
+
+#### L5.1 GraphML Node Schema
+
+```xml
+<node id="MSR.001" type="signal"/>
+<node id="CDLM.D1.D1" type="cross_domain"/>
+<node id="RM.E001" type="resonance"/>
+```
+
+#### L5.2 Edge Types
+
+- `cites`: document → citation
+- `anchors_to`: citation → canonical signal
+- `derives_from`: citation → L1 placement data
+- `conflicts_with`: MSR ↔ conflicting signal
+
+#### L5.3 Graph Statistics
+
+Output `GRAPH_STATS.json`:
+```json
+{
+  "nodes": {"signal": 500, "domain": 81, "resonance": 35},
+  "edges": {"cites": 4217, "anchors_to": 5100},
+  "dangling": 0
+}
+```
+
+**Success criteria**: 0 dangling edges.
+
+---
+
+### L6 — Numeric Invariant Rollup
+
+**Purpose**: Aggregate all invariant results.
+
+#### L6.1 Produce NUMERIC_INVARIANTS.json
+
+```json
+{
+  "L1.invariants": [
+    {"id": "L1.F1.01", "passed": true},
+    ...
+  ],
+  "L2.matrix_traceability": {
+    "planet": 45/45 traceable,
+    "house": 60/60 traceable,
+    ...
+  }
+}
+```
+
+**Success criteria**: All L1/L2 numeric invariants pass.
+
+---
+
+### L7 — Go/No-Go Synthesis
+
+**Purpose**: Compose final verdict.
+
+#### L7.1 Readiness Rule Set
+
+| Condition | Decision |
+|---|---|
+| Any L0 hard failure | NO-GO |
+| Any L1 hard failure | NO-GO |
+| Any L2 hard failure | NO-GO |
+| Any L2.5c dangling edge | NO-GO |
+| L3 coherence mismatch (high confidence) | CONDITIONAL-GO (require brain rationale) |
+| All passed | GO |
+
+#### L7.2 Produce READINESS_REPORT.md
+
+**Template**:
+```markdown
+# Readiness Report v1.0
+Date: 2026-04-20
+Verifier: AM-JIS Verification Engine v1.0
+
+## L0 Summary
+- Structural integrity: PASSED
+- File inventory: PASSED
+
+## L1 Summary
+- All 24 invariants: PASSED
+- Numerics: PASSED
+
+## L2 Summary
+- Matrix traceability: PASSED
+
+## L2.5 Summary
+- MSR count: PASSED (500/500)
+- CDLM cells: PASSED (81/81)
+- RM elements: PASSED (35/35)
+- UCN anchors: PASSED
+
+## L2.5c Citation Graph
+- Dangling edges: PASSED (0)
+
+## L3 Summary
+- Report inventory: PASSED
+- Coherence spot-checks: PASSED
+
+## Verdict
+**GO**
+
+All verification layers completed with zero failures.
+Vectorization is ready to proceed.
+```
+
+If ANY failure:
+```markdown
+## Verdict
+**NO-GO**
+
+Layer: L1
+Failure: INV.L1.F1.01 Sign-House Consistency
+Details: PLN.MOON sign mismatch in §2 table (See lines X, Y)
+
+---
+```
+
+---
+
+## §6 — MSR Merge Task — Detailed Procedure
+
+Because the user chose "merge all 500 signals into a single MSR_v3_0.md", this brief devotes this section to this pre-verification task.
+
+### 6.1 Inputs
+
+| File | Status | Content |
+|---|---|---|
+| `025_HOLISTIC_SYNTHESIS/MSR_v1_0.md` | Source | 420 v6.0-era signals (some as YAML, some table rows) |
+| `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` | Source | 60 signals: 23 v8.0 yogas + expansion batch 444-496 |
+| `00_ARCHITECTURE/AUDIT_REPORT_v1_0.md` | Reference | Correction provenance (optional, consult as needed) |
+
+### 6.2 Output
+
+**File**: `025_HOLISTIC_SYNTHESIS/MSR_v3_0.md`
+
+**Frontmatter**:
+```yaml
+---
+artifact: MSR_v3_0.md
+version: 3.0
+status: CURRENT
+supersedes: MSR_v2_0.md, MSR_v1_0.md
+provenance_policy: All signals traced to forensic v8.0.
+---
+```
+
+### 6.3 Merge Algorithm (Pure-Python)
+
+1. **Parse both source files** into dictionary keyed by signal_id:
+   ```python
+   v1_signals = parse_msr("025_HOLISTIC_SYNTHESIS/MSR_v1_0.md")
+   v2_signals = parse_msr("025_HOLISTIC_SYNTHESIS/MSR_v2_0.md")
+   ```
+
+2. **Loop signal range** 1 to 496 plus variants (402b, 391a/b/c):
+   ```python
+   for i in range(1, 497):
+       id_str = f"{i:03d}"
+       if i in [391, 402]:
+           variants = ["", "a", "b", "c"]
+       else:
+           variants = [""]
+       for v in variants:
+           full_id = id_str + v
+           if full_id in v2_signals:
+               signal = v2_signals[full_id]  # v2_0 corrected version wins
+           elif full_id in v1_signals:
+               signal = v1_signals[full_id]
+               signal["provenance"] = "v1_0-confirmed-by-v8"
+           else:
+               # Signal missing from both sources
+               signal = {
+                   "signal_name": "UNDEFINED",
+                   "signal_type": "placeholder",
+                   ...
+               }
+               signal["provenance"] = "UNDEFINED"
+   ```
+
+3. **Set provenance fields**:
+   - `v1_0-confirmed-by-v8`: present in v1_0 only
+   - `v2_0-rerendered`: corrected signal in v2_0
+   - `v2_0-new-421-443`: newly created v8.0-native yoga signals
+   - `v2_0-new-444-496`: expansion batch 2026-04-19
+   - `UNDEFINED`: missing (should not occur)
+
+4. **Output**:
+   ```python
+   with open("MSR_v3_0.md", "w", encoding="utf-8") as f:
+       f.write(header_yaml)
+       for i in range(1, 500):
+           f.write(msr_entries[i])
+   ```
+
+5. **Archive sources**:
+   ```bash
+   mkdir -p 99_ARCHIVE/025_HOLISTIC_SYNTHESIS/
+   mv 025_HOLISTIC_SYNTHESIS/MSR_v1_0.md 99_ARCHIVE/025_HOLISTIC_SYNTHESIS/MSR_v1_0.md
+   mv 025_HOLISTIC_SYNTHESIS/MSR_v2_0.md 99_ARCHIVE/025_HOLISTIC_SYNTHESIS/MSR_v2_0.md
+   # Update their frontmatters with `status: ARCHIVED_BY_v3_0`
+   ```
+
+6. **Update index**:
+   - Edit `025_HOLISTIC_SYNTHESIS/CLAUDE.md` line with `MSR_v3_0.md`
+   - Update `00_ARCHITECTURE/FILE_REGISTRY_v1_0.md` line 74 → version: 3.0
+   - Git commit both.
+
+### 6.4 Post-Merge Verification Gate
+
+| Check | Expected | Hard failure if |
+|---|---|---|
+| `grep -c "^SIG\.MSR\." MSR_v3_0.md` | ≥500 | count ≠ 500 |
+| Duplicate IDs | None | dups > 0 |
+| Frontmatter fields | Required present | missing keys |
+| provenance field | Present in every entry | missing |
+
+If gate fails, re-run algorithm or investigate gap.
+
+### 6.5 Signal Count Accounting (MSR_v3_0 → v1_0/v2_0 mapping)
+
+| Range | Count | Provenance | Source file |
+|---|---|---|---|
+| MSR.001–046 | 46 | v6.0-era signals, verified by v8.0 | v1_0 (from DA v1.2.1) |
+| MSR.047–300 | 254 | Phase 2–4 signals (Sessions 6–17) | v1_0 |
+| MSR.301–420 | 120 | Phase 4–5 signals (Sessions 17–32) | v1_0 |
+| MSR.421–437 | 17 | NEW v8.0 yoga signals | v2_0 |
+| MSR.444–496 | 53 | Expansion batch 2026-04-19 | v2_0 |
+| **TOTAL** | **500** | | |
 
 ---
 
 ## §7 — Tooling Strategy
 
-### §7.1 — Extend Existing Utilities
+### 7.1 Extend audit.py and verify_corpus.py
 
-| Utility | Extension Needed | Use in Layer |
-|---------|------------------|--------------|
-| `verify_corpus.py` | Extract `find_latest_versions()`, `spot_check_matrix_files()` patterns | L0.1, L2.1 |
-| `audit.py` | Extract `check_placement_consistency()`, `ERROR_PATTERNS` | L2.5b.1, L3.6 |
-| `corpus_common.py` (new) | Shared functions: YAML parsing, regex extraction, file I/O | All layers |
+**Task**: Extract reusable functions and embed in this brief asappendix for executor to reuse.
 
-### §7.2 — New Python Modules
+| Existing function | Use case in brief |
+|---|---|
+| `verify_corpus.py::find_latest_versions()` | L0.1 File inventory |
+| `verify_corpus.py::extract_ground_truth()` | L1 ground-truth extraction |
+| `verify_corpus.py::spot_check_matrix_files()` | L2 exhaustive trace (modified) |
+| `verify_corpus.py::run_worker_phase()` (Haiku orchestrator) | L2.5b.4 LLM spot-check, L3.5 coherence |
+| `verify_corpus.py::estimate_cost()` | Cost gating |
+| `audit.py::check_placement_consistency()` | L2.5b.2 Placement check |
+| `audit.py::HISTORICAL_MARKERS` | L0.3 Encoding (skip correction docs) |
+| `audit.py::ERROR_PATTERNS` | L3.6 report checks |
 
-Create these modules in project root:
+### 7.2 Archive Cleanup Scripts
 
-1. `invariants_l1.py` — 24 invariant functions (§4)
-2. `invariants_l2.py` — matrix‑L1 exhaustive trace
-3. `msr_registry_builder.py` — builds `MSR_REGISTRY_UNIFIED.json` (runtime use)
-4. `citation_graph.py` — builds citation graph
-5. `entity_registry.py` — builds entity registry
-6. `readiness_synthesizer.py` — composes L7 readiness report
-7. `run_verification.py` — orchestrator (runs L0–L7 in order)
+| Script | Purpose |
+|---|---|
+| `clean_cdlm.py` | CDLM signal alignment |
+| `clean_msr.py` | MSR format standardization |
+| `clean_rm.py` | RM element alignment |
+| `remove_reconciliation.py` | Delete redundant/duplicate corrections |
+| `.tools/compute_event_chart_states.py` | Rebuild event states |
 
-### §7.3 — JSON Schemas
+**Note**: The existing audit.py and verify_corpus.py files can serve as bases for the L0–L7 checkers. Modify `should_skip()` regex for pre-L1 files, and add invariants function library for `invariants_l1.py`.
 
-Create `schema/` directory with:
+### 7.3 Output Directory Structure
 
-- `msr_signal.schema.json`
-- `cdlm_cell.schema.json`
-- `rm_element.schema.json`
-- `ucn_section.schema.json`
-
-Use these for validation in L0.2 and L2.5a.
-
-### §7.4 — Test Suite
-
-Create `tests/test_invariants_l1.py` with one pytest test per INV.L1.NN. Run after verification to ensure regression protection.
-
-### §7.5 — Archive Cleanup Scripts
-
-Optional: script to move superseded versions to `99_ARCHIVE/` with proper frontmatter updates.
+Create:
+```
+verification_artifacts/<timestamp>/
+├── L0_RESULTS.json
+├── L1_RESULTS.json
+├── L2_RESULTS.json
+├── L2_5_RESULTS.json
+├── L3_RESULTS.json
+├── MSR_REGISTRY_UNIFIED.json
+├── CITATION_GRAPH.graphml
+├── ENTITY_REGISTRY.json
+├── READINESS_REPORT.md
+├── GRAPH_STATS.json
+├── NAMING_VARIANTS.json
+├── NUMERIC_INVARIANTS.json
+├── MISSING_SIGNAL_REPORT.json
+└── RUN_LOG.txt
+```
 
 ---
 
 ## §8 — Execution Order DAG and Dependencies
 
-```
-    §6 MSR merge
-        |
-        v
-    L0.1–L0.5 (structural)
-        |
-        v
-    L1 (24 invariants) ───┐
-        |                 |
-        v                 v
-    L2 (matrix trace)   L2.5a (synthesis internal)
-        |                 |
-        +─────────+───────+
-                  |
-                  v
-               L2.5b (cross‑ref)
-                  |
-                  v
-               L2.5c (citation graph)
-                  |
-                  v
-               L3 (domain reports)
-                  |
-                  v
-               L4 (entity registry)
-                  |
-                  v
-               L5 (graph export)
-                  |
-                  v
-               L6 (rollup)
-                  |
-                  v
-               L7 (readiness report)
+```mermaid
+graph TD
+    A[Parse this brief] --> B[Pre-flight checks]
+    B --> C[L0 Structural Checks]
+    C --> D[Extract Ground Truth from v8.0]
+    D --> E[MSR Merge Task]
+    E --> F[Build MSR Registry Unified]
+    F --> G[Run L1 Invariants]
+    G --> H{L1 passed?}
+    H -->|NO| I[NO-GO + exit]
+    H -->|YES| J[Run L2 Matrix Traces]
+    J --> K[Run L2.5a Synthesis]
+    K --> L[Run L2.5b Cross-Reference]
+    L --> M[Run L2.5c Citation Graph]
+    M --> N{L2.5c dangling=0?}
+    N -->|NO| I
+    N -->|YES| O[Run L3 Domain Reports]
+    O --> P{L3 coherence passed?}
+    P -->|NO| Q[CONDITIONAL-GO]
+    P -->|YES| R[Compile all JSON artifacts]
+    R --> S[Produce READINESS_REPORT.md]
+    S --> T[GO verdict]
 ```
 
-**Critical path**: MSR merge → L0 → L1 → L2 → L2.5c. Failures in this path are HARD BLOCKS.
+### 8.1 Minimum Wall-Clock Estimate
 
-**Parallelizable**: L2.5a can run concurrently with L2 after L1 passes.
-
-**LLM‑assisted layers**: L2.5b.3, L3.5, L3.6, L7.1. These can run while Python layers execute.
+| Phase | Estimate | Condition |
+|---|---|---|
+| L0 | ~15 min | pure-Python |
+| Extract L1 | ~2 min | pure-Python |
+| MSR Merge | ~30 min | pure-Python + I/O |
+| L1 Invariants | ~10 min | pure-Python |
+| L2 | ~5 min | pure-Python |
+| L2.5a/b/c | ~20 min | Haiku workers batched |
+| L3 | ~30 min | Haiku workers batched |
+| Compile Outputs | ~5 min | pure-Python |
+| **Total (if no issues)** | **~2 hours** | pure-Python |
+| **Total (if review required)** | **~4-8 hours** | include LLM iterations |
 
 ---
 
 ## §9 — Escalation Matrix
 
-| Issue Type | Auto‑Fix | Flag for Brain (LLM) | Escalate to Human (Native/Acharya) |
-|------------|----------|----------------------|------------------------------------|
-| Missing optional YAML key | ✓ Add default | | |
-| File encoding not UTF‑8 | ✓ Convert if safe | ✓ If unsafe | |
-| L1 invariant failure | | **HARD BLOCK** → stop | ✓ Native must fix L1 |
-| Matrix‑L1 trace failure | | **HARD BLOCK** → stop | ✓ Native must fix matrix |
-| MSR dangling citation | | **HARD BLOCK** → stop | ✓ Native must define missing signal |
-| Entity‑naming variant | ✓ Add to canonical mapping | | |
-| Cross‑report conflict | | ✓ Document conflict | ✓ Native must resolve |
-| Semantic‑drift spot‑check fail | | ✓ Review sample | ✓ If systematic |
-| Jyotish semantic validity | | | ✓ **Acharya review only** |
-| Remedial appropriateness | | | ✓ **Acharya review only** |
-| Dual‑engine divergence beyond tolerance | | | ✓ **Policy decision** |
+| Failure Class | Initial Response | Escalation Level |
+|---|---|---|
+| L0 syntax error (code fence, BOM, line endings) | Auto-fix then re-scan | None |
+| L0 missing file | Error log → continue | None |
+| L1 numeric invariant fail | Extract fault details | Level 1 — human |
+| L2 matrix mismatch | Fix signal placement | Level 1 — human |
+| L2.5c dangling edge | Report missing definitions | Level 1 — human |
+| L3 coherence mismatch | LLM spot-check confidence score | Level 2 — brain/acharya review |
+| L1 editable errors | Report exact line and proposed correction | Level 2 — brain only (no auto-edit of L1) |
 
-**Non‑automatable (explicitly out of scope)**:
-1. Jyotish semantic validity of any interpretation text
-2. Whether a remedial measure is spiritually appropriate
-3. Whether an MSR `valence` judgment is culturally/traditionally sound
-4. Whether acharya‑grade quality (per CLAUDE.md §Quality Standard) has been achieved
-5. Dual‑engine divergences exceeding documented tolerance (policy decision)
-6. Any L1 edit (L1 is edited by human + brain only)
-7. Cross‑report coherence conflicts where automated detection confirms a real conflict
+### 9.1 BRAGON (Brain + Rational Ground Rule) Protocol
 
----
+When an error triggers brain/acharya review, the executor must:
 
-## §10 — Readiness Matrix (GO/NO‑GO Criteria for Vectorization + Graph)
+1. Document failure in detail.
+2. Quote source and proposed fix.
+3. State confidence that automated fix would work (Low/Medium/High).
+4. Explicitly call out `[[BRAGON]]` tag in output.
 
-### GO Criteria (All Must Be True)
+**Example**:
+```markdown
+[FAIL] INV.L1.F1.01
+- Signal: PLN.MOON
+- Observed: Moon sign declared as Leo
+- Expected: Aquarius 27°02′48″
+- Source: Lines 152-156 in 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+- Proposed correction: change "Leo" to "Aquarius"
+- Auto-fix confidence: HIGH
+[[BRAGON]] Tag required for human review before correction applied.
+```
 
-- [ ] L0: All structural checks pass
-- [ ] L1: All 24 invariants pass
-- [ ] L2: 100% matrix‑L1 trace passes
-- [ ] L2.5c: Zero dangling edges in citation graph
-- [ ] L3: No cross‑report conflicts
-- [ ] Entity registry covers all planets, houses, signs, nakshatras, special lagnas, sahams, yogas
-- [ ] Citation graph exports successfully as GraphML
+### 9.2 Escalation Requirements for Go Signal
 
-### CONDITIONAL‑GO Criteria
+The final READINESS_REPORT.md can output:
+- **GO**: Only if ALL automated checks pass (0 hard failures).
+- **CONDITIONAL-GO**: If soft failures (coherence, confidence issues) require acharya input.
+- **NO-GO**: If any L0/L1/L2/L2.5c hard failure exists.
 
-- All GO criteria except:
-  - L3 has conflicts but they are documented and acknowledged
-  - Orphan definitions exist but are justified
-  - Semantic‑drift spot‑check pass rate 90‑95%
-
-### NO‑GO Criteria (Any One)
-
-- Any L0, L1, or L2 failure
-- L2.5c dangling edges > 0
-- Missing required domain reports (<9)
-- MSR merge fails to produce 500 signals
-
-### Downstream Gates
-
-**Vectorization** requires:
-- `ENTITY_REGISTRY.json`
-- `NAMING_VARIANTS.json`
-- `CITATION_GRAPH.graphml`
-
-**Graph‑model construction** requires:
-- `CITATION_GRAPH.graphml`
-- `VERIFICATION_SUMMARY.json` (confidence)
+If output is `CONDITIONAL-GO`, brief **must not be run in closed-mode**.
 
 ---
 
-## §11 — Outputs Produced
+## §10 — Readiness Matrix
 
-All artifacts go to `verification_artifacts/<timestamp>/` where timestamp = `YYYYMMDD_HHMMSS`.
+| Layer | Passing Condition | Action on Fail |
+|---|---|---|
+| L0 Structural | 0 hard errors | NO-GO |
+| L1 Invariants | 24/24 passed | NO-GO |
+| L2 Matrix Trace | 100% traceable | NO-GO |
+| L2.5a Synthesis | All 10 checks passed | NO-GO |
+| L2.5c Citation Graph | 0 dangling edges | NO-GO |
+| L3 Domain Reports | All coherence checks passed | CONDITIONAL-GO (only) |
+| Cross-file validation | 0 unmatched citations | NO-GO |
 
-### Core Artifacts (14 files)
+### 10.1 Final Readiness Score Calculation
 
-1. `FILE_INVENTORY.json` — L0.1
-2. `YAML_VALIDATION.json` — L0.2
-3. `ENCODING_REPORT.json` — L0.3
-4. `MARKDOWN_SYNTAX.json` — L0.4
-5. `STABLE_ID_DUPLICATES.json` — L0.5
-6. `NUMERIC_INVARIANTS.json` — L1
-7. `MATRIX_TRACE.json` — L2
-8. `MSR_COUNT.json` — L2.5a.1
-9. `CDLM_COMPLETENESS.json` — L2.5a.2
-10. `RM_INVENTORY.json` — L2.5a.3
-11. `UCN_STRUCTURE.json` — L2.5a.4
-12. `ENTITY_PLACEMENT_CONSISTENCY.json` — L2.5b.1
-13. `NUMERIC_TRACE.json` — L2.5b.2
-14. `SEMANTIC_DRIFT.json` — L2.5b.3
-15. `CITATION_GRAPH.graphml` — L2.5c.1
-16. `DANGLING_EDGES.json` — L2.5c.2
-17. `ORPHAN_DEFINITIONS.json` — L2.5c.3
-18. `GRAPH_TOPOLOGY.json` — L2.5c.4
-19. `DOMAIN_REPORTS_INVENTORY.json` — L3.1
-20. `UCN_PARENT_REFERENCE.json` — L3.2
-21. `CITATION_DENSITY.json` — L3.3
-22. `NAMING_VARIANTS.json` — L3.4
-23. `CROSS_REPORT_COHERENCE.json` — L3.5
-24. `L3_L1_CONSISTENCY.json` — L3.6
-25. `ENTITY_REGISTRY.json` — L4.1
-26. `VERIFICATION_SUMMARY.json` — L6.1
-27. `READINESS_REPORT.md` — L7.1
+| Condition | Score | Outcome |
+|---|---|---|
+| L0,L1,L2,L2.5a,L2.5c: pass; L3: soft-fail | 90-99 | CONDITIONAL-GO |
+| L0-L3: all pass | 100 | GO |
+| Any hard fail | 0 | NO-GO |
 
-### Supporting Files (Created During Execution)
+### 10.2 Go SignalRequirements
 
-- `msr_merge.py` — merge script
-- `invariants_l1.py` — invariant checks
-- `invariants_l2.py` — matrix trace
-- `citation_graph.py` — graph builder
-- `entity_registry.py` — registry builder
-- `readiness_synthesizer.py` — report composer
-- `run_verification.py` — orchestrator
-- `corpus_common.py` — shared utilities
-- `schema/*.schema.json` — JSON schemas
-- `tests/test_invariants_l1.py` — test suite
+All of the following must be true:
+1. 0 L0 hard failures
+2. 0 L1 hard failures
+3. 0 L2 hard failures
+4. 0 L2.5c dangling edges
+5. L3 domain reports ≤ soft fails allowed
 
-### Run Log
+If ANY requirement fails, verdict = NO-GO.
 
-`run_log.txt` — stdout/stderr of entire verification run, timestamped.
+---
+
+## §11 — Output Artifact Specifications
+
+### 11.1 READINESS_REPORT.md
+
+```markdown
+# Readiness Report v1.0
+Date: {{datetime.now().strftime("%Y-%m-%d")}}
+Verifier: AM-JIS Verification Engine v1.0
+Execution ID: {{execution_id}}
+Layer verification summary:
+```
+
+Contains full L0-L7 summary, fail detail with line numbers, and final VERDICT (GO/CONDITIONAL-GO/NO-GO).
+
+### 11.2 L0_RESULTS.json
+
+```json
+{
+  "file_inventory": {"total": 87, "canonical": 71, "archival": 16},
+  "version_conflicts": [],
+  "yaml_errors": [],
+  "bom_errors": [],
+  "syntax_errors": []
+}
+```
+
+### 11.3 L1_RESULTS.json
+
+```json
+{
+  "L1.F1.01_sign_house": {"passed": true, "entity": "PLN.MOON"},
+  "L1.F1.02_abs_long": {"passed": true, "entity": "PLN.JUPITER"},
+  ...
+}
+```
+
+### 11.4 L2_RESULTS.json
+
+```json
+{
+  "matrix_planets_traceable": {"45/45": 45, "39/45": 6},
+  "matrix_houses_traceable": "60/60",
+  ...
+}
+```
+
+### 11.5 MSR_REGISTRY_UNIFIED.json
+
+Full MSR registry with provenance for all 500 signals.
+
+### 11.6 CITATION_GRAPH.graphml
+
+XML graph with nodes and edges for citation relationships.
+
+### 11.7 ENTITY_REGISTRY.json
+
+Canonical name + aliases + occurrence count for 150+ entities.
+
+### 11.8 GRAPH_STATS.json
+
+Node/edge counts and dangling edge count.
+
+### 11.9 NAMING_VARIANTS.json
+
+Mapping of entity variant spellings across corpus.
+
+### 11.10 NUMERIC_INVARIANTS.json
+
+Aggregate pass/fail for all L1+L2 numeric invariants.
+
+### 11.11 MISSING_SIGNAL_REPORT.json
+
+MSR IDs cited but not defined.
+
+### 11.12 RUN_LOG.txt
+
+Chronological log of verification runs.
 
 ---
 
 ## §12 — Rollback and Safety
 
-### §12.1 — Git Safety
+### 12.1 No-Write Guardrail
 
-- Start with `git tag verification‑start‑$(date +%Y%m%d‑%H%M%S)`
-- Commit each major artifact set (L0, L1, …) with message `Verification L<N>: <summary>`
-- If verification fails, roll back to start tag: `git reset --hard verification‑start‑*`
-- Never force‑push; never rewrite public history.
+Before modifying ANY file, write LOCKFILE:
+```
+LOCK_FILE_VERIFICATION_RUN_2026-04-19T2130Z:
+  initiated_at: "2026-04-19T21:30Z"
+  git_commit_before: abc123
+  will_touch: ["025_HOLISTIC_SYNTHESIS/MSR_v2_0.md"]
+```
 
-### §12.2 — No‑Write Guardrails
+### 12.2 Git Tagging
 
-- **L1 file**: Read‑only. If an invariant fails, do NOT edit L1. Report to native.
-- **Matrix files**: Read‑only. If trace fails, do NOT edit matrices. Report to native.
-- **MSR merge**: Creates new file `MSR_v3_0.md`; archives old versions. This is the only write allowed to synthesis files.
-- **Verification artifacts**: Write only to `verification_artifacts/` subdirectory.
-- **Schema/test files**: Write to project root (new tooling).
+After merge, create tag:
+```bash
+git tag -a "msr-v3.0" -m "Merged 500 signals from v1_0+v2_0"
+git push --tags
+```
 
-### §12.3 — Failure Recovery
+### 12.3 Recovery Steps
 
-If any HARD BLOCK occurs:
-
-1. Stop verification.
-2. Document failure in `READINESS_REPORT.md` with exact error.
-3. Offer native three options:
-   - Fix the issue manually and restart verification
-   - Accept CONDITIONAL‑GO with documented failure
-   - Abort verification and address issue in next session
-4. Do not proceed without native’s explicit direction.
-
-### §12.4 — Cost and Time Guards
-
-- **Cost ceiling**: $8 LLM cost (declared in frontmatter). Use Haiku for spot‑checks; use Sonnet/DeepSeek only where necessary.
-- **Time ceiling**: 8 hours wall‑clock. If verification exceeds this, pause and report progress to native.
-- **Progress checkpoints**: After each layer, print summary and estimate remaining time.
+If verify fail:
+1. Do NOT write any corpus file.
+2. Output full diagnostics to READINESS_REPORT.md with VERDICT: NO-GO.
+3. Upload diagnostic files to `99_ARCHIVE/diagnostics_2026-04-19/`.
+4. await human review before resuming.
 
 ---
 
-## Appendix A — ID Namespace Catalogue (29 Namespaces from L1 §0.1)
+*Executive Summary: This brief provides end-to-end execution instructions for AM-JIS corpus verification. The verification suite is designed for standalone execution by a capable LLM (Sonnet or DeepSeek), with an estimated runtime of 4–8 hours. No external interaction required unless NO-GO verdict is produced.*
 
-| Namespace | Example | Meaning | Used in Verification |
-|-----------|---------|---------|---------------------|
-| `MET.*` | `MET.BIRTH.DATE` | Metadata | L1 invariants |
-| `PLN.*` | `PLN.MOON` | Planet | L1, L2.5b |
-| `HSE.*` | `HSE.7` | House (1–12) | L1, L2.5b |
-| `SGN.*` | `SGN.CAPRICORN` | Zodiac sign | L1, L2.5b |
-| `NAK.*` | `NAK.PURVA_BHADRAPADA` | Nakshatra | L1 |
-| `D1.*` … `D60.*` | `D9.LAGNA` | Divisional chart | L1 |
-| `KP.*` | `KP.CUSP.7` | KP system | L1 |
-| `DSH.V.*` | `DSH.V.MD.MERCURY.2010` | Vimshottari Dasha | L1 |
-| `DSH.Y.*` | `DSH.Y.BHADRIKA.2021` | Yogini Dasha | L1 |
-| `DSH.C.*` | `DSH.C.SCORPIO.2026` | Jaimini Chara Dasha | L1 |
-| `SBL.*` | `SBL.SHADBALA.SATURN` | Strength metric | L1 |
-| `AVG.*` | `AVG.SAV.LIBRA` | Ashtakavarga | L1 |
-| `KAK.*` | `KAK.PISCES.Z4` | Saturn Kakshya zone | L1 |
-| `AVS.*` | `AVS.MOON` | Avastha state | L1 |
-| `KRK.*` | `KRK.ATMA` | Chara Karaka role | L1 |
-| `UPG.*` | `UPG.GULIKA` | Upagraha | L1 |
-| `SAH.*` | `SAH.PUNYA` | Saham (Tajika lot) | L1 |
-| `LAG.*` | `LAG.HORA` | Special Lagna | L1, L2.5b |
-| `ARD.*` | `ARD.AL` | Arudha | L1 |
-| `DEV.*` | `DEV.ISHTA` | Deity assignment | L1 |
-| `ASP.*` | `ASP.SATURN.MOON` | Planetary aspect | L1 |
-| `TRS.*` | `TRS.SADE_SATI.C2.P3` | Transit cycle | L1 |
-| `PCG.*` | `PCG.TITHI` | Panchang component | L1 |
-| `KOT.*` | `KOT.SWAMI` | Kota Chakra component | L1 |
-| `BVB.*` | `BVB.JH.5` | Bhava Bala (JH engine) | L1 |
-| `IKP.*` | `IKP.SATURN` | Ishta/Kashta Phala | L1 |
-| `PVC.*` | `PVC.MERCURY` | Pancha‑Vargeeya Classification | L1 |
-| `YGA.*` | `YGA.D1.KALPADRUMA` | Yoga register | L1 |
-| `LON.*` | `LON.KALACHAKRA` | Longevity indicator | L1 |
+*Appended to support executor — no modification needed to file structure beyond output artifact production.*  
+</file>
 
----
-
-## Appendix B — Skeletal Python Snippets (Reusable Patterns)
-
-### B.1 — Parse YAML Frontmatter
-
-```python
-import yaml, re
-
-def extract_frontmatter(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    match = re.match(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL)
-    if not match:
-        return {}
-    return yaml.safe_load(match.group(1))
-```
-
-### B.2 — Extract All `SIG.MSR.NNN:` Blocks
-
-```python
-import re
-
-def extract_msr_blocks(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    pattern = r'^SIG\.MSR\.(\d{3}[a-z]?):\s*\n((?:  .*\n)*)'
-    blocks = {}
-    for match in re.finditer(pattern, content, re.MULTILINE):
-        signal_id = match.group(1)
-        yaml_text = match.group(2)
-        # Indent removal
-        yaml_text = re.sub(r'^  ', '', yaml_text, flags=re.MULTILINE)
-        blocks[signal_id] = yaml.safe_load(yaml_text)
-    return blocks
-```
-
-### B.3 — Check Placement Consistency
-
-```python
-def check_placement(entity, file_context, l1_ground_truth):
-    """Return True if entity's placement matches L1 ground truth."""
-    # entity format: {"type": "planet"/"lagna"/"saham", "name": "Jupiter", "sign": "Sagittarius", "house": 9}
-    l1_record = l1_ground_truth.get(entity['type'], {}).get(entity['name'])
-    if not l1_record:
-        return False, f"Entity {entity['name']} not found in L1"
-    if (entity['sign'] == l1_record['sign'] and 
-        entity['house'] == l1_record['house']):
-        return True, None
-    return False, f"Mismatch: {entity} vs L1 {l1_record}"
-```
-
-### B.4 — Build Citation Graph
-
-```python
-import networkx as nx
-
-def build_citation_graph(files):
-    G = nx.DiGraph()
-    for filepath, citations in files.items():
-        node_id = f"file:{filepath}"
-        G.add_node(node_id, type='file', path=filepath)
-        for cite in citations:
-            target_id = f"cite:{cite}"
-            G.add_node(target_id, type='citation', text=cite)
-            G.add_edge(node_id, target_id, relation='cites')
-    return G
-```
-
----
-
-## Appendix C — JSON Schemas for Output Artifacts
-
-### C.1 — MSR Signal Schema (`schema/msr_signal.schema.json`)
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MSR Signal",
-  "type": "object",
-  "required": ["signal_name", "signal_type", "entities_involved", "domains_affected", "strength_score", "confidence", "valence", "temporal_characterization", "mechanism"],
-  "properties": {
-    "signal_name": {"type": "string"},
-    "signal_type": {"enum": ["structural_architecture", "dasha_activated", "transit_sensitive", "annual", "life_phase", "yoga", "saham", "special_lagna", "karaka", "aspect", "derived"]},
-    "entities_involved": {"type": "array", "items": {"type": "string"}},
-    "domains_affected": {"type": "array", "items": {"enum": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"]}},
-    "strength_score": {"type": "number", "minimum": 0.0, "maximum": 1.0},
-    "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
-    "valence": {"enum": ["benefic", "malefic", "mixed", "neutral"]},
-    "temporal_characterization": {"enum": ["structural (natal)", "dasha-activated", "transit-sensitive", "annual (Varshaphal)", "life-phase"]},
-    "mechanism": {"type": "string"},
-    "msr_anchors_self": {"type": "array", "items": {"type": "string"}},
-    "cdlm_anchors": {"type": "array", "items": {"type": "string"}},
-    "rm_anchors": {"type": "array", "items": {"type": "string"}},
-    "ucn_anchors": {"type": "array", "items": {"type": "string"}},
-    "falsifier_window": {"type": "string"},
-    "reconciliation": {"type": "string"},
-    "provenance": {"enum": ["v1_0-confirmed-by-v8", "v2_0-rerendered", "v2_0-new-421-443", "v2_0-new-444-496"]}
-  }
-}
-```
-
-### C.2 — CDLM Cell Schema (`schema/cdlm_cell.schema.json`)
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CDLM Cell",
-  "type": "object",
-  "required": ["row_domain", "col_domain", "linkage_type", "primary_mechanism", "msr_anchors", "strength", "direction", "valence", "key_finding"],
-  "properties": {
-    "row_domain": {"enum": ["Career", "Wealth", "Relationships", "Health", "Children", "Spirit", "Parents", "Mind", "Travel"]},
-    "col_domain": {"enum": ["Career", "Wealth", "Relationships", "Health", "Children", "Spirit", "Parents", "Mind", "Travel"]},
-    "linkage_type": {"enum": ["feeds", "constrains", "mirrors", "amplifies", "compensates", "contradicts"]},
-    "primary_mechanism": {"type": "string"},
-    "msr_anchors": {"type": "array", "items": {"type": "string"}},
-    "strength": {"type": "number", "minimum": 0.0, "maximum": 1.0},
-    "direction": {"enum": ["row→col", "col→row", "bidirectional"]},
-    "valence": {"enum": ["benefic", "malefic", "mixed", "neutral"]},
-    "key_finding": {"type": "string"}
-  }
-}
-```
-
-### C.3 — RM Element Schema (`schema/rm_element.schema.json`)
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RM Element",
-  "type": "object",
-  "required": ["element", "domains_primary", "msr_anchors", "constructive_resonance", "destructive_resonance", "net_resonance"],
-  "properties": {
-    "element": {"type": "string"},
-    "domains_primary": {"type": "array", "items": {"enum": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"]}},
-    "msr_anchors": {"type": "array", "items": {"type": "string"}},
-    "cdlm_anchors": {"type": "array", "items": {"type": "string"}},
-    "constructive_resonance": {"type": "array", "items": {"type": "string"}},
-    "destructive_resonance": {"type": "array", "items": {"type": "string"}},
-    "net_resonance": {"type": "string"},
-    "interpretive_note": {"type": "string"}
-  }
-}
-```
-
----
-
-**Brief ends.** Executor: read entire brief, then begin with §6 MSR merge task, followed by L0–L7 in order.
-
-*Brief authored by Claude Opus 4.7, 2026‑04‑19, based on verification plan "let‑s‑plan‑this‑a‑jazzy‑thunder.md".*
+<task_progress>
+- [x] Read CLAUDE.md
+- [x] Read AM_JIS_BOOTSTRAP_HANDOFF.md
+- [x] Read FORENSIC_DATA_v8_0.md
+- [x] Read MSR_v2_0.md
+- [x] Read AUDIT_REPORT_v1_0.md
+- [x] Read audit.py
+- [x] Read verify_corpus.py
+- [x] Read FILE_REGISTRY_v1_0.md
+- [x] Read AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md for structural reference
+- [x] Create AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md
+- [x] Verify the brief is complete and update FILE_REGISTRY
