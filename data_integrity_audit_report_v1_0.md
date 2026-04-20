@@ -1,16 +1,17 @@
-# Data Integrity Audit Report — 2026-04-19T21:01:55
+# Data Integrity Audit Report — 2026-04-19T23:47:39
 
 ## Executive Summary
-- Files scanned: 33
+- Files scanned: 35
 - Superseded versions auto-excluded: 18
-- Error-pattern matches: 96
-- Cross-source inconsistencies: 238
+- Error-pattern matches: 103
+- Cross-source inconsistencies: 248
 
 ## Top Offending Files (error patterns)
 - `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md` — 26
 - `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md` — 10
 - `025_HOLISTIC_SYNTHESIS/RM_v2_0.md` — 9
 - `03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md` — 7
+- `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` — 7
 - `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` — 6
 - `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` — 5
 - `03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md` — 5
@@ -26,7 +27,6 @@
 - `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` — 1
 - `03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md` — 1
 - `03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_1.md` — 1
-- `04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART2.md` — 1
 
 ## Top Offending Files (inconsistencies)
 - `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md` — 40
@@ -36,6 +36,7 @@
 - `02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md` — 22
 - `03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md` — 13
 - `025_HOLISTIC_SYNTHESIS/MSR_v2_0.md` — 12
+- `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` — 10
 - `03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md` — 9
 - `025_HOLISTIC_SYNTHESIS/RM_v2_0.md` — 8
 - `025_HOLISTIC_SYNTHESIS/CGM_v2_0.md` — 6
@@ -48,9 +49,9 @@
 - `02_ANALYTICAL_LAYER/MATRIX_PLANETS.md` — 3
 - `03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md` — 3
 - `03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md` — 3
-- `04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART1.md` — 2
 
 ## 1. Inventory of Scanned Files
+- `00_ARCHITECTURE/FILE_REGISTRY_v1_0.md`
 - `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md`
 - `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md`
 - `01_FACTS_LAYER/FORENSIC_DATA_v7_0_SUPPLEMENT.md`
@@ -83,6 +84,7 @@
 - `06_QUERY_INTERFACE/QUERY_PROMPT_LIBRARY_v1_0.md`
 - `06_QUERY_INTERFACE/SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md`
 - `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md`
+- `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md`
 - `corpus_verification_report_v1_0.md`
 
 ## 1b. Superseded Files (auto-excluded)
@@ -200,6 +202,13 @@
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | 60 | - Varnada Lagna was wrongly in Scorpio 8H (now Cancer 4H) | Varnada Lagna should be Cancer 4H |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | 61 | - Shree Lagna was wrongly in Sagittarius 9H (now Libra 7H) | Shree Lagna should be Libra 7H |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | 62 | - Saham Roga was wrongly in Libra 7H (now Taurus 2H) | Roga Saham should be Taurus 2H |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 150 | **Note**: Jupiter was **wrongly placed in Cancer 4H in v6.0**. The correct placement is Sagittarius 9H. Any file referen | Jupiter placement error (should be Sagittarius 9H) |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 164 | **Correction history**: Hora Lagna was wrongly in Libra 7H; Ghati Lagna was wrongly in Scorpio 8H; Varnada Lagna was wro | Shree Lagna should be Libra 7H |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 188 | - Jupiter in Cancer 4H | Jupiter placement error (should be Sagittarius 9H) |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 189 | - Hora Lagna in Libra 7H | Hora Lagna should be Gemini 3H |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 190 | - Ghati Lagna in Scorpio 8H | Ghati Lagna should be Sagittarius 9H |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 191 | - Varnada Lagna in Scorpio 8H | Varnada Lagna should be Cancer 4H |
+| `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | 192 | - Shree Lagna in Sagittarius 9H | Shree Lagna should be Libra 7H |
 | `corpus_verification_report_v1_0.md` | 41 | \| `02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md` \| 104 \| Jupiter \| Sagittarius 9H \| Cancer 4H \| | Jupiter placement error (should be Sagittarius 9H) |
 | `corpus_verification_report_v1_0.md` | 103 | \| `02_ANALYTICAL_LAYER/MATRIX_HOUSES.md` \| 224 \| Jupiter \| Sagittarius 9H \| Cancer 4H \| | Jupiter placement error (should be Sagittarius 9H) |
 | `corpus_verification_report_v1_0.md` | 128 | \| `02_ANALYTICAL_LAYER/MATRIX_SIGNS.md` \| 198 \| Jupiter \| Sagittarius 9H \| Cancer 4H \| | Jupiter placement error (should be Sagittarius 9H) |
@@ -446,6 +455,16 @@
 | Varnada Lagna | 4H, Cancer | 8H, Scorpio | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md:60` |
 | Shree Lagna | 7H, Libra | 9H, Sagittarius | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md:61` |
 | Saham Roga | 2H, Taurus | 7H, Libra | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md:62` |
+| Jupiter | 9H, Sagittarius | 4H, Cancer | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:150` |
+| Shree Lagna | 7H, Libra | 8H, Scorpio | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:164` |
+| Ghati Lagna | 9H, Sagittarius | 7H, Libra | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:164` |
+| Varnada Lagna | 4H, Cancer | 7H, Libra | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:164` |
+| Hora Lagna | 3H, Gemini | 7H, Libra | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:164` |
+| Jupiter | 9H, Sagittarius | 4H, Cancer | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:188` |
+| Hora Lagna | 3H, Gemini | 7H, Libra | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:189` |
+| Ghati Lagna | 9H, Sagittarius | 8H, Scorpio | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:190` |
+| Varnada Lagna | 4H, Cancer | 8H, Scorpio | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:191` |
+| Shree Lagna | 7H, Libra | 9H, Sagittarius | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md:192` |
 
 ## 4. Notes on Methodology
 - Meta / remediation / red-team / falsifier / audit / session-log docs are excluded; by design they enumerate past errors to correct them.
@@ -454,4 +473,4 @@
 - Lines with historical/negation markers (FALSIFIED, "v6.0 said", "previously claimed", "corrected from", "NOT in Nh", etc.) are skipped.
 
 ---
-*Generated by audit.py at 2026-04-19T21:01:55*
+*Generated by audit.py at 2026-04-19T23:47:39*
