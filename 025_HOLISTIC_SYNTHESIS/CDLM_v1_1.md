@@ -322,12 +322,12 @@ CDLM.D3.D3:
   row_domain: Relationships
   col_domain: Relationships (self-reference)
   linkage_type: amplifies
-  primary_mechanism: "7H five-layer convergence (v8.0 corrected): Saturn exalted (quality and discipline in relationship) + Mars Avayogi (friction and intensity) + Bhrigu Bindu (fortune-timing sensitivity) + Shree Lagna 7H Libra (Lakshmi-grace directly in relationship domain — new positive addition replacing the incorrect Hora Lagna) + KP sub=Saturn (relationship house KP signature) = the relationship domain is self-reinforcing through five simultaneous systems; Hora Lagna is now confirmed in 3H Gemini (not 7H) per FORENSIC v8.0; Roga Saham is in 2H Taurus and Mahatmya Saham is in 9H Sagittarius (not 7H); the five remaining layers are real and powerful; Shree Lagna in 7H adds a Lakshmi-wealth dimension to relationships that was absent in the six-layer count"
+  primary_mechanism: "7H five-layer convergence: Saturn exalted (quality and discipline) + Mars Avayogi (friction and intensity) + Bhrigu Bindu (fortune-timing sensitivity) + Shree Lagna 7H Libra (Lakshmi-grace) + KP sub=Saturn (KP signature). The relationship domain is self-reinforcing through these five simultaneous systems."
   msr_anchors: [MSR.391, MSR.411, MSR.254]
   strength: 0.93
   direction: bidirectional
   valence: mixed
-  key_finding: "The relationship domain is internally amplifying through five confirmed systems — Saturn exalted (quality), Mars Avayogi (friction), Bhrigu Bindu (sensitivity), Shree Lagna 7H (Lakshmi-grace), and KP sub=Saturn; the layer-count dropped from six to five but gained the Shree Lagna positive dimension; 7H remains the chart's primary karmic processing zone."
+  key_finding: "The relationship domain is internally amplifying through five systems — Saturn exalted (quality), Mars Avayogi (friction), Bhrigu Bindu (sensitivity), Shree Lagna 7H (Lakshmi-grace), and KP sub=Saturn; 7H remains the chart's primary karmic processing zone."
 
 CDLM.D3.D4:
   row_domain: Relationships

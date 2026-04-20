@@ -8,7 +8,7 @@ supersedes: REPORT_RELATIONSHIPS_v1_0.md
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 domain: D3 — Relationships
 parent_UCN_version: UCN_v4_0.md (v4.0, canonical unified version)
-primary_msr_anchors: [MSR.391 v2.0, MSR.404 v2.0, MSR.396, MSR.343, MSR.391c, MSR.443]
+primary_msr_anchors: [MSR.391 v2.0, MSR.404 v2.0, MSR.396, MSR.343, MSR.443]
 organizing_principle: "7H Five-Layer Wealth-Relational-Lakshmi Convergence (corrected from v1.0 six-layer disease-greatness framing)"
 corrections_applied:
   - "6-layer -> 5-layer: Hora Lagna (->3H), Roga Saham (->2H), Mahatmya Saham (->9H) removed from 7H"
@@ -124,7 +124,7 @@ Architectural implications:
 - 4H also carries A2 (family arudha) — marriage-fortune and family-image are co-located in the domestic house
 - Pushya-Cancer Vivaha Saham is a MORE auspicious placement than Ardra-Gemini
 
-MSR reference: MSR.391c
+MSR reference: MSR.391 (v2.0)
 
 ### Gemini 3H Nexus Upgrade
 
