@@ -239,8 +239,8 @@ Superseded versions are collected in §8 (Archival). Tooling and process files a
 | L4 Remedial Codex | 2 | 2 |
 | L5–L6 Temporal/Query | 5 | — |
 | Architecture/Governance | 17 | — |
-| Tooling & Process | 17 | — |
-| **Total** | **74** | **29** |
+| Tooling & Process | 18 | — |
+| **Total** | **75** | **29** |
 
 ---
 
