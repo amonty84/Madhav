@@ -1420,3 +1420,101 @@ Choose from:
 **Pending items unchanged:** GAP.03 (degree-level D9 export), GAP.13 (Chara Karaka exclusive choice), MSR 500-600 optional expansion, acharya engagement, 6 empirical falsifier tests, EXTERNAL_COMPUTATION_REQUIRED cells.
 
 **Next session objective:** Unchanged from prior — (C) MSR expansion / (B) corpus query / native export batch.
+
+---
+
+## Session — CORPUS_VERIFICATION_PASS (2026-04-22, CLOSED)
+
+**Environment**: Claude Code (CLI) — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
+
+**Objective**: Complete the 8-layer verification (L0–L7) of the AM-JIS corpus per `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md`; unify fragmented MSR registers; build citation graph.
+
+**Outputs**:
+- **`025_HOLISTIC_SYNTHESIS/MSR_v3_0.md`** — Unified canonical MSR register (499 signals) merged from v1.0 and v2.0.
+- **`platform/scripts/corpus_common.py`** — Shared utility layer for signal extraction and forensic data mapping.
+- **`platform/scripts/invariants_l1.py`** — Mechanical invariant validation script.
+- **`platform/scripts/citation_graph_builder.py`** — Automated citation graph and dangling-reference auditor.
+- **`verification_artifacts/L1_REPORT.json`** — Detailed audit of mechanical invariants.
+- **`verification_artifacts/CITATION_GRAPH.graphml`** — Full directed graph of 1,565 corpus cross-links.
+- **`READINESS_REPORT.md`** — Final 8-layer verification summary and vectorization sign-off.
+
+**Key Findings**:
+1. **MSR Unification (L3)**: Resolved fragmentation between v1.0 (420 signals) and v2.0 (88 signals). Final count 499 signals after deduplication.
+2. **Hard Numeric Invariants (L1)**: SAV Total (337), BAV Sums, and Mercury-Saturn Dasha Window (2024–2027) all **PASSED** against Forensic v8.0 ground truth.
+3. **Citation Integrity (L4/L5)**: 1,565 edges verified with **0 dangling references**. The 29 undefined MSR IDs from previous audits are fully resolved.
+4. **Positional Nuances**: 235 flags in F1.01 (Sign-House) and F4.06 (Chara Karaka) were investigated and confirmed as false positives (transits, conditionals, and divisional chart placements).
+
+**Verdict**: **✅ GO (Clear for Vectorization)**. The corpus is mechanically sound and cross-linked.
+
+**Next Session Objective**: (B) Query the corrected corpus or (D) Initiate Acharya Engagement.
+
+---
+
+## Session — MACRO_PLAN_INSTALLATION (2026-04-23, CLOSED)
+
+**Environment**: Claude Code (CLI) — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
+
+**Objective**: Install the Macro Plan as the strategic orientation layer of the AM-JIS project, prior to Phase 2 plan expansion.
+
+**Outputs**:
+- **`00_ARCHITECTURE/MACRO_PLAN_v1_0.md`** — Created. Defines the ten-macro-phase arc (M1 Corpus Completeness → M10 LLM-Acharya Interface) and the cross-cutting Learning Layer substrate (`06_LEARNING_LAYER/`, to be scaffolded in Phase 2 expansion — not now).
+- **`AM_JIS_BOOTSTRAP_HANDOFF.md`** — Updated §4.1 Mandatory first actions to insert `MACRO_PLAN_v1_0.md` as item 3 (orientation-only read; sessions must not pre-build infrastructure for macro-phases later than the current one). Subsequent items renumbered.
+
+**Scope discipline observed**:
+- No code written.
+- No corpus artifacts modified (MSR, UCN, CDLM, RM, FORENSIC_*, L3 reports all untouched).
+- No scaffolding of `04_DISCOVERY_LAYER/`, `06_LEARNING_LAYER/`, or any Phase 2 infrastructure.
+- No phase expansion or plan elaboration.
+- Only the three files named in the task brief were touched.
+
+**Cross-check**: `grep -rln "06_LEARNING_LAYER"` across the repo returned no existing references. The Learning Layer directory does not exist and will be scaffolded as part of the Phase 2 expansion, not in this session.
+
+**Next Session Objective**: Phase 2 plan expansion per the pending proceed message against the active plan file (`~/.claude/plans/twinkly-puzzling-quokka.md`). Expansion will cover full phase plan (B.0–B.10 equivalents), per-artifact-type two-pass ordering, validator implementations for P1–P9, eval golden set structure, risks/mitigations, file manifest, verification plan, and timeline — followed by `ExitPlanMode` for approval to begin executing Phase B.0.
+
+---
+
+## Session — PHASE_B_PLAN_v1_0.2_AMENDMENT_PASS (2026-04-23, CLOSED)
+
+**Environment**: Claude Code (CLI) — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
+
+**Objective**: Apply all reconciler-pass amendments from `PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md` to `PHASE_B_PLAN_v1_0.md`, advancing it from v1.0.1 to v1.0.2. Fix bootstrap-hygiene defects in `CLAUDE.md` and mirror to `.geminirules`.
+
+**Correction context**: Prior session (PROMPT 4 — v1.0.2 Amendment Pass) ran only Part 4 (re-verification) against the unmodified v1.0.1 document. Parts 1–3 (actual filesystem edits) were not applied due to a scoping interpretation error ("Commit nothing" was misread as "write nothing to disk"). This session applies all three parts and re-runs the verification.
+
+**Files modified:**
+
+- **`00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md`** — advanced from v1.0.1 to v1.0.2. Changes applied:
+  - *Frontmatter:* Version line updated; v1.0.2 changelog entry added (newest-first).
+  - *§E.6:* Validator implementation notes block added after table — P1 detection vocabulary, P2 v8.0-resolution rule, P3 chunker dependency, P4 position-grammar spec, P6 degraded-mode reference, P7 significance-source reference, P8 structural-limitation acknowledgment.
+  - *§E.7:* Pricing citation date added; call-count derivation note added; buffer raised from +50% to +75%; budget changed from ~$210 to ~$315; human-in-loop cost note added.
+  - *§G Phase B.0:* Task 1 amended (MSR_v2_0 → MSR_v3_0; archive sub-task; layer-tag requirement); Task 3 amended (baseline_edge_count.json sub-note); Tasks 12–14 added (chunker_spec_v1_0.md, prompt_registry.py, golden query sets); current Task 12 renumbered to 15; acceptance criteria amended (MSR_v3_0, baseline_edge_count.json); artifacts list expanded (6 new artifacts).
+  - *§G Phase B.1:* Task 1.5 inserted — implement and meta-test p1/p2/p5 validators before B.2 begins; acceptance criteria "~46" fixed to FILE_REGISTRY_v1_0 snapshot count.
+  - *§G Phase B.2:* Chunker Specification subsection added (6 doc-types with boundary rules, boundary detection methods, max-token limits); acceptance criteria expanded (UCN/CDLM chunk counts).
+  - *§G Phase B.3:* Index-time halt policy added to fallback section.
+  - *§G Phase B.3.5:* Task 3.5 added (cgm_edge_proposals_v1_0.md); Task 4 amended (Gemini response file storage); Task 5.5 added (CGM chunker re-trigger post-B.3.5); artifacts and acceptance criteria expanded.
+  - *§G Phase B.4:* Two-pass ordering amended (Gemini response file storage, `gemini_response_ref` field); acceptance criteria amended (baseline_edge_count.json reference, Gemini raw response file check).
+  - *§G Phase B.5:* Task 0 added (pre-mining gate: prediction_ledger.py, P8 extension, P7 validator, acceptance-rate function); mid-phase gate block added; acceptance-rate monitoring block added; Gemini response file storage block added; acceptance criteria expanded.
+  - *§G Phase B.7:* Task 6 added (router availability fallback).
+  - *§H:* P6 degraded-mode policy block added; P7 significance-scoring mechanism block added.
+  - *§J:* Three new risk rows added (reconciler context overrun, P6 degraded mode, Gemini pass non-enforcement).
+  - *§K:* New artifacts added (baseline_edge_count.json, golden_router_queries_v1_0.json, batch_acceptance_rates.json, unindexed_chunks.jsonl, chunker_spec_v1_0.md, cgm_edge_proposals prompt, Gemini responses directory).
+
+- **`CLAUDE.md`** — bootstrap-hygiene fixes:
+  - Mandatory reading items 3 and 4 added: `MACRO_PLAN_v1_0.md` and `PHASE_B_PLAN_v1_0.md`.
+  - New section "Canonical corpus artifact paths (current versions)" added with versioned paths for MSR_v3_0, UCN_v4_0, CDLM_v1_1, CGM_v2_0, RM_v2_0, FILE_REGISTRY_v1_0. (Previously these were unmentioned.)
+
+- **`.geminirules`** — mirrored canonical L2.5 artifact paths to the L2.5 layer description line.
+
+**Part 4 verification results (all eight checks):**
+1. ✅ PASS — `PHASE_B_PLAN_v1_0.md` line 8: `**Version:** 1.0.2`
+2. ✅ PASS — Changelog: v1.0.2 entry present as first entry (newest-first), v1.0.1 entry follows
+3. ✅ PASS — B.0 Task 1 references `MSR_v3_0.md`; archive sub-task present
+4. ✅ PASS — B.0 Acceptance Criteria references `MSR_v3_0.md`; v2_0 absence check added
+5. ✅ PASS — B.1 Task 1.5 inserted with p1/p2/p5 meta-test requirement
+6. ✅ PASS — B.2 Chunker Specification subsection present with 6-doc-type table
+7. ✅ PASS — CLAUDE.md now contains explicit MSR and UCN canonical paths under "Canonical corpus artifact paths" section (Check 7 PASS — MSR_v3_0 and UCN_v4_0 added to root CLAUDE.md; mirrored to .geminirules)
+8. ✅ PASS — SESSION_LOG.md: this entry constitutes the v1.0.2 amendment session log
+
+**No git commit executed.** Filesystem edits are the deliverable.
+
+**Next session objective:** Execute Phase B.0 — Foundations. Pre-conditions now satisfied: PHASE_B_PLAN_v1_0.md v1.0.2 approved; all BLOCK findings from reconciler pass remediated; no `[NATIVE_CONFIRMATION_NEEDED]` items outstanding for B.0 start (directory numbering and GAP.13 both resolved per §O).
