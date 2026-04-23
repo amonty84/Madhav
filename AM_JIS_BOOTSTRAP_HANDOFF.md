@@ -142,8 +142,9 @@ You are picking up the AM-JIS project from a handoff. Here is how you must opera
 
 1. **Read this entire file** (you're doing that now)
 2. **Read `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` fully** — it is ~1,240 lines, dense, authoritative. Do not skim. Do not summarize internally and discard. Hold its content as the governing frame for everything you do.
-3. **Verify file existence** per §3 above
-4. **Respond to the native** with a single structured message per §6 below
+3. **Read `00_ARCHITECTURE/MACRO_PLAN_v1_0.md`** — orientation only. It defines the ten-macro-phase arc (M1–M10) and the cross-cutting Learning Layer substrate. Read it once per session so you know where the current work sits in the full arc. Execute only the currently-scoped phase. Do **not** pre-build infrastructure for macro-phases later than the current one.
+4. **Verify file existence** per §3 above
+5. **Respond to the native** with a single structured message per §6 below
 
 ### §4.2 — Non-negotiable principles (from Architecture §B)
 

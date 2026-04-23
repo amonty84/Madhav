@@ -1,0 +1,34 @@
+# AM-JIS Project Context for Gemini
+
+## Project Overview
+You are working on **AM-JIS (Abhisek Mohanty Jyotish Intelligence System)**, a highly structured, multi-session astrological research project based on Abhisek Mohanty's natal chart (b. 1984-02-05, 10:43 IST, Bhubaneswar). 
+
+The goal is to build an *acharya-grade* Jyotish (Vedic astrology) intelligence system that integrates four engine families (Parashari, Jaimini, KP, Tajika, Nadi) treating the chart as an integrated organism.
+
+## Layer Architecture
+- **L0 (Source Data)**: Raw computation inputs (read-only).
+- **L1 (Facts Layer)**: Single ground-truth canonical data (e.g., `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md`). **DO NOT EDIT.**
+- **L2 (Analytical Layer)**: Derived matrices (Houses, Planets, Signs, Dashas, Divisionals).
+- **L2.5 (Holistic Synthesis)**: Bridging analytical and insight layers (UCN, MSR, CDLM, RM, CGM). Canonical versioned paths: MSR → `025_HOLISTIC_SYNTHESIS/MSR_v3_0.md`; UCN → `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md`; CDLM → `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md`; CGM → `025_HOLISTIC_SYNTHESIS/CGM_v2_0.md` (becomes `CGM_v9_0.md` after Phase B.3.5); RM → `025_HOLISTIC_SYNTHESIS/RM_v2_0.md`.
+- **L3 (Domain Reports)**: Chart-first reveals with call-to-action (e.g., Career, Finance, Health).
+- **L4 (Discovery Layer - Current Focus)**: An LLM-facing pattern-discovery engine treating the L1-L3 corpus as a graph/vector space.
+
+## Key Operating Principles
+1. **Fact/Interpretation Separation**: Facts (L1) and interpretations (L2+) must never be mixed.
+2. **Citation Ledger**: Every L2+ claim must cite specific L1 IDs via the derivation ledger.
+3. **No Fabricated Computations**: Mark missing computational data with `[EXTERNAL_COMPUTATION_REQUIRED]`.
+4. **Acharya-Grade Quality**: Avoid generic astrology. Insights must be deeply synthesized and reveal novel cross-domain patterns.
+5. **Closed-Artifact Discipline**: Each session works on one phase at a time and requires a "proceed" confirmation from the native before executing major changes.
+6. **Two-Pass Execution**: For the Discovery Layer (L4), Gemini 2.5 Pro acts as the promiscuous connector (proposing patterns), and Claude Opus acts as the skeptical reconciler against 9 core principles.
+
+## Gemini's Specific Role in L4 (Discovery Layer)
+- **Connector Pass**: Propose patterns, resonances, and contradictions liberally with evidence, mechanisms, and counter-cases.
+- **Append-Only Ledger**: All proposals must be logged in the provenance ledger.
+- **Strict Format**: Emit structured candidates based on the defined schemas (e.g., PATTERN.001, RESONANCE.001).
+
+Follow these principles rigorously to ensure pipeline integrity and downstream vectorization validity.
+
+## Collaboration with Claude
+You are working alongside Claude on this project. To ensure both models stay perfectly aligned:
+- **Bidirectional Sync**: Whenever you update your own configuration files (`.geminirules`, `.gemini/project_state.md`) or make significant state changes, you MUST simultaneously update the equivalent state in Claude's configuration (`CLAUDE.md` or the active Claude `.claude/plans/*.md` file).
+- Never leave Claude's plan or state files out-of-date after executing a major phase or making architectural changes.
