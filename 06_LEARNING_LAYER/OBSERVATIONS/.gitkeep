@@ -1,0 +1,13 @@
+# 06_LEARNING_LAYER/OBSERVATIONS/.gitkeep
+#
+# Role: Shadow-mode observation accumulator for the Learning Layer substrate. Receives
+# per-mechanism observation records (LL.1 calibration matches, LL.2 edge co-activations,
+# LL.3 retrieval relevance, LL.4 prompt outcomes, etc.) toward the per-mechanism
+# N-observation threshold (N = 3 default per MP §"Learning discipline" rule #3).
+#
+# Currently empty. First populated at the M4 calibration session that fires the first
+# Learning Layer mechanism (LL.1 per MP §LL-Appendix.A activation matrix).
+#
+# Population gate: see 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md §5.2.
+#
+# Provenance: produced at Step 11 of the Step 0 → Step 15 governance rebuild (2026-04-24).

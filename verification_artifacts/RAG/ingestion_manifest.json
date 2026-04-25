@@ -1,0 +1,1905 @@
+{
+  "produced_at": "2026-04-25T06:28:51.291076+00:00",
+  "scanner_version": "1.0",
+  "document_count": 237,
+  "current_document_count": 35,
+  "signal_count": 499,
+  "documents": [
+    {
+      "path": "01_FACTS_LAYER/CGP_AUDIT_v1_0.md",
+      "layer": "L1",
+      "doc_type": "CGP_AUDIT_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 3
+    },
+    {
+      "path": "01_FACTS_LAYER/CLAUDE.md",
+      "layer": "L1",
+      "doc_type": "CLAUDE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "01_FACTS_LAYER/EVENT_CHART_STATES_v1_0.md",
+      "layer": "L1",
+      "doc_type": "EVENT_CHART_STATES_v1_0",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
+      "layer": "L1",
+      "doc_type": "EXTERNAL_COMPUTATION_SPEC_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md",
+      "layer": "L1",
+      "doc_type": "EXTERNAL_COMPUTATION_SPEC_v2_0.md",
+      "version": "2.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md",
+      "layer": "L1",
+      "doc_type": "FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY",
+      "version": "6.0",
+      "is_current": false,
+      "token_count_approx": 11
+    },
+    {
+      "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "layer": "L1",
+      "doc_type": "FORENSIC_ASTROLOGICAL_DATA_v8_0",
+      "version": "8.0",
+      "is_current": true,
+      "token_count_approx": 7
+    },
+    {
+      "path": "01_FACTS_LAYER/FORENSIC_DATA_v7_0_SUPPLEMENT.md",
+      "layer": "L1",
+      "doc_type": "FORENSIC_DATA_v7_0_SUPPLEMENT",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
+      "layer": "L1",
+      "doc_type": "FORENSIC_DATA_v8_0_SUPPLEMENT.md",
+      "version": "8.0 (supplement/override layer)",
+      "is_current": true,
+      "token_count_approx": 8
+    },
+    {
+      "path": "01_FACTS_LAYER/JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
+      "layer": "L1",
+      "doc_type": "JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
+      "version": "8.0-source",
+      "is_current": true,
+      "token_count_approx": 8
+    },
+    {
+      "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
+      "layer": "L1",
+      "doc_type": "LIFE_EVENT_LOG_v1_1",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
+      "layer": "L1",
+      "doc_type": "LIFE_EVENT_LOG_v1_2",
+      "version": "1.2",
+      "is_current": true,
+      "token_count_approx": 4
+    },
+    {
+      "path": "01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md",
+      "layer": "L1",
+      "doc_type": "SADE_SATI_CYCLES_ALL",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "CDLM_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 3
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "layer": "L2.5",
+      "doc_type": "CDLM_v1_1.md",
+      "version": "1.2",
+      "is_current": true,
+      "token_count_approx": 3
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/CGM_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "CGM_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/CGM_v2_0.md",
+      "layer": "L2.5",
+      "doc_type": "CGM_v2_0",
+      "version": "2.0",
+      "is_current": true,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/CLAUDE.md",
+      "layer": "L2.5",
+      "doc_type": "CLAUDE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/MASTER_SYNTHESIS_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "MASTER_SYNTHESIS_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
+      "layer": "L2.5",
+      "doc_type": "MSR_v3_0",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/RED_TEAM_L2_5_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "RED_TEAM_L2_5_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/RM_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "RM_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/RM_v1_1.md",
+      "layer": "L2.5",
+      "doc_type": "RM_v1_1.md",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "layer": "L2.5",
+      "doc_type": "RM_v2_0.md",
+      "version": "2.1",
+      "is_current": true,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v1_0.md",
+      "layer": "L2.5",
+      "doc_type": "UCN_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v1_1.md",
+      "layer": "L2.5",
+      "doc_type": "UCN_v1_1.md",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v2_0.md",
+      "layer": "L2.5",
+      "doc_type": "UCN_v2_0.md",
+      "version": "2.0",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v3_0.md",
+      "layer": "L2.5",
+      "doc_type": "UCN_v3_0.md",
+      "version": "3.0",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "layer": "L2.5",
+      "doc_type": "UCN_v4_0.md",
+      "version": "4.1",
+      "is_current": true,
+      "token_count_approx": 2
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/CLAUDE.md",
+      "layer": "L2",
+      "doc_type": "CLAUDE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "layer": "L2",
+      "doc_type": "DEEP_ANALYSIS_Abhisek_Mohanty_v1",
+      "version": "1.2.1",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md",
+      "layer": "L2",
+      "doc_type": "MATRIX_DASHA_PERIODS",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "layer": "L2",
+      "doc_type": "MATRIX_DIVISIONALS",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 4
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "layer": "L2",
+      "doc_type": "MATRIX_HOUSES",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 3
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "layer": "L2",
+      "doc_type": "MATRIX_PLANETS",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 3
+    },
+    {
+      "path": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "layer": "L2",
+      "doc_type": "MATRIX_SIGNS",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 3
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/CLAUDE.md",
+      "layer": "L3",
+      "doc_type": "CLAUDE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/CROSS_REPORT_COHERENCE_AUDIT_v1_0.md",
+      "layer": "L3",
+      "doc_type": "CROSS_REPORT_COHERENCE_AUDIT_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/FINANCIAL_REPORT_Abhisek_Mohanty.md",
+      "layer": "L3",
+      "doc_type": "FINANCIAL_REPORT_Abhisek_Mohanty",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/RED_TEAM_L3_v1_0.md",
+      "layer": "L3",
+      "doc_type": "RED_TEAM_L3_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_CAREER_DHARMA_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_CAREER_DHARMA_v1_1",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_CHILDREN_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_CHILDREN_v1_1",
+      "version": "1.1",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_FINANCIAL_v2_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_FINANCIAL_v2_1",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_HEALTH_LONGEVITY_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_HEALTH_LONGEVITY_v1_1",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 7
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_PARENTS_v1_0",
+      "version": "1.0.1",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_PARENTS_v1_1",
+      "version": "1.1",
+      "is_current": true,
+      "token_count_approx": 4
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_PSYCHOLOGY_MIND_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_PSYCHOLOGY_MIND_v1_1",
+      "version": "1.1",
+      "is_current": true,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_RELATIONSHIPS_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_RELATIONSHIPS_v1_1",
+      "version": "1.1",
+      "is_current": true,
+      "token_count_approx": 6
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_SPIRITUAL_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_SPIRITUAL_v1_1",
+      "version": "unknown",
+      "is_current": true,
+      "token_count_approx": 5
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_0.md",
+      "layer": "L3",
+      "doc_type": "REPORT_TRAVEL_v1_0",
+      "version": "1.0.1",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md",
+      "layer": "L3",
+      "doc_type": "REPORT_TRAVEL_v1_1",
+      "version": "1.1",
+      "is_current": true,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/ACHARYA_ENGAGEMENT_KIT.md",
+      "layer": "L0",
+      "doc_type": "ACHARYA_ENGAGEMENT_KIT.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/AUDIT_REPORT_v1_0.md",
+      "layer": "L0",
+      "doc_type": "AUDIT_REPORT_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md",
+      "layer": "L0",
+      "doc_type": "B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md",
+      "layer": "L0",
+      "doc_type": "CANONICAL_ARTIFACTS_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/CLAUDE.md",
+      "layer": "L0",
+      "doc_type": "CLAUDE",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 1
+    },
+    {
+      "path": "00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_0.md",
+      "layer": "L0",
+      "doc_type": "CONTRADICTION_REGISTRY_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_1.md",
+      "layer": "L0",
+      "doc_type": "CONTRADICTION_REGISTRY_v1_1.md",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/CONVERSATION_LOG.md",
+      "layer": "L0",
+      "doc_type": "CONVERSATION_LOG.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md",
+      "layer": "L0",
+      "doc_type": "CONVERSATION_NAMING_CONVENTION_v1_0.md",
+      "version": "1.4",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/CURRENT_STATE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "CURRENT_STATE_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/DATA_INTEGRITY_AUDIT_PLAN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DATA_INTEGRITY_AUDIT_PLAN_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DISAGREEMENT_REGISTER_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/DRIFT_REPORT_STEP_13_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/DRIFT_REPORT_STEP_13_v1_1.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13_v1_1.md",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/EXTERNAL_ACHARYA_REVIEW_INVITATION.md",
+      "layer": "L0",
+      "doc_type": "EXTERNAL_ACHARYA_REVIEW_INVITATION.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/FALSIFIER_REGISTRY_v1_0.md",
+      "layer": "L0",
+      "doc_type": "FALSIFIER_REGISTRY_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/FALSIFIER_REGISTRY_v1_1.md",
+      "layer": "L0",
+      "doc_type": "FALSIFIER_REGISTRY_v1_1.md",
+      "version": "1.1",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/FALSIFIER_REGISTRY_v2_0_EXPANSION.md",
+      "layer": "L0",
+      "doc_type": "FALSIFIER_REGISTRY_v2_0_EXPANSION.md",
+      "version": "2.0 (expansion supplement)",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_INDEX_v1_0.md",
+      "layer": "L0",
+      "doc_type": "FILE_INDEX_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_0.md",
+      "layer": "L0",
+      "doc_type": "FILE_REGISTRY_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_1.md",
+      "layer": "L0",
+      "doc_type": "FILE_REGISTRY_v1_1",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_2.md",
+      "layer": "L0",
+      "doc_type": "FILE_REGISTRY_v1_2",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md",
+      "layer": "L0",
+      "doc_type": "FILE_REGISTRY_v1_3",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_4.md",
+      "layer": "L0",
+      "doc_type": "FILE_REGISTRY_v1_4",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/FIX_SESSION_001_COMPLETION.md",
+      "layer": "L0",
+      "doc_type": "FIX_SESSION_001_COMPLETION.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/FIX_SESSION_002_COMPLETION.md",
+      "layer": "L0",
+      "doc_type": "FIX_SESSION_002_COMPLETION.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/GAP_13_RESOLUTION_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GAP_13_RESOLUTION_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/GOVERNANCE_BASELINE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GOVERNANCE_BASELINE_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GOVERNANCE_INTEGRITY_PROTOCOL_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GOVERNANCE_INTEGRITY_REDTEAM_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GOVERNANCE_STACK_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md",
+      "layer": "L0",
+      "doc_type": "GROUNDING_AUDIT_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md",
+      "layer": "L0",
+      "doc_type": "LEARNING_LAYER_SCAFFOLD_DECISION_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/LIVING_PROJECT_MAINTENANCE_GUIDE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "LIVING_PROJECT_MAINTENANCE_GUIDE_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/M2A_EXEC_PLAN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "M2A_EXEC_PLAN",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 3
+    },
+    {
+      "path": "00_ARCHITECTURE/MACRO_PLAN_CRITIQUE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MACRO_PLAN_CRITIQUE_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/MACRO_PLAN_REDTEAM_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MACRO_PLAN_REDTEAM_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/MACRO_PLAN_REVISION_SPEC_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MACRO_PLAN_REVISION_SPEC_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/MACRO_PLAN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MACRO_PLAN_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 3
+    },
+    {
+      "path": "00_ARCHITECTURE/MACRO_PLAN_v2_0.md",
+      "layer": "L0",
+      "doc_type": "MACRO_PLAN_v2_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 3
+    },
+    {
+      "path": "00_ARCHITECTURE/MAINTENANCE_SCHEDULE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MAINTENANCE_SCHEDULE_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md",
+      "layer": "L0",
+      "doc_type": "NATIVE_DIRECTIVES_FOR_REVISION_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md",
+      "layer": "L0",
+      "doc_type": "ONGOING_HYGIENE_POLICIES_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "PHASE_B_PLAN_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md",
+      "layer": "L0",
+      "doc_type": "PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0",
+      "version": "1.0.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md",
+      "layer": "L0",
+      "doc_type": "PROJECT_ARCHITECTURE_v2_1",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md",
+      "layer": "L0",
+      "doc_type": "PROJECT_ARCHITECTURE_v2_2",
+      "version": "2.2",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/PROJECT_COMPLETION_DOSSIER_v1_0.md",
+      "layer": "L0",
+      "doc_type": "PROJECT_COMPLETION_DOSSIER_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/PROJECT_WIDE_RED_TEAM_v1_0.md",
+      "layer": "L0",
+      "doc_type": "PROJECT_WIDE_RED_TEAM_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/RECONCILIATION_PLAN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "RECONCILIATION_PLAN_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/SCHEMA_VALIDATION_REPORT_STEP_14_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_14_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SESSION_CLOSE_TEMPLATE_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/SESSION_LOG.md",
+      "layer": "L0",
+      "doc_type": "SESSION_LOG",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 2
+    },
+    {
+      "path": "00_ARCHITECTURE/SESSION_LOG_SCHEMA_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SESSION_LOG_SCHEMA_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SESSION_OPEN_TEMPLATE_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/STALENESS_REGISTER.md",
+      "layer": "L0",
+      "doc_type": "STALENESS_REGISTER",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/README.md",
+      "layer": "L0",
+      "doc_type": "STEP_BRIEFS/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_01_MACRO_PLAN_CRITIQUE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_01_MACRO_PLAN_CRITIQUE_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_02_MACRO_PLAN_REVISION_SPEC_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_02_MACRO_PLAN_REVISION_SPEC_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_03_MACRO_PLAN_REWRITE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_03_MACRO_PLAN_REWRITE_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_04_MACRO_PLAN_REDTEAM_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_04_MACRO_PLAN_REDTEAM_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_05_MACRO_PLAN_CLOSURE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_05_MACRO_PLAN_CLOSURE_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_06_GOVERNANCE_INTEGRITY_DESIGN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_06_GOVERNANCE_INTEGRITY_DESIGN_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_07_GOVERNANCE_INTEGRITY_IMPLEMENTATION_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_07_GOVERNANCE_INTEGRITY_IMPLEMENTATION_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 12
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_08_GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_08_GOVERNANCE_INTEGRITY_REDTEAM_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_09_CLAUDE_MD_REBUILD_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_09_CLAUDE_MD_REBUILD_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_10_SESSION_LOG_SCHEMA_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_10_SESSION_LOG_SCHEMA_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_11_LEARNING_LAYER_SCAFFOLD_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_11_LEARNING_LAYER_SCAFFOLD_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_12_ONGOING_HYGIENE_POLICIES_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_12_ONGOING_HYGIENE_POLICIES_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_13_DRIFT_DETECTION_RUN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_13_DRIFT_DETECTION_RUN_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_14_SCHEMA_VALIDATION_RUN_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_14_SCHEMA_VALIDATION_RUN_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_15_GOVERNANCE_BASELINE_CLOSE_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_15_GOVERNANCE_BASELINE_CLOSE_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_BRIEFS/STEP_5A_PROJECT_ARCHITECTURE_REFRESH_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_5A_PROJECT_ARCHITECTURE_REFRESH_v1_0",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/STEP_LEDGER_v1_0.md",
+      "layer": "L0",
+      "doc_type": "STEP_LEDGER_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "layer": "L0",
+      "doc_type": "V8_0_RECONCILIATION_REPORT.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_10_FINAL_20260424T075855Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_10_FINAL_20260424T075855Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_10_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_10_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_11_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_11_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_12_1_RAW_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_12_1_RAW_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_12_1_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_12_1_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_12_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_12_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_13_RAW_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13_RAW_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_13_RAW_v1_1.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13_RAW_v1_1",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_RAW_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_RAW_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 12
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 12
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_7_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_7_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_9_v1_0.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_STEP_9_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T050708Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T050708Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T132723Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T132723Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T133204Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T133204Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T134251Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T134251Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T164323Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T164323Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T170448Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T170448Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T171615Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T171615Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T171702Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T171702Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T172741Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T172741Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T172822Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T172822Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T183357Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T183357Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T183422Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T183422Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T183603Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T183603Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T183951Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T183951Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T183957Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T183957Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T184045Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T184045Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260424T214028Z.md",
+      "layer": "L0",
+      "doc_type": "DRIFT_REPORT_adhoc_20260424T214028Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_10_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_10_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_11_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_11_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_12_1_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_12_1_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_12_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_12_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_13_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_13_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 11
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_13b_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_13b_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_7_FINAL.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_7_FINAL",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_7_POST_REAUTHOR.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_7_POST_REAUTHOR",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_7_PRE_REAUTHOR.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_7_PRE_REAUTHOR",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 8
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_9_v1_0.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_STEP_9_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T050657Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T050657Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T132723Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T132723Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T133204Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T133204Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T134257Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T134257Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T170455Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T170455Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T170843Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T170843Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T171610Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T171610Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T171703Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T171703Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T172741Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T172741Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T172823Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T172823Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T183357Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T183357Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T183913Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T183913Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T184406Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T184406Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T214027Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T214027Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260424T214214Z.md",
+      "layer": "L0",
+      "doc_type": "MIRROR_REPORT_adhoc_20260424T214214Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T075804Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T075804Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T075831Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T075831Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T092212Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T092212Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T131500Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T131500Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T131510Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T131510Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T131519Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T131519Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T131650Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T131650Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T132717Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T132717Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T132740Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T132740Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T133151Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T133151Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T134254Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T134254Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T170455Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T170455Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T172446Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T172446Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T172741Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T172741Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T172823Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T172823Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T183357Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T183357Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T183951Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T183951Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T184053Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T184053Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260424T214048Z.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_REPORT_adhoc_20260424T214048Z",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_10_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_10_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_11_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_11_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_12_1_RAW_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_12_1_RAW_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_12_1_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_12_1_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_12_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_12_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 10
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_13_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_13_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_13b_CLOSE_MACHINERY_FIX_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 14
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_13b_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_13b_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_14_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_14_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_7_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_7_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_9_v1_0.md",
+      "layer": "L0",
+      "doc_type": "SCHEMA_VALIDATION_REPORT_STEP_9_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 9
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/PROMPTS/claude/placeholder_v1_0.md",
+      "layer": "L4",
+      "doc_type": "placeholder_v1_0",
+      "version": "unknown",
+      "is_current": false,
+      "token_count_approx": 4
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/DECISION_SUPPORT_PLAYBOOK_v1_0.md",
+      "layer": "L4",
+      "doc_type": "DECISION_SUPPORT_PLAYBOOK_v1_0.md",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 8
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/QUERY_PROMPT_LIBRARY_v1_0.md",
+      "layer": "L4",
+      "doc_type": "QUERY_PROMPT_LIBRARY_v1_0.md",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 7
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md",
+      "layer": "L4",
+      "doc_type": "SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md",
+      "version": "1.0",
+      "is_current": true,
+      "token_count_approx": 10
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/README.md",
+      "layer": "L4",
+      "doc_type": "035_DISCOVERY_LAYER/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "035_DISCOVERY_LAYER/SCHEMAS/chunker_spec_v1_0.md",
+      "layer": "L4",
+      "doc_type": "SCHEMAS/chunker_spec_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART1.md",
+      "layer": "L3",
+      "doc_type": "REMEDIAL_CODEX_v1_0_PART1.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART2.md",
+      "layer": "L3",
+      "doc_type": "REMEDIAL_CODEX_v1_0_PART2.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 7
+    },
+    {
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md",
+      "layer": "L3",
+      "doc_type": "REMEDIAL_CODEX_v2_0_PART1.md",
+      "version": "2.0",
+      "is_current": true,
+      "token_count_approx": 7
+    },
+    {
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART2.md",
+      "layer": "L3",
+      "doc_type": "REMEDIAL_CODEX_v2_0_PART2.md",
+      "version": "2.0",
+      "is_current": true,
+      "token_count_approx": 7
+    },
+    {
+      "path": "05_TEMPORAL_ENGINES/HEATMAP_VARSHPHAL_v1_0.md",
+      "layer": "L3",
+      "doc_type": "HEATMAP_VARSHPHAL_v1_0.md",
+      "version": "1.0.1",
+      "is_current": true,
+      "token_count_approx": 6
+    },
+    {
+      "path": "05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md",
+      "layer": "L3",
+      "doc_type": "LIFETIME_TIMELINE_v1_0.md",
+      "version": "1.0.1",
+      "is_current": true,
+      "token_count_approx": 6
+    },
+    {
+      "path": "05_TEMPORAL_ENGINES/RED_TEAM_PHASE5_v1_0.md",
+      "layer": "L3",
+      "doc_type": "RED_TEAM_PHASE5_v1_0.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 5
+    },
+    {
+      "path": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README.md",
+      "layer": "L4",
+      "doc_type": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 13
+    },
+    {
+      "path": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README.md",
+      "layer": "L4",
+      "doc_type": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 13
+    },
+    {
+      "path": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README.md",
+      "layer": "L4",
+      "doc_type": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 11
+    },
+    {
+      "path": "06_LEARNING_LAYER/README.md",
+      "layer": "L4",
+      "doc_type": "06_LEARNING_LAYER/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 6
+    },
+    {
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md",
+      "layer": "L4",
+      "doc_type": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md",
+      "version": "1.0",
+      "is_current": false,
+      "token_count_approx": 13
+    }
+  ]
+}
