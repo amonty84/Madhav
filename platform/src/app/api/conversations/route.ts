@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
 import { listConversations } from '@/lib/conversations'
 import type { ConversationModule } from '@/lib/supabase/types'
 
 export async function GET(request: Request) {
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   const url = new URL(request.url)
@@ -15,7 +14,7 @@ export async function GET(request: Request) {
 
   const conversations = await listConversations({
     chartId,
-    userId: user.id,
+    userId: user.uid,
     module: moduleParam as ConversationModule,
   })
 

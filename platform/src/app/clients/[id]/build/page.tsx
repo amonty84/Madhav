@@ -1,4 +1,5 @@
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { BuildChat } from '@/components/build/BuildChat'
 
@@ -9,15 +10,14 @@ export default async function BuildPage({
 }) {
   const { id } = await params
 
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getServerUser()
   if (!user) redirect('/login')
 
   const service = createServiceClient()
   const { data: profile } = await service
     .from('profiles')
     .select('role')
-    .eq('id', user.id)
+    .eq('id', user.uid)
     .single()
 
   if (profile?.role !== 'astrologer') redirect('/dashboard')
