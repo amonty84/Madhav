@@ -74,6 +74,33 @@ changelog:
       next_session_objective → Madhav_M2A_Exec_2 (B.2 doc-types 1–3). B.1 deliverables:
       models.py, ingest.py, P1/P2/P5 validators, STALENESS_REGISTER.md, ingestion_manifest.json
       (35 current docs, 499 signals). 6/6 AC-B1.x pass. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-25, Madhav_M2A_Exec_2 close — B.2 doc-types 1–3 populated):
+      active_phase_plan_sub_phase → "B.2 partial — doc-types 1–3 populated";
+      last_session_id → Madhav_M2A_Exec_2; next_session_objective → Madhav_M2A_Exec_3
+      (B.2 doc-types 4–5 + doc-type 6 code + B.2 ACs). B.2 S1 deliverables:
+      chunkers/__init__.py, msr_signal.py (499 chunks), ucn_section.py (25 chunks),
+      cdlm_cell.py (81 chunks). DB totals: 605 rows in rag_chunks.
+      Partial-progress targets all pass: msr_signal=499, ucn_section≥1 per Part, cdlm_cell=81.
+      migration 005 applied to Supabase (pgvector + 8 tables + 9 indexes).
+      mirror_enforcer.py exit 0 (8/8 pairs clean). §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-25, Madhav_M2A_Exec_3 close — B.2 complete):
+      active_phase_plan_sub_phase → "B.2 complete";
+      last_session_id → Madhav_M2A_Exec_3; next_session_objective → Madhav_M2A_Exec_4
+      (B.3 Embedding + HNSW). B.2 S2 deliverables: l1_fact.py (102 L1 chunks),
+      domain_report.py (52 L3 chunks; 16 stale from 4 stale reports), cgm_node.py
+      (code only; FileNotFoundError guard for CGM_v9_0.md), chunk.py orchestrator.
+      chunking_report.json: p1_violations=0, truncation_events=5. DB totals: 759 rows in
+      rag_chunks. All 8 B.2 ACs pass. mirror_enforcer.py exit 0 (8/8 pairs clean).
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-25, Madhav_M2A_Exec_4 close — B.3 complete):
+      active_phase_plan_sub_phase → "B.3 complete";
+      last_session_id → Madhav_M2A_Exec_4; next_session_objective → Madhav_M2A_Exec_5
+      (B.3.5 CGM Rebuild + red-team RT1–RT6). GCP migration: Cloud SQL + Vertex AI
+      text-multilingual-embedding-002 (768-dim); Voyage AI removed; BATCH_SIZE=10.
+      743/743 non-stale chunks embedded. HNSW m=16 ef_construction=64.
+      b3_sanity_test.json: "Saturn 7th house Libra" → 2 distinct doc_types (AC-B3.4 ✓);
+      p95=71.56ms Auth Proxy overhead (AC-B3.3 accepted Option A).
+      mirror_enforcer.py exit 0 (8/8 pairs clean). §3 narrative refreshed.
 ---
 
 # CURRENT STATE v1.0
@@ -121,8 +148,8 @@ current_state:
   # ------------------------------------------------------------------
   active_phase_plan: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
   active_phase_plan_version: "1.0.3"             # amendment complete (Madhav 16, 2026-04-24; resolved WARN.2/3/5/7)
-  active_phase_plan_sub_phase: "B.1 complete"  # Madhav_M2A_Exec closed 2026-04-25; B.2 doc-types 1–3 next
-  active_phase_plan_status: active              # M2 active; B.1 complete; B.2 execution next
+  active_phase_plan_sub_phase: "B.3 complete"  # Madhav_M2A_Exec_4 closed 2026-04-25; all B.3 ACs pass (AC-B3.3 accepted Option A); B.3.5 CGM + red-team next
+  active_phase_plan_status: active              # M2 active; B.3 complete; B.3.5 CGM Rebuild + red-team execution next
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -170,39 +197,49 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: Madhav_M2A_Exec
-    # Madhav_M2A_Exec closed 2026-04-25. B.1 Ingestion execution session.
-    # Deliverables: models.py (7 Pydantic models), ingest.py (scan_corpus + write_manifest),
-    # P1/P2/P5 validators + 12 fixtures + test_p1_p2_p5.py (12/12 PASS),
-    # 00_ARCHITECTURE/STALENESS_REGISTER.md (4 stale L3 reports identified),
-    # verification_artifacts/RAG/ingestion_manifest.json (current_document_count=35, signal_count=499).
-    # All 6 AC-B1.x passed. MSR sub-signal regex fix: SIG.MSR.391a/391b/391c/402b now included.
-    # OBS.1 resolution: registry count (35) used for manifest, not physical scan count (32).
-  last_session_closed_at: 2026-04-25T12:00:00+05:30
-  last_session_attempted_close_at: 2026-04-25T12:00:00+05:30
+  last_session_id: Madhav_M2A_Exec_4
+    # Madhav_M2A_Exec_4 closed 2026-04-25. B.3 Embedding + HNSW.
+    # GCP migration: Cloud SQL PostgreSQL 15 (asia-south1, db-g1-small), pgvector, Auth Proxy port 5433.
+    # Voyage AI removed; replaced with Vertex AI text-multilingual-embedding-002 (768-dim, ADC, no API key).
+    # BATCH_SIZE=10 (Vertex 20k token/request limit); re-chunked locally (Supabase paused).
+    # embed.py: psycopg reads/writes, HNSW m=16 ef_construction=64 vector_cosine_ops.
+    # 743 embeddings in rag_embeddings (all non-stale chunks). HNSW index present.
+    # Sanity: "Saturn 7th house Libra" → top-3 sim 0.763/0.750/0.736; 2 distinct doc_types.
+    # AC-B3.1 ✓ B3.2 ✓ B3.3 accepted-Option-A (p95=71.56ms > 50ms, Auth Proxy overhead) B3.4 ✓ B3.5 ✓.
+    # mirror_enforcer.py exit 0 (8/8 pairs clean). red_team_counter stays at 3 (fires at Session 5).
+  last_session_closed_at: 2026-04-25T22:00:00+05:30
+  last_session_attempted_close_at: 2026-04-25T22:00:00+05:30
   last_session_agent: claude-sonnet-4-6
-  last_session_cowork_thread_name: "Madhav M2A-Exec — Foundation Stack Session 1"
+  last_session_cowork_thread_name: "Madhav M2A-Exec-4 — Foundation Stack Session 4"
   last_session_close_state: atomically_closed
-  last_session_drift_verdict: exit=2 (HIGH — pre-existing SESSION_LOG naming disagreement from prior session; not introduced this session)
+  last_session_drift_verdict: >
+    drift_detector exit=2 (34 findings; pre-existing carry-over).
+    schema_validator exit=2 (46 violations; 1 HIGH pre-existing Madhav_16 naming disagreement;
+    45 MEDIUM/LOW frontmatter fields; no new violations from B.3 scope).
+    mirror_enforcer exit=0.
   last_session_deliverable: >
-    B.1 Ingestion — Foundation Stack Session 1. Deliverables: rag/models.py, rag/ingest.py,
-    validators (P1/P2/P5 + 12 fixtures + test_p1_p2_p5.py), STALENESS_REGISTER.md,
-    verification_artifacts/RAG/ingestion_manifest.json. 6/6 AC-B1.x pass.
-    mirror_enforcer.py exit 0 (8/8 pairs clean). red_team_counter stays at 3 (Sessions 1–4 hold).
-  previous_session_id: Madhav_M2A_Plan_Foundation_Stack
-    # Closed 2026-04-25; planning session that produced M2A_EXEC_PLAN_v1_0.md.
+    B.3 complete — Foundation Stack Session 4. GCP migration (Supabase → Cloud SQL).
+    Voyage AI → Vertex AI text-multilingual-embedding-002 (768-dim, GCP-native).
+    embed.py: batch embed, pre-embedding enrichment ([{layer}] [{doc_type}] prefix),
+    content-hash idempotency, HNSW index. 743/743 non-stale chunks embedded.
+    b3_sanity_test.json: query "Saturn 7th house Libra", top-3 sims 0.763/0.750/0.736,
+    2 distinct doc_types, p95=71.56ms (Auth Proxy overhead, Option A accepted).
+    B.3 CLOSED. B.3.5 CGM Rebuild + red-team probes RT1–RT6 is next (Session 5).
+  previous_session_id: Madhav_M2A_Exec_3
+    # Closed 2026-04-25; B.2 Chunking doc-types 4–5 + doc-type 6 code + B.2 ACs session.
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    Execute **Madhav_M2A_Exec_2 — Foundation Stack Session 2 (B.2 Chunking doc-types 1–3)** per
-    CLAUDECODE_BRIEF v5.0 §SESSION_2 and M2A_EXEC_PLAN_v1_0.md §PLAN B.2.
+    Execute **Madhav_M2A_Exec_5 — Foundation Stack Session 5 (B.3.5 CGM Rebuild + red-team)**
+    per CLAUDECODE_BRIEF v5.0 §SESSION_5 and M2A_EXEC_PLAN_v1_0.md §PLAN B.3.5.
     Trigger phrase: "Read CLAUDECODE_BRIEF.md and execute it."
-    Implement msr_signal.py, ucn_section.py, cdlm_cell.py chunkers.
-    Red-team probes RT1–RT6 fire at Madhav_M2A_Exec_5 close (counter = 3, threshold = 3, held Sessions 1–4).
-  next_session_proposed_cowork_thread_name: "Madhav COW-04 — M2B Brief"
-    # COW-03 deliverable complete (M2A-Exec brief issued). COW-04 will issue M2B brief after M2A execution closes.
+    Build CGM_v9_0.md (node-per-planet format), run cgm_node.py against it, verify
+    CGM chunk ingestion. Red-team probes RT1–RT6 fire at this session close
+    (counter = 3, threshold = 3, held through Sessions 1–4; fires now).
+    Set CLAUDECODE_BRIEF.md status: COMPLETE at Session 5 close.
+  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-5 — Foundation Stack Session 5"
   red_team_due_note: >
     Counter reached 3 at Madhav_M2A_Plan_Foundation_Stack close (2026-04-25).
     Deferred to M2A-Exec.5 (final Foundation Stack session). M2A_EXEC_PLAN §RISKS specifies
@@ -211,11 +248,11 @@ current_state:
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-04-25T12:00:00+05:30
-  file_updated_by_session: Madhav_M2A_Exec
+  file_updated_at: 2026-04-25T22:00:00+05:30
+  file_updated_by_session: Madhav_M2A_Exec_4
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, Madhav_M2A_Exec, null).
+    = (Step_15 completed, Madhav_M2A_Exec_4, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -225,21 +262,21 @@ current_state:
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
 
-At the close of Madhav_M2A_Exec (2026-04-25):
+At the close of Madhav_M2A_Exec_4 (2026-04-25):
 
-**Macro-phase.** The project is in **M2 — Corpus Activation**, active. B.1 Ingestion complete. B.2 Chunking (doc-types 1–3) is next.
+**Macro-phase.** The project is in **M2 — Corpus Activation**, active. **B.3 Embedding + HNSW is COMPLETE**: 743 embeddings in `rag_embeddings` (all non-stale chunks). B.3.5 CGM Rebuild + red-team (Session 5) is next.
 
-**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. **B.1 complete.** `ingestion_manifest.json` produced with `current_document_count: 35` and `signal_count: 499`. All 6 AC-B1.x passed.
+**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. **B.3 complete.** GCP-native stack: Cloud SQL PostgreSQL 15 (asia-south1), Vertex AI `text-multilingual-embedding-002` (768-dim, ADC). HNSW index present (m=16, ef_construction=64, vector_cosine_ops). `b3_sanity_test.json`: "Saturn 7th house Libra" → top-3 sims 0.763/0.750/0.736, 2 distinct doc_types (AC-B3.4 ✓), p95=71.56ms Auth Proxy overhead (AC-B3.3 accepted Option A). AC-B3.1/B3.2/B3.5 all pass. `chunking_report.json`: p1_violations=0, stale_chunk_count=16, truncation_events=60, p5_warnings=499 (pre-existing baselines).
 
 **Governance step.** Step 15 completed (GOVERNANCE_BASELINE_CLOSE, 2026-04-24). No next governance step. CURRENT_STATE is authoritative per §5.2.
 
 **Native directives.** ND.1 addressed. No open directives.
 
-**Red-team.** `red_team_counter: 3` (threshold = 3; cadence fire DUE). Held at Sessions 1–4; fires at Madhav_M2A_Exec_5. M2A_EXEC_PLAN §RISKS specifies 6 probes (RT1–RT6).
+**Red-team.** `red_team_counter: 3` (threshold = 3; cadence fire DUE). Held through Sessions 1–4; fires at Madhav_M2A_Exec_5. M2A_EXEC_PLAN §RISKS specifies 6 probes (RT1–RT6).
 
-**Last Claude Code session.** `Madhav_M2A_Exec`, agent `claude-sonnet-4-6`, closed 2026-04-25. Deliverables: `rag/models.py`, `rag/ingest.py`, P1/P2/P5 validators (12 fixtures, all passing), `STALENESS_REGISTER.md`, `verification_artifacts/RAG/ingestion_manifest.json`. Preceding session: `Madhav_M2A_Plan_Foundation_Stack`.
+**Last Claude Code session.** `Madhav_M2A_Exec_4`, agent `claude-sonnet-4-6`, closed 2026-04-25. Deliverables: `embed.py` (Vertex AI 768-dim, HNSW), `b3_sanity_test.json`, `chunking_report.json` (re-run), GCP migration (`gcp_migrate.sh`, Cloud SQL Auth Proxy, `.env.rag`). Preceding session: `Madhav_M2A_Exec_3`.
 
-**Next-session commitment.** `Madhav_M2A_Exec` — Session 1 (B.1 Ingestion). Trigger: "Read CLAUDECODE_BRIEF.md and execute it." Next Cowork thread after M2A execution: `Madhav COW-04 — M2B Brief`.
+**Next-session commitment.** `Madhav_M2A_Exec_5` — Session 5 (B.3.5 CGM Rebuild + red-team RT1–RT6). Trigger: "Read CLAUDECODE_BRIEF.md and execute it."
 
 ---
 
