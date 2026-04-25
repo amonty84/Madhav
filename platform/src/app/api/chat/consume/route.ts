@@ -8,7 +8,8 @@ import {
 } from 'ai'
 import type { ModelMessage, UIMessage } from 'ai'
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { consumeTools } from '@/lib/claude/consume-tools'
 import { consumeSystemPrompt, type ConsumeStyle } from '@/lib/claude/system-prompts'
 import {
@@ -41,8 +42,7 @@ interface RequestBody {
 export async function POST(request: Request) {
   const setupStart = Date.now()
 
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   let body: RequestBody
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       .select('id, name, birth_date, birth_time, birth_place, client_id')
       .eq('id', chartId)
       .single(),
-    service.from('profiles').select('role').eq('id', user.id).single(),
+    service.from('profiles').select('role').eq('id', user.uid).single(),
     service
       .from('reports')
       .select('domain, title, version')
@@ -86,7 +86,7 @@ export async function POST(request: Request) {
   const role = profileResult.data?.role
   const isAstrologer = role === 'astrologer'
 
-  if (!isAstrologer && chart.client_id !== user.id) {
+  if (!isAstrologer && chart.client_id !== user.uid) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
   let pendingConversationInsert: Promise<void> | null = null
 
   if (conversationId) {
-    const existing = await getConversation({ id: conversationId, userId: user.id, isAstrologer })
+    const existing = await getConversation({ id: conversationId, userId: user.uid, isAstrologer })
     if (!existing || existing.chart_id !== chartId) {
       return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
     }
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
     pendingConversationInsert = insertConversationWithId({
       id: conversationId,
       chartId,
-      userId: user.id,
+      userId: user.uid,
       module: 'consume',
     })
   }

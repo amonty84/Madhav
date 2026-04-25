@@ -1,11 +1,12 @@
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser, adminAuth } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
 async function requireAstrologer() {
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return null
-  const { data: prof } = await sb.from('profiles').select('role').eq('id', user.id).single()
+  const service = createServiceClient()
+  const { data: prof } = await service.from('profiles').select('role').eq('id', user.uid).single()
   if (prof?.role !== 'astrologer') return null
   return user
 }
@@ -35,15 +36,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
-  const supabase = createServiceClient()
-
-  const { data: authUser, error: inviteError } = await supabase.auth.admin.inviteUserByEmail(client_email)
-  if (inviteError || !authUser.user) {
-    return NextResponse.json({ error: inviteError?.message ?? 'Could not create client user' }, { status: 400 })
+  // Create Firebase user account for the client
+  let firebaseUser: Awaited<ReturnType<typeof adminAuth.createUser>>
+  try {
+    firebaseUser = await adminAuth.createUser({ email: client_email, emailVerified: false })
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Could not create client user'
+    return NextResponse.json({ error: message }, { status: 400 })
   }
 
-  const client_id = authUser.user.id
+  const client_id = firebaseUser.uid
 
+  const supabase = createServiceClient()
   const { data: chart, error } = await supabase
     .from('charts')
     .insert({
@@ -55,7 +59,7 @@ export async function POST(request: Request) {
     .single()
 
   if (error) {
-    await supabase.auth.admin.deleteUser(client_id)
+    await adminAuth.deleteUser(client_id).catch(() => {})
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
@@ -70,9 +74,11 @@ export async function POST(request: Request) {
   const { error: layerError } = await supabase.from('pyramid_layers').insert(layers)
   if (layerError) {
     await supabase.from('charts').delete().eq('id', chart.id)
-    await supabase.auth.admin.deleteUser(client_id)
+    await adminAuth.deleteUser(client_id).catch(() => {})
     return NextResponse.json({ error: layerError.message }, { status: 500 })
   }
 
-  return NextResponse.json(chart)
+  // Generate a password-reset link the admin can share with the client to let them set their password.
+  const inviteLink = await adminAuth.generatePasswordResetLink(client_email).catch(() => null)
+  return NextResponse.json({ ...chart, inviteLink })
 }

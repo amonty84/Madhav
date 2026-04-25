@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 
 const BUCKET = 'chat-attachments'
 const MAX_BYTES = 30 * 1024 * 1024 // 30 MB
@@ -13,8 +14,7 @@ function isAllowedMime(mime: string): boolean {
 }
 
 export async function POST(request: Request) {
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   let form: FormData
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
   const ext = file.name.includes('.') ? file.name.split('.').pop() : null
   const safeExt = ext && /^[a-z0-9]{1,8}$/i.test(ext) ? `.${ext.toLowerCase()}` : ''
-  const key = `${user.id}/${crypto.randomUUID()}${safeExt}`
+  const key = `${user.uid}/${crypto.randomUUID()}${safeExt}`
 
   const service = createServiceClient()
   const { error: upErr } = await service.storage
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
   // Persist metadata so we can re-sign later if the URL expires. conversation_id
   // and message_id are nullable — the upload happens before the message is sent.
   await service.from('chat_attachments').insert({
-    user_id: user.id,
+    user_id: user.uid,
     storage_path: key,
     mime,
     size_bytes: file.size,

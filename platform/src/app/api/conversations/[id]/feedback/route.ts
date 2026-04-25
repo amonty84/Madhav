@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { getConversation } from '@/lib/conversations'
 
 async function resolveAccess(userId: string) {
@@ -10,12 +11,11 @@ async function resolveAccess(userId: string) {
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()
@@ -23,7 +23,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     .from('message_feedback')
     .select('message_id, rating, comment')
     .eq('conversation_id', id)
-    .eq('user_id', user.id)
+    .eq('user_id', user.uid)
 
   return NextResponse.json({ feedback: data ?? [] })
 }
@@ -36,12 +36,11 @@ interface FeedbackBody {
 
 export async function POST(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   let body: FeedbackBody
@@ -66,7 +65,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       .from('message_feedback')
       .delete()
       .eq('message_id', messageId)
-      .eq('user_id', user.id)
+      .eq('user_id', user.uid)
     return NextResponse.json({ ok: true, rating: null })
   }
 
@@ -77,7 +76,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     {
       conversation_id: id,
       message_id: messageId,
-      user_id: user.id,
+      user_id: user.uid,
       rating,
       comment,
     },
