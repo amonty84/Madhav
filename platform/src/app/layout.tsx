@@ -18,7 +18,7 @@ const serif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: 'AM-JIS Platform',
+  title: 'MARSYS-JIS',
   description: 'Jyotish Intelligence System',
 }
 

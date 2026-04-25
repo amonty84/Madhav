@@ -28,7 +28,7 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // Astrologer: fetch all charts with pyramid completion
+  // Super-admin: fetch all charts with pyramid completion
   const { data: charts } = await service
     .from('charts')
     .select('*')

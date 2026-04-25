@@ -14,7 +14,7 @@ const supabase = createClient(
   { auth: { persistSession: false, autoRefreshToken: false } }
 )
 
-const EMAIL = process.env.ASTROLOGER_EMAIL!
+const EMAIL = process.env.SUPER_ADMIN_EMAIL!
 const PASSWORD = process.argv[2] ?? 'amjis2024'
 
 async function main() {

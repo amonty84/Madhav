@@ -215,7 +215,7 @@ export function ConversationSidebar({
 
       <div className="mt-auto border-t border-sidebar-border px-2 py-2">
         <div className="flex items-center justify-between gap-1 px-1">
-          <span className="text-[11px] text-muted-foreground">AM-JIS</span>
+          <span className="text-[11px] text-muted-foreground">MARSYS-JIS</span>
           <ThemeToggle />
         </div>
       </div>

@@ -18,7 +18,7 @@ export async function GET(
   ])
 
   if (!chart) return NextResponse.json({ error: 'not found' }, { status: 404 })
-  if (profile?.role !== 'astrologer' && chart.client_id !== user.uid) {
+  if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 

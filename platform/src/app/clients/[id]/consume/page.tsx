@@ -21,7 +21,7 @@ export default async function ConsumePage({
   ])
 
   if (!chart) redirect('/dashboard')
-  if (profile?.role !== 'astrologer' && chart.client_id !== user.uid) redirect('/dashboard')
+  if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')
 
   const [{ data: reports }, conversations] = await Promise.all([
     service.from('reports').select('*').eq('chart_id', id).order('domain'),

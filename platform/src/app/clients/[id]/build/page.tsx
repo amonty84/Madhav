@@ -20,7 +20,7 @@ export default async function BuildPage({
     .eq('id', user.uid)
     .single()
 
-  if (profile?.role !== 'astrologer') redirect('/dashboard')
+  if (profile?.role !== 'super_admin') redirect('/dashboard')
 
   const { data: layers } = await service
     .from('pyramid_layers')

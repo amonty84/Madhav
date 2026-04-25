@@ -84,9 +84,9 @@ export async function POST(request: Request) {
   if (!chartResult.data) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
   const chart = chartResult.data
   const role = profileResult.data?.role
-  const isAstrologer = role === 'astrologer'
+  const isSuperAdmin = role === 'super_admin'
 
-  if (!isAstrologer && chart.client_id !== user.uid) {
+  if (!isSuperAdmin && chart.client_id !== user.uid) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
   let pendingConversationInsert: Promise<void> | null = null
 
   if (conversationId) {
-    const existing = await getConversation({ id: conversationId, userId: user.uid, isAstrologer })
+    const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin })
     if (!existing || existing.chart_id !== chartId) {
       return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
     }

@@ -25,13 +25,13 @@ export default async function ConsumeConversationPage({
   ])
 
   if (!chart) redirect('/dashboard')
-  const isAstrologer = profile?.role === 'astrologer'
-  if (!isAstrologer && chart.client_id !== user.uid) redirect('/dashboard')
+  const isSuperAdmin = profile?.role === 'super_admin'
+  if (!isSuperAdmin && chart.client_id !== user.uid) redirect('/dashboard')
 
   const conversation = await getConversation({
     id: conversationId,
     userId: user.uid,
-    isAstrologer,
+    isSuperAdmin,
   })
   if (!conversation || conversation.chart_id !== id) notFound()
 
