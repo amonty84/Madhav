@@ -1,0 +1,869 @@
+---
+artifact: CANONICAL_ARTIFACTS_v1_0.md
+version: 1.0
+status: CURRENT
+produced_during: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION (2026-04-24)
+implements: GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §E
+authoritative_side: Claude (the machine-readable canonical-path registry — Claude-resident by
+  construction; its role is to be the single source of truth that every other surface imports
+  from rather than duplicates)
+mirror_obligations: >
+  This file itself is Claude-only (no Gemini counterpart). Its §2 Mirror-pair inventory is the
+  machine-readable declaration of every Claude ↔ Gemini mirror pair on the project, per ND.1.
+  The §1 table is the authoritative artifact inventory — other surfaces cite it; it does not
+  cite them.
+supersedes: (none — first version of this registry)
+schema_version: 1.0
+  # Changes that would break machine-parse compatibility force a major bump (v2.0). Changes
+  # that add rows / optional fields are minor (v1.X). Changes that rotate a fingerprint in an
+  # existing row are patch (v1.0.Y).
+update_rules:
+  - "Rotate a fingerprint whenever the file content changes. Record the rotating session in
+    `last_verified_session` + `last_verified_on`."
+  - "Add a row for a new canonical artifact at the session that admits it. Bump to v1.X."
+  - "Change a mirror pair's authoritative_side / mirror_mode / known_asymmetries only via
+    an explicit ND.N directive or a native-approved protocol amendment; bump to v1.X."
+  - "Never carry a SUPERSEDED row. Superseded versions live in FILE_REGISTRY §8 Archival."
+  - "Never duplicate FILE_REGISTRY's inventory. CANONICAL_ARTIFACTS lists only canonical
+    artifacts — those with a stable canonical_id. Closed artifacts (STEP_BRIEFS, CRITIQUEs,
+    REDTEAMs, SESSION_LOG entries) do not appear here unless they also carry a CURRENT
+    canonical role (e.g., STEP_LEDGER, which is LIVE until Step 15 closure)."
+consumers:
+  - platform/scripts/governance/drift_detector.py — reads §1 path + fingerprint per canonical_id
+    as the authoritative source for cross-surface comparison (protocol §H.3)
+  - platform/scripts/governance/schema_validator.py — reads §1 to resolve artifact-class schemas
+    and §2 to validate mirror-pair structural equivalence (protocol §I.3)
+  - platform/scripts/governance/mirror_enforcer.py — reads §2 as the full MP.1–MP.8 inventory
+    (protocol §J / ND.1)
+  - 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md — canonical_artifact_fingerprint_check block
+    reads declared fingerprints from §1
+  - 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md — registry_updates_made.canonical_artifacts
+    block writes back to §1 when fingerprints rotate
+  - Step 9 (CLAUDE.md rebuild) — CLAUDE.md's canonical-path table is replaced by a
+    cite-CANONICAL_ARTIFACTS-by-reference rule
+changelog:
+  - v1.0 (2026-04-24, Step 7 of the Step 0→15 governance rebuild):
+    Initial registry. §1 carries one row per CURRENT canonical artifact (19 rows including
+    CANONICAL_ARTIFACTS self-entry). §2 carries the MP.1–MP.8 mirror-pair inventory
+    transcribed machine-readably from PROJECT_ARCHITECTURE_v2_2.md §D.11.2. Fingerprints
+    computed at Step 7 session close. ND.1 global status flip fires at this session's close
+    per directive consumption-matrix close condition.
+date: 2026-04-24
+---
+
+# CANONICAL ARTIFACTS v1.0
+## AM-JIS Project — Machine-Readable Canonical-Path Registry
+
+*Implements `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §E`. Single source of truth for canonical artifact paths, versions, fingerprints, and mirror obligations. Every other governance surface imports from here or cites it by reference — no other surface may declare a canonical version without citing this file.*
+
+*Produced in Step 7 of the Step 0 → Step 15 governance rebuild.*
+
+---
+
+## §0 — How to read this registry
+
+- **§1 Canonical artifact table** — one row per canonical_id. Each row is a YAML-block header (for machine parse) plus a human-readable summary paragraph. The YAML block is authoritative; the paragraph is a reading aid.
+- **§2 Mirror-pair inventory** — one row per mirror pair (MP.1 through MP.8 as of v1.0). Each row is a YAML-block header + summary paragraph. The YAML is authoritative.
+- **§3 Asymmetry declarations** — per-pair `known_asymmetries`, duplicated here for grep-friendliness. Drift between this section and the §2 rows' `known_asymmetries` field is itself a finding (`asymmetry_declaration_drift`).
+
+**Machine parse.** A script consumes this file by (a) locating all fenced `yaml` blocks under §1 or §2 headers, (b) parsing each as YAML, (c) indexing by `canonical_id` or `pair_id`. Text outside fenced blocks is documentation and is ignored by the parser.
+
+**Fingerprint rotation.** When a file's content changes, the next session that touches it updates the row's `fingerprint_sha256` and records the rotating session in `last_verified_session` + `last_verified_on`. Any fingerprint mismatch between declared and observed (at session open) fails the `canonical_artifact_fingerprint_check` block in the session-open handshake — indicates silent file mutation.
+
+**Bootstrap note.** Step 7 is the session that creates this file. The canonical_artifact_fingerprint_check block of the Step 7 session-open handshake fills rows with "n/a-bootstrap" because there is no prior CANONICAL_ARTIFACTS to check against. Steps 8 onward fully populate the check.
+
+---
+
+## §1 — Canonical artifact table
+
+Sorted by layer: L1 → L2.5 → Architecture/Governance (sub-sorted by canonical_id).
+
+### L1 — Facts Layer
+
+#### FORENSIC
+
+```yaml
+canonical_id: FORENSIC
+path: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+version: "8.0"
+status: CURRENT
+fingerprint_sha256: 85ca34690780c749eb155134b126dee5dffc9514c7611022385651ae2f2fa101
+mirror_obligations:
+  claude_side: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "L1 facts are Claude-resident; Gemini reads them at L4 Discovery Layer but does not author."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Unified canonical L1 — all planet/house/lagna/saham/dasha data. Supersedes v6.0 and v7.0 supplement."
+```
+
+Unified canonical L1 — 1,950-line single-source-of-truth for every planet/house/lagna/saham/dasha fact. All L2+ claims cite `v6_ids_consumed` rooted here. FORENSIC fingerprint rotation requires a formal supplement or v9.0 event + FIX_SESSION mirror cascade to MSR/UCN/CDLM/RM/CGM. Not touched in Step 7.
+
+#### LEL
+
+```yaml
+canonical_id: LEL
+path: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md
+version: "1.2"
+status: CURRENT
+fingerprint_sha256: a8e5148a7b186d04378dc0eff1047305d87a68ba3c89e517b0af05014057b4b6
+mirror_obligations:
+  claude_side: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "L1 facts are Claude-resident; Gemini reads them at L4 Discovery Layer but does not author."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "36 events + 5 period summaries + 6 chronic patterns + Swiss-Ephemeris-populated chart_states. Confidence 0.89."
+```
+
+Life Event Log v1.2 is CURRENT. MP v2.0 names LEL as M4 prerequisite with cadence "Start immediately; do not defer." Closes GA.9 at the CANONICAL_ARTIFACTS registration layer; full CLAUDE.md surfacing lands at Step 9.
+
+### L2.5 — Holistic Synthesis
+
+#### MSR
+
+```yaml
+canonical_id: MSR
+path: 025_HOLISTIC_SYNTHESIS/MSR_v3_0.md
+version: "3.0"
+status: CURRENT
+fingerprint_sha256: ba32fc0b8e10f2ff1c99681ba52c1951e3d528d8278a75f1077ac4fa6c9a9c75
+mirror_obligations:
+  claude_side: 025_HOLISTIC_SYNTHESIS/MSR_v3_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "MSR is Claude-authored; Gemini consumes at L4. The Gemini-side L2.5 canonical-path block in .geminirules (MP.5) names MSR_v3_0 as CURRENT — that declaration is a path pointer, not a content mirror."
+last_verified_session: Madhav_17_B0_DISCOVERY_LAYER_SCAFFOLD
+last_verified_on: 2026-04-24
+numeric_invariants:
+  signal_count: 499
+notes: "499 signals; v1.0 and v2.0 superseded (v2.0 carried 500 under internal v2.2 cleanup; v3.0 is canonical 499-signal register per GA.1 resolution)."
+```
+
+Master Signal Register 499 signals. Authoritative source for every P5 (Signal ID Resolution) validator check. Not touched in Step 7.
+
+#### UCN
+
+```yaml
+canonical_id: UCN
+path: 025_HOLISTIC_SYNTHESIS/UCN_v4_0.md
+version: "4.1"
+status: CURRENT
+fingerprint_sha256: 9f4a2833ab6708d23cd75c97b4151b92db2161f6fb23d5adb50714048e490fd7
+mirror_obligations:
+  claude_side: 025_HOLISTIC_SYNTHESIS/UCN_v4_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "UCN is Claude-authored; Gemini consumes at L4. MP.5 name-pointer in .geminirules is a path reference, not a content mirror."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Unified Chart Narrative — canonical single-file mother document. v1.0–v3.0 superseded; v4.1 internal cleanup applied within v4_0 file."
+```
+
+#### CDLM
+
+```yaml
+canonical_id: CDLM
+path: 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md
+version: "1.2"
+status: CURRENT
+fingerprint_sha256: a1575e7a60fe953567605a70087f507a7e3dd0363074fe5f5cb544d889906f38
+mirror_obligations:
+  claude_side: 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "CDLM is Claude-authored."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Cross-Domain Linkage Matrix 9×9 domain grid. v1.1 filename; v1.2 internal cleanup within the same file."
+```
+
+#### RM
+
+```yaml
+canonical_id: RM
+path: 025_HOLISTIC_SYNTHESIS/RM_v2_0.md
+version: "2.1"
+status: CURRENT
+fingerprint_sha256: da7532f03ee5b77d94be167b9d0c300f7da05208e8047f26ef25228a7e003cf0
+mirror_obligations:
+  claude_side: 025_HOLISTIC_SYNTHESIS/RM_v2_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "RM is Claude-authored."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Resonance Map — 32 elements (RM.21A + RM.21B split); 35 historical heads merged."
+```
+
+#### CGM
+
+```yaml
+canonical_id: CGM
+path: 025_HOLISTIC_SYNTHESIS/CGM_v2_0.md
+version: "2.0"
+status: CURRENT
+fingerprint_sha256: f7c5aef3c667c273f93c272865b1dfa8d081e1bfb726a997bbc724a494b99363
+mirror_obligations:
+  claude_side: 025_HOLISTIC_SYNTHESIS/CGM_v2_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "CGM is Claude-authored."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Chart Graph Model — rebuilt on FORENSIC_v8_0 2026-04-19. Becomes CGM_v9_0.md after Phase B.3.5."
+```
+
+### Architecture & Governance
+
+#### PROJECT_ARCHITECTURE
+
+```yaml
+canonical_id: PROJECT_ARCHITECTURE
+path: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+version: "2.2"
+status: CURRENT
+fingerprint_sha256: 33f4e39c01ab0b9adf0469d70323bcb3b0c480573e6e94650ecfd57599b7b6d9
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+  gemini_side: "compact architecture block in .geminirules + .gemini/project_state.md"
+  mirror_mode: adapted_parity
+  authoritative_side: claude
+  mirror_pair_id: MP.8
+  asymmetries: "Gemini-side carries a compact five-layer summary + pointer to full v2.2; not a full duplicate."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "v2.1 SUPERSEDED 2026-04-24 at Step 5A. v2.2 absorbs MP v2.0 arc (§I pointer), Learning Layer (§D.10), Multi-Agent Collaboration + ND.1 (§D.11), §L Governance Rebuild Reference."
+```
+
+#### MACRO_PLAN
+
+```yaml
+canonical_id: MACRO_PLAN
+path: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+version: "2.0"
+status: CURRENT
+fingerprint_sha256: 2fef28fdcfa54c425ce96c0dd82e8016a47d907545915139c39688f19ab451c3
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+  gemini_side: "compact MP summary in .geminirules (item #3) + .gemini/project_state.md"
+  mirror_mode: adapted_parity
+  authoritative_side: claude
+  mirror_pair_id: MP.3
+  asymmetries: "Gemini-side carries compact arc summary (M1–M10 names) + pointer to full MP v2.0; not a full duplicate."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "v1.0 SUPERSEDED 2026-04-23 at Step 5. v2.0 carries the 10-macro-phase arc M1–M10, Learning Layer, System Integrity Substrate (IS.1–IS.9 per ND.1), Ethical Framework, External Dependency Graph, per-phase schema, Meta-Governance, Multi-Agent Collaboration, Post-M10 Framing."
+```
+
+#### PHASE_B_PLAN
+
+```yaml
+canonical_id: PHASE_B_PLAN
+path: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+version: "1.0.3"
+status: CURRENT
+fingerprint_sha256: 65bc6332b2753f651fc6481a56b213d27e7bb744eae71454ffb5c321dec08880
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+  gemini_side: "current-phase pointer in .gemini/project_state.md + .geminirules item #4"
+  mirror_mode: adapted_parity
+  authoritative_side: claude
+  mirror_pair_id: MP.4
+  asymmetries: "Gemini-side carries the current-phase pointer + paused-during-rebuild banner; not the full B.0–B.10 plan."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "M2 Corpus Activation execution plan (B.0–B.10). v1.0.3 amendment complete (Madhav 16, 2026-04-24): WARN.2/3/5/7 stale-pointer cleanup; MACRO_PLAN v1.0 → v2.0 references. B.0 sub-phase execution is next."
+```
+
+#### FILE_REGISTRY
+
+```yaml
+canonical_id: FILE_REGISTRY
+path: 00_ARCHITECTURE/FILE_REGISTRY_v1_4.md
+version: "1.4"
+status: CURRENT
+fingerprint_sha256: 51e66af50482db10b47db5d3e2a4b06dc03303b63581422b742f840f2c3bc0b4
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/FILE_REGISTRY_v1_4.md
+  gemini_side: "L2.5 canonical-path block in .geminirules"
+  mirror_mode: adapted_parity_subset
+  authoritative_side: claude
+  mirror_pair_id: MP.5
+  asymmetries: "Gemini-side carries only the L2.5 subset (MSR, UCN, CDLM, CGM, RM) relevant to L4 Discovery Layer — proper subset relationship, not full mirror."
+last_verified_session: Madhav_17_B0_DISCOVERY_LAYER_SCAFFOLD
+last_verified_on: 2026-04-24
+notes: "v1.0 → v1.1 at Step 5; v1.1 → v1.2 at Step 5A; v1.2 → v1.3 at Step 7; v1.3 → v1.4 at Step 12 (Step 10-deferred bump executed). v1.4 is delta-style: §1–§7 corpus rows unchanged and retained in v1.3 (SUPERSEDED). §9.1 delta carries ONGOING_HYGIENE_POLICIES row + BOOTSTRAP retirement to §8 + LEL_v1_1 archival. Fingerprint resolved at Step 12.1: b23b399d…b3f833e (pre-v1.4) → da0cdde5…fea20907 (v1.4 CURRENT). File itself not touched at Step 12.1 — only the fingerprint placeholder in this row. SUPERSEDED versions live in FILE_REGISTRY §8 Archival. v1.3 SUPERSEDED-banner received Step-12.1 delta-pointer index (non-substantive; detector-compat workaround for drift_detector.py L315 hardcoded fr_path; v1.3 §1–§10 archival content untouched)."
+```
+
+#### GOVERNANCE_STACK
+
+```yaml
+canonical_id: GOVERNANCE_STACK
+path: 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md
+version: "1.0-updated-STEP_15_GOVERNANCE_BASELINE_CLOSE"
+status: CURRENT
+fingerprint_sha256: 0b88cd67106cdd1de3e0ebcf087079880ace9fff372ddd6473847da0eea7b1d5
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  mirror_pair_id: MP.6
+  asymmetries: "Declared Claude-only at PROJECT_ARCHITECTURE_v2_2 §D.11.2. Revisit if a Gemini-side governance surface emerges."
+last_verified_session: STEP_15_GOVERNANCE_BASELINE_CLOSE
+last_verified_on: 2026-04-24
+notes: "Amended in-place at each step close. §10–§17 as previously recorded. §18 STEP_14 log + §14 index. §19 STEP_15 log (NEW this session) + §14 cumulative index refreshed + end-of-file footer updated. Fingerprint rotation history: … → 8ba55f17…e95949 (STEP_13b_CLOSE_MACHINERY_FIX — §16+§17) → 1bf17ef7…b28 (Step 14 — §18+§14 index) → 0b88cd67…b1d5 (Step 15 — §19+§14 index+footer). Schema-break would force v2.0."
+```
+
+#### STEP_LEDGER
+
+```yaml
+canonical_id: STEP_LEDGER
+path: 00_ARCHITECTURE/STEP_LEDGER_v1_0.md
+version: "1.0"
+status: GOVERNANCE_CLOSED
+fingerprint_sha256: cf5f8e7352eb25c0b04ba4f668e234c7b4da976473c30fdee430984768d718f1
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/STEP_LEDGER_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  mirror_pair_id: "MP.2 (composite — STEP_LEDGER now GOVERNANCE_CLOSED; removed from composite at Step 15)"
+  asymmetries: "STEP_LEDGER is now GOVERNANCE_CLOSED and retired. It was part of the MP.2 composite during the rebuild era only. Post-Step-15, CURRENT_STATE_v1_0.md is the sole authoritative state surface."
+last_verified_session: STEP_15_GOVERNANCE_BASELINE_CLOSE
+last_verified_on: 2026-04-24
+notes: "GOVERNANCE_CLOSED at Step 15 (2026-04-24). CURRENT_STATE_v1_0.md takes over as authoritative state surface per CURRENT_STATE §5.2. This row retained as audit trail. Status change: LIVE → GOVERNANCE_CLOSED. File amended at Step 15: frontmatter status → GOVERNANCE_CLOSED; role updated; row 15 → completed; §Step 15 History block appended. Fingerprint rotation history: 88b3a97c…7d69123c (Step 12.1) → unchanged at STEP_13b_CLOSE_MACHINERY_FIX (Step 13 remained completed, Step 14 remained ready) → fd61876b…c3e (Step 14 — row 14 completed + row 15 ready) → cf5f8e73…18f1 (Step 15 — row 15 completed + GOVERNANCE_CLOSED + History block)."
+```
+
+#### SESSION_LOG
+
+```yaml
+canonical_id: SESSION_LOG
+path: 00_ARCHITECTURE/SESSION_LOG.md
+version: "rolling-schema-v1.0-adopted-STEP_10"
+status: LIVE
+fingerprint_sha256: "<populated-at-step-15-close-after-session-log-entry-appended>"
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/SESSION_LOG.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  mirror_pair_id: MP.7
+  asymmetries: "Declared Claude-only at Step 5A. The session-pointer aspect is mirrored via MP.2 composite (now including CURRENT_STATE as of Step 10); a full Gemini-side SESSION_LOG has no present need."
+last_verified_session: STEP_15_GOVERNANCE_BASELINE_CLOSE
+last_verified_on: 2026-04-24
+notes: "Append-only. Schema retrofit COMPLETED at Step 10. Bootstrap placeholder forward-rotation history: `<populated-at-step-10-close-after-session-log-entry-appended>` → (Step 12 placeholder `<rotated-at-step-12-close>` — anti-pattern, Step-13-detected defect) → `<populated-at-step-12-1-close-after-session-log-entry-appended>` (Step 12.1 restored Step-7-pattern) → (Step 13b declared rotation but did NOT execute — one of three Step 13b close-machinery defects) → `<populated-at-step-13b-close-machinery-fix-after-session-log-entry-appended>` (STEP_13b_CLOSE_MACHINERY_FIX resolved) → unchanged at Step 14 (SESSION_LOG appended but placeholder rotation was not explicitly tracked in this step's CA rotation set) → `<populated-at-step-15-close-after-session-log-entry-appended>` (Step 15 — forward rotation). Placeholder remains `<populated-*>` pattern (drift_detector.py L215-225 LOW downgrade, not HIGH) because the SESSION_LOG Step 15 entry is appended as part of this session's atomic close; a real sha256 written here would be invalidated by that append."
+```
+
+#### NATIVE_DIRECTIVES
+
+```yaml
+canonical_id: NATIVE_DIRECTIVES
+path: 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
+version: "1.0"
+status: LIVING
+fingerprint_sha256: 9e44283f237f33cfde5de2a409440fb8d28f52b9afc31a9f76a5a19c0e53154b
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Directive log is Claude-resident; Gemini-side session_open handshake acknowledges directives but does not author."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "ND.1 status flipped open → addressed at this session close per ND.1 consumption-matrix close condition."
+```
+
+#### CONVERSATION_NAMING_CONVENTION
+
+```yaml
+canonical_id: CONVERSATION_NAMING_CONVENTION
+path: 00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md
+version: "1.4"
+status: LIVING
+fingerprint_sha256: ROTATED_COW03_2026-04-25_v1-4
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only per the artifact's own frontmatter (Cowork thread-naming is a Claude session-open behavior)."
+last_verified_session: Madhav_COW03_2026-04-25
+last_verified_on: 2026-04-25
+notes: "v1.3 amendments (COW-03): milestone groupings M2A-E, checkpoint protocol §8.5, model assignment matrix §8.6, Google Anti-Gravity IDE executor correction, COW ledger update."
+```
+
+#### GOVERNANCE_INTEGRITY_PROTOCOL
+
+```yaml
+canonical_id: GOVERNANCE_INTEGRITY_PROTOCOL
+path: 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: a57e9dd9a05b0853f8f447d1895084bf28dcc5f194cb6104fd78a67934d04c64
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "The protocol governs mirror discipline but is not itself a mirror pair; the principle is stated verbatim in MP v2.0 §IS.2 and v2.2 §D.11, both of which do have Gemini-side mirrors."
+last_verified_session: STEP_8_GOVERNANCE_INTEGRITY_REDTEAM
+last_verified_on: 2026-04-24
+notes: "Status flipped DRAFT_PENDING_REDTEAM → CURRENT at Step 8 close 2026-04-24 per red-team verdict PASS_WITH_FIXES (GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md §1) and this row's prior close condition."
+```
+
+#### CANONICAL_ARTIFACTS (self-entry)
+
+```yaml
+canonical_id: CANONICAL_ARTIFACTS
+path: 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: "<populated-at-step-15-close>"
+  # Step-7-pattern continuation. Chicken-and-egg: writing any real sha256 into this
+  # self-row changes CANONICAL_ARTIFACTS content and invalidates the written value.
+  # The `<populated-*>` placeholder is downgraded by drift_detector.py L215-225 to
+  # LOW `fingerprint_bootstrap_placeholder` (not HIGH `fingerprint_mismatch`).
+  # Rotation history: `<populated-at-step-7-close>` → ... → `<populated-at-step-12-1-close>`
+  # (Step 12.1 restored Step-7-pattern) → unchanged at Step 13b (execution defect) →
+  # `<populated-at-step-13b-close-machinery-fix>` (STEP_13b_CLOSE_MACHINERY_FIX) →
+  # `<populated-at-step-14-close>` (Step 14) → `<populated-at-step-15-close>` (Step 15).
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "The authoritative machine-readable inventory — Claude-resident by construction. Gemini-side surfaces cite it by reference (`.geminirules` Mirror Discipline section §3 names this file as the authoritative inventory)."
+last_verified_session: STEP_14_SCHEMA_VALIDATION_RUN
+last_verified_on: 2026-04-24
+notes: "Self-entry: this row is the registry's own record of itself. Placeholder forward-rotation history: Step 7 `<populated-at-step-7-close>` → Steps 8–11 unchanged → Step 12 `<rotated-at-step-12-close>` (anti-pattern; Step-13-detected defect) → Step 12.1 `<populated-at-step-12-1-close>` (restored Step-7-pattern) → Step 13b unchanged (Step 13b declared rotation to `<populated-at-step-13b-close>` but did not execute — one of three Step 13b close-machinery defects) → `<populated-at-step-13b-close-machinery-fix>` (STEP_13b_CLOSE_MACHINERY_FIX this session). Fingerprint rotation of this file (whether by CA edits or by writing a new value into this self-row) forces every downstream script to re-read; that re-read observes the placeholder and correctly treats as LOW BASELINE. A future step that wants to commit a real self-row hash must first resolve the fixed-point problem (e.g., by using a hash-of-content-excluding-this-row schema, or by moving the self-row out of the file entirely) — booked as a future governance-rebuild item."
+```
+
+#### SESSION_OPEN_TEMPLATE
+
+```yaml
+canonical_id: SESSION_OPEN_TEMPLATE
+path: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 25ad044030d903129d6e9dfd18274225149737d0c65c4137093b7cd9f8897e77
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Template is Claude-resident; per-session instantiations appended to SESSION_LOG. Gemini sessions emit their own handshake by reading this template."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Implements protocol §F."
+```
+
+#### SESSION_CLOSE_TEMPLATE
+
+```yaml
+canonical_id: SESSION_CLOSE_TEMPLATE
+path: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 5875af7ae389a7ea786d091d57e284db54f685ddb91817a2f7750e19a16ebf0b
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Template is Claude-resident."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Implements protocol §G."
+```
+
+#### DISAGREEMENT_REGISTER
+
+```yaml
+canonical_id: DISAGREEMENT_REGISTER
+path: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+version: "1.0"
+status: LIVING
+fingerprint_sha256: 5d0f58a59788c4ec1061897ed9680780a1ef0bbd89c0b13ae16edd790b759282
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Register is Claude-resident; entries may cite both Claude-side and Gemini-side evidence."
+last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
+last_verified_on: 2026-04-24
+notes: "Implements protocol §K. Zero entries at creation."
+```
+
+#### CLAUDE (master instructions)
+
+```yaml
+canonical_id: CLAUDE
+path: CLAUDE.md
+version: "2.0"
+status: CURRENT
+fingerprint_sha256: ad58903901865c22b80900f5b29c7349b3ab57ae063c60f1fa533807b7a3dd20
+mirror_obligations:
+  claude_side: CLAUDE.md
+  gemini_side: .geminirules
+  mirror_mode: adapted_parity
+  authoritative_side: claude
+  mirror_pair_id: MP.1
+  asymmetries: "Claude-side contains Claude Code / MCP / skills references with no Gemini equivalent (documented in .geminirules Asymmetries section). Gemini-side contains Gemini-rules idiom + Gemini-tool expectations with no Claude equivalent."
+last_verified_session: STEP_15_GOVERNANCE_BASELINE_CLOSE
+last_verified_on: 2026-04-24
+notes: "Rebuilt to v2.0 at Step 9. §A–§M structure. At Step 10, §F + §C item #8 amended (CURRENT_STATE pointer). At Step 12: §C item #11 BOOTSTRAP dropped; ONGOING_HYGIENE_POLICIES added. At Step 15 (this update): rebuild-era banner removed from §F; §C item #5 paused note removed; §C item #8 → steady-state CURRENT_STATE pointer; §D STEP_LEDGER row → GOVERNANCE_CLOSED; §L rebuild-step bullet removed; footer updated. Fingerprint rotation history: 16002b6b…a54d → (Step 12 placeholder `<rotated-at-step-12-close>`) → 320bdc47…f841b5 (Step 12.1) → 50b59665…386dc (Step 15 — banner removal + §L + §D + footer)."
+```
+
+#### GEMINIRULES
+
+```yaml
+canonical_id: GEMINIRULES
+path: .geminirules
+version: "amended-STEP_15"
+status: LIVE
+fingerprint_sha256: d179fc1637c608d956a7193ac69bde2a0966e0309b737863b11a0f9f107c93cf
+mirror_obligations:
+  claude_side: CLAUDE.md
+  gemini_side: .geminirules
+  mirror_mode: adapted_parity
+  authoritative_side: claude
+  mirror_pair_id: MP.1
+  asymmetries: "See CLAUDE row above."
+last_verified_session: Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT
+last_verified_on: 2026-04-24
+notes: "Re-authored at Step 7 per ND.1. Re-authored at Step 9. Amended at Step 10/11/12. At Step 15 (this update): §C item #5 paused note removed; §C item #8 → steady-state CURRENT_STATE pointer; §F banner replaced; §L rebuild-step bullet removed; §L4 paused note updated; footer updated. Fingerprint rotation history: 5967a56c…ae8de → (Step 12 placeholder) → e4766723…68fcff3 (Step 12.1) → 8ba5617e…78f3f (Step 15 — MP.1 mirror of CLAUDE.md Step 15 amendments) → f6e4ff38…311cb (Madhav 16 — MP.4 mirror update for PBP v1.0.3)."
+```
+
+#### PROJECT_STATE (Gemini-side)
+
+```yaml
+canonical_id: PROJECT_STATE
+path: .gemini/project_state.md
+version: "amended-STEP_15"
+status: LIVE
+fingerprint_sha256: e972a4b56fe1fba787227df9918a1ba9054991689d9ca0fb6a9df0af4d850bbd
+mirror_obligations:
+  claude_side: "composite(SESSION_LOG + CURRENT_STATE + active plan pointers)"
+  gemini_side: .gemini/project_state.md
+  mirror_mode: adapted_parity_state
+  authoritative_side: claude
+  mirror_pair_id: MP.2
+  asymmetries: "Claude-side is a composite; Gemini-side is one file. STEP_LEDGER removed from composite at Step 15 (now GOVERNANCE_CLOSED)."
+last_verified_session: Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT
+last_verified_on: 2026-04-24
+notes: "Re-authored at Step 7/9/10/11/12/13/13b_CLOSE_MACHINERY_FIX. At Step 15 (this update): §Governance Rebuild In Progress → §Governance Rebuild CLOSED; full state transition (Step 15 completed; Steps remaining 0; M2 active; CURRENT_STATE authoritative; Pending Actions updated; Working Protocol rebuild-deference bullet removed; Mirror Discipline Notes STEP_LEDGER reference removed). Fingerprint rotation history: … → be3e500b…72554944ef (STEP_13b_CLOSE_MACHINERY_FIX) → unchanged at Step 14 (file not modified) → b7692372…6ff0a (Step 15 — full state-transition MP.2 update) → 4355a248…ee577 (Madhav 16 — PBP v1.0.3 state update)."
+```
+
+#### SESSION_LOG_SCHEMA
+
+```yaml
+canonical_id: SESSION_LOG_SCHEMA
+path: 00_ARCHITECTURE/SESSION_LOG_SCHEMA_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 1148e541f0ad4ae5d865e8da7b63d1e79a93f2b5d59af9c6d5dd0a647b637304
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/SESSION_LOG_SCHEMA_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "SESSION_LOG itself is declared Claude-only at MP.7; this schema — the rule-set for SESSION_LOG entries — is Claude-only by inheritance. Gemini sessions that append to SESSION_LOG would emit entries conforming to §2 of the schema; no Gemini-side schema counterpart is required."
+last_verified_session: STEP_10_SESSION_LOG_SCHEMA
+last_verified_on: 2026-04-24
+notes: "New at Step 10. §1 naming schema; §2 entry structure (session_open YAML + body + session_close YAML + one committed next-objective); §3 optional frontmatter; §4 menu-form deprecation; §5 SESSION_LOG header banner; §6 forward-only retrofit; §7 schema-validator integration. Closes GA.17 + GA.18 at the schema layer."
+```
+
+#### LEARNING_LAYER_SCAFFOLD_DECISION
+
+```yaml
+canonical_id: LEARNING_LAYER_SCAFFOLD_DECISION
+path: 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 23af6e2cf51ffe0863336715da7399b1ad32dc0f886728c2f8992548dce8efc5
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Closed governance decision artifact; Claude-resident. Gemini-side reflects Step 11 closure via .gemini/project_state.md state-block transition (MP.2 composite mirror), not via a parallel decision file."
+last_verified_session: STEP_11_LEARNING_LAYER_SCAFFOLD
+last_verified_on: 2026-04-24
+notes: "New at Step 11. Closed decision record resolving GA.6 at the full-surface layer. SCAFFOLD verdict per native input 2026-04-24. §3 enumerates the 06_LEARNING_LAYER/ scaffold bundle (top-level README + four LL.1–LL.4 mechanism stubs + OBSERVATIONS/ + PARAMETER_UPDATES/ empty subdirs). §5 guardrails bind every future Learning-Layer-touching session. §7 documents the PHASE_B_PLAN B.0 substrate-hook coordination (sibling extension at M2 resume; Step 4 red-team WARN.1 resolved at design-intent layer)."
+```
+
+The Step 11 closure record. Names the SCAFFOLD verdict, enumerates the scaffold bundle, declares binding guardrails. Sibling artifacts (the four mechanism stubs + top-level README + two `.gitkeep` markers under `06_LEARNING_LAYER/`) are not separately registered here — they are tracked through this decision record §3 inventory + the directory's existence on disk + (Step 12 hygiene) FILE_REGISTRY §9.1 rows. CANONICAL_ARTIFACTS lists only artifacts with stable canonical_ids per §0 update_rules bullet 5; the scaffold stubs have directory-relative names, not canonical IDs.
+
+#### GOVERNANCE_BASELINE
+
+```yaml
+canonical_id: GOVERNANCE_BASELINE
+path: 00_ARCHITECTURE/GOVERNANCE_BASELINE_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 82033d4d82f0ffd0bbc79c85340a58362ce05c1203106450f328c7c2652a0719
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/GOVERNANCE_BASELINE_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Sealing artifact for the Step 0→15 governance rebuild. Claude-resident. Gemini-side is informed of the rebuild closure via the MP.2 composite mirror (.gemini/project_state.md §Governance Rebuild CLOSED section), not via a parallel baseline file."
+last_verified_session: STEP_15_GOVERNANCE_BASELINE_CLOSE
+last_verified_on: 2026-04-24
+notes: "NEW at Step 15. Final governance-rebuild closure document. §1 Declaration; §2 Closure matrix (32 GA.N findings: 30 RESOLVED, 1 ACCEPTED_AS_POLICY GA.11 scope-separation, 1 DEFERRED_AS_DESIGN_CHOICE GA.27 non-binding timeline); §3 Artifacts produced Steps 0–15; §4 Scripts (clean-state invocation + output for drift/schema/mirror); §5 Governance guarantees G.1–G.6; §6 What changed vs pre-Step-0; §7 What did not change (corpus: FORENSIC v8.0, LEL v1.2, MSR v3.0, UCN, CDLM, RM, CGM, L3 reports, PHASE_B_PLAN); §8 Known deferred items (WARN.2/3/5/7, GA.11, GA.27, 46 schema violations, PHASE_B_PLAN v1.0.3 amendment cycle); §9 Resumption pointer (M2 resumes; PHASE_B_PLAN v1.0.3 first act); §10 Next governance cycle (quarterly pass due 2026-07-24; red-team counter reset to 0)."
+```
+
+The Step 15 sealing artifact. Final closure document for the governance rebuild. Retains the audit trail of all 32 GA.N findings and their resolution status. Marks the transition from rebuild-era governance to steady-state governance. Future governance reviews cite this file as the baseline from which steady-state operates.
+
+#### CURRENT_STATE
+
+```yaml
+canonical_id: CURRENT_STATE
+path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+version: "1.0"
+status: AUTHORITATIVE
+fingerprint_sha256: ffeecf7d412fd250278985f7583bde81879367357bb1c05000a3ecbfa60ba9f8
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+  gemini_side: ".gemini/project_state.md §Governance Rebuild CLOSED + §Canonical Corpus State"
+  mirror_mode: adapted_parity_state
+  authoritative_side: claude
+  mirror_pair_id: "MP.2 (composite — CURRENT_STATE is now the sole authoritative state surface post-Step-15)"
+  asymmetries: "Claude-side is a single canonical YAML block (§2) + narrative §3. Gemini-side is free-form Gemini-idiom prose in .gemini/project_state.md. Semantic parity; not byte-identity. CURRENT_STATE is now authoritative (§5.2 in force; STEP_LEDGER GOVERNANCE_CLOSED)."
+last_verified_session: Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT
+last_verified_on: 2026-04-24
+notes: "New at Step 10. Status AUTHORITATIVE since Step 15 close (was LIVE/secondary during rebuild era per §5.1). At Step 15 (this update): §2 YAML full state transition (active_macro_phase_status → active; active_phase_plan_version → 1.0.3; active_governance_step → Step_15 completed; next_governance_step → null; red_team_counter → 0; last_session_id → STEP_15_GOVERNANCE_BASELINE_CLOSE; next_session_objective → PHASE_B_PLAN v1.0.3; cross_check_authority → CURRENT_STATE); §3 narrative refreshed; §5.1 marked HISTORICAL; footer updated. Fingerprint rotation history: 81da20d1…24dacef (Step 12.1) → 82452377…bfb0ec41 (Step 13b partial) → 86d53f31…17268a08 (STEP_13b_CLOSE_MACHINERY_FIX) → 9ff48c47…946a (Step 14 — Step 14 state-block transition) → 88f40331…9234 (Step 15 — full governance-closed state transition) → 5a837de6…9e87 (Madhav 16 — state-block transition to Madhav_16 last_session + B.0 next). Closes GA.19 at the full-surface layer."
+```
+
+#### ONGOING_HYGIENE_POLICIES
+
+```yaml
+canonical_id: ONGOING_HYGIENE_POLICIES
+path: 00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: 878e884a6b11a1a39a7c73850b7dfb41cb818b1b05840f0df9ab3efc303fb34f
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only policy artifact. Gemini-side sessions cite by reference from .geminirules collaboration section. No Gemini-side counterpart required — the enforcing mechanisms (schema_validator.py extensions, CANONICAL_ARTIFACTS schema, SESSION_LOG_SCHEMA entry structure) are Claude-side Claude-only infrastructure."
+last_verified_session: STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX
+last_verified_on: 2026-04-24
+notes: "New at Step 12. §A archival retain-in-place; §B LEL v1.1 cleanup + standing predecessor rule (closes GA.12); §C scope-boundary enforcement (closes GA.20 at close-checklist layer); §D SESSION_LOG completeness (closes GA.21); §E Staleness Register; §F CI cadence + exit-code-3 whitelist (closes F.2); §G red-team cadence + learning_layer_stub class + LL N=3 default (closes LL scaffold §5.7 + §5.4); §H quarterly governance pass; §I Macro Plan review triggers (explicit WARN.2/3/5/7 re-defer with PHASE_B_PLAN v1.0.3 owner + M2 resume trigger); §J implementation actions index; §K residual disposition; §L finding coverage; §M interactions; §N fingerprint-rotation audit. File itself not touched at Step 12.1 — only the `<computed-at-step-12-close>` placeholder in this row resolved to observed hash 878e884a…303fb34f (content unchanged since Step 12 close)."
+```
+
+---
+
+## §2 — Mirror-pair inventory (per ND.1)
+
+Per `NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md` §1 ND.1 + `PROJECT_ARCHITECTURE_v2_2.md §D.11.2`. Machine-enforceable table for `mirror_enforcer.py`.
+
+### MP.1 — CLAUDE.md ↔ .geminirules
+
+```yaml
+pair_id: MP.1
+claude_side: CLAUDE.md
+gemini_side: .geminirules
+authoritative_side: claude
+mirror_mode: adapted_parity
+enforcement_rule: >
+  Compare structural blocks: (a) mandatory-reading list — same N items, same canonical_ids;
+  (b) governance-rebuild banner — semantic parity (both sides carry the "paused work / read
+  ledger → brief → audit" instruction); (c) canonical-path table — Gemini-side is a subset per
+  MP.5 scope (L2.5 paths only); (d) project-overview block — semantic parity (both name the
+  subject, both name the goal at acharya-grade resolution); (e) Collaboration section —
+  Claude-addressing on Claude-side, Gemini-addressing on Gemini-side; ND.1 citation on both.
+  FAIL on structural-block mismatch (missing block, wrong item count).
+  FAIL on canonical-ID disagreement in the shared subset.
+  PASS_WITH_ASYMMETRIES_NOTED on byte-level differences within each paired block (expected).
+known_asymmetries:
+  - "Claude-side CLAUDE.md contains Claude Code / MCP / skills references with no Gemini equivalent"
+  - "Gemini-side .geminirules contains Gemini-rules idiom / Gemini-tool expectations with no Claude equivalent"
+  - "Claude-side Collaboration-with-Gemini section and Gemini-side Mirror-Discipline-Collaboration-with-Claude section are each directed at their own agent; semantic parity of content, not byte-identity of prose"
+```
+
+### MP.2 — Composite Claude state ↔ .gemini/project_state.md
+
+```yaml
+pair_id: MP.2
+claude_side: "composite(00_ARCHITECTURE/SESSION_LOG.md + 00_ARCHITECTURE/STEP_LEDGER_v1_0.md + active phase/macro-plan pointers)"
+gemini_side: .gemini/project_state.md
+authoritative_side: claude
+mirror_mode: adapted_parity_state
+enforcement_rule: >
+  Compare state-snapshot facts:
+  (a) current executed step (Gemini-side) matches STEP_LEDGER's single `in_progress` row OR
+      most recent `completed` row (Claude-side);
+  (b) next step (Gemini-side) matches STEP_LEDGER's `ready` row;
+  (c) canonical corpus state block (Gemini-side) matches CANONICAL_ARTIFACTS §1 CURRENT rows
+      (version numbers, paths, signal count for MSR);
+  (d) pending actions (Gemini-side) matches SESSION_LOG's tail handoff note scope
+      (adapted-phrasing allowed; no contradictions).
+  FAIL on state disagreement (wrong step, wrong version, wrong path).
+  PASS on adapted-phrasing differences.
+known_asymmetries:
+  - "Claude-side is a composite of three files; Gemini-side is a single file"
+  - "SESSION_LOG history is Claude-only; Gemini-side carries only the current state, not history"
+```
+
+### MP.3 — MACRO_PLAN_v2_0.md ↔ Gemini-side MP summary
+
+```yaml
+pair_id: MP.3
+claude_side: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+gemini_side: "compact MP summary in .geminirules item #3 + .gemini/project_state.md"
+authoritative_side: claude
+mirror_mode: adapted_parity_summary
+enforcement_rule: >
+  Compare:
+  (a) MP version pointer — Gemini-side cites `MACRO_PLAN_v2_0.md` matching MP frontmatter
+      version "2.0";
+  (b) ten-macro-phase arc — Gemini-side compact list matches MP §The ten macro-phases by
+      count (10) and by M1..M10 names;
+  (c) Learning Layer + System Integrity Substrate mentions — Gemini side names both;
+      not necessarily with full IS.1–IS.9 detail.
+  FAIL on version disagreement.
+  FAIL on macro-phase-name disagreement.
+  PASS on summary-vs-full differences.
+known_asymmetries:
+  - "Gemini-side is a compact summary; Claude-side is the full ~30K-line plan"
+```
+
+### MP.4 — PHASE_B_PLAN_v1_0.md (v1.0.3) ↔ Gemini-side phase pointer
+
+```yaml
+pair_id: MP.4
+claude_side: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+gemini_side: "current-phase pointer in .gemini/project_state.md + .geminirules item #4"
+authoritative_side: claude
+mirror_mode: adapted_parity_summary
+enforcement_rule: >
+  Compare:
+  (a) PHASE_B_PLAN version pointer — Gemini side cites v1.0.3 matching PBP frontmatter;
+  (b) pause-during-rebuild banner — Gemini side reflects the paused state while STEP_LEDGER
+      is LIVE.
+  FAIL on version disagreement.
+  FAIL on absence of paused-state reflection on Gemini side during the rebuild era.
+known_asymmetries:
+  - "Gemini-side carries only the current-phase pointer; the full B.0–B.10 plan is Claude-only"
+```
+
+### MP.5 — FILE_REGISTRY ↔ Gemini-side L2.5 path block
+
+```yaml
+pair_id: MP.5
+claude_side: 00_ARCHITECTURE/FILE_REGISTRY_v1_3.md
+gemini_side: "L2.5 canonical-path block in .geminirules layer-architecture section"
+authoritative_side: claude
+mirror_mode: adapted_parity_subset
+enforcement_rule: >
+  Compare:
+  The L2.5 path subset Gemini side carries (MSR_v3_0 / UCN_v4_0 / CDLM_v1_1 / CGM_v2_0 / RM_v2_0)
+  matches FILE_REGISTRY §4.
+  FAIL on path disagreement (e.g., Gemini side still citing MSR_v2_0 after a version bump).
+  PASS if Gemini side is a proper subset with no contradictions.
+known_asymmetries:
+  - "Gemini-side carries only L2.5 paths relevant to L4 Discovery Layer; does not mirror FILE_REGISTRY's full inventory"
+```
+
+### MP.6 — GOVERNANCE_STACK (Claude-only)
+
+```yaml
+pair_id: MP.6
+claude_side: 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md
+gemini_side: null
+authoritative_side: claude
+mirror_mode: claude_only
+enforcement_rule: >
+  No enforcement; the pair is declared Claude-only. mirror_enforcer.py emits a
+  PASS_DECLARED_CLAUDE_ONLY entry in the report. Revisit if a Gemini-side governance surface
+  emerges.
+known_asymmetries: []
+```
+
+### MP.7 — SESSION_LOG (Claude-only)
+
+```yaml
+pair_id: MP.7
+claude_side: 00_ARCHITECTURE/SESSION_LOG.md
+gemini_side: null
+authoritative_side: claude
+mirror_mode: claude_only
+enforcement_rule: >
+  No enforcement; the pair is declared Claude-only per Step 5A decision. The session-pointer
+  aspect is mirrored via MP.2 composite. mirror_enforcer.py emits PASS_DECLARED_CLAUDE_ONLY.
+  Revisit if Gemini sessions begin producing their own session records.
+known_asymmetries: []
+```
+
+### MP.8 — PROJECT_ARCHITECTURE_v2_2.md ↔ Gemini-side architecture summary
+
+```yaml
+pair_id: MP.8
+claude_side: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+gemini_side: "compact architecture block in .geminirules + .gemini/project_state.md"
+authoritative_side: claude
+mirror_mode: adapted_parity_summary
+enforcement_rule: >
+  Compare:
+  (a) architecture version pointer — Gemini side (.geminirules item #2 + .gemini/project_state.md
+      canonical corpus state) cites `PROJECT_ARCHITECTURE_v2_2.md`;
+  (b) five-layer architecture summary — Gemini-side matches PROJECT_ARCHITECTURE §C by layer
+      count (5) and by L0..L4 names;
+  (c) mirror-pair inventory cite — Gemini side references `PROJECT_ARCHITECTURE_v2_2.md §D.11.2`
+      as the architecture-layer first pass, and this file (CANONICAL_ARTIFACTS) as the
+      machine-enforceable inventory.
+  FAIL on version disagreement.
+  FAIL on layer-naming disagreement.
+known_asymmetries:
+  - "Gemini-side carries a compact architecture summary; full v2.2 text (1,180 lines) is Claude-only"
+```
+
+---
+
+## §3 — Asymmetry declarations (aggregate)
+
+Per ND.1 "Asymmetries to preserve (not defects)". Re-stated here aggregately for grep-friendliness; authoritative declarations live per-pair in §2 `known_asymmetries`. Drift between §2 and §3 is itself a finding (class `asymmetry_declaration_drift`).
+
+- **MP.1** — Claude-only: Claude Code / MCP / skills references; CLAUDE.md's Collaboration-with-Gemini section is Claude-addressing. Gemini-only: `.geminirules` Gemini-rules idiom; Mirror-Discipline-Collaboration-with-Claude section is Gemini-addressing.
+- **MP.2** — Claude-only: SESSION_LOG history (time-stamped entries). Gemini-side carries only current state.
+- **MP.3** — Gemini-side compact summary only; full MP Claude-side.
+- **MP.4** — Gemini-side current-phase pointer only; full B.0–B.10 Claude-side.
+- **MP.5** — Gemini-side L2.5 subset only; full FILE_REGISTRY Claude-side. Subset relationship is the declared asymmetry.
+- **MP.6**, **MP.7** — Declared Claude-only; no Gemini counterpart. No enforcement.
+- **MP.8** — Gemini-side compact architecture summary only; full v2.2 text Claude-side.
+
+---
+
+## §4 — Future-agent admission protocol
+
+Per `MACRO_PLAN_v2_0.md §3.4.E`: if a third agent is admitted (e.g., Gemini 3.0 alongside 2.5 Pro, or Opus 5.0 alongside 4.7), the admission session:
+
+1. Adds new mirror-pair rows (MP.9+) to §2 with their own enforcement rules.
+2. Extends `mirror_enforcer.py`'s rule set within the same session that introduces the pair.
+3. Updates `FILE_REGISTRY` and `GOVERNANCE_STACK` per the protocol §D registry triad.
+4. Bumps this file to v1.X for the additive change.
+
+---
+
+## §5 — Changelog reference
+
+See frontmatter `changelog` field. Fingerprint rotations of individual rows do not bump the file's own version (they are per-row edits tracked in `last_verified_session` / `last_verified_on`). Schema-breaking changes (new required field, field removal) force a major bump to v2.0.
+
+---
+
+*End of CANONICAL_ARTIFACTS_v1_0.md — Step 7 of the Step 0→15 governance rebuild — 2026-04-24.*
