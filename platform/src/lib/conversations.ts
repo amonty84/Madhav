@@ -77,7 +77,7 @@ export async function insertConversationWithId(params: {
 export async function getConversation(params: {
   id: string
   userId: string
-  isAstrologer: boolean
+  isSuperAdmin: boolean
 }): Promise<ConversationSummary | null> {
   const service = createServiceClient()
   const { data } = await service
@@ -86,7 +86,7 @@ export async function getConversation(params: {
     .eq('id', params.id)
     .single()
   if (!data) return null
-  if (!params.isAstrologer && data.user_id !== params.userId) return null
+  if (!params.isSuperAdmin && data.user_id !== params.userId) return null
   return { ...data, module: data.module as ConversationModule, updated_at: data.created_at }
 }
 

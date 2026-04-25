@@ -14,38 +14,57 @@ export async function POST(request: Request) {
   }
   if (!idToken) return NextResponse.json({ error: 'idToken required' }, { status: 400 })
 
+  let decoded
   try {
-    const decoded = await adminAuth.verifyIdToken(idToken)
-
-    // Ensure a Supabase profile row exists for this Firebase UID. The layout
-    // authorization checks (e.g. clients/[id]/layout.tsx) require it; without
-    // this row, every chart navigation silently redirects to /dashboard.
-    const service = createServiceClient()
-    const role =
-      decoded.email && decoded.email === process.env.ASTROLOGER_EMAIL
-        ? 'astrologer'
-        : 'client'
-    const { error: profileError } = await service
-      .from('profiles')
-      .upsert({ id: decoded.uid, role, name: decoded.name ?? null }, { onConflict: 'id' })
-    if (profileError) {
-      console.error('[session] profile upsert failed', profileError)
-      return NextResponse.json({ error: 'profile sync failed' }, { status: 500 })
-    }
-
-    const sessionCookie = await createSessionCookie(idToken, SESSION_DURATION_MS)
-    const response = NextResponse.json({ ok: true })
-    response.cookies.set('__session', sessionCookie, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: SESSION_DURATION_MS / 1000,
-      path: '/',
-    })
-    return response
+    decoded = await adminAuth.verifyIdToken(idToken)
   } catch {
     return NextResponse.json({ error: 'invalid token' }, { status: 401 })
   }
+
+  // Sync / look up the Supabase profile row for this Firebase UID. The role +
+  // status columns gate sign-in: a row with status != 'active' is refused.
+  const service = createServiceClient()
+  const { data: existing } = await service
+    .from('profiles')
+    .select('id, role, status')
+    .eq('id', decoded.uid)
+    .single<{ id: string; role: 'super_admin' | 'client'; status: 'pending' | 'active' | 'disabled' }>()
+
+  if (existing) {
+    if (existing.status !== 'active') {
+      return NextResponse.json({ error: 'account_inactive' }, { status: 403 })
+    }
+  } else {
+    // First sign-in via this Firebase UID — create the profile row. The seed
+    // super-admin is provisioned via migration; everyone else lands as a
+    // status='active' client unless created via the admin module.
+    const role =
+      decoded.email && decoded.email === process.env.SUPER_ADMIN_EMAIL
+        ? 'super_admin'
+        : 'client'
+    const { error: insertError } = await service.from('profiles').insert({
+      id: decoded.uid,
+      role,
+      status: 'active',
+      name: decoded.name ?? null,
+      email: decoded.email ?? null,
+    })
+    if (insertError) {
+      console.error('[session] profile insert failed', insertError)
+      return NextResponse.json({ error: 'profile sync failed' }, { status: 500 })
+    }
+  }
+
+  const sessionCookie = await createSessionCookie(idToken, SESSION_DURATION_MS)
+  const response = NextResponse.json({ ok: true })
+  response.cookies.set('__session', sessionCookie, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: SESSION_DURATION_MS / 1000,
+    path: '/',
+  })
+  return response
 }
 
 export async function DELETE() {

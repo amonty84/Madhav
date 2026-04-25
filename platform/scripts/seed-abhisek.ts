@@ -4,7 +4,7 @@
  * Prerequisites:
  *   1. Supabase project deployed with 001_initial_schema.sql applied
  *   2. chart-documents Storage bucket created (private)
- *   3. Abhisek signed up at ASTROLOGER_EMAIL so his profile has role='astrologer'
+ *   3. Abhisek signed up at SUPER_ADMIN_EMAIL so his profile has role='super_admin'
  *   4. .env.local populated with real keys
  *
  * Run:
@@ -159,36 +159,36 @@ const DOCUMENT_MAP: Array<{
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function getAstrologerClientId(): Promise<string> {
-  const astrologerEmail = process.env.ASTROLOGER_EMAIL
-  if (!astrologerEmail) throw new Error('ASTROLOGER_EMAIL not set')
+  const superAdminEmail = process.env.SUPER_ADMIN_EMAIL
+  if (!superAdminEmail) throw new Error('SUPER_ADMIN_EMAIL not set')
 
   const { data: users, error } = await supabase.auth.admin.listUsers()
   if (error) throw new Error(`Failed to list users: ${error.message}`)
 
-  let user = users.users.find(u => u.email === astrologerEmail)
+  let user = users.users.find(u => u.email === superAdminEmail)
 
   if (!user) {
-    console.log(`  Creating auth user for ${astrologerEmail}…`)
+    console.log(`  Creating auth user for ${superAdminEmail}…`)
     const { data: created, error: createError } = await supabase.auth.admin.createUser({
-      email: astrologerEmail,
+      email: superAdminEmail,
       email_confirm: true,
       user_metadata: { full_name: 'Abhisek Mohanty' },
     })
     if (createError || !created.user) {
-      throw new Error(`Failed to create astrologer user: ${createError?.message}`)
+      throw new Error(`Failed to create super-admin user: ${createError?.message}`)
     }
     user = created.user
     console.log(`  ✓ Auth user created: ${user.id}`)
   }
 
-  // Upsert profile with role='astrologer' — handles both first-run and re-run.
-  // The trigger may assign 'client' role if app.astrologer_email isn't set,
+  // Upsert profile with role='super_admin' — handles both first-run and re-run.
+  // The trigger may assign 'client' role if app.super_admin_email isn't set,
   // so we always force the correct role here.
   const { error: profileError } = await supabase
     .from('profiles')
-    .upsert({ id: user.id, role: 'astrologer', name: 'Abhisek Mohanty' }, { onConflict: 'id' })
+    .upsert({ id: user.id, role: 'super_admin', name: 'Abhisek Mohanty' }, { onConflict: 'id' })
 
-  if (profileError) throw new Error(`Failed to upsert astrologer profile: ${profileError.message}`)
+  if (profileError) throw new Error(`Failed to upsert super-admin profile: ${profileError.message}`)
 
   console.log(`✓ Astrologer profile ready: ${user.id}`)
   return user.id

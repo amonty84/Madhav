@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   if (!chart) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const { data: profile } = await service.from('profiles').select('role').eq('id', user.uid).single()
-  if (profile?.role !== 'astrologer' && chart.client_id !== user.uid) {
+  if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 

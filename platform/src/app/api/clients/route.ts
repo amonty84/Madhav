@@ -2,17 +2,17 @@ import { getServerUser, adminAuth } from '@/lib/firebase/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
-async function requireAstrologer() {
+async function requireSuperAdmin() {
   const user = await getServerUser()
   if (!user) return null
   const service = createServiceClient()
   const { data: prof } = await service.from('profiles').select('role').eq('id', user.uid).single()
-  if (prof?.role !== 'astrologer') return null
+  if (prof?.role !== 'super_admin') return null
   return user
 }
 
 export async function GET() {
-  const user = await requireAstrologer()
+  const user = await requireSuperAdmin()
   if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
 
   const supabase = createServiceClient()
@@ -26,7 +26,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const user = await requireAstrologer()
+  const user = await requireSuperAdmin()
   if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
 
   const body = await request.json()
