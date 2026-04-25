@@ -3,7 +3,9 @@ document: AM-JIS MACRO PLAN — STRATEGIC ARC
 project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 1.0
-status: ORIENTATION DOCUMENT — defines the full project arc across macro-phases
+status: SUPERSEDED by MACRO_PLAN_v2_0.md (closed 2026-04-23 at Step 5 of the Step 0→15 governance rebuild)
+superseded_by: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+superseded_on: 2026-04-23
 author: Abhisek Mohanty (native, project owner)
 date: 2026-04-23
 purpose: >
@@ -24,7 +26,14 @@ changelog:
   - v1.0 (2026-04-23): Initial macro plan establishing ten macro-phase arc and
     cross-cutting Learning Layer substrate. Introduced to prevent session-level
     scope drift in M2 work.
+  - SUPERSEDED 2026-04-23 at Step 5 of the Step 0→15 governance rebuild.
+    Successor: MACRO_PLAN_v2_0.md (architectural revision per
+    MACRO_PLAN_REVISION_SPEC_v1_0.md; red-team verdict PASS_WITH_FIXES per
+    MACRO_PLAN_REDTEAM_v1_0.md). Content below retained for historical
+    reference only — do not cite as current.
 ---
+
+> **⚠ SUPERSEDED** — This file is historical. The current Macro Plan is **`MACRO_PLAN_v2_0.md`** (published 2026-04-23 at Step 5 of the Step 0→15 governance rebuild). v2.0 is an architectural revision: per-phase schema (entry/exit/dependencies/risks/quality gate), System Integrity Substrate (IS.1–IS.9) parallel to the Learning Layer, Mirror Discipline per native directive ND.1, plus Ethical Framework / External Dependency Graph / Meta-Governance / Multi-Agent Collaboration / Post-M10 Framing. Read v2.0 for any current work. v1.0 content below is retained for lineage tracing only — it is **not authoritative**.
 
 # AM-JIS Macro Plan — Strategic Arc v1.0
 

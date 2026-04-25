@@ -2,12 +2,13 @@
 
 **Status:** APPROVED FOR EXECUTION — Phase B.0 pending start.
 **Supersedes:** `twinkly-puzzling-quokka.md` (session-scoped draft), v2 draft (scope-only), v1 (query-primary).
-**Macro-phase context:** M2 (Corpus Activation) of M1–M10 arc per `00_ARCHITECTURE/MACRO_PLAN_v1_0.md`.
+**Macro-phase context:** M2 (Corpus Activation) of M1–M10 arc per `00_ARCHITECTURE/MACRO_PLAN_v2_0.md`.
 **Plan Owner:** Abhisek Mohanty
 **Date:** 2026-04-23
-**Version:** 1.0.2
+**Version:** 1.0.3
 
 ## Changelog
+- **2026-04-24 v1.0.3**: WARN items 2/3/5/7 amendment cycle. Stale MACRO_PLAN v1.0 pointer → v2.0; stale PROJECT_ARCHITECTURE pointer → v2.2; B.0 scope refresh per ONGOING_HYGIENE_POLICIES §I; remaining WARN items resolved. No substantive content changes. Prepared by Cowork; executed by Claude Code (Madhav 16).
 - **2026-04-23 v1.0.2**: Applied reconciler-pass amendments (PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md). BLOCK remediations: (1) B.0 Task 1 and acceptance criterion updated to target `MSR_v3_0.md` (not `v2_0`); archive of `MSR_v1_0` and `MSR_v2_0` added as B.0 sub-task. (2) B.1 Task 1.5 inserted: implement and meta-test p1/p2/p5 validators before B.2 begins. (3) B.2 Chunker Specification subsection added — 6 doc-types with boundary rules. Selected ESCALATE remediations: §E.6 validator rows augmented with detection-mechanism and structural-limitation notes; §E.7 buffer raised to +75% (~$315 budget); B.0 augmented with Tasks 12–14 (chunker_spec, prompt_registry.py, golden query sets) and baseline_edge_count.json; B.3 index-time halt policy added; B.3.5 CGM edge-proposal prompt and Gemini response-file storage added; B.5 Task 0 added (prediction_ledger.py + P8 extension before mining), acceptance-rate monitoring and mid-phase sanity eval added; B.7 router availability fallback added; §H P6 degraded-mode and P7 significance-scoring mechanism documented; §J two new risk rows; §K manifest updated.
 - **2026-04-23 v1.0.1**: Integrated Gemini corrective pass-1. Replaced §E.3 (JSON-canonical storage model + V-shift1-drift active validator), §E.5 (two-pass table with Contradictions, Reconciliations, and Retrieval-bundles rows), §E.7 (actor × phase cost matrix, grand total $140.09, budget ~$210.14), §G Phase B.0 Task 1 (GAP_13_RESOLUTION target file + verifiable delta + acceptance criterion). Arithmetic verified.
 - **2026-04-23 v1.0.0**: Promoted from session-scoped draft. Un-gated execution based on GAP.13 (8-karaka) and directory numbering (`035_DISCOVERY_LAYER`) resolutions.
@@ -1002,7 +1003,7 @@ Discovery Layer (additional):
 7. Staleness Register complete; zero validated discovery entries depend exclusively on stale L3.
 8. `CGM_v9_0.md` current and principle-compliant.
 9. `RAG_READINESS_REPORT_v1_0.md` signed off by native.
-10. `SESSION_LOG.md` reflects M2 closure; `MACRO_PLAN_v1_0.md` "current macro-phase" advanceable to M3.
+10. `SESSION_LOG.md` reflects M2 closure; `MACRO_PLAN_v2_0.md` "current macro-phase" advanceable to M3.
 
 Native's acharya-grade review on 10 self-chosen questions is the final gate. Anything reading as generic astrology fails sign-off.
 

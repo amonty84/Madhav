@@ -7434,6 +7434,7 @@ SIG.MSR.320:
   confidence: 0.83
   v6_ids_consumed: [PLN.MARS, HSE.7, JMN.PK]
   rpt_deep_dive: "MATRIX_PLANETS (Mars PK); EVT.2022.01.03.01"
+  tags: ["7-karaka-alternative"]
 
 SIG.MSR.321:
   signal_name: "Jaimini — Jupiter as Gnatri Karaka (GK): Relatives/Community Significator = Own-Sign 9H"
@@ -10116,6 +10117,7 @@ SIG.MSR.432:
   confidence: 0.75
   v6_ids_consumed: [D9.MOON, D9.RAHU, KRK.C.AK]
   rpt_deep_dive: "UCN_v3_0 §XXII"
+  tags: ["7-karaka-alternative"]
 
 SIG.MSR.433:
   signal_name: "Viparita Raja Yoga Jupiter (D-9) — Success After Pressures, Others' Losses Become Native's Opportunity"
