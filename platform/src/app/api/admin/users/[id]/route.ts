@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
 
 interface PatchBody {
@@ -31,17 +31,21 @@ export async function PATCH(
     return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
   }
 
-  const updates: Record<string, unknown> = {}
+  const setClauses: string[] = []
+  const values: unknown[] = []
+  let idx = 1
 
   if (typeof body.username === 'string') {
     const username = body.username.trim().toLowerCase()
     const error = validateUsername(username)
     if (error) return NextResponse.json({ error }, { status: 400 })
-    updates.username = username
+    setClauses.push(`username=$${idx++}`)
+    values.push(username)
   }
 
   if (body.status === 'active' || body.status === 'disabled') {
-    updates.status = body.status
+    setClauses.push(`status=$${idx++}`)
+    values.push(body.status)
     try {
       await adminAuth.updateUser(id, { disabled: body.status === 'disabled' })
     } catch (err: unknown) {
@@ -50,13 +54,22 @@ export async function PATCH(
     }
   }
 
-  if (Object.keys(updates).length === 0) {
+  if (setClauses.length === 0) {
     return NextResponse.json({ error: 'Nothing to update.' }, { status: 400 })
   }
 
-  const service = createServiceClient()
-  const { error } = await service.from('profiles').update(updates).eq('id', id)
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  setClauses.push(`updated_at=now()`)
+  values.push(id)
+
+  try {
+    await query(
+      `UPDATE profiles SET ${setClauses.join(', ')} WHERE id=$${idx}`,
+      values
+    )
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Update failed.'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 
   return NextResponse.json({ ok: true })
 }
@@ -88,9 +101,12 @@ export async function DELETE(
     }
   }
 
-  const service = createServiceClient()
-  const { error } = await service.from('profiles').delete().eq('id', id)
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  try {
+    await query('DELETE FROM profiles WHERE id=$1', [id])
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Delete failed.'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 
   return NextResponse.json({ ok: true })
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import type { Report } from '@/lib/supabase/types'
+import type { Report } from '@/lib/db/types'
 
 interface Props {
   reports: Report[]

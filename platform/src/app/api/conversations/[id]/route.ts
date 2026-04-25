@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import {
   deleteConversation,
   getConversation,
@@ -9,9 +9,11 @@ import {
 } from '@/lib/conversations'
 
 async function resolveAccess(userId: string) {
-  const service = createServiceClient()
-  const { data: profile } = await service.from('profiles').select('role').eq('id', userId).single()
-  return profile?.role === 'super_admin'
+  const result = await query<{ role: string }>(
+    'SELECT role FROM profiles WHERE id=$1',
+    [userId]
+  )
+  return result.rows[0]?.role === 'super_admin'
 }
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {

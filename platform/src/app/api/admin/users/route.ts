@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -17,14 +17,24 @@ export async function GET() {
   const auth = await requireSuperAdmin()
   if (auth instanceof NextResponse) return auth
 
-  const service = createServiceClient()
-  const { data, error } = await service
-    .from('profiles')
-    .select('id, role, status, name, username, email, created_at, approved_at')
-    .order('created_at', { ascending: false })
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ users: data ?? [] })
+  try {
+    const { rows } = await query<{
+      id: string
+      role: string
+      status: string
+      name: string | null
+      username: string | null
+      email: string | null
+      created_at: string
+      approved_at: string | null
+    }>(
+      'SELECT id, role, status, name, username, email, created_at, approved_at FROM profiles ORDER BY created_at DESC'
+    )
+    return NextResponse.json({ users: rows })
+  } catch (err) {
+    console.error('[admin/users] GET failed', err)
+    return NextResponse.json({ error: 'Failed to load users.' }, { status: 500 })
+  }
 }
 
 export async function POST(request: Request) {
@@ -52,14 +62,12 @@ export async function POST(request: Request) {
   const usernameError = validateUsername(username)
   if (usernameError) return NextResponse.json({ error: usernameError }, { status: 400 })
 
-  const service = createServiceClient()
-
-  const { data: dup } = await service
-    .from('profiles')
-    .select('id')
-    .or(`email.ilike.${email},username.ilike.${username}`)
-    .maybeSingle()
-  if (dup) {
+  // Duplicate email/username check
+  const { rows: dupRows } = await query<{ id: string }>(
+    'SELECT id FROM profiles WHERE lower(email)=lower($1) OR lower(username)=lower($2) LIMIT 1',
+    [email, username]
+  )
+  if (dupRows.length > 0) {
     return NextResponse.json(
       { error: 'A user with that email or username already exists.' },
       { status: 409 },
@@ -79,21 +87,16 @@ export async function POST(request: Request) {
   }
 
   const uid = firebaseUser.uid
-  const { error: insertError } = await service.from('profiles').insert({
-    id: uid,
-    role,
-    status: 'active',
-    name: fullName,
-    username,
-    email,
-    approved_at: new Date().toISOString(),
-    approved_by: auth.user.uid,
-  })
-  if (insertError) {
+  try {
+    const { rows: inserted } = await query(
+      'INSERT INTO profiles (id, role, status, name, username, email, approved_at, approved_by) VALUES ($1,$2,$3,$4,$5,$6,now(),$7) RETURNING *',
+      [uid, role, 'active', fullName, username, email, auth.user.uid]
+    )
+    const resetLink = await adminAuth.generatePasswordResetLink(email).catch(() => null)
+    return NextResponse.json({ ok: true, user_id: uid, reset_link: resetLink, user: inserted[0] })
+  } catch (err) {
     await adminAuth.deleteUser(uid).catch(() => {})
-    return NextResponse.json({ error: insertError.message }, { status: 500 })
+    const message = err instanceof Error ? err.message : 'Could not create profile.'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
-
-  const resetLink = await adminAuth.generatePasswordResetLink(email).catch(() => null)
-  return NextResponse.json({ ok: true, user_id: uid, reset_link: resetLink })
 }

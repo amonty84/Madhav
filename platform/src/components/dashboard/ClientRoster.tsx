@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ClientCard } from './ClientCard'
-import type { Chart } from '@/lib/supabase/types'
+import type { Chart } from '@/lib/db/types'
 
 interface Props {
   charts: (Chart & { pyramidPercent: number })[]

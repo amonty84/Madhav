@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
+import { chatBucket, gcsSignedUpload } from '@/lib/storage/client'
 
-const BUCKET = 'chat-attachments'
 const MAX_BYTES = 30 * 1024 * 1024 // 30 MB
 const ALLOWED_MIME_PREFIXES = ['image/']
 const ALLOWED_MIMES = ['application/pdf']
-const URL_TTL_SECONDS = 60 * 60 * 24 * 7 // 7 days
 
 function isAllowedMime(mime: string): boolean {
   if (ALLOWED_MIMES.includes(mime)) return true
@@ -44,35 +43,27 @@ export async function POST(request: Request) {
 
   const ext = file.name.includes('.') ? file.name.split('.').pop() : null
   const safeExt = ext && /^[a-z0-9]{1,8}$/i.test(ext) ? `.${ext.toLowerCase()}` : ''
-  const key = `${user.uid}/${crypto.randomUUID()}${safeExt}`
+  const storagePath = `${user.uid}/${crypto.randomUUID()}${safeExt}`
 
-  const service = createServiceClient()
-  const { error: upErr } = await service.storage
-    .from(BUCKET)
-    .upload(key, file, { contentType: mime, upsert: false })
-  if (upErr) {
-    return NextResponse.json({ error: upErr.message }, { status: 500 })
-  }
-
-  const { data: signed, error: urlErr } = await service.storage
-    .from(BUCKET)
-    .createSignedUrl(key, URL_TTL_SECONDS)
-  if (urlErr || !signed) {
-    return NextResponse.json({ error: urlErr?.message ?? 'failed to sign url' }, { status: 500 })
+  let uploadUrl: string
+  try {
+    uploadUrl = await gcsSignedUpload(chatBucket(), storagePath, mime)
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'failed to create upload URL'
+    return NextResponse.json({ error: msg }, { status: 500 })
   }
 
   // Persist metadata so we can re-sign later if the URL expires. conversation_id
   // and message_id are nullable — the upload happens before the message is sent.
-  await service.from('chat_attachments').insert({
-    user_id: user.uid,
-    storage_path: key,
-    mime,
-    size_bytes: file.size,
-  })
+  const { rows } = await query<{ id: string }>(
+    'INSERT INTO chat_attachments (user_id, storage_path, mime, size_bytes) VALUES ($1,$2,$3,$4) RETURNING id',
+    [user.uid, storagePath, mime, file.size]
+  )
 
   return NextResponse.json({
-    url: signed.signedUrl,
-    storagePath: key,
+    id: rows[0]?.id,
+    uploadUrl,
+    storagePath,
     mime,
     filename: file.name,
     size: file.size,
