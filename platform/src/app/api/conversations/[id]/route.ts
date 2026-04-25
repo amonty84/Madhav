@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import {
   deleteConversation,
   getConversation,
@@ -15,12 +16,11 @@ async function resolveAccess(userId: string) {
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const messages = await loadConversationMessages(id)
@@ -29,12 +29,11 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
 
 export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   let body: { title?: string }
@@ -55,12 +54,11 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   await deleteConversation(id)

@@ -1,45 +1,50 @@
-import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function proxy(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          )
-          supabaseResponse = NextResponse.next({ request })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  const { data: { user } } = await supabase.auth.getUser()
-
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-  const isPublicRoute = request.nextUrl.pathname === '/'
-
-  if (!user && !isAuthRoute && !isPublicRoute) {
-    if (request.nextUrl.pathname.startsWith('/api/')) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
-    }
-    const redirect = NextResponse.redirect(new URL('/login', request.url))
-    supabaseResponse.cookies.getAll().forEach((c) =>
-      redirect.cookies.set(c.name, c.value)
+// Lightweight JWT payload parse — no crypto. Real verification happens in each
+// route handler via firebase-admin (Node.js runtime). Middleware only gates
+// redirects; cryptographic enforcement is at the route layer.
+function parseJwtPayload(token: string): Record<string, unknown> | null {
+  try {
+    const segment = token.split('.')[1]
+    if (!segment) return null
+    const padded = segment.replace(/-/g, '+').replace(/_/g, '/').padEnd(
+      segment.length + ((4 - (segment.length % 4)) % 4),
+      '='
     )
-    return redirect
+    return JSON.parse(atob(padded)) as Record<string, unknown>
+  } catch {
+    return null
+  }
+}
+
+function isSessionValid(sessionCookie: string | undefined): boolean {
+  if (!sessionCookie) return false
+  const payload = parseJwtPayload(sessionCookie)
+  if (!payload) return false
+  return (
+    typeof payload.exp === 'number' &&
+    payload.exp * 1000 > Date.now() &&
+    typeof payload.iss === 'string' &&
+    payload.iss.includes('session.firebase.google.com')
+  )
+}
+
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  const isAuthRoute = pathname.startsWith('/login')
+  const isPublicRoute = pathname === '/'
+
+  if (!isAuthRoute && !isPublicRoute) {
+    const sessionCookie = request.cookies.get('__session')?.value
+    if (!isSessionValid(sessionCookie)) {
+      if (pathname.startsWith('/api/')) {
+        return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+      }
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
   }
 
-  return supabaseResponse
+  return NextResponse.next({ request })
 }
 
 export const config = {

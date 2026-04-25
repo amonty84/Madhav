@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { getConversation } from '@/lib/conversations'
 
 async function resolveAccess(userId: string) {
@@ -19,12 +20,11 @@ function generateSlug(): string {
 
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()
@@ -42,12 +42,11 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
 
 export async function POST(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()
@@ -66,7 +65,7 @@ export async function POST(_req: Request, ctx: { params: Promise<{ id: string }>
   const { error } = await service.from('conversation_shares').insert({
     conversation_id: id,
     slug,
-    created_by: user.id,
+    created_by: user.uid,
   })
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
@@ -75,12 +74,11 @@ export async function POST(_req: Request, ctx: { params: Promise<{ id: string }>
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.id)
-  const conv = await getConversation({ id, userId: user.id, isAstrologer })
+  const isAstrologer = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()

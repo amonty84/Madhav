@@ -1,4 +1,5 @@
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
 export async function GET(
@@ -7,18 +8,17 @@ export async function GET(
 ) {
   const { chartId, domain } = await params
 
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   const service = createServiceClient()
   const [{ data: chart }, { data: profile }] = await Promise.all([
     service.from('charts').select('client_id').eq('id', chartId).single(),
-    service.from('profiles').select('role').eq('id', user.id).single(),
+    service.from('profiles').select('role').eq('id', user.uid).single(),
   ])
 
   if (!chart) return NextResponse.json({ error: 'not found' }, { status: 404 })
-  if (profile?.role !== 'astrologer' && chart.client_id !== user.id) {
+  if (profile?.role !== 'astrologer' && chart.client_id !== user.uid) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 

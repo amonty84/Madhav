@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
 import { NextResponse } from 'next/server'
 
 const SIDECAR_URL = process.env.PYTHON_SIDECAR_URL ?? 'http://localhost:8000'
@@ -8,8 +8,7 @@ export async function POST(
   request: Request,
   { params }: { params: Promise<{ type: string }> }
 ) {
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   const { type } = await params

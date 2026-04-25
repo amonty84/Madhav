@@ -1,16 +1,17 @@
 import { streamText, stepCountIs } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import { NextResponse } from 'next/server'
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { buildTools } from '@/lib/claude/build-tools'
 import { buildSystemPrompt } from '@/lib/claude/system-prompts'
 import type { ModelMessage } from 'ai'
 
 async function requireAstrologer() {
-  const sb = await createClient()
-  const { data: { user } } = await sb.auth.getUser()
+  const user = await getServerUser()
   if (!user) return null
-  const { data: prof } = await sb.from('profiles').select('role').eq('id', user.id).single()
+  const service = createServiceClient()
+  const { data: prof } = await service.from('profiles').select('role').eq('id', user.uid).single()
   if (prof?.role !== 'astrologer') return null
   return user
 }

@@ -1,34 +1,34 @@
-import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { getServerUser } from '@/lib/firebase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { ClientRoster } from '@/components/dashboard/ClientRoster'
 import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getServerUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const service = createServiceClient()
+
+  const { data: profile } = await service
     .from('profiles')
     .select('role')
-    .eq('id', user.id)
+    .eq('id', user.uid)
     .single()
 
   // Clients go directly to their Consume view
   if (profile?.role === 'client') {
-    const service = createServiceClient()
     const { data: chart } = await service
       .from('charts')
       .select('id')
-      .eq('client_id', user.id)
+      .eq('client_id', user.uid)
       .single()
     if (chart) redirect(`/clients/${chart.id}/consume`)
     redirect('/login')
   }
 
   // Astrologer: fetch all charts with pyramid completion
-  const service = createServiceClient()
   const { data: charts } = await service
     .from('charts')
     .select('*')

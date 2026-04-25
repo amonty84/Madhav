@@ -1,7 +1,8 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { auth } from '@/lib/firebase/client'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,38 +15,29 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const supabase = useMemo(() => createClient(), [])
   const router = useRouter()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
-
-    if (mode === 'signin') {
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) {
-        toast.error(error.message)
-        setLoading(false)
-      } else {
-        router.push('/dashboard')
-        router.refresh()
-      }
-    } else {
-      const { error } = await supabase.auth.signUp({ email, password })
-      if (error) {
-        toast.error(error.message)
-        setLoading(false)
-      } else {
-        toast.success('Account created — signing you in…')
-        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
-        if (signInError) {
-          toast.error(signInError.message)
-          setLoading(false)
-        } else {
-          router.push('/dashboard')
-          router.refresh()
-        }
-      }
+    try {
+      const credential =
+        mode === 'signin'
+          ? await signInWithEmailAndPassword(auth, email, password)
+          : await createUserWithEmailAndPassword(auth, email, password)
+      const idToken = await credential.user.getIdToken()
+      const res = await fetch('/api/auth/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      })
+      if (!res.ok) throw new Error('Session creation failed')
+      router.push('/dashboard')
+      router.refresh()
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Authentication failed'
+      toast.error(message)
+      setLoading(false)
     }
   }
 
