@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
-import type { Report } from '@/lib/supabase/types'
+import type { Report } from '@/lib/db/types'
 import { cn } from '@/lib/utils'
 
 function getTimeOfDay(hour: number): string {

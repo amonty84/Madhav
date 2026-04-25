@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
 
 interface ApproveBody {
@@ -37,26 +37,23 @@ export async function POST(
 
   const role = body.role === 'super_admin' ? 'super_admin' : 'client'
 
-  const service = createServiceClient()
-
   // 1. Load the request row.
-  const { data: req } = await service
-    .from('access_requests')
-    .select('id, full_name, email, status')
-    .eq('id', id)
-    .single<RequestRow>()
+  const { rows: reqRows } = await query<RequestRow>(
+    'SELECT id, full_name, email, status FROM access_requests WHERE id=$1',
+    [id]
+  )
+  const req = reqRows[0] ?? null
   if (!req) return NextResponse.json({ error: 'not_found' }, { status: 404 })
   if (req.status !== 'pending') {
     return NextResponse.json({ error: 'Request is not pending.' }, { status: 409 })
   }
 
   // 2. Username uniqueness pre-check (the unique index will enforce too).
-  const { data: dupUsername } = await service
-    .from('profiles')
-    .select('id')
-    .ilike('username', username)
-    .maybeSingle()
-  if (dupUsername) {
+  const { rows: dupRows } = await query<{ id: string }>(
+    'SELECT id FROM profiles WHERE lower(username)=lower($1) LIMIT 1',
+    [username]
+  )
+  if (dupRows.length > 0) {
     return NextResponse.json({ error: 'Username is already taken.' }, { status: 409 })
   }
 
@@ -75,35 +72,32 @@ export async function POST(
 
   // 4. Insert profile row. On conflict, roll back the Firebase user.
   const uid = firebaseUser.uid
-  const { error: insertError } = await service.from('profiles').insert({
-    id: uid,
-    role,
-    status: 'active',
-    name: req.full_name,
-    username,
-    email: req.email,
-    approved_at: new Date().toISOString(),
-    approved_by: auth.user.uid,
-  })
-  if (insertError) {
+  try {
+    await query(
+      'INSERT INTO profiles (id, role, status, name, username, email, approved_at, approved_by) VALUES ($1,\'client\',\'active\',$2,$3,$4,now(),$5) ON CONFLICT (id) DO NOTHING',
+      [uid, req.full_name, username, req.email, auth.user.uid]
+    )
+    // Override role if super_admin was requested
+    if (role === 'super_admin') {
+      await query('UPDATE profiles SET role=$1 WHERE id=$2', ['super_admin', uid])
+    }
+  } catch (err) {
     await adminAuth.deleteUser(uid).catch(() => {})
-    return NextResponse.json({ error: insertError.message }, { status: 500 })
+    const message = err instanceof Error ? err.message : 'Could not create profile.'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 
   // 5. Mark the request approved.
-  const { error: updateError } = await service
-    .from('access_requests')
-    .update({
-      status: 'approved',
-      reviewed_at: new Date().toISOString(),
-      reviewed_by: auth.user.uid,
-      approved_user_id: uid,
-    })
-    .eq('id', id)
-  if (updateError) console.error('[approve] could not mark request approved', updateError)
+  try {
+    await query(
+      'UPDATE access_requests SET status=\'approved\', reviewed_at=now(), reviewed_by=$1, approved_user_id=$2 WHERE id=$3',
+      [auth.user.uid, uid, id]
+    )
+  } catch (err) {
+    console.error('[approve] could not mark request approved', err)
+  }
 
-  // 6. Generate a password-reset link. The link itself is returned to the
-  // admin UI for copy-paste OR to be sent via SMTP (out of scope for v1).
+  // 6. Generate a password-reset link.
   const resetLink = await adminAuth
     .generatePasswordResetLink(req.email)
     .catch(() => null)

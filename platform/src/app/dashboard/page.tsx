@@ -1,51 +1,56 @@
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { ClientRoster } from '@/components/dashboard/ClientRoster'
 import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import type { Chart } from '@/lib/db/types'
 
 export default async function DashboardPage() {
   const user = await getServerUser()
   if (!user) redirect('/login')
 
-  const service = createServiceClient()
-
-  const { data: profile } = await service
-    .from('profiles')
-    .select('role')
-    .eq('id', user.uid)
-    .single()
+  const profileResult = await query(
+    'SELECT id, role, name, username, email, status FROM profiles WHERE id=$1',
+    [user.uid]
+  )
+  const profile = (profileResult.rows[0] ?? null) as { id: string; role: string } | null
 
   // Clients go directly to their Consume view
   if (profile?.role === 'client') {
-    const { data: chart } = await service
-      .from('charts')
-      .select('id')
-      .eq('client_id', user.uid)
-      .single()
+    const chartResult = await query(
+      'SELECT * FROM charts WHERE client_id=$1 ORDER BY created_at DESC',
+      [user.uid]
+    )
+    const chart = (chartResult.rows[0] ?? null) as { id: string } | null
     if (chart) redirect(`/clients/${chart.id}/consume`)
     redirect('/login')
   }
 
   // Super-admin: fetch all charts with pyramid completion
-  const { data: charts } = await service
-    .from('charts')
-    .select('*')
-    .order('created_at', { ascending: false })
+  const chartsResult = await query(
+    'SELECT * FROM charts ORDER BY created_at DESC',
+    []
+  )
+  const charts = chartsResult.rows as unknown as Chart[]
 
-  const { data: layers } = await service
-    .from('pyramid_layers')
-    .select('chart_id, status')
+  const chartIds = charts.map((c) => c.id)
+  const layersResult = chartIds.length > 0
+    ? await query(
+        'SELECT chart_id, layer, sublayer, status FROM pyramid_layers WHERE chart_id = ANY($1::text[])',
+        [chartIds]
+      )
+    : { rows: [] }
+  const layers = layersResult.rows as unknown as { chart_id: string; status: string }[]
 
   const pyramidPercents = new Map<string, number>()
-  for (const chart of charts ?? []) {
-    const chartLayers = (layers ?? []).filter((l) => l.chart_id === chart.id)
+  for (const chart of charts) {
+    const chartLayers = layers.filter((l) => l.chart_id === chart.id)
     const complete = chartLayers.filter((l) => l.status === 'complete').length
     pyramidPercents.set(chart.id, Math.round((complete / 6) * 100))
   }
 
-  const chartsWithPercent = (charts ?? []).map((c) => ({
+  const chartsWithPercent = charts.map((c) => ({
     ...c,
     pyramidPercent: pyramidPercents.get(c.id) ?? 0,
   }))

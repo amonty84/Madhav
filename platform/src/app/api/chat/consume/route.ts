@@ -9,7 +9,7 @@ import {
 import type { ModelMessage, UIMessage } from 'ai'
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { consumeTools } from '@/lib/claude/consume-tools'
 import { consumeSystemPrompt, type ConsumeStyle } from '@/lib/claude/system-prompts'
 import {
@@ -65,25 +65,24 @@ export async function POST(request: Request) {
     ? (body.style as ConsumeStyle)
     : 'acharya'
 
-  const service = createServiceClient()
-
   const [chartResult, profileResult, reportsResult] = await Promise.all([
-    service
-      .from('charts')
-      .select('id, name, birth_date, birth_time, birth_place, client_id')
-      .eq('id', chartId)
-      .single(),
-    service.from('profiles').select('role').eq('id', user.uid).single(),
-    service
-      .from('reports')
-      .select('domain, title, version')
-      .eq('chart_id', chartId)
-      .order('domain'),
+    query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string; client_id: string }>(
+      'SELECT id, name, birth_date, birth_time, birth_place, client_id FROM charts WHERE id=$1',
+      [chartId]
+    ),
+    query<{ role: string }>(
+      'SELECT role FROM profiles WHERE id=$1',
+      [user.uid]
+    ),
+    query<{ domain: string; title: string; version: string }>(
+      'SELECT domain, title, version FROM reports WHERE chart_id=$1 ORDER BY domain',
+      [chartId]
+    ),
   ])
 
-  if (!chartResult.data) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
-  const chart = chartResult.data
-  const role = profileResult.data?.role
+  if (!chartResult.rows[0]) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
+  const chart = chartResult.rows[0]
+  const role = profileResult.rows[0]?.role
   const isSuperAdmin = role === 'super_admin'
 
   if (!isSuperAdmin && chart.client_id !== user.uid) {
@@ -111,7 +110,7 @@ export async function POST(request: Request) {
     })
   }
 
-  const systemPrompt = consumeSystemPrompt(chart, reportsResult.data ?? [], style)
+  const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style)
 
   console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  model=${modelId}  style=${style}`)
 

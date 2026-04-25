@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { listConversations } from '@/lib/conversations'
-import type { ConversationModule } from '@/lib/supabase/types'
+import type { ConversationModule } from '@/lib/db/types'
 
 export async function GET(request: Request) {
   const user = await getServerUser()

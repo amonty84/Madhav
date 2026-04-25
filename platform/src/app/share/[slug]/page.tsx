@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { loadConversationMessages } from '@/lib/conversations'
 import { SharedConversation } from './SharedConversation'
 
@@ -12,29 +12,33 @@ export default async function SharedConversationPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const service = createServiceClient()
 
-  const { data: share } = await service
-    .from('conversation_shares')
-    .select('conversation_id, revoked_at, expires_at')
-    .eq('slug', slug)
-    .maybeSingle()
+  const shareResult = await query<{
+    conversation_id: string
+    revoked_at: string | null
+    expires_at: string | null
+  }>(
+    'SELECT * FROM conversation_shares WHERE slug=$1 AND revoked_at IS NULL AND (expires_at IS NULL OR expires_at > now())',
+    [slug]
+  )
+  const share = shareResult.rows[0] ?? null
 
-  if (!share || share.revoked_at) notFound()
-  if (share.expires_at && new Date(share.expires_at) < new Date()) notFound()
+  if (!share) notFound()
 
-  const { data: conversation } = await service
-    .from('conversations')
-    .select('id, title, chart_id, created_at')
-    .eq('id', share.conversation_id)
-    .single()
+  const conversationResult = await query<{
+    id: string
+    title: string
+    chart_id: string
+    created_at: string
+  }>('SELECT * FROM conversations WHERE id=$1', [share.conversation_id])
+  const conversation = conversationResult.rows[0] ?? null
   if (!conversation) notFound()
 
-  const { data: chart } = await service
-    .from('charts')
-    .select('name')
-    .eq('id', conversation.chart_id)
-    .single()
+  const chartResult = await query<{ name: string; birth_date: string; birth_place: string }>(
+    'SELECT name, birth_date, birth_place FROM charts WHERE id=$1',
+    [conversation.chart_id]
+  )
+  const chart = chartResult.rows[0] ?? null
 
   const messages = await loadConversationMessages(conversation.id)
 

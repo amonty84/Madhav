@@ -1,6 +1,7 @@
 import { tool } from 'ai'
 import { z } from 'zod'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
+import { chartDocsBucket, gcsDownloadText, gcsUpload, gcsDelete } from '@/lib/storage/client'
 
 export const buildTools = {
   list_documents: tool({
@@ -11,15 +12,12 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, layer }) => {
       try {
-        const supabase = createServiceClient()
-        let query = supabase
-          .from('documents')
-          .select('id, name, layer, version, updated_at')
-          .eq('chart_id', chart_id)
-        if (layer) query = query.eq('layer', layer)
-        const { data, error } = await query.order('layer').order('name')
-        if (error) return { error: error.message }
-        return data ?? []
+        let sql = 'SELECT id, name, layer, version, updated_at FROM documents WHERE chart_id=$1'
+        const params: unknown[] = [chart_id]
+        if (layer) { sql += ' AND layer=$2'; params.push(layer) }
+        sql += ' ORDER BY layer, name'
+        const { rows } = await query(sql, params)
+        return rows
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }
@@ -34,22 +32,14 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, name }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: row, error: rowError } = await supabase
-          .from('documents')
-          .select('id, name, layer, version, storage_path')
-          .eq('chart_id', chart_id)
-          .eq('name', name)
-          .single()
-        if (rowError || !row) return { error: rowError?.message ?? 'Document not found' }
-
-        const { data: blob, error: storageError } = await supabase
-          .storage
-          .from('chart-documents')
-          .download(row.storage_path)
-        if (storageError || !blob) return { error: storageError?.message ?? 'Download failed' }
-
-        const content = await blob.text()
+        const { rows } = await query(
+          'SELECT id, name, layer, version, storage_path FROM documents WHERE chart_id=$1 AND name=$2',
+          [chart_id, name]
+        )
+        const row = rows[0] ?? null
+        if (!row) return { error: 'Document not found' }
+        const content = await gcsDownloadText(chartDocsBucket(), row.storage_path)
+        if (!content) return { error: 'Download failed' }
         return { name: row.name, layer: row.layer, version: row.version, content }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
@@ -67,26 +57,19 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, layer, name, content }) => {
       try {
-        const supabase = createServiceClient()
         const storage_path = `charts/${chart_id}/${layer}/${name}_v1.0.md`
-
-        const { error: uploadError } = await supabase
-          .storage
-          .from('chart-documents')
-          .upload(storage_path, content, { contentType: 'text/markdown', upsert: false })
-        if (uploadError) return { error: uploadError.message }
-
-        const { data: row, error: insertError } = await supabase
-          .from('documents')
-          .insert({ chart_id, layer, name, storage_path, version: '1.0' })
-          .select('id, name, storage_path, version')
-          .single()
-        if (insertError || !row) {
-          await supabase.storage.from('chart-documents').remove([storage_path])
-          return { error: insertError?.message ?? 'Insert failed' }
+        await gcsUpload(chartDocsBucket(), storage_path, content, 'text/markdown')
+        try {
+          const { rows } = await query(
+            'INSERT INTO documents (chart_id, layer, name, storage_path, version) VALUES ($1,$2,$3,$4,$5) RETURNING id, name, storage_path, version',
+            [chart_id, layer, name, storage_path, '1.0']
+          )
+          const row = rows[0]
+          return { id: row.id, name: row.name, storage_path: row.storage_path, version: row.version }
+        } catch (insertErr) {
+          await gcsDelete(chartDocsBucket(), storage_path)
+          return { error: insertErr instanceof Error ? insertErr.message : 'Insert failed' }
         }
-
-        return { id: row.id, name: row.name, storage_path: row.storage_path, version: row.version }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }
@@ -103,38 +86,28 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, name, content, changelog }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: row, error: rowError } = await supabase
-          .from('documents')
-          .select('id, storage_path, version')
-          .eq('chart_id', chart_id)
-          .eq('name', name)
-          .single()
-        if (rowError || !row) return { error: rowError?.message ?? 'Document not found' }
+        const { rows } = await query(
+          'SELECT id, storage_path, version FROM documents WHERE chart_id=$1 AND name=$2',
+          [chart_id, name]
+        )
+        const row = rows[0] ?? null
+        if (!row) return { error: 'Document not found' }
 
-        const oldVersion = row.version
-        const oldMajor = parseInt(oldVersion.split('.')[0], 10)
-        if (isNaN(oldMajor)) return { error: `Cannot parse version: ${oldVersion}` }
+        const oldMajor = parseInt(row.version.split('.')[0], 10)
+        if (isNaN(oldMajor)) return { error: `Cannot parse version: ${row.version}` }
         const newVersion = `${oldMajor + 1}.0`
-        const newPath = row.storage_path.replace(`_v${oldVersion}.md`, `_v${newVersion}.md`)
+        const newPath = row.storage_path.replace(`_v${row.version}.md`, `_v${newVersion}.md`)
 
         if (newPath === row.storage_path) {
           return { error: 'storage_path does not match expected version suffix pattern' }
         }
 
-        const { error: uploadError } = await supabase
-          .storage
-          .from('chart-documents')
-          .upload(newPath, content, { contentType: 'text/markdown', upsert: true })
-        if (uploadError) return { error: uploadError.message }
-
-        const { error: updateError } = await supabase
-          .from('documents')
-          .update({ storage_path: newPath, version: newVersion, updated_at: new Date().toISOString() })
-          .eq('id', row.id)
-        if (updateError) return { error: updateError.message }
-
-        return { name, old_version: oldVersion, new_version: newVersion, changelog }
+        await gcsUpload(chartDocsBucket(), newPath, content, 'text/markdown')
+        await query(
+          'UPDATE documents SET storage_path=$1, version=$2, updated_at=now() WHERE id=$3',
+          [newPath, newVersion, row.id]
+        )
+        return { name, old_version: row.version, new_version: newVersion, changelog }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }
@@ -150,37 +123,22 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, name, content }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: row, error: rowError } = await supabase
-          .from('documents')
-          .select('storage_path')
-          .eq('chart_id', chart_id)
-          .eq('name', name)
-          .single()
-        if (rowError || !row) return { error: rowError?.message ?? 'Document not found' }
+        const { rows } = await query(
+          'SELECT storage_path FROM documents WHERE chart_id=$1 AND name=$2',
+          [chart_id, name]
+        )
+        const row = rows[0] ?? null
+        if (!row) return { error: 'Document not found' }
 
-        const { data: blob, error: downloadError } = await supabase
-          .storage
-          .from('chart-documents')
-          .download(row.storage_path)
-        if (downloadError || !blob) return { error: downloadError?.message ?? 'Download failed' }
+        const existing = await gcsDownloadText(chartDocsBucket(), row.storage_path)
+        if (existing === null) return { error: 'Download failed' }
 
-        const existing = await blob.text()
         const combined = existing + '\n\n---\n\n' + content
-
-        const { error: uploadError } = await supabase
-          .storage
-          .from('chart-documents')
-          .upload(row.storage_path, combined, { contentType: 'text/markdown', upsert: true })
-        if (uploadError) return { error: uploadError.message }
-
-        const { error: updateError } = await supabase
-          .from('documents')
-          .update({ updated_at: new Date().toISOString() })
-          .eq('chart_id', chart_id)
-          .eq('name', name)
-        if (updateError) return { error: updateError.message }
-
+        await gcsUpload(chartDocsBucket(), row.storage_path, combined, 'text/markdown')
+        await query(
+          'UPDATE documents SET updated_at=now() WHERE chart_id=$1 AND name=$2',
+          [chart_id, name]
+        )
         return { name, bytes_appended: content.length }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
@@ -198,14 +156,13 @@ export const buildTools = {
     }),
     execute: async ({ chart_id, layer, sublayer, status }) => {
       try {
-        const supabase = createServiceClient()
-        const { error } = await supabase
-          .from('pyramid_layers')
-          .upsert(
-            { chart_id, layer, sublayer, status, updated_at: new Date().toISOString() },
-            { onConflict: 'chart_id,layer,sublayer' }
-          )
-        if (error) return { error: error.message }
+        await query(
+          `INSERT INTO pyramid_layers (chart_id, layer, sublayer, status, updated_at)
+           VALUES ($1,$2,$3,$4,now())
+           ON CONFLICT (chart_id, layer, sublayer) DO UPDATE
+           SET status=$4, updated_at=now()`,
+          [chart_id, layer, sublayer, status]
+        )
         return { layer, sublayer, status }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
@@ -273,25 +230,19 @@ export const buildTools = {
       name: z.string().describe('Document name to search within'),
       query: z.string().describe('Search term (case-insensitive)'),
     }),
-    execute: async ({ chart_id, name, query }) => {
+    execute: async ({ chart_id, name, query: searchQuery }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: row, error: rowError } = await supabase
-          .from('documents')
-          .select('storage_path')
-          .eq('chart_id', chart_id)
-          .eq('name', name)
-          .single()
-        if (rowError || !row) return { error: rowError?.message ?? 'Document not found' }
+        const { rows } = await query(
+          'SELECT storage_path FROM documents WHERE chart_id=$1 AND name=$2',
+          [chart_id, name]
+        )
+        const row = rows[0] ?? null
+        if (!row) return { error: 'Document not found' }
 
-        const { data: blob, error: downloadError } = await supabase
-          .storage
-          .from('chart-documents')
-          .download(row.storage_path)
-        if (downloadError || !blob) return { error: downloadError?.message ?? 'Download failed' }
+        const text = await gcsDownloadText(chartDocsBucket(), row.storage_path)
+        if (!text) return { error: 'Download failed' }
 
-        const text = await blob.text()
-        const lowerQuery = query.toLowerCase()
+        const lowerQuery = searchQuery.toLowerCase()
         const matches = text.split('\n').filter(line => line.toLowerCase().includes(lowerQuery))
         return { name, matches, total_matches: matches.length }
       } catch (e) {
@@ -307,15 +258,11 @@ export const buildTools = {
     }),
     execute: async ({ chart_id }) => {
       try {
-        const supabase = createServiceClient()
-        const { data, error } = await supabase
-          .from('pyramid_layers')
-          .select('layer, sublayer, status, version, updated_at')
-          .eq('chart_id', chart_id)
-          .order('layer')
-          .order('sublayer')
-        if (error) return { error: error.message }
-        return data ?? []
+        const { rows } = await query(
+          'SELECT layer, sublayer, status, version, updated_at FROM pyramid_layers WHERE chart_id=$1 ORDER BY layer ASC, sublayer ASC',
+          [chart_id]
+        )
+        return rows
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }

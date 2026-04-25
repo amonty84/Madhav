@@ -2,7 +2,7 @@ import 'server-only'
 import { NextResponse } from 'next/server'
 import type { DecodedIdToken } from 'firebase-admin/auth'
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 
 export interface ProfileAuth {
   id: string
@@ -10,33 +10,20 @@ export interface ProfileAuth {
   status: 'pending' | 'active' | 'disabled'
 }
 
-/**
- * Loads the current user's profile (including the post-007 columns).
- * Returns null if there is no session OR no matching profile row.
- */
 export async function getServerUserWithProfile(): Promise<
   { user: DecodedIdToken; profile: ProfileAuth } | null
 > {
   const user = await getServerUser()
   if (!user) return null
-  const service = createServiceClient()
-  const { data } = await service
-    .from('profiles')
-    .select('id, role, status')
-    .eq('id', user.uid)
-    .single<ProfileAuth>()
-  if (!data) return null
-  return { user, profile: data }
+  const { rows } = await query<ProfileAuth>(
+    'SELECT id, role, status FROM profiles WHERE id=$1',
+    [user.uid]
+  )
+  const profile = rows[0] ?? null
+  if (!profile) return null
+  return { user, profile }
 }
 
-/**
- * Route-handler helper. Returns either a `NextResponse` to bail out with,
- * or `{ user, profile }` for the super-admin caller. Use:
- *
- *   const result = await requireSuperAdmin()
- *   if (result instanceof NextResponse) return result
- *   const { user, profile } = result
- */
 export async function requireSuperAdmin(): Promise<
   NextResponse | { user: DecodedIdToken; profile: ProfileAuth }
 > {

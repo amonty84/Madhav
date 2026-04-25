@@ -1,12 +1,10 @@
 import { tool } from 'ai'
 import { z } from 'zod'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
+import { chartDocsBucket, gcsDownloadText } from '@/lib/storage/client'
 
 async function readDocumentContent(storage_path: string): Promise<string | null> {
-  const supabase = createServiceClient()
-  const { data: blob, error } = await supabase.storage.from('chart-documents').download(storage_path)
-  if (error || !blob) return null
-  return blob.text()
+  return gcsDownloadText(chartDocsBucket(), storage_path)
 }
 
 export const consumeTools = {
@@ -17,13 +15,12 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id }) => {
       try {
-        const supabase = createServiceClient()
-        const { data, error } = await supabase
-          .from('charts')
-          .select('name, birth_date, birth_time, birth_place, birth_lat, birth_lng, ayanamsa, house_system')
-          .eq('id', chart_id)
-          .single()
-        if (error || !data) return { error: error?.message ?? 'Chart not found' }
+        const { rows } = await query(
+          'SELECT name, birth_date, birth_time, birth_place, birth_lat, birth_lng, ayanamsa, house_system FROM charts WHERE id=$1',
+          [chart_id]
+        )
+        const data = rows[0] ?? null
+        if (!data) return { error: 'Chart not found' }
         return data
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
@@ -39,13 +36,12 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id, divisional = 'D1' }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: chart, error } = await supabase
-          .from('charts')
-          .select('birth_date, birth_time, birth_lat, birth_lng')
-          .eq('id', chart_id)
-          .single()
-        if (error || !chart) return { error: error?.message ?? 'Chart not found' }
+        const { rows } = await query(
+          'SELECT birth_date, birth_time, birth_lat, birth_lng FROM charts WHERE id=$1',
+          [chart_id]
+        )
+        const chart = rows[0] ?? null
+        if (!chart) return { error: 'Chart not found' }
 
         if (!chart.birth_lat || !chart.birth_lng) {
           return { error: 'Chart is missing birth coordinates required for ephemeris calculation' }
@@ -81,30 +77,20 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id, date }) => {
       try {
-        const supabase = createServiceClient()
-        // Dasha periods are recorded in the L1 factual data document
-        const { data: doc, error } = await supabase
-          .from('documents')
-          .select('storage_path')
-          .eq('chart_id', chart_id)
-          .eq('layer', 'L1')
-          .ilike('name', '%forensic%')
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .single()
-
-        if (error || !doc) {
+        const { rows } = await query(
+          "SELECT storage_path FROM documents WHERE chart_id=$1 AND layer='L1' AND lower(name) LIKE '%forensic%' ORDER BY updated_at DESC LIMIT 1",
+          [chart_id]
+        )
+        const doc = rows[0] ?? null
+        if (!doc) {
           return { error: 'L1 factual data not found. Build the pyramid first.', date }
         }
 
         const content = await readDocumentContent(doc.storage_path)
         if (!content) return { error: 'Failed to read L1 document' }
 
-        // Return the raw document excerpt around dasha-related content
         const lines = content.split('\n')
-        const dashaLines = lines.filter(l =>
-          /dasha|antar|mahadasha|bhukti/i.test(l)
-        )
+        const dashaLines = lines.filter(l => /dasha|antar|mahadasha|bhukti/i.test(l))
         return {
           date,
           source: 'L1 factual data',
@@ -125,15 +111,12 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id, layer, name }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: row, error } = await supabase
-          .from('documents')
-          .select('name, layer, version, storage_path')
-          .eq('chart_id', chart_id)
-          .eq('layer', layer)
-          .eq('name', name)
-          .single()
-        if (error || !row) return { error: error?.message ?? `Document "${name}" not found in layer ${layer}` }
+        const { rows } = await query(
+          'SELECT name, layer, version, storage_path FROM documents WHERE chart_id=$1 AND layer=$2 AND name=$3',
+          [chart_id, layer, name]
+        )
+        const row = rows[0] ?? null
+        if (!row) return { error: `Document "${name}" not found in layer ${layer}` }
 
         const content = await readDocumentContent(row.storage_path)
         if (!content) return { error: 'Failed to download document from storage' }
@@ -151,19 +134,17 @@ export const consumeTools = {
       chart_id: z.string().describe('The chart UUID'),
       query: z.string().describe('Search term (case-insensitive)'),
     }),
-    execute: async ({ chart_id, query }) => {
+    execute: async ({ chart_id, query: searchQuery }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: docs, error } = await supabase
-          .from('documents')
-          .select('name, layer, storage_path')
-          .eq('chart_id', chart_id)
-        if (error) return { error: error.message }
+        const { rows: docs } = await query(
+          'SELECT name, layer, storage_path FROM documents WHERE chart_id=$1',
+          [chart_id]
+        )
 
         const results: Array<{ document: string; layer: string; matches: string[] }> = []
-        const lowerQuery = query.toLowerCase()
+        const lowerQuery = searchQuery.toLowerCase()
 
-        for (const doc of docs ?? []) {
+        for (const doc of docs) {
           const content = await readDocumentContent(doc.storage_path)
           if (!content) continue
           const matches = content.split('\n').filter(l => l.toLowerCase().includes(lowerQuery))
@@ -172,7 +153,7 @@ export const consumeTools = {
           }
         }
 
-        return { query, results, total_documents_searched: (docs ?? []).length }
+        return { query: searchQuery, results, total_documents_searched: docs.length }
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }
@@ -180,38 +161,25 @@ export const consumeTools = {
   }),
 
   get_domain_report: tool({
-    description:
-      'Read a specific L3 domain report. Use the exact domain slug from the system prompt`s Available reports list. Match is case-insensitive.',
+    description: 'Read a specific L3 domain report. Use the exact domain slug from the system prompt\'s Available reports list. Match is case-insensitive.',
     inputSchema: z.object({
       chart_id: z.string().describe('The chart UUID'),
-      domain: z
-        .string()
-        .describe('Domain slug from the Available reports list (e.g. finance, career, health, relationships)'),
+      domain: z.string().describe('Domain slug from the Available reports list (e.g. finance, career, health, relationships)'),
     }),
     execute: async ({ chart_id, domain }) => {
       try {
-        const supabase = createServiceClient()
-
-        // Case-insensitive match to tolerate the model using a different case
-        // than the DB slug.
-        const { data: report } = await supabase
-          .from('reports')
-          .select('title, domain, version, storage_path, updated_at')
-          .eq('chart_id', chart_id)
-          .ilike('domain', domain)
-          .order('updated_at', { ascending: false })
-          .limit(1)
-          .maybeSingle()
+        const { rows } = await query(
+          'SELECT title, domain, version, storage_path, updated_at FROM reports WHERE chart_id=$1 AND lower(domain)=lower($2) ORDER BY updated_at DESC LIMIT 1',
+          [chart_id, domain]
+        )
+        const report = rows[0] ?? null
 
         if (!report) {
-          // Return the actual domains present for this chart so the model can
-          // re-call with a valid slug instead of guessing.
-          const { data: available } = await supabase
-            .from('reports')
-            .select('domain')
-            .eq('chart_id', chart_id)
-            .order('domain')
-          const domains = [...new Set((available ?? []).map(r => r.domain))]
+          const { rows: available } = await query(
+            'SELECT DISTINCT domain FROM reports WHERE chart_id=$1 ORDER BY domain',
+            [chart_id]
+          )
+          const domains = available.map(r => r.domain)
           return {
             error: `No report found for domain "${domain}" on this chart.`,
             available_domains: domains,
@@ -247,13 +215,12 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id, from_date, to_date }) => {
       try {
-        const supabase = createServiceClient()
-        const { data: chart, error } = await supabase
-          .from('charts')
-          .select('birth_lat, birth_lng')
-          .eq('id', chart_id)
-          .single()
-        if (error || !chart) return { error: error?.message ?? 'Chart not found' }
+        const { rows } = await query(
+          'SELECT birth_lat, birth_lng FROM charts WHERE id=$1',
+          [chart_id]
+        )
+        const chart = rows[0] ?? null
+        if (!chart) return { error: 'Chart not found' }
 
         const res = await fetch(`${process.env.PYTHON_SIDECAR_URL}/transits`, {
           method: 'POST',
@@ -278,15 +245,11 @@ export const consumeTools = {
     }),
     execute: async ({ chart_id }) => {
       try {
-        const supabase = createServiceClient()
-        const { data, error } = await supabase
-          .from('pyramid_layers')
-          .select('layer, sublayer, status, version, updated_at')
-          .eq('chart_id', chart_id)
-          .order('layer')
-          .order('sublayer')
-        if (error) return { error: error.message }
-        return data ?? []
+        const { rows } = await query(
+          'SELECT layer, sublayer, status, version, updated_at FROM pyramid_layers WHERE chart_id=$1 ORDER BY layer ASC, sublayer ASC',
+          [chart_id]
+        )
+        return rows
       } catch (e) {
         return { error: e instanceof Error ? e.message : String(e) }
       }

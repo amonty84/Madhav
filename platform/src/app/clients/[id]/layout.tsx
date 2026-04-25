@@ -1,5 +1,5 @@
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
 
 export default async function ClientLayout({
@@ -13,11 +13,13 @@ export default async function ClientLayout({
   const user = await getServerUser()
   if (!user) redirect('/login')
 
-  const service = createServiceClient()
-  const [{ data: profile }, { data: chart }] = await Promise.all([
-    service.from('profiles').select('role').eq('id', user.uid).single(),
-    service.from('charts').select('client_id').eq('id', id).single(),
+  const [profileResult, chartResult] = await Promise.all([
+    query<{ role: string }>('SELECT role FROM profiles WHERE id=$1', [user.uid]),
+    query<{ client_id: string }>('SELECT client_id FROM charts WHERE id=$1', [id]),
   ])
+
+  const profile = profileResult.rows[0] ?? null
+  const chart = chartResult.rows[0] ?? null
 
   if (!chart) redirect('/dashboard')
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')

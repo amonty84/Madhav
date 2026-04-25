@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 import { getConversation } from '@/lib/conversations'
 
 async function resolveAccess(userId: string) {
-  const service = createServiceClient()
-  const { data: profile } = await service.from('profiles').select('role').eq('id', userId).single()
-  return profile?.role === 'super_admin'
+  const result = await query<{ role: string }>(
+    'SELECT role FROM profiles WHERE id=$1',
+    [userId]
+  )
+  return result.rows[0]?.role === 'super_admin'
 }
 
 // URL-safe 10-char slug (~58 bits of entropy — enough for public read-only links).
@@ -27,17 +29,17 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
   const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
-  const service = createServiceClient()
-  const { data } = await service
-    .from('conversation_shares')
-    .select('slug, created_at, expires_at, revoked_at')
-    .eq('conversation_id', id)
-    .is('revoked_at', null)
-    .order('created_at', { ascending: false })
-    .limit(1)
-    .maybeSingle()
+  const { rows } = await query<{
+    slug: string
+    created_at: string
+    expires_at: string | null
+    revoked_at: string | null
+  }>(
+    'SELECT slug, created_at, expires_at, revoked_at FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL ORDER BY created_at DESC LIMIT 1',
+    [id]
+  )
 
-  return NextResponse.json({ share: data })
+  return NextResponse.json({ share: rows[0] ?? null })
 }
 
 export async function POST(_req: Request, ctx: { params: Promise<{ id: string }> }) {
@@ -49,25 +51,23 @@ export async function POST(_req: Request, ctx: { params: Promise<{ id: string }>
   const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
-  const service = createServiceClient()
-
   // Reuse the active share if one exists — idempotent from the user's POV.
-  const { data: existing } = await service
-    .from('conversation_shares')
-    .select('slug')
-    .eq('conversation_id', id)
-    .is('revoked_at', null)
-    .limit(1)
-    .maybeSingle()
-  if (existing) return NextResponse.json({ slug: existing.slug })
+  const existing = await query<{ slug: string }>(
+    'SELECT slug FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL LIMIT 1',
+    [id]
+  )
+  if (existing.rows[0]) return NextResponse.json({ slug: existing.rows[0].slug })
 
   const slug = generateSlug()
-  const { error } = await service.from('conversation_shares').insert({
-    conversation_id: id,
-    slug,
-    created_by: user.uid,
-  })
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  try {
+    await query(
+      'INSERT INTO conversation_shares (conversation_id, slug, created_by) VALUES ($1,$2,$3) RETURNING *',
+      [id, slug, user.uid]
+    )
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'database error'
+    return NextResponse.json({ error: msg }, { status: 500 })
+  }
 
   return NextResponse.json({ slug })
 }
@@ -81,12 +81,10 @@ export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string 
   const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
-  const service = createServiceClient()
-  await service
-    .from('conversation_shares')
-    .update({ revoked_at: new Date().toISOString() })
-    .eq('conversation_id', id)
-    .is('revoked_at', null)
+  await query(
+    'UPDATE conversation_shares SET revoked_at=now() WHERE conversation_id=$1 AND revoked_at IS NULL',
+    [id]
+  )
 
   return NextResponse.json({ ok: true })
 }

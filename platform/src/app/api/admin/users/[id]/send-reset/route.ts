@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 
 // Generates a Firebase password-reset link for the target user. Returns the
 // link to the admin UI for copy-paste.
@@ -16,12 +16,12 @@ export async function POST(
   if (auth instanceof NextResponse) return auth
 
   const { id } = await ctx.params
-  const service = createServiceClient()
-  const { data: profile } = await service
-    .from('profiles')
-    .select('email')
-    .eq('id', id)
-    .single<{ email: string | null }>()
+
+  const { rows } = await query<{ email: string | null }>(
+    'SELECT email FROM profiles WHERE id=$1',
+    [id]
+  )
+  const profile = rows[0] ?? null
 
   if (!profile?.email) {
     return NextResponse.json({ error: 'User has no email on file.' }, { status: 404 })

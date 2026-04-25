@@ -38,7 +38,7 @@ import { useBranches } from '@/hooks/useBranches'
 import { classifyChatError } from '@/lib/chat/classify-error'
 import { ModelStylePicker } from '@/components/chat/ModelStylePicker'
 import { ShareButton } from '@/components/chat/ShareButton'
-import type { Report, ConversationModule } from '@/lib/supabase/types'
+import type { Report, ConversationModule } from '@/lib/db/types'
 
 interface ConversationRow {
   id: string

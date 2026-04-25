@@ -1,7 +1,7 @@
 import 'server-only'
 import type { UIMessage } from 'ai'
-import { createServiceClient } from '@/lib/supabase/server'
-import type { ConversationModule } from '@/lib/supabase/types'
+import { query } from '@/lib/db/client'
+import type { ConversationModule } from '@/lib/db/types'
 
 export interface ConversationSummary {
   id: string
@@ -18,20 +18,11 @@ export async function listConversations(params: {
   userId: string
   module: ConversationModule
 }): Promise<ConversationSummary[]> {
-  const service = createServiceClient()
-  const { data } = await service
-    .from('conversations')
-    .select('id, chart_id, user_id, module, title, created_at')
-    .eq('chart_id', params.chartId)
-    .eq('user_id', params.userId)
-    .eq('module', params.module)
-    .order('created_at', { ascending: false })
-    .limit(100)
-  return (data ?? []).map(row => ({
-    ...row,
-    module: row.module as ConversationModule,
-    updated_at: row.created_at,
-  }))
+  const { rows } = await query(
+    'SELECT id, chart_id, user_id, module, title, created_at FROM conversations WHERE chart_id=$1 AND user_id=$2 AND module=$3 ORDER BY created_at DESC LIMIT 100',
+    [params.chartId, params.userId, params.module]
+  )
+  return rows.map(row => ({ ...(row as ConversationSummary), module: row.module as ConversationModule, updated_at: row.created_at as string }))
 }
 
 export async function createConversation(params: {
@@ -39,39 +30,25 @@ export async function createConversation(params: {
   userId: string
   module: ConversationModule
 }): Promise<ConversationSummary> {
-  const service = createServiceClient()
-  const { data, error } = await service
-    .from('conversations')
-    .insert({
-      chart_id: params.chartId,
-      user_id: params.userId,
-      module: params.module,
-      title: null,
-    })
-    .select('id, chart_id, user_id, module, title, created_at')
-    .single()
-  if (error || !data) throw new Error(error?.message ?? 'Failed to create conversation')
-  return { ...data, module: data.module as ConversationModule, updated_at: data.created_at }
+  const { rows } = await query(
+    'INSERT INTO conversations (chart_id, user_id, module, title) VALUES ($1,$2,$3,NULL) RETURNING id, chart_id, user_id, module, title, created_at',
+    [params.chartId, params.userId, params.module]
+  )
+  const data = rows[0]
+  if (!data) throw new Error('Failed to create conversation')
+  return { ...(data as ConversationSummary), module: data.module as ConversationModule, updated_at: data.created_at as string }
 }
 
-// Inserts a conversation row with a caller-supplied id. Used when the route
-// generates the id upfront and streams the response before persisting, so the
-// insert can run in parallel with the model call instead of blocking TTFT.
 export async function insertConversationWithId(params: {
   id: string
   chartId: string
   userId: string
   module: ConversationModule
 }): Promise<void> {
-  const service = createServiceClient()
-  const { error } = await service.from('conversations').insert({
-    id: params.id,
-    chart_id: params.chartId,
-    user_id: params.userId,
-    module: params.module,
-    title: null,
-  })
-  if (error) throw new Error(error.message)
+  await query(
+    'INSERT INTO conversations (id, chart_id, user_id, module, title) VALUES ($1,$2,$3,$4,NULL)',
+    [params.id, params.chartId, params.userId, params.module]
+  )
 }
 
 export async function getConversation(params: {
@@ -79,27 +56,23 @@ export async function getConversation(params: {
   userId: string
   isSuperAdmin: boolean
 }): Promise<ConversationSummary | null> {
-  const service = createServiceClient()
-  const { data } = await service
-    .from('conversations')
-    .select('id, chart_id, user_id, module, title, created_at')
-    .eq('id', params.id)
-    .single()
+  const { rows } = await query(
+    'SELECT id, chart_id, user_id, module, title, created_at FROM conversations WHERE id=$1',
+    [params.id]
+  )
+  const data = rows[0] ?? null
   if (!data) return null
   if (!params.isSuperAdmin && data.user_id !== params.userId) return null
-  return { ...data, module: data.module as ConversationModule, updated_at: data.created_at }
+  return { ...(data as ConversationSummary), module: data.module as ConversationModule, updated_at: data.created_at as string }
 }
 
 export async function loadConversationMessages(conversationId: string): Promise<UIMessage[]> {
-  const service = createServiceClient()
-  const { data } = await service
-    .from('messages')
-    .select('id, role, content, tool_calls, created_at')
-    .eq('conversation_id', conversationId)
-    .order('created_at', { ascending: true })
-  if (!data) return []
+  const { rows } = await query(
+    'SELECT id, role, content, tool_calls, created_at FROM messages WHERE conversation_id=$1 ORDER BY created_at ASC',
+    [conversationId]
+  )
   const out: UIMessage[] = []
-  for (const row of data) {
+  for (const row of rows) {
     if (row.role === 'user' || row.role === 'assistant') {
       let parts: UIMessage['parts'] | null = null
       if (Array.isArray(row.tool_calls)) {
@@ -109,11 +82,7 @@ export async function loadConversationMessages(conversationId: string): Promise<
       } else {
         parts = []
       }
-      out.push({
-        id: row.id,
-        role: row.role,
-        parts: parts ?? [],
-      } as UIMessage)
+      out.push({ id: row.id, role: row.role, parts: parts ?? [] } as UIMessage)
     }
   }
   return out
@@ -123,31 +92,30 @@ export async function replaceConversationMessages(params: {
   conversationId: string
   messages: UIMessage[]
 }) {
-  const service = createServiceClient()
-  await service.from('messages').delete().eq('conversation_id', params.conversationId)
+  await query('DELETE FROM messages WHERE conversation_id=$1', [params.conversationId])
   if (params.messages.length === 0) return
-  const rows = params.messages.map(m => {
+  for (const m of params.messages) {
     const text = m.parts
       .filter(p => p.type === 'text')
       .map(p => (p as { text: string }).text)
       .join('')
-    return {
-      id: m.id,
-      conversation_id: params.conversationId,
-      role: m.role === 'assistant' || m.role === 'user' ? m.role : 'assistant',
-      content: text || null,
-      tool_calls: m.parts as unknown,
-    }
-  })
-  await service.from('messages').insert(rows)
+    await query(
+      'INSERT INTO messages (id, conversation_id, role, content, tool_calls) VALUES ($1,$2,$3,$4,$5)',
+      [
+        m.id,
+        params.conversationId,
+        m.role === 'assistant' || m.role === 'user' ? m.role : 'assistant',
+        text || null,
+        JSON.stringify(m.parts),
+      ]
+    )
+  }
 }
 
 export async function updateConversationTitle(id: string, title: string) {
-  const service = createServiceClient()
-  await service.from('conversations').update({ title }).eq('id', id)
+  await query('UPDATE conversations SET title=$1 WHERE id=$2', [title, id])
 }
 
 export async function deleteConversation(id: string) {
-  const service = createServiceClient()
-  await service.from('conversations').delete().eq('id', id)
+  await query('DELETE FROM conversations WHERE id=$1', [id])
 }
