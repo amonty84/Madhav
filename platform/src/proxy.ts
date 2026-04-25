@@ -31,10 +31,15 @@ function isSessionValid(sessionCookie: string | undefined): boolean {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const isAuthRoute = pathname.startsWith('/login')
-  const isPublicRoute = pathname === '/'
+  // Public routes (no session required). The /api/auth/* prefix is also
+  // excluded via the matcher below.
+  const isPublic =
+    pathname === '/' ||
+    pathname.startsWith('/login') ||
+    pathname.startsWith('/reset-password') ||
+    pathname.startsWith('/api/access-requests')
 
-  if (!isAuthRoute && !isPublicRoute) {
+  if (!isPublic) {
     const sessionCookie = request.cookies.get('__session')?.value
     if (!isSessionValid(sessionCookie)) {
       if (pathname.startsWith('/api/')) {
@@ -48,5 +53,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api/auth/).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|icon.png|apple-icon.png|brand/|api/auth/).*)'],
 }

@@ -6,7 +6,7 @@ import { getConversation } from '@/lib/conversations'
 async function resolveAccess(userId: string) {
   const service = createServiceClient()
   const { data: profile } = await service.from('profiles').select('role').eq('id', userId).single()
-  return profile?.role === 'astrologer'
+  return profile?.role === 'super_admin'
 }
 
 // URL-safe 10-char slug (~58 bits of entropy — enough for public read-only links).
@@ -23,8 +23,8 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
   const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
+  const isSuperAdmin = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()
@@ -45,8 +45,8 @@ export async function POST(_req: Request, ctx: { params: Promise<{ id: string }>
   const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
+  const isSuperAdmin = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()
@@ -77,8 +77,8 @@ export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string 
   const user = await getServerUser()
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const isAstrologer = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isAstrologer })
+  const isSuperAdmin = await resolveAccess(user.uid)
+  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
   if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
 
   const service = createServiceClient()

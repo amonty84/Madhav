@@ -56,7 +56,7 @@ export default async function SharedConversationPage({
       </main>
       <footer className="mt-8 border-t border-border pt-4 text-center text-xs text-muted-foreground">
         <Link href="/" className="hover:text-foreground">
-          AM-JIS
+          MARSYS-JIS
         </Link>
       </footer>
     </div>

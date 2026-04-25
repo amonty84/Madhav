@@ -7,17 +7,17 @@ import { buildTools } from '@/lib/claude/build-tools'
 import { buildSystemPrompt } from '@/lib/claude/system-prompts'
 import type { ModelMessage } from 'ai'
 
-async function requireAstrologer() {
+async function requireSuperAdmin() {
   const user = await getServerUser()
   if (!user) return null
   const service = createServiceClient()
   const { data: prof } = await service.from('profiles').select('role').eq('id', user.uid).single()
-  if (prof?.role !== 'astrologer') return null
+  if (prof?.role !== 'super_admin') return null
   return user
 }
 
 export async function POST(request: Request) {
-  const user = await requireAstrologer()
+  const user = await requireSuperAdmin()
   if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
 
   let body: { chartId?: string; messages?: ModelMessage[] }

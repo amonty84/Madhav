@@ -1,4 +1,5 @@
-export type Role = 'astrologer' | 'client'
+export type Role = 'super_admin' | 'client'
+export type AccountStatus = 'pending' | 'active' | 'disabled'
 export type PyramidStatus = 'not_started' | 'in_progress' | 'complete'
 export type ConversationModule = 'build' | 'consume'
 export type MessageRole = 'user' | 'assistant' | 'tool'
@@ -6,7 +7,12 @@ export type MessageRole = 'user' | 'assistant' | 'tool'
 export interface Profile {
   id: string
   role: Role
+  status: AccountStatus
   name: string | null
+  username: string | null
+  email: string | null
+  approved_at: string | null
+  approved_by: string | null
   created_at: string
 }
 
