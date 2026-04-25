@@ -35,13 +35,29 @@ except Exception:
     pass
 
 # ── Brief reading ────────────────────────────────────────────────────────────
+# SESSION_DETECTION: maps last_session_id → (session_num, next_session_label)
+# Update this table at the start of each new multi-session milestone.
+M2A_SESSION_TABLE = {
+    'Madhav_M2A_Plan_Foundation_Stack': (1, 'Madhav_M2A_Exec'),
+    'Madhav_M2A_Exec':                  (2, 'Madhav_M2A_Exec_2'),
+    'Madhav_M2A_Exec_2':                (3, 'Madhav_M2A_Exec_3'),
+    'Madhav_M2A_Exec_3':                (4, 'Madhav_M2A_Exec_4'),
+    'Madhav_M2A_Exec_4':                (5, 'Madhav_M2A_Exec_5'),
+    'Madhav_M2A_Exec_5':                (None, 'MILESTONE_COMPLETE'),
+}
+
 brief = {}
 try:
     content = open(base + '/CLAUDECODE_BRIEF.md').read(3000)
+    # Read YAML frontmatter fields (correct field names as of brief v5.0)
     for line in content.split('\n'):
-        for key in ['status', 'session_id', 'proposed_thread_name', 'active_sub_phase', 'prepared_on']:
-            if line.startswith(key + ':'):
-                brief[key] = line.split(':', 1)[1].strip().strip('"')
+        for key in ['status', 'title', 'milestone', 'active_sub_phases',
+                    'sessions_total', 'prepared_on', 'brief_version',
+                    'model', 'executor']:
+            stripped = line.strip()
+            if stripped.startswith(key + ':'):
+                brief[key] = stripped.split(':', 1)[1].strip().strip('"')
+                break
     brief['exists'] = True
 except Exception as e:
     brief = {'exists': False, 'error': str(e)}
@@ -55,11 +71,23 @@ try:
         last_session['session_id'] = sids[-1]
     notes = re.findall(r'handoff_notes:\s*>\s*\n((?:[ \t]+.+\n)+)', log)
     if notes:
-        last_session['notes'] = notes[-1].strip()[:280]
+        last_session['notes'] = notes[-1].strip()[:300]
     dates = re.findall(r'produced_on:\s*(\S+)', log)
     if dates:
         last_session['date'] = dates[-1]
 except Exception as e:
     last_session = {'error': str(e)}
+
+# ── Session detection (M2A) ──────────────────────────────────────────────────
+last_sid = last_session.get('session_id', '')
+if last_sid in M2A_SESSION_TABLE:
+    num, label = M2A_SESSION_TABLE[last_sid]
+    brief['current_session_num'] = num
+    brief['next_session_label'] = label
+    if num is not None:
+        sessions_total = int(brief.get('sessions_total', 5))
+        brief['session_display'] = f'Session {num} of {sessions_total} — {label}'
+    else:
+        brief['session_display'] = 'MILESTONE COMPLETE — report to Abhisek'
 
 print(json.dumps({'phases': phases, 'brief': brief, 'last_session': last_session}))
