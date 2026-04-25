@@ -10,5 +10,8 @@ __pycache__/
 *.pyo
 *.pyd
 .env
+.env.rag
 .ipynb_checkpoints/
 /*.png
+.continue/
+.kilo/
