@@ -13,7 +13,7 @@ correction_required: YES (UCN §I.1 FS3, §III.3, §V.1, §VI.1, multiple other 
 ---
 
 # Red-Team Audit — L2.5 Holistic Synthesis Layer
-## AM-JIS Project — Session 18
+## MARSYS-JIS Project — Session 18
 
 ### Purpose and Scope
 

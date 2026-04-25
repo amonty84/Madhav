@@ -5,7 +5,7 @@ status: SUPERSEDED
 superseded_on: 2026-04-24
 superseded_by: FILE_REGISTRY_v1_3.md (Step 7 of the Step 0→15 governance rebuild)
 date: 2026-04-24
-scope: Complete registry of final/current AM-JIS corpus files
+scope: Complete registry of final/current MARSYS-JIS corpus files
 supersedes: FILE_REGISTRY_v1_1.md (closed 2026-04-23 at Step 5; superseded 2026-04-24 at Step 5A of the Step 0→15 governance rebuild); FILE_REGISTRY_v1_0.md (closed 2026-04-19; superseded 2026-04-23 at Step 5)
 changelog:
   - v1.2 (2026-04-24, Step 5A of the Step 0→15 governance rebuild):
@@ -54,7 +54,7 @@ changelog:
     (Session 36, stale). Captured 75 current files + 29 archival.
 ---
 
-# AM-JIS File Registry — Final Corpus (v1.2)
+# MARSYS-JIS File Registry — Final Corpus (v1.2)
 
 > **⚠ SUPERSEDED (2026-04-24) by `FILE_REGISTRY_v1_3.md`** at Step 7 of the Step 0→15 governance rebuild. v1.3 is additive + corrective relative to v1.2: it registers the Step 7 artifacts (CANONICAL_ARTIFACTS, SESSION_OPEN_TEMPLATE, SESSION_CLOSE_TEMPLATE, DISAGREEMENT_REGISTER, the three governance scripts) and adds two new columns (`canonical_artifact_id`, `mirror_obligations` summary) per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §D.2`. Do not cite v1.2 for CURRENT state; retained for lineage tracing only. See v1.3 frontmatter changelog.
 
@@ -304,7 +304,7 @@ The v1.2 revision is additive + corrective relative to v1.1: the PROJECT_ARCHITE
 | `corpus_verification_report_v1_0.json` | Machine-readable verification output |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | Agent brief for corpus cleanup task (completed) |
 | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | Agent brief for comprehensive 8-layer corpus verification (MSR merge + citation graph + 24 invariants) |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
 | `SESSION_RESUME_PROMPT.md` | Session resume context prompt |
 | `.tools/build_lel_v1_2.py` | Life Event Log builder |
 | `.tools/compute_event_chart_states.py` | Event chart state computation |

@@ -96,7 +96,7 @@ document_metadata:
 
 ## §1. Cover and Report Scope
 
-This is the v1.0 Health & Longevity Domain Report for Abhisek Mohanty, born February 5, 1984 at 10:43 IST in Bhubaneswar, Odisha. It is the third L3 Domain Report in the AM-JIS corpus, following the Career & Dharma Report (Session 16) and the Financial Report v2.0 (Session 17).
+This is the v1.0 Health & Longevity Domain Report for Abhisek Mohanty, born February 5, 1984 at 10:43 IST in Bhubaneswar, Odisha. It is the third L3 Domain Report in the MARSYS-JIS corpus, following the Career & Dharma Report (Session 16) and the Financial Report v2.0 (Session 17).
 
 **Scope.** This report covers: constitutional architecture (the physical and psychological body the chart was built with), health-karma (what the chart carries as inherent health burden and capacity), longevity assessment (classical longevity indicators), timing windows for health-sensitive periods (dasha-transit intersections that activate health themes), and intervention protocols (Ayurvedic, devata, gemstone, behavioral).
 

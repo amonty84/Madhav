@@ -2,17 +2,17 @@
 brief_type: Agent Execution Brief
 brief_version: 1.0
 created: 2026-04-19
-scope: Comprehensive AM-JIS corpus verification pre-vectorization
+scope: Comprehensive MARSYS-JIS corpus verification pre-vectorization
 status: READY FOR EXECUTION
 executor_model: Claude Sonnet 4.6 or DeepSeek V3
 cost_budget_usd: 8
 estimated_runtime: 4-8 hours
-prerequisite_reads: [CLAUDE.md, AM_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0-§2]
+prerequisite_reads: [CLAUDE.md, MARSYS_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0-§2]
 produces_artifacts: [/verification_artifacts/<timestamp>/READINESS_REPORT.md + 14 supporting JSON/graphml files]
 blocks_downstream: [vectorization, graph_model_construction]
 ---
 
-# Agent Execution Brief — AM-JIS Corpus Verification v1.0
+# Agent Execution Brief — MARSYS-JIS Corpus Verification v1.0
 
 ## DO NOT START without reading this entire brief first.
 
@@ -20,7 +20,7 @@ blocks_downstream: [vectorization, graph_model_construction]
 
 ## §0 — Executor Preamble
 
-You are receiving this execution brief because you are the selected executor for AM-JIS corpus verification.
+You are receiving this execution brief because you are the selected executor for MARSYS-JIS corpus verification.
 
 **READ THIS SECTION FIRST — THIS IS YOUR OPERATION MANUAL.**
 
@@ -56,7 +56,7 @@ If any of these conditions fail, produce a `READINESS_REPORT.md` that terminates
 When you are ready to proceed, acknowledge with:
 
 ```
-ACKNOWLEDGED: Executor will proceed with full 8-layer verification of AM-JIS corpus.
+ACKNOWLEDGED: Executor will proceed with full 8-layer verification of MARSYS-JIS corpus.
 Cost budget: $8, estimated runtime: 4-8 hours, deadline: [your calendar time].
 Artifact target: /verification_artifacts/<timestamp>/READINESS_REPORT.md.
 ```
@@ -65,11 +65,11 @@ Do not proceed without this explicit acknowledgment. If any step fails, produce 
 
 ---
 
-## §1 — Project Context (Self-Contained AM-JIS Introduction)
+## §1 — Project Context (Self-Contained MARSYS-JIS Introduction)
 
 ### 1.1 What This Project Is
 
-**AM-JIS** (Abhisek Mohanty — Jyotish Intelligence System) is a five-layer corpus construction project targeting one objective: build an *acharya-grade* Jyotish (Vedic astrology) intelligence system centered on Abhisek Mohanty's natal chart (b. 1984-02-05, 10:43 IST, Bhubaneswar).
+**MARSYS-JIS** (Abhisek Mohanty — Jyotish Intelligence System) is a five-layer corpus construction project targeting one objective: build an *acharya-grade* Jyotish (Vedic astrology) intelligence system centered on Abhisek Mohanty's natal chart (b. 1984-02-05, 10:43 IST, Bhubaneswar).
 
 The ambition: exceed 99% of professional Jyotish output by integrating **four complete engine families** (Parashari + Jaimini + KP + Tajika + Nadi) and treating the chart as one integrated organism—not domain-siloed projections.
 
@@ -1203,7 +1203,7 @@ Output `GRAPH_STATS.json`:
 ```markdown
 # Readiness Report v1.0
 Date: 2026-04-20
-Verifier: AM-JIS Verification Engine v1.0
+Verifier: MARSYS-JIS Verification Engine v1.0
 
 ## L0 Summary
 - Structural integrity: PASSED
@@ -1541,7 +1541,7 @@ If ANY requirement fails, verdict = NO-GO.
 ```markdown
 # Readiness Report v1.0
 Date: {{datetime.now().strftime("%Y-%m-%d")}}
-Verifier: AM-JIS Verification Engine v1.0
+Verifier: MARSYS-JIS Verification Engine v1.0
 Execution ID: {{execution_id}}
 Layer verification summary:
 ```
@@ -1644,14 +1644,14 @@ If verify fail:
 
 ---
 
-*Executive Summary: This brief provides end-to-end execution instructions for AM-JIS corpus verification. The verification suite is designed for standalone execution by a capable LLM (Sonnet or DeepSeek), with an estimated runtime of 4–8 hours. No external interaction required unless NO-GO verdict is produced.*
+*Executive Summary: This brief provides end-to-end execution instructions for MARSYS-JIS corpus verification. The verification suite is designed for standalone execution by a capable LLM (Sonnet or DeepSeek), with an estimated runtime of 4–8 hours. No external interaction required unless NO-GO verdict is produced.*
 
 *Appended to support executor — no modification needed to file structure beyond output artifact production.*  
 </file>
 
 <task_progress>
 - [x] Read CLAUDE.md
-- [x] Read AM_JIS_BOOTSTRAP_HANDOFF.md
+- [x] Read MARSYS_JIS_BOOTSTRAP_HANDOFF.md
 - [x] Read FORENSIC_DATA_v8_0.md
 - [x] Read MSR_v2_0.md
 - [x] Read AUDIT_REPORT_v1_0.md

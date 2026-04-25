@@ -3,7 +3,7 @@ artifact: CONVERSATION_LOG.md
 version: 1.0
 status: LIVE
 role: >
-  Authoritative index of all Cowork conversations on the AM-JIS project.
+  Authoritative index of all Cowork conversations on the MARSYS-JIS project.
   Covers all series: Madhav NN (rebuild era), Madhav BN (M2 corpus era),
   Madhav COW-NN (Cowork Oversight), Madhav LEL-NN, Madhav PPL-NN.
   One row per conversation; updated at conversation close.
@@ -16,7 +16,7 @@ update_policy: >
   restructuring only; no content change.
 ---
 
-# AM-JIS Conversation Log
+# MARSYS-JIS Conversation Log
 
 ## §1 — Schema
 

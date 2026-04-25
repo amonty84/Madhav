@@ -1,4 +1,4 @@
-# AM-JIS Project State & Configuration
+# MARSYS-JIS Project State & Configuration
 
 _Last updated: 2026-04-25 at Madhav_M2A_Exec_4 close (B.3 Embedding + HNSW complete; embed.py — Vertex AI text-multilingual-embedding-002 768-dim, BATCH_SIZE=10, HNSW m=16 ef_construction=64; 743/743 non-stale chunks embedded; b3_sanity_test.json: "Saturn 7th house Libra" → 2 distinct doc_types [AC-B3.4 ✓], p95=71.56ms Auth Proxy [AC-B3.3 accepted Option A]; GCP migration: Cloud SQL asia-south1 + Vertex AI [Voyage AI removed]; B.3 CLOSED; B.3.5 CGM Rebuild + red-team RT1–RT6 next). Per ND.1 Mirror Discipline, this file mirrors the composite state that the Claude-side `SESSION_LOG.md` + `CURRENT_STATE_v1_0.md` + active plan pointers declare. The mirror is adapted to Gemini's construct; it is not byte-identical. The authoritative machine-enforceable inventory of every mirror pair on the project is `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md §2`. Post-Step-15, the Claude-side authoritative state surface is `CURRENT_STATE_v1_0.md`._
 

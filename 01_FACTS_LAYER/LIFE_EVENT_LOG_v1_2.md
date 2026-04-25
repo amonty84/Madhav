@@ -1,6 +1,6 @@
 ---
 document: LIFE EVENT LOG — ABHISEK MOHANTY
-project: AM-JIS (Abhisek Mohanty Jyotish Intelligence System)
+project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_2
 version: 1.2

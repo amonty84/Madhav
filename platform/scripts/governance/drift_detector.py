@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-drift_detector.py — AM-JIS governance drift detector.
+drift_detector.py — MARSYS-JIS governance drift detector.
 
 # Implements: GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §H
 
@@ -59,10 +59,10 @@ WHITELIST_TICKETS = {
         "files": ["00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md"],
         "booked_for": "PHASE_B_PLAN v1.0.3 amendment cycle",
     },
-    # STEP_LEDGER Step 5 close — AM_JIS_BOOTSTRAP_HANDOFF.md line 145 MP v1.0 pointer
+    # STEP_LEDGER Step 5 close — MARSYS_JIS_BOOTSTRAP_HANDOFF.md line 145 MP v1.0 pointer
     "WARN.4": {
-        "description": "AM_JIS_BOOTSTRAP_HANDOFF.md MP v1.0 pointer",
-        "files": ["AM_JIS_BOOTSTRAP_HANDOFF.md"],
+        "description": "MARSYS_JIS_BOOTSTRAP_HANDOFF.md MP v1.0 pointer",
+        "files": ["MARSYS_JIS_BOOTSTRAP_HANDOFF.md"],
         "booked_for": "Step 9 CLAUDE.md rebuild cycle",
     },
     # STEP_LEDGER Step 5 close — B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md MP v1.0 pointer

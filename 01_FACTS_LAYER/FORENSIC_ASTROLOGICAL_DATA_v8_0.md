@@ -519,7 +519,7 @@ LLM USAGE NOTES:
 
 ## §5 — DASHA SYSTEMS (FACTS)
 
-**RESOLVED (GAP.09 — 2026-04-19):** Vimshottari dasha date offset between FORENSIC (later) and JH (earlier) is closed. Offsets: +7 to +9 days (FORENSIC later), rooted in 1.4 arcmin Moon longitude difference at birth. Policy: **FORENSIC dasha dates are canonical for AM-JIS retrodictive fit**. Sessions 16-25 matched all LEL events against FORENSIC dates with good retrodictive alignment. JH dates are NOT used for dasha period boundaries in AM-JIS. Note: the ±7-9 day window falls within the "dasha cusp zone"; precise-date claims within 10 days of a period transition should acknowledge both possible dates. See GOVERNANCE_STACK §3 GAP.09.
+**RESOLVED (GAP.09 — 2026-04-19):** Vimshottari dasha date offset between FORENSIC (later) and JH (earlier) is closed. Offsets: +7 to +9 days (FORENSIC later), rooted in 1.4 arcmin Moon longitude difference at birth. Policy: **FORENSIC dasha dates are canonical for MARSYS-JIS retrodictive fit**. Sessions 16-25 matched all LEL events against FORENSIC dates with good retrodictive alignment. JH dates are NOT used for dasha period boundaries in MARSYS-JIS. Note: the ±7-9 day window falls within the "dasha cusp zone"; precise-date claims within 10 days of a period transition should acknowledge both possible dates. See GOVERNANCE_STACK §3 GAP.09.
 
 ### §5.1 Vimshottari Dasha (Mahadasha / Antardasha)
 
@@ -895,7 +895,7 @@ LLM USAGE NOTES:
 
 ## §7 — ASHTAKAVARGA (FACTS + DERIVED)
 
-**RESOLVED (GAP.08 — 2026-04-19):** Moon BAV row divergence between FORENSIC and JH engines is closed. FORENSIC and JH differ in 4 signs (Gemini, Libra, Scorpio, Capricorn — ±1 bindu each; grand total 337 matches). Policy: **FORENSIC BAV/SAV values are the AM-JIS canonical values** throughout all domain reports and MSR signals. JH Moon BAV row is retained as reference row `AVG.BAV.MOON.JH` in the table. Rank-dependent claims are unaffected — ±1 differences cancel in aggregate. See GOVERNANCE_STACK §3 GAP.08.
+**RESOLVED (GAP.08 — 2026-04-19):** Moon BAV row divergence between FORENSIC and JH engines is closed. FORENSIC and JH differ in 4 signs (Gemini, Libra, Scorpio, Capricorn — ±1 bindu each; grand total 337 matches). Policy: **FORENSIC BAV/SAV values are the MARSYS-JIS canonical values** throughout all domain reports and MSR signals. JH Moon BAV row is retained as reference row `AVG.BAV.MOON.JH` in the table. Rank-dependent claims are unaffected — ±1 differences cancel in aggregate. See GOVERNANCE_STACK §3 GAP.08.
 
 ### §7.1 BAV — Per-Planet Bindus by Sign
 
@@ -983,7 +983,7 @@ LLM USAGE NOTES:
 
 ### §10.1 Chara Karakas (Jaimini — 7-karaka system, primary)
 
-<!-- 7-karaka system: Highest degree = Atmakaraka, lowest = Darakaraka. Nodes excluded. This is the AM-JIS primary system. -->
+<!-- 7-karaka system: Highest degree = Atmakaraka, lowest = Darakaraka. Nodes excluded. This is the MARSYS-JIS primary system. -->
 
 | ID | Role (Sanskrit) | Life Area | Planet | D1 Longitude (sign-stripped) |
 | --- | --- | --- | --- | --- |
@@ -1014,7 +1014,7 @@ LLM USAGE NOTES:
      - Rahu (degree ~19°01′ — nodes counted at full-sign longitude for this purpose) = Putrakaraka (PK)
      - Mars (18°31′) = Pitrukaraka (PiK)
      - All other assignments identical to 7-karaka system above.
-     AM-JIS primary narrative uses 7-karaka system (§10.1). 8-karaka reading invoked where parenthood/ancestral karma is specifically the domain focus. -->
+     MARSYS-JIS primary narrative uses 7-karaka system (§10.1). 8-karaka reading invoked where parenthood/ancestral karma is specifically the domain focus. -->
 
 | ID | Role (8-karaka) | Planet | Note |
 | --- | --- | --- | --- |
@@ -1758,7 +1758,7 @@ From Gemini: 12th = Taurus (Venus); 9th = Aquarius (Saturn); 1st = Gemini (Mercu
 
 ### §24.2 Ayurdasaya Status (LONGEVITY.GAP.01 — Kalachakra anchor CLOSED; Parashari trio optional)
 
-**Governance:** AM-JIS adopts **Kalachakra Paramayush = 85 years** as the authoritative longevity anchor per **GOVERNANCE_STACK** (Pindayu/Nisargayu/Amsayu intentionally not pursued unless native requests). Rows below remain **optional** JH exports for scholars who want full Parashari trio comparison — not required for corpus closure.
+**Governance:** MARSYS-JIS adopts **Kalachakra Paramayush = 85 years** as the authoritative longevity anchor per **GOVERNANCE_STACK** (Pindayu/Nisargayu/Amsayu intentionally not pursued unless native requests). Rows below remain **optional** JH exports for scholars who want full Parashari trio comparison — not required for corpus closure.
 
 | ID | Field | Status |
 | --- | --- | --- |

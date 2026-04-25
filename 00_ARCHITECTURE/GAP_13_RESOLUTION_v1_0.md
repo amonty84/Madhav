@@ -17,7 +17,7 @@ changelog:
 
 **GAP.13 is resolved as of Madhav 17 (2026-04-24).**
 
-AM-JIS adopts a dual-register policy:
+MARSYS-JIS adopts a dual-register policy:
 
 1. **Primary system:** Jaimini 7-karaka (planets only; Rahu excluded). Assignments per
    `FORENSIC_ASTROLOGICAL_DATA_v8_0.md §10.1` — the canonical source, established at v8.0
@@ -36,7 +36,7 @@ cite one of the two FORENSIC sections above as its L1 source.
 
 ## §2 — 8-Karaka Lock Assertion
 
-The following assignments constitute the **locked 8-karaka supplementary register** for AM-JIS.
+The following assignments constitute the **locked 8-karaka supplementary register** for MARSYS-JIS.
 These are authoritative for any signal, node, or claim that invokes the 8-karaka system.
 
 `[L1 source: FORENSIC_v8_0 §10.3]`
@@ -67,12 +67,12 @@ and Rahu = Putrakaraka. Signals derived from Mars's karaka role are system-depen
 
 `[L2+ policy: interpretive]`
 
-Under the Three-Interpretation Principle (P7), AM-JIS preserves both karaka readings as formal
+Under the Three-Interpretation Principle (P7), MARSYS-JIS preserves both karaka readings as formal
 alternatives wherever the 7-karaka and 8-karaka assignments produce materially different
 interpretations. The policy is:
 
 1. **7-karaka reading is primary** for all general interpretive claims. The 7-karaka system is
-   AM-JIS's designated primary system per FORENSIC_v8_0 §10.1 and PHASE_B_PLAN_v1_0.md §3
+   MARSYS-JIS's designated primary system per FORENSIC_v8_0 §10.1 and PHASE_B_PLAN_v1_0.md §3
    item 1 resolution.
 
 2. **8-karaka reading is the formal P7 alternative** for any claim where the karaka assignment

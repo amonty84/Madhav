@@ -288,7 +288,7 @@ async function uploadDocument(
 }
 
 async function main() {
-  console.log('── AM-JIS Seed: Abhisek Mohanty ──')
+  console.log('── MARSYS-JIS Seed: Abhisek Mohanty ──')
 
   const clientId = await getAstrologerClientId()
   console.log(`Astrologer profile: ${clientId}`)

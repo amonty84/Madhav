@@ -79,8 +79,8 @@ def clean_rm(file_path):
     new_content = re.sub(r'version: 2\.0', 'version: 2.1', new_content)
     
     # Update the title line
-    new_content = re.sub(r'# AM-JIS — Resonance Map v2\.0', 
-                         '# AM-JIS — Resonance Map v2.1', new_content)
+    new_content = re.sub(r'# MARSYS-JIS — Resonance Map v2\.0', 
+                         '# MARSYS-JIS — Resonance Map v2.1', new_content)
     
     # Add changelog to frontmatter if not already there
     if 'v2_1_changelog:' not in new_content:

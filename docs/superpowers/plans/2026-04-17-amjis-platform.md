@@ -1,4 +1,4 @@
-# AM-JIS Platform Implementation Plan
+# MARSYS-JIS Platform Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -682,7 +682,7 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AM-JIS Platform',
+  title: 'MARSYS-JIS Platform',
   description: 'Jyotish Intelligence System',
 }
 
@@ -772,7 +772,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>AM-JIS Platform</CardTitle>
+          <CardTitle>MARSYS-JIS Platform</CardTitle>
           <CardDescription>Sign in to access the Jyotish Intelligence System</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -1300,7 +1300,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import ephemeris, events, eclipses, retrogrades, sade_sati, jaimini, v7_additions
 
-app = FastAPI(title="AM-JIS Compute Sidecar", version="1.0.0")
+app = FastAPI(title="MARSYS-JIS Compute Sidecar", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -1780,7 +1780,7 @@ Ayanamsa: ${chart.ayanamsa}. House system: ${chart.house_system}.
 Current pyramid status:
 ${statusSummary}
 
-Architecture: AM-JIS 5-layer system
+Architecture: MARSYS-JIS 5-layer system
   L1 → Facts (raw chart data, life events, ephemeris — NO interpretation)
   L2 → Analysis (Mode A: curated depth; Mode B: exhaustive matrices)
   L2.5 → Holistic Synthesis (Chart Graph Model, Signal Register, UCN)
@@ -2902,7 +2902,7 @@ In Supabase → Authentication → URL Configuration:
 - Site URL: `https://your-vercel-domain.vercel.app`
 - Redirect URLs: `https://your-vercel-domain.vercel.app/api/auth/callback`
 
-- [ ] **Step 12.4: Seed Abhisek's chart with existing AM-JIS data**
+- [ ] **Step 12.4: Seed Abhisek's chart with existing MARSYS-JIS data**
 
 ```
 1. Log in as astrologer at the deployed URL

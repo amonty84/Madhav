@@ -4,7 +4,7 @@ version: 1.0
 status: CLOSED
 session: 43
 date_closed: 2026-04-18
-scope: "Maintenance guide for the AM-JIS corpus as a living project post-Session 44 completion"
+scope: "Maintenance guide for the MARSYS-JIS corpus as a living project post-Session 44 completion"
 architecture_ref: "§I Phase 7 Living Project"
 ---
 

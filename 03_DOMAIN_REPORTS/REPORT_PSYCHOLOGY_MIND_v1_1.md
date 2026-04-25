@@ -28,7 +28,7 @@ supersedes: REPORT_PSYCHOLOGY_MIND_v1_0.md
 
 ### §1 — Document Scope and Architecture Position
 
-This report is the D8 domain analysis within the AM-JIS L3 Domain Reports layer. D8 (Mind/Psychology) is the most architecturally central domain in this chart: the CDLM's D8.D8 self-amplification score (0.95) is the second-highest in the entire 9×9 matrix, and the D8 row produces the highest single cross-linkage in the matrix (D8.D1 = 0.94 — Mind → Career). The mind domain is not one domain among nine; it is the domain through which all other domains are most directly governed.
+This report is the D8 domain analysis within the MARSYS-JIS L3 Domain Reports layer. D8 (Mind/Psychology) is the most architecturally central domain in this chart: the CDLM's D8.D8 self-amplification score (0.95) is the second-highest in the entire 9×9 matrix, and the D8 row produces the highest single cross-linkage in the matrix (D8.D1 = 0.94 — Mind → Career). The mind domain is not one domain among nine; it is the domain through which all other domains are most directly governed.
 
 This report examines: the chart's three distinct mind-layers (Aries Lagna body-identity, Moon AK Aquarius emotional matrix, Mercury Capricorn analytical instrument); the Atmakaraka Moon's psychological significance as both soul and mind; Mercury's role as the analytical mind's primary planetary instrument and its dual 6L/10L governance creating the cognitive-overload health interface; the Aries Lagna psychological character and the planetary aspects shaping it; the Chandra Lagna (from-Moon) perspective on the native's vocational and relational psychology; and the current dasha configuration's implications for psychological integration.
 

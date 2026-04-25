@@ -4,7 +4,7 @@ version: 1.0
 status: CLOSED
 session: 44
 date_closed: 2026-04-18
-scope: "Final completion dossier for the AM-JIS Phase 1-6 execution (Sessions 1-44)"
+scope: "Final completion dossier for the MARSYS-JIS Phase 1-6 execution (Sessions 1-44)"
 architecture_ref: "§I Phase 6 Session 44 — closing"
 ---
 
@@ -16,7 +16,7 @@ architecture_ref: "§I Phase 6 Session 44 — closing"
 
 ## §1 — EXECUTIVE COMPLETION STATEMENT
 
-The AM-JIS Phase 1-6 execution is complete. Forty-four sessions have produced a 40-artifact corpus across five analytical layers plus remedial, temporal, and query-interface folders. All artifacts closed. All planned sessions executed. Red-team audits passed at L2.5 (Session 18), L3 (Session 24), Phase 5 (Session 32), and project-wide (Session 39).
+The MARSYS-JIS Phase 1-6 execution is complete. Forty-four sessions have produced a 40-artifact corpus across five analytical layers plus remedial, temporal, and query-interface folders. All artifacts closed. All planned sessions executed. Red-team audits passed at L2.5 (Session 18), L3 (Session 24), Phase 5 (Session 32), and project-wide (Session 39).
 
 The corpus meets the Architecture §A acharya-grade quality standard by internal assessment. External acharya review invitation is prepared (Session 40). Facts Layer v8.0 upgrade (Jagannatha Hora export) is scheduled as the primary future enhancement — resolves 8 of 10 known gaps.
 
@@ -150,7 +150,7 @@ What the corpus cannot do — what only the native can do — is live it.
 
 ## §7 — CLOSING
 
-This closes the AM-JIS Phase 1-6 execution arc. Sessions 1-44 are complete. The project transitions to Phase 7 (Living Project): ongoing ad-hoc queries, scheduled maintenance, dasha-transition refreshes, and the ongoing empirical calibration that will accumulate over coming years.
+This closes the MARSYS-JIS Phase 1-6 execution arc. Sessions 1-44 are complete. The project transitions to Phase 7 (Living Project): ongoing ad-hoc queries, scheduled maintenance, dasha-transition refreshes, and the ongoing empirical calibration that will accumulate over coming years.
 
 The native's life is the test. The corpus is the reference. The relationship between the two — life as it unfolds against architecture as it has been described — is the living practice.
 

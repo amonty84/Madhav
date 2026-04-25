@@ -22,7 +22,7 @@ changelog:
 ---
 
 # SCHEMA VALIDATION REPORT — STEP 14
-## AM-JIS Governance Rebuild — Step 14 Baseline Schema-Validator Run
+## MARSYS-JIS Governance Rebuild — Step 14 Baseline Schema-Validator Run
 
 *Produced by `platform/scripts/governance/schema_validator.py` — Step 12 extensions active.*
 *Session: `STEP_14_SCHEMA_VALIDATION_RUN` — 2026-04-24.*

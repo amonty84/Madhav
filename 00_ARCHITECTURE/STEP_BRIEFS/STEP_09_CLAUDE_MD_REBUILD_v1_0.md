@@ -25,7 +25,7 @@ Rewrite `/Users/Dev/Vibe-Coding/Apps/Madhav/CLAUDE.md` from scratch against the 
 6. `CANONICAL_ARTIFACTS_v1_0.md`
 7. `GROUNDING_AUDIT_v1_0.md` (findings GA.9, GA.10, GA.11, GA.19 are primary inputs)
 8. `GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md` (must show PASS/PASS_WITH_FIXES)
-9. `AM_JIS_BOOTSTRAP_HANDOFF.md` — verify existence (per GA.8); if missing, decide whether to retire the reference or create a stub
+9. `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` — verify existence (per GA.8); if missing, decide whether to retire the reference or create a stub
 10. `SESSION_OPEN_TEMPLATE_v1_0.md`, `SESSION_CLOSE_TEMPLATE_v1_0.md`
 
 ## 3. Deliverable
@@ -36,7 +36,7 @@ Rewrite `/Users/Dev/Vibe-Coding/Apps/Madhav/CLAUDE.md` from scratch against the 
 
 - **§A — Project mission.** One paragraph, lifted from the new Macro Plan's "Ultimate goal".
 - **§B — Subject.** Native, birth data, canonical L1 reference.
-- **§C — Mandatory reading (per session).** Ordered list. Replaces the current implicit ordering. Must include: the new Macro Plan, the active phase plan, CANONICAL_ARTIFACTS, GOVERNANCE_INTEGRITY_PROTOCOL, STEP_LEDGER if active, AM_JIS_BOOTSTRAP_HANDOFF (if verified to exist).
+- **§C — Mandatory reading (per session).** Ordered list. Replaces the current implicit ordering. Must include: the new Macro Plan, the active phase plan, CANONICAL_ARTIFACTS, GOVERNANCE_INTEGRITY_PROTOCOL, STEP_LEDGER if active, MARSYS_JIS_BOOTSTRAP_HANDOFF (if verified to exist).
 - **§D — Canonical artifacts (import).** One line: "Canonical artifact versions and paths are defined in `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md`. Do not duplicate declarations here." Then a cached snapshot of the table with a timestamp and hash — the snapshot is informational; CANONICAL_ARTIFACTS is authoritative.
 - **§E — Concurrent workstreams.** Explicit callout of Life Event Log v1.2 and prospective prediction logging. LEL is now surfaced (closes GA.9).
 - **§F — Current execution position marker.** A "You are here" block with: active macro-phase (M_N), active phase-plan expansion (B.N or equivalent), active governance step (Step_N of 0–15, or "governance-closed / Phase B execution") — with pointer to STEP_LEDGER_v1_0.md for the current-step source of truth.
@@ -53,7 +53,7 @@ Rewrite `/Users/Dev/Vibe-Coding/Apps/Madhav/CLAUDE.md` from scratch against the 
 - DO NOT duplicate canonical artifact paths in CLAUDE.md. Every path lives in CANONICAL_ARTIFACTS_v1_0.md; CLAUDE.md references it.
 - DO NOT restate the Macro Plan. Reference only.
 - DO NOT inline the full Integrity Protocol. Reference only.
-- DO NOT remove the AM_JIS_BOOTSTRAP_HANDOFF reference without first verifying and documenting what that file is and whether it is redundant with PROJECT_ARCHITECTURE_v2_1.md. If redundant, retire and note. If authoritative, keep and maintain.
+- DO NOT remove the MARSYS_JIS_BOOTSTRAP_HANDOFF reference without first verifying and documenting what that file is and whether it is redundant with PROJECT_ARCHITECTURE_v2_1.md. If redundant, retire and note. If authoritative, keep and maintain.
 - DO mirror any change to `.geminirules` in the same session (mirror_enforcer.py will fail close otherwise).
 
 ## 5. Discipline rules

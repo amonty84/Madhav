@@ -8,7 +8,7 @@ parent: [RECONCILIATION_PLAN_v1_0.md, AUDIT_REPORT_v1_0.md]
 ---
 
 # FIX_SESSION_001_COMPLETION
-## AM-JIS Reconciliation Execution Report
+## MARSYS-JIS Reconciliation Execution Report
 ### 2026-04-18 | CLOSED
 
 ---

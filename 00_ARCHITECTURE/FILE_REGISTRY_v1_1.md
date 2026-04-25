@@ -6,7 +6,7 @@ version: 1.1
 status: SUPERSEDED by FILE_REGISTRY_v1_2.md (2026-04-24, Step 5A of the Step 0→15 governance rebuild)
 superseded_by: FILE_REGISTRY_v1_2.md
 date: 2026-04-23
-scope: Complete registry of final/current AM-JIS corpus files
+scope: Complete registry of final/current MARSYS-JIS corpus files
 supersedes: FILE_REGISTRY_v1_0.md (closed 2026-04-19; superseded 2026-04-23 at Step 5 of the Step 0→15 governance rebuild)
 changelog:
   - v1.1 (2026-04-23, Step 5 of the Step 0→15 governance rebuild):
@@ -40,7 +40,7 @@ changelog:
     superseded by v1.1.
 ---
 
-# AM-JIS File Registry — Final Corpus (v1.1)
+# MARSYS-JIS File Registry — Final Corpus (v1.1)
 
 **Subject**: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 **Branch**: `feature/amjis-platform`
@@ -285,7 +285,7 @@ The v1.1 revision is additive + corrective relative to v1.0: the MSR row is corr
 | `corpus_verification_report_v1_0.json` | Machine-readable verification output |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | Agent brief for corpus cleanup task (completed) |
 | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | Agent brief for comprehensive 8-layer corpus verification (MSR merge + citation graph + 24 invariants) |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
 | `SESSION_RESUME_PROMPT.md` | Session resume context prompt |
 | `.tools/build_lel_v1_2.py` | Life Event Log builder |
 | `.tools/compute_event_chart_states.py` | Event chart state computation |

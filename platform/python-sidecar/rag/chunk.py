@@ -1,5 +1,5 @@
 """
-chunk — AM-JIS RAG Pipeline corpus chunker orchestrator.
+chunk — MARSYS-JIS RAG Pipeline corpus chunker orchestrator.
 Phase B.2. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.2 Task 3 + chunker_spec_v1_0.md.
 Dispatches to each doc-type chunker, integrates P1/P2/P5 gating, and produces
 verification_artifacts/RAG/chunking_report.json.

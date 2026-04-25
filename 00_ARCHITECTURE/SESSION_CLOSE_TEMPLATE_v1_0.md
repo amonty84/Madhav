@@ -27,7 +27,7 @@ changelog:
 ---
 
 # SESSION_CLOSE_TEMPLATE v1.0
-## AM-JIS Project — Session-Close Checklist
+## MARSYS-JIS Project — Session-Close Checklist
 
 *Implements `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §G`. Every session, before claiming close, emits a machine-readable checklist per this schema. The checklist is the LAST thing `schema_validator.py` validates; only after it validates does the SESSION_LOG append happen atomically.*
 

@@ -1080,6 +1080,6 @@ primary_flow_identified: Career ↔ Mind ↔ Wealth triangle (≥0.92)
 karmic_vortex: Relationships (D3.D3 = 0.95 self-amplifying)
 next_artifact: RM_v1_0.md (Resonance Map, Session 13 continued)
 feeds_into: [RM_v1_0.md, UCN_v1_0.md, Domain Reports L3]
-author: Claude Sonnet 4.6 (AM-JIS Session 13)
+author: Claude Sonnet 4.6 (MARSYS-JIS Session 13)
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 ```

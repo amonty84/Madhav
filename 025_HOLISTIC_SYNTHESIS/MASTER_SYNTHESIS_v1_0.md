@@ -4,7 +4,7 @@ version: 1.0
 status: CLOSED
 session: 42
 date_closed: 2026-04-18
-scope: "Highest-level integration across the entire AM-JIS corpus — the chart as one coherent organism"
+scope: "Highest-level integration across the entire MARSYS-JIS corpus — the chart as one coherent organism"
 parent: UCN_v1_1.md and all L3 Domain Reports
 ---
 

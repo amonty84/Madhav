@@ -8,7 +8,7 @@ parent: [RECONCILIATION_PLAN_v1_0.md, FIX_SESSION_001_COMPLETION.md, AUDIT_REPOR
 ---
 
 # FIX_SESSION_002_COMPLETION
-## AM-JIS Full Implementation Report
+## MARSYS-JIS Full Implementation Report
 ### 2026-04-18 | CLOSED
 
 ---
@@ -138,7 +138,7 @@ Three streams require native to act:
 | RM status | v1.0 SUPERSEDED | **v1.1 CLOSED** (rebuilt with corrected Jupiter) |
 | Documentation for native actions | Implicit | **3 explicit specs** (JHora, acharya, maintenance) |
 
-**Current net position**: AM-JIS Phase 1-6 execution is architecturally and editorially complete. Remaining work is either (a) native-executed data acquisition (JHora v8.0, acharya review) or (b) time-dependent empirical observation (falsifier window closures, ongoing maintenance).
+**Current net position**: MARSYS-JIS Phase 1-6 execution is architecturally and editorially complete. Remaining work is either (a) native-executed data acquisition (JHora v8.0, acharya review) or (b) time-dependent empirical observation (falsifier window closures, ongoing maintenance).
 
 ---
 

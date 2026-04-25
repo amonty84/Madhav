@@ -1,5 +1,5 @@
 """
-embed — AM-JIS RAG Pipeline embedding generator.
+embed — MARSYS-JIS RAG Pipeline embedding generator.
 Phase B.3. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.3 Task 1 + CLAUDECODE_BRIEF v5.0 §SESSION_4.
 
 Vertex AI text-multilingual-embedding-002 (768-dim) replaces Voyage-3-large.

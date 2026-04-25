@@ -566,7 +566,7 @@ D1→D10 status: placement in Dashamsha relative to D10 Lagna (Leo).
      Vimshottari Dasha dates are engine-implementation-dependent. This FORENSIC v6.0 uses a Moon longitude of 327°02'48" (Aquarius 27°02'48" Purva Bhadrapada Pada 3). Jagannatha Hora export (AUDIT_REPORT_v1_0 WS-1b) uses Moon 327°04'14" — a 1.42 arcmin difference.
      Consequence: FORENSIC dasha dates run +7 to +9 days LATER than JHora dates (less remaining balance-of-dasha at birth given FORENSIC's slightly-earlier Moon).
      Sample offsets: Saturn MD start FORENSIC 1991-08-21 vs JHora 1991-08-14 (+7d); Mercury-Saturn AD FORENSIC 2024-12-12 vs JHora 2024-12-04 (+8d); Ketu MD FORENSIC 2027-08-21 vs JHora 2027-08-14 (+7d).
-     AM-JIS discipline: All retrodictive fits and timing analyses use FORENSIC engine dates. When engaging external reviewers using JHora, note the offset explicitly.
+     MARSYS-JIS discipline: All retrodictive fits and timing analyses use FORENSIC engine dates. When engaging external reviewers using JHora, note the offset explicitly.
      Root cause (ayanamsa-level): FORENSIC uses Lahiri 23°37'58" vs JHora's 23°37'09.78" (+48 arcsec difference) — this propagates into Moon position and thereby balance-of-dasha.
      See GAP.09 in GOVERNANCE_STACK §3. -->
 
@@ -842,7 +842,7 @@ Naisargika (natural), Drik (aspectual).
      Jagannatha Hora engine (verified via JHora .docx export in AUDIT_REPORT_v1_0 WS-1b) ranks:
          Saturn #1 (8.79 rupas), Sun #2 (8.18), Jupiter #3 (7.68), Moon #4 (6.44), Mercury #5 (6.09), Mars #6 (5.34), Venus #7 (4.80)
      Component-level divergences primarily in Sthana (Saturn +21v JHora vs FORENSIC), Kala (Mercury −37v, Saturn +57v), and Drik (Sun +12v).
-     AM-JIS discipline: All Shadbala citations in Domain Reports cite FORENSIC values (Sun #1). When engaging external reviewers or JHora-using acharyas, note the dual-engine variance explicitly. Rank-dependent claims ("Sun is the strongest planet") should acknowledge engine convention.
+     MARSYS-JIS discipline: All Shadbala citations in Domain Reports cite FORENSIC values (Sun #1). When engaging external reviewers or JHora-using acharyas, note the dual-engine variance explicitly. Rank-dependent claims ("Sun is the strongest planet") should acknowledge engine convention.
      See GAP.07 in GOVERNANCE_STACK §3 for resolution path. -->
 
 ### §6.2 Shadbala — Totals and Ranking
@@ -913,7 +913,7 @@ Naisargika (natural), Drik (aspectual).
          Scorpio: FORENSIC=5, JHora=4 (Δ=−1)
          Capricorn: FORENSIC=2, JHora=3 (Δ=+1)
      Consequence: SAV per-sign column sums differ in 4 signs (Gemini F28/J27, Libra F33/J34, Scorpio F33/J32, Capricorn F26/J27). SAV grand total 337 matches in both engines — the 4 row-level differences cancel in aggregate.
-     AM-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims (e.g., "Libra has highest SAV at 33") are stable because the +1/−1 cancellations preserve rank ordering.
+     MARSYS-JIS discipline: Domain Reports cite FORENSIC BAV/SAV values. Rank-dependent claims (e.g., "Libra has highest SAV at 33") are stable because the +1/−1 cancellations preserve rank ordering.
      See GAP.08 in GOVERNANCE_STACK §3. -->
 
 ### §7.1 BAV — Per-Planet Bindus by Sign

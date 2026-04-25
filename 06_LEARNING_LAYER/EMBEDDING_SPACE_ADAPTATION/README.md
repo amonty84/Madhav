@@ -26,7 +26,7 @@ STATUS: STUB — activates at M4. Do not populate until Voyage-3-large corpus lo
 ## What this mechanism does
 
 LL.3 layers adapter weights (LoRA-style or equivalent) on the base Voyage-3-large
-embedding to shape the embedding space toward the AM-JIS corpus's signal/domain semantics.
+embedding to shape the embedding space toward the MARSYS-JIS corpus's signal/domain semantics.
 The output is a set of adapter weights at `embedding_adapters/` (**does not yet exist**).
 Adapters are added at retrieval time, not by replacing the base embedding.
 

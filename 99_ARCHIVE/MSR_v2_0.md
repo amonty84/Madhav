@@ -19,7 +19,7 @@ v2_2_changelog: "§0-SCHEMA.2 version-diff notes stripped; inline correction com
 ---
 
 # MASTER SIGNAL REGISTER v2.2 — Abhisek Mohanty
-## AM-JIS L2.5 Holistic Synthesis
+## MARSYS-JIS L2.5 Holistic Synthesis
 ### FIX_SESSION_003 + MSR_EXPANSION | 2026-04-19 | **500 signals**
 
 ---
@@ -151,7 +151,7 @@ SIG.MSR.404:
   valence: benefic
   temporal_activation: transit-triggered
   supporting_rules:
-    - "AM-JIS canonical timed-BB framing: natal BB Libra 8°03'; progression rate **6°/year** per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F (contradiction §3.1 RESOLVED 2026-04-19 in CONTRADICTION_REGISTRY_v1_1)."
+    - "MARSYS-JIS canonical timed-BB framing: natal BB Libra 8°03'; progression rate **6°/year** per FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F (contradiction §3.1 RESOLVED 2026-04-19 in CONTRADICTION_REGISTRY_v1_1)."
     - "Simple linear (42 × 6°) arithmetic from BB alone does not govern the crystallization thesis; **Gemini 3H loading** is established independently by UL + A5 + A11 + **Hora Lagna (JH 3H Gemini)** co-tenancy — MSR.404 is a **convergence signal**, not a pure single-formula progression proof."
     - "Gemini 3H loading at age 42: UL (Gemini 3H) + A5 + A11 + Hora Lagna (JH confirmed) + BB progression = FIVE-FOLD activation, not three-fold as v1.0 claimed."
     - "Mercury rules Gemini 3H — the chart's primary planet governs the convergence sign"
@@ -618,7 +618,7 @@ SIG.MSR.432:
     - "Moon and Rahu both in Gemini D-9 = AK and PK conjunct in D-9 = classical Raja Yoga formation"
     - "Note: Under 7-karaka (v6.0) system, PK = Mars (in 7H D-1). This yoga is valid specifically under the 8-karaka reading used by JH."
     - "Loyal following quality = consistent with the chart's social-network (11H Moon AK) and dharmic-authority architecture"
-  falsifier: "This yoga requires 8-karaka system with Rahu = PK. Under 7-karaka, this specific yoga does not form (different planets are AK and PK). Both systems noted; AM-JIS uses 7-karaka primary with 8-karaka as supplementary."
+  falsifier: "This yoga requires 8-karaka system with Rahu = PK. Under 7-karaka, this specific yoga does not form (different planets are AK and PK). Both systems noted; MARSYS-JIS uses 7-karaka primary with 8-karaka as supplementary."
   domains_affected: [career, relationships, spirit]
   confidence: 0.75
   v6_ids_consumed: [D9.MOON, D9.RAHU, KRK.C.AK]

@@ -3,14 +3,14 @@ artifact: AUDIT_REPORT_v1_0.md
 version: 1.0
 status: CLOSED
 date: 2026-04-18
-scope: "Comprehensive data-integrity audit of AM-JIS corpus Sessions 1–44 (~40 artifacts, ~700K words). Read-only audit; flags findings for a subsequent fix-session."
+scope: "Comprehensive data-integrity audit of MARSYS-JIS corpus Sessions 1–44 (~40 artifacts, ~700K words). Read-only audit; flags findings for a subsequent fix-session."
 audit_mode: READ-ONLY (no corpus artifacts modified)
 external_ground_truth: JHora/*.docx (JH 1, JH 3, JH 4) via textutil
 internal_formula_verification: python3 one-liners against FORENSIC v6.0 stated formulas
 parent_plan: /Users/Dev/.claude/plans/abundant-hugging-sedgewick.md
 ---
 
-# AUDIT_REPORT_v1_0 — AM-JIS Data-Integrity Audit
+# AUDIT_REPORT_v1_0 — MARSYS-JIS Data-Integrity Audit
 
 ## §1 — EXECUTIVE SUMMARY
 
@@ -603,7 +603,7 @@ artifact: AUDIT_REPORT_v1_0.md
 version: 1.0
 status: CLOSED
 session_context: Comprehensive data-integrity audit (6 workstreams) executed 2026-04-18
-audit_scope: "AM-JIS Sessions 1–44 corpus (~40 artifacts, ~700K words, ~47K lines across 5 analytical layers)"
+audit_scope: "MARSYS-JIS Sessions 1–44 corpus (~40 artifacts, ~700K words, ~47K lines across 5 analytical layers)"
 findings_total: 41
 findings_by_severity: {CRITICAL: 13, HIGH: 10, MEDIUM: 12, LOW: 6}
 overall_integrity_verdict: PASS-WITH-CONDITIONS

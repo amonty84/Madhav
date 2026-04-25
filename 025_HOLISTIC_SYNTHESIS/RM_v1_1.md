@@ -18,7 +18,7 @@ schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
 rebuild_rationale: "RM_v1_0 had extensive residual Jupiter-from-4H aspect chain errors (10+ element blocks affected: HSE_1, HSE_4_CANCER, PLN_SUN, PLN_RAHU, PLN_KETU, PLN_MOON). v1.1 rebuilds using CORRECTED Jupiter placement (Sagittarius 9H own sign) and CORRECTED Jupiter aspects (5th→1H, 7th→3H, 9th→5H — NOT 8H/10H/12H). 30-element coverage preserving v1.0's structural insights where not dependent on the Jupiter error."
 ---
 
-# AM-JIS — Resonance Map v1.1
+# MARSYS-JIS — Resonance Map v1.1
 ## Abhisek Mohanty Jyotish Intelligence System
 ### 2026-04-18 | CLOSED
 

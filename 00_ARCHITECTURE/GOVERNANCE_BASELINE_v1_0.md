@@ -24,7 +24,7 @@ role: >
   schema_validator.py, mirror_enforcer.py) operate under the steady-state cadence
   declared in ONGOING_HYGIENE_POLICIES_v1_0.md.
 consumers:
-  - Every future session opening the AM-JIS project — verifies rebuild was closed
+  - Every future session opening the MARSYS-JIS project — verifies rebuild was closed
   - ONGOING_HYGIENE_POLICIES_v1_0.md §H quarterly governance pass — uses this file
     as the baseline-state anchor for drift comparison
   - CURRENT_STATE_v1_0.md — cites this file as the rebuild-close artifact
@@ -35,7 +35,7 @@ changelog:
 ---
 
 # GOVERNANCE BASELINE v1.0
-## AM-JIS Project — Step 0 → Step 15 Governance Rebuild Closure Record
+## MARSYS-JIS Project — Step 0 → Step 15 Governance Rebuild Closure Record
 
 *Produced in Step 15 of the Step 0 → Step 15 governance rebuild.*
 *Status: CLOSED — this artifact is a point-in-time sealed record.*
@@ -44,7 +44,7 @@ changelog:
 
 ## §1 — Declaration
 
-**The Step 0 → Step 15 AM-JIS governance rebuild is closed on 2026-04-24.**
+**The Step 0 → Step 15 MARSYS-JIS governance rebuild is closed on 2026-04-24.**
 
 This file is the baseline state record. It seals the rebuild arc that began on 2026-04-23 when a grounding audit (`GROUNDING_AUDIT_v1_0.md`) found 32 findings (4 CRITICAL, 11 HIGH, 12 MEDIUM, 5 LOW) spanning version drift, phantom references, absent enforcement, and schema gaps across the project's governance surfaces.
 
@@ -85,7 +85,7 @@ One row per finding from `GROUNDING_AUDIT_v1_0.md`. Columns: finding ID, severit
 | **GA.5** — MACRO_PLAN stale: "four L3 reports stale" | HIGH | Step 3 | `MACRO_PLAN_v2_0.md §M1` removes stale claim; all nine L3 reports at v1.1+ per GAP_RESOLUTION_SESSION | RESOLVED |
 | **GA.6** — Learning Layer described in present tense; directory absent | MEDIUM | Step 11 | `LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md` (verdict SCAFFOLD); `06_LEARNING_LAYER/` scaffold with LL.1–LL.4 stubs clearly marked `STATUS: STUB — activates at M4` | RESOLVED |
 | **GA.7** — project_state.md anchors to superseded twinkly-puzzling-quokka.md | HIGH | Step 5 | `.gemini/project_state.md` rewritten at Step 5 (twinkly reference dropped; PHASE_B_PLAN v1.0.2 + MP v2.0 pointers adopted) | RESOLVED |
-| **GA.8** — AM_JIS_BOOTSTRAP_HANDOFF.md existence unverified | LOW | Step 12 | File confirmed to exist; retired at Step 12 per native decision with SUPERSEDED banner pointing to successors (CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2 + MACRO_PLAN_v2_0 + CURRENT_STATE_v1_0) | RESOLVED |
+| **GA.8** — MARSYS_JIS_BOOTSTRAP_HANDOFF.md existence unverified | LOW | Step 12 | File confirmed to exist; retired at Step 12 per native decision with SUPERSEDED banner pointing to successors (CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2 + MACRO_PLAN_v2_0 + CURRENT_STATE_v1_0) | RESOLVED |
 | **GA.9** — LEL v1.2 not listed in CLAUDE.md | CRITICAL | Step 9 | `CLAUDE.md v2.0 §E` Concurrent workstreams: LEL v1.2 explicitly surfaced with M4 prerequisite and cadence; `CANONICAL_ARTIFACTS §1` LEL row registered | RESOLVED |
 | **GA.10** — GOVERNANCE_STACK unreferenced in CLAUDE.md | HIGH | Step 9 | `CLAUDE.md v2.0 §D` cites CANONICAL_ARTIFACTS by reference; GOVERNANCE_STACK is a canonical artifact in `CANONICAL_ARTIFACTS §1`; session templates reference it via close-checklist machinery | RESOLVED |
 | **GA.11** — MAINTENANCE/FALSIFIER/CONTRADICTION/AUDIT artifacts unreferenced | MEDIUM | Steps 9 + 12 | Accepted as correct scope-separation per `PROJECT_ARCHITECTURE_v2_2 §B.2` + `ONGOING_HYGIENE_POLICIES §0`: those are corpus-subject-layer maintenance artifacts; governance-layer mandatory reading covers governance surfaces only. Not an omission — a design boundary. | ACCEPTED_AS_POLICY |
@@ -176,7 +176,7 @@ Superseded artifacts (retained in-place per `ONGOING_HYGIENE_POLICIES §A`):
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_1.md` | `FILE_REGISTRY_v1_2.md` | 5 |
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_2.md` | `FILE_REGISTRY_v1_3.md` | 5A |
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` | `FILE_REGISTRY_v1_4.md` | 12 |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | CLAUDE.md v2.0 + PA_v2_2 + MP_v2_0 + CURRENT_STATE | 12 |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | CLAUDE.md v2.0 + PA_v2_2 + MP_v2_0 + CURRENT_STATE | 12 |
 | `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md` | `LIFE_EVENT_LOG_v1_2.md` | 12 |
 
 ---

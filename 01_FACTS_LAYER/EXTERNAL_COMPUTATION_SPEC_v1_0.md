@@ -1,6 +1,6 @@
 ---
 document: EXTERNAL COMPUTATION SPEC
-project: AM-JIS (Abhisek Mohanty Jyotish Intelligence System)
+project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer) — sibling to FORENSIC_DATA and LIFE_EVENT_LOG
 artifact_id: EXTERNAL_COMPUTATION_SPEC_v1_0
 version: 1.0

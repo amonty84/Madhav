@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-schema_validator.py — AM-JIS governance schema validator.
+schema_validator.py — MARSYS-JIS governance schema validator.
 
 # Implements: GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §I
 

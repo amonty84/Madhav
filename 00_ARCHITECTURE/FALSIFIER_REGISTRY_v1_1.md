@@ -22,7 +22,7 @@ l1_sources:
 
 ## §1 — PURPOSE
 
-A legitimate analytical corpus articulates what would refute its claims. This registry lists the major claims in AM-JIS and the specific observations that would falsify each. v1.1 updates four entries where the v8.0 JH reconciliation either falsified a claim, corrected a falsifier's composition, or required revision.
+A legitimate analytical corpus articulates what would refute its claims. This registry lists the major claims in MARSYS-JIS and the specific observations that would falsify each. v1.1 updates four entries where the v8.0 JH reconciliation either falsified a claim, corrected a falsifier's composition, or required revision.
 
 ---
 
@@ -315,5 +315,5 @@ When new life events occur (per LIFE_EVENT_LOG updates):
 
 ---
 
-*FALSIFIER_REGISTRY_v1_1.md — AM-JIS FIX_SESSION_003 — 2026-04-18 — CURRENT*
+*FALSIFIER_REGISTRY_v1_1.md — MARSYS-JIS FIX_SESSION_003 — 2026-04-18 — CURRENT*
 *Parent: MSR_v2_0.md, UCN_v3_0.md — L1 source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md*

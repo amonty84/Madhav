@@ -1,6 +1,6 @@
 ---
 document: L2.5 HOLISTIC SYNTHESIS — CHART GRAPH MODEL
-project: AM-JIS
+project: MARSYS-JIS
 layer: L2.5 (Holistic Synthesis Layer)
 artifact_id: CGM_v2_0
 version: 2.0

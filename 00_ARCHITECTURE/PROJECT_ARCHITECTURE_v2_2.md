@@ -1,6 +1,6 @@
 ---
 document: PROJECT MASTER ARCHITECTURE BLUEPRINT
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 2.2
 supersedes: 2.1 (2026-04-17) and 2.0 (2026-04-17 mid) and 1.0 (archived)
@@ -51,7 +51,7 @@ audience:
   quaternary: Independent classical-Jyotish acharyas invited for review
 ---
 
-# AM-JIS — PROJECT MASTER ARCHITECTURE BLUEPRINT v2.2
+# MARSYS-JIS — PROJECT MASTER ARCHITECTURE BLUEPRINT v2.2
 
 ## §A — EXECUTIVE FRAME
 
@@ -576,7 +576,7 @@ v2.2 replaces v2.1's §E entirely. The v2.1 tree named `PROJECT_ARCHITECTURE_v2_
 │   └── project_state.md                     ← Gemini dynamic state (MP.2 mirror of Claude composite state)
 │
 ├── CLAUDE.md                                ← Claude master instructions (MP.1 authoritative side)
-├── AM_JIS_BOOTSTRAP_HANDOFF.md              ← session bootstrap document (referenced from CLAUDE.md item #1)
+├── MARSYS_JIS_BOOTSTRAP_HANDOFF.md              ← session bootstrap document (referenced from CLAUDE.md item #1)
 ├── SESSION_RESUME_PROMPT.md                 ← session-resume context prompt
 │
 ├── 00_ARCHITECTURE/
@@ -747,7 +747,7 @@ v2.2 replaces v2.1's §E entirely. The v2.1 tree named `PROJECT_ARCHITECTURE_v2_
 - `.geminirules` and `.gemini/project_state.md` are listed **at project root** (not under 00_ARCHITECTURE/) because that is where they live on disk and where Gemini reads them from by convention.
 - Superseded versions are retained (never deleted) per §B.8 versioning discipline. The authoritative CURRENT/SUPERSEDED/ARCHIVAL/CLOSED status lives in `FILE_REGISTRY_v1_1.md`; this §E shows the tree shape only.
 - `B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md` carries a WARN.5-tracked live `MACRO_PLAN_v1_0` pointer per STEP_LEDGER; its correction is booked for `PHASE_B_PLAN v1.0.3` per the deferral rationale recorded at STEP_5 close. This is a tracked deferral, not a drift.
-- `AM_JIS_BOOTSTRAP_HANDOFF.md` similarly carries WARN.4-tracked stale MP v1.0 + architecture v2.1 pointers; its refresh is booked for Step 9 (CLAUDE.md rebuild) which is the natural update vehicle for a CLAUDE.md companion document.
+- `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` similarly carries WARN.4-tracked stale MP v1.0 + architecture v2.1 pointers; its refresh is booked for Step 9 (CLAUDE.md rebuild) which is the natural update vehicle for a CLAUDE.md companion document.
 
 ---
 
@@ -1036,7 +1036,7 @@ v22_finding_coverage:
   GA.5 (L3 reports stale): addressed in §D.5 + §E (all nine at v1.1+)
   GA.6 (06_LEARNING_LAYER phantom): addressed in §D.10 + §E (PENDING per Step 11)
   GA.7 (twinkly-puzzling-quokka in project_state.md): resolved at Step 5; referenced in §L for context
-  GA.8 (AM_JIS_BOOTSTRAP_HANDOFF unverified): acknowledged in §E; WARN.4 tracked deferral to Step 9
+  GA.8 (MARSYS_JIS_BOOTSTRAP_HANDOFF unverified): acknowledged in §E; WARN.4 tracked deferral to Step 9
   GA.9 (LEL unreferenced): addressed in §D.2 (LEL promoted to cross-cutting per MP §CW.LEL)
   GA.10 (GOVERNANCE_STACK unreferenced): addressed in §D.9 + §E
   GA.11 (other architectural artifacts unreferenced): addressed in §E (full 00_ARCHITECTURE tree listed)
@@ -1049,7 +1049,7 @@ v22_deliberate_deferrals:
   - "Scope: Step 11 Learning Layer scaffold decision. v2.2 declares 06_LEARNING_LAYER/ PENDING in §D.10 and §E."
   - "Scope: Step 7 CANONICAL_ARTIFACTS machine-enforceable mirror inventory. v2.2 carries the architecture-layer first pass in §D.11.2; the authoritative machine-readable list lives at Step 7."
   - "Scope: WARN.2 (PHASE_B_PLAN live MP v1.0 pointers) → tracked to PHASE_B_PLAN v1.0.3 cycle."
-  - "Scope: WARN.4 (AM_JIS_BOOTSTRAP_HANDOFF stale pointers) → tracked to Step 9 CLAUDE.md rebuild cycle."
+  - "Scope: WARN.4 (MARSYS_JIS_BOOTSTRAP_HANDOFF stale pointers) → tracked to Step 9 CLAUDE.md rebuild cycle."
   - "Scope: WARN.5 (B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE stale MP v1.0 pointer) → tracked to PHASE_B_PLAN v1.0.3 cycle."
 
 protection_clauses (preserved from v2.1):

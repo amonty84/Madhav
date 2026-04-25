@@ -208,7 +208,7 @@ The v1.0 §7.4 was titled "The 7H Relational-Health Mirror (Saham Roga Coinciden
 
 > **Kalachakra Paramayush: 85 years (Savya scheme)**
 
-The Kalachakra system (the "time-wheel" longevity method) has computed a maximum lifespan indicator of **85 years** under the Savya (forward-moving) scheme for this nativity. This is the longevity figure adopted by AM-JIS as the authoritative quantitative anchor.
+The Kalachakra system (the "time-wheel" longevity method) has computed a maximum lifespan indicator of **85 years** under the Savya (forward-moving) scheme for this nativity. This is the longevity figure adopted by MARSYS-JIS as the authoritative quantitative anchor.
 
 **What the Kalachakra system computes.** The Kalachakra Paramayush is the maximum longevity indicator within the Kalachakra Nakshatra Dasha system. It represents the sum of the planetary periods available under the Kalachakra scheme for the natal Moon's nakshatra and position. The Paramayush is NOT a prediction that the native will die at age 85 — it is the maximum available period in the system. Actual longevity depends on reductions (Balarishta, dashas that exhaust early, health-depleting transits) and extensions (strong lagna, Jupiter aspects, benefic dashas providing full periods).
 
@@ -372,5 +372,5 @@ The v1.1 Health & Longevity Report has clarified two dimensions that v1.0 mapped
 
 ---
 
-*REPORT_HEALTH_LONGEVITY_v1_1.md — AM-JIS FIX_SESSION_003 — 2026-04-18*
+*REPORT_HEALTH_LONGEVITY_v1_1.md — MARSYS-JIS FIX_SESSION_003 — 2026-04-18*
 *Parent: UCN_v4_0.md — MSR source: MSR_v2_0.md — L1 source: FORENSIC_ASTROLOGICAL_DATA_v8_0.md (incorporates JHORA_TRANSCRIPTION_v8_0_SOURCE)*

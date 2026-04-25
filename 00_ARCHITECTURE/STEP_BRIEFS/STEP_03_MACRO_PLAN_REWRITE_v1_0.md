@@ -38,8 +38,8 @@ Produce the revised Macro Plan — either `MACRO_PLAN_v1_1.md` or `MACRO_PLAN_v2
 
 ```yaml
 ---
-document: AM-JIS MACRO PLAN — STRATEGIC ARC
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+document: MARSYS-JIS MACRO PLAN — STRATEGIC ARC
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 1.1 OR 2.0
 status: DRAFT_PENDING_REDTEAM

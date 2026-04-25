@@ -4,10 +4,10 @@ version: 1.0
 status: CLOSED
 session: 36
 date_closed: 2026-04-18
-scope: "Master index of all AM-JIS artifacts as of Session 36"
+scope: "Master index of all MARSYS-JIS artifacts as of Session 36"
 ---
 
-# FILE_INDEX_v1_0 — AM-JIS Master File Index
+# FILE_INDEX_v1_0 — MARSYS-JIS Master File Index
 ## Abhisek Mohanty Jyotish Intelligence System
 ### Session 36 | 2026-04-18 | CLOSED
 
@@ -18,7 +18,7 @@ scope: "Master index of all AM-JIS artifacts as of Session 36"
 ```
 /Users/Dev/Vibe-Coding/Apps/Madhav/
 ├── CLAUDE.md                                    # Project-root instructions
-├── AM_JIS_BOOTSTRAP_HANDOFF.md                  # Session-start handoff
+├── MARSYS_JIS_BOOTSTRAP_HANDOFF.md                  # Session-start handoff
 ├── 00_ARCHITECTURE/
 │   ├── PROJECT_ARCHITECTURE_v2_1.md             # Governing blueprint
 │   ├── SESSION_LOG.md                           # Chronological session log
@@ -96,7 +96,7 @@ scope: "Master index of all AM-JIS artifacts as of Session 36"
 ## READING ORDER FOR NEW READERS
 
 Recommended sequence for someone new to the corpus:
-1. AM_JIS_BOOTSTRAP_HANDOFF.md (context)
+1. MARSYS_JIS_BOOTSTRAP_HANDOFF.md (context)
 2. PROJECT_ARCHITECTURE_v2_1.md (blueprint)
 3. FORENSIC_ASTROLOGICAL_DATA_v6.0 (L1 facts)
 4. UCN_v1_1.md + UCN_v1_0.md (L2.5 integrated narrative)

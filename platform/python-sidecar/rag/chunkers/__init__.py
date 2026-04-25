@@ -1,5 +1,5 @@
 """
-chunkers — AM-JIS RAG Pipeline chunker package.
+chunkers — MARSYS-JIS RAG Pipeline chunker package.
 Phase B.2. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.2 + chunker_spec_v1_0.md §2.
 Shared utilities: token counting (cl100k_base), truncation, Cloud SQL write (psycopg),
 MSR reference normalization, staleness register loader.

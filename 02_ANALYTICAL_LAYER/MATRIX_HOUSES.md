@@ -1,6 +1,6 @@
 ---
 document: L2 MODE B — HOUSE MATRIX
-project: AM-JIS
+project: MARSYS-JIS
 layer: L2 (Analytical Layer, Mode B — Exhaustive Coverage)
 artifact_id: MATRIX_HOUSES_v1_0
 version: 1.0

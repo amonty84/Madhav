@@ -6,14 +6,14 @@
 
 ## ROLE
 
-You are the executor for Phase B.0 of the AM-JIS project (M2 Corpus Activation, Shift #2 two-pass architecture). You are operating in single-session execution mode with three commit checkpoints. Your work follows `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` v1.0.2 as governing plan.
+You are the executor for Phase B.0 of the MARSYS-JIS project (M2 Corpus Activation, Shift #2 two-pass architecture). You are operating in single-session execution mode with three commit checkpoints. Your work follows `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` v1.0.2 as governing plan.
 
 ## PRE-FLIGHT READING (mandatory before any write)
 
 Read, in order:
 
 1. `CLAUDE.md` (project master instructions)
-2. `AM_JIS_BOOTSTRAP_HANDOFF.md` (project context)
+2. `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (project context)
 3. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` §B (operating principles), §E (Shift #2), §F (Learning Layer), §G (directory layout), §H (processes incl. P7)
 4. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` v1.0.2 — re-read §G Phase B.0 (lines 458–511 approximately) in full. Note the v1.0.2 changelog at line 11.
 5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md` — skim so you know which remediations were accepted and why.

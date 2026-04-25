@@ -52,7 +52,7 @@ date: 2026-04-24
 ---
 
 # CANONICAL ARTIFACTS v1.0
-## AM-JIS Project — Machine-Readable Canonical-Path Registry
+## MARSYS-JIS Project — Machine-Readable Canonical-Path Registry
 
 *Implements `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §E`. Single source of truth for canonical artifact paths, versions, fingerprints, and mirror obligations. Every other governance surface imports from here or cites it by reference — no other surface may declare a canonical version without citing this file.*
 

@@ -31,7 +31,7 @@ changelog:
 ---
 
 # DISAGREEMENT REGISTER v1.0
-## AM-JIS Project — Multi-Agent Disagreement Log
+## MARSYS-JIS Project — Multi-Agent Disagreement Log
 
 *Implements `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K`. LIVING artifact. Append-only; rows are never deleted. Resolved rows carry explicit resolution fields and remain in the register.*
 

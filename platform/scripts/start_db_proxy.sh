@@ -1,5 +1,5 @@
 #!/bin/bash
-# AM-JIS — Start Cloud SQL Auth Proxy for local development
+# MARSYS-JIS — Start Cloud SQL Auth Proxy for local development
 # Run this before any RAG pipeline session (embed.py, chunk.py, queries)
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

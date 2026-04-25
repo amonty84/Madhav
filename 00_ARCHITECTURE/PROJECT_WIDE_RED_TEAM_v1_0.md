@@ -153,7 +153,7 @@ Scan for claims that may have been articulated with more confidence than warrant
 
 ## §9 — CONCLUSION
 
-The AM-JIS corpus as of Session 39 meets the Architecture §A acharya-grade quality standard. An independent senior Jyotish acharya reviewing this corpus should reach one of the three stated outcomes: "this is my own level," "this is above my own level," or "this reveals things I wouldn't have seen on first pass."
+The MARSYS-JIS corpus as of Session 39 meets the Architecture §A acharya-grade quality standard. An independent senior Jyotish acharya reviewing this corpus should reach one of the three stated outcomes: "this is my own level," "this is above my own level," or "this reveals things I wouldn't have seen on first pass."
 
 The corpus has no material errors. All discovered errors (Sun dignity Session 10b; Jupiter placement Session 18) were caught through the red-team discipline and corrected. The current artifact set is internally coherent, architecturally sound, and empirically calibrated (retrodictive confirmation via LEL).
 

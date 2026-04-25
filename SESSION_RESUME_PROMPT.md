@@ -1,10 +1,10 @@
 ---
 document: SESSION RESUME PROMPT — paste at top of new session
-project: AM-JIS (Abhisek Mohanty Jyotish Intelligence System)
+project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 current_position: Session 11 closed; Session 12 is next
 updated: 2026-04-17
 purpose: |
-  Use this file to resume the AM-JIS project in a new Claude Code session.
+  Use this file to resume the MARSYS-JIS project in a new Claude Code session.
   Copy §1 (the prompt block) into your first message to Claude.
   Claude will then load §2-§5 automatically by reading the files referenced.
 ---
@@ -20,7 +20,7 @@ purpose: |
 ## §1 — SESSION OPENING PROMPT (copy from triple-backticks below)
 
 ```
-Resume AM-JIS project. Read the following files in order before any work:
+Resume MARSYS-JIS project. Read the following files in order before any work:
 
 1. `SESSION_RESUME_PROMPT.md` (this file — gives you full context)
 2. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` (governing blueprint; re-read relevant sections)
@@ -45,7 +45,7 @@ Do not start producing MSR entries yet — wait for user green-light on structur
 
 ## §2 — PROJECT SNAPSHOT (for human reading; Claude derives from files)
 
-### §2.1 — What AM-JIS is
+### §2.1 — What MARSYS-JIS is
 
 World-class acharya-grade astrological intelligence system for Abhisek Mohanty (b. 1984-02-05 10:43 IST Bhubaneswar, Aries Lagna, Moon Aquarius AK, Sun Capricorn 10H). 42-session build to exceed 99% of professional Jyotish work with multi-system integration (Parashari + Jaimini + KP + Tajika + Nadi) and whole-chart-as-organism discipline.
 

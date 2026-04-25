@@ -1,4 +1,4 @@
-# AM-JIS Session Log
+# MARSYS-JIS Session Log
 
 <!-- SCHEMA BANNER — installed at Step 10 close 2026-04-24 -->
 
@@ -16,7 +16,7 @@ Chronological log of all project sessions. Every session appends an entry here.
 - `PROJECT_ARCHITECTURE_v1_0.md` (initial blueprint; superseded)
 - `PROJECT_ARCHITECTURE_v2_0.md` (L2.5 Holistic Synthesis added; superseded)
 - `PROJECT_ARCHITECTURE_v2_1.md` (all §J decisions resolved; CURRENT)
-- `AM_JIS_BOOTSTRAP_HANDOFF.md` (handoff document for Claude Code/Cowork)
+- `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (handoff document for Claude Code/Cowork)
 **Key outcomes**:
 - Five-layer pyramid architecture locked (L1, L2, L2.5, L3, L4)
 - 9 workstreams defined
@@ -29,7 +29,7 @@ Chronological log of all project sessions. Every session appends an entry here.
 ## Session 1.5 — Bootstrap Execution (2026-04-17, this session)
 **Environment**: Claude Code (CLI, working dir `/Users/Dev/Vibe-Coding/Apps/Madhav`)
 **Output produced**:
-- AM-JIS folder structure created (00_ARCHITECTURE, 01_FACTS_LAYER, 02_ANALYTICAL_LAYER, 025_HOLISTIC_SYNTHESIS, 03_DOMAIN_REPORTS, 04_REMEDIAL_CODEX, 05_TEMPORAL_ENGINES, 06_QUERY_INTERFACE, 99_ARCHIVE)
+- MARSYS-JIS folder structure created (00_ARCHITECTURE, 01_FACTS_LAYER, 02_ANALYTICAL_LAYER, 025_HOLISTIC_SYNTHESIS, 03_DOMAIN_REPORTS, 04_REMEDIAL_CODEX, 05_TEMPORAL_ENGINES, 06_QUERY_INTERFACE, 99_ARCHIVE)
 - 4 pre-existing files placed in correct subfolders by native
 - Root `CLAUDE.md` created
 - 5 subfolder `CLAUDE.md` files created (00_ARCHITECTURE, 01_FACTS_LAYER, 02_ANALYTICAL_LAYER, 025_HOLISTIC_SYNTHESIS, 03_DOMAIN_REPORTS)
@@ -913,7 +913,7 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 
 ### Sessions 35-38: Governance Stack
 - **Session 35**: `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` — Version registry (40 artifacts tracked), confidence ledger, gap register (10 gaps consolidated), change-control protocol
-- **Session 36**: `00_ARCHITECTURE/FILE_INDEX_v1_0.md` — Master index of all AM-JIS artifacts
+- **Session 36**: `00_ARCHITECTURE/FILE_INDEX_v1_0.md` — Master index of all MARSYS-JIS artifacts
 - **Session 37**: `00_ARCHITECTURE/FALSIFIER_REGISTRY_v1_0.md` — 11 major claims with specific falsifiers; empirical testing protocol
 - **Session 38**: `00_ARCHITECTURE/CONTRADICTION_REGISTRY_v1_0.md` — 2 resolved errors (Sun dignity, Jupiter placement); 2 open items (BB method, D9 tension); 7 architectural contradictions preserved as curriculum
 
@@ -936,7 +936,7 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 - **Red-team passes completed**: 4 (L2.5 Session 18, L3 Session 24, Phase 5 Session 32, Project-wide Session 39)
 
 ### Project Status
-**PHASE 1-6 EXECUTION COMPLETE.** The AM-JIS corpus is architecturally complete. Future work transitions to Phase 7 (Living Project maintenance), Facts Layer v8.0 upgrade when native executes Jagannatha Hora export, and potential external acharya review.
+**PHASE 1-6 EXECUTION COMPLETE.** The MARSYS-JIS corpus is architecturally complete. Future work transitions to Phase 7 (Living Project maintenance), Facts Layer v8.0 upgrade when native executes Jagannatha Hora export, and potential external acharya review.
 
 **Known outstanding items**:
 1. Facts Layer v8.0 (resolves 8 of 10 gaps via Jagannatha Hora export)
@@ -952,7 +952,7 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 
 ## FIX_SESSION_001 — Reconciliation of AUDIT_REPORT_v1_0 Findings (2026-04-18, CLOSED)
 
-**Context**: AUDIT_REPORT_v1_0 (2026-04-18) found 41 data-integrity discrepancies across the AM-JIS corpus (13 CRITICAL, 10 HIGH, 12 MEDIUM, 6 LOW). Native requested a reconciliation plan + implementation. Plan written as RECONCILIATION_PLAN_v1_0.md organizing findings into 6 priority fix-sessions; execution completed in single continuous session.
+**Context**: AUDIT_REPORT_v1_0 (2026-04-18) found 41 data-integrity discrepancies across the MARSYS-JIS corpus (13 CRITICAL, 10 HIGH, 12 MEDIUM, 6 LOW). Native requested a reconciliation plan + implementation. Plan written as RECONCILIATION_PLAN_v1_0.md organizing findings into 6 priority fix-sessions; execution completed in single continuous session.
 
 **Artifacts produced**:
 - `00_ARCHITECTURE/RECONCILIATION_PLAN_v1_0.md` (NEW — strategy document)
@@ -1008,7 +1008,7 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 
 **Corpus integrity verdict**: PASS (unconditional for internal review, post-FIX_SESSION_002). Previously PASS-WITH-TWO-DEFERRED-ITEMS.
 
-**AM-JIS Phase 1-6**: Architecturally and editorially COMPLETE. Transitions to:
+**MARSYS-JIS Phase 1-6**: Architecturally and editorially COMPLETE. Transitions to:
 - Phase 7 (Living Project — maintenance schedule active)
 - Facts Layer v8.0 upgrade (native-triggered)
 - External acharya validation (native-initiated)
@@ -1030,12 +1030,12 @@ Per native's instruction ("execute session 21 to session 44 all in one go bypass
 - §XII NEW — Three-Layer Mind Architecture (promoted from REPORT_PSYCHOLOGY §5-10; Aries Lagna drive + Moon AK Aquarius soul + Mercury Capricorn analytical; Saturn integrating)
 - §XIII NEW — Compensated-Emptiness Principle (promoted from REPORT_CHILDREN §4; chart-reading convention preventing over-pessimizing empty houses)
 - §XIV NEW — BB Progression Methodology (6°/year from 60-year completion cycle formalized; age-by-age table; MSR.404 clarification)
-- §XV NEW — Dual-Engine Reconciliation Meta-Note (Shadbala/Ashtakavarga/Vimshottari variance between FORENSIC and JHora; AM-JIS adopts FORENSIC consistently while documenting JHora variance transparently)
+- §XV NEW — Dual-Engine Reconciliation Meta-Note (Shadbala/Ashtakavarga/Vimshottari variance between FORENSIC and JHora; MARSYS-JIS adopts FORENSIC consistently while documenting JHora variance transparently)
 - §XVI, XVII — metadata + changelog
 
 **Corpus state post UCN v2.0**: All L2.5 promotions from L3 synthesis are now at mother-document level. All process-learnings from AUDIT_REPORT are captured as operating instructions. All dual-engine variances are explicitly acknowledged. UCN v2.0 is the synthesis-ceiling achievable without Facts Layer v8.0 data.
 
-**Corpus integrity**: PASS. AM-JIS Phase 1-6 architecturally + editorially + synthetically COMPLETE. Future UCN v3.0 scheduled post-Facts-Layer-v8.0 + external acharya review (no target date).
+**Corpus integrity**: PASS. MARSYS-JIS Phase 1-6 architecturally + editorially + synthetically COMPLETE. Future UCN v3.0 scheduled post-Facts-Layer-v8.0 + external acharya review (no target date).
 
 ---
 
@@ -1433,7 +1433,7 @@ Choose from:
 
 **Environment**: Claude Code (CLI) — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
 
-**Objective**: Complete the 8-layer verification (L0–L7) of the AM-JIS corpus per `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md`; unify fragmented MSR registers; build citation graph.
+**Objective**: Complete the 8-layer verification (L0–L7) of the MARSYS-JIS corpus per `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md`; unify fragmented MSR registers; build citation graph.
 
 **Outputs**:
 - **`025_HOLISTIC_SYNTHESIS/MSR_v3_0.md`** — Unified canonical MSR register (499 signals) merged from v1.0 and v2.0.
@@ -1460,11 +1460,11 @@ Choose from:
 
 **Environment**: Claude Code (CLI) — workspace `/Users/Dev/Vibe-Coding/Apps/Madhav`
 
-**Objective**: Install the Macro Plan as the strategic orientation layer of the AM-JIS project, prior to Phase 2 plan expansion.
+**Objective**: Install the Macro Plan as the strategic orientation layer of the MARSYS-JIS project, prior to Phase 2 plan expansion.
 
 **Outputs**:
 - **`00_ARCHITECTURE/MACRO_PLAN_v1_0.md`** — Created. Defines the ten-macro-phase arc (M1 Corpus Completeness → M10 LLM-Acharya Interface) and the cross-cutting Learning Layer substrate (`06_LEARNING_LAYER/`, to be scaffolded in Phase 2 expansion — not now).
-- **`AM_JIS_BOOTSTRAP_HANDOFF.md`** — Updated §4.1 Mandatory first actions to insert `MACRO_PLAN_v1_0.md` as item 3 (orientation-only read; sessions must not pre-build infrastructure for macro-phases later than the current one). Subsequent items renumbered.
+- **`MARSYS_JIS_BOOTSTRAP_HANDOFF.md`** — Updated §4.1 Mandatory first actions to insert `MACRO_PLAN_v1_0.md` as item 3 (orientation-only read; sessions must not pre-build infrastructure for macro-phases later than the current one). Subsequent items renumbered.
 
 **Scope discipline observed**:
 - No code written.
@@ -1568,7 +1568,7 @@ Choose from:
 
 **Key design decision — multi-conversation workflow**: the native requested confirmation that each step can be executed in a separate conversation with full context retained via the file system. The Step Brief + Step Ledger + Grounding Audit triad is the mechanism. A fresh conversation reading only (a) new CLAUDE.md banner (b) STEP_LEDGER (c) the active STEP_BRIEF has everything it needs. No cross-conversation memory is required. The Step Briefs are written with this constraint enforced.
 
-**Cross-check**: `Glob 00_ARCHITECTURE/*.md` confirmed all referenced files exist. PHASE_B_PLAN_v1_0.md and all Step Briefs verified present. `06_LEARNING_LAYER/` correctly absent (pending Step 11). `AM_JIS_BOOTSTRAP_HANDOFF.md` existence flagged for Step 6 verification (GA.8).
+**Cross-check**: `Glob 00_ARCHITECTURE/*.md` confirmed all referenced files exist. PHASE_B_PLAN_v1_0.md and all Step Briefs verified present. `06_LEARNING_LAYER/` correctly absent (pending Step 11). `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` existence flagged for Step 6 verification (GA.8).
 
 **Next session objective**: Execute **Step 1 — Exhaustive Macro Plan Critique (14 dimensions)**. The fresh conversation reads: (1) CLAUDE.md, (2) STEP_LEDGER_v1_0.md, (3) STEP_BRIEFS/STEP_01_MACRO_PLAN_CRITIQUE_v1_0.md, (4) GROUNDING_AUDIT_v1_0.md, (5) MACRO_PLAN_v1_0.md, (6) PROJECT_ARCHITECTURE_v2_1.md, (7) PHASE_B_PLAN_v1_0.md. Produces `00_ARCHITECTURE/MACRO_PLAN_CRITIQUE_v1_0.md`. Exhaustive, not triaged. Every finding gets a stable `MPC.N.M` ID.
 
@@ -2063,12 +2063,12 @@ Two surgical FIXes applied inline to MP v2.0 during this session. Three WARN-lev
 - `00_ARCHITECTURE/STEP_LEDGER_v1_0.md` — this file's own history (historical ✓).
 - `00_ARCHITECTURE/SESSION_LOG.md` — prior STEP_1/2/3/4 entries (historical ✓).
 - `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` line 5 (Macro-phase context header) + line 1005 (§N.10) — **live pointers; deferred per WARN.2** to a tracked PHASE_B_PLAN v1.0.3 amendment cycle. Not a Step-5 bug by spec §5.1 scope; documented here + STEP_LEDGER + GOVERNANCE_STACK §9.
-- `AM_JIS_BOOTSTRAP_HANDOFF.md` line 145 (pre-flight reading block) — **live pointer surfaced by §8 red-team grep; NEWLY REGISTERED AS WARN.4**; deferred to Step 9 CLAUDE.md rebuild cycle. Rationale: BOOTSTRAP is CLAUDE.md's companion orientation document; the natural update vehicle is Step 9 (which rebuilds CLAUDE.md's mandatory-reading architecture). Not in spec §5.1 S.1–S.10; spec-author implicitly reserved BOOTSTRAP for Step 9. The v1.0 file's own SUPERSEDED banner routes any future BOOTSTRAP reader to v2.0 in one hop, so deferral does not create a functional routing hazard.
+- `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` line 145 (pre-flight reading block) — **live pointer surfaced by §8 red-team grep; NEWLY REGISTERED AS WARN.4**; deferred to Step 9 CLAUDE.md rebuild cycle. Rationale: BOOTSTRAP is CLAUDE.md's companion orientation document; the natural update vehicle is Step 9 (which rebuilds CLAUDE.md's mandatory-reading architecture). Not in spec §5.1 S.1–S.10; spec-author implicitly reserved BOOTSTRAP for Step 9. The v1.0 file's own SUPERSEDED banner routes any future BOOTSTRAP reader to v2.0 in one hop, so deferral does not create a functional routing hazard.
 - `00_ARCHITECTURE/B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md` line 20 — **live pointer surfaced by §8 red-team grep; NEWLY REGISTERED AS WARN.5**; deferred to PHASE_B_PLAN v1.0.3 amendment cycle alongside WARN.2. Rationale: kickoff prompt is a Phase-B execution artifact (to be consumed by a fresh Claude Code session at B-execution resumption), not a governance-surface listed in spec §5.1 S.1–S.10. Cleanup belongs in the Phase-B amendment cycle.
 - `/.geminirules` + `/.gemini/project_state.md` — no live references remain (both rewritten at S.2 / S.3 to point at MP v2.0; `.geminirules` has two `MACRO_PLAN_v1_0` hits, both are supersede-chain / historical references).
 - `/CLAUDE.md` — item 3 re-pointed (the one hit is a supersede-chain reference — "v1.0 is SUPERSEDED — do not cite").
 
-Every `MACRO_PLAN_v1_0` hit is either (a) in the v1.0 file itself, (b) a supersede-chain pointer explicitly framing v1.0 as historical, or (c) inside STEP_BRIEFS / SESSION_LOG / STEP_LEDGER / critique / spec / red-team history artifacts — **with three live pointers remaining in files outside spec §5.1 S.1–S.10 scope**, classified above as WARN.2 (PHASE_B_PLAN, two lines), WARN.4 (AM_JIS_BOOTSTRAP_HANDOFF.md line 145), and WARN.5 (B0_KICKOFF_PROMPT line 20). All three deferred per the Step 5 up-front spec-scope discipline; all three covered by the v1.0 SUPERSEDED-banner routing safety net (a reader that follows any of these pointers lands on v1.0.md and is re-routed to v2.0 in one hop via the prepended banner). None block Step 5 close.
+Every `MACRO_PLAN_v1_0` hit is either (a) in the v1.0 file itself, (b) a supersede-chain pointer explicitly framing v1.0 as historical, or (c) inside STEP_BRIEFS / SESSION_LOG / STEP_LEDGER / critique / spec / red-team history artifacts — **with three live pointers remaining in files outside spec §5.1 S.1–S.10 scope**, classified above as WARN.2 (PHASE_B_PLAN, two lines), WARN.4 (MARSYS_JIS_BOOTSTRAP_HANDOFF.md line 145), and WARN.5 (B0_KICKOFF_PROMPT line 20). All three deferred per the Step 5 up-front spec-scope discipline; all three covered by the v1.0 SUPERSEDED-banner routing safety net (a reader that follows any of these pointers lands on v1.0.md and is re-routed to v2.0 in one hop via the prepended banner). None block Step 5 close.
 
 **Prompt 2 — CLAUDE.md and .geminirules cite the same version of every canonical artifact.** Eyeball diff:
 
@@ -2110,7 +2110,7 @@ The FILE_REGISTRY asymmetry in CLAUDE.md is a deliberate scope constraint of Ste
 - **WARN.2** — `PHASE_B_PLAN_v1_0.md` line 5 (Macro-phase context) + line 1005 (§N.10) update to name MP v2.0: book for PHASE_B_PLAN v1.0.3 amendment cycle (post-rebuild, or folded into the M2 resumption session per Step 15 close).
 - **WARN.3** — CW.PPL scaffold-anchor language harmonization between MP v2.0 and PHASE_B_PLAN: same cycle as WARN.2.
 - **WARN.1** — coordination note for Step 11 brief: `06_LEARNING_LAYER/` is scaffolded at PHASE_B_PLAN B.0 (M2 open); Step 11 scaffold decision must account for this precedence.
-- **WARN.4 (newly surfaced by §8 red-team grep)** — `AM_JIS_BOOTSTRAP_HANDOFF.md` line 145 pre-flight reading block still names MP v1.0. Defer to Step 9 CLAUDE.md rebuild cycle; the natural update vehicle is Step 9 (which rebuilds CLAUDE.md's mandatory-reading architecture). The v1.0 SUPERSEDED banner routes any BOOTSTRAP reader to v2.0 in one hop, so deferral is safe.
+- **WARN.4 (newly surfaced by §8 red-team grep)** — `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` line 145 pre-flight reading block still names MP v1.0. Defer to Step 9 CLAUDE.md rebuild cycle; the natural update vehicle is Step 9 (which rebuilds CLAUDE.md's mandatory-reading architecture). The v1.0 SUPERSEDED banner routes any BOOTSTRAP reader to v2.0 in one hop, so deferral is safe.
 - **WARN.5 (newly surfaced by §8 red-team grep)** — `00_ARCHITECTURE/B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md` line 20 kickoff-prompt pre-flight reading still names MP v1.0. Defer to PHASE_B_PLAN v1.0.3 amendment cycle (kickoff prompt is a Phase-B execution artifact, not a governance surface listed in spec §5.1).
 - **CLAUDE.md FILE_REGISTRY pointer** — §Canonical corpus artifact paths still cites `FILE_REGISTRY_v1_0.md`; Step 9 (CLAUDE.md rebuild) will refresh to `FILE_REGISTRY_v1_1.md` (or whatever version is current at that time).
 
@@ -2153,7 +2153,7 @@ The FILE_REGISTRY asymmetry in CLAUDE.md is a deliberate scope constraint of Ste
 - **§D.9** (Governance Stack): live scope replaces v2.1 "Unchanged from v1.0" pointer. Current state enumerated (GOVERNANCE_STACK_v1_0 + FILE_REGISTRY_v1_1 [now v1_2 post-Step-5A] + LIVING_PROJECT_MAINTENANCE_GUIDE + MAINTENANCE_SCHEDULE + FALSIFIER_REGISTRY + CONTRADICTION_REGISTRY + AUDIT_REPORT + V8_0_RECONCILIATION_REPORT). Forward pointer to Step 6 GOVERNANCE_INTEGRITY_PROTOCOL + Step 7 implementation bundle + Step 15 GOVERNANCE_BASELINE. Red-team cadence §B.5 preserved and bound to MP §IS.8.
 - **§D.10** (NEW Learning Layer substrate): LL.1–LL.10 summary; activation-phase matrix summary; six non-negotiable learning-discipline rules summary; scaffold-pending declaration for 06_LEARNING_LAYER/; ownership (native/Claude/Gemini) per MP §LL-Appendix.D; forward pointer to MP §LL-Appendix.A–D.
 - **§D.11** (NEW Multi-Agent Collaboration): §D.11.1 ND.1 adapted-parity principle with three load-bearing claims verbatim; §D.11.2 MP.1–MP.8 mirror-pair inventory (MP.1 CLAUDE.md↔.geminirules, MP.2 composite state↔project_state.md, MP.3 MACRO_PLAN↔compact ref, MP.4 PHASE_B_PLAN↔phase pointer, MP.5 FILE_REGISTRY↔path block, MP.6 GOVERNANCE_STACK Claude-only, MP.7 SESSION_LOG **resolved Claude-only at Step 5A**, MP.8 PROJECT_ARCHITECTURE↔compact ref **added at Step 5A**); §D.11.3 forward pointer to Step 7 `mirror_enforcer.py` + `CANONICAL_ARTIFACTS_v1_0.md` with `mirror_obligations` column. Current-agents list (Claude Opus 4.7 + Gemini 2.5 Pro); two-pass protocol summary; disagreement protocol including mirror-desync as implicit class; version-pinning discipline; future-agent admission policy.
-- **§E**: REPLACED entirely. Current tree as of 2026-04-24 `ls`. Root-level .geminirules + .gemini/project_state.md + CLAUDE.md + AM_JIS_BOOTSTRAP_HANDOFF + SESSION_RESUME_PROMPT. Full 00_ARCHITECTURE tree including STEP_LEDGER + STEP_BRIEFS/ (01..15 + 5A) + MACRO_PLAN v2.0 + MACRO_PLAN v1.0 SUPERSEDED + MACRO_PLAN_CRITIQUE + MACRO_PLAN_REVISION_SPEC + MACRO_PLAN_REDTEAM + NATIVE_DIRECTIVES + CONVERSATION_NAMING + PHASE_B_PLAN v1.0 + PHASE_B_PLAN_RECONCILER + FILE_REGISTRY v1_1 SUPERSEDED + GROUNDING_AUDIT + governance-rebuild family. 01_FACTS_LAYER with FORENSIC v8.0 CURRENT + LEL v1.2 CURRENT + supporting files. 02_ANALYTICAL_LAYER with five MATRIX_* files. 025_HOLISTIC_SYNTHESIS with CGM_v2_0 + MSR_v3_0 + CDLM_v1_1 + RM_v2_0 + UCN_v4_0 all CURRENT. 03_DOMAIN_REPORTS with nine reports at v1.1+ CURRENT. 04_REMEDIAL_CODEX v2_0 PART1+PART2 CURRENT. 05_TEMPORAL_ENGINES. 06_QUERY_INTERFACE. **06_LEARNING_LAYER/ listed as PENDING per Step 11**. 99_ARCHIVE. Platform + JHora + docs. Root tool scripts. Notes call out WARN.5 B0_KICKOFF_PROMPT and WARN.4 BOOTSTRAP deferrals explicitly.
+- **§E**: REPLACED entirely. Current tree as of 2026-04-24 `ls`. Root-level .geminirules + .gemini/project_state.md + CLAUDE.md + MARSYS_JIS_BOOTSTRAP_HANDOFF + SESSION_RESUME_PROMPT. Full 00_ARCHITECTURE tree including STEP_LEDGER + STEP_BRIEFS/ (01..15 + 5A) + MACRO_PLAN v2.0 + MACRO_PLAN v1.0 SUPERSEDED + MACRO_PLAN_CRITIQUE + MACRO_PLAN_REVISION_SPEC + MACRO_PLAN_REDTEAM + NATIVE_DIRECTIVES + CONVERSATION_NAMING + PHASE_B_PLAN v1.0 + PHASE_B_PLAN_RECONCILER + FILE_REGISTRY v1_1 SUPERSEDED + GROUNDING_AUDIT + governance-rebuild family. 01_FACTS_LAYER with FORENSIC v8.0 CURRENT + LEL v1.2 CURRENT + supporting files. 02_ANALYTICAL_LAYER with five MATRIX_* files. 025_HOLISTIC_SYNTHESIS with CGM_v2_0 + MSR_v3_0 + CDLM_v1_1 + RM_v2_0 + UCN_v4_0 all CURRENT. 03_DOMAIN_REPORTS with nine reports at v1.1+ CURRENT. 04_REMEDIAL_CODEX v2_0 PART1+PART2 CURRENT. 05_TEMPORAL_ENGINES. 06_QUERY_INTERFACE. **06_LEARNING_LAYER/ listed as PENDING per Step 11**. 99_ARCHIVE. Platform + JHora + docs. Root tool scripts. Notes call out WARN.5 B0_KICKOFF_PROMPT and WARN.4 BOOTSTRAP deferrals explicitly.
 - **§F.1**: UNCHANGED (every v2.1 namespace row preserved verbatim).
 - **§F.2** (NEW): governance-layer + Macro Plan namespaces. GA.*, MPC.N.M, MPC.OS.*, STEP.*, ND.*, M1..M10, LL.*, IS.*, ED.*, CW.*, MP.*, R.*, T.*, FIX.*/WARN.*, DIS.* (reserved). Note on EVT.* vs LEL.*: confirms EVT.* suffices; no new LEL.* namespace needed.
 - **§G**: PRESERVED structurally; pointer corrections only (v7.0 → v8.0; MSR 500-600 target → v3.0 at 499; LEL v1.0 → v1.2).
@@ -2505,11 +2505,11 @@ Step 9 propagates to `.geminirules` per MP.1 (ND.1). Post-Step-9 expected: CLAUD
 
 ### Session-open handshake
 
-Emitted per `SESSION_OPEN_TEMPLATE_v1_0.md §2`. Mandatory reading confirmed across fourteen files (CLAUDE.md pre-rebuild at fingerprint fd19b4b7…fdeb6; STEP_LEDGER, Step 9 brief, CANONICAL_ARTIFACTS, GOVERNANCE_INTEGRITY_PROTOCOL, GOVERNANCE_INTEGRITY_REDTEAM, GROUNDING_AUDIT, SESSION_OPEN/CLOSE templates, MACRO_PLAN v2.0, PROJECT_ARCHITECTURE v2.2, PHASE_B_PLAN v1.0.2, NATIVE_DIRECTIVES, AM_JIS_BOOTSTRAP_HANDOFF). `canonical_artifact_fingerprint_check` PASS across MACRO_PLAN, PROJECT_ARCHITECTURE, GOVERNANCE_INTEGRITY_PROTOCOL, CLAUDE, GEMINIRULES, STEP_LEDGER; CANONICAL_ARTIFACTS row is `n/a-self-row` per the bootstrap placeholder rule. `declared_scope.may_touch` = [CLAUDE.md (full rebuild), .geminirules (mirror), .gemini/project_state.md (MP.2), CANONICAL_ARTIFACTS §1 CLAUDE+GEMINIRULES rows, STEP_LEDGER, SESSION_LOG, FILE_REGISTRY, GOVERNANCE_STACK, drift/mirror/schema report dirs]. `must_not_touch` = [L1/L2.5/L2/L3/L4 corpus, MP v2.0, PROJECT_ARCHITECTURE v2.2, GOVERNANCE_INTEGRITY_PROTOCOL, GOVERNANCE_INTEGRITY_REDTEAM, SESSION_OPEN/CLOSE templates, DISAGREEMENT_REGISTER, NATIVE_DIRECTIVES, PHASE_B_PLAN, governance scripts, AM_JIS_BOOTSTRAP_HANDOFF]. `mirror_pair_freshness_check` 0 days across MP.1–MP.8; no pair stale. Native-directive obligations: none (ND.1 closed at Step 7). `red_team_due: false`.
+Emitted per `SESSION_OPEN_TEMPLATE_v1_0.md §2`. Mandatory reading confirmed across fourteen files (CLAUDE.md pre-rebuild at fingerprint fd19b4b7…fdeb6; STEP_LEDGER, Step 9 brief, CANONICAL_ARTIFACTS, GOVERNANCE_INTEGRITY_PROTOCOL, GOVERNANCE_INTEGRITY_REDTEAM, GROUNDING_AUDIT, SESSION_OPEN/CLOSE templates, MACRO_PLAN v2.0, PROJECT_ARCHITECTURE v2.2, PHASE_B_PLAN v1.0.2, NATIVE_DIRECTIVES, MARSYS_JIS_BOOTSTRAP_HANDOFF). `canonical_artifact_fingerprint_check` PASS across MACRO_PLAN, PROJECT_ARCHITECTURE, GOVERNANCE_INTEGRITY_PROTOCOL, CLAUDE, GEMINIRULES, STEP_LEDGER; CANONICAL_ARTIFACTS row is `n/a-self-row` per the bootstrap placeholder rule. `declared_scope.may_touch` = [CLAUDE.md (full rebuild), .geminirules (mirror), .gemini/project_state.md (MP.2), CANONICAL_ARTIFACTS §1 CLAUDE+GEMINIRULES rows, STEP_LEDGER, SESSION_LOG, FILE_REGISTRY, GOVERNANCE_STACK, drift/mirror/schema report dirs]. `must_not_touch` = [L1/L2.5/L2/L3/L4 corpus, MP v2.0, PROJECT_ARCHITECTURE v2.2, GOVERNANCE_INTEGRITY_PROTOCOL, GOVERNANCE_INTEGRITY_REDTEAM, SESSION_OPEN/CLOSE templates, DISAGREEMENT_REGISTER, NATIVE_DIRECTIVES, PHASE_B_PLAN, governance scripts, MARSYS_JIS_BOOTSTRAP_HANDOFF]. `mirror_pair_freshness_check` 0 days across MP.1–MP.8; no pair stale. Native-directive obligations: none (ND.1 closed at Step 7). `red_team_due: false`.
 
 ### Outcome — Step 9 closed with all §6 close criteria met
 
-**CLAUDE.md v2.0 produced.** §A Project mission (lifted from MP v2.0 §Ultimate goal with Ethical Framework scoping sentence). §B Subject (native + birth data + FORENSIC_v8_0 canonical pointer + v6.0 archival note). §C Mandatory reading (11 items — 1 CLAUDE.md self, 2 CANONICAL_ARTIFACTS, 3 PROJECT_ARCHITECTURE v2.2, 4 MACRO_PLAN v2.0, 5 PHASE_B_PLAN paused, 6 GOVERNANCE_INTEGRITY_PROTOCOL CURRENT, 7 SESSION_OPEN/CLOSE templates, 8 STEP_LEDGER-while-LIVE→STEP_BRIEF-for-ready-row, 9 GROUNDING_AUDIT for fresh-context, 10 NATIVE_DIRECTIVES, 11 AM_JIS_BOOTSTRAP_HANDOFF with WARN.4 known-drift caveat). §D Canonical artifacts (one-line cite + cached snapshot table with CANONICAL_ARTIFACTS fingerprint `be76cc7a…5dc954dc88` + disagreement-resolution rule). §E Concurrent workstreams (LEL v1.2 M4 prerequisite + Prospective Prediction Logging interim on LEL). §F Currently-executing marker ("You are here": active macro-phase M2 paused, active phase-plan v1.0.2 paused, active governance step Step 10 ready, ND status addressed + rebuild-era banner). §G Session-open handshake one-line reference. §H Session-close checklist one-line reference. §I Operating principles (pointer to PROJECT_ARCHITECTURE §B B.1–B.12 full list + five most-violated inline: B.1/B.3/B.8/B.10/B.11; plus two substrate-layer rules: Mirror Discipline + Scope declaration). §J Quality standard (Acharya-grade, verbatim). §K Gemini collaboration (pointers to protocol §K, CANONICAL_ARTIFACTS §2, v2.2 §D.11, ND.1 addressed-state + operational rule). §L Do-not list (10 prohibitions — 5 preserved from old CLAUDE.md + 5 new prohibitions surfaced by Step 7/8 red-team). §M Cadence (daily + closed-artifact + 3-cadence red-team per MP §IS.8 + handshake/close validation). Frontmatter: version 2.0 CURRENT; supersedes pre-rebuild minimal marker; changelog documents rebuild rationale + GA resolution map. File grew from 62 lines (pre-rebuild marker) to ~155 lines (§A–§M + frontmatter); sha256 `c60ddf8e1c0b253cf9b2d04e1200529eedc5c2313e1537f14cddb8c73905a565`.
+**CLAUDE.md v2.0 produced.** §A Project mission (lifted from MP v2.0 §Ultimate goal with Ethical Framework scoping sentence). §B Subject (native + birth data + FORENSIC_v8_0 canonical pointer + v6.0 archival note). §C Mandatory reading (11 items — 1 CLAUDE.md self, 2 CANONICAL_ARTIFACTS, 3 PROJECT_ARCHITECTURE v2.2, 4 MACRO_PLAN v2.0, 5 PHASE_B_PLAN paused, 6 GOVERNANCE_INTEGRITY_PROTOCOL CURRENT, 7 SESSION_OPEN/CLOSE templates, 8 STEP_LEDGER-while-LIVE→STEP_BRIEF-for-ready-row, 9 GROUNDING_AUDIT for fresh-context, 10 NATIVE_DIRECTIVES, 11 MARSYS_JIS_BOOTSTRAP_HANDOFF with WARN.4 known-drift caveat). §D Canonical artifacts (one-line cite + cached snapshot table with CANONICAL_ARTIFACTS fingerprint `be76cc7a…5dc954dc88` + disagreement-resolution rule). §E Concurrent workstreams (LEL v1.2 M4 prerequisite + Prospective Prediction Logging interim on LEL). §F Currently-executing marker ("You are here": active macro-phase M2 paused, active phase-plan v1.0.2 paused, active governance step Step 10 ready, ND status addressed + rebuild-era banner). §G Session-open handshake one-line reference. §H Session-close checklist one-line reference. §I Operating principles (pointer to PROJECT_ARCHITECTURE §B B.1–B.12 full list + five most-violated inline: B.1/B.3/B.8/B.10/B.11; plus two substrate-layer rules: Mirror Discipline + Scope declaration). §J Quality standard (Acharya-grade, verbatim). §K Gemini collaboration (pointers to protocol §K, CANONICAL_ARTIFACTS §2, v2.2 §D.11, ND.1 addressed-state + operational rule). §L Do-not list (10 prohibitions — 5 preserved from old CLAUDE.md + 5 new prohibitions surfaced by Step 7/8 red-team). §M Cadence (daily + closed-artifact + 3-cadence red-team per MP §IS.8 + handshake/close validation). Frontmatter: version 2.0 CURRENT; supersedes pre-rebuild minimal marker; changelog documents rebuild rationale + GA resolution map. File grew from 62 lines (pre-rebuild marker) to ~155 lines (§A–§M + frontmatter); sha256 `c60ddf8e1c0b253cf9b2d04e1200529eedc5c2313e1537f14cddb8c73905a565`.
 
 **.geminirules re-authored to MP.1 structural parity.** Same §A–§M section schema, adapted to Gemini idiom. Identical 11-item mandatory reading list (same canonical_ids). Rebuild-era banner carried at §F. Layer Architecture block (L2.5 canonical-path subset per MP.5) preserved with explicit "any disagreement resolves in favor of CANONICAL_ARTIFACTS" rule. Gemini's Specific Role in L4 preserved. §K Collaboration with Claude (direction-reversed from CLAUDE.md §K) carries ND.1's three load-bearing claims verbatim + mechanical-enforcement paragraph + operational mirror rule. Asymmetries section preserved. File sha256 `359eb996056644e7c454ce3dee4b69502716912e8d3e6c1a0757e28649b1060f`.
 
@@ -2549,13 +2549,13 @@ Emitted per `SESSION_OPEN_TEMPLATE_v1_0.md §2`. Mandatory reading confirmed acr
 - `00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_9_v1_0.{md,json}` (CREATED)
 - `00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_STEP_9_v1_0.{md,json}` (CREATED)
 
-Untouched per `must_not_touch`: MACRO_PLAN_v2_0.md, PROJECT_ARCHITECTURE_v2_2.md, GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md, GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md, SESSION_OPEN_TEMPLATE_v1_0.md, SESSION_CLOSE_TEMPLATE_v1_0.md, DISAGREEMENT_REGISTER_v1_0.md, NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md, PHASE_B_PLAN_v1_0.md, platform/scripts/governance/**, all L1/L2.5/L2/L3/L4 corpus, AM_JIS_BOOTSTRAP_HANDOFF.md.
+Untouched per `must_not_touch`: MACRO_PLAN_v2_0.md, PROJECT_ARCHITECTURE_v2_2.md, GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md, GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md, SESSION_OPEN_TEMPLATE_v1_0.md, SESSION_CLOSE_TEMPLATE_v1_0.md, DISAGREEMENT_REGISTER_v1_0.md, NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md, PHASE_B_PLAN_v1_0.md, platform/scripts/governance/**, all L1/L2.5/L2/L3/L4 corpus, MARSYS_JIS_BOOTSTRAP_HANDOFF.md.
 
 ### Tracked follow-ups (not part of Step 9 scope)
 
 - **FILE_REGISTRY v1.3 CLAUDE.md row** still references the old version string; sync with CANONICAL_ARTIFACTS is a Step 12 hygiene action (CANONICAL_ARTIFACTS is authoritative; FILE_REGISTRY drift is booked).
 - **GOVERNANCE_STACK §12 STEP_9 amendment log** — deferred to Step 12 cumulative amendment consolidation; §11 STEP_7 log already scopes the post-Step-7 single-line pointer addition and names Step 9 rebuild as the deferral target.
-- **AM_JIS_BOOTSTRAP_HANDOFF.md retire-vs-refresh decision (WARN.4 / WARN.6)** — deferred to Step 12 ongoing hygiene; current Step 9 decision: keep in §C mandatory reading with explicit "known drift" caveat.
+- **MARSYS_JIS_BOOTSTRAP_HANDOFF.md retire-vs-refresh decision (WARN.4 / WARN.6)** — deferred to Step 12 ongoing hygiene; current Step 9 decision: keep in §C mandatory reading with explicit "known drift" caveat.
 - **CANONICAL_ARTIFACTS self-row fingerprint** remains `<populated-at-step-7-close>` bootstrap placeholder — whitelisted as LOW `fingerprint_bootstrap_placeholder` per drift_detector; Step 12 ongoing hygiene decides whether to rotate the placeholder to a real fingerprint or keep it intentionally placeholder-valued.
 
 ### Next session objective
@@ -2632,7 +2632,7 @@ session_open:
     - file: 00_ARCHITECTURE/SESSION_LOG.md
       fingerprint_sha256: 9c4aeda948284a9985b3ff0e603cbb0e4c322eb2c081a7f5da4a95d0ea3b79ec
       read_at: 2026-04-24T12:00:00+05:30
-    - file: AM_JIS_BOOTSTRAP_HANDOFF.md
+    - file: MARSYS_JIS_BOOTSTRAP_HANDOFF.md
       fingerprint_sha256: 01f937273fe1d2f3f86b9813f65e346e6dacbacee72ab83c033014eb08d67e11
       read_at: 2026-04-24T12:00:00+05:30
   canonical_artifact_fingerprint_check:
@@ -2697,7 +2697,7 @@ session_open:
       - platform/scripts/governance/drift_detector.py
       - platform/scripts/governance/mirror_enforcer.py
       - platform/scripts/governance/_ca_loader.py
-      - AM_JIS_BOOTSTRAP_HANDOFF.md
+      - MARSYS_JIS_BOOTSTRAP_HANDOFF.md
       - 00_ARCHITECTURE/STEP_BRIEFS/**
   mirror_pair_freshness_check:
     - pair_id: MP.1
@@ -2762,7 +2762,7 @@ session_open:
 
 ### Environment
 
-Claude desktop app Cowork mode (research preview); agent `claude-opus-4-7`; working directory the AM-JIS project root; sandboxed shell for script execution.
+Claude desktop app Cowork mode (research preview); agent `claude-opus-4-7`; working directory the MARSYS-JIS project root; sandboxed shell for script execution.
 
 ### Objective
 
@@ -3021,7 +3021,7 @@ session_close:
 - **CANONICAL_ARTIFACTS self-row fingerprint** — still `<populated-at-step-7-close>` placeholder. Step 7/8/9/10 all carried this; decision deferred to Step 12 ongoing hygiene (rotate to a real fingerprint or keep intentionally placeholder-valued).
 - **FILE_REGISTRY v1.3 → v1.4 version bump** — deferred to Step 12 per Step 9 handoff precedent. In-place §9.1 append consistent with in-place governance-registry amendment spirit.
 - **GOVERNANCE_STACK §12 + future STEP_N logs consolidation** — Step 12 ongoing hygiene.
-- **AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh (WARN.4/WARN.6)** — Step 12.
+- **MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh (WARN.4/WARN.6)** — Step 12.
 - **CLAUDE.md §F wording mid-post-Step-15 transition** — at Step 15 close, §F's "Authoritative source of truth: STEP_LEDGER" clause flips to "Authoritative source of truth: CURRENT_STATE"; the rebuild-era banner drops; §C item #8's "while STEP_LEDGER is LIVE" conditional drops. All three edits land in Step 15 scope.
 
 ### Next session objective
@@ -3098,7 +3098,7 @@ session_open:
     - file: 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
       fingerprint_sha256: 9e44283f237f33cfde5de2a409440fb8d28f52b9afc31a9f76a5a19c0e53154b
       read_at: 2026-04-24T20:30:00+05:30
-    - file: AM_JIS_BOOTSTRAP_HANDOFF.md
+    - file: MARSYS_JIS_BOOTSTRAP_HANDOFF.md
       fingerprint_sha256: 01f937273fe1d2f3f86b9813f65e346e6dacbacee72ab83c033014eb08d67e11
       read_at: 2026-04-24T20:30:00+05:30
   canonical_artifact_fingerprint_check:
@@ -3197,7 +3197,7 @@ session_open:
       - platform/scripts/governance/schemas/*.yaml
       - platform/src/**
       - CLAUDE.md
-      - AM_JIS_BOOTSTRAP_HANDOFF.md
+      - MARSYS_JIS_BOOTSTRAP_HANDOFF.md
   mirror_pair_freshness_check:
     - {pair_id: MP.1, claude_side: CLAUDE.md, gemini_side: .geminirules, last_verified_on: 2026-04-24, days_since_verification: 0, stale: false}
     - {pair_id: MP.2, claude_side: composite, gemini_side: .gemini/project_state.md, last_verified_on: 2026-04-24, days_since_verification: 0, stale: false}
@@ -3258,10 +3258,10 @@ session_open:
 - FILE_REGISTRY v1.3 → v1.4 bump (cumulative §9.1 amendments from Step 9, 10, 11).
 - GOVERNANCE_STACK §13 STEP_11 amendment log + cumulative-log consolidation (Step 9, 10, 11 deferred items).
 - CANONICAL_ARTIFACTS self-row fingerprint resolution (Step 7 vintage; carried Step 7-11).
-- AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh (WARN.4 / WARN.6).
+- MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh (WARN.4 / WARN.6).
 - Step 8 red-team F.1 (mirror substring-presence rule), F.2 (close-checklist nonzero-exit policy), F.3 (--dr-entry validator mode) — close-checklist exit-2 from this Step 11 close confirms F.2 is still live.
 
-**Session-close action discipline:** All touched files within `declared_scope.may_touch`. Did NOT touch MP v2.0, PROJECT_ARCHITECTURE v2.2, PHASE_B_PLAN v1.0.2, GOVERNANCE_INTEGRITY_PROTOCOL v1.0, GOVERNANCE_INTEGRITY_REDTEAM v1.0, SESSION_OPEN_TEMPLATE v1.0, SESSION_CLOSE_TEMPLATE v1.0, SESSION_LOG_SCHEMA v1.0, NATIVE_DIRECTIVES v1.0, DISAGREEMENT_REGISTER v1.0, CONVERSATION_NAMING_CONVENTION v1.0, GROUNDING_AUDIT v1.0, STEP_BRIEFS/**, GOVERNANCE_STACK v1.0, governance scripts, platform/src/**, AM_JIS_BOOTSTRAP_HANDOFF, CLAUDE.md (per `must_not_touch`). No L1/L2/L2.5/L3/L4 corpus touched. No pre-build for M3-M10.
+**Session-close action discipline:** All touched files within `declared_scope.may_touch`. Did NOT touch MP v2.0, PROJECT_ARCHITECTURE v2.2, PHASE_B_PLAN v1.0.2, GOVERNANCE_INTEGRITY_PROTOCOL v1.0, GOVERNANCE_INTEGRITY_REDTEAM v1.0, SESSION_OPEN_TEMPLATE v1.0, SESSION_CLOSE_TEMPLATE v1.0, SESSION_LOG_SCHEMA v1.0, NATIVE_DIRECTIVES v1.0, DISAGREEMENT_REGISTER v1.0, CONVERSATION_NAMING_CONVENTION v1.0, GROUNDING_AUDIT v1.0, STEP_BRIEFS/**, GOVERNANCE_STACK v1.0, governance scripts, platform/src/**, MARSYS_JIS_BOOTSTRAP_HANDOFF, CLAUDE.md (per `must_not_touch`). No L1/L2/L2.5/L3/L4 corpus touched. No pre-build for M3-M10.
 
 ```yaml
 session_close:
@@ -3321,7 +3321,7 @@ session_close:
   unblocks: "Step 12 (Ongoing hygiene policies) — status → ready"
   handoff_notes: "Step 12 reads CLAUDE.md → STEP_LEDGER (row 11 completed; row 12 ready) → STEP_BRIEFS/STEP_12_ONGOING_HYGIENE_POLICIES_v1_0.md → CURRENT_STATE_v1_0.md → LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md (Step 11 closure record; §5.4 N-override deferral + §5.7 validator-class booking + §7 PHASE_B_PLAN B.0 coordination are Step 12 inputs) → GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md (Step 8 F.1/F.2/F.3 WARNs Step 12 absorbs) → SESSION_LOG Step 11 entry. Cowork thread: Madhav 12 — Ongoing Hygiene Policies."
   next_session_objective: >
-    Execute Step 12 — Ongoing hygiene policies. Single committed objective per SESSION_LOG_SCHEMA §4 (no menu form): produce ONGOING_HYGIENE_POLICIES_v1_0.md + the schema_validator extensions it specifies (learning_layer_stub class with STATUS-banner regex + population-gate rule per LL_SCAFFOLD_DECISION §5.7; --dr-entry validator mode per Step 8 F.3; close-checklist nonzero-exit policy per Step 8 F.2; mirror substring-presence tightening per Step 8 F.1) + the consolidated FILE_REGISTRY v1.4 / GOVERNANCE_STACK §13+ amendments / per-mechanism Learning Layer N-overrides / AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision / CANONICAL_ARTIFACTS self-row fingerprint resolution named in the brief.
+    Execute Step 12 — Ongoing hygiene policies. Single committed objective per SESSION_LOG_SCHEMA §4 (no menu form): produce ONGOING_HYGIENE_POLICIES_v1_0.md + the schema_validator extensions it specifies (learning_layer_stub class with STATUS-banner regex + population-gate rule per LL_SCAFFOLD_DECISION §5.7; --dr-entry validator mode per Step 8 F.3; close-checklist nonzero-exit policy per Step 8 F.2; mirror substring-presence tightening per Step 8 F.1) + the consolidated FILE_REGISTRY v1.4 / GOVERNANCE_STACK §13+ amendments / per-mechanism Learning Layer N-overrides / MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision / CANONICAL_ARTIFACTS self-row fingerprint resolution named in the brief.
 ```
 
 **Close-checklist validation note (Step 8 F.2 known WARN):** The session_close YAML above triggers two known WARN-tracked validator firings from `schema_validator.py --close-checklist`:
@@ -3337,13 +3337,13 @@ Both firings are the **Step 8 red-team finding F.2** ("close-checklist nonzero-e
 - FILE_REGISTRY v1.3 → v1.4 bump (cumulative §9.1 amendments from Step 9, 10, 11) → Step 12.
 - GOVERNANCE_STACK §13 STEP_11 amendment log + cumulative consolidation (Step 9, 10, 11 deferred items) → Step 12.
 - CANONICAL_ARTIFACTS self-row fingerprint resolution (Step 7 vintage) → Step 12.
-- AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision (WARN.4 / WARN.6) → Step 12.
+- MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision (WARN.4 / WARN.6) → Step 12.
 - Step 8 red-team F.1 (mirror substring-presence rule), F.2 (close-checklist nonzero-exit policy), F.3 (--dr-entry validator mode) → Step 12.
 - PHASE_B_PLAN B.0 substrate-hook implementation (PROMPT_REGISTRY/ + PREDICTION_LEDGER/ + SCHEMAS/ + prediction_ledger.jsonl + 2 v0.1 schema files) → B.0 deliverable when M2 execution resumes (post-Step-15). NOT a Step 12 follow-up; documented at Step 11 close for forward visibility per LL_SCAFFOLD_DECISION §7.
 
 ### Next session objective
 
-Execute **Step 12 — Ongoing hygiene policies**. Single committed objective per SESSION_LOG_SCHEMA §4: produce `ONGOING_HYGIENE_POLICIES_v1_0.md` + the schema_validator extensions it specifies + the consolidated FILE_REGISTRY v1.4 / GOVERNANCE_STACK §13+ amendments / per-mechanism Learning Layer N-overrides / AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision / CANONICAL_ARTIFACTS self-row fingerprint resolution named in the brief. **Proposed Cowork thread name:** `Madhav 12 — Ongoing Hygiene Policies` per `CONVERSATION_NAMING_CONVENTION_v1_0.md §2`.
+Execute **Step 12 — Ongoing hygiene policies**. Single committed objective per SESSION_LOG_SCHEMA §4: produce `ONGOING_HYGIENE_POLICIES_v1_0.md` + the schema_validator extensions it specifies + the consolidated FILE_REGISTRY v1.4 / GOVERNANCE_STACK §13+ amendments / per-mechanism Learning Layer N-overrides / MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh decision / CANONICAL_ARTIFACTS self-row fingerprint resolution named in the brief. **Proposed Cowork thread name:** `Madhav 12 — Ongoing Hygiene Policies` per `CONVERSATION_NAMING_CONVENTION_v1_0.md §2`.
 
 *End of STEP_11_LEARNING_LAYER_SCAFFOLD entry — 2026-04-24.*
 
@@ -3420,7 +3420,7 @@ session_open:
       - CLAUDE.md
       - .geminirules
       - .gemini/project_state.md
-      - AM_JIS_BOOTSTRAP_HANDOFF.md
+      - MARSYS_JIS_BOOTSTRAP_HANDOFF.md
       - 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md
       - 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_12_v1_0.md
       - 00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_12_v1_0.md
@@ -3456,7 +3456,7 @@ session_open:
 
 ### Body
 
-**Scope.** Execute Step 12 — Ongoing hygiene policies — per `STEP_BRIEFS/STEP_12_ONGOING_HYGIENE_POLICIES_v1_0.md`. The brief §3 structure (§A–§J) + native-approved additions (§K residual disposition + §L finding coverage + §M interactions + §N fingerprint-rotation audit) compose the deliverable `ONGOING_HYGIENE_POLICIES_v1_0.md`. Step 12 additionally closes the Step 10-deferred `FILE_REGISTRY v1.3 → v1.4` bump, the Step 7/8/9/10/11-carried `CANONICAL_ARTIFACTS` self-row fingerprint placeholder, the Step 8 red-team F.1/F.2/F.3 WARNs at the schema_validator layer, and the native-approved retirement of `AM_JIS_BOOTSTRAP_HANDOFF.md` (WARN.4/WARN.6 closure). `LIFE_EVENT_LOG_v1_1.md` receives §A archival treatment (GA.12 closure). Per-mechanism Learning Layer N-override default commits at N=3 per LL_SCAFFOLD §5.4 authorization; `learning_layer_stub` validator class commits per §5.7.
+**Scope.** Execute Step 12 — Ongoing hygiene policies — per `STEP_BRIEFS/STEP_12_ONGOING_HYGIENE_POLICIES_v1_0.md`. The brief §3 structure (§A–§J) + native-approved additions (§K residual disposition + §L finding coverage + §M interactions + §N fingerprint-rotation audit) compose the deliverable `ONGOING_HYGIENE_POLICIES_v1_0.md`. Step 12 additionally closes the Step 10-deferred `FILE_REGISTRY v1.3 → v1.4` bump, the Step 7/8/9/10/11-carried `CANONICAL_ARTIFACTS` self-row fingerprint placeholder, the Step 8 red-team F.1/F.2/F.3 WARNs at the schema_validator layer, and the native-approved retirement of `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (WARN.4/WARN.6 closure). `LIFE_EVENT_LOG_v1_1.md` receives §A archival treatment (GA.12 closure). Per-mechanism Learning Layer N-override default commits at N=3 per LL_SCAFFOLD §5.4 authorization; `learning_layer_stub` validator class commits per §5.7.
 
 **Pre-approval handshake.** Before emission of the session-open handshake, a plan-first pass surfaced three native decisions: (a) BOOTSTRAP retire-vs-refresh → **retire**; (b) residual-disposition table → **approve as proposed**; (c) declared_scope → **proceed as listed**. The plan's §1/§4/§5 blocks are the native-approved scope for this session.
 
@@ -3467,7 +3467,7 @@ session_open:
 3. `platform/scripts/governance/schema_validator.py` extensions: `validate_scope_boundary`, `validate_files_touched_completeness`, `validate_learning_layer_stub`, `validate_mirror_structural_block` (closes **F.1**), `validate_dr_entry_yaml`, close-checklist exit-code-3 `known_residuals` whitelist (closes **F.2**), `--dr-entry` CLI mode (closes **F.3**), `--session-open-for-close` CLI cross-reference hook.
 4. `platform/scripts/governance/schemas/artifact_schemas.yaml` extensions: `learning_layer_stub` class, `session_close` class with scope_boundary + files_touched_completeness + exit_code_whitelist + known_residuals_schema subrules, `disagreement_register_entry` class.
 5. `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md`: §12.5 STEP_11_LEARNING_LAYER_SCAFFOLD retro-log (Step 11 was in-place-amended at close without a dedicated amendment log; this retro-logs per brief §4); §13 STEP_12 amendment log; §14 NEW cumulative amendment-log index for grep-friendly navigation across the rebuild arc.
-6. `AM_JIS_BOOTSTRAP_HANDOFF.md`: SUPERSEDED banner + frontmatter flip + `superseded_by: CLAUDE.md + PROJECT_ARCHITECTURE_v2_2 + MACRO_PLAN_v2_0 + GROUNDING_AUDIT + CURRENT_STATE`. Retired per native decision (**WARN.4 + WARN.6 closed**).
+6. `MARSYS_JIS_BOOTSTRAP_HANDOFF.md`: SUPERSEDED banner + frontmatter flip + `superseded_by: CLAUDE.md + PROJECT_ARCHITECTURE_v2_2 + MACRO_PLAN_v2_0 + GROUNDING_AUDIT + CURRENT_STATE`. Retired per native decision (**WARN.4 + WARN.6 closed**).
 7. `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md`: SUPERSEDED banner + frontmatter flip + `superseded_by: LIFE_EVENT_LOG_v1_2.md`. Retain-in-place per §A (**GA.12 closed**).
 8. `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md`: SUPERSEDED banner + frontmatter flip + `superseded_by: FILE_REGISTRY_v1_4.md`.
 9. `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md`: +1 row ONGOING_HYGIENE_POLICIES; FILE_REGISTRY row path-swapped v1.3 → v1.4; self-row fingerprint placeholder (Step 7 carryover) resolved; fingerprint rotations on CLAUDE/GEMINIRULES/PROJECT_STATE/STEP_LEDGER/SESSION_LOG/CURRENT_STATE/GOVERNANCE_STACK rows; last_verified_session set to STEP_12_ONGOING_HYGIENE_POLICIES across all touched rows.
@@ -3509,7 +3509,7 @@ session_close:
     - { path: CLAUDE.md, reason: amended, within_declared_scope: true }
     - { path: .geminirules, reason: amended, within_declared_scope: true }
     - { path: .gemini/project_state.md, reason: amended, within_declared_scope: true }
-    - { path: AM_JIS_BOOTSTRAP_HANDOFF.md, reason: superseded_this_session, within_declared_scope: true }
+    - { path: MARSYS_JIS_BOOTSTRAP_HANDOFF.md, reason: superseded_this_session, within_declared_scope: true }
     - { path: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md, reason: superseded_this_session, within_declared_scope: true }
     - { path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_STEP_12_v1_0.md, reason: created_this_session, within_declared_scope: true }
     - { path: 00_ARCHITECTURE/schema_reports/SCHEMA_VALIDATION_REPORT_STEP_12_v1_0.md, reason: created_this_session, within_declared_scope: true }
@@ -3523,7 +3523,7 @@ session_close:
     file_registry:
       version_bumped: {from: "1.3", to: "1.4"}
       rows_added_to_9_1: [ONGOING_HYGIENE_POLICIES]
-      rows_added_to_8_Archival: [AM_JIS_BOOTSTRAP_HANDOFF, LIFE_EVENT_LOG_v1_1, FILE_REGISTRY_v1_3]
+      rows_added_to_8_Archival: [MARSYS_JIS_BOOTSTRAP_HANDOFF, LIFE_EVENT_LOG_v1_1, FILE_REGISTRY_v1_3]
       sections_added: [9.4_LL_scaffold_inventory, 9.5_governance_script_extensions]
     governance_stack:
       sections_added: [12.5_STEP_11_retro_log, 13_STEP_12_amendment_log, 14_cumulative_amendment_log_index]
@@ -3617,7 +3617,7 @@ session_open:
 
 1. **`00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — 9 rows rotated (brief §3.1 File 1).** 8 rows received computed sha256 from filesystem state at rotation moment. CANONICAL_ARTIFACTS self-row received Step-7-pattern placeholder `<populated-at-step-12-1-close>` per brief §3.1 #3 bootstrap chicken-and-egg note: writing any real hash into the self-row rotates CA content and invalidates the written value (fixed-point iteration does not converge for sha256 on a variable-content file). The `<populated*>` prefix triggers drift_detector.py L215-225 LOW `fingerprint_bootstrap_placeholder` downgrade, matching the mechanical pattern Steps 7–11 used successfully. Step 12 broke this pattern by using `<rotated-at-*>` prefix that doesn't match the downgrade whitelist — that was the Step 13-detected defect. SESSION_LOG row placeholder rotated to `<populated-at-step-12-1-close-after-session-log-entry-appended>` per brief §4 bootstrap-placeholder forward policy. All 9 rows: `last_verified_session: STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX`, `last_verified_on: 2026-04-24`.
 
-2. **`00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` — SUPERSEDED-banner basename-pointer index (brief §3.1 File 2 detector-compat workaround).** The v1.4 row for ONGOING_HYGIENE_POLICIES_v1_0.md was already in place from Step 12 at line 134 with correct 5-column schema. `drift_detector.py`'s H.3.5 check hardcodes `FILE_REGISTRY_v1_3.md` as `fr_path` (L315) and performs a basename-substring check (L338); brief §4 "detector discipline" forbids script modification. Added a non-substantive "Delta-to-v1.4 basename index" pointer block to v1.3's SUPERSEDED banner explicitly naming `ONGOING_HYGIENE_POLICIES_v1_0.md`, `LIFE_EVENT_LOG_v1_1.md`, `AM_JIS_BOOTSTRAP_HANDOFF.md`. v1.3's §1–§10 archival tables untouched; pointer-only clarification of successor relationship.
+2. **`00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` — SUPERSEDED-banner basename-pointer index (brief §3.1 File 2 detector-compat workaround).** The v1.4 row for ONGOING_HYGIENE_POLICIES_v1_0.md was already in place from Step 12 at line 134 with correct 5-column schema. `drift_detector.py`'s H.3.5 check hardcodes `FILE_REGISTRY_v1_3.md` as `fr_path` (L315) and performs a basename-substring check (L338); brief §4 "detector discipline" forbids script modification. Added a non-substantive "Delta-to-v1.4 basename index" pointer block to v1.3's SUPERSEDED banner explicitly naming `ONGOING_HYGIENE_POLICIES_v1_0.md`, `LIFE_EVENT_LOG_v1_1.md`, `MARSYS_JIS_BOOTSTRAP_HANDOFF.md`. v1.3's §1–§10 archival tables untouched; pointer-only clarification of successor relationship.
 
 3. **Close-machinery.** STEP_LEDGER row 12.1 → completed; row 13 → ready. CURRENT_STATE state-block transition (active_governance_step Step_13 → Step_12.1 completed; next Step_13 ready; red_team_counter 4 → 5; next_session_objective → Step 13 fresh re-execution). GOVERNANCE_STACK §15 STEP_12.1 amendment log + §14 cumulative index refresh. .gemini/project_state.md MP.2 mirror (Last-updated header + state-block + Pending Actions + MP.5-row corrected v1_3 → v1_4). SESSION_LOG (this entry) appended atomically. Drift/schema/mirror reports produced.
 
@@ -3656,7 +3656,7 @@ session_close:
       added_rows: []
       path_swaps: []
     file_registry:
-      v1_3_pointer_block_added: [ONGOING_HYGIENE_POLICIES_v1_0.md, LIFE_EVENT_LOG_v1_1.md, AM_JIS_BOOTSTRAP_HANDOFF.md]
+      v1_3_pointer_block_added: [ONGOING_HYGIENE_POLICIES_v1_0.md, LIFE_EVENT_LOG_v1_1.md, MARSYS_JIS_BOOTSTRAP_HANDOFF.md]
       v1_4_row_status: "unchanged from Step 12 (already correct at line 134)"
     governance_stack:
       sections_added: [15_STEP_12_1_amendment_log]

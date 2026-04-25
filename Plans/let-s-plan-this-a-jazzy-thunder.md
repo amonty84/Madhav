@@ -1,8 +1,8 @@
-# Plan — AM-JIS Corpus Verification Brief v1.0
+# Plan — MARSYS-JIS Corpus Verification Brief v1.0
 
 ## Context
 
-The AM-JIS corpus has been through multiple iterative correction sessions. Before it can be fed into downstream **vectorization + graph model construction** for LLM-based insight generation, the user needs high confidence that:
+The MARSYS-JIS corpus has been through multiple iterative correction sessions. Before it can be fed into downstream **vectorization + graph model construction** for LLM-based insight generation, the user needs high confidence that:
 
 1. The L1 ground-truth file (`01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md`) is **internally consistent** — every planet's sign/house/longitude/nakshatra/pada/dasha continuity derives correctly; all numeric aggregates (SAV=337, Shadbala sums, BAV totals) balance.
 2. All derived files (L2 matrices, L2.5 synthesis, L3 domain reports) correctly trace back to L1.
@@ -38,12 +38,12 @@ A single self-contained brief an external LLM agent can read and execute end-to-
 brief_type: Agent Execution Brief
 brief_version: 1.0
 created: 2026-04-19
-scope: Comprehensive AM-JIS corpus verification pre-vectorization
+scope: Comprehensive MARSYS-JIS corpus verification pre-vectorization
 status: READY FOR EXECUTION
 executor_model: Claude Sonnet 4.6 or DeepSeek V3
 cost_budget_usd: 8
 estimated_runtime: 4-8 hours
-prerequisite_reads: [CLAUDE.md, AM_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0–§2]
+prerequisite_reads: [CLAUDE.md, MARSYS_JIS_BOOTSTRAP_HANDOFF.md, AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md (this file), 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §0–§2]
 produces_artifacts: [/verification_artifacts/<timestamp>/READINESS_REPORT.md + 14 supporting JSON/graphml files]
 blocks_downstream: [vectorization, graph_model_construction]
 ```
@@ -53,7 +53,7 @@ blocks_downstream: [vectorization, graph_model_construction]
 | § | Section | Approx. lines |
 |---|---|---|
 | §0 | Executor preamble — STOP before starting | 40 |
-| §1 | Project context (self-contained AM-JIS intro, layer hierarchy, subject metadata) | 80 |
+| §1 | Project context (self-contained MARSYS-JIS intro, layer hierarchy, subject metadata) | 80 |
 | §2 | Authoritative v8.0 placements ledger (planets, lagnas, sahams, key yogas, SAV=337, Vimshottari window) | 120 |
 | §3 | How to read MSR / CDLM / RM / UCN (one fully-rendered example of each) | 200 |
 | §4 | Mechanical invariants catalogue — INV.L1.01–24 formally stated | 280 |

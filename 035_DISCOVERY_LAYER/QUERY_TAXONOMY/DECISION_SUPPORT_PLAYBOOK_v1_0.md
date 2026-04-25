@@ -4,7 +4,7 @@ version: 1.0
 status: CLOSED
 session: 41
 date_closed: 2026-04-18
-scope: "Playbook for high-stakes decisions using the AM-JIS corpus as a structured decision-support tool"
+scope: "Playbook for high-stakes decisions using the MARSYS-JIS corpus as a structured decision-support tool"
 ---
 
 # DECISION_SUPPORT_PLAYBOOK_v1_0

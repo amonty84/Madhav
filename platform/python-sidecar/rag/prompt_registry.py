@@ -1,6 +1,6 @@
 """
 prompt_registry.py
-AM-JIS RAG Pipeline — Prompt Registry
+MARSYS-JIS RAG Pipeline — Prompt Registry
 Per PHASE_B_PLAN_v1_0.md §F.3 Hook 3 + §G B.0 Task 13.
 Registers prompt files in 06_LEARNING_LAYER/PROMPT_REGISTRY/INDEX.json.
 """

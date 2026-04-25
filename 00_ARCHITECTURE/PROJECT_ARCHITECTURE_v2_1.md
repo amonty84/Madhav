@@ -2,7 +2,7 @@
 
 ---
 document: PROJECT MASTER ARCHITECTURE BLUEPRINT
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 2.1
 supersedes: 2.0 (2026-04-17 mid) and 1.0 (archived)
@@ -35,7 +35,7 @@ audience:
   tertiary: Independent classical-Jyotish acharyas invited for review
 ---
 
-# AM-JIS — PROJECT MASTER ARCHITECTURE BLUEPRINT v2.1
+# MARSYS-JIS — PROJECT MASTER ARCHITECTURE BLUEPRINT v2.1
 
 ## §A — EXECUTIVE FRAME
 

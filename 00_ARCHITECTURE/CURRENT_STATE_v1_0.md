@@ -6,7 +6,7 @@ produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebui
 produced_on: 2026-04-24
 authoritative_side: claude
 role: >
-  Machine-readable, single-file "you-are-here" pointer for the AM-JIS project. Answers —
+  Machine-readable, single-file "you-are-here" pointer for the MARSYS-JIS project. Answers —
   in one grep — the question a fresh session asks: which macro-phase is active, which
   phase-plan row is in flight, which governance step is ready, which session last closed,
   and what the next session is committed to. Updated at every session close.
@@ -104,7 +104,7 @@ changelog:
 ---
 
 # CURRENT STATE v1.0
-## AM-JIS Project — Canonical "You Are Here" Pointer
+## MARSYS-JIS Project — Canonical "You Are Here" Pointer
 
 *Implements GA.19 at the full-surface layer per `GROUNDING_AUDIT_v1_0.md §6.3` +
 `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §I.5`. Companion to `SESSION_LOG_SCHEMA_v1_0.md`

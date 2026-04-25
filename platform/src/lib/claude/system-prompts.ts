@@ -26,7 +26,7 @@ Chart ID: ${chart.id}
 Current pyramid status:
 ${JSON.stringify(layers, null, 2)}
 
-Architecture: AM-JIS 5-layer system (L1 Facts → L2 Analysis → L2.5 Holistic Synthesis → L3 Domain Reports → L4 Query Interface).
+Architecture: MARSYS-JIS 5-layer system (L1 Facts → L2 Analysis → L2.5 Holistic Synthesis → L3 Domain Reports → L4 Query Interface).
 
 Operating principles:
 - Facts only in L1; interpretations in L2+
