@@ -9,7 +9,7 @@ severity: "CRITICAL — largest single-session discovery of L1 errors in corpus 
 ---
 
 # V8.0 RECONCILIATION REPORT
-## AM-JIS Corpus — Jagannatha Hora Ground-Truth Reconciliation
+## MARSYS-JIS Corpus — Jagannatha Hora Ground-Truth Reconciliation
 ### 2026-04-18 | CLOSED
 
 ---
@@ -182,7 +182,7 @@ Per JH authoritative:
 - 7-karaka PK reading: Mars in 7H = children significator in marriage house ✓ (traditional Parashari-adjacent)
 - 8-karaka PK reading: Rahu in 2H = children significator in family-wealth house (different mechanism)
 
-**MSR.343 status**: Retained with dual-karaka-system note. Both readings are classically legitimate; AM-JIS documents both.
+**MSR.343 status**: Retained with dual-karaka-system note. Both readings are classically legitimate; MARSYS-JIS documents both.
 
 ### §3.6 Other MSR signals reviewed
 
@@ -270,7 +270,7 @@ Still missing: Pindayu / Nisargayu / Amsayu from separate Ayurdasaya calculation
 | GAP.10 | Saham nakshatra labels | RESOLVED | RESOLVED |
 | **GAP.11 (NEW)** | **Special Lagnas v6.0 ERRORS — HL/GL/Shree/Varnada all wrong** | — | **CRITICAL — flagged for v8.0 correction** |
 | **GAP.12 (NEW)** | **Saham Roga/Mahatmya/Vivaha house-placement errors in MSR.391 + v6.0** | — | **CRITICAL — flagged for MSR correction** |
-| **GAP.13 (NEW)** | **Chara Karaka 7-vs-8 karaka system ambiguity** | — | Documented — AM-JIS adopts 7-karaka primary, notes 8-karaka alternate |
+| **GAP.13 (NEW)** | **Chara Karaka 7-vs-8 karaka system ambiguity** | — | Documented — MARSYS-JIS adopts 7-karaka primary, notes 8-karaka alternate |
 | **GAP.14 (NEW)** | **17 classical yogas not in MSR v1.0** | — | Flagged for MSR v2.0 addition |
 
 **Total gaps tracked**: 19 (was 15). **Post–FIX_SESSION_003 / GAP_RESOLUTION_SESSION (2026-04-19):** Special-lagna / saham / domain-report / CGM / MSR provenance cascades are **closed** in the live corpus. **Still OPEN or optional:** Varshesha (exact solar return), D9 degree-level GAP.03 fine print, optional Ayurdasaya trio exports — see **GOVERNANCE_STACK_v1_0.md** §3 and **EXTERNAL_COMPUTATION_SPEC_v2_0.md** §0.

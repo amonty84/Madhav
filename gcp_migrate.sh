@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# AM-JIS — Google Cloud Migration
+# MARSYS-JIS — Google Cloud Migration
 # Supabase → Cloud SQL (PostgreSQL 15 + pgvector)
 # Voyage AI is RETAINED (not migrated — quality-critical for this corpus)
 #
@@ -28,7 +28,7 @@ error()   { echo -e "${RED}[ERROR]${NC} $*"; exit 1; }
 
 echo ""
 echo "╔════════════════════════════════════════════════════════╗"
-echo "║     AM-JIS — Google Cloud Migration                   ║"
+echo "║     MARSYS-JIS — Google Cloud Migration                   ║"
 echo "║     Supabase → Cloud SQL (PostgreSQL 15 + pgvector)   ║"
 echo "╚════════════════════════════════════════════════════════╝"
 echo ""
@@ -265,7 +265,7 @@ success "Secrets stored: amjis-db-password, amjis-voyage-api-key"
 info "PHASE 6 — Writing .env.rag..."
 
 cat > .env.rag << ENVFILE
-# AM-JIS RAG environment — Google Cloud (migrated from Supabase 2026-04-25)
+# MARSYS-JIS RAG environment — Google Cloud (migrated from Supabase 2026-04-25)
 # DO NOT COMMIT — .env.rag is in .gitignore
 
 # Database — Cloud SQL via Auth Proxy (local port 5433)
@@ -293,7 +293,7 @@ info "PHASE 7 — Writing platform/scripts/start_db_proxy.sh..."
 
 cat > platform/scripts/start_db_proxy.sh << 'SCRIPT'
 #!/bin/bash
-# AM-JIS — Start Cloud SQL Auth Proxy for local development
+# MARSYS-JIS — Start Cloud SQL Auth Proxy for local development
 # Run this before any RAG pipeline session (embed.py, chunk.py, queries)
 # Usage: bash platform/scripts/start_db_proxy.sh
 set -e

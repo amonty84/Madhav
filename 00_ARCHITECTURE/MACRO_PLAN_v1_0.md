@@ -1,6 +1,6 @@
 ---
-document: AM-JIS MACRO PLAN — STRATEGIC ARC
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+document: MARSYS-JIS MACRO PLAN — STRATEGIC ARC
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 1.0
 status: SUPERSEDED by MACRO_PLAN_v2_0.md (closed 2026-04-23 at Step 5 of the Step 0→15 governance rebuild)
@@ -9,14 +9,14 @@ superseded_on: 2026-04-23
 author: Abhisek Mohanty (native, project owner)
 date: 2026-04-23
 purpose: >
-  Strategic orientation layer for the AM-JIS project. Frames the ten macro-phase
+  Strategic orientation layer for the MARSYS-JIS project. Frames the ten macro-phase
   arc (M1–M10) and the cross-cutting Learning Layer substrate. Read once per
   session for orientation only; execute only the currently-scoped phase. This
   document was introduced to prevent session-level scope drift in M2 work by
   giving every session a stable view of where the current phase sits in the
   full arc.
 audience:
-  primary: Any LLM session working on AM-JIS, current and future
+  primary: Any LLM session working on MARSYS-JIS, current and future
   secondary: Abhisek Mohanty (native, project owner)
   tertiary: Independent classical-Jyotish acharyas reviewing the corpus
 operational_rule: >
@@ -35,10 +35,10 @@ changelog:
 
 > **⚠ SUPERSEDED** — This file is historical. The current Macro Plan is **`MACRO_PLAN_v2_0.md`** (published 2026-04-23 at Step 5 of the Step 0→15 governance rebuild). v2.0 is an architectural revision: per-phase schema (entry/exit/dependencies/risks/quality gate), System Integrity Substrate (IS.1–IS.9) parallel to the Learning Layer, Mirror Discipline per native directive ND.1, plus Ethical Framework / External Dependency Graph / Meta-Governance / Multi-Agent Collaboration / Post-M10 Framing. Read v2.0 for any current work. v1.0 content below is retained for lineage tracing only — it is **not authoritative**.
 
-# AM-JIS Macro Plan — Strategic Arc v1.0
+# MARSYS-JIS Macro Plan — Strategic Arc v1.0
 
 **Status:** Orientation document. Defines the full project arc across macro-phases.
-**Audience:** Any LLM session working on AM-JIS, current and future.
+**Audience:** Any LLM session working on MARSYS-JIS, current and future.
 **Operational rule:** Read this once per session for orientation. Execute only the currently-scoped phase. Do not pre-build infrastructure for later macro-phases.
 **Date:** 2026-04-23
 **Owner:** Abhisek Mohanty

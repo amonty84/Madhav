@@ -10,7 +10,7 @@ supersession_rationale: >
   new rows (ONGOING_HYGIENE_POLICIES entry + BOOTSTRAP retirement archival row + LEL v1.1
   archival row). v1.3 retained in-place per ONGOING_HYGIENE_POLICIES §A.
 date: 2026-04-24
-scope: (superseded) Complete registry of final/current AM-JIS corpus files; Step 7 governance-integrity artifacts + canonical_artifact_id / mirror_obligations columns
+scope: (superseded) Complete registry of final/current MARSYS-JIS corpus files; Step 7 governance-integrity artifacts + canonical_artifact_id / mirror_obligations columns
 supersedes: FILE_REGISTRY_v1_2.md (closed 2026-04-24 at Step 5A; superseded 2026-04-24 at Step 7 of the Step 0→15 governance rebuild); FILE_REGISTRY_v1_1.md (closed 2026-04-23 at Step 5; superseded 2026-04-24 at Step 5A); FILE_REGISTRY_v1_0.md (closed 2026-04-19; superseded 2026-04-23 at Step 5)
 schema_version: 1.3
   # v1.3 additions: two new columns on §9 rows — canonical_artifact_id (pointer into
@@ -51,11 +51,11 @@ changelog:
 > **Delta-to-v1.4 basename index (added by STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX, 2026-04-24 — pointer clarification only, zero substantive change to v1.3 tables):**
 > - `ONGOING_HYGIENE_POLICIES_v1_0.md` (NEW CURRENT at v1.4 §9.1; canonical_artifact_id `ONGOING_HYGIENE_POLICIES`; mirror_obligations `claude_only`; produced_during `STEP_12_ONGOING_HYGIENE_POLICIES`).
 > - `LIFE_EVENT_LOG_v1_1.md` (received §A retain-in-place archival banner at v1.4 §8; GA.12 closure).
-> - `AM_JIS_BOOTSTRAP_HANDOFF.md` (retired to v1.4 §8 archival per native Step 12 WARN.4/WARN.6 decision).
+> - `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (retired to v1.4 §8 archival per native Step 12 WARN.4/WARN.6 decision).
 >
 > *This basename index exists so that the Step-7-vintage `platform/scripts/governance/drift_detector.py` (which hardcodes `FILE_REGISTRY_v1_3.md` as its `fr_path` at L315 and performs a basename-substring check at L338) can resolve its H.3.5 FILE_REGISTRY-vs-CANONICAL_ARTIFACTS agreement check against post-Step-12 CA §1 rows without requiring a script modification — which brief §4 "detector discipline" forbids. The authoritative row content lives in `FILE_REGISTRY_v1_4.md §9.1`; this block is a pointer only.*
 
-# AM-JIS File Registry — Final Corpus (v1.3)
+# MARSYS-JIS File Registry — Final Corpus (v1.3)
 
 **Subject**: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 **Branch**: `feature/amjis-platform`
@@ -317,7 +317,7 @@ Per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §D.2`, this section adds two new col
 | `corpus_verification_report_v1_0.json` | Machine-readable verification output |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | Agent brief (completed) |
 | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | Agent brief for 8-layer corpus verification |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
 | `SESSION_RESUME_PROMPT.md` | Session resume context prompt |
 | `.tools/build_lel_v1_2.py` | Life Event Log builder |
 | `.tools/compute_event_chart_states.py` | Event chart state computation |

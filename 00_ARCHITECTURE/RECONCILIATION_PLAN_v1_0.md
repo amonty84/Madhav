@@ -7,7 +7,7 @@ scope: "Reconciliation plan for the 41 findings in AUDIT_REPORT_v1_0.md organize
 parent: AUDIT_REPORT_v1_0.md
 ---
 
-# RECONCILIATION_PLAN_v1_0 — AM-JIS Audit Reconciliation
+# RECONCILIATION_PLAN_v1_0 — MARSYS-JIS Audit Reconciliation
 ## Abhisek Mohanty Jyotish Intelligence System
 ### 2026-04-18 | CLOSED
 

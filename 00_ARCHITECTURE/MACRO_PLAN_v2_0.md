@@ -1,6 +1,6 @@
 ---
-document: AM-JIS MACRO PLAN — STRATEGIC ARC
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+document: MARSYS-JIS MACRO PLAN — STRATEGIC ARC
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 2.0
 status: CURRENT
@@ -11,7 +11,7 @@ date: 2026-04-23
 produced_during: STEP_3_MACRO_PLAN_REWRITE (Step 0→15 governance rebuild)
 id_namespace: M1..M10 (macro-phases); LL.1..LL.10 (Learning Layer mechanisms); IS.1..IS.9 (System Integrity Substrate axes); ED.1..ED.9 (External dependencies); CW.LEL, CW.PPL (Cross-cutting workstreams); MP.1..MP.7 (Mirror pairs, first-pass inventory)
 purpose: >
-  Strategic orientation layer for the AM-JIS project. Frames the ten macro-phase
+  Strategic orientation layer for the MARSYS-JIS project. Frames the ten macro-phase
   arc (M1–M10) and the two cross-cutting substrates (Learning Layer and System
   Integrity). Read once per session for orientation; execute only the currently-
   scoped phase. This document governs how the project evolves across macro-
@@ -19,7 +19,7 @@ purpose: >
   is produced during the governance rebuild workflow (Step 0 → Step 15) that
   closes multi-session drift observed in M2 execution.
 audience:
-  primary: Any LLM session working on AM-JIS, current and future
+  primary: Any LLM session working on MARSYS-JIS, current and future
   secondary: Abhisek Mohanty (native, project owner)
   tertiary: Independent classical-Jyotish acharyas reviewing the corpus
 operational_rule: >
@@ -73,9 +73,9 @@ changelog:
     governance rebuild closes.
 ---
 
-# AM-JIS Macro Plan — Strategic Arc v2.0
+# MARSYS-JIS Macro Plan — Strategic Arc v2.0
 
-Authoritative strategic arc for the AM-JIS project. See frontmatter for version, status, and audience.
+Authoritative strategic arc for the MARSYS-JIS project. See frontmatter for version, status, and audience.
 
 ---
 
@@ -1042,7 +1042,7 @@ This appendix is required by the Step 3 brief §5 discipline rules. It maps each
 | MP v2.0 section / element | Disposition | Spec entry mandating it | ND binding |
 |---|---|---|---|
 | Frontmatter (version, status, supersedes, produced_during, id_namespace, operational_rule forward-pointer, changelog) | REPLACE | Spec §2.1, §2.10, §4.1, §4.2 | ND.1 changelog entry per §IS.2 obligation |
-| Title block ("AM-JIS Macro Plan — Strategic Arc v2.0" + one-line subtitle) | REVISE | Spec §2.2 | — |
+| Title block ("MARSYS-JIS Macro Plan — Strategic Arc v2.0" + one-line subtitle) | REVISE | Spec §2.2 | — |
 | §Why this exists (rebuild-era prepend + original text) | REVISE (KEEP+prepend) | Spec §2.3 | — |
 | §Ultimate goal (original two sentences + ethics-scope third sentence) | REVISE | Spec §2.4 | — |
 | §System Integrity Substrate (§IS.1–§IS.9) | NEW-SECTION | Spec §3.3 | ND.1 — §IS.2 is the MP-layer implementation; verbatim-or-equivalent three claims; MP changelog names ND.1 |

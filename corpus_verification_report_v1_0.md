@@ -1,4 +1,4 @@
-# AM-JIS Corpus Verification Report — 2026-04-19T16:56:18
+# MARSYS-JIS Corpus Verification Report — 2026-04-19T16:56:18
 
 ## Executive Summary
 | Metric | Count |

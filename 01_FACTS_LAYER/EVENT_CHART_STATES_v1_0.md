@@ -1,6 +1,6 @@
 ---
 document: EVENT CHART STATES (per-event precise positions for all 36 LEL events)
-project: AM-JIS
+project: MARSYS-JIS
 layer: L1 (Facts Layer)
 artifact_id: EVENT_CHART_STATES_v1_0
 version: 1.0

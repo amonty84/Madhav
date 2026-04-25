@@ -5,7 +5,7 @@ status: SUPERSEDED by FILE_REGISTRY_v1_1.md (2026-04-23 at Step 5 of the Step 0�
 superseded_by: 00_ARCHITECTURE/FILE_REGISTRY_v1_1.md
 superseded_on: 2026-04-23
 date: 2026-04-19
-scope: Complete registry of final/current AM-JIS corpus files
+scope: Complete registry of final/current MARSYS-JIS corpus files
 supersedes: FILE_INDEX_v1_0.md (Session 36, now stale)
 changelog:
   - v1.0 (2026-04-19): Initial registry. Captured 75 current + 29 archival files.
@@ -16,7 +16,7 @@ changelog:
 
 > **⚠ SUPERSEDED** — This registry is historical (dated 2026-04-19). The current registry is **`FILE_REGISTRY_v1_1.md`** (published 2026-04-23 at Step 5 of the Step 0→15 governance rebuild). v1.1 corrects the §4 MSR row to `MSR_v3_0.md` (499 signals) per GA.1, adds rows for the governance-rebuild artifact family (MACRO_PLAN_v2_0.md + lineage, STEP_LEDGER, STEP_BRIEFS, GROUNDING_AUDIT, NATIVE_DIRECTIVES, PHASE_B_PLAN v1.0.2), and marks MP v1.0 / MSR v2.0 / FILE_REGISTRY v1.0 as superseded in §8 Archival. Content below is retained for lineage only — do **not** cite as current.
 
-# AM-JIS File Registry — Final Corpus
+# MARSYS-JIS File Registry — Final Corpus
 
 **Subject**: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 **Branch**: `feature/amjis-platform`
@@ -223,7 +223,7 @@ Superseded versions are collected in §8 (Archival). Tooling and process files a
 | `corpus_verification_report_v1_0.json` | Machine-readable verification output |
 | `AGENT_BRIEF_CORPUS_CLEANUP_v1_0.md` | Agent brief for corpus cleanup task (completed) |
 | `AGENT_BRIEF_CORPUS_VERIFICATION_v1_0.md` | Agent brief for comprehensive 8-layer corpus verification (MSR merge + citation graph + 24 invariants) |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | Session bootstrap document |
 | `SESSION_RESUME_PROMPT.md` | Session resume context prompt |
 | `.tools/build_lel_v1_2.py` | Life Event Log builder |
 | `.tools/compute_event_chart_states.py` | Event chart state computation |

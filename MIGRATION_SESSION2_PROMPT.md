@@ -328,6 +328,88 @@ FILE: platform/src/app/api/admin/users/[id]/send-reset/route.ts
   Replace createServiceClient() with query().
   SELECT email FROM profiles WHERE id=$1
 
+PAGE FILES (server components — also use createServiceClient directly):
+
+FILE: platform/src/app/clients/[id]/layout.tsx
+  Replace createServiceClient() with query().
+  Role check: SELECT role FROM profiles WHERE id=$1
+  Chart auth: SELECT client_id FROM charts WHERE id=$1
+  Redirect to /dashboard if role != 'super_admin' AND chart.client_id != user.uid
+
+FILE: platform/src/app/clients/[id]/build/page.tsx
+  Replace createServiceClient() with query().
+  Profile: SELECT role FROM profiles WHERE id=$1
+  Pyramid: SELECT layer,sublayer,status FROM pyramid_layers WHERE chart_id=$1
+
+FILE: platform/src/app/clients/[id]/consume/page.tsx
+  Replace createServiceClient() with query().
+  Profile: SELECT role FROM profiles WHERE id=$1
+  Chart: SELECT name,birth_date,birth_place,client_id FROM charts WHERE id=$1
+  Reports: SELECT * FROM reports WHERE chart_id=$1 ORDER BY domain
+
+FILE: platform/src/app/clients/[id]/consume/[conversationId]/page.tsx
+  Replace createServiceClient() with query().
+  Same as consume/page.tsx plus:
+  Conversation: SELECT * FROM conversations WHERE id=$1
+
+FILE: platform/src/app/dashboard/page.tsx
+  Replace createServiceClient() with query().
+  Profile: SELECT id,role,name,username,email,status FROM profiles WHERE id=$1
+  Charts (super_admin): SELECT * FROM charts ORDER BY created_at DESC
+  Charts (client): SELECT * FROM charts WHERE client_id=$1 ORDER BY created_at DESC
+  Pyramid: SELECT layer,sublayer,status FROM pyramid_layers WHERE chart_id=ANY($1)
+           (bulk fetch for all chart IDs returned above)
+
+FILE: platform/src/app/share/[slug]/page.tsx
+  Replace createServiceClient() with query().
+  Share: SELECT * FROM conversation_shares WHERE slug=$1
+         AND revoked_at IS NULL AND (expires_at IS NULL OR expires_at > now())
+  Conversation: SELECT * FROM conversations WHERE id=$1
+  Chart: SELECT name,birth_date,birth_place FROM charts WHERE id=$1
+
+LIB/CLAUDE FILES (complex — both DB and GCS storage):
+
+FILE: platform/src/lib/claude/build-tools.ts
+  This file uses BOTH the documents table (DB) and the chart-documents
+  storage bucket. Replace all createServiceClient() calls.
+
+  Import { query } from '@/lib/db/client'
+  Import { chartDocsBucket, uploadBuffer, signedDownloadUrl } from '@/lib/storage/client'
+  Import { Storage } from '@google-cloud/storage'
+
+  DB operations on documents table:
+    List:   SELECT id,title,storage_path,created_at FROM documents WHERE chart_id=$1
+    Fetch:  SELECT id,title,storage_path FROM documents WHERE id=$1
+    Insert: INSERT INTO documents (chart_id,title,storage_path,created_at)
+            VALUES ($1,$2,$3,now()) RETURNING *
+    Delete: DELETE FROM documents WHERE id=$1
+
+  Storage operations (replace supabase.storage.from('chart-documents')):
+    .download(path)      → chartDocsBucket().file(path).download() → returns [Buffer]
+    .upload(path, data)  → chartDocsBucket().file(path).save(data, {contentType:'text/markdown'})
+    .remove([path])      → chartDocsBucket().file(path).delete()
+
+  The file content downloaded from GCS is a Buffer; convert to string with
+  buffer.toString('utf-8') where text content is expected.
+
+FILE: platform/src/lib/claude/consume-tools.ts
+  This file also uses both documents/reports tables and chart-documents bucket.
+
+  Import { query } from '@/lib/db/client'
+  Import { chartDocsBucket } from '@/lib/storage/client'
+
+  DB operations:
+    Charts:    SELECT * FROM charts WHERE id=$1
+    Documents: SELECT id,title,storage_path FROM documents WHERE id=$1
+               SELECT id,title,storage_path FROM documents WHERE chart_id=$1
+               INSERT INTO documents (chart_id,title,storage_path) VALUES ($1,$2,$3) RETURNING *
+    Reports:   SELECT title,domain,version,storage_path FROM reports
+               WHERE chart_id=$1 AND domain=$2 ORDER BY version DESC LIMIT 1
+
+  Storage operations (replace supabase.storage.from('chart-documents')):
+    .download(storage_path) → chartDocsBucket().file(storage_path).download()
+                              returns [Buffer] — convert with buf.toString('utf-8')
+
 ---
 
 PHASE 6: CLEAN UP REMOVED FILES

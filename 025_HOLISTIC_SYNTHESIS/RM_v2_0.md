@@ -14,7 +14,7 @@ schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
 v2_1_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
 ---
 
-# AM-JIS — Resonance Map v2.1
+# MARSYS-JIS — Resonance Map v2.1
 ## Abhisek Mohanty Jyotish Intelligence System
 ### 2026-04-18 | FIX_SESSION_003_deferred
 

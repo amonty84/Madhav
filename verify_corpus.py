@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AM-JIS Corpus Verification Orchestrator
+MARSYS-JIS Corpus Verification Orchestrator
 ========================================
 Brain:   Claude Opus 4.7 (the session/you) — reads the findings report and decides what to fix
 Workers: Claude Haiku 4.5 (default) or DeepSeek — classify suspicious passages cheaply
@@ -81,7 +81,7 @@ SKIP_PATTERNS = [
     r"(^|/)AGENTS\.md$",
     r"(^|/)README\.md$",
     r"(^|/)SESSION_RESUME_PROMPT\.md$",
-    r"(^|/)AM_JIS_BOOTSTRAP_HANDOFF\.md$",
+    r"(^|/)MARSYS_JIS_BOOTSTRAP_HANDOFF\.md$",
     r"audit.*\.md$",
     r"verify.*\.md$",
     r"data_integrity_audit_report.*\.md$",
@@ -372,7 +372,7 @@ OLD_WRONG_SUMMARY = "\n".join(
     for entity, v in KNOWN_OLD_WRONG.items()
 )
 
-WORKER_SYSTEM = f"""You are a corpus integrity checker for an AM-JIS Jyotish (Vedic astrology) research project.
+WORKER_SYSTEM = f"""You are a corpus integrity checker for an MARSYS-JIS Jyotish (Vedic astrology) research project.
 
 ## Authoritative placements (FORENSIC_ASTROLOGICAL_DATA_v8_0.md, v8.0):
 {GROUND_TRUTH_SUMMARY}
@@ -566,7 +566,7 @@ def generate_report(
     # Write Markdown report
     now = summary["generated_at"]
     lines = [
-        f"# AM-JIS Corpus Verification Report — {now}",
+        f"# MARSYS-JIS Corpus Verification Report — {now}",
         "",
         "## Executive Summary",
         f"| Metric | Count |",
@@ -674,7 +674,7 @@ def estimate_cost(n_candidates: int, backend: str) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AM-JIS corpus verifier — brain + workers")
+    parser = argparse.ArgumentParser(description="MARSYS-JIS corpus verifier — brain + workers")
     parser.add_argument("--path",    default=".", help="Project root directory")
     parser.add_argument("--backend", default="anthropic", choices=["anthropic", "deepseek"],
                         help="Worker model backend (default: anthropic/haiku)")
@@ -694,7 +694,7 @@ def main():
         sys.exit(1)
 
     print(f"\n{'='*60}")
-    print(f"AM-JIS Corpus Verification Orchestrator")
+    print(f"MARSYS-JIS Corpus Verification Orchestrator")
     print(f"Root: {ROOT}")
     print(f"Backend: {args.backend} workers | Concurrency: {args.workers}")
     print(f"{'='*60}\n")

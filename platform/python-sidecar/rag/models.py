@@ -1,5 +1,5 @@
 """
-models — AM-JIS RAG Pipeline Pydantic v2 data models.
+models — MARSYS-JIS RAG Pipeline Pydantic v2 data models.
 Phase B.1. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.1 Task 1 + chunker_spec_v1_0.md metadata field lists.
 """
 from __future__ import annotations

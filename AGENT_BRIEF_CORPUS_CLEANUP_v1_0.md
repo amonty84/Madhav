@@ -2,14 +2,14 @@
 brief_type: Agent Execution Brief
 brief_version: 1.0
 created: 2026-04-19
-scope: AM-JIS corpus cleanup — strip corrective/explanatory text from claim-bearing files
+scope: MARSYS-JIS corpus cleanup — strip corrective/explanatory text from claim-bearing files
 status: READY FOR EXECUTION
 executor_model: Any capable LLM (Claude Sonnet or DeepSeek recommended for cost efficiency)
 brain_session: Claude Opus 4.7 session 2026-04-19
 verification_run: corpus_verification_report_v1_0.md (same directory)
 ---
 
-# Agent Execution Brief — AM-JIS Corpus Cleanup
+# Agent Execution Brief — MARSYS-JIS Corpus Cleanup
 
 ## DO NOT START without reading this entire brief first.
 
@@ -17,7 +17,7 @@ verification_run: corpus_verification_report_v1_0.md (same directory)
 
 ## §1 — Project Context
 
-**AM-JIS** (Abhisek Mohanty Jyotish Intelligence System) is a multi-layered astrological research corpus for chart analysis of Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar. The corpus has four layers:
+**MARSYS-JIS** (Abhisek Mohanty Jyotish Intelligence System) is a multi-layered astrological research corpus for chart analysis of Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar. The corpus has four layers:
 
 | Layer | Files | Purpose |
 |---|---|---|

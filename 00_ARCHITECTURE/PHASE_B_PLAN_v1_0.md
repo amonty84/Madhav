@@ -1,4 +1,4 @@
-# AM-JIS Corpus Activation — Phase B Plan v1.0 (B-PRIMARY, M2-SCOPED)
+# MARSYS-JIS Corpus Activation — Phase B Plan v1.0 (B-PRIMARY, M2-SCOPED)
 
 **Status:** APPROVED FOR EXECUTION — Phase B.0 pending start.
 **Supersedes:** `twinkly-puzzling-quokka.md` (session-scoped draft), v2 draft (scope-only), v1 (query-primary).

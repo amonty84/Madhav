@@ -86,7 +86,7 @@ The corpus contains ~700,000 words across 40+ artifacts. This registry tracks:
 
 **Prior tension**: A naive 1°/year × 42 year sketch disagreed with narrative placing BB-related activation in the Gemini 3H zone at ~age 42.
 
-**Resolution**: AM-JIS adopts **6°/year** longitudinal progression for Bhrigu Bindu **documentation purposes** per **FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F**, encoded in **MSR_v2_0 §MSR.404** supporting_rules. The **Gemini 3H crystallization thesis** does not rest on a single simplified BB longitude extrapolation: it is anchored by **UL + A5 + A11 + Hora Lagna (JH-confirmed in Gemini 3H)** co-loading — independent of elementary BB arithmetic.
+**Resolution**: MARSYS-JIS adopts **6°/year** longitudinal progression for Bhrigu Bindu **documentation purposes** per **FORENSIC_DATA_v7_0_SUPPLEMENT §V7.F**, encoded in **MSR_v2_0 §MSR.404** supporting_rules. The **Gemini 3H crystallization thesis** does not rest on a single simplified BB longitude extrapolation: it is anchored by **UL + A5 + A11 + Hora Lagna (JH-confirmed in Gemini 3H)** co-loading — independent of elementary BB arithmetic.
 
 **Status**: CLOSED. See MSR.404 falsifier + supporting_rules update (same date).
 
@@ -224,5 +224,5 @@ The nine UCN §IX contradictions are features, not bugs. Each represents a dimen
 
 ---
 
-*CONTRADICTION_REGISTRY_v1_1.md — AM-JIS FIX_SESSION_003 — 2026-04-18 — CURRENT*
+*CONTRADICTION_REGISTRY_v1_1.md — MARSYS-JIS FIX_SESSION_003 — 2026-04-18 — CURRENT*
 *Parent: MSR_v2_0.md, UCN_v3_0.md — L1 source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md*

@@ -15,7 +15,7 @@ scope: "Registry of falsifiers — specific empirical events or data findings th
 
 ## §1 — PURPOSE
 
-A legitimate analytical corpus articulates what would refute its claims. This registry lists the major claims in AM-JIS and the specific observations that would falsify each.
+A legitimate analytical corpus articulates what would refute its claims. This registry lists the major claims in MARSYS-JIS and the specific observations that would falsify each.
 
 ---
 

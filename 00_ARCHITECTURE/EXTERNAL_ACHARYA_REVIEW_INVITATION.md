@@ -4,7 +4,7 @@ version: 1.0
 status: CLOSED
 session: 40
 date_closed: 2026-04-18
-scope: "Invitation package for external senior Jyotish acharya to review the AM-JIS corpus"
+scope: "Invitation package for external senior Jyotish acharya to review the MARSYS-JIS corpus"
 ---
 
 # EXTERNAL_ACHARYA_REVIEW_INVITATION
@@ -17,7 +17,7 @@ scope: "Invitation package for external senior Jyotish acharya to review the AM-
 
 **To**: Senior Jyotish acharya — to be identified by native Abhisek Mohanty
 **From**: Abhisek Mohanty (native)
-**Subject**: Request for review of AM-JIS (Abhisek Mohanty Jyotish Intelligence System) corpus
+**Subject**: Request for review of MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System) corpus
 
 Dear Acharya,
 

@@ -126,7 +126,7 @@ v6.0 §6.2 ranks Sun #1 by Shadbala. JH authoritative ranks Saturn #1:
 | Mars | 5.34 | 6 | 6 | ✓ |
 | Venus | 4.80 | 7 | 7 | ✓ |
 
-**AM-JIS discipline**: For external reviewers using JH, cite JH ranking (Saturn #1). For internal-v6.0-continuity, note FORENSIC used alternate engine. Both are classically valid computations.
+**MARSYS-JIS discipline**: For external reviewers using JH, cite JH ranking (Saturn #1). For internal-v6.0-continuity, note FORENSIC used alternate engine. Both are classically valid computations.
 
 ### §1.5 Overrides to v6.0 §7 Ashtakavarga — Moon BAV row + 4 SAV columns
 
@@ -159,7 +159,7 @@ v6.0 dates run +7 to +9 days LATER than JH authoritative.
 | Mercury MD end / Ketu MD start | 2027-08-14 | 2027-08-21 | +7d |
 | Saturn-Jup PD start | 2027-04-02 | (TBD per v6.0) | ≈+7d |
 
-**AM-JIS discipline**: For retrodictive fit (which used v6.0 dates for LEL correlation), continue citing v6.0 dates with an engine-note. For forward timing analyses (HEATMAP, LIFETIME_TIMELINE), prefer JH dates for tighter accuracy.
+**MARSYS-JIS discipline**: For retrodictive fit (which used v6.0 dates for LEL correlation), continue citing v6.0 dates with an engine-note. For forward timing analyses (HEATMAP, LIFETIME_TIMELINE), prefer JH dates for tighter accuracy.
 
 ### §1.7 Chara Karaka — 8-karaka clarification (GAP.13)
 
@@ -168,7 +168,7 @@ v6.0 §10.1 uses 7-karaka Chara system. JH uses 8-karaka (adds Rahu as PK).
 **Under 7-karaka (v6.0)**: Mars = PK (children-karaka), no PiK
 **Under 8-karaka (JH)**: Rahu = PK (children-karaka), Mars = PiK (father-karaka)
 
-Both systems are classically legitimate. AM-JIS primary narrative uses 7-karaka; 8-karaka reading is noted where relevant.
+Both systems are classically legitimate. MARSYS-JIS primary narrative uses 7-karaka; 8-karaka reading is noted where relevant.
 
 ### §1.8 NEW YOGAS (supplementary to v6.0)
 

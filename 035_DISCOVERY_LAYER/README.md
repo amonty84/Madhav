@@ -9,7 +9,7 @@ implements: PHASE_B_PLAN_v1_0.md §B.3 + §E.1 + §G B.0 Task 2
 
 # 035_DISCOVERY_LAYER — L4 Discovery Layer
 
-The Discovery Layer is the fourth architectural stratum of AM-JIS, sitting above the L3
+The Discovery Layer is the fourth architectural stratum of MARSYS-JIS, sitting above the L3
 Domain Reports and receiving input from L2.5 Holistic Synthesis. Its purpose is to surface
 emergent cross-domain patterns, resonances, contradictions, and clusters that are not visible
 within any single domain report — the kinds of insights that require holding the entire

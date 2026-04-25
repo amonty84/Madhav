@@ -1,4 +1,4 @@
-# AM-JIS Data Model Gap Resolution Plan
+# MARSYS-JIS Data Model Gap Resolution Plan
 
 > **STATUS — EXECUTED (2026-04-19):** This plan was run to completion in-repo (gap-resolution commits through `GAP_RESOLUTION_SESSION`). **Do not re-execute** wholesale — use **`GOVERNANCE_STACK_v1_0.md`** and **`SESSION_LOG`** for current state. Checkboxes below are **historical** unless you are verifying archaeology.
 
@@ -490,7 +490,7 @@ grep -n -A8 "GAP\.08\|GAP\.09\|BAV.*Moon.*DUAL\|Vimshottari.*offset\|dasha.*offs
 Replace `<!-- GAP.08 ... -->` comment with inline resolved text:
 
 ```
-**RESOLVED (GAP.08):** Moon BAV row differs in 4 signs between FORENSIC and JH engines (Gemini, Libra, Scorpio, Capricorn — ±1 bindu each; grand total 337 matches). Policy adopted: FORENSIC BAV/SAV values are used throughout AM-JIS domain reports; JH values are listed in the table as reference row (AVG.BAV.MOON.JH). Rank-dependent claims are unaffected as ±1 differences cancel in aggregate.
+**RESOLVED (GAP.08):** Moon BAV row differs in 4 signs between FORENSIC and JH engines (Gemini, Libra, Scorpio, Capricorn — ±1 bindu each; grand total 337 matches). Policy adopted: FORENSIC BAV/SAV values are used throughout MARSYS-JIS domain reports; JH values are listed in the table as reference row (AVG.BAV.MOON.JH). Rank-dependent claims are unaffected as ±1 differences cancel in aggregate.
 ```
 
 - [ ] **Step 3: Close GAP.09**
@@ -498,7 +498,7 @@ Replace `<!-- GAP.08 ... -->` comment with inline resolved text:
 Find the GAP.09 comment in §5.1 (Vimshottari dasha dates). Replace with:
 
 ```
-**RESOLVED (GAP.09):** Vimshottari dasha dates offset +7 to +9 days between FORENSIC (later) and JH engines, rooted in 1.4 arcmin Moon longitude difference at birth. Policy adopted: FORENSIC dates are used for retrodictive fit throughout AM-JIS (LEL events were matched against FORENSIC dates in Sessions 16-25 and confirmed). JH dates are NOT used for dasha period boundaries. Note: the ±7-9 day window is within the "dasha cusp zone" and does not affect life-arc interpretations; only precise-date claims within a 10-day window of period transitions are affected.
+**RESOLVED (GAP.09):** Vimshottari dasha dates offset +7 to +9 days between FORENSIC (later) and JH engines, rooted in 1.4 arcmin Moon longitude difference at birth. Policy adopted: FORENSIC dates are used for retrodictive fit throughout MARSYS-JIS (LEL events were matched against FORENSIC dates in Sessions 16-25 and confirmed). JH dates are NOT used for dasha period boundaries. Note: the ±7-9 day window is within the "dasha cusp zone" and does not affect life-arc interpretations; only precise-date claims within a 10-day window of period transitions are affected.
 ```
 
 - [ ] **Step 4: Commit**

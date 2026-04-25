@@ -5,7 +5,7 @@ status: CLOSED
 session: STEP_0_GROUNDING
 date: 2026-04-23
 scope: >
-  Baseline audit of the AM-JIS governance surface at the moment Step 0 is being
+  Baseline audit of the MARSYS-JIS governance surface at the moment Step 0 is being
   executed. Captures every point of drift, contradiction, staleness, phantom
   reference, and unreferenced artifact across the files that control how LLM
   sessions orient themselves. This is the evidence base that Steps 1–15 will
@@ -33,7 +33,7 @@ consumers:
   - All other steps as reference
 ---
 
-# GROUNDING AUDIT v1.0 — Baseline State of the AM-JIS Governance Surface
+# GROUNDING AUDIT v1.0 — Baseline State of the MARSYS-JIS Governance Surface
 
 ## §0 — Purpose and method
 
@@ -158,11 +158,11 @@ A "phantom reference" is a file path that appears authoritatively in a governanc
 
 **GA.7** [HIGH / STALENESS + PHANTOM-REFERENCE / owning_step=Step 7]: project_state.md still anchors its "current state" to the superseded draft. Gemini reading this surface starts from a superseded plan. Mirror mechanism introduced in last session only covered L2.5 paths in .geminirules, not project_state.md.
 
-### §3.3 — AM_JIS_BOOTSTRAP_HANDOFF.md
+### §3.3 — MARSYS_JIS_BOOTSTRAP_HANDOFF.md
 
 CLAUDE.md mandatory-reading item 1. Existence not yet verified in this audit — flag for Step 6.
 
-**GA.8** [LOW / VERIFY / owning_step=Step 6]: Existence of AM_JIS_BOOTSTRAP_HANDOFF.md must be confirmed and its role vs PROJECT_ARCHITECTURE_v2_1.md reconciled. If it exists, does it duplicate architecture content? If it doesn't, CLAUDE.md references a ghost file.
+**GA.8** [LOW / VERIFY / owning_step=Step 6]: Existence of MARSYS_JIS_BOOTSTRAP_HANDOFF.md must be confirmed and its role vs PROJECT_ARCHITECTURE_v2_1.md reconciled. If it exists, does it duplicate architecture content? If it doesn't, CLAUDE.md references a ghost file.
 
 ### §3.4 — Retracted: PHASE_B_PLAN_v1_0.md
 

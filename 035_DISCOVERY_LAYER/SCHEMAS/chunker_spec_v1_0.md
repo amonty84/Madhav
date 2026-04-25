@@ -7,7 +7,7 @@ date: 2026-04-24
 implements: "PHASE_B_PLAN_v1_0.md §G B.2 Chunker Specification + B.0 Task 12"
 ---
 
-# AM-JIS Chunker Specification v1.0
+# MARSYS-JIS Chunker Specification v1.0
 
 Reference for Phase B.2 chunker implementation. Defines the 6 document types ingested
 into `rag_chunks`, their chunk unit definitions, boundary detection methods, metadata

@@ -12,7 +12,7 @@ changelog:
       and M2A_EXEC_PLAN §PLAN B.1 Task 3.
 ---
 
-# STALENESS REGISTER v1.0 — AM-JIS RAG Pipeline
+# STALENESS REGISTER v1.0 — MARSYS-JIS RAG Pipeline
 
 *Enumerates each L3 domain report with `version_aligned_with` and staleness status.
 Used by B.2 doc-type 5 chunker to propagate `is_stale` flag to rag_chunks.*

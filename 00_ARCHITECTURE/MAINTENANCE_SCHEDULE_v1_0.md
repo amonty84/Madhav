@@ -3,10 +3,10 @@ artifact: MAINTENANCE_SCHEDULE_v1_0.md
 version: 1.0
 status: CLOSED
 date: 2026-04-18
-scope: "Concrete maintenance calendar for the AM-JIS corpus — quarterly/annual/event-triggered refresh schedule. Complements LIVING_PROJECT_MAINTENANCE_GUIDE_v1_0 with specific dates."
+scope: "Concrete maintenance calendar for the MARSYS-JIS corpus — quarterly/annual/event-triggered refresh schedule. Complements LIVING_PROJECT_MAINTENANCE_GUIDE_v1_0 with specific dates."
 ---
 
-# AM-JIS MAINTENANCE SCHEDULE
+# MARSYS-JIS MAINTENANCE SCHEDULE
 ### 2026-04-18 | CLOSED
 
 ---

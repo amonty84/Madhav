@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-mirror_enforcer.py — AM-JIS Claude ↔ Gemini mirror enforcer.
+mirror_enforcer.py — MARSYS-JIS Claude ↔ Gemini mirror enforcer.
 
 # Implements: GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §J (primary)
 # Addresses: NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md ND.1 (Mirror Discipline)

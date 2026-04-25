@@ -3,12 +3,12 @@ artifact: FILE_REGISTRY_v1_4.md
 version: 1.4
 status: CURRENT
 date: 2026-04-24
-scope: Complete registry of final/current AM-JIS corpus files; adds Step 10/11/12 governance-rebuild artifacts and closes the Step 10-deferred v1.3→v1.4 bump
+scope: Complete registry of final/current MARSYS-JIS corpus files; adds Step 10/11/12 governance-rebuild artifacts and closes the Step 10-deferred v1.3→v1.4 bump
 supersedes: FILE_REGISTRY_v1_3.md (closed 2026-04-24 at Step 10 in-place amendment; superseded 2026-04-24 at Step 12 of the Step 0→15 governance rebuild); FILE_REGISTRY_v1_2.md (closed 2026-04-24 at Step 5A; superseded 2026-04-24 at Step 7); FILE_REGISTRY_v1_1.md (closed 2026-04-23 at Step 5; superseded 2026-04-24 at Step 5A); FILE_REGISTRY_v1_0.md (closed 2026-04-19; superseded 2026-04-23 at Step 5)
 schema_version: 1.4
   # v1.4 additions: §9.1 rows — SESSION_LOG_SCHEMA_v1_0 (CURRENT, Step 10), CURRENT_STATE_v1_0
   # (LIVE, Step 10), LEARNING_LAYER_SCAFFOLD_DECISION_v1_0 (CURRENT, Step 11),
-  # ONGOING_HYGIENE_POLICIES_v1_0 (CURRENT, Step 12); §9.1 removals — AM_JIS_BOOTSTRAP_HANDOFF
+  # ONGOING_HYGIENE_POLICIES_v1_0 (CURRENT, Step 12); §9.1 removals — MARSYS_JIS_BOOTSTRAP_HANDOFF
   # (retired Step 12) moved to §8 Archival; §8 archival — LEL_v1_1 archival banner (Step 12);
   # §9.4 NEW — 06_LEARNING_LAYER/ scaffold inventory; §9.5 NEW — governance script extensions
   # (Step 12). No new columns.
@@ -17,7 +17,7 @@ changelog:
     (a) §9.1 Architecture & Governance — added ONGOING_HYGIENE_POLICIES_v1_0 (CURRENT).
         Confirmed already-in-place Step-10/11 rows: SESSION_LOG_SCHEMA_v1_0 (CURRENT),
         CURRENT_STATE_v1_0 (LIVE), LEARNING_LAYER_SCAFFOLD_DECISION_v1_0 (CURRENT).
-    (b) §9.1 — AM_JIS_BOOTSTRAP_HANDOFF retired (moved to §8 Archival) per native Step 12
+    (b) §9.1 — MARSYS_JIS_BOOTSTRAP_HANDOFF retired (moved to §8 Archival) per native Step 12
         decision on WARN.4/WARN.6.
     (c) §8 Archival — added LEL_v1_1 archival row (was in §2 L1 Facts; §A retain-in-place
         policy per ONGOING_HYGIENE_POLICIES applied; GA.12 closed).
@@ -39,7 +39,7 @@ changelog:
   - v1.0 (2026-04-19): registry successor to FILE_INDEX_v1_0.
 ---
 
-# AM-JIS File Registry — Final Corpus (v1.4)
+# MARSYS-JIS File Registry — Final Corpus (v1.4)
 
 **Subject**: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 **Branch**: `feature/amjis-platform`
@@ -48,7 +48,7 @@ changelog:
 This registry lists only the **current authoritative version** of each artifact.
 Superseded versions are collected in §8 (Archival). Tooling and process files are in §9–§10.
 
-The v1.4 revision is **additive relative to v1.3** with one retirement (AM_JIS_BOOTSTRAP_HANDOFF moved to archival per WARN.4/WARN.6 close) and one archival-banner application (LEL v1.1 per GA.12 close). §1–§7 corpus rows are unchanged from v1.3 and are retained there for audit trail per ONGOING_HYGIENE_POLICIES §A retain-in-place policy; readers needing §1–§7 consult v1.3 (SUPERSEDED but content-identical for those sections).
+The v1.4 revision is **additive relative to v1.3** with one retirement (MARSYS_JIS_BOOTSTRAP_HANDOFF moved to archival per WARN.4/WARN.6 close) and one archival-banner application (LEL v1.1 per GA.12 close). §1–§7 corpus rows are unchanged from v1.3 and are retained there for audit trail per ONGOING_HYGIENE_POLICIES §A retain-in-place policy; readers needing §1–§7 consult v1.3 (SUPERSEDED but content-identical for those sections).
 
 The authoritative machine-readable inventory is `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — this registry's `canonical_artifact_id` column points into it.
 
@@ -107,7 +107,7 @@ See `FILE_REGISTRY_v1_3.md §7` — unchanged.
 |---|---|---|---|---|
 | `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_0.md` (implicit pre-v1.1) | `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md` (same session) | Session 2 (2026-04-17) | 2026-04-17 | Same-session minor revision |
 | `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md` | `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` | STEP_12_ONGOING_HYGIENE_POLICIES | 2026-04-24 | **GA.12 closure**; §A banner + frontmatter flip applied Step 12 |
-| `AM_JIS_BOOTSTRAP_HANDOFF.md` | CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2.md + MACRO_PLAN_v2_0.md + CURRENT_STATE_v1_0.md | STEP_12_ONGOING_HYGIENE_POLICIES | 2026-04-24 | **WARN.4/WARN.6 closure**; native decision to retire rather than refresh |
+| `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` | CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2.md + MACRO_PLAN_v2_0.md + CURRENT_STATE_v1_0.md | STEP_12_ONGOING_HYGIENE_POLICIES | 2026-04-24 | **WARN.4/WARN.6 closure**; native decision to retire rather than refresh |
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` | `00_ARCHITECTURE/FILE_REGISTRY_v1_4.md` (this) | STEP_12_ONGOING_HYGIENE_POLICIES | 2026-04-24 | v1.4 is delta-style; §1–§7 unchanged bulk retained in v1.3 |
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_2.md` | `FILE_REGISTRY_v1_3.md` | STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION | 2026-04-24 | Step 7 governance bundle |
 | `00_ARCHITECTURE/FILE_REGISTRY_v1_1.md` | `FILE_REGISTRY_v1_2.md` | STEP_5A_PROJECT_ARCHITECTURE_REFRESH | 2026-04-24 | MP v2.1 → v2.2 |
@@ -160,7 +160,7 @@ See `FILE_REGISTRY_v1_3.md §7` — unchanged.
 | `00_ARCHITECTURE/LIVING_PROJECT_MAINTENANCE_GUIDE_v1_0.md` | 1.0 | CLOSED | — | corpus-layer; referenced by §M of ONGOING_HYGIENE_POLICIES |
 | `00_ARCHITECTURE/MAINTENANCE_SCHEDULE_v1_0.md` | 1.0 | CLOSED | — | corpus-layer; referenced by §M of ONGOING_HYGIENE_POLICIES |
 | `00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md` | 1.0 | CLOSED (baseline) | — | Step 0 rebuild baseline; fresh-context read |
-| `~AM_JIS_BOOTSTRAP_HANDOFF.md~` | (retired) | SUPERSEDED | — | Retired Step 12 (WARN.4/WARN.6); see §8 |
+| `~MARSYS_JIS_BOOTSTRAP_HANDOFF.md~` | (retired) | SUPERSEDED | — | Retired Step 12 (WARN.4/WARN.6); see §8 |
 
 *Other v1.3 §9.1 rows unchanged by reference.*
 

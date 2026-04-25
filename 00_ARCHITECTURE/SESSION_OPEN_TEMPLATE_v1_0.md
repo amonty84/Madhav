@@ -26,7 +26,7 @@ changelog:
 ---
 
 # SESSION_OPEN_TEMPLATE v1.0
-## AM-JIS Project — Session-Open Handshake
+## MARSYS-JIS Project — Session-Open Handshake
 
 *Implements `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §F`. Every session, Claude-side or Gemini-side, emits a handshake per this schema **before any substantive tool call**. A session whose handshake fails `schema_validator.py` halts and reports; it does not proceed.*
 
@@ -78,7 +78,7 @@ session_open:
     # One entry per item in the current mandatory-reading list (per CLAUDE.md +
     # the active step brief). Each entry carries the file path, the sha256 of the
     # file content at read time, and the ISO timestamp.
-    - file: AM_JIS_BOOTSTRAP_HANDOFF.md
+    - file: MARSYS_JIS_BOOTSTRAP_HANDOFF.md
       fingerprint_sha256: <hex>
       read_at: 2026-04-24T00:00:00+05:30
     - file: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md

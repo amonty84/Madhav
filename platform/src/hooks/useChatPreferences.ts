@@ -9,7 +9,7 @@ const DEFAULT_STYLE: StyleId = 'acharya'
 const VALID_STYLES: StyleId[] = ['acharya', 'brief', 'client']
 
 function keyFor(chartId: string) {
-  return `amjis:consume-prefs:${chartId}`
+  return `marsys-jis:consume-prefs:${chartId}`
 }
 
 interface Prefs {

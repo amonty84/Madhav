@@ -1,6 +1,6 @@
 ---
 document: L2.5 HOLISTIC SYNTHESIS — MASTER SIGNAL REGISTER
-project: AM-JIS
+project: MARSYS-JIS
 layer: L2.5
 artifact_id: MSR_v1_0
 version: 1.0
@@ -5519,7 +5519,7 @@ SIG.MSR.241:
 SIG.MSR.242:
   signal_name: "Sensitive-Point — CONVERGENCE: Yogi Point + Pranapada Both in Revati 12H = Mercury-12H as Chart's Fortune-Prana Axis"
   signal_type: convergence
-  classical_source: "Phaladeepika (Yogi Point); BPHS (Pranapada); convergence analysis per AM-JIS Architecture §B.2"
+  classical_source: "Phaladeepika (Yogi Point); BPHS (Pranapada); convergence analysis per MARSYS-JIS Architecture §B.2"
   entities_involved: [YOG.POINT, LAG.PRANAPADA, PLN.MERCURY, HSE.12, PLN.JUPITER]
   strength_score: 0.88
   valence: benefic
@@ -5736,7 +5736,7 @@ SIG.MSR.250:
 SIG.MSR.251:
   signal_name: "Saham — Roga+Mahatmya BOTH in Libra 7H: Disease-Point AND Greatness-Point Conjunct Saturn-Mars — The 7H Crucible Paradox"
   signal_type: convergence
-  classical_source: "Tajika Neelakanthi (Saham Roga = disease lot; Saham Mahatmya = greatness/glory lot); AM-JIS Architecture §B.2 (convergence analysis)"
+  classical_source: "Tajika Neelakanthi (Saham Roga = disease lot; Saham Mahatmya = greatness/glory lot); MARSYS-JIS Architecture §B.2 (convergence analysis)"
   entities_involved: [SAH.ROGA, SAH.MAHATMYA, HSE.7, PLN.SATURN, PLN.MARS, HAZ.BHRIGU_BINDU, LAG.HORA]
   strength_score: 0.90
   valence: mixed
@@ -5814,7 +5814,7 @@ SIG.MSR.253:
 SIG.MSR.254:
   signal_name: "Sensitive-Point — 7H Libra Supreme Convergence: Saturn+Mars+BhriguBindu+HoraLagna+RogaSaham+MahatmyaSaham = Six-Layer Convergence in One House"
   signal_type: convergence
-  classical_source: "AM-JIS Architecture §B.2 (convergence = when 3+ independent methods point to the same zone); Jyotish general (house-concentration = that house dominates the native's life)"
+  classical_source: "MARSYS-JIS Architecture §B.2 (convergence = when 3+ independent methods point to the same zone); Jyotish general (house-concentration = that house dominates the native's life)"
   entities_involved: [PLN.SATURN, PLN.MARS, HAZ.BHRIGU_BINDU, LAG.HORA, SAH.ROGA, SAH.MAHATMYA, HSE.7]
   strength_score: 0.97
   valence: mixed
@@ -5879,7 +5879,7 @@ SIG.MSR.255:
 SIG.MSR.256:
   signal_name: "Dasha — Mercury MD 10x Event-Density Pattern (SIG.29): Statistical Confirmation of Yogi-Planet MD Premium"
   signal_type: dasha-activation
-  classical_source: "BPHS Ch.46 (strong Mahadasha lord = exceptional event delivery); AM-JIS MATRIX_DASHA_PERIODS §2.2 statistical analysis"
+  classical_source: "BPHS Ch.46 (strong Mahadasha lord = exceptional event delivery); MARSYS-JIS MATRIX_DASHA_PERIODS §2.2 statistical analysis"
   entities_involved: [PLN.MERCURY, DSH.VM.MD.MERCURY]
   strength_score: 0.88
   valence: benefic
@@ -6014,7 +6014,7 @@ SIG.MSR.261:
 SIG.MSR.262:
   signal_name: "Dasha — AD-Lord Domain Match 100% Pattern (SIG.30): Every AD Lord's Domain = Primary LEL-Event Domain"
   signal_type: dasha-activation
-  classical_source: "BPHS Ch.46 (AD lord delivers its signification during its sub-period); AM-JIS MATRIX_DASHA_PERIODS §2.3 statistical analysis"
+  classical_source: "BPHS Ch.46 (AD lord delivers its signification during its sub-period); MARSYS-JIS MATRIX_DASHA_PERIODS §2.3 statistical analysis"
   entities_involved: [DSH.VM.MD.MERCURY, PLN.MERCURY, PLN.SATURN, PLN.MOON, PLN.MARS, PLN.JUPITER, PLN.KETU]
   strength_score: 0.91
   valence: benefic
@@ -6029,7 +6029,7 @@ SIG.MSR.262:
       → Mercury-Rahu AD: Panic attack + twins birth (Rahu = amplification, unusual, sudden-event) ✓
       → Mercury-Jupiter AD: Business launch + MBA (Jupiter = dharmic-expansion, 9L opportunity) ✓
     - 7/7 sub-periods with primary events matching AD lord's domain = 100% hit rate
-    - This is the highest retrodictive precision of any analytical frame in the entire AM-JIS system
+    - This is the highest retrodictive precision of any analytical frame in the entire MARSYS-JIS system
     - Classical explanation: for this native, the dasha system is operating at maximum precision because (a) Vimshottari dasha is calibrated to the Moon, (b) the Moon is AK (soul-significator = the dasha-correction factor is maximally aligned), (c) each planet is strongly placed and distinct in its domain
     - Implication: future ADs are predictable at domain-level with high confidence; Mercury-Saturn AD (current) = structure/business-compounding domain = confirmed by 2025 Marsys contract event
   falsifier: "Pattern requires all 7 ADs to match. If any LEL event in an AD does not match the AD lord's domain, the 100% claim fails. The matching is done at domain-level (broad), not event-level (specific), reducing false-negative risk. Accept as statistically meaningful."
@@ -9678,6 +9678,6 @@ open_gaps: 8 (see MSR.419)
 next_artifact: CDLM_v1_0.md (Session 13)
 red_team_required: yes (next 3rd session = Session 13 or 14)
 feeds_into: [CDLM_v1_0.md, RM_v1_0.md, UCN_v1_0.md, DEEP_ANALYSIS_v2_0.md]
-author: Claude Sonnet 4.6 (AM-JIS Session 12)
+author: Claude Sonnet 4.6 (MARSYS-JIS Session 12)
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 ```

@@ -1,6 +1,6 @@
 ---
 document: PHASE_B_PLAN_v1_0_RECONCILER_PASS
-project_name: AM-JIS
+project_name: MARSYS-JIS
 version: 1.0.0
 status: ISSUED
 author: Claude Sonnet 4.6 (acting as reconciler role; model constraints acknowledged)

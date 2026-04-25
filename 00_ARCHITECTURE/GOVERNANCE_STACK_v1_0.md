@@ -109,7 +109,7 @@ All closed artifacts as of Session 35:
 |---|---|---|---|
 | PROJECT_ARCHITECTURE_v2_1 | 2.1 | **SUPERSEDED** (2026-04-24) | Superseded by PROJECT_ARCHITECTURE_v2_2 in STEP_5A_PROJECT_ARCHITECTURE_REFRESH |
 | **PROJECT_ARCHITECTURE_v2_2** | **2.2** | **CURRENT** | **NEW STEP_5A_PROJECT_ARCHITECTURE_REFRESH (2026-04-24) — minor-version refresh absorbing MP v2.0 arc (§I pointer), Learning Layer substrate (§D.10), Multi-Agent Collaboration + ND.1 mirror-pair inventory MP.1–MP.8 (§D.11), corrected §E file tree, new §L Governance Rebuild Reference. §B principles, §C five-layer pyramid, §F existing namespaces, §H quality standards, §J resolved decisions preserved verbatim.** |
-| AM_JIS_BOOTSTRAP_HANDOFF | 1.0 | CURRENT | No change |
+| MARSYS_JIS_BOOTSTRAP_HANDOFF | 1.0 | CURRENT | No change |
 | SESSION_LOG | Rolling | CURRENT | STEP_5_MACRO_PLAN_CLOSURE entry appended 2026-04-23 |
 | GOVERNANCE_STACK_v1_0 | 1.0-updated-STEP_5_MACRO_PLAN_CLOSURE | CURRENT (this artifact) | Updated in-place STEP_5_MACRO_PLAN_CLOSURE (2026-04-23) — §8 + §9 amendment logs added; MSR row corrected to MSR_v3_0; macro-plan + governance-rebuild rows added |
 | FILE_REGISTRY_v1_0 | 1.0 | **SUPERSEDED** | Superseded by FILE_REGISTRY_v1_1 in STEP_5_MACRO_PLAN_CLOSURE (2026-04-23) |
@@ -530,7 +530,7 @@ P4 (baseline reports):
 
 ### No new WARNs surfaced by Step 10
 
-Step 12 ongoing hygiene will consolidate: (a) CANONICAL_ARTIFACTS self-row bootstrap placeholder resolution; (b) SESSION_LOG one-session bootstrap placeholder resolution; (c) FILE_REGISTRY v1.3 → v1.4 version-bump decision; (d) GOVERNANCE_STACK §12 (this log) + STEP_9 deferred log + future STEP_N logs consolidation; (e) AM_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh.
+Step 12 ongoing hygiene will consolidate: (a) CANONICAL_ARTIFACTS self-row bootstrap placeholder resolution; (b) SESSION_LOG one-session bootstrap placeholder resolution; (c) FILE_REGISTRY v1.3 → v1.4 version-bump decision; (d) GOVERNANCE_STACK §12 (this log) + STEP_9 deferred log + future STEP_N logs consolidation; (e) MARSYS_JIS_BOOTSTRAP_HANDOFF retire-vs-refresh.
 
 ### STEP_LEDGER update
 
@@ -579,7 +579,7 @@ Step 11 → completed. Step 12 → ready. GA.6 closed at full-surface layer; Ste
 - Produce `ONGOING_HYGIENE_POLICIES_v1_0.md` (CURRENT) per brief §3 (§A–§J + §K residual disposition + §L coverage audit).
 - Extend `schema_validator.py` per brief §C (scope-boundary close-check, GA.20 full-surface closure), §D (SESSION_LOG completeness, GA.21), §G (learning_layer_stub class per LL scaffold §5.7).
 - Close Step 8 red-team F.1 (mirror substring-match gap), F.2 (close-checklist nonzero-exit policy), F.3 (no `--dr-entry` validator mode).
-- Retire `AM_JIS_BOOTSTRAP_HANDOFF.md` (WARN.4/WARN.6 closure per native Step 12 decision); apply §A retain-in-place banner on `LIFE_EVENT_LOG_v1_1.md` (GA.12 closure).
+- Retire `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (WARN.4/WARN.6 closure per native Step 12 decision); apply §A retain-in-place banner on `LIFE_EVENT_LOG_v1_1.md` (GA.12 closure).
 - Close Step 10-deferred FILE_REGISTRY v1.3 → v1.4 bump; consolidate amendment-log arc (§12.5 STEP_11 retro-log + §13 STEP_12 + §14 cumulative index).
 - Resolve CANONICAL_ARTIFACTS self-row fingerprint placeholder (carried since Step 7).
 - Commit per-mechanism Learning Layer N-override default (N=3, no override) per LL scaffold §5.4 authorization.
@@ -593,7 +593,7 @@ Declared scope honored; every path in `files_touched` resolves to declared `may_
 
 **In-place amendments:** `schema_validator.py` (new functions + CLI modes), `schemas/artifact_schemas.yaml` (new classes), `CLAUDE.md` (§C item #11 BOOTSTRAP dropped; §C item for ONGOING_HYGIENE_POLICIES added; §F pointer refresh), `.geminirules` (MP.1 mirror), `.gemini/project_state.md` (MP.2 composite), `CANONICAL_ARTIFACTS_v1_0.md` (+1 row + path swap + fingerprint rotations + self-row resolution), `CURRENT_STATE_v1_0.md` (state-block transitioned), `STEP_LEDGER_v1_0.md` (row 12 → completed, row 13 → ready), `SESSION_LOG.md` (Step 12 entry).
 
-**Supersessions (banner + frontmatter flip per §A):** `AM_JIS_BOOTSTRAP_HANDOFF.md`, `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md`, `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md`.
+**Supersessions (banner + frontmatter flip per §A):** `MARSYS_JIS_BOOTSTRAP_HANDOFF.md`, `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md`, `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md`.
 
 ### §13.3 — Native directive state
 
@@ -663,7 +663,7 @@ Declared-scope honored; every path in `files_touched` resolves to declared `may_
 
 **Modified:**
 - `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — 9 rows rotated (8 real sha256 values + CA self-row `<populated-at-step-12-1-close>` Step-7-pattern placeholder per brief §3.1 #3 bootstrap chicken-and-egg note). All 9 rows: `last_verified_session: STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX`, `last_verified_on: 2026-04-24`. SESSION_LOG row placeholder rotated to `<populated-at-step-12-1-close-after-session-log-entry-appended>` per brief §4 bootstrap-placeholder forward policy.
-- `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` — SUPERSEDED-banner extended with a "Delta-to-v1.4 basename index" pointer block naming `ONGOING_HYGIENE_POLICIES_v1_0.md`, `LIFE_EVENT_LOG_v1_1.md`, `AM_JIS_BOOTSTRAP_HANDOFF.md`. Zero substantive change to v1.3 §1–§10 archival tables; pointer-only clarification of successor-relationship with explicit basenames to satisfy detector's hardcoded v1_3 fr_path at drift_detector.py L315 basename-substring check at L338.
+- `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` — SUPERSEDED-banner extended with a "Delta-to-v1.4 basename index" pointer block naming `ONGOING_HYGIENE_POLICIES_v1_0.md`, `LIFE_EVENT_LOG_v1_1.md`, `MARSYS_JIS_BOOTSTRAP_HANDOFF.md`. Zero substantive change to v1.3 §1–§10 archival tables; pointer-only clarification of successor-relationship with explicit basenames to satisfy detector's hardcoded v1_3 fr_path at drift_detector.py L315 basename-substring check at L338.
 - `00_ARCHITECTURE/STEP_LEDGER_v1_0.md` — row 12.1 status `ready` → `completed`; row 13 status `blocked` → `ready` (per Step 12.1 brief §6 close-criterion); frontmatter `updated_at` rotated with third-amendment-this-date narrative; History block "Step 12.1 closed" prepended to History section.
 - `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — §2 state-block transition: `active_governance_step` Step_13 → Step_12.1; `active_governance_step_status` blocked → completed; `next_governance_step` Step_12.1 → Step_13; `next_governance_step_status` ready; `last_session_id` STEP_13_DRIFT_DETECTION_BASELINE → STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX; `last_session_close_state` failed_atomic_close → atomically_closed; `last_session_drift_verdict` REGRESSION → CLEAN; `next_session_objective` refreshed to Step 13 re-execution; `red_team_counter` 4 → 5 (cadence overridden for rebuild-arc per MP §IS.8 exception); freshness metadata rotated. §3 narrative refreshed to match §2.
 - `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` — §15 STEP_12.1 amendment log (this section) appended; §14 cumulative index refreshed with §15 row.

@@ -94,8 +94,8 @@ Each entry cites the MPC.N.M finding IDs it addresses. Where a finding is resolv
 
 ```yaml
 ---
-document: AM-JIS MACRO PLAN — STRATEGIC ARC
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+document: MARSYS-JIS MACRO PLAN — STRATEGIC ARC
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 2.0
 status: CURRENT
@@ -105,7 +105,7 @@ date: <Step 3 execution date>
 produced_during: STEP_3_MACRO_PLAN_REWRITE (Step 0→15 governance rebuild)
 id_namespace: M1..M10 (macro-phases); LL.1..LL.10 (Learning Layer mechanisms); IS.1..IS.N (Integrity Substrate axes — enumerated in §System Integrity Substrate)
 purpose: >
-  Strategic orientation layer for the AM-JIS project. Frames the ten macro-
+  Strategic orientation layer for the MARSYS-JIS project. Frames the ten macro-
   phase arc (M1–M10) and the two cross-cutting substrates (Learning Layer and
   System Integrity). Read once per session for orientation; execute only the
   currently-scoped phase. This document governs how the project evolves across
@@ -113,7 +113,7 @@ purpose: >
   v2.0 is produced during the governance rebuild workflow (Step 0 → Step 15)
   that closes multi-session drift observed in M2 execution.
 audience:
-  primary: Any LLM session working on AM-JIS, current and future
+  primary: Any LLM session working on MARSYS-JIS, current and future
   secondary: Abhisek Mohanty (native, project owner)
   tertiary: Independent classical-Jyotish acharyas reviewing the corpus
 operational_rule: >
@@ -142,15 +142,15 @@ changelog:
 
 **Implementation note for Step 3:** the `id_namespace` line also names `IS.1..IS.N` — the N is the count of Integrity Substrate axes specified in §3.3 of this spec. Step 3 counts them and substitutes the literal number.
 
-### §2.2 — `# AM-JIS Macro Plan — Strategic Arc v1.0` + "Status/Audience/Operational rule/Date/Owner" header block (MP v1.0 lines 29–37)
+### §2.2 — `# MARSYS-JIS Macro Plan — Strategic Arc v1.0` + "Status/Audience/Operational rule/Date/Owner" header block (MP v1.0 lines 29–37)
 
 **Disposition:** REVISE.
 
 **New content spec:**
 
-- Title becomes `# AM-JIS Macro Plan — Strategic Arc v2.0`.
+- Title becomes `# MARSYS-JIS Macro Plan — Strategic Arc v2.0`.
 - The redundant header block (Status / Audience / Operational rule / Date / Owner) is DELETED from the body — those fields are in the frontmatter and do not need to be restated in prose. The removal avoids the staleness risk of having two copies to maintain (a governance-hygiene concern per GA.13's "procedural rule that has been broken once will be broken again" principle).
-- A single-sentence title-page line replaces the deleted block: "Authoritative strategic arc for the AM-JIS project. See frontmatter for version, status, and audience."
+- A single-sentence title-page line replaces the deleted block: "Authoritative strategic arc for the MARSYS-JIS project. See frontmatter for version, status, and audience."
 
 **Findings addressed:** MPC.12.6 (status source-of-truth; only one copy), MPC.OS.3 (header-style hygiene — Step 3 also normalizes header levels per that finding).
 

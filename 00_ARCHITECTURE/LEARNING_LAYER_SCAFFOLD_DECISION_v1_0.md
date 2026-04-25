@@ -57,7 +57,7 @@ date: 2026-04-24
 ---
 
 # LEARNING LAYER SCAFFOLD DECISION v1.0
-## AM-JIS Project — Step 11 Decision Record
+## MARSYS-JIS Project — Step 11 Decision Record
 
 *Closed governance artifact produced in Step 11 of the Step 0 → Step 15 governance rebuild
 per `STEP_BRIEFS/STEP_11_LEARNING_LAYER_SCAFFOLD_v1_0.md` (binding spec). Resolves

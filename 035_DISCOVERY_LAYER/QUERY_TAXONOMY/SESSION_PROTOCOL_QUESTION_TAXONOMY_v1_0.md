@@ -19,7 +19,7 @@ scope: "Live-session protocol for ad-hoc native queries + question taxonomy for 
 
 Every ad-hoc session begins with:
 
-1. **Read AM_JIS_BOOTSTRAP_HANDOFF.md** (once per session)
+1. **Read MARSYS_JIS_BOOTSTRAP_HANDOFF.md** (once per session)
 2. **Read PROJECT_ARCHITECTURE_v2_1.md relevant sections**
 3. **Read SESSION_LOG.md** last 3 entries (establish current position)
 4. **Clarify query type** (per Part II taxonomy below)
@@ -123,7 +123,7 @@ Questions are classified into categories that determine routing:
 
 ### §10 — Category G: External / Non-Chart Questions
 
-Questions that are not chart-specific should be deflected or routed to non-AM-JIS sources:
+Questions that are not chart-specific should be deflected or routed to non-MARSYS-JIS sources:
 - "What is the best Sanskrit translation of X?" → external scholarly sources
 - "What did my grandfather's chart look like?" → outside scope (different native)
 

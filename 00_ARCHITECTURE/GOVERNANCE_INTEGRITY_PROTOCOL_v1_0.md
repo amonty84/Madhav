@@ -14,7 +14,7 @@ consumed_by:
   - Step 15 (Governance Baseline close) — the entry point into the steady-state governance regime this protocol operates under
 role: >
   Specification-only design document for the full drift-prevention, integrity-enforcement, and
-  multi-agent-sync system the AM-JIS project will implement. Written in Step 6 of the Step 0 →
+  multi-agent-sync system the MARSYS-JIS project will implement. Written in Step 6 of the Step 0 →
   Step 15 governance rebuild. Carries no code and writes no configuration. Becomes the
   requirements spec Step 7 implements. Favors mechanical enforcement over procedural
   exhortation: "session MUST update X" is weaker than "script fails loudly if X is not
@@ -43,7 +43,7 @@ changelog:
 ---
 
 # GOVERNANCE & INTEGRITY PROTOCOL v1.0
-## AM-JIS Project — Design Specification
+## MARSYS-JIS Project — Design Specification
 
 *Produced in Step 6 of the Step 0 → Step 15 governance rebuild.*
 *Specification only — no code, no configuration. Step 7 implements.*
@@ -193,7 +193,7 @@ This section specifies one subsection per axis listed in the Step 6 brief §1. E
 - Orphan mutations: a file edited in-session without a matching FILE_REGISTRY row update (GA.21).
 - Orphan artifacts: a new file created in-session without registry registration (e.g., a `06_LEARNING_LAYER/` scaffolding that does not appear in FILE_REGISTRY until Step 11's scaffold decision closes).
 - Orphan supersessions: an old version retained on disk without its SUPERSEDED banner (GA.12 — LEL_v1.1 still in facts folder).
-- Phantom references: a live pointer to a file that does not exist (GA.6 06_LEARNING_LAYER/; GA.7 twinkly-puzzling-quokka.md; GA.8 AM_JIS_BOOTSTRAP_HANDOFF.md existence verification — the latter verified 2026-04-24 at this step's production: 32.5 KB, exists, frontmatter consistent).
+- Phantom references: a live pointer to a file that does not exist (GA.6 06_LEARNING_LAYER/; GA.7 twinkly-puzzling-quokka.md; GA.8 MARSYS_JIS_BOOTSTRAP_HANDOFF.md existence verification — the latter verified 2026-04-24 at this step's production: 32.5 KB, exists, frontmatter consistent).
 - Missing scheduled-maintenance records: LIVING_PROJECT_MAINTENANCE_GUIDE cadences not observed (quarterly heatmap; annual Varshphal + LEL bump + MSR review).
 
 **GA.N mapped**: GA.6 (phantom), GA.7 (phantom + staleness; prevention of recurrence), GA.8 (verified at §C.5 production — existence confirmed), GA.11 (unreferenced supporting artifacts — the hygiene cadence re-registers them), GA.12 (LEL_v1.1 hygiene — Step 11 decision), GA.17 (session-naming schema — Step 10), GA.18 (next-objective schema — Step 10), GA.19 (you-are-here marker — Step 10 replaces the minimal marker this rebuild cycle installs), GA.21 (SESSION_LOG entry-per-touched-file discipline — this axis's primary obligation).
@@ -932,7 +932,7 @@ Legend:
 | GA.5 | HIGH | STALENESS | Step 1 + Step 3 | C.2 | D (recurrence prevention) | drift_detector | ADDRESSED-AT-MP-LEVEL; recurrence prevented |
 | GA.6 | MEDIUM | PHANTOM-REFERENCE | Step 3 + Step 11 | C.5 | D | drift_detector (phantom-reference scan §H.3.7) | ADDRESSED-AT-DETECTION-LAYER; full resolution at Step 11 scaffold decision |
 | GA.7 | HIGH | STALENESS + PHANTOM-REFERENCE | Step 7 | C.3 + C.5 + C.6 | P + D + Cr | Step 7 `.gemini/project_state.md` re-author + drift_detector + mirror_enforcer | ADDRESSED |
-| GA.8 | LOW | VERIFY | Step 6 | C.5 | D | **Verified at Step 6 production**: `AM_JIS_BOOTSTRAP_HANDOFF.md` exists (32.5 KB, 2026-04-23 timestamp, frontmatter consistent). drift_detector's phantom-reference scan will continue to verify. | ADDRESSED |
+| GA.8 | LOW | VERIFY | Step 6 | C.5 | D | **Verified at Step 6 production**: `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` exists (32.5 KB, 2026-04-23 timestamp, frontmatter consistent). drift_detector's phantom-reference scan will continue to verify. | ADDRESSED |
 | GA.9 | CRITICAL | UNREFERENCED-ARTIFACT | Step 9 | C.3 + C.5 | P | CANONICAL_ARTIFACTS (LEL canonical_id registered) + drift_detector + Step 9 CLAUDE.md rebuild | ADDRESSED-AT-REGISTRY-LEVEL; full surfacing at Step 9 |
 | GA.10 | HIGH | UNREFERENCED-ARTIFACT | Step 9 | C.3 + C.5 | P | CANONICAL_ARTIFACTS (GOVERNANCE_STACK canonical_id registered) + Step 9 CLAUDE.md rebuild | ADDRESSED-AT-REGISTRY-LEVEL; full surfacing at Step 9 |
 | GA.11 | MEDIUM | UNREFERENCED-ARTIFACT | Step 9 | C.3 + C.5 | P | CANONICAL_ARTIFACTS (all supporting artifacts registered) + Step 9 | ADDRESSED-AT-REGISTRY-LEVEL; full surfacing at Step 9 |

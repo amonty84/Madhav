@@ -3,7 +3,7 @@ artifact: ACHARYA_ENGAGEMENT_KIT.md
 version: 1.0
 status: CLOSED
 date: 2026-04-18
-scope: "Execution-ready kit for native to engage an external senior Jyotish acharya to review AM-JIS corpus. Complements EXTERNAL_ACHARYA_REVIEW_INVITATION (the invitation letter artifact from Session 40)."
+scope: "Execution-ready kit for native to engage an external senior Jyotish acharya to review MARSYS-JIS corpus. Complements EXTERNAL_ACHARYA_REVIEW_INVITATION (the invitation letter artifact from Session 40)."
 ---
 
 # ACHARYA ENGAGEMENT KIT
@@ -22,12 +22,12 @@ scope: "Execution-ready kit for native to engage an external senior Jyotish acha
 **Preferred**:
 - Comfort with Jagannatha Hora software (aligns with the project's computational baseline)
 - Experience with complex charts containing dual-engine (FORENSIC/JHora) variances — specifically Shadbala ranking divergence handling
-- Open to dual-tradition reading (Parashari-Tajika-Jaimini fusion, as AM-JIS uses all three)
+- Open to dual-tradition reading (Parashari-Tajika-Jaimini fusion, as MARSYS-JIS uses all three)
 - Availability within 2-3 months
 
 **Red flags to avoid**:
 - Single-system practitioners who dismiss Jaimini or vice versa
-- Practitioners who require only Indian-context client (AM-JIS includes Singapore-based content)
+- Practitioners who require only Indian-context client (MARSYS-JIS includes Singapore-based content)
 - Unwillingness to engage with Falsifier Registry discipline (some traditionalists find empirical-testing framing unfamiliar)
 
 ---
@@ -49,7 +49,7 @@ Send the following as the review packet (all files in `/Users/Dev/Vibe-Coding/Ap
 
 ### 3.1 Primary materials (required)
 1. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` — blueprint
-2. `AM_JIS_BOOTSTRAP_HANDOFF.md` — context
+2. `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` — context
 3. `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md` — L1 facts
 4. `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md` — 36 dated events (retrodictive check)
 5. `025_HOLISTIC_SYNTHESIS/UCN_v1_1.md` — primary synthesis document (use v1.1 post-Jupiter correction)
@@ -79,7 +79,7 @@ Send the following as the review packet (all files in `/Users/Dev/Vibe-Coding/Ap
 
 > Dear [Acharya name],
 >
-> As arranged per our [prior communication / referral from X], I am submitting the AM-JIS (Abhisek Mohanty Jyotish Intelligence System) analytical corpus for your review. Please find the review packet at [URL / physical shipment].
+> As arranged per our [prior communication / referral from X], I am submitting the MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System) analytical corpus for your review. Please find the review packet at [URL / physical shipment].
 >
 > **Scope of review requested**:
 > 1. **L1 factual accuracy** — Do you concur with FORENSIC v6.0's chart data? Ayanamsa Lahiri 23°37'58", Sripathi houses, birth 1984-02-05 10:43 IST Bhubaneswar.

@@ -1097,6 +1097,6 @@ changelog:
   - "D6.D6: seven→six mechanisms; Ghati (→9H) and Varnada (→4H) removed from 8H count; Shree Lagna 7H added; strength 0.96→0.94"
 next_artifact: RM_v2_0.md (Resonance Map v2.0 with same v8.0 corrections)
 feeds_into: [RM_v2_0.md, UCN_v1_0.md, Domain Reports L3]
-author: Claude Sonnet 4.6 (AM-JIS FIX_SESSION_003_deferred)
+author: Claude Sonnet 4.6 (MARSYS-JIS FIX_SESSION_003_deferred)
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 ```

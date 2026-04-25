@@ -13,7 +13,7 @@ POST-SESSION (run in terminal after Claude Code confirms complete):
 
 OBJECTIVE
 ---------
-Migrate the AM-JIS app database tables and file storage out of Supabase onto
+Migrate the MARSYS-JIS app database tables and file storage out of Supabase onto
 Google Cloud (Cloud SQL + GCS). This is pure infrastructure — no application
 code changes in this session. The app will keep talking to Supabase until
 Session 2, so do NOT touch any TypeScript source files.
@@ -45,7 +45,8 @@ Start the proxy:
   PROXY_PID=$!
   sleep 6
 
-Set the local connection URL:
+Extract DB_PASSWORD from DATABASE_URL and set the local connection URL:
+  DB_PASSWORD=$(grep "^DATABASE_URL=" .env.rag | sed 's|.*://[^:]*:\([^@]*\)@.*|\1|')
   LOCAL_DB_URL="postgresql://$DB_USER:$DB_PASSWORD@127.0.0.1:5433/$DB_NAME"
 
 ---

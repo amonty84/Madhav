@@ -3,7 +3,7 @@ artifact: CLAUDE.md
 version: "2.0"
 status: CURRENT
 role: >
-  Root governance surface. Master orientation document for every Claude session on the AM-JIS
+  Root governance surface. Master orientation document for every Claude session on the MARSYS-JIS
   project. Every Claude session opens by reading this file first. Cites the machine-readable
   canonical-artifact registry rather than duplicating it.
 produced_during: STEP_9_CLAUDE_MD_REBUILD (Step 0 → Step 15 governance rebuild)
@@ -40,7 +40,7 @@ changelog:
       position. Footer updated. .geminirules MP.1 mirror propagated in the same session.
 ---
 
-# AM-JIS — Master Instructions for Claude
+# MARSYS-JIS — Master Instructions for Claude
 
 ## §A — Project mission
 
@@ -70,7 +70,7 @@ Every Claude session, at open, reads the following in order before any substanti
 10. `00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md` — open directives (ND.N) that bind to the session's step. At v2.0 publication, ND.1 (Mirror Discipline) is `addressed` — no open directive.
 11. `00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md` — governance-layer hygiene rule set (CURRENT since Step 12 close, 2026-04-24). §A–§N: archival retain-in-place, predecessor cleanup, scope-boundary enforcement, SESSION_LOG completeness, staleness register, CI cadence + exit-code-3 known_residuals whitelist, red-team cadence + learning_layer_stub validator class, quarterly governance pass, Macro Plan review triggers, implementation-actions index, residual-disposition record, finding-coverage audit. Governs every session-close checklist from Step 12 forward.
 
-*Item 11 previously named `AM_JIS_BOOTSTRAP_HANDOFF.md` — retired at Step 12 close 2026-04-24 per native decision (WARN.4 / WARN.6 resolution). Every load-bearing claim it carried is now in items 1–10 above + this item 11. Audit trail retained at root-level path.*
+*Item 11 previously named `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` — retired at Step 12 close 2026-04-24 per native decision (WARN.4 / WARN.6 resolution). Every load-bearing claim it carried is now in items 1–10 above + this item 11. Audit trail retained at root-level path.*
 
 ## §D — Canonical artifacts (import)
 

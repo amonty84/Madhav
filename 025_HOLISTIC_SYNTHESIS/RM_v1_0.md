@@ -18,7 +18,7 @@ schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
 rebuild_priority: MEDIUM (schedule for post-Facts-Layer-v8.0 rebuild using corrected Jupiter-from-9H aspect chains: 5th→1H, 7th→3H, 9th→5H)
 ---
 
-# AM-JIS — Resonance Map v1.0 (`RM_v1_0.md`)
+# MARSYS-JIS — Resonance Map v1.0 (`RM_v1_0.md`)
 
 > **⚠️ SUPERSEDED 2026-04-18 — DO NOT USE FOR CURRENT ANALYSIS**
 >

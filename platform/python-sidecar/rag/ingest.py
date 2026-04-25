@@ -1,5 +1,5 @@
 """
-ingest — AM-JIS RAG Pipeline corpus ingestion orchestrator.
+ingest — MARSYS-JIS RAG Pipeline corpus ingestion orchestrator.
 Phase B.1. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.1 Task 2.
 Scans corpus, builds Document list, parses MSR signals, writes ingestion_manifest.json.
 """

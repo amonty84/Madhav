@@ -1,4 +1,4 @@
-# AM-JIS Platform — Design Spec
+# MARSYS-JIS Platform — Design Spec
 **Date:** 2026-04-17
 
 > This spec was produced through collaborative brainstorming. See the implementation plan at `docs/superpowers/plans/2026-04-17-amjis-platform.md`.
@@ -7,7 +7,7 @@
 
 ## Context
 
-The AM-JIS project is a forensic-grade astrological knowledge base (42,000+ lines of structured markdown across 5 layers). All content currently lives as flat markdown files managed through Claude Code CLI sessions. This spec defines a hosted web platform to productize it.
+The MARSYS-JIS project is a forensic-grade astrological knowledge base (42,000+ lines of structured markdown across 5 layers). All content currently lives as flat markdown files managed through Claude Code CLI sessions. This spec defines a hosted web platform to productize it.
 
 ## Two Modules
 
@@ -45,7 +45,7 @@ Reports are clickable — open inline above chat. Domain suggestion chips in inp
 **Claude tools (read-only):**
 `get_birth_data`, `get_planetary_positions`, `get_dasha_periods`, `get_layer_document`, `search_signals`, `get_domain_report`, `get_transits`, `get_pyramid_status`
 
-**Whole-Chart-Read Protocol:** System prompt mandates `get_layer_document(L2.5, 'cgm')` call before any domain answer, mirroring AM-JIS architecture §H.4.
+**Whole-Chart-Read Protocol:** System prompt mandates `get_layer_document(L2.5, 'cgm')` call before any domain answer, mirroring MARSYS-JIS architecture §H.4.
 
 **Claude config:** `claude-sonnet-4-6`, extended thinking disabled
 

@@ -6,7 +6,7 @@ produced_during: STEP_12_ONGOING_HYGIENE_POLICIES (Step 0 → Step 15 governance
 produced_on: 2026-04-24
 authoritative_side: claude
 role: >
-  Institutionalized hygiene-rule set governing the AM-JIS project's living governance
+  Institutionalized hygiene-rule set governing the MARSYS-JIS project's living governance
   surfaces. Prevents the kind of drift the grounding audit found (version disagreement,
   unarchived predecessors, scope leak, session-log gaps, stale canonical pointers) from
   re-accumulating between macro-phases. Each policy names the mechanism that enforces
@@ -69,7 +69,7 @@ date: 2026-04-24
 ---
 
 # ONGOING HYGIENE POLICIES v1.0
-## AM-JIS Project — Governance-Layer Hygiene Rule Set
+## MARSYS-JIS Project — Governance-Layer Hygiene Rule Set
 
 *Produced in Step 12 of the Step 0 → Step 15 governance rebuild. Closes GA.12 + GA.20 + GA.21 and Step 8 red-team findings F.1 + F.2 + F.3. Reference point for every session-close checklist from this session forward.*
 
@@ -219,7 +219,7 @@ Axis C.5 of the governance integrity protocol (Living-Document Hygiene) requires
 
 The three governance scripts (`drift_detector.py`, `schema_validator.py`, `mirror_enforcer.py`) MUST run on every session close. This is already mandated by `SESSION_CLOSE_TEMPLATE_v1_0.md §2` (`drift_detector_run`, `schema_validator_run`, `mirror_enforcer_run` fields). This policy confirms the per-session cadence is the operational floor.
 
-**Nightly automation is out of scope** for this environment. The AM-JIS project runs as a daily-cadence human-in-the-loop workflow; there is no CI runner, no cron service, no persistent automation host at the time of this policy commit. The per-session cadence is sufficient because closed-artifact-per-session discipline (§M CLAUDE.md) ensures there is no between-session edit activity to detect.
+**Nightly automation is out of scope** for this environment. The MARSYS-JIS project runs as a daily-cadence human-in-the-loop workflow; there is no CI runner, no cron service, no persistent automation host at the time of this policy commit. The per-session cadence is sufficient because closed-artifact-per-session discipline (§M CLAUDE.md) ensures there is no between-session edit activity to detect.
 
 If a persistent automation host is introduced in a future phase, the nightly cadence becomes: `drift_detector.py --full` + `schema_validator.py --full-repo` + `mirror_enforcer.py --all-pairs` at 02:00 local, with reports persisted under `00_ARCHITECTURE/drift_reports/nightly/`. Introduction of the nightly cadence is a Macro-Plan review trigger (§I) per "non-trivial mechanism addition" category.
 

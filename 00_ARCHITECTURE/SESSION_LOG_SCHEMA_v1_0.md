@@ -51,7 +51,7 @@ changelog:
 ---
 
 # SESSION_LOG SCHEMA v1.0
-## AM-JIS Project — Canonical Entry Format for `00_ARCHITECTURE/SESSION_LOG.md`
+## MARSYS-JIS Project — Canonical Entry Format for `00_ARCHITECTURE/SESSION_LOG.md`
 
 *Implements GA.17 (naming inconsistency) + GA.18 (multi-option next-objective) closure per
 `GROUNDING_AUDIT_v1_0.md`. Companion deliverable `CURRENT_STATE_v1_0.md` closes GA.19

@@ -1,6 +1,6 @@
 ---
 document: COMPLETENESS GUARANTEE PROTOCOL AUDIT
-project: AM-JIS
+project: MARSYS-JIS
 layer: L1 (Facts Layer)
 artifact_id: CGP_AUDIT_v1_0
 version: 1.0

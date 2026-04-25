@@ -1,6 +1,6 @@
 ---
-document: AM-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
-project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
+document: MARSYS-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
+project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar, Odisha, India)
 handoff_from: Claude (claude.ai web session, 2026-04-17)
 handoff_to: (retired — successors named below)
@@ -33,11 +33,11 @@ handoff_date: 2026-04-17    # original handoff date preserved for audit trail
 
 > **SUPERSEDED 2026-04-24** by CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2.md + MACRO_PLAN_v2_0.md + CURRENT_STATE_v1_0.md at STEP_12_ONGOING_HYGIENE_POLICIES. Content retained for audit trail; do not consume as CURRENT. A fresh session should read the successors instead; see `superseded_by` in frontmatter above.
 
-# AM-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
+# MARSYS-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
 
 ## §1 — WHAT THIS PROJECT IS (Read First, 2 minutes)
 
-This project — **AM-JIS (Abhisek Mohanty — Jyotish Intelligence System)** — is a multi-month, multi-session effort to construct a **world-class, acharya-grade astrological intelligence system** centered on the natal chart of Abhisek Mohanty.
+This project — **MARSYS-JIS (Abhisek Mohanty — Jyotish Intelligence System)** — is a multi-month, multi-session effort to construct a **world-class, acharya-grade astrological intelligence system** centered on the natal chart of Abhisek Mohanty.
 
 **The native's objective** (his own words, paraphrased):
 - Build extensive astrological data research on his own chart
@@ -115,12 +115,12 @@ Two concerns raised by the native drove the v2.0/v2.1 design:
 
 ---
 
-## §3 — FILE SYSTEM STATE (What Should Exist in the AM-JIS Folder)
+## §3 — FILE SYSTEM STATE (What Should Exist in the MARSYS-JIS Folder)
 
 The native has (or will) set up a folder on his computer with this structure:
 
 ```
-AM-JIS/
+MARSYS-JIS/
 ├── 00_ARCHITECTURE/
 │   └── PROJECT_ARCHITECTURE_v2_1.md          ← MUST EXIST — governing document
 │
@@ -140,7 +140,7 @@ AM-JIS/
 ├── 06_QUERY_INTERFACE/                       ← empty; will be populated in Phase 6
 ├── 99_ARCHIVE/                               ← for superseded versions
 │
-└── AM_JIS_BOOTSTRAP_HANDOFF.md               ← this file (you're reading it)
+└── MARSYS_JIS_BOOTSTRAP_HANDOFF.md               ← this file (you're reading it)
 ```
 
 **Your first task** (next Claude instance): verify that the four MUST-EXIST files are actually present in these exact locations. If any are missing, stop and ask the native to place them correctly before proceeding.
@@ -149,7 +149,7 @@ AM-JIS/
 
 ## §4 — YOUR OPERATING POSTURE (Next Claude Instance)
 
-You are picking up the AM-JIS project from a handoff. Here is how you must operate:
+You are picking up the MARSYS-JIS project from a handoff. Here is how you must operate:
 
 ### §4.1 — Mandatory first actions
 
@@ -206,15 +206,15 @@ Before the actual Session 2 work (Life Event Log elicitation) begins, you must p
 
 Create the following files with the specified content. Place them in the exact locations indicated.
 
-#### §5.1.A — Root `CLAUDE.md` (at AM-JIS/ root)
+#### §5.1.A — Root `CLAUDE.md` (at MARSYS-JIS/ root)
 
 ```markdown
-# AM-JIS Project — Master Instructions for Claude
+# MARSYS-JIS Project — Master Instructions for Claude
 
-You are working on AM-JIS (Abhisek Mohanty Jyotish Intelligence System), a multi-session astrological research project.
+You are working on MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System), a multi-session astrological research project.
 
 ## Mandatory reading before any work
-1. `AM_JIS_BOOTSTRAP_HANDOFF.md` (project context; read once per session)
+1. `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` (project context; read once per session)
 2. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md` (governing blueprint; re-read relevant sections as needed)
 
 ## Subject
@@ -398,7 +398,7 @@ L3. Nine domain reports. Each is a lens into the Unified Chart Narrative (UCN), 
 Create `00_ARCHITECTURE/SESSION_LOG.md` with this content:
 
 ```markdown
-# AM-JIS Session Log
+# MARSYS-JIS Session Log
 
 Chronological log of all project sessions. Every session appends an entry here.
 
@@ -454,7 +454,7 @@ After executing §5 bootstrap tasks, respond to the native with this structure (
 ```
 I've completed the bootstrap. Here's the state of the project:
 
-**Files verified present in AM-JIS folder**:
+**Files verified present in MARSYS-JIS folder**:
 - ✓ 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md
 - ✓ 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6_0_ABHISEK_MOHANTY.md
 - ✓ 02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md
@@ -589,7 +589,7 @@ At end of Session 2:
 
 ## §8 — GIT DISCIPLINE (OPTIONAL BUT RECOMMENDED)
 
-If the native has initialized git in the AM-JIS folder (`git init` in the folder root), observe this commit discipline:
+If the native has initialized git in the MARSYS-JIS folder (`git init` in the folder root), observe this commit discipline:
 
 - **One commit per session minimum**, with commit message format: `Session N: [title] — [brief summary]`
 - **Commit after each major artifact is finished**, not at session end only
@@ -628,7 +628,7 @@ Native chose daily cadence. Hold the compensating discipline: closed artifacts p
 
 Before you produce your first response to the native, verify:
 
-- [ ] You have read this entire file (AM_JIS_BOOTSTRAP_HANDOFF.md)
+- [ ] You have read this entire file (MARSYS_JIS_BOOTSTRAP_HANDOFF.md)
 - [ ] You have read PROJECT_ARCHITECTURE_v2_1.md fully
 - [ ] Four must-exist files verified present in correct folders
 - [ ] Seven scaffolding files created (root CLAUDE.md + 5 subfolder CLAUDE.md + SESSION_LOG.md)
@@ -641,7 +641,7 @@ If all ten items above are ✓, produce the first response and begin Session 2.
 
 ## END OF BOOTSTRAP HANDOFF
 
-*This document hands off the AM-JIS project from the claude.ai architecture session (2026-04-17) to Claude Code/Cowork for execution phase.*
+*This document hands off the MARSYS-JIS project from the claude.ai architecture session (2026-04-17) to Claude Code/Cowork for execution phase.*
 
 *Load this file FIRST at the start of every new session in Claude Code until the scaffolding in §5 is complete. After scaffolding is complete, this file becomes reference-only; SESSION_LOG.md becomes the living project-state document.*
 

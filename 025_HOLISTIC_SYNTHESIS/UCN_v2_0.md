@@ -302,12 +302,12 @@ MSR.404 ("BB-UL 2026 crystallization") references BB reaching Gemini at age 42 (
 ### Alternative progression conventions
 
 Classical tradition varies:
-- **6°/year (60-year cycle)** — v7.0 §V7.F convention; adopted in AM-JIS
+- **6°/year (60-year cycle)** — v7.0 §V7.F convention; adopted in MARSYS-JIS
 - **1°/year** — some teachers; yields different progressed positions
 - **30°/year (one sign per year)** — other teachers
 - **Annual-lunation progression** — Tajika-based variant
 
-AM-JIS discipline: 6°/year is the adopted convention. Future external acharya review may recommend alternative; if so, reconciliation would be handled via FIX_SESSION process.
+MARSYS-JIS discipline: 6°/year is the adopted convention. Future external acharya review may recommend alternative; if so, reconciliation would be handled via FIX_SESSION process.
 
 ### Why documented at UCN v2.0 level
 
@@ -323,25 +323,25 @@ UCN v1.1 assumed FORENSIC v6.0 values are authoritative. FIX_SESSION_002 reveale
 
 - **FORENSIC engine** ranks: Sun #1, Jupiter #2, Saturn #3
 - **Jagannatha Hora engine** ranks: Saturn #1, Sun #2, Jupiter #3
-- **Convention adopted**: AM-JIS uses FORENSIC values for Shadbala citations
+- **Convention adopted**: MARSYS-JIS uses FORENSIC values for Shadbala citations
 - **Why this matters at UCN level**: Any UCN claim of the form "Sun is the strongest planet" or "the chart's strongest-Shadbala planet is X" is engine-dependent. Future citations should acknowledge.
 
 ### Ashtakavarga Moon-row variance (GAP.08)
 
 - **FORENSIC Moon BAV row** differs from JHora in 4 signs: Gemini, Libra, Scorpio, Capricorn
 - **SAV grand total 337** matches in both engines (row-level differences cancel in aggregate)
-- **Convention adopted**: AM-JIS uses FORENSIC BAV/SAV values
+- **Convention adopted**: MARSYS-JIS uses FORENSIC BAV/SAV values
 
 ### Vimshottari date variance (GAP.09)
 
 - **FORENSIC dates** run +7 to +9 days LATER than JHora
 - **Root cause**: 1.42 arcmin Moon difference + 48 arcsec ayanamsa difference
-- **Convention adopted**: AM-JIS uses FORENSIC dates; LEL retrodictive fit validates at this engine
+- **Convention adopted**: MARSYS-JIS uses FORENSIC dates; LEL retrodictive fit validates at this engine
 - **Implication**: External reviewers using JHora will see slightly-earlier dates; variance is documented not hidden
 
 ### Why at UCN level
 
-These engine variances are not errors in either engine — they reflect legitimate implementation choices. UCN v2.0 formalizes the AM-JIS discipline of using FORENSIC values consistently while documenting the dual-engine variances transparently for external review.
+These engine variances are not errors in either engine — they reflect legitimate implementation choices. UCN v2.0 formalizes the MARSYS-JIS discipline of using FORENSIC values consistently while documenting the dual-engine variances transparently for external review.
 
 ---
 

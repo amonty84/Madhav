@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AM-JIS Build Tracker Probe
+MARSYS-JIS Build Tracker Probe
 Called by the Cowork artifact on every refresh.
 Outputs a single JSON object to stdout.
 """

@@ -14,7 +14,7 @@ scope: >
 
 ## Purpose
 
-The Step 0 → Step 15 workflow exists to rebuild the AM-JIS governance layer so that the project survives multi-session, multi-agent execution without drift. The workflow was commissioned in the conversation dated 2026-04-23 after the native identified that governance surfaces (CLAUDE.md, .geminirules, FILE_REGISTRY, GOVERNANCE_STACK) had already drifted out of sync within days of being mirrored.
+The Step 0 → Step 15 workflow exists to rebuild the MARSYS-JIS governance layer so that the project survives multi-session, multi-agent execution without drift. The workflow was commissioned in the conversation dated 2026-04-23 after the native identified that governance surfaces (CLAUDE.md, .geminirules, FILE_REGISTRY, GOVERNANCE_STACK) had already drifted out of sync within days of being mirrored.
 
 The design principle: each step is a **closed artifact** that one conversation produces and the next conversation consumes. No step spans conversations. No two steps run simultaneously. The Step Ledger is the only cross-conversation state.
 

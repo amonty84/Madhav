@@ -26,7 +26,7 @@ organizing_principle: 7H Karmic Vortex as the relational axis — six-layer conv
 
 ### §1 — Document Scope and Architecture Position
 
-This report is the D3 domain analysis within the AM-JIS L3 Domain Reports layer. It covers the Relationships domain in its full classical scope: marriage and partnership (7H), the partnership-image lagna (UL), the spouse/partner significator (DK Mercury), the relational social web (11H, A7), the inner sanctuary (4H), the sibling-communication axis (3H / UL house), and the cross-domain structural interdependencies that make the relational domain inseparable from career, wealth, mind, health, and spirit in this chart.
+This report is the D3 domain analysis within the MARSYS-JIS L3 Domain Reports layer. It covers the Relationships domain in its full classical scope: marriage and partnership (7H), the partnership-image lagna (UL), the spouse/partner significator (DK Mercury), the relational social web (11H, A7), the inner sanctuary (4H), the sibling-communication axis (3H / UL house), and the cross-domain structural interdependencies that make the relational domain inseparable from career, wealth, mind, health, and spirit in this chart.
 
 **Architecture position**: This report sits downstream of the complete L2.5 Holistic Synthesis Layer (CGM, MSR, CDLM, RM, UCN) and parallel to the already-closed Career (Session 16), Financial (Session 17), and Health (Session 18) Domain Reports. All cross-domain observations in this report are grounded in CDLM_v1_0.md cell values and MSR_v1_0.md signal IDs. All interpretive claims are traceable to L1 facts in FORENSIC_ASTROLOGICAL_DATA_v6.0.md.
 

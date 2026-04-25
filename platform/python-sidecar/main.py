@@ -6,7 +6,7 @@ from routers import ephemeris, events, eclipses, retrogrades, sade_sati, jaimini
 
 load_dotenv()
 
-app = FastAPI(title="AM-JIS Compute Sidecar", version="1.0.0")
+app = FastAPI(title="MARSYS-JIS Compute Sidecar", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,

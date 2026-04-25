@@ -42,7 +42,7 @@ changelog:
 ---
 
 # GOVERNANCE & INTEGRITY RED-TEAM v1.0
-## AM-JIS Project — Step 8 Deliverable
+## MARSYS-JIS Project — Step 8 Deliverable
 
 *Produced in Step 8 of the Step 0 → Step 15 governance rebuild.*
 *Adversarial red-team of the Step 7 implementation, judged against the Step 6 protocol.*
