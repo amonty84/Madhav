@@ -1,11 +1,20 @@
 ---
 artifact: FILE_REGISTRY_v1_0.md
 version: 1.0
-status: CURRENT
+status: SUPERSEDED by FILE_REGISTRY_v1_1.md (2026-04-23 at Step 5 of the Step 0→15 governance rebuild)
+superseded_by: 00_ARCHITECTURE/FILE_REGISTRY_v1_1.md
+superseded_on: 2026-04-23
 date: 2026-04-19
 scope: Complete registry of final/current AM-JIS corpus files
 supersedes: FILE_INDEX_v1_0.md (Session 36, now stale)
+changelog:
+  - v1.0 (2026-04-19): Initial registry. Captured 75 current + 29 archival files.
+  - SUPERSEDED 2026-04-23 by FILE_REGISTRY_v1_1.md (Step 5 of the Step 0→15
+    governance rebuild). v1.1 corrects the §4 MSR row to MSR_v3_0 (499 signals)
+    per GA.1 and adds rows for the governance-rebuild artifact family.
 ---
+
+> **⚠ SUPERSEDED** — This registry is historical (dated 2026-04-19). The current registry is **`FILE_REGISTRY_v1_1.md`** (published 2026-04-23 at Step 5 of the Step 0→15 governance rebuild). v1.1 corrects the §4 MSR row to `MSR_v3_0.md` (499 signals) per GA.1, adds rows for the governance-rebuild artifact family (MACRO_PLAN_v2_0.md + lineage, STEP_LEDGER, STEP_BRIEFS, GROUNDING_AUDIT, NATIVE_DIRECTIVES, PHASE_B_PLAN v1.0.2), and marks MP v1.0 / MSR v2.0 / FILE_REGISTRY v1.0 as superseded in §8 Archival. Content below is retained for lineage only — do **not** cite as current.
 
 # AM-JIS File Registry — Final Corpus
 

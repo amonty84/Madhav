@@ -1,10 +1,13 @@
+> **SUPERSEDED** — see `PROJECT_ARCHITECTURE_v2_2.md` for current. Retained for historical reference only. Do not cite v2.1 as authoritative. Superseded 2026-04-24 at Step 5A of the Step 0 → Step 15 governance rebuild.
+
 ---
 document: PROJECT MASTER ARCHITECTURE BLUEPRINT
 project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 version: 2.1
 supersedes: 2.0 (2026-04-17 mid) and 1.0 (archived)
-status: APPROVED BLUEPRINT — all §J decisions resolved; Session 2 ready
+superseded_by: PROJECT_ARCHITECTURE_v2_2.md (2026-04-24, Step 5A of the Step 0 → Step 15 governance rebuild)
+status: SUPERSEDED by PROJECT_ARCHITECTURE_v2_2.md
 author_of_blueprint: Claude (Anthropic)
 blueprint_date: 2026-04-17
 v21_rationale: >

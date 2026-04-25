@@ -4,8 +4,17 @@ project: AM-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_0
 version: 1.1
-status: CLOSED (Session 2 output — v1.1 amendments applied in same session per 4 native-supplied date corrections + 1 name correction)
-supersedes: v1.0 (same-session minor revision)
+status: SUPERSEDED
+superseded_on: 2026-04-24
+superseded_by: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md
+supersession_session: STEP_12_ONGOING_HYGIENE_POLICIES
+supersession_rationale: >
+  LEL v1.2 (canonical_id LEL per CANONICAL_ARTIFACTS §1) is the CURRENT Life Event Log.
+  v1.1 was the same-session minor revision of v1.0 after native supplied 4 date
+  corrections + 1 name correction (Session 2, 2026-04-17). Step 12 applies the §A
+  archival banner + frontmatter flip per ONGOING_HYGIENE_POLICIES §B (closes GA.12).
+  Retain-in-place at original path; do not consume as CURRENT.
+supersedes_historical: v1.0 (same-session minor revision)
 author: Claude (Session 2, Claude Code instance)
 date_built: 2026-04-17
 date_range_covered: 1984-02-05 to 2026-04-17
@@ -24,6 +33,8 @@ next_steps:
   - Future (v1.1): Expand to 75-100 events; fill remaining gap register items
   - Future (v2.0): Build Pattern Library (RPT.LFE.01 in Deep Analysis v2.0) from retrodictive yes/partial events
 ---
+
+> **SUPERSEDED 2026-04-24** by `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` at STEP_12_ONGOING_HYGIENE_POLICIES. Content retained for audit trail; do not consume as CURRENT. Closes GROUNDING_AUDIT GA.12 per ONGOING_HYGIENE_POLICIES §B.
 
 # LIFE EVENT LOG — Abhisek Mohanty (v1.0)
 

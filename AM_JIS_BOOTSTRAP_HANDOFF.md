@@ -3,22 +3,35 @@ document: AM-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
 project_name: Abhisek Mohanty — Jyotish Intelligence System (AM-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar, Odisha, India)
 handoff_from: Claude (claude.ai web session, 2026-04-17)
-handoff_to: Claude Code / Claude Cowork (next instance picking up the project)
+handoff_to: (retired — successors named below)
 handoff_purpose: >
-  This is a bootstrap handoff document. When the native (Abhisek Mohanty) opens
-  a new Claude Code or Claude Cowork session pointed at the AM-JIS folder,
-  this file tells the next Claude instance:
-    1. What this project is
-    2. What has been accomplished so far
-    3. What files exist and what they mean
-    4. What needs to be built next (scaffolding)
-    5. What the immediate next actions are (Session 2 — Life Event Log)
-    6. All locked architectural decisions
-  The next Claude instance should read this file FIRST, then read
-  PROJECT_ARCHITECTURE_v2_1.md, then execute the bootstrap tasks in §5.
-status: AUTHORITATIVE HANDOFF — follow instructions literally
-handoff_date: 2026-04-17
+  Historical bootstrap orientation. Retired 2026-04-24 at STEP_12_ONGOING_HYGIENE_POLICIES
+  per native decision on WARN.4 / WARN.6 retire-vs-refresh. Every load-bearing claim this
+  file once carried is now covered by the successors named in `superseded_by` below. Fresh
+  Claude / Cowork / Code sessions should NOT read this file as a mandatory-reading item.
+  Content preserved verbatim below the SUPERSEDED banner for audit-trail purposes only.
+status: SUPERSEDED
+superseded_on: 2026-04-24
+superseded_by:
+  - CLAUDE.md                                # v2.0; master instructions (§A–§M)
+  - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md   # current blueprint (was v2.1 here)
+  - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md       # 10-macro-phase arc
+  - 00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md  # baseline state 2026-04-23
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md    # "you are here" state pointer
+supersession_session: STEP_12_ONGOING_HYGIENE_POLICIES
+supersession_rationale: >
+  WARN.4 (line 145 live v1.0 MP pointer) and WARN.6 (v2.1-as-blueprint claim, line 37
+  below) were tracked as deferred drift since Step 5 and Step 5A respectively. Step 9
+  (CLAUDE.md rebuild) kept this file in §C item #11 mandatory reading with a known-drift
+  caveat, deferring the retire-vs-refresh decision to Step 12. At Step 12, native elected
+  retirement: every navigational + orientational claim BOOTSTRAP carried is present in
+  CLAUDE.md v2.0 §A–§M + PROJECT_ARCHITECTURE v2.2 + MACRO_PLAN v2.0 + GROUNDING_AUDIT
+  + CURRENT_STATE, with no v2.1/v1.0 drift. Refreshing BOOTSTRAP in-place would duplicate
+  those surfaces; retiring it removes the drift surface without losing history.
+handoff_date: 2026-04-17    # original handoff date preserved for audit trail
 ---
+
+> **SUPERSEDED 2026-04-24** by CLAUDE.md v2.0 + PROJECT_ARCHITECTURE_v2_2.md + MACRO_PLAN_v2_0.md + CURRENT_STATE_v1_0.md at STEP_12_ONGOING_HYGIENE_POLICIES. Content retained for audit trail; do not consume as CURRENT. A fresh session should read the successors instead; see `superseded_by` in frontmatter above.
 
 # AM-JIS PROJECT BOOTSTRAP & CONTINUATION HANDOFF
 
