@@ -1,0 +1,19 @@
+# 06_LEARNING_LAYER/PARAMETER_UPDATES/.gitkeep
+#
+# Role: Bayesian-update landing zone for the Learning Layer substrate. Receives parameter
+# updates after the two-pass Gemini/Claude protocol approves them (per MP §"Learning
+# discipline" rules #3 + #5). Also the destination for per-mechanism N-override amendments
+# to MP §LL-Appendix.B (deferred to Step 12 per
+# 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md §5.4).
+#
+# Currently empty. First populated at the M4 calibration session that produces the first
+# parameter update for a stabilized mechanism.
+#
+# Update protocol: each entry is versioned per mechanism (monotonically increasing);
+# reversal is performed by retracting the version + logging the retraction at
+# 06_LEARNING_LAYER/OBSERVATIONS/ next to the data that motivated the original update.
+# Audit trail: every entry carries the SESSION_LOG entry ID that performed it.
+#
+# Population gate: see 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md §5.3 + §5.6.
+#
+# Provenance: produced at Step 11 of the Step 0 → Step 15 governance rebuild (2026-04-24).

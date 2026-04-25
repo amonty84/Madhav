@@ -1,0 +1,12 @@
+{
+  "description": "P1 REJECT: chunk with no layer tag. Must reject.",
+  "chunk": {
+    "layer": "",
+    "doc_type": "unknown",
+    "content": "Saturn in Libra at 7H.",
+    "token_count": 8
+  },
+  "expected": {
+    "valid": false
+  }
+}
