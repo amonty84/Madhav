@@ -37,7 +37,7 @@ export default async function DashboardPage() {
   const chartIds = charts.map((c) => c.id)
   const layersResult = chartIds.length > 0
     ? await query(
-        'SELECT chart_id, layer, sublayer, status FROM pyramid_layers WHERE chart_id = ANY($1::text[])',
+        'SELECT chart_id, layer, sublayer, status FROM pyramid_layers WHERE chart_id = ANY($1::uuid[])',
         [chartIds]
       )
     : { rows: [] }

@@ -1,5 +1,10 @@
 import 'server-only'
-import { Pool, QueryResult, QueryResultRow } from 'pg'
+import { Pool, QueryResult, QueryResultRow, types } from 'pg'
+
+// Return date/timestamp columns as strings to match TypeScript types
+types.setTypeParser(types.builtins.DATE, (v) => v)
+types.setTypeParser(types.builtins.TIMESTAMP, (v) => v)
+types.setTypeParser(types.builtins.TIMESTAMPTZ, (v) => v)
 
 let _pool: Pool | null = null
 
