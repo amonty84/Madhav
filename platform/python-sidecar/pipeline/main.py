@@ -1,0 +1,348 @@
+"""
+pipeline.main — MARSYS-JIS build pipeline orchestrator.
+Phase 14B.
+
+Reads VALIDATED_ASSET_REGISTRY from GCS, fetches CURRENT assets, chunks via
+existing chunkers (rag/chunkers/*), embeds via Vertex AI, writes to staging
+tables, validates, and optionally swaps to live.
+
+Usage:
+  python -m pipeline.main [--registry-uri GS_URI] [--build-id ID]
+                          [--triggered-by STR] [--dry-run] [--skip-swap]
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import os
+import shutil
+import sys
+import time
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+import structlog
+import vertexai
+from vertexai.language_models import TextEmbeddingInput, TextEmbeddingModel
+
+from pipeline.manifest_writer import EMBEDDING_DIM, EMBEDDING_MODEL, write_manifest
+from pipeline.registry_loader import collect_current_assets, load_registry
+from pipeline.source_fetcher import fetch_all_assets
+from pipeline.validators import ValidatedAssetRegistry
+from pipeline.writers.rag_chunks_writer import RAGChunksWriter
+
+# ── Logging setup ─────────────────────────────────────────────────────────────
+
+structlog.configure(
+    processors=[
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.JSONRenderer(),
+    ],
+    wrapper_class=structlog.stdlib.BoundLogger,
+    logger_factory=structlog.stdlib.LoggerFactory(),
+)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+log = structlog.get_logger(__name__)
+
+# ── Chunker registry ──────────────────────────────────────────────────────────
+# Maps asset path (relative) → (doc_type, chunker_function).
+# 14C/14D/14E add new entries here when new writers are registered.
+
+def _build_chunker_registry() -> dict[str, tuple[str, Any]]:
+    from rag.chunkers.cdlm_cell import chunk_cdlm_cells
+    from rag.chunkers.cgm_node import chunk_cgm_nodes
+    from rag.chunkers.l1_fact import chunk_l1_facts
+    from rag.chunkers.msr_signal import chunk_msr_signals
+    from rag.chunkers.ucn_section import chunk_ucn_sections
+
+    return {
+        "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md": ("l1_fact", chunk_l1_facts),
+        "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md": ("msr_signal", chunk_msr_signals),
+        "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md": ("ucn_section", chunk_ucn_sections),
+        "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md": ("cdlm_cell", chunk_cdlm_cells),
+        "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md": ("cgm_node", chunk_cgm_nodes),
+    }
+
+
+# ── Vertex AI embedding ───────────────────────────────────────────────────────
+
+def _init_vertexai() -> None:
+    project = os.environ.get("GCP_PROJECT", "")
+    location = os.environ.get("VERTEX_AI_LOCATION", "us-central1")
+    if not project:
+        raise RuntimeError("GCP_PROJECT env var not set")
+    vertexai.init(project=project, location=location)
+
+
+def _embed_batch(texts: list[str]) -> list[list[float]]:
+    model = TextEmbeddingModel.from_pretrained(EMBEDDING_MODEL)
+    inputs = [TextEmbeddingInput(t, "RETRIEVAL_DOCUMENT") for t in texts]
+    results = model.get_embeddings(inputs)
+    return [r.values for r in results]
+
+
+def _embed_chunks(chunks: list[Any]) -> list[list[float]]:
+    """Embed all chunks in batches of 10. Halt on first Vertex AI error."""
+    batch_size = 10
+    all_embeddings: list[list[float]] = []
+
+    for i in range(0, len(chunks), batch_size):
+        batch = chunks[i : i + batch_size]
+        texts = [
+            f"[{c.layer}] [{c.doc_type}]\n{c.content}" for c in batch
+        ]
+        try:
+            vecs = _embed_batch(texts)
+        except Exception as exc:
+            raise RuntimeError(
+                f"[STOP] Vertex AI embedding failed at batch {i}: {exc}"
+            ) from exc
+        all_embeddings.extend(vecs)
+        log.info("embedded_batch", start=i, end=i + len(batch), total_so_far=len(all_embeddings))
+
+    return all_embeddings
+
+
+# ── Build manifest DB row ─────────────────────────────────────────────────────
+
+def _insert_manifest_row(
+    build_id: str,
+    triggered_by: str,
+    registry_fingerprint: str,
+    pipeline_image_uri: str,
+    status: str = "staging",
+) -> None:
+    import psycopg
+    db_url = os.environ.get("DATABASE_URL", "")
+    if not db_url:
+        raise RuntimeError("DATABASE_URL not set")
+    with psycopg.connect(db_url) as conn:
+        conn.execute(
+            """
+            INSERT INTO build_manifests
+              (build_id, triggered_by, registry_fingerprint, pipeline_image_uri,
+               embedding_model, embedding_dim, chunk_count, embedding_count,
+               status, manifest_uri)
+            VALUES (%s, %s, %s, %s, %s, %s, 0, 0, %s, '')
+            ON CONFLICT (build_id) DO NOTHING
+            """,
+            (
+                build_id,
+                triggered_by,
+                registry_fingerprint,
+                pipeline_image_uri,
+                EMBEDDING_MODEL,
+                EMBEDDING_DIM,
+                status,
+            ),
+        )
+        conn.commit()
+
+
+def _update_manifest_row(
+    build_id: str,
+    chunk_count: int,
+    embedding_count: int,
+    status: str,
+    manifest_uri: str,
+) -> None:
+    import psycopg
+    db_url = os.environ.get("DATABASE_URL", "")
+    with psycopg.connect(db_url) as conn:
+        conn.execute(
+            """
+            UPDATE build_manifests
+            SET chunk_count=%s, embedding_count=%s, status=%s, manifest_uri=%s
+            WHERE build_id=%s
+            """,
+            (chunk_count, embedding_count, status, manifest_uri, build_id),
+        )
+        conn.commit()
+
+
+# ── Main orchestration ────────────────────────────────────────────────────────
+
+def run_build(
+    registry_uri: str,
+    build_id: str,
+    triggered_by: str,
+    dry_run: bool,
+    skip_swap: bool,
+    sources_bucket: str,
+    artifacts_bucket: str,
+    pipeline_image_uri: str,
+) -> dict[str, Any]:
+    t0 = time.perf_counter()
+    log.info("build_start", build_id=build_id, registry_uri=registry_uri, dry_run=dry_run, skip_swap=skip_swap)
+
+    # Workspace root: in the container /app is WORKDIR and matches the dev repo_root layout
+    # so validators using Path(__file__).parent^5 resolve correctly.
+    workspace_root = os.environ.get("PIPELINE_WORKSPACE_ROOT", "/app")
+
+    # 1. Load registry
+    registry, fingerprint = load_registry(registry_uri)
+    current_assets = collect_current_assets(registry)
+    log.info("registry_loaded", asset_count=len(current_assets), fingerprint=fingerprint[:16])
+
+    # 2. Build chunker registry
+    chunker_registry = _build_chunker_registry()
+    chunker_paths = set(chunker_registry.keys())
+
+    # 3. Insert build_manifests staging row (skip in dry-run to avoid DB write)
+    if not dry_run:
+        _insert_manifest_row(build_id, triggered_by, fingerprint, pipeline_image_uri)
+
+    # 4. Fetch assets to workspace (mirrors repo layout; validators resolve correctly)
+    workspace, sha256_map = fetch_all_assets(sources_bucket, current_assets, chunker_paths, workspace_root)
+    log.info("assets_fetched", count=len(sha256_map), workspace=workspace)
+
+    # Track which layer subdirs were downloaded so we can clean them post-build
+    downloaded_subdirs = {Path(p).parts[0] for p in sha256_map}
+
+    all_chunks: list[Any] = []
+    try:
+        # 5. Chunk each fetched asset
+        for asset_path, (doc_type, chunker_fn) in chunker_registry.items():
+            local_file = Path(workspace) / asset_path
+            if not local_file.exists():
+                log.warning("asset_not_fetched", path=asset_path)
+                continue
+            log.info("chunking", asset=asset_path, doc_type=doc_type)
+            try:
+                chunks = chunker_fn(workspace)
+            except Exception as exc:
+                log.error("chunker_failed", asset=asset_path, error=str(exc))
+                raise RuntimeError(f"Chunker failed for {asset_path}: {exc}") from exc
+            log.info("chunks_produced", asset=asset_path, count=len(chunks))
+            all_chunks.extend(chunks)
+
+        log.info("total_chunks", count=len(all_chunks))
+
+        if dry_run:
+            log.info("dry_run_complete", chunk_count=len(all_chunks))
+            return {
+                "build_id": build_id,
+                "dry_run": True,
+                "chunk_count": len(all_chunks),
+                "duration_s": round(time.perf_counter() - t0, 2),
+            }
+
+        # 6. Embed all chunks
+        _init_vertexai()
+        embeddings = _embed_chunks(all_chunks)
+        log.info("embeddings_complete", count=len(embeddings))
+
+        # 7. Write to staging
+        writer = RAGChunksWriter()
+        write_result = writer.write_chunks(all_chunks, embeddings, build_id)
+        log.info("staging_written", chunk_count=write_result.chunk_count, embedding_count=write_result.embedding_count)
+
+        # 8. Validate staging
+        validation = writer.validate_staging(build_id)
+        if not validation.valid:
+            raise RuntimeError(f"Staging validation failed: {validation.issues}")
+        log.info("staging_validated", chunk_count=validation.chunk_count, embedding_count=validation.embedding_count)
+
+        # 9. Emit manifest JSON to GCS
+        manifest_uri = write_manifest(
+            artifacts_bucket=artifacts_bucket,
+            build_id=build_id,
+            triggered_by=triggered_by,
+            registry_fingerprint=fingerprint,
+            pipeline_image_uri=pipeline_image_uri,
+            chunk_count=validation.chunk_count,
+            embedding_count=validation.embedding_count,
+            status="staging" if skip_swap else "promoted",
+            asset_sha256_map=sha256_map,
+        )
+
+        if skip_swap:
+            _update_manifest_row(build_id, validation.chunk_count, validation.embedding_count, "staging", manifest_uri)
+            log.info("build_complete_skip_swap", build_id=build_id, manifest_uri=manifest_uri)
+        else:
+            # 10. Swap staging → live
+            swap_result = writer.swap_to_live(build_id)
+            if not swap_result.success:
+                raise RuntimeError(f"Swap failed: {swap_result.message}")
+            _update_manifest_row(build_id, validation.chunk_count, validation.embedding_count, "live", manifest_uri)
+            log.info("build_complete_live", build_id=build_id, promoted=swap_result.promoted_chunk_count, manifest_uri=manifest_uri)
+
+        duration = round(time.perf_counter() - t0, 2)
+        return {
+            "build_id": build_id,
+            "dry_run": False,
+            "skip_swap": skip_swap,
+            "chunk_count": validation.chunk_count,
+            "embedding_count": validation.embedding_count,
+            "manifest_uri": manifest_uri,
+            "duration_s": duration,
+        }
+
+    finally:
+        # Clean up only the downloaded source subdirs (not the code under platform/)
+        for subdir in downloaded_subdirs:
+            target = Path(workspace) / subdir
+            if target.exists() and not str(target).startswith(str(Path(workspace) / "platform")):
+                shutil.rmtree(target, ignore_errors=True)
+                log.info("cleaned_subdir", path=str(target))
+
+
+# ── CLI ───────────────────────────────────────────────────────────────────────
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="MARSYS-JIS build pipeline orchestrator")
+    parser.add_argument(
+        "--registry-uri",
+        default="gs://madhav-marsys-sources/00_ARCHITECTURE/VALIDATED_ASSET_REGISTRY_v1_0.json",
+        help="GCS URI of VALIDATED_ASSET_REGISTRY JSON",
+    )
+    parser.add_argument(
+        "--build-id",
+        default=None,
+        help="Build ID (auto-generated if omitted)",
+    )
+    parser.add_argument(
+        "--triggered-by",
+        default="manual:unknown",
+        help="Who triggered this build (e.g. manual:email, scheduler, github-push)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate + chunk but skip write to staging and skip swap",
+    )
+    parser.add_argument(
+        "--skip-swap",
+        action="store_true",
+        help="Write to staging but do not promote to live",
+    )
+    args = parser.parse_args()
+
+    build_id = args.build_id or f"build-{uuid.uuid4()}"
+    sources_bucket = os.environ.get("GCS_SOURCES_BUCKET", "madhav-marsys-sources")
+    artifacts_bucket = os.environ.get("GCS_ARTIFACTS_BUCKET", "madhav-marsys-build-artifacts")
+    pipeline_image_uri = os.environ.get(
+        "PIPELINE_IMAGE_URI",
+        "asia-south1-docker.pkg.dev/madhav-astrology/marsys-pipeline/pipeline:unknown",
+    )
+
+    result = run_build(
+        registry_uri=args.registry_uri,
+        build_id=build_id,
+        triggered_by=args.triggered_by,
+        dry_run=args.dry_run,
+        skip_swap=args.skip_swap,
+        sources_bucket=sources_bucket,
+        artifacts_bucket=artifacts_bucket,
+        pipeline_image_uri=pipeline_image_uri,
+    )
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__":
+    main()

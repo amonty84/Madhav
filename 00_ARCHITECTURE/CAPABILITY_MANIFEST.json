@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-28T00:00:00Z",
+  "generated_at": "2026-04-28T17:43:00Z",
   "generator_version": "1.0",
-  "entry_count": 58,
-  "fingerprint": "d89c40951467a908383fcdb9544b1b3b59ee650d5e8995ffbc55d15954fe1857",
+  "entry_count": 63,
+  "fingerprint": "d1ab62990a62d67fcf6a57745f9d3b32bc62aa8ff624110c0c566b82c1aefd4f",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -906,6 +906,81 @@
       "fingerprint": "f6891c9a2813a1e7c94c4d8eed6ba39d577575218109dddc0a29fec182f61f07",
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L3/registers/INDEX.json"
+    },
+    {
+      "canonical_id": "BUILD_PIPELINE_v1_0",
+      "path": "00_ARCHITECTURE/BUILD_PIPELINE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "ef1d5accc6a45245f19af94421b54b4747fb8938b3efc78b13a90ceea3e737a6",
+      "phase": "14B",
+      "description": "Canonical specification for the build pipeline (Cloud Run Job, staging-then-swap, writer interface)"
+    },
+    {
+      "canonical_id": "PHASE_14B_BUILD_PIPELINE_REPORT_v1_0",
+      "path": "00_ARCHITECTURE/PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "fd1bc552c7716835be9efcc5e5a8135eb67a0b74e635f96dc4f18d50f16ab6e5",
+      "phase": "14B",
+      "description": "Phase 14B execution report; first promotion run result (941 chunks live)"
+    },
+    {
+      "canonical_id": "CLOUDBUILD_YAML",
+      "path": "cloudbuild.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "627cabf9a134f1655fefaac62fde6921415b3fd0703b19fba05cc3e19dbe8d32",
+      "phase": "14B",
+      "description": "Cloud Build config: build pipeline image, push, deploy Cloud Run Job"
+    },
+    {
+      "canonical_id": "DOCKERFILE_PIPELINE",
+      "path": "platform/python-sidecar/Dockerfile.pipeline",
+      "version": "1.0.3",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "3cecdd7e7f16fb45a4e8da392a100b31acd15a04fa3f09776999268419b2bf6d",
+      "phase": "14B",
+      "description": "Docker image for marsys-build-pipeline Cloud Run Job (linux/amd64, dev-layout mirror)"
+    },
+    {
+      "canonical_id": "MIGRATION_013_BUILD_PIPELINE_STAGING",
+      "path": "platform/supabase/migrations/013_build_pipeline_staging.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "2ced8ad389e02b367dde094522636247a4a0f546986ec404f66a39a61403742b",
+      "phase": "14B",
+      "description": "rag_chunks_staging, rag_embeddings_staging, build_manifests tables"
     }
   ]
 }
