@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-28T15:47:48.266Z",
+  "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
   "entry_count": 58,
-  "fingerprint": "bb1638276423d57d1b54919d13ad311da74b4eea2929018452feebae31fea0d2",
+  "fingerprint": "d89c40951467a908383fcdb9544b1b3b59ee650d5e8995ffbc55d15954fe1857",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
       "path": "01_FACTS_LAYER/CGP_AUDIT_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -16,13 +16,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "223f04bb9b3e755298cd0d2759a028d336f89793860c57952c6deb367f8f35cf",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/CGP_AUDIT_v1_0.md"
     },
     {
       "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v2_0",
       "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md",
       "version": "2",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -30,13 +31,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "3db9b40bbbfe695f3e17cc4450c6bde0a11b34f2adf73d0375e7468cd3f109aa",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/EXTERNAL_COMPUTATION_SPEC_v2_0.md"
     },
     {
       "canonical_id": "FORENSIC_ASTROLOGICAL_DATA_v8_0",
       "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
       "version": "8",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
@@ -52,13 +54,14 @@
         "holistic"
       ],
       "cost_weight": 1,
-      "always_required": true
+      "always_required": true,
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md"
     },
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
       "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
       "version": "1.2",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
@@ -72,13 +75,14 @@
         "temporal",
         "retrodictive"
       ],
-      "cost_weight": 0.8
+      "cost_weight": 0.8,
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md"
     },
     {
       "canonical_id": "SADE_SATI_CYCLES_ALL",
       "path": "01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md",
       "version": "unknown",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -86,13 +90,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "716bcb8c8830324e1f6d8cd36e0682ca0b39e1df0840380c37746359e16ad808",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/SADE_SATI_CYCLES_ALL.md"
     },
     {
       "canonical_id": "EVENT_CHART_STATES_v1_0",
       "path": "01_FACTS_LAYER/SOURCES/EVENT_CHART_STATES_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -100,13 +105,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "957e58bbd523d981ac08a6c9a525987b787d3cca066ec78104e8e703fbd1c343",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/sources/EVENT_CHART_STATES_v1_0.md"
     },
     {
       "canonical_id": "JHORA_TRANSCRIPTION_v8_0_SOURCE",
       "path": "01_FACTS_LAYER/SOURCES/JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
       "version": "8.0-source",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -114,13 +120,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "29dd7839ff5fbbbebd704e8703e26fb75db94c31317587c0a3b1516ed23668ba",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/sources/JHORA_TRANSCRIPTION_v8_0_SOURCE.md"
     },
     {
       "canonical_id": "CDLM_v1_1",
       "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
       "version": "1.2",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -134,13 +141,14 @@
         "cross_domain",
         "discovery"
       ],
-      "cost_weight": 0.7
+      "cost_weight": 0.7,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md"
     },
     {
       "canonical_id": "CGM",
       "path": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
       "version": "9",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -155,13 +163,14 @@
         "holistic"
       ],
       "cost_weight": 1,
-      "always_required": true
+      "always_required": true,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md"
     },
     {
       "canonical_id": "MSR_v3_0",
       "path": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
       "version": "3",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -175,13 +184,14 @@
         "interpretive",
         "cross_domain"
       ],
-      "cost_weight": 0.9
+      "cost_weight": 0.9,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md"
     },
     {
       "canonical_id": "RED_TEAM_L2_5_v1_0",
       "path": "025_HOLISTIC_SYNTHESIS/RED_TEAM_L2_5_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": false,
       "representations": [
@@ -189,13 +199,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "5202ed3bc7c5827213707a60154bd7d36eb7299bda2de5ef074fa20fed1337a2",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RED_TEAM_L2_5_v1_0.md"
     },
     {
       "canonical_id": "RM_v2_0",
       "path": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
       "version": "2.1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -209,13 +220,14 @@
         "resonance",
         "cross_domain"
       ],
-      "cost_weight": 0.6
+      "cost_weight": 0.6,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md"
     },
     {
       "canonical_id": "UCN_v4_0",
       "path": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
       "version": "4.1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -229,7 +241,8 @@
         "cross_domain",
         "holistic"
       ],
-      "cost_weight": 0.8
+      "cost_weight": 0.8,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md"
     },
     {
       "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
@@ -609,7 +622,7 @@
       "canonical_id": "CLUSTER_ATLAS_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -617,13 +630,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "2ed3f8df9b970f3c85e3aed877e04244eabebc521a3e845adbcbed379e46aac8",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.md"
     },
     {
       "canonical_id": "CONTRADICTION_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -631,13 +645,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "7d1acea5dc195716e15248c67a272aa0fb3b9b211f1a6110e4074052b0dfe8e8",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.md"
     },
     {
       "canonical_id": "PATTERN_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -645,13 +660,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "b8eaf9402827c55d03eaf73f1b4d1a903f06ccb2dbd3eb0e28775b292991e974",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.md"
     },
     {
       "canonical_id": "RESONANCE_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.md",
       "version": "1",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -659,7 +675,8 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "3faca59472859d801c5502ac72276e58853d1b8299ca7b0f3979704e9ddd7b07",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.md"
     },
     {
       "canonical_id": "SCHEMAS/chunker_spec_v1_0",
@@ -819,7 +836,7 @@
       "canonical_id": "PATTERN_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -827,13 +844,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "729d850720a4986389c451b3e0c425dc05c9f31ebb60dbe281ad387d275ec7a5",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.json"
     },
     {
       "canonical_id": "RESONANCE_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -841,13 +859,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "ac9f284bd591dc69c7ebf4bba3104b9f64c266f4340524eec46590203d23154d",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.json"
     },
     {
       "canonical_id": "CONTRADICTION_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -855,13 +874,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "1e2fd304e400aee529eb3800f0e5facf4755de9bdb6e09878c11a6528ed80f68",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.json"
     },
     {
       "canonical_id": "CLUSTER_ATLAS_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
       "version": "1.0",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -869,13 +889,14 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "59d5d90c1759dce79ed83e4c47134b5d37b9ff36f926a1f639f7add0a50b233f",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.json"
     },
     {
       "canonical_id": "DISCOVERY_REGISTERS_INDEX",
       "path": "035_DISCOVERY_LAYER/REGISTERS/INDEX.json",
       "version": "1.0",
-      "status": "CURRENT",
+      "status": "TRANSITIONAL",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -883,7 +904,8 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "f6891c9a2813a1e7c94c4d8eed6ba39d577575218109dddc0a29fec182f61f07",
-      "native_id": "abhisek"
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/INDEX.json"
     }
   ]
 }
