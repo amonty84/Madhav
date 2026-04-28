@@ -156,6 +156,12 @@ All 6 artifacts from the brief's required list confirmed present in the file.
 
 ---
 
+## Follow-ups (2026-04-28)
+
+14F.1 follow-up landed at commit f569845: changelog amendment (§B.1/§B.3 boundary-text corrections applied + ## Changelog section added to PROJECT_ARCHITECTURE_v2_2.md) + validator baseline captured at PHASE_14F_VALIDATOR_BASELINE.txt (schema_validator exit=2/70, drift_detector exit=2/136, mirror_enforcer exit=0/8 pairs).
+
+---
+
 ## Native Sign-Off
 
 *Awaiting "Phase 14F accepted" before Phase 14G can proceed with lockdown verification.*
