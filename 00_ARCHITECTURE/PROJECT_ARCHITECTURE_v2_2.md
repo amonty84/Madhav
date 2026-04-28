@@ -119,8 +119,8 @@ These principles govern every asset created. Any future session that violates th
 ### B.1 — Facts/Derivation/Interpretation Separation
 
 - **Facts** (observed or computed chart values): live ONLY in the Facts Layer (L1). No interpretation, no narrative.
-- **Derivations** (logical transforms of facts — e.g., yoga detection, karaka assignment): live at L1/L2 boundary with explicit derivation-ledger pointing to source facts.
-- **Interpretations** (meaning, implication, prediction): live ONLY at L2+ with explicit derivation-chain back to facts.
+- **Derivations** (logical transforms of facts — e.g., yoga detection, karaka assignment): live at L1/L2.5 boundary with explicit derivation-ledger pointing to source facts.
+- **Interpretations** (meaning, implication, prediction): live ONLY at L2.5+ with explicit derivation-chain back to facts.
 
 **Why this matters**: when the underlying facts are audited (e.g., re-computed with different ayanamsa), we know exactly which interpretations must be re-examined. Mixing layers destroys auditability.
 
@@ -130,7 +130,7 @@ Every fact, derivation, interpretation, event, signal, edge, node, pattern, and 
 
 ### B.3 — Derivation Ledger Mandate
 
-Every L2+ claim must carry a `DERIVATION_LEDGER` entry that lists the specific L1 fact IDs it consumes. No claim is allowed to rest on "as is known classically" or "per tradition" without source.
+Every L2.5+ claim must carry a `DERIVATION_LEDGER` entry that lists the specific L1 fact IDs it consumes. No claim is allowed to rest on "as is known classically" or "per tradition" without source.
 
 ### B.4 — Three-Interpretation Discipline
 
@@ -1170,6 +1170,18 @@ Post-Step-15 (steady-state), this list shortens: `CLAUDE.md` → `PROJECT_ARCHIT
 ### L.4 — v2.2 amendment trigger
 
 v2.2 §L is rewritten to a short steady-state pointer after Step 15 closes and `GOVERNANCE_BASELINE_v1_0.md` exists. The rewrite is a patch-version bump (v2.2.1) if it edits only §L; a minor bump (v2.3) if other sections also need updates at that time; a major bump (v3.0) only if a concern of v2.0-magnitude surfaces. Until Step 15, §L remains as written here.
+
+---
+
+## Changelog
+
+### 2026-04-28 — Phase 14F amendment (in-place; no version bump)
+
+- §B.1 "Facts/Derivation/Interpretation Separation" — boundary text updated from "L1/L2 boundary" to "L1/L2.5 boundary" reflecting the L2 archive close.
+- §B.3 "Derivation Ledger Mandate" — claim layer text updated from "L2+ claims" to "L2.5+ claims" for the same reason.
+- Principle *intent* unchanged; only boundary references retitled. Per §B.8 versioning discipline, in-place amendment recorded here in lieu of a v2.3 bump because the canonical principles' meaning is preserved (only their referenced layer numbers updated to match the post-14F layer roster).
+- Authority: Phase 14F brief at `EXEC_BRIEF_PHASE_14F_L2_ARCHIVE_AND_GOVERNANCE_REFRESH_v1_0.md`.
+- Commit: `0812ecd` (14F atomic commit) + this changelog amendment commit.
 
 ---
 
