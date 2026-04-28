@@ -1,0 +1,124 @@
+{
+  "schema_version": "0.1",
+  "session_id": "Madhav_M2A_Exec_9",
+  "produced_at": "2026-04-26T19:18:48.042944+00:00",
+  "phase": "B.5",
+  "session_label": "B.5 Discovery Engine Session 1 of 3",
+  "eval_gate": {
+    "mode": "discovery_sanity",
+    "total_seeds": 5,
+    "hits": 4,
+    "recall_at_10": 0.8,
+    "pass": true,
+    "note": "SEED.001 missed (Saturn Vishakha positional query returned different chunks); SEED.002-005 all hit."
+  },
+  "pattern_mining": {
+    "batches_run": [
+      "batch1",
+      "batch2",
+      "batch3"
+    ],
+    "total_proposals": 11,
+    "total_accepted": 11,
+    "total_rejected": 0,
+    "acceptance_rate": 1.0,
+    "anomaly_note": "ACCEPTANCE_RATE_ANOMALY fired on all batches (100%); curated high-quality seeds from established CGM SUPPORTS edges; anomaly acknowledged per native instruction to proceed.",
+    "patterns_by_domain": {
+      "career": 3,
+      "cross_domain": 3,
+      "children": 1,
+      "mind": 1,
+      "spiritual": 3
+    }
+  },
+  "patterns": [
+    {
+      "pattern_id": "PAT.001",
+      "domain": "career",
+      "confidence": "HIGH",
+      "significance": 0.9,
+      "is_forward_looking": true,
+      "claim_text_excerpt": "The convergence of the highest career signal and highest adversity signal under Saturn AK forces an unprecedented struct"
+    },
+    {
+      "pattern_id": "PAT.002",
+      "domain": "cross_domain",
+      "confidence": "HIGH",
+      "significance": 0.85,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "Professional output is an architectural compulsion of the soul rather than a choice, driven by Mercury's dual role as op"
+    },
+    {
+      "pattern_id": "PAT.003",
+      "domain": "children",
+      "confidence": "MED",
+      "significance": 0.75,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "The same exalted structural tension that fuels career success acts as a systemic constraint on the window for children, "
+    },
+    {
+      "pattern_id": "PAT.004",
+      "domain": "mind",
+      "confidence": "MED",
+      "significance": 0.7,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "Routine communication and public expression carry inherent calamitous risks that must be actively converted into dharmic"
+    },
+    {
+      "pattern_id": "PAT.005",
+      "domain": "cross_domain",
+      "confidence": "HIGH",
+      "significance": 0.88,
+      "is_forward_looking": true,
+      "claim_text_excerpt": "Saturn's triple-layer activation — transit adversity, divisional chart strength peak, and past-karma thread — converges "
+    },
+    {
+      "pattern_id": "PAT.006",
+      "domain": "cross_domain",
+      "confidence": "MED",
+      "significance": 0.82,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "Mars functions as a simultaneous architectural creator and architectural destroyer across three domains — career, childr"
+    },
+    {
+      "pattern_id": "PAT.007",
+      "domain": "career",
+      "confidence": "MED",
+      "significance": 0.8,
+      "is_forward_looking": true,
+      "claim_text_excerpt": "The Mercury MD → Saturn MD transition in 2027 is architecturally pre-staged by the Sade Sati peak, creating a four-year "
+    },
+    {
+      "pattern_id": "PAT.008",
+      "domain": "spiritual",
+      "confidence": "HIGH",
+      "significance": 0.87,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "Saturn's governance of both the D9 Karakamsa (soul purpose sign ruler) and the D1 Arudha Lagna (public identity) creates"
+    },
+    {
+      "pattern_id": "PAT.009",
+      "domain": "career",
+      "confidence": "HIGH",
+      "significance": 0.85,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "The Mercury-governed communication channel is the chart's highest-leverage and highest-risk domain simultaneously: it is"
+    },
+    {
+      "pattern_id": "PAT.010",
+      "domain": "spiritual",
+      "confidence": "MED",
+      "significance": 0.78,
+      "is_forward_looking": false,
+      "claim_text_excerpt": "The D27 strength-chart Lagna in Pisces — natal 12H — architecturally encodes that the native's maximum vitality and impa"
+    },
+    {
+      "pattern_id": "PAT.011",
+      "domain": "spiritual",
+      "confidence": "MED",
+      "significance": 0.76,
+      "is_forward_looking": true,
+      "claim_text_excerpt": "Ketu in the 8H Scorpio creates an inheritance-moksha gateway that activates progressively with each dasha transition, cu"
+    }
+  ]
+}

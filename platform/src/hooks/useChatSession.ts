@@ -55,13 +55,13 @@ export function useChatSession({
   const canSend = chat.status === 'ready' || chat.status === 'error'
 
   const send = useCallback(
-    (text: string, files?: FileUIPart[]) => {
+    (text: string, files?: FileUIPart[], extraBody?: Record<string, unknown>) => {
       const trimmed = text.trim()
       const hasFiles = Boolean(files && files.length > 0)
       if ((!trimmed && !hasFiles) || isStreaming) return
       chat.sendMessage(
         hasFiles ? { text: trimmed, files } : { text: trimmed },
-        { body: { chartId, conversationId: persistedId, model, style } }
+        { body: { chartId, conversationId: persistedId, model, style, ...extraBody } }
       )
     },
     [chat, isStreaming, chartId, persistedId, model, style]

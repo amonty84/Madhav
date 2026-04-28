@@ -38,22 +38,32 @@ export function DashboardHeader({
             MARSYS-JIS
           </span>
         </Link>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="grid h-9 w-9 place-items-center rounded-full border border-border bg-muted text-sm font-medium text-foreground transition-colors hover:bg-accent">
-            {userInitial}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {isSuperAdmin && (
-              <>
-                <DropdownMenuItem onClick={() => router.push('/admin')}>
-                  User management
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-              </>
-            )}
-            <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-4">
+          {isSuperAdmin && (
+            <Link
+              href="/audit"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Audit
+            </Link>
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="grid h-9 w-9 place-items-center rounded-full border border-border bg-muted text-sm font-medium text-foreground transition-colors hover:bg-accent">
+              {userInitial}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {isSuperAdmin && (
+                <>
+                  <DropdownMenuItem onClick={() => router.push('/admin')}>
+                    User management
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </>
+              )}
+              <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </header>
   )

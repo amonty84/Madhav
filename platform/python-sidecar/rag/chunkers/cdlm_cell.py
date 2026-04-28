@@ -182,7 +182,7 @@ def chunk_cdlm_cells(repo_root: str) -> list[Chunk]:
 
 
 def run(repo_root: str) -> int:
-    """Parse CDLM cells, write to rag_chunks via Supabase REST, return written count."""
+    """Parse CDLM cells, write to rag_chunks via Cloud SQL (psycopg), return written count."""
     chunks = chunk_cdlm_cells(repo_root)
     written = write_chunks_to_db(chunks)
     logger.info("cdlm_cell: wrote %d / %d chunks to rag_chunks", written, len(chunks))

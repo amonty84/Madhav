@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "session_id": "Madhav_M2A_Exec_10",
+  "produced_at": "2026-04-26T22:30:00Z",
+  "phase": "B.5",
+  "session_label": "B.5 Discovery Engine Session 2 of 3 — Pattern Expansion + Resonance Mapping",
+  "scope_amendment_applied": {
+    "amendment_target": "00_ARCHITECTURE/M2B_EXEC_PLAN_v1_0.md",
+    "decision_q3_native_2026-04-27": "Cluster annotation deferred from §PLAN.B5_S2 to §PLAN.B5_S3",
+    "ac3_executed": true
+  },
+  "pass_1_actor_lock_q1_2026-04-27": {
+    "all_exec_10_batches_pass_1_actor": "gemini",
+    "verification": 19
+  },
+  "acceptance_rate_enforcement_q2_2026-04-27": {
+    "model": "hard_halt_on_first_anomaly",
+    "anomalies_fired_this_session": 6,
+    "halts_with_native_restart": 6,
+    "open_drs_acceptance_rate_anomaly": ["DIS.003", "DIS.004", "DIS.005"]
+  },
+  "exec_9_intervention_backfill_ac4": {
+    "intervention_a_already_captured": true,
+    "intervention_a_backfilled_this_session": false,
+    "intervention_b_already_captured": true,
+    "intervention_b_backfilled_this_session": false
+  },
+  "pattern_mining": {
+    "exec_9_baseline_count": 11,
+    "batches_run_this_session": ["batch4", "batch5", "batch6"],
+    "new_patterns_added": 11,
+    "total_patterns_at_close": 22,
+    "patterns_by_domain": {"career": 3, "wealth": 2, "health": 1, "relationships": 1, "children": 2, "travel": 1, "spiritual": 5, "mind": 3, "cross_domain": 4},
+    "phase_close_target_20_status": "exceeds_by_2"
+  },
+  "resonance_walk": {
+    "batches_run_this_session": ["batch1", "batch2", "batch3"],
+    "total_resonances_at_close": 9,
+    "resonances_by_bridge": {"career__spiritual": 1, "wealth__spiritual": 1, "career__relationships": 1, "career__mind": 1, "spiritual__health": 1, "wealth__health": 1, "spiritual__mind": 1, "relationships__children": 1, "travel__spiritual": 1},
+    "phase_close_target_10_status": "short_by_1"
+  },
+  "schemas_extended": [
+    {"schema": "pattern_schema_v0_1.json", "change": "additive pass_1_actor field"},
+    {"schema": "two_pass_events_schema_v0_1.json", "change": "additive resonance event_types"}
+  ],
+  "schemas_new": ["resonance_schema_v0_1.json"],
+  "code_new": ["resonance_walk_reconciler.py", "run_resonance_pipeline.py", "test_resonance_walk_reconciler.py", "test_run_resonance_pipeline.py"],
+  "code_extended": ["reconcilers/__init__.py"],
+  "prompt_new": [{"prompt_id": "gemini.resonance_walk", "version": "1.0", "registered": true}],
+  "optional_mid_phase_eval_re_run": null,
+  "next_session_objective": "Madhav_M2A_Exec_11 (B.5 Session 3 — Cluster annotation + Contradiction register + B.5 phase final close + macro-phase + every-third-session red-team)"
+}

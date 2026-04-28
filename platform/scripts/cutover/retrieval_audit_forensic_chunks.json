@@ -1,0 +1,41 @@
+{
+  "_generated": "2026-04-28",
+  "_stream": "B",
+  "_total_l1_fact_chunks": 102,
+  "_total_l1_fact_embedded": 102,
+  "_unembedded": 0,
+  "critical_chunks": {
+    "d1_planet_positions": {
+      "chunk_id": "fcf469e1354fc3204e32f0d80dc1d1a2",
+      "doc_type": "l1_fact",
+      "source_file": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "section": "§2.1 D1 Planet Positions",
+      "content_len": 905,
+      "has_embedding": true,
+      "contains_facts": ["sun.degree", "sun.nakshatra", "moon.degree", "mars.degree", "rahu.degree", "ketu.degree", "ketu.nakshatra", "all_planetary_positions"],
+      "bm25_rank_for_d1_query": 1
+    },
+    "bhava_chalit_cusp_ledger": {
+      "chunk_id": "f52abf1325d766781b3a05f38a26466a",
+      "doc_type": "l1_fact",
+      "source_file": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "section": "§2.3 Bhava/Chalit Cusp Ledger",
+      "content_len": 928,
+      "has_embedding": true,
+      "contains_facts": ["cusps.2_through_12", "all_house_cusps_1_to_12"],
+      "bm25_rank_for_cusp_query": "N/A (no BM25 keyword match for generic D1 query)"
+    }
+  },
+  "ecr_facts_to_chunk_map": {
+    "sun.degree":         "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "sun.nakshatra":      "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "moon.degree":        "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "mars.degree":        "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "rahu.degree":        "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "ketu.degree":        "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "ketu.nakshatra":     "fcf469e1354fc3204e32f0d80dc1d1a2",
+    "cusps.2_through_12": "f52abf1325d766781b3a05f38a26466a"
+  },
+  "_verdict": "All ECR facts map to chunks that exist in rag_chunks AND have embeddings. No missing chunks.",
+  "_secondary_finding": "16 domain_report chunks have no embeddings (unrelated to ECR issue)."
+}

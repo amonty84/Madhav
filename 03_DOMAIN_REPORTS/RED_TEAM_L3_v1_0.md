@@ -7,6 +7,10 @@ date_closed: 2026-04-18
 scope: "Red-team audit of L3 Domain Reports produced in Sessions 16-23"
 artifacts_audited: [REPORT_CAREER_DHARMA_v1_0, REPORT_FINANCIAL_v2_0, REPORT_HEALTH_LONGEVITY_v1_0, REPORT_RELATIONSHIPS_v1_0, REPORT_PSYCHOLOGY_MIND_v1_0, REPORT_CHILDREN_v1_0, REPORT_SPIRITUAL_v1_0]
 architecture_ref: "§B.5 red-team every 3rd session"
+layer: "L3"
+expose_to_chat: false
+native_id: "abhisek"
+category: quality
 ---
 
 # RED_TEAM_L3_v1_0 — Red-Team of L3 Domain Reports

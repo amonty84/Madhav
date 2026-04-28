@@ -5,7 +5,8 @@ pydantic==2.9.0
 python-dotenv==1.0.1
 
 # RAG stack — added Madhav 17 B.0 per PHASE_B_PLAN §G B.0 Task 6
-voyageai>=0.2.3
+# Voyage replaced by Vertex AI (text-multilingual-embedding-002) at B.3 migration.
+google-cloud-aiplatform>=1.60.0
 anthropic>=0.25.0
 openai>=1.30.0
 tiktoken>=0.7.0
@@ -17,3 +18,5 @@ pgvector>=0.3.0
 ragas>=0.2.0
 pytest>=8.0
 jsonschema>=4.22.0
+rank-bm25>=0.2.2
+sentence-transformers>=3.0.0

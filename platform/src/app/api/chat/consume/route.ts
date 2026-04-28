@@ -26,6 +26,15 @@ import {
   supports,
 } from '@/lib/models/registry'
 import { resolveModel } from '@/lib/models/resolver'
+import { configService } from '@/lib/config/index'
+import { classify } from '@/lib/router/router'
+import { compose } from '@/lib/bundle/rule_composer'
+import { getTool } from '@/lib/retrieve/index'
+import { createToolCache, executeWithCache } from '@/lib/cache/index'
+import { loadManifest } from '@/lib/bundle/manifest_reader'
+import { runAll, summarize } from '@/lib/validators/index'
+import { createOrchestrator } from '@/lib/synthesis/index'
+import { createAuditConsumer } from '@/lib/audit/consumer'
 
 export const maxDuration = 120
 
@@ -37,6 +46,7 @@ interface RequestBody {
   messages?: UIMessage[]
   model?: string
   style?: string
+  panel_opt_in?: boolean
 }
 
 export async function POST(request: Request) {
@@ -110,6 +120,124 @@ export async function POST(request: Request) {
     })
   }
 
+  const finalConversationId = conversationId
+
+  if (configService.getFlag('NEW_QUERY_PIPELINE_ENABLED')) {
+    const lastUserMessage = messages.filter(m => m.role === 'user').at(-1)
+    const queryText = extractText(lastUserMessage?.parts ?? [])
+
+    const manifest = await loadManifest('00_ARCHITECTURE/CAPABILITY_MANIFEST.json', '00_ARCHITECTURE/manifest_overrides.yaml')
+
+    const queryPlan = await classify(queryText, {
+      audience_tier: isSuperAdmin ? 'super_admin' : 'client',
+      manifest_fingerprint: manifest.fingerprint,
+      conversation_history: messages
+        .filter(m => m.role === 'user' || m.role === 'assistant')
+        .slice(-4)
+        .map(m => ({
+          role: m.role as 'user' | 'assistant',
+          content: extractText(m.parts ?? []),
+        })),
+    })
+
+    const bundle = await compose(queryPlan)
+
+    const cache = createToolCache()
+    const toolResults = await Promise.all(
+      queryPlan.tools_authorized.map(async (toolName: string) => {
+        const t = getTool(toolName)
+        if (!t) return null
+        try {
+          return await executeWithCache(t, queryPlan, cache)
+        } catch {
+          return null
+        }
+      })
+    )
+    const validToolResults = toolResults.filter((r): r is NonNullable<typeof r> => r !== null)
+
+    const bundleValidations = await runAll(bundle, 'bundle', { query_plan: queryPlan, bundle, manifest_fingerprint: manifest.fingerprint })
+    const bundleSummary = summarize(bundleValidations)
+    if (bundleSummary.overall === 'fail' && configService.getFlag('VALIDATOR_FAILURE_HALT')) {
+      return NextResponse.json(
+        { error: 'bundle_validation_failed', failures: bundleSummary.failures },
+        { status: 422 }
+      )
+    }
+
+    const audienceTier = isSuperAdmin ? 'super_admin' as const : 'client' as const
+    const panelOptIn = body.panel_opt_in === true
+    const orchestrator = createOrchestrator({ panel_opt_in: panelOptIn })
+    const { result } = await orchestrator.synthesize({
+      query: queryText,
+      query_plan: queryPlan,
+      bundle,
+      tool_results: validToolResults,
+      conversation_history: messages
+        .filter(m => m.role === 'user' || m.role === 'assistant')
+        .map(m => ({
+          role: m.role as 'user' | 'assistant',
+          content: extractText(m.parts ?? []),
+        })),
+      selected_model_id: modelId,
+      style,
+      audience_tier: audienceTier,
+      cache,
+      chart_context: {
+        name: chart.name ?? 'the native',
+        birth_date: chart.birth_date,
+        birth_time: chart.birth_time,
+        birth_place: chart.birth_place,
+      },
+      panel_opt_in: panelOptIn,
+      onAuditEvent: configService.getFlag('AUDIT_ENABLED')
+        ? createAuditConsumer({
+            query_text: queryText,
+            query_plan: queryPlan,
+            bundle,
+            tool_results: validToolResults,
+            validator_results: bundleValidations,
+            disclosure_tier: audienceTier,
+          })
+        : undefined,
+    })
+
+    result.consumeStream()
+
+    return result.toUIMessageStreamResponse({
+      originalMessages: messages,
+      generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
+      messageMetadata: ({ part }: { part: { type: string } }) => {
+        if (part.type === 'start' && isFirstTurn) {
+          return { conversationId: finalConversationId, model: modelId, pipeline: 'v2' }
+        }
+        if (part.type === 'start') {
+          return { model: modelId, pipeline: 'v2' }
+        }
+      },
+      onFinish: async ({ messages: finalMessages }: { messages: UIMessage[] }) => {
+        try {
+          if (pendingConversationInsert) await pendingConversationInsert
+          await replaceConversationMessages({
+            conversationId: finalConversationId,
+            messages: finalMessages,
+          })
+          if (isFirstTurn) {
+            generateConversationTitle(finalMessages).then((title: string | null) => {
+              if (title) void updateConversationTitle(finalConversationId, title)
+            })
+          }
+        } catch (err) {
+          console.error('[consume:v2] persistence failed', err)
+        }
+      },
+      onError: (error: unknown) => {
+        if (error instanceof Error) return error.message
+        return 'Something went wrong while generating a response.'
+      },
+    })
+  }
+
   const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style)
 
   console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  model=${modelId}  style=${style}`)
@@ -173,8 +301,6 @@ export async function POST(request: Request) {
   // Keep the server stream alive even if the client disconnects, so onFinish
   // still fires and we persist the full assistant turn.
   result.consumeStream()
-
-  const finalConversationId = conversationId
 
   return result.toUIMessageStreamResponse({
     originalMessages: messages,
@@ -249,4 +375,8 @@ function fallbackTitle(text: string): string {
   const slice = firstLine.slice(0, 60)
   const lastSpace = slice.lastIndexOf(' ')
   return (lastSpace > 20 ? slice.slice(0, lastSpace) : slice) + '…'
+}
+
+function extractText(parts: Array<{ type: string; text?: string }>): string {
+  return parts.filter(p => p.type === 'text').map(p => p.text ?? '').join(' ').trim()
 }

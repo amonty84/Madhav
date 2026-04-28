@@ -16,6 +16,9 @@ document_metadata:
     - "Maha Yogada (Jupiter D-2) added to financial yoga constellation"
     - "Two-channel Lakshmi architecture: 9H dharmic-Lakshmi + 7H relational-Lakshmi"
   source_chart_data: FORENSIC_ASTROLOGICAL_DATA_v8_0.md (authoritative; v6.0+v7.0 superseded)
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # Financial Domain Report — Abhisek Mohanty (v2.1)

@@ -17,6 +17,9 @@ downstream_unlocks:
   - FORENSIC_DATA v6.0 → v7.0 (CGP audit prerequisites met for D27, Nadi-amsa, full Sahams, Pranapada, Cycle 1 Sade Sati, eclipse catalog, retrograde catalog, full virupa aspect grid)
   - Enables Session 5 (v7.0 build) and Session 6 (CGP audit + signoff) per Architecture §I Phase 1
 provenance_tag_target: All outputs become `source: jagannatha_hora` per Architecture §B.10 (No Fabricated Computation)
+expose_to_chat: false
+native_id: "abhisek"
+category: source
 ---
 
 # EXTERNAL COMPUTATION SPEC v1.0

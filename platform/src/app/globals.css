@@ -168,6 +168,72 @@
   content: none !important;
 }
 
+/* Build-portal typography scale — strict 5-step ladder.
+   Use these classes anywhere in /build/* instead of arbitrary text-* utilities.
+   Display / Heading: serif (page titles + section heads only).
+   Body / Label / Mono: sans + mono. */
+.bt-display {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.bt-heading {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.bt-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.bt-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+.bt-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.bt-num {
+  font-family: var(--font-sans);
+  font-size: 1.625rem;
+  line-height: 1.1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+/* Hero stat size — 2.5-3× bt-body; used for corpus density numbers */
+.bt-mega {
+  font-family: var(--font-sans);
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* Status color utilities */
+.bt-status-complete { color: oklch(0.40 0.12 145); }
+.bt-status-active   { color: oklch(0.45 0.12 75);  }
+.bt-status-pending  { color: var(--color-muted-foreground); }
+.bt-status-blocked  { color: oklch(0.40 0.18 27);  }
+
+.dark .bt-status-complete { color: oklch(0.78 0.13 145); }
+.dark .bt-status-active   { color: oklch(0.78 0.13 75);  }
+.dark .bt-status-blocked  { color: oklch(0.70 0.19 22);  }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

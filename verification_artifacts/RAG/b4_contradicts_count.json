@@ -1,0 +1,38 @@
+{
+  "produced_at": "2026-04-26T17:34:03.565254+00:00",
+  "produced_by_session": "Madhav_M2A_Exec_8",
+  "by_batch": [
+    {
+      "batch": "A",
+      "conflict_type": "p1_layer_bleed",
+      "proposed": 0,
+      "accepted": 0,
+      "rejected_by_gemini": 0,
+      "rejected_by_pass2_schema": 0
+    },
+    {
+      "batch": "B",
+      "conflict_type": "p6_uvc_conflict",
+      "proposed": 0,
+      "accepted": 0,
+      "rejected_by_gemini": 0,
+      "rejected_by_pass2_schema": 0
+    },
+    {
+      "batch": "C",
+      "conflict_type": "rahu_as_pk",
+      "proposed": 5,
+      "accepted": 4,
+      "rejected_by_gemini": 1,
+      "rejected_by_pass2_schema": 0
+    }
+  ],
+  "totals": {
+    "total_proposed": 5,
+    "total_accepted": 4,
+    "total_rejected": 1
+  },
+  "by_target_node_type": {
+    "karaka_system": 4
+  }
+}

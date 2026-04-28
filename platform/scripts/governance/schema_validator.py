@@ -36,6 +36,7 @@ import argparse
 import dataclasses
 import datetime as _dt
 import json
+import os
 import pathlib
 import re
 import sys
@@ -46,6 +47,10 @@ import yaml
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from _ca_loader import load_canonical_artifacts  # noqa: E402
+
+# Feature flag: when true, reads from CAPABILITY_MANIFEST.json instead of CANONICAL_ARTIFACTS.
+# Default true (manifest path is production after Phase 1B cutover).
+_USE_MANIFEST = os.environ.get("SCHEMA_VALIDATOR_USE_MANIFEST", "true").lower() in ("true", "1", "yes")
 
 
 SCHEMAS_FILE = pathlib.Path(__file__).parent / "schemas" / "artifact_schemas.yaml"
@@ -1049,14 +1054,27 @@ def write_markdown_report(violations: List[Violation], out_path: pathlib.Path, s
 
 def run_corpus(repo_root: pathlib.Path) -> List[Violation]:
     violations: List[Violation] = []
-    try:
-        ca = load_canonical_artifacts(repo_root)
-    except FileNotFoundError:
-        violations.append(Violation("canonical_artifacts_missing", "CRITICAL",
-                                    "00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md",
-                                    "File does not exist — corpus schema validation cannot complete",
-                                    "Produce CANONICAL_ARTIFACTS per protocol §E"))
-        return violations
+    if _USE_MANIFEST:
+        try:
+            from manifest_reader import load_manifest_as_ca  # noqa: E402
+            ca = load_manifest_as_ca(repo_root)
+        except Exception as exc:
+            violations.append(Violation(
+                "capability_manifest_missing", "CRITICAL",
+                "00_ARCHITECTURE/CAPABILITY_MANIFEST.json",
+                f"Could not load CAPABILITY_MANIFEST.json: {exc}",
+                "Build the manifest via `npm run manifest:build` or set SCHEMA_VALIDATOR_USE_MANIFEST=false",
+            ))
+            return violations
+    else:
+        try:
+            ca = load_canonical_artifacts(repo_root)
+        except FileNotFoundError:
+            violations.append(Violation("canonical_artifacts_missing", "CRITICAL",
+                                        "00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md",
+                                        "File does not exist — corpus schema validation cannot complete",
+                                        "Produce CANONICAL_ARTIFACTS per protocol §E"))
+            return violations
     schemas = load_schemas()
     violations.extend(validate_frontmatter_for_class(repo_root, schemas))
     violations.extend(validate_step_ledger(repo_root))

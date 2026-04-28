@@ -1,0 +1,66 @@
+{
+  "produced_by_session": "Madhav_M2A_Exec_7",
+  "produced_at": "2026-04-26T14:54:55.780966+00:00",
+  "per_l3_report": [
+    {
+      "report_id": "REPORT_CAREER_DHARMA_v1_1.md",
+      "supports_proposed": 11,
+      "supports_accepted": 8
+    },
+    {
+      "report_id": "REPORT_CHILDREN_v1_1.md",
+      "supports_proposed": 14,
+      "supports_accepted": 4
+    },
+    {
+      "report_id": "REPORT_FINANCIAL_v2_1.md",
+      "supports_proposed": 28,
+      "supports_accepted": 7
+    },
+    {
+      "report_id": "REPORT_HEALTH_LONGEVITY_v1_1.md",
+      "supports_proposed": 3,
+      "supports_accepted": 0
+    },
+    {
+      "report_id": "REPORT_PARENTS_v1_1.md",
+      "supports_proposed": 45,
+      "supports_accepted": 44
+    },
+    {
+      "report_id": "REPORT_PSYCHOLOGY_MIND_v1_1.md",
+      "supports_proposed": 40,
+      "supports_accepted": 2
+    },
+    {
+      "report_id": "REPORT_RELATIONSHIPS_v1_1.md",
+      "supports_proposed": 15,
+      "supports_accepted": 0
+    },
+    {
+      "report_id": "REPORT_SPIRITUAL_v1_1.md",
+      "supports_proposed": 32,
+      "supports_accepted": 8
+    },
+    {
+      "report_id": "REPORT_TRAVEL_v1_1.md",
+      "supports_proposed": 28,
+      "supports_accepted": 28
+    }
+  ],
+  "aggregate": {
+    "total_proposed": 216,
+    "total_accepted": 101,
+    "total_rejected": 115,
+    "rejected_l3_chain": 115,
+    "rejected_p1": 0,
+    "rejected_p2": 0,
+    "rejected_p5": 0
+  },
+  "l3_gate_pass": false,
+  "l3_gate_failures": [
+    "REPORT_HEALTH_LONGEVITY_v1_1.md",
+    "REPORT_RELATIONSHIPS_v1_1.md"
+  ],
+  "l3_gate_disposition": "DIS.class.l3_zero_supports \u2014 accepted-as-data 2026-04-26"
+}

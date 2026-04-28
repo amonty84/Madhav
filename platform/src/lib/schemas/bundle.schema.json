@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marsys-jis/schemas/bundle.schema.json",
+  "title": "Bundle",
+  "description": "Mandatory-context payload for a query, composed by the Bundle Composer (C2.2)",
+  "version": "1.0",
+  "type": "object",
+  "required": ["bundle_id", "query_plan_reference", "manifest_fingerprint", "mandatory_context", "total_tokens", "bundle_hash", "schema_version"],
+  "properties": {
+    "bundle_id": { "type": "string", "format": "uuid" },
+    "query_plan_reference": { "type": "string", "format": "uuid" },
+    "manifest_fingerprint": { "type": "string" },
+    "mandatory_context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["canonical_id", "version", "content_hash", "token_count", "role", "source"],
+        "properties": {
+          "canonical_id": { "type": "string" },
+          "version": { "type": "string" },
+          "content_hash": { "type": "string" },
+          "token_count": { "type": "integer", "minimum": 0 },
+          "role": { "type": "string", "enum": ["floor", "interpretive", "predictive", "discovery", "holistic"] },
+          "source": { "type": "string", "enum": ["rule_composer", "bundle_augmenter"] }
+        }
+      }
+    },
+    "total_tokens": { "type": "integer", "minimum": 0 },
+    "bundle_hash": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1.0" },
+    "retrieved_context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tool_name", "tool_invocation_params", "tool_bundle_id", "token_count"],
+        "properties": {
+          "tool_name": { "type": "string" },
+          "tool_invocation_params": { "type": "object" },
+          "tool_bundle_id": { "type": "string", "format": "uuid" },
+          "token_count": { "type": "integer", "minimum": 0 },
+          "validator_votes": { "type": "object" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

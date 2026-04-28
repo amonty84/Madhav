@@ -22,12 +22,14 @@ CREATE TABLE IF NOT EXISTS rag_chunks (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- RAG embeddings: Voyage-3-large embeddings for each chunk
+-- RAG embeddings: Vertex AI text-multilingual-embedding-002 embeddings for each chunk
+-- NOTE: Original schema used vector(1024) for Voyage-3-large. Migration 010 alters this
+-- to vector(768) for Vertex AI text-multilingual-embedding-002. Applied after B.3.
 CREATE TABLE IF NOT EXISTS rag_embeddings (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     chunk_id TEXT NOT NULL REFERENCES rag_chunks(chunk_id) ON DELETE CASCADE,
-    model TEXT NOT NULL,             -- voyage-3-large|openai-fallback
-    embedding vector(1024),
+    model TEXT NOT NULL,             -- vertex-text-multilingual-embedding-002|openai-fallback
+    embedding vector(1024),          -- dimension updated to 768 in migration 010
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -108,7 +110,7 @@ CREATE INDEX IF NOT EXISTS idx_rag_graph_edges_target ON rag_graph_edges(target_
 CREATE INDEX IF NOT EXISTS idx_rag_graph_edges_type ON rag_graph_edges(edge_type);
 CREATE INDEX IF NOT EXISTS idx_rag_chunks_stale ON rag_chunks(is_stale);
 
--- HNSW index for vector similarity search (Voyage-3-large = 1024 dims)
+-- HNSW index for vector similarity search (see migration 010 — updated to 768 dims for Vertex AI)
 CREATE INDEX IF NOT EXISTS idx_rag_embeddings_hnsw
     ON rag_embeddings
     USING hnsw (embedding vector_cosine_ops)

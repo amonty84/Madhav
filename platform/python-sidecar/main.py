@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 from routers import ephemeris, events, eclipses, retrogrades, sade_sati, jaimini, v7_additions
+from rag.routers.rag_retrieve import router as rag_retrieve_router
+from rag.routers.rag_router import router as rag_router_router
+from rag.routers.rag_synthesize import router as rag_synthesize_router
 
 load_dotenv()
 
@@ -30,6 +33,9 @@ app.include_router(retrogrades.router, prefix="/retrogrades", dependencies=[Depe
 app.include_router(sade_sati.router, prefix="/sade_sati", dependencies=[Depends(verify_api_key)])
 app.include_router(jaimini.router, prefix="/jaimini_drishti", dependencies=[Depends(verify_api_key)])
 app.include_router(v7_additions.router, prefix="/v7_additions", dependencies=[Depends(verify_api_key)])
+app.include_router(rag_retrieve_router, prefix="/rag", dependencies=[Depends(verify_api_key)])
+app.include_router(rag_router_router, prefix="/rag", dependencies=[Depends(verify_api_key)])
+app.include_router(rag_synthesize_router, prefix="/rag", dependencies=[Depends(verify_api_key)])
 
 
 @app.get("/health")

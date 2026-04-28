@@ -2,9 +2,9 @@
 artifact: GOVERNANCE_STACK_v1_0.md
 version: 1.0-updated-STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
 status: CURRENT (updated in-place; next version will be v2.0)
-session: 35 (created); FIX_SESSION_003; FIX_SESSION_003_deferred; GAP_RESOLUTION_SESSION; UCN_MERGE_SESSION + corpus_integrity_pass (2026-04-19); STEP_5_MACRO_PLAN_CLOSURE (2026-04-23); STEP_5A_PROJECT_ARCHITECTURE_REFRESH (2026-04-24); STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION (2026-04-24)
+session: 35 (created); FIX_SESSION_003; FIX_SESSION_003_deferred; GAP_RESOLUTION_SESSION; UCN_MERGE_SESSION + corpus_integrity_pass (2026-04-19); STEP_5_MACRO_PLAN_CLOSURE (2026-04-23); STEP_5A_PROJECT_ARCHITECTURE_REFRESH (2026-04-24); STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION (2026-04-24); Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3 (2026-04-26)
 date_closed: 2026-04-18
-date_updated: 2026-04-24 (STEP_7 closure — CANONICAL_ARTIFACTS_v1_0.md + three governance scripts + three templates + DISAGREEMENT_REGISTER produced; .geminirules + .gemini/project_state.md re-authored per ND.1 adapted parity; FILE_REGISTRY bumped to v1_3; ND.1 global status flipped `open` → `addressed`). Prior update: 2026-04-24 (STEP_5A closure — PROJECT_ARCHITECTURE_v2_2 CURRENT, v2.1 SUPERSEDED; FILE_REGISTRY bumped to v1_2). Prior: 2026-04-23 (STEP_5 closure — MP v2.0 CURRENT, MP v1.0 SUPERSEDED, MSR row corrected to MSR_v3_0, FILE_REGISTRY bumped to v1_1, governance-rebuild family registered)
+date_updated: 2026-04-26 (Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3 — Portal Build Tracker Session 3 of 3 COMPLETE; PORTAL_BUILD_TRACKER_PLAN_v0_1.md → IMPLEMENTED; all 28 ACs pass; 5 new build components + 4 stub pages implemented). Prior: 2026-04-24 (STEP_7 closure — CANONICAL_ARTIFACTS_v1_0.md + three governance scripts + three templates + DISAGREEMENT_REGISTER produced; .geminirules + .gemini/project_state.md re-authored per ND.1 adapted parity; FILE_REGISTRY bumped to v1_3; ND.1 global status flipped `open` → `addressed`). Prior: 2026-04-24 (STEP_5A closure — PROJECT_ARCHITECTURE_v2_2 CURRENT, v2.1 SUPERSEDED; FILE_REGISTRY bumped to v1_2). Prior: 2026-04-23 (STEP_5 closure — MP v2.0 CURRENT, MP v1.0 SUPERSEDED, MSR row corrected to MSR_v3_0, FILE_REGISTRY bumped to v1_1, governance-rebuild family registered)
 scope: "Project-wide governance stack: version registry, confidence ledger, known-gaps consolidation, change-control protocol"
 architecture_ref: "§G.9 Governance"
 ---
@@ -936,4 +936,60 @@ Step 15 → `completed`. STEP_LEDGER → `GOVERNANCE_CLOSED`. All 16 steps (Step
 
 ---
 
-*End of GOVERNANCE_STACK_v1_0.md — Session 35 — updated FIX_SESSION_003 — 2026-04-18 — updated GAP_RESOLUTION_SESSION — 2026-04-19 — updated STEP_5_MACRO_PLAN_CLOSURE — 2026-04-23 — updated STEP_5A_PROJECT_ARCHITECTURE_REFRESH — 2026-04-24 — updated STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION — 2026-04-24 — updated STEP_10_SESSION_LOG_SCHEMA — 2026-04-24 — updated STEP_11_LEARNING_LAYER_SCAFFOLD retro-logged at §12.5 — 2026-04-24 — updated STEP_12_ONGOING_HYGIENE_POLICIES (§13 + §14 index) — 2026-04-24 — updated STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX (§15 + §14 index refresh) — 2026-04-24 — updated STEP_13b_DRIFT_DETECTION_BASELINE_RERUN retro-logged at §16 (authoring moment STEP_13b_CLOSE_MACHINERY_FIX) — 2026-04-24 — updated STEP_13b_CLOSE_MACHINERY_FIX (§17 + §14 index refresh) — 2026-04-24 — updated STEP_14_SCHEMA_VALIDATION_RUN (§18 + §14 index refresh) — 2026-04-24 — updated STEP_15_GOVERNANCE_BASELINE_CLOSE (§19 + §14 index refresh) — 2026-04-24 — GOVERNANCE REBUILD CLOSED*
+### §20 — Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 (2026-04-26) — governance_aside
+
+Interstitial governance aside: Portal Build Tracker Session 1 of 3. No governance step incremented; red_team_counter unchanged (governance_aside).
+
+**Deliverables:** serialize_build_state.py v0.2.0; build_state schema v0.2; session_detail + phase_detail schemas (new); COWORK_LEDGER.md (canonical_id COWORK_LEDGER, 5 bootstrap entries); SESSION_CLOSE_TEMPLATE extended (native_overrides, halts_encountered); SESSION_LOG_SCHEMA §1.5 enum; ONGOING_HYGIENE_POLICIES §O extended + §P added; CANONICAL_ARTIFACTS COWORK_LEDGER row; FILE_REGISTRY v1.6 → v1.7. GCS: 52 session shards + build-state.json uploaded. All 15 ACs pass.
+
+*End of §20 — Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 amendment log.*
+
+---
+
+### §21 — Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2 (2026-04-26) — governance_aside
+
+Interstitial governance aside: Portal Build Tracker Session 2 of 3. No governance step incremented; red_team_counter unchanged (governance_aside).
+
+**Deliverables:** 26 new portal source files — data layer (types.ts, dataSource.ts, format.ts, parsers/sessionClass.ts); 10 components (BuildHeader, CockpitGrid, PhaseGrid, SessionTable, SessionDetail, RegistryTable, BriefPanel, RefreshButton, StatusPill, ScriptVerdictBadge); /build route group (layout [auth gate], cockpit, plan, plan/[phase_id], sessions, sessions/[session_id], registry, error, 4 Session-3 stubs). ACs AC.9–AC.13/AC.18–AC.20/AC.28 all pass. Build-state GCS updated (generated_by_session=Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2). PORTAL_BUILD_TRACKER_PLAN_v0_1.md §19.2 appended. FILE_REGISTRY_v1_7.md portal stub row replaced with full 26-file tree. CURRENT_STATE_v1_0.md last_session_id rotated to Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2.
+
+*End of §21 — Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2 amendment log.*
+
+---
+
+*End of GOVERNANCE_STACK_v1_0.md — Session 35 — updated FIX_SESSION_003 — 2026-04-18 — updated GAP_RESOLUTION_SESSION — 2026-04-19 — updated STEP_5_MACRO_PLAN_CLOSURE — 2026-04-23 — updated STEP_5A_PROJECT_ARCHITECTURE_REFRESH — 2026-04-24 — updated STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION — 2026-04-24 — updated STEP_10_SESSION_LOG_SCHEMA — 2026-04-24 — updated STEP_11_LEARNING_LAYER_SCAFFOLD retro-logged at §12.5 — 2026-04-24 — updated STEP_12_ONGOING_HYGIENE_POLICIES (§13 + §14 index) — 2026-04-24 — updated STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX (§15 + §14 index refresh) — 2026-04-24 — updated STEP_13b_DRIFT_DETECTION_BASELINE_RERUN retro-logged at §16 (authoring moment STEP_13b_CLOSE_MACHINERY_FIX) — 2026-04-24 — updated STEP_13b_CLOSE_MACHINERY_FIX (§17 + §14 index refresh) — 2026-04-24 — updated STEP_14_SCHEMA_VALIDATION_RUN (§18 + §14 index refresh) — 2026-04-24 — updated STEP_15_GOVERNANCE_BASELINE_CLOSE (§19 + §14 index refresh) — 2026-04-24 — GOVERNANCE REBUILD CLOSED — updated Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 (§20) — 2026-04-26 — updated Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2 (§21) — 2026-04-26*
+
+---
+
+### §23 — Madhav_M2A_Exec_7 (2026-04-26) — M2 execution, B.4 Task 3 SUPPORTS sub-task
+
+M2 execution session. red_team_counter incremented 1 → 2 (cadence fires at counter=3, i.e. Exec_8 close).
+
+**B.4 Task 3 SUPPORTS sub-task COMPLETE.** Two-pass infrastructure built end-to-end: `rag/ledger.py` minimal impl (`append_two_pass_event` + `read_events_for_batch` against new `two_pass_events_schema_v0_1.json`); `rag/reconcilers/{cgm_supports_reconciler,run_supports_pipeline,persist_from_reconciled}.py`; `rag/graph.persist_supports_edges` helper; 8/8 ledger smoke tests pass. `cgm_supports_edges_v1_0.md` prompt authored (83KB; 9-batch strategy with embedded 495-signal MSR + 44-section UCN + per-L3 citation index) and registered v1.0; `cgm_edge_proposals` registered at v1.1 (residual cleanup); placeholder hash also corrected. 9 Gemini batches reconciled: 216 proposed → 101 accepted → 97 unique persisted (4 cross-batch duplicates collapsed by edge_id sha256; semantically correct dedup). 17 new `ucn_section` nodes; 0 dangling edges. Graph totals at close: 1752 nodes / 3911 edges / 97 SUPPORTS.
+
+**DIS.001 / DIS.class.l3_zero_supports OPENED + RESOLVED in-session.** AC.8 GATE FAILURE for HEALTH_LONGEVITY (3 proposed → 0 accepted) + RELATIONSHIPS (15 proposed → 0 accepted): underlying L3 reports lack formal `(UCN §X.Y)` citations; reconciler L3 chain check correctly rejects. Native chose Option B (accept gap as data) over Option A (re-run with relaxed sub-prompt). DISAGREEMENT_REGISTER §1 amended with new class; §4 entry DIS.001 carries full evidence + resolution + falsifier-promotion link to RED_TEAM KR-4. KR-4 NEW (L3 v1.2 UCN-citation gap) added to RED_TEAM_M2A_v1_0.md.
+
+**FILE_REGISTRY v1.7 → v1.8** at §9.10 (Exec_7 deliverables). CANONICAL_ARTIFACTS FILE_REGISTRY row rotated to v1.8. CURRENT_STATE rotated. SESSION_LOG appended atomically.
+
+**Governance verdicts:** drift_detector exit=2 (58 pre-existing residuals; no Exec_7 regression); schema_validator exit=2 (50 pre-existing); mirror_enforcer exit=0 (8/8 pairs clean). build_state.json re-uploaded to GCS (HTTP/2 200 + `access-control-allow-origin: *`).
+
+*End of §23 — Madhav_M2A_Exec_7 amendment log.*
+
+---
+
+### §24 — Madhav_M2A_Exec_8 (2026-04-26) — M2 execution, B.4 CONTRADICTS sub-task + B.4 phase final close
+
+M2 execution session. red_team_counter 2 → 3 → cadence FIRED → reset to 0 (RT.M2B.1–6 + KR-1/2/3/4 all PASS; RED_TEAM_M2B_PHASE_B4_v1_0.md emitted).
+
+**B.4 Task 3 CONTRADICTS sub-task COMPLETE (inverted two-pass: Claude→Gemini).** Three-batch hypothesis scan: Batch A (P1 layer-bleed, 10 hypotheses) — all 10 rejected HIGH by Gemini (quantitative Bala metric terms are L1-valid, not L2 interpretations; important corpus insight). Batch B (P6 UVC-conflict, keyword heuristic) — 0 hypotheses found (accepted-as-data; full semantic scan deferred to B.5). Batch C (Rahu-as-PK dual-karaka, 5 hypotheses) — 4 ACCEPTED HIGH (genuine karaka-system divergence: 7-karaka Mars=PK vs 8-karaka Rahu=PK; corpus uses both without explicit lock), 1 REJECTED HIGH (GK same in both systems). 4 CONTRADICTS edges persisted: SIG.MSR.226/320/321/432 → KARAKA.DUAL_SYSTEM_DIVERGENCE. Ledger: +30 events (total 462 in two_pass_events.jsonl). DB totals: 1753 nodes / 3915 edges / 4 CONTRADICTS / 97 SUPPORTS.
+
+**Schema extension + tooling.** `two_pass_events_schema_v0_1.json` extended in-place (additive only; 3→6 event_types; `hypothesis_id`, `conflict_type`, `claude_severity_prior` fields added). `p6_uvc_consistency.py` PARTIAL_IMPL stub registered in STALENESS_REGISTER §4. `claude/cgm_contradicts_edges_v1_0.md` prompt registered in INDEX.json v1.0.
+
+**UI fix.** `platform/src/components/build/PlanTree.tsx` — React render-phase side-effect bug: `router.replace()` moved out of `setExpanded` updater into callback body; `expanded` added to `useCallback` dependency array.
+
+**B.4 phase final close COMPLETE.** All 20 ACs (AC.0–AC.19) satisfied. B.4 eligible for close per RED_TEAM_M2B_PHASE_B4_v1_0.md.
+
+**FILE_REGISTRY v1.8 → v1.9** at §9.11 (Exec_8 deliverables). CANONICAL_ARTIFACTS FILE_REGISTRY row rotated to v1.9. CURRENT_STATE rotated (last_session → Exec_8, sub_phase → "B.4 complete", red_team_counter → 0, next → Exec_9/B.5). SESSION_LOG appended atomically.
+
+**Governance verdicts:** drift_detector exit=2 (62 findings; pre-existing; no Exec_8 regression); schema_validator exit=2 (54 violations; pre-existing heading/session_id mismatches; SESSION_LOG "Body" H2 heading corrected); mirror_enforcer exit=0 (8/8 pairs clean). build_state.json re-uploaded to GCS.
+
+*End of §24 — Madhav_M2A_Exec_8 amendment log.*

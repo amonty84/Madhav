@@ -9,6 +9,9 @@ date: 2026-04-18
 supersedes: "Specific sections of FORENSIC_ASTROLOGICAL_DATA_v6.0 per V8_0_RECONCILIATION_REPORT §2"
 parent_authoritative_source: JHORA_TRANSCRIPTION_v8_0_SOURCE.md
 scope: "Override layer for FORENSIC v6.0 values that disagree with Jagannatha Hora authoritative data. SUPERSEDED — all corrections now integrated into FORENSIC_ASTROLOGICAL_DATA_v8_0.md."
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L1"
 ---
 
 <!-- ⚠️ SUPERSEDED: All corrections from this supplement have been integrated into FORENSIC_ASTROLOGICAL_DATA_v8_0.md. Use v8.0 as the canonical L1 source. -->

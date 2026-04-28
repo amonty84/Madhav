@@ -12,6 +12,9 @@ supersedes: CDLM_v1_0.md
 corrections_applied: 9
 correction_basis: "FORENSIC_ASTROLOGICAL_DATA_v8_0.md — Special Lagna positions corrected (Hora Lagna→3H Gemini, Ghati→9H Sagittarius, Varnada→4H Cancer, Shree→7H Libra); Saham Roga confirmed in 2H Taurus (NOT 7H Libra)"
 v1_2_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
+layer: "L2.5"
+expose_to_chat: true
+native_id: "abhisek"
 ---
 
 # CDLM_v1_1 — Cross-Domain Linkage Matrix

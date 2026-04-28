@@ -102,7 +102,7 @@ export async function replaceConversationMessages(params: {
     await query(
       'INSERT INTO messages (id, conversation_id, role, content, tool_calls) VALUES ($1,$2,$3,$4,$5)',
       [
-        m.id,
+        crypto.randomUUID(),
         params.conversationId,
         m.role === 'assistant' || m.role === 'user' ? m.role : 'assistant',
         text || null,

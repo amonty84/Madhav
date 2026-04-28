@@ -7,6 +7,8 @@ import {
   listConversations,
   loadConversationMessages,
 } from '@/lib/conversations'
+import { configService } from '@/lib/config/index'
+import type { AudienceTier } from '@/lib/prompts/types'
 
 export default async function ConsumeConversationPage({
   params,
@@ -50,6 +52,10 @@ export default async function ConsumeConversationPage({
 
   const chartMeta = [chart.birth_date, chart.birth_place].filter(Boolean).join(' · ')
 
+  const pipelineEnabled = configService.getFlag('NEW_QUERY_PIPELINE_ENABLED')
+  const panelModeEnabled = configService.getFlag('PANEL_MODE_ENABLED')
+  const audienceTier: AudienceTier = isSuperAdmin ? 'super_admin' : 'client'
+
   return (
     <ConsumeChat
       chartId={id}
@@ -66,6 +72,9 @@ export default async function ConsumeConversationPage({
       }))}
       currentConversationId={conversationId}
       initialMessages={messages}
+      pipelineEnabled={pipelineEnabled}
+      panelModeEnabled={panelModeEnabled}
+      audienceTier={audienceTier}
     />
   )
 }

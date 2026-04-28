@@ -1,0 +1,25 @@
+{
+  "produced_by_session": "Madhav_M2A_Exec_7",
+  "produced_at": "2026-04-26T14:54:55.779403+00:00",
+  "description": "Maps UCN stable section IDs to rag_graph_nodes node_id. node_id == stable_id; chunk_id NULL.",
+  "mappings": {
+    "UCN.SEC.IV.3": "UCN.SEC.IV.3",
+    "UCN.SEC.VII.4": "UCN.SEC.VII.4",
+    "UCN.SEC.IV.4": "UCN.SEC.IV.4",
+    "UCN.SEC.VIII.2": "UCN.SEC.VIII.2",
+    "UCN.SEC.IX.2": "UCN.SEC.IX.2",
+    "UCN.SEC.IV.5": "UCN.SEC.IV.5",
+    "UCN.SEC.II.2": "UCN.SEC.II.2",
+    "UCN.SEC.VIII.4": "UCN.SEC.VIII.4",
+    "UCN.SEC.V.4": "UCN.SEC.V.4",
+    "UCN.SEC.III.4": "UCN.SEC.III.4",
+    "UCN.SEC.IV.1": "UCN.SEC.IV.1",
+    "UCN.SEC.IV.2": "UCN.SEC.IV.2",
+    "UCN.SEC.V.7": "UCN.SEC.V.7",
+    "UCN.SEC.VI.3": "UCN.SEC.VI.3",
+    "UCN.SEC.V.5": "UCN.SEC.V.5",
+    "UCN.SEC.VI.4": "UCN.SEC.VI.4",
+    "UCN.SEC.VI.1": "UCN.SEC.VI.1"
+  },
+  "unique_ucn_targets": 17
+}

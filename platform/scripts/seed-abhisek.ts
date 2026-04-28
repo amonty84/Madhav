@@ -1,34 +1,63 @@
 /**
  * Seed script: create Abhisek Mohanty's chart and upload existing pyramid documents.
+ * Migrated from Supabase to GCP stack (Firebase Auth + Cloud SQL + GCS) on 2026-04-28.
  *
  * Prerequisites:
- *   1. Supabase project deployed with 001_initial_schema.sql applied
- *   2. chart-documents Storage bucket created (private)
- *   3. Abhisek signed up at SUPER_ADMIN_EMAIL so his profile has role='super_admin'
- *   4. .env.local populated with real keys
+ *   1. Cloud SQL Auth Proxy running locally: DATABASE_URL set in .env.local
+ *   2. GCS bucket created (chart-documents or equivalent)
+ *   3. FIREBASE_ADMIN_CREDENTIALS set in .env.local
+ *   4. SUPER_ADMIN_EMAIL set in .env.local
  *
  * Run:
  *   cd platform && npx tsx scripts/seed-abhisek.ts
  */
 
-import { createClient } from '@supabase/supabase-js'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
 import * as dotenv from 'dotenv'
+import { Pool } from 'pg'
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') })
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
+// ── DB connection (Cloud SQL via DATABASE_URL) ────────────────────────────────
 
-if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
-  console.error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local')
-  process.exit(1)
+const pool = new Pool({ connectionString: process.env.DATABASE_URL! })
+
+async function dbQuery<T extends Record<string, unknown> = Record<string, unknown>>(
+  sql: string,
+  params?: unknown[]
+): Promise<T[]> {
+  const { rows } = await pool.query(sql, params)
+  return rows as T[]
 }
 
-const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
-  auth: { persistSession: false, autoRefreshToken: false },
-})
+// ── Firebase Admin ────────────────────────────────────────────────────────────
+
+async function initFirebaseAuth() {
+  const { initializeApp, getApps, cert } = await import('firebase-admin/app')
+  const { getAuth } = await import('firebase-admin/auth')
+
+  let serviceAccount: object = {}
+  try {
+    serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_CREDENTIALS ?? '{}')
+  } catch {
+    throw new Error('FIREBASE_ADMIN_CREDENTIALS is not valid JSON')
+  }
+
+  const app =
+    getApps().length > 0
+      ? getApps()[0]
+      : initializeApp({ credential: cert(serviceAccount) })
+
+  return getAuth(app)
+}
+
+// ── GCS client ────────────────────────────────────────────────────────────────
+
+async function initGCS() {
+  const { Storage } = await import('@google-cloud/storage')
+  return new Storage()
+}
 
 // ── Chart data ────────────────────────────────────────────────────────────────
 
@@ -45,48 +74,18 @@ const CHART = {
 
 // ── Document inventory ────────────────────────────────────────────────────────
 // Map: { local file path (relative to project root) → { layer, name } }
-// Adjust paths to match where the markdown files actually live.
 
-const DOCUMENT_MAP: Array<{
-  localPath: string
-  layer: string
-  name: string
-}> = [
+const DOCUMENT_MAP: Array<{ localPath: string; layer: string; name: string }> = [
   // ── L1 — Facts Layer ────────────────────────────────────────────────────────
   {
-    localPath: '../01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v6.0_ABHISEK_MOHANTY.md',
+    localPath: '../01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md',  // v8.0 current (CANONICAL)
     layer: 'L1',
     name: 'forensic_data',
-  },
-  {
-    localPath: '../01_FACTS_LAYER/FORENSIC_DATA_v7_0_SUPPLEMENT.md',
-    layer: 'L1',
-    name: 'forensic_data_v7_supplement',
   },
   {
     localPath: '../01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md',
     layer: 'L1',
     name: 'life_event_log',
-  },
-  {
-    localPath: '../01_FACTS_LAYER/EVENT_CHART_STATES_v1_0.md',
-    layer: 'L1',
-    name: 'event_chart_states',
-  },
-  {
-    localPath: '../01_FACTS_LAYER/CGP_AUDIT_v1_0.md',
-    layer: 'L1',
-    name: 'cgp_audit',
-  },
-  {
-    localPath: '../01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md',
-    layer: 'L1',
-    name: 'sade_sati_cycles',
-  },
-  {
-    localPath: '../01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md',
-    layer: 'L1',
-    name: 'external_computation_spec',
   },
 
   // ── L2 — Analytical Layer ───────────────────────────────────────────────────
@@ -123,27 +122,27 @@ const DOCUMENT_MAP: Array<{
 
   // ── L2.5 — Holistic Synthesis Layer ─────────────────────────────────────────
   {
-    localPath: '../025_HOLISTIC_SYNTHESIS/CGM_v1_0.md',
+    localPath: '../025_HOLISTIC_SYNTHESIS/CGM_v9_0.md',  // v9.0 current (CANONICAL)
     layer: 'L2.5',
     name: 'cgm',
   },
   {
-    localPath: '../025_HOLISTIC_SYNTHESIS/MSR_v1_0.md',
+    localPath: '../025_HOLISTIC_SYNTHESIS/MSR_v3_0.md',  // v3.0 current (CANONICAL)
     layer: 'L2.5',
     name: 'msr',
   },
   {
-    localPath: '../025_HOLISTIC_SYNTHESIS/CDLM_v1_0.md',
+    localPath: '../025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md',
     layer: 'L2.5',
     name: 'cdlm',
   },
   {
-    localPath: '../025_HOLISTIC_SYNTHESIS/RM_v1_0.md',
+    localPath: '../025_HOLISTIC_SYNTHESIS/RM_v2_0.md',
     layer: 'L2.5',
     name: 'rm',
   },
   {
-    localPath: '../025_HOLISTIC_SYNTHESIS/UCN_v1_0.md',
+    localPath: '../025_HOLISTIC_SYNTHESIS/UCN_v4_0.md',  // v4.0 current (CANONICAL)
     layer: 'L2.5',
     name: 'ucn',
   },
@@ -156,66 +155,73 @@ const DOCUMENT_MAP: Array<{
   },
 ]
 
+// ── GCS bucket name ───────────────────────────────────────────────────────────
+
+const GCS_BUCKET = process.env.GCS_CHART_DOCUMENTS_BUCKET ?? 'chart-documents'
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-async function getAstrologerClientId(): Promise<string> {
+async function getOrCreateAstrologerUid(): Promise<string> {
   const superAdminEmail = process.env.SUPER_ADMIN_EMAIL
   if (!superAdminEmail) throw new Error('SUPER_ADMIN_EMAIL not set')
 
-  const { data: users, error } = await supabase.auth.admin.listUsers()
-  if (error) throw new Error(`Failed to list users: ${error.message}`)
+  const auth = await initFirebaseAuth()
 
-  let user = users.users.find(u => u.email === superAdminEmail)
-
-  if (!user) {
-    console.log(`  Creating auth user for ${superAdminEmail}…`)
-    const { data: created, error: createError } = await supabase.auth.admin.createUser({
+  let uid: string
+  try {
+    const user = await auth.getUserByEmail(superAdminEmail)
+    uid = user.uid
+    console.log(`✓ Firebase Auth user found: ${uid}`)
+  } catch {
+    console.log(`  Creating Firebase Auth user for ${superAdminEmail}…`)
+    const created = await auth.createUser({
       email: superAdminEmail,
-      email_confirm: true,
-      user_metadata: { full_name: 'Abhisek Mohanty' },
+      emailVerified: true,
+      displayName: 'Abhisek Mohanty',
     })
-    if (createError || !created.user) {
-      throw new Error(`Failed to create super-admin user: ${createError?.message}`)
-    }
-    user = created.user
-    console.log(`  ✓ Auth user created: ${user.id}`)
+    uid = created.uid
+    console.log(`  ✓ Firebase Auth user created: ${uid}`)
   }
 
-  // Upsert profile with role='super_admin' — handles both first-run and re-run.
-  // The trigger may assign 'client' role if app.super_admin_email isn't set,
-  // so we always force the correct role here.
-  const { error: profileError } = await supabase
-    .from('profiles')
-    .upsert({ id: user.id, role: 'super_admin', name: 'Abhisek Mohanty' }, { onConflict: 'id' })
-
-  if (profileError) throw new Error(`Failed to upsert super-admin profile: ${profileError.message}`)
-
-  console.log(`✓ Astrologer profile ready: ${user.id}`)
-  return user.id
+  // Upsert profile with role='super_admin'
+  await dbQuery(
+    `INSERT INTO profiles (id, role, name)
+     VALUES ($1, 'super_admin', 'Abhisek Mohanty')
+     ON CONFLICT (id) DO UPDATE SET role='super_admin', name='Abhisek Mohanty'`,
+    [uid]
+  )
+  console.log(`✓ Astrologer profile ready: ${uid}`)
+  return uid
 }
 
 async function createOrGetChart(clientId: string): Promise<string> {
-  // Check if chart already exists
-  const { data: existing } = await supabase
-    .from('charts')
-    .select('id')
-    .eq('client_id', clientId)
-    .eq('name', CHART.name)
-    .single()
+  const existing = await dbQuery<{ id: string }>(
+    `SELECT id FROM charts WHERE client_id=$1 AND name=$2 LIMIT 1`,
+    [clientId, CHART.name]
+  )
 
-  if (existing) {
-    console.log(`✓ Chart already exists: ${existing.id}`)
-    return existing.id
+  if (existing.length > 0) {
+    console.log(`✓ Chart already exists: ${existing[0].id}`)
+    return existing[0].id
   }
 
-  const { data: chart, error } = await supabase
-    .from('charts')
-    .insert({ ...CHART, client_id: clientId })
-    .select('id')
-    .single()
-
-  if (error || !chart) throw new Error(`Failed to create chart: ${error?.message}`)
-  console.log(`✓ Created chart: ${chart.id}`)
+  const created = await dbQuery<{ id: string }>(
+    `INSERT INTO charts (client_id, name, birth_date, birth_time, birth_place, birth_lat, birth_lng, ayanamsa, house_system)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,
+    [
+      clientId,
+      CHART.name,
+      CHART.birth_date,
+      CHART.birth_time,
+      CHART.birth_place,
+      CHART.birth_lat,
+      CHART.birth_lng,
+      CHART.ayanamsa,
+      CHART.house_system,
+    ]
+  )
+  const chartId = created[0].id
+  console.log(`✓ Created chart: ${chartId}`)
 
   // Create pyramid_layers stubs
   const layers = [
@@ -226,12 +232,15 @@ async function createOrGetChart(clientId: string): Promise<string> {
     { layer: 'L3', sublayer: 'domain_reports' },
     { layer: 'L4', sublayer: 'query_interface' },
   ]
-  await supabase.from('pyramid_layers').insert(
-    layers.map(l => ({ chart_id: chart.id, ...l }))
-  )
+  for (const l of layers) {
+    await dbQuery(
+      `INSERT INTO pyramid_layers (chart_id, layer, sublayer, status)
+       VALUES ($1,$2,$3,'not_started') ON CONFLICT DO NOTHING`,
+      [chartId, l.layer, l.sublayer]
+    )
+  }
   console.log('✓ Pyramid layers created')
-
-  return chart.id
+  return chartId
 }
 
 async function uploadDocument(
@@ -246,41 +255,42 @@ async function uploadDocument(
     return
   }
 
-  const content = fs.readFileSync(resolved, 'utf-8')
-  const storagePath = `charts/${chartId}/${layer}/${name}_v1.0.md`
-
-  // Check if document already exists
-  const { data: existing } = await supabase
-    .from('documents')
-    .select('id')
-    .eq('chart_id', chartId)
-    .eq('name', name)
-    .single()
-
-  if (existing) {
+  // Check if document already exists in DB
+  const existing = await dbQuery<{ id: string }>(
+    `SELECT id FROM documents WHERE chart_id=$1 AND name=$2 LIMIT 1`,
+    [chartId, name]
+  )
+  if (existing.length > 0) {
     console.log(`  ↩ Document already exists: ${name}`)
     return
   }
 
-  const { error: uploadError } = await supabase.storage
-    .from('chart-documents')
-    .upload(storagePath, content, { contentType: 'text/markdown', upsert: false })
+  const content = fs.readFileSync(resolved, 'utf-8')
+  const storagePath = `charts/${chartId}/${layer}/${name}_v1.0.md`
 
-  if (uploadError) {
-    console.warn(`  ⚠ Upload failed for ${name}: ${uploadError.message}`)
+  // Upload to GCS
+  const gcs = await initGCS()
+  try {
+    await gcs.bucket(GCS_BUCKET).file(storagePath).save(content, {
+      contentType: 'text/markdown',
+      metadata: { cacheControl: 'no-cache' },
+    })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.warn(`  ⚠ GCS upload failed for ${name}: ${message}`)
     return
   }
 
-  const { error: insertError } = await supabase.from('documents').insert({
-    chart_id: chartId,
-    layer,
-    name,
-    storage_path: storagePath,
-    version: '1.0',
-  })
-
-  if (insertError) {
-    console.warn(`  ⚠ DB insert failed for ${name}: ${insertError.message}`)
+  // Insert document record
+  try {
+    await dbQuery(
+      `INSERT INTO documents (chart_id, layer, name, storage_path, version)
+       VALUES ($1,$2,$3,$4,'1.0')`,
+      [chartId, layer, name, storagePath]
+    )
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.warn(`  ⚠ DB insert failed for ${name}: ${message}`)
     return
   }
 
@@ -290,9 +300,12 @@ async function uploadDocument(
 async function main() {
   console.log('── MARSYS-JIS Seed: Abhisek Mohanty ──')
 
-  const clientId = await getAstrologerClientId()
-  console.log(`Astrologer profile: ${clientId}`)
+  if (!process.env.DATABASE_URL) {
+    console.error('DATABASE_URL not set — start Cloud SQL Auth Proxy and set in .env.local')
+    process.exit(1)
+  }
 
+  const clientId = await getOrCreateAstrologerUid()
   const chartId = await createOrGetChart(clientId)
 
   console.log('\nUploading documents…')
@@ -300,6 +313,7 @@ async function main() {
     await uploadDocument(chartId, doc.localPath, doc.layer, doc.name)
   }
 
+  await pool.end()
   console.log('\n── Done ──')
   console.log(`Chart ID: ${chartId}`)
   console.log(`Visit: /clients/${chartId}/build`)

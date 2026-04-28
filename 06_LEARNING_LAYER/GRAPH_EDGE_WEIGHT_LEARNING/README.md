@@ -4,6 +4,9 @@ mechanism_id: LL.2
 mechanism_name: Graph edge weight learning
 version: 1.0
 status: STUB
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L6"
 produced_during: STEP_11_LEARNING_LAYER_SCAFFOLD (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
 activates_at: M4

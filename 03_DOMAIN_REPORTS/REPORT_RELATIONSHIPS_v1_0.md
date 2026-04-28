@@ -12,6 +12,9 @@ word_count_estimate: ~22000
 primary_msr_anchors: [MSR.391, MSR.404, MSR.396, MSR.338, MSR.330, MSR.336, MSR.340, MSR.253, MSR.343, MSR.411]
 primary_cdlm_row: D3
 organizing_principle: 7H Karmic Vortex as the relational axis — six-layer convergence producing maximum karmic density in the chart's relational quadrant; every relationship this native forms carries full-weight karmic significance across six simultaneous classical frameworks
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_RELATIONSHIPS_v1_0 — Relationships Domain Report

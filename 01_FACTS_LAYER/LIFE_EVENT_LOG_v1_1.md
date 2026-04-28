@@ -32,6 +32,8 @@ next_steps:
   - Session 3: Build EXTERNAL_COMPUTATION_SPEC.md requesting Jagannatha Hora exports to resolve `chart_state.transits_of_note` and `eclipses_within_6mo` for each event
   - Future (v1.1): Expand to 75-100 events; fill remaining gap register items
   - Future (v2.0): Build Pattern Library (RPT.LFE.01 in Deep Analysis v2.0) from retrodictive yes/partial events
+expose_to_chat: false
+native_id: "abhisek"
 ---
 
 > **SUPERSEDED 2026-04-24** by `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` at STEP_12_ONGOING_HYGIENE_POLICIES. Content retained for audit trail; do not consume as CURRENT. Closes GROUNDING_AUDIT GA.12 per ONGOING_HYGIENE_POLICIES §B.

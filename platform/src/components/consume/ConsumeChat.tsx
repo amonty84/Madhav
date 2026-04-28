@@ -39,6 +39,11 @@ import { classifyChatError } from '@/lib/chat/classify-error'
 import { ModelStylePicker } from '@/components/chat/ModelStylePicker'
 import { ShareButton } from '@/components/chat/ShareButton'
 import type { Report, ConversationModule } from '@/lib/db/types'
+import { StreamingAnswer } from './StreamingAnswer'
+import { ValidatorFailureView } from './ValidatorFailureView'
+import { DisclosureTierBadge } from '@/components/disclosure/DisclosureTierBadge'
+import { parseValidatorError } from '@/lib/ui/validator-error'
+import type { AudienceTier } from '@/lib/prompts/types'
 
 interface ConversationRow {
   id: string
@@ -57,6 +62,9 @@ interface Props {
   conversations: ConversationRow[]
   currentConversationId?: string
   initialMessages?: UIMessage[]
+  pipelineEnabled?: boolean
+  panelModeEnabled?: boolean
+  audienceTier?: AudienceTier
 }
 
 export function ConsumeChat({
@@ -67,11 +75,15 @@ export function ConsumeChat({
   conversations: initialConversations,
   currentConversationId,
   initialMessages,
+  pipelineEnabled = false,
+  panelModeEnabled = false,
+  audienceTier = 'client',
 }: Props) {
   const router = useRouter()
   const composerRef = useRef<ComposerHandle>(null)
 
   const [conversations, setConversations] = useState(initialConversations)
+  const [panelOptIn, setPanelOptIn] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
@@ -79,6 +91,11 @@ export function ConsumeChat({
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
 
   const { scrollRef, bottomRef, isAtBottom, scrollToBottom } = useScrollAnchor({ thresholdPx: 96 })
+
+  // Track structured validator failures separately from generic chat errors (flag-ON only).
+  const [validatorFailures, setValidatorFailures] = useState<
+    ReturnType<typeof parseValidatorError>
+  >(null)
 
   const { model, style, setModel, setStyle } = useChatPreferences(chartId)
 
@@ -124,6 +141,16 @@ export function ConsumeChat({
     },
   })
 
+  // Parse validator failure payloads from chat errors when pipeline is ON.
+  useEffect(() => {
+    if (!pipelineEnabled) return
+    if (session.error) {
+      setValidatorFailures(parseValidatorError(session.error))
+    } else {
+      setValidatorFailures(null)
+    }
+  }, [pipelineEnabled, session.error])
+
   const attachmentsApi = useAttachments()
 
   const handleSend = useCallback(
@@ -136,10 +163,12 @@ export function ConsumeChat({
           mediaType: a.mime,
           url: a.url!,
         }))
-      session.send(text, files)
+      session.send(text, files, panelOptIn ? { panel_opt_in: true } : undefined)
+      // Panel mode is not sticky — auto-reset after each submit.
+      setPanelOptIn(false)
       if (files.length > 0) attachmentsApi.clear()
     },
-    [session, attachmentsApi]
+    [session, attachmentsApi, panelOptIn]
   )
 
   const handleRegenerate = useCallback(() => {
@@ -255,7 +284,7 @@ export function ConsumeChat({
   const messagesEmpty = displayMessages.length === 0
   const lastMessage = displayMessages[displayMessages.length - 1]
   const showPendingAssistant =
-    session.status === 'submitted' &&
+    session.isStreaming &&
     !branches.isViewingArchived &&
     lastMessage?.role === 'user'
 
@@ -306,7 +335,7 @@ export function ConsumeChat({
       >
         <div
           ref={scrollRef}
-          className="relative flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
+          className="relative flex-1 min-h-0 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
           aria-live="polite"
         >
           {messagesEmpty ? (
@@ -315,6 +344,34 @@ export function ConsumeChat({
               reports={reports}
               onSuggest={handleSend}
             />
+          ) : pipelineEnabled ? (
+            <>
+              <div className="sticky top-0 z-10 mx-auto w-full max-w-3xl px-4 pt-2 pb-1 bg-background/80 backdrop-blur">
+                <DisclosureTierBadge tier={audienceTier} />
+              </div>
+              {validatorFailures ? (
+                <ValidatorFailureView
+                  failures={validatorFailures}
+                  onRetry={() => {
+                    const lastUser = displayMessages.filter(m => m.role === 'user').at(-1)
+                    const text = lastUser?.parts
+                      ?.filter((p): p is { type: 'text'; text: string } => p.type === 'text')
+                      .map(p => p.text)
+                      .join('') ?? ''
+                    if (text) handleSend(text)
+                  }}
+                />
+              ) : (
+                <>
+                  <StreamingAnswer
+                    messages={displayMessages}
+                    isStreaming={session.isStreaming && !branches.isViewingArchived}
+                    onStop={session.stop}
+                  />
+                  {showPendingAssistant && <PendingAssistantBubble />}
+                </>
+              )}
+            </>
           ) : (
             <>
               <AdaptiveMessageList
@@ -341,7 +398,7 @@ export function ConsumeChat({
           />
         </div>
 
-        {session.error && (() => {
+        {session.error && !validatorFailures && (() => {
           const err = classifyChatError(session.error)
           if (!err) return null
           return (
@@ -392,6 +449,20 @@ export function ConsumeChat({
               disabled={session.isStreaming || branches.isViewingArchived}
             />
           </div>
+          {panelModeEnabled && pipelineEnabled && (
+            <div className="mx-auto flex w-full max-w-3xl items-center gap-2 px-4 pb-1">
+              <input
+                type="checkbox"
+                id="panel-opt-in"
+                checked={panelOptIn}
+                onChange={e => setPanelOptIn(e.target.checked)}
+                className="h-3.5 w-3.5 rounded border-border bg-background text-primary focus:ring-ring"
+              />
+              <label htmlFor="panel-opt-in" className="text-xs text-muted-foreground cursor-pointer select-none">
+                Panel mode (3 independent models)
+              </label>
+            </div>
+          )}
           <Composer
             ref={composerRef}
             onSubmit={handleSend}

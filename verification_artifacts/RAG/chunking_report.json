@@ -1,52 +1,25 @@
 {
-  "produced_at": "2026-04-25T12:17:44.209362+00:00",
+  "produced_at": "2026-04-26T10:34:22.884822+00:00",
   "producer": "chunk.py — M2A-Exec Session 3 (Madhav_M2A_Exec_3)",
   "per_doctype_counts": {
     "msr_signal": 499,
     "ucn_section": 25,
     "cdlm_cell": 81,
     "l1_fact": 102,
-    "domain_report": 52
+    "domain_report": 52,
+    "cgm_node": 234
   },
   "token_distribution": {
-    "msr_signal": {
-      "min": 96,
-      "max": 800,
-      "p50": 542,
-      "p95": 800,
-      "count": 499
-    },
-    "ucn_section": {
-      "min": 298,
-      "max": 1500,
-      "p50": 744,
-      "p95": 1429,
-      "count": 25
-    },
-    "cdlm_cell": {
-      "min": 201,
-      "max": 400,
-      "p50": 253,
-      "p95": 332,
-      "count": 81
-    },
-    "l1_fact": {
-      "min": 10,
-      "max": 1000,
-      "p50": 283,
-      "p95": 848,
-      "count": 102
-    },
-    "domain_report": {
-      "min": 131,
-      "max": 1500,
-      "p50": 473,
-      "p95": 1306,
-      "count": 52
+    "cgm_node": {
+      "min": 59,
+      "max": 192,
+      "p50": 98,
+      "p95": 145,
+      "count": 234
     }
   },
-  "stale_chunk_count": 16,
-  "truncation_events": 60,
+  "stale_chunk_count": 0,
+  "truncation_events": 0,
   "p1_violations": 0,
-  "p5_warnings": 499
+  "p5_warnings": 0
 }

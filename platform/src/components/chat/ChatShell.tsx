@@ -55,7 +55,7 @@ export function ChatShell({
   return (
     <div
       className="relative flex h-[100dvh] w-full bg-background"
-      style={{ ['--composer-h' as string]: '128px' }}
+      style={{ ['--composer-h' as string]: '160px' }}
     >
       <aside
         aria-label="Conversations"

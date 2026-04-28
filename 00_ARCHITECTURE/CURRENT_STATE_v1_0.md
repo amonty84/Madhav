@@ -69,6 +69,34 @@ changelog:
       last_session_id → STEP_15_GOVERNANCE_BASELINE_CLOSE; next_session_objective →
       PHASE_B_PLAN v1.0.3 amendment. §3 narrative refreshed to reflect rebuild closed and M2
       active. §5.1 note updated to reflect §5.2 (CURRENT_STATE) now in force.
+  - v1.0 amended-in-place (2026-04-27, Madhav_PORTAL_QUALITY_v0_1 — portal quality governance aside):
+      last_session_id → Madhav_PORTAL_QUALITY_v0_1; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work).
+      red_team_counter unchanged at 1 (governance aside — does NOT increment per ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective remains Madhav_M2A_Exec_10.
+      Deliverables: 10 portal quality fixes across /build/* routes —
+      (1) PlanTree.tsx statusDot: completed→emerald, unknown→muted/15;
+      (2) PhaseGrid.tsx statusDot+statusBadge: completed→emerald;
+      (3) naturalSort helper in format.ts + applied in PhaseGrid + PlanTree + activity/page;
+      (4) derive.ts macroCompletionPercent: weights partial active macro via phaseCompletionPercent;
+      (5) health/page.tsx: tri-state healthy/unhealthy/unknown badge;
+      (6) serialize_build_state.py: workstreams derived from source (not hardcoded);
+      (7) serialize_build_state.py: cowork_ledger reversed to newest-first + M2 milestone
+          status rebuild after enrichment + _phase_id_sort_key comparison fix;
+      (8) parallel/page.tsx: .reverse() removed;
+      (9) FreshnessIndicator.tsx new component + layout.tsx footer;
+      (10) AcCriteriaList/JourneyStrip/plan-phase page status colors → emerald canonical.
+      lint=exit0, typecheck=0 new errors, naturalSort 6/6 PASS, serializer smoke exit0.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_10 close — B.5 Session 2 complete):
+      active_phase_plan_sub_phase → "B.5 Session 2 complete (pattern top-off: 21 total patterns; resonance walk: 13 total resonances; cluster annotation deferred to Exec_11 per Q3)";
+      last_session_id → Madhav_M2A_Exec_10; next_session_objective → Madhav_M2A_Exec_11
+      (B.5 Session 3 — Cluster + Contradictions + B.5 Close + Red-team).
+      Deliverables: PAT.012–PAT.022 (11 new patterns), RES.001–RES.009 (9 new resonances),
+      M2B amendment applied (cluster-defer), AC.4 pass_1_actor backfill, AC.4.5 PRED.004 backfill,
+      RESONANCE_REGISTER_v1_0 produced, prediction_ledger updated (PRED.011–014).
+      Governance: drift=exit2 (59), schema=exit2 (61), mirror=exit0.
+      build_state serialized + GCS upload 200. §3 narrative refreshed.
   - v1.0 amended-in-place (2026-04-25, Madhav_M2A_Exec close — B.1 Ingestion complete):
       active_phase_plan_sub_phase → "B.1 complete"; last_session_id → Madhav_M2A_Exec;
       next_session_objective → Madhav_M2A_Exec_2 (B.2 doc-types 1–3). B.1 deliverables:
@@ -101,6 +129,301 @@ changelog:
       b3_sanity_test.json: "Saturn 7th house Libra" → 2 distinct doc_types (AC-B3.4 ✓);
       p95=71.56ms Auth Proxy overhead (AC-B3.3 accepted Option A).
       mirror_enforcer.py exit 0 (8/8 pairs clean). §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_BUILD_TRACKER_INTEGRATION_v0_1 — governance aside):
+      last_session_id → Madhav_BUILD_TRACKER_INTEGRATION_v0_1; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (B.3.5 complete; governance aside, no M2 corpus work).
+      red_team_counter unchanged at 0 (governance aside — not a red-team session).
+      next_session_objective remains Madhav_M2A_Exec_6.
+      Deliverables: serialize_build_state.py, build_state.schema.json, build_state.example.json,
+      SESSION_CLOSE_TEMPLATE extended (§2 + §5 + §6 build_state_serialized block),
+      ONGOING_HYGIENE_POLICIES extended (§O policy + §J index row),
+      FILE_REGISTRY_v1_5 §9.7 added. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_5 close — B.3.5 CGM Rebuild + red-team):
+      active_phase_plan_sub_phase → "B.3.5 complete (Gemini two-pass pending native action)";
+      last_session_id → Madhav_M2A_Exec_5; next_session_objective → B.4 RAG Query Engine +
+      Gemini two-pass carry-forward. M2A Foundation Stack: 5/5 sessions done.
+      Deliverables: CGM_v9_0.md (234 nodes), FILE_REGISTRY_v1_5, cgm_edge_proposals_v1_0.md
+      (registered), RED_TEAM_M2A_v1_0.md (RT1–RT6 PASS, 2 known_residuals).
+      red_team_counter reset to 0 (cadence fired — RT1–RT6 all pass at B.3.5 close per
+      MACRO_PLAN §IS.8 cadence clause (a): every third session).
+      CANONICAL_ARTIFACTS CGM row rotated v2.0→v9.0; FILE_REGISTRY row rotated v1.4→v1.5.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_5 reconciler continuation — AC-B3.5.6 close):
+      active_phase_plan_sub_phase → "B.3.5 complete (AC-B3.5.6 SATISFIED)".
+      AC-B3.5.6 SATISFIED: 27 Gemini-proposed edges reconciled — 10 accepted as-is, 15 rejected
+      (P2 violations from PROMPT_P2_VIOLATION in cgm_edge_proposals_v1_0.md INPUT DATA), 11
+      corrected edges derived directly from FORENSIC_v8_0 §2.1. Net 21 accepted edges.
+      Reconciler artifact written: 035_DISCOVERY_LAYER/PROMPTS/gemini/responses/
+      2026-04-26_B3-5_batch1_reconciled.md. next_session_objective updated: carry-forward
+      priority is now cgm_edge_proposals_v1_1.md + edge ingestion (not Gemini prompt re-run).
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_BUILD_TRACKER_GCS_PERMISSIONS_FIX — governance aside):
+      last_session_id → Madhav_BUILD_TRACKER_GCS_PERMISSIONS_FIX; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work).
+      red_team_counter unchanged at 0 (governance aside — not a red-team session).
+      next_session_objective remains Madhav_M2A_Exec_6.
+      Deliverables: GCS bucket-level IAM allUsers:objectViewer granted; CORS set (origin:*);
+      ONGOING_HYGIENE_POLICIES §O extended with Operational Setup sub-block.
+      Public URL verified 200+CORS. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_BUILD_TRACKER_GCS_BOOTSTRAP — governance aside):
+      last_session_id → Madhav_BUILD_TRACKER_GCS_BOOTSTRAP; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work).
+      red_team_counter unchanged at 0 (governance aside — not a red-team session).
+      next_session_objective remains Madhav_M2A_Exec_6.
+      Deliverables: GCS bucket marsys-jis-build-state (asia-south1) created; build-state.json
+      uploaded via serializer; public-read object ACL set; canonical URI recorded in
+      ONGOING_HYGIENE_POLICIES §O Enforcement. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2 — Portal Build Tracker Session 2):
+      last_session_id → Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2; last_session_* block populated.
+      active_phase_plan_sub_phase updated to include Session 2 complete.
+      red_team_counter unchanged at 1 (governance_aside; does NOT increment).
+      next_session_objective updated: Session 2 complete; Session 3 still pending.
+      Deliverables: 26 new portal source files (lib/build/*, components/build/*, app/build/**).
+      TypeScript: 0 errors. GCS: build-state.json re-uploaded (generated_by_session: v0_2).
+      Governance: drift=exit2(59), schema=exit2(52), mirror=exit0. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3 — Portal Build Tracker Session 3 COMPLETE):
+      active_phase_plan_sub_phase updated: Session 3 of 3 complete.
+      last_session_id → Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3.
+      red_team_counter unchanged at 1 (governance_aside; does NOT increment).
+      next_session_objective → Madhav_M2A_Exec_7 exclusively (all portal sessions complete).
+      Deliverables: 5 new components (InterventionList, ActivityFeed, MirrorPairsTable, HealthTrend,
+      HealthSparkline); 4 stub pages converted to full implementations (/build/{interventions,parallel,
+      health,activity}). All 6 Session 3 ACs pass (AC.14–AC.17, AC.19 final, AC.24).
+      Governance: drift_detector exit=2 (58), schema_validator exit=2, mirror_enforcer exit=0.
+      PORTAL_BUILD_TRACKER_PLAN_v0_1.md flipped to IMPLEMENTED. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_COW_M2A_Exec_8_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_8_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_7's
+      "B.4 Task 3 SUPPORTS sub-task complete" state stands until Exec_8 actually runs).
+      red_team_counter unchanged at 2 (governance aside — does NOT increment per
+      ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective remains Madhav_M2A_Exec_8 (CONTRADICTS sub-task + B.4 phase final close).
+      Deliverables: CLAUDECODE_BRIEF_M2A_Exec_8.md authored at /CLAUDECODE_BRIEF.md (replacing
+      Exec_7 COMPLETE in-place). 19-AC structure mirroring Exec_7 precision pattern; CONTRADICTS-
+      specific scope (Claude→Gemini inverted ordering per §E.5; minimal p6_uvc_consistency.py
+      scope creep documented; new claude/ prompt path tier; ledger schema v0.1 extension decision
+      at AC.1; B.4 phase final close gates at AC.12; red-team cadence fire AC.13 — RT.M2B.1–RT.M2B.6
+      + KR-1/2/3/4 re-verify; close-side ACs.15–.19 standard governance + GCS upload + mirror updates).
+      Sibling reference cited throughout: M2B_EXEC_PLAN_v1_0.md §PLAN.B4_TASK3_CONTRADICTS_AND_CLOSE.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_8 close — B.4 CONTRADICTS + B.4 phase final close):
+      active_phase_plan_sub_phase → "B.4 complete (Tasks 1+2+3+4+5; full Task 3 SUPPORTS+CONTRADICTS); B.4 phase final close at Madhav_M2A_Exec_8".
+      active_phase_plan_status → active (M2 still active; B.5 next).
+      red_team_counter → 0 (cadence fired: counter 2→3→reset; RT.M2B.1–6 + KR-1/2/3/4 all PASS).
+      last_session_id → Madhav_M2A_Exec_8; last_session_* block populated; close_state → atomically_closed.
+      next_session_objective → Madhav_M2A_Exec_9 (B.5 Session 1 Setup + Pattern Mining).
+      next_session_proposed_cowork_thread_name → "Madhav M2A-Exec-9 — B.5 Session 1 (Setup + Pattern Mining)".
+      Deliverables: p6_uvc_consistency.py PARTIAL_IMPL stub; CONTRADICTS two-pass pipeline code;
+      two_pass_events_schema_v0_1.json extended; claude/ prompt + 2 Pass-1 batch files; 2 Gemini adjudication files;
+      +30 CONTRADICTS ledger events (total 462); 4 CONTRADICTS edges (DB: nodes=1753, edges=3915);
+      RED_TEAM_M2B_PHASE_B4_v1_0.md (all PASS); FILE_REGISTRY v1.9; PlanTree.tsx bugfix; CLAUDECODE_BRIEF COMPLETE.
+      Governance: drift=exit2, schema=exit2, mirror=exit0 (8/8 clean).
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_7 close — B.4 Task 3 SUPPORTS sub-task complete):
+      active_phase_plan_sub_phase → "B.4 Task 3 SUPPORTS sub-task complete (CONTRADICTS sub-task + B.4 phase final close deferred to Exec_8)";
+      red_team_counter → 2 (Exec_7 is M2 execution; increments toward cadence=3).
+      last_session_id → Madhav_M2A_Exec_7; last_session_* block populated; close_state → atomically_closed.
+      Deliverables (file): cgm_supports_edges_v1_0.md prompt (registered v1.0); cgm_edge_proposals v1.1
+      registered (residual cleanup); rag/ledger.py minimal impl (append_two_pass_event +
+      read_events_for_batch); two_pass_events_schema_v0_1.json; rag/reconcilers/cgm_supports_reconciler.py;
+      rag/reconcilers/persist_from_reconciled.py; rag/graph.persist_supports_edges helper;
+      cgm_supports_edges_manifest_v1_0.json (101 logical edges); ucn_section_node_map.json (17 unique UCN targets).
+      Deliverables (DB): 97 SUPPORTS edges in rag_graph_edges (101 logical accepted; 4 cross-batch
+      duplicates collapsed by ON CONFLICT DO UPDATE on edge_id sha256). 17 new ucn_section nodes
+      in rag_graph_nodes. Totals: rag_graph_nodes=1752 (+17), rag_graph_edges=3911 (+97).
+      9 Gemini batches run (216 proposed total): batch1 (CAREER) 11→8, batch2 (CHILDREN) 14→4,
+      batch3 (FINANCIAL) 28→7, batch4 (HEALTH) 3→0 [GATE FAIL], batch5 (PARENTS) 45→44,
+      batch6 (PSYCHOLOGY) 40→2, batch7 (RELATIONSHIPS) 15→0 [GATE FAIL], batch8 (SPIRITUAL) 32→8,
+      batch9 (TRAVEL) 28→28. Ledger: 432 two-pass events written to two_pass_events.jsonl.
+      DIS.001 / DIS.class.l3_zero_supports OPENED + RESOLVED in-session: HEALTH_LONGEVITY +
+      RELATIONSHIPS L3 reports lack formal UCN §X.Y citations; native chose Option B (accept
+      gap as data) over Option A (re-run with relaxed sub-prompt). Resolution recorded in
+      DISAGREEMENT_REGISTER_v1_0 §4.
+      Governance: drift_detector exit=2 (58 findings; pre-existing residuals — fingerprint
+      rotations + canonical_path CGM v9_0 vs v2_0 carry-over); schema_validator exit=2
+      (50 violations; pre-existing); mirror_enforcer exit=0 (8/8 pairs clean).
+      build_state serialized + GCS HTTP/2 200 + CORS preserved.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-26, Madhav_M2A_Exec_6 — B.4 Session 1 full close):
+      active_phase_plan_sub_phase → "B.4 Session 1 of 2 complete (Tasks 1+2+4+5; Task 3 SUPPORTS two-pass deferred to Exec_7)";
+      red_team_counter → 1 (Madhav_M2A_Exec_6 is M2 execution; increments toward cadence=3).
+      last_session_id → Madhav_M2A_Exec_6; last_session_* block populated; close_state → atomically_closed.
+      File/code deliverables: cgm_edges_manifest_v1_0.json (22 reconciled CGM edges);
+      CGM_v9_0.md frontmatter amended; FILE_REGISTRY v1.5 → v1.6; rag/graph.py (full B.4 impl);
+      chunk.py (doc-type 6 activated); CANONICAL_ARTIFACTS CGM row rotated; .gemini/project_state.md updated.
+      DB deliverables: 234 cgm_node chunks (total 993); 234 embeddings (total 977);
+      HNSW p95=96.8ms; rag_graph_nodes=1735, rag_graph_edges=3814; graph.json exported.
+      KR-1 CLOSED (stale=16), KR-2 CLOSED (all ceilings pass), KR-3 NEW (cgm_node NL rank by_design).
+      PLN.SATURN hops=2=496; deterministic edges=3792 >> baseline=957.
+      build_state serialized + GCS HTTP/2 200 + CORS access-control-allow-origin:*.
+      Governance: drift_detector exit=2, schema_validator exit=2, mirror_enforcer exit=0.
+      prior_narrative_correction: prior next_session_objective said "21 reconciled edges" —
+      correct count post-batch-2 is 22. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_9's
+      "B.5 Session 1 complete" state stands until Exec_10 actually runs).
+      red_team_counter unchanged at 1 (governance aside — does NOT increment per
+      ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective remains Madhav_M2A_Exec_10 (B.5 Session 2 — Pattern Expansion + Resonance Mapping)
+      with significantly elaborated objective text per the three native decisions Q1+Q2+Q3 captured at
+      this session's AskUserQuestion handshake. next_session_proposed_cowork_thread_name updated to
+      "Madhav M2A-Exec-11 — B.5 Session 3 (Cluster + Contradictions + B.5 Close + Red-team)" reflecting
+      cluster-defer per Q3.
+      Deliverables: CLAUDECODE_BRIEF_M2A_Exec_10.md authored at /CLAUDECODE_BRIEF.md (replacing Exec_9
+      COMPLETE in-place per CLAUDE.md §C item 0). 24-AC structure mirroring Exec_9 precision pattern;
+      three native decision points Q1 (Pass-1 actor revert to Gemini→Claude), Q2 (hard-halt on first
+      acceptance-rate anomaly), Q3 (cluster annotation defer to Exec_11) captured as governing brief
+      frontmatter and threaded through ACs; AC.4.5 NEW for PRED.004/PAT.005 prediction_ledger
+      reconciliation (Exec_9 records claim 4 entries; actual file has 3 — surfaced as Exec_9 close-state
+      inconsistency; default Path A backfill).
+      COWORK_LEDGER §3 entry 6 appended per ONGOING_HYGIENE_POLICIES §P.
+      Sibling reference cited throughout brief: M2B_EXEC_PLAN_v1_0.md §PLAN.B5_S2 (to be amended in-place
+      by Exec_10 per AC.3 for cluster defer).
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_COW_M2A_Exec_14_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_14_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_13's
+      "B.7 complete (Router + Plan Library)" state stands until Exec_14 actually runs).
+      red_team_counter unchanged at 1 (governance aside — does NOT increment per
+      ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective updated: CLAUDECODE_BRIEF now READY; trigger phrase added.
+      Deliverables: CLAUDECODE_BRIEF.md for Exec_14 authored at /CLAUDECODE_BRIEF.md (replacing
+      Exec_13 COMPLETE in-place per CLAUDE.md §C item 0). 16-AC structure (AC.0–AC.16); composite
+      endpoint design (classify_query → retrieve → synthesize in POST /rag/synthesize); SynthesisAnswer
+      schema (11 fields) + DerivationEntry schema (5 fields); P7 gate (3 interpretations when
+      significance ≥ 0.7); P5 gate (no out-of-bundle refs); synthesis_golden_v1_0.json spec
+      (10 queries: 5 P7-gated, 5 standard); CF.1 carried (claude-opus-4.7 pending);
+      CF.2 CLOSED (20/20 router eval). COWORK_LEDGER §3 entry 10 appended per ONGOING_HYGIENE_POLICIES §P.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-28, Madhav_PHASE11A_CUTOVER_STAGE1 — Phase 11A Pipeline Cutover Stage 1 governance aside):
+      last_session_id → Madhav_PHASE11A_CUTOVER_STAGE1; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; B.8 complete state stands).
+      red_team_counter unchanged at 2 (governance aside — does NOT increment per ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective unchanged → Madhav_M2A_Exec_15 (B.9).
+      Deliverables: NEW_QUERY_PIPELINE_ENABLED default flipped false→true; AUDIT_ENABLED default flipped false→true
+      in platform/src/lib/config/feature_flags.ts. platform/.env.example feature-flags section added documenting
+      revert paths. platform/tests/unit/config/index.test.ts updated: new default-true assertions for both flags +
+      env-var override test (MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false reverts to legacy). platform/scripts/cutover/
+      stage1_smoke.ts created (8-class smoke script: env guard + 8 HTTP queries + audit_log count + 2 audit-detail
+      fetches). cutover:stage1-smoke npm script registered in platform/package.json. CURRENT_STATE, SESSION_LOG, and
+      CLAUDE.md §F updated. Reversibility: legacy path reachable via MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-28, Madhav_M2A_Exec_14 close — B.8 Synthesis Layer complete):
+      active_phase_plan_sub_phase → "B.8 complete (Synthesis Layer)".
+      red_team_counter → 2 (Exec_14 is M2 execution session; no cadence fire at 2).
+      last_session_id → Madhav_M2A_Exec_14; last_session_* block populated; close_state → atomically_closed.
+      next_session_objective → Madhav_M2A_Exec_15 (B.9 per PHASE_B_PLAN_v1_0.md §B.9).
+      Deliverables: synthesis_v1_0.md (P5/P6/P7 enforcement; 600-word cap; 2 worked examples);
+      synthesize.py (ANTHROPIC_MODEL=claude-opus-4-6; temp=0.2; max_tokens=4096;
+      _load_synthesis_prompt + _build_bundle_context + synthesize + SynthesisError);
+      rag_synthesize.py (POST /rag/synthesize; composite classify→retrieve→synthesize; SynthesisError→422);
+      main.py v1.3 (rag_synthesize_router added); synthesizeClient.ts (DerivationEntry+SynthesisAnswer
+      interfaces; ragSynthesize() async function); synthesis_golden_v1_0.json (10 queries;
+      5 P7-gated all confirmed sig≥0.7; SQ.010 rephrased factual per CF.3 protocol);
+      synthesis_eval_v1_0.json (derivation=10/10, p7=10/10, p5=10/10 — all 100% PASS);
+      schemas.py v1.1 (DerivationEntry+SynthesisAnswer added); FILE_REGISTRY v1.15.
+      Spec gap documented: max_tokens 1500→4096 (P7 3-interpretation JSON exceeds 1500 tokens);
+      length constraint added to synthesis_v1_0.md (600-word answer_text cap).
+      CF.1 carry-forward: upgrade to claude-opus-4.7 when available.
+      build_state serialized + GCS upload.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_M2A_Exec_13 close — B.7 Router + Plan Library complete):
+      active_phase_plan_sub_phase → "B.7 complete (Router + Plan Library)".
+      red_team_counter → 1 (Exec_13 is M2 execution session; no cadence fire at 1).
+      last_session_id → Madhav_M2A_Exec_13; last_session_* block populated; close_state → atomically_closed.
+      next_session_objective → Madhav_M2A_Exec_14 (B.8 per PHASE_B_PLAN_v1_0.md §B.8).
+      Deliverables: schemas.py QueryPlan (7 fields, pydantic); plans_v1_0.md (5 plan types + exploratory fallback,
+      significance rubric, WCR enforcement rule, worked examples); router_v1_0.md (claude-opus-4-6; 7 examples;
+      disambiguation rules A+B added to fix interpretive_single vs multidomain + timing vs interpretive);
+      router.py (ANTHROPIC_MODEL=claude-opus-4-6, _load_router_prompt, classify_query with WCR enforcer + static
+      fallback); rag_router.py (POST /rag/route); main.py v1.2 (rag_router_router added); routerClient.ts
+      (QueryPlanType 6-value union, QueryPlan interface, ragRoute() function); router_eval_v1_0.json (20/20 PASS,
+      WCR invariant 15/15 PASS); FILE_REGISTRY v1.14.
+      AC.7: 20/20 (100% — exceeded the 18/20 gate). AC.8: 15/15 WCR invariant PASS.
+      CF.1 carry-forward: upgrade ANTHROPIC_MODEL to claude-opus-4.7 when available.
+      build_state serialized + GCS upload PASS.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_12's
+      "B.6 complete (M2B CLOSED)" state stands until Exec_13 actually runs).
+      red_team_counter unchanged at 0 (governance aside — does NOT increment per ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective updated: CLAUDECODE_BRIEF now READY; trigger phrase added.
+      Deliverables: CLAUDECODE_BRIEF.md for Exec_13 authored at /CLAUDECODE_BRIEF.md (replacing Exec_12
+      COMPLETE in-place per CLAUDE.md §C item 0). 15-AC structure (AC.0–AC.15); native decisions Q1
+      (claude-opus-4-6 router; CQ6 override; CF.1 carry-forward) + Q2 (no M2C_EXEC_PLAN) encoded as
+      governing brief frontmatter. Pre-flight assertions, QueryPlan schema (7 fields), 5 plan types +
+      exploratory fallback, significance rubric, WCR enforcer rule, CF.1/CF.2 carry-forwards specified.
+      COWORK_LEDGER §3 entry 9 appended per ONGOING_HYGIENE_POLICIES §P.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_11's
+      "B.5 complete" state stands until Exec_12 actually runs).
+      red_team_counter unchanged at 0 (governance aside — does NOT increment per ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective remains Madhav_M2A_Exec_12 (B.6 Hybrid Retrieval Library).
+      Deliverables: CLAUDECODE_BRIEF.md for Exec_12 authored at /CLAUDECODE_BRIEF.md (replacing Exec_11
+      COMPLETE in-place per CLAUDE.md §C item 0). 16-AC structure; native decisions Q1 (reconciler
+      pre-flight — run_pattern_pipeline.py DR-write fix before B.6 code) + Q2 (Vertex Ranking API
+      first, cross-encoder/ms-marco-MiniLM-L-6-v2 fallback) encoded as governing brief frontmatter.
+      retrieve.py with 5 modes (vector, bm25, graph_walk, hybrid_rrf, auto), RRF k=60, layer-balance
+      enforcer, Whole-Chart-Read invariant (B.11), cgm_node boost (+0.3 for chart-state queries),
+      reranker, FastAPI router + TypeScript shim, 20-query golden eval set, 11-probe red-team
+      (RT.M2B.1–6 + RT.B6.7–11), M2B milestone close gates. 5 carry-forwards from Exec_11
+      addressed in scope. COWORK_LEDGER §3 entry 8 appended per ONGOING_HYGIENE_POLICIES §P.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_M2A_Exec_12 close — B.6 Hybrid Retrieval Library complete + M2B milestone CLOSED):
+      active_phase_plan_sub_phase → "B.6 complete (M2B CLOSED)".
+      red_team_counter → 0 (cadence fired: §IS.8(b) M2B milestone close; counter 0→1→red-team fires→reset to 0).
+      last_session_id → Madhav_M2A_Exec_12; last_session_* block populated; close_state → atomically_closed.
+      next_session_objective → Madhav_M2A_Exec_13 (B.7 per PHASE_B_PLAN_v1_0.md).
+      Deliverables: run_pattern_pipeline.py DR-write fix (AC.0 backport; 8 unit tests pass);
+      retrieve.py 5-mode hybrid retrieval library (vector, bm25, graph_walk, hybrid_rrf, auto;
+      RRF k=60; layer-balance enforcer ≥1 per 5 doc types; WCR invariant; cgm_boost +0.3;
+      Vertex AI Ranking API probe + cross-encoder fallback); rag_retrieve.py FastAPI router
+      POST /rag/retrieve; main.py registered; retrieveClient.ts TypeScript shim;
+      retrieval_golden_v1_0.json (20 queries, 5 classes; v1.1 corrected — live DB-verified IDs);
+      run_eval.py extended (retrieval_eval mode); retrieval_eval_v1_0.json PASS
+      (precision@10=0.32, recall@10=0.8875, layer_balance=1.0, kr3_cgm_top5=1.0);
+      RED_TEAM_M2B_PHASE_B6_v1_0.md (11 probes all PASS); FILE_REGISTRY v1.13.
+      AC.8 live eval PASS (post-context-compaction continuation with Cloud SQL Auth Proxy;
+      golden set corrected to v1.1 — recycled IDs + wrong signal prefix fixed).
+      AC.15 GCS upload PASS (gsutil to gs://marsys-jis-build-state/build_state.json; HTTP 200).
+      mirror_updates: .geminirules + .gemini/project_state.md → B.6 complete (M2B CLOSED).
+      CLAUDECODE_BRIEF.md → COMPLETE. §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_M2A_Exec_11 close — B.5 Session 3 complete + B.5 phase final close):
+      active_phase_plan_sub_phase → "B.5 complete (22 patterns, ≥10 resonances, ≥5 contradictions, ≥10 clusters; B.5 phase final close at Madhav_M2A_Exec_11)".
+      red_team_counter → 0 (cadence fired: counter 2→3→reset; RT.M2B.1–6 + RT.B5.7–10 + KR-3/KR-4 all PASS).
+      last_session_id → Madhav_M2A_Exec_11; last_session_* block populated; close_state → atomically_closed.
+      next_session_objective → Madhav_M2A_Exec_12 (B.6 Hybrid Retrieval Library).
+      Deliverables: CLUSTER_ATLAS_v1_0.json (12 clusters CLUS.001–CLUS.012; KMeans/HDBSCAN; 12 domains);
+      CONTRADICTION_REGISTER_v1_0.json (8 contradictions CON.001–CON.008; CONFIRMED; 3 HIGH + 5 MED);
+      cluster_schema_v0_1.json + contradiction_schema_v0_1.json (new); two_pass_events_schema_v0_1.json extended
+      (cluster event types + gemini_revalidation_pass1); cluster_reconciler.py + run_cluster_pipeline.py +
+      contradiction_reconciler.py + run_contradiction_pipeline.py (new code); cluster_annotation_v1_0.md prompt +
+      contradiction_scan_v1_0.md prompt (new); PROMPT_REGISTRY/INDEX.json → 10 entries (backfill: claude.pattern_revalidation
+      + gemini.contradiction_adjudication); p6_retroactive_sweep_v1_0.json (0 flags; PARTIAL-IMPL whitelisted);
+      b5_session3_summary.json (all 8 bars PASS); RED_TEAM_M2B_PHASE_B5_v1_0.md (12 probes all PASS);
+      FILE_REGISTRY v1.12; CANONICAL_ARTIFACTS fingerprints rotated (DISAGREEMENT_REGISTER + FILE_REGISTRY rows).
+      mirror_updates: .geminirules + .gemini/project_state.md → B.5 COMPLETE state. CLAUDECODE_BRIEF.md → COMPLETE.
+      §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-27, Madhav_COW_M2A_Exec_11_BRIEF_AUTHORING — Cowork governance aside):
+      last_session_id → Madhav_COW_M2A_Exec_11_BRIEF_AUTHORING; last_session_* block populated.
+      active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; Exec_10's
+      "B.5 Session 2 complete" state stands until Exec_11 actually runs).
+      red_team_counter unchanged at 2 (governance aside — does NOT increment per ONGOING_HYGIENE_POLICIES §G).
+      next_session_objective remains Madhav_M2A_Exec_11 (B.5 Session 3 — Cluster + Contradictions + B.5 Close + Red-team).
+      Deliverables: CLAUDECODE_BRIEF.md for Exec_11 authored at /CLAUDECODE_BRIEF.md (replacing Exec_10
+      COMPLETE in-place per CLAUDE.md §C item 0). 18-section brief; native decisions Q1 (resolve DIS.003/4/5
+      + tighten acceptance-rate prompts via mandatory self-audit block), Q2 (soft re-validation gate for
+      PAT.005–011 — DR+annotate, B.5 close not blocked), Q3 (backfill-only DRs DIS.006/7/8 for reconciler
+      silent-failure) encoded as governing frontmatter. New schemas: cluster_schema_v0_1.json (CLUS.NNN,
+      kmeans|hdbscan, ≥3 signal_ids), contradiction_schema_v0_1.json (CONT.NNN, 5 tension types). Pattern
+      schema additive extension: re_validation_status + re_validation_event_id. 17 ACs defined; 5 carry-forwards
+      to Exec_12 listed at §16. Combined red-team (counter→3) spec at §13: RT.M2B.1–6 + RT.B5.7–10 + KR-3/KR-4.
+      COWORK_LEDGER §3 entry 7 appended per ONGOING_HYGIENE_POLICIES §P.
+      §3 narrative refreshed.
 ---
 
 # CURRENT STATE v1.0
@@ -148,8 +471,18 @@ current_state:
   # ------------------------------------------------------------------
   active_phase_plan: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
   active_phase_plan_version: "1.0.3"             # amendment complete (Madhav 16, 2026-04-24; resolved WARN.2/3/5/7)
-  active_phase_plan_sub_phase: "B.3 complete"  # Madhav_M2A_Exec_4 closed 2026-04-25; all B.3 ACs pass (AC-B3.3 accepted Option A); B.3.5 CGM + red-team next
-  active_phase_plan_status: active              # M2 active; B.3 complete; B.3.5 CGM Rebuild + red-team execution next
+  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer)"
+    # Madhav_M2A_Exec_14 closed 2026-04-28. B.8 Synthesis Layer.
+    # schemas.py v1.1: DerivationEntry (5 fields) + SynthesisAnswer (11 fields) added.
+    # synthesis_v1_0.md: acharya-grade synthesizer prompt (P5/P6/P7 enforcement; 600-word cap; 2 worked examples).
+    # synthesize.py: ANTHROPIC_MODEL=claude-opus-4-6; synthesize() temp=0.2 max_tokens=4096; P7+P5 post-parse enforcement.
+    # rag_synthesize.py: FastAPI POST /rag/synthesize — composite classify_query→retrieve→synthesize; SynthesisError→422.
+    # main.py v1.3: rag_synthesize_router registered at /rag prefix.
+    # synthesizeClient.ts: DerivationEntry+SynthesisAnswer interfaces; ragSynthesize() async function.
+    # synthesis_golden_v1_0.json: 10 queries (5 P7-gated confirmed sig≥0.7; 5 standard confirmed sig<0.7).
+    # synthesis_eval_v1_0.json: derivation_ledger=10/10 PASS; p7=10/10 PASS; p5=10/10 PASS.
+    # FILE_REGISTRY v1.15. CF.1 carry-forward: upgrade to claude-opus-4.7 when available.
+  active_phase_plan_status: active              # M2 active; M2C active; B.9 next
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -178,13 +511,15 @@ current_state:
   # ------------------------------------------------------------------
   # Red-team counter (ONGOING_HYGIENE_POLICIES §G addition at Step 12)
   # ------------------------------------------------------------------
-  red_team_counter: 3
-    # Reset from 8 to 0 at Step 15 close (macro-phase-close red-team fired 2026-04-24;
-    # 2/2 PASS). Incremented to 1 at Madhav 16 close. Incremented to 2 at Madhav 17 close.
-    # Incremented to 3 at Madhav_M2A_Plan_Foundation_Stack close (2026-04-25).
-    # Threshold reached (>=3). Cadence red-team is DUE.
-    # Deferred to M2A-Exec (first code-delivery session) — planning-only session has no
-    # code deliverables to probe. See red_team_due_note below.
+  red_team_counter: 2
+    # 0 at Madhav_M2A_Exec_8 close (cadence fired; RT.M2B.1–RT.M2B.6 + KR-1/2/3/4 all PASS) → reset to 0.
+    # Exec_9 → 1. Exec_10 → 2. Exec_11 → 3 → cadence fires → reset to 0.
+    # BUILD_TRACKER + PORTAL + COW governance asides did NOT increment.
+    # Reset to 0 at Madhav_M2A_Exec_11 close: combined cadence (every-third-session §IS.8(a) + B.5 phase-close §IS.8(b)).
+    # Exec_12 → 1 during session → §IS.8(b) M2B milestone close fires → reset to 0.
+    # Exec_13 → 1. B.7 is not a milestone close; no §IS.8(b) fire. Counter at 1.
+    # Exec_14 → 2. B.8 is not a milestone close; no §IS.8(b) fire. Counter at 2.
+    # Next cadence fire at counter=3 (Madhav_M2A_Exec_15 if no governance asides between Exec_14–15).
 
   # ------------------------------------------------------------------
   # Native-directive state (ND.N)
@@ -197,62 +532,49 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: Madhav_M2A_Exec_4
-    # Madhav_M2A_Exec_4 closed 2026-04-25. B.3 Embedding + HNSW.
-    # GCP migration: Cloud SQL PostgreSQL 15 (asia-south1, db-g1-small), pgvector, Auth Proxy port 5433.
-    # Voyage AI removed; replaced with Vertex AI text-multilingual-embedding-002 (768-dim, ADC, no API key).
-    # BATCH_SIZE=10 (Vertex 20k token/request limit); re-chunked locally (Supabase paused).
-    # embed.py: psycopg reads/writes, HNSW m=16 ef_construction=64 vector_cosine_ops.
-    # 743 embeddings in rag_embeddings (all non-stale chunks). HNSW index present.
-    # Sanity: "Saturn 7th house Libra" → top-3 sim 0.763/0.750/0.736; 2 distinct doc_types.
-    # AC-B3.1 ✓ B3.2 ✓ B3.3 accepted-Option-A (p95=71.56ms > 50ms, Auth Proxy overhead) B3.4 ✓ B3.5 ✓.
-    # mirror_enforcer.py exit 0 (8/8 pairs clean). red_team_counter stays at 3 (fires at Session 5).
-  last_session_closed_at: 2026-04-25T22:00:00+05:30
-  last_session_attempted_close_at: 2026-04-25T22:00:00+05:30
+  last_session_id: Madhav_PHASE11A_CUTOVER_STAGE1
+    # Governance aside — Phase 11A Pipeline Cutover Stage 1 (flag flip only; no code deletion).
+    # NEW_QUERY_PIPELINE_ENABLED + AUDIT_ENABLED defaults flipped to true.
+    # stage1_smoke.ts created. Reversibility: env-var MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false restores legacy.
+  last_session_closed_at: 2026-04-28T00:00:00+00:00
+  last_session_attempted_close_at: 2026-04-28T00:00:00+00:00
   last_session_agent: claude-sonnet-4-6
-  last_session_cowork_thread_name: "Madhav M2A-Exec-4 — Foundation Stack Session 4"
+  last_session_cowork_thread_name: "Phase 11A — Pipeline Cutover Stage 1 (Flag Flip)"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
-    drift_detector exit=2 (34 findings; pre-existing carry-over).
-    schema_validator exit=2 (46 violations; 1 HIGH pre-existing Madhav_16 naming disagreement;
-    45 MEDIUM/LOW frontmatter fields; no new violations from B.3 scope).
-    mirror_enforcer exit=0.
+    Governance scripts not run in-session (governance aside — no corpus work).
+    Mirror updates: .geminirules + .gemini/project_state.md updated with Phase 11A note.
+    red_team_counter: 2 (governance aside — does not increment).
   last_session_deliverable: >
-    B.3 complete — Foundation Stack Session 4. GCP migration (Supabase → Cloud SQL).
-    Voyage AI → Vertex AI text-multilingual-embedding-002 (768-dim, GCP-native).
-    embed.py: batch embed, pre-embedding enrichment ([{layer}] [{doc_type}] prefix),
-    content-hash idempotency, HNSW index. 743/743 non-stale chunks embedded.
-    b3_sanity_test.json: query "Saturn 7th house Libra", top-3 sims 0.763/0.750/0.736,
-    2 distinct doc_types, p95=71.56ms (Auth Proxy overhead, Option A accepted).
-    B.3 CLOSED. B.3.5 CGM Rebuild + red-team probes RT1–RT6 is next (Session 5).
-  previous_session_id: Madhav_M2A_Exec_3
-    # Closed 2026-04-25; B.2 Chunking doc-types 4–5 + doc-type 6 code + B.2 ACs session.
+    Phase 11A Pipeline Cutover Stage 1 COMPLETE.
+    feature_flags.ts: NEW_QUERY_PIPELINE_ENABLED false→true; AUDIT_ENABLED false→true.
+    platform/.env.example: feature-flags section added (revert instructions for both flags).
+    tests/unit/config/index.test.ts: updated default-true assertions + env-var override revert test.
+    scripts/cutover/stage1_smoke.ts: 8-class smoke script (env guard; 8 HTTP POST /api/chat/consume
+    queries; audit_log count ≥8; 2 audit-detail GET fetches; ✅/✗ summary).
+    package.json: cutover:stage1-smoke npm script registered.
+    CLAUDE.md §F: Phase 11A note added.
+    Reversibility preserved: MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false still routes to legacy.
+  previous_session_id: Madhav_M2A_Exec_14
+    # M2 execution — B.8 Synthesis Layer COMPLETE.
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    Execute **Madhav_M2A_Exec_5 — Foundation Stack Session 5 (B.3.5 CGM Rebuild + red-team)**
-    per CLAUDECODE_BRIEF v5.0 §SESSION_5 and M2A_EXEC_PLAN_v1_0.md §PLAN B.3.5.
-    Trigger phrase: "Read CLAUDECODE_BRIEF.md and execute it."
-    Build CGM_v9_0.md (node-per-planet format), run cgm_node.py against it, verify
-    CGM chunk ingestion. Red-team probes RT1–RT6 fire at this session close
-    (counter = 3, threshold = 3, held through Sessions 1–4; fires now).
-    Set CLAUDECODE_BRIEF.md status: COMPLETE at Session 5 close.
-  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-5 — Foundation Stack Session 5"
+    Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
+  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-15 — B.9"
   red_team_due_note: >
-    Counter reached 3 at Madhav_M2A_Plan_Foundation_Stack close (2026-04-25).
-    Deferred to M2A-Exec.5 (final Foundation Stack session). M2A_EXEC_PLAN §RISKS specifies
-    6 probes (RT1–RT6) for B.1–B.3.5 deliverables.
+    Counter at 2 (Exec_13→1, Exec_14→2). Next cadence fire at counter=3 (Exec_15 if no governance asides between Exec_14–15).
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-04-25T22:00:00+05:30
-  file_updated_by_session: Madhav_M2A_Exec_4
+  file_updated_at: 2026-04-28T00:00:00+00:00
+  file_updated_by_session: Madhav_M2A_Exec_14
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, Madhav_M2A_Exec_4, null).
+    = (Step_15 completed, Madhav_M2A_Exec_12, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -262,21 +584,23 @@ current_state:
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
 
-At the close of Madhav_M2A_Exec_4 (2026-04-25):
+At the close of Madhav_PHASE11A_CUTOVER_STAGE1 (2026-04-28) — Phase 11A Pipeline Cutover Stage 1 COMPLETE:
 
-**Macro-phase.** The project is in **M2 — Corpus Activation**, active. **B.3 Embedding + HNSW is COMPLETE**: 743 embeddings in `rag_embeddings` (all non-stale chunks). B.3.5 CGM Rebuild + red-team (Session 5) is next.
+**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 is next.
 
-**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. **B.3 complete.** GCP-native stack: Cloud SQL PostgreSQL 15 (asia-south1), Vertex AI `text-multilingual-embedding-002` (768-dim, ADC). HNSW index present (m=16, ef_construction=64, vector_cosine_ops). `b3_sanity_test.json`: "Saturn 7th house Libra" → top-3 sims 0.763/0.750/0.736, 2 distinct doc_types (AC-B3.4 ✓), p95=71.56ms Auth Proxy overhead (AC-B3.3 accepted Option A). AC-B3.1/B3.2/B3.5 all pass. `chunking_report.json`: p1_violations=0, stale_chunk_count=16, truncation_events=60, p5_warnings=499 (pre-existing baselines).
+**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). B.9 next (Exec_15). `FILE_REGISTRY_v1_15.md` CURRENT.
 
-**Governance step.** Step 15 completed (GOVERNANCE_BASELINE_CLOSE, 2026-04-24). No next governance step. CURRENT_STATE is authoritative per §5.2.
+**Platform cutover.** Phase 11A COMPLETE (governance aside, 2026-04-28). `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` are now **default true** in `feature_flags.ts`. Legacy code path is still in the codebase but is now the explicit-opt-out branch (`MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false`). Stage 1 smoke script: `npm run cutover:stage1-smoke`. Phase 11B (legacy code deletion) gates on the smoke script passing ✅ and native acceptance.
+
+**Governance step.** Step 15 completed. CURRENT_STATE is authoritative.
 
 **Native directives.** ND.1 addressed. No open directives.
 
-**Red-team.** `red_team_counter: 3` (threshold = 3; cadence fire DUE). Held through Sessions 1–4; fires at Madhav_M2A_Exec_5. M2A_EXEC_PLAN §RISKS specifies 6 probes (RT1–RT6).
+**Red-team.** `red_team_counter: 2` — Exec_13→1, Exec_14→2. Governance aside does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
 
-**Last Claude Code session.** `Madhav_M2A_Exec_4`, agent `claude-sonnet-4-6`, closed 2026-04-25. Deliverables: `embed.py` (Vertex AI 768-dim, HNSW), `b3_sanity_test.json`, `chunking_report.json` (re-run), GCP migration (`gcp_migrate.sh`, Cloud SQL Auth Proxy, `.env.rag`). Preceding session: `Madhav_M2A_Exec_3`.
+**Last session.** `Madhav_PHASE11A_CUTOVER_STAGE1`, governance aside 2026-04-28. Deliverables: feature_flags.ts defaults flipped (NEW_QUERY_PIPELINE_ENABLED→true, AUDIT_ENABLED→true); .env.example updated; config tests updated (default-true assertions + env-var revert test); stage1_smoke.ts (8-class smoke script); cutover:stage1-smoke npm script; CLAUDE.md §F note added.
 
-**Next-session commitment.** `Madhav_M2A_Exec_5` — Session 5 (B.3.5 CGM Rebuild + red-team RT1–RT6). Trigger: "Read CLAUDECODE_BRIEF.md and execute it."
+**Next-session commitment.** `Madhav_M2A_Exec_15` — B.9 per PHASE_B_PLAN_v1_0.md §B.9.
 
 ---
 

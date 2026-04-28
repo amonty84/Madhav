@@ -4,6 +4,7 @@ import { google } from '@ai-sdk/google'
 import { deepseek } from '@ai-sdk/deepseek'
 import type { LanguageModel } from 'ai'
 import { getModelMeta } from './registry'
+import { getOpenAIModel } from './openai'
 
 /**
  * Resolve a model ID to a `LanguageModel` for `streamText` / `generateText`.
@@ -21,6 +22,8 @@ export function resolveModel(id: string): LanguageModel {
       return google(meta.id)
     case 'deepseek':
       return deepseek(meta.id)
+    case 'openai':
+      return getOpenAIModel(meta.id)
     default: {
       const _exhaustive: never = meta.provider
       throw new Error(`Unhandled provider: ${String(_exhaustive)}`)

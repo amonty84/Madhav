@@ -1,0 +1,1 @@
+export { DisclosureTierBadge } from './DisclosureTierBadge'
