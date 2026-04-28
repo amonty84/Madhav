@@ -312,7 +312,7 @@ Every macro-phase below follows a fixed schema. Free-form prose has been replace
 
 ### M1 — Corpus Completeness
 
-- **Scope:** Produce an L1 facts corpus at acharya-grade completeness (FORENSIC chart data unified), an L2 signals register (MSR), and an L2.5 Holistic Synthesis suite (UCN, CDLM, CGM, RM). No dynamics; no learning; pure reference corpus.
+- **Scope:** Produce an L1 facts corpus at acharya-grade completeness (FORENSIC chart data unified), an L2.5 signals register (MSR), and an L2.5 Holistic Synthesis suite (UCN, CDLM, CGM, RM). No dynamics; no learning; pure reference corpus. *(Note: MSR was always an L2.5 artifact; "L2 signals register" in earlier drafts was a misclassification corrected in Phase 14F.)*
 - **Entry state:** n/a — seed phase.
 - **Exit state:** (a) CGM rebuilt on FORENSIC v8.0 ✓ (completed 2026-04-19 in GAP_RESOLUTION_SESSION Phase D); (b) all nine L3 Domain Reports at v1.1+ referencing only current L1 / L2.5 artifacts ✓ (completed 2026-04-19 per CLOSURE_AUDIT_PASS); (c) GAP.13 resolved ✓; (d) MSR v3.0 unified at 499 signals ✓ (2026-04-22); (e) UCN v4.0 current ✓; (f) CDLM v1.1 current ✓; (g) RM v2.0 current ✓; (h) FORENSIC v8.0 unified ✓. **Status: CLOSED as of 2026-04-19 per GAP_RESOLUTION_SESSION + CLOSURE_AUDIT_PASS; unification to MSR v3.0 at 499 signals on 2026-04-22 closes the final artifact pointer.**
 - **Dependencies:**

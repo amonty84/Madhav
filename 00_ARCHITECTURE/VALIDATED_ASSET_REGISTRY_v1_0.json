@@ -6,7 +6,7 @@
   "brief": "EXEC_BRIEF_PHASE_14_0_ASSET_INVENTORY_v1_0.md",
   "layers": {
     "L1": {
-      "purpose": "Atomic facts about the chart and reference timelines — no interpretation",
+      "purpose": "Atomic facts about the chart and reference timelines \u2014 no interpretation",
       "current_assets": [
         {
           "asset_id": "FORENSIC_v8_0",
@@ -48,7 +48,10 @@
             "additional_dasha_systems",
             "yogas_register"
           ],
-          "current_storage": ["filesystem", "rag_chunks (chunked by section)"],
+          "current_storage": [
+            "filesystem",
+            "rag_chunks (chunked by section)"
+          ],
           "modernization_target": "+ chart_facts Postgres table",
           "modernization_phase": "14C",
           "unique_data_note": "Unified canonical L1 hub; sole source for corrected special lagnas (4 errors fixed from v6.0), full 36-saham JH-authoritative register, KP system, all dasha systems, yogas"
@@ -65,7 +68,10 @@
             "chronic_patterns_6",
             "chart_states_per_event"
           ],
-          "current_storage": ["filesystem", "rag_chunks"],
+          "current_storage": [
+            "filesystem",
+            "rag_chunks"
+          ],
           "modernization_target": "+ life_events Postgres table",
           "modernization_phase": "14D",
           "unique_data_note": "36 dated life events with Swiss-Ephemeris-populated chart_states (transits, eclipses, retrogrades, Ashtakavarga, Sade Sati phase, dasha tags)"
@@ -76,11 +82,15 @@
           "format": "markdown",
           "version": "8.0-source",
           "status": "CURRENT",
-          "data_categories": ["sade_sati_lifetime_cycles"],
-          "current_storage": ["filesystem"],
+          "data_categories": [
+            "sade_sati_lifetime_cycles"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "Fold into chart_facts or separate sade_sati table",
           "modernization_phase": "14D",
-          "unique_data_note": "Complete lifetime Sade Sati table (pre-birth, Cycle 1-3) with retrograde loops; supersedes v6.0 §21 which covered Cycle 2 only"
+          "unique_data_note": "Complete lifetime Sade Sati table (pre-birth, Cycle 1-3) with retrograde loops; supersedes v6.0 \u00a721 which covered Cycle 2 only"
         },
         {
           "asset_id": "EXTERNAL_COMPUTATION_SPEC_v2",
@@ -89,9 +99,13 @@
           "version": "2.0",
           "status": "CURRENT",
           "classification": "GOVERNANCE",
-          "data_categories": ["computation_governance_spec"],
-          "current_storage": ["filesystem"],
-          "modernization_target": "No transform — governance doc",
+          "data_categories": [
+            "computation_governance_spec"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
+          "modernization_target": "No transform \u2014 governance doc",
           "modernization_phase": "N/A",
           "unique_data_note": "Spec for remaining optional JH exports; GAP.01 resolved via self-compute; GAP.03 optional"
         },
@@ -102,9 +116,13 @@
           "version": "1.0",
           "status": "CURRENT",
           "classification": "GOVERNANCE",
-          "data_categories": ["quality_audit_record"],
-          "current_storage": ["filesystem"],
-          "modernization_target": "No transform — governance quality record",
+          "data_categories": [
+            "quality_audit_record"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
+          "modernization_target": "No transform \u2014 governance quality record",
           "modernization_phase": "N/A"
         },
         {
@@ -112,7 +130,9 @@
           "path": "01_FACTS_LAYER/CLAUDE.md",
           "format": "markdown",
           "classification": "ORIENTATION",
-          "current_storage": ["filesystem"],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "Update to reflect cleaned file list after Phase 14.0",
           "modernization_phase": "14.0 (Stream H)"
         },
@@ -121,8 +141,12 @@
           "path": "01_FACTS_LAYER/EPHEMERIS_MONTHLY_1900_2100.csv",
           "format": "csv",
           "classification": "DEAD_DATA",
-          "data_categories": ["transit_ephemeris_monthly_1900_2100"],
-          "current_storage": ["filesystem"],
+          "data_categories": [
+            "transit_ephemeris_monthly_1900_2100"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "Postgres time-series table or queryable CSV",
           "modernization_phase": "14C",
           "unique_data_note": "Monthly transit positions for all 9 planets (1st of each month), Swiss Ephemeris, Lahiri sidereal; inert today"
@@ -132,8 +156,12 @@
           "path": "01_FACTS_LAYER/ECLIPSES_1900_2100.csv",
           "format": "csv",
           "classification": "DEAD_DATA",
-          "data_categories": ["eclipse_catalog_1900_2100"],
-          "current_storage": ["filesystem"],
+          "data_categories": [
+            "eclipse_catalog_1900_2100"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "Postgres time-series table",
           "modernization_phase": "14C"
         },
@@ -142,8 +170,12 @@
           "path": "01_FACTS_LAYER/RETROGRADES_1900_2100.csv",
           "format": "csv",
           "classification": "DEAD_DATA",
-          "data_categories": ["retrograde_stations_1900_2100"],
-          "current_storage": ["filesystem"],
+          "data_categories": [
+            "retrograde_stations_1900_2100"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "Postgres time-series table",
           "modernization_phase": "14C"
         },
@@ -154,9 +186,13 @@
           "version": "1.0",
           "status": "CURRENT",
           "classification": "SOURCE_REFERENCE",
-          "data_categories": ["swiss_ephemeris_chart_states_36_events"],
-          "current_storage": ["filesystem"],
-          "modernization_target": "No transform — audit source; chart_states already in LEL v1.2",
+          "data_categories": [
+            "swiss_ephemeris_chart_states_36_events"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
+          "modernization_target": "No transform \u2014 audit source; chart_states already in LEL v1.2",
           "modernization_phase": "N/A"
         },
         {
@@ -166,11 +202,15 @@
           "version": "8.0-source",
           "status": "CURRENT",
           "classification": "SOURCE_REFERENCE",
-          "data_categories": ["jhora_raw_export_transcription"],
-          "current_storage": ["filesystem"],
-          "modernization_target": "No transform — authoritative source for v8.0 corrections",
+          "data_categories": [
+            "jhora_raw_export_transcription"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
+          "modernization_target": "No transform \u2014 authoritative source for v8.0 corrections",
           "modernization_phase": "N/A",
-          "unique_data_note": "Authoritative JH PDF export transcript; dual-engine reconciliation authority for §12.1, §12.2, §6.6-§6.8, §26 of FORENSIC v8.0"
+          "unique_data_note": "Authoritative JH PDF export transcript; dual-engine reconciliation authority for \u00a712.1, \u00a712.2, \u00a76.6-\u00a76.8, \u00a726 of FORENSIC v8.0"
         }
       ],
       "archived_assets": [
@@ -178,38 +218,38 @@
           "asset_id": "FORENSIC_SUPPLEMENT_v8",
           "original_path": "01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
           "archive_path": "99_ARCHIVE/01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
-          "reason": "SUPERSEDED — all corrections (Special Lagnas, Sahams, Shadbala) merged into FORENSIC_ASTROLOGICAL_DATA_v8_0.md per frontmatter (FIX_SESSION_003, 2026-04-18)"
+          "reason": "SUPERSEDED \u2014 all corrections (Special Lagnas, Sahams, Shadbala) merged into FORENSIC_ASTROLOGICAL_DATA_v8_0.md per frontmatter (FIX_SESSION_003, 2026-04-18)"
         },
         {
           "asset_id": "LEL_v1_1",
           "original_path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
           "archive_path": "99_ARCHIVE/01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
-          "reason": "SUPERSEDED — replaced by LIFE_EVENT_LOG_v1_2.md which adds Swiss-Ephemeris chart_states and 4 date corrections; frontmatter marks SUPERSEDED 2026-04-24"
+          "reason": "SUPERSEDED \u2014 replaced by LIFE_EVENT_LOG_v1_2.md which adds Swiss-Ephemeris chart_states and 4 date corrections; frontmatter marks SUPERSEDED 2026-04-24"
         },
         {
           "asset_id": "EXTERNAL_COMPUTATION_SPEC_v1",
           "original_path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
           "archive_path": "99_ARCHIVE/01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
-          "reason": "SUPERSEDED — replaced by v2.0 and self-compute approach via Swiss Ephemeris (Session 4); documents Session 3 decision process only"
+          "reason": "SUPERSEDED \u2014 replaced by v2.0 and self-compute approach via Swiss Ephemeris (Session 4); documents Session 3 decision process only"
         }
       ],
       "coverage_gaps": [
         {
           "gap_id": "GAP.L1.01",
-          "description": "Varshphal (solar return) detailed computation for years beyond 2026-2027 — EXTERNAL_COMPUTATION_SPEC_v2_0.md marks as optional JH export",
+          "description": "Varshphal (solar return) detailed computation for years beyond 2026-2027 \u2014 EXTERNAL_COMPUTATION_SPEC_v2_0.md marks as optional JH export",
           "severity": "LOW",
           "resolution": "On-demand external computation per EXTERNAL_COMPUTATION_SPEC_v2_0 GAP.03"
         },
         {
           "gap_id": "GAP.L1.02",
-          "description": "Narayana / Moola dasha sub-rows in FORENSIC §25 marked [EXTERNAL_COMPUTATION_REQUIRED]",
+          "description": "Narayana / Moola dasha sub-rows in FORENSIC \u00a725 marked [EXTERNAL_COMPUTATION_REQUIRED]",
           "severity": "LOW",
           "resolution": "Optional; Kalachakra and Jaimini Chara already present"
         }
       ]
     },
     "L2": {
-      "purpose": "Analytical layer — deep per-domain analysis matrices and reports (pre-L2.5 synthesis)",
+      "purpose": "Analytical layer \u2014 deep per-domain analysis matrices and reports (pre-L2.5 synthesis)",
       "status_note": "SUPERSEDED by L2.5 Holistic Synthesis layer. User approved archival of entire L2. No hard code references found in platform.",
       "current_assets": [],
       "archived_assets": [
@@ -217,49 +257,70 @@
           "asset_id": "L2_DEEP_ANALYSIS_v1",
           "original_path": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
-          "reason": "SUPERSEDED by L2.5 Holistic Synthesis artifacts (MSR, UCN, CDLM, RM, CGM) — no hard platform references"
+          "reason": "SUPERSEDED by L2.5 Holistic Synthesis artifacts (MSR, UCN, CDLM, RM, CGM) \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_MATRIX_DASHA",
           "original_path": "02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md",
-          "reason": "SUPERSEDED by MSR_v3_0 + CDLM_v1_1 — no hard platform references"
+          "reason": "SUPERSEDED by MSR_v3_0 + CDLM_v1_1 \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_MATRIX_DIVISIONALS",
           "original_path": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
-          "reason": "SUPERSEDED by MSR_v3_0 + UCN_v4_0 — no hard platform references"
+          "reason": "SUPERSEDED by MSR_v3_0 + UCN_v4_0 \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_MATRIX_HOUSES",
           "original_path": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
-          "reason": "SUPERSEDED by MSR_v3_0 + UCN_v4_0 — no hard platform references"
+          "reason": "SUPERSEDED by MSR_v3_0 + UCN_v4_0 \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_MATRIX_PLANETS",
           "original_path": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
-          "reason": "SUPERSEDED by MSR_v3_0 signals — no hard platform references"
+          "reason": "SUPERSEDED by MSR_v3_0 signals \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_MATRIX_SIGNS",
           "original_path": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
-          "reason": "SUPERSEDED by MSR_v3_0 + CGM_v9_0 — no hard platform references"
+          "reason": "SUPERSEDED by MSR_v3_0 + CGM_v9_0 \u2014 no hard platform references",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         },
         {
           "asset_id": "L2_CLAUDE_MD",
           "original_path": "02_ANALYTICAL_LAYER/CLAUDE.md",
           "archive_path": "99_ARCHIVE/02_ANALYTICAL_LAYER/CLAUDE.md",
-          "reason": "Layer orientation for archived L2 — moves with layer"
+          "reason": "Layer orientation for archived L2 \u2014 moves with layer",
+          "status": "ARCHIVED",
+          "archived_in": "PHASE_14F",
+          "archived_at": "2026-04-28"
         }
       ],
       "coverage_gaps": []
     },
     "L2_5": {
-      "purpose": "Holistic Synthesis — cross-domain signal integration (MSR, UCN, CDLM, RM, CGM)",
+      "purpose": "Holistic Synthesis \u2014 cross-domain signal integration (MSR, UCN, CDLM, RM, CGM)",
       "current_assets": [
         {
           "asset_id": "MSR_v3_0",
@@ -267,11 +328,16 @@
           "format": "markdown",
           "version": "3.0",
           "status": "CURRENT",
-          "data_categories": ["499_cross_domain_signals"],
-          "current_storage": ["filesystem", "msr_signals Postgres table (499 rows, IN_SYNC)"],
+          "data_categories": [
+            "499_cross_domain_signals"
+          ],
+          "current_storage": [
+            "filesystem",
+            "msr_signals Postgres table (499 rows, IN_SYNC)"
+          ],
           "modernization_target": "msr_signals table already exists; Phase 14E ensures bidirectional sync",
           "modernization_phase": "14E",
-          "drift_check": "IN_SYNC — 499/499 signals matched; spot-check 3/3 verified"
+          "drift_check": "IN_SYNC \u2014 499/499 signals matched; spot-check 3/3 verified"
         },
         {
           "asset_id": "UCN_v4_0",
@@ -279,8 +345,13 @@
           "format": "markdown",
           "version": "4.1 (internal)",
           "status": "CURRENT",
-          "data_categories": ["unified_chart_narrative"],
-          "current_storage": ["filesystem", "rag_chunks"],
+          "data_categories": [
+            "unified_chart_narrative"
+          ],
+          "current_storage": [
+            "filesystem",
+            "rag_chunks"
+          ],
           "modernization_target": "rag_chunks already serves retrieval; Phase 14E confirms coverage",
           "modernization_phase": "14E"
         },
@@ -290,8 +361,13 @@
           "format": "markdown",
           "version": "1.2 (internal)",
           "status": "CURRENT",
-          "data_categories": ["cross_domain_linkage_matrix"],
-          "current_storage": ["filesystem", "rag_chunks"],
+          "data_categories": [
+            "cross_domain_linkage_matrix"
+          ],
+          "current_storage": [
+            "filesystem",
+            "rag_chunks"
+          ],
           "modernization_target": "Phase 14E",
           "modernization_phase": "14E"
         },
@@ -301,8 +377,13 @@
           "format": "markdown",
           "version": "2.1 (internal)",
           "status": "CURRENT",
-          "data_categories": ["reading_map"],
-          "current_storage": ["filesystem", "rag_chunks"],
+          "data_categories": [
+            "reading_map"
+          ],
+          "current_storage": [
+            "filesystem",
+            "rag_chunks"
+          ],
           "modernization_target": "Phase 14E",
           "modernization_phase": "14E"
         },
@@ -312,11 +393,18 @@
           "format": "markdown",
           "version": "9.0",
           "status": "CURRENT",
-          "data_categories": ["chart_graph_nodes_234", "chart_graph_edges_339"],
-          "current_storage": ["filesystem", "rag_graph_nodes (234 nodes)", "rag_graph_edges (339 edges)"],
+          "data_categories": [
+            "chart_graph_nodes_234",
+            "chart_graph_edges_339"
+          ],
+          "current_storage": [
+            "filesystem",
+            "rag_graph_nodes (234 nodes)",
+            "rag_graph_edges (339 edges)"
+          ],
           "modernization_target": "rag_graph tables already exist; Phase 14E confirms coverage",
           "modernization_phase": "14E",
-          "drift_check": "IN_SYNC — 3/3 spot-check node types verified in MSR cross-references"
+          "drift_check": "IN_SYNC \u2014 3/3 spot-check node types verified in MSR cross-references"
         },
         {
           "asset_id": "RED_TEAM_L2_5_v1",
@@ -325,8 +413,12 @@
           "version": "1.0",
           "status": "CURRENT",
           "classification": "GOVERNANCE",
-          "data_categories": ["red_team_findings_l2_5"],
-          "current_storage": ["filesystem"],
+          "data_categories": [
+            "red_team_findings_l2_5"
+          ],
+          "current_storage": [
+            "filesystem"
+          ],
           "modernization_target": "No transform",
           "modernization_phase": "N/A"
         }
@@ -343,20 +435,20 @@
         {
           "finding_id": "SF.C.01",
           "severity": "MEDIUM",
-          "description": "025_HOLISTIC_SYNTHESIS/CLAUDE.md references CGM_v2_0.md and MSR_v2_0.md as CURRENT — actual current files are CGM_v9_0.md and MSR_v3_0.md",
+          "description": "025_HOLISTIC_SYNTHESIS/CLAUDE.md references CGM_v2_0.md and MSR_v2_0.md as CURRENT \u2014 actual current files are CGM_v9_0.md and MSR_v3_0.md",
           "action": "OUT_OF_SCOPE for Phase 14.0 (content edit); flag for Phase 14F doc-update sweep"
         },
         {
           "finding_id": "SF.C.02",
           "severity": "MEDIUM",
-          "description": "GOVERNANCE_STACK_v1_0.md §L2.5 entry for CGM shows CGM_v2_0 as CURRENT; CGM_v9_0 not registered",
+          "description": "GOVERNANCE_STACK_v1_0.md \u00a7L2.5 entry for CGM shows CGM_v2_0 as CURRENT; CGM_v9_0 not registered",
           "action": "OUT_OF_SCOPE for Phase 14.0 (content edit); flag for Phase 14F governance-update sweep"
         }
       ],
       "coverage_gaps": []
     },
     "L3": {
-      "purpose": "Discovery Layer — pattern, resonance, contradiction, cluster registers; query taxonomy; synthesis prompts",
+      "purpose": "Discovery Layer \u2014 pattern, resonance, contradiction, cluster registers; query taxonomy; synthesis prompts",
       "current_assets": [
         {
           "asset_id": "PATTERN_REGISTER_v1_0",
@@ -364,8 +456,8 @@
           "format": "json",
           "entry_count": 22,
           "status": "CURRENT",
-          "platform_references": "HARD — composition_rules.ts line 115",
-          "decision": "KEEP — active platform dependency"
+          "platform_references": "HARD \u2014 composition_rules.ts line 115",
+          "decision": "KEEP \u2014 active platform dependency"
         },
         {
           "asset_id": "RESONANCE_REGISTER_v1_0",
@@ -373,8 +465,8 @@
           "format": "json",
           "entry_count": 12,
           "status": "CURRENT",
-          "platform_references": "HARD — composition_rules.ts line 116",
-          "decision": "KEEP — active platform dependency"
+          "platform_references": "HARD \u2014 composition_rules.ts line 116",
+          "decision": "KEEP \u2014 active platform dependency"
         },
         {
           "asset_id": "CONTRADICTION_REGISTER_v1_0",
@@ -382,8 +474,8 @@
           "format": "json",
           "entry_count": 8,
           "status": "CURRENT",
-          "platform_references": "HARD — composition_rules.ts line 117",
-          "decision": "KEEP — active platform dependency"
+          "platform_references": "HARD \u2014 composition_rules.ts line 117",
+          "decision": "KEEP \u2014 active platform dependency"
         },
         {
           "asset_id": "CLUSTER_ATLAS_v1_0",
@@ -391,15 +483,15 @@
           "format": "json",
           "entry_count": 12,
           "status": "CURRENT",
-          "platform_references": "HARD — composition_rules.ts line 118",
-          "decision": "KEEP — active platform dependency"
+          "platform_references": "HARD \u2014 composition_rules.ts line 118",
+          "decision": "KEEP \u2014 active platform dependency"
         }
       ],
       "archived_assets": [],
       "coverage_gaps": [
         {
           "gap_id": "GAP.L3.01",
-          "description": "INDEX.json is a stub (empty entries array) — pending B.5 Discovery Layer activation",
+          "description": "INDEX.json is a stub (empty entries array) \u2014 pending B.5 Discovery Layer activation",
           "severity": "INFO",
           "resolution": "By design; populate at B.5"
         }
@@ -407,12 +499,12 @@
     },
     "L4": {
       "status": "not_built",
-      "rationale": "Single-native today; federated discovery is M3+ work per MACRO_PLAN_v2_0.md §D.11",
+      "rationale": "Single-native today; federated discovery is M3+ work per MACRO_PLAN_v2_0.md \u00a7D.11",
       "current_assets": [],
       "archived_assets": []
     },
     "L5": {
-      "purpose": "Learning Layer — prediction ledger, signal weight calibration, embedding adaptation, prompt optimization",
+      "purpose": "Learning Layer \u2014 prediction ledger, signal weight calibration, embedding adaptation, prompt optimization",
       "current_assets": [
         {
           "asset_id": "PREDICTION_LEDGER_JSONL",
@@ -420,7 +512,7 @@
           "format": "jsonl",
           "entry_count": 14,
           "status": "CURRENT",
-          "db_mirror": "prediction_ledger Postgres table — TABLE_MISSING (expected; M4 activation will sync)",
+          "db_mirror": "prediction_ledger Postgres table \u2014 TABLE_MISSING (expected; M4 activation will sync)",
           "decision": "KEEP"
         },
         {
@@ -429,7 +521,7 @@
           "format": "jsonl",
           "entry_count": 545,
           "status": "CURRENT",
-          "decision": "KEEP — seed data for LL.9 counterfactual learning"
+          "decision": "KEEP \u2014 seed data for LL.9 counterfactual learning"
         },
         {
           "asset_id": "PROMPT_REGISTRY_INDEX",
@@ -444,14 +536,14 @@
           "path": "06_LEARNING_LAYER/SCHEMAS/",
           "format": "json (7 validator files)",
           "status": "CURRENT",
-          "decision": "KEEP — schema validators; DO NOT ARCHIVE"
+          "decision": "KEEP \u2014 schema validators; DO NOT ARCHIVE"
         }
       ],
       "archived_assets": [],
       "coverage_gaps": [
         {
           "gap_id": "GAP.L5.01",
-          "description": "prediction_ledger Postgres table does not yet exist — file-side only",
+          "description": "prediction_ledger Postgres table does not yet exist \u2014 file-side only",
           "severity": "INFO",
           "resolution": "By design; table created at M4 calibration activation"
         }
@@ -464,21 +556,21 @@
       {
         "from": "01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
         "to": "99_ARCHIVE/01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
-        "reason": "SUPERSEDED — content merged into FORENSIC_ASTROLOGICAL_DATA_v8_0.md per frontmatter (FIX_SESSION_003, 2026-04-18)",
+        "reason": "SUPERSEDED \u2014 content merged into FORENSIC_ASTROLOGICAL_DATA_v8_0.md per frontmatter (FIX_SESSION_003, 2026-04-18)",
         "hard_references": "NONE",
         "archive_safe": true
       },
       {
         "from": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
         "to": "99_ARCHIVE/01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
-        "reason": "SUPERSEDED — replaced by LIFE_EVENT_LOG_v1_2.md; frontmatter marks SUPERSEDED 2026-04-24",
+        "reason": "SUPERSEDED \u2014 replaced by LIFE_EVENT_LOG_v1_2.md; frontmatter marks SUPERSEDED 2026-04-24",
         "hard_references": "NONE",
         "archive_safe": true
       },
       {
         "from": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
         "to": "99_ARCHIVE/01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
-        "reason": "SUPERSEDED — replaced by v2.0 + self-compute via Swiss Ephemeris (Session 4)",
+        "reason": "SUPERSEDED \u2014 replaced by v2.0 + self-compute via Swiss Ephemeris (Session 4)",
         "hard_references": "NONE",
         "archive_safe": true
       },
@@ -492,7 +584,7 @@
       {
         "from": "02_ANALYTICAL_LAYER/CLAUDE.md",
         "to": "99_ARCHIVE/02_ANALYTICAL_LAYER/CLAUDE.md",
-        "reason": "L2 layer orientation — archived with entire L2 layer per user approval",
+        "reason": "L2 layer orientation \u2014 archived with entire L2 layer per user approval",
         "hard_references": "NONE",
         "archive_safe": true
       },

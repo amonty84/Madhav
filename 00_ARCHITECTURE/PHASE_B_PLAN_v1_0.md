@@ -68,7 +68,7 @@ Preserved from v2 with Hook 3 additions (`prompt_version`, `prompt_hash` promote
 | CQ6 | **Opus 4.7 router** — STACK DEVIATION; native override reconfirmed; no downgrade path | |
 | CQ7 | **a** — single initial batch pass for v1.0 | |
 | CQ8 | **b** — native reviews all `validated && HIGH` before write-back | |
-| CQ9 | **a** — five-layer (L1/L2/L2.5/L3/L4); L0 archival; L5–L7 out of scope for M2 | |
+| CQ9 | **a** — five-layer (L1/L2/L2.5/L3/L4); L0 archival; L5–L7 out of scope for M2 *(L2 layer archived Phase 14F 2026-04-28; effective architecture is L1→L2.5→L3→L4)* | |
 | CQ10 | **a** — proceeding | |
 
 ### B.6 — Post-"proceed" expansion
@@ -123,7 +123,7 @@ This section is now §D onwards.
 ```
 00_ARCHITECTURE/           # governance
 01_FACTS_LAYER/            # L1
-02_ANALYTICAL_LAYER/       # L2
+02_ANALYTICAL_LAYER/       # L2 (ARCHIVED Phase 14F 2026-04-28 → 99_ARCHIVE/02_ANALYTICAL_LAYER/)
 025_HOLISTIC_SYNTHESIS/    # L2.5
 03_DOMAIN_REPORTS/         # L3
 04_REMEDIAL_CODEX/         # remedial actions (not a retrieval layer)

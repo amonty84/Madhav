@@ -12,7 +12,7 @@ This plan outlines a systematic audit of all data assets in the Madhav project t
 ## 2. Scope and Boundaries
 
 **In scope:**
-- All markdown documents in `00_ARCHITECTURE/`, `01_FACTS_LAYER/` (excluding JHora transcription and CSV files), `02_ANALYTICAL_LAYER/`, `03_DOMAIN_REPORTS/`, `04_REMEDIAL_CODEX/`, `05_TEMPORAL_ENGINES/`, `06_QUERY_INTERFACE/`, `025_HOLISTIC_SYNTHESIS/`.
+- All markdown documents in `00_ARCHITECTURE/`, `01_FACTS_LAYER/` (excluding JHora transcription and CSV files), `99_ARCHIVE/02_ANALYTICAL_LAYER/` *(ARCHIVED Phase 14F 2026-04-28; read-only audit only)*, `03_DOMAIN_REPORTS/`, `04_REMEDIAL_CODEX/`, `05_TEMPORAL_ENGINES/`, `06_QUERY_INTERFACE/`, `025_HOLISTIC_SYNTHESIS/`.
 - Structured mapping files (`MATRIX_*.md`, `FORENSIC_*.md`), excluding `JHORA_TRANSCRIPTION_*.md`.
 - Configuration files (`package.json`, `*.config.*`) for syntactic validity.
 
@@ -28,7 +28,7 @@ This plan outlines a systematic audit of all data assets in the Madhav project t
 | Category | File Pattern | Example Files | Validation Focus |
 |----------|--------------|---------------|------------------|
 | **Markdown Reports** | `*.md` | Domain reports (`REPORT_*.md`), analytical layers (`DEEP_ANALYSIS_*.md`), synthesis documents (`MSR_*.md`, `UCN_*.md`) | Consistency of astrological placements, detection of known error patterns, cross‑reference accuracy |
-| **Structured Mappings** | `MATRIX_*.md`, `FORENSIC_*.md` | `MATRIX_PLANETS.md`, `MATRIX_HOUSES.md`, `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` | Key‑value consistency, house‑sign‑planet alignment, absence of contradictions |
+| **Structured Mappings** | `MATRIX_*.md` *(ARCHIVED — at 99_ARCHIVE/02_ANALYTICAL_LAYER/)*, `FORENSIC_*.md` | `MATRIX_PLANETS.md` *(archived)*, `MATRIX_HOUSES.md` *(archived)*, `FORENSIC_ASTROLOGICAL_DATA_v8_0.md` | Key‑value consistency, house‑sign‑planet alignment, absence of contradictions |
 | **Configuration & Metadata** | `package.json`, `*.config.*`, `.gitignore` | `platform/package.json`, `eslint.config.mjs`, `next.config.ts` | Syntactic validity, required fields, dependency version sanity |
 
 ## 4. Validation Framework per Data Type
@@ -40,7 +40,7 @@ This plan outlines a systematic audit of all data assets in the Madhav project t
 
 ### 4.2 Structured Mappings
 - **Key‑value alignment**: Ensure that each matrix row (e.g., planet‑house‑sign) is consistent with the natal chart.
-- **Contradiction detection**: Compare equivalent values across different files (e.g., Jupiter’s house in `MATRIX_PLANETS.md` vs. `FORENSIC_v8_0.md`).
+- **Contradiction detection**: Compare equivalent values across different files (e.g., Jupiter’s house in `MATRIX_PLANETS.md` *(ARCHIVED at 99_ARCHIVE/02_ANALYTICAL_LAYER/)* vs. `FORENSIC_v8_0.md`).
 
 ### 4.3 Configuration Files
 - **Syntax validation**: Validate JSON, YAML, or JavaScript syntax.
@@ -52,7 +52,7 @@ The following key data points must be identical across all files that mention th
 
 | Data Point | Authoritative Value (House/Sign) | Files to Check |
 |------------|----------------------------------|----------------|
-| Jupiter placement | Sagittarius 9H | `MATRIX_PLANETS.md`, `DEEP_ANALYSIS_*.md`, all domain reports |
+| Jupiter placement | Sagittarius 9H | `MATRIX_PLANETS.md` *(ARCHIVED)*, `DEEP_ANALYSIS_*.md` *(ARCHIVED)*, all domain reports |
 | Shree Lagna | Libra 7H | `MATRIX_*.md`, `MSR_*.md`, `REPORT_FINANCIAL_*.md`, `REPORT_RELATIONSHIPS_*.md` |
 | Ghati Lagna | Sagittarius 9H | `MATRIX_*.md`, `MSR_*.md`, `UCN_*.md` |
 | Varnada Lagna | Cancer 4H | `MATRIX_*.md`, `MSR_*.md`, `UCN_*.md` |

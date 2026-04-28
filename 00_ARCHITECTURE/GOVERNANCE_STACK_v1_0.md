@@ -31,23 +31,25 @@ All closed artifacts as of Session 35:
 | EXTERNAL_COMPUTATION_SPEC | 1.0 | CLOSED (pending native execution) | Session 3 |
 | CGP_AUDIT_v1_0 | 1.0 | CLOSED | Session 6 |
 
-### L2 — Analytical Layer (Mode A + Mode B)
+### L2 — Analytical Layer (ARCHIVED 2026-04-28)
 
-| Artifact | Version | Status |
-|---|---|---|
-| DEEP_ANALYSIS_v1.2.1 | 1.2.1 | CURRENT |
-| MATRIX_HOUSES | 1.0 | CLOSED |
-| MATRIX_PLANETS | 1.0 | CLOSED |
-| MATRIX_SIGNS | 1.0 | CLOSED |
-| MATRIX_DIVISIONALS | 1.0 | CLOSED |
-| MATRIX_DASHA_PERIODS | 1.0 | CLOSED |
+The entire L2 layer was archived in Phase 14F. Files preserved at
+`99_ARCHIVE/02_ANALYTICAL_LAYER/` for historical audit only. The L2.5
+Holistic Synthesis stack (MSR, UCN, CDLM, RM, CGM) supersedes L2
+per `00_ARCHITECTURE/MARSYS_JIS_ARCHITECTURE_v1_0.md`. No production code path
+reads from L2.
+
+Predecessor entries: 7 files (DEEP_ANALYSIS_*, MATRIX_PLANETS,
+MATRIX_HOUSES, MATRIX_SIGNS, MATRIX_DIVISIONALS, MATRIX_DASHA_PERIODS,
+CLAUDE.md). See `VALIDATED_ASSET_REGISTRY_v1_0.json §archive_actions`.
 
 ### L2.5 — Holistic Synthesis
 
 | Artifact | Version | Status | FIX_SESSION_003 note |
 |---|---|---|---|
 | CGM_v1_0 | 1.0 | **SUPERSEDED** | Superseded by CGM_v2_0 in GAP_RESOLUTION_SESSION |
-| **CGM_v2_0** | **2.0** | **CURRENT** | **NEW GAP_RESOLUTION_SESSION — LAG.HORA 7H→3H, LAG.GHATI 8H→9H, LAG.VARNADA 8H→4H, LAG.SHREE 9H→7H; all edges updated** |
+| CGM_v2_0 | 2.0 | **SUPERSEDED** | Superseded by CGM_v9_0 (Phase 14F registry correction 2026-04-28) |
+| **CGM_v9_0** | **9.0** | **CURRENT** | **Canonical per CAPABILITY_MANIFEST.json; LAG corrections from GAP_RESOLUTION_SESSION carried forward through v9.0** |
 | MSR_v1_0 | 1.0 | **SUPERSEDED** | Superseded by MSR_v2_0 |
 | MSR_v2_0 | 2.1 | **SUPERSEDED** | Superseded by MSR_v3_0 (CURRENT per CLAUDE.md §Canonical corpus artifact paths and GROUNDING_AUDIT §GA.1). v2.0 carried 500 signals under internal v2.2 cleanup; v3.0 is the canonical 499-signal register. |
 | **MSR_v3_0** | **3.0** | **CURRENT** | **499 signals — canonical per CLAUDE.md §Canonical corpus artifact paths; registered here via STEP_5_MACRO_PLAN_CLOSURE (2026-04-23) per GA.1 registry-discipline correction** |
@@ -993,3 +995,9 @@ M2 execution session. red_team_counter 2 → 3 → cadence FIRED → reset to 0 
 **Governance verdicts:** drift_detector exit=2 (62 findings; pre-existing; no Exec_8 regression); schema_validator exit=2 (54 violations; pre-existing heading/session_id mismatches; SESSION_LOG "Body" H2 heading corrected); mirror_enforcer exit=0 (8/8 pairs clean). build_state.json re-uploaded to GCS.
 
 *End of §24 — Madhav_M2A_Exec_8 amendment log.*
+
+## Changelog
+
+| Date | Change |
+|---|---|
+| 2026-04-28 | Phase 14F: L2 section flipped to ARCHIVED tombstone; CGM v2.0 → v9.0 (CURRENT); MSR v3.0 / 499 signals already CURRENT (no change needed). |
