@@ -5,7 +5,9 @@ generated_at: 2026-04-28
 generated_by: Phase_14_0_Asset_Inventory
 executor: Claude Code (Sonnet 4.6)
 brief: EXEC_BRIEF_PHASE_14_0_ASSET_INVENTORY_v1_0.md
-status: AWAITING_NATIVE_ACCEPTANCE
+status: ACCEPTED
+accepted_at: 2026-04-28
+accepted_by: native
 companion_registry: 00_ARCHITECTURE/VALIDATED_ASSET_REGISTRY_v1_0.json
 ---
 

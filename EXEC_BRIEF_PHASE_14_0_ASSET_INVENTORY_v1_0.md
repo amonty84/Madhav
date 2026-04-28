@@ -1,7 +1,7 @@
 ---
 brief_id: EXEC_BRIEF_PHASE_14_0_ASSET_INVENTORY
 version: 1.0
-status: AUTHORED
+status: COMPLETE
 authored_by: Cowork (Opus)
 authored_at: 2026-04-28
 target_executor: Claude Code session (Sonnet 4.6) in Anti-Gravity / VS Code
