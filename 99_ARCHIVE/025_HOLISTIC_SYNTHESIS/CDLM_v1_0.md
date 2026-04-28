@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED by CDLM_v1_1.md (2026-04-18); no hard platform references
 artifact: CDLM_v1_0.md
 version: 1.0
 status: SUPERSEDED

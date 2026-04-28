@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-27T16:13:24.447Z",
+  "generated_at": "2026-04-28T15:47:48.266Z",
   "generator_version": "1.0",
-  "entry_count": 62,
-  "fingerprint": "0dee4e5242712d272274c24a9b4ee361c58e097cd65ffcbb475d42a545dd46c7",
+  "entry_count": 58,
+  "fingerprint": "bb1638276423d57d1b54919d13ad311da74b4eea2929018452feebae31fea0d2",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -16,20 +16,6 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "223f04bb9b3e755298cd0d2759a028d336f89793860c57952c6deb367f8f35cf",
-      "native_id": "abhisek"
-    },
-    {
-      "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v1_0",
-      "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v1_0.md",
-      "version": "1",
-      "status": "CURRENT",
-      "layer": "L1",
-      "expose_to_chat": false,
-      "representations": [
-        "file"
-      ],
-      "interface_version": "1.0",
-      "fingerprint": "66e272d6ca4f52f3b39b76b24ccc8c9ac3aeea372353ea1a62a1b9061836a318",
       "native_id": "abhisek"
     },
     {
@@ -67,34 +53,6 @@
       ],
       "cost_weight": 1,
       "always_required": true
-    },
-    {
-      "canonical_id": "FORENSIC_DATA_v8_0_SUPPLEMENT",
-      "path": "01_FACTS_LAYER/FORENSIC_DATA_v8_0_SUPPLEMENT.md",
-      "version": "8.0 (supplement/override layer)",
-      "status": "PREDECESSOR",
-      "layer": "L1",
-      "expose_to_chat": false,
-      "representations": [
-        "file"
-      ],
-      "interface_version": "1.0",
-      "fingerprint": "7d5ecdbda9ef8e879dbc9f0418dbb5e2fcc9f8f5fd79328c55b2cc8c5f81a44c",
-      "native_id": "abhisek"
-    },
-    {
-      "canonical_id": "LIFE_EVENT_LOG_v1_0",
-      "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_1.md",
-      "version": "1.1",
-      "status": "PREDECESSOR",
-      "layer": "L1",
-      "expose_to_chat": false,
-      "representations": [
-        "file"
-      ],
-      "interface_version": "1.0",
-      "fingerprint": "2685c4ded8e010175d0957bc81a0873a1ae1f3c2cfef506a972f53fe14e48ff7",
-      "native_id": "abhisek"
     },
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
@@ -156,20 +114,6 @@
       ],
       "interface_version": "1.0",
       "fingerprint": "29dd7839ff5fbbbebd704e8703e26fb75db94c31317587c0a3b1516ed23668ba",
-      "native_id": "abhisek"
-    },
-    {
-      "canonical_id": "CDLM_v1_0",
-      "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_0.md",
-      "version": "1",
-      "status": "PREDECESSOR",
-      "layer": "L2.5",
-      "expose_to_chat": false,
-      "representations": [
-        "file"
-      ],
-      "interface_version": "1.0",
-      "fingerprint": "f71cc3a1438a1c81ac881ae8e3e513171277e397ccd0c4bf0ebaad88e327d61b",
       "native_id": "abhisek"
     },
     {

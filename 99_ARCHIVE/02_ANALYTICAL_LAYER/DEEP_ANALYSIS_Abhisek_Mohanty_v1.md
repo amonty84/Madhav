@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED by L2.5 Holistic Synthesis (MSR_v3_0, UCN_v4_0, CDLM_v1_1, RM_v2_0, CGM_v9_0); no hard platform references
 document: DEEP FORENSIC ASTROLOGICAL ANALYSIS
 subject: Abhisek Mohanty
 version: 1.2.1

@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED — replaced by LIFE_EVENT_LOG_v1_2.md which adds Swiss-Ephemeris chart_states; frontmatter marks SUPERSEDED 2026-04-24
 document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)

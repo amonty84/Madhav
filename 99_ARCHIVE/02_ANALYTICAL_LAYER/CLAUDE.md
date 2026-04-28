@@ -1,3 +1,9 @@
+---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: L2 layer archived in full — superseded by L2.5 Holistic Synthesis; no hard platform references
+---
+
 # 02_ANALYTICAL_LAYER — Instructions
 
 L2. Two modes operate here in parallel: Mode A (curated depth) and Mode B (exhaustive coverage).

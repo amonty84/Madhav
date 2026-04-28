@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED by MSR_v3_0 + CDLM_v1_1; no hard platform references
 document: L2 MODE B — DASHA-PERIOD MATRIX
 project: MARSYS-JIS
 layer: L2 (Analytical Layer, Mode B — Exhaustive Coverage)

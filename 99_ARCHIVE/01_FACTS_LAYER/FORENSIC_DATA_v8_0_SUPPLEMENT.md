@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED — all corrections merged into FORENSIC_ASTROLOGICAL_DATA_v8_0.md (FIX_SESSION_003, 2026-04-18)
 artifact: FORENSIC_DATA_v8_0_SUPPLEMENT.md
 version: 8.0 (supplement/override layer)
 status: SUPERSEDED

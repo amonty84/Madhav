@@ -1,4 +1,7 @@
 ---
+archived_at: 2026-04-28
+archived_by: Phase_14_0_Asset_Inventory
+archived_reason: SUPERSEDED — replaced by EXTERNAL_COMPUTATION_SPEC_v2_0.md and self-compute approach via Swiss Ephemeris (Session 4)
 document: EXTERNAL COMPUTATION SPEC
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer) — sibling to FORENSIC_DATA and LIFE_EVENT_LOG
