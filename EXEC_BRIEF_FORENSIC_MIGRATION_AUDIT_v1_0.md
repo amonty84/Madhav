@@ -1,7 +1,7 @@
 ---
 brief_id: EXEC_BRIEF_FORENSIC_MIGRATION_AUDIT
 version: 1.0
-status: AUTHORED
+status: COMPLETE
 authored_by: Cowork (Opus)
 authored_at: 2026-04-28
 target_executor: Claude Code session (Sonnet 4.6) in Anti-Gravity / VS Code (multi-session — see Execution model)
