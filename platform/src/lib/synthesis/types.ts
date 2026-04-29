@@ -94,10 +94,16 @@ export interface PanelAuditPayload {
 /**
  * Return value from synthesize(). The caller (Stream E) calls
  * result.toUIMessageStreamResponse(...) on the streamText result.
+ *
+ * methodologyBlockHolder is a mutable container populated synchronously in
+ * streamText's onFinish (before the 'finish' SSE part fires), allowing the
+ * route to include methodology_block in the finish-part messageMetadata.
  */
 export interface SynthesisResult {
   result: StreamTextResult<ToolSet, never>
   metadata: SynthesisMetadata
+  /** Optional — only populated by SingleModelOrchestrator. Panel path leaves this absent → null. */
+  methodologyBlockHolder?: { value: string | null }
 }
 
 export interface SynthesisOrchestrator {

@@ -12,18 +12,21 @@ interface Props {
 }
 
 const VARIANT_STYLES: Record<CitationType, string> = {
-  signal:
-    'bg-amber-100/80 text-amber-800 border-amber-200/60 hover:bg-amber-200/80 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-700/40',
-  asset:
-    'bg-sky-100/80 text-sky-800 border-sky-200/60 hover:bg-sky-200/80 dark:bg-sky-900/30 dark:text-sky-300 dark:border-sky-700/40',
-  chunk:
-    'bg-violet-100/80 text-violet-800 border-violet-200/60 hover:bg-violet-200/80 dark:bg-violet-900/30 dark:text-violet-300 dark:border-violet-700/40',
+  signal: 'border-[var(--cite-signal)]/40 bg-[var(--cite-signal-bg)] text-[var(--cite-signal)] hover:border-[var(--cite-signal)]/70',
+  asset:  'border-[var(--cite-asset)]/40 bg-[var(--cite-asset-bg)] text-[var(--cite-asset)] hover:border-[var(--cite-asset)]/70',
+  chunk:  'border-[var(--cite-chunk)]/40 bg-[var(--cite-chunk-bg)] text-[var(--cite-chunk)] hover:border-[var(--cite-chunk)]/70',
 }
 
 const PREFIX: Record<CitationType, string> = {
   signal: '≋',
   asset: '⊞',
   chunk: '§',
+}
+
+const ARIA_LABEL: Record<CitationType, (id: string) => string> = {
+  signal: (id) => `Chart signal ${id} — click to read the source`,
+  asset:  (id) => `Asset ${id} — click to read`,
+  chunk:  (id) => `Source chunk ${id} — click to read`,
 }
 
 export function CitationChip({ type, id, className }: Props) {
@@ -33,7 +36,7 @@ export function CitationChip({ type, id, className }: Props) {
     <>
       <button
         type="button"
-        aria-label={`Citation: ${type} ${id} — click to preview`}
+        aria-label={ARIA_LABEL[type](id)}
         aria-haspopup="dialog"
         aria-expanded={previewOpen}
         onClick={() => setPreviewOpen(true)}

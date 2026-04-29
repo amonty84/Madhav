@@ -42,6 +42,14 @@ export const STYLE_SUFFIXES = {
   client: '\n\nUse accessible language. Avoid technical Jyotish terms without explanation.',
 }
 
+const METHODOLOGY_INSTRUCTION = `After all visible content, append a fenced block labeled \`marsys_methodology_block\` containing 2–4 sentences describing your reasoning chain: which signals you considered, which derivation rules you applied, which classical principles you cited, and which alternatives you discarded. Write for a senior Jyotish acharya reviewing your work. This block is not rendered to the client. Example:
+
+\`\`\`marsys_methodology_block
+I routed through L2.5 holistic synthesis, consulting the MSR for pattern density and the UCN for natal-nodal polarisation. The query class required two orthogonal signal chains — I selected [F.X] × [SIG.MSR.Y] and [F.Z] × [SIG.MSR.W]. I discarded the Ashtottari dasha framing because no conditional trigger was found in the chart.
+\`\`\`
+
+Omit this block only if the answer was a single-line factual lookup with no reasoning to expose.`
+
 /** Compose the standard opening block shared by all templates */
 export function buildOpeningBlock(): string {
   return `${NATIVE_CONTEXT}
@@ -54,5 +62,7 @@ ${ACHARYA_GRADE}
 
 ${CITATION_DISCIPLINE}
 
-${NO_FABRICATION}`
+${NO_FABRICATION}
+
+${METHODOLOGY_INSTRUCTION}`
 }

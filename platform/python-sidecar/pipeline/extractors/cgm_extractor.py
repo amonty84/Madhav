@@ -239,12 +239,42 @@ def extract_cgm_edges(
                 100.0 * dropped / total_before_filter,
             )
 
-    count = len(filtered_rows)
+    # --- Self-loop filtering ---
+    # Self-referential edges (source == target) are valid astrological facts in the
+    # manifest (e.g. Venus in Purva Ashadha is its own nakshatra lord) but must not
+    # be surfaced to callers; graph algorithms and S5 of the spec both forbid them.
+    non_loop_rows: list[dict[str, Any]] = []
+    dropped_loops = 0
+    for row in filtered_rows:
+        if row["source_node_id"] == row["target_node_id"]:
+            log.warning(
+                "cgm_extractor: dropping self-loop edge %s (%s → %s, type=%s)",
+                row["edge_id"],
+                row["source_node_id"],
+                row["target_node_id"],
+                row["edge_type"],
+            )
+            dropped_loops += 1
+        else:
+            non_loop_rows.append(row)
+
+    if dropped_loops > 0:
+        log.warning(
+            "cgm_extractor: dropped %d self-loop edge(s) after orphan filter",
+            dropped_loops,
+        )
+
+    count = len(non_loop_rows)
     if count == 0:
         raise ValueError(
-            "CGM edge count is 0 after orphan filtering. "
+            "CGM edge count is 0 after orphan + self-loop filtering. "
             "Check CGM_v9_0.md node blocks and edge manifest files."
         )
 
-    log.info("cgm_extractor: extracted %d edges (%d dropped as orphans)", count, dropped)
-    return filtered_rows
+    log.info(
+        "cgm_extractor: extracted %d edges (%d dropped as orphans, %d dropped as self-loops)",
+        count,
+        dropped,
+        dropped_loops,
+    )
+    return non_loop_rows

@@ -2,7 +2,7 @@ import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
 import { telemetry } from '../telemetry/index'
 
-const REPO_ROOT = '/Users/Dev/Vibe-Coding/Apps/Madhav'
+const REPO_ROOT = process.env.MARSYS_REPO_ROOT ?? process.cwd()
 
 function resolveAndCheck(repoRelativePath: string): string {
   const resolved = path.resolve(REPO_ROOT, repoRelativePath)

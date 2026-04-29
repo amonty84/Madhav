@@ -48,6 +48,21 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Brand spine — shared across login + consume + admin. Hex equivalents
+     come from src/app/login/page.tsx (canonical reference). */
+  --brand-gold:        oklch(0.78 0.13 80);     /* ≈ #d4af37 */
+  --brand-gold-light:  oklch(0.86 0.13 88);     /* ≈ #f4d160 */
+  --brand-gold-deep:   oklch(0.55 0.13 70);     /* ≈ #a26d0e */
+  --brand-gold-cream:  oklch(0.92 0.075 88);    /* ≈ #fce29a */
+  --brand-charcoal:    oklch(0.10 0.012 70);    /* ≈ #0d0a05 */
+  --brand-ink:         oklch(0.04 0.005 70);    /* ≈ #020201 */
+  --brand-vellum:      oklch(0.94 0.02 80);     /* warm paper for light mode */
+}
+
+html,
+body {
+  overscroll-behavior: none;
 }
 
 :root {
@@ -84,6 +99,80 @@
   --sidebar-accent-foreground: oklch(0.22 0.006 75);
   --sidebar-border: oklch(0.895 0.008 75);
   --sidebar-ring: oklch(0.68 0.008 75);
+
+  /* Brand alpha tokens — consumed by consume shell and chat components. */
+  --brand-cream: oklch(0.92 0.10 90);
+
+  /* Citation palette — tonal variants in the gold family, distinct enough
+     to carry type meaning while living in the same warm register as the brand. */
+  --cite-signal:    oklch(0.78 0.13 80);
+  --cite-asset:     oklch(0.72 0.10 60);
+  --cite-chunk:     oklch(0.66 0.06 50);
+  --cite-signal-bg: oklch(0.78 0.13 80 / 0.10);
+  --cite-asset-bg:  oklch(0.72 0.10 60 / 0.10);
+  --cite-chunk-bg:  oklch(0.66 0.06 50 / 0.10);
+  --brand-charcoal-deep: oklch(0.05 0.005 70);
+  --brand-form-fill: oklch(0.13 0.01 70 / 0.86);
+  --brand-gold-hairline: oklch(0.78 0.13 80 / 0.35);
+  --brand-gold-glow: oklch(0.78 0.13 80 / 0.20);
+  --brand-gold-faint: oklch(0.78 0.13 80 / 0.12);
+}
+
+/* Consume-shell scope: applies the brand gold/ink palette only to the consume
+   chat surface, leaving build/audit/admin dark-mode pages untouched. Mounted
+   on ConsumeChat's root via the .consume-shell class. The radial-gradient
+   matches login's bg treatment. Tokens (--accent, --ring, --primary) are
+   re-pointed to gold so any descendant focus-ring / accent picks up the
+   brand without per-component overrides. */
+.dark .consume-shell {
+  --background: var(--brand-charcoal);
+  --accent: var(--brand-gold);
+  --accent-foreground: var(--brand-ink);
+  --ring: var(--brand-gold);
+  --primary: var(--brand-gold);
+  --primary-foreground: var(--brand-ink);
+  background: radial-gradient(
+    ellipse at top,
+    oklch(0.10 0.012 70) 0%,
+    oklch(0.04 0.005 70) 100%
+  );
+}
+
+/* Brand CTA — used for primary gold-on-ink actions (composer send,
+   sidebar New chat). Layered gradient + warm shadow matches login's
+   sign-in button. */
+.brand-cta {
+  background: linear-gradient(
+    180deg,
+    var(--brand-gold-light) 0%,
+    var(--brand-gold) 50%,
+    var(--brand-gold-deep) 100%
+  );
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in oklch, var(--brand-gold) 50%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--brand-gold) 25%, transparent),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: filter 150ms ease;
+}
+.brand-cta:hover {
+  filter: brightness(1.08);
+}
+.brand-cta:disabled,
+.brand-cta[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Soft hairline brand card — translucent ink fill, gold edge. */
+.brand-card {
+  border: 1px solid color-mix(in oklch, var(--brand-gold) 25%, transparent);
+  background: color-mix(in oklch, var(--brand-ink) 92%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .dark {
@@ -119,6 +208,13 @@
   --sidebar-accent-foreground: oklch(0.97 0.006 75);
   --sidebar-border: oklch(1 0 0 / 9%);
   --sidebar-ring: oklch(0.58 0.008 75);
+
+  /* Brand override: accent + ring + primary become gold in dark mode. */
+  --accent: var(--brand-gold);
+  --accent-foreground: var(--brand-charcoal);
+  --ring: var(--brand-gold);
+  --primary: var(--brand-gold);
+  --primary-foreground: var(--brand-charcoal);
 }
 
 @layer base {
@@ -154,7 +250,7 @@
   height: 1.05em;
   margin-left: 2px;
   transform: translateY(2px);
-  background-color: color-mix(in oklab, var(--color-foreground) 80%, transparent);
+  background-color: color-mix(in oklab, var(--brand-gold) 80%, transparent);
   vertical-align: baseline;
   animation: chat-caret 1s steps(1) infinite;
 }
@@ -198,8 +294,11 @@
   line-height: 1.2;
   font-weight: 500;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--color-muted-foreground);
+}
+/* Use bt-label-upper for metadata/badge contexts that require ALL CAPS. */
+.bt-label-upper {
+  text-transform: uppercase;
 }
 .bt-mono {
   font-family: var(--font-mono);
@@ -224,6 +323,24 @@
   letter-spacing: -0.03em;
 }
 
+/*
+ * Semantic status tokens:
+ *   warn    = system is OK but flagging — use for truncation, cautions
+ *   halt    = system declined to proceed — use for validator failures, blocks
+ *   info    = neutral metadata — use for disclosure tier, non-critical notes
+ *   success = passed validation / completed — use for confirmed states
+ */
+:root {
+  --status-warn:       oklch(0.78 0.13 80);
+  --status-halt:       oklch(0.55 0.20 25);
+  --status-info:       oklch(0.70 0.10 230);
+  --status-success:    oklch(0.70 0.12 145);
+  --status-warn-bg:    oklch(0.78 0.13 80 / 0.10);
+  --status-halt-bg:    oklch(0.55 0.20 25 / 0.10);
+  --status-info-bg:    oklch(0.70 0.10 230 / 0.10);
+  --status-success-bg: oklch(0.70 0.12 145 / 0.10);
+}
+
 /* Status color utilities */
 .bt-status-complete { color: oklch(0.40 0.12 145); }
 .bt-status-active   { color: oklch(0.45 0.12 75);  }
@@ -240,4 +357,21 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Devanagari double-danda accent — applied once, on the Welcome H2 only.
+   Do not add to other elements; over-use dilutes the domain marker. */
+.bt-devanagari-rule::before {
+  content: "॥";
+  margin-right: 0.5em;
+  opacity: 0.6;
+  color: var(--brand-gold);
+  font-family: var(--font-serif);
+}
+.bt-devanagari-rule::after {
+  content: "॥";
+  margin-left: 0.5em;
+  opacity: 0.6;
+  color: var(--brand-gold);
+  font-family: var(--font-serif);
 }

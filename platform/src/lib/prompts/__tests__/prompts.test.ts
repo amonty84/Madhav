@@ -149,6 +149,19 @@ describe('PromptRegistry', () => {
     )
   })
 
+  describe('get() — client fallback', () => {
+    it.each(ALL_QUERY_CLASSES)(
+      'falls back to super_admin template for client tier (%s)',
+      (qc) => {
+        const registry = getDefaultRegistry()
+        const fallback = registry.get(qc, 'client', 'single_model')
+        // No client-specific templates in Phase 3 — falls back to super_admin
+        expect(fallback.query_class).toBe(qc)
+        expect(fallback.audience_tier).toBe('super_admin')
+      },
+    )
+  })
+
   describe('get() — missing combination throws', () => {
     it('throws for a completely unregistered combination', () => {
       const registry = getDefaultRegistry()

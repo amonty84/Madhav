@@ -160,7 +160,7 @@ function enforceTokenBudget(
 }
 
 function isDomainReport(asset: AssetEntry): boolean {
-  return asset.path.includes('REPORT_') || asset.canonical_id.includes('REPORT_')
+  return Boolean(asset.path?.includes('REPORT_')) || asset.canonical_id.includes('REPORT_')
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

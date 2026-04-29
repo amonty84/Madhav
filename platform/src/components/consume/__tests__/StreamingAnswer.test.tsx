@@ -11,8 +11,31 @@ vi.mock('@/components/chat/StreamingMarkdown', () => ({
 vi.mock('@/components/chat/StreamingDots', () => ({
   StreamingDots: () => <div data-testid="streaming-dots" />,
 }))
-vi.mock('../AnswerView', () => ({
-  AnswerView: ({ text }: { text: string }) => <div data-testid="answer-view">{text}</div>,
+vi.mock('@/components/chat/AssistantMessage', () => ({
+  AssistantMessage: ({
+    message,
+    isStreaming,
+    onRegenerate,
+  }: {
+    message: UIMessage
+    isStreaming: boolean
+    isLast: boolean
+    onRegenerate?: () => void
+  }) => (
+    <div
+      data-testid="assistant-message"
+      data-streaming={isStreaming}
+      data-has-regen={onRegenerate != null ? 'true' : 'false'}
+    >
+      {(message.parts ?? [])
+        .filter((p): p is { type: 'text'; text: string } => p.type === 'text')
+        .map(p => p.text)
+        .join('')}
+    </div>
+  ),
+}))
+vi.mock('@/components/chat/MessageErrorBoundary', () => ({
+  MessageErrorBoundary: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
 import { StreamingAnswer } from '../StreamingAnswer'
@@ -32,15 +55,41 @@ describe('StreamingAnswer', () => {
     expect(screen.getByText('What is my lagna?')).toBeInTheDocument()
   })
 
-  it('renders completed assistant message via AnswerView', () => {
+  it('renders completed assistant message via AssistantMessage', () => {
     render(
       <StreamingAnswer
         messages={[makeMsg('user', 'Q'), makeMsg('assistant', 'A long synthesis answer.')]}
         isStreaming={false}
       />
     )
-    expect(screen.getByTestId('answer-view')).toBeInTheDocument()
-    expect(screen.getByTestId('answer-view').textContent).toBe('A long synthesis answer.')
+    expect(screen.getByTestId('assistant-message')).toBeInTheDocument()
+    expect(screen.getByTestId('assistant-message').textContent).toBe('A long synthesis answer.')
+  })
+
+  it('completed assistant message shows isStreaming=false on AssistantMessage', () => {
+    render(
+      <StreamingAnswer
+        messages={[makeMsg('user', 'Q'), makeMsg('assistant', 'Done answer.')]}
+        isStreaming={false}
+      />
+    )
+    const el = screen.getByTestId('assistant-message')
+    expect(el.getAttribute('data-streaming')).toBe('false')
+  })
+
+  it('passes onRegenerate only to the last assistant message', () => {
+    const onRegenerate = vi.fn()
+    const msgs: UIMessage[] = [
+      makeMsg('user', 'Q1'),
+      makeMsg('assistant', 'A1'),
+      makeMsg('user', 'Q2'),
+      makeMsg('assistant', 'A2'),
+    ]
+    render(<StreamingAnswer messages={msgs} isStreaming={false} onRegenerate={onRegenerate} />)
+    const elems = screen.getAllByTestId('assistant-message')
+    expect(elems).toHaveLength(2)
+    expect(elems[0].getAttribute('data-has-regen')).toBe('false')
+    expect(elems[1].getAttribute('data-has-regen')).toBe('true')
   })
 
   it('renders streaming assistant message via StreamingMarkdown with isStreaming=true', () => {
@@ -65,33 +114,7 @@ describe('StreamingAnswer', () => {
     expect(screen.getByTestId('streaming-dots')).toBeInTheDocument()
   })
 
-  it('calls onStop on unmount while streaming', () => {
-    const onStop = vi.fn()
-    const { unmount } = render(
-      <StreamingAnswer
-        messages={[makeMsg('assistant', 'In progress…')]}
-        isStreaming={true}
-        onStop={onStop}
-      />
-    )
-    act(() => unmount())
-    expect(onStop).toHaveBeenCalledOnce()
-  })
-
-  it('does not call onStop on unmount when not streaming', () => {
-    const onStop = vi.fn()
-    const { unmount } = render(
-      <StreamingAnswer
-        messages={[makeMsg('assistant', 'Done.')]}
-        isStreaming={false}
-        onStop={onStop}
-      />
-    )
-    act(() => unmount())
-    expect(onStop).not.toHaveBeenCalled()
-  })
-
-  it('only the last assistant message streams — earlier ones use AnswerView', () => {
+  it('only the last assistant message streams — earlier ones use AssistantMessage', () => {
     const msgs: UIMessage[] = [
       makeMsg('user', 'Q1'),
       makeMsg('assistant', 'A1'),
@@ -99,9 +122,9 @@ describe('StreamingAnswer', () => {
       makeMsg('assistant', 'A2 partial'),
     ]
     render(<StreamingAnswer messages={msgs} isStreaming={true} />)
-    const answerViews = screen.getAllByTestId('answer-view')
-    expect(answerViews).toHaveLength(1)
-    expect(answerViews[0].textContent).toBe('A1')
+    const assistantMessages = screen.getAllByTestId('assistant-message')
+    expect(assistantMessages).toHaveLength(1)
+    expect(assistantMessages[0].textContent).toBe('A1')
     expect(screen.getByTestId('streaming-markdown')).toBeInTheDocument()
   })
 })

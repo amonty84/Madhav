@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { QueryClassBadge, DisclosureTierBadge, ValidatorStatusIcon } from './AuditBadge'
+import { QueryClassBadge, AuditDisclosureTierBadge, ValidatorStatusIcon } from './AuditBadge'
 import type { AuditDetailRow } from '@/lib/audit/queries'
 import type { ValidatorRecord } from '@/lib/audit/types'
 
@@ -86,8 +86,8 @@ export function CompareView({ rowA, rowB }: Props) {
           <DiffRow
             labelA="tier"
             labelB="tier"
-            valueA={<DisclosureTierBadge tier={rowA.disclosure_tier ?? '—'} />}
-            valueB={<DisclosureTierBadge tier={rowB.disclosure_tier ?? '—'} />}
+            valueA={<AuditDisclosureTierBadge tier={rowA.disclosure_tier ?? '—'} />}
+            valueB={<AuditDisclosureTierBadge tier={rowB.disclosure_tier ?? '—'} />}
             isDifferent={rowA.disclosure_tier !== rowB.disclosure_tier}
           />
           <DiffRow

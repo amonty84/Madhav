@@ -1,26 +1,26 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import {
-  DisclosureTierBadge,
+  AuditDisclosureTierBadge,
   QueryClassBadge,
   ValidatorStatusIcon,
   CheckpointSummaryIcon,
   PanelIndicator,
 } from '../AuditBadge'
 
-describe('DisclosureTierBadge', () => {
+describe('AuditDisclosureTierBadge', () => {
   it('renders super_admin tier', () => {
-    render(<DisclosureTierBadge tier="super_admin" />)
+    render(<AuditDisclosureTierBadge tier="super_admin" />)
     expect(screen.getByText('super_admin')).toBeInTheDocument()
   })
 
   it('renders client tier', () => {
-    render(<DisclosureTierBadge tier="client" />)
+    render(<AuditDisclosureTierBadge tier="client" />)
     expect(screen.getByText('client')).toBeInTheDocument()
   })
 
   it('renders unknown tier without throwing', () => {
-    render(<DisclosureTierBadge tier="unknown_tier" />)
+    render(<AuditDisclosureTierBadge tier="unknown_tier" />)
     expect(screen.getByText('unknown_tier')).toBeInTheDocument()
   })
 })

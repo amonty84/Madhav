@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
+import { AssistantSigil } from '@/components/brand/AssistantSigil'
 import { StreamingDots } from './StreamingDots'
 
 /**
@@ -21,8 +21,8 @@ export function PendingAssistantBubble() {
       aria-label="Assistant is thinking"
     >
       <div className="flex gap-4">
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full border border-border/40 bg-background text-foreground shadow-sm">
-          <Sparkles className="size-4" />
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_oklch,var(--brand-gold)_35%,transparent)] bg-muted text-[var(--brand-gold)] shadow-sm">
+          <AssistantSigil size={18} />
         </div>
         <div className="min-w-0 flex-1 pt-2">
           <StreamingDots />

@@ -18,7 +18,8 @@
     "audit:smoke": "tsx scripts/audit/smoke.ts",
     "checkpoint:eval": "tsx src/scripts/checkpoints/eval.ts",
     "cutover:stage1-smoke": "tsx scripts/cutover/stage1_smoke.ts",
-    "cutover:phase12-smoke": "tsx scripts/cutover/stage1_phase12_smoke.ts"
+    "cutover:phase12-smoke": "tsx scripts/cutover/stage1_phase12_smoke.ts",
+    "trace:smoke": "tsx scripts/trace/trace_smoke.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.71",

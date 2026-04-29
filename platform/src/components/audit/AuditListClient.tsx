@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { AuditFilterSidebar } from './AuditFilterSidebar'
 import {
-  DisclosureTierBadge,
+  AuditDisclosureTierBadge,
   QueryClassBadge,
   ValidatorStatusIcon,
   CheckpointSummaryIcon,
@@ -61,7 +61,7 @@ function AuditTableRow({
         </Link>
       </td>
       <td className="px-3 py-2.5">
-        <DisclosureTierBadge tier={row.disclosure_tier ?? '—'} />
+        <AuditDisclosureTierBadge tier={row.disclosure_tier ?? '—'} />
       </td>
       <td className="px-3 py-2.5 text-center">
         <ValidatorStatusIcon validatorsRun={validators} />

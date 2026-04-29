@@ -24,5 +24,5 @@ export default async function ClientLayout({
   if (!chart) redirect('/dashboard')
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')
 
-  return <div className="flex h-[100dvh] flex-col">{children}</div>
+  return <div className="flex h-[100dvh] flex-col overflow-hidden">{children}</div>
 }

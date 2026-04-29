@@ -9,17 +9,13 @@ interface Props {
 
 interface State {
   error: Error | null
+  retryKey: number
 }
 
-/**
- * Isolates render errors to a single message bubble so one broken message
- * cannot unmount the whole conversation. Errors here used to bubble up to
- * app/error.tsx, which would wipe the in-memory chat state.
- */
 export class MessageErrorBoundary extends Component<Props, State> {
-  state: State = { error: null }
+  state: State = { error: null, retryKey: 0 }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): Partial<State> {
     return { error }
   }
 
@@ -36,13 +32,13 @@ export class MessageErrorBoundary extends Component<Props, State> {
       return (
         <div className="mx-auto w-full max-w-3xl px-4">
           <div className="rounded-lg border border-destructive/40 bg-destructive/5 px-3 py-2 text-xs text-destructive">
-            <p className="font-medium">This message couldn’t render.</p>
+            <p className="font-medium">This message couldn&apos;t render.</p>
             <p className="mt-0.5 text-destructive/80">
               {this.state.error.message || 'Unknown render error.'}
             </p>
             <button
               type="button"
-              onClick={() => this.setState({ error: null })}
+              onClick={() => this.setState(s => ({ error: null, retryKey: s.retryKey + 1 }))}
               className="mt-1 rounded-md border border-destructive/40 px-2 py-0.5 text-[11px] hover:bg-destructive/20"
             >
               Retry render
@@ -51,6 +47,6 @@ export class MessageErrorBoundary extends Component<Props, State> {
         </div>
       )
     }
-    return this.props.children
+    return <div key={this.state.retryKey}>{this.props.children}</div>
   }
 }

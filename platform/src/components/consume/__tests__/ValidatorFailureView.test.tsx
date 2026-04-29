@@ -61,16 +61,21 @@ describe('ValidatorFailureView', () => {
     expect(screen.queryByText(/p1_layer_separation/)).not.toBeInTheDocument()
   })
 
-  it('calls onRetry when retry button is clicked', () => {
+  it('calls onRetry when "Edit and retry" button is clicked', () => {
     const onRetry = vi.fn()
     render(<ValidatorFailureView failures={[P1]} onRetry={onRetry} />)
-    fireEvent.click(screen.getByRole('button', { name: /retry with different framing/i }))
+    fireEvent.click(screen.getByRole('button', { name: /edit and retry/i }))
     expect(onRetry).toHaveBeenCalledOnce()
   })
 
-  it('retry button is keyboard accessible with visible text', () => {
+  it('"Edit and retry" button is keyboard accessible with visible text', () => {
     render(<ValidatorFailureView failures={[P5]} onRetry={vi.fn()} />)
-    const btn = screen.getByRole('button', { name: /retry with different framing/i })
+    const btn = screen.getByRole('button', { name: /edit and retry/i })
     expect(btn).toBeInTheDocument()
+  })
+
+  it('renders EPISTEMIC HALT kicker', () => {
+    render(<ValidatorFailureView failures={[P1]} onRetry={vi.fn()} />)
+    expect(screen.getByText('EPISTEMIC HALT')).toBeInTheDocument()
   })
 })

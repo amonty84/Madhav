@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { PanelResult } from '@/lib/synthesis/panel/types'
 import { DivergenceReport } from './DivergenceReport'
+import { AnswerView } from './AnswerView'
 
 interface Props {
   panel: PanelResult
@@ -44,10 +45,9 @@ export function PanelAnswerView({ panel, chartId: _chartId }: Props) {
         </div>
       )}
 
-      {/* Final answer */}
-      <div className="prose prose-sm prose-invert max-w-none text-foreground leading-relaxed whitespace-pre-wrap">
-        {adjudication.final_answer}
-      </div>
+      {/* Final answer — routed through AnswerView so markdown, headings, lists,
+          code blocks, and citation chips render identically to the single-model path. */}
+      <AnswerView text={adjudication.final_answer} />
 
       {/* Divergence section */}
       <div className="border border-border/60 rounded-lg overflow-hidden">

@@ -100,10 +100,12 @@ function findOverrideKey(
   // 1. Exact canonical_id match (case-sensitive)
   if (overrides[entry.canonical_id]) return entry.canonical_id
 
-  // 2. path_pattern substring match
-  for (const [key, ov] of Object.entries(overrides)) {
-    if (ov.path_pattern && entry.path.includes(ov.path_pattern)) {
-      return key
+  // 2. path_pattern substring match — skip entries with no path (e.g. tool-layer descriptors)
+  if (entry.path) {
+    for (const [key, ov] of Object.entries(overrides)) {
+      if (ov.path_pattern && entry.path.includes(ov.path_pattern)) {
+        return key
+      }
     }
   }
 

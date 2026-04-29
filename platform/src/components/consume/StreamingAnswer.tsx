@@ -1,42 +1,41 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import type { UIMessage } from 'ai'
 import { StreamingMarkdown } from '@/components/chat/StreamingMarkdown'
 import { StreamingDots } from '@/components/chat/StreamingDots'
-import { AnswerView } from './AnswerView'
+import { AssistantMessage } from '@/components/chat/AssistantMessage'
+import { MessageErrorBoundary } from '@/components/chat/MessageErrorBoundary'
+import type { Rating } from '@/hooks/useFeedback'
 import { cn } from '@/lib/utils'
 
 interface Props {
   messages: UIMessage[]
   isStreaming: boolean
   onStop?: () => void
+  onRegenerate?: () => void
+  ratings?: Record<string, Rating>
+  onRate?: (messageId: string, rating: Rating) => void
   className?: string
 }
 
 /**
  * Flag-ON message renderer for the pipeline-v2 path.
- * Renders all messages with simplified bubbles; the last assistant message
- * uses AnswerView (with inline citation chips) when not streaming, and
- * StreamingMarkdown with a caret while streaming.
  *
- * Abort on unmount: when this component unmounts while streaming, it calls
- * onStop() to cancel the in-flight request via AbortController.
+ * Streaming tail: bare StreamingMarkdown with caret while the last assistant
+ * message is in flight.
+ *
+ * Completed turns: rendered through AssistantMessage (avatar + actions bar)
+ * wrapped in MessageErrorBoundary so a single broken message cannot crash the
+ * whole conversation.
  */
-export function StreamingAnswer({ messages, isStreaming, onStop, className }: Props) {
-  const isStreamingRef = useRef(isStreaming)
-  useEffect(() => {
-    isStreamingRef.current = isStreaming
-  }, [isStreaming])
-
-  // Cancel in-flight request on unmount (navigation away mid-stream)
-  useEffect(() => {
-    return () => {
-      if (isStreamingRef.current && onStop) {
-        onStop()
-      }
-    }
-  }, [onStop])
+export function StreamingAnswer({
+  messages,
+  isStreaming,
+  onRegenerate,
+  ratings,
+  onRate,
+  className,
+}: Props) {
 
   if (messages.length === 0) return null
 
@@ -63,20 +62,32 @@ export function StreamingAnswer({ messages, isStreaming, onStop, className }: Pr
 
         if (message.role === 'assistant') {
           const isCurrentlyStreaming = isLast && isStreaming
-          return (
-            <div key={message.id} className="px-4 py-2">
-              {isCurrentlyStreaming ? (
-                textContent ? (
+
+          if (isCurrentlyStreaming) {
+            return (
+              <div key={message.id} className="px-4 py-2">
+                {textContent ? (
                   <StreamingMarkdown isStreaming>
                     {textContent}
                   </StreamingMarkdown>
                 ) : (
                   <StreamingDots />
-                )
-              ) : (
-                <AnswerView text={textContent} />
-              )}
-            </div>
+                )}
+              </div>
+            )
+          }
+
+          return (
+            <MessageErrorBoundary key={message.id} messageId={message.id}>
+              <AssistantMessage
+                message={message}
+                isStreaming={false}
+                isLast={isLast}
+                onRegenerate={isLast ? onRegenerate : undefined}
+                rating={ratings?.[message.id]}
+                onRate={onRate ? (r) => onRate(message.id, r) : undefined}
+              />
+            </MessageErrorBoundary>
           )
         }
 

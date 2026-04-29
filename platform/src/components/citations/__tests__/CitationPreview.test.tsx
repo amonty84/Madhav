@@ -65,7 +65,8 @@ describe('CitationPreview', () => {
     makeFetchOk({ title: 'CGM', content: 'Asset content' })
     const onClose = vi.fn()
     render(<CitationPreview type="asset" id="CGM" onClose={onClose} />)
-    fireEvent.keyDown(document, { key: 'Escape' })
+    const panel = screen.getByRole('dialog')
+    fireEvent.keyDown(panel, { key: 'Escape' })
     expect(onClose).toHaveBeenCalledOnce()
   })
 

@@ -17,7 +17,7 @@ const CLASS_STYLES: Record<string, string> = {
 
 const BASE = 'inline-flex items-center rounded border px-1.5 py-0.5 text-[11px] font-medium leading-none'
 
-export function DisclosureTierBadge({ tier }: { tier: string }) {
+export function AuditDisclosureTierBadge({ tier }: { tier: string }) {
   const style = TIER_STYLES[tier] ?? 'bg-muted text-muted-foreground border-border'
   return <span className={cn(BASE, style)}>{tier}</span>
 }

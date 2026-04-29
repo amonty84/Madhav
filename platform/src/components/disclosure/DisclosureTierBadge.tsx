@@ -7,7 +7,9 @@ import type { AudienceTier } from '@/lib/prompts/types'
 
 interface Props {
   tier: AudienceTier
-  methodologyBlock?: string
+  methodologyBlock?: string | null
+  defaultExpanded?: boolean
+  compact?: boolean
   className?: string
 }
 
@@ -45,11 +47,33 @@ const TIER_CONFIG: Record<
   },
 }
 
-export function DisclosureTierBadge({ tier, methodologyBlock, className }: Props) {
+export function DisclosureTierBadge({ tier, methodologyBlock, defaultExpanded, compact, className }: Props) {
   const [tooltipVisible, setTooltipVisible] = useState(false)
-  const [methodologyExpanded, setMethodologyExpanded] = useState(false)
+  // defaultExpanded prop overrides tier-based default; falls back to
+  // super_admin === expanded for backward compatibility.
+  const [methodologyExpanded, setMethodologyExpanded] = useState(
+    defaultExpanded ?? tier === 'super_admin'
+  )
 
   const config = TIER_CONFIG[tier]
+
+  // Compact mode: chip only — no methodology expander or helper text.
+  if (compact) {
+    return (
+      <span
+        role="status"
+        aria-label={`Disclosure tier: ${config.label}. ${config.tooltip}`}
+        className={cn(
+          'inline-flex cursor-default select-none items-center rounded border px-1.5 py-0.5',
+          'bt-label font-medium',
+          config.chipClass,
+          className
+        )}
+      >
+        {config.label}
+      </span>
+    )
+  }
 
   return (
     <div className={cn('flex flex-col gap-2', className)}>
@@ -86,16 +110,16 @@ export function DisclosureTierBadge({ tier, methodologyBlock, className }: Props
           )}
         </div>
 
-        {tier === 'super_admin' && methodologyBlock && (
+        {tier === 'super_admin' && methodologyBlock ? (
           <button
             type="button"
             aria-expanded={methodologyExpanded}
             aria-controls="methodology-block"
             onClick={() => setMethodologyExpanded(e => !e)}
             className={cn(
-              'inline-flex items-center gap-1 rounded border border-border px-2 py-0.5',
-              'bt-label text-muted-foreground hover:bg-muted hover:text-foreground transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+              'inline-flex items-center gap-1 rounded border border-[var(--brand-gold-hairline)] px-2 py-0.5',
+              'bt-label text-[var(--brand-gold)]/70 hover:border-[var(--brand-gold)] hover:text-[var(--brand-gold)] transition-colors',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]'
             )}
           >
             {methodologyExpanded ? (
@@ -103,9 +127,9 @@ export function DisclosureTierBadge({ tier, methodologyBlock, className }: Props
             ) : (
               <ChevronDown className="h-3 w-3" aria-hidden="true" />
             )}
-            Methodology
+            {methodologyExpanded ? 'Collapse methodology' : 'Show methodology'}
           </button>
-        )}
+        ) : null}
       </div>
 
       {tier === 'super_admin' && methodologyBlock && methodologyExpanded && (
@@ -114,8 +138,8 @@ export function DisclosureTierBadge({ tier, methodologyBlock, className }: Props
           role="region"
           aria-label="Methodology disclosure"
           className={cn(
-            'rounded-md border border-border bg-muted/40 px-3 py-2',
-            'bt-mono text-muted-foreground whitespace-pre-wrap text-xs'
+            'mt-2 rounded-md border border-[var(--brand-gold-hairline)] bg-[var(--brand-charcoal)]/60 p-3',
+            'font-mono text-[12px] leading-relaxed text-[var(--brand-cream)] whitespace-pre-wrap'
           )}
         >
           {methodologyBlock}

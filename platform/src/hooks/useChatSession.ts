@@ -2,7 +2,7 @@
 
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport, type FileUIPart, type UIMessage } from 'ai'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface Options {
   chartId: string
@@ -22,6 +22,9 @@ export function useChatSession({
   style,
 }: Options) {
   const [persistedId, setPersistedId] = useState<string | undefined>(conversationId)
+  // queryId for the most recent pipeline query (set as soon as start-part metadata arrives)
+  const [currentQueryId, setCurrentQueryId] = useState<string | undefined>(undefined)
+  const lastSeenQueryId = useRef<string | undefined>(undefined)
 
   useEffect(() => {
     // Sync state with incoming prop when navigating between conversations.
@@ -50,6 +53,19 @@ export function useChatSession({
       }
     },
   })
+
+  // Watch messages in real-time: the 'start' stream part populates assistant message
+  // metadata immediately, well before synthesis begins — so queryId is available
+  // for TracePanel SSE subscription while the pipeline is still running.
+  useEffect(() => {
+    const lastAssistant = [...chat.messages].reverse().find(m => m.role === 'assistant')
+    const meta = lastAssistant?.metadata as Record<string, unknown> | undefined
+    const qid = meta?.queryId as string | undefined
+    if (qid && qid !== lastSeenQueryId.current) {
+      lastSeenQueryId.current = qid
+      setCurrentQueryId(qid)
+    }
+  }, [chat.messages])
 
   const isStreaming = chat.status === 'streaming' || chat.status === 'submitted'
   const canSend = chat.status === 'ready' || chat.status === 'error'
@@ -97,5 +113,6 @@ export function useChatSession({
     setMessages: chat.setMessages,
     editAndResubmit,
     conversationId: persistedId,
+    currentQueryId,
   }
 }

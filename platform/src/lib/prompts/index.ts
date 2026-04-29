@@ -75,15 +75,17 @@ class PromptRegistryImpl implements PromptRegistry {
     const direct = this.store.get(makeKey(query_class, audience_tier, strategy))
     if (direct !== undefined) return direct
 
-    // Fallback: acharya_reviewer → super_admin
-    if (audience_tier === 'acharya_reviewer') {
+    // Fallback: acharya_reviewer and client → super_admin
+    // Phase 3 only registers super_admin templates; client-specific templates
+    // are deferred to a later phase. Style suffix handles audience adaptation.
+    if (audience_tier === 'acharya_reviewer' || audience_tier === 'client') {
       const fallback = this.store.get(makeKey(query_class, 'super_admin', strategy))
       if (fallback !== undefined) return fallback
     }
 
     throw new Error(
       `PromptRegistry: no template found for (query_class="${query_class}", audience_tier="${audience_tier}", strategy="${strategy}")` +
-        (audience_tier === 'acharya_reviewer'
+        (audience_tier === 'acharya_reviewer' || audience_tier === 'client'
           ? ' — fallback to super_admin also failed'
           : ''),
     )

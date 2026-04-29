@@ -1,0 +1,107 @@
+/**
+ * MARSYS-JIS Query Trace Panel — DB persistence
+ * schema_version: 1.0
+ */
+
+import { query } from '@/lib/db/client'
+import type { TraceStep } from './types'
+
+/** Persist a single trace step. Called fire-and-forget from emitter. */
+export async function writeTraceStep(step: TraceStep): Promise<void> {
+  await query(
+    `INSERT INTO public.query_trace_steps
+       (query_id, conversation_id, step_seq, step_name, step_type, status,
+        started_at, completed_at, latency_ms, parallel_group, data_summary, payload)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11::jsonb, $12::jsonb)
+     ON CONFLICT DO NOTHING`,
+    [
+      step.query_id,
+      step.conversation_id ?? null,
+      step.step_seq,
+      step.step_name,
+      step.step_type,
+      step.status,
+      step.started_at,
+      step.completed_at ?? null,
+      step.latency_ms ?? null,
+      step.parallel_group ?? null,
+      JSON.stringify(step.data_summary),
+      JSON.stringify(step.payload),
+    ]
+  )
+}
+
+/** Fetch all steps for a query, ordered by step_seq (for historical replay). */
+export async function fetchTraceSteps(queryId: string): Promise<TraceStep[]> {
+  const result = await query<{
+    query_id: string
+    conversation_id: string | null
+    step_seq: number
+    step_name: string
+    step_type: string
+    status: string
+    started_at: string
+    completed_at: string | null
+    latency_ms: number | null
+    parallel_group: string | null
+    data_summary: Record<string, unknown>
+    payload: Record<string, unknown>
+  }>(
+    `SELECT
+       query_id, conversation_id, step_seq, step_name, step_type,
+       status, started_at, completed_at, latency_ms, parallel_group,
+       data_summary, payload
+     FROM public.query_trace_steps
+     WHERE query_id = $1
+     ORDER BY step_seq ASC`,
+    [queryId]
+  )
+
+  return result.rows.map(r => ({
+    query_id: r.query_id,
+    conversation_id: r.conversation_id ?? undefined,
+    step_seq: r.step_seq,
+    step_name: r.step_name,
+    step_type: r.step_type as TraceStep['step_type'],
+    status: r.status as TraceStep['status'],
+    started_at: r.started_at,
+    completed_at: r.completed_at ?? undefined,
+    latency_ms: r.latency_ms ?? undefined,
+    parallel_group: r.parallel_group ?? undefined,
+    data_summary: r.data_summary as TraceStep['data_summary'],
+    payload: r.payload as TraceStep['payload'],
+  }))
+}
+
+/** For the history list: recent distinct queries with aggregate stats. */
+export async function fetchTraceHistory(limit = 50): Promise<Array<{
+  query_id: string
+  query_text: string | null
+  created_at: string
+  step_count: number
+  total_latency_ms: number | null
+}>> {
+  const result = await query<{
+    query_id: string
+    query_text: string | null
+    created_at: string
+    step_count: number
+    total_latency_ms: number | null
+  }>(
+    `SELECT
+       t.query_id,
+       a.query_text,
+       MIN(t.started_at)::text                                            AS created_at,
+       COUNT(*)::int                                                       AS step_count,
+       ROUND(
+         EXTRACT(EPOCH FROM (MAX(t.completed_at) - MIN(t.started_at))) * 1000
+       )::int                                                              AS total_latency_ms
+     FROM public.query_trace_steps t
+     LEFT JOIN public.audit_log a ON a.query_id = t.query_id
+     GROUP BY t.query_id, a.query_text
+     ORDER BY MIN(t.started_at) DESC
+     LIMIT $1`,
+    [limit]
+  )
+  return result.rows
+}

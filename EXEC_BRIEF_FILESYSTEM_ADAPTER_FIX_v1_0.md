@@ -1,7 +1,7 @@
 ---
 brief_id: EXEC_BRIEF_FILESYSTEM_ADAPTER_FIX
 version: 1.0
-status: AUTHORED
+status: COMPLETE
 authored_by: Claude Code (Sonnet 4.6) — Sidecar 500 investigation session
 authored_at: 2026-04-29
 target_executor: Claude Code session

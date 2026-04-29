@@ -39,17 +39,20 @@ describe('DisclosureTierBadge', () => {
     expect(screen.queryByRole('button', { name: /methodology/i })).not.toBeInTheDocument()
   })
 
-  it('expands and collapses methodology block', () => {
+  it('defaults methodology block to expanded for super_admin', () => {
+    // Per R1.7 brand-spine: super_admin's derivation/methodology is the
+    // most load-bearing surface in the chip — show it without a click.
     render(<DisclosureTierBadge tier="super_admin" methodologyBlock="synthesis prompt: v1.0" />)
     const btn = screen.getByRole('button', { name: /methodology/i })
-    expect(btn).toHaveAttribute('aria-expanded', 'false')
-    fireEvent.click(btn)
     expect(btn).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getByRole('region', { name: /methodology disclosure/i })).toBeInTheDocument()
     expect(screen.getByText('synthesis prompt: v1.0')).toBeInTheDocument()
     fireEvent.click(btn)
     expect(btn).toHaveAttribute('aria-expanded', 'false')
     expect(screen.queryByRole('region', { name: /methodology disclosure/i })).not.toBeInTheDocument()
+    fireEvent.click(btn)
+    expect(btn).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByRole('region', { name: /methodology disclosure/i })).toBeInTheDocument()
   })
 
   it('does not show methodology button for non-super_admin tiers', () => {

@@ -1,4 +1,14 @@
 steps:
+  - id: copy-governance-files
+    name: 'ubuntu'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        mkdir -p platform/00_ARCHITECTURE
+        cp 00_ARCHITECTURE/CAPABILITY_MANIFEST.json platform/00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+        cp 00_ARCHITECTURE/manifest_overrides.yaml platform/00_ARCHITECTURE/manifest_overrides.yaml
+
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'

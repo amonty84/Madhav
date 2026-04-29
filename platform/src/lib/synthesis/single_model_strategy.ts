@@ -17,6 +17,8 @@
 import 'server-only'
 
 import { streamText, stepCountIs, smoothStream, tool } from 'ai'
+import { traceEmitter } from '@/lib/trace/emitter'
+import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
@@ -140,6 +142,64 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       renderedPrompt += `\n\n<PRE_FETCHED_TOOL_RESULTS>\n${truncated}\n</PRE_FETCHED_TOOL_RESULTS>`
     }
 
+    // ── Trace: context_assembly step ─────────────────────────────────────────
+    // Emit after both FUB-2 and FUB-3 blocks are assembled so token counts
+    // reflect the actual content entering the LLM context.
+    // Fire-and-forget — never awaited.
+    {
+      const qid = query_plan.query_plan_id
+      const nToolSteps = query_plan.tools_authorized?.length ?? 0
+      const ctxSeq = 3 + nToolSteps       // synthesis is ctxSeq+1
+
+      const l1Items: TraceChunkItem[] = vsResults.map(r => ({
+        id: r.signal_id ?? 'unknown',
+        source: 'vector_search',
+        layer: 'L1' as const,
+        token_estimate: Math.ceil(r.content.length / 4),
+        text: r.content,
+      }))
+
+      const l2Items: TraceChunkItem[] = nonVsResults.flatMap(tb =>
+        tb.results.map((r: { signal_id?: string; content: string }) => ({
+          id: r.signal_id ?? tb.tool_name,
+          source: tb.tool_name,
+          layer: 'L2.5' as const,
+          token_estimate: Math.ceil(r.content.length / 4),
+          text: r.content,
+        }))
+      )
+
+      const systemChars = renderedPrompt.length
+      const systemTokens = Math.ceil(systemChars / 4)
+      const l1Tokens = l1Items.reduce((s, i) => s + i.token_estimate, 0)
+      const l2Tokens = l2Items.reduce((s, i) => s + i.token_estimate, 0)
+      const totalTokens = l1Tokens + l2Tokens + systemTokens
+
+      traceEmitter.emitStep({
+        event: 'step_done',
+        query_id: qid,
+        step: {
+          query_id: qid,
+          step_seq: ctxSeq,
+          step_name: 'context_assembly',
+          step_type: 'deterministic',
+          status: 'done',
+          started_at: new Date().toISOString(),
+          completed_at: new Date().toISOString(),
+          latency_ms: 0,
+          data_summary: { token_estimate: totalTokens },
+          payload: {
+            l1_tokens: l1Tokens,
+            l2_tokens: l2Tokens,
+            system_tokens: systemTokens,
+            total_tokens: totalTokens,
+            l1_items: l1Items,
+            l2_items: l2Items,
+          },
+        },
+      })
+    }
+
     let toolsForModel: ToolSet | undefined
     if (supports(selected_model_id, 'tool-use')) {
       const wrappedTools: ToolSet = {}
@@ -191,6 +251,10 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       started_at,
     }
 
+    // Populated synchronously at the top of onFinish (before any await), so
+    // it is set by the time the 'finish' SSE part fires in toUIMessageStreamResponse.
+    const methodologyBlockHolder: { value: string | null } = { value: null }
+
     const result = streamText({
       model: resolveModel(selected_model_id),
       messages: modelMessages,
@@ -207,6 +271,41 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         usage?: { inputTokens?: number; outputTokens?: number }
         text?: string
       }) => {
+        // Synchronous extraction — before any await — so the value is
+        // available when the 'finish' SSE part fires in the route handler.
+        const mbMatch = (text ?? '').match(/^```marsys_methodology_block\n([\s\S]*?)\n```/m)
+        methodologyBlockHolder.value = mbMatch ? mbMatch[1].trim() : null
+
+        // ── Trace: synthesis done ─────────────────────────────────────────────
+        // Fire-and-forget — never awaited.
+        {
+          const qid = query_plan.query_plan_id
+          const nToolSteps = query_plan.tools_authorized?.length ?? 0
+          const synthesisSeq = 3 + nToolSteps + 1
+          traceEmitter.emitStep({
+            event: 'step_done',
+            query_id: qid,
+            step: {
+              query_id: qid,
+              step_seq: synthesisSeq,
+              step_name: 'synthesis',
+              step_type: 'llm',
+              status: 'done',
+              started_at: new Date().toISOString(),
+              completed_at: new Date().toISOString(),
+              latency_ms: 0,             // wall-clock tracked by consume/route
+              data_summary: {
+                model: selected_model_id,
+                input_tokens: usage?.inputTokens ?? 0,
+                output_tokens: usage?.outputTokens ?? 0,
+              },
+              payload: {
+                prompt_preview: (text ?? '').slice(0, 500),
+              },
+            },
+          })
+        }
+
         telemetry.recordMetric('synthesis', 'stream_finish', 1, {
           finishReason,
           model: selected_model_id,
@@ -266,7 +365,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       },
     })
 
-    return { result, metadata }
+    return { result, metadata, methodologyBlockHolder }
   }
 }
 

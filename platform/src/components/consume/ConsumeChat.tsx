@@ -41,7 +41,8 @@ import { ShareButton } from '@/components/chat/ShareButton'
 import type { Report, ConversationModule } from '@/lib/db/types'
 import { StreamingAnswer } from './StreamingAnswer'
 import { ValidatorFailureView } from './ValidatorFailureView'
-import { DisclosureTierBadge } from '@/components/disclosure/DisclosureTierBadge'
+import { ConsumeForceDark } from './ConsumeForceDark'
+import { TracePanel } from '@/components/trace/TracePanel'
 import { parseValidatorError } from '@/lib/ui/validator-error'
 import type { AudienceTier } from '@/lib/prompts/types'
 
@@ -81,9 +82,11 @@ export function ConsumeChat({
 }: Props) {
   const router = useRouter()
   const composerRef = useRef<ComposerHandle>(null)
+  const composerEl = useRef<HTMLDivElement>(null)
 
   const [conversations, setConversations] = useState(initialConversations)
   const [panelOptIn, setPanelOptIn] = useState(false)
+  const [tracePanelOpen, setTracePanelOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
@@ -141,10 +144,23 @@ export function ConsumeChat({
     },
   })
 
+  // Write --composer-h to :root so ScrollToBottomButton can position above the band.
+  useEffect(() => {
+    const el = composerEl.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      const h = Math.ceil(entry.contentRect.height)
+      document.documentElement.style.setProperty('--composer-h', `${h}px`)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   // Parse validator failure payloads from chat errors when pipeline is ON.
   useEffect(() => {
     if (!pipelineEnabled) return
     if (session.error) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setValidatorFailures(parseValidatorError(session.error))
     } else {
       setValidatorFailures(null)
@@ -280,6 +296,20 @@ export function ConsumeChat({
     if (!session.isStreaming) composerRef.current?.focus()
   }, [session.isStreaming, currentConversationId])
 
+  const handleRenameConversation = useCallback(
+    async (id: string, title: string) => {
+      const res = await fetch(`/api/conversations/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+      })
+      if (res.ok) {
+        setConversations(prev => prev.map(c => (c.id === id ? { ...c, title } : c)))
+      }
+    },
+    []
+  )
+
   const displayMessages = branches.viewingMessages ?? session.messages
   const messagesEmpty = displayMessages.length === 0
   const lastMessage = displayMessages[displayMessages.length - 1]
@@ -318,7 +348,8 @@ export function ConsumeChat({
     )
 
   return (
-    <>
+    <div className="consume-shell flex h-full flex-1 min-h-0 flex-col">
+      <ConsumeForceDark />
       <ChatShell
         sidebar={sidebar}
         rightPanel={rightPanel}
@@ -332,11 +363,12 @@ export function ConsumeChat({
         onToggleDesktopSidebar={() => setDesktopSidebarCollapsed(c => !c)}
         onToggleMobileSidebar={() => setMobileSidebarOpen(o => !o)}
         setMobileSidebarOpen={setMobileSidebarOpen}
+        conversationId={session.conversationId}
+        onRenameConversation={handleRenameConversation}
       >
         <div
           ref={scrollRef}
           className="relative flex-1 min-h-0 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-          aria-live="polite"
         >
           {messagesEmpty ? (
             <WelcomeGreeting
@@ -346,9 +378,6 @@ export function ConsumeChat({
             />
           ) : pipelineEnabled ? (
             <>
-              <div className="sticky top-0 z-10 mx-auto w-full max-w-3xl px-4 pt-2 pb-1 bg-background/80 backdrop-blur">
-                <DisclosureTierBadge tier={audienceTier} />
-              </div>
               {validatorFailures ? (
                 <ValidatorFailureView
                   failures={validatorFailures}
@@ -358,7 +387,10 @@ export function ConsumeChat({
                       ?.filter((p): p is { type: 'text'; text: string } => p.type === 'text')
                       .map(p => p.text)
                       .join('') ?? ''
-                    if (text) handleSend(text)
+                    if (text) {
+                      composerRef.current?.setValue(text)
+                      composerRef.current?.focus()
+                    }
                   }}
                 />
               ) : (
@@ -367,6 +399,9 @@ export function ConsumeChat({
                     messages={displayMessages}
                     isStreaming={session.isStreaming && !branches.isViewingArchived}
                     onStop={session.stop}
+                    onRegenerate={branches.isViewingArchived ? undefined : handleRegenerate}
+                    ratings={ratings}
+                    onRate={branches.isViewingArchived ? undefined : rate}
                   />
                   {showPendingAssistant && <PendingAssistantBubble />}
                 </>
@@ -410,6 +445,11 @@ export function ConsumeChat({
                 <div className="min-w-0 flex-1">
                   <p className="font-medium">{err.title}</p>
                   <p className="mt-0.5 text-destructive/80">{err.hint}</p>
+                  {err.detail && (
+                    <p className="mt-1 font-mono text-[10px] break-all opacity-60 select-all">
+                      {err.detail.slice(0, 400)}
+                    </p>
+                  )}
                 </div>
                 {err.kind !== 'auth' && (
                   <button
@@ -425,7 +465,7 @@ export function ConsumeChat({
           )
         })()}
 
-        <div className="relative shrink-0 border-t border-border/60 bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60 pb-[env(safe-area-inset-bottom)]">
+        <div ref={composerEl} className="relative shrink-0 border-t border-border/60 bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60 pb-[env(safe-area-inset-bottom)]">
           {branches.isViewingArchived && (
             <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 pt-2">
               <p className="text-xs text-muted-foreground">
@@ -449,18 +489,38 @@ export function ConsumeChat({
               disabled={session.isStreaming || branches.isViewingArchived}
             />
           </div>
-          {panelModeEnabled && pipelineEnabled && (
-            <div className="mx-auto flex w-full max-w-3xl items-center gap-2 px-4 pb-1">
-              <input
-                type="checkbox"
-                id="panel-opt-in"
-                checked={panelOptIn}
-                onChange={e => setPanelOptIn(e.target.checked)}
-                className="h-3.5 w-3.5 rounded border-border bg-background text-primary focus:ring-ring"
-              />
-              <label htmlFor="panel-opt-in" className="text-xs text-muted-foreground cursor-pointer select-none">
-                Panel mode (3 independent models)
-              </label>
+          {(panelModeEnabled || audienceTier === 'super_admin') && pipelineEnabled && (
+            <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pb-1">
+              {panelModeEnabled && (
+                <>
+                  <input
+                    type="checkbox"
+                    id="panel-opt-in"
+                    checked={panelOptIn}
+                    onChange={e => setPanelOptIn(e.target.checked)}
+                    className="h-3.5 w-3.5 rounded border-border bg-background text-primary focus:ring-ring"
+                  />
+                  <label htmlFor="panel-opt-in" className="text-xs text-muted-foreground cursor-pointer select-none">
+                    Panel mode (3 independent models)
+                  </label>
+                </>
+              )}
+              {audienceTier === 'super_admin' && (
+                <button
+                  type="button"
+                  onClick={() => setTracePanelOpen(o => !o)}
+                  className={[
+                    'ml-auto inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
+                    tracePanelOpen
+                      ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
+                      : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
+                  ].join(' ')}
+                  title="Toggle query trace panel"
+                >
+                  <Zap className="h-3 w-3" />
+                  Trace
+                </button>
+              )}
             </div>
           )}
           <Composer
@@ -479,6 +539,13 @@ export function ConsumeChat({
       </ChatShell>
       <ShortcutsDialog open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} commands={paletteCommands} />
-    </>
+      {tracePanelOpen && audienceTier === 'super_admin' && (
+        <TracePanel
+          queryId={session.currentQueryId ?? null}
+          isSuperAdmin={true}
+          onClose={() => setTracePanelOpen(false)}
+        />
+      )}
+    </div>
   )
 }

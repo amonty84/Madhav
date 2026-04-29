@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { X } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { CitationType } from '@/lib/ui/citation-parser'
 
@@ -21,6 +21,7 @@ export function CitationPreview({ type, id, onClose }: Props) {
   const [data, setData] = useState<PreviewData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [expanded, setExpanded] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -52,14 +53,40 @@ export function CitationPreview({ type, id, onClose }: Props) {
     return () => controller.abort()
   }, [type, id])
 
-  // Trap focus and close on Escape
+  // Focus trap + restore focus on close
   useEffect(() => {
-    panelRef.current?.focus()
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+    if (!panelRef.current) return
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    const root = panelRef.current
+
+    const focusables = root.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    )
+    const first = focusables[0]
+    const last = focusables[focusables.length - 1]
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last?.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first?.focus()
+      }
     }
-    document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
+
+    root.addEventListener('keydown', onKey)
+    first?.focus()
+
+    return () => {
+      root.removeEventListener('keydown', onKey)
+      previouslyFocused?.focus()
+    }
   }, [onClose])
 
   return (
@@ -79,31 +106,42 @@ export function CitationPreview({ type, id, onClose }: Props) {
         aria-label={`Citation preview: ${type} ${id}`}
         tabIndex={-1}
         className={cn(
-          'fixed right-0 top-0 z-50 flex h-full w-full max-w-sm flex-col',
-          'border-l border-border bg-background shadow-xl',
-          'focus-visible:outline-none'
+          'fixed right-0 top-0 z-50 flex h-full flex-col',
+          'border-l border-[var(--brand-gold-hairline)] bg-[var(--brand-charcoal)]/95 backdrop-blur-md shadow-xl',
+          'focus-visible:outline-none transition-[width] duration-200',
+          expanded ? 'w-full max-w-3xl' : 'w-full max-w-md sm:max-w-lg lg:max-w-xl'
         )}
       >
-        <header className="flex items-center justify-between border-b border-border px-4 py-3">
+        <header className="flex items-center justify-between border-b border-[var(--brand-gold-hairline)] px-4 py-3">
           <div>
-            <p className="bt-label text-muted-foreground uppercase tracking-wider">
+            <p className="bt-label text-[var(--brand-gold)]/70 uppercase tracking-wider">
               {type} citation
             </p>
-            <p className="bt-body font-medium text-foreground">{id}</p>
+            <p className="bt-body font-medium text-[var(--brand-cream)]" style={{ fontFamily: 'var(--font-serif)' }}>{id}</p>
           </div>
-          <button
-            type="button"
-            aria-label="Close citation preview"
-            onClick={onClose}
-            className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setExpanded(v => !v)}
+              aria-label={expanded ? 'Collapse panel' : 'Expand panel'}
+              className="rounded-md p-1.5 text-[var(--brand-gold)]/60 hover:bg-[var(--brand-gold-faint)] hover:text-[var(--brand-gold)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]"
+            >
+              {expanded ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+            </button>
+            <button
+              type="button"
+              aria-label="Close citation preview"
+              onClick={onClose}
+              className="rounded-md p-1.5 text-[var(--brand-cream)]/60 hover:bg-[var(--brand-gold-faint)] hover:text-[var(--brand-cream)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
         </header>
 
         <div className="flex-1 overflow-y-auto px-4 py-4">
           {loading && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-[var(--brand-cream)]/60">
               <span className="animate-pulse">Loading…</span>
             </div>
           )}
@@ -112,11 +150,11 @@ export function CitationPreview({ type, id, onClose }: Props) {
           )}
           {data && (
             <div className="space-y-3">
-              <h3 className="bt-body font-semibold text-foreground">{data.title}</h3>
+              <h3 className="bt-body font-semibold text-[var(--brand-cream)]">{data.title}</h3>
               {data.meta && (
-                <p className="bt-label text-muted-foreground">{data.meta}</p>
+                <p className="bt-label text-[var(--brand-cream)]/60">{data.meta}</p>
               )}
-              <p className="bt-body text-foreground/90 leading-relaxed whitespace-pre-wrap">
+              <p className="bt-body text-[var(--brand-cream)]/80 leading-relaxed whitespace-pre-wrap">
                 {data.content}
               </p>
             </div>

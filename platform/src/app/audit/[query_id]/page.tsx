@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getAuditRow } from '@/lib/audit/queries'
 import { AuditDetailView } from '@/components/audit/AuditDetailView'
-import { QueryClassBadge, DisclosureTierBadge } from '@/components/audit/AuditBadge'
+import { QueryClassBadge, AuditDisclosureTierBadge } from '@/components/audit/AuditBadge'
 
 export async function generateMetadata({
   params,
@@ -39,7 +39,7 @@ export default async function AuditDetailPage({
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <QueryClassBadge queryClass={row.query_class ?? '—'} />
-          <DisclosureTierBadge tier={row.disclosure_tier ?? '—'} />
+          <AuditDisclosureTierBadge tier={row.disclosure_tier ?? '—'} />
         </div>
       </div>
 

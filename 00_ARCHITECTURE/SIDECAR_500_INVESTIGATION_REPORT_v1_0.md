@@ -10,6 +10,7 @@ trigger_brief: EXEC_BRIEF_SIDECAR_500_INVESTIGATION_v1_0.md
 phase_14_lockdown_commit: 5b7d252
 changelog:
   - v1.0 (2026-04-29): Initial investigation. Root cause: transient cold-start. Sidecar healthy.
+  - v1.1 (2026-04-29): REM-001 executed — EXEC_BRIEF_FILESYSTEM_ADAPTER_FIX_v1_0.md complete. filesystem.ts now env-var driven; Dockerfile + cloudbuild updated.
 ---
 
 # Sidecar 500 Investigation Report
@@ -152,10 +153,10 @@ becomes MEDIUM if any code path directly proxies to the sidecar RAG endpoints.
 
 | ID | Finding | Brief | Complexity |
 |---|---|---|---|
-| REM-001 | filesystemAdapter REPO_ROOT hardcoded | `EXEC_BRIEF_FILESYSTEM_ADAPTER_FIX_v1_0.md` | Medium |
-| REM-002 | Sidecar missing RAG routes | `EXEC_BRIEF_SIDECAR_IMAGE_REBUILD_v1_0.md` | Medium |
+| REM-001 | filesystemAdapter REPO_ROOT hardcoded | `EXEC_BRIEF_FILESYSTEM_ADAPTER_FIX_v1_0.md` | Medium | **COMPLETE 2026-04-29** |
+| REM-002 | Sidecar missing RAG routes | `EXEC_BRIEF_SIDECAR_IMAGE_REBUILD_v1_0.md` | Medium | Deferred |
 
-**REM-001 must be executed before any new amjis-web image is deployed.**
+**REM-001 COMPLETE — fix deployed; new amjis-web image may now be shipped.**
 **REM-002 can be deferred until sidecar RAG routes are actually needed.**
 
 ---
@@ -176,6 +177,6 @@ amjis-web service: Ready (all conditions True)
 
 ## Residuals
 
-1. `REM-001` — filesystemAdapter REPO_ROOT — blocked until `EXEC_BRIEF_FILESYSTEM_ADAPTER_FIX_v1_0.md` executes
+1. `REM-001` — filesystemAdapter REPO_ROOT — **COMPLETE 2026-04-29**: filesystem.ts env-var driven; Dockerfile + cloudbuild updated; .env.local set for local dev.
 2. `REM-002` — Sidecar RAG routes — deferred until needed; `EXEC_BRIEF_SIDECAR_IMAGE_REBUILD_v1_0.md` ready
 3. `query_trace_steps` table — now present; 14G hypothesis was secondary/incorrect; no action needed

@@ -19,7 +19,7 @@ export function ScrollToBottomButton({ visible, onClick }: Props) {
         'hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none',
         visible ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-2'
       )}
-      style={{ bottom: 'calc(var(--composer-h, 100px) + 12px)' }}
+      style={{ bottom: 'calc(var(--composer-h) + 12px)' }}
     >
       <ArrowDown className="size-4 text-muted-foreground" />
     </button>

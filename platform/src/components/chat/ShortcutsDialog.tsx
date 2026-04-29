@@ -14,13 +14,16 @@ interface Props {
 }
 
 const SHORTCUTS: { keys: string[]; label: string }[] = [
-  { keys: ['⌘', 'K'], label: 'Command palette' },
-  { keys: ['⌘', '⇧', 'O'], label: 'New chat' },
-  { keys: ['⌘', 'B'], label: 'Toggle sidebar' },
-  { keys: ['⌘', '/'], label: 'Show keyboard shortcuts' },
   { keys: ['↵'], label: 'Send message' },
   { keys: ['⇧', '↵'], label: 'New line' },
   { keys: ['Esc'], label: 'Stop generating' },
+  { keys: ['⌘', 'K'], label: 'Command palette' },
+  { keys: ['⌘', 'B'], label: 'Toggle sidebar' },
+  { keys: ['⌘', '⇧', 'O'], label: 'New chat' },
+  { keys: ['⌘', '/'], label: 'Show keyboard shortcuts' },
+  { keys: ['/'], label: 'Focus composer (from anywhere)' },
+  { keys: ['hover', '→', 'Copy'], label: 'Copy message' },
+  { keys: ['hover', '→', '↺'], label: 'Regenerate response' },
 ]
 
 export function ShortcutsDialog({ open, onOpenChange }: Props) {
