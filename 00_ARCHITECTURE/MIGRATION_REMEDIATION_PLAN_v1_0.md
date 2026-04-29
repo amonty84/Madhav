@@ -2,16 +2,18 @@
 artifact: MIGRATION_REMEDIATION_PLAN_v1_0.md
 canonical_id: MIGRATION_REMEDIATION_PLAN
 version: "1.0"
-status: OPEN
+status: CLOSED
 produced_during: Forensic Migration Audit (post-Phase-14G lockdown)
 produced_on: "2026-04-29"
+closed_on: "2026-04-29"
 authoritative_side: claude
 trigger_brief: EXEC_BRIEF_FORENSIC_MIGRATION_AUDIT_v1_0.md
 divergence_register: 00_ARCHITECTURE/MIGRATION_DIVERGENCE_REGISTER_v1_0.json
 audit_report: 00_ARCHITECTURE/MIGRATION_AUDIT_REPORT_v1_0.md
-open_items: 2
+open_items: 0
 changelog:
   - v1.0 (2026-04-29): Initial plan. 2 REM entries covering 3 DIV entries. Both are manifest-only edits; no data migration required.
+  - v1.1 (2026-04-29): CLOSED. REM-A-001 and REM-A-002 both discharged in same session. CAPABILITY_MANIFEST.json updated: 2 gcs_uri prefixes corrected, 3 ephemeris CSV entries added with fingerprints. drift_detector confirms 0 new HIGH findings introduced. Forensic migration audit cycle complete.
 ---
 
 # Migration Remediation Plan — Phase 14
@@ -22,8 +24,8 @@ Two remediation actions are required to close the 3 metadata divergences found d
 
 | REM ID | DIV(s) | Action | Complexity | Risk | Status |
 |---|---|---|---|---|---|
-| REM-A-001 | DIV-001, DIV-002 | Correct 2 GCS URI prefixes in CAPABILITY_MANIFEST.json | Small | LOW | OPEN |
-| REM-A-002 | DIV-003 | Add 3 ephemeris CSV entries to CAPABILITY_MANIFEST.json | Small | LOW | OPEN |
+| REM-A-001 | DIV-001, DIV-002 | Correct 2 GCS URI prefixes in CAPABILITY_MANIFEST.json | Small | LOW | CLOSED 2026-04-29 |
+| REM-A-002 | DIV-003 | Add 3 ephemeris CSV entries to CAPABILITY_MANIFEST.json | Small | LOW | CLOSED 2026-04-29 |
 
 ---
 

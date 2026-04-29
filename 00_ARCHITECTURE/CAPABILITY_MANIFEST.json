@@ -996,7 +996,7 @@
       "interface_version": "1.0",
       "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L1/structured/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
       "notes": "589-fact structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md. Phase 14C Stream B 2026-04-29."
     },
     {
@@ -1012,7 +1012,7 @@
       "interface_version": "1.0",
       "fingerprint": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L1/structured/CHART_FACTS_SCHEMA_v1_0.json",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
       "notes": "JSON Schema for chart_facts table and CHART_FACTS_EXTRACTION YAML. Phase 14C Stream B 2026-04-29."
     },
     {
@@ -1175,7 +1175,7 @@
         "cross_domain",
         "signal_lookup"
       ],
-      "description": "499 MSR signals with category, valence, planet/house/sign arrays \u2014 queryable by deterministic filters",
+      "description": "499 MSR signals with category, valence, planet/house/sign arrays — queryable by deterministic filters",
       "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
@@ -1222,7 +1222,7 @@
         "cross_domain",
         "interpretive"
       ],
-      "description": "81-cell 9\u00d79 CDLM matrix \u2014 from_domain/to_domain/link_type/strength for all domain pair relationships",
+      "description": "81-cell 9×9 CDLM matrix — from_domain/to_domain/link_type/strength for all domain pair relationships",
       "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
@@ -1307,7 +1307,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Canonical spec for L2.5 structured Postgres tables \u2014 schemas, pipeline integration, tool surface, naming conventions, findings",
+      "description": "Canonical spec for L2.5 structured Postgres tables — schemas, pipeline integration, tool surface, naming conventions, findings",
       "fingerprint": "07aae69a77926b16ec830130a9e68dc048882699516ca3ce662e6802097554d3"
     },
     {
@@ -1322,7 +1322,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Phase 14D execution report \u2014 done criteria verification, stream log, spot-check results, findings, follow-ups",
+      "description": "Phase 14D execution report — done criteria verification, stream log, spot-check results, findings, follow-ups",
       "fingerprint": "55483ae04a6a1a3a643991bd187b2ae2c651e7e79cac89551e6a66b7d601e20c"
     },
     {
@@ -1351,7 +1351,8 @@
         "query_dasha"
       ],
       "description": "Twelve deterministic LLM tools in consumeTools: 5 L2.5 (Phase 14D) + 7 L1 (Phase 14C).",
-      "fingerprint": "UNKNOWN_PATH"
+      "fingerprint": "UNKNOWN_PATH",
+      "path": "platform/src/lib/claude/consume-tools.ts"
     },
     {
       "canonical_id": "MIGRATION_014_CHART_FACTS",
@@ -1427,7 +1428,7 @@
       "phase": "14C",
       "table_name": "chart_facts",
       "row_count": 589,
-      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams.",
+      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md — planets, houses, cusps, yogas, dashas, sahams.",
       "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
     },
     {
@@ -1482,6 +1483,52 @@
       "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
     },
     {
+      "canonical_id": "ECLIPSES_1900_2100",
+      "path": "01_FACTS_LAYER/ECLIPSES_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": ["file", "db_table"],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "fbacc50f1c0d0b3ed33b02341c3f2497eb04ee77d37efe3f6fbca21c15d1b1c2",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/ECLIPSES_1900_2100.csv",
+      "downstream_table": "eclipses",
+      "downstream_row_count": 913,
+      "notes": "Eclipse events 1900–2100 source CSV. Ingested into eclipses table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
+      "canonical_id": "RETROGRADES_1900_2100",
+      "path": "01_FACTS_LAYER/RETROGRADES_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": ["file", "db_table"],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "17fa17153c02887295fba6794283ca9b3573071afad7d1a9b4412990109d6ace",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/RETROGRADES_1900_2100.csv",
+      "downstream_table": "retrogrades",
+      "downstream_row_count": 2462,
+      "notes": "Planetary retrograde periods 1900–2100 source CSV. Ingested into retrogrades table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
+      "canonical_id": "EPHEMERIS_MONTHLY_1900_2100",
+      "path": "01_FACTS_LAYER/EPHEMERIS_MONTHLY_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": ["file"],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "a0e8fbac0178610faa00fcbdc4f63b89b4071d8936ce8691eafb57ebb2a9791a",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/EPHEMERIS_MONTHLY_1900_2100.csv",
+      "notes": "Monthly planetary positions 1900–2100 source CSV (summary; daily detail in ephemeris_daily table). Confirmed in GCS by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
       "canonical_id": "L1_LIFE_EVENTS",
       "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
       "version": "1.0",
@@ -1527,7 +1574,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated.",
+      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md — 589 facts, native-validated.",
       "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66"
     },
     {
