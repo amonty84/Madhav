@@ -10,9 +10,10 @@ import { AnswerView } from './AnswerView'
 interface Props {
   panel: PanelResult
   chartId: string
+  traceId?: string
 }
 
-export function PanelAnswerView({ panel, chartId: _chartId }: Props) {
+export function PanelAnswerView({ panel, chartId: _chartId, traceId }: Props) {
   const [divergenceOpen, setDivergenceOpen] = useState(false)
   const [membersOpen, setMembersOpen] = useState(false)
 
@@ -47,7 +48,7 @@ export function PanelAnswerView({ panel, chartId: _chartId }: Props) {
 
       {/* Final answer — routed through AnswerView so markdown, headings, lists,
           code blocks, and citation chips render identically to the single-model path. */}
-      <AnswerView text={adjudication.final_answer} />
+      <AnswerView text={adjudication.final_answer} traceId={traceId} queryId={traceId} />
 
       {/* Divergence section */}
       <div className="border border-border/60 rounded-lg overflow-hidden">

@@ -1,49 +1,80 @@
 'use client'
 
-import { memo, useMemo } from 'react'
+import { memo, useMemo, useState } from 'react'
+import { Zap } from 'lucide-react'
 import { parseCitations, type ParsedSegment } from '@/lib/ui/citation-parser'
 import { CitationChip } from '@/components/citations/CitationChip'
 import { StreamingMarkdown } from '@/components/chat/StreamingMarkdown'
+import { TraceDrawer } from './TraceDrawer'
+import { LogPredictionAction } from './LogPredictionAction'
 
 interface Props {
   text: string
   className?: string
+  traceId?: string
+  queryId?: string
 }
 
 /**
  * Renders a finalized synthesis answer with inline citation chips.
- * Citation markers ([signal:...], [asset:...], [chunk:...]) are replaced
- * with interactive CitationChip pills; remaining text is markdown-rendered.
  *
- * Used for completed (non-streaming) pipeline-v2 messages.
+ * Footer (when relevant):
+ *  - Trace button → opens TraceDrawer (only when traceId provided)
+ *  - Log Prediction button → only when detectPrediction returns true
  */
-function AnswerViewImpl({ text, className }: Props) {
+function AnswerViewImpl({ text, className, traceId, queryId }: Props) {
   const { segments } = useMemo(() => parseCitations(text), [text])
-
-  // Split segments into markdown runs separated by citation chips.
-  // react-markdown requires a full string, so we reconstruct text blocks
-  // and interleave chips using a key-indexed span approach.
   const nodes = useMemo(() => buildNodes(segments), [segments])
+  const [traceOpen, setTraceOpen] = useState(false)
+
+  const hasFooter = !!traceId || true // LogPredictionAction self-hides when no detection
 
   return (
     <div className={className}>
-      {nodes.map((node, i) => {
-        if (node.type === 'markdown') {
+      <div>
+        {nodes.map((node, i) => {
+          if (node.type === 'markdown') {
+            return (
+              <StreamingMarkdown key={i} isStreaming={false}>
+                {node.content}
+              </StreamingMarkdown>
+            )
+          }
           return (
-            <StreamingMarkdown key={i} isStreaming={false}>
-              {node.content}
-            </StreamingMarkdown>
+            <CitationChip
+              key={i}
+              type={node.citationType}
+              id={node.citationId}
+              className="mx-0.5 align-middle"
+            />
           )
-        }
-        return (
-          <CitationChip
-            key={i}
-            type={node.citationType}
-            id={node.citationId}
-            className="mx-0.5 align-middle"
-          />
-        )
-      })}
+        })}
+      </div>
+
+      {hasFooter && (
+        <div className="mt-3 flex items-center gap-2">
+          {traceId && (
+            <button
+              type="button"
+              onClick={() => setTraceOpen(true)}
+              className="inline-flex items-center gap-1 rounded border border-border px-2 py-0.5 text-[11px] text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:text-[var(--status-warn)] transition-colors"
+              title="Open query trace"
+            >
+              <Zap className="h-3 w-3" />
+              Trace
+            </button>
+          )}
+          <LogPredictionAction answerText={text} queryId={queryId ?? traceId} />
+        </div>
+      )}
+
+      {traceId && (
+        <TraceDrawer
+          queryId={traceId}
+          open={traceOpen}
+          onOpenChange={setTraceOpen}
+        />
+      )}
     </div>
   )
 }

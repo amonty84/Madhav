@@ -653,9 +653,13 @@ function TraceTimeline({
   )
 }
 
-// ── Main TracePanel ────────────────────────────────────────────────────────────
+// ── TracePanelContent — shared render body used by TraceDrawer + TracePanel ────
 
-export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
+interface ContentProps {
+  queryId: string | null
+}
+
+export function TracePanelContent({ queryId }: ContentProps) {
   const [activeTab, setActiveTab] = useState<'live' | 'history'>('live')
   const [historyQueryId, setHistoryQueryId] = useState<string | null>(null)
   const [historyList, setHistoryList] = useState<Array<{
@@ -673,11 +677,6 @@ export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
 
   const { steps, done, error } = useTraceStream(effectiveQueryId, isHistorical)
 
-  // Reset selected step when query changes
-  const prevQid = historyQueryId
-  if (prevQid !== historyQueryId) setSelectedStep(null)
-
-  // Load history list when tab opens
   const loadHistory = () => {
     if (historyLoaded) return
     fetch('/api/trace/history')
@@ -686,10 +685,8 @@ export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
         setHistoryList(data)
         setHistoryLoaded(true)
       })
-      .catch(err => console.error('[TracePanel] history load failed', err))
+      .catch(err => console.error('[TracePanelContent] history load failed', err))
   }
-
-  if (!isSuperAdmin) return null
 
   const liveBadgeLabel = done ? 'DONE' : steps.length > 0 ? 'LIVE' : 'READY'
   const liveBadgeColor = done
@@ -699,120 +696,124 @@ export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
     : 'bg-slate-900 text-slate-600 border-slate-800'
 
   return (
+    <div className="flex flex-col h-full">
+      {/* Sub-header: query pill + live badge + tabs */}
+      <div className="flex items-center gap-3 px-4 py-2 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <Zap size={12} className="text-blue-400" />
+          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${liveBadgeColor}`}>
+            {liveBadgeLabel}
+          </span>
+        </div>
+
+        {effectiveQueryId && (
+          <div className="flex-1 min-w-0 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-500 font-mono truncate">
+            {effectiveQueryId}
+          </div>
+        )}
+
+        <div className="flex gap-px bg-slate-800 rounded p-0.5">
+          <button
+            type="button"
+            onClick={() => setActiveTab('live')}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'live' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+          >
+            Live
+          </button>
+          <button
+            type="button"
+            onClick={() => { setActiveTab('history'); loadHistory() }}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'history' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+          >
+            History
+          </button>
+        </div>
+      </div>
+
+      {/* Error banner */}
+      {error && (
+        <div className="px-4 py-2 bg-red-950 border-b border-red-900 text-[11px] text-red-400 flex-shrink-0">
+          {error}
+        </div>
+      )}
+
+      {/* Body */}
+      {activeTab === 'history' && !historyQueryId ? (
+        <div className="flex-1 overflow-y-auto py-2">
+          {!historyLoaded ? (
+            <div className="px-4 py-3 text-[11px] text-slate-600">Loading history…</div>
+          ) : historyList.length === 0 ? (
+            <div className="px-4 py-3 text-[11px] text-slate-600">No trace history yet. Run a query first.</div>
+          ) : (
+            historyList.map(entry => (
+              <button
+                key={entry.query_id}
+                type="button"
+                onClick={() => setHistoryQueryId(entry.query_id)}
+                className="w-full text-left px-4 py-2.5 hover:bg-slate-800/60 border-b border-slate-800/60 transition-colors"
+              >
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-[11px] text-slate-300 truncate flex-1">
+                    {entry.query_text ?? '(no text)'}
+                  </span>
+                  <span className="text-[9px] text-slate-600 flex-shrink-0">{entry.step_count} steps</span>
+                  {entry.total_latency_ms != null && (
+                    <span className="text-[9px] text-slate-600 flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
+                  )}
+                </div>
+                <div className="text-[9px] text-slate-600">
+                  {new Date(entry.created_at).toLocaleString()}
+                </div>
+              </button>
+            ))
+          )}
+        </div>
+      ) : (
+        <div className="flex-1 flex overflow-hidden min-h-0">
+          <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
+            <TraceTimeline
+              steps={steps}
+              selectedSeq={selectedStep?.step_seq ?? null}
+              onSelect={s => setSelectedStep(s)}
+            />
+          </div>
+          <div className="flex-1 overflow-hidden flex flex-col">
+            <ContextInspector steps={steps} selectedStep={selectedStep} />
+          </div>
+        </div>
+      )}
+
+      <TimelineBar steps={steps} />
+    </div>
+  )
+}
+
+// ── Main TracePanel — backward-compatible always-on drawer wrapper ─────────────
+
+export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
+  if (!isSuperAdmin) return null
+
+  return (
     <>
-      {/* Backdrop */}
       <div
         className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
         onClick={onClose}
       />
-
-      {/* Drawer */}
       <div className="fixed inset-y-0 right-0 z-50 flex flex-col w-[65vw] min-w-[700px] max-w-[1100px] bg-[#0d1117] border-l border-slate-800 shadow-2xl">
-
-        {/* Header */}
         <div className="flex items-center gap-3 px-4 py-2.5 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <Zap size={13} className="text-blue-400" />
-            <span className="text-[13px] font-bold text-slate-100">Query Trace</span>
-            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${liveBadgeColor}`}>
-              {liveBadgeLabel}
-            </span>
-          </div>
-
-          {/* Query pill */}
-          {effectiveQueryId && (
-            <div className="flex-1 min-w-0 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-500 font-mono truncate">
-              {effectiveQueryId}
-            </div>
-          )}
-
-          {/* Tabs */}
-          <div className="flex gap-px bg-slate-800 rounded p-0.5">
-            <button
-              type="button"
-              onClick={() => setActiveTab('live')}
-              className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'live' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
-            >
-              Live
-            </button>
-            <button
-              type="button"
-              onClick={() => { setActiveTab('history'); loadHistory() }}
-              className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'history' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
-            >
-              History
-            </button>
-          </div>
-
+          <Zap size={13} className="text-blue-400" />
+          <span className="text-[13px] font-bold text-slate-100">Query Trace</span>
           <button
             type="button"
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-200 transition-colors"
+            className="ml-auto text-slate-500 hover:text-slate-200 transition-colors"
           >
             <X size={16} />
           </button>
         </div>
-
-        {/* Error banner */}
-        {error && (
-          <div className="px-4 py-2 bg-red-950 border-b border-red-900 text-[11px] text-red-400 flex-shrink-0">
-            {error}
-          </div>
-        )}
-
-        {/* Body */}
-        {activeTab === 'history' && !historyQueryId ? (
-          /* History list */
-          <div className="flex-1 overflow-y-auto py-2">
-            {!historyLoaded ? (
-              <div className="px-4 py-3 text-[11px] text-slate-600">Loading history…</div>
-            ) : historyList.length === 0 ? (
-              <div className="px-4 py-3 text-[11px] text-slate-600">No trace history yet. Run a query first.</div>
-            ) : (
-              historyList.map(entry => (
-                <button
-                  key={entry.query_id}
-                  type="button"
-                  onClick={() => setHistoryQueryId(entry.query_id)}
-                  className="w-full text-left px-4 py-2.5 hover:bg-slate-800/60 border-b border-slate-800/60 transition-colors"
-                >
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[11px] text-slate-300 truncate flex-1">
-                      {entry.query_text ?? '(no text)'}
-                    </span>
-                    <span className="text-[9px] text-slate-600 flex-shrink-0">{entry.step_count} steps</span>
-                    {entry.total_latency_ms != null && (
-                      <span className="text-[9px] text-slate-600 flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
-                    )}
-                  </div>
-                  <div className="text-[9px] text-slate-600">
-                    {new Date(entry.created_at).toLocaleString()}
-                  </div>
-                </button>
-              ))
-            )}
-          </div>
-        ) : (
-          /* Trace view: timeline + inspector */
-          <div className="flex-1 flex overflow-hidden min-h-0">
-            {/* Left: pipeline steps */}
-            <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
-              <TraceTimeline
-                steps={steps}
-                selectedSeq={selectedStep?.step_seq ?? null}
-                onSelect={s => setSelectedStep(s)}
-              />
-            </div>
-
-            {/* Right: context + step detail */}
-            <div className="flex-1 overflow-hidden flex flex-col">
-              <ContextInspector steps={steps} selectedStep={selectedStep} />
-            </div>
-          </div>
-        )}
-
-        {/* Footer: wall-clock timeline */}
-        <TimelineBar steps={steps} />
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <TracePanelContent queryId={queryId} />
+        </div>
       </div>
     </>
   )
