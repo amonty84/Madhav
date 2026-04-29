@@ -27,11 +27,17 @@ log = logging.getLogger(__name__)
 
 SOURCE_FILE = "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md"
 
-_SIG_RE = re.compile(r"SIG\.MSR\.\d{3}[a-z]?")
+_SIG_RE_FULL = re.compile(r"SIG\.MSR\.(\d{3}[a-z]?)")
+_SIG_RE_SHORT = re.compile(r"\bMSR\.(\d{3}[a-z]?)")
 
 
 def _extract_signal_refs(text: str) -> list[str]:
-    return sorted(set(_SIG_RE.findall(text)))
+    found = set()
+    for m in _SIG_RE_FULL.finditer(text):
+        found.add(f"SIG.MSR.{m.group(1)}")
+    for m in _SIG_RE_SHORT.finditer(text):
+        found.add(f"SIG.MSR.{m.group(1)}")
+    return sorted(found)
 
 
 def _slugify(text: str) -> str:
