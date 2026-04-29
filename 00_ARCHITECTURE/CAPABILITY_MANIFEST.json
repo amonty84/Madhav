@@ -969,7 +969,7 @@
     },
     {
       "canonical_id": "MIGRATION_013_BUILD_PIPELINE_STAGING",
-      "path": "platform/supabase/migrations/013_build_pipeline_staging.sql",
+      "path": "platform/migrations/013_build_pipeline_staging.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1017,7 +1017,7 @@
     },
     {
       "canonical_id": "MIGRATION_019_L3_REGISTERS",
-      "path": "platform/supabase/migrations/019_l3_registers.sql",
+      "path": "platform/migrations/019_l3_registers.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1141,7 +1141,7 @@
     },
     {
       "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1156,7 +1156,7 @@
     },
     {
       "canonical_id": "L25_MSR_SIGNALS",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1180,7 +1180,7 @@
     },
     {
       "canonical_id": "L25_UCN_SECTIONS",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1204,7 +1204,7 @@
     },
     {
       "canonical_id": "L25_CDLM_LINKS",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1227,7 +1227,7 @@
     },
     {
       "canonical_id": "L25_CGM_NODES",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1250,7 +1250,7 @@
     },
     {
       "canonical_id": "L25_CGM_EDGES",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1273,7 +1273,7 @@
     },
     {
       "canonical_id": "L25_RM_RESONANCES",
-      "path": "platform/supabase/migrations/018_l2_5_structured.sql",
+      "path": "platform/migrations/018_l2_5_structured.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L2.5",
@@ -1356,7 +1356,7 @@
     },
     {
       "canonical_id": "MIGRATION_014_CHART_FACTS",
-      "path": "platform/supabase/migrations/014_chart_facts.sql",
+      "path": "platform/migrations/014_chart_facts.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1371,7 +1371,7 @@
     },
     {
       "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
-      "path": "platform/supabase/migrations/015_ephemeris_daily.sql",
+      "path": "platform/migrations/015_ephemeris_daily.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1386,7 +1386,7 @@
     },
     {
       "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
-      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1401,7 +1401,7 @@
     },
     {
       "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
-      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "infra",
@@ -1416,7 +1416,7 @@
     },
     {
       "canonical_id": "L1_CHART_FACTS",
-      "path": "platform/supabase/migrations/014_chart_facts.sql",
+      "path": "platform/migrations/014_chart_facts.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",
@@ -1433,7 +1433,7 @@
     },
     {
       "canonical_id": "L1_EPHEMERIS_DAILY",
-      "path": "platform/supabase/migrations/015_ephemeris_daily.sql",
+      "path": "platform/migrations/015_ephemeris_daily.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",
@@ -1450,7 +1450,7 @@
     },
     {
       "canonical_id": "L1_ECLIPSES",
-      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",
@@ -1467,7 +1467,7 @@
     },
     {
       "canonical_id": "L1_RETROGRADES",
-      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",
@@ -1530,7 +1530,7 @@
     },
     {
       "canonical_id": "L1_LIFE_EVENTS",
-      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",
@@ -1547,7 +1547,7 @@
     },
     {
       "canonical_id": "L1_SADE_SATI_PHASES",
-      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "L1",

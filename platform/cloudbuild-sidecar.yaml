@@ -5,11 +5,9 @@ steps:
     args:
       - -c
       - |
-        mkdir -p platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude
-        cp 035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md \
-           platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md
-        cp 035_DISCOVERY_LAYER/PROMPTS/claude/synthesis_v1_0.md \
-           platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude/synthesis_v1_0.md
+        mkdir -p platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS
+        cp -r 035_DISCOVERY_LAYER/PROMPTS/. \
+           platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/
 
   - name: 'gcr.io/cloud-builders/docker'
     args:

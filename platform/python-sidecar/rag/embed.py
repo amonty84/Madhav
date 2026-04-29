@@ -2,6 +2,10 @@
 embed — MARSYS-JIS RAG Pipeline embedding generator.
 Phase B.3. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.3 Task 1 + CLAUDECODE_BRIEF v5.0 §SESSION_4.
 
+DEPRECATED: Superseded by pipeline/main.py (Phase 14B) as the canonical production
+embedding path. Retained for ad-hoc re-embedding of small batches during development.
+Use pipeline/main.py for full corpus rebuilds and production ingestion.
+
 Vertex AI text-multilingual-embedding-002 (768-dim) replaces Voyage-3-large.
 Uses Application Default Credentials — no API key required.
 Pre-embedding enrichment: [{layer}] [{doc_type}] prefix.
@@ -105,9 +109,8 @@ def _init_vertexai() -> None:
     import vertexai
 
     project = os.environ.get("GCP_PROJECT", "")
-    # Vertex AI text embedding models are available in us-central1 globally;
-    # use that regardless of where Cloud SQL is hosted.
-    vertexai.init(project=project, location="us-central1")
+    location = os.environ.get("VERTEX_AI_LOCATION", "asia-south1")
+    vertexai.init(project=project, location=location)
 
 
 def _embed_batch(texts: list[str], task_type: str = "RETRIEVAL_DOCUMENT") -> list[list[float]]:

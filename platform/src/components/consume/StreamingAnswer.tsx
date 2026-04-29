@@ -47,10 +47,10 @@ export function StreamingAnswer({
 
         if (message.role === 'user') {
           return (
-            <div key={message.id} className="flex justify-end px-4 py-2">
+            <div key={message.id} className="mx-auto w-full max-w-4xl flex justify-end px-4 py-2">
               <div
                 className={cn(
-                  'max-w-[80%] rounded-2xl bg-muted px-4 py-2.5',
+                  'max-w-[75%] rounded-2xl border border-border/80 bg-muted/50 px-4 py-2.5',
                   'bt-body text-foreground'
                 )}
               >

@@ -11,9 +11,15 @@ load_dotenv()
 
 app = FastAPI(title="MARSYS-JIS Compute Sidecar", version="1.0.0")
 
+# SIDECAR_ALLOWED_ORIGINS: comma-separated list of allowed origins.
+# In production (Cloud Run service-to-service), CORS is not needed — set to
+# the frontend Cloud Run URL. For local dev, http://localhost:3000 is sufficient.
+_raw_origins = os.environ.get("SIDECAR_ALLOWED_ORIGINS", "http://localhost:3000")
+_allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_allowed_origins,
     allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
