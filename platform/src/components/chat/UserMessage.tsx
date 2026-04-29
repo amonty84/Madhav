@@ -66,7 +66,7 @@ export function UserMessage({
 
   if (editing) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4">
+      <div className="mx-auto w-full max-w-4xl px-4">
         <div className="ml-auto w-full max-w-[85%]">
           <div className="rounded-2xl border border-border bg-background p-3 shadow-sm">
             <TextareaAutosize
@@ -112,7 +112,7 @@ export function UserMessage({
       initial={reduce ? false : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="group/message mx-auto w-full max-w-3xl px-4"
+      className="group/message mx-auto w-full max-w-4xl px-4"
     >
       <div className="flex items-start gap-4">
       <div className="min-w-0 flex-1">

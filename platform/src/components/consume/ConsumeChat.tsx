@@ -14,6 +14,7 @@ import {
   FileQuestion,
   BookOpenText,
   User,
+  Columns3,
   type LucideIcon,
 } from 'lucide-react'
 import { MODELS, PROVIDER_LABEL, type SpeedTier } from '@/lib/models/registry'
@@ -437,7 +438,7 @@ export function ConsumeChat({
           const err = classifyChatError(session.error)
           if (!err) return null
           return (
-            <div className="mx-auto w-full max-w-3xl px-4">
+            <div className="mx-auto w-full max-w-4xl px-4">
               <div
                 role="alert"
                 className="flex items-start justify-between gap-3 rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive"
@@ -467,7 +468,7 @@ export function ConsumeChat({
 
         <div ref={composerEl} className="relative shrink-0 border-t border-border/60 bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60 pb-[env(safe-area-inset-bottom)]">
           {branches.isViewingArchived && (
-            <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 pt-2">
+            <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-3 px-4 pt-2">
               <p className="text-xs text-muted-foreground">
                 Viewing an earlier version of this conversation. Composer is disabled.
               </p>
@@ -480,7 +481,7 @@ export function ConsumeChat({
               </button>
             </div>
           )}
-          <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-2 px-4 pt-1.5">
+          <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-2 px-4 py-1.5">
             <ModelStylePicker
               model={model}
               style={style}
@@ -488,41 +489,49 @@ export function ConsumeChat({
               onStyleChange={setStyle}
               disabled={session.isStreaming || branches.isViewingArchived}
             />
-          </div>
-          {(panelModeEnabled || audienceTier === 'super_admin') && pipelineEnabled && (
-            <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pb-1">
-              {panelModeEnabled && (
-                <>
-                  <input
-                    type="checkbox"
-                    id="panel-opt-in"
-                    checked={panelOptIn}
-                    onChange={e => setPanelOptIn(e.target.checked)}
-                    className="h-3.5 w-3.5 rounded border-border bg-background text-primary focus:ring-ring"
-                  />
-                  <label htmlFor="panel-opt-in" className="text-xs text-muted-foreground cursor-pointer select-none">
-                    Panel mode (3 independent models)
+            {(panelModeEnabled || audienceTier === 'super_admin') && pipelineEnabled && (
+              <div className="flex items-center gap-1.5">
+                {panelModeEnabled && (
+                  <label
+                    htmlFor="panel-opt-in"
+                    className={[
+                      'inline-flex cursor-pointer select-none items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
+                      panelOptIn
+                        ? 'border-[color-mix(in_oklch,var(--brand-gold)_60%,transparent)] bg-[var(--brand-gold-faint)] text-[var(--brand-gold)]'
+                        : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--brand-gold)_40%,transparent)] hover:bg-[var(--brand-gold-faint)] hover:text-[var(--brand-gold)]',
+                    ].join(' ')}
+                    title="Run 3 independent models and adjudicate"
+                  >
+                    <Columns3 className="h-3 w-3" />
+                    Panel
+                    <input
+                      type="checkbox"
+                      id="panel-opt-in"
+                      checked={panelOptIn}
+                      onChange={e => setPanelOptIn(e.target.checked)}
+                      className="sr-only"
+                    />
                   </label>
-                </>
-              )}
-              {audienceTier === 'super_admin' && (
-                <button
-                  type="button"
-                  onClick={() => setTracePanelOpen(o => !o)}
-                  className={[
-                    'ml-auto inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
-                    tracePanelOpen
-                      ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
-                      : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
-                  ].join(' ')}
-                  title="Toggle query trace panel"
-                >
-                  <Zap className="h-3 w-3" />
-                  Trace
-                </button>
-              )}
-            </div>
-          )}
+                )}
+                {audienceTier === 'super_admin' && (
+                  <button
+                    type="button"
+                    onClick={() => setTracePanelOpen(o => !o)}
+                    className={[
+                      'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
+                      tracePanelOpen
+                        ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
+                        : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
+                    ].join(' ')}
+                    title="Toggle query trace panel"
+                  >
+                    <Zap className="h-3 w-3" />
+                    Trace
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
           <Composer
             ref={composerRef}
             onSubmit={handleSend}

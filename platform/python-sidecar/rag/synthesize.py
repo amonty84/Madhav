@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from pathlib import Path
 
@@ -23,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 ANTHROPIC_MODEL = "claude-opus-4-6"
 
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_ROOT = Path(os.environ.get('MARSYS_REPO_ROOT', '/app'))
 _SYNTHESIS_PROMPT_PATH = (
     _REPO_ROOT / "035_DISCOVERY_LAYER" / "PROMPTS" / "claude" / "synthesis_v1_0.md"
 )

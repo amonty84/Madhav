@@ -136,7 +136,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
   const showStop = isStreaming && onStop
 
   return (
-    <div className={cn('mx-auto w-full max-w-3xl px-4 pb-3 pt-1', className)}>
+    <div className={cn('mx-auto w-full max-w-4xl px-4 pb-3 pt-1', className)}>
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}

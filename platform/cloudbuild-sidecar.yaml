@@ -1,0 +1,28 @@
+steps:
+  - id: copy-prompt-files
+    name: 'ubuntu'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        mkdir -p platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude
+        cp 035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md \
+           platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md
+        cp 035_DISCOVERY_LAYER/PROMPTS/claude/synthesis_v1_0.md \
+           platform/python-sidecar/035_DISCOVERY_LAYER/PROMPTS/claude/synthesis_v1_0.md
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -f
+      - platform/python-sidecar/Dockerfile
+      - -t
+      - asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar:latest
+      - platform/python-sidecar/
+
+images:
+  - asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar:latest
+
+options:
+  machineType: 'E2_HIGHCPU_8'
+  logging: CLOUD_LOGGING_ONLY

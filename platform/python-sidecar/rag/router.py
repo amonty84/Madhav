@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from pathlib import Path
 
@@ -26,7 +27,7 @@ ANTHROPIC_MODEL = "claude-opus-4-6"
 # Resolved relative to the repo root — three parents up from this file:
 # platform/python-sidecar/rag/router.py
 #   → rag/  → python-sidecar/  → platform/  → repo root
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_ROOT = Path(os.environ.get('MARSYS_REPO_ROOT', '/app'))
 _ROUTER_PROMPT_PATH = (
     _REPO_ROOT / "035_DISCOVERY_LAYER" / "PROMPTS" / "claude" / "router_v1_0.md"
 )

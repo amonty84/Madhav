@@ -30,7 +30,7 @@ export class MessageErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.error) {
       return (
-        <div className="mx-auto w-full max-w-3xl px-4">
+        <div className="mx-auto w-full max-w-4xl px-4">
           <div className="rounded-lg border border-destructive/40 bg-destructive/5 px-3 py-2 text-xs text-destructive">
             <p className="font-medium">This message couldn&apos;t render.</p>
             <p className="mt-0.5 text-destructive/80">

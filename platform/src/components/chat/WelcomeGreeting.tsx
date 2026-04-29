@@ -57,7 +57,7 @@ export function WelcomeGreeting({ chartName, reports, onSuggest }: Props) {
   }, [])
 
   return (
-    <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center justify-center px-6 py-12 text-center md:py-20">
+    <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center justify-center px-6 py-12 text-center md:py-20">
       {/* Mandala watermark — soft brand presence behind the greeting. */}
       <div
         aria-hidden

@@ -30,7 +30,7 @@ export interface SynthesisAnswer {
   p6_enforcement: string;
 }
 
-const SIDECAR_URL = process.env.NEXT_PUBLIC_SIDECAR_URL ?? "http://localhost:8000";
+const SIDECAR_URL = process.env.PYTHON_SIDECAR_URL ?? "http://localhost:8000";
 const SIDECAR_API_KEY = process.env.PYTHON_SIDECAR_API_KEY ?? "";
 
 export async function ragSynthesize(query: string): Promise<SynthesisAnswer> {

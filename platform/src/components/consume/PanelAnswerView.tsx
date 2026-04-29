@@ -28,7 +28,7 @@ export function PanelAnswerView({ panel, chartId: _chartId }: Props) {
   const successfulMembers = member_outputs.filter(m => m.status === 'success')
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 py-4 space-y-4">
+    <div className="mx-auto w-full max-w-4xl px-4 py-4 space-y-4">
       {/* Degrade notice */}
       {degrade_notice && (
         <div

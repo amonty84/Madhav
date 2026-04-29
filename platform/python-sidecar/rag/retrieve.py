@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
-_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_PROJECT_ROOT = Path(os.environ.get('MARSYS_REPO_ROOT', '/app'))
 _UCN_MAP_PATH = _PROJECT_ROOT / "verification_artifacts" / "RAG" / "ucn_section_node_map.json"
 
 RRF_K = 60

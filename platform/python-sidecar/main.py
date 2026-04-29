@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-API_KEY = os.environ.get("SIDECAR_API_KEY", "")
+API_KEY = os.environ.get("PYTHON_SIDECAR_API_KEY", "")
 
 
 def verify_api_key(x_api_key: str = Header(default="")):

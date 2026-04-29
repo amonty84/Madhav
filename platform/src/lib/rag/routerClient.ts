@@ -25,7 +25,7 @@ export interface QueryPlan {
   routing_rationale: string;
 }
 
-const SIDECAR_URL = process.env.NEXT_PUBLIC_SIDECAR_URL ?? "http://localhost:8000";
+const SIDECAR_URL = process.env.PYTHON_SIDECAR_URL ?? "http://localhost:8000";
 const SIDECAR_API_KEY = process.env.PYTHON_SIDECAR_API_KEY ?? "";
 
 export async function ragRoute(query: string): Promise<QueryPlan> {

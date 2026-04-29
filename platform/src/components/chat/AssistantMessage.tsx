@@ -88,7 +88,7 @@ export function AssistantMessage({ message, isStreaming, isLast, onRegenerate, o
       initial={reduce ? false : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="group/message mx-auto w-full max-w-3xl px-4"
+      className="group/message mx-auto w-full max-w-4xl px-4"
     >
       <div className="flex gap-4">
         <div className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_oklch,var(--brand-gold)_35%,transparent)] bg-muted text-[var(--brand-gold)] shadow-sm">

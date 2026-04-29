@@ -70,7 +70,7 @@ export function ValidatorFailureView({ failures, onRetry, className }: Props) {
     <div
       role="alert"
       aria-live="assertive"
-      className={cn('mx-auto w-full max-w-3xl px-4 py-4', className)}
+      className={cn('mx-auto w-full max-w-4xl px-4 py-4', className)}
     >
       <div className={cn(
         'rounded-[14px] border border-[var(--brand-gold-hairline)] px-6 py-5',

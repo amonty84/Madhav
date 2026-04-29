@@ -40,7 +40,7 @@ export function StreamingAnswer({
   if (messages.length === 0) return null
 
   return (
-    <div className={cn('flex flex-col', className)}>
+    <div className={cn('flex w-full flex-col', className)}>
       {messages.map((message, idx) => {
         const isLast = idx === messages.length - 1
         const textContent = extractText(message)
@@ -65,7 +65,7 @@ export function StreamingAnswer({
 
           if (isCurrentlyStreaming) {
             return (
-              <div key={message.id} className="px-4 py-2">
+              <div key={message.id} className="mx-auto w-full max-w-4xl px-4 py-2">
                 {textContent ? (
                   <StreamingMarkdown isStreaming>
                     {textContent}

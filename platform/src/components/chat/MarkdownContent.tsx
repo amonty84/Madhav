@@ -117,7 +117,7 @@ function MarkdownContentImpl({ children, className, streaming = false }: Props) 
         streaming && 'chat-stream-caret',
         className
       )}
-      style={streaming ? { contain: 'layout style' } : undefined}
+      style={streaming ? { contain: 'style' } : undefined}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
