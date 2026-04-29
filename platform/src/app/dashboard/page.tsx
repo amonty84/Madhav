@@ -102,7 +102,10 @@ export default async function DashboardPage() {
             Roster
             <span className="opacity-55 text-[#d4af37] font-serif ml-1">॥</span>
           </h1>
-          <Link href="/clients/new" className="brand-cta">+ New Client</Link>
+          <Link href="/clients/new" className="brand-cta inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm">
+            <span className="text-base leading-none">+</span>
+            New Client
+          </Link>
         </div>
         <Suspense>
           <ClientRoster charts={chartsWithMeta} stats={stats} />
