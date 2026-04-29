@@ -28,6 +28,7 @@ export type FeatureFlag =
   | 'PANEL_DEGRADE_2_OF_3'
   // Portal Redesign
   | 'PORTAL_REDESIGN_R0_ENABLED'
+  | 'PORTAL_REDESIGN_R5_ENABLED'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -58,6 +59,7 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_DEGRADE_2_OF_3: false,
   // Portal Redesign (default ON)
   PORTAL_REDESIGN_R0_ENABLED: true,
+  PORTAL_REDESIGN_R5_ENABLED: true,
 }
 
 // Numeric config keys (read via configService.getValue)
