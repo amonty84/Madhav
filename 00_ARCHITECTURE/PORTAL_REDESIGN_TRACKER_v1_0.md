@@ -1,7 +1,7 @@
 ---
 artifact_id: PORTAL_REDESIGN_TRACKER
-version: 1.0.10
-status: LIVING
+version: 1.0.12
+status: ARCHIVED
 authored_by: Cowork (Opus)
 authored_at: 2026-04-29
 owner: Abhisek Mohanty
@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.12 (2026-04-30): ARCHIVED. Redesign workstream fully closed. Status flipped LIVING → ARCHIVED. No further updates to this file. All eight phases (R0–R2, R4–R6, R7) closed; R3 permanently deferred. Sealed by Claude Code (Sonnet 4.6) as final governance action on the redesign workstream.
   - v1.0.11 (2026-04-30): R7 Polish closed. Redesign workstream COMPLETE. §2 state block: active_phase→null, last_redesign_session_id→redesign-r7-polish-2026-04-30, next_phase_committed_to→null, deferred_briefs→[], redesign_workstream_status→COMPLETE. §3 R7 row: status→closed, exec_brief set, closure_report set, session_id set, started_at + closed_at set, follow_ups populated (R3 deferred, optimistic UI deferred, pre-existing test TS errors deferred). Pre-flight deviation noted: R3 never executed; R7 scope reduced accordingly. 55 tests pass (0 regressions). Authored by Claude Code (Sonnet 4.6) at R7 close.
   - v1.0.10 (2026-04-30): R3 Build mode upgrade closed. §2 state block: last_redesign_session_id→redesign-r3-build-upgrade-2026-04-30, next_phase_committed_to→null. §3 R3 row: status→closed, exec_brief + closure_report + session_id + started_at + closed_at set. sub_phases: both R3a + R3b marked completed (Verdict B landed both in 1 session). follow_ups: a11y + mobile + InsightCards + sidebar polish deferred to R7. Authored by Claude Code (Sonnet 4.6) at R3 close.
   - v1.0.9 (2026-04-30): R5 Timeline closed. Fan-out complete — R0 through R6 all closed; R5 last. §2 state block: last_redesign_session_id→redesign-r5-timeline-2026-04-30, post_r0_parallel_ready→[] (all fan-out phases closed). §3 R5 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated. R2 Timeline Room CTA now enabled. Authored by Claude Code (Sonnet 4.6) at R5 close.
