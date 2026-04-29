@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { relativeTime } from '@/lib/build/format'
 import type { ChartWithMeta } from '@/lib/roster/types'
@@ -12,6 +11,8 @@ type SortKey = 'name' | 'buildPct' | 'activity'
 interface RosterTableViewProps {
   charts: ChartWithMeta[]
 }
+
+const GHOST_BTN = "border border-[rgba(212,175,55,0.22)] bg-transparent text-[rgba(212,175,55,0.55)] text-xs font-semibold uppercase tracking-[0.08em] rounded-md px-3 py-1.5 hover:text-[#fce29a] hover:border-[rgba(212,175,55,0.4)] transition-colors"
 
 export function RosterTableView({ charts }: RosterTableViewProps) {
   const [sortKey, setSortKey] = useState<SortKey>('name')
@@ -42,80 +43,98 @@ export function RosterTableView({ charts }: RosterTableViewProps) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-border">
+    <div className="overflow-x-auto rounded-lg border border-[rgba(212,175,55,0.15)]">
       <table className="w-full text-xs">
-        <thead className="bg-muted/50">
+        <thead className="bg-[rgba(8,6,3,0.6)]">
           <tr>
             <th
-              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'name' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('name')}
-                className="cursor-pointer select-none hover:text-foreground"
+                className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Name{sortIndicator('name')}
               </button>
             </th>
-            <th className="px-3 py-2 text-left font-medium text-muted-foreground">Birth</th>
-            <th className="px-3 py-2 text-left font-medium text-muted-foreground">
+            <th
+              className="bt-label bt-label-upper px-3 py-2 text-left"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
+            >
+              Birth
+            </th>
+            <th
+              className="bt-label bt-label-upper px-3 py-2 text-left"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
+            >
               Current dasha
             </th>
             <th
-              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'buildPct' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('buildPct')}
-                className="cursor-pointer select-none hover:text-foreground"
+                className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Build %{sortIndicator('buildPct')}
               </button>
             </th>
             <th
-              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'activity' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('activity')}
-                className="cursor-pointer select-none hover:text-foreground"
+                className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Last activity{sortIndicator('activity')}
               </button>
             </th>
-            <th className="px-3 py-2 text-left font-medium text-muted-foreground">Actions</th>
+            <th
+              className="bt-label bt-label-upper px-3 py-2 text-left"
+              style={{ color: 'rgba(212,175,55,0.45)' }}
+            >
+              Actions
+            </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border">
+        <tbody className="divide-y divide-[rgba(212,175,55,0.1)]">
           {sorted.map((c) => (
-            <tr key={c.id} className="hover:bg-muted/30 transition-colors">
+            <tr key={c.id} className="hover:bg-[rgba(212,175,55,0.04)] transition-colors">
               <td className="px-3 py-2">
-                <p className="font-medium">{c.name}</p>
+                <p className="text-[#fce29a] font-medium">{c.name}</p>
               </td>
               <td className="px-3 py-2">
-                <p>{c.birth_date}</p>
-                <p className="text-muted-foreground">{c.birth_place}</p>
+                <p className="text-[rgba(212,175,55,0.6)]">{c.birth_date}</p>
+                <p className="text-[rgba(212,175,55,0.38)]">{c.birth_place}</p>
               </td>
-              <td className="px-3 py-2 text-muted-foreground italic">
+              <td className="px-3 py-2 text-[rgba(212,175,55,0.38)] italic">
                 —
               </td>
-              <td className="whitespace-nowrap px-3 py-2 tabular-nums">
+              <td className="whitespace-nowrap px-3 py-2 tabular-nums text-[#d4af37] font-semibold">
                 {c.pyramidPercent}%
               </td>
-              <td className="whitespace-nowrap px-3 py-2 text-muted-foreground">
+              <td className="whitespace-nowrap px-3 py-2 text-[rgba(212,175,55,0.42)]">
                 {relativeTime(c.lastLayerActivity)}
               </td>
               <td className="px-3 py-2">
                 <div className="flex gap-1.5">
                   <Link
                     href={`/clients/${c.id}/build`}
-                    className={cn(buttonVariants({ size: 'sm', variant: 'default' }))}
+                    className={cn(GHOST_BTN)}
+                    aria-label={`Build — ${c.name}`}
                   >
                     Build
                   </Link>
                   <Link
                     href={`/clients/${c.id}/consume`}
-                    className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}
+                    className={cn(GHOST_BTN)}
+                    aria-label={`Consume — ${c.name}`}
                   >
                     Consume
                   </Link>
@@ -125,7 +144,7 @@ export function RosterTableView({ charts }: RosterTableViewProps) {
           ))}
           {sorted.length === 0 && (
             <tr>
-              <td colSpan={6} className="px-3 py-6 text-center text-muted-foreground">
+              <td colSpan={6} className="px-3 py-6 text-center text-[rgba(212,175,55,0.38)]">
                 No charts match the current filters.
               </td>
             </tr>
