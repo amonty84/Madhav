@@ -39,6 +39,11 @@ from pipeline.writers.cdlm_links_writer import CDLMLinksWriter
 from pipeline.writers.cgm_nodes_writer import CGMNodesWriter
 from pipeline.writers.cgm_edges_writer import CGMEdgesWriter
 from pipeline.writers.rm_resonances_writer import RMResonancesWriter
+from pipeline.writers.chart_facts_writer import ChartFactsWriter
+from pipeline.writers.eclipses_writer import EclipsesWriter
+from pipeline.writers.retrogrades_writer import RetrogradesWriter
+from pipeline.writers.life_events_writer import LifeEventsWriter
+from pipeline.writers.sade_sati_writer import SadeSatiWriter
 
 # ── Logging setup ─────────────────────────────────────────────────────────────
 
@@ -171,6 +176,51 @@ def _update_manifest_row(
         conn.commit()
 
 
+# ── L1 structured writer step (14C) ──────────────────────────────────────────
+
+def _run_l1_writers(build_id: str, skip_swap: bool, log: Any) -> None:
+    """Run all L1 structured writers (chart_facts, eclipses, retrogrades, life_events, sade_sati)."""
+    from pipeline.writers.chart_facts_writer import load_from_gcs as load_chart_facts
+    from pipeline.writers.eclipses_writer import load_from_gcs as load_eclipses
+    from pipeline.writers.retrogrades_writer import load_from_gcs as load_retrogrades
+    from pipeline.writers.life_events_writer import LifeEventsWriter
+    from pipeline.writers.sade_sati_writer import SadeSatiWriter
+    from pipeline.extractors.life_event_extractor import extract_life_events
+    from pipeline.extractors.sade_sati_extractor import extract_sade_sati_phases
+
+    writers_and_loaders = [
+        ("chart_facts",   ChartFactsWriter,   load_chart_facts),
+        ("eclipses",      EclipsesWriter,     load_eclipses),
+        ("retrogrades",   RetrogradesWriter,  load_retrogrades),
+        ("life_events",   LifeEventsWriter,   extract_life_events),
+        ("sade_sati",     SadeSatiWriter,     extract_sade_sati_phases),
+    ]
+
+    for name, WriterClass, loader in writers_and_loaders:
+        log.info("l1_writer_start", writer=name)
+        try:
+            rows = loader()
+            writer = WriterClass()
+            result = writer.write_to_staging(rows, build_id)
+            log.info("l1_staging_written", writer=name, row_count=result.row_count)
+
+            validation = writer.validate_staging(build_id)
+            if not validation.valid:
+                log.error("l1_validation_failed", writer=name, issues=validation.issues)
+                raise RuntimeError(f"L1 staging validation failed for {name}: {validation.issues}")
+            log.info("l1_staging_validated", writer=name, row_count=validation.row_count)
+
+            if not skip_swap:
+                swap = writer.swap_to_live(build_id)
+                if not swap.success:
+                    log.error("l1_swap_failed", writer=name, message=swap.message)
+                    raise RuntimeError(f"L1 swap failed for {name}: {swap.message}")
+                log.info("l1_swap_complete", writer=name, promoted=swap.promoted_chunk_count)
+        except Exception as exc:
+            log.error("l1_writer_error", writer=name, error=str(exc))
+            raise
+
+
 # ── L2.5 structured writer step (14D) ────────────────────────────────────────
 
 def _run_l25_writers(workspace: str, build_id: str, skip_swap: bool, log: Any) -> None:
@@ -298,7 +348,10 @@ def run_build(
             raise RuntimeError(f"Staging validation failed: {validation.issues}")
         log.info("staging_validated", chunk_count=validation.chunk_count, embedding_count=validation.embedding_count)
 
-        # 8b. L2.5 structured writers (additive — 14D)
+        # 8b. L1 structured writers (additive — 14C)
+        _run_l1_writers(build_id, skip_swap, log)
+
+        # 8c. L2.5 structured writers (additive — 14D)
         _run_l25_writers(workspace, build_id, skip_swap, log)
 
         # 9. Emit manifest JSON to GCS

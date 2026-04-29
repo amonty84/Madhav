@@ -11,6 +11,13 @@ import { query_ucn_section } from '@/lib/tools/structured/query_ucn_section'
 import { query_cdlm_link } from '@/lib/tools/structured/query_cdlm_link'
 import { query_cgm } from '@/lib/tools/structured/query_cgm'
 import { query_resonance } from '@/lib/tools/structured/query_resonance'
+import { query_chart_fact } from '@/lib/tools/structured/query_chart_fact'
+import { query_planet_position } from '@/lib/tools/structured/query_planet_position'
+import { query_eclipse_window } from '@/lib/tools/structured/query_eclipse_window'
+import { query_retrograde_window } from '@/lib/tools/structured/query_retrograde_window'
+import { query_life_events } from '@/lib/tools/structured/query_life_events'
+import { query_sade_sati } from '@/lib/tools/structured/query_sade_sati'
+import { query_dasha } from '@/lib/tools/structured/query_dasha'
 
 async function readDocumentContent(storage_path: string): Promise<string | null> {
   return gcsDownloadText(chartDocsBucket(), storage_path)
@@ -256,6 +263,13 @@ export const consumeTools = {
   query_cdlm_link,
   query_cgm,
   query_resonance,
+  query_chart_fact,
+  query_planet_position,
+  query_eclipse_window,
+  query_retrograde_window,
+  query_life_events,
+  query_sade_sati,
+  query_dasha,
 
   get_pyramid_status: tool({
     description: 'Get the status of all pyramid layers for the chart.',
