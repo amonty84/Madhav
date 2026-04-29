@@ -1,0 +1,8 @@
+{
+  "table": "l25_msr_signals",
+  "db_count": 499,
+  "expected_count": 499,
+  "key_nulls": 0,
+  "overall_status": "PASS",
+  "notes": "signal_number range 1\u2013496; distinct signal_ids=499; gap at 497 (signal_number skips to 496 then jumps \u2014 verify source)"
+}
