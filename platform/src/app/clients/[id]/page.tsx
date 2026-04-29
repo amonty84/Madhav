@@ -76,6 +76,7 @@ export default async function ClientPage({
     id: l.sublayer,
     title: l.sublayer,
     status: l.status === 'complete' ? 'completed' : l.status === 'in_progress' ? 'active' : 'pending',
+    milestones: [],
   }))
   const activeBuildId = buildArc.find((e) => e.status === 'active')?.id ?? ''
 

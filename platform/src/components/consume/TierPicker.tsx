@@ -5,7 +5,7 @@ import type { AudienceTier } from '@/lib/prompts/types'
 
 const TIERS: { value: AudienceTier; label: string }[] = [
   { value: 'client',      label: 'Client'  },
-  { value: 'admin',       label: 'Admin'   },
+  { value: 'acharya_reviewer', label: 'Acharya' },
   { value: 'super_admin', label: 'Super'   },
 ]
 
