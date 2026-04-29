@@ -296,6 +296,22 @@ changelog:
       (10 queries: 5 P7-gated, 5 standard); CF.1 carried (claude-opus-4.7 pending);
       CF.2 CLOSED (20/20 router eval). COWORK_LEDGER §3 entry 10 appended per ONGOING_HYGIENE_POLICIES §P.
       §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-29, Phase_14C_Stream_H — Phase 14C COMPLETE):
+      last_session_id → Phase_14C_Stream_H; last_session_* block populated.
+      active_phase_plan_sub_phase updated: Phase 14C COMPLETE (all 12 done-criteria PASS).
+      red_team_counter unchanged (Phase 14C is parallel platform work, not M2 corpus — does not increment).
+      next_session_objective: Phase 14G lockdown (fingerprint population + drift resolution) or Phase 11B (legacy deletion).
+      Deliverables:
+        Schema migrations 014–017 applied (chart_facts, ephemeris_daily, eclipses, retrogrades, life_events, sade_sati_phases).
+        CHART_FACTS_EXTRACTION_v1_0.yaml (589 facts, native-validated, FORENSIC v8.0 projection).
+        ephemeris_daily: 660,726 rows, Swiss Ephemeris Lahiri sidereal, 1900-01-01..2100-12-31.
+        eclipses: 913 rows, retrogrades: 2,462 rows, life_events: 36 rows, sade_sati_phases: 46 rows.
+        6 pipeline writers wired into main.py _run_l1_writers(); 7 TypeScript LLM tools in consumeTools.
+        CAPABILITY_MANIFEST.json v1.5 (102 entries; directory-path bug fixed on L25_TOOLS_v1_0).
+        L1_STRUCTURED_LAYER_v1_0.md + PHASE_14C_L1_STRUCTURED_TABLES_REPORT_v1_0.md produced.
+        Governance: drift_detector=258/exit2 (+122 from 136; mainly missing fingerprints for 14C/D/E entries);
+          schema_validator=75/exit2 (+5 from 70); mirror_enforcer=0/exit0. No new CRITICAL.
+      §3 narrative refreshed.
   - v1.0 amended-in-place (2026-04-28, Madhav_PHASE11A_CUTOVER_STAGE1 — Phase 11A Pipeline Cutover Stage 1 governance aside):
       last_session_id → Madhav_PHASE11A_CUTOVER_STAGE1; last_session_* block populated.
       active_phase_plan_sub_phase unchanged (governance aside — no M2 corpus work; B.8 complete state stands).
@@ -471,18 +487,14 @@ current_state:
   # ------------------------------------------------------------------
   active_phase_plan: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
   active_phase_plan_version: "1.0.3"             # amendment complete (Madhav 16, 2026-04-24; resolved WARN.2/3/5/7)
-  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer)"
+  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer) + Phase 14C COMPLETE (L1 Structured Tables)"
     # Madhav_M2A_Exec_14 closed 2026-04-28. B.8 Synthesis Layer.
-    # schemas.py v1.1: DerivationEntry (5 fields) + SynthesisAnswer (11 fields) added.
-    # synthesis_v1_0.md: acharya-grade synthesizer prompt (P5/P6/P7 enforcement; 600-word cap; 2 worked examples).
-    # synthesize.py: ANTHROPIC_MODEL=claude-opus-4-6; synthesize() temp=0.2 max_tokens=4096; P7+P5 post-parse enforcement.
-    # rag_synthesize.py: FastAPI POST /rag/synthesize — composite classify_query→retrieve→synthesize; SynthesisError→422.
-    # main.py v1.3: rag_synthesize_router registered at /rag prefix.
-    # synthesizeClient.ts: DerivationEntry+SynthesisAnswer interfaces; ragSynthesize() async function.
-    # synthesis_golden_v1_0.json: 10 queries (5 P7-gated confirmed sig≥0.7; 5 standard confirmed sig<0.7).
-    # synthesis_eval_v1_0.json: derivation_ledger=10/10 PASS; p7=10/10 PASS; p5=10/10 PASS.
-    # FILE_REGISTRY v1.15. CF.1 carry-forward: upgrade to claude-opus-4.7 when available.
-  active_phase_plan_status: active              # M2 active; M2C active; B.9 next
+    # Phase_14C_Stream_H closed 2026-04-29. Phase 14C L1 Structured Tables: all 12 done-criteria PASS.
+    # 6 new tables: chart_facts(589), ephemeris_daily(660726), eclipses(913), retrogrades(2462), life_events(36), sade_sati_phases(46).
+    # 7 new LLM tools in consumeTools: query_chart_fact, query_planet_position, query_eclipse_window,
+    #   query_retrograde_window, query_life_events, query_sade_sati, query_dasha.
+    # CAPABILITY_MANIFEST v1.5 (102 entries).
+  active_phase_plan_status: active              # M2 active; M2C active; B.9 next; Phase 14G lockdown pending
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -532,46 +544,47 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: Madhav_PHASE11A_CUTOVER_STAGE1
-    # Governance aside — Phase 11A Pipeline Cutover Stage 1 (flag flip only; no code deletion).
-    # NEW_QUERY_PIPELINE_ENABLED + AUDIT_ENABLED defaults flipped to true.
-    # stage1_smoke.ts created. Reversibility: env-var MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false restores legacy.
-  last_session_closed_at: 2026-04-28T00:00:00+00:00
-  last_session_attempted_close_at: 2026-04-28T00:00:00+00:00
+  last_session_id: Phase_14C_Stream_H
+    # Phase 14C Stream H — L1 Structured Tables COMPLETE. All 12 done-criteria pass.
+    # 6 tables live; 7 TypeScript LLM tools registered; CAPABILITY_MANIFEST v1.5.
+  last_session_closed_at: 2026-04-29T00:00:00+00:00
+  last_session_attempted_close_at: 2026-04-29T00:00:00+00:00
   last_session_agent: claude-sonnet-4-6
-  last_session_cowork_thread_name: "Phase 11A — Pipeline Cutover Stage 1 (Flag Flip)"
+  last_session_cowork_thread_name: "Phase 14C Stream H — L1 Structured Tables close + verification"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
-    Governance scripts not run in-session (governance aside — no corpus work).
-    Mirror updates: .geminirules + .gemini/project_state.md updated with Phase 11A note.
-    red_team_counter: 2 (governance aside — does not increment).
+    drift_detector=258/exit2 (+122 from 136 baseline; missing fingerprints on 14C/D/E entries expected for 14G).
+    schema_validator=75/exit2 (+5 from 70; pre-existing issues).
+    mirror_enforcer=0/exit0. No new CRITICAL.
+    red_team_counter: 2 (Phase 14C is parallel platform work — does not increment M2 counter).
   last_session_deliverable: >
-    Phase 11A Pipeline Cutover Stage 1 COMPLETE.
-    feature_flags.ts: NEW_QUERY_PIPELINE_ENABLED false→true; AUDIT_ENABLED false→true.
-    platform/.env.example: feature-flags section added (revert instructions for both flags).
-    tests/unit/config/index.test.ts: updated default-true assertions + env-var override revert test.
-    scripts/cutover/stage1_smoke.ts: 8-class smoke script (env guard; 8 HTTP POST /api/chat/consume
-    queries; audit_log count ≥8; 2 audit-detail GET fetches; ✅/✗ summary).
-    package.json: cutover:stage1-smoke npm script registered.
-    CLAUDE.md §F: Phase 11A note added.
-    Reversibility preserved: MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false still routes to legacy.
-  previous_session_id: Madhav_M2A_Exec_14
-    # M2 execution — B.8 Synthesis Layer COMPLETE.
+    Phase 14C COMPLETE. 6 new L1 structured tables:
+    chart_facts(589 rows), ephemeris_daily(660726), eclipses(913), retrogrades(2462),
+    life_events(36), sade_sati_phases(46). 7 LLM tools in consumeTools.
+    CAPABILITY_MANIFEST v1.5 (102 entries; L25_TOOLS_v1_0 directory-path bug fixed).
+    L1_STRUCTURED_LAYER_v1_0.md + PHASE_14C_L1_STRUCTURED_TABLES_REPORT_v1_0.md.
+    EXEC_BRIEF_PHASE_14C status: COMPLETE.
+  previous_session_id: Madhav_PHASE11A_CUTOVER_STAGE1
+    # Governance aside — Phase 11A Pipeline Cutover Stage 1 COMPLETE.
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
-  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-15 — B.9"
+    Option A: Phase 14G lockdown — fingerprint population, drift delta reduction, validator baseline update.
+    Option B: Phase 11B — legacy code deletion (gates on stage1 smoke ✅ + native acceptance).
+    Option C: Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
+    Per exec brief dependency: Phase 14G must_complete_before Phase 14G lockdown; 14C done.
+  next_session_proposed_cowork_thread_name: "Phase 14G — Lockdown Verification"
   red_team_due_note: >
     Counter at 2 (Exec_13→1, Exec_14→2). Next cadence fire at counter=3 (Exec_15 if no governance asides between Exec_14–15).
+    Phase 14C is parallel platform work — does not increment the M2 red_team_counter.
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-04-28T00:00:00+00:00
-  file_updated_by_session: Madhav_M2A_Exec_14
+  file_updated_at: 2026-04-29T00:00:00+00:00
+  file_updated_by_session: Phase_14C_Stream_H
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, Madhav_M2A_Exec_12, null).
@@ -584,23 +597,31 @@ current_state:
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
 
-At the close of Madhav_PHASE11A_CUTOVER_STAGE1 (2026-04-28) — Phase 11A Pipeline Cutover Stage 1 COMPLETE:
+At the close of Phase_14C_Stream_H (2026-04-29) — Phase 14C L1 Structured Tables COMPLETE:
 
-**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 is next.
+**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 next; Phase 14G lockdown pending.
 
-**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). B.9 next (Exec_15). `FILE_REGISTRY_v1_15.md` CURRENT.
+**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). Phase 14C COMPLETE (2026-04-29). Platform: 6 new L1 structured tables + 7 LLM tools live.
 
-**Platform cutover.** Phase 11A COMPLETE (governance aside, 2026-04-28). `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` are now **default true** in `feature_flags.ts`. Legacy code path is still in the codebase but is now the explicit-opt-out branch (`MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false`). Stage 1 smoke script: `npm run cutover:stage1-smoke`. Phase 11B (legacy code deletion) gates on the smoke script passing ✅ and native acceptance.
+**Platform cutover.** Phase 11A COMPLETE (governance aside, 2026-04-28). `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` default true. Phase 11B (legacy deletion) gates on stage1 smoke ✅ + native acceptance.
+
+**Phase 14C outcome.** All 12 done-criteria PASS.
+- `chart_facts`: 589 rows (FORENSIC v8.0 projection, native-validated)
+- `ephemeris_daily`: 660,726 rows (Swiss Ephemeris, Lahiri, 1900–2100)
+- `eclipses`: 913 rows / `retrogrades`: 2,462 station rows
+- `life_events`: 36 rows / `sade_sati_phases`: 46 phase rows
+- 7 LLM tools: query_chart_fact, query_planet_position, query_eclipse_window, query_retrograde_window, query_life_events, query_sade_sati, query_dasha
+- CAPABILITY_MANIFEST v1.5 (102 entries)
 
 **Governance step.** Step 15 completed. CURRENT_STATE is authoritative.
 
 **Native directives.** ND.1 addressed. No open directives.
 
-**Red-team.** `red_team_counter: 2` — Exec_13→1, Exec_14→2. Governance aside does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
+**Red-team.** `red_team_counter: 2` — unchanged. Phase 14C is parallel platform work — does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
 
-**Last session.** `Madhav_PHASE11A_CUTOVER_STAGE1`, governance aside 2026-04-28. Deliverables: feature_flags.ts defaults flipped (NEW_QUERY_PIPELINE_ENABLED→true, AUDIT_ENABLED→true); .env.example updated; config tests updated (default-true assertions + env-var revert test); stage1_smoke.ts (8-class smoke script); cutover:stage1-smoke npm script; CLAUDE.md §F note added.
+**Validator state.** drift_detector=258/exit2 (+122; missing fingerprints for new manifest entries — 14G scope), schema_validator=75/exit2 (+5 pre-existing), mirror_enforcer=0/exit0.
 
-**Next-session commitment.** `Madhav_M2A_Exec_15` — B.9 per PHASE_B_PLAN_v1_0.md §B.9.
+**Next-session commitment.** Phase 14G lockdown (fingerprint population + drift resolution) OR Madhav_M2A_Exec_15 (B.9).
 
 ---
 

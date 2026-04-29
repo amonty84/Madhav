@@ -15,7 +15,8 @@ export const query_life_events = tool({
     start_date: z.string().optional().describe('Filter events on or after this date (YYYY-MM-DD).'),
     end_date: z.string().optional().describe('Filter events on or before this date (YYYY-MM-DD).'),
     category: z.enum([
-      'career', 'health', 'family', 'marriage', 'spiritual', 'travel', 'finance', 'education', 'relocation',
+      'career', 'health', 'family', 'relationship', 'spiritual', 'travel', 'finance',
+      'education', 'residential', 'creative', 'loss', 'other',
     ]).optional().describe('Filter by life event category. Omit for all categories.'),
     significance: z.enum(['major', 'moderate', 'minor']).optional().describe(
       'Filter by significance level. Omit for all.'

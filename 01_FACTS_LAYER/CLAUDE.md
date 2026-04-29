@@ -23,10 +23,10 @@ This folder holds L1 Facts — the single source of truth for all chart data, li
 - **`SOURCES/JHORA_TRANSCRIPTION_v8_0_SOURCE.md`** — Jagannatha Hora export transcript; reconciliation authority for §12.1, §12.2, §6.6–§6.8, §26
 - **`SOURCES/EVENT_CHART_STATES_v1_0.md`** — Swiss Ephemeris computed chart states for all 36 LEL events
 
-**Dead data (inert today; Phase 14C activates):**
-- **`EPHEMERIS_MONTHLY_1900_2100.csv`** — monthly transit positions 1900–2100
-- **`ECLIPSES_1900_2100.csv`** — eclipse catalog 1900–2100
-- **`RETROGRADES_1900_2100.csv`** — retrograde stations 1900–2100
+**Ephemeris CSVs (Phase 14C promoted from DEAD_DATA → TRANSITIONAL; GCS-synced):**
+- **`EPHEMERIS_MONTHLY_1900_2100.csv`** — monthly transit positions 1900–2100; GCS: `L1/ephemeris/`
+- **`ECLIPSES_1900_2100.csv`** — eclipse catalog 1900–2100; authority source for `eclipses` table
+- **`RETROGRADES_1900_2100.csv`** — retrograde stations 1900–2100; authority source for `retrogrades` table
 
 **Archived (superseded — see `99_ARCHIVE/01_FACTS_LAYER/`):**
 - `FORENSIC_DATA_v8_0_SUPPLEMENT.md` — merged into v8.0 (FIX_SESSION_003)

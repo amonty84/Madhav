@@ -1310,7 +1310,6 @@
     },
     {
       "canonical_id": "L25_TOOLS_v1_0",
-      "path": "platform/src/lib/tools/structured/",
       "version": "1.0",
       "status": "CURRENT",
       "layer": "tool",
@@ -1319,15 +1318,311 @@
         "llm_tool"
       ],
       "interface_version": "1.0",
-      "phase": "14D",
+      "phase": "14C/14D",
       "tools": [
         "query_msr_signals",
         "query_ucn_section",
         "query_cdlm_link",
         "query_cgm",
-        "query_resonance"
+        "query_resonance",
+        "query_chart_fact",
+        "query_planet_position",
+        "query_eclipse_window",
+        "query_retrograde_window",
+        "query_life_events",
+        "query_sade_sati",
+        "query_dasha"
       ],
-      "description": "Five L2.5 deterministic LLM tools registered in consumeTools \u2014 query_msr_signals, query_ucn_section, query_cdlm_link, query_cgm, query_resonance"
+      "description": "Twelve deterministic LLM tools in consumeTools: 5 L2.5 (Phase 14D) + 7 L1 (Phase 14C)."
+    },
+    {
+      "canonical_id": "MIGRATION_014_CHART_FACTS",
+      "path": "platform/supabase/migrations/014_chart_facts.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 014: chart_facts + chart_facts_staging tables."
+    },
+    {
+      "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
+      "path": "platform/supabase/migrations/015_ephemeris_daily.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 015: ephemeris_daily + staging. Swiss Ephemeris Lahiri, 1900-2100."
+    },
+    {
+      "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
+      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 016: eclipses + retrogrades + staging tables."
+    },
+    {
+      "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
+      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 017: life_events + sade_sati_phases + staging tables."
+    },
+    {
+      "canonical_id": "L1_CHART_FACTS",
+      "path": "platform/supabase/migrations/014_chart_facts.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "chart_facts",
+      "row_count": 589,
+      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams."
+    },
+    {
+      "canonical_id": "L1_EPHEMERIS_DAILY",
+      "path": "platform/supabase/migrations/015_ephemeris_daily.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "ephemeris_daily",
+      "row_count": 660726,
+      "description": "660726 daily ephemeris rows 1900-01-01..2100-12-31, 9 graha, Lahiri sidereal Swiss Ephemeris."
+    },
+    {
+      "canonical_id": "L1_ECLIPSES",
+      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "eclipses",
+      "row_count": 913,
+      "description": "913 solar/lunar eclipse events 1900-2100, Lahiri sidereal, nakshatra + visibility region."
+    },
+    {
+      "canonical_id": "L1_RETROGRADES",
+      "path": "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "retrogrades",
+      "row_count": 2462,
+      "description": "2462 station rows (retrograde_start + retrograde_end) for Mercury/Venus/Mars/Jupiter/Saturn 1900-2100."
+    },
+    {
+      "canonical_id": "L1_LIFE_EVENTS",
+      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "life_events",
+      "row_count": 36,
+      "description": "36 life events from LIFE_EVENT_LOG_v1_2.md with Swiss Ephemeris chart_state snapshots."
+    },
+    {
+      "canonical_id": "L1_SADE_SATI_PHASES",
+      "path": "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "sade_sati_phases",
+      "row_count": 46,
+      "description": "46 sade sati phase rows across 4 Saturn cycles (pre-birth + 3 lifetime)."
+    },
+    {
+      "canonical_id": "CHART_FACTS_EXTRACTION",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated."
+    },
+    {
+      "canonical_id": "CHART_FACTS_SCHEMA",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "JSON Schema governing CHART_FACTS_EXTRACTION_v1_0.yaml."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CHART_FACT",
+      "path": "platform/src/lib/tools/structured/query_chart_fact.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query chart_facts by fact_id/category/divisional_chart."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_PLANET_POSITION",
+      "path": "platform/src/lib/tools/structured/query_planet_position.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query ephemeris_daily for planetary positions on a specific date."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
+      "path": "platform/src/lib/tools/structured/query_eclipse_window.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query eclipses within a date window."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
+      "path": "platform/src/lib/tools/structured/query_retrograde_window.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query retrograde stations within a date window."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
+      "path": "platform/src/lib/tools/structured/query_life_events.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query life_events by category/date range. 36 life events with chart_state JSONB."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_SADE_SATI",
+      "path": "platform/src/lib/tools/structured/query_sade_sati.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query sade_sati_phases by date/cycle/phase."
+    },
+    {
+      "canonical_id": "TOOL_QUERY_DASHA",
+      "path": "platform/src/lib/tools/structured/query_dasha.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query dasha balance facts from chart_facts (category=dasha_balance)."
     }
-  ]
+  ],
+  "manifest_fingerprint": "6712d84f9c1cc73c7e750939a554f3508eb5123d7bd9e75b74a698c6fa2517ee",
+  "manifest_version": "1.5",
+  "last_updated": "2026-04-29",
+  "last_updated_by": "Phase 14C Stream H"
 }
