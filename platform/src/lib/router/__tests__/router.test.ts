@@ -315,3 +315,161 @@ describe('Router classify() — FUB-4: vector_search authorization', () => {
     expect(plan.tools_authorized).not.toContain('vector_search')
   })
 })
+
+describe('Router classify() — CGM graph_seed_hints and edge_type_filter extraction', () => {
+  it('Mercury support query → PLN.MERCURY seed + SUPPORTS filter', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'interpretive',
+      domains: [],
+      tools_authorized: ['msr_sql', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['PLN.MERCURY'],
+      edge_type_filter: ['SUPPORTS'],
+    }))
+
+    const plan = await classify('What does my Mercury support in my chart?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['PLN.MERCURY'])
+    expect(plan.edge_type_filter).toEqual(['SUPPORTS'])
+  })
+
+  it('Saraswati yoga query → YOG.SARASWATI seed, no edge filter', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'interpretive',
+      domains: ['spiritual'],
+      tools_authorized: ['msr_sql', 'pattern_register', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['YOG.SARASWATI'],
+    }))
+
+    const plan = await classify('Tell me about my Saraswati yoga.', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['YOG.SARASWATI'])
+    expect(plan.edge_type_filter).toBeUndefined()
+  })
+
+  it('dispositor query → PLN.SATURN seed + DISPOSITED_BY filter', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'factual',
+      domains: [],
+      tools_authorized: ['msr_sql', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'single_answer',
+      graph_seed_hints: ['PLN.SATURN'],
+      edge_type_filter: ['DISPOSITED_BY'],
+    }))
+
+    const plan = await classify('Which dispositor governs my Saturn?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['PLN.SATURN'])
+    expect(plan.edge_type_filter).toEqual(['DISPOSITED_BY'])
+  })
+
+  it('7th house query → HSE.7 seed, no edge filter', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'interpretive',
+      domains: ['relationships'],
+      tools_authorized: ['msr_sql', 'pattern_register', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['HSE.7'],
+    }))
+
+    const plan = await classify('What does the 7th house show in my chart?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['HSE.7'])
+    expect(plan.edge_type_filter).toBeUndefined()
+  })
+
+  it('Saturn dasha + career query → PLN.SATURN and DSH.MD.SATURN in seeds', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'cross_domain',
+      domains: ['career'],
+      tools_authorized: ['msr_sql', 'pattern_register', 'temporal', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      dasha_context_required: true,
+      graph_seed_hints: ['PLN.SATURN', 'DSH.MD.SATURN', 'HSE.10'],
+    }))
+
+    const plan = await classify('How does my Saturn dasha affect my career?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toContain('PLN.SATURN')
+    expect(plan.graph_seed_hints).toContain('DSH.MD.SATURN')
+  })
+
+  it('karaka contradiction query → KARAKA.DUAL_SYSTEM_DIVERGENCE + CONTRADICTS filter', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'cross_domain',
+      domains: [],
+      tools_authorized: ['msr_sql', 'contradiction_register', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['KARAKA.DUAL_SYSTEM_DIVERGENCE'],
+      edge_type_filter: ['CONTRADICTS'],
+    }))
+
+    const plan = await classify('Are there contradictions in my karaka assignment?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['KARAKA.DUAL_SYSTEM_DIVERGENCE'])
+    expect(plan.edge_type_filter).toEqual(['CONTRADICTS'])
+  })
+
+  it('UCN section IV.1 query → UCN.SEC.IV.1 seed', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'interpretive',
+      domains: [],
+      tools_authorized: ['msr_sql', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['UCN.SEC.IV.1'],
+    }))
+
+    const plan = await classify('Describe section IV.1 of my unified narrative.', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual(['UCN.SEC.IV.1'])
+    expect(plan.edge_type_filter).toBeUndefined()
+  })
+
+  it('generic chart query → empty graph_seed_hints', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'holistic',
+      domains: ['career', 'finance', 'relationships'],
+      tools_authorized: ['msr_sql', 'pattern_register', 'resonance_register', 'vector_search'],
+      panel_mode: true,
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: [],
+    }))
+
+    const plan = await classify('What does my chart say about life direction?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toEqual([])
+    expect(plan.edge_type_filter).toBeUndefined()
+  })
+
+  it('Mars and Saturn interaction query → both PLN seeds', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'cross_domain',
+      domains: [],
+      tools_authorized: ['msr_sql', 'pattern_register', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      graph_seed_hints: ['PLN.MARS', 'PLN.SATURN'],
+    }))
+
+    const plan = await classify('How do my Mars and Saturn interact?', BASE_CONTEXT)
+
+    expect(plan.graph_seed_hints).toContain('PLN.MARS')
+    expect(plan.graph_seed_hints).toContain('PLN.SATURN')
+    expect(plan.edge_type_filter).toBeUndefined()
+  })
+
+  it('Atmakaraka query → KRK.C8.AK seed, factual class', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'factual',
+      domains: [],
+      tools_authorized: ['msr_sql', 'cgm_graph_walk', 'vector_search'],
+      expected_output_shape: 'single_answer',
+      graph_seed_hints: ['KRK.C8.AK'],
+    }))
+
+    const plan = await classify("What's my Atmakaraka?", BASE_CONTEXT)
+
+    expect(plan.query_class).toBe('factual')
+    expect(plan.graph_seed_hints).toEqual(['KRK.C8.AK'])
+  })
+})

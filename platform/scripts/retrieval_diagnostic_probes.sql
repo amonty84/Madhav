@@ -119,7 +119,7 @@ SELECT
   COALESCE(layer, '<null>')      AS layer,
   COALESCE(doc_type, '<null>')   AS doc_type,
   COUNT(*)                       AS chunks,
-  COUNT(DISTINCT source_doc)     AS distinct_sources
+  COUNT(DISTINCT source_file)    AS distinct_sources
 FROM rag_chunks
 WHERE is_stale = false
 GROUP BY layer, doc_type
