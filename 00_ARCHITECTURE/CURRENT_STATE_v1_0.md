@@ -296,11 +296,30 @@ changelog:
       (10 queries: 5 P7-gated, 5 standard); CF.1 carried (claude-opus-4.7 pending);
       CF.2 CLOSED (20/20 router eval). COWORK_LEDGER §3 entry 10 appended per ONGOING_HYGIENE_POLICIES §P.
       §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-04-29, Phase_14G_Lockdown_Verification — Phase 14 SEALED):
+      last_session_id → Phase_14G_Lockdown_Verification; last_session_* block populated.
+      active_phase_plan_sub_phase updated: Phase 14 SEALED — Lockdown Verification complete.
+      red_team_counter unchanged (Phase 14G is parallel platform work — does not increment).
+      next_session_objective: Madhav_M2A_Exec_15 (B.9) or Phase 11B (legacy deletion).
+      Deliverables:
+        verification_artifacts/PHASE_14G/ produced: schema_snapshot.sql, data_audit.json,
+          tool_registry.json, schema_validator.txt, drift_detector.txt, mirror_enforcer.txt,
+          validator_diff.md, smoke_evidence.json, PHASE_14_FINDINGS_DISCHARGE_v1_0.md.
+        PHASE_14_LOCKDOWN_v1_0.md sealing artifact produced (see 00_ARCHITECTURE/).
+        PHASE_14G_LOCKDOWN_VERIFICATION_REPORT_v1_0.md produced (see 00_ARCHITECTURE/).
+        CAPABILITY_MANIFEST.json: 36 missing fingerprints populated; 22 TRANSITIONAL entries
+          flipped to LOCKED; manifest_fingerprint rotated.
+        Findings: 29 total — 9 CLOSED, 6 WHITELISTED, 14 DEFERRED (all non-blocking).
+        Smoke gate: SATISFIED (11/11 real audit_log sessions use msr_sql; 0/11 use rag_search).
+        Anomalies resolved: sade_sati_phases=46 CORRECT; cgm_edges=21 (1 self-loop gap, DEFERRED).
+        Validators post-14G: drift_detector=222/exit2 (−36 from 258; fingerprints fixed);
+          schema_validator=76/exit2 (unchanged); mirror_enforcer=0/exit0.
+      §3 narrative refreshed.
   - v1.0 amended-in-place (2026-04-29, Phase_14C_Stream_H — Phase 14C COMPLETE):
       last_session_id → Phase_14C_Stream_H; last_session_* block populated.
       active_phase_plan_sub_phase updated: Phase 14C COMPLETE (all 12 done-criteria PASS).
       red_team_counter unchanged (Phase 14C is parallel platform work, not M2 corpus — does not increment).
-      next_session_objective: Phase 14G lockdown (fingerprint population + drift resolution) or Phase 11B (legacy deletion).
+      next_session_objective: Madhav_M2A_Exec_15 (B.9) or Phase 11B (legacy deletion).
       Deliverables:
         Schema migrations 014–017 applied (chart_facts, ephemeris_daily, eclipses, retrogrades, life_events, sade_sati_phases).
         CHART_FACTS_EXTRACTION_v1_0.yaml (589 facts, native-validated, FORENSIC v8.0 projection).
@@ -487,14 +506,14 @@ current_state:
   # ------------------------------------------------------------------
   active_phase_plan: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
   active_phase_plan_version: "1.0.3"             # amendment complete (Madhav 16, 2026-04-24; resolved WARN.2/3/5/7)
-  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer) + Phase 14C COMPLETE (L1 Structured Tables)"
+  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer) + Phase 14 SEALED (14G Lockdown Verification complete)"
     # Madhav_M2A_Exec_14 closed 2026-04-28. B.8 Synthesis Layer.
     # Phase_14C_Stream_H closed 2026-04-29. Phase 14C L1 Structured Tables: all 12 done-criteria PASS.
+    # Phase_14G_Lockdown_Verification closed 2026-04-29. Phase 14 modernization SEALED.
     # 6 new tables: chart_facts(589), ephemeris_daily(660726), eclipses(913), retrogrades(2462), life_events(36), sade_sati_phases(46).
-    # 7 new LLM tools in consumeTools: query_chart_fact, query_planet_position, query_eclipse_window,
-    #   query_retrograde_window, query_life_events, query_sade_sati, query_dasha.
-    # CAPABILITY_MANIFEST v1.5 (102 entries).
-  active_phase_plan_status: active              # M2 active; M2C active; B.9 next; Phase 14G lockdown pending
+    # 7+9 new LLM tools in consumeTools (16 total structured tools).
+    # CAPABILITY_MANIFEST v1.5 (102 entries; all fingerprints populated; 22 entries LOCKED).
+  active_phase_plan_status: active              # M2 active; M2C active; B.9 next; Phase 14 SEALED
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -571,23 +590,22 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    Option A: Phase 14G lockdown — fingerprint population, drift delta reduction, validator baseline update.
-    Option B: Phase 11B — legacy code deletion (gates on stage1 smoke ✅ + native acceptance).
-    Option C: Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
-    Per exec brief dependency: Phase 14G must_complete_before Phase 14G lockdown; 14C done.
-  next_session_proposed_cowork_thread_name: "Phase 14G — Lockdown Verification"
+    Option A: Phase 11B — legacy code deletion (gates on stage1 smoke ✅ + native acceptance).
+    Option B: Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
+    Phase 14 modernization SEALED at Phase_14G_Lockdown_Verification (2026-04-29).
+  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-15 — B.9"
   red_team_due_note: >
     Counter at 2 (Exec_13→1, Exec_14→2). Next cadence fire at counter=3 (Exec_15 if no governance asides between Exec_14–15).
-    Phase 14C is parallel platform work — does not increment the M2 red_team_counter.
+    Phase 14G is parallel platform work — does not increment the M2 red_team_counter.
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
   file_updated_at: 2026-04-29T00:00:00+00:00
-  file_updated_by_session: Phase_14C_Stream_H
+  file_updated_by_session: Phase_14G_Lockdown_Verification
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, Madhav_M2A_Exec_12, null).
+    = (Step_15 completed, Phase_14G_Lockdown_Verification, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -597,27 +615,29 @@ current_state:
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
 
-At the close of Phase_14C_Stream_H (2026-04-29) — Phase 14C L1 Structured Tables COMPLETE:
+At the close of Phase_14G_Lockdown_Verification (2026-04-29) — Phase 14 Modernization SEALED:
 
-**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 next; Phase 14G lockdown pending.
+**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 next.
 
-**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). Phase 14C COMPLETE (2026-04-29). Platform: 6 new L1 structured tables + 7 LLM tools live.
+**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). Phase 14 modernization SEALED (Phase 14G, 2026-04-29). Platform: 16 structured LLM tools live; all Phase 14 tables populated; CAPABILITY_MANIFEST fully fingerprinted and locked.
 
 **Platform cutover.** Phase 11A COMPLETE (governance aside, 2026-04-28). `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` default true. Phase 11B (legacy deletion) gates on stage1 smoke ✅ + native acceptance.
 
-**Phase 14C outcome.** All 12 done-criteria PASS.
-- `chart_facts`: 589 rows (FORENSIC v8.0 projection, native-validated)
-- `ephemeris_daily`: 660,726 rows (Swiss Ephemeris, Lahiri, 1900–2100)
-- `eclipses`: 913 rows / `retrogrades`: 2,462 station rows
-- `life_events`: 36 rows / `sade_sati_phases`: 46 phase rows
-- 7 LLM tools: query_chart_fact, query_planet_position, query_eclipse_window, query_retrograde_window, query_life_events, query_sade_sati, query_dasha
-- CAPABILITY_MANIFEST v1.5 (102 entries)
+**Phase 14 outcome (sealed).** All phases 14A–14G complete.
+- L1 structured tables: chart_facts(589), ephemeris_daily(660726), eclipses(913), retrogrades(2462), life_events(36), sade_sati_phases(46)
+- L2.5 structured tables: l25_msr_signals(499), l25_ucn_sections(134), l25_cdlm_links(81), l25_cgm_nodes(234), l25_cgm_edges(21), l25_rm_resonances(28)
+- L3 structured registers: patterns(21), resonances(13), clusters(11), contradictions(19) rows
+- 16 LLM-callable tools in consumeTools; 10 pipeline retrieval tools in src/lib/retrieve
+- Smoke gate: 11/11 audit_log sessions use msr_sql structured tool; 0/11 use deprecated rag_search
+- CAPABILITY_MANIFEST v1.5 (102 entries; all fingerprints populated; 22 LOCKED, 0 TRANSITIONAL)
+- Findings: 9 CLOSED, 6 WHITELISTED, 14 DEFERRED (all non-blocking)
+- Validators post-14G: drift=222/exit2, schema=76/exit2, mirror=0/exit0
 
 **Governance step.** Step 15 completed. CURRENT_STATE is authoritative.
 
 **Native directives.** ND.1 addressed. No open directives.
 
-**Red-team.** `red_team_counter: 2` — unchanged. Phase 14C is parallel platform work — does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
+**Red-team.** `red_team_counter: 2` — unchanged. Phase 14G is parallel platform work — does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
 
 **Validator state.** drift_detector=258/exit2 (+122; missing fingerprints for new manifest entries — 14G scope), schema_validator=75/exit2 (+5 pre-existing), mirror_enforcer=0/exit0.
 

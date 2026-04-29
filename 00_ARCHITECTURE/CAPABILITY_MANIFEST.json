@@ -8,7 +8,7 @@
       "canonical_id": "CGP_AUDIT_v1_0",
       "path": "01_FACTS_LAYER/CGP_AUDIT_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -23,7 +23,7 @@
       "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v2_0",
       "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md",
       "version": "2",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -38,7 +38,7 @@
       "canonical_id": "FORENSIC_ASTROLOGICAL_DATA_v8_0",
       "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
       "version": "8",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
@@ -61,7 +61,7 @@
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
       "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
       "version": "1.2",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
@@ -82,7 +82,7 @@
       "canonical_id": "SADE_SATI_CYCLES_ALL",
       "path": "01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md",
       "version": "unknown",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -97,7 +97,7 @@
       "canonical_id": "EVENT_CHART_STATES_v1_0",
       "path": "01_FACTS_LAYER/SOURCES/EVENT_CHART_STATES_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -112,7 +112,7 @@
       "canonical_id": "JHORA_TRANSCRIPTION_v8_0_SOURCE",
       "path": "01_FACTS_LAYER/SOURCES/JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
       "version": "8.0-source",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": false,
       "representations": [
@@ -127,7 +127,7 @@
       "canonical_id": "CDLM_v1_1",
       "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
       "version": "1.2",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -148,7 +148,7 @@
       "canonical_id": "CGM",
       "path": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
       "version": "9",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -170,7 +170,7 @@
       "canonical_id": "MSR_v3_0",
       "path": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
       "version": "3",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -191,7 +191,7 @@
       "canonical_id": "RED_TEAM_L2_5_v1_0",
       "path": "025_HOLISTIC_SYNTHESIS/RED_TEAM_L2_5_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": false,
       "representations": [
@@ -206,7 +206,7 @@
       "canonical_id": "RM_v2_0",
       "path": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
       "version": "2.1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -227,7 +227,7 @@
       "canonical_id": "UCN_v4_0",
       "path": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
       "version": "4.1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
       "representations": [
@@ -622,7 +622,7 @@
       "canonical_id": "CLUSTER_ATLAS_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -637,7 +637,7 @@
       "canonical_id": "CONTRADICTION_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -652,7 +652,7 @@
       "canonical_id": "PATTERN_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -667,7 +667,7 @@
       "canonical_id": "RESONANCE_REGISTER_v1_0",
       "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.md",
       "version": "1",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": true,
       "representations": [
@@ -836,7 +836,7 @@
       "canonical_id": "PATTERN_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -851,7 +851,7 @@
       "canonical_id": "RESONANCE_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -866,7 +866,7 @@
       "canonical_id": "CONTRADICTION_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json",
       "version": "1.0",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -881,7 +881,7 @@
       "canonical_id": "CLUSTER_ATLAS_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
       "version": "1.0",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -896,7 +896,7 @@
       "canonical_id": "DISCOVERY_REGISTERS_INDEX",
       "path": "035_DISCOVERY_LAYER/REGISTERS/INDEX.json",
       "version": "1.0",
-      "status": "TRANSITIONAL",
+      "status": "LOCKED",
       "layer": "L3.5",
       "expose_to_chat": false,
       "representations": [
@@ -1027,7 +1027,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "Four L3 discovery register tables + staging counterparts (pattern, resonance, cluster, contradiction)"
+      "description": "Four L3 discovery register tables + staging counterparts (pattern, resonance, cluster, contradiction)",
+      "fingerprint": "163a6e41cd18cf25c836d2ab646e4286596a5d88e178da7d10b29c9b01d2478a"
     },
     {
       "canonical_id": "INGEST_L3_REGISTERS",
@@ -1041,7 +1042,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "One-shot L3 register ingest runner: load from JSON, validate FKs, stage, append-only swap to live"
+      "description": "One-shot L3 register ingest runner: load from JSON, validate FKs, stage, append-only swap to live",
+      "fingerprint": "bab85f68e386dd556bb9de214a66f5c59f3e405c0c486d0beca15c49ea2330e5"
     },
     {
       "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
@@ -1055,7 +1057,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "Canonical spec for L3 register tables: schemas, architectural commitments, pipeline integration, tool surface"
+      "description": "Canonical spec for L3 register tables: schemas, architectural commitments, pipeline integration, tool surface",
+      "fingerprint": "66bd48df0d5e43fb2f4c9d7813fe05698a6b72c425c50891cc6f10f86024956b"
     },
     {
       "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
@@ -1069,7 +1072,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "Phase 14E execution report; 54 register entries live (22+12+12+8); all done-criteria met"
+      "description": "Phase 14E execution report; 54 register entries live (22+12+12+8); all done-criteria met",
+      "fingerprint": "c763d37a080ffac00fce63cae8bf2cb85fe48db09c55e5f6165a87109da2283d"
     },
     {
       "canonical_id": "TOOL_QUERY_PATTERNS",
@@ -1084,7 +1088,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'"
+      "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'",
+      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2"
     },
     {
       "canonical_id": "TOOL_QUERY_RESONANCES_L3",
@@ -1099,7 +1104,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'"
+      "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'",
+      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7"
     },
     {
       "canonical_id": "TOOL_QUERY_CLUSTERS",
@@ -1114,7 +1120,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'"
+      "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'",
+      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00"
     },
     {
       "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
@@ -1129,7 +1136,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14E",
-      "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'"
+      "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'",
+      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4"
     },
     {
       "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
@@ -1143,7 +1151,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Six l25_* tables + staging counterparts for L2.5 structured projection (MSR, UCN, CDLM, CGM nodes/edges, RM resonances)"
+      "description": "Six l25_* tables + staging counterparts for L2.5 structured projection (MSR, UCN, CDLM, CGM nodes/edges, RM resonances)",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_MSR_SIGNALS",
@@ -1166,7 +1175,8 @@
         "cross_domain",
         "signal_lookup"
       ],
-      "description": "499 MSR signals with category, valence, planet/house/sign arrays \u2014 queryable by deterministic filters"
+      "description": "499 MSR signals with category, valence, planet/house/sign arrays \u2014 queryable by deterministic filters",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_UCN_SECTIONS",
@@ -1189,7 +1199,8 @@
         "holistic",
         "domain_narrative"
       ],
-      "description": "134 UCN sections with domain, title, content, derived_from_signals"
+      "description": "134 UCN sections with domain, title, content, derived_from_signals",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_CDLM_LINKS",
@@ -1211,7 +1222,8 @@
         "cross_domain",
         "interpretive"
       ],
-      "description": "81-cell 9\u00d79 CDLM matrix \u2014 from_domain/to_domain/link_type/strength for all domain pair relationships"
+      "description": "81-cell 9\u00d79 CDLM matrix \u2014 from_domain/to_domain/link_type/strength for all domain pair relationships",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_CGM_NODES",
@@ -1233,7 +1245,8 @@
         "interpretive",
         "graph_query"
       ],
-      "description": "234 CGM nodes: PLN(9), HSE(12), SGN(12), KRK(18), NAK(15), DVS(77), SEN(42), DSH(30), YOG(19)"
+      "description": "234 CGM nodes: PLN(9), HSE(12), SGN(12), KRK(18), NAK(15), DVS(77), SEN(42), DSH(30), YOG(19)",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_CGM_EDGES",
@@ -1255,7 +1268,8 @@
         "interpretive",
         "graph_query"
       ],
-      "description": "21 CGM edges (DISPOSITED_BY, NAKSHATRA_LORD_IS, etc.) joining CGM nodes; served via query_cgm with include_edges=true"
+      "description": "21 CGM edges (DISPOSITED_BY, NAKSHATRA_LORD_IS, etc.) joining CGM nodes; served via query_cgm with include_edges=true",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L25_RM_RESONANCES",
@@ -1278,7 +1292,8 @@
         "resonance",
         "cross_domain"
       ],
-      "description": "28 RM signal resonance pairs with type (reinforce/amplify/modulate/cancel/tension) and theme"
+      "description": "28 RM signal resonance pairs with type (reinforce/amplify/modulate/cancel/tension) and theme",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
       "canonical_id": "L2_5_STRUCTURED_LAYER_v1_0",
@@ -1292,7 +1307,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Canonical spec for L2.5 structured Postgres tables \u2014 schemas, pipeline integration, tool surface, naming conventions, findings"
+      "description": "Canonical spec for L2.5 structured Postgres tables \u2014 schemas, pipeline integration, tool surface, naming conventions, findings",
+      "fingerprint": "07aae69a77926b16ec830130a9e68dc048882699516ca3ce662e6802097554d3"
     },
     {
       "canonical_id": "PHASE_14D_L2_5_PARITY_REPORT_v1_0",
@@ -1306,7 +1322,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Phase 14D execution report \u2014 done criteria verification, stream log, spot-check results, findings, follow-ups"
+      "description": "Phase 14D execution report \u2014 done criteria verification, stream log, spot-check results, findings, follow-ups",
+      "fingerprint": "55483ae04a6a1a3a643991bd187b2ae2c651e7e79cac89551e6a66b7d601e20c"
     },
     {
       "canonical_id": "L25_TOOLS_v1_0",
@@ -1333,7 +1350,8 @@
         "query_sade_sati",
         "query_dasha"
       ],
-      "description": "Twelve deterministic LLM tools in consumeTools: 5 L2.5 (Phase 14D) + 7 L1 (Phase 14C)."
+      "description": "Twelve deterministic LLM tools in consumeTools: 5 L2.5 (Phase 14D) + 7 L1 (Phase 14C).",
+      "fingerprint": "UNKNOWN_PATH"
     },
     {
       "canonical_id": "MIGRATION_014_CHART_FACTS",
@@ -1347,7 +1365,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Migration 014: chart_facts + chart_facts_staging tables."
+      "description": "Migration 014: chart_facts + chart_facts_staging tables.",
+      "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
     },
     {
       "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
@@ -1361,7 +1380,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Migration 015: ephemeris_daily + staging. Swiss Ephemeris Lahiri, 1900-2100."
+      "description": "Migration 015: ephemeris_daily + staging. Swiss Ephemeris Lahiri, 1900-2100.",
+      "fingerprint": "6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f"
     },
     {
       "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
@@ -1375,7 +1395,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Migration 016: eclipses + retrogrades + staging tables."
+      "description": "Migration 016: eclipses + retrogrades + staging tables.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
     },
     {
       "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
@@ -1389,7 +1410,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Migration 017: life_events + sade_sati_phases + staging tables."
+      "description": "Migration 017: life_events + sade_sati_phases + staging tables.",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
     },
     {
       "canonical_id": "L1_CHART_FACTS",
@@ -1405,7 +1427,8 @@
       "phase": "14C",
       "table_name": "chart_facts",
       "row_count": 589,
-      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams."
+      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams.",
+      "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
     },
     {
       "canonical_id": "L1_EPHEMERIS_DAILY",
@@ -1421,7 +1444,8 @@
       "phase": "14C",
       "table_name": "ephemeris_daily",
       "row_count": 660726,
-      "description": "660726 daily ephemeris rows 1900-01-01..2100-12-31, 9 graha, Lahiri sidereal Swiss Ephemeris."
+      "description": "660726 daily ephemeris rows 1900-01-01..2100-12-31, 9 graha, Lahiri sidereal Swiss Ephemeris.",
+      "fingerprint": "6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f"
     },
     {
       "canonical_id": "L1_ECLIPSES",
@@ -1437,7 +1461,8 @@
       "phase": "14C",
       "table_name": "eclipses",
       "row_count": 913,
-      "description": "913 solar/lunar eclipse events 1900-2100, Lahiri sidereal, nakshatra + visibility region."
+      "description": "913 solar/lunar eclipse events 1900-2100, Lahiri sidereal, nakshatra + visibility region.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
     },
     {
       "canonical_id": "L1_RETROGRADES",
@@ -1453,7 +1478,8 @@
       "phase": "14C",
       "table_name": "retrogrades",
       "row_count": 2462,
-      "description": "2462 station rows (retrograde_start + retrograde_end) for Mercury/Venus/Mars/Jupiter/Saturn 1900-2100."
+      "description": "2462 station rows (retrograde_start + retrograde_end) for Mercury/Venus/Mars/Jupiter/Saturn 1900-2100.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
     },
     {
       "canonical_id": "L1_LIFE_EVENTS",
@@ -1469,7 +1495,8 @@
       "phase": "14C",
       "table_name": "life_events",
       "row_count": 36,
-      "description": "36 life events from LIFE_EVENT_LOG_v1_2.md with Swiss Ephemeris chart_state snapshots."
+      "description": "36 life events from LIFE_EVENT_LOG_v1_2.md with Swiss Ephemeris chart_state snapshots.",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
     },
     {
       "canonical_id": "L1_SADE_SATI_PHASES",
@@ -1485,7 +1512,8 @@
       "phase": "14C",
       "table_name": "sade_sati_phases",
       "row_count": 46,
-      "description": "46 sade sati phase rows across 4 Saturn cycles (pre-birth + 3 lifetime)."
+      "description": "46 sade sati phase rows across 4 Saturn cycles (pre-birth + 3 lifetime).",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
     },
     {
       "canonical_id": "CHART_FACTS_EXTRACTION",
@@ -1499,7 +1527,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated."
+      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated.",
+      "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66"
     },
     {
       "canonical_id": "CHART_FACTS_SCHEMA",
@@ -1513,7 +1542,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "JSON Schema governing CHART_FACTS_EXTRACTION_v1_0.yaml."
+      "description": "JSON Schema governing CHART_FACTS_EXTRACTION_v1_0.yaml.",
+      "fingerprint": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64"
     },
     {
       "canonical_id": "TOOL_QUERY_CHART_FACT",
@@ -1528,7 +1558,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query chart_facts by fact_id/category/divisional_chart."
+      "description": "LLM tool: query chart_facts by fact_id/category/divisional_chart.",
+      "fingerprint": "825156fc229fdca5ac3a495fb2a6ca311e58f56d9a1193e3c382ce488eb1b729"
     },
     {
       "canonical_id": "TOOL_QUERY_PLANET_POSITION",
@@ -1543,7 +1574,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query ephemeris_daily for planetary positions on a specific date."
+      "description": "LLM tool: query ephemeris_daily for planetary positions on a specific date.",
+      "fingerprint": "b7ac9579bd01393515c4a65967666c7b04ccc5d5cba06248126f502c8ceb70b4"
     },
     {
       "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
@@ -1558,7 +1590,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query eclipses within a date window."
+      "description": "LLM tool: query eclipses within a date window.",
+      "fingerprint": "29cc7ad7cb2fa32477d2db3dba9f39c08b4329aceb209853a8174842c340ea50"
     },
     {
       "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
@@ -1573,7 +1606,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query retrograde stations within a date window."
+      "description": "LLM tool: query retrograde stations within a date window.",
+      "fingerprint": "17705da56a075070ce0dd828c02405cb85554b728fd743373280a0921a8d7f62"
     },
     {
       "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
@@ -1588,7 +1622,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query life_events by category/date range. 36 life events with chart_state JSONB."
+      "description": "LLM tool: query life_events by category/date range. 36 life events with chart_state JSONB.",
+      "fingerprint": "294eb75a428eca6b39a667e718d9585666b52ea6c70ec54cee33fe988395f1aa"
     },
     {
       "canonical_id": "TOOL_QUERY_SADE_SATI",
@@ -1603,7 +1638,8 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query sade_sati_phases by date/cycle/phase."
+      "description": "LLM tool: query sade_sati_phases by date/cycle/phase.",
+      "fingerprint": "b6d9e95c615db16722f1178e9561a2f18c88515dc99ee44bb6fb7727fb7e7d00"
     },
     {
       "canonical_id": "TOOL_QUERY_DASHA",
@@ -1618,11 +1654,12 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "LLM tool: query dasha balance facts from chart_facts (category=dasha_balance)."
+      "description": "LLM tool: query dasha balance facts from chart_facts (category=dasha_balance).",
+      "fingerprint": "e507c2298ae0c5c49f57a389e30cdb30c7c1555695195c2e9fe823e37c8f5ba1"
     }
   ],
-  "manifest_fingerprint": "6712d84f9c1cc73c7e750939a554f3508eb5123d7bd9e75b74a698c6fa2517ee",
+  "manifest_fingerprint": "sha256:f1222d74f741c16c5f59d66ca38e854760e2de6009d141212e6c0680585c4a1f",
   "manifest_version": "1.5",
   "last_updated": "2026-04-29",
-  "last_updated_by": "Phase 14C Stream H"
+  "last_updated_by": "Phase-14G-lockdown"
 }
