@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import type { UIMessage } from 'ai'
 import {
   Plus,
@@ -15,6 +15,8 @@ import {
   BookOpenText,
   User,
   Columns3,
+  LayoutGrid,
+  List,
   type LucideIcon,
 } from 'lucide-react'
 import { MODELS, PROVIDER_LABEL, type SpeedTier } from '@/lib/models/registry'
@@ -29,6 +31,8 @@ import { ShortcutsDialog } from '@/components/chat/ShortcutsDialog'
 import { CommandPalette, type Command } from '@/components/chat/CommandPalette'
 import { ReportLibrary } from './ReportLibrary'
 import { ReportReader } from './ReportReader'
+import { TraceDrawer } from './TraceDrawer'
+import { TierPicker } from './TierPicker'
 import { useChatSession } from '@/hooks/useChatSession'
 import { useScrollAnchor } from '@/hooks/useScrollAnchor'
 import { useHotkeys } from '@/hooks/useHotkeys'
@@ -42,9 +46,10 @@ import { ShareButton } from '@/components/chat/ShareButton'
 import type { Report, ConversationModule } from '@/lib/db/types'
 import { StreamingAnswer } from './StreamingAnswer'
 import { ValidatorFailureView } from './ValidatorFailureView'
-import { TracePanel } from '@/components/trace/TracePanel'
 import { parseValidatorError } from '@/lib/ui/validator-error'
 import type { AudienceTier } from '@/lib/prompts/types'
+
+const REPORT_VIEW_KEY = 'marsys.consume.reportView'
 
 interface ConversationRow {
   id: string
@@ -78,24 +83,48 @@ export function ConsumeChat({
   initialMessages,
   pipelineEnabled = false,
   panelModeEnabled = false,
-  audienceTier = 'client',
+  audienceTier: initialAudienceTier = 'client',
 }: Props) {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const composerRef = useRef<ComposerHandle>(null)
   const composerEl = useRef<HTMLDivElement>(null)
 
   const [conversations, setConversations] = useState(initialConversations)
   const [panelOptIn, setPanelOptIn] = useState(false)
-  const [tracePanelOpen, setTracePanelOpen] = useState(false)
+  const [traceDrawerOpen, setTraceDrawerOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
 
+  // View preference persisted to localStorage
+  const [reportView, setReportView] = useState<'list' | 'gallery'>(() => {
+    if (typeof window === 'undefined') return 'gallery'
+    return (localStorage.getItem(REPORT_VIEW_KEY) as 'list' | 'gallery') ?? 'gallery'
+  })
+
+  const handleReportViewChange = useCallback((v: 'list' | 'gallery') => {
+    setReportView(v)
+    localStorage.setItem(REPORT_VIEW_KEY, v)
+  }, [])
+
+  // Audience tier — super_admin can flip via URL ?tier=... or TierPicker
+  const tierFromUrl = searchParams?.get('tier') as AudienceTier | null
+  const [activeTier, setActiveTier] = useState<AudienceTier>(
+    tierFromUrl ?? initialAudienceTier
+  )
+
+  const handleTierChange = useCallback((tier: AudienceTier) => {
+    setActiveTier(tier)
+    const url = new URL(window.location.href)
+    url.searchParams.set('tier', tier)
+    window.history.replaceState(window.history.state, '', url.toString())
+  }, [])
+
   const { scrollRef, bottomRef, isAtBottom, scrollToBottom } = useScrollAnchor({ thresholdPx: 96 })
 
-  // Track structured validator failures separately from generic chat errors (flag-ON only).
   const [validatorFailures, setValidatorFailures] = useState<
     ReturnType<typeof parseValidatorError>
   >(null)
@@ -109,17 +138,7 @@ export function ConsumeChat({
     model,
     style,
     onConversationCreated: id => {
-      // First-turn URL sync. We deliberately do NOT use router.replace here:
-      // that would re-mount ConsumeChat under the [conversationId] segment,
-      // re-reading initialMessages from the DB. The DB write happens in the
-      // server route's async onFinish (after the client stream finishes), so
-      // the re-mount races against persistence and loses when slow — landing
-      // on empty initialMessages and wiping the conversation from view.
-      //
-      // history.replaceState updates the URL shallowly so the component stays
-      // mounted with its in-memory messages. A subsequent real navigation
-      // (clicking a sidebar item, hard refresh) re-reads from the DB, which
-      // by then has the messages.
+      // First-turn URL sync without re-mounting (see comment in original).
       if (typeof window !== 'undefined') {
         window.history.replaceState(
           window.history.state,
@@ -127,9 +146,6 @@ export function ConsumeChat({
           `/clients/${chartId}/consume/${id}`
         )
       }
-      // Optimistically prepend to the sidebar list. Title will show null
-      // (rendered as a placeholder) until the next navigation pulls the
-      // server-generated title.
       setConversations(prev => [
         {
           id,
@@ -144,7 +160,6 @@ export function ConsumeChat({
     },
   })
 
-  // Write --composer-h to :root so ScrollToBottomButton can position above the band.
   useEffect(() => {
     const el = composerEl.current
     if (!el) return
@@ -156,7 +171,6 @@ export function ConsumeChat({
     return () => ro.disconnect()
   }, [])
 
-  // Parse validator failure payloads from chat errors when pipeline is ON.
   useEffect(() => {
     if (!pipelineEnabled) return
     if (session.error) {
@@ -180,7 +194,6 @@ export function ConsumeChat({
           url: a.url!,
         }))
       session.send(text, files, panelOptIn ? { panel_opt_in: true } : undefined)
-      // Panel mode is not sticky — auto-reset after each submit.
       setPanelOptIn(false)
       if (files.length > 0) attachmentsApi.clear()
     },
@@ -195,8 +208,6 @@ export function ConsumeChat({
 
   const handleEdit = useCallback(
     (id: string, text: string) => {
-      // Snapshot the live conversation as an archived branch under this edit
-      // point before truncating. See useBranches for the session-local tradeoff.
       branches.archiveBranch(id, session.messages)
       session.editAndResubmit(id, text)
     },
@@ -257,6 +268,20 @@ export function ConsumeChat({
         run: () => setSelectedDomain(null),
       },
       {
+        id: 'report-view-gallery',
+        label: 'Reports: Gallery view',
+        icon: LayoutGrid,
+        section: 'View',
+        run: () => handleReportViewChange('gallery'),
+      },
+      {
+        id: 'report-view-list',
+        label: 'Reports: List view',
+        icon: List,
+        section: 'View',
+        run: () => handleReportViewChange('list'),
+      },
+      {
         id: 'shortcuts',
         label: 'Keyboard shortcuts',
         hint: '⌘/',
@@ -290,7 +315,7 @@ export function ConsumeChat({
         run: () => setStyle('client'),
       },
     ]
-  }, [chartId, router, desktopSidebarCollapsed, setModel, setStyle])
+  }, [chartId, router, desktopSidebarCollapsed, setModel, setStyle, handleReportViewChange])
 
   useEffect(() => {
     if (!session.isStreaming) composerRef.current?.focus()
@@ -338,6 +363,7 @@ export function ConsumeChat({
         reports={reports}
         selectedDomain={null}
         onSelect={d => setSelectedDomain(d)}
+        view={reportView}
       />
     ) : (
       <ReportReader
@@ -487,8 +513,13 @@ export function ConsumeChat({
               onStyleChange={setStyle}
               disabled={session.isStreaming || branches.isViewingArchived}
             />
-            {(panelModeEnabled || audienceTier === 'super_admin') && pipelineEnabled && (
+            {(panelModeEnabled || activeTier === 'super_admin') && pipelineEnabled && (
               <div className="flex items-center gap-1.5">
+                {/* TierPicker — super_admin only */}
+                {activeTier === 'super_admin' && (
+                  <TierPicker tier={activeTier} onChange={handleTierChange} />
+                )}
+
                 {panelModeEnabled && (
                   <label
                     htmlFor="panel-opt-in"
@@ -511,17 +542,19 @@ export function ConsumeChat({
                     />
                   </label>
                 )}
-                {audienceTier === 'super_admin' && (
+
+                {/* Trace — opens drawer instead of inline panel */}
+                {activeTier === 'super_admin' && (
                   <button
                     type="button"
-                    onClick={() => setTracePanelOpen(o => !o)}
+                    onClick={() => setTraceDrawerOpen(o => !o)}
                     className={[
                       'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
-                      tracePanelOpen
+                      traceDrawerOpen
                         ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
                         : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
                     ].join(' ')}
-                    title="Toggle query trace panel"
+                    title="Toggle query trace drawer"
                   >
                     <Zap className="h-3 w-3" />
                     Trace
@@ -546,13 +579,13 @@ export function ConsumeChat({
       </ChatShell>
       <ShortcutsDialog open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} commands={paletteCommands} />
-      {tracePanelOpen && audienceTier === 'super_admin' && (
-        <TracePanel
-          queryId={session.currentQueryId ?? null}
-          isSuperAdmin={true}
-          onClose={() => setTracePanelOpen(false)}
-        />
-      )}
+
+      {/* TraceDrawer replaces always-on TracePanel */}
+      <TraceDrawer
+        queryId={session.currentQueryId ?? null}
+        open={traceDrawerOpen && activeTier === 'super_admin'}
+        onOpenChange={setTraceDrawerOpen}
+      />
     </div>
   )
 }
