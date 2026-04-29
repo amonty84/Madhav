@@ -27,6 +27,23 @@ The UCN reads the chart as **one organism**. Every Domain Report (L3) must cite 
 
 Mode B matrices and CGP audit completed per **SESSION_LOG** — see **`01_FACTS_LAYER/CGP_AUDIT_v1_0.md`** in Facts Layer.
 
+## STRUCTURED projection (Phase 14D — 2026-04-28)
+
+All five L2.5 source files now have a parallel structured Postgres projection (`l25_*` tables) queryable by the LLM router as deterministic tools. The markdown files remain the canonical authoring source; the structured tables are a read-only projection updated by the pipeline on each build.
+
+| Table | Rows | LLM Tool |
+|---|---|---|
+| `l25_msr_signals` | 499 | `query_msr_signals` |
+| `l25_ucn_sections` | 134 | `query_ucn_section` |
+| `l25_cdlm_links` | 81 | `query_cdlm_link` |
+| `l25_cgm_nodes` | 234 | `query_cgm` |
+| `l25_cgm_edges` | 21 | `query_cgm` (joined) |
+| `l25_rm_resonances` | 28 | `query_resonance` |
+
+Spec: `00_ARCHITECTURE/L2_5_STRUCTURED_LAYER_v1_0.md`. Report: `00_ARCHITECTURE/PHASE_14D_L2_5_PARITY_REPORT_v1_0.md`.
+
+**Query routing guideline:** Use the structured tools for attribute-filtered lookups (planet=SATURN, house=7, domain=career). Use `rag_chunks` vector search for open semantic queries. Both surfaces serve the same source data; the router selects per query type.
+
 ## L2 Archival Notice
 
 **L2 (`02_ANALYTICAL_LAYER/`) was archived in Phase 14F (2026-04-28).** All `MATRIX_*` and `DEEP_ANALYSIS_*` files are preserved at `99_ARCHIVE/02_ANALYTICAL_LAYER/` for historical audit only. Do not cite L2 artifacts in new work; the L2.5 stack above supersedes them entirely.
