@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.10 (2026-04-30): R3 Build mode upgrade closed. §2 state block: last_redesign_session_id→redesign-r3-build-upgrade-2026-04-30, next_phase_committed_to→null. §3 R3 row: status→closed, exec_brief + closure_report + session_id + started_at + closed_at set. sub_phases: both R3a + R3b marked completed (Verdict B landed both in 1 session). follow_ups: a11y + mobile + InsightCards + sidebar polish deferred to R7. Authored by Claude Code (Sonnet 4.6) at R3 close.
   - v1.0.9 (2026-04-30): R5 Timeline closed. Fan-out complete — R0 through R6 all closed; R5 last. §2 state block: last_redesign_session_id→redesign-r5-timeline-2026-04-30, post_r0_parallel_ready→[] (all fan-out phases closed). §3 R5 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated. R2 Timeline Room CTA now enabled. Authored by Claude Code (Sonnet 4.6) at R5 close.
   - v1.0.8 (2026-04-30): R4 Consume polish closed. §2 state block: last_redesign_session_id→redesign-r4-consume-polish-2026-04-30, post_r0_parallel_ready→[R5] (R6+R1+R2+R4 closed), trace_fix_status confirmed on_hold. §3 R4 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R4 close.
   - v1.0.7 (2026-04-30): R2 Chart Profile closed. §2 state block: last_redesign_session_id→redesign-r2-chart-profile-2026-04-30, post_r0_parallel_ready→[R4, R5] (R6+R1+R2 closed), deferred_briefs→[R7] (R3 now unblocked). §3 R2 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R2 close.
@@ -119,15 +120,15 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # Fan-out complete — R0 through R6 all closed 2026-04-30
+active_phase: null                      # Fan-out complete — R0 through R6 all closed 2026-04-30; R3 now closed
 in_flight_parallel_phases: []           # none
-last_redesign_session_id: redesign-r5-timeline-2026-04-30
+last_redesign_session_id: redesign-r3-build-upgrade-2026-04-30
 last_close_at: "2026-04-30"
-next_phase_committed_to: null           # R3 authorable (unblocked by R2); R7 authorable; native decides
-next_phase_brief_authored: true         # all fan-out briefs authored and closed
-next_phase_clausecode_brief_set: false  # R3/R7 await brief authoring
-post_r0_parallel_ready: []              # all fan-out phases closed; R3 + R7 are the remaining pipeline
-deferred_briefs: [R7]                   # R3 unblocked + authorable; R7 authorable (all R0–R6 closed)
+next_phase_committed_to: null           # R7 authorable; native decides whether to proceed
+next_phase_brief_authored: true         # all fan-out briefs authored and closed; R7 awaits decision
+next_phase_clausecode_brief_set: false  # R7 awaits native decision and brief authoring
+post_r0_parallel_ready: []              # all fan-out phases closed; R7 is the final pipeline step
+deferred_briefs: [R7]                   # R3 closed; R7 awaits native decision (all R0–R6 closed)
 trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
@@ -253,15 +254,15 @@ follow_ups:
 ```yaml
 phase_id: R3
 phase_name: Build mode — three-pane cockpit (per-client)
-status: pending
-exec_brief: null
-closure_report: null
-session_id: null
-authored_at: null
-started_at: null
-closed_at: null
+status: closed
+exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R3_BUILD_UPGRADE_v1_0.md
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R3_REPORT_v1_0.md
+session_id: redesign-r3-build-upgrade-2026-04-30
+authored_at: 2026-04-29
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: MEDIUM                             # /api/chat/build hook compatibility audit needed first
-estimated_sessions: 2                    # R3a audit + R3b UI swap
+estimated_sessions: 2                    # R3a audit + R3b UI swap — landed in 1 session (Verdict B)
 depends_on: [R0, R2]                     # R2 because Continue-building CTA originates in R2's Build Room
 parallelizable_with: [R4, R5, R6]        # R4 only safe in parallel if trace fix has merged
                                          # — see VISION §4.3.2; otherwise serialize R3 → trace-fix-merge → R4
@@ -270,20 +271,26 @@ sub_phases:
     name: /api/chat/build hook-compatibility audit
     risk: LOW
     notes: Independent investigation; produces written audit; no code changes
+    status: completed
     parallelizable_with: [R3b]           # only the *audit* is parallelizable; the swap depends on the audit
   - id: R3b
     name: BuildChat shell swap + right-pane widget composition
     risk: MEDIUM
+    status: completed
     depends_on: [R3a]
     parallelizable_with: []
 key_deliverables:
-  - hook-compatibility audit report (R3a output)
-  - BuildChat replaced with ChatShell + AdaptiveMessageList + Composer
-  - right pane: JourneyStrip + BriefPanel + InsightCards + MirrorPairsTable + PyramidStatusPanel (collapsed)
-  - feature parity with Consume (sidebar, branches, streaming, model picker, command palette)
+  - hook-compatibility audit report (R3a output) — LANDED
+  - BuildChat replaced with ChatShell + AdaptiveMessageList + Composer — LANDED
+  - right pane: JourneyStrip + BriefPanel + InsightCards + MirrorPairsTable + PyramidStatusPanel (collapsed) — LANDED
+  - feature parity with Consume (sidebar, branches, streaming, model picker, command palette) — LANDED
 trace_fix_collision: false               # R3 doesn't modify chat components; just composes them
                                          # but R3 should not begin before trace-fix merges (re-composing moving target)
-follow_ups: []
+follow_ups:
+  - a11y pass on Build ChatShell instance (R7)
+  - mobile layout pass — three-pane on small screens (R7)
+  - InsightCards data source enrichment (R7)
+  - sidebar rename/delete confirmation dialogs (R7)
 ```
 
 ### R4 — Consume polish
