@@ -3,17 +3,18 @@ import { z } from 'zod'
 import { query } from '@/lib/db/client'
 
 const DOMAIN_ENUM = [
-  'self', 'wealth', 'sibling', 'home', 'progeny',
-  'health', 'partner', 'transformation', 'career',
+  'career', 'children', 'health', 'mind', 'parents',
+  'relationships', 'spirit', 'travel', 'wealth',
 ] as const
 
 export const query_cdlm_link = tool({
   description:
     'Query the L2.5 CDLM (Cross-Domain Linkage Matrix) — the 9×9 matrix of how each life domain relates to every other. ' +
-    'Use this when the user asks: "how does the self domain relate to the partner domain?", ' +
-    '"which domain pairs have CONTRADICTS link type?", "show me all strong cross-domain links", ' +
+    'Use this when the user asks: "how does career relate to relationships?", ' +
+    '"which domain pairs have strong links?", "show me all cross-domain links involving wealth", ' +
     '"what does career reinforce or contradict?", "show me the full cross-domain matrix", ' +
     '"what domains does wealth connect to?", "which domain pairs have tension?". ' +
+    'Domains: career|children|health|mind|parents|relationships|spirit|travel|wealth. ' +
     'Each link has a type (CITES|CONTRADICTS|REINFORCES|NEUTRAL) and strength (strong|moderate|weak|nil). ' +
     'For the narrative of a specific domain use query_ucn_section. ' +
     'For resonance relationships between individual MSR signals use query_resonance.',

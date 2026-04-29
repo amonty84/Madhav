@@ -33,6 +33,12 @@ from pipeline.registry_loader import collect_current_assets, load_registry
 from pipeline.source_fetcher import fetch_all_assets
 from pipeline.validators import ValidatedAssetRegistry
 from pipeline.writers.rag_chunks_writer import RAGChunksWriter
+from pipeline.writers.msr_signals_writer import MSRSignalsWriter
+from pipeline.writers.ucn_sections_writer import UCNSectionsWriter
+from pipeline.writers.cdlm_links_writer import CDLMLinksWriter
+from pipeline.writers.cgm_nodes_writer import CGMNodesWriter
+from pipeline.writers.cgm_edges_writer import CGMEdgesWriter
+from pipeline.writers.rm_resonances_writer import RMResonancesWriter
 
 # ── Logging setup ─────────────────────────────────────────────────────────────
 
@@ -165,6 +171,50 @@ def _update_manifest_row(
         conn.commit()
 
 
+# ── L2.5 structured writer step (14D) ────────────────────────────────────────
+
+def _run_l25_writers(workspace: str, build_id: str, skip_swap: bool, log: Any) -> None:
+    """Run all six L2.5 structured writers (extract → stage → validate → swap)."""
+    from pipeline.extractors.msr_extractor import extract_msr_signals
+    from pipeline.extractors.ucn_extractor import extract_ucn_sections
+    from pipeline.extractors.cdlm_extractor import extract_cdlm_links
+    from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
+    from pipeline.extractors.rm_extractor import extract_rm_resonances
+
+    writers_and_extractors = [
+        ("msr_signals",   MSRSignalsWriter,   lambda: extract_msr_signals(workspace)),
+        ("ucn_sections",  UCNSectionsWriter,  lambda: extract_ucn_sections(workspace)),
+        ("cdlm_links",    CDLMLinksWriter,    lambda: extract_cdlm_links(workspace)),
+        ("cgm_nodes",     CGMNodesWriter,     lambda: extract_cgm_nodes(workspace)),
+        ("cgm_edges",     CGMEdgesWriter,     lambda: extract_cgm_edges(workspace)),
+        ("rm_resonances", RMResonancesWriter, lambda: extract_rm_resonances(workspace)),
+    ]
+
+    for name, WriterClass, extractor in writers_and_extractors:
+        log.info("l25_writer_start", writer=name)
+        try:
+            rows = extractor()
+            writer = WriterClass()
+            result = writer.write_to_staging(rows, build_id)
+            log.info("l25_staging_written", writer=name, row_count=result.row_count)
+
+            validation = writer.validate_staging(build_id)
+            if not validation.valid:
+                log.error("l25_validation_failed", writer=name, issues=validation.issues)
+                raise RuntimeError(f"L2.5 staging validation failed for {name}: {validation.issues}")
+            log.info("l25_staging_validated", writer=name, row_count=validation.row_count)
+
+            if not skip_swap:
+                swap = writer.swap_to_live(build_id)
+                if not swap.success:
+                    log.error("l25_swap_failed", writer=name, message=swap.message)
+                    raise RuntimeError(f"L2.5 swap failed for {name}: {swap.message}")
+                log.info("l25_swap_complete", writer=name, promoted=swap.promoted_chunk_count)
+        except Exception as exc:
+            log.error("l25_writer_error", writer=name, error=str(exc))
+            raise
+
+
 # ── Main orchestration ────────────────────────────────────────────────────────
 
 def run_build(
@@ -247,6 +297,9 @@ def run_build(
         if not validation.valid:
             raise RuntimeError(f"Staging validation failed: {validation.issues}")
         log.info("staging_validated", chunk_count=validation.chunk_count, embedding_count=validation.embedding_count)
+
+        # 8b. L2.5 structured writers (additive — 14D)
+        _run_l25_writers(workspace, build_id, skip_swap, log)
 
         # 9. Emit manifest JSON to GCS
         manifest_uri = write_manifest(

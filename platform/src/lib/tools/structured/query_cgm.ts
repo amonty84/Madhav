@@ -5,22 +5,25 @@ import { query } from '@/lib/db/client'
 export const query_cgm = tool({
   description:
     'Query the L2.5 CGM (Chart Graph Model) — the graph of planetary nodes, house nodes, sign nodes, and their typed relationships. ' +
-    'Use this when the user asks: "get Saturn node and all its edges", "show me all planet-type CGM nodes", ' +
+    'Use this when the user asks: "get Saturn node and all its edges", "show me all PLN-type CGM nodes", ' +
     '"find the node for the 7th house and its relationships", "what aspects does Jupiter make?", ' +
-    '"show me all YUTI_WITH relationships", "which planets are exalted or debilitated?", ' +
+    '"show me all DISPOSITED_BY relationships", "which planets have NAKSHATRA_LORD edges?", ' +
     '"what does the karaka node for career show?", "show me the nakshatra nodes". ' +
-    'Node types: planet|house|sign|karaka|nakshatra|fixed_star|special_lagna. ' +
-    'Edge types: ASPECTS|RULES|EXALTED_IN|DEBILITATED_IN|YUTI_WITH|LORDS|KARAKA_FOR|CONTRADICTS|SUPPORTS. ' +
+    'Node type codes: PLN=planet, HSE=house, SGN=sign, KRK=karaka, NAK=nakshatra, DVS=divisional, SEN=sensitive point, DSH=dasha, YOG=yoga. ' +
+    'Planet node IDs: PLN.SATURN, PLN.SUN, PLN.MOON, PLN.MARS, PLN.MERCURY, PLN.JUPITER, PLN.VENUS, PLN.RAHU, PLN.KETU. ' +
+    'House node IDs: HSE.1 through HSE.12. ' +
+    'Edge types: ASPECTS|RULES|EXALTED_IN|DEBILITATED_IN|YUTI_WITH|LORDS|KARAKA_FOR|CONTRADICTS|SUPPORTS|DISPOSITED_BY|NAKSHATRA_LORD_IS. ' +
     'Set include_edges=false for a lightweight node-only listing. ' +
     'For narrative synthesis that interprets these nodes use query_ucn_section.',
   inputSchema: z.object({
     node_id: z.string().optional().describe(
-      'Exact node ID (e.g. CGM.PLN.SAT, CGM.HSE.07, CGM.SGN.SCO). Returns that specific node.'
+      'Exact node ID. Planets: PLN.SATURN, PLN.SUN, PLN.MOON, PLN.MARS, PLN.MERCURY, PLN.JUPITER, PLN.VENUS, PLN.RAHU, PLN.KETU. ' +
+      'Houses: HSE.1 through HSE.12. Signs: SGN.ARIES, SGN.LIBRA, etc. Returns that specific node and its edges.'
     ),
     node_type: z.enum([
-      'planet', 'house', 'sign', 'karaka', 'nakshatra', 'fixed_star', 'special_lagna',
+      'PLN', 'HSE', 'SGN', 'KRK', 'NAK', 'DVS', 'SEN', 'DSH', 'YOG',
     ]).optional().describe(
-      'Filter nodes by type. Omit to return all node types.'
+      'Filter nodes by type code: PLN=planet, HSE=house, SGN=sign, KRK=karaka, NAK=nakshatra, DVS=divisional, SEN=sensitive point, DSH=dasha, YOG=yoga. Omit to return all types.'
     ),
     include_edges: z.boolean().optional().describe(
       'If true, also returns all edges where this node is the source or target. Defaults to true. ' +

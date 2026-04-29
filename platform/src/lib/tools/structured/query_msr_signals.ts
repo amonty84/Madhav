@@ -22,7 +22,7 @@ export const query_msr_signals = tool({
       'Filter by valence. Omit for all valences.'
     ),
     planet: z.string().optional().describe(
-      'Filter to signals that involve this planet (e.g. SAT, SUN, MOO, MAR, MER, JUP, VEN, RAH, KET, ASC). ' +
+      'Filter to signals that involve this planet. Use full uppercase names: SATURN, SUN, MOON, MARS, MERCURY, JUPITER, VENUS, RAHU, KETU. ' +
       'Matches against the planets_involved array column.'
     ),
     house: z.number().int().min(1).max(12).optional().describe(
