@@ -6,6 +6,7 @@ import { CorpusDensityHero } from './CorpusDensityHero'
 import { BuildVelocityStrip } from './BuildVelocityStrip'
 import { InsightCards } from './InsightCards'
 import { deriveInsights } from '@/lib/build/insights'
+import { ActiveChartsWidget } from './ActiveChartsWidget'
 import { getClassColor } from './colors'
 import {
   computeTodayProgress,
@@ -266,6 +267,9 @@ export function CockpitGrid({ state }: { state: BuildState }) {
           )}
         </Card>
       </section>
+
+      {/* R6: Active charts — live links into per-chart profiles */}
+      <ActiveChartsWidget />
 
       {/* AC.15: Recent activity — 7 sessions with class pills */}
       <section>

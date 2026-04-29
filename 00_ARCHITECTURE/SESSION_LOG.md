@@ -10636,3 +10636,87 @@ session_close:
 
 *End of Phase_14G_Lockdown_Verification entry — 2026-04-29. Phase 14 modernization SEALED. 22 CAPABILITY_MANIFEST entries LOCKED; 36 fingerprints populated; validator delta resolved -36. PHASE_14_LOCKDOWN_v1_0.md produced as sealing artifact.*
 
+---
+
+```yaml
+session_open:
+  session_id: redesign-r6-cockpit-2026-04-30
+  cowork_thread_name: "Portal Redesign R6 — Cockpit elevation"
+  session_type: portal_redesign
+  governing_brief: EXEC_BRIEF_PORTAL_REDESIGN_R6_COCKPIT_v1_0.md
+  phase: "R6"
+  objective: "Promote Cockpit to first-class AppShell rail item; add <ActiveChartsWidget> to CockpitGrid linking into per-chart profiles at /clients/{id}"
+  may_touch:
+    - platform/src/components/shared/AppShell.tsx
+    - platform/src/components/build/CockpitGrid.tsx
+    - platform/src/components/build/ActiveChartsWidget.tsx
+    - platform/src/components/build/BuildHeader.tsx
+    - platform/src/lib/build/dataSource.ts
+    - tests/e2e/portal/cockpit-rail.spec.ts
+    - tests/components/ActiveChartsWidget.test.tsx
+    - 00_ARCHITECTURE/PORTAL_REDESIGN_R6_REPORT_v1_0.md
+    - 00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+    - CLAUDECODE_BRIEF.md
+    - CLAUDECODE_BRIEF_R6.md
+  must_not_touch:
+    - 01_FACTS_LAYER/
+    - 025_HOLISTIC_SYNTHESIS/
+    - 03_DOMAIN_REPORTS/
+    - 035_DISCOVERY_LAYER/
+    - 04_REMEDIAL_CODEX/
+    - 05_TEMPORAL_ENGINES/
+    - 06_LEARNING_LAYER/
+    - 99_ARCHIVE/
+    - platform/migrations/
+    - platform/supabase/migrations/
+    - platform/python-sidecar/
+    - platform/src/app/api/**
+    - platform/src/lib/db/types.ts
+    - platform/src/lib/firebase/
+    - platform/src/components/dashboard/
+    - platform/src/components/consume/
+    - platform/src/components/chat/
+    - platform/src/app/clients/[id]/**
+    - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+
+session_close:
+  session_id: redesign-r6-cockpit-2026-04-30
+  close_state: atomically_closed
+  done_criteria_met: true
+  pre_flight_exceptions: none
+  rail_promotion_result: "no-op assertion — R0 already shipped Roster→Cockpit→Admin order"
+  buildheader_cleanup_result: "no-op assertion — R0 already removed avatar from BuildHeader"
+  governance_scripts_run: true
+  drift_detector_run: "exit=0; 233 pre-existing findings; none from R6 files"
+  schema_validator_run: "exit=0; 81 pre-existing violations; none from R6 files"
+  mirror_enforcer_run: "exit=0; 0 findings; 8 pairs checked; CLEAN"
+  redesign_tracker_updated: true
+  deliverables:
+    - "platform/src/components/build/ActiveChartsWidget.tsx (NEW)"
+    - "platform/src/lib/build/dataSource.ts (getActiveCharts + ActiveChartEntry + healthDot added)"
+    - "platform/src/components/build/CockpitGrid.tsx (ActiveChartsWidget import + tile added)"
+    - "tests/e2e/portal/cockpit-rail.spec.ts (NEW — 4 Playwright tests)"
+    - "tests/components/ActiveChartsWidget.test.tsx (NEW — 6 Vitest tests)"
+    - "00_ARCHITECTURE/PORTAL_REDESIGN_R6_REPORT_v1_0.md (closure report, COMPLETE)"
+    - "00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md (v1.0.4→v1.0.5; R6 row closed)"
+    - "00_ARCHITECTURE/SESSION_LOG.md (this entry)"
+    - "CLAUDECODE_BRIEF.md (status: PENDING→COMPLETE)"
+    - "CLAUDECODE_BRIEF_R6.md (status: PENDING→COMPLETE)"
+  acceptance_criteria_summary:
+    - "AC1 — Rail promotion verified (no-op): PASS"
+    - "AC2 — <ActiveChartsWidget> on CockpitGrid with /clients/{id} click-through: PASS"
+    - "AC3 — BuildHeader cleanup verified (no-op): PASS"
+    - "AC4 — Tests created: PASS (cockpit-rail.spec.ts + ActiveChartsWidget.test.tsx)"
+    - "AC5 — Closure report status: COMPLETE: PASS"
+    - "AC6 — TRACKER §3 R6 row status: closed: PASS"
+    - "AC7 — Governance scripts exit 0: PASS"
+    - "AC8 — SESSION_LOG appended: PASS"
+    - "AC9 — CLAUDECODE_BRIEF_R6.md status: COMPLETE: PASS"
+  mirror_updates_propagated: n/a  # redesign workstream is Claude-only; no Gemini-side mirror
+  next_session_id: null           # native decides which of R1–R5 to run next; R7 now unblockable after R1–R4 close
+  next_session_objective: "Run R1, R2, R4, or R5 (all parallel-safe post-R0/R6); author R7 brief once R1–R4 close"
+```
+
+*End of redesign-r6-cockpit-2026-04-30 entry — Portal Redesign R6 CLOSED. Cockpit is now a first-class AppShell rail destination; <ActiveChartsWidget> surfaces live links from the governance Cockpit into per-chart profiles. R7 brief now authorable.*
+
