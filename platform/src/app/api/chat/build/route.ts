@@ -1,11 +1,14 @@
-import { streamText, stepCountIs } from 'ai'
+import { streamText, stepCountIs, createIdGenerator, convertToModelMessages } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { buildTools } from '@/lib/claude/build-tools'
 import { buildSystemPrompt } from '@/lib/claude/system-prompts'
-import type { ModelMessage } from 'ai'
+import type { ModelMessage, UIMessage } from 'ai'
+import { insertConversationWithId, replaceConversationMessages, getConversation } from '@/lib/conversations'
+
+export const maxDuration = 120
 
 async function requireSuperAdmin() {
   const user = await getServerUser()
@@ -22,7 +25,7 @@ export async function POST(request: Request) {
   const user = await requireSuperAdmin()
   if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
 
-  let body: { chartId?: string; messages?: ModelMessage[] }
+  let body: { chartId?: string; messages?: UIMessage[]; conversationId?: string }
   try {
     body = await request.json()
   } catch {
@@ -51,10 +54,32 @@ export async function POST(request: Request) {
 
   const systemPrompt = buildSystemPrompt(chart, layers)
 
+  let conversationId = body.conversationId
+  let isFirstTurn = false
+  let pendingConversationInsert: Promise<void> | null = null
+
+  if (conversationId) {
+    const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin: true })
+    if (!existing || existing.chart_id !== chartId) {
+      return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
+    }
+  } else {
+    conversationId = crypto.randomUUID()
+    isFirstTurn = true
+    pendingConversationInsert = insertConversationWithId({
+      id: conversationId,
+      chartId,
+      userId: user.uid,
+      module: 'build',
+    })
+  }
+
+  const finalConversationId = conversationId
+
   const result = streamText({
     model: anthropic('claude-sonnet-4-6'),
     system: systemPrompt,
-    messages,
+    messages: await convertToModelMessages(messages),
     tools: buildTools,
     stopWhen: stepCountIs(5),
     maxOutputTokens: 16384,
@@ -63,5 +88,30 @@ export async function POST(request: Request) {
     },
   })
 
-  return result.toTextStreamResponse()
+  result.consumeStream()
+
+  return result.toUIMessageStreamResponse({
+    originalMessages: body.messages ?? [],
+    generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
+    messageMetadata: ({ part }) => {
+      if (part.type === 'start' && isFirstTurn) {
+        return { conversationId: finalConversationId }
+      }
+    },
+    onError: error => {
+      if (error instanceof Error) return error.message
+      return 'Something went wrong generating the build response.'
+    },
+    onFinish: async ({ messages: finalMessages }) => {
+      try {
+        if (pendingConversationInsert) await pendingConversationInsert
+        await replaceConversationMessages({
+          conversationId: finalConversationId,
+          messages: finalMessages as UIMessage[],
+        })
+      } catch (err) {
+        console.error('[build] persistence failed', err)
+      }
+    },
+  })
 }
