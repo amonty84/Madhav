@@ -71,13 +71,13 @@ export function ClientCard({ chart }: Props) {
 
       {/* Action buttons */}
       <div className="flex gap-2">
-        <Link href={`/clients/${chart.id}`} className="brand-cta text-xs rounded-md px-3 py-1.5 flex-1">
+        <Link href={`/clients/${chart.id}`} aria-label={`Profile — ${chart.name}`} className="brand-cta text-xs rounded-md px-3 py-1.5 flex-1">
           Profile
         </Link>
-        <Link href={`/clients/${chart.id}/build`} className={GHOST_BTN}>
+        <Link href={`/clients/${chart.id}/build`} aria-label={`Build — ${chart.name}`} className={GHOST_BTN}>
           Build
         </Link>
-        <Link href={`/clients/${chart.id}/consume`} className={GHOST_BTN}>
+        <Link href={`/clients/${chart.id}/consume`} aria-label={`Consume — ${chart.name}`} className={GHOST_BTN}>
           Consume
         </Link>
       </div>
