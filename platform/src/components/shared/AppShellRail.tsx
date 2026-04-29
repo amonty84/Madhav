@@ -73,8 +73,8 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
               className={cn(
                 'flex h-11 w-11 items-center justify-center rounded text-xs font-medium transition-colors',
                 isActive
-                  ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  ? 'bg-[rgba(212,175,55,0.12)] border border-[rgba(212,175,55,0.22)] text-[#d4af37]'
+                  : 'text-[rgba(212,175,55,0.28)] hover:bg-[rgba(212,175,55,0.08)] hover:text-[#d4af37]'
               )}
             >
               {label.slice(0, 2)}
@@ -87,7 +87,7 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
       <DropdownMenu>
         <DropdownMenuTrigger
           aria-label="User menu"
-          className="grid h-11 w-11 place-items-center rounded-full border border-border bg-muted text-xs font-medium text-foreground transition-colors hover:bg-accent"
+          className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(212,175,55,0.25)] bg-[rgba(212,175,55,0.07)] text-xs font-medium text-[rgba(212,175,55,0.6)] transition-colors hover:bg-[rgba(212,175,55,0.12)]"
         >
           {userInitial}
         </DropdownMenuTrigger>
