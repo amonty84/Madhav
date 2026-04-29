@@ -1,6 +1,6 @@
 ---
 artifact: CLAUDECODE_BRIEF.md (R6 instance)
-status: PENDING
+status: COMPLETE
 authored_on: 2026-04-29
 authored_by: Cowork (Opus)
 authored_during: "Portal Redesign — R6 Cockpit elevation"

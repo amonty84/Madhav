@@ -1,6 +1,72 @@
 import 'server-only'
 import { Storage } from '@google-cloud/storage'
+import { query } from '@/lib/db/client'
 import type { BuildState, SessionDetail, PhaseDetail } from './types'
+
+export interface ActiveChartEntry {
+  id: string
+  client_id: string
+  name: string
+  build_pct: number
+  last_activity: string | null
+  health: 'green' | 'amber' | 'red'
+}
+
+// 60-second in-memory cache so the cockpit page doesn't hammer the DB on every render.
+let _activeChartsCache: { data: ActiveChartEntry[]; ts: number } | null = null
+
+function healthDot(lastActivity: string | null): 'green' | 'amber' | 'red' {
+  if (!lastActivity) return 'red'
+  const ageMs = Date.now() - new Date(lastActivity).getTime()
+  const ageDays = ageMs / 86_400_000
+  if (ageDays <= 7) return 'green'
+  if (ageDays <= 30) return 'amber'
+  return 'red'
+}
+
+export async function getActiveCharts({ limit = 5 }: { limit?: number } = {}): Promise<ActiveChartEntry[]> {
+  const now = Date.now()
+  if (_activeChartsCache && now - _activeChartsCache.ts < 60_000) {
+    return _activeChartsCache.data.slice(0, limit)
+  }
+
+  type ActiveChartRow = {
+    id: string
+    client_id: string
+    name: string
+    build_pct: number
+    last_activity: string | null
+  }
+
+  const result = await query<ActiveChartRow>(
+    `SELECT
+       c.id,
+       c.client_id,
+       c.name,
+       COALESCE(
+         COUNT(CASE WHEN pl.status = 'complete' THEN 1 END) * 100.0
+           / NULLIF(COUNT(pl.id), 0),
+         0
+       )::numeric(5,1)::float AS build_pct,
+       MAX(conv.created_at) AS last_activity
+     FROM charts c
+     LEFT JOIN pyramid_layers pl ON pl.chart_id = c.id
+     LEFT JOIN conversations conv ON conv.chart_id = c.id
+     GROUP BY c.id, c.client_id, c.name
+     ORDER BY last_activity DESC NULLS LAST
+     LIMIT $1`,
+    [50]
+  )
+
+  const data: ActiveChartEntry[] = result.rows.map((row: ActiveChartRow) => ({
+    ...row,
+    build_pct: Number(row.build_pct),
+    health: healthDot(row.last_activity),
+  }))
+
+  _activeChartsCache = { data, ts: now }
+  return data.slice(0, limit)
+}
 
 let _storage: Storage | null = null
 let _bucketName: string | null = null
