@@ -1,13 +1,13 @@
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { ClientRoster } from '@/components/dashboard/ClientRoster'
-import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import type { Chart } from '@/lib/db/types'
 import { fetchConsumedTodayCount } from '@/lib/roster/stats'
 import type { ChartWithMeta, RosterStats } from '@/lib/roster/types'
+import { Mandala } from '@/components/brand/Mandala'
 
 export default async function DashboardPage() {
   const user = await getServerUser()
@@ -88,14 +88,26 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Clients</h1>
-        <Link href="/clients/new" className={buttonVariants()}>+ New Client</Link>
+    <div className="container mx-auto py-8 px-4 relative min-h-full overflow-hidden">
+      <Mandala
+        size={560}
+        opacity={0.13}
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_25%,rgba(2,2,1,0.5)_65%,rgba(2,2,1,0.88)_100%)]" />
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="bt-display text-[#fce29a] mb-6">
+            <span className="opacity-55 text-[#d4af37] font-serif mr-1">॥</span>
+            Roster
+            <span className="opacity-55 text-[#d4af37] font-serif ml-1">॥</span>
+          </h1>
+          <Link href="/clients/new" className="brand-cta">+ New Client</Link>
+        </div>
+        <Suspense>
+          <ClientRoster charts={chartsWithMeta} stats={stats} />
+        </Suspense>
       </div>
-      <Suspense>
-        <ClientRoster charts={chartsWithMeta} stats={stats} />
-      </Suspense>
     </div>
   )
 }
