@@ -5,12 +5,12 @@ steps:
       - -f
       - platform/python-sidecar/Dockerfile.pipeline
       - --build-arg
-      - PIPELINE_VERSION=v1.0.6
+      - PIPELINE_VERSION=v1.0.8
       - -t
-      - asia-south1-docker.pkg.dev/madhav-astrology/marsys-pipeline/pipeline:v1.0.6
+      - asia-south1-docker.pkg.dev/madhav-astrology/marsys-pipeline/pipeline:v1.0.8
       - .
 images:
-  - asia-south1-docker.pkg.dev/madhav-astrology/marsys-pipeline/pipeline:v1.0.6
+  - asia-south1-docker.pkg.dev/madhav-astrology/marsys-pipeline/pipeline:v1.0.8
 options:
   machineType: 'E2_HIGHCPU_8'
   logging: CLOUD_LOGGING_ONLY
