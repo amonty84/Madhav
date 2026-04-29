@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.7 (2026-04-30): R2 Chart Profile closed. §2 state block: last_redesign_session_id→redesign-r2-chart-profile-2026-04-30, post_r0_parallel_ready→[R4, R5] (R6+R1+R2 closed), deferred_briefs→[R7] (R3 now unblocked). §3 R2 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R2 close.
   - v1.0.6 (2026-04-30): R1 Roster closed. §2 state block: last_redesign_session_id→redesign-r1-roster-2026-04-30, post_r0_parallel_ready→[R2, R4, R5] (R6+R1 now closed). §3 R1 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R1 close.
   - v1.0.5 (2026-04-30): R6 Cockpit elevation closed. §2 state block: last_redesign_session_id→redesign-r6-cockpit-2026-04-30, last_close_at→2026-04-30. §3 R6 row: status→closed, closure_report set, session_id set, closed_at set, follow_ups populated. deferred_briefs remains [R3, R7] — R7 now unblocked by R6 close (pending R1–R4). Authored by Claude Code (Sonnet 4.6) at R6 close.
   - v1.0.4 (2026-04-29): R0 Foundation closed. §2 state block: active_phase→null, last_redesign_session_id set, vision_status→CURRENT, canonical_artifacts_entry→true, claude_md_section_C_updated→true. §3 R0 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated (forced scope expansions + playwright note). Version bumped 1.0.3→1.0.4. Authored by Claude Code (Sonnet 4.6) at R0 close.
@@ -116,15 +117,15 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # R6 + R1 closed 2026-04-30; R2/R4/R5 remain
+active_phase: null                      # R6 + R1 + R2 closed 2026-04-30; R4/R5 remain; R3 now unblocked
 in_flight_parallel_phases: []           # none — native picks next
-last_redesign_session_id: redesign-r1-roster-2026-04-30
+last_redesign_session_id: redesign-r2-chart-profile-2026-04-30
 last_close_at: "2026-04-30"
-next_phase_committed_to: null           # native decides which of R2/R4/R5 to start next
+next_phase_committed_to: null           # R3 now authorable; native decides next
 next_phase_brief_authored: true         # all parallel-ready briefs authored
 next_phase_clausecode_brief_set: false  # per-phase CLAUDECODE_BRIEFs await worktree setup
-post_r0_parallel_ready: [R2, R4, R5]   # R6 + R1 closed; remaining parallel-safe phases
-deferred_briefs: [R3, R7]               # R3 awaits R2 close; R7 unblocked by R6 (pending R2/R4)
+post_r0_parallel_ready: [R4, R5]        # R6 + R1 + R2 closed; R3 unblocked; R4/R5 remaining
+deferred_briefs: [R7]                   # R3 unblocked by R2 close; R7 awaits R6 (already closed) + R4
 trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
@@ -205,13 +206,13 @@ follow_ups:
 ```yaml
 phase_id: R2
 phase_name: Chart Profile — keystone surface (NEW /clients/[id])
-status: authored                         # EXEC_BRIEF authored 2026-04-29; not yet started
+status: closed
 exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R2_CHART_PROFILE_v1_0.md
-closure_report: null
-session_id: null
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R2_REPORT_v1_0.md
+session_id: redesign-r2-chart-profile-2026-04-30
 authored_at: 2026-04-29
-started_at: null
-closed_at: null
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: MEDIUM                             # one new page; one new SVG renderer; B.10 visual verification required
 estimated_sessions: 2                    # 3 if rasi-renderer or B.10 verification surfaces friction
 depends_on: [R0]                         # R1 nice-to-have but not strict (R2 can land before R1 if R1 is delayed)
@@ -239,7 +240,10 @@ key_deliverables:
   - replace silent redirect with real /clients/[id]/page.tsx
   - one-line ClientCard href change (primary CTA → /clients/[id])
 trace_fix_collision: false
-follow_ups: []                           # populated at close; expected: South Indian style, click-to-house tooltips
+follow_ups:
+  - South Indian chart style (deferred to R2+; no EXEC_BRIEF yet)
+  - Click-to-house tooltips on RasiChartSVG (deferred to R2+)
+  - Pratyantar-level DashaCountdown (L1 has MD/AD only; Pratyantar requires Phase 14C extension)
 ```
 
 ### R3 — Build mode upgrade
