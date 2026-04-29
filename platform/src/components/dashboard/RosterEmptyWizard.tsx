@@ -1,26 +1,25 @@
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/button'
 import { Mandala } from '@/components/brand/Mandala'
 
 export function RosterEmptyWizard() {
   return (
-    <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-xl">
+    <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_50%_50%,rgba(13,10,5,0.4)_0%,rgba(2,2,1,0.9)_100%)] border border-[rgba(212,175,55,0.15)]">
       {/* Mandala backdrop */}
       <Mandala
         size={480}
-        opacity={0.18}
+        opacity={0.22}
         className="pointer-events-none absolute inset-0 m-auto"
       />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-6 text-center">
-        <h2 className="bt-heading text-xl text-foreground">
+        <h2 className="bt-heading text-[#fce29a]">
           Welcome. Begin with your first chart.
         </h2>
-        <p className="text-sm text-muted-foreground max-w-xs">
+        <p className="text-sm text-[rgba(212,175,55,0.45)] max-w-xs">
           Each chart is a native's complete Jyotish record — facts, build corpus, and conversation history.
         </p>
-        <Link href="/clients/new" className={buttonVariants({ size: 'lg' })}>
+        <Link href="/clients/new" className="brand-cta text-sm rounded-lg px-6 py-3">
           + Add first chart
         </Link>
       </div>
