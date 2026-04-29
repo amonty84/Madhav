@@ -6,6 +6,11 @@ import { query_patterns } from '@/lib/tools/structured/query_patterns'
 import { query_resonances_l3 } from '@/lib/tools/structured/query_resonances_l3'
 import { query_clusters } from '@/lib/tools/structured/query_clusters'
 import { query_contradictions } from '@/lib/tools/structured/query_contradictions'
+import { query_msr_signals } from '@/lib/tools/structured/query_msr_signals'
+import { query_ucn_section } from '@/lib/tools/structured/query_ucn_section'
+import { query_cdlm_link } from '@/lib/tools/structured/query_cdlm_link'
+import { query_cgm } from '@/lib/tools/structured/query_cgm'
+import { query_resonance } from '@/lib/tools/structured/query_resonance'
 
 async function readDocumentContent(storage_path: string): Promise<string | null> {
   return gcsDownloadText(chartDocsBucket(), storage_path)
@@ -246,6 +251,11 @@ export const consumeTools = {
   query_resonances_l3,
   query_clusters,
   query_contradictions,
+  query_msr_signals,
+  query_ucn_section,
+  query_cdlm_link,
+  query_cgm,
+  query_resonance,
 
   get_pyramid_status: tool({
     description: 'Get the status of all pyramid layers for the chart.',
