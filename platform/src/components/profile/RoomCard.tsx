@@ -46,7 +46,8 @@ export function RoomCard({ title, description, cta, children, className }: RoomC
         {cta.disabled ? (
           <span
             title={cta.tooltip}
-            className="inline-flex cursor-not-allowed items-center gap-1 text-xs opacity-40"
+            aria-disabled="true"
+            className="inline-flex min-h-[44px] cursor-not-allowed items-center gap-1 py-2 text-xs opacity-60"
             style={{ color: 'var(--brand-gold)' }}
           >
             {cta.label}
@@ -54,7 +55,7 @@ export function RoomCard({ title, description, cta, children, className }: RoomC
         ) : (
           <Link
             href={cta.href}
-            className="inline-flex items-center gap-1 text-sm font-medium transition-opacity hover:opacity-80"
+            className="inline-flex min-h-[44px] items-center gap-1 py-2 text-sm font-medium transition-opacity hover:opacity-80"
             style={{ color: 'var(--brand-gold)' }}
           >
             {cta.label} →

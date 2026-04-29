@@ -39,7 +39,7 @@ export function ProfileSideRail({
       {/* Top Yogas */}
       {chart.topYogas.length > 0 && (
         <div className="flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-widest opacity-50" style={{ color: 'var(--brand-gold)' }}>
+          <p className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--brand-gold)' }}>
             Active Yogas
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -69,7 +69,7 @@ export function ProfileSideRail({
 
       {/* Audience tier badge */}
       <div className="flex items-center gap-2">
-        <span className="text-xs uppercase tracking-widest opacity-50" style={{ color: 'var(--brand-gold)' }}>
+        <span className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--brand-gold)' }}>
           Tier
         </span>
         <span
@@ -90,7 +90,7 @@ export function ProfileSideRail({
           <a
             href={`/cockpit/audit?chart=${chartId}`}
             className="text-xs transition-opacity hover:opacity-80"
-            style={{ color: 'var(--brand-gold)', opacity: 0.6 }}
+            style={{ color: 'var(--brand-gold)', opacity: 0.85 }}
           >
             Audit log →
           </a>

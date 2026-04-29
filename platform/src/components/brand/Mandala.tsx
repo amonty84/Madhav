@@ -57,10 +57,12 @@ export function Mandala({
   size = 760,
   className,
   opacity = 0.95,
+  rotate = false,
 }: {
   size?: number
   className?: string
   opacity?: number
+  rotate?: boolean
 }) {
   return (
     <svg
@@ -68,7 +70,7 @@ export function Mandala({
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      className={cn('block', className)}
+      className={cn('block', rotate && 'mandala-spin', className)}
       style={{ opacity }}
       aria-hidden="true"
     >

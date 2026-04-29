@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 
 export type BreadcrumbSegment = {
@@ -6,12 +7,20 @@ export type BreadcrumbSegment = {
   current?: boolean
 }
 
-export function AppShellBreadcrumb({ segments }: { segments: BreadcrumbSegment[] }) {
+export function AppShellBreadcrumb({
+  segments,
+  mobileNav,
+}: {
+  segments: BreadcrumbSegment[]
+  mobileNav?: ReactNode
+}) {
   return (
     <nav
       aria-label="Breadcrumb"
       className="flex h-10 items-center gap-1.5 border-b border-border bg-background px-4 text-sm"
     >
+      {/* Mobile-only hamburger trigger rendered before breadcrumb items */}
+      {mobileNav}
       {segments.map((seg, i) => (
         <span key={i} className="flex items-center gap-1.5">
           {i > 0 && (
