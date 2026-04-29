@@ -1,6 +1,3 @@
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { MomentPhrase } from './MomentPhrase'
@@ -26,41 +23,64 @@ const HEALTH_DOT_CLASS: Record<HealthStatus, string> = {
   red: 'bg-red-500',
 }
 
+const GHOST_BTN = "border border-[rgba(212,175,55,0.22)] bg-transparent text-[rgba(212,175,55,0.55)] text-xs font-semibold uppercase tracking-[0.08em] rounded-md px-3 py-1.5 hover:text-[#fce29a] hover:border-[rgba(212,175,55,0.4)] transition-colors"
+
 export function ClientCard({ chart }: Props) {
   const percent = chart.pyramidPercent
-  const statusColor = percent === 100 ? 'default' : percent > 0 ? 'secondary' : 'outline'
   const health = healthStatus(chart)
 
   return (
-    <Card className="hover:border-primary/50 transition-colors">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base">{chart.name}</CardTitle>
-        <CardAction className="flex items-center gap-2">
-          <span
-            aria-label={`Health: ${health}`}
-            className={cn('inline-block h-1.5 w-1.5 rounded-full', HEALTH_DOT_CLASS[health])}
+    <div className="brand-card rounded-xl p-4 flex flex-col gap-3 hover:border-[rgba(212,175,55,0.35)] transition-colors">
+      {/* Name and health dot row */}
+      <div className="flex items-center justify-between gap-2">
+        <span className="bt-heading text-[#fce29a]">{chart.name}</span>
+        <span
+          aria-label={`Health: ${health}`}
+          className={cn('inline-block h-1.5 w-1.5 rounded-full shadow-[0_0_4px_currentColor]', HEALTH_DOT_CLASS[health])}
+        />
+      </div>
+
+      {/* Build percentage and progress bar */}
+      <div className="flex flex-col gap-1">
+        <div>
+          <span className="bt-num text-[#d4af37]">{percent}</span>
+          <span className="text-[rgba(212,175,55,0.5)] text-sm font-normal">%</span>
+        </div>
+        <div className="h-0.5 w-full bg-[rgba(212,175,55,0.1)] rounded-full">
+          <div
+            className="h-full bg-gradient-to-r from-[#a26d0e] to-[#f4d160] rounded-full"
+            style={{ width: `${percent}%` }}
           />
-          <Badge variant={statusColor}>{percent}%</Badge>
-        </CardAction>
-        <p className="text-xs text-muted-foreground">
+        </div>
+      </div>
+
+      {/* Metadata */}
+      <div>
+        <span className="bt-label" style={{ color: 'rgba(212,175,55,0.42)' }}>
           {chart.birth_date} · {chart.birth_place}
-        </p>
+        </span>
+      </div>
+
+      {/* Moment phrase */}
+      <div className="text-[rgba(212,175,55,0.3)] text-xs truncate">
         <MomentPhrase
           pyramidPercent={percent}
           lastLayerActivity={chart.lastLayerActivity}
         />
-      </CardHeader>
-      <CardContent className="flex gap-2">
-        <Link href={`/clients/${chart.id}`} className={cn(buttonVariants({ size: 'sm' }), 'flex-1')}>
+      </div>
+
+      {/* Action buttons */}
+      <div className="flex gap-2">
+        <Link href={`/clients/${chart.id}`} className="brand-cta text-xs rounded-md px-3 py-1.5 flex-1">
           Profile
         </Link>
-        <Link href={`/clients/${chart.id}/build`} className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}>
+        <Link href={`/clients/${chart.id}/build`} className={GHOST_BTN}>
           Build
         </Link>
-        <Link href={`/clients/${chart.id}/consume`} className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}>
+        <Link href={`/clients/${chart.id}/consume`} className={GHOST_BTN}>
           Consume
         </Link>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }
