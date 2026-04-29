@@ -1,0 +1,19 @@
+{
+  "canonical_id": "CONTRADICTION_REGISTER_JSON",
+  "local_path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json",
+  "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.json",
+  "local_sha256": "de3d1cd5b86f484fe10920bfd7cc9a38de32fb2fe35abf6aa1393576aa85f3ea",
+  "gcs_sha256": "de3d1cd5b86f484fe10920bfd7cc9a38de32fb2fe35abf6aa1393576aa85f3ea",
+  "gcs_sha256_embedded_metadata": "de3d1cd5b86f484fe10920bfd7cc9a38de32fb2fe35abf6aa1393576aa85f3ea",
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "cMzgLQ==",
+  "gcs_size_bytes": 20772,
+  "local_size_bytes": 20772,
+  "match": true,
+  "gcs_generation": "1777392222837528",
+  "gcs_upload_time": "2026-04-28T16:03:42+0000",
+  "local_commits_after_gcs_upload": [
+    "e4a77c8 chore: commit prior multi-session work before Phase 14.0 asset inventory"
+  ],
+  "divergence_type": "none"
+}

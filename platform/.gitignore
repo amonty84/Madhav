@@ -41,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+verification/
+
+# CI-staged governance files (copied from repo root during docker build; not committed)
+/00_ARCHITECTURE/

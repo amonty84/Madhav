@@ -1,0 +1,58 @@
+[
+  {
+    "seed_id": "SEED.001",
+    "claim_text": "Saturn is in the 7th house in Libra at birth, conjunct Mars, with degree 22°27′04″ in Vishakha nakshatra pada 1.",
+    "expected_chunks_rank10": [
+      "f07efabeea1f55b29399228ae33a17c5",
+      "ab8416eb8dd0ac537a1639dc70aa7103"
+    ],
+    "expected_signals": ["SIG.MSR.015"],
+    "expected_l3_evidence_report": "REPORT_CAREER_DHARMA_v1_1.md",
+    "source_attribution": "FORENSIC_ASTROLOGICAL_DATA_v8_0.md §2.1 D1 Planet Positions (PLN.SATURN) | MSR_v3_0.md §SIG.MSR.015"
+  },
+  {
+    "seed_id": "SEED.002",
+    "claim_text": "Mars and Saturn form a Hidden Raja Yoga by exalted conjunction in the 7th house Libra, per SIG.MSR.015, with strength score 0.80 and mixed valence.",
+    "expected_chunks_rank10": [
+      "ab8416eb8dd0ac537a1639dc70aa7103",
+      "f893f4d70f6a8df8a1422cc6e49cc242"
+    ],
+    "expected_signals": ["SIG.MSR.015"],
+    "expected_l3_evidence_report": "REPORT_CAREER_DHARMA_v1_1.md",
+    "source_attribution": "MSR_v3_0.md §SIG.MSR.015 — Hidden Raja Yoga Mars+Saturn conjunction 7H Libra"
+  },
+  {
+    "seed_id": "SEED.003",
+    "claim_text": "The chart has five foundation signatures that function as the lens through which all other features must be read, per UCN Part I §I.1.",
+    "expected_chunks_rank10": [
+      "d4b7d3d769741455910724d62f670c66",
+      "7eecda70c21facdd07cd3a6ef52dd5b5"
+    ],
+    "expected_signals": [],
+    "expected_l3_evidence_report": "REPORT_CAREER_DHARMA_v1_1.md",
+    "source_attribution": "UCN_v4_0.md §I.1 — The Five Foundation Signatures"
+  },
+  {
+    "seed_id": "SEED.004",
+    "claim_text": "This chart's career architecture has seven independent astrological systems all designating Mercury as the primary operational planet, making it among the most structured for professional excellence.",
+    "expected_chunks_rank10": [
+      "94b4ba5e825146f83d976684f82e3e09",
+      "7820054dff466759d37f19818b615cef",
+      "456819e49cf2a3fcf5676584da68f259",
+      "36fd397da5b18a834952d7c2653819ad"
+    ],
+    "expected_signals": ["SIG.MSR.413"],
+    "expected_l3_evidence_report": "REPORT_CAREER_DHARMA_v1_1.md",
+    "source_attribution": "MSR_v3_0.md §SIG.MSR.413 — Mercury Eight-System Convergence"
+  },
+  {
+    "seed_id": "SEED.005",
+    "claim_text": "The Career-Children domain link (CDLM.D1.D5) shows PK Mars in 7H Libra constrains children timing through Saturn AmK competition in the same house.",
+    "expected_chunks_rank10": [
+      "e8292e2d4f15fa4682a9e7e619f2bf31"
+    ],
+    "expected_signals": [],
+    "expected_l3_evidence_report": "REPORT_CAREER_DHARMA_v1_1.md",
+    "source_attribution": "CDLM_v1_1.md §CDLM.D1.D5 — Career row × Children column, linkage_type: constrains"
+  }
+]

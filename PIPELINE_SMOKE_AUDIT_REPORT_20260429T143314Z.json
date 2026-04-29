@@ -1,0 +1,560 @@
+{
+  "audit_version": "1.0",
+  "produced_at": "2026-04-29T14:33:14.573398+00:00",
+  "repo_root": "/Users/Dev/Vibe-Coding/Apps/Madhav",
+  "summary": {
+    "total": 57,
+    "passed": 31,
+    "failed": 18,
+    "warned": 2,
+    "skipped": 6
+  },
+  "checks": [
+    {
+      "check_id": "1.1",
+      "category": "static",
+      "description": "No NEXT_PUBLIC_SIDECAR_URL in active TS source",
+      "status": "pass",
+      "detail": "Clean \u2014 all 3 RAG clients use PYTHON_SIDECAR_URL",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.2",
+      "category": "static",
+      "description": "No old SIDECAR_API_KEY in active TS/Python source",
+      "status": "pass",
+      "detail": "Clean \u2014 only PYTHON_SIDECAR_API_KEY used everywhere",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.3",
+      "category": "static",
+      "description": "temporal.ts sidecar URL reads from PYTHON_SIDECAR_URL env var",
+      "status": "pass",
+      "detail": "Reads process.env.PYTHON_SIDECAR_URL with localhost fallback only",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.4",
+      "category": "static",
+      "description": "No @supabase/supabase-js imports in active TS source",
+      "status": "pass",
+      "detail": "No @supabase imports \u2014 fully migrated to Cloud SQL",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.5",
+      "category": "static",
+      "description": "No voyageai imports in active Python source (outside venv)",
+      "status": "pass",
+      "detail": "Voyage AI fully replaced \u2014 no voyageai imports in active Python",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.6",
+      "category": "static",
+      "description": "Dockerfile copies 035_DISCOVERY_LAYER (needed by 4 register tools)",
+      "status": "pass",
+      "detail": "035_DISCOVERY_LAYER is COPY'd into runner stage",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "1.7",
+      "category": "static",
+      "description": "L3 register JSON files present under MARSYS_REPO_ROOT",
+      "status": "pass",
+      "detail": "All 4 present. Sizes: {'PATTERN_REGISTER_v1_0.json': '47KB', 'RESONANCE_REGISTER_v1_0.json': '27KB', 'CLUSTER_ATLAS_v1_0.json': '19KB', 'CONTRADICTION_REGISTER_v1_0.json': '20KB'}",
+      "latency_ms": null,
+      "data": {
+        "files": [
+          "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json",
+          "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
+          "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
+          "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json"
+        ]
+      }
+    },
+    {
+      "check_id": "2.1",
+      "category": "cloud_sql",
+      "description": "Cloud SQL connection via Auth Proxy",
+      "status": "pass",
+      "detail": "PostgreSQL: PostgreSQL 15.17 on x86_64-pc-linux-gnu, compiled by Debian ...",
+      "latency_ms": 493.4002500376664,
+      "data": {}
+    },
+    {
+      "check_id": "2.2",
+      "category": "cloud_sql",
+      "description": "charts (must have \u22651 chart)",
+      "status": "pass",
+      "detail": "1 rows",
+      "latency_ms": 113.89762500766665,
+      "data": {
+        "row_count": 1
+      }
+    },
+    {
+      "check_id": "2.3",
+      "category": "cloud_sql",
+      "description": "msr_signals (L2.5 \u2014 L2.5 MSR signals \u2014 pipeline tool: msr_sql)",
+      "status": "pass",
+      "detail": "499 rows",
+      "latency_ms": 171.53945798054338,
+      "data": {
+        "row_count": 499
+      }
+    },
+    {
+      "check_id": "2.4a",
+      "category": "cloud_sql",
+      "description": "rag_chunks (L1+L2.5 \u2014 non-stale RAG chunks \u2014 pipeline tool: vector_search)",
+      "status": "pass",
+      "detail": "941 rows",
+      "latency_ms": 66.95141701493412,
+      "data": {
+        "row_count": 941
+      }
+    },
+    {
+      "check_id": "2.4b",
+      "category": "cloud_sql",
+      "description": "rag_embeddings (vector embeddings \u2014 pipeline tool: vector_search)",
+      "status": "pass",
+      "detail": "941 rows",
+      "latency_ms": 52.49466700479388,
+      "data": {
+        "row_count": 941
+      }
+    },
+    {
+      "check_id": "2.5a",
+      "category": "cloud_sql",
+      "description": "l25_cgm_nodes (L2.5 CGM \u2014 CGM graph nodes \u2014 tool: cgm_graph_walk)",
+      "status": "pass",
+      "detail": "234 rows",
+      "latency_ms": 47.47179098194465,
+      "data": {
+        "row_count": 234
+      }
+    },
+    {
+      "check_id": "2.5b",
+      "category": "cloud_sql",
+      "description": "l25_cgm_edges_valid (L2.5 CGM \u2014 CGM graph edges (valid) \u2014 tool: cgm_graph_walk)",
+      "status": "pass",
+      "detail": "21 rows",
+      "latency_ms": 47.27695800829679,
+      "data": {
+        "row_count": 21
+      }
+    },
+    {
+      "check_id": "2.5c",
+      "category": "cloud_sql",
+      "description": "l25_cgm_edges_total (L2.5 CGM \u2014 CGM graph edges (all statuses))",
+      "status": "pass",
+      "detail": "127 rows",
+      "latency_ms": 51.71608302043751,
+      "data": {
+        "row_count": 127
+      }
+    },
+    {
+      "check_id": "2.6a",
+      "category": "cloud_sql",
+      "description": "ucn_sections (L2.5 UCN \u2014 row count)",
+      "status": "fail",
+      "detail": "relation \"ucn_sections\" does not exist\nLINE 1: SELECT COUNT(*) FROM ucn_sections\n                             ^",
+      "latency_ms": 90.85433400468901,
+      "data": {}
+    },
+    {
+      "check_id": "2.6b",
+      "category": "cloud_sql",
+      "description": "cdlm_links (L2.5 CDLM \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 54.790666967164725,
+      "data": {}
+    },
+    {
+      "check_id": "2.6c",
+      "category": "cloud_sql",
+      "description": "cgm_nodes (L2.5 CGM nodes \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 52.06154199549928,
+      "data": {}
+    },
+    {
+      "check_id": "2.6d",
+      "category": "cloud_sql",
+      "description": "cgm_edges (L2.5 CGM edges \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 50.34854100085795,
+      "data": {}
+    },
+    {
+      "check_id": "2.6e",
+      "category": "cloud_sql",
+      "description": "rm_resonances (L2.5 RM \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 47.62183298589662,
+      "data": {}
+    },
+    {
+      "check_id": "2.6f",
+      "category": "cloud_sql",
+      "description": "chart_facts (L1 structured facts \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 49.19345799135044,
+      "data": {}
+    },
+    {
+      "check_id": "2.6g",
+      "category": "cloud_sql",
+      "description": "eclipses (L1 eclipses \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 49.635417002718896,
+      "data": {}
+    },
+    {
+      "check_id": "2.6h",
+      "category": "cloud_sql",
+      "description": "retrogrades (L1 retrogrades \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 50.312957959249616,
+      "data": {}
+    },
+    {
+      "check_id": "2.6i",
+      "category": "cloud_sql",
+      "description": "life_events (L1 life events \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 49.106250051409006,
+      "data": {}
+    },
+    {
+      "check_id": "2.6j",
+      "category": "cloud_sql",
+      "description": "sade_sati (L1 Sade Sati cycles \u2014 row count)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 111.87216697726399,
+      "data": {}
+    },
+    {
+      "check_id": "2.7a",
+      "category": "cloud_sql",
+      "description": "audit_events (pipeline audit log)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 51.44391703652218,
+      "data": {}
+    },
+    {
+      "check_id": "2.7b",
+      "category": "cloud_sql",
+      "description": "query_trace_steps (pipeline trace steps)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 48.07941702893004,
+      "data": {}
+    },
+    {
+      "check_id": "2.8",
+      "category": "cloud_sql",
+      "description": "conversations (persisted conversations)",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": 49.743250012397766,
+      "data": {}
+    },
+    {
+      "check_id": "2.9",
+      "category": "cloud_sql",
+      "description": "pgvector extension installed",
+      "status": "fail",
+      "detail": "current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "2.10",
+      "category": "cloud_sql",
+      "description": "rag_embeddings dimension = 768 (Vertex AI text-multilingual-embedding-002)",
+      "status": "warn",
+      "detail": "Could not check embedding dim: current transaction is aborted, commands ignored until end of transaction block",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "2.11",
+      "category": "cloud_sql",
+      "description": "HNSW index on rag_embeddings (cosine, m=16)",
+      "status": "warn",
+      "detail": "only '%s', '%b', '%t' are allowed as placeholders, got '%h'",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "3.1",
+      "category": "gcs",
+      "description": "Chat attachments bucket (upload/download for chat files) [madhav-astrology-chat-attachments]",
+      "status": "pass",
+      "detail": "Accessible (sampled 1 object)",
+      "latency_ms": 1665.5062910285778,
+      "data": {
+        "bucket": "madhav-astrology-chat-attachments"
+      }
+    },
+    {
+      "check_id": "3.2",
+      "category": "gcs",
+      "description": "Chart documents bucket (reports PDF storage) [madhav-astrology-chart-documents]",
+      "status": "pass",
+      "detail": "Accessible (sampled 1 object)",
+      "latency_ms": 224.31341599440202,
+      "data": {
+        "bucket": "madhav-astrology-chart-documents"
+      }
+    },
+    {
+      "check_id": "3.3",
+      "category": "gcs",
+      "description": "Sources bucket (pipeline reads VALIDATED_ASSET_REGISTRY + corpus files) [madhav-marsys-sources]",
+      "status": "pass",
+      "detail": "Accessible (sampled 1 object)",
+      "latency_ms": 688.8385000056587,
+      "data": {
+        "bucket": "madhav-marsys-sources"
+      }
+    },
+    {
+      "check_id": "3.4",
+      "category": "gcs",
+      "description": "Build artifacts bucket (pipeline writes build manifests) [madhav-marsys-build-artifacts]",
+      "status": "pass",
+      "detail": "Accessible (sampled 1 object)",
+      "latency_ms": 677.5996669894084,
+      "data": {
+        "bucket": "madhav-marsys-build-artifacts"
+      }
+    },
+    {
+      "check_id": "3.5",
+      "category": "gcs",
+      "description": "L1/L2.5 corpus files present in sources bucket",
+      "status": "fail",
+      "detail": "403 GET https://storage.googleapis.com/storage/v1/b/madhav-marsys-sources/o/L1%2Ffacts%2FFORENSIC_ASTROLOGICAL_DATA_v8_0.md?fields=name&prettyPrint=false: mail.abhisek.mohanty@gmail.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist).",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "3.6",
+      "category": "gcs",
+      "description": "VALIDATED_ASSET_REGISTRY_v1_0.json in sources bucket",
+      "status": "fail",
+      "detail": "403 GET https://storage.googleapis.com/storage/v1/b/madhav-marsys-sources/o/00_ARCHITECTURE%2FVALIDATED_ASSET_REGISTRY_v1_0.json?fields=name&prettyPrint=false: mail.abhisek.mohanty@gmail.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist).",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "4.1",
+      "category": "vertex_ai",
+      "description": "Application Default Credentials available",
+      "status": "fail",
+      "detail": "'NoneType' object is not callable\n         \u2192 Run: gcloud auth application-default login",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "4.2",
+      "category": "vertex_ai",
+      "description": "Vertex AI embed call",
+      "status": "skip",
+      "detail": "No ADC credentials",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.1",
+      "category": "sidecar",
+      "description": "Sidecar health check [http://localhost:8000/health]",
+      "status": "fail",
+      "detail": "Cannot reach sidecar: timed out\n         URL: http://localhost:8000\n         \u2192 Start sidecar: cd platform/python-sidecar && uvicorn main:app --port 8000",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.2",
+      "category": "sidecar",
+      "description": "sidecar endpoint",
+      "status": "skip",
+      "detail": "sidecar unreachable",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.3",
+      "category": "sidecar",
+      "description": "sidecar endpoint",
+      "status": "skip",
+      "detail": "sidecar unreachable",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.4",
+      "category": "sidecar",
+      "description": "sidecar endpoint",
+      "status": "skip",
+      "detail": "sidecar unreachable",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.5",
+      "category": "sidecar",
+      "description": "sidecar endpoint",
+      "status": "skip",
+      "detail": "sidecar unreachable",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "5.6",
+      "category": "sidecar",
+      "description": "sidecar endpoint",
+      "status": "skip",
+      "detail": "sidecar unreachable",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "6.1",
+      "category": "tool",
+      "description": "msr_sql \u2014 Cloud SQL: msr_signals table",
+      "status": "pass",
+      "detail": "499 signals. Top domains: {'career': 208, 'spirit': 94, 'wealth': 64, 'relationships': 41, 'health': 32}",
+      "latency_ms": 1068.252749973908,
+      "data": {
+        "row_count": 499
+      }
+    },
+    {
+      "check_id": "6.2",
+      "category": "tool",
+      "description": "pattern_register \u2014 filesystem: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json (L3)",
+      "status": "pass",
+      "detail": "22 entries (patterns), 47KB",
+      "latency_ms": 0.552999961655587,
+      "data": {}
+    },
+    {
+      "check_id": "6.3",
+      "category": "tool",
+      "description": "resonance_register \u2014 filesystem: 035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json (L3)",
+      "status": "pass",
+      "detail": "12 entries (resonances), 27KB",
+      "latency_ms": 0.24016696261242032,
+      "data": {}
+    },
+    {
+      "check_id": "6.4",
+      "category": "tool",
+      "description": "cluster_atlas \u2014 filesystem: 035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json (L3)",
+      "status": "pass",
+      "detail": "12 entries (clusters), 19KB",
+      "latency_ms": 0.17733295680955052,
+      "data": {}
+    },
+    {
+      "check_id": "6.5",
+      "category": "tool",
+      "description": "contradiction_register \u2014 filesystem: 035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json (L3)",
+      "status": "pass",
+      "detail": "8 entries (contradictions), 20KB",
+      "latency_ms": 0.1644170260988176,
+      "data": {}
+    },
+    {
+      "check_id": "6.6",
+      "category": "tool",
+      "description": "temporal \u2014 Python sidecar /transits (see 5.2 for live check)",
+      "status": "pass",
+      "detail": "Delegates to sidecar at http://localhost:8000/transits \u2014 result in check 5.2",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "6.7",
+      "category": "tool",
+      "description": "query_msr_aggregate \u2014 no I/O (multi-native stub, always returns status)",
+      "status": "pass",
+      "detail": "Stub tool \u2014 returns 'multi_native_not_deployed' immediately, no cloud calls",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "6.8",
+      "category": "tool",
+      "description": "cgm_graph_walk \u2014 l25_cgm_nodes + l25_cgm_edges (L2.5 CGM)",
+      "status": "pass",
+      "detail": "nodes=234  edges_valid=21  edges_total=127  types={'SUPPORTS(orphan)': 101, 'DISPOSITED_BY(valid)': 8, 'NAKSHATRA_LORD_IS(valid)': 8, 'CONTRADICTS(orphan)': 4, 'ASPECTS_4TH(valid)': 2, 'ASPECTS_3RD(valid)': 2, 'ASPECTS_8TH(valid)': 1, 'NAKSHATRA_LORD_IS(self_loop)': 1}",
+      "latency_ms": 1043.5567919630557,
+      "data": {}
+    },
+    {
+      "check_id": "6.9",
+      "category": "tool",
+      "description": "manifest_query \u2014 filesystem: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (L0)",
+      "status": "pass",
+      "detail": "105 entries  fingerprint=73010a7fd9e47169...",
+      "latency_ms": 0.5867080180905759,
+      "data": {
+        "entries": 105
+      }
+    },
+    {
+      "check_id": "6.10",
+      "category": "tool",
+      "description": "vector_search \u2014 Vertex AI embed + Cloud SQL: rag_embeddings \u2295 rag_chunks",
+      "status": "pass",
+      "detail": "chunks=941  embeddings=941  coverage=100.0%  doc_types={'msr_signal': 499, 'cgm_node': 234, 'l1_fact': 102, 'cdlm_cell': 81, 'ucn_section': 25}",
+      "latency_ms": 1600.2122499630786,
+      "data": {}
+    },
+    {
+      "check_id": "7.1",
+      "category": "anthropic",
+      "description": "Anthropic API key format",
+      "status": "pass",
+      "detail": "Key present: sk-ant-...sFZD2gAA",
+      "latency_ms": null,
+      "data": {}
+    },
+    {
+      "check_id": "7.2",
+      "category": "anthropic",
+      "description": "Anthropic API reachable (models endpoint)",
+      "status": "pass",
+      "detail": "HTTP 200 \u2014 sample models: ['claude-opus-4-7', 'claude-sonnet-4-6', 'claude-opus-4-6']",
+      "latency_ms": 497.13041697395965,
+      "data": {}
+    }
+  ]
+}

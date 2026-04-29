@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pattern_schema_v0_1",
+  "$comment": "v0.1 amended in-place 2026-04-27 (Madhav_M2A_Exec_11) — additive re_validation_status + re_validation_event_id fields per AC.4 Q2 gate. No version bump (additive). Prior amendment: Exec_10 added pass_1_actor.",
+  "version": "0.1",
+  "title": "MARSYS-JIS Pattern Register Entry Schema v0.1",
+  "description": "Schema for pattern register entries in 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json. Produced at Madhav_M2A_Exec_9 (2026-04-27) per PHASE_B_PLAN_v1_0.md §B.5.",
+  "produced_at": "2026-04-27",
+  "produced_by_session": "Madhav_M2A_Exec_9",
+  "type": "object",
+  "required": [
+    "pattern_id",
+    "claim_text",
+    "mechanism",
+    "domain",
+    "signals_referenced",
+    "classical_basis",
+    "alternatives",
+    "validator_results",
+    "confidence",
+    "is_forward_looking",
+    "ledger_event_ids",
+    "created_at",
+    "created_by_session"
+  ],
+  "properties": {
+    "pattern_id": {
+      "type": "string",
+      "pattern": "^PAT\\.\\d{3}$",
+      "description": "Auto-assigned pattern identifier (PAT.001, PAT.002, ...)."
+    },
+    "claim_text": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Plain-English statement of the pattern (≤300 chars recommended)."
+    },
+    "mechanism": {
+      "type": "string",
+      "minLength": 10,
+      "description": "How the signals causally combine — at least one sentence."
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "career",
+        "wealth",
+        "health",
+        "relationships",
+        "children",
+        "spiritual",
+        "parents",
+        "mind",
+        "travel",
+        "meta",
+        "cross_domain"
+      ],
+      "description": "Primary domain classification."
+    },
+    "signals_referenced": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^SIG\\.MSR\\.\\d{3}[a-z]?$"
+      },
+      "description": "MSR signal IDs this pattern draws on."
+    },
+    "counter_cases": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Known counter-examples or conditions under which the pattern does not hold."
+    },
+    "classical_basis": {
+      "type": "string",
+      "description": "Citation to classical text (e.g. 'BPHS Ch.23 Sl.7') or 'derivative — emergent pattern'."
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 0,
+      "description": "Alternative interpretations (e.g. 7-karaka vs 8-karaka readings). ≥2 required when significance ≥0.7 per P7."
+    },
+    "validator_results": {
+      "type": "object",
+      "properties": {
+        "P1": {"type": "boolean"},
+        "P2": {"type": "boolean"},
+        "P5": {"type": "boolean"},
+        "P7": {"type": "boolean"},
+        "P8": {"type": "boolean"},
+        "P9": {"type": "boolean"}
+      },
+      "description": "Per-validator pass/fail results from Claude Pass-2."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["LOW", "MED", "HIGH"],
+      "description": "Confidence level assigned by Gemini Pass-1 and validated in Pass-2."
+    },
+    "significance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Significance score (0–1). Gates P7 three-interpretation check at threshold 0.7."
+    },
+    "is_forward_looking": {
+      "type": "boolean",
+      "description": "True if pattern makes a testable time-indexed claim. Triggers Hook 2 prediction logging."
+    },
+    "time_indexed_falsifier": {
+      "type": ["object", "null"],
+      "properties": {
+        "verification_window_start": {"type": "string", "format": "date"},
+        "verification_window_end": {"type": "string", "format": "date"},
+        "falsifier_conditions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        }
+      },
+      "required": ["verification_window_start", "verification_window_end", "falsifier_conditions"],
+      "description": "Required when is_forward_looking is true. Specifies falsifiable prediction window."
+    },
+    "ledger_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{12}$"
+      },
+      "minItems": 2,
+      "description": "Two-pass trail: [pattern_proposal event_id, claude_pattern_accept event_id]. Both required."
+    },
+    "prediction_ledger_ref": {
+      "type": ["string", "null"],
+      "description": "PRED.NNN if is_forward_looking; null otherwise.",
+      "pattern": "^(PRED\\.\\d{3}|null)$"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "ISO 8601 UTC timestamp of pattern acceptance."
+    },
+    "created_by_session": {
+      "type": "string",
+      "description": "Session ID that accepted this pattern (e.g. Madhav_M2A_Exec_9)."
+    },
+    "pass_1_actor": {
+      "type": "string",
+      "enum": ["gemini", "claude_self", "claude_via_pattern_mining_reconciler"],
+      "description": "Actor that produced Pass-1 (proposal). Per PHASE_B_PLAN §E.5: pattern Pass-1 SHOULD be 'gemini' for Gemini→Claude two-pass. 'claude_self' marks pre-lock Exec_9 deviation (PAT.002–PAT.011). Required for entries created at or after Exec_10."
+    },
+    "re_validation_status": {
+      "type": "string",
+      "enum": ["gemini_confirmed", "gemini_conflict", "not_required"],
+      "description": "Result of the Exec_11 AC.4 Gemini Pass-1 re-validation. 'gemini_confirmed': Gemini accepted the pattern. 'gemini_conflict': Gemini rejected; DR entry opened (Q2 soft gate — B.5 close not blocked). 'not_required': pattern was already Gemini Pass-1 validated (PAT.001–004 from Exec_9 batch1; PAT.012–022 from Exec_10 batches 4–6). Added additive in-place at Exec_11."
+    },
+    "re_validation_event_id": {
+      "type": ["string", "null"],
+      "description": "Ledger event ID of the gemini_revalidation_pass1 event (two_pass_events.jsonl). Null for patterns with re_validation_status: not_required. Added additive in-place at Exec_11."
+    }
+  },
+  "if": {
+    "properties": {
+      "created_by_session": {
+        "pattern": "^Madhav_M2A_Exec_(1[0-9]|[2-9][0-9])"
+      }
+    },
+    "required": ["created_by_session"]
+  },
+  "then": {
+    "required": ["pass_1_actor"]
+  },
+  "additionalProperties": false
+}

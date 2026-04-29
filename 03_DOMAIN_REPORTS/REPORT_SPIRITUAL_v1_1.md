@@ -17,6 +17,9 @@ corrections_applied:
   - "Shree Lagna removed from 9H (corrected to 7H — see REPORT_RELATIONSHIPS_v1_1 and UCN_v4_0 Part IV §XVII)"
   - "Ketu MD 2031-2038: hidden-pinnacle Varnada+Ghati 8H claim invalidated; correct framing via Ketu-exalted-8H mechanism only"
   - "MSR.407 confidence: 0.87 -> 0.82 (Shree Lagna removed from 9H)"
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_SPIRITUAL_v1_1 — Spirit, Dharma, and Moksha Domain Report

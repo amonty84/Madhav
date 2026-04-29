@@ -18,13 +18,14 @@ Every Gemini session reads, in order, before any substantive work. Item numberin
 2. `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — machine-readable canonical-path registry (§1 canonical artifacts; §2 MP.1–MP.8 mirror-pair inventory). Every other governance surface — including this file — imports from or cites CANONICAL_ARTIFACTS; no other surface may declare a canonical version without citing this file. Any disagreement between `.geminirules` and CANONICAL_ARTIFACTS resolves in favor of CANONICAL_ARTIFACTS.
 3. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md` (canonical_id `PROJECT_ARCHITECTURE`; v2.1 SUPERSEDED 2026-04-24 at Step 5A — do not cite). Governing blueprint. Re-read relevant sections as needed.
 4. `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` (canonical_id `MACRO_PLAN`; v1.0 SUPERSEDED 2026-04-23 — do not cite). Ten-macro-phase strategic arc M1–M10, Learning Layer substrate, System Integrity Substrate per ND.1 Mirror Discipline, Ethical Framework, External Dependency Graph, per-phase schema. Orientation only — do not pre-build for phases later than the current one.
-5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` (canonical_id `PHASE_B_PLAN`, v1.0.3) — active M2 execution plan (B.0–B.10). WARN.2/3/5/7 amendment complete (Madhav 16). **B.0 completed (Madhav 17). M2A planning complete. B.1 + B.2 + B.3 complete (Madhav_M2A_Exec through Madhav_M2A_Exec_4, 2026-04-25)**. `M2A_EXEC_PLAN_v1_0.md` governs B.1–B.3.5; **B.3.5 CGM Rebuild + red-team (Session 5) is the next execution sub-phase.**
+5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` (canonical_id `PHASE_B_PLAN`, v1.0.3) — active M2 execution plan (B.0–B.10). WARN.2/3/5/7 amendment complete (Madhav 16). **B.0 completed (Madhav 17). M2A planning complete. B.1 + B.2 + B.3 + B.3.5 complete (Madhav_M2A_Exec through Madhav_M2A_Exec_5)**. M2A Foundation Stack: 5/5 sessions done. **B.4 Graph Construction Session 1 of 2 in partial close** (Madhav_M2A_Exec_6, 2026-04-26): file/code complete; DB-dependent ACs pending Auth Proxy. Task 3 (SUPPORTS two-pass) deferred to Exec_7.
 6. `00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md` (canonical_id `GOVERNANCE_INTEGRITY_PROTOCOL`, status CURRENT since Step 8 close) — governs session-open/close, drift/schema/mirror enforcement, disagreement protocol (including `DIS.class.mirror_desync`), meta-rules. Re-read axes §C.1–§C.6 + §K disagreement protocol at session open.
 7. `00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md` + `00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md` — the handshake + close-checklist schemas the session emits. See §G + §H below.
 8. `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (canonical_id `CURRENT_STATE`, LIVE) — the authoritative "you are here" state pointer. Answers: which macro-phase is active, which phase-plan sub-phase is in flight, which session last closed, and what the next session is committed to. Updated at every session close. Authoritative since Step 15 close (2026-04-24); STEP_LEDGER retired (status `GOVERNANCE_CLOSED`).
 9. `00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md` — baseline facts as of 2026-04-23 (CLOSED audit; GA.N findings cited downstream).
 10. `00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md` — open ND.N directives bound to the current step. At this revision, ND.1 (Mirror Discipline) is `addressed` — no open directive.
 11. `00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md` — governance-layer hygiene rule set (CURRENT since Step 12 close, 2026-04-24). §A–§N: archival retain-in-place, predecessor cleanup, scope-boundary enforcement, SESSION_LOG completeness, staleness register, CI cadence + exit-code-3 known_residuals whitelist, red-team cadence + learning_layer_stub validator class, quarterly governance pass, Macro Plan review triggers, implementation-actions index, residual-disposition record, finding-coverage audit. Governs every Gemini session-close checklist from Step 12 forward.
+12. `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` (canonical_id `PORTAL_REDESIGN_TRACKER`, LIVING) + `00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md` (canonical_id `PORTAL_REDESIGN_VISION`, CURRENT) — **Portal Redesign workstream only.** Read when any redesign session (R0–R7) opens. TRACKER §2 canonical state block answers: which R-phase is in flight, which phases are parallel-safe, what the trace-fix status is. Skip this item if the session is not a portal redesign session. (Mirror of CLAUDE.md §C item #12; Claude-only workstream per TRACKER mirror_obligations — no Gemini-side execution required.)
 
 *Item 11 previously named `AM_JIS_BOOTSTRAP_HANDOFF.md` — retired at Step 12 close 2026-04-24 per native decision (WARN.4 / WARN.6 resolution). Every load-bearing claim it carried is now in items 1–10 above + this item 11. Audit trail retained at root-level path.*
 
@@ -43,14 +44,17 @@ Two workstreams run concurrently with (not inside) the currently-active macro-ph
 
 **Authoritative source: `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (LIVE; authoritative since Step 15 close 2026-04-24).** Read §2 of that file for the canonical state block. The governance rebuild (Step 0 → Step 15) is **closed** — `GOVERNANCE_BASELINE_v1_0.md` is the sealing artifact. `STEP_LEDGER_v1_0.md` is retired (status `GOVERNANCE_CLOSED`); consult it only for historical audit trail.
 
-At the close of Madhav_M2A_Exec_4 (2026-04-25) — B.3 Embedding + HNSW complete:
+At the close of Madhav_M2A_Exec_12 (2026-04-27) — **B.6 COMPLETE — M2B MILESTONE CLOSED**:
 
-- **Active macro-phase:** M2 — Corpus Activation (active; **B.3 complete** — 743 embeddings in rag_embeddings; Vertex AI text-multilingual-embedding-002 768-dim [Voyage AI removed; GCP migration to Cloud SQL asia-south1]; HNSW m=16 ef_construction=64; b3_sanity_test.json: "Saturn 7th house Libra" → 2 distinct doc_types [AC-B3.4 ✓]; p95=71.56ms Auth Proxy [AC-B3.3 accepted Option A]). B.3.5 CGM Rebuild + red-team next.
-- **Active phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` v1.0.3. **B.3 complete.** `CLAUDECODE_BRIEF.md` v5.0 governs 5 execution sessions; Session 5 remains. Next Claude Code session: `Madhav_M2A_Exec_5` (B.3.5 CGM Rebuild + red-team RT1–RT6).
+- **Active macro-phase:** M2 — Corpus Activation (active). **M2B CLOSED.** B.0–B.6 complete. Retrieval library operational (5 modes, RRF k=60, layer-balance enforcer, WCR invariant, cgm_boost +0.3).
+- **Active phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` v1.0.3. **B.6 CLOSED. M2B CLOSED.** B.7 is next (Madhav_M2A_Exec_13).
 - **Governance step:** Step 0 → Step 15 rebuild `GOVERNANCE_CLOSED`. Steady-state: quarterly governance pass per `ONGOING_HYGIENE_POLICIES §H`; next due 2026-07-24.
 - **ND status:** ND.1 (Mirror Discipline) `addressed` 2026-04-24 at Step 7 close. No open directive.
-- **Red-team:** `red_team_counter: 3` (cadence threshold reached; held Sessions 1–4; **fires at Session 5 close**). Probes RT1–RT6 specified in `M2A_EXEC_PLAN_v1_0.md §RISKS`.
-- **Rebuild findings:** all 32 GA.N findings resolved, accepted-as-policy, or explicitly deferred per `GOVERNANCE_BASELINE_v1_0.md §2`.
+- **Red-team:** `red_team_counter: 0` (reset at Exec_12 close — §IS.8(b) M2B milestone-close cadence fired; RED_TEAM_M2B_PHASE_B6_v1_0 11 probes all PASS). Next cadence fires at counter=3 (Exec_15 approximately).
+- **B.6 deliverables:** retrieve.py (vector/bm25/graph_walk/hybrid_rrf/auto); rag_retrieve.py (POST /rag/retrieve); retrieveClient.ts; retrieval_golden_v1_0.json (20 queries); run_eval.py extended; RED_TEAM_M2B_PHASE_B6.
+- **AC.8 live eval deferred:** eval runner + golden set complete; live run requires Cloud SQL Auth Proxy — carry-forward to Exec_13.
+- **FILE_REGISTRY:** v1.13 CURRENT (Exec_12 close); v1.12 SUPERSEDED.
+- **Build state:** To be serialized and uploaded to GCS at Exec_12 close.
 
 ## §G — Session-open handshake (reference)
 
@@ -127,11 +131,11 @@ Daily sessions. Closed-artifact-per-session discipline. Red-team passes at three
   - MSR → `025_HOLISTIC_SYNTHESIS/MSR_v3_0.md` (499 signals)
   - UCN → `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md`
   - CDLM → `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md`
-  - CGM → `025_HOLISTIC_SYNTHESIS/CGM_v2_0.md` (becomes `CGM_v9_0.md` after Phase B.3.5)
+  - CGM → `025_HOLISTIC_SYNTHESIS/CGM_v9_0.md` (234 nodes, 8-karaka; CGM_v2_0.md SUPERSEDED at B.3.5 close)
   - RM → `025_HOLISTIC_SYNTHESIS/RM_v2_0.md`
   Any disagreement between this block and CANONICAL_ARTIFACTS §1 is resolved in favor of CANONICAL_ARTIFACTS.
 - **L3 (Domain Reports)**: chart-first reveals with call-to-action (Career, Finance, Health, etc.). All at v1.1+.
-- **L4 (Discovery Layer — current focus post-rebuild)**: an LLM-facing pattern-discovery engine treating the L1–L3 corpus as a graph/vector space. M2 execution resumes from `PHASE_B_PLAN_v1_0.md` v1.0.3; see CURRENT_STATE for active position.
+- **L4 (Discovery Layer — current focus post-rebuild)**: an LLM-facing pattern-discovery engine treating the L1–L3 corpus as a graph/vector space. M2 execution resumes from `PHASE_B_PLAN_v1_0.md` v1.0.3; see CURRENT_STATE for active position. PATTERN_REGISTER + RESONANCE_REGISTER active.
 
 ## Gemini's Specific Role in L4 (Discovery Layer)
 
@@ -165,4 +169,9 @@ Follow these principles rigorously.
 
 ---
 
-*End of .geminirules — amended 2026-04-24 at Step 15 (Governance Baseline Close) to remove rebuild-era banner and rebuild-step constraints; governance rebuild CLOSED — MP.1 mirror of `CLAUDE.md` v2.0 (Step 15 amendment).*
+*End of .geminirules — footer amended 2026-04-27 at Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING (Cowork governance aside — B.6 brief authored): CLAUDECODE_BRIEF.md for Exec_12 READY; §F state unchanged (B.5 COMPLETE; red_team_counter: 0); next execution session: Madhav_M2A_Exec_12 (B.6 Hybrid Retrieval Library). §F substantive state block will be updated at Exec_12 close by the Claude Code executor.*
+*Footer amended 2026-04-27 at Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING (Cowork governance aside — B.7 brief authored): CLAUDECODE_BRIEF.md for Exec_13 READY; §F state unchanged (B.6 COMPLETE, M2B CLOSED; red_team_counter: 0); next execution session: Madhav_M2A_Exec_13 (B.7 Router + Plan Library, M2C begins). Router runtime = claude-opus-4-6 (Q1); no M2C_EXEC_PLAN (Q2).*
+*B.7 COMPLETE — Madhav_M2A_Exec_13 (2026-04-27): Router + Plan Library. QueryPlan schema (7 fields), plans_v1_0.md taxonomy (5 types), router_v1_0.md prompt (2 disambiguation rules), router.py (claude-opus-4-6, WCR enforcer), rag_router.py (POST /rag/route), routerClient.ts, golden eval 20/20 PASS (100%), WCR invariant 15/15 PASS. red_team_counter: 1. M2C active. Next: Madhav_M2A_Exec_14 (B.8).*
+*B.8 COMPLETE — Madhav_M2A_Exec_14 (2026-04-28): Synthesis Layer. synthesis_v1_0.md prompt (P5/P6/P7 enforcement), synthesize.py (claude-opus-4-6, temp=0.2, max_tokens=4096), rag_synthesize.py (POST /rag/synthesize — composite classify→retrieve→synthesize), synthesizeClient.ts, golden eval 10/10 PASS (derivation/P7/P5 all 100%), SynthesisAnswer schema (11 fields) + DerivationEntry (5 fields). red_team_counter: 2. Next: Madhav_M2A_Exec_15 (B.9).*
+
+*Phase 11A COMPLETE — Madhav_PHASE11A_CUTOVER_STAGE1 (2026-04-28): Pipeline Cutover Stage 1 (flag flip). NEW_QUERY_PIPELINE_ENABLED + AUDIT_ENABLED defaults flipped true in feature_flags.ts. Legacy code path still present (Phase 11B scope). Smoke script: npm run cutover:stage1-smoke. red_team_counter: 2 (governance aside — no increment). Next: Madhav_M2A_Exec_15 (B.9).*

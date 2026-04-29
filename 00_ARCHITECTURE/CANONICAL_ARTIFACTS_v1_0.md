@@ -1,7 +1,7 @@
 ---
 artifact: CANONICAL_ARTIFACTS_v1_0.md
 version: 1.0
-status: CURRENT
+status: "SUPERSEDED (2026-04-27 — canonical-path registry function migrated to CAPABILITY_MANIFEST.json; mirror_pairs migrated to manifest_overrides.yaml mirror_pairs section; retained in place for historical audit)"
 produced_during: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION (2026-04-24)
 implements: GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §E
 authoritative_side: Claude (the machine-readable canonical-path registry — Claude-resident by
@@ -208,19 +208,19 @@ notes: "Resonance Map — 32 elements (RM.21A + RM.21B split); 35 historical hea
 
 ```yaml
 canonical_id: CGM
-path: 025_HOLISTIC_SYNTHESIS/CGM_v2_0.md
-version: "2.0"
+path: 025_HOLISTIC_SYNTHESIS/CGM_v9_0.md
+version: "9.0"
 status: CURRENT
-fingerprint_sha256: f7c5aef3c667c273f93c272865b1dfa8d081e1bfb726a997bbc724a494b99363
+fingerprint_sha256: ROTATED_Madhav_M2A_Exec_6_2026-04-26_frontmatter-amendment-manifest-pointer
 mirror_obligations:
-  claude_side: 025_HOLISTIC_SYNTHESIS/CGM_v2_0.md
+  claude_side: 025_HOLISTIC_SYNTHESIS/CGM_v9_0.md
   gemini_side: null
   mirror_mode: claude_only
   authoritative_side: claude
-  asymmetries: "CGM is Claude-authored."
-last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
-last_verified_on: 2026-04-24
-notes: "Chart Graph Model — rebuilt on FORENSIC_v8_0 2026-04-19. Becomes CGM_v9_0.md after Phase B.3.5."
+  asymmetries: "CGM is Claude-authored. Gemini-side .geminirules L2.5 path block updated to CGM_v9_0 at Madhav_M2A_Exec_5. Gemini-side project_state.md updated to reflect edge_count_reconciled:22 at Madhav_M2A_Exec_6."
+last_verified_session: Madhav_M2A_Exec_6
+last_verified_on: 2026-04-26
+notes: "Chart Graph Model — 234 YAML node blocks rebuilt on FORENSIC_v8_0 at B.3.5 (2026-04-26, Madhav_M2A_Exec_5). 8-karaka canonical (GAP.13 resolved). All nodes P1-clean; stop-condition verified chunk_count=234=node_count. CGM_v2_0.md SUPERSEDED; archive copy at 99_ARCHIVE/CGM_v2_0.md. Amended in-place 2026-04-26 at Madhav_M2A_Exec_6: reconciled_edges_manifest pointer added (035_DISCOVERY_LAYER/cgm_edges_manifest_v1_0.json), edge_count_reconciled:22; no node content changed; fingerprint rotates."
 ```
 
 ### Architecture & Governance
@@ -289,20 +289,20 @@ notes: "M2 Corpus Activation execution plan (B.0–B.10). v1.0.3 amendment compl
 
 ```yaml
 canonical_id: FILE_REGISTRY
-path: 00_ARCHITECTURE/FILE_REGISTRY_v1_4.md
-version: "1.4"
+path: 00_ARCHITECTURE/FILE_REGISTRY_v1_15.md
+version: "1.15"
 status: CURRENT
-fingerprint_sha256: 51e66af50482db10b47db5d3e2a4b06dc03303b63581422b742f840f2c3bc0b4
+fingerprint_sha256: 75ca992e4569600007dfed8d17b9e78dd181dba14b0e38f9067b20b5f5ea9241
 mirror_obligations:
-  claude_side: 00_ARCHITECTURE/FILE_REGISTRY_v1_4.md
+  claude_side: 00_ARCHITECTURE/FILE_REGISTRY_v1_15.md
   gemini_side: "L2.5 canonical-path block in .geminirules"
   mirror_mode: adapted_parity_subset
   authoritative_side: claude
   mirror_pair_id: MP.5
-  asymmetries: "Gemini-side carries only the L2.5 subset (MSR, UCN, CDLM, CGM, RM) relevant to L4 Discovery Layer — proper subset relationship, not full mirror."
-last_verified_session: Madhav_17_B0_DISCOVERY_LAYER_SCAFFOLD
-last_verified_on: 2026-04-24
-notes: "v1.0 → v1.1 at Step 5; v1.1 → v1.2 at Step 5A; v1.2 → v1.3 at Step 7; v1.3 → v1.4 at Step 12 (Step 10-deferred bump executed). v1.4 is delta-style: §1–§7 corpus rows unchanged and retained in v1.3 (SUPERSEDED). §9.1 delta carries ONGOING_HYGIENE_POLICIES row + BOOTSTRAP retirement to §8 + LEL_v1_1 archival. Fingerprint resolved at Step 12.1: b23b399d…b3f833e (pre-v1.4) → da0cdde5…fea20907 (v1.4 CURRENT). File itself not touched at Step 12.1 — only the fingerprint placeholder in this row. SUPERSEDED versions live in FILE_REGISTRY §8 Archival. v1.3 SUPERSEDED-banner received Step-12.1 delta-pointer index (non-substantive; detector-compat workaround for drift_detector.py L315 hardcoded fr_path; v1.3 §1–§10 archival content untouched)."
+  asymmetries: "Gemini-side carries only the L2.5 subset (MSR, UCN, CDLM, CGM, RM) relevant to L4 Discovery Layer. v1.15 bump adds B.8 deliverables (synthesis prompt, synthesize.py, rag_synthesize.py, synthesizeClient.ts, synthesis_golden_v1_0.json, synthesis_eval_v1_0.json — Claude-only; Gemini-side requires MP.5 parity check but no content change for this bump)."
+last_verified_session: Madhav_M2A_Exec_14
+last_verified_on: 2026-04-28
+notes: "v1.14 → v1.15 at Madhav_M2A_Exec_14 (2026-04-28). v1.15 delta: §9.17 adds Exec_14 deliverables (synthesis_v1_0.md, synthesize.py, rag_synthesize.py, synthesizeClient.ts, synthesis_golden_v1_0.json, synthesis_eval_v1_0.json; schemas.py v1.1 + main.py v1.3 mutation rows). v1.14 SUPERSEDED. SUPERSEDED versions live in FILE_REGISTRY §8 Archival."
 ```
 
 #### GOVERNANCE_STACK
@@ -494,16 +494,16 @@ canonical_id: DISAGREEMENT_REGISTER
 path: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
 version: "1.0"
 status: LIVING
-fingerprint_sha256: 5d0f58a59788c4ec1061897ed9680780a1ef0bbd89c0b13ae16edd790b759282
+fingerprint_sha256: 64855abcb1839b4feb29468560f296a4168da70757ffa4a116e755d472e82687
 mirror_obligations:
   claude_side: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
   gemini_side: null
   mirror_mode: claude_only
   authoritative_side: claude
   asymmetries: "Register is Claude-resident; entries may cite both Claude-side and Gemini-side evidence."
-last_verified_session: STEP_7_GOVERNANCE_INTEGRITY_IMPLEMENTATION
-last_verified_on: 2026-04-24
-notes: "Implements protocol §K. Zero entries at creation."
+last_verified_session: Madhav_M2A_Exec_11
+last_verified_on: 2026-04-27
+notes: "Implements protocol §K. DIS.003/4/5 resolved (Option B). DIS.006/7/8 backfilled+resolved. DIS.009 opened (PAT.008 gemini_conflict). 9 entries total."
 ```
 
 #### CLAUDE (master instructions)
@@ -664,6 +664,82 @@ mirror_obligations:
 last_verified_session: STEP_12_1_FINGERPRINT_AND_REGISTRY_FIX
 last_verified_on: 2026-04-24
 notes: "New at Step 12. §A archival retain-in-place; §B LEL v1.1 cleanup + standing predecessor rule (closes GA.12); §C scope-boundary enforcement (closes GA.20 at close-checklist layer); §D SESSION_LOG completeness (closes GA.21); §E Staleness Register; §F CI cadence + exit-code-3 whitelist (closes F.2); §G red-team cadence + learning_layer_stub class + LL N=3 default (closes LL scaffold §5.7 + §5.4); §H quarterly governance pass; §I Macro Plan review triggers (explicit WARN.2/3/5/7 re-defer with PHASE_B_PLAN v1.0.3 owner + M2 resume trigger); §J implementation actions index; §K residual disposition; §L finding coverage; §M interactions; §N fingerprint-rotation audit. File itself not touched at Step 12.1 — only the `<computed-at-step-12-close>` placeholder in this row resolved to observed hash 878e884a…303fb34f (content unchanged since Step 12 close)."
+```
+
+#### COWORK_LEDGER
+
+```yaml
+canonical_id: COWORK_LEDGER
+path: 00_ARCHITECTURE/COWORK_LEDGER.md
+version: "1.0"
+status: LIVING
+fingerprint_sha256: 8333c090b373a084932a85a89869de819721f26fa38139ebbb0c48e00c32cffa
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/COWORK_LEDGER.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only canonical artifact. Cowork conversations happen in the Cowork platform; this file is the project-side record of those threads. The Cowork platform itself is not mirrored — only this register is maintained."
+last_verified_session: Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1
+last_verified_on: 2026-04-26
+notes: "New at Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 (2026-04-26). §1 Purpose; §2 Entry schema (YAML blocks); §3 Entries — 5 bootstrap rows covering predecessor Cowork threads. Admitted per PORTAL_BUILD_TRACKER_PLAN_v0_1.md §0.1 Q.2 native approval. Cadence: append-on-thread-close per ONGOING_HYGIENE_POLICIES §P. Serializer reads this file; absent file returns empty cowork_ledger[] gracefully."
+```
+
+#### INTERVENTION_BACKFILL
+
+```yaml
+canonical_id: INTERVENTION_BACKFILL
+path: 00_ARCHITECTURE/INTERVENTION_BACKFILL_v1_0.md
+version: "1.0"
+status: CURRENT
+fingerprint_sha256: null
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/INTERVENTION_BACKFILL_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only annotation file. Captures native overrides and halts from past sessions that SESSION_LOG cannot retroactively record (per CLAUDE.md §L constraint). No Gemini-side counterpart — interventions are Claude-session artifacts."
+last_verified_session: Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2_3
+last_verified_on: 2026-04-26
+notes: "New at Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_2_3 (2026-04-26). Admitted per PORTAL_BUILD_TRACKER_PLAN_v0_2.md §10 (D.3). Contains 4 backfill entries covering: Exec_6 wrong-prompt halt, GCS_PERMISSIONS_FIX governance aside approval, IMPL_v0_1_1 FILE_REGISTRY residual acceptance, IMPL_v0_1_3 brief supersession. Serializer reads this file and merges into session emitted native_overrides[]/halts_encountered[] for sessions with empty arrays."
+```
+
+#### PORTAL_REDESIGN_VISION
+
+```yaml
+canonical_id: PORTAL_REDESIGN_VISION
+path: 00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md
+version: "1.0.2"
+status: CURRENT
+fingerprint_sha256: null
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only UX vision. Gemini's primary role is L4 Discovery Layer (PROJECT_ARCHITECTURE_v2_2.md §D.11); the redesign is platform-UI-scoped and has no Gemini-facing surface."
+last_verified_session: redesign-r0-foundation-2026-04-29
+last_verified_on: 2026-04-29
+notes: "Admitted at R0 Foundation close (2026-04-29). Authored by Cowork (Opus) 2026-04-29. Covers the full R0–R7 UX strategy. Status promoted DRAFT→CURRENT at R0 close. Companion to PORTAL_REDESIGN_TRACKER."
+```
+
+#### PORTAL_REDESIGN_TRACKER
+
+```yaml
+canonical_id: PORTAL_REDESIGN_TRACKER
+path: 00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md
+version: "1.0.4"
+status: LIVING
+fingerprint_sha256: null
+mirror_obligations:
+  claude_side: 00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md
+  gemini_side: null
+  mirror_mode: claude_only
+  authoritative_side: claude
+  asymmetries: "Claude-only phase ledger. No Gemini-side counterpart per TRACKER mirror_obligations declaration."
+last_verified_session: redesign-r0-foundation-2026-04-29
+last_verified_on: 2026-04-29
+notes: "Admitted at R0 Foundation close (2026-04-29). LIVING — updated at every redesign session-close. §2 canonical state block + §3 phase ledger (R0 closed; R1–R6 parallel-ready). Companion to PORTAL_REDESIGN_VISION."
 ```
 
 ---

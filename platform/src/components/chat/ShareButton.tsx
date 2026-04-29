@@ -18,6 +18,7 @@ export function ShareButton({ conversationId }: Props) {
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
   const [open, setOpen] = useState(false)
+  const [confirmRevoke, setConfirmRevoke] = useState(false)
 
   // Fetch existing share state when the dropdown is opened the first time.
   const refresh = useCallback(async () => {
@@ -61,6 +62,7 @@ export function ShareButton({ conversationId }: Props) {
 
   async function revoke() {
     if (!conversationId) return
+    setConfirmRevoke(false)
     setLoading(true)
     try {
       await fetch(`/api/conversations/${conversationId}/share`, { method: 'DELETE' })
@@ -107,15 +109,40 @@ export function ShareButton({ conversationId }: Props) {
                   {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
                 </button>
               </div>
-              <button
-                type="button"
-                onClick={revoke}
-                disabled={loading}
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-destructive/40 px-2 py-1.5 text-[11px] text-destructive transition-colors hover:bg-destructive/10 disabled:opacity-50"
-              >
-                {loading ? <Loader2 className="size-3 animate-spin" /> : <Trash2 className="size-3" />}
-                Revoke link
-              </button>
+              {confirmRevoke ? (
+                <div className="space-y-1.5 rounded-md border border-destructive/40 bg-destructive/5 p-2">
+                  <p className="text-[11px] text-destructive">
+                    Revoking removes access for anyone with this link. Continue?
+                  </p>
+                  <div className="flex gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setConfirmRevoke(false)}
+                      className="flex-1 rounded-md border border-border px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:bg-muted"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={revoke}
+                      disabled={loading}
+                      className="flex-1 inline-flex items-center justify-center gap-1 rounded-md border border-destructive/60 bg-destructive/10 px-2 py-1 text-[11px] text-destructive transition-colors hover:bg-destructive/20 disabled:opacity-50"
+                    >
+                      {loading ? <Loader2 className="size-3 animate-spin" /> : <Trash2 className="size-3" />}
+                      Revoke
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setConfirmRevoke(true)}
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-destructive/40 px-2 py-1.5 text-[11px] text-destructive transition-colors hover:bg-destructive/10"
+                >
+                  <Trash2 className="size-3" />
+                  Revoke link
+                </button>
+              )}
             </>
           ) : (
             <button

@@ -15,6 +15,9 @@ primary_ucn_sections: [UCN §III.4 4H mother-governance, UCN §IV.1 9H father-dh
 primary_l1_sections: [FORENSIC §2.1 PLN.JUPITER/VENUS/SUN/MOON, FORENSIC §10.1 Chara Karakas GK/MK, FORENSIC §11.5 HAZ.MANDI, LEL §4 parental events]
 organizing_principle: The 9H (Jupiter + Venus) holds both father's house and dharma/spirit; both parents' primary significators (Jupiter GK = father; Venus MK = mother) are in the dharmic trine in own-sign/exalted-ish placements. The parental dharmic transmission is architecturally strong, even though father deceased 2018 and father's kidney illness arc 2013-2018 was a significant family event.
 reconciliation: "FIX_SESSION_002 2026-04-18 — Citation density upgrade per AUDIT WS2.08. Original v1.0 had 1 citation (below Domain Report protocol). Added structured §13 Citation Index mapping each major claim to its L1/L2.5/UCN source; inline citation markers preserved where already present. Citation count increased from 1 to ~25 via the index."
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_PARENTS_v1_1 — Parents Domain Report

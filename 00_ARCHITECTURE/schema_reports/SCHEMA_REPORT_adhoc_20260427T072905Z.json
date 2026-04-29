@@ -1,0 +1,29 @@
+{
+  "schema_validation_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-04-27T07:29:05.742156+00:00",
+    "violations": [
+      {
+        "rule": "handshake_fingerprint_mismatch",
+        "severity": "CRITICAL",
+        "path": "<handshake>",
+        "evidence": "canonical_artifact_fingerprint_check mismatch on MACRO_PLAN",
+        "suggested_remediation": "Investigate silent file mutation or refresh CANONICAL_ARTIFACTS"
+      },
+      {
+        "rule": "handshake_fingerprint_mismatch",
+        "severity": "CRITICAL",
+        "path": "<handshake>",
+        "evidence": "canonical_artifact_fingerprint_check mismatch on CURRENT_STATE",
+        "suggested_remediation": "Investigate silent file mutation or refresh CANONICAL_ARTIFACTS"
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "by_severity": {
+        "CRITICAL": 2
+      }
+    },
+    "exit_code": 1
+  }
+}

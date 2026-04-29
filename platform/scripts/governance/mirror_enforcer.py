@@ -36,6 +36,7 @@ import argparse
 import dataclasses
 import datetime as _dt
 import json
+import os
 import pathlib
 import re
 import sys
@@ -44,6 +45,10 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from _ca_loader import load_canonical_artifacts  # noqa: E402
+
+# Feature flag: when true, reads mirror_pairs from manifest_overrides.yaml + manifest
+# instead of CANONICAL_ARTIFACTS. Default true (production path after Phase 1B cutover).
+_USE_MANIFEST = os.environ.get("MIRROR_ENFORCER_USE_MANIFEST", "true").lower() in ("true", "1", "yes")
 
 
 # --------------------------------------------------------------------------------------
@@ -379,16 +384,25 @@ def rule_asymmetry_declaration_drift(ca) -> List[Finding]:
 
 def run(repo_root: pathlib.Path) -> Tuple[List[Finding], dict]:
     findings: List[Finding] = []
-    ca = load_canonical_artifacts(repo_root)
+
+    if _USE_MANIFEST:
+        from manifest_reader import load_manifest_as_ca  # noqa: E402
+        ca = load_manifest_as_ca(repo_root)
+    else:
+        ca = load_canonical_artifacts(repo_root)
 
     claude_md = (repo_root / "CLAUDE.md").read_text(encoding="utf-8")
     geminirules = (repo_root / ".geminirules").read_text(encoding="utf-8")
     project_state = (repo_root / ".gemini" / "project_state.md").read_text(encoding="utf-8")
     mp_text = (repo_root / "00_ARCHITECTURE" / "MACRO_PLAN_v2_0.md").read_text(encoding="utf-8", errors="replace")
     pbp_text = (repo_root / "00_ARCHITECTURE" / "PHASE_B_PLAN_v1_0.md").read_text(encoding="utf-8", errors="replace")
-    fr_path = repo_root / "00_ARCHITECTURE" / "FILE_REGISTRY_v1_3.md"
+    fr_path = repo_root / "00_ARCHITECTURE" / "FILE_REGISTRY_v1_14.md"
     if not fr_path.exists():
-        fr_path = repo_root / "00_ARCHITECTURE" / "FILE_REGISTRY_v1_2.md"
+        for ver in ("v1_13", "v1_12", "v1_11", "v1_3", "v1_2"):
+            candidate = repo_root / f"00_ARCHITECTURE/FILE_REGISTRY_{ver}.md"
+            if candidate.exists():
+                fr_path = candidate
+                break
     file_registry = fr_path.read_text(encoding="utf-8", errors="replace") if fr_path.exists() else ""
     arch_text = (repo_root / "00_ARCHITECTURE" / "PROJECT_ARCHITECTURE_v2_2.md").read_text(encoding="utf-8", errors="replace")
 

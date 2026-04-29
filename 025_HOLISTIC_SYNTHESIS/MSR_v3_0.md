@@ -1,3 +1,12 @@
+---
+artifact: MSR_v3_0.md
+version: "3.0"
+status: CURRENT
+layer: "L2.5"
+expose_to_chat: true
+native_id: "abhisek"
+---
+
 # MSR_v3_0 — MASTER SIGNAL REGISTER (UNIFIED)
 
 ## §I — INTRODUCTION

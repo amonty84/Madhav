@@ -10,6 +10,9 @@ audit_date: 2026-04-17
 audit_method: Cell-by-cell verification per Architecture §G.1.CGP 7-category rubric
 audit_standard: "v7.0 signed off only when every gap is (a) filled OR (b) explicitly accepted as deferred with justification. Target ≥ 95% populated."
 auditor: Claude (Session 6, red-team posture)
+expose_to_chat: false
+native_id: "abhisek"
+category: quality
 ---
 
 # COMPLETENESS GUARANTEE PROTOCOL AUDIT v1.0

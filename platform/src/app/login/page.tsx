@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 import { Logo } from '@/components/brand/Logo'
 import { Wordmark } from '@/components/brand/Wordmark'
 import { Mandala } from '@/components/brand/Mandala'
-import { ForceDarkMode } from '@/components/auth/ForceDarkMode'
+import { ZoneRoot } from '@/components/shared/ZoneRoot'
 import { RequestAccessModal } from '@/components/auth/RequestAccessModal'
 import { ForgotPasswordModal } from '@/components/auth/ForgotPasswordModal'
 
@@ -92,8 +92,7 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-      <ForceDarkMode />
+    <ZoneRoot zone="ink">
       <div className="relative h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[radial-gradient(ellipse_at_50%_50%,#0d0a05_0%,#020201_100%)] text-[#fce29a]">
         {/* Mandala — centered behind everything */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -208,6 +207,6 @@ export default function LoginPage() {
         initialEmail={tab === 'email' ? identifier : ''}
       />
       <RequestAccessModal open={requestOpen} onOpenChange={setRequestOpen} />
-    </>
+    </ZoneRoot>
   )
 }

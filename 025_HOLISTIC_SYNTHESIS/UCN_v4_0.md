@@ -28,6 +28,8 @@ v4_1_changelog: >-
   replaced with v8.0-correct GL-9H / VL-4H authority framing; (8) Part III §VI.4 seven-mechanism
   list corrected to v8.0 placements. Part IV (v8.0 reconciliation) unchanged — it was already correct.
   ; Part II §CHANGELOG stripped 2026-04-19 per corpus cleanup brief.
+expose_to_chat: true
+native_id: "abhisek"
 ---
 
 # UCN v4.0 — Unified Chart Narrative (Canonical)

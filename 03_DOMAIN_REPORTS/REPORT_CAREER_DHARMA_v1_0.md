@@ -27,6 +27,9 @@ format: Single Markdown file, narrative prose, acharya-grade
 audience: Abhisek Mohanty (native); secondary: classical Jyotish acharya
 citation_protocol: Every major claim cites UCN§, MSR.*, CDLM.*, RM.*, or L1 source
 red_team_status: Pending (to be incorporated in Session 18 red-team pass)
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # Career & Dharma Domain Report — Abhisek Mohanty

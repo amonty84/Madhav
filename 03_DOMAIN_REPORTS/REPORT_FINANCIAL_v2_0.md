@@ -32,6 +32,9 @@ document_metadata:
     - CDLM D2 (Wealth) row integrated as cross-domain foundation
     - RM.32 Career-Mind-Wealth triangle named as the financial read's systemic context
     - Closing: Invitation to Goal-Formation added (required in v2.0 architecture)
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # Financial Domain Report — Abhisek Mohanty (v2.0)

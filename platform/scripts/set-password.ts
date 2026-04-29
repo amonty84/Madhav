@@ -1,33 +1,58 @@
 /**
- * One-time script: set a password for the astrologer account.
+ * One-time script: set a password for the astrologer account via Firebase Auth.
+ * Replaces the former Supabase-auth approach (migrated to Firebase, 2026-04-28).
+ *
  * Run: cd platform && npx tsx scripts/set-password.ts
  */
-import { createClient } from '@supabase/supabase-js'
 import * as path from 'node:path'
 import * as dotenv from 'dotenv'
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') })
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  { auth: { persistSession: false, autoRefreshToken: false } }
-)
-
 const EMAIL = process.env.SUPER_ADMIN_EMAIL!
 const PASSWORD = process.argv[2] ?? 'amjis2024'
 
 async function main() {
-  const { data: { users } } = await supabase.auth.admin.listUsers()
-  const user = users.find(u => u.email === EMAIL)
-  if (!user) {
-    console.error(`User not found: ${EMAIL}`)
+  if (!EMAIL) {
+    console.error('SUPER_ADMIN_EMAIL not set in .env.local')
     process.exit(1)
   }
 
-  const { error } = await supabase.auth.admin.updateUserById(user.id, { password: PASSWORD })
-  if (error) {
-    console.error('Failed:', error.message)
+  // Initialise Firebase Admin SDK directly (avoids server-only guard in @/lib/firebase/server)
+  const { initializeApp, getApps, cert } = await import('firebase-admin/app')
+  const { getAuth } = await import('firebase-admin/auth')
+
+  let serviceAccount: object = {}
+  try {
+    serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_CREDENTIALS ?? '{}')
+  } catch {
+    console.error('FIREBASE_ADMIN_CREDENTIALS is not valid JSON in .env.local')
+    process.exit(1)
+  }
+
+  const app =
+    getApps().length > 0
+      ? getApps()[0]
+      : initializeApp({ credential: cert(serviceAccount) })
+
+  const auth = getAuth(app)
+
+  // Look up user by email
+  let uid: string
+  try {
+    const user = await auth.getUserByEmail(EMAIL)
+    uid = user.uid
+  } catch {
+    console.error(`User not found in Firebase Auth: ${EMAIL}`)
+    process.exit(1)
+  }
+
+  // Update password
+  try {
+    await auth.updateUser(uid, { password: PASSWORD })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error('Failed to update password:', message)
     process.exit(1)
   }
 

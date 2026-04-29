@@ -4,7 +4,7 @@
  * live in a separate `resolver.ts` so they are never bundled into the client.
  */
 
-export type Provider = 'anthropic' | 'google' | 'deepseek'
+export type Provider = 'anthropic' | 'google' | 'deepseek' | 'openai'
 export type Capability = 'tool-use' | 'prompt-caching'
 export type SpeedTier = 'fast' | 'balanced' | 'deep'
 
@@ -109,6 +109,19 @@ export const MODELS: ModelMeta[] = [
     maxOutputTokens: 8_192,
     capabilities: [],
   },
+  // OpenAI — GPT
+  // gpt-4.1 is the April 2025 flagship; prompt-caching is automatic on OpenAI
+  // (no explicit cache-control headers required) so 'prompt-caching' is omitted
+  // from capabilities.
+  {
+    id: 'gpt-4.1',
+    provider: 'openai',
+    label: 'GPT-4.1',
+    hint: 'OpenAI flagship model',
+    speedTier: 'deep',
+    maxOutputTokens: 16_384,
+    capabilities: ['tool-use'],
+  },
 ]
 
 // DeepSeek V3 is the default because it has working tool-use + low cost.
@@ -149,4 +162,5 @@ export const PROVIDER_LABEL: Record<Provider, string> = {
   anthropic: 'Anthropic',
   google: 'Google',
   deepseek: 'DeepSeek',
+  openai: 'OpenAI',
 }

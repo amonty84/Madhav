@@ -59,7 +59,7 @@ Every Claude session, at open, reads the following in order before any substanti
 0. `CLAUDECODE_BRIEF.md` (project root) — **Claude Code sessions only; check first.** If this file exists at the project root and its `status` field is not `COMPLETE`, read it before items 1–11 below. It is the Cowork-authored governing scope for this specific execution session: active phase, file scope, acceptance criteria, and hard constraints. Its `may_touch` / `must_not_touch` declarations override all other scope guidance for the duration of the session. When the session closes and all acceptance criteria are met, set `status: COMPLETE` in this file's frontmatter. If `status` is already `COMPLETE`, or the file does not exist, skip this item and proceed with item 1 normally.
 
 1. `CLAUDE.md` (this file — self-reference; the session's own orientation surface).
-2. `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — the machine-readable canonical-path registry (§1 canonical artifacts; §2 MP.1–MP.8 mirror-pair inventory). Every other governance surface imports from or cites this file; no other surface may declare a canonical version without citing this file.
+2. `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` — **new single source of truth** for the canonical-path + artifact catalog (Phase 1B cutover 2026-04-27). Replaces the dual `FILE_REGISTRY` + `CANONICAL_ARTIFACTS` registries. Mirror pairs declared in `00_ARCHITECTURE/manifest_overrides.yaml` `mirror_pairs:` section. `CANONICAL_ARTIFACTS_v1_0.md` retained in place as SUPERSEDED historical record — read it for audit trail only; governance tooling now reads from the manifest. `drift_detector.py`, `schema_validator.py`, `mirror_enforcer.py` default to manifest mode (`*_USE_MANIFEST=true`).
 3. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md` (canonical_id `PROJECT_ARCHITECTURE`) — governing blueprint. Re-read relevant sections as needed.
 4. `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` (canonical_id `MACRO_PLAN`) — ten-macro-phase strategic arc M1–M10, Learning Layer substrate, System Integrity Substrate per ND.1, Ethical Framework, External Dependency Graph, per-phase schema, Meta-Governance, Multi-Agent Collaboration, Post-M10 Framing. Orientation only — do not pre-build for phases later than the current one.
 5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` (canonical_id `PHASE_B_PLAN`) — active M2 execution plan (B.0–B.10). Read the sections that name the current sub-phase; skim the rest. First M2 session must execute the v1.0.3 amendment cycle (WARN.2/3/5/7 cleanup + B.0 scope refresh) before executing any B.X sub-phase.
@@ -69,6 +69,7 @@ Every Claude session, at open, reads the following in order before any substanti
 9. `00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md` — baseline facts as of 2026-04-23, the CLOSED audit that seeded the Step 0→15 rebuild. Read once per fresh-context session; findings `GA.N` are cited throughout downstream artifacts.
 10. `00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md` — open directives (ND.N) that bind to the session's step. At v2.0 publication, ND.1 (Mirror Discipline) is `addressed` — no open directive.
 11. `00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md` — governance-layer hygiene rule set (CURRENT since Step 12 close, 2026-04-24). §A–§N: archival retain-in-place, predecessor cleanup, scope-boundary enforcement, SESSION_LOG completeness, staleness register, CI cadence + exit-code-3 known_residuals whitelist, red-team cadence + learning_layer_stub validator class, quarterly governance pass, Macro Plan review triggers, implementation-actions index, residual-disposition record, finding-coverage audit. Governs every session-close checklist from Step 12 forward.
+12. `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` (canonical_id `PORTAL_REDESIGN_TRACKER`, LIVING) + `00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md` (canonical_id `PORTAL_REDESIGN_VISION`, CURRENT) — **Portal Redesign workstream only.** Read when any redesign session (R0–R7) opens. TRACKER §2 canonical state block answers: which R-phase is in flight, which phases are parallel-safe, what the trace-fix status is. Skip this item if the session is not a portal redesign session.
 
 *Item 11 previously named `MARSYS_JIS_BOOTSTRAP_HANDOFF.md` — retired at Step 12 close 2026-04-24 per native decision (WARN.4 / WARN.6 resolution). Every load-bearing claim it carried is now in items 1–10 above + this item 11. Audit trail retained at root-level path.*
 
@@ -89,11 +90,11 @@ Canonical artifact versions and paths are defined in `00_ARCHITECTURE/CANONICAL_
 | UCN | `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md` | 4.1 (internal) | CURRENT |
 | CDLM | `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md` | 1.2 (internal) | CURRENT |
 | RM | `025_HOLISTIC_SYNTHESIS/RM_v2_0.md` | 2.1 (internal) | CURRENT |
-| CGM | `025_HOLISTIC_SYNTHESIS/CGM_v2_0.md` | 2.0 (→ 9.0 after B.3.5) | CURRENT |
+| CGM | `025_HOLISTIC_SYNTHESIS/CGM_v9_0.md` | 9.0 | CURRENT |
 | PROJECT_ARCHITECTURE | `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md` | 2.2 | CURRENT |
 | MACRO_PLAN | `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` | 2.0 | CURRENT |
 | PHASE_B_PLAN | `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` | 1.0.2 | CURRENT |
-| FILE_REGISTRY | `00_ARCHITECTURE/FILE_REGISTRY_v1_3.md` | 1.3 | CURRENT |
+| FILE_REGISTRY | `00_ARCHITECTURE/FILE_REGISTRY_v1_14.md` | 1.14 | SUPERSEDED (2026-04-27 — see CAPABILITY_MANIFEST.json) |
 | GOVERNANCE_STACK | `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` | 1.0 (amended in-place) | CURRENT |
 | STEP_LEDGER | `00_ARCHITECTURE/STEP_LEDGER_v1_0.md` | 1.0 | GOVERNANCE_CLOSED (2026-04-24) |
 | SESSION_LOG | `00_ARCHITECTURE/SESSION_LOG.md` | rolling | LIVE |
@@ -129,6 +130,8 @@ At the moment of Step 15 close (2026-04-24):
 - **ND status:** ND.1 (Mirror Discipline) addressed 2026-04-24 at Step 7 close. No open directive.
 - **Rebuild findings:** all 32 GA.N findings resolved, accepted-as-policy, or explicitly deferred per `GOVERNANCE_BASELINE_v1_0.md §2`. Deferred items tracked in `ONGOING_HYGIENE_POLICIES §I` + `§K`.
 
+**Phase 11A Platform Cutover note (2026-04-28).** `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` are now **default true** in `platform/src/lib/config/feature_flags.ts`. The new query pipeline (`classify → compose → retrieve → synthesize → audit`) is the default behavior for the Consume tab. The legacy code path is still in the codebase (Phase 11B scope for deletion) but is now the explicit opt-out branch. To revert: set `MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false` in env. To validate Stage 1: `npm run cutover:stage1-smoke` (requires `SMOKE_SESSION_COOKIE` + `SMOKE_CHART_ID`; see script header for instructions). Phase 11B (legacy deletion) gates on Stage 1 smoke passing ✅ and native acceptance.
+
 ## §G — Session-open handshake (reference)
 
 Every session begins by emitting the SESSION_OPEN artifact per `00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md`. The handshake is validated by `platform/scripts/governance/schema_validator.py` (or equivalent in-session check) before any substantive tool call. A session whose handshake fails validation halts and reports to the native; it does not proceed.
@@ -143,8 +146,8 @@ Every session ends by emitting the SESSION_CLOSE artifact per `00_ARCHITECTURE/S
 
 The full principle list is `PROJECT_ARCHITECTURE_v2_2.md §B — Architectural Principles (Non-Negotiable)` (B.1–B.12, preserved verbatim from v2.1). Cross-cutting substrates are in `MACRO_PLAN_v2_0.md §Learning Layer` and `§System Integrity Substrate`. The five most-violated principles, surfaced here as inline reminders (seeded from GROUNDING_AUDIT_v1_0.md finding patterns):
 
-- **B.1 — Facts/Interpretation separation.** Facts live at L1; derivations at the L1/L2 boundary with explicit ledger; interpretations at L2+ only. Mixing layers destroys auditability.
-- **B.3 — Derivation-ledger mandate.** Every L2+ claim carries a `DERIVATION_LEDGER` entry listing the specific L1 fact IDs it consumes. No claim rests on "as is known classically" or "per tradition" without a source.
+- **B.1 — Facts/Interpretation separation.** Facts live at L1; derivations at the L1/L2.5 boundary with explicit ledger; interpretations at L2.5+ only. Mixing layers destroys auditability. *(L2 Analytical Layer archived Phase 14F 2026-04-28; L2.5 is the first active synthesis layer.)*
+- **B.3 — Derivation-ledger mandate.** Every L2.5+ claim carries a `DERIVATION_LEDGER` entry listing the specific L1 fact IDs it consumes. No claim rests on "as is known classically" or "per tradition" without a source.
 - **B.8 — Versioning discipline.** Every canonical artifact carries frontmatter `version`, `status`, and a changelog. Registries must not disagree (GA.1 failure mode). Silent file mutation fails `drift_detector.py` and `schema_validator.py`.
 - **B.10 — No fabricated computation.** If a computation requires a specialist tool (Jagannatha Hora, Parashara's Light, Shri Jyoti Star, Swiss Ephemeris) and the value is not already in L1, the session marks it `[EXTERNAL_COMPUTATION_REQUIRED]` with exact specification of what to compute. Claude never invents numerical chart values.
 - **B.11 — Whole-Chart-Read discipline.** Every query routes through L2.5 Holistic Synthesis first (MSR + UCN + CDLM + CGM + RM), surfaces cross-domain signals via the Cross-Domain Linkage Matrix, then produces its domain-specific answer. A query-answer that skips L2.5 consultation is a procedural violation equivalent to a red-team finding.

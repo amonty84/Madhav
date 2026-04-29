@@ -23,6 +23,8 @@ next_steps:
   - Optional v1.3: Promote eclipse/transit evidence from chart_state into each event's signals_that_matched lists (SESSION_LOG red-team note)
   - Future: Expand toward 75-100 events; drain §6 gap register
   - Future (v2.0): Pattern Library (RPT.LFE.01) when Deep Analysis v2.0 exists
+expose_to_chat: true
+native_id: "abhisek"
 ---
 
 # LIFE EVENT LOG — Abhisek Mohanty (v1.0)

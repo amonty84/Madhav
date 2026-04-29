@@ -1,0 +1,224 @@
+---
+artifact: CLAUDECODE_BRIEF_TRACE_PANEL_FIX_2026-04-29.md
+status: COMPLETE
+authored_on: 2026-04-29
+authored_by: Cowork (Claude Sonnet 4.6)
+authored_during: "Trace Panel frontend fix — SSE timing + historical mode"
+governing_clause: CLAUDE.md §C item 0 — overrides items 1–11 for the duration of this session
+target_executor: Claude Code (CLI), Sonnet 4.6
+session_class: Platform infrastructure (not a PHASE_B_PLAN execution session)
+---
+
+# CLAUDECODE_BRIEF — Trace Panel: SSE timing fix + historical mode repair
+
+## Background
+
+This session is a pure platform session. No corpus artifacts are touched.
+
+The Query Trace Panel backend is fully working (all 9 ACs from the previous session
+are met — all 14 steps per query write to `query_trace_steps` with correct
+`conversation_id`). The frontend panel opens when the trace button is clicked but
+shows no data.
+
+Two bugs were found and already patched by Cowork. This session's job is to
+run tests, build, deploy, and verify.
+
+---
+
+### Bug 1 (primary): SSE timing — live mode misses completed queries
+
+**Root cause:** `useTraceStream` opens an `EventSource` to
+`/api/trace/stream/[queryId]`. In the old live-mode handler, the server subscribed
+to the in-process `traceEmitter` and waited for events. If the user opened the trace
+panel *after* the pipeline had already finished, the emitter's subscriber list for
+that queryId had been cleared — no events ever arrived, and the panel showed nothing.
+
+**Fix (already applied to `route.ts`):** In live mode, the server now:
+1. Calls `fetchTraceSteps(queryId)` at connection time and flushes any already-
+   persisted steps to the client immediately.
+2. Checks whether the synthesis step is marked `done` (pipeline complete). If so,
+   sends the `done` sentinel and closes — no emitter subscription needed.
+3. If the pipeline is still running, subscribes to the emitter for remaining events
+   (panel opened mid-query). Duplicate step_seq arrivals are safely deduplicated
+   by the client's `useTraceStream` hook.
+
+**Fix (already applied to `route.ts`):** Historical mode now uses a URL query
+parameter `?mode=historical` instead of an `x-trace-mode` request header, because
+`EventSource` does not support custom request headers.
+
+### Bug 2 (secondary): `useTraceStream` never activated historical mode
+
+**Root cause:** The hook passed `historical` as an effect dependency but never
+used it to change the `EventSource` URL, so the History tab's per-query replay was
+dead code (server never received the header).
+
+**Fix (already applied to `useTraceStream.ts`):** When `historical=true`, the URL
+now includes `?mode=historical`, which the server's updated `isHistorical` check
+picks up correctly.
+
+---
+
+## Pre-verified facts (do not re-derive)
+
+- Code changes are already committed to the workspace by Cowork:
+  - `platform/src/app/api/trace/stream/[queryId]/route.ts` — live mode async start
+    + `cancelled` flag + DB replay + `?mode=historical` param check
+  - `platform/src/hooks/useTraceStream.ts` — `?mode=historical` query param
+- `may_touch` list below covers both files. Do NOT touch anything else.
+- Pre-existing npm test baseline: 9 failures (accepted). No new failures allowed.
+
+---
+
+## may_touch
+
+```
+platform/src/app/api/trace/stream/[queryId]/route.ts
+platform/src/hooks/useTraceStream.ts
+```
+
+## must_not_touch
+
+```
+platform/migrations/**
+platform/src/lib/trace/**
+platform/src/lib/retrieve/**
+platform/src/lib/synthesis/**
+platform/src/app/api/chat/**
+01_FACTS_LAYER/**
+025_HOLISTIC_SYNTHESIS/**
+035_DISCOVERY_LAYER/**
+00_ARCHITECTURE/**
+```
+
+---
+
+## Implementation Steps
+
+### Step 1 — Confirm code changes are in place
+
+Read both patched files and confirm the following are present:
+
+**`platform/src/app/api/trace/stream/[queryId]/route.ts`:**
+- `const reqUrl = new URL(request.url)` + `reqUrl.searchParams.get('mode') === 'historical'`
+- `async start(controller)` (not sync `start`)
+- `let cancelled = false` declared outside the stream
+- `const existingSteps = await fetchTraceSteps(queryId)` at the top of start()
+- `pipelineComplete` check (`step_name === 'synthesis' && status === 'done'`)
+- `cancelled = true` in `cancel()`
+
+**`platform/src/hooks/useTraceStream.ts`:**
+- `${historical ? '?mode=historical' : ''}` appended to the EventSource URL
+
+If either file is missing these changes, apply them now before proceeding to Step 2.
+
+---
+
+### Step 2 — Run npm tests
+
+```bash
+cd platform && npm test
+```
+
+Expected: same 9 pre-existing failures, no new failures.
+If any test in `__tests__/` related to trace or SSE fails, investigate and fix
+before proceeding.
+
+---
+
+### Step 3 — Build and deploy
+
+```bash
+bash platform/scripts/cloud_build_submit.sh
+```
+
+Expected: successful Cloud Build + Cloud Run deploy. Confirm the new revision
+is serving 100% traffic:
+
+```bash
+gcloud run revisions list \
+  --service amjis-web \
+  --region asia-south1 \
+  --project madhav-astrology \
+  --limit 3
+```
+
+---
+
+### Step 4 — End-to-end trace panel verification
+
+After deploy, perform these checks:
+
+**4a — Backend sanity (Auth Proxy on :5433 required):**
+
+```bash
+cd platform && python3 - << 'EOF'
+import psycopg, os
+from dotenv import load_dotenv
+load_dotenv(".env.local")
+with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+    rows = conn.execute("""
+        SELECT step_name, step_seq, status,
+               conversation_id IS NOT NULL AS has_conv,
+               latency_ms
+        FROM query_trace_steps
+        WHERE created_at > NOW() - INTERVAL '30 minutes'
+        ORDER BY created_at DESC, step_seq
+        LIMIT 20
+    """).fetchall()
+    print(f"{'step_name':25s} {'seq':4s} {'status':8s} {'has_conv':9s} {'ms':6s}")
+    print("-" * 60)
+    for r in rows:
+        print(f"{r[0]:25s} {r[1]:4d} {r[2]:8s} {str(r[3]):9s} {str(r[4] or '?'):6s}")
+EOF
+```
+
+Expected: rows present with `has_conv=True` and all step names visible.
+
+**4b — UI verification:**
+
+1. Open the production consume UI.
+2. Send a query. Wait for it to complete.
+3. Click the ⚡ TRACE button.
+4. Expected: TracePanel opens and **immediately** shows all 14 steps (seq 1–14),
+   badge shows DONE, and the wall-clock timeline bar at the bottom is populated.
+   (This tests the "opened after query" path — the primary bug fix.)
+
+5. For live mode: open the TRACE panel first, then send a query.
+6. Expected: steps appear in the panel as they stream in real-time.
+
+7. Click the **History** tab in the panel.
+8. Expected: a list of recent queries appears. Click one.
+9. Expected: all steps for that query replay and display correctly.
+
+---
+
+## Acceptance Criteria
+
+| # | Criterion | How to verify |
+|---|-----------|---------------|
+| AC.1 | `route.ts`: `isHistorical` uses `reqUrl.searchParams.get('mode')` | Code review (Step 1) |
+| AC.2 | `route.ts`: live-mode `start()` is `async` and calls `fetchTraceSteps` first | Code review (Step 1) |
+| AC.3 | `route.ts`: `pipelineComplete` check closes stream when synthesis is done | Code review (Step 1) |
+| AC.4 | `route.ts`: `cancelled` flag prevents enqueue after client disconnects | Code review (Step 1) |
+| AC.5 | `useTraceStream.ts`: `?mode=historical` appended when `historical=true` | Code review (Step 1) |
+| AC.6 | `npm test` — no new failures beyond pre-existing 9-failure baseline | Step 2 output |
+| AC.7 | Cloud Run revision deployed, serving 100% traffic | Step 3 gcloud output |
+| AC.8 | Post-deploy: TRACE panel opened AFTER query shows all steps immediately | Step 4b manual check |
+| AC.9 | Post-deploy: History tab replays a past query correctly | Step 4b manual check |
+
+Set `status: COMPLETE` in this file's frontmatter when all 9 ACs are met.
+
+---
+
+## Execution order summary
+
+```
+Step 1 — Confirm patched files are in place (code review)
+Step 2 — npm test                              [no external deps]
+Step 3 — gcloud builds submit + run deploy     [REQUIRES: gcloud auth]
+Step 4 — UI + DB verification                  [REQUIRES: Auth Proxy :5433 + UI access]
+```
+
+Steps 1–2 have no external dependencies.
+Step 3 requires gcloud CLI authenticated.
+Step 4 requires Auth Proxy on :5433 and the production UI.

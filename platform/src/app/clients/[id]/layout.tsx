@@ -1,6 +1,8 @@
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
+import { AppShell } from '@/components/shared/AppShell'
+import { configService } from '@/lib/config'
 
 export default async function ClientLayout({
   children,
@@ -14,8 +16,8 @@ export default async function ClientLayout({
   if (!user) redirect('/login')
 
   const [profileResult, chartResult] = await Promise.all([
-    query<{ role: string }>('SELECT role FROM profiles WHERE id=$1', [user.uid]),
-    query<{ client_id: string }>('SELECT client_id FROM charts WHERE id=$1', [id]),
+    query<{ role: string; status: string }>('SELECT role, status FROM profiles WHERE id=$1', [user.uid]),
+    query<{ client_id: string; name: string }>('SELECT client_id, name FROM charts WHERE id=$1', [id]),
   ])
 
   const profile = profileResult.rows[0] ?? null
@@ -24,5 +26,20 @@ export default async function ClientLayout({
   if (!chart) redirect('/dashboard')
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')
 
-  return <div className="flex h-[100dvh] flex-col">{children}</div>
+  if (!configService.getFlag('PORTAL_REDESIGN_R0_ENABLED')) {
+    return <div className="flex h-[100dvh] flex-col overflow-hidden">{children}</div>
+  }
+
+  return (
+    <AppShell
+      user={user}
+      profile={{ role: (profile?.role as 'super_admin' | 'client') ?? 'client', status: 'active' }}
+      breadcrumb={[
+        { label: 'Roster', href: '/dashboard' },
+        { label: chart.name ?? id, href: `/clients/${id}`, current: true },
+      ]}
+    >
+      {children}
+    </AppShell>
+  )
 }

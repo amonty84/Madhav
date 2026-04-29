@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   MoreHorizontal,
@@ -27,7 +27,18 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -77,8 +88,10 @@ export function ConversationSidebar({
   onClose,
 }: Props) {
   const router = useRouter()
-  const pathname = usePathname()
   const [query, setQuery] = useState('')
+  const [renameTarget, setRenameTarget] = useState<{ id: string; current: string } | null>(null)
+  const [renameValue, setRenameValue] = useState('')
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; title: string } | null>(null)
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -89,31 +102,47 @@ export function ConversationSidebar({
   const groups = useMemo(() => groupByDate(filtered), [filtered])
   const searching = query.trim().length > 0
 
-  async function handleRename(id: string) {
+  function handleRename(id: string) {
     const current = conversations.find(c => c.id === id)
-    const next = window.prompt('Rename conversation', current?.title ?? '')
-    if (!next || next.trim() === current?.title) return
+    setRenameTarget({ id, current: current?.title ?? '' })
+    setRenameValue(current?.title ?? '')
+  }
+
+  function handleDelete(id: string) {
+    const current = conversations.find(c => c.id === id)
+    setDeleteTarget({ id, title: current?.title ?? 'New chat' })
+  }
+
+  async function confirmRename() {
+    if (!renameTarget) return
+    const { id } = renameTarget
+    const title = renameValue.trim()
+    setRenameTarget(null)
+    if (!title || title === renameTarget.current) return
     const res = await fetch(`/api/conversations/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: next.trim() }),
+      body: JSON.stringify({ title }),
     })
-    if (res.ok) onRenamed?.(id, next.trim())
+    if (res.ok) onRenamed?.(id, title)
   }
 
-  async function handleDelete(id: string) {
-    if (!window.confirm('Delete this conversation?')) return
+  async function confirmDelete() {
+    if (!deleteTarget) return
+    const { id, title } = deleteTarget
+    setDeleteTarget(null)
     const res = await fetch(`/api/conversations/${id}`, { method: 'DELETE' })
     if (res.ok) {
       onDeleted?.(id)
       if (id === currentConversationId) {
         router.push(`/clients/${chartId}/consume`)
       }
+      toast('Conversation deleted', { description: title, duration: 10000 })
     }
   }
 
   return (
-    <aside className="flex h-full w-full flex-col bg-sidebar text-sidebar-foreground">
+    <div className="flex h-full w-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center justify-between gap-2 px-3 pt-3 pb-2">
         <Link
           href="/dashboard"
@@ -143,12 +172,15 @@ export function ConversationSidebar({
           type="button"
           onClick={() => router.push(`/clients/${chartId}/consume`)}
           className={cn(
-            'group flex w-full items-center gap-2 rounded-lg border border-border/60 bg-sidebar-accent/30 px-3 py-2 text-sm font-medium transition-colors hover:bg-sidebar-accent',
-            pathname === `/clients/${chartId}/consume` && 'bg-sidebar-accent'
+            'w-full inline-flex items-center justify-center gap-2 rounded-lg',
+            'border border-[var(--brand-gold-hairline)] bg-[var(--brand-charcoal)]/50',
+            'px-3 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brand-cream)]',
+            'transition hover:border-[var(--brand-gold)] hover:bg-[var(--brand-charcoal)]/70 hover:text-[var(--brand-gold-light)]',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]'
           )}
         >
           <Plus className="size-4" />
-          New chat
+          New conversation
         </button>
       </div>
 
@@ -164,7 +196,7 @@ export function ConversationSidebar({
             onChange={e => setQuery(e.target.value)}
             placeholder="Search conversations…"
             aria-label="Search conversations"
-            className="w-full rounded-md border border-border/60 bg-background/50 py-1.5 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30"
+            className="w-full rounded-md border border-border/60 bg-background/50 py-2 pl-8 pr-7 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30"
           />
           {searching && (
             <button
@@ -219,7 +251,51 @@ export function ConversationSidebar({
           <ThemeToggle />
         </div>
       </div>
-    </aside>
+
+      {/* Rename dialog */}
+      <Dialog open={renameTarget !== null} onOpenChange={(o) => !o && setRenameTarget(null)}>
+        <DialogContent className="border-[var(--brand-gold-hairline)] bg-[var(--brand-charcoal)]/95 backdrop-blur-md">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-[var(--brand-cream)]">Rename conversation</DialogTitle>
+            <DialogDescription className="text-[var(--brand-cream)]/60">
+              Choose a new title for this conversation.
+            </DialogDescription>
+          </DialogHeader>
+          <Input
+            value={renameValue}
+            onChange={(e) => setRenameValue(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') confirmRename() }}
+            autoFocus
+            className="border-[var(--brand-gold-hairline)] bg-[var(--brand-charcoal-deep)] text-[var(--brand-cream)] focus-visible:ring-[var(--brand-gold)]"
+          />
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setRenameTarget(null)}>Cancel</Button>
+            <Button
+              onClick={confirmRename}
+              className="bg-[var(--brand-gold)] text-[var(--brand-charcoal)] hover:bg-[var(--brand-gold-light)]"
+            >
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete confirmation dialog */}
+      <Dialog open={deleteTarget !== null} onOpenChange={(o) => !o && setDeleteTarget(null)}>
+        <DialogContent className="border-[oklch(0.5_0.18_25)]/40 bg-[var(--brand-charcoal)]/95 backdrop-blur-md">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-[var(--brand-cream)]">Delete conversation?</DialogTitle>
+            <DialogDescription className="text-[var(--brand-cream)]/60">
+              This will permanently delete &ldquo;<span className="text-[var(--brand-cream)]">{deleteTarget?.title}</span>&rdquo;.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setDeleteTarget(null)}>Cancel</Button>
+            <Button variant="destructive" onClick={confirmDelete}>Delete</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   )
 }
 

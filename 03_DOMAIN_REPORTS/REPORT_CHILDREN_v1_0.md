@@ -14,6 +14,9 @@ word_count_estimate: ~12500
 primary_msr_anchors: [MSR.333, MSR.341, MSR.343, MSR.398, MSR.406, MSR.413, MSR.394]
 primary_cdlm_row: D5
 organizing_principle: The 5H is empty in D1 but supervised by Jupiter's 9th special aspect from own-sign 9H — children/creativity domain compensates natal emptiness through dharmic effort; Jupiter as Sthira Putra karaka governs the domain from maximum dignity
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_CHILDREN_v1_0 — Children, Creativity, and Buddhi Domain Report

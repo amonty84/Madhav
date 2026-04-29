@@ -10,6 +10,10 @@ auditor: Claude (acting as independent red-team reviewer)
 scope: UCN_v1_0.md Five Foundation Signatures (§I.1), wealth-as-dharmic-output principle (§IV.4), seven contradictions §IX.2 correct-response assessments
 priority_finding: MATERIAL ERROR — Jupiter's natal house placement is wrong throughout UCN
 correction_required: YES (UCN §I.1 FS3, §III.3, §V.1, §VI.1, multiple other UCN sections)
+layer: "L2.5"
+expose_to_chat: false
+native_id: "abhisek"
+category: quality
 ---
 
 # Red-Team Audit — L2.5 Holistic Synthesis Layer

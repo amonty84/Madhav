@@ -1,7 +1,10 @@
 ---
 artifact: FILE_REGISTRY_v1_4.md
 version: 1.4
-status: CURRENT
+status: SUPERSEDED
+superseded_on: 2026-04-26
+superseded_by: 00_ARCHITECTURE/FILE_REGISTRY_v1_5.md
+supersession_session: Madhav_M2A_Exec_5
 date: 2026-04-24
 scope: Complete registry of final/current MARSYS-JIS corpus files; adds Step 10/11/12 governance-rebuild artifacts and closes the Step 10-deferred v1.3→v1.4 bump
 supersedes: FILE_REGISTRY_v1_3.md (closed 2026-04-24 at Step 10 in-place amendment; superseded 2026-04-24 at Step 12 of the Step 0→15 governance rebuild); FILE_REGISTRY_v1_2.md (closed 2026-04-24 at Step 5A; superseded 2026-04-24 at Step 7); FILE_REGISTRY_v1_1.md (closed 2026-04-23 at Step 5; superseded 2026-04-24 at Step 5A); FILE_REGISTRY_v1_0.md (closed 2026-04-19; superseded 2026-04-23 at Step 5)
@@ -225,5 +228,7 @@ See `FILE_REGISTRY_v1_3.md §10` — unchanged at the file-inventory level. §9.
 | `verification_artifacts/RAG/ingestion_manifest.json` | LIVE | Madhav_M2A_Exec | Ingestion manifest; current_document_count=35, signal_count=499, document_count=237 |
 
 ---
+
+**SUPERSEDED 2026-04-26** by `00_ARCHITECTURE/FILE_REGISTRY_v1_5.md` at Madhav_M2A_Exec_5 (B.3.5 CGM Rebuild). Content retained for audit trail per ONGOING_HYGIENE_POLICIES §A.
 
 *End of FILE_REGISTRY_v1_4.md — amended Madhav_M2A_Exec 2026-04-25 (§9.1 STALENESS_REGISTER row; §9.6 B.1 deliverables added). Original: Step 12 of the Step 0→15 governance rebuild — 2026-04-24.*

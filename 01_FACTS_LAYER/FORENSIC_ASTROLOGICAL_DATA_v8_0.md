@@ -15,6 +15,9 @@ house_system: Sripathi (Bhava Chalit)
 coordinate_type: Geocentric
 engines: "FORENSIC (primary base) + Jagannatha Hora v8.0 (authoritative for Special Lagnas, Sahams, Shadbala ranking, Yogas, Longevity, additional dasha systems)"
 dual_engine_policy: "Where FORENSIC and JH values differ, both are documented inline with [DUAL-ENGINE RECONCILIATION NOTE]. JH is authoritative for §12.1, §12.2, §6.6–§6.8, §26. FORENSIC is primary for §5.1 date continuity."
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L1"
 ---
 
 # FORENSIC ASTROLOGICAL DATA v8.0 — ABHISEK MOHANTY

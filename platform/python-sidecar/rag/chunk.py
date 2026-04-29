@@ -1,6 +1,7 @@
 """
 chunk — MARSYS-JIS RAG Pipeline corpus chunker orchestrator.
-Phase B.2. Per M2A_EXEC_PLAN_v1_0.md §PLAN B.2 Task 3 + chunker_spec_v1_0.md.
+Phase B.2 (doc-types 1–5) + B.4 Session 1 (doc-type 6).
+Per M2A_EXEC_PLAN_v1_0.md §PLAN B.2 Task 3 + chunker_spec_v1_0.md.
 Dispatches to each doc-type chunker, integrates P1/P2/P5 gating, and produces
 verification_artifacts/RAG/chunking_report.json.
 
@@ -10,7 +11,7 @@ Doc-types:
   3: cdlm_cell   (L2.5) — chunkers/cdlm_cell.py
   4: l1_fact     (L1)   — chunkers/l1_fact.py
   5: domain_report (L3) — chunkers/domain_report.py
-  6: cgm_node    (L2.5) — chunkers/cgm_node.py (B.3.5 only — skipped here)
+  6: cgm_node    (L2.5) — chunkers/cgm_node.py (activated at B.4 Session 1)
 
 Stop conditions propagate from individual chunkers via RuntimeError.
 """
@@ -29,6 +30,7 @@ from rag.chunkers.ucn_section import chunk_ucn_sections
 from rag.chunkers.cdlm_cell import chunk_cdlm_cells
 from rag.chunkers.l1_fact import chunk_l1_facts
 from rag.chunkers.domain_report import chunk_domain_reports
+from rag.chunkers.cgm_node import chunk_cgm_nodes
 from rag.models import Chunk
 
 logger = logging.getLogger(__name__)
@@ -63,15 +65,15 @@ def _token_stats(chunks: list[Chunk]) -> dict[str, Any]:
 
 def run_all_chunkers(repo_root: str, doc_types: list[str] | None = None) -> dict[str, list[Chunk]]:
     """
-    Run all (or a subset of) B.2 chunkers and return chunks by doc_type.
+    Run all (or a subset of) chunkers and return chunks by doc_type.
     Each chunker writes its chunks to rag_chunks.
     Stop conditions from individual chunkers propagate as RuntimeError.
 
     Args:
         repo_root: Absolute path to the repository root.
-        doc_types: Optional list of doc_types to run. Defaults to all 5 non-CGM types.
+        doc_types: Optional list of doc_types to run. Defaults to all 6 types (includes cgm_node).
     """
-    all_types = ["msr_signal", "ucn_section", "cdlm_cell", "l1_fact", "domain_report"]
+    all_types = ["msr_signal", "ucn_section", "cdlm_cell", "l1_fact", "domain_report", "cgm_node"]
     requested = doc_types if doc_types is not None else all_types
 
     chunker_map = {
@@ -80,6 +82,7 @@ def run_all_chunkers(repo_root: str, doc_types: list[str] | None = None) -> dict
         "cdlm_cell": lambda: chunk_cdlm_cells(repo_root),
         "l1_fact": lambda: chunk_l1_facts(repo_root),
         "domain_report": lambda: chunk_domain_reports(repo_root),
+        "cgm_node": lambda: chunk_cgm_nodes(repo_root),
     }
 
     result: dict[str, list[Chunk]] = {}
@@ -104,7 +107,7 @@ def build_chunking_report(
     Build the chunking_report.json content dict from all chunks.
     Queries DB for any doc_type counts not in chunks_by_type.
     """
-    all_types = ["msr_signal", "ucn_section", "cdlm_cell", "l1_fact", "domain_report"]
+    all_types = ["msr_signal", "ucn_section", "cdlm_cell", "l1_fact", "domain_report", "cgm_node"]
 
     # Per-doctype counts: prefer in-memory count, fall back to DB query
     per_doctype_counts: dict[str, int] = {}

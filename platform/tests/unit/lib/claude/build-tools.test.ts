@@ -1,11 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-vi.mock('@/lib/supabase/server', () => ({
-  createClient: vi.fn(),
-  createServiceClient: vi.fn(),
+// build-tools.ts uses @/lib/db/client (query) and @/lib/storage/client (gcs ops)
+vi.mock('@/lib/db/client', () => ({
+  query: vi.fn(),
 }))
 
-import { createServiceClient } from '@/lib/supabase/server'
+vi.mock('@/lib/storage/client', () => ({
+  chartDocsBucket: 'chart-documents',
+  gcsDownloadText: vi.fn(),
+  gcsUpload: vi.fn(),
+  gcsDelete: vi.fn(),
+}))
+
+import { query } from '@/lib/db/client'
 
 describe('buildTools', () => {
   beforeEach(() => {
@@ -43,23 +50,10 @@ describe('buildTools', () => {
   describe('list_documents', () => {
     it('returns documents array for a chart', async () => {
       const mockDocs = [
-        { id: 'doc-1', name: 'forensic_data', layer: 'L1', version: '6.0', updated_at: '2026-01-01' },
+        { id: 'doc-1', name: 'forensic_data', layer: 'L1', version: '8.0', updated_at: '2026-01-01' },
         { id: 'doc-2', name: 'holistic_synthesis', layer: 'L2.5', version: '1.0', updated_at: '2026-01-02' },
       ]
-
-      const mockQuery = {
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockReturnThis(),
-      }
-      // Second order() call resolves
-      mockQuery.order
-        .mockReturnValueOnce(mockQuery)
-        .mockResolvedValueOnce({ data: mockDocs, error: null })
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockQuery),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: mockDocs })
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.list_documents.execute!({ chart_id: 'chart-1' }, {} as never)
@@ -68,21 +62,9 @@ describe('buildTools', () => {
 
     it('returns documents filtered by layer', async () => {
       const mockDocs = [
-        { id: 'doc-1', name: 'forensic_data', layer: 'L1', version: '6.0', updated_at: '2026-01-01' },
+        { id: 'doc-1', name: 'forensic_data', layer: 'L1', version: '8.0', updated_at: '2026-01-01' },
       ]
-
-      const mockQuery = {
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockReturnThis(),
-      }
-      mockQuery.order
-        .mockReturnValueOnce(mockQuery)
-        .mockResolvedValueOnce({ data: mockDocs, error: null })
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockQuery),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: mockDocs })
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.list_documents.execute!({ chart_id: 'chart-1', layer: 'L1' }, {} as never)
@@ -90,18 +72,7 @@ describe('buildTools', () => {
     })
 
     it('returns error object on DB failure', async () => {
-      const mockQuery = {
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockReturnThis(),
-      }
-      mockQuery.order
-        .mockReturnValueOnce(mockQuery)
-        .mockResolvedValueOnce({ data: null, error: { message: 'DB error' } })
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockQuery),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('DB error'))
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.list_documents.execute!({ chart_id: 'chart-1' }, {} as never)
@@ -115,75 +86,42 @@ describe('buildTools', () => {
         id: 'doc-1',
         name: 'forensic_data',
         layer: 'L1',
-        version: '6.0',
-        storage_path: 'charts/chart-1/L1/forensic_data_v6.0.md',
+        version: '8.0',
+        storage_path: 'charts/chart-1/L1/forensic_data_v8.0.md',
       }
       const mockContent = '# Forensic Astrological Data\n\nContent here.'
 
-      const mockFrom = vi.fn()
-      mockFrom.mockReturnValueOnce({
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        single: vi.fn().mockResolvedValue({ data: mockRow, error: null }),
-      })
-
-      const mockBlob = { text: vi.fn().mockResolvedValue(mockContent) }
-      const mockStorage = {
-        from: vi.fn().mockReturnValue({
-          download: vi.fn().mockResolvedValue({ data: mockBlob, error: null }),
-        }),
-      }
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: mockFrom,
-        storage: mockStorage,
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: [mockRow] })
+      const { gcsDownloadText } = await import('@/lib/storage/client')
+      ;(gcsDownloadText as ReturnType<typeof vi.fn>).mockResolvedValue(mockContent)
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.read_document.execute!({ chart_id: 'chart-1', name: 'forensic_data' }, {} as never)
       expect(result).toEqual({
         name: 'forensic_data',
         layer: 'L1',
-        version: '6.0',
+        version: '8.0',
         content: mockContent,
       })
     })
 
     it('returns error when document not found', async () => {
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue({
-          select: vi.fn().mockReturnThis(),
-          eq: vi.fn().mockReturnThis(),
-          single: vi.fn().mockResolvedValue({ data: null, error: { message: 'Row not found' } }),
-        }),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: [] })
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.read_document.execute!({ chart_id: 'chart-1', name: 'missing' }, {} as never)
-      expect(result).toEqual({ error: 'Row not found' })
+      expect(result).toEqual({ error: 'Document not found: missing' })
     })
   })
 
   describe('get_pyramid_status', () => {
     it('returns pyramid layer statuses', async () => {
       const mockLayers = [
-        { layer: 'L1', sublayer: 'facts', status: 'complete', version: '6.0', updated_at: '2026-01-01' },
+        { layer: 'L1', sublayer: 'facts', status: 'complete', version: '8.0', updated_at: '2026-01-01' },
         { layer: 'L2', sublayer: 'analysis_mode_a', status: 'in_progress', version: null, updated_at: '2026-01-02' },
         { layer: 'L2.5', sublayer: 'synthesis', status: 'not_started', version: null, updated_at: '2026-01-01' },
       ]
-
-      const mockQuery = {
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockReturnThis(),
-      }
-      mockQuery.order
-        .mockReturnValueOnce(mockQuery)
-        .mockResolvedValueOnce({ data: mockLayers, error: null })
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockQuery),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: mockLayers })
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.get_pyramid_status.execute!({ chart_id: 'chart-1' }, {} as never)
@@ -191,18 +129,7 @@ describe('buildTools', () => {
     })
 
     it('returns error on DB failure', async () => {
-      const mockQuery = {
-        select: vi.fn().mockReturnThis(),
-        eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockReturnThis(),
-      }
-      mockQuery.order
-        .mockReturnValueOnce(mockQuery)
-        .mockResolvedValueOnce({ data: null, error: { message: 'Connection timeout' } })
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockQuery),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Connection timeout'))
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.get_pyramid_status.execute!({ chart_id: 'chart-1' }, {} as never)
@@ -212,13 +139,7 @@ describe('buildTools', () => {
 
   describe('update_layer_status', () => {
     it('upserts layer status and returns result', async () => {
-      const mockUpsert = {
-        upsert: vi.fn().mockResolvedValue({ error: null }),
-      }
-
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue(mockUpsert),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockResolvedValue({ rows: [] })
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.update_layer_status.execute!(
@@ -226,18 +147,14 @@ describe('buildTools', () => {
         {} as never
       )
       expect(result).toEqual({ layer: 'L1', sublayer: 'facts', status: 'complete' })
-      expect(mockUpsert.upsert).toHaveBeenCalledWith(
-        expect.objectContaining({ chart_id: 'chart-1', layer: 'L1', sublayer: 'facts', status: 'complete' }),
-        { onConflict: 'chart_id,layer,sublayer' }
+      expect(query).toHaveBeenCalledWith(
+        expect.stringContaining('pyramid_layers'),
+        expect.arrayContaining(['chart-1', 'L1', 'facts', 'complete'])
       )
     })
 
     it('returns error on upsert failure', async () => {
-      ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-        from: vi.fn().mockReturnValue({
-          upsert: vi.fn().mockResolvedValue({ error: { message: 'Upsert failed' } }),
-        }),
-      })
+      ;(query as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('Upsert failed'))
 
       const { buildTools } = await import('@/lib/claude/build-tools')
       const result = await buildTools.update_layer_status.execute!(

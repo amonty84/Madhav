@@ -8,6 +8,7 @@
 **Version:** 1.0.3
 
 ## Changelog
+- **2026-04-28 v1.0.4 — Infrastructure Amendment (Cowork, post-B.3):** Supabase fully replaced by GCP stack (Cloud SQL + Firebase Auth + GCS). Voyage-3-large replaced by Vertex AI `text-multilingual-embedding-002` (768 dims) — see `python-sidecar/rag/embed.py` + migration `010_vertex_ai_embedding_dim.sql`. All references to "Voyage-3-large primary" and "Supabase pgvector store" in §A.4 and sub-phase tasks describe the historical tech stack at plan authoring; the live stack is now fully GCP-native. No structural changes to phase logic; all acceptance criteria remain valid against the new stack.
 - **2026-04-24 v1.0.3**: WARN items 2/3/5/7 amendment cycle. Stale MACRO_PLAN v1.0 pointer → v2.0; stale PROJECT_ARCHITECTURE pointer → v2.2; B.0 scope refresh per ONGOING_HYGIENE_POLICIES §I; remaining WARN items resolved. No substantive content changes. Prepared by Cowork; executed by Claude Code (Madhav 16).
 - **2026-04-23 v1.0.2**: Applied reconciler-pass amendments (PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md). BLOCK remediations: (1) B.0 Task 1 and acceptance criterion updated to target `MSR_v3_0.md` (not `v2_0`); archive of `MSR_v1_0` and `MSR_v2_0` added as B.0 sub-task. (2) B.1 Task 1.5 inserted: implement and meta-test p1/p2/p5 validators before B.2 begins. (3) B.2 Chunker Specification subsection added — 6 doc-types with boundary rules. Selected ESCALATE remediations: §E.6 validator rows augmented with detection-mechanism and structural-limitation notes; §E.7 buffer raised to +75% (~$315 budget); B.0 augmented with Tasks 12–14 (chunker_spec, prompt_registry.py, golden query sets) and baseline_edge_count.json; B.3 index-time halt policy added; B.3.5 CGM edge-proposal prompt and Gemini response-file storage added; B.5 Task 0 added (prediction_ledger.py + P8 extension before mining), acceptance-rate monitoring and mid-phase sanity eval added; B.7 router availability fallback added; §H P6 degraded-mode and P7 significance-scoring mechanism documented; §J two new risk rows; §K manifest updated.
 - **2026-04-23 v1.0.1**: Integrated Gemini corrective pass-1. Replaced §E.3 (JSON-canonical storage model + V-shift1-drift active validator), §E.5 (two-pass table with Contradictions, Reconciliations, and Retrieval-bundles rows), §E.7 (actor × phase cost matrix, grand total $140.09, budget ~$210.14), §G Phase B.0 Task 1 (GAP_13_RESOLUTION target file + verifiable delta + acceptance criterion). Arithmetic verified.
@@ -67,7 +68,7 @@ Preserved from v2 with Hook 3 additions (`prompt_version`, `prompt_hash` promote
 | CQ6 | **Opus 4.7 router** — STACK DEVIATION; native override reconfirmed; no downgrade path | |
 | CQ7 | **a** — single initial batch pass for v1.0 | |
 | CQ8 | **b** — native reviews all `validated && HIGH` before write-back | |
-| CQ9 | **a** — five-layer (L1/L2/L2.5/L3/L4); L0 archival; L5–L7 out of scope for M2 | |
+| CQ9 | **a** — five-layer (L1/L2/L2.5/L3/L4); L0 archival; L5–L7 out of scope for M2 *(L2 layer archived Phase 14F 2026-04-28; effective architecture is L1→L2.5→L3→L4)* | |
 | CQ10 | **a** — proceeding | |
 
 ### B.6 — Post-"proceed" expansion
@@ -122,7 +123,7 @@ This section is now §D onwards.
 ```
 00_ARCHITECTURE/           # governance
 01_FACTS_LAYER/            # L1
-02_ANALYTICAL_LAYER/       # L2
+02_ANALYTICAL_LAYER/       # L2 (ARCHIVED Phase 14F 2026-04-28 → 99_ARCHIVE/02_ANALYTICAL_LAYER/)
 025_HOLISTIC_SYNTHESIS/    # L2.5
 03_DOMAIN_REPORTS/         # L3
 04_REMEDIAL_CODEX/         # remedial actions (not a retrieval layer)

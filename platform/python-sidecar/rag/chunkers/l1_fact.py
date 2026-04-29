@@ -281,7 +281,7 @@ def chunk_l1_facts(repo_root: str) -> list[Chunk]:
 
 
 def run(repo_root: str) -> int:
-    """Parse FORENSIC L1 sections, write to rag_chunks via Supabase REST, return written count."""
+    """Parse FORENSIC L1 sections, write to rag_chunks via Cloud SQL (psycopg), return written count."""
     chunks = chunk_l1_facts(repo_root)
     written = write_chunks_to_db(chunks)
     logger.info("l1_fact: wrote %d / %d chunks to rag_chunks", written, len(chunks))

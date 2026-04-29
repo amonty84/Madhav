@@ -35,6 +35,9 @@ document_metadata:
     - V8_0_RECONCILIATION_REPORT.md §2 (7 L1 errors confirmed)
   changelog:
     - v1.2 2026-04-19: MSR.391c/391d citations corrected to MSR.391; corrective text removed per corpus cleanup.
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # Health & Longevity Domain Report — Abhisek Mohanty (v1.1)

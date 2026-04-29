@@ -19,6 +19,7 @@ export interface Profile {
 export interface Chart {
   id: string
   client_id: string
+  native_id: string
   name: string
   birth_date: string
   birth_time: string
@@ -33,6 +34,7 @@ export interface Chart {
 export interface PyramidLayer {
   id: string
   chart_id: string
+  native_id: string
   layer: string
   sublayer: string
   status: PyramidStatus
@@ -43,6 +45,7 @@ export interface PyramidLayer {
 export interface Document {
   id: string
   chart_id: string
+  native_id: string
   layer: string
   name: string
   storage_path: string
@@ -54,6 +57,7 @@ export interface Document {
 export interface Conversation {
   id: string
   chart_id: string
+  native_id: string
   user_id: string
   module: ConversationModule
   title: string | null
@@ -63,19 +67,41 @@ export interface Conversation {
 export interface Message {
   id: string
   conversation_id: string
+  native_id: string
   role: MessageRole
   content: string | null
   tool_calls: unknown | null
+  panel_metadata: unknown | null
   created_at: string
 }
 
 export interface Report {
   id: string
   chart_id: string
+  native_id: string
   domain: string
   title: string
   storage_path: string
   version: string
   created_at: string
   updated_at: string
+}
+
+export interface MsrSignal {
+  signal_id: string
+  native_id: string
+  domain: string
+  planet: string | null
+  house: number | null
+  nakshatra: string | null
+  dasha_lord: string | null
+  confidence: number
+  significance: number
+  is_forward_looking: boolean
+  claim_text: string
+  classical_basis: string | null
+  falsifier: string | null
+  source_file: string
+  source_version: string
+  ingested_at: string
 }

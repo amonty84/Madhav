@@ -17,6 +17,9 @@ corrections_applied:
   - "Vivaha Saham corrected: Cancer 4H Pushya (not Gemini Ardra 3H)"
   - "D3.D4 health-relationship mechanism revised (Roga not in 7H)"
   - "Gemini 3H nexus upgraded: Hora Lagna now confirmed in 3H, adding 4th element"
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_RELATIONSHIPS_v1_1 — Relationships Domain Report

@@ -119,8 +119,8 @@ These principles govern every asset created. Any future session that violates th
 ### B.1 — Facts/Derivation/Interpretation Separation
 
 - **Facts** (observed or computed chart values): live ONLY in the Facts Layer (L1). No interpretation, no narrative.
-- **Derivations** (logical transforms of facts — e.g., yoga detection, karaka assignment): live at L1/L2 boundary with explicit derivation-ledger pointing to source facts.
-- **Interpretations** (meaning, implication, prediction): live ONLY at L2+ with explicit derivation-chain back to facts.
+- **Derivations** (logical transforms of facts — e.g., yoga detection, karaka assignment): live at L1/L2.5 boundary with explicit derivation-ledger pointing to source facts.
+- **Interpretations** (meaning, implication, prediction): live ONLY at L2.5+ with explicit derivation-chain back to facts.
 
 **Why this matters**: when the underlying facts are audited (e.g., re-computed with different ayanamsa), we know exactly which interpretations must be re-examined. Mixing layers destroys auditability.
 
@@ -130,7 +130,7 @@ Every fact, derivation, interpretation, event, signal, edge, node, pattern, and 
 
 ### B.3 — Derivation Ledger Mandate
 
-Every L2+ claim must carry a `DERIVATION_LEDGER` entry that lists the specific L1 fact IDs it consumes. No claim is allowed to rest on "as is known classically" or "per tradition" without source.
+Every L2.5+ claim must carry a `DERIVATION_LEDGER` entry that lists the specific L1 fact IDs it consumes. No claim is allowed to rest on "as is known classically" or "per tradition" without source.
 
 ### B.4 — Three-Interpretation Discipline
 
@@ -213,13 +213,14 @@ L2 analytical work refuses to interpret against incomplete L1 data. When a cell 
 └──────────────────────┬──────────────────────────────────────────┘
                        │ Synthesizes from ↓
 ┌──────────────────────┴──────────────────────────────────────────┐
-│  L2 — ANALYTICAL LAYER                                          │
+│  L2 — ANALYTICAL LAYER (ARCHIVED 2026-04-28 — Phase 14F)        │
 │  Mode A: Curated Deep Analysis (RPT.* — 25+ interpreted blocks) │
 │  Mode B: Exhaustive Matrices ★ NEW IN v2.0 ★                   │
 │          - House Matrix (12 rows)                               │
 │          - Planet Matrix (9 rows)                               │
 │          - Sign Matrix (12 rows)                                │
 │          - Dasha-Period Matrix (200+ rows)                      │
+│  ► All files now at: 99_ARCHIVE/02_ANALYTICAL_LAYER/            │
 │  "How the system reasons — both opportunistically AND           │
 │   exhaustively"                                                 │
 └──────────────────────┬──────────────────────────────────────────┘
@@ -250,7 +251,9 @@ L2 analytical work refuses to interpret against incomplete L1 data. When a cell 
 
 **Update discipline**: L1 is append-only by default. Corrections produce new versions; old versions retained under `§8 Archival` in `FILE_REGISTRY_v1_1.md`.
 
-### C.2 — Layer L2 — Analytical Layer
+### C.2 — Layer L2 — Analytical Layer *(ARCHIVED 2026-04-28 — Phase 14F)*
+
+> **Archive notice:** The entire L2 layer was archived in Phase 14F. All files (DEEP_ANALYSIS_*, MATRIX_*) are preserved at `99_ARCHIVE/02_ANALYTICAL_LAYER/` for historical audit only. The L2.5 Holistic Synthesis stack supersedes L2. The description below is retained as historical context.
 
 **Purpose**: extract patterns, detect convergences, resolve contradictions, formulate interpretations — via two complementary modes.
 
@@ -653,16 +656,16 @@ v2.2 replaces v2.1's §E entirely. The v2.1 tree named `PROJECT_ARCHITECTURE_v2_
 │   ├── RETROGRADES_1900_2100.csv
 │   └── SADE_SATI_CYCLES_ALL.md
 │
-├── 02_ANALYTICAL_LAYER/
-│   ├── MATRIX_HOUSES.md                     ← Mode B House Matrix (CLOSED)
-│   ├── MATRIX_PLANETS.md                    ← Mode B Planet Matrix (CLOSED)
-│   ├── MATRIX_SIGNS.md                      ← Mode B Sign Matrix (CLOSED)
-│   ├── MATRIX_DIVISIONALS.md                ← Mode B Divisional Matrix (CLOSED)
-│   ├── MATRIX_DASHA_PERIODS.md              ← Mode B Dasha-Period Matrix (CLOSED)
-│   └── DEEP_ANALYSIS_Abhisek_Mohanty_v1.md  ← Mode A curated analysis (v1.2.1 CURRENT)
+├── 99_ARCHIVE/02_ANALYTICAL_LAYER/          ← ARCHIVED Phase 14F 2026-04-28 (was 02_ANALYTICAL_LAYER/)
+│   ├── MATRIX_HOUSES.md                     ← Mode B House Matrix (ARCHIVED)
+│   ├── MATRIX_PLANETS.md                    ← Mode B Planet Matrix (ARCHIVED)
+│   ├── MATRIX_SIGNS.md                      ← Mode B Sign Matrix (ARCHIVED)
+│   ├── MATRIX_DIVISIONALS.md                ← Mode B Divisional Matrix (ARCHIVED)
+│   ├── MATRIX_DASHA_PERIODS.md              ← Mode B Dasha-Period Matrix (ARCHIVED)
+│   └── DEEP_ANALYSIS_Abhisek_Mohanty_v1.md  ← Mode A curated analysis (ARCHIVED)
 │
 ├── 025_HOLISTIC_SYNTHESIS/                  ← L2.5 layer (all five components CURRENT)
-│   ├── CGM_v2_0.md                          ← CURRENT (rebuilt on FORENSIC v8.0 2026-04-19; → v9.0 post-B.3.5)
+│   ├── CGM_v9_0.md                          ← CURRENT (v9.0; rebuilt on FORENSIC v8.0 2026-04-19)
 │   ├── MSR_v3_0.md                          ← CURRENT (499 signals; v1.0+v2.0 merged+deduped)
 │   ├── CDLM_v1_1.md                         ← CURRENT (internal v1.2)
 │   ├── RM_v2_0.md                           ← CURRENT (internal v2.1; 32 elements)
@@ -1167,6 +1170,18 @@ Post-Step-15 (steady-state), this list shortens: `CLAUDE.md` → `PROJECT_ARCHIT
 ### L.4 — v2.2 amendment trigger
 
 v2.2 §L is rewritten to a short steady-state pointer after Step 15 closes and `GOVERNANCE_BASELINE_v1_0.md` exists. The rewrite is a patch-version bump (v2.2.1) if it edits only §L; a minor bump (v2.3) if other sections also need updates at that time; a major bump (v3.0) only if a concern of v2.0-magnitude surfaces. Until Step 15, §L remains as written here.
+
+---
+
+## Changelog
+
+### 2026-04-28 — Phase 14F amendment (in-place; no version bump)
+
+- §B.1 "Facts/Derivation/Interpretation Separation" — boundary text updated from "L1/L2 boundary" to "L1/L2.5 boundary" reflecting the L2 archive close.
+- §B.3 "Derivation Ledger Mandate" — claim layer text updated from "L2+ claims" to "L2.5+ claims" for the same reason.
+- Principle *intent* unchanged; only boundary references retitled. Per §B.8 versioning discipline, in-place amendment recorded here in lieu of a v2.3 bump because the canonical principles' meaning is preserved (only their referenced layer numbers updated to match the post-14F layer roster).
+- Authority: Phase 14F brief at `EXEC_BRIEF_PHASE_14F_L2_ARCHIVE_AND_GOVERNANCE_REFRESH_v1_0.md`.
+- Commit: `0812ecd` (14F atomic commit) + this changelog amendment commit.
 
 ---
 

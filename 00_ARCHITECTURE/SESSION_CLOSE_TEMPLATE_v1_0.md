@@ -24,6 +24,16 @@ changelog:
   - v1.0 (2026-04-24, Step 7): Initial template. Produced per GOVERNANCE_INTEGRITY_PROTOCOL §G.
     Carries the mandatory-field schema, enforcement rules, and two worked examples
     (rebuild-era Step 7, post-rebuild-era M2.B.3).
+  - v1.0 amended in-place (2026-04-26, Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1): Added
+    `native_overrides[]` and `halts_encountered[]` optional blocks to §2 schema (per
+    PORTAL_BUILD_TRACKER_PLAN_v0_1.md §9 G.2 + G.3; native approval Q.3 2026-04-26).
+    Added `shards_emitted` + `cowork_ledger_referenced` fields to `build_state_serialized`
+    block (per §9 G.1 + ONGOING_HYGIENE_POLICIES §O extension).
+    LOW finding if optional blocks absent (existing closed sessions remain valid).
+  - v1.0 amended in-place (2026-04-26, Madhav_BUILD_TRACKER_INTEGRATION_v0_1): Added
+    `build_state_serialized` block to §2 schema, §5 worked example 1, and §6 worked
+    example 2. Implements ONGOING_HYGIENE_POLICIES §O (build-state serialization at
+    session close). See BUILD_TRACKER_DEPLOYMENT_NOTES.md §4.2.
 ---
 
 # SESSION_CLOSE_TEMPLATE v1.0
@@ -159,6 +169,28 @@ session_close:
   disagreement_register_entries_resolved: [] # list of DR entry IDs resolved this session
 
   # ------------------------------------------------------------------
+  # Native overrides (optional — LOW finding if absent)
+  # Per PORTAL_BUILD_TRACKER_PLAN_v0_1.md §9 G.2 + §0.1 Q.3 (native approval 2026-04-26).
+  # Populate when the native issued a mid-session directive that overrode the session's
+  # declared scope, AC interpretation, or execution path. Schema validator does NOT require
+  # this field; absence produces a LOW finding, not a close failure.
+  # Backfill example: Madhav_M2A_Exec_5 AC.2 hard-stop / native override for Cloud SQL
+  # (the canonical test case this field was designed to capture per Q.3 disposition).
+  # ------------------------------------------------------------------
+  native_overrides: []
+  # Each entry: {override_id: "OVR.1", issued_at: "...", description: "...", scope_effect: "..."}
+
+  # ------------------------------------------------------------------
+  # Halts encountered (optional — LOW finding if absent)
+  # Per PORTAL_BUILD_TRACKER_PLAN_v0_1.md §9 G.3 + §0.1 Q.3 (native approval 2026-04-26).
+  # Populate when the session encountered a halt-and-ask event (AC blocked, blocker hit,
+  # external dependency unavailable) that required native input before continuing.
+  # Schema validator does NOT require this field; absence produces LOW, not close failure.
+  # ------------------------------------------------------------------
+  halts_encountered: []
+  # Each entry: {halt_id: "HLT.1", occurred_at: "...", description: "...", resolution: "..."}
+
+  # ------------------------------------------------------------------
   # Native-directive per-step verification
   # ------------------------------------------------------------------
   native_directive_per_step_verification:
@@ -173,6 +205,19 @@ session_close:
         inventory. `.geminirules` and `.gemini/project_state.md` re-authored to adapted
         parity; each carries an Asymmetries section. ND.1 global status flipped from
         `open` to `addressed`.
+
+  # ------------------------------------------------------------------
+  # Build-state serialization (ONGOING_HYGIENE_POLICIES §O)
+  # ------------------------------------------------------------------
+  build_state_serialized:
+    serialized: true                         # bool — serialize_build_state.py ran without error
+    output_path: /tmp/build_state.json       # local copy path
+    uploaded: true                           # bool — GCS upload succeeded
+    gcs_uri: gs://marsys-jis-build-state/build-state.json
+    schema_validated: true                   # bool — passed --validate-against-schema
+    serializer_version: "0.2.0"
+    shards_emitted: 0                        # int — number of session+phase shards written+uploaded
+    cowork_ledger_referenced: true           # bool — COWORK_LEDGER.md read (or graceful empty)
 
   # ------------------------------------------------------------------
   # Close-criteria verdict + handoff
@@ -412,6 +457,13 @@ session_close:
       step: STEP_7
       obligation_addressed: true
       evidence: "CANONICAL_ARTIFACTS §2 MP.1–MP.8 inventory; mirror_enforcer.py exit 0; Asymmetries sections in .geminirules and project_state.md; ND.1 status flipped open → addressed"
+  build_state_serialized:
+    serialized: true
+    output_path: /tmp/build_state.json
+    uploaded: true
+    gcs_uri: gs://marsys-jis-build-state/build-state.json
+    schema_validated: true
+    serializer_version: "0.1.0"
   close_criteria_met: true
   unblocks: "Step 8 (Red-team on Integrity implementation) — status → ready"
   handoff_notes: >
@@ -469,6 +521,13 @@ session_close:
   session_log_appended: true
   disagreement_register_entries_opened: []
   native_directive_per_step_verification: []     # no open directive names M2.B.3
+  build_state_serialized:
+    serialized: true
+    output_path: /tmp/build_state.json
+    uploaded: true
+    gcs_uri: gs://marsys-jis-build-state/build-state.json
+    schema_validated: true
+    serializer_version: "0.1.0"
   close_criteria_met: true
   unblocks: "M2.B.4 (Cluster-extraction bundle)"
   handoff_notes: "M2.B.4 scope: cluster extraction across UCN's refreshed indexes."

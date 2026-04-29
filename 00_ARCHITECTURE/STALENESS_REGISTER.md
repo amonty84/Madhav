@@ -59,4 +59,16 @@ Rebuild scheduled as follow-on to M2 (per CQ2 resolution: stale-mark at ingestio
 
 ---
 
-*End of STALENESS_REGISTER v1.0 — Madhav_M2A_Exec 2026-04-25.*
+## §4 — Partial-Implementation Registry
+
+Tracks deliberate partial implementations that are load-bearing for the current phase but require
+extension in a future phase. Distinct from §2 staleness: these are code artifacts, not document artifacts.
+
+| artifact | status | partial_impl_note | full_impl_due |
+|---|---|---|---|
+| `platform/python-sidecar/rag/validators/p6_uvc_consistency.py` | PARTIAL_IMPL | B.4 Exec_8 minimal scaffold: `scan_ucn_vs_l3()` keyword-heuristic only (antonym/magnitude/state-inversion pairs). No gate validator, no accept/reject fixtures, no CI integration. | B.5 Session 3 (Exec_11) per PHASE_B_PLAN §H + §B.5 retroactive-review obligation |
+| `platform/python-sidecar/rag/eval/run_eval.py` | PARTIAL_IMPL | B.5 Exec_9 implements only `--mode=discovery_sanity` (vector recall@10 against 5 known seeds). Full RAGAS harness (faithfulness, context precision, context recall, answer relevancy) against 50-query golden set deferred to B.9 per PHASE_B_PLAN §B.9. | B.9 (Exec_12+) per PHASE_B_PLAN §B.9 |
+
+---
+
+*End of STALENESS_REGISTER v1.2 — amended Madhav_M2A_Exec_9 2026-04-27 (§4 run_eval.py partial-impl row added).*

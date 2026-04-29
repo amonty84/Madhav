@@ -2,6 +2,22 @@ import { tool } from 'ai'
 import { z } from 'zod'
 import { query } from '@/lib/db/client'
 import { chartDocsBucket, gcsDownloadText } from '@/lib/storage/client'
+import { query_patterns } from '@/lib/tools/structured/query_patterns'
+import { query_resonances_l3 } from '@/lib/tools/structured/query_resonances_l3'
+import { query_clusters } from '@/lib/tools/structured/query_clusters'
+import { query_contradictions } from '@/lib/tools/structured/query_contradictions'
+import { query_msr_signals } from '@/lib/tools/structured/query_msr_signals'
+import { query_ucn_section } from '@/lib/tools/structured/query_ucn_section'
+import { query_cdlm_link } from '@/lib/tools/structured/query_cdlm_link'
+import { query_cgm } from '@/lib/tools/structured/query_cgm'
+import { query_resonance } from '@/lib/tools/structured/query_resonance'
+import { query_chart_fact } from '@/lib/tools/structured/query_chart_fact'
+import { query_planet_position } from '@/lib/tools/structured/query_planet_position'
+import { query_eclipse_window } from '@/lib/tools/structured/query_eclipse_window'
+import { query_retrograde_window } from '@/lib/tools/structured/query_retrograde_window'
+import { query_life_events } from '@/lib/tools/structured/query_life_events'
+import { query_sade_sati } from '@/lib/tools/structured/query_sade_sati'
+import { query_dasha } from '@/lib/tools/structured/query_dasha'
 
 async function readDocumentContent(storage_path: string): Promise<string | null> {
   return gcsDownloadText(chartDocsBucket(), storage_path)
@@ -237,6 +253,23 @@ export const consumeTools = {
       }
     },
   }),
+
+  query_patterns,
+  query_resonances_l3,
+  query_clusters,
+  query_contradictions,
+  query_msr_signals,
+  query_ucn_section,
+  query_cdlm_link,
+  query_cgm,
+  query_resonance,
+  query_chart_fact,
+  query_planet_position,
+  query_eclipse_window,
+  query_retrograde_window,
+  query_life_events,
+  query_sade_sati,
+  query_dasha,
 
   get_pyramid_status: tool({
     description: 'Get the status of all pyramid layers for the chart.',

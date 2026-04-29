@@ -12,6 +12,8 @@ feeds_into: [Domain Reports L3, future UCN v2.0]
 native: Abhisek Mohanty, b. 1984-02-05, 10:43 IST, Bhubaneswar
 schema_ref: Architecture §C.3.4, §D.4.D, §G.4.D
 v2_1_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
+expose_to_chat: true
+native_id: "abhisek"
 ---
 
 # MARSYS-JIS — Resonance Map v2.1

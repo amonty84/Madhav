@@ -22,6 +22,9 @@ document_metadata:
     - D4.D3 = 0.78 (Health ↔ Relationships — Saham Roga in 7H)
     - D4.D6 = 0.82 (Health feeds Spirit — Ketu 8H transforms health into spiritual catalysts)
     - D4.D8 = 0.78 (Health constrains Mind — emotional health governs cognitive functioning)
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # Health & Longevity Domain Report — Abhisek Mohanty (v1.0)

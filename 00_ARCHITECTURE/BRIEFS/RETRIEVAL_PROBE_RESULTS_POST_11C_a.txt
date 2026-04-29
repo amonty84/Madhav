@@ -1,0 +1,37 @@
+# RETRIEVAL_11C_a — Post-deployment probe results
+# Date: 2026-04-30
+# Build ID: build-retrieval-11c-a-20260429
+# Brief: 00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_RETRIEVAL_11C_a.md
+
+## l25_cgm_edges status breakdown
+  status   | count
+-----------+-------
+ self_loop |     1
+ valid     |   126
+(2 rows)
+
+## l25_cgm_nodes count
+ count
+-------
+   369
+(1 row)
+
+## Orphan edge reasons (should be empty)
+ orphan_reason | count
+---------------+-------
+(0 rows)
+
+---
+## Acceptance criteria verdict
+
+AC.1 PASS — extract_ucn_section_nodes returns 134 UCN.SEC.* nodes (≥80 required)
+AC.2 PASS — KARAKA.DUAL_SYSTEM_DIVERGENCE node present with node_type=KARAKA_META, conflict_type=rahu_as_pk
+AC.3 PASS — extract_cgm_nodes merged set: 369 nodes (234 base + 134 UCN + 1 KARAKA), no collisions
+AC.4 PASS — All 17 AC.4 targets + KARAKA present in merged node set (verified in tests)
+AC.5 PASS — l25_cgm_nodes live count = 369 (≥315 required)
+AC.6 PASS — valid=126 (≥122 required), orphan=0 (≤4 required)
+AC.7 PASS — 106/106 tests pass (no new failures)
+AC.8 SKIP — Cloud Run redeploy optional per §3.6 (DB data already live; graph topology picks up on next query)
+AC.9 PASS — this file captures probe output showing valid≥122, orphan=0
+AC.10 PASS — brief status updated to COMPLETE
+AC.11 PASS — no platform/src/** files modified (only pipeline/extractors/cgm_extractor.py, ucn_extractor.py, rag/chunkers/*, tests/extractors/*, pipeline/ingest_cgm.py)
