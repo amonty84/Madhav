@@ -1,6 +1,6 @@
 ---
 artifact_id: PORTAL_REDESIGN_VISION
-version: 1.0.2
+version: 1.0.3
 status: CURRENT
 authored_by: Cowork (Opus)
 authored_at: 2026-04-29
@@ -15,6 +15,7 @@ mirror_pair: none (Claude-only UX vision; no Gemini-side counterpart)
 # Portal Redesign Vision v1.0 — "The Chart Room"
 
 ## Changelog
+- **2026-04-30 v1.0.3 — Redesign workstream complete**: R7 (Polish) closed 2026-04-30. All executed phases (R0–R2, R4–R6, R7) closed. R3 (Build mode three-pane cockpit) remains deferred — never authored or executed; excluded from R7 polish scope. Acceptance criteria §5 items 1–7 satisfied across executed phases. Tracker moves to `redesign_workstream_status: COMPLETE`; tracker will be archived at next session close. Vision retains `status: CURRENT` as the historical record.
 - **2026-04-29 v1.0.2 — trace-fix on-hold amendment**: Native put the Query Trace Panel `conversation_id` propagation fix on hold (decision recorded 2026-04-29, post-tracker-authoring). §4.3.2 updated to reflect the dissolved R4 collision: with trace fix not in flight, R4 is no longer the one-true-serialization-point and can fan out alongside R1, R2, R5, R6 post-R0. Five phases parallel-ready post-R0 instead of four. R3 and R7 deferrals unchanged (R3 awaits R2 close; R7 is the polish pass). The R4 brief is authored in the same session as this amendment per the new posture. If trace fix resumes later, the serialization rule reverses: trace fix work would then need to coordinate against R4 (whichever has merged first), captured as a sticky note in §4.3.2.
 - **2026-04-29 v1.0.1 — parallelism amendment**: Added §4.3 Parallelism guidance — phase-level dependency graph, trace-fix co-existence table, R2/R3 sub-phase decompositions, isolation mechanisms (branch/worktree, scope discipline, feature flags), tracker integration rule. Also added companion artifact reference: `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` (LIVING). Triggered by native question on parallelism with the active Query Trace Panel workstream. No structural changes to phases R0–R7; phasing and scope unchanged.
 - **2026-04-29 v1.0.0 — initial draft**: First articulation of the unified UX vision that ties together the five existing in-flight portal surfaces (Login, Dashboard, per-client Build, per-client Consume, super-admin Cockpit) into a single journey, with Chart Profile as the missing keystone surface. Captures findings from a Cowork inspection of `platform/src/` on 2026-04-29. Authored by Cowork (Opus). To be promoted to `status: CURRENT` after R0 EXEC_BRIEF executes and the foundation phase lands.

@@ -2,7 +2,6 @@ import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
 import { AppShell } from '@/components/shared/AppShell'
-import { configService } from '@/lib/config'
 
 export default async function ClientLayout({
   children,
@@ -25,10 +24,6 @@ export default async function ClientLayout({
 
   if (!chart) redirect('/dashboard')
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')
-
-  if (!configService.getFlag('PORTAL_REDESIGN_R0_ENABLED')) {
-    return <div className="flex h-[100dvh] flex-col overflow-hidden">{children}</div>
-  }
 
   return (
     <AppShell

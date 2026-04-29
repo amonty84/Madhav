@@ -47,7 +47,7 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
   return (
     <nav
       aria-label="Primary navigation"
-      className="flex h-full w-14 shrink-0 flex-col items-center border-r border-sidebar-border bg-sidebar py-3"
+      className="hidden h-full w-14 shrink-0 flex-col items-center border-r border-sidebar-border bg-sidebar py-3 md:flex"
     >
       {/* Sigil — links to Roster */}
       <Link
@@ -71,7 +71,7 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
               title={label}
               aria-label={label}
               className={cn(
-                'flex h-9 w-9 items-center justify-center rounded text-xs font-medium transition-colors',
+                'flex h-11 w-11 items-center justify-center rounded text-xs font-medium transition-colors',
                 isActive
                   ? 'bg-sidebar-accent text-sidebar-accent-foreground'
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
@@ -87,7 +87,7 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
       <DropdownMenu>
         <DropdownMenuTrigger
           aria-label="User menu"
-          className="grid h-9 w-9 place-items-center rounded-full border border-border bg-muted text-xs font-medium text-foreground transition-colors hover:bg-accent"
+          className="grid h-11 w-11 place-items-center rounded-full border border-border bg-muted text-xs font-medium text-foreground transition-colors hover:bg-accent"
         >
           {userInitial}
         </DropdownMenuTrigger>

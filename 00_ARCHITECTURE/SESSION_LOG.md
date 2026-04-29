@@ -10720,3 +10720,114 @@ session_close:
 
 *End of redesign-r6-cockpit-2026-04-30 entry — Portal Redesign R6 CLOSED. Cockpit is now a first-class AppShell rail destination; <ActiveChartsWidget> surfaces live links from the governance Cockpit into per-chart profiles. R7 brief now authorable.*
 
+
+---
+
+## Session: redesign-r7-polish-2026-04-30
+
+```yaml
+session_open:
+  session_id: redesign-r7-polish-2026-04-30
+  session_class: Portal Redesign — R7 Polish
+  phase: R7
+  cowork_thread_name: "Portal Redesign R7 — Polish"
+  active_macro_phase: M2
+  active_phase_plan: PHASE_B_PLAN_v1_0.md
+  governance_step: steady-state (post-Step-15 rebuild)
+  may_touch:
+    - platform/src/components/**
+    - platform/src/app/**
+    - 00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md
+    - 00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md
+    - 00_ARCHITECTURE/PORTAL_REDESIGN_R7_REPORT_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+    - platform/FEATURE_FLAG_STATUS.md
+    - platform/src/lib/config/feature_flags.ts
+    - tests/e2e/portal/
+    - tests/unit/config/
+  must_not_touch:
+    - 01_FACTS_LAYER/, 025_HOLISTIC_SYNTHESIS/, 03_DOMAIN_REPORTS/, 035_DISCOVERY_LAYER/
+    - platform/python-sidecar/
+    - platform/src/app/api/**
+    - platform/src/lib/db/types.ts
+    - platform/src/lib/synthesis/
+    - CLAUDE.md
+    - .geminirules, .gemini/project_state.md
+  pre_flight_deviations:
+    - "R3 (Build mode) status: pending — never authored/executed. R7 scope reduced: Build mode three-pane items inapplicable."
+    - "Working tree had unrelated retrieval-11C modifications — stashed before branch creation."
+  exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R7_POLISH_v1_0.md
+  executor: Claude Code (Sonnet 4.6), Anti-Gravity / VS Code
+```
+
+```yaml
+session_body:
+  branch: redesign/r7-polish
+  test_baseline: "55 tests, 3 files (committed state)"
+  deliverables_landed:
+    flag_cleanup:
+      - "PORTAL_REDESIGN_R0_ENABLED removed from feature_flags.ts + 6 layout.tsx files + config tests"
+      - "PORTAL_REDESIGN_R5_ENABLED removed (declaration-only)"
+      - "FEATURE_FLAG_STATUS.md updated with Removed section"
+    accessibility:
+      - "RosterTableView: sortable <th onClick> → <button> + aria-sort"
+      - "RosterTableView: action buttons h-6 override removed (standard size)"
+      - "ChartHero: opacity 0.5/0.7 gold text → 0.7/0.85"
+      - "DashaCountdown: opacity 0.5/0.65 → 0.7/0.85"
+      - "ProfileSideRail: opacity 0.5/0.6 → 0.7/0.85"
+      - "RoomCard: disabled opacity 0.4 → 0.6 + aria-disabled; CTA link min-h-[44px]"
+      - "AppShellRail: nav links + avatar h-9 → h-11 (44px touch targets)"
+    mobile:
+      - "MobileNavSheet.tsx (NEW): hamburger trigger + Sheet drawer; md:hidden"
+      - "AppShellRail: hidden md:flex"
+      - "AppShellBreadcrumb: mobileNav slot"
+      - "ChartHero: RasiChartSVG max-w-[360px] + h-auto w-full"
+    animation:
+      - "Mandala: rotate prop + mandala-spin keyframe (90 s, prefers-reduced-motion aware)"
+      - "ProgressBar: duration-500 → duration-300 ease-out"
+      - "StreamingDots: 1.2 s → 0.9 s cadence"
+      - "page-ascend keyframe on AppShell main (200 ms translate+fade)"
+    skeleton_states:
+      - "clients/[id]/loading.tsx (NEW)"
+      - "clients/[id]/timeline/loading.tsx (NEW)"
+    e2e_tests:
+      - "tests/e2e/portal/a11y.spec.ts (NEW)"
+      - "tests/e2e/portal/mobile.spec.ts (NEW)"
+    governance:
+      - "PORTAL_REDESIGN_R7_REPORT_v1_0.md (NEW, status: COMPLETE)"
+      - "PORTAL_REDESIGN_TRACKER_v1_0.md v1.0.10 (R7 closed; workstream COMPLETE)"
+      - "PORTAL_REDESIGN_VISION_v1_0.md v1.0.3 (changelog entry)"
+```
+
+```yaml
+session_close:
+  session_id: redesign-r7-polish-2026-04-30
+  closed_at: "2026-04-30"
+  tests_post_r7: "55 tests, 3 files — 0 regressions"
+  closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R7_REPORT_v1_0.md
+  acceptance_criteria_summary:
+    - "AC1 — a11y violations fixed (contrast, aria-sort, touch targets): PASS"
+    - "AC2 — Mobile nav (AppShellRail hidden + MobileNavSheet): PASS"
+    - "AC3 — RasiChartSVG responsive at 375px: PASS"
+    - "AC4 — Mandala slow spin + ProgressBar ease-out + StreamingDots 0.9 s: PASS"
+    - "AC5 — page-ascend transition on AppShell main: PASS"
+    - "AC6 — Skeleton loading states for Chart Profile + Timeline: PASS"
+    - "AC7 — PORTAL_REDESIGN_R0/R5_ENABLED flags removed end-to-end: PASS"
+    - "AC8 — E2E test stubs landed (a11y.spec.ts + mobile.spec.ts): PASS"
+    - "AC9 — 55 tests pass, 0 regressions: PASS"
+    - "AC10 — Closure report status: COMPLETE: PASS"
+    - "AC11 — TRACKER R7 row status: closed: PASS"
+    - "AC12 — VISION v1.0.3 changelog entry: PASS"
+    - "AC13 — SESSION_LOG appended: PASS"
+  deviations:
+    - "R3 pre-flight failure: Build mode polish deferred to R3 execution (indefinitely deferred)"
+    - "Optimistic UI deferred (larger refactor)"
+    - "Lighthouse JSON captures deferred (require running server + auth)"
+  mirror_updates_propagated: n/a  # redesign is Claude-only
+  redesign_workstream_status: COMPLETE
+  next_session_objective: >
+    Archive PORTAL_REDESIGN_TRACKER_v1_0.md (status: LIVING → ARCHIVED).
+    Resume M2 corpus work. Run Cloud Run env cleanup gcloud command at next deploy.
+```
+
+*End of redesign-r7-polish-2026-04-30 entry — Portal Redesign R7 CLOSED. Redesign workstream COMPLETE (R0–R2, R4–R6, R7). R3 deferred indefinitely.*

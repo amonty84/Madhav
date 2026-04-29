@@ -62,18 +62,18 @@ describe('ConfigService', () => {
     expect(svc.getValue('nonexistent', 42)).toBe(42)
   })
 
-  it('PORTAL_REDESIGN_R0_ENABLED defaults true (R0 Foundation)', () => {
+  it('PANEL_MODE_ENABLED defaults true', () => {
     const svc = createConfigService()
-    expect(svc.getFlag('PORTAL_REDESIGN_R0_ENABLED')).toBe(true)
+    expect(svc.getFlag('PANEL_MODE_ENABLED')).toBe(true)
   })
 
-  it('env var override: MARSYS_FLAG_PORTAL_REDESIGN_R0_ENABLED=false disables AppShell', () => {
-    process.env.MARSYS_FLAG_PORTAL_REDESIGN_R0_ENABLED = 'false'
+  it('env var override: MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false disables pipeline', () => {
+    process.env.MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED = 'false'
     try {
       const svc = createConfigService()
-      expect(svc.getFlag('PORTAL_REDESIGN_R0_ENABLED')).toBe(false)
+      expect(svc.getFlag('NEW_QUERY_PIPELINE_ENABLED')).toBe(false)
     } finally {
-      delete process.env.MARSYS_FLAG_PORTAL_REDESIGN_R0_ENABLED
+      delete process.env.MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED
     }
   })
 

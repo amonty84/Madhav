@@ -96,7 +96,7 @@ export default function LoginPage() {
       <div className="relative h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[radial-gradient(ellipse_at_50%_50%,#0d0a05_0%,#020201_100%)] text-[#fce29a]">
         {/* Mandala — centered behind everything */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <Mandala size={760} opacity={0.95} />
+          <Mandala size={760} opacity={0.95} rotate />
         </div>
 
         {/* Vignette */}

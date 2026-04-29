@@ -25,14 +25,18 @@ export function ChartHero({
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden="true"
       >
-        <Mandala size={760} opacity={0.06} className="shrink-0" />
+        <Mandala size={760} opacity={0.06} rotate className="shrink-0" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 py-10 md:flex-row md:items-start md:gap-10 md:px-12">
-        {/* Rasi chart SVG */}
-        <div className="shrink-0">
-          <RasiChartSVG chart={chart} size={360} />
+        {/* Rasi chart SVG — capped at 360px, shrinks on narrow viewports */}
+        <div className="w-full max-w-[360px] shrink-0 md:w-auto">
+          <RasiChartSVG
+            chart={chart}
+            size={360}
+            className="h-auto w-full"
+          />
         </div>
 
         {/* Name + meta */}
@@ -49,14 +53,14 @@ export function ChartHero({
           </h1>
           <p
             className="text-sm tracking-wider"
-            style={{ color: 'var(--brand-gold)', opacity: 0.7 }}
+            style={{ color: 'var(--brand-gold)', opacity: 0.85 }}
           >
             {birthDate}&ensp;·&ensp;{birthTime} IST&ensp;·&ensp;{birthPlace}
           </p>
           {!chart.isEmpty && (
             <p
               className="mt-1 text-xs tracking-widest uppercase"
-              style={{ color: 'var(--brand-gold)', opacity: 0.5 }}
+              style={{ color: 'var(--brand-gold)', opacity: 0.7 }}
             >
               Lagna&ensp;{chart.lagnaSign}&ensp;{chart.lagnaDegreeDms}
             </p>

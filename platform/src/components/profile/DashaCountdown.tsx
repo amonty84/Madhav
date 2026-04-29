@@ -33,15 +33,15 @@ export function DashaCountdown({ md, ad, adEnd }: DashaCountdownProps) {
 
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-xs uppercase tracking-widest opacity-50" style={{ color: 'var(--brand-gold)' }}>
+      <p className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--brand-gold)' }}>
         Vimshottari Dasha
       </p>
       <p className="text-sm font-medium" style={{ color: 'var(--brand-gold-cream, #fce29a)' }}>
         {md} MD · {ad} AD
       </p>
-      <p className="text-xs" style={{ color: 'var(--brand-gold)', opacity: 0.65 }}>
+      <p className="text-xs" style={{ color: 'var(--brand-gold)', opacity: 0.85 }}>
         {formatDuration(remaining)} until next antar boundary
-        <span className="ml-1 opacity-50">({adEnd})</span>
+        <span className="ml-1 opacity-70">({adEnd})</span>
       </p>
     </div>
   )

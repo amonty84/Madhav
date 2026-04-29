@@ -4,7 +4,6 @@ import { AppShell } from '@/components/shared/AppShell'
 import { BuildHeader } from '@/components/build/BuildHeader'
 import { FreshnessIndicator } from '@/components/build/FreshnessIndicator'
 import { fetchBuildState } from '@/lib/build/dataSource'
-import { configService } from '@/lib/config'
 
 export default async function CockpitLayout({ children }: { children: React.ReactNode }) {
   const ctx = await getServerUserWithProfile()
@@ -19,21 +18,6 @@ export default async function CockpitLayout({ children }: { children: React.Reac
     generatedAt = state.generated_at
   } catch {
     // silently skip
-  }
-
-  if (!configService.getFlag('PORTAL_REDESIGN_R0_ENABLED')) {
-    const initial = (ctx.user.email?.[0] ?? 'U').toUpperCase()
-    return (
-      <div className="min-h-[100dvh] bg-background text-foreground">
-        <BuildHeader />
-        {children}
-        {generatedAt && (
-          <footer className="border-t border-border px-4 py-2 flex justify-end">
-            <FreshnessIndicator generatedAt={generatedAt} />
-          </footer>
-        )}
-      </div>
-    )
   }
 
   return (
