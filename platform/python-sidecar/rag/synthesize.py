@@ -79,7 +79,7 @@ def synthesize(plan: QueryPlan, results: list) -> SynthesisAnswer:
     """
     Synthesize a layer-aware answer from a QueryPlan and retrieval bundle.
 
-    Single-pass Opus call at temperature=0.2, max_tokens=1500.
+    Single-pass Opus call at temperature=0.2, max_tokens=4096.
     Post-parse enforcements (applied here, not delegated to Opus):
       - p7_triggered = (plan.significance_score >= 0.7)
       - If p7_triggered and len(interpretations) != 3: raises SynthesisError

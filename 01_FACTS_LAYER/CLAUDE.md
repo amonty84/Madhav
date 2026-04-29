@@ -4,6 +4,12 @@ This folder holds L1 Facts — the single source of truth for all chart data, li
 
 ## Current files (authoritative) — cleaned 2026-04-28 Phase 14.0
 
+**Structured extraction (Phase 14C Stream B — 2026-04-29):**
+- **`STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml`** — 589-fact structured projection of FORENSIC v8.0 into chart_facts schema (CURRENT)
+- **`STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json`** — JSON Schema v1.0 for the YAML (CURRENT)
+- Loader: `platform/python-sidecar/pipeline/extractors/forensic_extractor.py`
+- Review: `verification_artifacts/PHASE_14C/forensic_extraction_review.html`
+
 **Canonical L1 facts:**
 - **`FORENSIC_ASTROLOGICAL_DATA_v8_0.md`** — unified Facts Layer (CURRENT; 32 sections; sole authoritative source for natal chart, KP, all dasha systems, special lagnas, sahams, yogas)
 - **`LIFE_EVENT_LOG_v1_2.md`** — 36 dated life events + Swiss Ephemeris chart states (CURRENT)

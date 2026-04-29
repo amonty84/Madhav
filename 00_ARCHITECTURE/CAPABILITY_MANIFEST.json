@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-28T17:43:00Z",
+  "generated_at": "2026-04-29T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 63,
-  "fingerprint": "d1ab62990a62d67fcf6a57745f9d3b32bc62aa8ff624110c0c566b82c1aefd4f",
+  "entry_count": 65,
+  "fingerprint": "463e54d6e9263405b504800ac485575220b99fbab2c35d392aa390ec970a943f",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -981,6 +981,39 @@
       "fingerprint": "2ced8ad389e02b367dde094522636247a4a0f546986ec404f66a39a61403742b",
       "phase": "14B",
       "description": "rag_chunks_staging, rag_embeddings_staging, build_manifests tables"
+    },
+    {
+      "canonical_id": "CHART_FACTS_EXTRACTION_v1_0",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/structured/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "notes": "589-fact structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md. Phase 14C Stream B 2026-04-29."
+    },
+    {
+      "canonical_id": "CHART_FACTS_SCHEMA_v1_0",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/structured/CHART_FACTS_SCHEMA_v1_0.json",
+      "notes": "JSON Schema for chart_facts table and CHART_FACTS_EXTRACTION YAML. Phase 14C Stream B 2026-04-29."
     }
   ]
 }
