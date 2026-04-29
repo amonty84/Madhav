@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.8 (2026-04-30): R4 Consume polish closed. §2 state block: last_redesign_session_id→redesign-r4-consume-polish-2026-04-30, post_r0_parallel_ready→[R5] (R6+R1+R2+R4 closed), trace_fix_status confirmed on_hold. §3 R4 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R4 close.
   - v1.0.7 (2026-04-30): R2 Chart Profile closed. §2 state block: last_redesign_session_id→redesign-r2-chart-profile-2026-04-30, post_r0_parallel_ready→[R4, R5] (R6+R1+R2 closed), deferred_briefs→[R7] (R3 now unblocked). §3 R2 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R2 close.
   - v1.0.6 (2026-04-30): R1 Roster closed. §2 state block: last_redesign_session_id→redesign-r1-roster-2026-04-30, post_r0_parallel_ready→[R2, R4, R5] (R6+R1 now closed). §3 R1 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R1 close.
   - v1.0.5 (2026-04-30): R6 Cockpit elevation closed. §2 state block: last_redesign_session_id→redesign-r6-cockpit-2026-04-30, last_close_at→2026-04-30. §3 R6 row: status→closed, closure_report set, session_id set, closed_at set, follow_ups populated. deferred_briefs remains [R3, R7] — R7 now unblocked by R6 close (pending R1–R4). Authored by Claude Code (Sonnet 4.6) at R6 close.
@@ -117,16 +118,16 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # R6 + R1 + R2 closed 2026-04-30; R4/R5 remain; R3 now unblocked
-in_flight_parallel_phases: []           # none — native picks next
-last_redesign_session_id: redesign-r2-chart-profile-2026-04-30
+active_phase: null                      # R6 + R1 + R2 + R4 closed 2026-04-30; only R5 remains
+in_flight_parallel_phases: []           # none — R5 is last
+last_redesign_session_id: redesign-r4-consume-polish-2026-04-30
 last_close_at: "2026-04-30"
-next_phase_committed_to: null           # R3 now authorable; native decides next
+next_phase_committed_to: null           # R5 is last fan-out phase; R3 authorable; native decides next
 next_phase_brief_authored: true         # all parallel-ready briefs authored
 next_phase_clausecode_brief_set: false  # per-phase CLAUDECODE_BRIEFs await worktree setup
-post_r0_parallel_ready: [R4, R5]        # R6 + R1 + R2 closed; R3 unblocked; R4/R5 remaining
-deferred_briefs: [R7]                   # R3 unblocked by R2 close; R7 awaits R6 (already closed) + R4
-trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
+post_r0_parallel_ready: [R5]            # R6 + R1 + R2 + R4 closed; only R5 remaining
+deferred_briefs: [R7]                   # R3 unblocked by R2; R7 now authorable (R6+R1+R2+R4 done)
+trace_fix_status: on_hold               # remained on_hold throughout R4 execution
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
 claude_md_section_C_updated: true       # CLAUDE.md §C item #12 added at R0 close
@@ -289,32 +290,40 @@ follow_ups: []
 ```yaml
 phase_id: R4
 phase_name: Consume polish — report gallery + trace drawer + tier picker + prediction-log
-status: authored
+status: closed
 exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R4_CONSUME_POLISH_v1_0.md
-closure_report: null
-session_id: null
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R4_REPORT_v1_0.md
+session_id: redesign-r4-consume-polish-2026-04-30
 authored_at: 2026-04-29
-started_at: null
-closed_at: null
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: LOW
 estimated_sessions: 1
-depends_on: [R0]                         # while trace_fix_status is on_hold, no other dependency applies
+depends_on: [R0]
 parallelizable_with: [R1, R2, R3, R5, R6]
 sub_phases: []
 key_deliverables:
-  - <ReportGallery> (replaces flat ReportLibrary list)
-  - <TraceDrawer> (collapses TracePanel into side drawer)
-  - <TierPicker> (super_admin can flip audience tiers)
-  - <LogPredictionAction> (writes to LEL prediction subsection)
-trace_fix_collision: false               # dissolved 2026-04-29 when trace_fix_status flipped to on_hold;
-                                         # see VISION §4.3.2 resumption rule if trace work resumes later
+  - <ReportGallery> (replaces flat ReportLibrary list) — LANDED
+  - lib/consume/domain-icons.ts (extracted shared icon + freshness logic) — LANDED
+  - <TraceDrawer> (collapses TracePanel into side drawer) — LANDED
+  - TracePanelContent extracted from TracePanel (shared render body) — LANDED
+  - <TierPicker> (super_admin can flip audience tiers; persists to ?tier= URL) — LANDED
+  - <LogPredictionAction> + LogPredictionDialog (writes to /api/lel) — LANDED
+  - lib/consume/prediction-detection.ts (7-pattern regex heuristic) — LANDED
+  - /api/lel route.ts (minimal POST endpoint) — LANDED
+  - AnswerView footer slot (traceId + LogPredictionAction) — LANDED
+  - PanelAnswerView traceId prop — LANDED
+  - ConsumeChat wired: TraceDrawer + TierPicker + ReportLibrary view — LANDED
+trace_fix_collision: false
 trace_fix_serialization_rule: >
-  While trace_fix_status: on_hold — R4 has no serialization constraint.
-  If trace_fix_status flips back to in_flight before R4 starts: revert to original
-  rule "trace fix lands first; then R4 begins."
-  If trace_fix_status flips back to in_flight AFTER R4 has merged: trace-fix authoring
-  rebuilds against R4's <TraceDrawer> surface.
-follow_ups: []
+  trace_fix_status remained on_hold throughout R4 execution.
+  If trace-fix work resumes post-R4, it rebuilds against <TraceDrawer> surface
+  (the always-on <TracePanel> usage in ConsumeChat is retired as of R4).
+follow_ups:
+  - "E2E tests (consume-polish.spec.ts) require dev server + SMOKE_SESSION_COOKIE + SMOKE_CHART_ID — run manually before R4 PR merge"
+  - "TierPicker omits acharya_reviewer tier per brief; expand when that tier requires QA"
+  - "R5 may land a richer /api/lel endpoint; review R4 route.ts for consolidation"
+  - "trace_fix_status still on_hold — if resumed, trace-fix author should work against R4 TraceDrawer surface"
 ```
 
 ### R5 — Timeline (LEL surface)
