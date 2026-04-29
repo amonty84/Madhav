@@ -37,6 +37,8 @@ export interface QueryPlan {
   houses?: number[]
   dasha_context_required?: boolean
   graph_seed_hints?: string[]
+  /** Edge types the classifier wants cgm_graph_walk to traverse. Empty/undefined = all edge types. */
+  edge_type_filter?: string[]
   graph_traversal_depth?: number
   bundle_directives?: {
     floor_overrides?: string[]

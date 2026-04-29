@@ -42,13 +42,14 @@ Output:
   "domains": [],
   "forward_looking": false,
   "audience_tier": "client",
-  "tools_authorized": ["msr_sql", "vector_search"],
+  "tools_authorized": ["msr_sql", "cgm_graph_walk", "vector_search"],
   "history_mode": "synthesized",
   "panel_mode": false,
   "expected_output_shape": "single_answer",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "planets": ["Mercury"]
+  "planets": ["Mercury"],
+  "graph_seed_hints": ["PLN.MERCURY"]
 }
 
 #### interpretive
@@ -61,13 +62,14 @@ Output:
   "domains": ["career"],
   "forward_looking": false,
   "audience_tier": "client",
-  "tools_authorized": ["msr_sql", "pattern_register", "resonance_register", "vector_search"],
+  "tools_authorized": ["msr_sql", "pattern_register", "resonance_register", "cgm_graph_walk", "vector_search"],
   "history_mode": "synthesized",
   "panel_mode": false,
   "expected_output_shape": "three_interpretation",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "dasha_context_required": false
+  "dasha_context_required": false,
+  "graph_seed_hints": ["HSE.10", "PLN.MERCURY"]
 }
 
 #### predictive
@@ -86,7 +88,8 @@ Output:
   "expected_output_shape": "time_indexed_prediction",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "dasha_context_required": true
+  "dasha_context_required": true,
+  "graph_seed_hints": ["DSH.MD.SATURN", "PLN.SATURN"]
 }
 
 #### cross_domain
@@ -105,7 +108,8 @@ Output:
   "expected_output_shape": "three_interpretation",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "graph_seed_hints": ["career_dharma", "relationships"]
+  "graph_seed_hints": ["HSE.7", "HSE.10", "PLN.MARS", "PLN.SATURN"],
+  "edge_type_filter": ["CONTRADICTS", "SUPPORTS"]
 }
 
 #### discovery
@@ -143,7 +147,8 @@ Output:
   "expected_output_shape": "three_interpretation",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "dasha_context_required": true
+  "dasha_context_required": true,
+  "graph_seed_hints": []
 }
 
 #### remedial
@@ -162,7 +167,8 @@ Output:
   "expected_output_shape": "single_answer",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "planets": ["Saturn"]
+  "planets": ["Saturn"],
+  "graph_seed_hints": ["PLN.SATURN"]
 }
 
 #### cross_native
@@ -181,7 +187,27 @@ Output:
   "expected_output_shape": "structured_data",
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
-  "planets": ["Saturn"]
+  "planets": ["Saturn"],
+  "graph_seed_hints": ["PLN.SATURN"]
+}
+
+#### interpretive (UCN section reference)
+Query: "Explain section IV.1 of my unified chart narrative."
+Output:
+{
+  "query_plan_id": "00000000-0000-0000-0000-000000000009",
+  "query_text": "Explain section IV.1 of my unified chart narrative.",
+  "query_class": "interpretive",
+  "domains": [],
+  "forward_looking": false,
+  "audience_tier": "client",
+  "tools_authorized": ["msr_sql", "cgm_graph_walk", "vector_search"],
+  "history_mode": "synthesized",
+  "panel_mode": false,
+  "expected_output_shape": "three_interpretation",
+  "manifest_fingerprint": "__PLACEHOLDER__",
+  "schema_version": "1.0",
+  "graph_seed_hints": ["UCN.SEC.IV.1"]
 }
 `
 
@@ -231,9 +257,75 @@ Choose only tools relevant to the query class:
    - predictive → time_indexed_prediction
    - discovery / cross_native → structured_data
 9. history_mode: "research" for discovery and cross_native; "synthesized" for all others.
-10. graph_seed_hints: array of CGM node IDs relevant to the query (may be empty []).
+10. graph_seed_hints: extract every chart entity named in the query (planet, house, sign,
+    nakshatra, yoga, karaka, sensitive point, dasha, divisional placement, UCN section,
+    karaka meta-concept) and map each to a valid CGM node ID using the CGM Node ID
+    reference below. 0–4 IDs typical; 5+ allowed when query is dense. If the query is
+    generic ("explain my chart"), leave empty []. Never invent prefixes or node IDs not
+    in the reference.
 11. planets: list only planets explicitly named in the query.
 12. houses: list only house numbers (1–12) explicitly named in the query.
+13. edge_type_filter: optional list of CGM edge types to constrain cgm_graph_walk
+    traversal. Use sparingly — only set when the query clearly asks about one type of
+    relationship (e.g., dispositor questions → ["DISPOSITED_BY"]; "what supports X" →
+    ["SUPPORTS"]). When unsure, leave empty/undefined. A narrow filter that is wrong is
+    worse than no filter.
+14. cgm_graph_walk inclusion rule: whenever graph_seed_hints is non-empty (you extracted
+    at least one chart entity), you MUST include "cgm_graph_walk" in tools_authorized.
+    Queries that name specific chart entities always benefit from graph traversal.
+
+## CGM Node ID reference
+
+Valid node-id prefixes the classifier may emit in graph_seed_hints:
+
+- PLN.<PLANET>            — planets. PLN.SUN, PLN.MOON, PLN.MARS, PLN.MERCURY,
+                            PLN.JUPITER, PLN.VENUS, PLN.SATURN, PLN.RAHU,
+                            PLN.KETU, PLN.LAGNA.
+- HSE.<N>                 — houses 1–12. HSE.1, HSE.7, HSE.10.
+- SGN.<SIGN>              — signs. SGN.ARIES, SGN.LIBRA, SGN.CAPRICORN, etc.
+- NAK.<NAKSHATRA>         — nakshatras with chart placements (15 of 27).
+                            Examples: NAK.ASHWINI, NAK.HASTA, NAK.PUSHYA.
+- YOG.<NAME>              — named yogas. Examples: YOG.SARASWATI, YOG.LAKSHMI,
+                            YOG.GAJAKESARI, YOG.SASHA. Use the yoga's canonical name.
+- KRK.<C8|C7>.<KARAKA>    — karakas. C8 = 8-karaka system, C7 = 7-karaka system.
+                            Examples: KRK.C8.AK (Atmakaraka), KRK.C8.AmK
+                            (Amatyakaraka), KRK.C8.DARA, KRK.C8.PK, KRK.C8.GK.
+- SEN.<NAME>              — sensitive points: arudhas, special lagnas, sahams,
+                            yogi/avayogi/mandi/gulika. Examples: SEN.AL (Arudha
+                            Lagna), SEN.UL (Upapada Lagna), SEN.GULIKA, SEN.YOGI,
+                            SEN.SAHAM_VIVAHA.
+- DSH.MD.<PLANET>         — Vimshottari mahadashas. DSH.MD.MERCURY, DSH.MD.SATURN,
+                            DSH.MD.KETU. Use the dasha lord planet.
+- DSH.AD.<PLANET>         — Vimshottari antardashas; same naming.
+- DVS.<DIVISIONAL>.<ENT>  — divisional placements. DVS.D9.MOON, DVS.D10.SATURN,
+                            DVS.D27.LAGNA, DVS.D60.MERCURY. <ENT> is usually a
+                            planet or LAGNA.
+- UCN.SEC.<PART>.<SUB>    — UCN section nodes. UCN.SEC.III.4, UCN.SEC.IV.1,
+                            UCN.SEC.VI.3. Use only when query references a
+                            specific UCN section by name or part number.
+- KARAKA.<NAME>           — karaka meta-concepts. KARAKA.DUAL_SYSTEM_DIVERGENCE
+                            represents the 7-karaka vs 8-karaka divergence.
+
+## CGM Edge type reference
+
+Valid edge_type values the classifier may emit in edge_type_filter:
+
+- DISPOSITED_BY      — dispositor relationships. Use for "who governs", "what
+                       rules", "who is the lord of".
+- NAKSHATRA_LORD_IS  — nakshatra lordship. Use for nakshatra-specific queries.
+- ASPECTS_3RD        — Vedic 3rd-house aspect (Mars-special).
+- ASPECTS_4TH        — 4th-house aspect (Saturn-special).
+- ASPECTS_8TH        — 8th-house aspect (Saturn-special).
+- SUPPORTS           — pattern-supports relationships from the Discovery Layer.
+                       Use for queries asking "what reinforces", "what amplifies".
+- CONTRADICTS        — pattern-contradicts relationships. Use for queries asking
+                       "what conflicts with", "what challenges", "tensions".
+- YOGA_MEMBERSHIP    — planet/house belongs to yoga. Use for yoga drill-downs.
+- DASHA_ACTIVATION   — dasha activates pattern. Use for dasha-windowed queries.
+- DIVISIONAL_CONFIRMATION — varga corroboration. Use for divisional cross-checks.
+
+Leave edge_type_filter empty [] when the query is general or you are unsure.
+A narrow filter when one is wrong is worse than no filter.
 
 ${FEW_SHOT_EXAMPLES}
 

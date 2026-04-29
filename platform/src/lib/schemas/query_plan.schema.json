@@ -23,6 +23,7 @@
     "houses": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 12 } },
     "dasha_context_required": { "type": "boolean" },
     "graph_seed_hints": { "type": "array", "items": { "type": "string" } },
+    "edge_type_filter": { "type": "array", "items": { "type": "string" } },
     "graph_traversal_depth": { "type": "integer", "minimum": 0 },
     "bundle_directives": {
       "type": "object",

@@ -69,6 +69,7 @@ def _build_chunker_registry() -> dict[str, tuple[str, Any]]:
     from rag.chunkers.cgm_node import chunk_cgm_nodes
     from rag.chunkers.l1_fact import chunk_l1_facts
     from rag.chunkers.msr_signal import chunk_msr_signals
+    from rag.chunkers.rm_element import chunk_rm_elements
     from rag.chunkers.ucn_section import chunk_ucn_sections
 
     return {
@@ -77,6 +78,7 @@ def _build_chunker_registry() -> dict[str, tuple[str, Any]]:
         "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md": ("ucn_section", chunk_ucn_sections),
         "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md": ("cdlm_cell", chunk_cdlm_cells),
         "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md": ("cgm_node", chunk_cgm_nodes),
+        "025_HOLISTIC_SYNTHESIS/RM_v2_0.md": ("rm_element", chunk_rm_elements),
     }
 
 
@@ -320,6 +322,16 @@ def run_build(
                 raise RuntimeError(f"Chunker failed for {asset_path}: {exc}") from exc
             log.info("chunks_produced", asset=asset_path, count=len(chunks))
             all_chunks.extend(chunks)
+
+        # domain_report: self-scanning multi-file chunker (not gated by a single source path)
+        try:
+            from rag.chunkers.domain_report import chunk_domain_reports
+            dr_chunks = chunk_domain_reports(workspace)
+            log.info("chunks_produced", asset="domain_reports/*", doc_type="domain_report", count=len(dr_chunks))
+            all_chunks.extend(dr_chunks)
+        except Exception as exc:
+            log.error("chunker_failed", asset="domain_report", error=str(exc))
+            raise RuntimeError(f"Chunker failed for domain_report: {exc}") from exc
 
         log.info("total_chunks", count=len(all_chunks))
 
