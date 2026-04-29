@@ -97,7 +97,7 @@ export default async function DashboardPage() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_25%,rgba(2,2,1,0.5)_65%,rgba(2,2,1,0.88)_100%)]" />
       <div className="relative z-10 container mx-auto py-8 px-4">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="bt-display text-[#fce29a] mb-6">
+          <h1 className="bt-display text-[#fce29a]">
             <span className="opacity-55 text-[#d4af37] font-serif mr-1">॥</span>
             Roster
             <span className="opacity-55 text-[#d4af37] font-serif ml-1">॥</span>
