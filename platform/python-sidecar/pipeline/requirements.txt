@@ -10,3 +10,6 @@ structlog>=24.1.0,<25
 tiktoken>=0.7.0
 pgvector>=0.3.0
 numpy>=1.26.0
+pyswisseph>=2.10.0            # Swiss Ephemeris bindings — Stream C ephemeris bootstrap
+jsonschema>=4.21.0            # YAML schema validation — Stream B forensic_extractor
+psycopg2-binary>=2.9.9        # psycopg2 for forensic_extractor + bootstrap_ephemeris
