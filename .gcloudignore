@@ -21,3 +21,4 @@ platform/.env
 platform/.env.*
 platform/supabase/.temp/
 Assets/
+platform/python-sidecar/venv/

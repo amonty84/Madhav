@@ -1,7 +1,6 @@
 import { getServerUser } from '@/lib/firebase/server'
 import { NextResponse } from 'next/server'
 
-const SIDECAR_URL = process.env.PYTHON_SIDECAR_URL ?? 'http://localhost:8000'
 const SIDECAR_KEY = process.env.PYTHON_SIDECAR_API_KEY ?? ''
 
 export async function POST(
@@ -25,9 +24,14 @@ export async function POST(
     return NextResponse.json({ error: 'Unknown compute type' }, { status: 400 })
   }
 
+  const sidecarUrl = process.env.PYTHON_SIDECAR_URL
+  if (!sidecarUrl) {
+    return NextResponse.json({ error: 'PYTHON_SIDECAR_URL is not set' }, { status: 503 })
+  }
+
   const body = await request.json()
 
-  const response = await fetch(`${SIDECAR_URL}/${type}`, {
+  const response = await fetch(`${sidecarUrl}/${type}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

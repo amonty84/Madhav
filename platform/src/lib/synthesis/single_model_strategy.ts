@@ -62,6 +62,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       style,
       audience_tier,
       cache,
+      conversation_id,
       onAuditEvent,
     } = request
 
@@ -180,6 +181,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         query_id: qid,
         step: {
           query_id: qid,
+          conversation_id,
           step_seq: ctxSeq,
           step_name: 'context_assembly',
           step_type: 'deterministic',
@@ -287,6 +289,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
             query_id: qid,
             step: {
               query_id: qid,
+              conversation_id,
               step_seq: synthesisSeq,
               step_name: 'synthesis',
               step_type: 'llm',

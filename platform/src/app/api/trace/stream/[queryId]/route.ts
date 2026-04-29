@@ -2,8 +2,8 @@
  * MARSYS-JIS Query Trace Panel — SSE streaming endpoint
  *
  * GET /api/trace/stream/[queryId]
- *   Live mode:       streams TraceEvents from the in-process emitter as they arrive.
- *   Historical mode: replays stored steps from query_trace_steps (header x-trace-mode: historical).
+ *   Live mode:       replays any existing DB steps, then streams live TraceEvents from the emitter.
+ *   Historical mode: replays stored steps from query_trace_steps (?mode=historical query param).
  *
  * Auth: super_admin only (same pattern as /api/audit/*).
  * Sends a 'done' sentinel event when the pipeline completes or all stored steps are replayed.
@@ -34,7 +34,8 @@ export async function GET(
   const encode = (event: TraceEvent) =>
     encoder.encode(`data: ${JSON.stringify(event)}\n\n`)
 
-  const isHistorical = request.headers.get('x-trace-mode') === 'historical'
+  const reqUrl = new URL(request.url)
+  const isHistorical = reqUrl.searchParams.get('mode') === 'historical'
 
   if (isHistorical) {
     // Replay stored steps synchronously as a one-shot stream
@@ -58,11 +59,34 @@ export async function GET(
     })
   }
 
-  // Live mode: subscribe to in-process EventEmitter
+  // Live mode: replay any steps already persisted (handles clients that connect after
+  // the pipeline finishes), then subscribe to the in-process EventEmitter for future steps.
   let cleanup: ((e: TraceEvent) => void) | null = null
+  let cancelled = false
 
   const stream = new ReadableStream({
-    start(controller) {
+    async start(controller) {
+      // --- Phase 1: flush existing DB steps ---
+      // Covers: (a) late-connecting client, (b) panel opened mid-pipeline.
+      const existingSteps = await fetchTraceSteps(queryId)
+      if (cancelled) return
+
+      for (const step of existingSteps) {
+        controller.enqueue(encode({ event: 'step_done', query_id: queryId, step }))
+      }
+
+      // If the synthesis step is already done, the pipeline is complete — send the
+      // done sentinel and close. No need to subscribe to the live emitter.
+      const pipelineComplete = existingSteps.some(
+        s => s.step_name === 'synthesis' && s.status === 'done'
+      )
+      if (pipelineComplete) {
+        controller.enqueue(encode({ event: 'done', query_id: queryId }))
+        controller.close()
+        return
+      }
+
+      // --- Phase 2: subscribe for live events (pipeline still in progress) ---
       const handler = (event: TraceEvent) => {
         try {
           controller.enqueue(encode(event))
@@ -79,6 +103,7 @@ export async function GET(
       traceEmitter.subscribe(queryId, handler)
     },
     cancel() {
+      cancelled = true
       if (cleanup) {
         traceEmitter.unsubscribe(queryId, cleanup)
         cleanup = null

@@ -17,7 +17,13 @@ const TOOL_VERSION = '1.0'
 const NATIVE_ID = 'abhisek_mohanty'
 
 async function callSidecar(endpoint: string, body: object): Promise<unknown> {
-  const url = `${process.env.PYTHON_SIDECAR_URL}${endpoint}`
+  const baseUrl = process.env.PYTHON_SIDECAR_URL
+  if (!baseUrl) {
+    throw new Error(
+      'PYTHON_SIDECAR_URL env var not set — sidecar call to ' + endpoint + ' will fail'
+    )
+  }
+  const url = `${baseUrl}${endpoint}`
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

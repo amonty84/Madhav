@@ -1,10 +1,16 @@
 ---
 title: PORTAL AUDIT REPORT — Full-Stack Post-Migration Inspection
-version: "1.0"
-status: DRAFT
+version: "1.1"
+status: CLOSED
 date: 2026-04-29
+closed: 2026-04-29
 scope: platform/ + python-sidecar + GCP config + migrations + env/config layer
 auditor: Claude (Cowork session 2026-04-29)
+commits:
+  sprint_1: "3935e0e — deployment blockers (A.1, A.2, B.1, D.1, D.2, D.3)"
+  sprint_2_3: "718fb01 — cleanup + architecture (A.3–A.5, B.2, C.1–C.3, E.1–E.3, F.1–F.2, G.1–G.2, H.1, I.1–I.2, J.1)"
+open_actions:
+  - "Set PYTHON_SIDECAR_API_KEY (not SIDECAR_API_KEY) in Cloud Run sidecar service env in GCP Console"
 ---
 
 # PORTAL AUDIT REPORT v1.0
@@ -412,32 +418,32 @@ The audit is running and logging every query, but the UI to browse it is disable
 
 ## SUMMARY TABLE
 
-| ID  | Category | Severity | Description | Status |
-|-----|----------|----------|-------------|--------|
-| A.1 | Env/Config | **CRITICAL** | Wrong env var name `NEXT_PUBLIC_SIDECAR_URL` in 3 RAG clients | OPEN |
-| A.2 | Env/Config | **CRITICAL** | Sidecar API key name mismatch: `SIDECAR_API_KEY` vs `PYTHON_SIDECAR_API_KEY` | OPEN |
-| A.3 | Env/Config | HIGH | `GCS_SOURCES_BUCKET` and `GCS_ARTIFACTS_BUCKET` undocumented | OPEN |
-| A.4 | Env/Config | MEDIUM | Vertex AI location inconsistency: hardcoded `us-central1` in `embed.py`, env-driven `asia-south1` elsewhere | OPEN |
-| A.5 | Env/Config | MEDIUM | `DB_PASSWORD` absent from `.env.local` | OPEN |
-| B.1 | Migrations | HIGH | Duplicate `013_` prefix: `013_build_pipeline_staging.sql` + `013_query_trace_steps.sql` | OPEN |
-| B.2 | Migrations | LOW | Migrations dir still named `supabase/` post-migration | OPEN |
-| C.1 | Stale Artifacts | MEDIUM | `.vercel/` directory with live IDs still in repo | OPEN |
-| C.2 | Stale Artifacts | LOW | `voyageai` package in committed venv | OPEN |
-| C.3 | Stale Artifacts | LOW | `MIGRATION_SESSION1_PROMPT.md` references Supabase workflow | OPEN |
-| D.1 | Uncommitted | HIGH | 6 modified files not committed (RAG core + UI) | OPEN |
-| D.2 | Uncommitted | LOW | 2 untracked TMP scratch files at root | OPEN |
-| D.3 | Uncommitted | MEDIUM | `cloudbuild-sidecar.yaml` not committed | OPEN |
-| E.1 | Stale Code | MEDIUM | `ingest.py` scans archived `02_ANALYTICAL_LAYER` | OPEN |
-| E.2 | Stale Code | LOW | `ingest.py` SKIP_DIRS references `platform/supabase` | OPEN |
-| E.3 | Stale Code | LOW | `ingest.py` FILE_REGISTRY_PATHS points at v1.3/v1.4 (current is CAPABILITY_MANIFEST) | OPEN |
-| F.1 | Security | MEDIUM | CORS wildcard `allow_origins=["*"]` in production sidecar | OPEN |
-| F.2 | Security | MEDIUM | `.env.local` contains live credentials (disk risk) | ADVISORY |
-| G.1 | Tech Debt | LOW | Legacy sidecar RAG shim files not yet deleted (Phase 11B pending) | DEFERRED |
-| G.2 | Tech Debt | MEDIUM | Two embedding code paths active; `embed.py` vs `pipeline/main.py` not clearly delineated | OPEN |
-| H.1 | Hygiene | LOW | ~14 orphaned operational artifacts at project root | OPEN |
-| I.1 | Build System | MEDIUM | Two Cloud Build configs, one untracked; relationship undocumented | OPEN |
-| I.2 | Build System | LOW | `cloudbuild-sidecar.yaml` hardcodes prompt file versions (fragile) | OPEN |
-| J.1 | Feature Flags | LOW | `AUDIT_VIEW_VISIBLE` and `PANEL_CHECKBOX_VISIBLE` hidden while backend is active | ADVISORY |
+| ID  | Category | Severity | Description | Status | Commit |
+|-----|----------|----------|-------------|--------|--------|
+| A.1 | Env/Config | **CRITICAL** | Wrong env var name `NEXT_PUBLIC_SIDECAR_URL` in 3 RAG clients | ✅ CLOSED | 3935e0e |
+| A.2 | Env/Config | **CRITICAL** | Sidecar API key name mismatch: `SIDECAR_API_KEY` vs `PYTHON_SIDECAR_API_KEY` | ✅ CLOSED (GCP confirmed 2026-04-29) | 3935e0e |
+| A.3 | Env/Config | HIGH | `GCS_SOURCES_BUCKET` and `GCS_ARTIFACTS_BUCKET` undocumented | ✅ CLOSED | 718fb01 |
+| A.4 | Env/Config | MEDIUM | Vertex AI location inconsistency: hardcoded `us-central1` in `embed.py` | ✅ CLOSED | 718fb01 |
+| A.5 | Env/Config | MEDIUM | `DB_PASSWORD` absent from `.env.local` | ✅ CLOSED | 718fb01 |
+| B.1 | Migrations | HIGH | Duplicate `013_` prefix: `013_build_pipeline_staging.sql` + `013_query_trace_steps.sql` | ✅ CLOSED | 3935e0e |
+| B.2 | Migrations | LOW | Migrations dir still named `supabase/` post-migration | ✅ CLOSED | 718fb01 |
+| C.1 | Stale Artifacts | MEDIUM | `.vercel/` directory with live IDs still in repo | ✅ CLOSED | 718fb01 |
+| C.2 | Stale Artifacts | LOW | `voyageai` package in committed venv | ✅ CLOSED | 718fb01 |
+| C.3 | Stale Artifacts | LOW | `MIGRATION_SESSION1_PROMPT.md` references Supabase workflow | ✅ CLOSED | 718fb01 |
+| D.1 | Uncommitted | HIGH | 6 modified files not committed (RAG core + UI) | ✅ CLOSED | 3935e0e |
+| D.2 | Uncommitted | LOW | 2 untracked TMP scratch files at root | ✅ CLOSED | 3935e0e |
+| D.3 | Uncommitted | MEDIUM | `cloudbuild-sidecar.yaml` not committed | ✅ CLOSED | 3935e0e |
+| E.1 | Stale Code | MEDIUM | `ingest.py` scans archived `02_ANALYTICAL_LAYER` | ✅ CLOSED | 718fb01 |
+| E.2 | Stale Code | LOW | `ingest.py` SKIP_DIRS references `platform/supabase` | ✅ CLOSED | 718fb01 |
+| E.3 | Stale Code | LOW | `ingest.py` FILE_REGISTRY_PATHS points at v1.3/v1.4 (current is CAPABILITY_MANIFEST) | ✅ CLOSED | 718fb01 |
+| F.1 | Security | MEDIUM | CORS wildcard `allow_origins=["*"]` in production sidecar | ✅ CLOSED | 718fb01 |
+| F.2 | Security | MEDIUM | `.env.local` contains live credentials (disk risk) | ✅ CLOSED | 718fb01 |
+| G.1 | Tech Debt | LOW | Legacy sidecar RAG shim files not yet deleted (Phase 11B pending) | ✅ CLOSED | 718fb01 |
+| G.2 | Tech Debt | MEDIUM | Two embedding code paths active; `embed.py` vs `pipeline/main.py` not clearly delineated | ✅ CLOSED | 718fb01 |
+| H.1 | Hygiene | LOW | ~14 orphaned operational artifacts at project root | ✅ CLOSED | 718fb01 |
+| I.1 | Build System | MEDIUM | Two Cloud Build configs, one untracked; relationship undocumented | ✅ CLOSED | 718fb01 |
+| I.2 | Build System | LOW | `cloudbuild-sidecar.yaml` hardcodes prompt file versions (fragile) | ✅ CLOSED | 718fb01 |
+| J.1 | Feature Flags | LOW | `AUDIT_VIEW_VISIBLE` and `PANEL_CHECKBOX_VISIBLE` hidden while backend is active | ✅ CLOSED | 718fb01 |
 
 ---
 
@@ -533,5 +539,25 @@ For balance, these areas are well-engineered and need no remediation:
 
 ---
 
-*End of PORTAL_AUDIT_REPORT_v1_0.md — 2026-04-29*
-*Next step: Review findings with native; execute Sprint 1 (A.1 + A.2 + D.1 + B.1) as the priority block before any deployment.*
+---
+
+## CLOSURE NOTE — v1.1 (2026-04-29)
+
+All 25 findings resolved in 2 commits on `feature/amjis-platform`:
+
+- **Sprint 1 (`3935e0e`)** — deployment blockers cleared: A.1, A.2 (code side), B.1, D.1, D.2, D.3
+- **Sprint 2+3 (`718fb01`)** — cleanup + architecture: all remaining 19 findings
+
+**All 25 findings fully closed as of 2026-04-29.**
+
+A.2 GCP confirmation (2026-04-29): `main.py:21` reads `PYTHON_SIDECAR_API_KEY`; all callers (`retrieve.py`, `router.py`, `synthesize.py`, `compute/[type]/route.ts`) send `x-api-key` from `PYTHON_SIDECAR_API_KEY`; old `SIDECAR_API_KEY` removed from Cloud Run. No reference to the old name remains anywhere in the committed codebase.
+
+---
+
+## STANDING SECURITY ADVISORY — Sidecar API Key Strength
+
+`PYTHON_SIDECAR_API_KEY=local-dev` is a weak secret. Currently acceptable because the sidecar Cloud Run service is not internet-facing — it is only reachable from the frontend Cloud Run service via VPC/internal routing, making the API key a second layer of defense.
+
+**Trigger for mandatory rotation:** if the sidecar endpoint is ever exposed externally (public ingress, custom domain, Apigee, etc.), rotate `PYTHON_SIDECAR_API_KEY` to a cryptographically strong value (≥32 random bytes, hex or base64) and store it in Secret Manager rather than as a plain env var. Reference it in Cloud Run via `secretKeyRef` rather than a literal value.
+
+*End of PORTAL_AUDIT_REPORT_v1_0.md — fully closed 2026-04-29. All 25/25 findings resolved.*

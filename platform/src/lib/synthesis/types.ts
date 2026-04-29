@@ -38,6 +38,9 @@ export interface SynthesisRequest {
   /** Phase 12 (FUB-1): canonical birth particulars for the native. Optional — callers that
    *  don't provide it fall back to placeholder strings rather than crashing. */
   chart_context?: ChartContext
+  /** Trace: conversation scope for query_trace_steps DB writes. Optional — absent means
+   *  trace steps are written without conversation_id (still queryable by query_id). */
+  conversation_id?: string
   /** Phase 4: optional consumer callback. When AUDIT_ENABLED, route.ts wires this. */
   onAuditEvent?: (event: SynthesisAuditEvent) => void
   /** Phase 7: per-query opt-in for panel synthesis. Only active when PANEL_MODE_ENABLED=true. */

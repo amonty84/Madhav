@@ -356,6 +356,7 @@ export async function POST(request: Request) {
         birth_time: chart.birth_time,
         birth_place: chart.birth_place,
       },
+      conversation_id: finalConversationId,
       panel_opt_in: panelOptIn,
       onAuditEvent: configService.getFlag('AUDIT_ENABLED')
         ? createAuditConsumer({

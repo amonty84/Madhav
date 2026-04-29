@@ -40,7 +40,8 @@ export function useTraceStream(queryId: string | null, historical = false): Trac
     setError(null)
     activeQueryId.current = queryId
 
-    const url = `/api/trace/stream/${encodeURIComponent(queryId)}`
+    // EventSource doesn't support custom headers — pass mode as a URL query param instead.
+    const url = `/api/trace/stream/${encodeURIComponent(queryId)}${historical ? '?mode=historical' : ''}`
     const es = new EventSource(url)
     esRef.current = es
 
