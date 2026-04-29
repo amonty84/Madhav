@@ -51,16 +51,13 @@ export function ClientCard({ chart }: Props) {
         />
       </CardHeader>
       <CardContent className="flex gap-2">
-        <Link
-          href={`/clients/${chart.id}/build`}
-          className={cn(buttonVariants({ size: 'sm' }), 'flex-1')}
-        >
+        <Link href={`/clients/${chart.id}`} className={cn(buttonVariants({ size: 'sm' }), 'flex-1')}>
+          Profile
+        </Link>
+        <Link href={`/clients/${chart.id}/build`} className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}>
           Build
         </Link>
-        <Link
-          href={`/clients/${chart.id}/consume`}
-          className={cn(buttonVariants({ size: 'sm', variant: 'outline' }), 'flex-1')}
-        >
+        <Link href={`/clients/${chart.id}/consume`} className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}>
           Consume
         </Link>
       </CardContent>
