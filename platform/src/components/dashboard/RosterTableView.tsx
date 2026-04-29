@@ -48,54 +48,63 @@ export function RosterTableView({ charts }: RosterTableViewProps) {
         <thead className="bg-[rgba(8,6,3,0.6)]">
           <tr>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
               style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'name' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('name')}
+                aria-label={`Sort by name${sortKey === 'name' ? `, currently ${sortDir}ending` : ''}`}
                 className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Name{sortIndicator('name')}
               </button>
             </th>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left"
               style={{ color: 'rgba(212,175,55,0.45)' }}
             >
               Birth
             </th>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left"
               style={{ color: 'rgba(212,175,55,0.45)' }}
             >
               Current dasha
             </th>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
               style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'buildPct' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('buildPct')}
+                aria-label={`Sort by build percentage${sortKey === 'buildPct' ? `, currently ${sortDir}ending` : ''}`}
                 className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Build %{sortIndicator('buildPct')}
               </button>
             </th>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left whitespace-nowrap"
               style={{ color: 'rgba(212,175,55,0.45)' }}
               aria-sort={sortKey === 'activity' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
               <button
                 onClick={() => toggle('activity')}
+                aria-label={`Sort by last activity${sortKey === 'activity' ? `, currently ${sortDir}ending` : ''}`}
                 className="cursor-pointer select-none hover:text-[#d4af37] transition-colors"
               >
                 Last activity{sortIndicator('activity')}
               </button>
             </th>
             <th
+              scope="col"
               className="bt-label bt-label-upper px-3 py-2 text-left"
               style={{ color: 'rgba(212,175,55,0.45)' }}
             >
