@@ -136,15 +136,15 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
   const showStop = isStreaming && onStop
 
   return (
-    <div className={cn('mx-auto w-full max-w-3xl px-4 pb-3 pt-1', className)}>
+    <div className={cn('mx-auto w-full max-w-4xl px-4 pb-3 pt-1', className)}>
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         className={cn(
           'relative flex flex-col rounded-3xl border border-border/70 bg-background shadow-sm transition-all duration-200',
-          isFocused && 'border-border/90 shadow-md ring-4 ring-ring/10',
-          isDragOver && 'border-ring/80 bg-ring/5 ring-4 ring-ring/20 shadow-lg',
+          isFocused && 'border-ring/60 shadow-md ring-2 ring-[var(--brand-gold)]/40',
+          isDragOver && 'border-ring/80 bg-ring/5 ring-4 ring-[var(--brand-gold)]/30 shadow-lg',
           disabled && 'opacity-60'
         )}
       >
@@ -177,6 +177,13 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
           )}
           aria-label="Message composer"
         />
+        {value === '/' && (
+          <p className="px-5 pb-0.5 text-[11px] text-muted-foreground/70">
+            Use{' '}
+            <kbd className="rounded border border-border bg-muted px-1 font-mono text-[10px]">⌘K</kbd>
+            {' '}for commands
+          </p>
+        )}
         <div className="flex items-center justify-between gap-2 px-3 pb-3 pt-0.5">
           <div className="flex items-center gap-1">
             <input
@@ -199,12 +206,9 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
             >
               <Paperclip className="size-4" />
             </button>
-            <p className="hidden sm:block pl-1 text-[11px] text-muted-foreground/70">
-              <kbd className="rounded border border-border/60 bg-muted/50 px-1 py-0.5 font-mono text-[10px] shadow-sm">Enter</kbd>{' '}
-              to send ·{' '}
-              <kbd className="rounded border border-border/60 bg-muted/50 px-1 py-0.5 font-mono text-[10px] shadow-sm">Shift+Enter</kbd>{' '}
-              new line
-            </p>
+            <span className="hidden md:inline pl-1 text-[10px] uppercase tracking-[0.18em] text-[var(--brand-cream)]/40">
+              ↵ Send · ⇧ ↵ New line
+            </span>
           </div>
           <div className="ml-auto flex items-center gap-1">
             {showStop ? (
@@ -223,9 +227,10 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
                 disabled={!canSend}
                 aria-label="Send message"
                 className={cn(
-                  'inline-flex size-9 items-center justify-center rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30',
+                  'inline-flex size-9 items-center justify-center rounded-full transition-all duration-200',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-charcoal)]',
                   canSend
-                    ? 'bg-foreground text-background hover:opacity-90 active:scale-95'
+                    ? 'brand-cta active:scale-95'
                     : 'bg-muted text-muted-foreground/50 cursor-not-allowed'
                 )}
               >

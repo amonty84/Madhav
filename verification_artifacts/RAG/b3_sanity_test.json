@@ -1,5 +1,5 @@
 {
-  "produced_at": "2026-04-25T12:33:20.813483+00:00",
+  "produced_at": "2026-04-26T10:37:33.651066+00:00",
   "producer": "embed.py \u2014 M2A-Exec Session 4 (Madhav_M2A_Exec_4)",
   "embedding_model": "text-multilingual-embedding-002",
   "query": "Saturn 7th house Libra",
@@ -28,11 +28,11 @@
   ],
   "doc_type_distinct_count": 2,
   "hnsw_latency": {
-    "min_ms": 35.009,
-    "max_ms": 149.543,
-    "p50_ms": 36.114,
-    "p95_ms": 71.56,
-    "mean_ms": 41.232,
+    "min_ms": 43.78,
+    "max_ms": 126.773,
+    "p50_ms": 45.913,
+    "p95_ms": 111.855,
+    "mean_ms": 53.658,
     "sample_count": 100
   },
   "ac_b3_4_pass": true,

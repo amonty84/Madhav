@@ -1,17 +1,23 @@
 .DS_Store
 .venv/
+venv/
 .tools/
 .claude/
-.superpowers/
-.playwright-mcp/
 node_modules/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .env
-.env.rag
 .ipynb_checkpoints/
 /*.png
+
+# Env files with secrets
+.env.*
+!.env.example
+
+# IDE / tooling artifacts
 .continue/
 .kilo/
+.playwright-mcp/
+.superpowers/

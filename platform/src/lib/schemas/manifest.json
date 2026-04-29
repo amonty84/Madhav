@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "description": "MARSYS-JIS Schema Registry — catalog of all load-bearing type schemas",
+  "schemas": [
+    { "name": "asset_entry", "version": "1.0", "path": "./asset_entry.schema.json", "description": "Catalog entry for a corpus asset in the Capability Manifest" },
+    { "name": "query_plan", "version": "1.0", "path": "./query_plan.schema.json", "description": "Structured query plan produced by the Router (C2.1)" },
+    { "name": "bundle", "version": "1.0", "path": "./bundle.schema.json", "description": "Mandatory-context payload for a query" },
+    { "name": "tool_bundle", "version": "1.0", "path": "./tool_bundle.schema.json", "description": "Output of a single retrieval tool invocation" },
+    { "name": "audit_event", "version": "1.0", "path": "./audit_event.schema.json", "description": "Complete execution record per query for the audit trail" },
+    { "name": "panel_metadata", "version": "1.0", "path": "./panel_metadata.schema.json", "description": "Panel synthesis metadata when panel_mode is active" }
+  ]
+}

@@ -12,6 +12,9 @@ word_count_estimate: ~14000
 primary_msr_anchors: [MSR.397, MSR.402, MSR.407, MSR.408, MSR.374, MSR.406, MSR.348]
 primary_cdlm_row: D6
 organizing_principle: The spirit domain is the chart's most self-amplifying domain (CDLM.D6.D6 = 0.96 — highest in the matrix). Seven distinct spiritual activation mechanisms (Jupiter own-sign 9H, Ketu exalted 8H, Shree Lagna 9H, Varnada+Ghati Lagnas in 8H, Yogi Point 12H Pisces, Devata system triple-lock, Karakamsa Gemini) all reinforce each other; spiritual evolution is structurally unstoppable
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_SPIRITUAL_v1_0 — Spirit, Dharma, and Moksha Domain Report

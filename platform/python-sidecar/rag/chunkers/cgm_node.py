@@ -186,7 +186,7 @@ def chunk_cgm_nodes(cgm_path_or_root: str) -> list[Chunk]:
 
 
 def run(repo_root: str) -> int:
-    """Parse CGM nodes, write to rag_chunks via Supabase REST, return written count."""
+    """Parse CGM nodes, write to rag_chunks via Cloud SQL (psycopg), return written count."""
     chunks = chunk_cgm_nodes(repo_root)
     written = write_chunks_to_db(chunks)
     logger.info("cgm_node: wrote %d / %d chunks to rag_chunks", written, len(chunks))

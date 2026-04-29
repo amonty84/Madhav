@@ -5,11 +5,12 @@ vi.mock('@/lib/firebase/server', () => ({
   adminAuth: {},
 }))
 
-vi.mock('@/lib/supabase/server', () => ({
-  createServiceClient: vi.fn(),
+// clients/route.ts uses query() from @/lib/db/client (Cloud SQL)
+vi.mock('@/lib/db/client', () => ({
+  query: vi.fn(),
 }))
 
-import { createServiceClient } from '@/lib/supabase/server'
+import { query } from '@/lib/db/client'
 
 describe('clients API', () => {
   it('returns charts for super_admin', async () => {
@@ -27,23 +28,11 @@ describe('clients API', () => {
       },
     ]
 
-    // Profile lookup → super_admin role.
-    const profileQuery = {
-      select: vi.fn().mockReturnThis(),
-      eq: vi.fn().mockReturnThis(),
-      single: vi.fn().mockResolvedValue({ data: { role: 'super_admin' } }),
-    }
-    // Charts query.
-    const chartsQuery = {
-      select: vi.fn().mockReturnThis(),
-      order: vi.fn().mockResolvedValue({ data: mockCharts, error: null }),
-    }
-    const fromMock = vi.fn((table: string) =>
-      table === 'profiles' ? profileQuery : chartsQuery,
-    )
-    ;(createServiceClient as ReturnType<typeof vi.fn>).mockReturnValue({
-      from: fromMock,
-    })
+    // First call: profile lookup → super_admin role.
+    // Second call: charts query.
+    ;(query as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce({ rows: [{ role: 'super_admin' }] })
+      .mockResolvedValueOnce({ rows: mockCharts })
 
     const { GET } = await import('@/app/api/clients/route')
     const response = await GET()

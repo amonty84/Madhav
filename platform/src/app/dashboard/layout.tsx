@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getServerUserWithProfile } from '@/lib/auth/access-control'
-import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import { AppShell } from '@/components/shared/AppShell'
+import { configService } from '@/lib/config'
 
 export default async function DashboardLayout({
   children,
@@ -11,16 +12,19 @@ export default async function DashboardLayout({
   if (!ctx) redirect('/login')
   if (ctx.profile.status !== 'active') redirect('/login')
 
-  const initial =
-    (ctx.user.email?.[0] ?? ctx.user.name?.[0] ?? 'U').toUpperCase()
+  if (!configService.getFlag('PORTAL_REDESIGN_R0_ENABLED')) {
+    return (
+      <div className="min-h-[100dvh] bg-background text-foreground">{children}</div>
+    )
+  }
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground">
-      <DashboardHeader
-        userInitial={initial}
-        isSuperAdmin={ctx.profile.role === 'super_admin'}
-      />
+    <AppShell
+      user={ctx.user}
+      profile={ctx.profile}
+      breadcrumb={[{ label: 'Roster', current: true }]}
+    >
       {children}
-    </div>
+    </AppShell>
   )
 }

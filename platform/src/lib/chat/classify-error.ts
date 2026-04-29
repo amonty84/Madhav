@@ -76,6 +76,14 @@ export function classifyChatError(err: Error | null | undefined): ClassifiedChat
       detail: err.message,
     }
   }
+  if (msg.includes('api key is missing') || msg.includes('api key must be') || msg.includes('environment variable')) {
+    return {
+      kind: 'auth',
+      title: 'Model API key not configured',
+      hint: 'The selected model\'s API key is missing from the server environment. Switch to a different model in the picker.',
+      detail: err.message,
+    }
+  }
   return {
     kind: 'unknown',
     title: 'Something went wrong',

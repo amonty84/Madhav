@@ -1,3 +1,11 @@
+---
+artifact: SADE_SATI_CYCLES_ALL.md
+layer: "L1"
+expose_to_chat: false
+native_id: "abhisek"
+category: source
+---
+
 # Sade Sati Cycles — Complete Lifetime View (1900-2100)
 
 Computed from Swiss Ephemeris sidereal (Lahiri). Supersedes v6.0 §21 which had Cycle 2 only.

@@ -1,0 +1,31 @@
+==============================================================
+PHASE 14F VALIDATOR BASELINE
+Captured: 2026-04-28T16:35:36Z
+Commit: 8ba045139cf1b21062f60db5469ff24832f45772
+Branch: feature/amjis-platform
+Manifest fingerprint: 34e4855d29b8452a
+==============================================================
+
+########## schema_validator.py ##########
+schema_validator: 70 violations; exit=2
+
+Exit code: 2
+
+########## drift_detector.py (no --use-manifest flag; see note) ##########
+NOTE: drift_detector.py does not implement --use-manifest as of this capture.
+CLAUDE.md §C.2 references DRIFT_DETECTOR_USE_MANIFEST=true as env-var mode;
+the CLI flag was not added to the script. Running plain invocation instead.
+14G lockdown should use the same plain invocation for diff comparability.
+drift_detector: 136 findings; exit=2
+  JSON: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260428T163538Z.json
+  MD:   00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260428T163538Z.md
+
+Exit code: 2
+
+########## mirror_enforcer.py ##########
+mirror_enforcer: 0 findings; exit=0
+  pairs checked=8; passed=8; failed=0; claude_only=2
+
+Exit code: 0
+
+########## END BASELINE ##########

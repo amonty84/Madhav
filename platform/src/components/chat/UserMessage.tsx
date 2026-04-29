@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { UIMessage } from 'ai'
 import { motion, useReducedMotion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -46,7 +46,11 @@ export function UserMessage({
   const files = getFileParts(message)
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(text)
-  const [timestamp] = useState(() => new Date())
+  const timestamp = useMemo(() => {
+    const meta = (message.metadata ?? {}) as Record<string, unknown>
+    const raw = meta.created_at ?? (message as unknown as { created_at?: unknown }).created_at
+    return typeof raw === 'string' || typeof raw === 'number' ? new Date(raw) : null
+  }, [message])
   const reduce = useReducedMotion()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -62,7 +66,7 @@ export function UserMessage({
 
   if (editing) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4">
+      <div className="mx-auto w-full max-w-4xl px-4">
         <div className="ml-auto w-full max-w-[85%]">
           <div className="rounded-2xl border border-border bg-background p-3 shadow-sm">
             <TextareaAutosize
@@ -108,8 +112,10 @@ export function UserMessage({
       initial={reduce ? false : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="group/message mx-auto w-full max-w-3xl px-4"
+      className="group/message mx-auto w-full max-w-4xl px-4"
     >
+      <div className="flex items-start gap-4">
+      <div className="min-w-0 flex-1">
       <div className="ml-auto flex w-full max-w-[85%] flex-col items-end gap-1.5">
         {files.length > 0 && (
           <div className="flex flex-wrap justify-end gap-1.5">
@@ -121,8 +127,8 @@ export function UserMessage({
         {text && (
           <div
             className={cn(
-              'rounded-2xl rounded-br-md px-4 py-2.5 text-[15px] leading-[1.6]',
-              'bg-muted text-foreground'
+              'rounded-2xl border border-border/80 bg-muted/50 px-4 py-2.5 text-[15px] leading-[1.6]',
+              'text-foreground'
             )}
           >
             <p className="whitespace-pre-wrap break-words">{text}</p>
@@ -136,7 +142,7 @@ export function UserMessage({
                 onClick={() => onStepBranch(-1)}
                 disabled={branchCurrent <= 0}
                 aria-label="Previous version"
-                className="inline-flex size-5 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
+                className="inline-flex min-h-9 min-w-9 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
               >
                 <ChevronLeft className="size-3" />
               </button>
@@ -148,7 +154,7 @@ export function UserMessage({
                 onClick={() => onStepBranch(1)}
                 disabled={branchCurrent >= branchTotal - 1}
                 aria-label="Next version"
-                className="inline-flex size-5 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
+                className="inline-flex min-h-9 min-w-9 items-center justify-center rounded hover:bg-muted hover:text-foreground disabled:opacity-30"
               >
                 <ChevronRight className="size-3" />
               </button>
@@ -157,9 +163,12 @@ export function UserMessage({
           <MessageActions
             onCopy={text ? copy : undefined}
             onEdit={onEditSubmit && text ? () => setEditing(true) : undefined}
-            timestamp={timestamp}
+            timestamp={timestamp ?? undefined}
           />
         </div>
+      </div>
+      </div>
+      <div className="w-8 shrink-0" aria-hidden />
       </div>
     </motion.div>
   )

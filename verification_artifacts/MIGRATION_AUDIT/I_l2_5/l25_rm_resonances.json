@@ -1,0 +1,7 @@
+{
+  "table": "l25_rm_resonances",
+  "db_count": 28,
+  "expected_count": 28,
+  "key_nulls": 0,
+  "overall_status": "PASS"
+}

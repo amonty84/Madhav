@@ -22,7 +22,7 @@ SCANNER_VERSION = "1.0"
 CORPUS_SCAN_DIRS = [
     "01_FACTS_LAYER",
     "025_HOLISTIC_SYNTHESIS",
-    "02_ANALYTICAL_LAYER",
+    # 02_ANALYTICAL_LAYER archived Phase 14F 2026-04-28
     "03_DOMAIN_REPORTS",
     "00_ARCHITECTURE",
     "035_DISCOVERY_LAYER",
@@ -34,7 +34,7 @@ CORPUS_SCAN_DIRS = [
 SKIP_DIRS = {
     "99_ARCHIVE", "node_modules", "platform", ".git",
     "__pycache__", "venv", ".claude", "platform/src",
-    "platform/supabase", "platform/scripts",
+    "platform/scripts",
 }
 
 # Directories outside the root-level scan that should be excluded
@@ -46,7 +46,6 @@ SKIP_DIR_PATTERNS = {
 # Layer assignment by directory prefix
 LAYER_BY_DIR = {
     "01_FACTS_LAYER": "L1",
-    "02_ANALYTICAL_LAYER": "L2",
     "025_HOLISTIC_SYNTHESIS": "L2.5",
     "03_DOMAIN_REPORTS": "L3",
     "04_REMEDIAL_CODEX": "L3",
@@ -62,8 +61,7 @@ MSR_SIGNAL_BOUNDARY = re.compile(r"^(SIG\.MSR\.\d{3}[a-z]?):\s*$", re.MULTILINE)
 
 # FILE_REGISTRY files to parse for is_current determination
 FILE_REGISTRY_PATHS = [
-    "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md",
-    "00_ARCHITECTURE/FILE_REGISTRY_v1_4.md",
+    "00_ARCHITECTURE/CAPABILITY_MANIFEST.json",
 ]
 
 

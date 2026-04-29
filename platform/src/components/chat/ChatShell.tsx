@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import Link from 'next/link'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { PanelLeft, FileText, X } from 'lucide-react'
+import { PanelLeft, FileText, X, Pencil, ChevronLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getHighlighter } from '@/lib/shiki'
 
@@ -20,6 +21,8 @@ interface Props {
   onToggleDesktopSidebar: () => void
   onToggleMobileSidebar: () => void
   setMobileSidebarOpen: (open: boolean) => void
+  conversationId?: string
+  onRenameConversation?: (id: string, title: string) => Promise<void>
 }
 
 export function ChatShell({
@@ -36,8 +39,23 @@ export function ChatShell({
   onToggleDesktopSidebar,
   onToggleMobileSidebar,
   setMobileSidebarOpen,
+  conversationId,
+  onRenameConversation,
 }: Props) {
   const [rightOpen, setRightOpen] = useState(false)
+  const [editing, setEditing] = useState(false)
+  const [titleDraft, setTitleDraft] = useState(headerTitle ?? '')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Keep draft in sync when the title changes externally (e.g. after nav)
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTitleDraft(headerTitle ?? '')
+  }, [headerTitle])
+
+  useEffect(() => {
+    if (editing) inputRef.current?.focus()
+  }, [editing])
 
   // Warm the Shiki highlighter bundle on idle so the first code block post-stream
   // renders with zero cold-start delay. CodeBlock skips Shiki during streaming.
@@ -52,10 +70,26 @@ export function ChatShell({
     else setTimeout(run, 200)
   }, [])
 
+  function saveTitle() {
+    const trimmed = titleDraft.trim()
+    setEditing(false)
+    if (!trimmed || trimmed === headerTitle || !conversationId || !onRenameConversation) return
+    onRenameConversation(conversationId, trimmed).catch(() => {
+      setTitleDraft(headerTitle ?? '')
+    })
+  }
+
+  function cancelTitle() {
+    setTitleDraft(headerTitle ?? '')
+    setEditing(false)
+  }
+
+  const canRename = !!conversationId && !!onRenameConversation
+
   return (
     <div
       className="relative flex h-[100dvh] w-full bg-background"
-      style={{ ['--composer-h' as string]: '128px' }}
+      style={{ ['--composer-h' as string]: '160px' }}
     >
       <aside
         aria-label="Conversations"
@@ -68,8 +102,20 @@ export function ChatShell({
         {!desktopSidebarCollapsed && <div className="flex h-full w-[260px] flex-col">{sidebar}</div>}
       </aside>
 
+      {/* Collapsed sidebar hover strip — desktop only */}
+      {desktopSidebarCollapsed && (
+        <button
+          type="button"
+          onClick={onToggleDesktopSidebar}
+          aria-label="Expand sidebar"
+          className="hidden md:flex fixed left-0 top-1/2 z-10 -translate-y-1/2 h-24 w-2 hover:w-8 transition-all duration-200 rounded-r bg-[color-mix(in_oklch,var(--brand-gold)_25%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-gold)_60%,transparent)] items-center justify-center overflow-hidden"
+        >
+          <PanelLeft className="h-4 w-4 text-[var(--brand-charcoal)] opacity-0 group-hover:opacity-100 shrink-0" />
+        </button>
+      )}
+
       <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
-        <SheetContent side="left" className="w-[84%] max-w-[320px] bg-sidebar p-0 md:hidden" showCloseButton={false}>
+        <SheetContent side="left" className="w-[78%] max-w-[300px] bg-sidebar p-0 md:hidden" showCloseButton={false}>
           <SheetTitle className="sr-only">Conversations</SheetTitle>
           <div className="flex h-full flex-col">{sidebar}</div>
         </SheetContent>
@@ -93,16 +139,64 @@ export function ChatShell({
           >
             <PanelLeft className="size-4" />
           </button>
-          <div className="flex min-w-0 items-center gap-2">
+
+          {/* Dashboard breadcrumb — desktop only; mobile uses sidebar drawer */}
+          <Link
+            href="/dashboard"
+            aria-label="Back to dashboard"
+            className="hidden md:inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground shrink-0"
+          >
+            <ChevronLeft className="size-3.5" />
+            <span>Dashboard</span>
+          </Link>
+
+          {/* Title area — stacked: h1 title + chartMeta always visible */}
+          <div className="flex min-w-0 flex-1 items-center gap-2">
             {headerTitle && (
-              <span className="truncate text-sm font-medium text-foreground">{headerTitle}</span>
-            )}
-            {headerMeta && (
-              <span className="hidden truncate text-xs text-muted-foreground sm:block">
-                {headerMeta}
-              </span>
+              <div className="group/title flex min-w-0 flex-col leading-tight">
+                {editing ? (
+                  <input
+                    ref={inputRef}
+                    value={titleDraft}
+                    onChange={e => setTitleDraft(e.target.value)}
+                    onBlur={saveTitle}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') { e.preventDefault(); saveTitle() }
+                      if (e.key === 'Escape') { e.preventDefault(); cancelTitle() }
+                    }}
+                    className="truncate rounded bg-transparent text-sm font-medium text-foreground outline-none ring-1 ring-[var(--brand-gold)]/60 px-1 min-w-0 max-w-[200px]"
+                    aria-label="Conversation title"
+                  />
+                ) : (
+                  <div className="flex items-center gap-1">
+                    <h1
+                      className="truncate text-sm font-medium text-foreground max-w-[200px]"
+                      onDoubleClick={canRename ? () => setEditing(true) : undefined}
+                      title={canRename ? 'Double-click to rename' : undefined}
+                    >
+                      {headerTitle}
+                    </h1>
+                    {canRename && (
+                      <button
+                        type="button"
+                        onClick={() => setEditing(true)}
+                        aria-label="Rename conversation"
+                        className="shrink-0 opacity-0 group-hover/title:opacity-100 transition-opacity inline-flex size-5 items-center justify-center rounded text-[var(--brand-gold-hairline)] hover:text-[var(--brand-gold)]"
+                      >
+                        <Pencil className="size-3" />
+                      </button>
+                    )}
+                  </div>
+                )}
+                {headerMeta && (
+                  <p className="truncate text-[10px] uppercase tracking-[0.24em] text-[var(--brand-cream)]/50">
+                    {headerMeta}
+                  </p>
+                )}
+              </div>
             )}
           </div>
+
           <div className="ml-auto flex items-center gap-1">
             {headerActions}
             {rightPanel && (
@@ -130,7 +224,7 @@ export function ChatShell({
         <Sheet open={rightOpen} onOpenChange={setRightOpen}>
           <SheetContent
             side="right"
-            className="w-[92%] max-w-xl overflow-hidden p-0"
+            className="w-[92%] max-w-2xl lg:max-w-3xl overflow-hidden p-0"
             showCloseButton={false}
           >
             <div className="flex h-full flex-col">

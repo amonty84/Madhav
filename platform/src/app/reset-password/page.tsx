@@ -8,7 +8,7 @@ import { auth } from '@/lib/firebase/client'
 import { Logo } from '@/components/brand/Logo'
 import { Wordmark } from '@/components/brand/Wordmark'
 import { Mandala } from '@/components/brand/Mandala'
-import { ForceDarkMode } from '@/components/auth/ForceDarkMode'
+import { ZoneRoot } from '@/components/shared/ZoneRoot'
 
 const INPUT_CLASS =
   'w-full rounded-[10px] border border-[#2a2210] bg-[#0e0b06] px-3.5 py-3 text-sm text-[#fce29a] placeholder:text-[#6a5830] focus:border-[#d4af37] focus:outline-none focus:ring-2 focus:ring-[#d4af37]/20'
@@ -90,8 +90,7 @@ function ResetPasswordContent() {
   }
 
   return (
-    <>
-      <ForceDarkMode />
+    <ZoneRoot zone="ink">
       <div className="relative h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[radial-gradient(ellipse_at_50%_50%,#0d0a05_0%,#020201_100%)] text-[#fce29a]">
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Mandala size={760} opacity={0.95} />
@@ -192,7 +191,7 @@ function ResetPasswordContent() {
           </div>
         </div>
       </div>
-    </>
+    </ZoneRoot>
   )
 }
 

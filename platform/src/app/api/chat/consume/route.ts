@@ -26,6 +26,56 @@ import {
   supports,
 } from '@/lib/models/registry'
 import { resolveModel } from '@/lib/models/resolver'
+import { configService } from '@/lib/config/index'
+import { classify } from '@/lib/router/router'
+import { compose } from '@/lib/bundle/rule_composer'
+import { getTool } from '@/lib/retrieve/index'
+import { createToolCache, executeWithCache } from '@/lib/cache/index'
+import { loadManifest } from '@/lib/bundle/manifest_reader'
+import { runAll, summarize } from '@/lib/validators/index'
+import { createOrchestrator } from '@/lib/synthesis/index'
+import { createAuditConsumer } from '@/lib/audit/consumer'
+import { traceEmitter } from '@/lib/trace/emitter'
+import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
+import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
+
+// ── Trace helpers ─────────────────────────────────────────────────────────────
+
+function toolStepType(toolName: string): TraceStep['step_type'] {
+  if (toolName === 'vector_search') return 'vector'
+  if (['msr_sql', 'query_msr_aggregate'].includes(toolName)) return 'sql'
+  return 'gcs'
+}
+
+function inferLayer(toolName: string): 'L1' | 'L2.5' {
+  if (['msr_sql', 'query_msr_aggregate', 'pattern_register', 'resonance_register',
+       'cluster_atlas', 'contradiction_register', 'temporal', 'cgm_graph_walk'].includes(toolName)) {
+    return 'L2.5'
+  }
+  return 'L1'
+}
+
+function buildToolSummary(toolName: string, result: ToolBundle): TraceDataSummary {
+  const totalChars = result.results.reduce((s: number, r: ToolBundleResult) => s + r.content.length, 0)
+  const token_estimate = Math.ceil(totalChars / 4)
+  if (toolName === 'vector_search') {
+    const top_score = result.results[0]?.significance ?? result.results[0]?.confidence ?? 0
+    return { chunks_returned: result.results.length, top_score, token_estimate }
+  }
+  return { rows_returned: result.results.length, tool_name: toolName, token_estimate }
+}
+
+function buildToolPayload(toolName: string, result: ToolBundle): TracePayload {
+  const layer = inferLayer(toolName)
+  const items: TraceChunkItem[] = result.results.map((r: ToolBundleResult) => ({
+    id: r.signal_id ?? r.source_canonical_id ?? toolName,
+    source: r.source_canonical_id ?? toolName,
+    layer,
+    token_estimate: Math.ceil(r.content.length / 4),
+    text: r.content,
+  }))
+  return { items }
+}
 
 export const maxDuration = 120
 
@@ -37,6 +87,7 @@ interface RequestBody {
   messages?: UIMessage[]
   model?: string
   style?: string
+  panel_opt_in?: boolean
 }
 
 export async function POST(request: Request) {
@@ -110,6 +161,262 @@ export async function POST(request: Request) {
     })
   }
 
+  const finalConversationId = conversationId
+
+  if (configService.getFlag('NEW_QUERY_PIPELINE_ENABLED')) {
+    try {
+    const lastUserMessage = messages.filter(m => m.role === 'user').at(-1)
+    const queryText = extractText(lastUserMessage?.parts ?? [])
+
+    const manifest = await loadManifest('00_ARCHITECTURE/CAPABILITY_MANIFEST.json', '00_ARCHITECTURE/manifest_overrides.yaml')
+
+    const classifyStart = Date.now()
+    const queryPlan = await classify(queryText, {
+      audience_tier: isSuperAdmin ? 'super_admin' : 'client',
+      manifest_fingerprint: manifest.fingerprint,
+      conversation_history: messages
+        .filter(m => m.role === 'user' || m.role === 'assistant')
+        .slice(-4)
+        .map(m => ({
+          role: m.role as 'user' | 'assistant',
+          content: extractText(m.parts ?? []),
+        })),
+    })
+    const queryId = queryPlan.query_plan_id
+    // Step 1 — classify (emit done immediately; query_id now known)
+    traceEmitter.emitStep({
+      event: 'step_done',
+      query_id: queryId,
+      step: {
+        query_id: queryId,
+        conversation_id: finalConversationId,
+        step_seq: 1,
+        step_name: 'classify',
+        step_type: 'deterministic',
+        status: 'done',
+        started_at: new Date(classifyStart).toISOString(),
+        completed_at: new Date().toISOString(),
+        latency_ms: Date.now() - classifyStart,
+        data_summary: {
+          result: queryPlan.query_class,
+          confidence: queryPlan.router_confidence,
+        },
+        payload: {},
+      },
+    })
+
+    const composeStart = Date.now()
+    const bundle = await compose(queryPlan)
+    // Step 2 — compose bundle
+    traceEmitter.emitStep({
+      event: 'step_done',
+      query_id: queryId,
+      step: {
+        query_id: queryId,
+        conversation_id: finalConversationId,
+        step_seq: 2,
+        step_name: 'compose_bundle',
+        step_type: 'deterministic',
+        status: 'done',
+        started_at: new Date(composeStart).toISOString(),
+        completed_at: new Date().toISOString(),
+        latency_ms: Date.now() - composeStart,
+        data_summary: {
+          result: `${bundle.mandatory_context.length} bundles · ${queryPlan.tools_authorized.length} tools`,
+        },
+        payload: {},
+      },
+    })
+
+    const cache = createToolCache()
+    const toolFetchWallStart = Date.now()
+    // Steps 3…N — emit 'running' for all tools simultaneously (they fire in parallel)
+    queryPlan.tools_authorized.forEach((toolName: string, idx: number) => {
+      traceEmitter.emitStep({
+        event: 'step_start',
+        query_id: queryId,
+        step: {
+          query_id: queryId,
+          conversation_id: finalConversationId,
+          step_seq: 3 + idx,
+          step_name: toolName,
+          step_type: toolStepType(toolName),
+          status: 'running',
+          started_at: new Date(toolFetchWallStart).toISOString(),
+          parallel_group: 'tool_fetch',
+          data_summary: {},
+          payload: {},
+        },
+      })
+    })
+
+    const toolResults = await Promise.all(
+      queryPlan.tools_authorized.map(async (toolName: string, idx: number) => {
+        const t = getTool(toolName)
+        if (!t) return null
+        const toolStart = Date.now()
+        try {
+          const result = await executeWithCache(t, queryPlan, cache)
+          traceEmitter.emitStep({
+            event: 'step_done',
+            query_id: queryId,
+            step: {
+              query_id: queryId,
+              conversation_id: finalConversationId,
+              step_seq: 3 + idx,
+              step_name: toolName,
+              step_type: toolStepType(toolName),
+              status: 'done',
+              started_at: new Date(toolFetchWallStart).toISOString(),
+              completed_at: new Date().toISOString(),
+              latency_ms: Date.now() - toolStart,
+              parallel_group: 'tool_fetch',
+              data_summary: buildToolSummary(toolName, result),
+              payload: buildToolPayload(toolName, result),
+            },
+          })
+          return result
+        } catch (err) {
+          traceEmitter.emitStep({
+            event: 'step_error',
+            query_id: queryId,
+            step: {
+              query_id: queryId,
+              conversation_id: finalConversationId,
+              step_seq: 3 + idx,
+              step_name: toolName,
+              step_type: toolStepType(toolName),
+              status: 'error',
+              started_at: new Date(toolFetchWallStart).toISOString(),
+              completed_at: new Date().toISOString(),
+              latency_ms: Date.now() - toolStart,
+              parallel_group: 'tool_fetch',
+              data_summary: { result: String(err) },
+              payload: {},
+            },
+          })
+          return null
+        }
+      })
+    )
+    const validToolResults = toolResults.filter((r): r is NonNullable<typeof r> => r !== null)
+
+    const bundleValidations = await runAll(bundle, 'bundle', { query_plan: queryPlan, bundle, manifest_fingerprint: manifest.fingerprint })
+    const bundleSummary = summarize(bundleValidations)
+    if (bundleSummary.overall === 'fail' && configService.getFlag('VALIDATOR_FAILURE_HALT')) {
+      return NextResponse.json(
+        { error: 'bundle_validation_failed', failures: bundleSummary.failures },
+        { status: 422 }
+      )
+    }
+
+    const audienceTier = isSuperAdmin ? 'super_admin' as const : 'client' as const
+    const panelOptIn = body.panel_opt_in === true
+
+    // Emit synthesis start — seq = 3 + nTools + 1 (after context_assembly which is in single_model_strategy)
+    const nToolSteps = queryPlan.tools_authorized.length
+    const synthesisSeq = 3 + nToolSteps + 1
+    const synthesisStart = Date.now()
+    traceEmitter.emitStep({
+      event: 'step_start',
+      query_id: queryId,
+      step: {
+        query_id: queryId,
+        conversation_id: finalConversationId,
+        step_seq: synthesisSeq,
+        step_name: 'synthesis',
+        step_type: 'llm',
+        status: 'running',
+        started_at: new Date(synthesisStart).toISOString(),
+        data_summary: { model: modelId },
+        payload: {},
+      },
+    })
+
+    const orchestrator = createOrchestrator({ panel_opt_in: panelOptIn })
+    const { result, methodologyBlockHolder } = await orchestrator.synthesize({
+      query: queryText,
+      query_plan: queryPlan,
+      bundle,
+      tool_results: validToolResults,
+      conversation_history: messages
+        .filter(m => m.role === 'user' || m.role === 'assistant')
+        .slice(0, -1)  // exclude current user message; synthesize() appends it via `query`
+        .map(m => ({
+          role: m.role as 'user' | 'assistant',
+          content: extractText(m.parts ?? []),
+        })),
+      selected_model_id: modelId,
+      style,
+      audience_tier: audienceTier,
+      cache,
+      chart_context: {
+        name: chart.name ?? 'the native',
+        birth_date: chart.birth_date,
+        birth_time: chart.birth_time,
+        birth_place: chart.birth_place,
+      },
+      conversation_id: finalConversationId,
+      panel_opt_in: panelOptIn,
+      onAuditEvent: configService.getFlag('AUDIT_ENABLED')
+        ? createAuditConsumer({
+            query_text: queryText,
+            query_plan: queryPlan,
+            bundle,
+            tool_results: validToolResults,
+            validator_results: bundleValidations,
+            disclosure_tier: audienceTier,
+          })
+        : undefined,
+    })
+
+    result.consumeStream()
+
+    return result.toUIMessageStreamResponse({
+      originalMessages: messages,
+      generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
+      messageMetadata: ({ part }: { part: { type: string } }) => {
+        if (part.type === 'start' && isFirstTurn) {
+          return { conversationId: finalConversationId, model: modelId, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
+        }
+        if (part.type === 'start') {
+          return { model: modelId, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
+        }
+        if (part.type === 'finish') {
+          return { methodology_block: methodologyBlockHolder?.value ?? null }
+        }
+      },
+      onFinish: async ({ messages: finalMessages }: { messages: UIMessage[] }) => {
+        // Emit trace done sentinel so SSE endpoint closes the stream
+        traceEmitter.emitStep({ event: 'done', query_id: queryId })
+        try {
+          if (pendingConversationInsert) await pendingConversationInsert
+          await replaceConversationMessages({
+            conversationId: finalConversationId,
+            messages: finalMessages,
+          })
+          if (isFirstTurn) {
+            generateConversationTitle(finalMessages).then((title: string | null) => {
+              if (title) void updateConversationTitle(finalConversationId, title)
+            })
+          }
+        } catch (err) {
+          console.error('[consume:v2] persistence failed', err)
+        }
+      },
+      onError: (error: unknown) => {
+        const msg = error instanceof Error ? error.message : String(error)
+        console.error('[consume:v2] synthesis error:', msg)
+        return msg
+      },
+    })
+  } catch (pipelineError) {
+    const msg = pipelineError instanceof Error ? pipelineError.message : String(pipelineError)
+    console.error('[consume:v2] pre-stream error:', msg)
+    return new Response(msg, { status: 500 })
+  }
+  }
+
   const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style)
 
   console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  model=${modelId}  style=${style}`)
@@ -173,8 +480,6 @@ export async function POST(request: Request) {
   // Keep the server stream alive even if the client disconnects, so onFinish
   // still fires and we persist the full assistant turn.
   result.consumeStream()
-
-  const finalConversationId = conversationId
 
   return result.toUIMessageStreamResponse({
     originalMessages: messages,
@@ -249,4 +554,8 @@ function fallbackTitle(text: string): string {
   const slice = firstLine.slice(0, 60)
   const lastSpace = slice.lastIndexOf(' ')
   return (lastSpace > 20 ? slice.slice(0, lastSpace) : slice) + '…'
+}
+
+function extractText(parts: Array<{ type: string; text?: string }>): string {
+  return parts.filter(p => p.type === 'text').map(p => p.text ?? '').join(' ').trim()
 }

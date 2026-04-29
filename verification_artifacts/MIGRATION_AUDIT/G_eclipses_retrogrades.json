@@ -1,0 +1,50 @@
+{
+  "audit_stream": "G",
+  "audit_date": "2026-04-29",
+  "auditor": "Claude Code (claude-sonnet-4-6)",
+  "build_id": "build-14c-eclipses-retrogrades-20260429",
+  "notes": {
+    "eclipse_type_mapping": "CSV uses two columns (type + subtype): 'Solar','Total+Central' → DB type='solar_total'. Subtype 'Annular-Total+Central' (15 rows) maps to 'solar_annular' — the DB uses the primary eclipse class, dropping the '+Central'/'+Non-Central' and '-Total' qualifiers. All 913 rows verified by date+sign+nakshatra+longitude.",
+    "retrograde_schema": "Each CSV row (one retrograde period) maps to TWO DB rows: station_type='retrograde_start' (station_retro_date + sign_at_station_retro + deg_at_station_retro) and station_type='retrograde_end' (station_direct_date + sign_at_station_direct + deg_at_station_direct). CSV 1231 rows → DB 2462 rows is the correct expected ratio.",
+    "retrograde_nakshatra": "nakshatra column is NULL for all 2462 retrograde rows. CSV source does not include nakshatra data for retrograde stations — this is expected schema gap, not a migration defect. arc_retrograded (CSV) is not persisted to DB — also expected, as the DB schema does not include this column.",
+    "eclipse_subtype": "CSV 'subtype' column (e.g. 'Total+Central', 'Annular+Non-Central') is not preserved in DB — DB stores only the primary type class. This is a deliberate schema simplification. No data loss for sign/nakshatra/longitude."
+  },
+  "eclipses": {
+    "csv_row_count": 913,
+    "db_row_count": 913,
+    "count_delta_pct": 0.0,
+    "csv_columns": ["date", "type", "subtype", "sidereal_long", "sign", "deg_in_sign", "nakshatra", "pada", "visible_from_bhubaneswar"],
+    "db_columns": ["id", "date", "type", "longitude_deg", "sign", "nakshatra", "visibility_region", "build_id", "source_uri"],
+    "full_cross_validation": true,
+    "full_cross_validation_sample": 913,
+    "full_cross_validation_matches": 913,
+    "sample_size": 50,
+    "sample_matches": 50,
+    "null_date_count": 0,
+    "null_type_count": 0,
+    "annular_total_rows_in_csv": 15,
+    "annular_total_mapped_to_solar_annular": 15,
+    "annular_total_data_verified": true,
+    "fields_not_in_db": ["subtype", "deg_in_sign", "pada"],
+    "overall_status": "PASS"
+  },
+  "retrogrades": {
+    "csv_row_count": 1231,
+    "db_row_count": 2462,
+    "expected_db_count": 2462,
+    "count_delta_pct": 0.0,
+    "schema_note": "1 CSV row → 2 DB rows (retrograde_start + retrograde_end)",
+    "csv_columns": ["planet", "station_retro_date", "sign_at_station_retro", "deg_at_station_retro", "station_direct_date", "sign_at_station_direct", "deg_at_station_direct", "arc_retrograded"],
+    "db_columns": ["id", "planet", "station_type", "date", "longitude_deg", "sign", "nakshatra", "build_id", "source_uri"],
+    "sample_size": 100,
+    "sample_matches": 100,
+    "null_date_count": 0,
+    "null_planet_count": 0,
+    "null_nakshatra_count": 2462,
+    "null_nakshatra_note": "CSV source contains no nakshatra data for retrograde stations — 100% NULL is expected, not a defect",
+    "arc_retrograded_in_db": false,
+    "arc_retrograded_note": "arc_retrograded column not in DB schema — deliberate omission, source data not lost (CSV retained)",
+    "fields_not_in_db": ["arc_retrograded"],
+    "overall_status": "PASS"
+  }
+}

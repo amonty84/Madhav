@@ -37,7 +37,11 @@ export function ReportReader({ chartId, domain, onBack }: Props) {
       <div className="flex-1 overflow-y-auto px-6 py-6">
         {isLoading && <p className="text-sm text-muted-foreground">Loading…</p>}
         {error && <p className="text-sm text-destructive">{String(error)}</p>}
-        {data?.content && <Markdown>{data.content}</Markdown>}
+        {data?.content && (
+          <div className="mx-auto max-w-[60ch]">
+            <Markdown>{data.content}</Markdown>
+          </div>
+        )}
       </div>
     </div>
   )

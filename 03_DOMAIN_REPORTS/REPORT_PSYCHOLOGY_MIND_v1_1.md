@@ -14,6 +14,9 @@ primary_msr_anchors: [MSR.413, MSR.406, MSR.388, MSR.396, MSR.348, MSR.374, MSR.
 primary_cdlm_row: D8
 organizing_principle: The Three-Layer Mind Architecture — Aries Lagna (Mars-driven initiative body), Moon AK Aquarius 11H (soul-emotion matrix), and Mercury Capricorn 10H (analytical cognitive instrument) must function as one integrated organism; the current Mercury MD / Saturn AD is the period of maximum structural alignment across all three layers
 supersedes: REPORT_PSYCHOLOGY_MIND_v1_0.md
+expose_to_chat: true
+native_id: "abhisek"
+layer: "L3"
 ---
 
 # REPORT_PSYCHOLOGY_MIND_v1_1 — Psychology and Mind Domain Report

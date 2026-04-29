@@ -1,0 +1,7 @@
+{
+  "table": "l25_cgm_edges",
+  "db_count": 21,
+  "expected_count": 21,
+  "key_nulls": 0,
+  "overall_status": "PASS"
+}

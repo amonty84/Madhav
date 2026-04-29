@@ -5,6 +5,8 @@ import { Pool, QueryResult, QueryResultRow, types } from 'pg'
 types.setTypeParser(types.builtins.DATE, (v) => v)
 types.setTypeParser(types.builtins.TIMESTAMP, (v) => v)
 types.setTypeParser(types.builtins.TIMESTAMPTZ, (v) => v)
+// Return NUMERIC/DECIMAL columns as numbers (pg returns them as strings by default)
+types.setTypeParser(1700, parseFloat)
 
 let _pool: Pool | null = null
 

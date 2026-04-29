@@ -26,7 +26,10 @@ function ToolCallCardImpl({ toolName, state, input, output, errorText }: ToolCal
   const isError = state === 'output-error'
 
   return (
-    <div className="my-3 overflow-hidden rounded-xl border border-border/60 bg-muted/30">
+    <div className={cn(
+      'my-3 overflow-hidden rounded-xl border border-border/60 bg-muted/30 border-l-2 transition-colors duration-150',
+      open ? 'border-l-[var(--brand-gold)]' : 'border-l-transparent'
+    )}>
       <button
         type="button"
         onClick={() => setOpen(o => !o)}

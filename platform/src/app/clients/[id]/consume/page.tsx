@@ -3,6 +3,8 @@ import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
 import { ConsumeChat } from '@/components/consume/ConsumeChat'
 import { listConversations } from '@/lib/conversations'
+import { configService } from '@/lib/config/index'
+import type { AudienceTier } from '@/lib/prompts/types'
 
 export default async function ConsumePage({
   params,
@@ -37,6 +39,10 @@ export default async function ConsumePage({
 
   const chartMeta = [chart.birth_date, chart.birth_place].filter(Boolean).join(' · ')
 
+  const pipelineEnabled = configService.getFlag('NEW_QUERY_PIPELINE_ENABLED')
+  const panelModeEnabled = configService.getFlag('PANEL_MODE_ENABLED')
+  const audienceTier: AudienceTier = profile?.role === 'super_admin' ? 'super_admin' : 'client'
+
   return (
     <ConsumeChat
       chartId={id}
@@ -51,6 +57,9 @@ export default async function ConsumePage({
         user_id: c.user_id,
         module: c.module,
       }))}
+      pipelineEnabled={pipelineEnabled}
+      panelModeEnabled={panelModeEnabled}
+      audienceTier={audienceTier}
     />
   )
 }

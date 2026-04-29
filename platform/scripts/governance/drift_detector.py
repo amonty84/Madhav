@@ -34,6 +34,7 @@ import argparse
 import dataclasses
 import datetime as _dt
 import json
+import os
 import pathlib
 import re
 import sys
@@ -43,6 +44,10 @@ from typing import Dict, List, Optional, Set
 # Local import
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from _ca_loader import CANONICAL_PATH, compute_sha256, load_canonical_artifacts  # noqa: E402
+
+# Feature flag: when true, reads from CAPABILITY_MANIFEST.json instead of CANONICAL_ARTIFACTS.
+# Default true (manifest path is production after Phase 1B cutover).
+_USE_MANIFEST = os.environ.get("DRIFT_DETECTOR_USE_MANIFEST", "true").lower() in ("true", "1", "yes")
 
 
 # --------------------------------------------------------------------------------------
@@ -94,7 +99,7 @@ GOVERNANCE_SURFACES_GLOBS = [
     "00_ARCHITECTURE/MACRO_PLAN_v2_0.md",
     "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
     "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md",
-    "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md",
+    "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
     "00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md",
     "00_ARCHITECTURE/STEP_LEDGER_v1_0.md",
     "00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md",
@@ -163,7 +168,7 @@ def check_canonical_path_parity(repo_root: pathlib.Path, ca) -> List[Finding]:
         "MSR": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
         "UCN": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
         "CDLM": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
-        "CGM": "025_HOLISTIC_SYNTHESIS/CGM_v2_0.md",
+        "CGM": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
         "RM": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
         "PROJECT_ARCHITECTURE": "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md",
         "MACRO_PLAN": "00_ARCHITECTURE/MACRO_PLAN_v2_0.md",
@@ -312,10 +317,14 @@ def check_step_ledger_consistency(repo_root: pathlib.Path) -> List[Finding]:
 def check_file_registry_agreement(repo_root: pathlib.Path, ca) -> List[Finding]:
     """§H.3.5 — FILE_REGISTRY vs CANONICAL_ARTIFACTS agreement on CURRENT rows."""
     findings: List[Finding] = []
-    fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md"
+    fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md"
     if not fr_path.exists():
-        # Fall back to v1.2 if v1.3 not yet published
-        fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_2.md"
+        # Fall back to earlier versions if v1.14 not yet present
+        for ver in ("v1_13", "v1_12", "v1_11", "v1_3", "v1_2"):
+            candidate = repo_root / f"00_ARCHITECTURE/FILE_REGISTRY_{ver}.md"
+            if candidate.exists():
+                fr_path = candidate
+                break
     if not fr_path.exists():
         findings.append(Finding(
             cls="registry_disagreement",
@@ -508,11 +517,15 @@ def check_unreferenced_canonical(repo_root: pathlib.Path, ca) -> List[Finding]:
     claude = (repo_root / "CLAUDE.md").read_text(encoding="utf-8")
     gemini = (repo_root / ".geminirules").read_text(encoding="utf-8")
     try:
-        fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md"
+        fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md"
         if not fr_path.exists():
-            fr_path = repo_root / "00_ARCHITECTURE/FILE_REGISTRY_v1_2.md"
+            for ver in ("v1_13", "v1_12", "v1_11", "v1_3", "v1_2"):
+                candidate = repo_root / f"00_ARCHITECTURE/FILE_REGISTRY_{ver}.md"
+                if candidate.exists():
+                    fr_path = candidate
+                    break
         fr = fr_path.read_text(encoding="utf-8")
-    except FileNotFoundError:
+    except (FileNotFoundError, AttributeError):
         fr = ""
     corpus = claude + "\n" + gemini + "\n" + fr
 
@@ -555,18 +568,33 @@ def check_unreferenced_canonical(repo_root: pathlib.Path, ca) -> List[Finding]:
 
 def run_all_checks(repo_root: pathlib.Path) -> List[Finding]:
     findings: List[Finding] = []
-    try:
-        ca = load_canonical_artifacts(repo_root)
-    except FileNotFoundError:
-        findings.append(Finding(
-            cls="bootstrap_error",
-            severity="CRITICAL",
-            canonical_id="CANONICAL_ARTIFACTS",
-            surfaces_involved=[CANONICAL_PATH],
-            evidence="CANONICAL_ARTIFACTS_v1_0.md not found; cannot run drift detection",
-            suggested_remediation="Produce CANONICAL_ARTIFACTS_v1_0.md per protocol §E",
-        ))
-        return findings
+    if _USE_MANIFEST:
+        try:
+            from manifest_reader import load_manifest_as_ca  # noqa: E402
+            ca = load_manifest_as_ca(repo_root)
+        except Exception as exc:
+            findings.append(Finding(
+                cls="bootstrap_error",
+                severity="CRITICAL",
+                canonical_id="CAPABILITY_MANIFEST",
+                surfaces_involved=["00_ARCHITECTURE/CAPABILITY_MANIFEST.json"],
+                evidence=f"Could not load CAPABILITY_MANIFEST.json: {exc}",
+                suggested_remediation="Build the manifest via `npm run manifest:build` or set DRIFT_DETECTOR_USE_MANIFEST=false",
+            ))
+            return findings
+    else:
+        try:
+            ca = load_canonical_artifacts(repo_root)
+        except FileNotFoundError:
+            findings.append(Finding(
+                cls="bootstrap_error",
+                severity="CRITICAL",
+                canonical_id="CANONICAL_ARTIFACTS",
+                surfaces_involved=[CANONICAL_PATH],
+                evidence="CANONICAL_ARTIFACTS_v1_0.md not found; cannot run drift detection",
+                suggested_remediation="Produce CANONICAL_ARTIFACTS_v1_0.md per protocol §E",
+            ))
+            return findings
     findings.extend(check_canonical_path_parity(repo_root, ca))
     findings.extend(check_ca_filesystem_fingerprints(repo_root, ca))
     findings.extend(check_mp_pbp_alignment(repo_root))

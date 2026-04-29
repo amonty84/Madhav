@@ -6,6 +6,10 @@ session: 27
 date_closed: 2026-04-18
 scope: "Cross-report coherence audit for all 9 L3 Domain Reports against UCN_v1_1 and each other"
 architecture_ref: "§I Phase 4 Session 34 equivalent"
+layer: "L3"
+expose_to_chat: false
+native_id: "abhisek"
+category: quality
 ---
 
 # CROSS_REPORT_COHERENCE_AUDIT_v1_0

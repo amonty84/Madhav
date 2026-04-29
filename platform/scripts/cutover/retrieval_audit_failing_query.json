@@ -1,0 +1,15 @@
+{
+  "_generated": "2026-04-28",
+  "_stream": "C",
+  "_status": "BLOCKED — no live audit data available",
+  "_explanation": {
+    "audit_log_table": "Migration 011_audit_log.sql was NOT applied to Cloud SQL before this session. The table was missing entirely. writeAuditLog() in audit/writer.ts was calling INSERT into a non-existent table on every query — the error was caught silently and only recorded to telemetry. Applied migration during this session.",
+    "messages_table": "Empty — no queries have been submitted through the platform UI yet.",
+    "rag_queries_table": "Empty — no queries logged here."
+  },
+  "_root_cause_found_via_code_analysis": true,
+  "_root_cause": "vector_search.ts SQL filters on `e.native_id` which does not exist in rag_embeddings schema. Every vector_search call throws PostgreSQL error 'column e.native_id does not exist', caught silently, returns warning bundle with 0 results and message 'Vector search unavailable: DB query failed'. LLM sees no chart data → marks all degree/cusp data [EXTERNAL_COMPUTATION_REQUIRED].",
+  "_confirmed_by": "Direct SQL execution of the exact query from vector_search.ts line 39-48 against the live DB returned: ERROR: column e.native_id does not exist",
+  "retrieved_chunk_ids": [],
+  "ecr_facts_retrieved": false
+}

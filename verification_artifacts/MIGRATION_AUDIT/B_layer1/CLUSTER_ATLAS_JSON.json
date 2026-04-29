@@ -1,0 +1,19 @@
+{
+  "canonical_id": "CLUSTER_ATLAS_JSON",
+  "local_path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
+  "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.json",
+  "local_sha256": "ac01116aa8ce3d7ef7ac6a59ac23733a78540c5d79203d27e896ba15ba863444",
+  "gcs_sha256": "ac01116aa8ce3d7ef7ac6a59ac23733a78540c5d79203d27e896ba15ba863444",
+  "gcs_sha256_embedded_metadata": "ac01116aa8ce3d7ef7ac6a59ac23733a78540c5d79203d27e896ba15ba863444",
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "HSxorQ==",
+  "gcs_size_bytes": 19690,
+  "local_size_bytes": 19690,
+  "match": true,
+  "gcs_generation": "1777392223721046",
+  "gcs_upload_time": "2026-04-28T16:03:43+0000",
+  "local_commits_after_gcs_upload": [
+    "e4a77c8 chore: commit prior multi-session work before Phase 14.0 asset inventory"
+  ],
+  "divergence_type": "none"
+}

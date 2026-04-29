@@ -220,7 +220,6 @@ export function VirtualizedMessageList({
     <div
       ref={internalScrollRef}
       className="relative flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
-      aria-live="polite"
     >
       {content}
     </div>

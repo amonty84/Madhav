@@ -36,6 +36,13 @@ consumers:
   - 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md — the `session_close` YAML in §2.f is
     the instantiated close-checklist from that template
 changelog:
+  - v1.0 amended in-place (2026-04-26, Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1):
+      Added §1.5 `expected_session_class` enum (8 values: m2_corpus_execution,
+      governance_aside, planning_only, fix_session, red_team, brief_authoring,
+      native_intervention, cowork_orchestration). Per PORTAL_BUILD_TRACKER_PLAN_v0_1.md
+      §9 G.4 + §0.1 Q.4 (native approval 2026-04-26). Pre-adoption entries grandfathered;
+      serializer v0.2.0 infers class from session_id pattern + sets `inferred: true`.
+      Infrastructure-bootstrap sessions map to `governance_aside` (not a ninth value).
   - v1.0 (2026-04-24, Step 10 of the Step 0 → Step 15 governance rebuild):
       Initial schema. §1 naming schema (rebuild-era + post-rebuild forms + legacy
       preservation); §2 required entry structure (six-block order: frontmatter /
@@ -133,6 +140,37 @@ in its body and still carries one canonical `session_id`.
   `last_session_id` field (post-rebuild) matches the SESSION_LOG `session_id`.
 - Any downstream artifact that cites a session (e.g., CANONICAL_ARTIFACTS §1 rows'
   `last_verified_session` field) cites the same string.
+
+### §1.5 — `expected_session_class` enum
+
+*Added 2026-04-26 at Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 per PORTAL_BUILD_TRACKER_PLAN_v0_1.md §9 G.4 + §0.1 Q.4 (native approval 2026-04-26).*
+
+Every session carries an `expected_session_class` field in its `session_open` YAML block
+(optional; LOW finding if absent on post-adoption entries). The value MUST be one of the
+eight enum values below. Sessions before this schema extension are grandfathered — the
+serializer (`serialize_build_state.py`) emits an `inferred: true` flag on the per-session
+shard when the class is inferred rather than declared.
+
+| Enum value | Description | Example |
+|---|---|---|
+| `m2_corpus_execution` | Substantive M2 corpus work (RAG build, embedding, graph, domain reports). Increments `red_team_counter`. | Madhav_M2A_Exec_1 – Madhav_M2A_Exec_N |
+| `governance_aside` | Parallel infrastructure or governance work that does NOT increment `red_team_counter`. Portal build sessions, GCS bootstrap, BUILD_TRACKER sessions. | Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1 |
+| `planning_only` | Session that produces a plan artifact and HALTS without executing work. `halt_after_plan: true` in the plan. | Madhav_PORTAL_BUILD_TRACKER_PLAN_v0_1 |
+| `fix_session` | Targeted bug or regression fix without corpus-layer changes. | Madhav_FIX_001_... |
+| `red_team` | Explicit red-team pass per MACRO_PLAN §IS.8 cadence. Resets `red_team_counter` to 0. | Sessions where RT1–RTN findings are evaluated |
+| `brief_authoring` | Session whose sole deliverable is a `CLAUDECODE_BRIEF.md` for a future session. | Cowork orchestration threads that produce briefs |
+| `native_intervention` | Native-driven session to override, amend, or audit a prior session's output. Does not increment `red_team_counter`. | Ad-hoc native-directed corrections |
+| `cowork_orchestration` | Cowork conversation that produces governance artifacts (plans, briefs, decisions). Not a Claude Code session; logged here for traceability. | Madhav_PORTAL_BUILD_TRACKER_PLAN_v0_1 Cowork thread |
+
+**Infrastructure-bootstrap rule** (Q.4 tagging note, plan §0.1): Future infrastructure-bootstrap
+sessions (portal builds, GCS setup, DB migrations unrelated to corpus data) map to
+`governance_aside`, NOT to a ninth enum value. Declare `governance_aside` explicitly and
+document the bootstrap nature in `session_open.session_objective`.
+
+**Serializer behavior**: `serialize_build_state.py` v0.2.0 reads `expected_session_class`
+from the `session_open` block (post-adoption entries). Pre-adoption entries receive class
+inferred from session_id pattern (see inference rules in `serialize_build_state.py
+_parse_all_sessions()`) with `inferred: true` set on the shard.
 
 ---
 

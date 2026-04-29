@@ -8,6 +8,10 @@ scope: "Specification of external computations (Jagannatha Hora exports) require
 execution_owner: Native (Abhisek Mohanty)
 execution_tool: Jagannatha Hora (already installed per Session 3 bootstrap)
 estimated_effort: "2-3 days native effort + 1-2 Claude sessions to incorporate"
+expose_to_chat: false
+native_id: "abhisek"
+layer: "L1"
+category: source
 ---
 
 # EXTERNAL_COMPUTATION_SPEC v2.0 — Facts Layer v8.0 Source Data

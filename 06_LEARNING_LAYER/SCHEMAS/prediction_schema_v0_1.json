@@ -18,7 +18,7 @@
     "artifact_id": {"type": "string"},
     "artifact_type": {"type": "string", "enum": ["pattern", "resonance", "cluster", "contradiction"]},
     "claim_text": {"type": "string", "minLength": 10},
-    "domain": {"type": "string", "enum": ["career", "wealth", "health", "relationships", "children", "spiritual", "parents", "mind", "travel", "meta"]},
+    "domain": {"type": "string", "enum": ["career", "wealth", "health", "relationships", "children", "spiritual", "parents", "mind", "travel", "meta", "cross_domain"]},
     "verification_window_start": {"type": "string", "format": "date"},
     "verification_window_end": {"type": "string", "format": "date"},
     "falsifier_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
