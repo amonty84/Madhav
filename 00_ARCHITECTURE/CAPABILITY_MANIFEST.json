@@ -1,8 +1,8 @@
 {
   "generated_at": "2026-04-29T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 65,
-  "fingerprint": "463e54d6e9263405b504800ac485575220b99fbab2c35d392aa390ec970a943f",
+  "entry_count": 73,
+  "fingerprint": "19ff5da5b9310a1ad36a74b79bc23b65846902ce6c51f2d5d84bc40ccaac7235",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -1014,6 +1014,122 @@
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L1/structured/CHART_FACTS_SCHEMA_v1_0.json",
       "notes": "JSON Schema for chart_facts table and CHART_FACTS_EXTRACTION YAML. Phase 14C Stream B 2026-04-29."
+    },
+    {
+      "canonical_id": "MIGRATION_019_L3_REGISTERS",
+      "path": "platform/supabase/migrations/019_l3_registers.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Four L3 discovery register tables + staging counterparts (pattern, resonance, cluster, contradiction)"
+    },
+    {
+      "canonical_id": "INGEST_L3_REGISTERS",
+      "path": "platform/python-sidecar/pipeline/ingest_l3_registers.py",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "One-shot L3 register ingest runner: load from JSON, validate FKs, stage, append-only swap to live"
+    },
+    {
+      "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
+      "path": "00_ARCHITECTURE/L3_DISCOVERY_REGISTERS_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Canonical spec for L3 register tables: schemas, architectural commitments, pipeline integration, tool surface"
+    },
+    {
+      "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
+      "path": "00_ARCHITECTURE/PHASE_14E_L3_REGISTERS_REPORT_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Phase 14E execution report; 54 register entries live (22+12+12+8); all done-criteria met"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_PATTERNS",
+      "path": "platform/src/lib/tools/structured/query_patterns.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_RESONANCES_L3",
+      "path": "platform/src/lib/tools/structured/query_resonances_l3.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CLUSTERS",
+      "path": "platform/src/lib/tools/structured/query_clusters.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
+      "path": "platform/src/lib/tools/structured/query_contradictions.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'"
     }
   ]
 }

@@ -2,6 +2,10 @@ import { tool } from 'ai'
 import { z } from 'zod'
 import { query } from '@/lib/db/client'
 import { chartDocsBucket, gcsDownloadText } from '@/lib/storage/client'
+import { query_patterns } from '@/lib/tools/structured/query_patterns'
+import { query_resonances_l3 } from '@/lib/tools/structured/query_resonances_l3'
+import { query_clusters } from '@/lib/tools/structured/query_clusters'
+import { query_contradictions } from '@/lib/tools/structured/query_contradictions'
 
 async function readDocumentContent(storage_path: string): Promise<string | null> {
   return gcsDownloadText(chartDocsBucket(), storage_path)
@@ -237,6 +241,11 @@ export const consumeTools = {
       }
     },
   }),
+
+  query_patterns,
+  query_resonances_l3,
+  query_clusters,
+  query_contradictions,
 
   get_pyramid_status: tool({
     description: 'Get the status of all pyramid layers for the chart.',
