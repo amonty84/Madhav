@@ -47,26 +47,41 @@ export function RosterTableView({ charts }: RosterTableViewProps) {
         <thead className="bg-muted/50">
           <tr>
             <th
-              onClick={() => toggle('name')}
-              className="cursor-pointer select-none whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground hover:text-foreground"
+              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              aria-sort={sortKey === 'name' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
-              Name{sortIndicator('name')}
+              <button
+                onClick={() => toggle('name')}
+                className="cursor-pointer select-none hover:text-foreground"
+              >
+                Name{sortIndicator('name')}
+              </button>
             </th>
             <th className="px-3 py-2 text-left font-medium text-muted-foreground">Birth</th>
             <th className="px-3 py-2 text-left font-medium text-muted-foreground">
               Current dasha
             </th>
             <th
-              onClick={() => toggle('buildPct')}
-              className="cursor-pointer select-none whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground hover:text-foreground"
+              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              aria-sort={sortKey === 'buildPct' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
-              Build %{sortIndicator('buildPct')}
+              <button
+                onClick={() => toggle('buildPct')}
+                className="cursor-pointer select-none hover:text-foreground"
+              >
+                Build %{sortIndicator('buildPct')}
+              </button>
             </th>
             <th
-              onClick={() => toggle('activity')}
-              className="cursor-pointer select-none whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground hover:text-foreground"
+              className="whitespace-nowrap px-3 py-2 text-left font-medium text-muted-foreground"
+              aria-sort={sortKey === 'activity' ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
             >
-              Last activity{sortIndicator('activity')}
+              <button
+                onClick={() => toggle('activity')}
+                className="cursor-pointer select-none hover:text-foreground"
+              >
+                Last activity{sortIndicator('activity')}
+              </button>
             </th>
             <th className="px-3 py-2 text-left font-medium text-muted-foreground">Actions</th>
           </tr>
@@ -94,13 +109,13 @@ export function RosterTableView({ charts }: RosterTableViewProps) {
                 <div className="flex gap-1.5">
                   <Link
                     href={`/clients/${c.id}/build`}
-                    className={cn(buttonVariants({ size: 'sm', variant: 'default' }), 'h-6 px-2 text-xs')}
+                    className={cn(buttonVariants({ size: 'sm', variant: 'default' }))}
                   >
                     Build
                   </Link>
                   <Link
                     href={`/clients/${c.id}/consume`}
-                    className={cn(buttonVariants({ size: 'sm', variant: 'outline' }), 'h-6 px-2 text-xs')}
+                    className={cn(buttonVariants({ size: 'sm', variant: 'outline' }))}
                   >
                     Consume
                   </Link>

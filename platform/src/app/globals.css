@@ -361,6 +361,26 @@ body {
 .dark .bt-status-active   { color: oklch(0.78 0.13 75);  }
 .dark .bt-status-blocked  { color: oklch(0.70 0.19 22);  }
 
+/* Page-entry ascend — translate-y + fade over 200 ms for layout <main> children. */
+@keyframes page-ascend {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-ascend {
+  animation: page-ascend 200ms ease-out both;
+}
+
+/* Mandala slow clockwise drift — 90 s full rotation. Paused by prefers-reduced-motion. */
+@keyframes mandala-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mandala-spin {
+  animation: mandala-spin 90s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

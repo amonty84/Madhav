@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { AppShellRail } from './AppShellRail'
 import { AppShellBreadcrumb, type BreadcrumbSegment } from './AppShellBreadcrumb'
+import { MobileNavSheet } from './MobileNavSheet'
 
 export type { BreadcrumbSegment }
 
@@ -14,10 +15,14 @@ interface AppShellProps {
 export function AppShell({ children, user, profile, breadcrumb = [] }: AppShellProps) {
   return (
     <div className="flex h-[100dvh] bg-background text-foreground">
+      {/* Desktop sidebar rail — hidden on mobile */}
       <AppShellRail user={user} profile={profile} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        {breadcrumb.length > 0 && <AppShellBreadcrumb segments={breadcrumb} />}
-        <main className="flex-1 overflow-auto">{children}</main>
+        <AppShellBreadcrumb
+          segments={breadcrumb}
+          mobileNav={<MobileNavSheet user={user} profile={profile} />}
+        />
+        <main className="page-ascend flex-1 overflow-auto">{children}</main>
       </div>
     </div>
   )

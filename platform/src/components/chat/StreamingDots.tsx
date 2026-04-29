@@ -1,9 +1,9 @@
 export function StreamingDots() {
   return (
     <span className="inline-flex items-center gap-0.5" aria-label="Thinking">
-      <span className="block size-2 animate-[chat-dot_1.2s_ease-in-out_infinite] rounded-full bg-foreground/50 [animation-delay:-0.32s]" />
-      <span className="block size-2 animate-[chat-dot_1.2s_ease-in-out_infinite] rounded-full bg-foreground/50 [animation-delay:-0.16s]" />
-      <span className="block size-2 animate-[chat-dot_1.2s_ease-in-out_infinite] rounded-full bg-foreground/50" />
+      <span className="block size-2 animate-[chat-dot_0.9s_ease-in-out_infinite] rounded-full bg-foreground/50 [animation-delay:-0.24s]" />
+      <span className="block size-2 animate-[chat-dot_0.9s_ease-in-out_infinite] rounded-full bg-foreground/50 [animation-delay:-0.12s]" />
+      <span className="block size-2 animate-[chat-dot_0.9s_ease-in-out_infinite] rounded-full bg-foreground/50" />
     </span>
   )
 }
