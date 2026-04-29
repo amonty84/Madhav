@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.6 (2026-04-30): R1 Roster closed. §2 state block: last_redesign_session_id→redesign-r1-roster-2026-04-30, post_r0_parallel_ready→[R2, R4, R5] (R6+R1 now closed). §3 R1 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R1 close.
   - v1.0.5 (2026-04-30): R6 Cockpit elevation closed. §2 state block: last_redesign_session_id→redesign-r6-cockpit-2026-04-30, last_close_at→2026-04-30. §3 R6 row: status→closed, closure_report set, session_id set, closed_at set, follow_ups populated. deferred_briefs remains [R3, R7] — R7 now unblocked by R6 close (pending R1–R4). Authored by Claude Code (Sonnet 4.6) at R6 close.
   - v1.0.4 (2026-04-29): R0 Foundation closed. §2 state block: active_phase→null, last_redesign_session_id set, vision_status→CURRENT, canonical_artifacts_entry→true, claude_md_section_C_updated→true. §3 R0 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated (forced scope expansions + playwright note). Version bumped 1.0.3→1.0.4. Authored by Claude Code (Sonnet 4.6) at R0 close.
   - v1.0.3 (2026-04-29): CLAUDECODE_BRIEF activation. Trace-fix
@@ -115,15 +116,15 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # R6 closed 2026-04-30; R1–R5 fan-out still available
-in_flight_parallel_phases: []           # R6 closed; no other phase in flight
-last_redesign_session_id: redesign-r6-cockpit-2026-04-30
+active_phase: null                      # R6 + R1 closed 2026-04-30; R2/R4/R5 remain
+in_flight_parallel_phases: []           # none — native picks next
+last_redesign_session_id: redesign-r1-roster-2026-04-30
 last_close_at: "2026-04-30"
-next_phase_committed_to: null           # native decides which of R1–R5 to start next
+next_phase_committed_to: null           # native decides which of R2/R4/R5 to start next
 next_phase_brief_authored: true         # all parallel-ready briefs authored
 next_phase_clausecode_brief_set: false  # per-phase CLAUDECODE_BRIEFs await worktree setup
-post_r0_parallel_ready: [R1, R2, R4, R5]  # R6 now closed; R7 unblocked pending R1–R4
-deferred_briefs: [R3, R7]               # R3 awaits R2 close; R7 now unblocked by R6 close (pending R1–R4)
+post_r0_parallel_ready: [R2, R4, R5]   # R6 + R1 closed; remaining parallel-safe phases
+deferred_briefs: [R3, R7]               # R3 awaits R2 close; R7 unblocked by R6 (pending R2/R4)
 trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
@@ -171,26 +172,32 @@ follow_ups:
 ```yaml
 phase_id: R1
 phase_name: Roster — stats ribbon + filters + grid/table toggle + upgraded ClientCard
-status: authored
+status: closed
 exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R1_ROSTER_v1_0.md
-closure_report: null
-session_id: null
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R1_REPORT_v1_0.md
+session_id: redesign-r1-roster-2026-04-30
 authored_at: 2026-04-29
-started_at: null
-closed_at: null
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: LOW
-estimated_sessions: 1                    # 2 if filter logic gets fiddly
+estimated_sessions: 1
 depends_on: [R0]
-parallelizable_with: [R2, R5, R6]        # all four can run concurrently in worktrees
+parallelizable_with: [R2, R5, R6]
 sub_phases: []
 key_deliverables:
   - <RosterStatsRibbon> (top of /dashboard)
-  - <RosterFilters> (search + filter row)
-  - <RosterTableView> (composed from build/RegistryTable)
+  - <RosterFilters> (search + filter row, URL query params)
+  - <RosterTableView> (composed from RegistryTable patterns)
   - upgraded <ClientCard> (moment phrase, health dot)
-  - zero-client wizard state with Mandala motif
+  - <RosterEmptyWizard> (Mandala backdrop, zero-client state)
+  - lib/roster/ module (types, stats server-query, filter helpers)
 trace_fix_collision: false
-follow_ups: []
+follow_ups:
+  - "per-chart mirror_pair_status: no DB column; health dot uses freshness only — add column + rewire if needed"
+  - "inActiveBuild secondary criterion 'last close < 7d' deferred (no last_close_at column)"
+  - "predictionsOverdue: hardcoded to 0; wired in R5 per brief §1"
+  - "node_modules symlink in Madhav-r1/platform/ must be recreated if worktree is re-checked-out"
+  - "E2e roster.spec.ts: run manually with SMOKE_SESSION_COOKIE before PR merge"
 ```
 
 ### R2 — Chart Profile (keystone)
