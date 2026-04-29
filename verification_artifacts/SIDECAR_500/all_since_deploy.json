@@ -1,0 +1,1354 @@
+[
+  {
+    "insertId": "69f1a7ae000d12ff2865ca88",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-29T06:39:42.861137536Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     169.254.169.126:31478 - \"GET /health HTTP/1.1\" 200 OK",
+    "timestamp": "2026-04-29T06:39:42.856831Z"
+  },
+  {
+    "insertId": "69f1a7ae000c590086d3f6e4",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-29T06:39:42.935478367Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Default STARTUP TCP probe succeeded after 1 attempt for container \"amjis-sidecar-1\" on port 8000.",
+    "timestamp": "2026-04-29T06:39:42.809216Z"
+  },
+  {
+    "insertId": "69f1a7ae000c2f09c6380887",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-29T06:39:43.120737635Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)",
+    "timestamp": "2026-04-29T06:39:42.798473Z"
+  },
+  {
+    "insertId": "69f1a7ae000bf9c41011483e",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-29T06:39:43.120737635Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application startup complete.",
+    "timestamp": "2026-04-29T06:39:42.784836Z"
+  },
+  {
+    "insertId": "69f1a7ae000bf78efedc6ce4",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-29T06:39:42.789169068Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application startup.",
+    "timestamp": "2026-04-29T06:39:42.784270Z"
+  },
+  {
+    "insertId": "69f1a7ae000bf770f3cc6dcd",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-29T06:39:42.789169068Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Started server process [1]",
+    "timestamp": "2026-04-29T06:39:42.784240Z"
+  },
+  {
+    "insertId": "69f1a7ab00091c3f96bcc06c",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4",
+      "scaling_reason": "AUTOSCALING"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-29T06:39:39.602350723Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic.",
+    "timestamp": "2026-04-29T06:39:39.597055Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "3.065120483s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2401:4900:3ea7:93ae:79a3:8882:958c:6435",
+      "requestMethod": "GET",
+      "requestSize": "409",
+      "requestUrl": "https://amjis-sidecar-qm256lasva-el.a.run.app/health",
+      "responseSize": "115",
+      "serverIp": "2600:1900:4243:200::",
+      "status": 200,
+      "userAgent": "curl/8.7.1"
+    },
+    "insertId": "69f1a7ae000d3f1309b11314",
+    "labels": {
+      "instanceId": "0007b734d9d2d511cd4b39b2653aee8d7c8c278b63d931d3af943de7307c258259956a99ac2845f9d5e803a0da638468f04f2a9a90f8ed13f03fc580f0dc6a303f9891312570845cac23a29b99d4"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-29T06:39:42.871848120Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "8674b49bab75b3dc",
+    "timestamp": "2026-04-29T06:39:39.561147Z",
+    "trace": "projects/madhav-astrology/traces/a47063908ca3ec7ab76c58181b6881c0",
+    "traceSampled": true
+  },
+  {
+    "insertId": "69ef3a9a000a4fc82f81e1dc",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:29:46.910230090Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Finished server process [1]",
+    "timestamp": "2026-04-27T10:29:46.675784Z"
+  },
+  {
+    "insertId": "69ef3a9a000a4f24e27c9181",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:29:46.910230090Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application shutdown complete.",
+    "timestamp": "2026-04-27T10:29:46.675620Z"
+  },
+  {
+    "insertId": "69ef3a9a000a4dcd77ea128a",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:29:46.910230090Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application shutdown.",
+    "timestamp": "2026-04-27T10:29:46.675277Z"
+  },
+  {
+    "insertId": "69ef3a9a0008c259ab843648",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:29:46.580248171Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Shutting down",
+    "timestamp": "2026-04-27T10:29:46.574041Z"
+  },
+  {
+    "insertId": "69ef3711000bbafdf23ee655",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-27T10:14:41.775927573Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     169.254.169.126:48882 - \"GET / HTTP/1.1\" 404 Not Found",
+    "timestamp": "2026-04-27T10:14:41.768765Z"
+  },
+  {
+    "insertId": "69ef3711000af7e399f4d3a2",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-27T10:14:41.877231659Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Default STARTUP TCP probe succeeded after 1 attempt for container \"amjis-sidecar-1\" on port 8000.",
+    "timestamp": "2026-04-27T10:14:41.718819Z"
+  },
+  {
+    "insertId": "69ef3711000af619240a2759",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:14:42.041434755Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)",
+    "timestamp": "2026-04-27T10:14:41.718361Z"
+  },
+  {
+    "insertId": "69ef3711000abd5071d04229",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:14:42.041434755Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application startup complete.",
+    "timestamp": "2026-04-27T10:14:41.703824Z"
+  },
+  {
+    "insertId": "69ef3711000ab9c6c2222fc7",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:14:41.709001976Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application startup.",
+    "timestamp": "2026-04-27T10:14:41.702918Z"
+  },
+  {
+    "insertId": "69ef3711000ab9aefec2fe50",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-27T10:14:41.709001976Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Started server process [1]",
+    "timestamp": "2026-04-27T10:14:41.702894Z"
+  },
+  {
+    "insertId": "69ef370e000332d2eaf1cc20",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158",
+      "scaling_reason": "AUTOSCALING"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-27T10:14:38.215589138Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic.",
+    "timestamp": "2026-04-27T10:14:38.209618Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "3.335768948s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "98.91.77.46",
+      "requestMethod": "GET",
+      "requestSize": "602",
+      "requestUrl": "https://amjis-sidecar-938361928218.asia-south1.run.app/",
+      "responseSize": "122",
+      "serverIp": "34.143.78.2",
+      "status": 404,
+      "userAgent": "Mozilla/5.0 (compatible)"
+    },
+    "insertId": "69ef3711000be7d05c4ff2ea",
+    "labels": {
+      "instanceId": "0007b734d981b527f4cd5312275b1ee9b6bc580978cff6e2d8ca3f1e5a0911aac17a324b0f5f28c4e87dc49b6096460e43f33b6ddc9569535ecf2c9c59205fece50cc690655cae000df0de51c158"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-27T10:14:41.785728796Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "WARNING",
+    "spanId": "3f8aa2055bf34dd9",
+    "timestamp": "2026-04-27T10:14:38.175098Z",
+    "trace": "projects/madhav-astrology/traces/68fbfc72d03503cd6d7f3d170fc03f4b",
+    "traceSampled": true
+  },
+  {
+    "insertId": "69edb1aa0001a3dbd189a9e3",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:33:14.347569932Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Finished server process [1]",
+    "timestamp": "2026-04-26T06:33:14.107483Z"
+  },
+  {
+    "insertId": "69edb1aa0001a393b0b7ab96",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:33:14.347569932Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application shutdown complete.",
+    "timestamp": "2026-04-26T06:33:14.107411Z"
+  },
+  {
+    "insertId": "69edb1aa0001a2f7c1c2f63a",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:33:14.347569932Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application shutdown.",
+    "timestamp": "2026-04-26T06:33:14.107255Z"
+  },
+  {
+    "insertId": "69edb1aa0000173374989076",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:33:14.010075865Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Shutting down",
+    "timestamp": "2026-04-26T06:33:14.005939Z"
+  },
+  {
+    "insertId": "69edae25000b8b2901d0e07d",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-26T06:18:13.761164992Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     169.254.169.126:52724 - \"POST /ephemeris HTTP/1.1\" 200 OK",
+    "timestamp": "2026-04-26T06:18:13.756521Z"
+  },
+  {
+    "insertId": "69edae25000a7e2a664d25fe",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-26T06:18:13.697763592Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Default STARTUP TCP probe succeeded after 1 attempt for container \"amjis-sidecar-1\" on port 8000.",
+    "timestamp": "2026-04-26T06:18:13.687658Z"
+  },
+  {
+    "insertId": "69edae25000a7c2e870fc4eb",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:18:14.010010487Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)",
+    "timestamp": "2026-04-26T06:18:13.687150Z"
+  },
+  {
+    "insertId": "69edae25000a4c666d0e54b4",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:18:14.010010487Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application startup complete.",
+    "timestamp": "2026-04-26T06:18:13.674918Z"
+  },
+  {
+    "insertId": "69edae25000a4a6c9be8db99",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:18:13.678606905Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application startup.",
+    "timestamp": "2026-04-26T06:18:13.674412Z"
+  },
+  {
+    "insertId": "69edae25000a4a40da5567ef",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-26T06:18:13.678606905Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Started server process [1]",
+    "timestamp": "2026-04-26T06:18:13.674368Z"
+  },
+  {
+    "insertId": "69edae22000a9e43d470607c",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61",
+      "scaling_reason": "AUTOSCALING"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-26T06:18:10.698658543Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic.",
+    "timestamp": "2026-04-26T06:18:10.695875Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "2.967824838s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "34.96.40.172",
+      "requestMethod": "POST",
+      "requestSize": "484",
+      "requestUrl": "https://amjis-sidecar-938361928218.asia-south1.run.app/ephemeris",
+      "responseSize": "1472",
+      "serverIp": "34.143.75.2",
+      "status": 200,
+      "userAgent": "node"
+    },
+    "insertId": "69edae25000ba18b8fdee3d4",
+    "labels": {
+      "instanceId": "008c15ff088359d56ae07e0838a1558726558e8e3387216ea6bd73e5cb5cef2e5506ec5b8d13fa8e6c112262fd48b24ae110a3c02cc89dc38c2adb02b643da6b78ed6d187cbd7503e108e8ab763a61"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-26T06:18:13.765057466Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "14e0b0ba9d889ee0",
+    "timestamp": "2026-04-26T06:18:10.677361Z",
+    "trace": "projects/madhav-astrology/traces/ae60528970cc4d9c06bea1aa526c5250",
+    "traceSampled": true
+  },
+  {
+    "insertId": "69ece8b9000ec9a6da1bf0ea",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:15:54.205888446Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Finished server process [1]",
+    "timestamp": "2026-04-25T16:15:53.969126Z"
+  },
+  {
+    "insertId": "69ece8b9000ec91c2ddf9e8a",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:15:54.205888446Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application shutdown complete.",
+    "timestamp": "2026-04-25T16:15:53.968988Z"
+  },
+  {
+    "insertId": "69ece8b9000ec85056442305",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:15:54.205888446Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application shutdown.",
+    "timestamp": "2026-04-25T16:15:53.968784Z"
+  },
+  {
+    "insertId": "69ece8b9000d3c834e5ddbbd",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:15:53.871835213Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Shutting down",
+    "timestamp": "2026-04-25T16:15:53.867459Z"
+  },
+  {
+    "insertId": "69ece52d0003653ce5d9d673",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-04-25T16:00:45.226744486Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     169.254.169.126:5940 - \"GET /health HTTP/1.1\" 200 OK",
+    "timestamp": "2026-04-25T16:00:45.222524Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.015328509s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2405:201:a00f:80e7:fc66:c89e:fd2f:492",
+      "requestMethod": "GET",
+      "requestSize": "291",
+      "requestUrl": "https://amjis-sidecar-938361928218.asia-south1.run.app/health",
+      "responseSize": "115",
+      "serverIp": "2600:1900:4245:200::",
+      "status": 200,
+      "userAgent": "curl/8.7.1"
+    },
+    "insertId": "69ece52d00036dd434dc0765",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-04-25T16:00:45.231953799Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "3cc0ae8d8ea67be7",
+    "timestamp": "2026-04-25T16:00:45.203349Z",
+    "trace": "projects/madhav-astrology/traces/7eafa0888506dea70835fa7bbed35a4c",
+    "traceSampled": true
+  },
+  {
+    "insertId": "-59kxvsdn862",
+    "logName": "projects/madhav-astrology/logs/cloudaudit.googleapis.com%2Fsystem_event",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "methodName": "/Services.CreateService",
+      "resourceName": "namespaces/madhav-astrology/services/amjis-sidecar",
+      "response": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.Service",
+        "apiVersion": "serving.knative.dev/v1",
+        "kind": "Service",
+        "metadata": {
+          "annotations": {
+            "run.googleapis.com/client-name": "gcloud",
+            "run.googleapis.com/client-version": "565.0.0",
+            "run.googleapis.com/ingress": "all",
+            "run.googleapis.com/ingress-status": "all",
+            "run.googleapis.com/maxScale": "20",
+            "run.googleapis.com/operation-id": "30ce0ce3-0797-4319-81d1-1994055509fb",
+            "run.googleapis.com/urls": "[\"https://amjis-sidecar-938361928218.asia-south1.run.app\",\"https://amjis-sidecar-qm256lasva-el.a.run.app\"]",
+            "serving.knative.dev/creator": "mail.abhisek.mohanty@gmail.com",
+            "serving.knative.dev/lastModifier": "mail.abhisek.mohanty@gmail.com"
+          },
+          "creationTimestamp": "2026-04-25T15:59:38.352610Z",
+          "generation": 1,
+          "labels": {
+            "cloud.googleapis.com/location": "asia-south1",
+            "run.googleapis.com/satisfiesPzs": "true"
+          },
+          "name": "amjis-sidecar",
+          "namespace": "938361928218",
+          "resourceVersion": "AAZQSvoUTM0",
+          "selfLink": "/apis/serving.knative.dev/v1/namespaces/938361928218/services/amjis-sidecar",
+          "uid": "f0670ee3-573a-4629-bd88-e121246b2e4b"
+        },
+        "spec": {
+          "template": {
+            "metadata": {
+              "annotations": {
+                "autoscaling.knative.dev/maxScale": "3",
+                "run.googleapis.com/client-name": "gcloud",
+                "run.googleapis.com/client-version": "565.0.0",
+                "run.googleapis.com/startup-cpu-boost": "true"
+              },
+              "labels": {
+                "client.knative.dev/nonce": "hknvjdripq",
+                "run.googleapis.com/startupProbeType": "Default"
+              }
+            },
+            "spec": {
+              "containerConcurrency": 80,
+              "containers": [
+                {
+                  "env": [
+                    {
+                      "name": "SIDECAR_API_KEY",
+                      "value": "local-dev"
+                    }
+                  ],
+                  "image": "asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar:latest",
+                  "ports": [
+                    {
+                      "containerPort": 8000,
+                      "name": "http1"
+                    }
+                  ],
+                  "resources": {
+                    "limits": {
+                      "cpu": "1",
+                      "memory": "1Gi"
+                    }
+                  },
+                  "startupProbe": {
+                    "failureThreshold": 1,
+                    "periodSeconds": 240,
+                    "tcpSocket": {
+                      "port": 8000
+                    },
+                    "timeoutSeconds": 240
+                  }
+                }
+              ],
+              "serviceAccountName": "938361928218-compute@developer.gserviceaccount.com",
+              "timeoutSeconds": 300
+            }
+          },
+          "traffic": [
+            {
+              "latestRevision": true,
+              "percent": 100
+            }
+          ]
+        },
+        "status": {
+          "address": {
+            "url": "https://amjis-sidecar-qm256lasva-el.a.run.app"
+          },
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-04-25T16:00:13.700301Z",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-04-25T16:00:08.141927Z",
+              "status": "True",
+              "type": "ConfigurationsReady"
+            },
+            {
+              "lastTransitionTime": "2026-04-25T16:00:13.671207Z",
+              "status": "True",
+              "type": "RoutesReady"
+            }
+          ],
+          "latestCreatedRevisionName": "amjis-sidecar-00001-s55",
+          "latestReadyRevisionName": "amjis-sidecar-00001-s55",
+          "observedGeneration": 1,
+          "traffic": [
+            {
+              "latestRevision": true,
+              "percent": 100,
+              "revisionName": "amjis-sidecar-00001-s55"
+            }
+          ],
+          "url": "https://amjis-sidecar-qm256lasva-el.a.run.app"
+        }
+      },
+      "serviceName": "run.googleapis.com",
+      "status": {
+        "message": "Ready condition status changed to True for Service amjis-sidecar."
+      }
+    },
+    "receiveTimestamp": "2026-04-25T16:00:14.641970166Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-04-25T16:00:13.710726Z"
+  },
+  {
+    "insertId": "-txtgmle19pas",
+    "logName": "projects/madhav-astrology/logs/cloudaudit.googleapis.com%2Fsystem_event",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "methodName": "/Services.CreateService",
+      "resourceName": "namespaces/madhav-astrology/revisions/amjis-sidecar-00001-s55",
+      "response": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.Revision",
+        "apiVersion": "serving.knative.dev/v1",
+        "kind": "Revision",
+        "metadata": {
+          "annotations": {
+            "autoscaling.knative.dev/maxScale": "3",
+            "run.googleapis.com/client-name": "gcloud",
+            "run.googleapis.com/client-version": "565.0.0",
+            "run.googleapis.com/operation-id": "30ce0ce3-0797-4319-81d1-1994055509fb",
+            "run.googleapis.com/startup-cpu-boost": "true",
+            "serving.knative.dev/creator": "mail.abhisek.mohanty@gmail.com"
+          },
+          "creationTimestamp": "2026-04-25T15:59:38.669446Z",
+          "generation": 1,
+          "labels": {
+            "client.knative.dev/nonce": "hknvjdripq",
+            "cloud.googleapis.com/location": "asia-south1",
+            "run.googleapis.com/satisfiesPzs": "true",
+            "run.googleapis.com/startupProbeType": "Default",
+            "serving.knative.dev/configuration": "amjis-sidecar",
+            "serving.knative.dev/configurationGeneration": "1",
+            "serving.knative.dev/route": "amjis-sidecar",
+            "serving.knative.dev/service": "amjis-sidecar",
+            "serving.knative.dev/serviceUid": "f0670ee3-573a-4629-bd88-e121246b2e4b"
+          },
+          "name": "amjis-sidecar-00001-s55",
+          "namespace": "938361928218",
+          "ownerReferences": [
+            {
+              "apiVersion": "serving.knative.dev/v1",
+              "blockOwnerDeletion": true,
+              "controller": true,
+              "kind": "Configuration",
+              "name": "amjis-sidecar",
+              "uid": "93ac76eb-0acb-4281-9bc2-9c81b762be60"
+            }
+          ],
+          "resourceVersion": "AAZQSvn7w/M",
+          "selfLink": "/apis/serving.knative.dev/v1/namespaces/938361928218/revisions/amjis-sidecar-00001-s55",
+          "uid": "700645e6-82c3-44de-9625-faadf95f411b"
+        },
+        "spec": {
+          "containerConcurrency": 80,
+          "containers": [
+            {
+              "env": [
+                {
+                  "name": "SIDECAR_API_KEY",
+                  "value": "local-dev"
+                }
+              ],
+              "image": "asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar@sha256:0753472cff3116acae8f4b6e6a1c90bb18e36df558f359260c34e84c3ba5ec64",
+              "name": "amjis-sidecar-1",
+              "ports": [
+                {
+                  "containerPort": 8000,
+                  "name": "http1"
+                }
+              ],
+              "resources": {
+                "limits": {
+                  "cpu": "1",
+                  "memory": "1Gi"
+                }
+              },
+              "startupProbe": {
+                "failureThreshold": 1,
+                "periodSeconds": 240,
+                "tcpSocket": {
+                  "port": 8000
+                },
+                "timeoutSeconds": 240
+              }
+            }
+          ],
+          "serviceAccountName": "938361928218-compute@developer.gserviceaccount.com",
+          "timeoutSeconds": 300
+        },
+        "status": {
+          "conditions": [
+            {
+              "lastTransitionTime": "2026-04-25T16:00:12.092403Z",
+              "message": "Deploying revision succeeded in 33.42s.",
+              "status": "True",
+              "type": "Ready"
+            },
+            {
+              "lastTransitionTime": "2026-04-25T16:00:12.051578Z",
+              "message": "Containers became healthy in 2.17s.",
+              "status": "True",
+              "type": "ContainerHealthy"
+            },
+            {
+              "lastTransitionTime": "2026-04-25T16:00:08.048874Z",
+              "message": "Container image import completed in 28.82s.",
+              "status": "True",
+              "type": "ContainerReady"
+            },
+            {
+              "lastTransitionTime": "2026-04-25T16:00:09.520294Z",
+              "message": "Provisioning imported containers completed in 1.47s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+              "status": "True",
+              "type": "ResourcesAvailable"
+            }
+          ],
+          "containerStatuses": [
+            {
+              "imageDigest": "asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar@sha256:0753472cff3116acae8f4b6e6a1c90bb18e36df558f359260c34e84c3ba5ec64",
+              "name": "amjis-sidecar-1"
+            }
+          ],
+          "imageDigest": "asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar@sha256:0753472cff3116acae8f4b6e6a1c90bb18e36df558f359260c34e84c3ba5ec64",
+          "logUrl": "https://console.cloud.google.com/logs/viewer?project=madhav-astrology&resource=cloud_run_revision/service_name/amjis-sidecar/revision_name/amjis-sidecar-00001-s55&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22amjis-sidecar%22%0Aresource.labels.revision_name%3D%22amjis-sidecar-00001-s55%22",
+          "observedGeneration": 1
+        }
+      },
+      "serviceName": "run.googleapis.com",
+      "status": {
+        "message": "Ready condition status changed to True for Revision amjis-sidecar-00001-s55 with message: Deploying revision succeeded in 33.42s."
+      }
+    },
+    "receiveTimestamp": "2026-04-25T16:00:12.593492701Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-04-25T16:00:12.102301Z"
+  },
+  {
+    "insertId": "69ece50c0000ac8956b673f8",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-25T16:00:12.342840502Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Default STARTUP TCP probe succeeded after 1 attempt for container \"amjis-sidecar-1\" on port 8000.",
+    "timestamp": "2026-04-25T16:00:12.044169Z"
+  },
+  {
+    "insertId": "69ece50c0000aac1aa184fb8",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:00:12.367491515Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)",
+    "timestamp": "2026-04-25T16:00:12.043713Z"
+  },
+  {
+    "insertId": "69ece50c00007acaf241e6e9",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:00:12.367491515Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Application startup complete.",
+    "timestamp": "2026-04-25T16:00:12.031434Z"
+  },
+  {
+    "insertId": "69ece50c0000785f71a8ad8c",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:00:12.035100487Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Waiting for application startup.",
+    "timestamp": "2026-04-25T16:00:12.030815Z"
+  },
+  {
+    "insertId": "69ece50c000078110c9ab6fe",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fstderr",
+    "receiveTimestamp": "2026-04-25T16:00:12.035100487Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "textPayload": "INFO:     Started server process [1]",
+    "timestamp": "2026-04-25T16:00:12.030737Z"
+  },
+  {
+    "insertId": "69ece509000a49e3b3ae117f",
+    "labels": {
+      "instanceId": "008c15ff08f2715ef6548310f4ab47bf006571c78545cac5b42ff9e5c11ad8c48b1f3079ccd0fabd8e46674e8c356ef132a47cc6ac3bcb1646311bb9433b82c0a994ed2597971ff46e23b740b88d18",
+      "scaling_reason": "DEPLOYMENT_ROLLOUT"
+    },
+    "logName": "projects/madhav-astrology/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-04-25T16:00:09.679842175Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "amjis-sidecar",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "amjis-sidecar-00001-s55",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting new instance. Reason: DEPLOYMENT_ROLLOUT - Instance started due to traffic shifting between revisions due to deployment, traffic split adjustment, or deployment health check.",
+    "timestamp": "2026-04-25T16:00:09.674275Z"
+  },
+  {
+    "insertId": "18yx0yle2f32x",
+    "logName": "projects/madhav-astrology/logs/cloudaudit.googleapis.com%2Factivity",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "oauthInfo": {
+          "oauthClientId": "32555940559.apps.googleusercontent.com"
+        },
+        "principalEmail": "mail.abhisek.mohanty@gmail.com",
+        "principalSubject": "user:mail.abhisek.mohanty@gmail.com"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.create",
+          "permissionType": "ADMIN_WRITE",
+          "resource": "namespaces/madhav-astrology/services/amjis-sidecar",
+          "resourceAttributes": {}
+        },
+        {
+          "granted": true,
+          "permission": "run.services.create",
+          "permissionType": "ADMIN_WRITE",
+          "resource": "namespaces/madhav-astrology/services/amjis-sidecar",
+          "resourceAttributes": {
+            "name": "namespaces/madhav-astrology/services/amjis-sidecar",
+            "service": "run.googleapis.com/",
+            "type": "run.googleapis.com/Service"
+          }
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.CreateService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.CreateServiceRequest",
+        "parent": "namespaces/madhav-astrology",
+        "service": {
+          "apiVersion": "serving.knative.dev/v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {
+              "run.googleapis.com/client-name": "gcloud",
+              "run.googleapis.com/client-version": "565.0.0"
+            },
+            "name": "amjis-sidecar",
+            "namespace": "madhav-astrology"
+          },
+          "spec": {
+            "template": {
+              "metadata": {
+                "annotations": {
+                  "autoscaling.knative.dev/maxScale": "3",
+                  "run.googleapis.com/client-name": "gcloud",
+                  "run.googleapis.com/client-version": "565.0.0",
+                  "run.googleapis.com/startup-cpu-boost": "True"
+                },
+                "labels": {
+                  "client.knative.dev/nonce": "hknvjdripq"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "image": "asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar:latest",
+                    "name": "",
+                    "resources": {
+                      "limits": {
+                        "cpu": "1",
+                        "memory": "1Gi"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "status": {}
+        }
+      },
+      "requestMetadata": {
+        "callerIp": "2405:201:a00f:80e7:fc66:c89e:fd2f:492",
+        "callerSuppliedUserAgent": "google-cloud-sdk gcloud/565.0.0 command/gcloud.run.deploy invocation-id/d135df4c9fef4996be763599f26c4612 environment/None environment-version/None client-os/MACOSX client-os-ver/25.4.0 client-pltf-arch/arm interactive/False from-script/True python/3.13.7 term/  (Macintosh; Intel Mac OS X 25.4.0),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-04-25T15:59:38.615836Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "asia-south1"
+        ]
+      },
+      "resourceName": "namespaces/madhav-astrology/services/amjis-sidecar",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-04-25T15:59:39.035576975Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "asia-south1",
+        "project_id": "madhav-astrology",
+        "revision_name": "",
+        "service_name": "amjis-sidecar"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "NOTICE",
+    "timestamp": "2026-04-25T15:59:37.989030Z"
+  }
+]
