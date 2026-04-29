@@ -201,9 +201,10 @@ describe('cgm_graph_walk tool', () => {
 
     await tool.retrieve(basePlan, { edge_type_filter: ['CONTRADICTS', 'CROSS_LINKS'] })
 
-    // First query call is the edges fetch; $3 param is the filter
+    // First query call is the edges fetch; $2 param (index 1) is the edge_type filter
+    // (nativeId no longer passed to SQL — l25_cgm_edges has no native_id column)
     const edgesCallArgs = mockQuery.mock.calls[0]
-    expect(edgesCallArgs[1][2]).toEqual(['CONTRADICTS', 'CROSS_LINKS'])
+    expect(edgesCallArgs[1][1]).toEqual(['CONTRADICTS', 'CROSS_LINKS'])
   })
 
   it('passes null edge_type_filter when not provided', async () => {
@@ -213,8 +214,9 @@ describe('cgm_graph_walk tool', () => {
 
     await tool.retrieve(basePlan)
 
+    // $2 param (index 1) should be null when no filter provided
     const edgesCallArgs = mockQuery.mock.calls[0]
-    expect(edgesCallArgs[1][2]).toBeNull()
+    expect(edgesCallArgs[1][1]).toBeNull()
   })
 
   it('returns valid ToolBundle schema fields', async () => {

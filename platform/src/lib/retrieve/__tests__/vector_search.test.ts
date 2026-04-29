@@ -102,8 +102,9 @@ beforeEach(() => {
   })
 
   // Default: Vertex AI Embeddings API returns valid embedding
-  // GCP_PROJECT must be set — vector_search checks it before calling ADC
+  // GCP_PROJECT + VERTEX_AI_LOCATION must be set — vector_search requires both
   process.env.GCP_PROJECT = 'test-project'
+  process.env.VERTEX_AI_LOCATION = 'asia-south1'
   global.fetch = vi.fn().mockResolvedValue({
     ok: true,
     status: 200,

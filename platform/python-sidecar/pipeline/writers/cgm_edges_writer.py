@@ -20,10 +20,11 @@ TABLE_LIVE = "l25_cgm_edges"
 _INSERT_SQL = f"""
 INSERT INTO {TABLE_STAGING}
   (edge_id, source_node_id, target_node_id, edge_type, strength, notes,
-   source_section, build_id)
+   source_section, build_id, status, orphan_reason)
 VALUES
   (%(edge_id)s, %(source_node_id)s, %(target_node_id)s, %(edge_type)s,
-   %(strength)s, %(notes)s, %(source_section)s, %(build_id)s)
+   %(strength)s, %(notes)s, %(source_section)s, %(build_id)s,
+   %(status)s, %(orphan_reason)s)
 ON CONFLICT (edge_id) DO UPDATE SET
   source_node_id = EXCLUDED.source_node_id,
   target_node_id = EXCLUDED.target_node_id,
@@ -31,7 +32,9 @@ ON CONFLICT (edge_id) DO UPDATE SET
   strength       = EXCLUDED.strength,
   notes          = EXCLUDED.notes,
   source_section = EXCLUDED.source_section,
-  build_id       = EXCLUDED.build_id
+  build_id       = EXCLUDED.build_id,
+  status         = EXCLUDED.status,
+  orphan_reason  = EXCLUDED.orphan_reason
 """
 
 
@@ -76,6 +79,8 @@ class CGMEdgesWriter(IBuildWriter):
                     "notes": row.get("notes"),
                     "source_section": row["source_section"],
                     "build_id": build_id,
+                    "status":        row.get("status", "valid"),
+                    "orphan_reason": row.get("orphan_reason"),
                 }
                 try:
                     conn.execute(_INSERT_SQL, params)
@@ -103,14 +108,19 @@ class CGMEdgesWriter(IBuildWriter):
                 (build_id,),
             ).fetchone()
             count = int(row[0]) if row else 0
+            valid_row = conn.execute(
+                "SELECT COUNT(*) FROM l25_cgm_edges_staging WHERE build_id = %s AND status = 'valid'",
+                (build_id,),
+            ).fetchone()
+            valid_count = int(valid_row[0]) if valid_row else 0
 
-        valid = count > 0
+        valid = count >= 100
         issues = [] if valid else [
-            f"Expected > 0 rows in staging for build_id={build_id}, found {count}"
+            f"Expected ≥ 100 rows in staging for build_id={build_id}, found {count}"
         ]
         log.info(
-            "cgm_edges validate_staging: build_id=%s count=%d valid=%s",
-            build_id, count, valid,
+            "cgm_edges validate_staging: build_id=%s count=%d valid_count=%d valid=%s",
+            build_id, count, valid_count, valid,
         )
         return ValidationResult(valid=valid, chunk_count=count, issues=issues)
 
@@ -151,10 +161,10 @@ class CGMEdgesWriter(IBuildWriter):
                     """
                     INSERT INTO l25_cgm_edges
                       (edge_id, source_node_id, target_node_id, edge_type, strength,
-                       notes, source_section, build_id)
+                       notes, source_section, build_id, status, orphan_reason)
                     SELECT
                       edge_id, source_node_id, target_node_id, edge_type, strength,
-                      notes, source_section, build_id
+                      notes, source_section, build_id, status, orphan_reason
                     FROM l25_cgm_edges_staging
                     WHERE build_id = %s
                     """,

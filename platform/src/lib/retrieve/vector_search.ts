@@ -66,10 +66,13 @@ interface ChunkRow {
 
 async function getQueryEmbedding(queryText: string): Promise<number[]> {
   const project = process.env.GCP_PROJECT ?? ''
-  const location = process.env.VERTEX_AI_LOCATION ?? 'us-central1'
+  const location = process.env.VERTEX_AI_LOCATION
 
   if (!project) {
     throw new Error('GCP_PROJECT env var not set — required for Vertex AI embeddings')
+  }
+  if (!location) {
+    throw new Error('VERTEX_AI_LOCATION env var not set — refusing to fall back to wrong region (would corrupt vector similarity against asia-south1 embeddings)')
   }
 
   const endpoint =

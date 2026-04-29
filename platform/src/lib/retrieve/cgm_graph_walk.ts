@@ -1,13 +1,19 @@
 /**
  * MARSYS-JIS Stream A — Tool: cgm_graph_walk
  *
- * BFS traversal over the CGM graph (rag_graph_nodes + rag_graph_edges).
+ * BFS traversal over the CGM graph (l25_cgm_nodes + l25_cgm_edges).
  * Starts from seed nodes supplied in QueryPlan.graph_seed_hints and expands
  * up to graph_traversal_depth levels, batch-fetching edges and node metadata
  * at each level (one SQL call per table per level, not N individual queries).
  *
  * Returns a validated ToolBundle. If the feature flag is disabled or no seeds
  * are supplied, returns an empty ToolBundle immediately without touching the DB.
+ *
+ * Table routing note: Phase 14D introduced l25_cgm_nodes / l25_cgm_edges as the
+ * authoritative CGM structured tables (migration 018). The original rag_graph_nodes /
+ * rag_graph_edges tables (migration 005) are never populated by the build pipeline
+ * and are reserved for a future cross-native graph layer. All BFS queries target
+ * l25_cgm_* exclusively. Column aliases: strength → weight, properties → metadata.
  */
 
 import crypto from 'crypto'
@@ -29,19 +35,24 @@ const DEFAULT_NATIVE_ID = 'abhisek_mohanty'
 // SQL templates
 // ---------------------------------------------------------------------------
 
+// l25_cgm_edges stores weight as `strength` (NUMERIC); alias to `weight` for EdgeRow compatibility.
+// No native_id column exists on l25_cgm_* tables — all rows belong to the single active native.
+// $1 = frontier node IDs (text[]), $2 = edge_type filter (text[] | NULL)
 const SQL_FETCH_EDGES = `
-  SELECT source_node_id, target_node_id, edge_type, weight
-  FROM rag_graph_edges
-  WHERE native_id = $1
-    AND source_node_id = ANY($2::text[])
-    AND ($3::text[] IS NULL OR edge_type = ANY($3::text[]))
+  SELECT source_node_id, target_node_id, edge_type,
+         COALESCE(strength, 1.0)::float AS weight
+  FROM l25_cgm_edges
+  WHERE source_node_id = ANY($1::text[])
+    AND ($2::text[] IS NULL OR edge_type = ANY($2::text[]))
+    AND status = 'valid'
 `.trim()
 
+// l25_cgm_nodes stores node payload as `properties` (JSONB); alias to `metadata` for NodeRow compatibility.
+// $1 = node IDs to hydrate (text[])
 const SQL_FETCH_NODES = `
-  SELECT node_id, node_type, metadata
-  FROM rag_graph_nodes
-  WHERE native_id = $1
-    AND node_id = ANY($2::text[])
+  SELECT node_id, node_type, properties AS metadata
+  FROM l25_cgm_nodes
+  WHERE node_id = ANY($1::text[])
 `.trim()
 
 // ---------------------------------------------------------------------------
@@ -109,8 +120,8 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     if (frontier.length === 0) break
 
     // Batch-fetch edges for all frontier nodes in one query
+    // Params: $1=frontier node IDs, $2=edge_type filter (or null)
     const { rows: edgeRows } = await storage.query<EdgeRow>(SQL_FETCH_EDGES, [
-      nativeId,
       frontier,
       edgeTypeFilter,
     ])
@@ -132,8 +143,8 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     }
 
     // Batch-fetch node metadata for newly discovered targets
+    // Params: $1=node IDs to hydrate
     const { rows: nodeRows } = await storage.query<NodeRow>(SQL_FETCH_NODES, [
-      nativeId,
       newTargets,
     ])
 

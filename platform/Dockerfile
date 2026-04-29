@@ -23,6 +23,8 @@ ARG NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=$NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 ARG NEXT_PUBLIC_FIREBASE_APP_ID
 ENV NEXT_PUBLIC_FIREBASE_APP_ID=$NEXT_PUBLIC_FIREBASE_APP_ID
+ARG BUILD_STATE_GCS_BASE
+ENV BUILD_STATE_GCS_BASE=$BUILD_STATE_GCS_BASE
 RUN npm run build
 
 FROM base AS runner
@@ -36,6 +38,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/00_ARCHITECTURE ./00_ARCHITECTURE
+# L3 register JSON files — required by pattern_register, resonance_register,
+# cluster_atlas, contradiction_register retrieval tools at query time.
+# Without this, those 4 tools throw ENOENT silently and return null bundles.
+COPY --from=builder --chown=nextjs:nodejs /app/035_DISCOVERY_LAYER ./035_DISCOVERY_LAYER
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000

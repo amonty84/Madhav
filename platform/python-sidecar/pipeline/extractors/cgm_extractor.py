@@ -6,8 +6,10 @@ Two-pass extraction:
   Pass 1 — Nodes: parse CGM_v9_0.md via _parse_nodes / _parse_node_properties.
   Pass 2 — Edges: first collect any inline 'edges:' blocks from node YAML props;
            then supplement from the three manifest JSON files in 035_DISCOVERY_LAYER/.
-           Orphan edges (target not in known node_ids) are dropped with a WARNING.
-           If drop count > 5% of total edges, logs WARNING but does not raise.
+           All 127 edges are stored with a status field: 'valid' | 'orphan' | 'self_loop'.
+           Orphan edges (target not in known node_ids) are stored with status='orphan'.
+           Self-loop edges (source == target) are stored with status='self_loop'.
+           If orphan rate > 5%, logs WARNING but extraction continues.
 """
 from __future__ import annotations
 
@@ -215,66 +217,38 @@ def extract_cgm_edges(
                 "source_section": source_section,
             })
 
-    total_before_filter = len(candidate_rows)
-
-    # --- Orphan filtering ---
-    filtered_rows: list[dict[str, Any]] = []
-    dropped = 0
+    # --- Status assignment pass ---
     for row in candidate_rows:
-        if row["target_node_id"] not in node_ids:
-            log.warning(
-                "cgm_extractor: dropping orphan edge %s (target %r not in node set)",
-                row["edge_id"],
-                row["target_node_id"],
-            )
-            dropped += 1
-        else:
-            filtered_rows.append(row)
-
-    if dropped > 0:
-        log.warning("cgm_extractor: dropped %d orphan edges (total before filter: %d)", dropped, total_before_filter)
-        if total_before_filter > 0 and (dropped / total_before_filter) > 0.05:
-            log.warning(
-                "cgm_extractor: orphan drop rate %.1f%% exceeds 5%% threshold — check edge manifests",
-                100.0 * dropped / total_before_filter,
-            )
-
-    # --- Self-loop filtering ---
-    # Self-referential edges (source == target) are valid astrological facts in the
-    # manifest (e.g. Venus in Purva Ashadha is its own nakshatra lord) but must not
-    # be surfaced to callers; graph algorithms and S5 of the spec both forbid them.
-    non_loop_rows: list[dict[str, Any]] = []
-    dropped_loops = 0
-    for row in filtered_rows:
         if row["source_node_id"] == row["target_node_id"]:
+            row["status"] = "self_loop"
+            row["orphan_reason"] = None
             log.warning(
-                "cgm_extractor: dropping self-loop edge %s (%s → %s, type=%s)",
-                row["edge_id"],
-                row["source_node_id"],
-                row["target_node_id"],
-                row["edge_type"],
+                "cgm_extractor: self-loop edge %s (%s → %s) stored with status=self_loop",
+                row["edge_id"], row["source_node_id"], row["target_node_id"],
             )
-            dropped_loops += 1
+        elif row["target_node_id"] not in node_ids:
+            row["status"] = "orphan"
+            row["orphan_reason"] = f"target_not_in_cgm_nodes: {row['target_node_id']}"
+            log.warning(
+                "cgm_extractor: orphan edge %s (target %r) stored with status=orphan",
+                row["edge_id"], row["target_node_id"],
+            )
         else:
-            non_loop_rows.append(row)
+            row["status"] = "valid"
+            row["orphan_reason"] = None
 
-    if dropped_loops > 0:
+    orphan_count = sum(1 for r in candidate_rows if r["status"] == "orphan")
+    if len(candidate_rows) > 0 and (orphan_count / len(candidate_rows)) > 0.05:
         log.warning(
-            "cgm_extractor: dropped %d self-loop edge(s) after orphan filter",
-            dropped_loops,
+            "cgm_extractor: orphan rate %.1f%% exceeds 5%% threshold",
+            100.0 * orphan_count / len(candidate_rows),
         )
 
-    count = len(non_loop_rows)
-    if count == 0:
-        raise ValueError(
-            "CGM edge count is 0 after orphan + self-loop filtering. "
-            "Check CGM_v9_0.md node blocks and edge manifest files."
-        )
+    if len(candidate_rows) == 0:
+        raise ValueError("CGM edge count is 0 — all manifests are empty. Check manifest files.")
 
-    log.info(
-        "cgm_extractor: extracted %d edges (%d dropped as orphans, %d dropped as self-loops)",
-        count,
-        dropped,
-        dropped_loops,
-    )
-    return non_loop_rows
+    by_status: dict[str, int] = {}
+    for r in candidate_rows:
+        by_status[r["status"]] = by_status.get(r["status"], 0) + 1
+    log.info("cgm_extractor: extracted %d edges — %s", len(candidate_rows), by_status)
+    return candidate_rows
