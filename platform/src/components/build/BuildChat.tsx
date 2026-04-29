@@ -98,13 +98,6 @@ export function BuildChat({
     [session]
   )
 
-  const handleComposerSubmit = useCallback(
-    (text: string, _attachments: import('@/hooks/useAttachments').Attachment[]) => {
-      session.send(text)
-    },
-    [session]
-  )
-
   const handleRegenerate = useCallback(() => session.regenerate(), [session])
 
   const handleEdit = useCallback(
@@ -176,7 +169,7 @@ export function BuildChat({
       chartId={chartId}
       chartName={chartName}
       conversations={conversations}
-      currentConversationId={currentConversationId}
+      currentConversationId={session.conversationId ?? currentConversationId}
       onClose={() => setMobileSidebarOpen(false)}
       onRenamed={(id, title) =>
         setConversations(prev => prev.map(c => (c.id === id ? { ...c, title } : c)))
@@ -265,7 +258,7 @@ export function BuildChat({
           )}
           <Composer
             ref={composerRef}
-            onSubmit={handleComposerSubmit}
+            onSubmit={(text, _attachments) => handleSend(text)}
             onStop={session.stop}
             isStreaming={session.isStreaming}
             disabled={branches.isViewingArchived}

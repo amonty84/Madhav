@@ -6,7 +6,9 @@ import { query } from '@/lib/db/client'
 import { buildTools } from '@/lib/claude/build-tools'
 import { buildSystemPrompt } from '@/lib/claude/system-prompts'
 import type { ModelMessage, UIMessage } from 'ai'
-import { insertConversationWithId, replaceConversationMessages } from '@/lib/conversations'
+import { insertConversationWithId, replaceConversationMessages, getConversation } from '@/lib/conversations'
+
+export const maxDuration = 120
 
 async function requireSuperAdmin() {
   const user = await getServerUser()
@@ -56,7 +58,12 @@ export async function POST(request: Request) {
   let isFirstTurn = false
   let pendingConversationInsert: Promise<void> | null = null
 
-  if (!conversationId) {
+  if (conversationId) {
+    const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin: true })
+    if (!existing || existing.chart_id !== chartId) {
+      return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
+    }
+  } else {
     conversationId = crypto.randomUUID()
     isFirstTurn = true
     pendingConversationInsert = insertConversationWithId({
@@ -90,6 +97,10 @@ export async function POST(request: Request) {
       if (part.type === 'start' && isFirstTurn) {
         return { conversationId: finalConversationId }
       }
+    },
+    onError: error => {
+      if (error instanceof Error) return error.message
+      return 'Something went wrong generating the build response.'
     },
     onFinish: async ({ messages: finalMessages }) => {
       try {

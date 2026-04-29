@@ -2,7 +2,7 @@
 
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport, type UIMessage } from 'ai'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface BuildChatOptions {
   chartId: string
@@ -18,9 +18,13 @@ export function useBuildChat({
   onConversationCreated,
 }: BuildChatOptions) {
   const [persistedId, setPersistedId] = useState<string | undefined>(conversationId)
+  const persistedIdRef = useRef<string | undefined>(conversationId)
 
   useEffect(() => {
-    if (conversationId) setPersistedId(conversationId)
+    if (conversationId) {
+      setPersistedId(conversationId)
+      persistedIdRef.current = conversationId
+    }
   }, [conversationId])
 
   const transport = useMemo(
@@ -35,7 +39,8 @@ export function useBuildChat({
     onFinish: ({ message }) => {
       const metadata = message.metadata as { conversationId?: string } | undefined
       const newId = metadata?.conversationId
-      if (newId && newId !== persistedId) {
+      if (newId && newId !== persistedIdRef.current) {
+        persistedIdRef.current = newId
         setPersistedId(newId)
         onConversationCreated?.(newId)
       }
