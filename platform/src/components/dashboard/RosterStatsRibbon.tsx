@@ -23,21 +23,21 @@ export function RosterStatsRibbon({
   ]
 
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border border-border bg-muted/40 px-4 py-2.5 text-sm">
+    <div className="brand-card flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg px-4 py-2.5 text-sm">
       {segments.map((seg, i) => (
         <span key={seg.label} className="flex items-center gap-1.5">
-          {i > 0 && <span className="text-muted-foreground/40 select-none">·</span>}
+          {i > 0 && <span className="text-[rgba(212,175,55,0.2)] select-none">·</span>}
           {seg.filterKey && onFilterShortcut ? (
             <button
               onClick={() => onFilterShortcut(seg.filterKey!, seg.filterVal!)}
-              className="font-semibold tabular-nums text-foreground hover:text-primary transition-colors"
+              className="font-semibold tabular-nums text-[#d4af37] hover:text-[#fce29a] hover:brightness-110 transition-colors"
             >
               {seg.value}
             </button>
           ) : (
-            <span className="font-semibold tabular-nums">{seg.value}</span>
+            <span className="font-semibold tabular-nums text-[#d4af37]">{seg.value}</span>
           )}
-          <span className="text-muted-foreground">{seg.label}</span>
+          <span className="text-[rgba(212,175,55,0.5)]">{seg.label}</span>
         </span>
       ))}
     </div>
