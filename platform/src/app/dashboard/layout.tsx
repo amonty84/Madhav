@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getServerUserWithProfile } from '@/lib/auth/access-control'
 import { AppShell } from '@/components/shared/AppShell'
+import { ZoneRoot } from '@/components/shared/ZoneRoot'
 
 export default async function DashboardLayout({
   children,
@@ -12,12 +13,14 @@ export default async function DashboardLayout({
   if (ctx.profile.status !== 'active') redirect('/login')
 
   return (
-    <AppShell
-      user={ctx.user}
-      profile={ctx.profile}
-      breadcrumb={[{ label: 'Roster', current: true }]}
-    >
-      {children}
-    </AppShell>
+    <ZoneRoot zone="ink">
+      <AppShell
+        user={ctx.user}
+        profile={ctx.profile}
+        breadcrumb={[{ label: 'Roster', current: true }]}
+      >
+        {children}
+      </AppShell>
+    </ZoneRoot>
   )
 }
