@@ -140,44 +140,53 @@
           "asset_id": "EPHEMERIS_CSV",
           "path": "01_FACTS_LAYER/EPHEMERIS_MONTHLY_1900_2100.csv",
           "format": "csv",
-          "classification": "DEAD_DATA",
+          "classification": "TRANSITIONAL",
           "data_categories": [
             "transit_ephemeris_monthly_1900_2100"
           ],
           "current_storage": [
-            "filesystem"
+            "filesystem",
+            "gcs"
           ],
-          "modernization_target": "Postgres time-series table or queryable CSV",
+          "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/EPHEMERIS_MONTHLY_1900_2100.csv",
+          "modernization_target": "Spot-check authority against ephemeris_daily (Stream C); spot-check only — pyswisseph is primary authority",
           "modernization_phase": "14C",
-          "unique_data_note": "Monthly transit positions for all 9 planets (1st of each month), Swiss Ephemeris, Lahiri sidereal; inert today"
+          "unique_data_note": "Monthly transit positions for all 9 planets (1st of each month), Swiss Ephemeris, Lahiri sidereal; inert today",
+          "phase_14c_promotion_note": "Promoted to TRANSITIONAL — authority source for eclipses + retrogrades tables. Phase 14C Stream D.0 2026-04-29"
         },
         {
           "asset_id": "ECLIPSES_CSV",
           "path": "01_FACTS_LAYER/ECLIPSES_1900_2100.csv",
           "format": "csv",
-          "classification": "DEAD_DATA",
+          "classification": "TRANSITIONAL",
           "data_categories": [
             "eclipse_catalog_1900_2100"
           ],
           "current_storage": [
-            "filesystem"
+            "filesystem",
+            "gcs"
           ],
-          "modernization_target": "Postgres time-series table",
-          "modernization_phase": "14C"
+          "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/ECLIPSES_1900_2100.csv",
+          "modernization_target": "Postgres time-series table — eclipses_daily",
+          "modernization_phase": "14C",
+          "phase_14c_promotion_note": "Promoted to TRANSITIONAL — authority source for eclipses + retrogrades tables. Phase 14C Stream D.0 2026-04-29"
         },
         {
           "asset_id": "RETROGRADES_CSV",
           "path": "01_FACTS_LAYER/RETROGRADES_1900_2100.csv",
           "format": "csv",
-          "classification": "DEAD_DATA",
+          "classification": "TRANSITIONAL",
           "data_categories": [
             "retrograde_stations_1900_2100"
           ],
           "current_storage": [
-            "filesystem"
+            "filesystem",
+            "gcs"
           ],
-          "modernization_target": "Postgres time-series table",
-          "modernization_phase": "14C"
+          "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/RETROGRADES_1900_2100.csv",
+          "modernization_target": "Postgres time-series table — retrogrades",
+          "modernization_phase": "14C",
+          "phase_14c_promotion_note": "Promoted to TRANSITIONAL — authority source for eclipses + retrogrades tables. Phase 14C Stream D.0 2026-04-29"
         },
         {
           "asset_id": "EVENT_CHART_STATES_v1",
