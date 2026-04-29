@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.9 (2026-04-30): R5 Timeline closed. Fan-out complete — R0 through R6 all closed; R5 last. §2 state block: last_redesign_session_id→redesign-r5-timeline-2026-04-30, post_r0_parallel_ready→[] (all fan-out phases closed). §3 R5 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated. R2 Timeline Room CTA now enabled. Authored by Claude Code (Sonnet 4.6) at R5 close.
   - v1.0.8 (2026-04-30): R4 Consume polish closed. §2 state block: last_redesign_session_id→redesign-r4-consume-polish-2026-04-30, post_r0_parallel_ready→[R5] (R6+R1+R2+R4 closed), trace_fix_status confirmed on_hold. §3 R4 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R4 close.
   - v1.0.7 (2026-04-30): R2 Chart Profile closed. §2 state block: last_redesign_session_id→redesign-r2-chart-profile-2026-04-30, post_r0_parallel_ready→[R4, R5] (R6+R1+R2 closed), deferred_briefs→[R7] (R3 now unblocked). §3 R2 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R2 close.
   - v1.0.6 (2026-04-30): R1 Roster closed. §2 state block: last_redesign_session_id→redesign-r1-roster-2026-04-30, post_r0_parallel_ready→[R2, R4, R5] (R6+R1 now closed). §3 R1 row: status→closed, closure_report + session_id + started_at + closed_at set, follow_ups populated. Authored by Claude Code (Sonnet 4.6) at R1 close.
@@ -118,16 +119,16 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # R6 + R1 + R2 + R4 closed 2026-04-30; only R5 remains
-in_flight_parallel_phases: []           # none — R5 is last
-last_redesign_session_id: redesign-r4-consume-polish-2026-04-30
+active_phase: null                      # Fan-out complete — R0 through R6 all closed 2026-04-30
+in_flight_parallel_phases: []           # none
+last_redesign_session_id: redesign-r5-timeline-2026-04-30
 last_close_at: "2026-04-30"
-next_phase_committed_to: null           # R5 is last fan-out phase; R3 authorable; native decides next
-next_phase_brief_authored: true         # all parallel-ready briefs authored
-next_phase_clausecode_brief_set: false  # per-phase CLAUDECODE_BRIEFs await worktree setup
-post_r0_parallel_ready: [R5]            # R6 + R1 + R2 + R4 closed; only R5 remaining
-deferred_briefs: [R7]                   # R3 unblocked by R2; R7 now authorable (R6+R1+R2+R4 done)
-trace_fix_status: on_hold               # remained on_hold throughout R4 execution
+next_phase_committed_to: null           # R3 authorable (unblocked by R2); R7 authorable; native decides
+next_phase_brief_authored: true         # all fan-out briefs authored and closed
+next_phase_clausecode_brief_set: false  # R3/R7 await brief authoring
+post_r0_parallel_ready: []              # all fan-out phases closed; R3 + R7 are the remaining pipeline
+deferred_briefs: [R7]                   # R3 unblocked + authorable; R7 authorable (all R0–R6 closed)
+trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
 claude_md_section_C_updated: true       # CLAUDE.md §C item #12 added at R0 close
@@ -331,15 +332,15 @@ follow_ups:
 ```yaml
 phase_id: R5
 phase_name: Timeline — NEW /clients/[id]/timeline (LEL + prediction log)
-status: authored
+status: closed
 exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R5_TIMELINE_v1_0.md
-closure_report: null
-session_id: null
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R5_REPORT_v1_0.md
+session_id: redesign-r5-timeline-2026-04-30
 authored_at: 2026-04-29
-started_at: null
-closed_at: null
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: MEDIUM                             # new route; no schema change (LEL is markdown)
-estimated_sessions: 1                    # 2 if prediction-outcome-capture flow surfaces complexity
+estimated_sessions: 1                    # landed in 1 session
 depends_on: [R0]                         # nice-to-have: R2 (so the Timeline Room CTA in Profile becomes enabled)
 parallelizable_with: [R1, R2, R3, R6]
 sub_phases: []
@@ -347,13 +348,17 @@ key_deliverables:
   - new /clients/[id]/timeline route
   - <TimelineView> reading from 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md
   - <PredictionTable> for active prospective predictions
-  - <EventCard>, <LogEventDialog>
-  - flips R2's Timeline Room CTA from disabled to enabled
+  - <EventCard>, <LogEventDialog>, <LogPredictionDialog>
+  - LEL parser (two-pass: js-yaml + regex fallback; 36 events / 0 hard errors)
+  - LEL writer (append-only, in-process mutex, round-trip validation)
+  - /api/lel POST endpoint (super_admin only)
+  - 11 unit tests passing (7 parser + 4 writer)
 trace_fix_collision: false
-follow_ups: []
-status_note: >
-  R5 is the only phase the VISION names as "safely deferrable" (§4 Phased
-  execution plan). If schedule pressure surfaces, defer to a post-R7 session.
+follow_ups:
+  - "R2 Timeline Room CTA flip (disabled → href) deferred — R2 not yet closed at R5 close; execute when R2 closes"
+  - "drift_detector.py exit 2 is pre-existing (233 findings from before R5); not a regression; carry forward to pre-existing debt cleanup"
+  - "E2E timeline.spec.ts requires running dev server + SMOKE_SESSION_COOKIE env — run manually before R5 PR merge"
+  - "Outcome-capture UI dialog (markPredictionOutcome) deferred to R4 scope per VISION"
 ```
 
 ### R6 — Cockpit elevation

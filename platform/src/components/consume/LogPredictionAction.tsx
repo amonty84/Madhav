@@ -102,12 +102,15 @@ function LogPredictionDialog({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          query_id: queryId ?? 'ui-manual',
-          prediction_text: answerText.slice(0, 2000),
-          confidence,
-          horizon_start: today,
-          horizon_end: today,
-          falsifier: falsifier.trim(),
+          action: 'append_prediction',
+          payload: {
+            query_id: queryId ?? 'ui-manual',
+            prediction_text: answerText.slice(0, 2000),
+            confidence,
+            horizon_start: today,
+            horizon_end: today,
+            falsifier: falsifier.trim(),
+          },
         }),
       })
       if (!res.ok) {
@@ -185,7 +188,7 @@ function LogPredictionDialog({
           )}
 
           <div className="flex items-center justify-end gap-2 pt-1">
-            <DialogClose asChild>
+            <DialogClose>
               <Button type="button" variant="ghost" size="sm">Cancel</Button>
             </DialogClose>
             <Button type="submit" size="sm" disabled={submitting}>
