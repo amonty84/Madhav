@@ -1,6 +1,6 @@
 ---
 artifact_id: PORTAL_REDESIGN_TRACKER
-version: 1.0.4
+version: 1.0.5
 status: LIVING
 authored_by: Cowork (Opus)
 authored_at: 2026-04-29
@@ -61,6 +61,7 @@ consumers:
     R0's closure report) reads this file's §3 ledger to decide whether a
     session opening phase R[N] collides with an in-flight phase R[M].
 changelog:
+  - v1.0.5 (2026-04-30): R6 Cockpit elevation closed. §2 state block: last_redesign_session_id→redesign-r6-cockpit-2026-04-30, last_close_at→2026-04-30. §3 R6 row: status→closed, closure_report set, session_id set, closed_at set, follow_ups populated. deferred_briefs remains [R3, R7] — R7 now unblocked by R6 close (pending R1–R4). Authored by Claude Code (Sonnet 4.6) at R6 close.
   - v1.0.4 (2026-04-29): R0 Foundation closed. §2 state block: active_phase→null, last_redesign_session_id set, vision_status→CURRENT, canonical_artifacts_entry→true, claude_md_section_C_updated→true. §3 R0 row: status→closed, closure_report + session_id + closed_at set, follow_ups populated (forced scope expansions + playwright note). Version bumped 1.0.3→1.0.4. Authored by Claude Code (Sonnet 4.6) at R0 close.
   - v1.0.3 (2026-04-29): CLAUDECODE_BRIEF activation. Trace-fix
     CLAUDECODE_BRIEF.md parked to CLAUDECODE_BRIEF_TRACE_FIX_2026-04-29.md.hold;
@@ -114,15 +115,15 @@ It is the workstream-scoped analog of `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. `
 # Out-of-band edits to this block fail drift_detector.py once the parallelism_check
 # script lands (currently advisory).
 
-active_phase: null                      # R0 closed 2026-04-29; R1–R6 fan-out available
-in_flight_parallel_phases: []           # none — fan-out not yet started
-last_redesign_session_id: redesign-r0-foundation-2026-04-29
-last_close_at: "2026-04-29"
-next_phase_committed_to: null           # native decides which of R1–R6 to start next
-next_phase_brief_authored: true         # all five parallel-ready briefs authored
+active_phase: null                      # R6 closed 2026-04-30; R1–R5 fan-out still available
+in_flight_parallel_phases: []           # R6 closed; no other phase in flight
+last_redesign_session_id: redesign-r6-cockpit-2026-04-30
+last_close_at: "2026-04-30"
+next_phase_committed_to: null           # native decides which of R1–R5 to start next
+next_phase_brief_authored: true         # all parallel-ready briefs authored
 next_phase_clausecode_brief_set: false  # per-phase CLAUDECODE_BRIEFs await worktree setup
-post_r0_parallel_ready: [R1, R2, R4, R5, R6]
-deferred_briefs: [R3, R7]               # R3 awaits R2 close; R7 awaits R6 close
+post_r0_parallel_ready: [R1, R2, R4, R5]  # R6 now closed; R7 unblocked pending R1–R4
+deferred_briefs: [R3, R7]               # R3 awaits R2 close; R7 now unblocked by R6 close (pending R1–R4)
 trace_fix_status: on_hold               # trace fix parked; R4 collision dissolved
 vision_status: CURRENT                  # promoted at R0 close 2026-04-29
 canonical_artifacts_entry: true         # VISION + TRACKER added to CANONICAL_ARTIFACTS §1 at R0 close
@@ -340,24 +341,29 @@ status_note: >
 ```yaml
 phase_id: R6
 phase_name: Cockpit — elevate to AppShell rail + Active charts widget
-status: authored
+status: closed
 exec_brief: EXEC_BRIEF_PORTAL_REDESIGN_R6_COCKPIT_v1_0.md
-closure_report: null
-session_id: null
+closure_report: 00_ARCHITECTURE/PORTAL_REDESIGN_R6_REPORT_v1_0.md
+session_id: redesign-r6-cockpit-2026-04-30
 authored_at: 2026-04-29
-started_at: null
-closed_at: null
+started_at: "2026-04-30"
+closed_at: "2026-04-30"
 risk: LOW
 estimated_sessions: 1
 depends_on: [R0]                         # R6 is internals-untouched; just rail promotion + one new widget
 parallelizable_with: [R1, R2, R3, R5]
 sub_phases: []
 key_deliverables:
-  - Cockpit promoted to AppShell left rail (super_admin only)
-  - <ActiveChartsWidget> on CockpitGrid linking into Chart Profiles
-  - BuildHeader nav cleanup (already renamed in R0; this is housekeeping)
+  - Cockpit promoted to AppShell left rail (super_admin only) — verified no-op (R0 already correct)
+  - <ActiveChartsWidget> on CockpitGrid linking into Chart Profiles via /clients/{id}
+  - BuildHeader nav cleanup — verified no-op (R0 already removed avatar)
+  - getActiveCharts() in dataSource.ts with 60s cache + healthDot logic
+  - cockpit-rail.spec.ts (4 Playwright tests) + ActiveChartsWidget.test.tsx (6 Vitest tests)
 trace_fix_collision: false
-follow_ups: []
+follow_ups:
+  - "R7 brief now authorable — polish pass scope is now fully defined by what landed in R0–R6"
+  - "getActiveCharts cache TTL is module-level; consider Redis/KV if Cloud Run cold starts prove costly (deferred post-R7)"
+  - "ActiveChartsWidget could show a miniature chart thumbnail — deferred post-R7 polish"
 ```
 
 ### R7 — Polish
