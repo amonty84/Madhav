@@ -37,17 +37,11 @@ class RAGChunksWriter(IBuildWriter):
     def __init__(self) -> None:
         self._db_url = _db_url()
 
-    def write_chunks(
-        self,
-        chunks: list[Any],
-        embeddings: list[list[float]],
-        build_id: str,
-    ) -> WriteResult:
-        if len(chunks) != len(embeddings):
-            raise ValueError(
-                f"chunks ({len(chunks)}) and embeddings ({len(embeddings)}) count mismatch"
-            )
-
+    def write_to_staging(self, rows: list[Any], build_id: str) -> WriteResult:
+        """
+        Write chunk+embedding pairs to rag_chunks_staging / rag_embeddings_staging.
+        rows is list[tuple[chunk, list[float]]] — (chunk, embedding) pairs.
+        """
         errors: list[str] = []
         written = 0
 
@@ -57,10 +51,9 @@ class RAGChunksWriter(IBuildWriter):
             with psycopg.connect(self._db_url) as conn:
                 register_vector(conn)
                 with conn.cursor() as cur:
-                    for i in range(0, len(chunks), 100):
-                        batch_chunks = chunks[i : i + 100]
-                        batch_embeddings = embeddings[i : i + 100]
-                        for chunk, emb in zip(batch_chunks, batch_embeddings):
+                    for i in range(0, len(rows), 100):
+                        batch = rows[i : i + 100]
+                        for chunk, emb in batch:
                             meta = {
                                 **chunk.metadata,
                                 "citation_valid": chunk.citation_valid,
@@ -105,13 +98,26 @@ class RAGChunksWriter(IBuildWriter):
                                 (chunk.chunk_id, EMBEDDING_MODEL, vec),
                             )
                         conn.commit()
-                        written += len(batch_chunks)
-                        logger.info("Wrote staging batch %d–%d (%d total)", i, i + len(batch_chunks) - 1, written)
+                        written += len(batch)
+                        logger.info("Wrote staging batch %d–%d (%d total)", i, i + len(batch) - 1, written)
         except Exception as exc:
             errors.append(str(exc))
             raise
 
         return WriteResult(chunk_count=written, embedding_count=written, errors=errors)
+
+    def write_chunks(
+        self,
+        chunks: list[Any],
+        embeddings: list[list[float]],
+        build_id: str,
+    ) -> WriteResult:
+        """Convenience wrapper for main.py: zips chunks+embeddings into pairs and calls write_to_staging."""
+        if len(chunks) != len(embeddings):
+            raise ValueError(
+                f"chunks ({len(chunks)}) and embeddings ({len(embeddings)}) count mismatch"
+            )
+        return self.write_to_staging(list(zip(chunks, embeddings)), build_id)
 
     def validate_staging(self, build_id: str) -> ValidationResult:
         issues: list[str] = []
