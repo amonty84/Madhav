@@ -221,14 +221,14 @@ status: pending
 runs:
   - run_id: W2-R1
     title: Design System Implementation
-    status: pending
+    status: closed
     exec_brief: NAK_EXEC_BRIEF_W2_R1_DESIGN_FIX_v1_0.md    # authored at W1 close
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W2_R1.md
     branch: nak/w2-r1-design-fix
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r1
     session_id: null
-    started_at: null
-    closed_at: null
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_DESIGN_FIX_REPORT_W2_R1_v1_0.md
     input_from: W1-R1 closure report
     may_touch:
