@@ -22,14 +22,14 @@ export function RoomCard({ title, description, cta, children, className }: RoomC
       className={cn(
         'flex flex-col gap-4 rounded-lg border p-5',
         'border-[color-mix(in_oklch,var(--brand-gold)_20%,transparent)]',
-        'bg-[color-mix(in_oklch,var(--brand-charcoal,_#0d0a05)_94%,var(--brand-gold)_6%)]',
+        'bg-[color-mix(in_oklch,var(--brand-charcoal)_94%,var(--brand-gold)_6%)]',
         className,
       )}
     >
       <div className="flex flex-col gap-1">
         <h2
           className="text-base font-semibold"
-          style={{ color: 'var(--brand-gold-cream, #fce29a)' }}
+          style={{ color: 'var(--brand-gold-cream)' }}
         >
           {title}
         </h2>

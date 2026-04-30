@@ -125,15 +125,15 @@ export function UsersTable({
 
   return (
     <section className={adminCard + ' overflow-hidden'}>
-      <header className="flex items-center justify-between gap-3 border-b border-[#211a08] px-6 py-4">
-        <h2 className="font-serif text-lg text-[#fce29a]">Users</h2>
+      <header className="flex items-center justify-between gap-3 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)] px-6 py-4">
+        <h2 className="font-serif text-lg text-brand-gold-cream">Users</h2>
         <div className="flex items-center gap-3">
           <input
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search…"
-            className="rounded-md border border-[#2a2210] bg-[#0e0b06] px-3 py-1.5 text-sm text-[#fce29a] placeholder:text-[#6a5830] focus:border-[#d4af37] focus:outline-none"
+            className="rounded-md border border-[color-mix(in_oklch,var(--brand-gold)_18%,transparent)] bg-brand-ink px-3 py-1.5 text-sm text-brand-gold-cream placeholder:text-muted-foreground focus:border-brand-gold focus:outline-none"
           />
           <button onClick={() => setNewUserOpen(true)} className={adminPrimaryBtn}>
             + New user
@@ -142,7 +142,7 @@ export function UsersTable({
       </header>
 
       {filtered.length === 0 ? (
-        <p className="px-6 py-8 text-center text-sm text-[#7a5210]">No users.</p>
+        <p className="px-6 py-8 text-center text-sm text-muted-foreground">No users.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -163,31 +163,31 @@ export function UsersTable({
                 return (
                   <tr key={u.id} className={adminTableRow}>
                     <td className={adminTableTd + ' font-medium'}>
-                      {u.username ?? <span className="text-[#7a5210]">—</span>}
+                      {u.username ?? <span className="text-muted-foreground">—</span>}
                       {isMe && (
-                        <span className="ml-2 text-[10px] uppercase tracking-[0.14em] text-[#d4af37]">
+                        <span className="ml-2 text-[10px] uppercase tracking-[0.14em] text-brand-gold">
                           you
                         </span>
                       )}
                     </td>
-                    <td className={adminTableTd + ' text-[#9b834f]'}>{u.name ?? '—'}</td>
-                    <td className={adminTableTd + ' text-[#d4af37]'}>{u.email ?? '—'}</td>
+                    <td className={adminTableTd + ' text-muted-foreground'}>{u.name ?? '—'}</td>
+                    <td className={adminTableTd + ' text-brand-gold'}>{u.email ?? '—'}</td>
                     <td className={adminTableTd + ' text-[11px] uppercase tracking-[0.14em]'}>
                       {u.role}
                     </td>
                     <td className={adminTableTd}>
                       <StatusBadge status={u.status} />
                     </td>
-                    <td className={adminTableTd + ' whitespace-nowrap text-[#9b834f]'}>
+                    <td className={adminTableTd + ' whitespace-nowrap text-muted-foreground'}>
                       {formatDate(u.created_at)}
                     </td>
                     <td className={adminTableTd + ' text-right'}>
                       {isMe ? null : (
                         <DropdownMenu>
-                          <DropdownMenuTrigger className="rounded border border-[#3a2c10] px-3 py-1 text-xs text-[#d4af37] hover:border-[#d4af37] hover:text-[#fce29a]">
+                          <DropdownMenuTrigger className="rounded border border-[color-mix(in_oklch,var(--brand-gold)_22%,transparent)] px-3 py-1 text-xs text-brand-gold hover:border-brand-gold hover:text-brand-gold-cream">
                             Actions
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-[#0e0b06] text-[#fce29a]">
+                          <DropdownMenuContent align="end" className="bg-brand-ink text-brand-gold-cream">
                             <DropdownMenuItem onClick={() => setEditingUser(u)}>
                               Edit username
                             </DropdownMenuItem>
@@ -271,8 +271,8 @@ export function UsersTable({
 
       {/* Reset-link bottom sheet (after Send reset link succeeds) */}
       {resetLink && (
-        <div className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-xl rounded-lg border border-[rgba(212,175,55,0.4)] bg-[rgba(8,6,3,0.96)] p-4 shadow-2xl">
-          <div className="mb-2 text-[11px] uppercase tracking-[0.14em] text-[#7a5210]">
+        <div className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-xl rounded-lg border border-[var(--brand-gold-hairline)] bg-brand-ink p-4 shadow-2xl">
+          <div className="mb-2 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             Password-reset link
           </div>
           <textarea
@@ -280,7 +280,7 @@ export function UsersTable({
             value={resetLink}
             rows={3}
             onFocus={(e) => e.currentTarget.select()}
-            className="w-full break-all rounded border border-[#2a2210] bg-[#0e0b06] p-3 font-mono text-xs text-[#fce29a]"
+            className="w-full break-all rounded border border-[color-mix(in_oklch,var(--brand-gold)_18%,transparent)] bg-brand-ink p-3 font-mono text-xs text-brand-gold-cream"
           />
           <div className="mt-2 flex justify-end">
             <button onClick={() => setResetLink(null)} className={adminGhostBtn}>
