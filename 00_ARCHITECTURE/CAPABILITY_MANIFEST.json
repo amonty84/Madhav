@@ -55,7 +55,8 @@
       ],
       "cost_weight": 1,
       "always_required": true,
-      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "token_count": 12000
     },
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
@@ -142,7 +143,8 @@
         "discovery"
       ],
       "cost_weight": 0.7,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md",
+      "token_count": 25000
     },
     {
       "canonical_id": "CGM",
@@ -164,7 +166,8 @@
       ],
       "cost_weight": 1,
       "always_required": true,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md",
+      "token_count": 60000
     },
     {
       "canonical_id": "MSR_v3_0",
@@ -185,7 +188,8 @@
         "cross_domain"
       ],
       "cost_weight": 0.9,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md",
+      "token_count": 180000
     },
     {
       "canonical_id": "RED_TEAM_L2_5_v1_0",
@@ -221,7 +225,8 @@
         "cross_domain"
       ],
       "cost_weight": 0.6,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md",
+      "token_count": 18000
     },
     {
       "canonical_id": "UCN_v4_0",
@@ -242,7 +247,8 @@
         "holistic"
       ],
       "cost_weight": 0.8,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md",
+      "token_count": 95000
     },
     {
       "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
@@ -922,7 +928,7 @@
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART1.md",
       "phase": "M2-D3 Wave5",
-      "description": "Remedial Codex Part 1 — planetary propitiation, gemology, mantra practice, daily dinacharya. Chart-first remedial philosophy: strengthen architecturally-strong planets, dharmic register over ritual-density, befriend (not pacify) AmK Saturn / Avayogi Mars / exalted Ketu. Source for doc_type=l4_remedial RAG chunks.",
+      "description": "Remedial Codex Part 1 \u2014 planetary propitiation, gemology, mantra practice, daily dinacharya. Chart-first remedial philosophy: strengthen architecturally-strong planets, dharmic register over ritual-density, befriend (not pacify) AmK Saturn / Avayogi Mars / exalted Ketu. Source for doc_type=l4_remedial RAG chunks.",
       "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
     },
     {
@@ -940,7 +946,7 @@
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART2.md",
       "phase": "M2-D3 Wave5",
-      "description": "Remedial Codex Part 2 — yantra recommendations (Shree Yantra primary), devata-specific practices, temporal interventions, domain-specific remedies, intervention heatmap. Source for doc_type=l4_remedial RAG chunks.",
+      "description": "Remedial Codex Part 2 \u2014 yantra recommendations (Shree Yantra primary), devata-specific practices, temporal interventions, domain-specific remedies, intervention heatmap. Source for doc_type=l4_remedial RAG chunks.",
       "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
     },
     {
@@ -958,7 +964,7 @@
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L5/temporal/LIFETIME_TIMELINE_v1_0.md",
       "phase": "M2-D4 Wave5",
-      "description": "Lifetime Jyotish timeline — life arc from 1984 birth through Saturn Libra return 2041–2044. Phase-by-phase Vimshottari + Chara dasha progression, major event windows, structural inflection points (Saturn returns, Jupiter cycles, eclipses). v1.0.1 carries CORR.TL.01 correction (Ghati Lagna 9H Sagittarius / Varnada 4H Cancer; lagna-based 'hidden-pinnacle' framing falsified, Ketu MD arc preserved via Ketu-8H exaltation). Source for doc_type=l5_timeline RAG chunks (9 chunks).",
+      "description": "Lifetime Jyotish timeline \u2014 life arc from 1984 birth through Saturn Libra return 2041\u20132044. Phase-by-phase Vimshottari + Chara dasha progression, major event windows, structural inflection points (Saturn returns, Jupiter cycles, eclipses). v1.0.1 carries CORR.TL.01 correction (Ghati Lagna 9H Sagittarius / Varnada 4H Cancer; lagna-based 'hidden-pinnacle' framing falsified, Ketu MD arc preserved via Ketu-8H exaltation). Source for doc_type=l5_timeline RAG chunks (9 chunks).",
       "downstream_canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY"
     },
     {
@@ -1836,10 +1842,20 @@
       ],
       "interface_version": "1.0",
       "phase": "M2-D2 Wave5",
-      "description": "Queries rag_chunks where doc_type='domain_report' (L3). Returns domain synthesis content for 9 domains: career, children, financial, health, parents, psychology, relationships, spiritual, travel. Filter by domain name(s) mapped to source_doc pattern, or by keyword. No new chunking needed — domain_report chunks pre-exist from Pre-KARN-4.",
+      "description": "Queries rag_chunks where doc_type='domain_report' (L3). Returns domain synthesis content for 9 domains: career, children, financial, health, parents, psychology, relationships, spiritual, travel. Filter by domain name(s) mapped to source_doc pattern, or by keyword. No new chunking needed \u2014 domain_report chunks pre-exist from Pre-KARN-4.",
       "doc_type": "domain_report",
       "layer_source": "L3",
-      "domains_covered": ["career", "children", "financial", "health", "parents", "psychology", "relationships", "spiritual", "travel"],
+      "domains_covered": [
+        "career",
+        "children",
+        "financial",
+        "health",
+        "parents",
+        "psychology",
+        "relationships",
+        "spiritual",
+        "travel"
+      ],
       "fingerprint": "d234_domain_report_query_v1_0_0_wave5"
     },
     {
@@ -1858,7 +1874,10 @@
       "description": "Queries rag_chunks where doc_type='l4_remedial' (L4). Returns remedial prescriptions from REMEDIAL_CODEX_v2_0 PART1+PART2 (21 chunks). Filter by planet (Mercury, Saturn, Mars, etc.) or practice_type (gemstone, mantra, yantra, devata, dinacharya, propit). Chunked by remedial_chunker.py Wave5.",
       "doc_type": "l4_remedial",
       "layer_source": "L4",
-      "source_canonical_ids": ["REMEDIAL_CODEX_v2_0_PART1", "REMEDIAL_CODEX_v2_0_PART2"],
+      "source_canonical_ids": [
+        "REMEDIAL_CODEX_v2_0_PART1",
+        "REMEDIAL_CODEX_v2_0_PART2"
+      ],
       "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5"
     },
     {
@@ -1874,15 +1893,17 @@
       ],
       "interface_version": "1.0",
       "phase": "M2-D4 Wave5",
-      "description": "Queries rag_chunks where doc_type='l5_timeline' (L5). Returns lifetime timeline content from LIFETIME_TIMELINE_v1_0 (9 chunks) — dasha phase arcs, event windows, structural inflection points. Filter by dasha_name or keyword. NOTE: Next MD after Mercury is Ketu MD (2027-08-21). Chunked by timeline_chunker.py Wave5.",
+      "description": "Queries rag_chunks where doc_type='l5_timeline' (L5). Returns lifetime timeline content from LIFETIME_TIMELINE_v1_0 (9 chunks) \u2014 dasha phase arcs, event windows, structural inflection points. Filter by dasha_name or keyword. NOTE: Next MD after Mercury is Ketu MD (2027-08-21). Chunked by timeline_chunker.py Wave5.",
       "doc_type": "l5_timeline",
       "layer_source": "L5",
-      "source_canonical_ids": ["LIFETIME_TIMELINE_v1_0"],
+      "source_canonical_ids": [
+        "LIFETIME_TIMELINE_v1_0"
+      ],
       "fingerprint": "d234_timeline_query_v1_0_0_wave5"
     }
   ],
   "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30",
   "manifest_version": "1.7",
-  "last_updated": "2026-04-30T18:12:00Z",
-  "last_updated_by": "KARN-W7-R2-MANIFEST-COMPLETENESS"
+  "last_updated": "2026-05-01",
+  "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
 }

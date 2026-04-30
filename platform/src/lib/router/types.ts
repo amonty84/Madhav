@@ -61,3 +61,84 @@ export interface QueryPlan {
   retrograde_query?: boolean
   retrograde_planet?: string
 }
+
+// ────────────────────────────────────────────────────────────────────────────
+// BHISMA Stream 2 — LLM-first planner types (§4.2)
+//
+// `RichQueryPlan` is what the unified `plan()` function returns when
+// `LLM_FIRST_PLANNER_ENABLED=true`. It is a strict superset of `QueryPlan`,
+// so every downstream consumer that already accepts a `QueryPlan` continues
+// to work without change. Only the planner-aware code paths (route.ts when
+// the flag is on, single_model_strategy synthesis_guidance reader) need to
+// know about the extra fields.
+// ────────────────────────────────────────────────────────────────────────────
+
+/** Planning priority for a tool call. 1 = critical (never drop), 3 = nice-to-have. */
+export type ToolCallPriority = 1 | 2 | 3
+
+/**
+ * Per-tool parameter spec produced by the planning LLM. The `params` object
+ * is opaque from the planner's POV — each retrieval tool validates its own
+ * param shape via Zod when called. Planner-supplied params are merged on
+ * top of the QueryPlan defaults at retrieval time, exactly the same way
+ * `per_tool_planner.ts` overrides work today.
+ */
+export interface ToolCallSpec {
+  tool_name: string
+  params: Record<string, unknown>
+  priority: ToolCallPriority
+  reason: string
+}
+
+/**
+ * The richer plan emitted by the LLM-first planner. Extends QueryPlan; all
+ * legacy consumers (rule_composer, retrieval pipeline) read only QueryPlan
+ * fields and ignore the extras.
+ */
+export interface RichQueryPlan extends QueryPlan {
+  /** One-sentence summary of what the user actually wants. */
+  query_intent_summary: string
+  /** Why these tools were selected (plan-level rationale). */
+  planning_rationale: string
+  /** Instruction to the synthesis LLM on angle, depth, and emphasis. */
+  synthesis_guidance: string
+  /** Per-tool parameter specs produced by the planning LLM. */
+  tool_calls: ToolCallSpec[]
+  /** Worker model that produced this plan. */
+  planning_model_id: string
+  /** Wall-clock latency of the planning LLM call. */
+  planning_latency_ms: number
+}
+
+/** Minimal chart context the planning LLM needs to make sane tool selections. */
+export interface ChartContext {
+  name: string
+  birth_date: string
+  birth_time: string
+  birth_place: string
+  /** Active mahadasha at current_date, e.g. "Mercury MD (2010–2027)". Optional. */
+  active_dasha?: string
+}
+
+/** Conversation turn the planner consumes for short-term context. */
+export interface ConversationTurn {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+/**
+ * Full input to `plan()`. The caller is responsible for resolving the
+ * synthesis-model family (so the planner knows which worker family to use
+ * per ADR-1) and for stamping current_date — never let the LLM guess time.
+ */
+export interface PlanContext {
+  query: string
+  conversation_history: ConversationTurn[]
+  chart_context: ChartContext
+  /** ISO date — the planner uses this for any temporal reasoning, never `new Date()` inside the prompt. */
+  current_date: string
+  audience_tier: QueryPlan['audience_tier']
+  manifest_fingerprint: string
+  /** The user-selected synthesis model; planner resolves its worker family from this. */
+  synthesis_model_id: string
+}

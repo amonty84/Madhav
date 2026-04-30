@@ -2,9 +2,8 @@ export type FeatureFlag =
   | 'PANEL_MODE_ENABLED'
   | 'MANIFEST_BUILDER_ENABLED'
   | 'LLM_CHECKPOINTS_ENABLED'
-  | 'BUNDLE_AUGMENTER_ENABLED'
-  | 'MSR_RERANKER_ENABLED'
-  | 'SEMANTIC_GATE_ENABLED'
+  // BHISMA-B1 §6.2 — retired: BUNDLE_AUGMENTER_ENABLED, MSR_RERANKER_ENABLED,
+  // SEMANTIC_GATE_ENABLED were declared but never implemented in any code path.
   | 'NEW_QUERY_PIPELINE_ENABLED'
   | 'VALIDATOR_FAILURE_HALT'
   | 'SYNTHESIS_PROMPT_DEBUG'
@@ -28,14 +27,14 @@ export type FeatureFlag =
   | 'PANEL_DEGRADE_2_OF_3'
   // Wave 6 M2-D2 — Per-tool Haiku planner (default OFF; flip after smoke verification)
   | 'PER_TOOL_PLANNER_ENABLED'
+  // BHISMA Stream 2 — LLM-first planner replaces classify+compose+plan_per_tool when ON.
+  // Default OFF; old path remains reachable. Flip after smoke + post-BHISMA eval comparison.
+  | 'LLM_FIRST_PLANNER_ENABLED'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
   MANIFEST_BUILDER_ENABLED: false,
   LLM_CHECKPOINTS_ENABLED: false,
-  BUNDLE_AUGMENTER_ENABLED: false,
-  MSR_RERANKER_ENABLED: false,
-  SEMANTIC_GATE_ENABLED: false,
   NEW_QUERY_PIPELINE_ENABLED: true,
   VALIDATOR_FAILURE_HALT: true,
   SYNTHESIS_PROMPT_DEBUG: false,
@@ -58,6 +57,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_DEGRADE_2_OF_3: false,
   // Wave 6 M2-D2 — Per-tool Haiku planner (default OFF; flip after smoke verification)
   PER_TOOL_PLANNER_ENABLED: false,
+  // BHISMA Stream 2 — LLM-first planner. Default OFF; old path is the live one.
+  LLM_FIRST_PLANNER_ENABLED: false,
 }
 
 // Numeric config keys (read via configService.getValue)
