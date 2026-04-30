@@ -2,6 +2,7 @@
 
 import type { TrendEntry } from '@/lib/build/types'
 
+// CHART_PALETTE — hex literals kept for SVG rect fill props; CSS variables are not valid SVG attribute values.
 const EXIT_COLORS: Record<number, string> = {
   0: '#22c55e',
   1: '#86efac',

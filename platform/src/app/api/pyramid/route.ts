@@ -1,30 +1,40 @@
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { NextResponse } from 'next/server'
+import { res } from '@/lib/errors'
 
 export async function GET(request: Request) {
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
   const { searchParams } = new URL(request.url)
   const chartId = searchParams.get('chartId')
-  if (!chartId) return NextResponse.json({ error: 'chartId required' }, { status: 400 })
+  if (!chartId) return res.badRequest('chartId required')
 
   // Verify caller can access this chart
-  const { rows: chartRows } = await query<{ client_id: string }>(
-    'SELECT client_id FROM charts WHERE id=$1',
-    [chartId]
-  )
-  const chart = chartRows[0] ?? null
-  if (!chart) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  let chartRows: Array<{ client_id: string }>
+  let profileRows: Array<{ role: string }>
+  try {
+    const chartResult = await query<{ client_id: string }>(
+      'SELECT client_id FROM charts WHERE id=$1',
+      [chartId]
+    )
+    chartRows = chartResult.rows
+    const profileResult = await query<{ role: string }>(
+      'SELECT role FROM profiles WHERE id=$1',
+      [user.uid]
+    )
+    profileRows = profileResult.rows
+  } catch {
+    return res.dbError()
+  }
 
-  const { rows: profileRows } = await query<{ role: string }>(
-    'SELECT role FROM profiles WHERE id=$1',
-    [user.uid]
-  )
+  const chart = chartRows[0] ?? null
+  if (!chart) return res.notFound('chart')
+
   const profile = profileRows[0] ?? null
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) {
-    return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+    return res.forbidden()
   }
 
   try {
@@ -35,6 +45,6 @@ export async function GET(request: Request) {
     return NextResponse.json(layers)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Query failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 }

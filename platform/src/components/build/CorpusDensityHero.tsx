@@ -47,6 +47,7 @@ function MiniBar({ items }: { items: { label: string; count: number; color: stri
   )
 }
 
+// CHART_PALETTE — hex literals kept for recharts MiniBar inline SVG style.background props.
 const DOC_COLORS = [
   '#3b82f6', '#8b5cf6', '#06b6d4', '#f59e0b',
   '#10b981', '#f97316', '#ec4899',
@@ -114,7 +115,7 @@ export function CorpusDensityHero({ corpus }: Props) {
                   key={d.domain_id}
                   className={`rounded px-2 py-0.5 bt-label ${
                     d.status === 'current'
-                      ? 'bg-[oklch(0.93_0.05_145)] text-[oklch(0.40_0.12_145)] dark:bg-[oklch(0.25_0.05_145)] dark:text-[oklch(0.78_0.13_145)]'
+                      ? 'bg-status-success-bg text-status-success'
                       : 'bg-muted text-muted-foreground'
                   }`}
                 >
@@ -124,7 +125,7 @@ export function CorpusDensityHero({ corpus }: Props) {
             : Array.from({ length: l3Total }).map((_, i) => (
                 <span
                   key={i}
-                  className="rounded px-2 py-0.5 bt-label bg-[oklch(0.93_0.05_145)] text-[oklch(0.40_0.12_145)]"
+                  className="rounded px-2 py-0.5 bt-label bg-status-success-bg text-status-success"
                 >
                   L3.{i + 1}
                 </span>
