@@ -36,7 +36,7 @@ export function DashaCountdown({ md, ad, adEnd }: DashaCountdownProps) {
       <p className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--brand-gold)' }}>
         Vimshottari Dasha
       </p>
-      <p className="text-sm font-medium" style={{ color: 'var(--brand-gold-cream, #fce29a)' }}>
+      <p className="text-sm font-medium" style={{ color: 'var(--brand-gold-cream)' }}>
         {md} MD · {ad} AD
       </p>
       <p className="text-xs" style={{ color: 'var(--brand-gold)', opacity: 0.85 }}>

@@ -34,10 +34,10 @@ export function ConfirmDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className={adminDialog + ' sm:max-w-md'}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl font-medium tracking-wide text-[#fce29a]">
+          <DialogTitle className="font-serif text-xl font-medium tracking-wide text-brand-gold-cream">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-sm text-[#9b834f]">
+          <DialogDescription className="text-sm text-muted-foreground">
             {description}
           </DialogDescription>
         </DialogHeader>
