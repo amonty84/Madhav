@@ -57,9 +57,9 @@ export default async function ClientPage({
     role === 'super_admin'
       ? query<{ promoted_at: string | null; build_id: string }>(
           `SELECT build_id, promoted_at FROM build_manifests
-           WHERE chart_id=$1 AND status='promoted'
+           WHERE status='live'
            ORDER BY promoted_at DESC NULLS LAST LIMIT 1`,
-          [id],
+          [],
         )
       : Promise.resolve({ rows: [] }),
   ])
@@ -83,7 +83,7 @@ export default async function ClientPage({
   const generatedAt = lastBuild?.promoted_at ?? null
 
   return (
-    <ZoneRoot zone="vellum" className="min-h-full">
+    <ZoneRoot zone="ink" className="min-h-full">
       <ChartHero
         chart={forensicChart}
         nativeName={chart.name}

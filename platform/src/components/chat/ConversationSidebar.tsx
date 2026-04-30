@@ -56,6 +56,7 @@ interface Props {
   onRenamed?: (id: string, title: string) => void
   onDeleted?: (id: string) => void
   onClose?: () => void
+  onNavigate?: () => void
 }
 
 function groupByDate(conversations: ConversationRow[]) {
@@ -86,6 +87,7 @@ export function ConversationSidebar({
   onRenamed,
   onDeleted,
   onClose,
+  onNavigate,
 }: Props) {
   const router = useRouter()
   const [query, setQuery] = useState('')
@@ -237,6 +239,7 @@ export function ConversationSidebar({
                     active={c.id === currentConversationId}
                     onRename={() => handleRename(c.id)}
                     onDelete={() => handleDelete(c.id)}
+                    onNavigate={onNavigate}
                   />
                 ))}
               </ul>
@@ -305,12 +308,14 @@ function ConversationRowItem({
   active,
   onRename,
   onDelete,
+  onNavigate,
 }: {
   row: ConversationRow
   chartId: string
   active: boolean
   onRename: () => void
   onDelete: () => void
+  onNavigate?: () => void
 }) {
   const linkRef = useRef<HTMLAnchorElement>(null)
   const [open, setOpen] = useState(false)
@@ -326,6 +331,7 @@ function ConversationRowItem({
       <Link
         ref={linkRef}
         href={`/clients/${chartId}/consume/${row.id}`}
+        onClick={onNavigate}
         className={cn(
           'block truncate rounded-lg px-3 py-1.5 pr-8 text-sm transition-colors',
           active

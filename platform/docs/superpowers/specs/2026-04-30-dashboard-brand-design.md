@@ -16,9 +16,9 @@ The login page establishes a strong brand identity: deep ink background, Mandala
 
 | Decision | Choice | Rationale |
 |---|---|---|
-| Theme forcing | `ZoneRoot zone="ink"` on `AppShell` | Dashboard is always the operator's tool; the brand is dark-first |
+| Theme forcing | `ZoneRoot zone="ink"` in **dashboard layout only** | Dashboard is always the operator's tool; scoped to layout so shared `AppShell` is not affected |
 | Mandala | Present at ~13% opacity + radial vignette | Atmospheric without competing with data; matches login treatment |
-| Page title ornament | Devanagari dandas `॥` flanking "Roster" | Domain marker; matches `bt-devanagari-rule` token in globals.css |
+| Page title ornament | Devanagari dandas `॥` as **inline JSX text** flanking "Roster" | `bt-devanagari-rule` class is restricted to the Welcome H2 by CSS comment; dandas inlined directly |
 | Typography | `bt-display` title, `bt-heading` card names, `bt-num` build %, `bt-label` metadata | Uses the 5-step scale already defined in globals.css |
 | Primary action | `brand-cta` class on "+ New Client" | Matches login sign-in button treatment |
 | Card surface | Translucent ink fill + gold border (matches `.brand-card`) | Consistent with the consume shell card treatment |
@@ -28,19 +28,31 @@ The login page establishes a strong brand identity: deep ink background, Mandala
 
 ## Files to Change
 
-### 1. `src/components/shared/AppShell.tsx`
+### 1. `src/app/dashboard/layout.tsx`
 
-Wrap the outer `div` in `ZoneRoot zone="ink"`. This adds the `dark` class (triggering Tailwind dark variants) and `zone-ink` for any CSS scope rules. No other change needed — Tailwind dark: variants and the brand token overrides in `globals.css` already handle the rest.
+Wrap the `AppShell` return in `ZoneRoot zone="ink"`. This scopes the `dark` class and `zone-ink` to the dashboard route only — admin, cockpit, build, and consume routes that also use `AppShell` are unaffected.
 
 ```tsx
 // Before
-<div className="flex h-[100dvh] bg-background text-foreground">
+return (
+  <AppShell user={ctx.user} profile={ctx.profile} breadcrumb={[{ label: 'Roster', current: true }]}>
+    {children}
+  </AppShell>
+)
 
 // After
-<ZoneRoot zone="ink" className="flex h-[100dvh]">
+return (
+  <ZoneRoot zone="ink" className="h-[100dvh]">
+    <AppShell user={ctx.user} profile={ctx.profile} breadcrumb={[{ label: 'Roster', current: true }]}>
+      {children}
+    </AppShell>
+  </ZoneRoot>
+)
 ```
 
-Import `ZoneRoot` from `@/components/shared/ZoneRoot`.
+Import `ZoneRoot` from `@/components/shared/ZoneRoot`. **Keep `h-[100dvh]` on `AppShell`'s own wrapper div** — `h-[100dvh]` is viewport-absolute and would collapse the shell if removed. The `className="h-[100dvh]"` on `ZoneRoot` is cosmetic/optional; `AppShell`'s own sizing is authoritative.
+
+**`src/components/shared/AppShell.tsx` — no change required.**
 
 ---
 
@@ -75,7 +87,7 @@ Replace the plain container wrapper with a brand-immersive layout:
 - Mandala: `<Mandala size={560} opacity={0.13} className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />`
 - Vignette overlay: `<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_25%,rgba(2,2,1,0.5)_65%,rgba(2,2,1,0.88)_100%)]" />`
 - Content div: `relative z-10 py-8 px-4 container mx-auto`
-- Page heading: `<h1 className="bt-display bt-devanagari-rule text-[#fce29a] mb-6">Roster</h1>` (the `bt-devanagari-rule` pseudo-elements add the dandas)
+- Page heading: `<h1 className="bt-display text-[#fce29a] mb-6"><span className="opacity-55 text-[#d4af37] font-serif mr-1">॥</span>Roster<span className="opacity-55 text-[#d4af37] font-serif ml-1">॥</span></h1>` — dandas inlined as JSX spans, **not** `bt-devanagari-rule` (that class is reserved for the Welcome H2 per the CSS comment in globals.css)
 - "+ New Client" button: replace `buttonVariants()` with `brand-cta` class directly on the `<Link>`
 
 ---
@@ -144,7 +156,7 @@ hover:border-[rgba(212,175,55,0.35)] transition-colors
 
 **Progress bar** (new): 2px track `bg-[rgba(212,175,55,0.1)] rounded-full`, fill `bg-gradient-to-r from-[#a26d0e] to-[#f4d160]` width = `pyramidPercent%`
 
-**Metadata:** `bt-label text-[rgba(212,175,55,0.42)]`
+**Metadata:** `bt-label` with inline `style={{ color: 'rgba(212,175,55,0.42)' }}` — same reason as table headers; `.bt-label` color must be overridden with inline style
 
 **Moment phrase:** `text-[rgba(212,175,55,0.3)] text-xs truncate`
 
@@ -160,7 +172,7 @@ hover:border-[rgba(212,175,55,0.35)] transition-colors
 
 - Outer wrapper: `overflow-x-auto rounded-lg border border-[rgba(212,175,55,0.15)]`
 - `thead`: `bg-[rgba(8,6,3,0.6)]`
-- Header cells: `bt-label bt-label-upper text-[rgba(212,175,55,0.45)] px-3 py-2`
+- Header cells: `bt-label bt-label-upper px-3 py-2` with an inline `style={{ color: 'rgba(212,175,55,0.45)' }}` — `.bt-label` sets `color: var(--color-muted-foreground)` directly in CSS which takes precedence over Tailwind `text-[...]` utilities; use inline style to guarantee the gold override wins
 - Sort buttons: `hover:text-[#d4af37] transition-colors`
 - Row hover: `hover:bg-[rgba(212,175,55,0.04)]`
 - Row divider: `divide-[rgba(212,175,55,0.1)]`
