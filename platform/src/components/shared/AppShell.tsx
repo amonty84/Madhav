@@ -15,6 +15,12 @@ interface AppShellProps {
 export function AppShell({ children, user, profile, breadcrumb = [] }: AppShellProps) {
   return (
     <div className="flex h-[100dvh] bg-background text-foreground">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]"
+      >
+        Skip to main content
+      </a>
       {/* Desktop sidebar rail — hidden on mobile */}
       <AppShellRail user={user} profile={profile} />
       <div className="flex flex-1 flex-col overflow-hidden">
@@ -22,7 +28,7 @@ export function AppShell({ children, user, profile, breadcrumb = [] }: AppShellP
           segments={breadcrumb}
           mobileNav={<MobileNavSheet user={user} profile={profile} />}
         />
-        <main className="page-ascend flex-1 overflow-auto">{children}</main>
+        <main id="main-content" className="page-ascend flex-1 overflow-auto">{children}</main>
       </div>
     </div>
   )
