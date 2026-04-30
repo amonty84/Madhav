@@ -185,14 +185,14 @@ runs:
 
   - run_id: W1-R3
     title: UX Component Audit and A11y First Pass
-    status: pending
+    status: closed
     exec_brief: NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W1_R3.md
     branch: nak/w1-r3-component-audit
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r3
-    session_id: null
-    started_at: null
-    closed_at: null
+    session_id: NAK-W1-R3-2026-04-30
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_COMPONENT_AUDIT_REPORT_W1_R3_v1_0.md
     may_touch:
       - platform/src/components/**             # read all components
@@ -204,7 +204,10 @@ runs:
       - 00_NAK/NAK_DESIGN_SYSTEM_v1_0.md      # W1-R1 territory
       - 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md    # W1-R2 territory
     parallelizable_with: [W1-R1, W1-R2]
-    follow_ups: []
+    follow_ups:
+      - W0 inventory methodology error: component "duplicates" were usage sites, not definition files. W0 component inventory (Part C) should be re-read with this understanding.
+      - MessageList W0 "unused" verdict reversed — KEEP-AS-IS (2 active importers)
+      - 3 HIGH + 4 MEDIUM a11y issues queued for W2-R3 (see NAK_COMPONENT_AUDIT_v1_0.md §2)
 ```
 
 ---
