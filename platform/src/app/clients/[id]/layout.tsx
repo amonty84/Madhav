@@ -2,6 +2,7 @@ import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
 import { AppShell } from '@/components/shared/AppShell'
+import { ZoneRoot } from '@/components/shared/ZoneRoot'
 
 export default async function ClientLayout({
   children,
@@ -26,15 +27,17 @@ export default async function ClientLayout({
   if (profile?.role !== 'super_admin' && chart.client_id !== user.uid) redirect('/dashboard')
 
   return (
-    <AppShell
-      user={user}
-      profile={{ role: (profile?.role as 'super_admin' | 'client') ?? 'client', status: 'active' }}
-      breadcrumb={[
-        { label: 'Roster', href: '/dashboard' },
-        { label: chart.name ?? id, href: `/clients/${id}`, current: true },
-      ]}
-    >
-      {children}
-    </AppShell>
+    <ZoneRoot zone="ink">
+      <AppShell
+        user={user}
+        profile={{ role: (profile?.role as 'super_admin' | 'client') ?? 'client', status: 'active' }}
+        breadcrumb={[
+          { label: 'Roster', href: '/dashboard' },
+          { label: chart.name ?? id, href: `/clients/${id}`, current: true },
+        ]}
+      >
+        {children}
+      </AppShell>
+    </ZoneRoot>
   )
 }
