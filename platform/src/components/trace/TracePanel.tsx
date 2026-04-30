@@ -3,19 +3,27 @@
 /**
  * MARSYS-JIS Query Trace Panel
  *
+ * v2.0 (BHISMA-B3, 2026-05-01):
+ *  - Full warm-gold re-skin per §5.1 (no cold slate palette anywhere)
+ *  - QueryDNAPanel above the timeline (§5.2)
+ *  - CostPerformanceBar in the footer (§5.4) above the wall-clock TimelineBar
+ *  - RetrievalScorecard mounted in ContextInspector when a tool step is selected (§5.3)
+ *  - Inline SynthesisQualityIndicators below the context summary (§5.5)
+ *  - History tab gains an Analytics sub-tab (§5.7)
+ *  - Single-click chunk expand (§5.8 GAP.T.10), inline error message display (§5.8)
+ *
  * Right-side drawer (65vw) showing real-time pipeline execution for any query.
  * Opens from the ⚡ TRACE button in the ConsumeChat input area.
- *
- * Layout:
- *   Header: query pill · LIVE/DONE badge · Live | History tabs
- *   Body:   TraceTimeline (left 300px) + ContextInspector (right flex)
- *   Footer: wall-clock timeline bar with parallel lanes
  */
 
 import { useState, useMemo } from 'react'
-import { X, ChevronRight, ChevronDown, Clock, Layers, Database, Zap } from 'lucide-react'
+import { X, ChevronRight, ChevronDown, Clock, Layers, Database, Zap, AlertCircle, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import { useTraceStream } from '@/hooks/useTraceStream'
-import type { TraceStep, TraceChunkItem } from '@/lib/trace/types'
+import type { TraceStep, TraceChunkItem, TraceHistoryRow } from '@/lib/trace/types'
+import { QueryDNAPanel } from './QueryDNAPanel'
+import { CostPerformanceBar } from './CostPerformanceBar'
+import { RetrievalScorecard, RetrievalEfficiency } from './RetrievalScorecard'
+import { AnalyticsTab } from './AnalyticsTab'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -25,28 +33,43 @@ interface Props {
   onClose: () => void
 }
 
-// ── Step type display config ───────────────────────────────────────────────────
+// ── Step type display config (warm tonal palette per BHISMA §5.1) ─────────────
 
 const STEP_TYPE_CONFIG = {
-  deterministic: { label: 'DET', color: 'bg-slate-700 text-slate-300 border-slate-600' },
-  llm:           { label: 'LLM', color: 'bg-violet-950 text-violet-300 border-violet-700' },
-  sql:           { label: 'SQL', color: 'bg-sky-950 text-sky-300 border-sky-700' },
-  vector:        { label: 'VEC', color: 'bg-emerald-950 text-emerald-300 border-emerald-700' },
-  gcs:           { label: 'GCS', color: 'bg-red-950 text-red-300 border-red-700' },
+  deterministic: {
+    label: 'DET',
+    color: 'bg-[rgba(180,140,20,0.15)] text-[rgba(212,175,55,0.75)] border-[rgba(212,175,55,0.25)]',
+  },
+  llm: {
+    label: 'LLM',
+    color: 'bg-[rgba(140,90,200,0.15)] text-[rgba(180,140,240,0.85)] border-[rgba(160,110,220,0.25)]',
+  },
+  sql: {
+    label: 'SQL',
+    color: 'bg-[rgba(20,100,180,0.15)] text-[rgba(100,160,240,0.85)] border-[rgba(60,130,210,0.25)]',
+  },
+  vector: {
+    label: 'VEC',
+    color: 'bg-[rgba(20,160,100,0.15)] text-[rgba(80,200,140,0.85)] border-[rgba(40,180,120,0.25)]',
+  },
+  gcs: {
+    label: 'GCS',
+    color: 'bg-[rgba(200,80,40,0.15)] text-[rgba(240,130,100,0.85)] border-[rgba(220,100,60,0.25)]',
+  },
 } as const
 
 const TIMELINE_BAR_COLOR = {
-  deterministic: 'bg-slate-500',
-  llm:           'bg-violet-600',
-  sql:           'bg-sky-600',
-  vector:        'bg-emerald-600',
-  gcs:           'bg-red-600',
+  deterministic: 'bg-[rgba(212,175,55,0.6)]',
+  llm:           'bg-[rgba(160,110,220,0.7)]',
+  sql:           'bg-[rgba(60,130,210,0.7)]',
+  vector:        'bg-[rgba(40,180,120,0.7)]',
+  gcs:           'bg-[rgba(220,100,60,0.7)]',
 } as const
 
 const LAYER_COLOR = {
-  L1:      { dot: 'bg-red-500', bar: 'bg-red-500', text: 'text-red-400' },
-  'L2.5':  { dot: 'bg-violet-500', bar: 'bg-violet-500', text: 'text-violet-400' },
-  system:  { dot: 'bg-slate-500', bar: 'bg-slate-500', text: 'text-slate-400' },
+  L1:      { dot: 'bg-[rgba(244,209,96,0.85)]', bar: 'bg-[rgba(244,209,96,0.85)]', text: 'text-[rgba(244,209,96,0.9)]' },
+  'L2.5':  { dot: 'bg-[rgba(190,150,240,0.85)]', bar: 'bg-[rgba(190,150,240,0.85)]', text: 'text-[rgba(190,150,240,0.9)]' },
+  system:  { dot: 'bg-[rgba(212,175,55,0.4)]', bar: 'bg-[rgba(212,175,55,0.4)]', text: 'text-[rgba(212,175,55,0.6)]' },
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -71,7 +94,7 @@ function stepSummaryLine(step: TraceStep): string {
   if (step.step_type === 'gcs' && s.token_estimate != null)
     return `~${fmtTokens(s.token_estimate)} tok`
   if (step.step_type === 'llm' && s.model)
-    return `${s.model.replace('claude-', '')} · in:${s.input_tokens ?? '?'} out:${s.output_tokens ?? '?'}`
+    return `${s.model.replace(/^claude-|^gpt-|^gemini-|^deepseek-/, '')} · in:${s.input_tokens ?? '?'} out:${s.output_tokens ?? '?'}`
   if (s.result) return s.result
   return ''
 }
@@ -93,22 +116,25 @@ function StepRow({
   const isError = step.status === 'error'
 
   const seqBg = isDone
-    ? 'bg-emerald-950 border-emerald-700 text-emerald-300'
+    ? 'bg-[rgba(212,175,55,0.08)] border-[rgba(212,175,55,0.35)] text-[rgba(244,209,96,0.9)]'
     : isRunning
-    ? 'bg-blue-950 border-blue-600 text-blue-300 animate-pulse'
+    ? 'bg-[rgba(100,80,20,0.3)] border-[rgba(212,175,55,0.45)] text-[rgba(252,226,154,0.95)] animate-pulse'
     : isError
-    ? 'bg-red-950 border-red-700 text-red-400'
-    : 'bg-slate-900 border-slate-700 text-slate-500'
+    ? 'bg-[rgba(220,90,60,0.15)] border-[rgba(230,110,80,0.5)] text-[rgba(240,150,120,0.95)]'
+    : 'bg-[rgba(5,3,1,0.8)] border-[rgba(212,175,55,0.15)] text-[rgba(212,175,55,0.4)]'
 
   const summaryLine = stepSummaryLine(step)
+  const errorMessage = isError
+    ? (step.payload.error_message ?? step.data_summary.error_reason ?? 'unknown error')
+    : null
   const latencyPct = step.latency_ms ? Math.min(100, (step.latency_ms / 2000) * 100) : 0
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`w-full text-left flex items-start gap-2.5 px-3 py-2 transition-colors border-l-2 hover:bg-slate-800/60 ${
-        isSelected ? 'bg-slate-800 border-l-blue-500' : 'border-l-transparent'
+      className={`w-full text-left flex items-start gap-2.5 px-3 py-2 transition-colors border-l-2 hover:bg-[rgba(212,175,55,0.04)] ${
+        isSelected ? 'bg-[rgba(212,175,55,0.06)] border-l-[#d4af37]' : 'border-l-transparent'
       }`}
     >
       {/* Sequence number */}
@@ -120,27 +146,35 @@ function StepRow({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 mb-0.5">
-          <span className="text-[11px] font-semibold text-slate-200 truncate">
+          <span className="text-[11px] font-semibold text-[rgba(252,226,154,0.9)] truncate">
             {step.step_name.replace(/_/g, ' ')}
           </span>
           <span className={`text-[9px] font-bold px-1 py-px rounded border ${cfg.color}`}>
             {cfg.label}
           </span>
           {step.latency_ms != null && (
-            <span className="text-[10px] text-slate-500 ml-auto">{fmtMs(step.latency_ms)}</span>
+            <span className="text-[10px] text-[rgba(212,175,55,0.5)] ml-auto">{fmtMs(step.latency_ms)}</span>
           )}
           {step.parallel_group && (
-            <span className="text-[9px] text-slate-600">⇉</span>
+            <span className="text-[9px] text-[rgba(212,175,55,0.4)]">⇉</span>
           )}
         </div>
 
-        {summaryLine && (
-          <div className="text-[10px] text-slate-400 truncate">{summaryLine}</div>
+        {summaryLine && !isError && (
+          <div className="text-[10px] text-[rgba(212,175,55,0.6)] truncate">{summaryLine}</div>
+        )}
+
+        {/* Inline error message — §5.8 */}
+        {isError && errorMessage && (
+          <div className="text-[10px] text-[rgba(240,150,120,0.85)] line-clamp-2 mt-0.5">
+            <AlertCircle size={9} className="inline mr-1 -translate-y-px" />
+            {errorMessage}
+          </div>
         )}
 
         {/* Latency bar */}
         {isDone && step.latency_ms != null && (
-          <div className="mt-1 h-[2px] bg-slate-800 rounded-full overflow-hidden">
+          <div className="mt-1 h-[2px] bg-[rgba(212,175,55,0.06)] rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-500 ${TIMELINE_BAR_COLOR[step.step_type]}`}
               style={{ width: `${latencyPct}%` }}
@@ -148,8 +182,8 @@ function StepRow({
           </div>
         )}
         {isRunning && (
-          <div className="mt-1 h-[2px] bg-slate-800 rounded-full overflow-hidden">
-            <div className="h-full w-1/3 rounded-full bg-blue-500 animate-[slide_1.2s_ease-in-out_infinite]" />
+          <div className="mt-1 h-[2px] bg-[rgba(212,175,55,0.06)] rounded-full overflow-hidden">
+            <div className="h-full w-1/3 rounded-full bg-[rgba(212,175,55,0.6)] animate-[slide_1.2s_ease-in-out_infinite]" />
           </div>
         )}
       </div>
@@ -169,10 +203,10 @@ function ParallelGroup({
   onSelect: (s: TraceStep) => void
 }) {
   return (
-    <div className="border border-slate-700/60 rounded mx-2 my-1 overflow-hidden">
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-800/40 border-b border-slate-700/60">
-        <span className="text-[9px] font-bold text-slate-500 tracking-wider">⇉ PARALLEL</span>
-        <span className="text-[9px] text-slate-600">{groupSteps.length} concurrent</span>
+    <div className="border border-[rgba(212,175,55,0.10)] rounded mx-2 my-1 overflow-hidden">
+      <div className="flex items-center gap-1.5 px-2 py-1 bg-[rgba(212,175,55,0.04)] border-b border-[rgba(212,175,55,0.08)]">
+        <span className="text-[9px] font-bold text-[rgba(212,175,55,0.5)] tracking-wider">⇉ PARALLEL</span>
+        <span className="text-[9px] text-[rgba(212,175,55,0.35)]">{groupSteps.length} concurrent</span>
       </div>
       {groupSteps.map(step => (
         <StepRow
@@ -182,6 +216,97 @@ function ParallelGroup({
           onClick={() => onSelect(step)}
         />
       ))}
+    </div>
+  )
+}
+
+// ── Sub-component: Synthesis quality indicators (§5.5) ────────────────────────
+
+function getOutputShapeCompliance(plan: TraceStep | undefined, synthStep: TraceStep | undefined, previewText?: string): boolean | null {
+  if (!plan || !synthStep) return null
+  const shape = plan.payload.query_plan?.expected_output_shape
+  if (!shape || !previewText) return null
+  if (shape === 'time_indexed_prediction') {
+    // heuristic: presence of a year token (e.g., 2026) or a date-like phrase
+    return /\b(19|20)\d{2}\b/.test(previewText)
+  }
+  if (shape === 'three_interpretation') {
+    return (previewText.match(/^#{1,3}\s/gm) ?? []).length >= 3
+  }
+  if (shape === 'structured_data') {
+    return /[{}\[\]]/.test(previewText)
+  }
+  // single_answer — always pass (no negative heuristic)
+  return true
+}
+
+function getCitationThreshold(queryClass?: string): number {
+  switch ((queryClass ?? '').toLowerCase()) {
+    case 'holistic': return 5
+    case 'cross_domain': return 4
+    case 'interpretive': return 3
+    case 'discovery': return 3
+    case 'predictive': return 2
+    case 'cross_native': return 2
+    case 'remedial': return 1
+    case 'factual': return 0
+    default: return 1
+  }
+}
+
+function SynthesisQualityIndicators({ steps }: { steps: TraceStep[] }) {
+  const synthStep = steps.find(s => s.step_name === 'synthesis_done' || s.step_name === 'synthesis')
+  if (!synthStep || synthStep.status !== 'done') return null
+
+  const planStep = steps.find(s => s.step_name === 'plan' || s.step_name === 'classify')
+  const queryClass = planStep?.payload.query_plan?.query_class ?? planStep?.data_summary.query_class
+  const citationCount = synthStep.data_summary.citation_count
+  const threshold = getCitationThreshold(queryClass)
+  const lowCitation = typeof citationCount === 'number' && citationCount < threshold
+  const compliance = getOutputShapeCompliance(planStep, synthStep, synthStep.payload.prompt_preview)
+
+  // Nothing to show if neither field is populated
+  if (citationCount == null && compliance == null) return null
+
+  return (
+    <div className="border-b border-[rgba(212,175,55,0.10)] flex-shrink-0">
+      <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[rgba(212,175,55,0.08)]">
+        <CheckCircle2 size={11} className="text-[rgba(212,175,55,0.55)]" />
+        <span className="text-[10px] font-bold text-[rgba(212,175,55,0.6)] uppercase tracking-[0.16em]">
+          Synthesis quality
+        </span>
+      </div>
+      <div className="px-3 py-2 flex items-center flex-wrap gap-2">
+        {citationCount != null && (
+          <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded border ${
+            lowCitation
+              ? 'bg-[rgba(220,140,60,0.10)] text-[rgba(240,170,100,0.95)] border-[rgba(220,140,60,0.35)]'
+              : 'bg-[rgba(212,175,55,0.06)] text-[rgba(252,226,154,0.85)] border-[rgba(212,175,55,0.25)]'
+          }`}>
+            {lowCitation && <AlertTriangle size={10} />}
+            <span className="text-[10px]">
+              {citationCount} signals cited
+              {lowCitation && (
+                <span className="opacity-70 ml-1">(expected ≥{threshold} for {queryClass})</span>
+              )}
+            </span>
+          </div>
+        )}
+        {compliance != null && (
+          <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded border text-[10px] ${
+            compliance
+              ? 'bg-[rgba(140,210,170,0.08)] text-[rgba(140,210,170,0.9)] border-[rgba(120,190,150,0.3)]'
+              : 'bg-[rgba(220,140,60,0.10)] text-[rgba(240,170,100,0.95)] border-[rgba(220,140,60,0.35)]'
+          }`}>
+            output shape: {compliance ? 'matches' : 'deviation'}
+          </div>
+        )}
+        {synthStep.data_summary.input_tokens != null && synthStep.data_summary.output_tokens != null && (
+          <div className="text-[10px] text-[rgba(212,175,55,0.55)] tabular-nums ml-auto">
+            in {fmtTokens(synthStep.data_summary.input_tokens)} · out {fmtTokens(synthStep.data_summary.output_tokens)}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -214,27 +339,33 @@ function ContextInspector({
     return (
       <div className="flex flex-col h-full">
         {/* Drilldown header */}
-        <div className="flex items-center gap-2 px-3 py-2 border-b border-slate-700/60 flex-shrink-0">
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-[rgba(212,175,55,0.10)] flex-shrink-0">
           <button
             type="button"
             onClick={() => setDrilldownItem(null)}
-            className="text-[10px] text-blue-400 hover:text-blue-300 flex items-center gap-1"
+            className="text-[10px] text-[#d4af37] hover:text-[rgba(244,209,96,0.95)] flex items-center gap-1"
           >
             ← Back
           </button>
-          <span className="text-[10px] text-slate-500 font-mono truncate">{drilldownItem.id}</span>
+          <span className="text-[10px] text-[rgba(212,175,55,0.5)] font-mono truncate">{drilldownItem.id}</span>
           <span className={`text-[9px] font-bold ml-auto ${LAYER_COLOR[drilldownItem.layer]?.text ?? ''}`}>
             {drilldownItem.layer}
           </span>
         </div>
         {/* Chunk meta */}
-        <div className="flex items-center gap-3 px-3 py-1.5 border-b border-slate-700/40 flex-shrink-0">
-          <span className="text-[10px] text-slate-500">source: <span className="text-slate-300">{drilldownItem.source}</span></span>
-          <span className="text-[10px] text-slate-500">~{drilldownItem.token_estimate} tok</span>
+        <div className="flex items-center gap-3 px-3 py-1.5 border-b border-[rgba(212,175,55,0.08)] flex-shrink-0">
+          <span className="text-[10px] text-[rgba(212,175,55,0.5)]">source: <span className="text-[rgba(252,226,154,0.85)]">{drilldownItem.source}</span></span>
+          <span className="text-[10px] text-[rgba(212,175,55,0.5)]">~{drilldownItem.token_estimate} tok</span>
+          {drilldownItem.score != null && (
+            <span className="text-[10px] text-[rgba(212,175,55,0.5)]">score: <span className="text-[rgba(252,226,154,0.85)]">{drilldownItem.score.toFixed(3)}</span></span>
+          )}
+          {drilldownItem.doc_type && (
+            <span className="text-[10px] text-[rgba(212,175,55,0.5)]">type: <span className="text-[rgba(252,226,154,0.85)]">{drilldownItem.doc_type}</span></span>
+          )}
         </div>
         {/* Chunk text */}
         <div className="flex-1 overflow-y-auto px-3 py-2">
-          <pre className="text-[11px] text-slate-300 whitespace-pre-wrap leading-relaxed font-mono">
+          <pre className="text-[11px] text-[rgba(252,226,154,0.85)] whitespace-pre-wrap leading-relaxed font-mono">
             {drilldownItem.text}
           </pre>
         </div>
@@ -244,19 +375,23 @@ function ContextInspector({
 
   // ── Selected step detail ───────────────────────────────────────────────────
   const showSelectedStep = selectedStep && selectedStep.step_name !== 'context_assembly'
+  const isToolStep = selectedStep && (selectedStep.step_type === 'sql' || selectedStep.step_type === 'vector' || selectedStep.step_type === 'gcs')
 
   return (
     <div className="flex flex-col h-full gap-0 overflow-y-auto">
 
+      {/* Synthesis quality (§5.5) — at top, when synthesis is done */}
+      <SynthesisQualityIndicators steps={steps} />
+
       {/* Context summary card */}
-      <div className="border-b border-slate-700/60 flex-shrink-0">
-        <div className="flex items-center justify-between px-3 py-2 border-b border-slate-700/40">
+      <div className="border-b border-[rgba(212,175,55,0.10)] flex-shrink-0">
+        <div className="flex items-center justify-between px-3 py-2 border-b border-[rgba(212,175,55,0.08)]">
           <div className="flex items-center gap-1.5">
-            <Layers size={11} className="text-slate-500" />
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Context</span>
+            <Layers size={11} className="text-[rgba(212,175,55,0.55)]" />
+            <span className="text-[10px] font-bold text-[rgba(212,175,55,0.6)] uppercase tracking-[0.16em]">Context</span>
           </div>
           {total > 0 && (
-            <span className="text-[10px] text-slate-400 font-semibold">{fmtTokens(total)} tokens</span>
+            <span className="text-[10px] text-[rgba(252,226,154,0.85)] font-semibold">{fmtTokens(total)} tokens</span>
           )}
         </div>
 
@@ -264,9 +399,9 @@ function ContextInspector({
           <div className="px-3 py-2">
             {/* Multi-colored bar */}
             <div className="h-2 rounded-full overflow-hidden flex gap-px mb-3">
-              <div className="bg-red-500 h-full rounded-l-full" style={{ width: `${l1Pct}%` }} />
-              <div className="bg-violet-500 h-full" style={{ width: `${l2Pct}%` }} />
-              <div className="bg-slate-500 h-full rounded-r-full" style={{ width: `${sysPct}%` }} />
+              <div className="bg-[rgba(244,209,96,0.85)] h-full rounded-l-full" style={{ width: `${l1Pct}%` }} />
+              <div className="bg-[rgba(190,150,240,0.85)] h-full" style={{ width: `${l2Pct}%` }} />
+              <div className="bg-[rgba(212,175,55,0.4)] h-full rounded-r-full" style={{ width: `${sysPct}%` }} />
             </div>
 
             {/* L1 row */}
@@ -295,100 +430,130 @@ function ContextInspector({
             />
             {/* System row */}
             <div className="flex items-center gap-2 py-1.5 px-1">
-              <div className="w-2 h-2 rounded-sm bg-slate-500 flex-shrink-0" />
+              <div className="w-2 h-2 rounded-sm bg-[rgba(212,175,55,0.4)] flex-shrink-0" />
               <div className="flex-1">
-                <div className="text-[11px] font-medium text-slate-300">System Preamble</div>
-                <div className="text-[10px] text-slate-500">static · prompt registry</div>
+                <div className="text-[11px] font-medium text-[rgba(252,226,154,0.85)]">System Preamble</div>
+                <div className="text-[10px] text-[rgba(212,175,55,0.5)]">static · prompt registry</div>
               </div>
               <div className="text-right">
-                <div className="text-[12px] font-bold text-slate-300">{fmtTokens(sysTok)}</div>
-                <div className="text-[9px] text-slate-500">{sysPct}%</div>
+                <div className="text-[12px] font-bold text-[rgba(252,226,154,0.85)]">{fmtTokens(sysTok)}</div>
+                <div className="text-[9px] text-[rgba(212,175,55,0.5)]">{sysPct}%</div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="px-3 py-3 text-[11px] text-slate-600 italic">
+          <div className="px-3 py-3 text-[11px] text-[rgba(212,175,55,0.4)] italic">
             {steps.length === 0 ? 'Waiting for query…' : 'Context assembling…'}
           </div>
         )}
+
+        {/* Cross-tool retrieval efficiency (§5.3 footer) */}
+        <RetrievalEfficiency steps={steps} />
       </div>
 
       {/* Selected step detail */}
       {showSelectedStep && (
         <div className="flex-shrink-0">
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-700/40">
-            <Database size={11} className="text-slate-500" />
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[rgba(212,175,55,0.08)]">
+            <Database size={11} className="text-[rgba(212,175,55,0.55)]" />
+            <span className="text-[10px] font-bold text-[rgba(212,175,55,0.6)] uppercase tracking-[0.16em]">
               Step {selectedStep.step_seq} — {selectedStep.step_name.replace(/_/g, ' ')}
             </span>
-            <span className="text-[10px] text-slate-600 ml-auto">{fmtMs(selectedStep.latency_ms)}</span>
+            <span className="text-[10px] text-[rgba(212,175,55,0.4)] ml-auto">{fmtMs(selectedStep.latency_ms)}</span>
           </div>
 
           <div className="px-3 py-2 grid grid-cols-[110px_1fr] gap-y-1 gap-x-2 text-[11px]">
-            <span className="text-slate-500">Status</span>
-            <span className={selectedStep.status === 'done' ? 'text-emerald-400' : selectedStep.status === 'running' ? 'text-blue-400' : 'text-red-400'}>
+            <span className="text-[rgba(212,175,55,0.55)]">Status</span>
+            <span className={
+              selectedStep.status === 'done' ? 'text-[rgba(244,209,96,0.9)]'
+              : selectedStep.status === 'running' ? 'text-[rgba(252,226,154,0.95)]'
+              : 'text-[rgba(240,150,120,0.95)]'
+            }>
               {selectedStep.status}
             </span>
-            <span className="text-slate-500">Type</span>
-            <span className="text-slate-300">{selectedStep.step_type}</span>
+            <span className="text-[rgba(212,175,55,0.55)]">Type</span>
+            <span className="text-[rgba(252,226,154,0.85)]">{selectedStep.step_type}</span>
             {selectedStep.data_summary.model && (
               <>
-                <span className="text-slate-500">Model</span>
-                <span className="text-slate-300">{selectedStep.data_summary.model}</span>
+                <span className="text-[rgba(212,175,55,0.55)]">Model</span>
+                <span className="text-[rgba(252,226,154,0.85)]">{selectedStep.data_summary.model}</span>
               </>
             )}
             {selectedStep.data_summary.chunks_returned != null && (
               <>
-                <span className="text-slate-500">Chunks</span>
-                <span className="text-emerald-400">{selectedStep.data_summary.chunks_returned} returned</span>
-                <span className="text-slate-500">Top score</span>
-                <span className="text-emerald-400">{selectedStep.data_summary.top_score?.toFixed(3)}</span>
+                <span className="text-[rgba(212,175,55,0.55)]">Chunks</span>
+                <span className="text-[rgba(140,210,170,0.9)]">{selectedStep.data_summary.chunks_returned} returned</span>
+                {selectedStep.data_summary.top_score != null && (
+                  <>
+                    <span className="text-[rgba(212,175,55,0.55)]">Top score</span>
+                    <span className="text-[rgba(140,210,170,0.9)]">{selectedStep.data_summary.top_score.toFixed(3)}</span>
+                  </>
+                )}
               </>
             )}
             {selectedStep.data_summary.rows_returned != null && (
               <>
-                <span className="text-slate-500">Rows</span>
-                <span className="text-sky-400">{selectedStep.data_summary.rows_returned} returned</span>
+                <span className="text-[rgba(212,175,55,0.55)]">Rows</span>
+                <span className="text-[rgba(100,160,240,0.9)]">{selectedStep.data_summary.rows_returned} returned</span>
               </>
             )}
             {selectedStep.data_summary.token_estimate != null && (
               <>
-                <span className="text-slate-500">~Tokens</span>
-                <span className="text-slate-300">{fmtTokens(selectedStep.data_summary.token_estimate)}</span>
+                <span className="text-[rgba(212,175,55,0.55)]">~Tokens</span>
+                <span className="text-[rgba(252,226,154,0.85)]">{fmtTokens(selectedStep.data_summary.token_estimate)}</span>
               </>
             )}
             {selectedStep.parallel_group && (
               <>
-                <span className="text-slate-500">Group</span>
-                <span className="text-slate-400">⇉ {selectedStep.parallel_group}</span>
+                <span className="text-[rgba(212,175,55,0.55)]">Group</span>
+                <span className="text-[rgba(212,175,55,0.6)]">⇉ {selectedStep.parallel_group}</span>
+              </>
+            )}
+            {selectedStep.status === 'error' && (
+              <>
+                <span className="text-[rgba(212,175,55,0.55)]">Error</span>
+                <span className="text-[rgba(240,150,120,0.95)]">
+                  {selectedStep.payload.error_message ?? selectedStep.data_summary.error_reason ?? 'unknown'}
+                </span>
+                {selectedStep.data_summary.error_stage && (
+                  <>
+                    <span className="text-[rgba(212,175,55,0.55)]">Stage</span>
+                    <span className="text-[rgba(240,150,120,0.85)]">{selectedStep.data_summary.error_stage}</span>
+                  </>
+                )}
               </>
             )}
           </div>
 
-          {/* Chunk preview for tool steps */}
+          {/* Retrieval scorecard for tool steps (§5.3) */}
+          {isToolStep && (
+            <RetrievalScorecard step={selectedStep} />
+          )}
+
+          {/* Chunk preview for tool steps — single-click expand (§5.8 GAP.T.10) */}
           {selectedStep.payload.items && selectedStep.payload.items.length > 0 && (
             <div className="px-3 pb-2">
-              <div className="text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">
-                Retrieved items — double-click to expand
+              <div className="text-[9px] font-bold text-[rgba(212,175,55,0.45)] uppercase tracking-[0.12em] mb-1">
+                Retrieved items — click to expand
               </div>
               <div className="space-y-1">
                 {selectedStep.payload.items.slice(0, 4).map((item, i) => (
                   <button
                     key={`${item.id}-${i}`}
                     type="button"
-                    onDoubleClick={() => setDrilldownItem(item)}
-                    className="w-full text-left bg-slate-900 border border-slate-700/60 rounded p-2 hover:border-slate-600 transition-colors"
+                    onClick={() => setDrilldownItem(item)}
+                    className="group w-full text-left bg-[rgba(5,3,1,0.6)] border border-[rgba(212,175,55,0.10)] rounded p-2 hover:border-[rgba(212,175,55,0.25)] hover:bg-[rgba(5,3,1,0.8)] transition-colors"
                   >
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[9px] font-mono text-slate-500 truncate max-w-[60%]">{item.id}</span>
+                    <div className="flex items-center justify-between mb-0.5 gap-2">
+                      <span className="text-[9px] font-mono text-[rgba(212,175,55,0.5)] truncate flex-1">{item.id}</span>
                       <span className={`text-[9px] font-bold ${LAYER_COLOR[item.layer]?.text ?? ''}`}>{item.layer}</span>
+                      <span className="text-[10px] text-[rgba(212,175,55,0.4)] group-hover:text-[rgba(212,175,55,0.7)]">↗</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 line-clamp-2">{item.text.slice(0, 120)}</div>
-                    <div className="text-[9px] text-slate-600 mt-0.5">double-click to expand</div>
+                    <div className="text-[10px] text-[rgba(252,226,154,0.7)] line-clamp-2">{item.text.slice(0, 120)}</div>
                   </button>
                 ))}
                 {selectedStep.payload.items.length > 4 && (
-                  <div className="text-[9px] text-slate-600 px-1">
+                  <div className="text-[9px] text-[rgba(212,175,55,0.4)] px-1">
                     +{selectedStep.payload.items.length - 4} more items
                   </div>
                 )}
@@ -399,15 +564,30 @@ function ContextInspector({
           {/* LLM prompt preview */}
           {selectedStep.payload.prompt_preview && (
             <div className="px-3 pb-2">
-              <div className="text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+              <div className="text-[9px] font-bold text-[rgba(212,175,55,0.45)] uppercase tracking-[0.12em] mb-1">
                 Output preview (first 500 chars)
               </div>
-              <div className="bg-slate-900 border border-slate-700/60 rounded p-2">
-                <p className="text-[10px] text-slate-400 leading-relaxed">
+              <div className="bg-[rgba(5,3,1,0.6)] border border-[rgba(212,175,55,0.10)] rounded p-2">
+                <p className="text-[10px] text-[rgba(252,226,154,0.7)] leading-relaxed">
                   {selectedStep.payload.prompt_preview}
                 </p>
               </div>
             </div>
+          )}
+
+          {/* DeepSeek R1 reasoning trace (when present) */}
+          {selectedStep.payload.reasoning_trace && (
+            <details className="px-3 pb-2">
+              <summary className="text-[9px] font-bold text-[rgba(212,175,55,0.45)] uppercase tracking-[0.12em] cursor-pointer">
+                Reasoning trace ({selectedStep.payload.reasoning_trace.length} chars)
+              </summary>
+              <div className="bg-[rgba(5,3,1,0.6)] border border-[rgba(212,175,55,0.10)] rounded p-2 mt-1">
+                <pre className="text-[10px] text-[rgba(252,226,154,0.65)] leading-relaxed font-mono whitespace-pre-wrap">
+                  {selectedStep.payload.reasoning_trace.slice(0, 2000)}
+                  {selectedStep.payload.reasoning_trace.length > 2000 && '…'}
+                </pre>
+              </div>
+            </details>
           )}
         </div>
       )}
@@ -444,23 +624,22 @@ function LayerRow({
     <div>
       <button
         type="button"
-        onDoubleClick={onToggle}
         onClick={onToggle}
-        className="w-full flex items-center gap-2 py-1.5 px-1 hover:bg-slate-800/40 rounded transition-colors"
+        className="w-full flex items-center gap-2 py-1.5 px-1 hover:bg-[rgba(212,175,55,0.04)] rounded transition-colors"
       >
         <div className={`w-2 h-2 rounded-sm ${cfg.dot} flex-shrink-0`} />
         <div className="flex-1 text-left min-w-0">
-          <div className="text-[11px] font-medium text-slate-300">{label}</div>
-          <div className="text-[10px] text-slate-500 truncate">{sublabel}</div>
+          <div className="text-[11px] font-medium text-[rgba(252,226,154,0.85)]">{label}</div>
+          <div className="text-[10px] text-[rgba(212,175,55,0.5)] truncate">{sublabel}</div>
         </div>
         <div className="text-right flex-shrink-0">
-          <div className="text-[12px] font-bold text-slate-300">{fmtTokens(tokens)}</div>
-          <div className="text-[9px] text-slate-500">{pct}%</div>
+          <div className="text-[12px] font-bold text-[rgba(252,226,154,0.85)]">{fmtTokens(tokens)}</div>
+          <div className="text-[9px] text-[rgba(212,175,55,0.5)]">{pct}%</div>
         </div>
         {expanded ? (
-          <ChevronDown size={11} className="text-slate-500 flex-shrink-0" />
+          <ChevronDown size={11} className="text-[rgba(212,175,55,0.5)] flex-shrink-0" />
         ) : (
-          <ChevronRight size={11} className="text-slate-500 flex-shrink-0" />
+          <ChevronRight size={11} className="text-[rgba(212,175,55,0.5)] flex-shrink-0" />
         )}
       </button>
 
@@ -470,15 +649,15 @@ function LayerRow({
             <button
               key={`${item.id}-${i}`}
               type="button"
-              onDoubleClick={() => onDrilldown(item)}
-              className="w-full text-left bg-slate-900/80 border border-slate-800 rounded p-1.5 hover:border-slate-700 transition-colors"
+              onClick={() => onDrilldown(item)}
+              className="group w-full text-left bg-[rgba(5,3,1,0.6)] border border-[rgba(212,175,55,0.08)] rounded p-1.5 hover:border-[rgba(212,175,55,0.22)] transition-colors"
             >
-              <div className="flex items-center justify-between mb-0.5">
-                <span className="text-[9px] font-mono text-slate-600 truncate max-w-[70%]">{item.id}</span>
-                <span className="text-[9px] text-slate-600">{fmtTokens(item.token_estimate)} tok</span>
+              <div className="flex items-center justify-between mb-0.5 gap-2">
+                <span className="text-[9px] font-mono text-[rgba(212,175,55,0.45)] truncate flex-1">{item.id}</span>
+                <span className="text-[9px] text-[rgba(212,175,55,0.45)]">{fmtTokens(item.token_estimate)} tok</span>
+                <span className="text-[10px] text-[rgba(212,175,55,0.35)] group-hover:text-[rgba(212,175,55,0.7)]">↗</span>
               </div>
-              <p className="text-[10px] text-slate-400 leading-relaxed line-clamp-2">{item.text.slice(0, 100)}</p>
-              <p className="text-[9px] text-slate-600 mt-0.5">double-click to expand</p>
+              <p className="text-[10px] text-[rgba(252,226,154,0.65)] leading-relaxed line-clamp-2">{item.text.slice(0, 100)}</p>
             </button>
           ))}
         </div>
@@ -502,17 +681,13 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
 
   // Group parallel steps
   const parallelGroups: Record<string, TraceStep[]> = {}
-  const sequentialSteps: TraceStep[] = []
   for (const step of doneSteps) {
     if (step.parallel_group) {
       parallelGroups[step.parallel_group] = parallelGroups[step.parallel_group] ?? []
       parallelGroups[step.parallel_group].push(step)
-    } else {
-      sequentialSteps.push(step)
     }
   }
 
-  // Build render list: sequential interspersed with parallel groups
   const renderItems: Array<{ type: 'seq'; step: TraceStep } | { type: 'par'; group: string; steps: TraceStep[] }> = []
   const seenGroups = new Set<string>()
   for (const step of doneSteps) {
@@ -530,11 +705,11 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
   const width = (start: number, end: number) => `${Math.max(0.5, ((end - start) / totalMs) * 100)}%`
 
   return (
-    <div className="border-t border-slate-800 bg-slate-900/80 px-3 py-2 flex-shrink-0">
+    <div className="border-t border-[rgba(212,175,55,0.10)] bg-[rgba(13,10,5,0.7)] px-3 py-2 flex-shrink-0">
       <div className="flex items-center gap-2 mb-1">
-        <Clock size={10} className="text-slate-600" />
-        <span className="text-[9px] text-slate-600 uppercase tracking-wider">Timeline</span>
-        <span className="text-[10px] text-slate-400 font-semibold ml-auto">{fmtMs(totalMs)} total</span>
+        <Clock size={10} className="text-[rgba(212,175,55,0.4)]" />
+        <span className="text-[9px] text-[rgba(212,175,55,0.4)] uppercase tracking-[0.16em]">Wall-clock</span>
+        <span className="text-[10px] text-[rgba(252,226,154,0.85)] font-semibold ml-auto">{fmtMs(totalMs)} total</span>
       </div>
 
       {/* Track area */}
@@ -547,7 +722,7 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
             return (
               <div
                 key={`seq-${s.step_seq}`}
-                className={`absolute top-0 h-4 rounded-sm text-[8px] flex items-center justify-center overflow-hidden ${TIMELINE_BAR_COLOR[s.step_type]}`}
+                className={`absolute top-0 h-4 rounded-sm text-[8px] flex items-center justify-center overflow-hidden text-[rgba(8,5,2,0.85)] font-bold ${TIMELINE_BAR_COLOR[s.step_type]}`}
                 style={{ left: pct(start), width: width(start, end) }}
                 title={`${s.step_name}: ${fmtMs(s.latency_ms)}`}
               >
@@ -563,7 +738,7 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
             return (
               <div
                 key={`par-${ps.step_seq}`}
-                className={`absolute h-3 rounded-sm text-[7px] flex items-center justify-center overflow-hidden opacity-80 ${TIMELINE_BAR_COLOR[ps.step_type]}`}
+                className={`absolute h-3 rounded-sm text-[7px] flex items-center justify-center overflow-hidden text-[rgba(8,5,2,0.85)] font-bold opacity-90 ${TIMELINE_BAR_COLOR[ps.step_type]}`}
                 style={{
                   left: pct(start),
                   width: width(start, end),
@@ -580,9 +755,9 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
 
       {/* Time labels */}
       <div className="flex justify-between mt-0.5">
-        <span className="text-[8px] text-slate-700">0ms</span>
-        <span className="text-[8px] text-slate-700">{fmtMs(totalMs / 2)}</span>
-        <span className="text-[8px] text-slate-700">{fmtMs(totalMs)}</span>
+        <span className="text-[8px] text-[rgba(212,175,55,0.3)]">0ms</span>
+        <span className="text-[8px] text-[rgba(212,175,55,0.3)]">{fmtMs(totalMs / 2)}</span>
+        <span className="text-[8px] text-[rgba(212,175,55,0.3)]">{fmtMs(totalMs)}</span>
       </div>
     </div>
   )
@@ -624,14 +799,14 @@ function TraceTimeline({
   }, [steps])
 
   return (
-    <div className="flex flex-col overflow-y-auto border-r border-slate-800 py-2">
-      <div className="px-3 pb-1.5 text-[9px] font-bold text-slate-600 uppercase tracking-wider">
+    <div className="flex flex-col overflow-y-auto border-r border-[rgba(212,175,55,0.10)] py-2">
+      <div className="px-3 pb-1.5 text-[9px] font-bold text-[rgba(212,175,55,0.45)] uppercase tracking-[0.12em]">
         Pipeline · {steps.length} steps
       </div>
       {renderItems.map((item, idx) =>
         item.type === 'seq' ? (
           <div key={`s-${item.step.step_seq}`}>
-            {idx > 0 && <div className="mx-4 h-3 w-px bg-slate-800" />}
+            {idx > 0 && <div className="mx-4 h-3 w-px bg-[rgba(212,175,55,0.12)]" />}
             <StepRow
               step={item.step}
               isSelected={selectedSeq === item.step.step_seq}
@@ -640,7 +815,7 @@ function TraceTimeline({
           </div>
         ) : (
           <div key={`pg-${item.group}`}>
-            {idx > 0 && <div className="mx-4 h-3 w-px bg-slate-800" />}
+            {idx > 0 && <div className="mx-4 h-3 w-px bg-[rgba(212,175,55,0.12)]" />}
             <ParallelGroup
               groupSteps={item.steps}
               selectedSeq={selectedSeq}
@@ -659,16 +834,13 @@ interface ContentProps {
   queryId: string | null
 }
 
+type HistorySubTab = 'list' | 'analytics'
+
 export function TracePanelContent({ queryId }: ContentProps) {
   const [activeTab, setActiveTab] = useState<'live' | 'history'>('live')
+  const [historySubTab, setHistorySubTab] = useState<HistorySubTab>('list')
   const [historyQueryId, setHistoryQueryId] = useState<string | null>(null)
-  const [historyList, setHistoryList] = useState<Array<{
-    query_id: string
-    query_text: string | null
-    created_at: string
-    step_count: number
-    total_latency_ms: number | null
-  }>>([])
+  const [historyList, setHistoryList] = useState<TraceHistoryRow[]>([])
   const [historyLoaded, setHistoryLoaded] = useState(false)
   const [selectedStep, setSelectedStep] = useState<TraceStep | null>(null)
 
@@ -677,12 +849,22 @@ export function TracePanelContent({ queryId }: ContentProps) {
 
   const { steps, done, error } = useTraceStream(effectiveQueryId, isHistorical)
 
+  // Compute 10-query rolling-avg total latency for the cost/perf comparison
+  const comparisonAvgMs = useMemo(() => {
+    const completed = historyList
+      .filter(r => r.total_latency_ms != null && r.query_id !== effectiveQueryId)
+      .slice(0, 10)
+    if (completed.length === 0) return null
+    const sum = completed.reduce((s, r) => s + (r.total_latency_ms ?? 0), 0)
+    return sum / completed.length
+  }, [historyList, effectiveQueryId])
+
   const loadHistory = () => {
     if (historyLoaded) return
     fetch('/api/trace/history')
       .then(r => r.json())
       .then(data => {
-        setHistoryList(data)
+        setHistoryList(Array.isArray(data) ? data : [])
         setHistoryLoaded(true)
       })
       .catch(err => console.error('[TracePanelContent] history load failed', err))
@@ -690,40 +872,48 @@ export function TracePanelContent({ queryId }: ContentProps) {
 
   const liveBadgeLabel = done ? 'DONE' : steps.length > 0 ? 'LIVE' : 'READY'
   const liveBadgeColor = done
-    ? 'bg-slate-800 text-slate-400 border-slate-700'
+    ? 'bg-[rgba(212,175,55,0.06)] text-[rgba(212,175,55,0.6)] border-[rgba(212,175,55,0.2)]'
     : steps.length > 0
-    ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
-    : 'bg-slate-900 text-slate-600 border-slate-800'
+    ? 'bg-[rgba(212,175,55,0.10)] text-[rgba(244,209,96,0.95)] border-[rgba(212,175,55,0.4)]'
+    : 'bg-[rgba(5,3,1,0.6)] text-[rgba(212,175,55,0.4)] border-[rgba(212,175,55,0.15)]'
 
   return (
     <div className="flex flex-col h-full">
       {/* Sub-header: query pill + live badge + tabs */}
-      <div className="flex items-center gap-3 px-4 py-2 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2 border-b border-[rgba(212,175,55,0.10)] bg-[rgba(13,10,5,0.7)] flex-shrink-0">
         <div className="flex items-center gap-2">
-          <Zap size={12} className="text-blue-400" />
+          <Zap size={12} className="text-[#d4af37]" />
           <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${liveBadgeColor}`}>
             {liveBadgeLabel}
           </span>
         </div>
 
         {effectiveQueryId && (
-          <div className="flex-1 min-w-0 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-500 font-mono truncate">
+          <div className="flex-1 min-w-0 px-2 py-0.5 bg-[rgba(5,3,1,0.6)] border border-[rgba(212,175,55,0.12)] rounded text-[10px] text-[rgba(212,175,55,0.5)] font-mono truncate">
             {effectiveQueryId}
           </div>
         )}
 
-        <div className="flex gap-px bg-slate-800 rounded p-0.5">
+        <div className="flex gap-px bg-[rgba(5,3,1,0.6)] rounded p-0.5">
           <button
             type="button"
             onClick={() => setActiveTab('live')}
-            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'live' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${
+              activeTab === 'live'
+                ? 'bg-[rgba(212,175,55,0.12)] text-[rgba(252,226,154,0.95)]'
+                : 'text-[rgba(212,175,55,0.5)] hover:text-[rgba(252,226,154,0.85)]'
+            }`}
           >
             Live
           </button>
           <button
             type="button"
             onClick={() => { setActiveTab('history'); loadHistory() }}
-            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'history' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${
+              activeTab === 'history'
+                ? 'bg-[rgba(212,175,55,0.12)] text-[rgba(252,226,154,0.95)]'
+                : 'text-[rgba(212,175,55,0.5)] hover:text-[rgba(252,226,154,0.85)]'
+            }`}
           >
             History
           </button>
@@ -732,58 +922,103 @@ export function TracePanelContent({ queryId }: ContentProps) {
 
       {/* Error banner */}
       {error && (
-        <div className="px-4 py-2 bg-red-950 border-b border-red-900 text-[11px] text-red-400 flex-shrink-0">
+        <div className="px-4 py-2 bg-[rgba(220,90,60,0.10)] border-b border-[rgba(220,90,60,0.30)] text-[11px] text-[rgba(240,150,120,0.95)] flex-shrink-0">
           {error}
         </div>
       )}
 
-      {/* Body */}
+      {/* History list view */}
       {activeTab === 'history' && !historyQueryId ? (
-        <div className="flex-1 overflow-y-auto py-2">
-          {!historyLoaded ? (
-            <div className="px-4 py-3 text-[11px] text-slate-600">Loading history…</div>
-          ) : historyList.length === 0 ? (
-            <div className="px-4 py-3 text-[11px] text-slate-600">No trace history yet. Run a query first.</div>
+        <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+          {/* History sub-tabs */}
+          <div className="flex items-center gap-2 px-4 py-1.5 border-b border-[rgba(212,175,55,0.08)] bg-[rgba(13,10,5,0.4)] flex-shrink-0">
+            <button
+              type="button"
+              onClick={() => setHistorySubTab('list')}
+              className={`text-[10px] font-semibold uppercase tracking-[0.16em] px-2 py-0.5 rounded ${
+                historySubTab === 'list'
+                  ? 'text-[rgba(252,226,154,0.95)] bg-[rgba(212,175,55,0.08)]'
+                  : 'text-[rgba(212,175,55,0.5)] hover:text-[rgba(252,226,154,0.85)]'
+              }`}
+            >
+              List
+            </button>
+            <button
+              type="button"
+              onClick={() => setHistorySubTab('analytics')}
+              className={`text-[10px] font-semibold uppercase tracking-[0.16em] px-2 py-0.5 rounded ${
+                historySubTab === 'analytics'
+                  ? 'text-[rgba(252,226,154,0.95)] bg-[rgba(212,175,55,0.08)]'
+                  : 'text-[rgba(212,175,55,0.5)] hover:text-[rgba(252,226,154,0.85)]'
+              }`}
+            >
+              Analytics
+            </button>
+          </div>
+
+          {/* History sub-tab body */}
+          {historySubTab === 'list' ? (
+            <div className="flex-1 overflow-y-auto py-2">
+              {!historyLoaded ? (
+                <div className="px-4 py-3 text-[11px] text-[rgba(212,175,55,0.5)]">Loading history…</div>
+              ) : historyList.length === 0 ? (
+                <div className="px-4 py-3 text-[11px] text-[rgba(212,175,55,0.5)]">No trace history yet. Run a query first.</div>
+              ) : (
+                historyList.map(entry => (
+                  <button
+                    key={entry.query_id}
+                    type="button"
+                    onClick={() => setHistoryQueryId(entry.query_id)}
+                    className="w-full text-left px-4 py-2.5 hover:bg-[rgba(212,175,55,0.04)] border-b border-[rgba(212,175,55,0.06)] transition-colors"
+                  >
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[11px] text-[rgba(252,226,154,0.85)] truncate flex-1">
+                        {entry.query_text ?? '(no text)'}
+                      </span>
+                      <span className="text-[9px] text-[rgba(212,175,55,0.4)] flex-shrink-0">{entry.step_count} steps</span>
+                      {entry.total_latency_ms != null && (
+                        <span className="text-[9px] text-[rgba(212,175,55,0.4)] flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
+                      )}
+                    </div>
+                    <div className="text-[9px] text-[rgba(212,175,55,0.4)]">
+                      {new Date(entry.created_at).toLocaleString()}
+                    </div>
+                  </button>
+                ))
+              )}
+            </div>
           ) : (
-            historyList.map(entry => (
-              <button
-                key={entry.query_id}
-                type="button"
-                onClick={() => setHistoryQueryId(entry.query_id)}
-                className="w-full text-left px-4 py-2.5 hover:bg-slate-800/60 border-b border-slate-800/60 transition-colors"
-              >
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[11px] text-slate-300 truncate flex-1">
-                    {entry.query_text ?? '(no text)'}
-                  </span>
-                  <span className="text-[9px] text-slate-600 flex-shrink-0">{entry.step_count} steps</span>
-                  {entry.total_latency_ms != null && (
-                    <span className="text-[9px] text-slate-600 flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
-                  )}
-                </div>
-                <div className="text-[9px] text-slate-600">
-                  {new Date(entry.created_at).toLocaleString()}
-                </div>
-              </button>
-            ))
+            <div className="flex-1 overflow-hidden">
+              <AnalyticsTab visible={historySubTab === 'analytics'} />
+            </div>
           )}
         </div>
       ) : (
-        <div className="flex-1 flex overflow-hidden min-h-0">
-          <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
-            <TraceTimeline
-              steps={steps}
-              selectedSeq={selectedStep?.step_seq ?? null}
-              onSelect={s => setSelectedStep(s)}
-            />
+        /* Live / single-query view */
+        <>
+          <QueryDNAPanel steps={steps} />
+          <div className="flex-1 flex overflow-hidden min-h-0">
+            <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
+              <TraceTimeline
+                steps={steps}
+                selectedSeq={selectedStep?.step_seq ?? null}
+                onSelect={s => setSelectedStep(s)}
+              />
+            </div>
+            <div className="flex-1 overflow-hidden flex flex-col">
+              <ContextInspector steps={steps} selectedStep={selectedStep} />
+            </div>
           </div>
-          <div className="flex-1 overflow-hidden flex flex-col">
-            <ContextInspector steps={steps} selectedStep={selectedStep} />
-          </div>
-        </div>
+        </>
       )}
 
-      <TimelineBar steps={steps} />
+      {/* Footer: cost/perf bar (§5.4) + wall-clock timeline */}
+      {(activeTab === 'live' || historyQueryId) && (
+        <>
+          <CostPerformanceBar steps={steps} comparisonAvgMs={comparisonAvgMs} />
+          <TimelineBar steps={steps} />
+        </>
+      )}
     </div>
   )
 }
@@ -799,14 +1034,14 @@ export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
         className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="fixed inset-y-0 right-0 z-50 flex flex-col w-[65vw] min-w-[700px] max-w-[1100px] bg-[#0d1117] border-l border-slate-800 shadow-2xl">
-        <div className="flex items-center gap-3 px-4 py-2.5 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
-          <Zap size={13} className="text-blue-400" />
-          <span className="text-[13px] font-bold text-slate-100">Query Trace</span>
+      <div className="fixed inset-y-0 right-0 z-50 flex flex-col w-[65vw] min-w-[700px] max-w-[1100px] bg-[rgba(8,5,2,0.97)] border-l border-[rgba(212,175,55,0.15)] shadow-2xl">
+        <div className="flex items-center gap-3 px-4 py-2.5 border-b border-[rgba(212,175,55,0.12)] bg-[rgba(13,10,5,0.7)] flex-shrink-0">
+          <Zap size={13} className="text-[#d4af37]" />
+          <span className="text-[13px] font-bold text-[rgba(252,226,154,0.95)]">Query Trace</span>
           <button
             type="button"
             onClick={onClose}
-            className="ml-auto text-slate-500 hover:text-slate-200 transition-colors"
+            className="ml-auto text-[rgba(212,175,55,0.5)] hover:text-[rgba(252,226,154,0.95)] transition-colors"
           >
             <X size={16} />
           </button>

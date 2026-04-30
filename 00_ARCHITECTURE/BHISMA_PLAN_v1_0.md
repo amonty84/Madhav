@@ -1020,10 +1020,10 @@ After all three streams close:
 
 ## §10 — Kickoff prompts for Claude Code sessions
 
-### W9-B1 kickoff (Stream 1 — Model Family)
+### BHISMA-W1-S1 kickoff (Stream 1 — Model Family)
 
 ```
-You are opening KARN-W9-B1, the first session of Project BHISMA, Stream 1:
+You are opening BHISMA-W1-S1-MODEL-FAMILY, Stream 1 of Project BHISMA:
 Model Family Infrastructure and Error Transparency.
 
 ROOT = ~/Vibe-Coding/Apps/Madhav
@@ -1035,7 +1035,7 @@ Read before any action:
 3. platform/src/lib/models/resolver.ts — current resolver
 4. platform/src/lib/router/router.ts — current classify (understand the silent fallback to remove)
 5. platform/src/app/api/chat/consume/route.ts — understand how classify is called
-6. 00_ARCHITECTURE/PROJECT_KARN_SESSION_LOG.md — last 50 lines
+6. 00_ARCHITECTURE/PROJECT_BHISMA_SESSION_LOG.md — Wave 1 session table + naming convention
 
 Your scope is §3 of the BHISMA plan. Key deliverables:
 - Add 5 OpenAI models + role/convention/cost fields to registry (ADR-1, ADR-2, §3.1)
@@ -1046,20 +1046,23 @@ Your scope is §3 of the BHISMA plan. Key deliverables:
 - Strip DeepSeek R1 think-blocks in single_model_strategy (§3.4)
 - Feature flag cleanup: retire permanently-ON/OFF flags (§6.2)
 
+Session log: append close block to PROJECT_BHISMA_SESSION_LOG.md (NOT PROJECT_KARN_SESSION_LOG).
+
 Halt conditions:
 - If adding OpenAI models causes resolver errors you cannot fix in 30 min, add the
   models to registry but leave resolver gated behind OPENAI_REASONING_ENABLED flag
   and report to native
 - Do NOT touch 025_HOLISTIC_SYNTHESIS/**, platform/migrations/**, or 00_ARCHITECTURE/**
+  (exception: PROJECT_BHISMA_SESSION_LOG.md — append close block at session end)
 
 Emit session-open handshake per SESSION_OPEN_TEMPLATE_v1_0.md.
-Session name: KARN-W9-B1-BHISMA-MODEL-FAMILY
+Session name: BHISMA-W1-S1-MODEL-FAMILY
 ```
 
-### W9-B2 kickoff (Stream 2 — LLM-First Pipeline)
+### BHISMA-W1-S2 kickoff (Stream 2 — LLM-First Pipeline)
 
 ```
-You are opening KARN-W9-B2, Project BHISMA Stream 2:
+You are opening BHISMA-W1-S2-LLM-PIPELINE, Stream 2 of Project BHISMA:
 LLM-First Intelligent Pipeline.
 
 ROOT = ~/Vibe-Coding/Apps/Madhav
@@ -1075,33 +1078,37 @@ Read before any action:
 7. platform/src/lib/synthesis/single_model_strategy.ts — where to add context_assembly emit
 8. platform/src/app/api/chat/consume/route.ts — pipeline orchestration to rewrite
 9. 00_ARCHITECTURE/CAPABILITY_MANIFEST.json — assets needing token_count
-10. 00_ARCHITECTURE/PROJECT_KARN_SESSION_LOG.md — last 50 lines
+10. 00_ARCHITECTURE/PROJECT_BHISMA_SESSION_LOG.md — Wave 1 session table + naming convention
 
 FIRST ACTION: Run eval baseline BEFORE any pipeline changes:
   export SMOKE_SESSION_COOKIE=... SMOKE_CHART_ID=... ANTHROPIC_API_KEY=...
   python3 platform/scripts/eval/runner.py --planner-off \
     --output 00_ARCHITECTURE/EVAL/BASELINE_RUN_W9.json
   If server is unavailable: record STUB and proceed; note as known gap.
+  Note: if M3-W1-A1 has already captured this baseline, use that file.
 
 Your deliverables are §4.1-4.9 of the BHISMA plan.
 Gate the new planner behind LLM_FIRST_PLANNER_ENABLED flag (default false).
 The old classify+compose path must remain reachable when the flag is false.
 This is a hard requirement for safe rollback.
 
+Session log: append close block to PROJECT_BHISMA_SESSION_LOG.md (NOT PROJECT_KARN_SESSION_LOG).
+
 Halt conditions:
 - If retrieval capability spec authoring takes >4 hours, reduce to 8 tools (the 8
   most-used per composition_rules.ts) and note remainder as deferred
 - Do NOT touch platform/src/lib/retrieve/** (tool implementations)
 - Do NOT touch 025_HOLISTIC_SYNTHESIS/**, platform/migrations/**
+  (exception: PROJECT_BHISMA_SESSION_LOG.md + CAPABILITY_MANIFEST.json — both in scope)
 
 Emit session-open handshake per SESSION_OPEN_TEMPLATE_v1_0.md.
-Session name: KARN-W9-B2-BHISMA-LLM-PIPELINE
+Session name: BHISMA-W1-S2-LLM-PIPELINE
 ```
 
-### W9-B3 kickoff (Stream 3 — Trace Command Center)
+### BHISMA-W1-S3 kickoff (Stream 3 — Trace Command Center)
 
 ```
-You are opening KARN-W9-B3, Project BHISMA Stream 3:
+You are opening BHISMA-W1-S3-TRACE-COMMAND, Stream 3 of Project BHISMA:
 Trace Command Center.
 
 ROOT = ~/Vibe-Coding/Apps/Madhav
@@ -1114,11 +1121,11 @@ Read before any action:
 4. platform/src/app/globals.css — brand token definitions (--brand-gold, --brand-charcoal, etc.)
 5. platform/src/lib/trace/types.ts — trace types (to extend)
 6. platform/src/app/api/trace/history/route.ts — history API (to extend)
-7. 00_ARCHITECTURE/PROJECT_KARN_SESSION_LOG.md — last 50 lines
+7. 00_ARCHITECTURE/PROJECT_BHISMA_SESSION_LOG.md — Wave 1 session table + naming convention
 
-Important context: Stream B2 will emit new trace steps (context_assembly, synthesis_done)
-and extend TraceStep's payload. B3 must be designed to gracefully handle these steps
-being absent (B2 may not be complete when B3 runs). Guard all new panel sections with
+Important context: Stream S2 will emit new trace steps (context_assembly, synthesis_done)
+and extend TraceStep's payload. S3 must be designed to gracefully handle these steps
+being absent (S2 may not be complete when S3 runs). Guard all new panel sections with
 null checks.
 
 Your deliverables are §5.1-5.8 of the BHISMA plan.
@@ -1127,12 +1134,15 @@ Priority order if time-constrained:
   P1: Query DNA panel (§5.2) — most informative new section
   P2: Cost/performance bar (§5.4)
   P2: Synthesis quality indicators (§5.5)
-  P3: Retrieval scorecard (§5.3) — depends on B2's context_assembly emit
+  P3: Retrieval scorecard (§5.3) — depends on S2's context_assembly emit
   P3: History analytics (§5.7) — requires API extension
+
+Session log: append close block to PROJECT_BHISMA_SESSION_LOG.md (NOT PROJECT_KARN_SESSION_LOG).
 
 Do NOT touch platform/src/lib/router/**, synthesis/**, or retrieve/**.
 Do NOT touch 025_HOLISTIC_SYNTHESIS/**, platform/migrations/**.
+(exception: PROJECT_BHISMA_SESSION_LOG.md — append close block at session end)
 
 Emit session-open handshake per SESSION_OPEN_TEMPLATE_v1_0.md.
-Session name: KARN-W9-B3-BHISMA-TRACE-COMMAND
+Session name: BHISMA-W1-S3-TRACE-COMMAND
 ```
