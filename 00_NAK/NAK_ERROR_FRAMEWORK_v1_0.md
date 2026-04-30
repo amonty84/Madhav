@@ -1,20 +1,35 @@
 ---
 artifact_id: NAK_ERROR_FRAMEWORK
-version: 1.0
-status: DRAFT
+version: 2.0
+status: FINAL
 authored_by: Claude Code (NAK W0 session) 2026-04-30
+revised_by: Claude Code (NAK W1-R2 session) 2026-04-30
+implemented_by: Claude Code (NAK W2-R2 session) 2026-04-30
 project: NAK — Nakula
-wave_run: W0 (draft) → W1-R2 (populate with audit findings, revise if constraints found) → W2-R2 (implement) → final
+wave_run: W0 (draft) → W1-R2 (confirmed/extended §9) → W2-R2 (implement) → FINAL
 purpose: >
   Defines the canonical error contract for the MARSYS-JIS platform portal.
-  This is prescriptive (target state). W1-R2 may revise if deep audit reveals
-  constraints. W2-R2 implements.
+  This is prescriptive (target state). W1-R2 audited current state in depth;
+  §2–§7 required no constraint-driven revision. §8 coverage table corrected
+  (all 3 "not confirmed" boundaries confirmed present + 3 new P1 gaps found).
+  §9 extended from 7 to 32 confirmed gaps. W2-R2 implemented all 32 gaps;
+  status elevated to FINAL.
 changelog:
   - v1.0 (2026-04-30): W0 authoring — canonical error envelope, four failure modes,
       user-facing messages, display patterns, decision matrix, retry strategy.
+  - v1.1 (2026-04-30): W1-R2 deep audit. §8 boundary table corrected and extended.
+      §9 replaced with confirmed 32-gap register from full-read audit of all 30 routes
+      and 9 hooks. No constraint found requiring revision to §2–§7 prescriptive spec.
+  - v2.0 (2026-04-30): W2-R2 implementation complete. All 32 gaps resolved:
+      platform/src/lib/errors/ created (ApiErrorBody type, factory functions, res.* helpers);
+      all 30 API routes migrated to ApiErrorBody envelope; all specific try-catch gaps
+      wrapped; useFeedback hook error state exposed. Status: DRAFT → FINAL.
+      Deferred to W2-R3: error.tsx boundary files (3 missing P1 boundaries:
+      dashboard, clients/[id]/build, share/[slug]; cockpit off-brand fix;
+      digest display on 4 boundaries; SharedConsumeError raw button).
 ---
 
-# NAK Error Framework v1.0 — DRAFT
+# NAK Error Framework v2.0 — FINAL
 
 ## §1 — Purpose
 
@@ -239,34 +254,66 @@ Applies only to `retry: true` errors (`NETWORK_*` and transient `SYSTEM_*`).
 
 ## §8 — Error Boundary Coverage Requirements
 
-Every client-rendered route segment reachable by a non-admin user must have an `error.tsx`. Minimum required boundaries after W2-R2:
+Every client-rendered route segment reachable by a non-admin user must have an `error.tsx`. Minimum required boundaries after W2-R2.
 
-| Route | Priority | Status |
-|---|---|---|
-| `src/app/error.tsx` | P0 — global fallback | ✅ exists |
-| `src/app/clients/[id]/consume/error.tsx` | P0 — highest-traffic user surface | ❌ not confirmed |
-| `src/app/clients/[id]/error.tsx` | P1 — client chart surface | ❌ not confirmed |
-| `src/app/cockpit/error.tsx` | P1 — build cockpit | ✅ exists (off-brand; fix at W2-R2) |
-| `src/app/clients/[id]/consume/[conversationId]/error.tsx` | P2 — conversation detail | ❌ not confirmed |
+**W1-R2 audit results** (2026-04-30): All five existing boundaries confirmed. Three "not confirmed" entries from W0 are now confirmed present. Three new P1 gaps discovered.
 
-W1-R2 confirms the full list; W2-R2 authors the missing boundaries.
+| Route | Priority | Status | W1-R2 Finding |
+|---|---|---|---|
+| `src/app/error.tsx` | P0 — global fallback | ✅ exists | Renders `error.message` directly (may expose internals); no digest; uses `Button` ✅ |
+| `src/app/clients/[id]/consume/error.tsx` | P0 — highest-traffic user surface | ✅ confirmed | Delegates to `SharedConsumeError` — brand tokens ✅; raw `<button>` not `Button` component; no digest |
+| `src/app/clients/[id]/error.tsx` | P1 — client chart surface | ✅ confirmed | Uses `Button` ✅; no digest |
+| `src/app/cockpit/error.tsx` | P1 — build cockpit | ✅ exists (off-brand; fix at W2-R2) | Confirmed off-brand: raw Tailwind, no `Button`, no brand tokens. Does show digest. |
+| `src/app/clients/[id]/consume/[conversationId]/error.tsx` | P2 — conversation detail | ✅ confirmed | Delegates to `SharedConsumeError`; same gaps as consume boundary |
+| `src/app/dashboard/error.tsx` | P1 — main user landing | ❌ **missing** | Discovered in W1-R2 |
+| `src/app/clients/[id]/build/error.tsx` | P1 — build mode surface | ❌ **missing** | Discovered in W1-R2 |
+| `src/app/share/[slug]/error.tsx` | P1 — public share link | ❌ **missing** | Discovered in W1-R2; public-facing, unauthenticated |
+| `src/app/audit/error.tsx` | P2 — audit surface | ❌ missing | Super-admin only |
+| `src/app/clients/[id]/timeline/error.tsx` | P2 — timeline surface | ❌ missing | User-facing |
+| `src/app/admin/error.tsx` | P2 — admin panel | ❌ missing | Super-admin only |
+
+W2-R2 authors the missing P1 boundaries (dashboard, build, share) and the off-brand cockpit fix. P2 boundaries are stretch goals.
 
 ---
 
-## §9 — Known Gaps (from W0 Part B)
+## §9 — Confirmed Gaps (from W1-R2 Full Audit)
 
-W1-R2 will confirm and extend this list:
+W1-R2 replaced the W0 placeholder list with the confirmed 32-gap register from full-read audit of all 30 routes and 9 hooks. Full audit detail in `00_NAK/reports/NAK_ERROR_AUDIT_REPORT_W1_R2_v1_0.md §7`.
+
+**W0 gap corrections:**
+- "Admin routes (6) lack try-catch entirely" — **CORRECTED:** Admin routes have partial try-catch; specific unprotected DB calls identified per route.
+- "Consume error boundary not confirmed" — **CORRECTED:** boundary confirmed present ✅.
+- "`useTraceStream` error surface unclear" — **CORRECTED:** error IS surfaced via `error: string | null` return value.
+- "`useChatSession.onFinish` silently swallows errors" — **CORRECTED:** ai-sdk `chat.error` exposed; `onFinish` is not an error handling path.
+
+**Confirmed gaps (abridged — full detail in NAK_ERROR_AUDIT_REPORT_W1_R2_v1_0.md):**
 
 | Gap | Mode | Severity | Surface |
 |---|---|---|---|
-| `useFeedback` silently discards fetch errors via `.catch(() => {})` | NETWORK/SYSTEM | Medium | Consume chat feedback |
-| Admin routes (6) lack try-catch entirely | DATA/SYSTEM | High | Admin user management |
-| Consume error boundary not confirmed | SYSTEM | High | Highest-traffic user surface |
-| `cockpit/error.tsx` renders off-brand (raw Tailwind, no tokens) | SYSTEM | Low | Build cockpit |
-| `useTraceStream` error surface unclear | SYSTEM | Medium | Trace panel |
-| `/api/chat/upload` missing storage error handling | DATA/SYSTEM | Medium | File attachment upload |
-| `useChatSession.onFinish` silently swallows errors | SYSTEM | Low | Chat session completion |
+| `conversations` route family: `resolveAccess` + `getConversation` unprotected systemically (4 routes, multiple methods) | SYSTEM | HIGH | Core conversation surface |
+| `compute/[type]`: bare `fetch(sidecarUrl)` — ECONNREFUSED throws unhandled | SYSTEM | HIGH | Sidecar compute |
+| `citations/preview`: entire route has no try-catch | SYSTEM | HIGH | Trace citation preview |
+| `auth/session`: DB SELECT + `createSessionCookie` unprotected | SYSTEM | HIGH | Login critical path |
+| `auth/resolve-username`: DB query unprotected | SYSTEM | HIGH | Login critical path |
+| `chat/upload`: DB INSERT unprotected after GCS upload succeeds | DATA/SYSTEM | HIGH | File attachment upload |
+| `reports/[chartId]/[domain]`: two unprotected DB queries | SYSTEM | HIGH | Report download |
+| `admin/access-requests/[id]/approve`: two unprotected DB queries + silent step-5 swallow | DATA/SYSTEM | HIGH | Admin approval |
+| `admin/access-requests/[id]/reject`: load query unprotected | SYSTEM | HIGH | Admin rejection |
+| `admin/users/[id]/send-reset`: DB query unprotected | SYSTEM | HIGH | Admin password reset |
+| `conversations` (GET list): `listConversations` unprotected | SYSTEM | HIGH | Sidebar conversation list |
+| `dashboard/`, `clients/[id]/build/`, `share/[slug]/` missing error.tsx | SYSTEM | HIGH (P1) | 3 user-facing surfaces |
+| `useFeedback` GET + POST: no error state exposed to caller | NETWORK/SYSTEM | MEDIUM | Consume chat feedback |
+| `admin/users`, `clients` POST, `access-requests` POST: JSON parse / specific queries unprotected | DATA/SYSTEM | MEDIUM | Various |
+| `chat/build` + `chat/consume` (old path): Promise.all DB queries unprotected | SYSTEM | MEDIUM | Chat |
+| `pyramid`, `trace/stream`, `audit/predictions/[id]/outcome`: specific queries unprotected | SYSTEM | MEDIUM | Various |
+| `chat/consume` new pipeline: error response inconsistently uses `new Response` not `NextResponse.json` | SYSTEM | MEDIUM | Consume pipeline |
+| `app/error.tsx`: renders `error.message` directly (may expose internals); no digest | SYSTEM | MEDIUM | Global fallback |
+| `cockpit/error.tsx` off-brand (raw Tailwind, no `Button`, no brand tokens) | — | LOW | Build cockpit |
+| 4 of 5 boundaries missing digest display | — | LOW | All surfaces |
+| `SharedConsumeError`: raw `<button>` not `Button` component | — | LOW | Consume/conversation errors |
+| Universal: no route returns `ApiErrorBody` — all use `{ error: string }` | — | SYSTEMIC | All 30 routes |
+| `lib/errors/` does not exist | — | PREREQUISITE | — |
 
 ---
 
-*End of NAK_ERROR_FRAMEWORK_v1_0.md v1.0 — DRAFT. W1-R2 to validate §9 and add deep findings. W2-R2 to implement and flip status to FINAL.*
+*End of NAK_ERROR_FRAMEWORK_v1_0.md v1.1 — DRAFT. §9 confirmed and extended by W1-R2. W2-R2 to implement and flip status to FINAL.*

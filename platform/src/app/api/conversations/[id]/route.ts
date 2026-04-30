@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import {
@@ -7,6 +6,7 @@ import {
   loadConversationMessages,
   updateConversationTitle,
 } from '@/lib/conversations'
+import { res } from '@/lib/errors'
 
 async function resolveAccess(userId: string) {
   const result = await query<{ role: string }>(
@@ -19,50 +19,62 @@ async function resolveAccess(userId: string) {
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
 
-  const messages = await loadConversationMessages(id)
-  return NextResponse.json({ conversation: conv, messages })
+    const messages = await loadConversationMessages(id)
+    return Response.json({ conversation: conv, messages })
+  } catch {
+    return res.dbError()
+  }
 }
 
 export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
-
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  if (!user) return res.unauthenticated()
 
   let body: { title?: string }
   try {
     body = await req.json()
   } catch {
-    return NextResponse.json({ error: 'invalid body' }, { status: 400 })
+    return res.badRequest('invalid body')
   }
   if (typeof body.title !== 'string') {
-    return NextResponse.json({ error: 'title required' }, { status: 400 })
+    return res.badRequest('title required')
   }
   const title = body.title.trim().slice(0, 120)
-  if (!title) return NextResponse.json({ error: 'title required' }, { status: 400 })
+  if (!title) return res.badRequest('title required')
 
-  await updateConversationTitle(id, title)
-  return NextResponse.json({ ok: true, title })
+  try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
+
+    await updateConversationTitle(id, title)
+    return Response.json({ ok: true, title })
+  } catch {
+    return res.dbError()
+  }
 }
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
 
-  await deleteConversation(id)
-  return NextResponse.json({ ok: true })
+    await deleteConversation(id)
+    return Response.json({ ok: true })
+  } catch {
+    return res.dbError()
+  }
 }

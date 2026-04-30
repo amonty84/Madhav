@@ -1,61 +1,82 @@
 ---
-artifact: NAK_CLAUDECODE_BRIEF (W2-R1 instance)
+artifact: NAK_CLAUDECODE_BRIEF (W2-R2 instance)
 status: COMPLETE
 authored_on: 2026-04-30
-authored_by: Cowork (Opus)
+authored_by: Native (NAK W2-R2 session launch)
 project: NAK — Nakula
-wave_run: W2-R1
-title: Design System Implementation — Fix Run
+wave_run: W2-R2
+title: Error Handling Implementation
 governing_clause: >
   NAK_SOP_v1_0.md §C.2 — NAK Claude Code sessions read this file first.
   This file's status field governs the session: ACTIVE = session open;
   COMPLETE = session closed.
 target_executor: Claude Code (CLI), Sonnet 4.6 in Anti-Gravity / VS Code
-session_class: NAK W2-R1 — code changes permitted within may_touch scope
-exec_brief: NAK_EXEC_BRIEF_W2_R1_DESIGN_v1_0.md
-branch: nak/w2-r1-design-fix
-worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r1
-parallelizable_with: []
-unblocks: [W2-R2, W2-R3]
+session_class: NAK W2-R2 — code changes permitted within may_touch scope
+branch: nak/w2-r2-error-fix
+worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r2
+input_from: nak/w1-r2-error-audit
+may_touch:
+  - platform/src/lib/errors/**
+  - platform/src/app/api/**
+  - platform/src/hooks/useFeedback.ts
+  - 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md
+  - 00_NAK/NAK_PORTAL_MATH_AUDIT_v1_0.md
+  - 00_NAK/NAK_TRACKER_v1_0.md
+  - 00_NAK/reports/NAK_ERROR_FIX_REPORT_W2_R2_v1_0.md
+must_not_touch:
+  - platform/src/app/**/error.tsx
+  - platform/src/components/**
+  - platform/src/app/globals.css
+  - 00_NAK/NAK_DESIGN_SYSTEM_v1_0.md
+  - 00_NAK/NAK_COMPONENT_AUDIT_v1_0.md
 ---
 
-# NAK CLAUDECODE_BRIEF — W2-R1 Design System Implementation
+# NAK CLAUDECODE_BRIEF — W1-R2 Error Handling and Robustness Audit
 
-## Scope
+## How to activate this brief
 
-Fix 181+ design token violations catalogued in W1-R1. Execute in sequence A→B→C→D→E→F.
+Copy from the brief pool to your worktree root before opening the session:
 
-## may_touch
+```bash
+cd ~/Vibe-Coding/Apps/Madhav
+git worktree add ../Madhav-nak-w1r2 -b nak/w1-r2-error-audit main
+cp NAK_CLAUDECODE_BRIEF_W1_R2.md ../Madhav-nak-w1r2/NAK_CLAUDECODE_BRIEF.md
+cd ../Madhav-nak-w1r2
+```
 
-- platform/src/app/globals.css
-- platform/src/components/admin/**
-- platform/src/components/trace/TracePanel.tsx
-- platform/src/components/build/**
-- platform/src/components/consume/TraceDrawer.tsx
-- platform/src/components/profile/**
-- platform/src/components/audit/AuditBadge.tsx
-- platform/src/components/ui/**
-- 00_NAK/NAK_DESIGN_SYSTEM_v1_0.md
-- 00_NAK/NAK_TRACKER_v1_0.md
+Copy the exec brief and NAK governance dir (they are untracked in main):
 
-## must_not_touch
+```bash
+cp ~/Vibe-Coding/Apps/Madhav/NAK_EXEC_BRIEF_W1_R2_ERROR_v1_0.md .
+cp -r ~/Vibe-Coding/Apps/Madhav/00_NAK .
+```
 
-- platform/src/app/api/**
-- platform/src/hooks/**
-- platform/src/app/**/error.tsx
-- platform/src/lib/**
-- 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md
-- 00_NAK/NAK_COMPONENT_AUDIT_v1_0.md
+## Pre-flight gate
 
-## Acceptance criteria
+1. `git status` is clean in worktree.
+2. `00_NAK/NAK_TRACKER_v1_0.md` §2 shows `w0_closed: true`, `active_wave: W1`.
+3. `00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md` exists (authored in W0).
 
-- [ ] AC-1: STEP A — `--color-brand-*` and `--color-status-*` added to `@theme inline`; build passes
-- [ ] AC-2: STEP B — `.brand-card` removed; 4 zero-usage variants removed (Button:link, Badge:ghost, Badge:link, TabsList:line)
-- [ ] AC-3: STEP C — admin/ 64 violations fixed; trace/TracePanel.tsx 50+ violations fixed; npm test passes (zero new failures vs W0 baseline of 933)
-- [ ] AC-4: STEP D — build/ 28 token-fixable violations fixed (24 CHART_PALETTE exceptions documented/untouched); consume/TraceDrawer.tsx 4 violations fixed
-- [ ] AC-5: STEP E — profile/ hex fallbacks removed; audit/AuditBadge.tsx design decision documented
-- [ ] AC-6: STEP F — NAK_DESIGN_SYSTEM_v1_0.md elevated to FINAL; all F-DS-1 through F-DS-10 resolved or intentionally deferred
-- [ ] AC-7: Closure report at 00_NAK/reports/NAK_DESIGN_FIX_REPORT_W2_R1_v1_0.md committed
-- [ ] AC-8: NAK_TRACKER_v1_0.md W2-R1 row status: closed
+## What this session does
+
+Deep audit of error handling across all API routes, hooks, and error boundaries. Maps current state against the target in `NAK_ERROR_FRAMEWORK_v1_0.md`. Confirms or corrects every finding from W0 Part B. Creates the portal math audit skeleton. Makes **zero code changes**.
+
+## Required reads, in order
+
+1. This file.
+2. `NAK_EXEC_BRIEF_W1_R2_ERROR_v1_0.md` — full spec. Pay special attention to §3 (AC-1 Parts A–D) and §5 (high-priority routes and hooks).
+3. `00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md` — the target state you are auditing against.
+4. `00_NAK/NAK_TRACKER_v1_0.md` §2 — confirm `active_wave: W1`, `w0_closed: true`.
+
+## Acceptance criteria (summary — full spec in exec brief §3)
+
+- [ ] AC-1: `00_NAK/reports/NAK_ERROR_AUDIT_REPORT_W1_R2_v1_0.md` committed (Parts A–D)
+- [ ] AC-2: `00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md` bumped to v1.1 with confirmed/revised §9
+- [ ] AC-3: `00_NAK/NAK_PORTAL_MATH_AUDIT_v1_0.md` DRAFT skeleton created
+- [ ] AC-4: `NAK_TRACKER_v1_0.md` §3 W1-R2 row closed
+
+## One-line session summary
+
+Read every API route and hook in full. Map against the error framework target state. Confirm gaps. Zero code changes.
 
 ---

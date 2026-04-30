@@ -3,6 +3,7 @@ import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
+import { res } from '@/lib/errors'
 
 interface PatchBody {
   username?: string
@@ -18,17 +19,26 @@ export async function PATCH(
 
   const { id } = await ctx.params
   if (id === auth.user.uid) {
-    return NextResponse.json(
-      { error: "You can't modify your own account from the admin panel." },
-      { status: 400 },
+    return res.badRequest("You can't modify your own account from the admin panel.")
+  }
+
+  // Verify the user exists before attempting any update.
+  try {
+    const { rows: existing } = await query<{ id: string }>(
+      'SELECT id FROM profiles WHERE id=$1',
+      [id]
     )
+    if (existing.length === 0) return res.notFound('user')
+  } catch (err) {
+    console.error('[admin/users/[id]] PATCH existence-check failed', err)
+    return res.dbError()
   }
 
   let body: PatchBody
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
 
   const setClauses: string[] = []
@@ -38,7 +48,7 @@ export async function PATCH(
   if (typeof body.username === 'string') {
     const username = body.username.trim().toLowerCase()
     const error = validateUsername(username)
-    if (error) return NextResponse.json({ error }, { status: 400 })
+    if (error) return res.badRequest(error)
     setClauses.push(`username=$${idx++}`)
     values.push(username)
   }
@@ -50,12 +60,12 @@ export async function PATCH(
       await adminAuth.updateUser(id, { disabled: body.status === 'disabled' })
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Firebase update failed.'
-      return NextResponse.json({ error: message }, { status: 500 })
+      return res.internal(message)
     }
   }
 
   if (setClauses.length === 0) {
-    return NextResponse.json({ error: 'Nothing to update.' }, { status: 400 })
+    return res.badRequest('Nothing to update.')
   }
 
   setClauses.push(`updated_at=now()`)
@@ -68,7 +78,7 @@ export async function PATCH(
     )
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Update failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 
   return NextResponse.json({ ok: true })
@@ -83,10 +93,7 @@ export async function DELETE(
 
   const { id } = await ctx.params
   if (id === auth.user.uid) {
-    return NextResponse.json(
-      { error: "You can't delete your own account." },
-      { status: 400 },
-    )
+    return res.badRequest("You can't delete your own account.")
   }
 
   // Firebase delete first; if it fails, we leave the profile row alone.
@@ -97,7 +104,7 @@ export async function DELETE(
     // user-not-found means Firebase already lost the row — proceed to clean up profile.
     if (code !== 'auth/user-not-found') {
       const message = err instanceof Error ? err.message : 'Firebase delete failed.'
-      return NextResponse.json({ error: message }, { status: 500 })
+      return res.internal(message)
     }
   }
 
@@ -105,7 +112,7 @@ export async function DELETE(
     await query('DELETE FROM profiles WHERE id=$1', [id])
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Delete failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 
   return NextResponse.json({ ok: true })

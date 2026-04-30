@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 export async function POST(
   _request: Request,
@@ -11,14 +12,20 @@ export async function POST(
 
   const { id } = await ctx.params
 
-  const { rows } = await query<{ status: string }>(
-    'SELECT status FROM access_requests WHERE id=$1',
-    [id]
-  )
+  let rows: { status: string }[]
+  try {
+    const result = await query<{ status: string }>(
+      'SELECT status FROM access_requests WHERE id=$1',
+      [id]
+    )
+    rows = result.rows
+  } catch {
+    return res.dbError()
+  }
   const req = rows[0] ?? null
-  if (!req) return NextResponse.json({ error: 'not_found' }, { status: 404 })
+  if (!req) return res.notFound('not_found')
   if (req.status !== 'pending') {
-    return NextResponse.json({ error: 'Request is not pending.' }, { status: 409 })
+    return res.conflict('Request is not pending.')
   }
 
   try {
@@ -26,9 +33,8 @@ export async function POST(
       'UPDATE access_requests SET status=\'rejected\', reviewed_at=now(), reviewed_by=$1 WHERE id=$2',
       [auth.user.uid, id]
     )
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Update failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+  } catch {
+    return res.internal('Update failed.')
   }
 
   return NextResponse.json({ ok: true })

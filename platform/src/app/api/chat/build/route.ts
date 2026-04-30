@@ -7,6 +7,7 @@ import { buildTools } from '@/lib/claude/build-tools'
 import { buildSystemPrompt } from '@/lib/claude/system-prompts'
 import type { ModelMessage, UIMessage } from 'ai'
 import { insertConversationWithId, replaceConversationMessages, getConversation } from '@/lib/conversations'
+import { res } from '@/lib/errors'
 
 export const maxDuration = 120
 
@@ -23,32 +24,38 @@ async function requireSuperAdmin() {
 
 export async function POST(request: Request) {
   const user = await requireSuperAdmin()
-  if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+  if (!user) return res.forbidden()
 
   let body: { chartId?: string; messages?: UIMessage[]; conversationId?: string }
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+    return res.badRequest('Invalid JSON body')
   }
 
   const { chartId, messages } = body
   if (!chartId || !messages) {
-    return NextResponse.json({ error: 'chartId and messages are required' }, { status: 400 })
+    return res.badRequest('chartId and messages are required')
   }
 
-  const [chartResult, layersResult] = await Promise.all([
-    query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string }>(
-      'SELECT id, name, birth_date, birth_time, birth_place FROM charts WHERE id=$1',
-      [chartId]
-    ),
-    query<{ layer: string; sublayer: string; status: string }>(
-      'SELECT layer, sublayer, status FROM pyramid_layers WHERE chart_id=$1',
-      [chartId]
-    ),
-  ])
+  let chartResult: Awaited<ReturnType<typeof query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string }>>>
+  let layersResult: Awaited<ReturnType<typeof query<{ layer: string; sublayer: string; status: string }>>>
+  try {
+    ;[chartResult, layersResult] = await Promise.all([
+      query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string }>(
+        'SELECT id, name, birth_date, birth_time, birth_place FROM charts WHERE id=$1',
+        [chartId]
+      ),
+      query<{ layer: string; sublayer: string; status: string }>(
+        'SELECT layer, sublayer, status FROM pyramid_layers WHERE chart_id=$1',
+        [chartId]
+      ),
+    ])
+  } catch {
+    return res.dbError()
+  }
 
-  if (!chartResult.rows[0]) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
+  if (!chartResult.rows[0]) return res.notFound('chart')
   const chart = chartResult.rows[0]
   const layers = layersResult.rows
 
@@ -59,9 +66,14 @@ export async function POST(request: Request) {
   let pendingConversationInsert: Promise<void> | null = null
 
   if (conversationId) {
-    const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin: true })
+    let existing: Awaited<ReturnType<typeof getConversation>>
+    try {
+      existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin: true })
+    } catch {
+      return res.dbError()
+    }
     if (!existing || existing.chart_id !== chartId) {
-      return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
+      return res.notFound('conversation')
     }
   } else {
     conversationId = crypto.randomUUID()
