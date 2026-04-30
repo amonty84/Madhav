@@ -12,15 +12,14 @@ function severityIcon(severity: InsightCard['severity']) {
 
 function severityClass(severity: InsightCard['severity']) {
   if (severity === 'positive')
-    return 'border-[oklch(0.78_0.13_145)] bg-[oklch(0.97_0.02_145)] dark:bg-[oklch(0.22_0.04_145)] dark:border-[oklch(0.50_0.10_145)]'
+    return 'border-status-success bg-status-success-bg'
   if (severity === 'concern')
     return 'border-amber-400 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-600'
   return 'border-border bg-muted/40'
 }
 
 function iconClass(severity: InsightCard['severity']) {
-  if (severity === 'positive')
-    return 'text-[oklch(0.40_0.12_145)] dark:text-[oklch(0.78_0.13_145)]'
+  if (severity === 'positive') return 'text-status-success'
   if (severity === 'concern') return 'text-amber-600 dark:text-amber-400'
   return 'text-muted-foreground'
 }

@@ -115,7 +115,7 @@ export function ChatShell({
       )}
 
       <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
-        <SheetContent side="left" className="w-[78%] max-w-[300px] bg-sidebar p-0 md:hidden" showCloseButton={false}>
+        <SheetContent side="left" className="w-[78%] max-w-[300px] bg-sidebar p-0 md:hidden">
           <SheetTitle className="sr-only">Conversations</SheetTitle>
           <div className="flex h-full flex-col">{sidebar}</div>
         </SheetContent>
@@ -203,6 +203,7 @@ export function ChatShell({
               <button
                 type="button"
                 onClick={() => setRightOpen(true)}
+                aria-label={rightPanelLabel}
                 className="inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 <FileText className="size-3.5" />

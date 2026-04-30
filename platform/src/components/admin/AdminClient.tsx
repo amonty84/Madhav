@@ -30,10 +30,10 @@ export function AdminClient({ currentUserId }: { currentUserId: string }) {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-serif text-3xl font-medium tracking-wide text-[#fce29a]">
+        <h1 className="font-serif text-3xl font-medium tracking-wide text-brand-gold-cream">
           User management
         </h1>
-        <p className="mt-1 text-sm text-[#9b834f]">
+        <p className="mt-1 text-sm text-muted-foreground">
           Pending access requests and active accounts.
         </p>
       </div>

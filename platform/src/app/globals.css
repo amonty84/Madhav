@@ -58,6 +58,27 @@
   --brand-charcoal:    oklch(0.10 0.012 70);    /* ≈ #0d0a05 */
   --brand-ink:         oklch(0.04 0.005 70);    /* ≈ #020201 */
   --brand-vellum:      oklch(0.94 0.02 80);     /* warm paper for light mode */
+
+  /* Brand color utilities — maps brand tokens to --color-* prefix so Tailwind
+     generates text-brand-gold, bg-brand-ink, etc. as utility classes. */
+  --color-brand-gold:        var(--brand-gold);
+  --color-brand-gold-light:  var(--brand-gold-light);
+  --color-brand-gold-deep:   var(--brand-gold-deep);
+  --color-brand-gold-cream:  var(--brand-gold-cream);
+  --color-brand-charcoal:    var(--brand-charcoal);
+  --color-brand-ink:         var(--brand-ink);
+  --color-brand-vellum:      var(--brand-vellum);
+  --color-brand-cream:       var(--brand-cream);
+
+  /* Status color utilities */
+  --color-status-warn:       var(--status-warn);
+  --color-status-halt:       var(--status-halt);
+  --color-status-info:       var(--status-info);
+  --color-status-success:    var(--status-success);
+  --color-status-warn-bg:    var(--status-warn-bg);
+  --color-status-halt-bg:    var(--status-halt-bg);
+  --color-status-info-bg:    var(--status-info-bg);
+  --color-status-success-bg: var(--status-success-bg);
 }
 
 html,
@@ -178,12 +199,6 @@ body {
   cursor: not-allowed;
 }
 
-/* Soft hairline brand card — translucent ink fill, gold edge. */
-.brand-card {
-  border: 1px solid color-mix(in oklch, var(--brand-gold) 25%, transparent);
-  background: color-mix(in oklch, var(--brand-ink) 92%, transparent);
-  backdrop-filter: blur(8px);
-}
 
 .dark {
   /* Warm-charcoal dark palette — subtle warmth in the shadows */
@@ -352,14 +367,14 @@ body {
 }
 
 /* Status color utilities */
-.bt-status-complete { color: oklch(0.40 0.12 145); }
-.bt-status-active   { color: oklch(0.45 0.12 75);  }
+.bt-status-complete { color: var(--status-success); }
+.bt-status-active   { color: var(--brand-gold); }
 .bt-status-pending  { color: var(--color-muted-foreground); }
-.bt-status-blocked  { color: oklch(0.40 0.18 27);  }
+.bt-status-blocked  { color: var(--status-halt); }
 
-.dark .bt-status-complete { color: oklch(0.78 0.13 145); }
-.dark .bt-status-active   { color: oklch(0.78 0.13 75);  }
-.dark .bt-status-blocked  { color: oklch(0.70 0.19 22);  }
+.dark .bt-status-complete { color: var(--status-success); }
+.dark .bt-status-active   { color: var(--brand-gold); }
+.dark .bt-status-blocked  { color: var(--status-halt); }
 
 /* Page-entry ascend — translate-y + fade over 200 ms for layout <main> children. */
 @keyframes page-ascend {

@@ -10,6 +10,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { fetchTraceHistory } from '@/lib/trace/writer'
+import { res } from '@/lib/errors'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,6 +26,6 @@ export async function GET(request: Request) {
     return NextResponse.json(history)
   } catch (err) {
     console.error('[api/trace/history] GET failed', err)
-    return NextResponse.json({ error: 'Failed to load trace history.' }, { status: 500 })
+    return res.internal('Failed to load trace history.')
   }
 }

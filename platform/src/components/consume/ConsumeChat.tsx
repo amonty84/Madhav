@@ -393,6 +393,9 @@ export function ConsumeChat({
       >
         <div
           ref={scrollRef}
+          role="log"
+          aria-label="Conversation"
+          aria-live="polite"
           className="relative flex-1 min-h-0 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
         >
           {messagesEmpty ? (
@@ -529,7 +532,7 @@ export function ConsumeChat({
                         ? 'border-[color-mix(in_oklch,var(--brand-gold)_60%,transparent)] bg-[var(--brand-gold-faint)] text-[var(--brand-gold)]'
                         : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--brand-gold)_40%,transparent)] hover:bg-[var(--brand-gold-faint)] hover:text-[var(--brand-gold)]',
                     ].join(' ')}
-                    title="Run 3 independent models and adjudicate"
+                    aria-label="Panel mode — run 3 independent models and adjudicate"
                   >
                     <Columns3 className="h-3 w-3" />
                     Panel
@@ -554,7 +557,7 @@ export function ConsumeChat({
                         ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
                         : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
                     ].join(' ')}
-                    title="Toggle query trace drawer"
+                    aria-label="Toggle query trace drawer"
                   >
                     <Zap className="h-3 w-3" />
                     Trace

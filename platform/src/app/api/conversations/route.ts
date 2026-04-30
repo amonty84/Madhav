@@ -1,22 +1,27 @@
-import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { listConversations } from '@/lib/conversations'
+import { res } from '@/lib/errors'
 import type { ConversationModule } from '@/lib/db/types'
 
 export async function GET(request: Request) {
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
   const url = new URL(request.url)
   const chartId = url.searchParams.get('chartId')
   const moduleParam = url.searchParams.get('module') ?? 'consume'
-  if (!chartId) return NextResponse.json({ error: 'chartId required' }, { status: 400 })
+  if (!chartId) return res.badRequest('chartId required')
 
-  const conversations = await listConversations({
-    chartId,
-    userId: user.uid,
-    module: moduleParam as ConversationModule,
-  })
+  let conversations
+  try {
+    conversations = await listConversations({
+      chartId,
+      userId: user.uid,
+      module: moduleParam as ConversationModule,
+    })
+  } catch {
+    return res.dbError()
+  }
 
-  return NextResponse.json({ conversations })
+  return Response.json({ conversations })
 }
