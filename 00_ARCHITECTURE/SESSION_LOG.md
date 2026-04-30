@@ -10831,3 +10831,125 @@ session_close:
 ```
 
 *End of redesign-r7-polish-2026-04-30 entry — Portal Redesign R7 CLOSED. Redesign workstream COMPLETE (R0–R2, R4–R6, R7). R3 deferred indefinitely.*
+
+---
+
+## KARN-W7-R2-MANIFEST-COMPLETENESS — 2026-04-30
+
+```yaml
+session_open:
+  session_id: KARN-W7-R2-MANIFEST-COMPLETENESS
+  cowork_thread_name: "Madhav KARN-W7-R2 — Manifest Completeness (F2)"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M2.F2
+  predecessor_session: KARN-W5-R2-D234-BUNDLE
+  brief: 00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_F2_MANIFEST_COMPLETENESS.md
+  parent_plan: 00_ARCHITECTURE/M1_M2_EXECUTION_PLAN_v1_0_DRAFT.md §F2
+  declared_scope:
+    may_touch:
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - 04_REMEDIAL_CODEX/**
+      - 05_TEMPORAL_ENGINES/**
+      - platform/src/**
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 03_DOMAIN_REPORTS/**
+  red_team_due: false
+```
+
+```yaml
+session_body:
+  problem: >
+    Three source-document canonical IDs (REMEDIAL_CODEX_v2_0_PART1,
+    REMEDIAL_CODEX_v2_0_PART2, LIFETIME_TIMELINE_v1_0) were referenced by
+    Wave-5 retrieval-tool entries' source_canonical_ids fields but were not
+    themselves registered as manifest entries. Path B silent-skip risk in
+    composition_rules.ts remedialRule + timelineRule at runtime.
+  source_file_fingerprints_sha256:
+    REMEDIAL_CODEX_v2_0_PART1: 56e2312c0e18c56b5cd56731aa44bf823efaebe6c6222d8b0c9b8c66f8717a0d
+    REMEDIAL_CODEX_v2_0_PART2: fbc1cd8e52bbc55dc21fabaa5c93ce76902a5bcbefcd85e55b360034b953707c
+    LIFETIME_TIMELINE_v1_0:    176a2dc6706866239b731e611c2c58cd1bb472427b043daf7703e96c115b91eb
+  manifest_edits:
+    insertion_point: "after DISCOVERY_REGISTERS_INDEX (last L3.5), before BUILD_PIPELINE_v1_0 (governance)"
+    entries_added:
+      - canonical_id: REMEDIAL_CODEX_v2_0_PART1
+        layer: L4
+        version: "2.0"
+        status: CURRENT
+        downstream_canonical_id: RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY
+      - canonical_id: REMEDIAL_CODEX_v2_0_PART2
+        layer: L4
+        version: "2.0"
+        status: CURRENT
+        downstream_canonical_id: RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY
+      - canonical_id: LIFETIME_TIMELINE_v1_0
+        layer: L5
+        version: "1.0.1"
+        status: CLOSED
+        downstream_canonical_id: RETRIEVAL_TOOL_TIMELINE_QUERY
+    metadata_updates:
+      entry_count_field: "106 → 109"
+      manifest_version: "1.6 → 1.7"
+      manifest_fingerprint: "d234_bundle_wave5_2026-04-30 → f2_manifest_completeness_w7_2026-04-30"
+      last_updated: "2026-04-30T21:00:00Z → 2026-04-30T18:12:00Z"
+      last_updated_by: "KARN-W5-R2-D234-BUNDLE → KARN-W7-R2-MANIFEST-COMPLETENESS"
+  validation:
+    json_valid: true
+    cross_check_unresolved_source_canonical_ids: 0
+    new_entries_present: [REMEDIAL_CODEX_v2_0_PART1, REMEDIAL_CODEX_v2_0_PART2, LIFETIME_TIMELINE_v1_0]
+    predecessors_absent: [REMEDIAL_CODEX_v1_0_PART1, REMEDIAL_CODEX_v1_0_PART2]
+  notes:
+    discrepancy_flag: >
+      Pre-existing 3-entry mismatch between entry_count field and actual entries.
+      HEAD shows entry_count=83 / actual=105 (delta 22, not 22+0 mismatch but a
+      latent miscount). Working tree pre-edit had entry_count=106 / actual=109
+      (delta 3). Post-edit: entry_count=109 / actual=112 (delta 3 preserved).
+      Brief AC.2 specifies entry_count=109 literally; this was honored. The
+      pre-existing 3-entry latent miscount is OUT OF SCOPE for F2 and should be
+      addressed in a future manifest-audit pass (not opened as a halt condition
+      because the brief's halt conditions do not name it).
+```
+
+```yaml
+session_close:
+  session_id: KARN-W7-R2-MANIFEST-COMPLETENESS
+  closed_at: "2026-04-30T18:12:00Z"
+  acceptance_criteria_summary:
+    - "AC.1 — CAPABILITY_MANIFEST.json valid JSON: PASS"
+    - "AC.2 — entry_count = 109: PASS (literal; latent miscount flagged in notes)"
+    - "AC.3 — manifest_version = 1.7: PASS"
+    - "AC.4 — REMEDIAL_CODEX_v2_0_PART1 entry present, sha256 fingerprint set: PASS"
+    - "AC.5 — REMEDIAL_CODEX_v2_0_PART2 entry present, sha256 fingerprint set: PASS"
+    - "AC.6 — LIFETIME_TIMELINE_v1_0 entry present, sha256 fingerprint set: PASS"
+    - "AC.7 — Layer fields set (L4/L4/L5): PASS"
+    - "AC.8 — Cross-check 0 UNRESOLVED source_canonical_ids: PASS"
+    - "AC.9 — No predecessor v1_0 PART1/PART2 added: PASS"
+    - "AC.10 — SESSION_LOG appended: PASS (this entry)"
+  closing_summary: |
+    === KARN-W7-R2 CLOSE ===
+    CAPABILITY_MANIFEST.json:
+      manifest_version: 1.6 → 1.7
+      manifest_fingerprint: d234_bundle_wave5_2026-04-30 → f2_manifest_completeness_w7_2026-04-30
+      entry_count field: 106 → 109
+      Added:
+        REMEDIAL_CODEX_v2_0_PART1  (L4, sha256: 56e2312c...)
+        REMEDIAL_CODEX_v2_0_PART2  (L4, sha256: fbc1cd8e...)
+        LIFETIME_TIMELINE_v1_0     (L5, sha256: 176a2dc6...)
+    Cross-check: PASS (0 unresolved source_canonical_ids)
+    JSON valid: 112 actual entries (entry_count field=109; pre-existing 3-entry latent miscount flagged for future audit, out of F2 scope)
+    SESSION_LOG: appended
+  mirror_updates_propagated: n/a  # CAPABILITY_MANIFEST is Claude-side authoritative; no Gemini-side counterpart in MP.1–MP.8 inventory
+  next_session_objective: >
+    KARN-W7-R2 closes F2. F1 (KARN-W7-R1-AUDIT-REPAIR) and F3
+    (KARN-W7-R3-EVAL-HARNESS) run concurrently in Wave 7. Future audit pass
+    should reconcile entry_count field with actual entries count (currently
+    109 vs 112; delta 3 inherited from pre-Wave-5 state).
+```
+
+*End of KARN-W7-R2-MANIFEST-COMPLETENESS entry — F2 manifest completeness CLOSED.*
