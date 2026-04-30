@@ -296,6 +296,22 @@ changelog:
       (10 queries: 5 P7-gated, 5 standard); CF.1 carried (claude-opus-4.7 pending);
       CF.2 CLOSED (20/20 router eval). COWORK_LEDGER §3 entry 10 appended per ONGOING_HYGIENE_POLICIES §P.
       §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-05-01, M3-W1-OPEN-PHASE-PLAN — M3 phase plan authored):
+      active_phase_plan flipped null → PHASE_M3_PLAN_v1_0.md (v1.0); active_phase_plan_version → "1.0";
+      active_phase_plan_sub_phase → "M3-A — Eval Baseline + Discovery Engine Activation + DIS.009 Disposition (not yet started)";
+      active_phase_plan_status → active.
+      last_session_id → M3-W1-OPEN-PHASE-PLAN; last_session_agent → claude-sonnet-4-6;
+      last_session_cowork_thread_name → "M3-W1-OPEN-PHASE-PLAN"; close_state → atomically_closed.
+      previous_session_id → KARN-W8-R2-M2-CLOSE.
+      next_session_objective → M3-W1-A1 (Eval baseline capture + DIS.009 written analysis).
+      next_session_proposed_cowork_thread_name → "M3-W1-A1 — Eval Baseline + DIS.009 Analysis".
+      red_team_counter: 0 (plan-only session; not incremented per governance-aside equivalence).
+      Deliverables: PHASE_M3_PLAN_v1_0.md (M3 phase plan; 4 sub-phases M3-A through M3-D;
+      eval-baseline gate declared; DIS.009 disposition gate at M3-A close).
+      Governance: mirror_enforcer=exit0 (8/8); drift_detector=exit2 (259 pre-existing);
+      schema_validator=exit2 (100 pre-existing). No new critical findings.
+      .gemini/project_state.md updated (MP.2 + MP.4 active plan pointer).
+      §3 narrative refreshed.
   - v1.0 amended-in-place (2026-05-01, KARN-W8-R2-M2-CLOSE — M2 CLOSED):
       active_macro_phase flipped M2 → M3; active_macro_phase_title → "Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)";
       active_macro_phase_status → active (M3 just opened, M2 sealed).
@@ -526,15 +542,17 @@ current_state:
   # Phase-plan expansion (M3 phase plan TBD; first M3 session decides whether to expand
   #   MACRO_PLAN §M3 into a PHASE_C_PLAN_v1_0.md or drive M3 directly from MACRO_PLAN.)
   # ------------------------------------------------------------------
-  active_phase_plan: null
-  active_phase_plan_version: null
-  active_phase_plan_sub_phase: "M2 closed; M3 phase plan pending first M3 session (KARN-W9-M3-OPEN)"
-    # PHASE_B_PLAN_v1_0.md (v1.0.3) is now SUPERSEDED-AS-COMPLETE for the M2 macro-phase.
-    # M2 sealing artifact: 00_ARCHITECTURE/M2_CLOSE_v1_0.md
-    # M3 first session: KARN-W9-M3-OPEN; reads MACRO_PLAN §M3 + HANDOFF_M2_TO_M3_v1_0.md +
-    # this CURRENT_STATE; authors M3 phase-plan analogue (or proceeds directly off MACRO_PLAN
-    # per native decision at M3 open).
-  active_phase_plan_status: pending_m3_open     # M3 phase plan not yet authored
+  active_phase_plan: 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+  active_phase_plan_version: "1.0"
+  active_phase_plan_sub_phase: >
+    M3-A — Eval Baseline + Discovery Engine Activation + DIS.009 Disposition
+    (NOT YET STARTED; PHASE_M3_PLAN_v1_0.md authored at M3-W1-OPEN-PHASE-PLAN 2026-05-01;
+    M3-A entry-blocked on BASELINE_RUN_W9.json capture)
+    # PHASE_M3_PLAN_v1_0.md is the active M3 phase plan (v1.0, authored 2026-05-01).
+    # Sub-phases: M3-A (Discovery Engine + DIS.009) → M3-B (Vimshottari + Yogini + Transit) →
+    # M3-C (Chara + Narayana + KP + Varshaphala + Shadbala) → M3-D (Validator + Close).
+    # Hard prerequisite: BASELINE_RUN_W9.json must be captured before M3-A retrieval changes.
+  active_phase_plan_status: active
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -583,54 +601,56 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: KARN-W8-R2-M2-CLOSE
-    # M2 macro-phase CLOSE artifact + mirror sync + M3 handoff. Sealed M2 (Corpus Activation).
-  last_session_closed_at: 2026-05-01T00:00:00+00:00
-  last_session_attempted_close_at: 2026-05-01T00:00:00+00:00
-  last_session_agent: claude-opus-4-7
-  last_session_cowork_thread_name: "KARN-W8-R2 — M2 CLOSE Artifact + Mirror Sync + M3 Handoff"
+  last_session_id: M3-W1-OPEN-PHASE-PLAN
+    # M3 first session. Plan-only. Produced PHASE_M3_PLAN_v1_0.md (M3 phase plan analogue of
+    # PHASE_B_PLAN). KARN-equivalent session name: KARN-W9-M3-OPEN.
+  last_session_closed_at: 2026-05-01T00:00:00+05:30
+  last_session_attempted_close_at: 2026-05-01T00:00:00+05:30
+  last_session_agent: claude-sonnet-4-6
+  last_session_cowork_thread_name: "M3-W1-OPEN-PHASE-PLAN"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
-    No governance script runs in this session per brief scope (governance/document-only;
-    no platform/src or migrations changes). W8-R1 (predecessor) script verdicts stand:
-    typecheck 9 pre-W6 residuals only; vitest 1047 PASS / 13 FAIL (matches W5 baseline);
-    composition_rules 39/39 PASS; per_tool_planner 15/15 PASS; audits 98.99% / 95.52%.
-    red_team_counter reset to 0 (W8-R1 IS.8 macro-phase-close cadence fired; verdict PASS).
+    Plan-only session (no corpus or platform changes). Scripts run at close:
+    mirror_enforcer exit=0 (8/8 pairs clean); schema_validator exit=2 (100 violations —
+    pre-existing carry-forward from M2 close, no new violations); drift_detector exit=2
+    (259 findings — pre-existing carry-forward, no new regressions). No CRITICAL findings.
+    red_team_counter: 0 (plan-only session does not increment per ONGOING_HYGIENE_POLICIES §G
+    governance-aside equivalence; same pattern as COW brief-authoring sessions).
   last_session_deliverable: >
-    M2 CLOSED. Sealing artifact: 00_ARCHITECTURE/M2_CLOSE_v1_0.md.
-    Handoff memo: 00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md.
-    Mirror sync: .geminirules + .gemini/project_state.md propagated to adapted parity
-    (W6/W7 Cowork-stream additions + M2 close state).
-    SESSION_LOG W8-R2 entry + M2 macro-phase seal block appended.
-    M2 quality bar at close: 8 PASS / 1 WARN (eval baseline STUB) / 0 FAIL.
-    Red-team: REDTEAM_M2_v1_0.md verdict PASS (9/9 axes; 0 findings).
-  previous_session_id: KARN-W8-R1-REDTEAM-SMOKE
-    # IS.8 mandatory macro-phase-close red-team. Verdict PASS. W8-R2 gate CLEARED.
+    PHASE_M3_PLAN_v1_0.md authored (v1.0, 2026-05-01). Sub-phases M3-A through M3-D
+    with scope, deliverables, and acceptance criteria per sub-phase. Eval-baseline gate
+    (BASELINE_RUN_W9.json) declared as hard prerequisite for M3-A retrieval-affecting
+    work. DIS.009 disposition decision point recorded at M3-A close (AC.M3A.4).
+    SESSION_LOG and PROJECT_M3_SESSION_LOG.md close blocks appended. CURRENT_STATE and
+    .gemini/project_state.md updated for active phase plan pointer.
+  previous_session_id: KARN-W8-R2-M2-CLOSE
+    # M2 macro-phase CLOSE artifact + mirror sync + M3 handoff. Sealed M2 (Corpus Activation).
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    KARN-W9-M3-OPEN — first M3 session. Reads MACRO_PLAN_v2_0.md §M3 + this CURRENT_STATE +
-    HANDOFF_M2_TO_M3_v1_0.md; verifies L3.5 register state in DB; runs the M2 eval baseline
-    (BASELINE_RUN_W7.json) before any retrieval-behavior change; authors the M3 phase plan
-    (PHASE_C_PLAN_v1_0.md analogue) or proceeds directly off MACRO_PLAN per native decision.
-    Concurrent option: Phase 11B (legacy code deletion) gates on stage1 smoke ✅ + native
-    acceptance — independent of M3 macro-phase progression.
-  next_session_proposed_cowork_thread_name: "KARN-W9 — M3 OPEN"
+    M3-W1-A1 (first M3-A execution session) — Eval baseline capture + DIS.009 written
+    analysis (no retrieval changes). Per PHASE_M3_PLAN_v1_0.md §3.1: capture
+    BASELINE_RUN_W9.json (hard gate); perform read-only DIS.009 written analysis (R1/R2/R3
+    option framing); no retrieval-affecting code committed until baseline captured.
+    Session ID pattern: M3-W1-A1-EVAL-BASELINE or similar (finalized at session open per
+    PROJECT_M3_SESSION_LOG.md naming convention).
+  next_session_proposed_cowork_thread_name: "M3-W1-A1 — Eval Baseline + DIS.009 Analysis"
   red_team_due_note: >
-    Counter at 0 (reset at KARN-W8-R2 close — W8-R1 IS.8 macro-phase-close cadence fired
-    with verdict PASS). M3 first session resumes counting from 0; next §IS.8(a) every-third
-    fire at M3 counter=3.
+    Counter at 0 (reset at KARN-W8-R2 close — W8-R1 IS.8 macro-phase-close cadence fired).
+    Plan-only session (M3-W1-OPEN) did NOT increment per governance-aside equivalence.
+    M3-A execution sessions begin counting from 0; next §IS.8(a) every-third fire at
+    M3 counter=3 (expected mid-M3-A or M3-A close depending on session count).
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-01T00:00:00+00:00
-  file_updated_by_session: KARN-W8-R2-M2-CLOSE
+  file_updated_at: 2026-05-01T00:00:00+05:30
+  file_updated_by_session: M3-W1-OPEN-PHASE-PLAN
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, KARN-W8-R2-M2-CLOSE, null).
+    = (Step_15 completed, M3-W1-OPEN-PHASE-PLAN, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -639,6 +659,18 @@ current_state:
 ---
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
+
+At the close of M3-W1-OPEN-PHASE-PLAN (2026-05-01) — **PHASE_M3_PLAN_v1_0.md authored**:
+
+**Macro-phase.** M3 — Temporal Animation / Discovery Layer (Pattern + Contradiction Engines), active. Phase plan is now set: `PHASE_M3_PLAN_v1_0.md` (v1.0). Sub-phases M3-A through M3-D defined. M3-A is the first execution sub-phase, entry-blocked on BASELINE_RUN_W9.json.
+
+**Phase plan.** PHASE_M3_PLAN_v1_0.md v1.0 is the authoritative M3 phase plan. Sub-phase assignments: M3-A = Discovery Engine Activation + DIS.009 Disposition; M3-B = Vimshottari + Yogini + Transit Engine; M3-C = Chara + Narayana + KP + Varshaphala + Shadbala; M3-D = Temporal Validator + Red-Team + M3 Close. Hard prerequisite: BASELINE_RUN_W9.json must be captured before any M3-A retrieval-affecting change. DIS.009 disposition decision point declared at M3-A close (AC.M3A.4).
+
+**Session.** Plan-only; no corpus or platform mutations. Governance scripts at close: mirror_enforcer exit=0 (8/8 clean), drift exit=2 (259 pre-existing), schema exit=2 (100 pre-existing). No new regressions. red_team_counter remains 0 (plan-only session does not increment).
+
+---
+
+*(Below: retained narrative from prior session close KARN-W8-R2-M2-CLOSE for audit trail.)*
 
 At the close of KARN-W8-R2-M2-CLOSE (2026-05-01) — **M2 (Corpus Activation) SEALED**:
 

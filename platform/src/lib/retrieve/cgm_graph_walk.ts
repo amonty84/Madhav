@@ -20,7 +20,7 @@ import crypto from 'crypto'
 import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
-import { getFlag, configService } from '@/lib/config'
+import { configService } from '@/lib/config'
 import {
   CGM_GRAPH_WALK_MAX_DEPTH_KEY,
   CGM_GRAPH_WALK_MAX_DEPTH_DEFAULT,
@@ -79,10 +79,7 @@ interface NodeRow {
 async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
 
-  // --- Feature flag gate ---
-  if (!getFlag('CGM_GRAPH_WALK_ENABLED')) {
-    return buildEmptyBundle(start, plan, params)
-  }
+  // CGM_GRAPH_WALK_ENABLED retired BHISMA-B1 §6.2: always-on; gate removed.
 
   // --- Seed validation ---
   const seeds: string[] =

@@ -53,7 +53,7 @@ close. Individual S1–S3 sessions do NOT write to the KARN log — they write h
 | Session ID | Stream | Primary deliverable | Status | Closed date | Git SHA |
 |---|---|---|---|---|---|
 | BHISMA-W1-S1-MODEL-FAMILY | Model Family | registry.ts + resolver.ts + hard-fail | OPEN | — | — |
-| BHISMA-W1-S2-LLM-PIPELINE | LLM Pipeline | planner.ts + retrieval_capability_spec.ts | CLOSED | 2026-05-01 | (recorded at commit) |
+| BHISMA-W1-S2-LLM-PIPELINE | LLM Pipeline | planner.ts + retrieval_capability_spec.ts | CLOSED | 2026-05-01 | 0ba34e2 |
 | BHISMA-W1-S3-TRACE-COMMAND | Trace UI | TracePanel re-skin + QueryDNAPanel + CostBar | OPEN | — | — |
 | BHISMA-W1-S4-CONVERGENCE | Convergence | tsc clean + eval delta + BHISMA_CLOSE_v1_0.md | PENDING | — | — |
 
@@ -86,7 +86,7 @@ notes: >
 === BHISMA-W1-S2-LLM-PIPELINE CLOSE ===
 session_id_alias: KARN-W9-B2-BHISMA-LLM-PIPELINE  # name from the user brief; predates the BHISMA log naming convention
 closed: 2026-05-01
-git_sha: (recorded at commit)
+git_sha: 0ba34e2
 agent: claude-opus-4-7-1m
 cowork_thread: "KARN-W9-B2 — BHISMA LLM-First Intelligent Pipeline"
 predecessor: KARN-W8-R2-M2-CLOSE

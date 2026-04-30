@@ -10,6 +10,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 vi.mock('server-only', () => ({}))
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5', provider: 'anthropic' })),
+  isReasoningModel: vi.fn(() => false),
+  resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
+  supportsStreaming: vi.fn(() => true),
 }))
 
 const mockStreamText = vi.fn()

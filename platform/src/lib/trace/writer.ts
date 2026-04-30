@@ -1,10 +1,14 @@
 /**
  * MARSYS-JIS Query Trace Panel — DB persistence
- * schema_version: 1.0
+ * schema_version: 1.1
+ *
+ * v1.1 (BHISMA-B3, 2026-05-01): added fetchTraceHistoryAnalytics() for the
+ * History analytics tab. Existing fetchTraceHistory() and writeTraceStep()
+ * remain unchanged — additive.
  */
 
 import { query } from '@/lib/db/client'
-import type { TraceStep } from './types'
+import type { TraceStep, TraceHistoryRow } from './types'
 
 /** Persist a single trace step. Called fire-and-forget from emitter. */
 export async function writeTraceStep(step: TraceStep): Promise<void> {
@@ -74,13 +78,7 @@ export async function fetchTraceSteps(queryId: string): Promise<TraceStep[]> {
 }
 
 /** For the history list: recent distinct queries with aggregate stats. */
-export async function fetchTraceHistory(limit = 50): Promise<Array<{
-  query_id: string
-  query_text: string | null
-  created_at: string
-  step_count: number
-  total_latency_ms: number | null
-}>> {
+export async function fetchTraceHistory(limit = 50): Promise<TraceHistoryRow[]> {
   const result = await query<{
     query_id: string
     query_text: string | null
@@ -104,4 +102,118 @@ export async function fetchTraceHistory(limit = 50): Promise<Array<{
     [limit]
   )
   return result.rows
+}
+
+/**
+ * Analytics-mode history fetch — extends fetchTraceHistory with per-stage
+ * latencies, query_class, citation_count, tools_used, error flag.
+ *
+ * Implementation note: per-stage latencies and JSONB-extracted fields are
+ * computed by aggregating filtered rows from query_trace_steps using PG's
+ * jsonb operators. Step name conventions (BHISMA-B2 + pre-BHISMA):
+ *   classify | plan          → planning stage
+ *   synthesis | synthesis_done → synthesis stage
+ *   any tool step (sql|vector|gcs step_type) → tool fetch stage
+ *
+ * If a step name does not exist (e.g. synthesis_done not yet emitted by B2),
+ * the corresponding latency column comes back null and the UI guards it.
+ */
+export async function fetchTraceHistoryAnalytics(
+  limit = 50
+): Promise<TraceHistoryRow[]> {
+  const result = await query<{
+    query_id: string
+    query_text: string | null
+    created_at: string
+    step_count: number
+    total_latency_ms: number | null
+    query_class: string | null
+    plan_latency_ms: number | null
+    synthesis_latency_ms: number | null
+    tool_fetch_latency_ms: number | null
+    citation_count: number | null
+    planning_confidence: number | null
+    has_error: boolean
+    tools_used: string[] | null
+  }>(
+    `SELECT
+       t.query_id,
+       a.query_text,
+       MIN(t.started_at)::text                                              AS created_at,
+       COUNT(*)::int                                                         AS step_count,
+       ROUND(
+         EXTRACT(EPOCH FROM (MAX(t.completed_at) - MIN(t.started_at))) * 1000
+       )::int                                                                AS total_latency_ms,
+       MAX(CASE
+         WHEN t.step_name IN ('classify', 'plan')
+         THEN COALESCE(
+           t.data_summary->>'query_class',
+           (t.payload->'query_plan'->>'query_class')
+         )
+         ELSE NULL
+       END)                                                                  AS query_class,
+       MAX(CASE
+         WHEN t.step_name IN ('classify', 'plan') AND t.status = 'done'
+         THEN t.latency_ms
+         ELSE NULL
+       END)                                                                  AS plan_latency_ms,
+       MAX(CASE
+         WHEN t.step_name IN ('synthesis', 'synthesis_done') AND t.status = 'done'
+         THEN t.latency_ms
+         ELSE NULL
+       END)                                                                  AS synthesis_latency_ms,
+       MAX(CASE
+         WHEN t.parallel_group = 'tool_fetch' AND t.status = 'done'
+         THEN t.latency_ms
+         ELSE NULL
+       END)                                                                  AS tool_fetch_latency_ms,
+       MAX(CASE
+         WHEN t.step_name IN ('synthesis', 'synthesis_done')
+         THEN (t.data_summary->>'citation_count')::int
+         ELSE NULL
+       END)                                                                  AS citation_count,
+       MAX(CASE
+         WHEN t.step_name IN ('classify', 'plan')
+         THEN (
+           COALESCE(
+             t.data_summary->>'planning_confidence',
+             t.data_summary->>'confidence',
+             t.data_summary->>'router_confidence'
+           )
+         )::float
+         ELSE NULL
+       END)                                                                  AS planning_confidence,
+       BOOL_OR(t.status = 'error')                                            AS has_error,
+       ARRAY_REMOVE(
+         ARRAY_AGG(DISTINCT
+           CASE
+             WHEN t.step_type IN ('sql', 'vector', 'gcs')
+             THEN COALESCE(t.data_summary->>'tool_name', t.step_name)
+             ELSE NULL
+           END
+         ),
+         NULL
+       )                                                                     AS tools_used
+     FROM public.query_trace_steps t
+     LEFT JOIN public.audit_log a ON a.query_id = t.query_id
+     GROUP BY t.query_id, a.query_text
+     ORDER BY MIN(t.started_at) DESC
+     LIMIT $1`,
+    [limit]
+  )
+  return result.rows.map(r => ({
+    query_id: r.query_id,
+    query_text: r.query_text,
+    created_at: r.created_at,
+    step_count: r.step_count,
+    total_latency_ms: r.total_latency_ms,
+    query_class: r.query_class,
+    plan_latency_ms: r.plan_latency_ms,
+    synthesis_latency_ms: r.synthesis_latency_ms,
+    tool_fetch_latency_ms: r.tool_fetch_latency_ms,
+    citation_count: r.citation_count,
+    planning_confidence: r.planning_confidence,
+    has_error: r.has_error,
+    tools_used: r.tools_used ?? [],
+  }))
 }

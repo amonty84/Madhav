@@ -6,6 +6,7 @@ vi.mock('server-only', () => ({}))
 // Mock the model resolver — we don't want real LLM calls
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5' })),
+  resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
 }))
 
 // Mock generateText at the ai module level

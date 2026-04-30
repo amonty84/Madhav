@@ -1,6 +1,6 @@
 # MARSYS-JIS Project State & Configuration
 
-_Last updated: 2026-05-01 at KARN-W8-R2-M2-CLOSE (**M2 Corpus Activation SEALED**). Sealing artifact: `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; M2→M3 handoff: `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`. M3 (Temporal Animation / Discovery Layer — Pattern + Contradiction Engines) is now the active macro-phase; first M3 session: `KARN-W9-M3-OPEN`. W6/W7 Cowork-stream additions (composition rules, per-tool planner, provenance audits, eval harness scaffold) propagated to this file in the same session per ND.1 Mirror Discipline. Previous: 2026-04-29 at redesign-r0-foundation-2026-04-29 (Portal Redesign R0 Foundation — COMPLETE)._
+_Last updated: 2026-05-01 at M3-W1-OPEN-PHASE-PLAN (**PHASE_M3_PLAN_v1_0.md authored; M3-A entry-blocked on eval baseline**). Active phase plan: `00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md` v1.0 (MP.4 adapted parity). Sub-phases M3-A through M3-D defined. Previous: 2026-05-01 at KARN-W8-R2-M2-CLOSE (M2 Corpus Activation SEALED)._
 
 ## Governance Rebuild CLOSED (Step 0 → Step 15 — COMPLETE 2026-04-24)
 
@@ -12,7 +12,15 @@ _Last updated: 2026-05-01 at KARN-W8-R2-M2-CLOSE (**M2 Corpus Activation SEALED*
 
 ## Active Phase: M3 Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)
 
-**M2 Corpus Activation is CLOSED (2026-05-01 at KARN-W8-R2-M2-CLOSE).** The sealing artifact is `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; the M2→M3 handoff memo is `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`. **M3 is now the active macro-phase.** First M3 session: `KARN-W9-M3-OPEN` — reads `MACRO_PLAN_v2_0.md §M3` + the handoff memo + `CURRENT_STATE_v1_0.md`, verifies L3.5 register state in DB, runs the M2 eval baseline, and authors the M3 phase plan (or proceeds directly off MACRO_PLAN per native decision).
+**M2 Corpus Activation is CLOSED (2026-05-01 at KARN-W8-R2-M2-CLOSE).** The sealing artifact is `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; the M2→M3 handoff memo is `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`. **M3 is the active macro-phase.** Phase plan: `00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md` v1.0, authored at M3-W1-OPEN-PHASE-PLAN (2026-05-01).
+
+**Active sub-phase: M3-A — NOT YET STARTED** (entry-blocked on `BASELINE_RUN_W9.json` capture). M3-A scope: Discovery Engine Activation (Pattern + Contradiction Engines surfaced query-time) + DIS.009 disposition + eval baseline pre/post delta. Next session: M3-W1-A1-EVAL-BASELINE.
+
+**M3 sub-phase map (per PHASE_M3_PLAN_v1_0.md):**
+- M3-A (W1): Discovery Engine Activation + eval baseline + DIS.009 disposition
+- M3-B (W2): Vimshottari + Yogini dasha + Transit Engine v1 + date-indexed signal surface
+- M3-C (W3): Chara + Narayana dashas + KP sublord timing + Varshaphala + Shadbala over time
+- M3-D (W4): Temporal Validator + IS.8 red-team + M3 close
 
 ### M2 cumulative deliverables (W1–W8 KARN waves; all CLOSED)
 
@@ -77,7 +85,7 @@ Governance rebuild complete. **M2 CORPUS ACTIVATION SEALED 2026-05-01.** M3 acti
 1. **CAPABILITY_MANIFEST `entry_count` +3 latent miscount.** Manifest header reads 109; actual is 112. Inherited pre-W7-R2. Resolve in a manifest-audit pass during M3.
 2. **SIG.MSR.207 absent from `MSR_v3_0.md`.** Medium severity (KARN-W6-R3 finding); investigate in M3.
 3. **UCN inline citation pass (Option A) against `UCN_v4_0.md`.** Aspirational only; not gating. Option B (DB-side `derived_from_signals` backfill) was the Audit 2/3 fix path.
-4. **Eval harness baseline run.** `BASELINE_RUN_W7.json` is a stub — runner requires `SMOKE_SESSION_COOKIE` + `SMOKE_CHART_ID`. **Hard prerequisite for M3-S1** before any retrieval-behavior change.
+4. **Eval harness baseline run.** `BASELINE_RUN_W7.json` is a stub — runner requires `SMOKE_SESSION_COOKIE` + `SMOKE_CHART_ID`. **Hard prerequisite for M3-A retrieval-affecting work** before any retrieval-behavior change. Output: `BASELINE_RUN_W9.json`. First M3-A session (M3-W1-A1) owns this gate.
 5. **TypeScript test-fixture errors** in `tests/components/AppShell.test.tsx` + `ReportGallery.test.tsx`. 9 errors total; pre-W6 portal-redesign drift; non-blocking.
 6. **DIS.009 — `DIS.class.output_conflict` on PAT.008 (Saturn D9 Karakamsa + AL Identity Lock).** Q2 soft-gated; B.5 close not blocked. Resolve alongside M3 Pattern Engine activation.
 7. **ND.1 Mirror Discipline.** Status: `addressed` since Step 7 close. W6/W7 Cowork-stream propagation completed at this M2 close. Held throughout M2; carry into M3.

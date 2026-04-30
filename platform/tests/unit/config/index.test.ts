@@ -18,9 +18,18 @@ describe('ConfigService', () => {
     expect(svc.getFlag('NEW_QUERY_PIPELINE_ENABLED')).toBe(true)
   })
 
-  it('AUDIT_ENABLED defaults true (Phase 11A cutover)', () => {
+  // AUDIT_ENABLED retired BHISMA-B1 §6.2; replaced by always-on observability flags.
+  it('BHISMA-B1 observability flags default true', () => {
     const svc = createConfigService()
-    expect(svc.getFlag('AUDIT_ENABLED')).toBe(true)
+    const flags: FeatureFlag[] = [
+      'TRACE_ANALYTICS_ENABLED',
+      'COST_TRACKING_ENABLED',
+      'CITATION_CHECK_ENABLED',
+      'REASONING_MODEL_STREAMING',
+    ]
+    for (const flag of flags) {
+      expect(svc.getFlag(flag)).toBe(true)
+    }
   })
 
   it('env var override: MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false reverts to legacy path', () => {
@@ -43,8 +52,8 @@ describe('ConfigService', () => {
     const svc = createConfigService()
     const calls: Array<[string, unknown]> = []
     const unsub = svc.subscribe((key, val) => calls.push([key, val]))
-    svc.setFlag('AUDIT_ENABLED', true)
-    expect(calls).toEqual([['AUDIT_ENABLED', true]])
+    svc.setFlag('AUDIT_VIEW_VISIBLE', true)
+    expect(calls).toEqual([['AUDIT_VIEW_VISIBLE', true]])
     unsub()
   })
 
@@ -53,7 +62,7 @@ describe('ConfigService', () => {
     const calls: number[] = []
     const unsub = svc.subscribe(() => calls.push(1))
     unsub()
-    svc.setFlag('AUDIT_ENABLED', true)
+    svc.setFlag('AUDIT_VIEW_VISIBLE', true)
     expect(calls).toHaveLength(0)
   })
 

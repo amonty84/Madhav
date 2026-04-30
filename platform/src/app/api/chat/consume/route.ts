@@ -44,7 +44,7 @@ import { writeAuditEvent, writeQueryPlan } from '@/lib/audit/audit_writer'
 import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
 import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
-import { planPerTool } from '@/lib/router/per_tool_planner'
+// planPerTool import removed BHISMA-B1 §6.2: PER_TOOL_PLANNER_ENABLED retired.
 
 // ── Trace helpers ─────────────────────────────────────────────────────────────
 
@@ -347,54 +347,27 @@ export async function POST(request: Request) {
         },
       })
 
-      // --- Step 3: plan_per_tool (Haiku per-tool parameter refinement) ---
+      // --- Step 3: plan_per_tool ---
+      // BHISMA-B1 §6.2: PER_TOOL_PLANNER_ENABLED retired (was never flipped true).
+      // Always emit planner-off step so A/B analysis can distinguish planner-off runs.
       const plannerStart = Date.now()
-      const plannerEnabled = configService.getFlag('PER_TOOL_PLANNER_ENABLED')
-
-      if (plannerEnabled) {
-        const plannerResult = await planPerTool(legacyPlan, legacyPlan.tools_authorized)
-        perToolOverrides = plannerResult.overrides as Map<string, Record<string, unknown>>
-        traceEmitter.emitStep({
-          event: 'step_done',
+      traceEmitter.emitStep({
+        event: 'step_done',
+        query_id: queryId,
+        step: {
           query_id: queryId,
-          step: {
-            query_id: queryId,
-            conversation_id: finalConversationId,
-            step_seq: 3,
-            step_name: 'plan_per_tool',
-            step_type: 'llm',
-            status: 'done',
-            started_at: new Date(plannerStart).toISOString(),
-            completed_at: new Date().toISOString(),
-            latency_ms: plannerResult.latency_ms,
-            data_summary: {
-              planner_active: true,
-              tools_refined: perToolOverrides.size,
-              tool_count: plannerResult.tool_count,
-            },
-            payload: {},
-          },
-        })
-      } else {
-        // Always emit the step so A/B analysis can distinguish planner-off runs
-        traceEmitter.emitStep({
-          event: 'step_done',
-          query_id: queryId,
-          step: {
-            query_id: queryId,
-            conversation_id: finalConversationId,
-            step_seq: 3,
-            step_name: 'plan_per_tool',
-            step_type: 'llm',
-            status: 'done',
-            started_at: new Date(plannerStart).toISOString(),
-            completed_at: new Date().toISOString(),
-            latency_ms: 0,
-            data_summary: { planner_active: false, tools_refined: 0, tool_count: 0 },
-            payload: {},
-          },
-        })
-      }
+          conversation_id: finalConversationId,
+          step_seq: 3,
+          step_name: 'plan_per_tool',
+          step_type: 'llm',
+          status: 'done',
+          started_at: new Date(plannerStart).toISOString(),
+          completed_at: new Date().toISOString(),
+          latency_ms: 0,
+          data_summary: { planner_active: false, tools_refined: 0, tool_count: 0 },
+          payload: {},
+        },
+      })
     }
 
     const cache = createToolCache()
@@ -532,16 +505,15 @@ export async function POST(request: Request) {
       },
       conversation_id: finalConversationId,
       panel_opt_in: panelOptIn,
-      onAuditEvent: configService.getFlag('AUDIT_ENABLED')
-        ? createAuditConsumer({
-            query_text: queryText,
-            query_plan: queryPlan,
-            bundle,
-            tool_results: validToolResults,
-            validator_results: bundleValidations,
-            disclosure_tier: audienceTier,
-          })
-        : undefined,
+      // BHISMA-B1 §6.2: AUDIT_ENABLED retired — audit consumer is always active.
+      onAuditEvent: createAuditConsumer({
+        query_text: queryText,
+        query_plan: queryPlan,
+        bundle,
+        tool_results: validToolResults,
+        validator_results: bundleValidations,
+        disclosure_tier: audienceTier,
+      }),
     })
 
     result.consumeStream()
