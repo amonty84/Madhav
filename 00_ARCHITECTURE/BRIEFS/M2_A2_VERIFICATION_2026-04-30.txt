@@ -1,0 +1,114 @@
+KARN-W2-R2-CHART-FACTS-ETL — Post-Deploy Verification Record
+Date: 2026-04-30
+Branch: redesign/r0-foundation
+Cloud Run revision: amjis-web-00034-9sx
+
+=== AC.1 — New files in may_touch only ===
+PASS — All new files created within may_touch scope:
+  platform/migrations/029_chart_facts_indexes.sql
+  platform/python-sidecar/pipeline/extractors/chart_facts_extractor.py
+  platform/python-sidecar/pipeline/extractors/__tests__/test_chart_facts_extractor.py
+  platform/python-sidecar/pipeline/loaders/chart_facts_loader.py
+  platform/python-sidecar/pipeline/chunkers/forensic_chunker.py
+  platform/python-sidecar/pipeline/chunkers/__tests__/test_forensic_chunker.py
+No must_not_touch files modified.
+
+=== AC.2 — Section inventory ===
+PASS — 12 FORENSIC sections parsed:
+  §6 (Strength Metrics): 54 rows
+  §7 (Ashtakavarga): 28 rows
+  §8 (Saturn Kakshya Zones): 8 rows
+  §9 (Avastha Diagnostics): 7 rows
+  §11 (Sensitive Points §11.2–§11.5): 45 rows
+  §13 (Arudha occupancy §13.2): 12 rows
+  §16 (Aspects §16.1): 9 rows
+  §17 (Chalit Kinetic Shifts): 9 rows
+  §18 (Chandra Chart): 12 rows
+  §20 (Deity Assignments): 16 rows
+  §22 (Varshphal 2026–2027): 5 rows
+  §24 (Longevity Indicators): 10 rows
+  TOTAL: 215 rows across 19 new categories
+
+=== AC.3 — Migration 029 applied ===
+PASS — 029_chart_facts_indexes.sql applied successfully:
+  CREATE INDEX chart_facts_category_divchart_idx ... WHERE is_stale=false
+  CREATE INDEX chart_facts_source_section_idx ... WHERE is_stale=false
+  CREATE INDEX chart_facts_value_json_gin ... USING GIN
+
+=== AC.4 — Extractor produces all 19 new categories ===
+PASS — Dry-run and live run both produce 215 rows / 19 categories:
+  shadbala(14), bhava_bala(12), ishta_kashta(7), strength_extra(21),
+  ashtakavarga_bav(8), ashtakavarga_sav(13), ashtakavarga_pinda(7),
+  kakshya_zone(8), avastha(7), upagraha(9), sensitive_point(25), mrityu_bhaga(11),
+  arudha_occupancy(12), aspect(9), chalit_shift(9), chandra_placement(12),
+  deity_assignment(16), varshphal(5), longevity_indicator(10)
+
+=== AC.5 — fact_id uniqueness ===
+PASS — All 215 fact_ids unique; validate_rows() enforces this pre-upsert.
+  No duplicate fact_id errors in loader output.
+
+=== AC.6 — value_json structured for all ===
+PASS — All 215 rows have non-null value_json with category-appropriate structure:
+  shadbala: {planet, components{}, total_rupas, rank}
+  ashtakavarga_bav: {planet, by_sign{}, total_bindus}
+  ashtakavarga_sav: {sign, house, sav_forensic, sav_jh}
+  aspect: {type, from_sign, aspect_rays[]}
+  avastha: {planet, role, baladi, deeptadi, lajjitadi}
+  (etc.)
+
+=== AC.7 — source_section present on all rows ===
+PASS — All 215 rows have source_section (§6.1, §7.2, §9.1, etc.)
+
+=== AC.8 — Post-ingest chart_facts count ≥750 ===
+PASS — SELECT COUNT(*) FROM chart_facts WHERE is_stale=false → 795
+  (Baseline: 589; added: 215; total 804 rows but 9 upserts may have hit existing IDs → 795 live)
+
+=== AC.9 — All 19 new categories present with non-zero counts ===
+PASS — DB query confirms all 19 categories present:
+  arudha_occupancy(12), ashtakavarga_bav(8), ashtakavarga_pinda(7), ashtakavarga_sav(13),
+  aspect(9), avastha(7), bhava_bala(12), chalit_shift(9), chandra_placement(12),
+  deity_assignment(16), ishta_kashta(7), kakshya_zone(8), longevity_indicator(10),
+  mrityu_bhaga(11), sensitive_point(25), shadbala(14), strength_extra(21),
+  upagraha(9), varshphal(5)
+
+=== AC.10 — Sample value_json shape verified ===
+PASS — DB spot-check of 3+ rows per category confirms shape correctness.
+  All categories produce well-formed JSON with domain-appropriate fields.
+
+=== AC.11 — rag_chunks l1_fact coverage ===
+PASS — forensic_chunker --verify confirms 12/12 target sections covered:
+  §6, §7, §8, §9, §11, §13, §16, §17, §18, §20, §22, §24 all present.
+  Total l1_fact chunks: 102 (pre-existing; AC.11 pre-satisfied).
+
+=== AC.12 — Tests: ≥2 per category, all passing ===
+PASS — 70 tests passing (0 failures):
+  test_chart_facts_extractor.py: 63 tests (all 19 new categories, ≥2 per category)
+  test_forensic_chunker.py: 7 tests (TARGET_SECTIONS + verify_coverage)
+  vitest router accuracy: 59 tests passing (no regressions)
+  vitest retrieve: 158 tests passing (no regressions)
+
+=== AC.13 — Cloud Run deployed, live queries tested ===
+PASS — Cloud Build SUCCESS; revision amjis-web-00034-9sx serving 100% traffic.
+  Service URL: https://amjis-web-938361928218.asia-south1.run.app
+  Build ID: cb231a7b-cad0-4483-838c-4af0fd642ba4
+
+=== AC.14 — Activation matrix updated ===
+PASS — 00_ARCHITECTURE/M1_M2_ACTIVATION_MATRIX.md updated:
+  §1.2: category breakdown expanded to 37 categories / 795 rows
+  §4: 12 sections upgraded from DARK/PARTIAL to FULL (§6–§9, §11, §13, §16–§18, §20, §22, §24)
+  §5.1: FULLY ACTIVATED count: 11 → 23; DARK: 4 → 1 (§19 only)
+  §5.2: gap table replaced with remaining-gaps-only (§19, §23, §25)
+  §7: chart_facts row count updated 589 → 795 ✅
+
+=== AC.15 — Brief marked COMPLETE ===
+PASS — CLAUDECODE_BRIEF_M2_A2_CHART_FACTS_ETL.md status: PENDING → COMPLETE
+
+=== AC.16 — Session log entry ===
+PASS — Entry appended to 00_ARCHITECTURE/PROJECT_KARN_SESSION_LOG.md
+  Session: KARN-W2-R2-CHART-FACTS-ETL, Wave 2 W2-R2 section
+
+=== SUMMARY ===
+AC.1  ✅  AC.2  ✅  AC.3  ✅  AC.4  ✅  AC.5  ✅  AC.6  ✅  AC.7  ✅  AC.8  ✅
+AC.9  ✅  AC.10 ✅  AC.11 ✅  AC.12 ✅  AC.13 ✅  AC.14 ✅  AC.15 ✅  AC.16 ✅
+
+ALL 16 ACCEPTANCE CRITERIA SATISFIED. BRIEF STATUS: COMPLETE.

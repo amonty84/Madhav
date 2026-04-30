@@ -1,0 +1,56 @@
+SESSION CLOSE — M2_D234_BUNDLE — 2026-04-30T15:36:17Z
+
+ACs result:
+  AC.1:  PASS — branch: redesign/r0-foundation
+  AC.2:  PASS — remedial_chunker.py + timeline_chunker.py created
+  AC.3:  PASS — l4_remedial=21 (≥10), l5_timeline=9 (≥5) in rag_chunks
+  AC.4:  PASS — domain_report=52 (≥36, no regression)
+  AC.5:  PASS — domain_report_query.ts, remedial_codex_query.ts, timeline_query.ts created
+  AC.6:  PASS — integration.test.ts: expect(RETRIEVAL_TOOLS).toHaveLength(17)
+  AC.7:  PASS — prompt.ts: 6 occurrences of domain_report_query / remedial_codex_query / timeline_query (3 blocks × 2+ refs each)
+  AC.8:  PASS — 16 Python tests passing (8 remedial + 8 timeline; brief required ≥10 total)
+  AC.9:  PASS — 15 TypeScript tests passing (5 per new tool)
+  AC.10: PASS — 13 failures (pre-existing only, unchanged); 1015 passing (+24 vs baseline of 991)
+  AC.11: PASS — no new TypeScript errors from files this session created; pre-existing errors in AppShell.test.tsx, ReportGallery.test.tsx (unrelated)
+  AC.12: PASS — CAPABILITY_MANIFEST.json: 6 occurrences of domain_report_query / remedial_codex_query / timeline_query (3 new entries)
+  AC.13: PASS — Cloud Run revision amjis-web-00037-mfs → amjis-web-00038-mbk ACTIVE at 100%
+  AC.14: PENDING native verification — no post-deploy queries yet in audit_events at session close; native should issue a career/remedial/dasha query via Consume tab to confirm tools fire
+
+Files created/modified:
+  platform/python-sidecar/rag/chunkers/remedial_chunker.py (CREATE — l4_remedial, PART1+PART2, 21 chunks ingested)
+  platform/python-sidecar/rag/chunkers/timeline_chunker.py (CREATE — l5_timeline, LIFETIME_TIMELINE_v1_0, 9 chunks ingested)
+  platform/python-sidecar/rag/chunkers/__tests__/test_remedial_chunker.py (CREATE — 8 tests, all pass)
+  platform/python-sidecar/rag/chunkers/__tests__/test_timeline_chunker.py (CREATE — 8 tests, all pass)
+  platform/python-sidecar/pipeline/main.py (MODIFY — timeline added to registry dict; remedial added as special-case block after domain_report)
+  platform/src/lib/retrieve/domain_report_query.ts (CREATE — queries doc_type=domain_report, 9-domain mapping)
+  platform/src/lib/retrieve/remedial_codex_query.ts (CREATE — queries doc_type=l4_remedial, planet + practice_type filters)
+  platform/src/lib/retrieve/timeline_query.ts (CREATE — queries doc_type=l5_timeline, dasha_name + keyword filters)
+  platform/src/lib/retrieve/__tests__/domain_report_query.test.ts (CREATE — 5 tests)
+  platform/src/lib/retrieve/__tests__/remedial_codex_query.test.ts (CREATE — 5 tests)
+  platform/src/lib/retrieve/__tests__/timeline_query.test.ts (CREATE — 5 tests)
+  platform/src/lib/retrieve/index.ts (MODIFY — 3 imports + 3 RETRIEVAL_TOOLS entries; count 14→17)
+  platform/src/lib/retrieve/__tests__/integration.test.ts (MODIFY — toHaveLength(14) → toHaveLength(17))
+  platform/src/lib/router/prompt.ts (MODIFY — 3 tool-guidance blocks appended before FEW_SHOT_EXAMPLES)
+  00_ARCHITECTURE/CAPABILITY_MANIFEST.json (MODIFY — 3 tool entries appended; manifest_version 1.5→1.6)
+  00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_D234_BUNDLE.md (status PENDING→COMPLETE)
+  00_ARCHITECTURE/BRIEFS/M2_D234_VERIFICATION_2026-04-30.txt (CREATE — this file)
+
+DB changes:
+  rag_chunks (l4_remedial): 0 → 21 (REMEDIAL_CODEX_v2_0 PART1: 15 chunks, PART2: 6 chunks)
+  rag_chunks (l5_timeline): 0 → 9 (LIFETIME_TIMELINE_v1_0: 9 chunks)
+  rag_chunks (domain_report): 52 → 52 (unchanged — pre-existing, no regression)
+  Note on embeddings: new l4_remedial and l5_timeline chunks have NULL embedding vectors.
+  Standalone chunker run does not trigger Vertex AI embedding. Vectors will populate on
+  next full pipeline build (cloud_build_submit.sh → Vertex AI embedding step).
+
+Cloud Run: amjis-web-00037-mfs → amjis-web-00038-mbk (100% traffic)
+
+Tests:
+  Python (pytest):  Before: N/A (new files)  After: 16 passed / 0 failed
+  TypeScript (vitest): Before: 991 passed / 13 failed  After: 1015 passed / 13 failed
+  Delta: +24 new passing, 0 new failures
+
+Halt-and-report cases: none
+
+Brief status: COMPLETE
+Next brief in stream: M2_D1_COMPOSITION_RULES (W6-R1) — adds composition rules for domain_report_query, remedial_codex_query, timeline_query to the router

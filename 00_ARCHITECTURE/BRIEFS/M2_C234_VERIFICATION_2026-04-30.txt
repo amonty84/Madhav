@@ -1,0 +1,49 @@
+SESSION CLOSE — M2_C234_BUNDLE — 2026-04-30T14:50:00Z
+
+ACs result:
+  AC.1:  PASS — branch redesign/r0-foundation confirmed
+  AC.2:  PASS — kp_query.ts, saham_query.ts, divisional_query.ts created
+  AC.3:  PASS — 14 RETRIEVAL_TOOLS entries (was 10 + W4-R3 chart_facts_query = 14); ≥4 index.ts references
+  AC.4:  PASS — 10 references to kp_query/saham_query/divisional_query in prompt.ts (tools list + guidance blocks)
+  AC.5:  PASS — kp_query {cusp:7} → KP.CUSP.7 (kp_cusp) + KP.SIG.7 (kp_significator) — 2 rows live
+  AC.6:  PASS — saham_query unfiltered → 36 rows (all 36 Tajika sahams present)
+  AC.7:  PASS — divisional_query {varga:'D9'} → 14 rows (D9 house + planet + strength categories)
+  AC.8:  PASS — 15 tests passing (5 per tool: kp_query.test.ts, saham_query.test.ts, divisional_query.test.ts)
+  AC.9:  PASS — no new TypeScript errors from the three new files (npx tsc --noEmit clean for new files)
+  AC.10: PASS — amjis-web-00036-wfs deployed, serving 100% of traffic
+
+Files created/modified:
+  platform/src/lib/retrieve/kp_query.ts (CREATE)
+  platform/src/lib/retrieve/saham_query.ts (CREATE)
+  platform/src/lib/retrieve/divisional_query.ts (CREATE)
+  platform/src/lib/retrieve/__tests__/kp_query.test.ts (CREATE)
+  platform/src/lib/retrieve/__tests__/saham_query.test.ts (CREATE)
+  platform/src/lib/retrieve/__tests__/divisional_query.test.ts (CREATE)
+  platform/src/lib/retrieve/index.ts (modified — 3 imports + 3 RETRIEVAL_TOOLS entries; W4-R3 chart_facts_query also present)
+  platform/src/lib/router/prompt.ts (modified — 3 tool descriptions in ## Tools list + 3 guidance blocks before FEW_SHOT_EXAMPLES)
+  platform/src/lib/retrieve/types.ts (modified — added description?: string to RetrievalTool interface)
+  platform/src/lib/db/types.ts (modified — added ChartFactsRow interface)
+  platform/src/lib/retrieve/__tests__/integration.test.ts (modified — updated tool count from 10 to 14)
+
+DB changes: None (chart_facts read-only; data was pre-loaded by W2-R2)
+
+Cloud Run: amjis-web-00035-4ll → amjis-web-00036-wfs (100% traffic)
+
+Tests:
+  Before: 964 passed / 13 failed (103 files)
+  After:  979 passed / 13 failed (106 files)
+  Delta:  +15 passing, 0 new failures
+
+Parallel stream notes:
+  W4-R3 (chart_facts_query) landed concurrently. index.ts now has 14 tools (brief expected 13).
+  chart_facts_query.ts has a TS error that was already fixed by W4-R3 before our deploy.
+  integration.test.ts "has exactly 10 tools" updated to 14 to reflect both W4-R2 and W4-R3.
+
+Halt-and-report cases: none — all ACs passed
+
+Brief status: COMPLETE
+Next brief in stream: M2_C5_TEMPORAL_EXTENSION (W5-R1)
+
+Pre-flight data verified:
+  kp_cusp: 12 rows | kp_planet: 9 rows | kp_significator: 7 rows | saham: 36 rows | house: 149 rows
+  All categories present and non-stale as of 2026-04-30.
