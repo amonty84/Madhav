@@ -44,17 +44,18 @@ Two workstreams run concurrently with (not inside) the currently-active macro-ph
 
 **Authoritative source: `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (LIVE; authoritative since Step 15 close 2026-04-24).** Read §2 of that file for the canonical state block. The governance rebuild (Step 0 → Step 15) is **closed** — `GOVERNANCE_BASELINE_v1_0.md` is the sealing artifact. `STEP_LEDGER_v1_0.md` is retired (status `GOVERNANCE_CLOSED`); consult it only for historical audit trail.
 
-At the close of Madhav_M2A_Exec_12 (2026-04-27) — **B.6 COMPLETE — M2B MILESTONE CLOSED**:
+At the close of **KARN-W8-R2-M2-CLOSE (2026-05-01) — M2 CORPUS ACTIVATION SEALED**:
 
-- **Active macro-phase:** M2 — Corpus Activation (active). **M2B CLOSED.** B.0–B.6 complete. Retrieval library operational (5 modes, RRF k=60, layer-balance enforcer, WCR invariant, cgm_boost +0.3).
-- **Active phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` v1.0.3. **B.6 CLOSED. M2B CLOSED.** B.7 is next (Madhav_M2A_Exec_13).
+- **Active macro-phase:** **M3 — Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)**, active. M2 closed at this session. Sealing artifact: `00_ARCHITECTURE/M2_CLOSE_v1_0.md`. Handoff memo: `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`.
+- **Phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` (v1.0.3) is SUPERSEDED-AS-COMPLETE for M2. M3 phase plan TBD — first M3 session (`KARN-W9-M3-OPEN`) reads `MACRO_PLAN_v2_0.md §M3` + handoff memo + `CURRENT_STATE_v1_0.md` and decides whether to expand to a `PHASE_C_PLAN_v1_0.md` (native-approval point at M3 open).
+- **M2 quality bar at close:** Audit 1 (MSR→FORENSIC) **98.99%**, Audit 2 (UCN→MSR) **95.52%**, Audit 3 (CGM→MSR) **95.52%** — all PASS. Eval harness scaffolded (24 fixtures + runner + A/B); baseline run is STUB pending manual native run (auth-cookie required headlessly) — non-blocking. Per-tool planner 15/15 PASS; composition rules 39/39 PASS. **W8-R1 IS.8 macro-phase-close red-team: PASS** (9/9 axes; 0 findings; 0 fixes applied) — `00_ARCHITECTURE/EVAL/REDTEAM_M2_v1_0.md`.
+- **Cumulative M2 KARN waves (W1–W8) all CLOSED:** W1 Foundation; W2 ETL Expansion; W3 Corpus Chunkers; W4 Facts Tools; W5 Narrative Tools; W6 Composition rules + per-tool planner; W7 Provenance audit repair + manifest completeness + eval harness scaffold; W8 IS.8 red-team + M2 close artifacts (this session).
+- **Live platform state at M2 close:** Query pipeline (default) `classify → [per_tool_planner] → compose → retrieve(parallel) → validate → synthesize → audit`. `NEW_QUERY_PIPELINE_ENABLED=true`, `AUDIT_ENABLED=true`, `PER_TOOL_PLANNER_ENABLED=false` (flip after smoke). 17 retrieval tools (5 L2.5 structured + 7 L1 structured + 5 RAG). 6 L1 + 6 L2.5 structured tables + 4 L3.5 register tables. CAPABILITY_MANIFEST v1.7 effective.
 - **Governance step:** Step 0 → Step 15 rebuild `GOVERNANCE_CLOSED`. Steady-state: quarterly governance pass per `ONGOING_HYGIENE_POLICIES §H`; next due 2026-07-24.
-- **ND status:** ND.1 (Mirror Discipline) `addressed` 2026-04-24 at Step 7 close. No open directive.
-- **Red-team:** `red_team_counter: 0` (reset at Exec_12 close — §IS.8(b) M2B milestone-close cadence fired; RED_TEAM_M2B_PHASE_B6_v1_0 11 probes all PASS). Next cadence fires at counter=3 (Exec_15 approximately).
-- **B.6 deliverables:** retrieve.py (vector/bm25/graph_walk/hybrid_rrf/auto); rag_retrieve.py (POST /rag/retrieve); retrieveClient.ts; retrieval_golden_v1_0.json (20 queries); run_eval.py extended; RED_TEAM_M2B_PHASE_B6.
-- **AC.8 live eval deferred:** eval runner + golden set complete; live run requires Cloud SQL Auth Proxy — carry-forward to Exec_13.
-- **FILE_REGISTRY:** v1.13 CURRENT (Exec_12 close); v1.12 SUPERSEDED.
-- **Build state:** To be serialized and uploaded to GCS at Exec_12 close.
+- **ND status:** ND.1 (Mirror Discipline) `addressed` 2026-04-24 at Step 7 close. Held throughout M2. W6/W7 Cowork-stream additions propagated to this file + `.gemini/project_state.md` in this session.
+- **Red-team:** `red_team_counter: 0` — reset at this close (W8-R1 IS.8 macro-phase-close cadence fired; verdict PASS). M3 first session resumes counting from 0.
+- **Open items inherited from M2 (non-blocking — see `M2_CLOSE_v1_0.md §Known deferred items`):** (1) CAPABILITY_MANIFEST `entry_count` +3 latent miscount; (2) SIG.MSR.207 absent from MSR; (3) UCN inline citation pass (Option A) — aspirational; (4) Eval baseline manual run — M3-S1 hard prerequisite; (5) UI-test fixture errors (`AppShell.test.tsx`, `ReportGallery.test.tsx`) — pre-W6 drift; (6) DIS.009 (`DIS.class.output_conflict` on PAT.008) — Q2 soft-gated; resolve alongside M3 Pattern Engine activation.
+- **FILE_REGISTRY / CAPABILITY_MANIFEST:** Manifest v1.7 (109 entries effective, +3 latent); FILE_REGISTRY v1.15 superseded by manifest cutover.
 
 ## §G — Session-open handshake (reference)
 

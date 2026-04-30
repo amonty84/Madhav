@@ -296,6 +296,25 @@ changelog:
       (10 queries: 5 P7-gated, 5 standard); CF.1 carried (claude-opus-4.7 pending);
       CF.2 CLOSED (20/20 router eval). COWORK_LEDGER §3 entry 10 appended per ONGOING_HYGIENE_POLICIES §P.
       §3 narrative refreshed.
+  - v1.0 amended-in-place (2026-05-01, KARN-W8-R2-M2-CLOSE — M2 CLOSED):
+      active_macro_phase flipped M2 → M3; active_macro_phase_title → "Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)";
+      active_macro_phase_status → active (M3 just opened, M2 sealed).
+      active_phase_plan → null (M3 phase plan to be authored at M3 open per HANDOFF_M2_TO_M3_v1_0.md);
+      active_phase_plan_version → null; active_phase_plan_sub_phase → "M2 closed; M3 phase plan pending first M3 session";
+      active_phase_plan_status → pending_m3_open.
+      last_session_id → KARN-W8-R2-M2-CLOSE; last_session_* block populated; close_state → atomically_closed.
+      previous_session_id → KARN-W8-R1-REDTEAM-SMOKE.
+      red_team_counter → 0 (cadence fired at W8-R1 per MACRO_PLAN §IS.8 (b) macro-phase close; reset).
+      next_session_objective → KARN-W9-M3-OPEN per HANDOFF_M2_TO_M3_v1_0.md.
+      next_session_proposed_cowork_thread_name → "KARN-W9 — M3 OPEN".
+      Deliverables: M2_CLOSE_v1_0.md (M2 sealing artifact, quality bar 8 PASS / 1 WARN / 0 FAIL);
+      HANDOFF_M2_TO_M3_v1_0.md (M3 orientation memo); CURRENT_STATE flipped (this entry);
+      .geminirules + .gemini/project_state.md propagated to adapted parity (W6/W7 Cowork-stream
+      additions + M2 close state); SESSION_LOG W8-R2 entry + M2 macro-phase seal block appended.
+      Mirror updates recorded in close-checklist mirror_updates_propagated block.
+      M2 quality bar at close: Audit 1 98.99% / Audit 2 95.52% / Audit 3 95.52% / red-team PASS /
+      eval-harness scaffolded (baseline STUB — manual native run is documented path).
+      §3 narrative refreshed.
   - v1.0 amended-in-place (2026-04-29, Phase_14G_Lockdown_Verification — Phase 14 SEALED):
       last_session_id → Phase_14G_Lockdown_Verification; last_session_* block populated.
       active_phase_plan_sub_phase updated: Phase 14 SEALED — Lockdown Verification complete.
@@ -495,25 +514,27 @@ current_state:
   # ------------------------------------------------------------------
   # Macro-phase position (per MACRO_PLAN_v2_0.md §"Ten macro-phase arc")
   # ------------------------------------------------------------------
-  active_macro_phase: M2                       # M1 completed; M2 is currently-active
-  active_macro_phase_title: "Corpus Activation"
+  active_macro_phase: M3                       # M2 CLOSED 2026-05-01 at KARN-W8-R2-M2-CLOSE; M3 is currently-active
+  active_macro_phase_title: "Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)"
   active_macro_phase_status: active
     # One of: active | paused_governance_rebuild | paused_native_hold | closed
-    # Flipped from "paused_governance_rebuild" to "active" at Step 15 close 2026-04-24.
+    # M2 flipped to closed at KARN-W8-R2-M2-CLOSE (2026-05-01); M3 active.
+    # M2 sealing artifact: 00_ARCHITECTURE/M2_CLOSE_v1_0.md
+    # M2→M3 handoff memo: 00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md
 
   # ------------------------------------------------------------------
-  # Phase-plan expansion (per PHASE_B_PLAN_v1_0.md §"B.0 – B.10")
+  # Phase-plan expansion (M3 phase plan TBD; first M3 session decides whether to expand
+  #   MACRO_PLAN §M3 into a PHASE_C_PLAN_v1_0.md or drive M3 directly from MACRO_PLAN.)
   # ------------------------------------------------------------------
-  active_phase_plan: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
-  active_phase_plan_version: "1.0.3"             # amendment complete (Madhav 16, 2026-04-24; resolved WARN.2/3/5/7)
-  active_phase_plan_sub_phase: "B.8 complete (Synthesis Layer) + Phase 14 SEALED (14G Lockdown Verification complete)"
-    # Madhav_M2A_Exec_14 closed 2026-04-28. B.8 Synthesis Layer.
-    # Phase_14C_Stream_H closed 2026-04-29. Phase 14C L1 Structured Tables: all 12 done-criteria PASS.
-    # Phase_14G_Lockdown_Verification closed 2026-04-29. Phase 14 modernization SEALED.
-    # 6 new tables: chart_facts(589), ephemeris_daily(660726), eclipses(913), retrogrades(2462), life_events(36), sade_sati_phases(46).
-    # 7+9 new LLM tools in consumeTools (16 total structured tools).
-    # CAPABILITY_MANIFEST v1.5 (102 entries; all fingerprints populated; 22 entries LOCKED).
-  active_phase_plan_status: active              # M2 active; M2C active; B.9 next; Phase 14 SEALED
+  active_phase_plan: null
+  active_phase_plan_version: null
+  active_phase_plan_sub_phase: "M2 closed; M3 phase plan pending first M3 session (KARN-W9-M3-OPEN)"
+    # PHASE_B_PLAN_v1_0.md (v1.0.3) is now SUPERSEDED-AS-COMPLETE for the M2 macro-phase.
+    # M2 sealing artifact: 00_ARCHITECTURE/M2_CLOSE_v1_0.md
+    # M3 first session: KARN-W9-M3-OPEN; reads MACRO_PLAN §M3 + HANDOFF_M2_TO_M3_v1_0.md +
+    # this CURRENT_STATE; authors M3 phase-plan analogue (or proceeds directly off MACRO_PLAN
+    # per native decision at M3 open).
+  active_phase_plan_status: pending_m3_open     # M3 phase plan not yet authored
 
   # ------------------------------------------------------------------
   # Governance step (Step 0 → Step 15 rebuild)
@@ -542,15 +563,14 @@ current_state:
   # ------------------------------------------------------------------
   # Red-team counter (ONGOING_HYGIENE_POLICIES §G addition at Step 12)
   # ------------------------------------------------------------------
-  red_team_counter: 2
-    # 0 at Madhav_M2A_Exec_8 close (cadence fired; RT.M2B.1–RT.M2B.6 + KR-1/2/3/4 all PASS) → reset to 0.
-    # Exec_9 → 1. Exec_10 → 2. Exec_11 → 3 → cadence fires → reset to 0.
-    # BUILD_TRACKER + PORTAL + COW governance asides did NOT increment.
-    # Reset to 0 at Madhav_M2A_Exec_11 close: combined cadence (every-third-session §IS.8(a) + B.5 phase-close §IS.8(b)).
-    # Exec_12 → 1 during session → §IS.8(b) M2B milestone close fires → reset to 0.
-    # Exec_13 → 1. B.7 is not a milestone close; no §IS.8(b) fire. Counter at 1.
-    # Exec_14 → 2. B.8 is not a milestone close; no §IS.8(b) fire. Counter at 2.
-    # Next cadence fire at counter=3 (Madhav_M2A_Exec_15 if no governance asides between Exec_14–15).
+  red_team_counter: 0
+    # Reset to 0 at KARN-W8-R2-M2-CLOSE (2026-05-01) — cadence fired at W8-R1 per
+    # MACRO_PLAN §IS.8 (b) macro-phase close: REDTEAM_M2_v1_0.md verdict PASS (9/9 axes;
+    # 0 findings; 0 fixes applied). M2 close cadence discharged.
+    # M3 first session resumes counting from 0.
+    # Historical M2 cadence trail: Exec_8→0; Exec_9→1; Exec_10→2; Exec_11→0 (B.5 close
+    # cadence fired); Exec_12→0 (M2B close cadence fired); Exec_13→1; Exec_14→2;
+    # Phase 14 work did not increment (parallel platform stream); W8-R1 IS.8 PASS → reset.
 
   # ------------------------------------------------------------------
   # Native-directive state (ND.N)
@@ -563,49 +583,54 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: Phase_14C_Stream_H
-    # Phase 14C Stream H — L1 Structured Tables COMPLETE. All 12 done-criteria pass.
-    # 6 tables live; 7 TypeScript LLM tools registered; CAPABILITY_MANIFEST v1.5.
-  last_session_closed_at: 2026-04-29T00:00:00+00:00
-  last_session_attempted_close_at: 2026-04-29T00:00:00+00:00
-  last_session_agent: claude-sonnet-4-6
-  last_session_cowork_thread_name: "Phase 14C Stream H — L1 Structured Tables close + verification"
+  last_session_id: KARN-W8-R2-M2-CLOSE
+    # M2 macro-phase CLOSE artifact + mirror sync + M3 handoff. Sealed M2 (Corpus Activation).
+  last_session_closed_at: 2026-05-01T00:00:00+00:00
+  last_session_attempted_close_at: 2026-05-01T00:00:00+00:00
+  last_session_agent: claude-opus-4-7
+  last_session_cowork_thread_name: "KARN-W8-R2 — M2 CLOSE Artifact + Mirror Sync + M3 Handoff"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
-    drift_detector=258/exit2 (+122 from 136 baseline; missing fingerprints on 14C/D/E entries expected for 14G).
-    schema_validator=75/exit2 (+5 from 70; pre-existing issues).
-    mirror_enforcer=0/exit0. No new CRITICAL.
-    red_team_counter: 2 (Phase 14C is parallel platform work — does not increment M2 counter).
+    No governance script runs in this session per brief scope (governance/document-only;
+    no platform/src or migrations changes). W8-R1 (predecessor) script verdicts stand:
+    typecheck 9 pre-W6 residuals only; vitest 1047 PASS / 13 FAIL (matches W5 baseline);
+    composition_rules 39/39 PASS; per_tool_planner 15/15 PASS; audits 98.99% / 95.52%.
+    red_team_counter reset to 0 (W8-R1 IS.8 macro-phase-close cadence fired; verdict PASS).
   last_session_deliverable: >
-    Phase 14C COMPLETE. 6 new L1 structured tables:
-    chart_facts(589 rows), ephemeris_daily(660726), eclipses(913), retrogrades(2462),
-    life_events(36), sade_sati_phases(46). 7 LLM tools in consumeTools.
-    CAPABILITY_MANIFEST v1.5 (102 entries; L25_TOOLS_v1_0 directory-path bug fixed).
-    L1_STRUCTURED_LAYER_v1_0.md + PHASE_14C_L1_STRUCTURED_TABLES_REPORT_v1_0.md.
-    EXEC_BRIEF_PHASE_14C status: COMPLETE.
-  previous_session_id: Madhav_PHASE11A_CUTOVER_STAGE1
-    # Governance aside — Phase 11A Pipeline Cutover Stage 1 COMPLETE.
+    M2 CLOSED. Sealing artifact: 00_ARCHITECTURE/M2_CLOSE_v1_0.md.
+    Handoff memo: 00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md.
+    Mirror sync: .geminirules + .gemini/project_state.md propagated to adapted parity
+    (W6/W7 Cowork-stream additions + M2 close state).
+    SESSION_LOG W8-R2 entry + M2 macro-phase seal block appended.
+    M2 quality bar at close: 8 PASS / 1 WARN (eval baseline STUB) / 0 FAIL.
+    Red-team: REDTEAM_M2_v1_0.md verdict PASS (9/9 axes; 0 findings).
+  previous_session_id: KARN-W8-R1-REDTEAM-SMOKE
+    # IS.8 mandatory macro-phase-close red-team. Verdict PASS. W8-R2 gate CLEARED.
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    Option A: Phase 11B — legacy code deletion (gates on stage1 smoke ✅ + native acceptance).
-    Option B: Execute **Madhav_M2A_Exec_15 — B.9** per PHASE_B_PLAN_v1_0.md §B.9.
-    Phase 14 modernization SEALED at Phase_14G_Lockdown_Verification (2026-04-29).
-  next_session_proposed_cowork_thread_name: "Madhav M2A-Exec-15 — B.9"
+    KARN-W9-M3-OPEN — first M3 session. Reads MACRO_PLAN_v2_0.md §M3 + this CURRENT_STATE +
+    HANDOFF_M2_TO_M3_v1_0.md; verifies L3.5 register state in DB; runs the M2 eval baseline
+    (BASELINE_RUN_W7.json) before any retrieval-behavior change; authors the M3 phase plan
+    (PHASE_C_PLAN_v1_0.md analogue) or proceeds directly off MACRO_PLAN per native decision.
+    Concurrent option: Phase 11B (legacy code deletion) gates on stage1 smoke ✅ + native
+    acceptance — independent of M3 macro-phase progression.
+  next_session_proposed_cowork_thread_name: "KARN-W9 — M3 OPEN"
   red_team_due_note: >
-    Counter at 2 (Exec_13→1, Exec_14→2). Next cadence fire at counter=3 (Exec_15 if no governance asides between Exec_14–15).
-    Phase 14G is parallel platform work — does not increment the M2 red_team_counter.
+    Counter at 0 (reset at KARN-W8-R2 close — W8-R1 IS.8 macro-phase-close cadence fired
+    with verdict PASS). M3 first session resumes counting from 0; next §IS.8(a) every-third
+    fire at M3 counter=3.
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-04-29T00:00:00+00:00
-  file_updated_by_session: Phase_14G_Lockdown_Verification
+  file_updated_at: 2026-05-01T00:00:00+00:00
+  file_updated_by_session: KARN-W8-R2-M2-CLOSE
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, Phase_14G_Lockdown_Verification, null).
+    = (Step_15 completed, KARN-W8-R2-M2-CLOSE, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -615,33 +640,40 @@ current_state:
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
 
-At the close of Phase_14G_Lockdown_Verification (2026-04-29) — Phase 14 Modernization SEALED:
+At the close of KARN-W8-R2-M2-CLOSE (2026-05-01) — **M2 (Corpus Activation) SEALED**:
 
-**Macro-phase.** The project is in **M2 — Corpus Activation**, active. M2C active (B.7–B.10). B.9 next.
+**Macro-phase.** The project is in **M3 — Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)**, active. M2 closed at this session. The M2 sealing artifact is `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; the M2→M3 handoff memo is `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`.
 
-**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` at v1.0.3. B.8 COMPLETE (Exec_14). Phase 14 modernization SEALED (Phase 14G, 2026-04-29). Platform: 16 structured LLM tools live; all Phase 14 tables populated; CAPABILITY_MANIFEST fully fingerprinted and locked.
+**Phase-plan expansion.** `PHASE_B_PLAN_v1_0.md` (v1.0.3) is SUPERSEDED-AS-COMPLETE for M2. The M3 phase plan is to be authored at the first M3 session (`KARN-W9-M3-OPEN`) — the decision on whether to expand `MACRO_PLAN_v2_0.md §M3` into a `PHASE_C_PLAN_v1_0.md` or to drive M3 directly from MACRO_PLAN is a native-approval point at M3 open.
 
-**Platform cutover.** Phase 11A COMPLETE (governance aside, 2026-04-28). `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` default true. Phase 11B (legacy deletion) gates on stage1 smoke ✅ + native acceptance.
+**M2 quality bar at close (final).**
+- Audit 1 (MSR→FORENSIC): **98.99%** (490/495) ≥ 95% — PASS
+- Audit 2 (UCN→MSR): **95.52%** (128/134) ≥ 90% — PASS
+- Audit 3 (CGM→MSR): **95.52%** (128/134) ≥ 95% — PASS
+- Eval harness scaffold: 24 fixtures + runner + A/B — PASS
+- Eval baseline run: STUB — auth-cookie required for headless run; manual native follow-up — WARN (deferred; non-blocking)
+- Per-tool planner: 15/15 vitest — PASS
+- Composition rules: 39/39 vitest — PASS
+- Red-team pass: REDTEAM_M2_v1_0.md verdict **PASS** (9/9 axes; 0 findings; 0 fixes) — PASS
+- New query pipeline default: NEW_QUERY_PIPELINE_ENABLED=true (Phase 11A Stage 1, 2026-04-28) — PASS
 
-**Phase 14 outcome (sealed).** All phases 14A–14G complete.
-- L1 structured tables: chart_facts(589), ephemeris_daily(660726), eclipses(913), retrogrades(2462), life_events(36), sade_sati_phases(46)
-- L2.5 structured tables: l25_msr_signals(499), l25_ucn_sections(134), l25_cdlm_links(81), l25_cgm_nodes(234), l25_cgm_edges(21), l25_rm_resonances(28)
-- L3 structured registers: patterns(21), resonances(13), clusters(11), contradictions(19) rows
-- 16 LLM-callable tools in consumeTools; 10 pipeline retrieval tools in src/lib/retrieve
-- Smoke gate: 11/11 audit_log sessions use msr_sql structured tool; 0/11 use deprecated rag_search
-- CAPABILITY_MANIFEST v1.5 (102 entries; all fingerprints populated; 22 LOCKED, 0 TRANSITIONAL)
-- Findings: 9 CLOSED, 6 WHITELISTED, 14 DEFERRED (all non-blocking)
-- Validators post-14G: drift=222/exit2, schema=76/exit2, mirror=0/exit0
+**Overall:** 8 PASS / 1 WARN / 0 FAIL.
+
+**Platform live state at M2 close (carry into M3).** Query pipeline (default): `classify → [per_tool_planner: optional] → compose → retrieve(parallel) → validate → synthesize → audit`. Retrieval tools: 17 (5 L2.5 structured + 7 L1 structured + 5 RAG). Structured tables: 6 L1 + 6 L2.5 + 4 L3.5 register tables. CAPABILITY_MANIFEST: v1.7 effective (with `entry_count` +3 latent miscount carried as known-deferred).
+
+**Mirror discipline.** Adapted parity holds across MP.1–MP.8. W6/W7 Cowork-stream additions (composition rules, per-tool planner, provenance audits, eval harness) propagated to `.geminirules` + `.gemini/project_state.md` in this session per ND.1. Recorded in close-checklist `mirror_updates_propagated` block.
 
 **Governance step.** Step 15 completed. CURRENT_STATE is authoritative.
 
-**Native directives.** ND.1 addressed. No open directives.
+**Native directives.** ND.1 addressed (held throughout M2). No open directives.
 
-**Red-team.** `red_team_counter: 2` — unchanged. Phase 14G is parallel platform work — does not increment. Next fire at counter=3 (Exec_15 if no governance asides).
+**Red-team.** `red_team_counter: 0` — reset at this close (W8-R1 IS.8 macro-phase-close cadence fired; verdict PASS). M3 first session resumes counting from 0.
 
-**Validator state.** drift_detector=258/exit2 (+122; missing fingerprints for new manifest entries — 14G scope), schema_validator=75/exit2 (+5 pre-existing), mirror_enforcer=0/exit0.
+**Open items inherited from M2 (non-blocking — see `M2_CLOSE_v1_0.md §Known deferred items`).** (1) CAPABILITY_MANIFEST `entry_count` +3 latent miscount — manifest-audit pass; (2) SIG.MSR.207 absent from `MSR_v3_0.md` — investigate; (3) UCN inline citation pass (Option A) — aspirational, not gating; (4) Eval baseline manual run — M3-S1 hard prerequisite; (5) UI-test fixture errors (`AppShell.test.tsx` + `ReportGallery.test.tsx`) — pre-W6 drift; (6) DIS.009 — Q2-soft-gated; resolve alongside M3 Pattern Engine activation.
 
-**Next-session commitment.** Phase 14G lockdown (fingerprint population + drift resolution) OR Madhav_M2A_Exec_15 (B.9).
+**Concurrent workstreams that survive M2 close.** Life Event Log (LEL) — continue adding events; M4 prerequisite. Prospective Prediction Logging — substrate at `06_LEARNING_LAYER/PREDICTION_LEDGER/`; all time-indexed predictions log with confidence/horizon/falsifier *before* outcome. Portal Redesign on `redesign/r0-foundation` — R0 closed 2026-04-29; R1–R6 parallel-ready; does not block M3.
+
+**Next-session commitment.** `KARN-W9-M3-OPEN` — first M3 session.
 
 ---
 
