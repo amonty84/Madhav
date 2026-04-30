@@ -1,6 +1,6 @@
 # MARSYS-JIS Project State & Configuration
 
-_Last updated: 2026-04-29 at redesign-r0-foundation-2026-04-29 (Portal Redesign R0 Foundation — COMPLETE). AppShell + ZoneRoot + /build→/cockpit rename + DashboardHeader/ForceDarkMode/ConsumeForceDark retired. PORTAL_REDESIGN_R0_ENABLED flag default true. VISION promoted CURRENT. TRACKER R0 row closed. R1–R6 parallel-ready. Previous: 2026-04-28 at Madhav_PHASE11A_CUTOVER_STAGE1 (Phase 11A Pipeline Cutover — COMPLETE)._
+_Last updated: 2026-05-01 at KARN-W8-R2-M2-CLOSE (**M2 Corpus Activation SEALED**). Sealing artifact: `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; M2→M3 handoff: `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`. M3 (Temporal Animation / Discovery Layer — Pattern + Contradiction Engines) is now the active macro-phase; first M3 session: `KARN-W9-M3-OPEN`. W6/W7 Cowork-stream additions (composition rules, per-tool planner, provenance audits, eval harness scaffold) propagated to this file in the same session per ND.1 Mirror Discipline. Previous: 2026-04-29 at redesign-r0-foundation-2026-04-29 (Portal Redesign R0 Foundation — COMPLETE)._
 
 ## Governance Rebuild CLOSED (Step 0 → Step 15 — COMPLETE 2026-04-24)
 
@@ -10,14 +10,26 @@ _Last updated: 2026-04-29 at redesign-r0-foundation-2026-04-29 (Portal Redesign 
 - **Next governance action:** Execute `Madhav_M2A_Exec_6` — B.4 RAG Query Engine + Gemini two-pass carry-forward. Carry-forward priorities: (1) native pastes cgm_edge_proposals_v1_0.md to Gemini, commits raw response, Claude reconciler runs Tasks 4a/4b; (2) write_chunks_to_db() for 234 CGM chunks; (3) B.4 RAG Query Engine per PHASE_B_PLAN §B.4.
 - **Steps remaining:** **0 (governance rebuild complete).** Steady-state governance discipline fully active. M2 active execution: B.0 closed, M2A Plan produced, B.1 complete, B.2 complete, B.3 complete, **B.3.5 complete** (M2A Foundation Stack 5/5 sessions done).
 
-## Active Phase: M2 Corpus Activation — L4 Discovery Layer
+## Active Phase: M3 Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)
 
-The project is in active execution at **M2 Corpus Activation**, governed by `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` v1.0.3. **B.0–B.6 complete. M2B MILESTONE CLOSED.** B.1 Ingestion + B.2 Chunking + B.3 Embedding + B.3.5 CGM Rebuild + B.4 RAG Query Engine + B.5 Discovery Engine (22 patterns, 12 resonances, 12 clusters, 8 contradictions) + **B.6 Hybrid Retrieval Library** (retrieve.py 5-mode, RRF, layer-balance, WCR, reranker; POST /rag/retrieve; TypeScript shim; golden eval) — all complete. **M2B CLOSED at Madhav_M2A_Exec_12 (2026-04-27).** Next session: `Madhav_M2A_Exec_13` (B.7).
+**M2 Corpus Activation is CLOSED (2026-05-01 at KARN-W8-R2-M2-CLOSE).** The sealing artifact is `00_ARCHITECTURE/M2_CLOSE_v1_0.md`; the M2→M3 handoff memo is `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`. **M3 is now the active macro-phase.** First M3 session: `KARN-W9-M3-OPEN` — reads `MACRO_PLAN_v2_0.md §M3` + the handoff memo + `CURRENT_STATE_v1_0.md`, verifies L3.5 register state in DB, runs the M2 eval baseline, and authors the M3 phase plan (or proceeds directly off MACRO_PLAN per native decision).
 
-### Two-pass execution model
+### M2 cumulative deliverables (W1–W8 KARN waves; all CLOSED)
+
+W1 Foundation; W2 ETL Expansion (MSR ETL + CGM full edges); W3 Corpus Chunkers (UCN H3 always-emit 25→151 chunks; LEL chunker; MSR re-cluster 34 semantic clusters @ 99.2% coverage); W4 Facts Tools (`chart_facts` 589→795 + `chart_facts_query`); W5 Narrative Tools (D2/3/4 bundle; temporal sidecar v1.1; RESONANCE 12→26, CONTRADICTION 8→27); W6 composition rules (39/39 PASS) + per-tool Haiku planner (15/15 PASS); W7 provenance audit repair (Audits 2/3 FAIL→PASS via DB-methodology rewrite + 90-node backfill) + manifest completeness (106→109 entries) + eval harness scaffold (24 fixtures + runner + A/B); W8 IS.8 macro-phase-close red-team PASS (9/9 axes; 0 findings) + this M2 close artifact.
+
+### M2 quality bar at close
+
+Audit 1 (MSR→FORENSIC) **98.99%** ✓ ; Audit 2 (UCN→MSR) **95.52%** ✓ ; Audit 3 (CGM→MSR) **95.52%** ✓ ; eval harness scaffolded (baseline STUB — manual native run pending) ; per-tool planner 15/15 ✓ ; composition rules 39/39 ✓ ; red-team **PASS** (9/9 axes) ; new query pipeline default-on (Phase 11A Stage 1, 2026-04-28). **8 PASS / 1 WARN / 0 FAIL.**
+
+### Live platform state at M2 close
+
+Query pipeline (default): `classify → [per_tool_planner: optional, default OFF] → compose → retrieve(parallel) → validate → synthesize → audit`. `NEW_QUERY_PIPELINE_ENABLED=true`, `AUDIT_ENABLED=true`. 17 retrieval tools (5 L2.5 structured + 7 L1 structured + 5 RAG). 6 L1 + 6 L2.5 structured tables + 4 L3.5 register tables. CAPABILITY_MANIFEST v1.7 effective.
+
+### Two-pass execution model (carry into M3)
 
 1. **Pass 1 (Gemini 2.5 Pro):** Proposes patterns, links, and hypotheses with evidence and mechanisms. High recall.
-2. **Pass 2 (Claude Opus 4.7):** Reconciles and validates against the strict project principles. Conflicts between passes open `DIS.class.output_conflict` entries in `00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md` per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K.2`; silent overwriting is forbidden.
+2. **Pass 2 (Claude Opus 4.7):** Reconciles and validates against the strict project principles. Conflicts between passes open `DIS.class.output_conflict` entries in `00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md` per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K.2`; silent overwriting is forbidden. *Open at M2 close: DIS.009 (PAT.008 Saturn D9 Karakamsa + AL Identity Lock) — Q2 soft-gated; resolve alongside M3 Pattern Engine activation.*
 
 ### Artifacts used by L4
 
@@ -60,14 +72,17 @@ Reference only — do **not** cite superseded versions. Any disagreement between
 
 ## Pending Actions & Blockers
 
-Governance rebuild complete. M2 execution active. Open items as of 2026-04-24:
+Governance rebuild complete. **M2 CORPUS ACTIVATION SEALED 2026-05-01.** M3 active. Open items inherited from M2 (see `M2_CLOSE_v1_0.md §Known deferred items` for canonical list):
 
-1. **B.5 Discovery Engine Session 2 — CLOSED (Madhav_M2A_Exec_10, 2026-04-26).** 22 patterns (11 new), 9 resonances (9 new). Q1 Gemini-lock, Q2 hard-halt, Q3 cluster-defer applied. M2B amendment applied. AC.4/AC.4.5 backfills complete. **Madhav_M2A_Exec_11 is the next execution priority.**
-2. **ND.1 Mirror Discipline.** Global directive status: `addressed` since Step 7 close (2026-04-24). Mirror discipline is mechanically enforced via `mirror_enforcer.py` operating over CANONICAL_ARTIFACTS §2. No action needed.
-3. **Step 15 Governance baseline close — CLOSED 2026-04-24.** Final step of the governance rebuild. Deliverable: `GOVERNANCE_BASELINE_v1_0.md`. 32 GA.N findings: 30 RESOLVED, 1 ACCEPTED_AS_POLICY (GA.11), 1 DEFERRED_AS_DESIGN_CHOICE (GA.27). Red-team: 2/2 PASS (macro-phase-close cadence). Script runs: drift exit 3 BASELINE, schema exit 3 BASELINE (46 RESIDUAL), mirror exit 0 CLEAN. STEP_LEDGER row 15 → completed; STEP_LEDGER status → GOVERNANCE_CLOSED. CURRENT_STATE transitions to authoritative. Rebuild-era banner removed from CLAUDE.md + .geminirules.
-4. **Citation Graph Integrity.** All L2+ claims must correctly reference canonical L1 files (`FORENSIC_ASTROLOGICAL_DATA_v8_0.md`). No dangling edges are allowed.
-5. **Staleness Tracking.** Any L3 chunk not aligned with `FORENSIC_v8_0` must be tracked in the staleness register. All nine L3 reports at v1.1+ are aligned.
-6. **CGM Rebuild to v9.0.** Scheduled for Phase B.3.5. Current `CGM_v2_0.md` already rebuilt on v8.0 facts.
+1. **CAPABILITY_MANIFEST `entry_count` +3 latent miscount.** Manifest header reads 109; actual is 112. Inherited pre-W7-R2. Resolve in a manifest-audit pass during M3.
+2. **SIG.MSR.207 absent from `MSR_v3_0.md`.** Medium severity (KARN-W6-R3 finding); investigate in M3.
+3. **UCN inline citation pass (Option A) against `UCN_v4_0.md`.** Aspirational only; not gating. Option B (DB-side `derived_from_signals` backfill) was the Audit 2/3 fix path.
+4. **Eval harness baseline run.** `BASELINE_RUN_W7.json` is a stub — runner requires `SMOKE_SESSION_COOKIE` + `SMOKE_CHART_ID`. **Hard prerequisite for M3-S1** before any retrieval-behavior change.
+5. **TypeScript test-fixture errors** in `tests/components/AppShell.test.tsx` + `ReportGallery.test.tsx`. 9 errors total; pre-W6 portal-redesign drift; non-blocking.
+6. **DIS.009 — `DIS.class.output_conflict` on PAT.008 (Saturn D9 Karakamsa + AL Identity Lock).** Q2 soft-gated; B.5 close not blocked. Resolve alongside M3 Pattern Engine activation.
+7. **ND.1 Mirror Discipline.** Status: `addressed` since Step 7 close. W6/W7 Cowork-stream propagation completed at this M2 close. Held throughout M2; carry into M3.
+8. **Citation Graph Integrity.** All L2+ claims correctly reference canonical L1 files (`FORENSIC_ASTROLOGICAL_DATA_v8_0.md`). No dangling edges. Maintain in M3.
+9. **Staleness Tracking.** All nine L3 reports at v1.1+ are aligned with `FORENSIC_v8_0`. Maintain in M3.
 
 ## Working Protocol for Gemini
 
