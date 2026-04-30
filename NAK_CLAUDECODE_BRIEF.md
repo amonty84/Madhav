@@ -1,67 +1,69 @@
 ---
-artifact: NAK_CLAUDECODE_BRIEF (W0 instance)
+artifact: NAK_CLAUDECODE_BRIEF (W1-R3 instance)
 status: COMPLETE
 authored_on: 2026-04-30
-authored_by: Cowork (Opus)
+authored_by: Claude Code (NAK W0 session)
 project: NAK — Nakula
-wave_run: W0
-title: Foundation Gate — Baseline Audit and Framework Drafting
+wave_run: W1-R3
+title: UX Component Audit and A11y First Pass
 governing_clause: >
   NAK_SOP_v1_0.md §C.2 — NAK Claude Code sessions read this file first.
   This file's status field governs the session: ACTIVE = session open;
   COMPLETE = session closed.
 target_executor: Claude Code (CLI), Sonnet 4.6 in Anti-Gravity / VS Code
-session_class: NAK W0 Gate — audit only, no code changes
-exec_brief: NAK_EXEC_BRIEF_W0_FOUNDATION_v1_0.md
-branch: nak/w0-foundation
-worktree: ~/Vibe-Coding/Apps/Madhav-nak-w0
-parallelizable_with: []       # gate phase — no parallel runs
-unblocks: [W1-R1, W1-R2, W1-R3]
+session_class: NAK W1-R3 — audit only, no code changes
+exec_brief: NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md
+branch: nak/w1-r3-component-audit
+worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r3
+parallelizable_with: [W1-R1, W1-R2]
+unblocks: [W2-R3]
 ---
 
-# NAK CLAUDECODE_BRIEF — W0 Foundation Gate
+# NAK CLAUDECODE_BRIEF — W1-R3 UX Component Audit and A11y First Pass
 
 ## How to activate this brief
 
-This file was copied from the brief pool (`NAK_CLAUDECODE_BRIEF_W0.md` at project root) into the W0 worktree root as `NAK_CLAUDECODE_BRIEF.md`.
+Copy from the brief pool to your worktree root before opening the session:
 
-If you are reading this as `NAK_CLAUDECODE_BRIEF_W0.md` (the pool copy, not in a worktree), you are in the wrong file. Copy it to your worktree first per `NAK_RUNBOOK_v1_0.md §4`.
+```bash
+cd ~/Vibe-Coding/Apps/Madhav
+git worktree add ../Madhav-nak-w1r3 -b nak/w1-r3-component-audit main
+cp NAK_CLAUDECODE_BRIEF_W1_R3.md ../Madhav-nak-w1r3/NAK_CLAUDECODE_BRIEF.md
+cd ../Madhav-nak-w1r3
+```
+
+Copy the exec brief and NAK governance dir (they are untracked in main):
+
+```bash
+cp ~/Vibe-Coding/Apps/Madhav/NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md .
+cp -r ~/Vibe-Coding/Apps/Madhav/00_NAK .
+```
+
+## Pre-flight gate
+
+1. `git status` is clean in worktree.
+2. `00_NAK/NAK_TRACKER_v1_0.md` §2 shows `w0_closed: true`, `active_wave: W1`.
+3. `00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md` exists (Part C has the suspect list).
 
 ## What this session does
 
-W0 is the gate phase for Project NAK. It produces the baseline that shapes W1. It makes **zero code changes**. It reads `platform/src/`, audits three axes (design system, error handling, component inventory), and produces the governance documents and briefs that fan out into W1.
+Resolves the 9 suspect duplicate components from W0 by reading both files in each pair. Performs an a11y first pass on the four user-facing component dirs (consume, shared, chat, ui). Maps all pages/layouts to surface coverage. Creates `NAK_COMPONENT_AUDIT_v1_0.md`. Makes **zero code changes**.
 
 ## Required reads, in order
 
 1. This file.
-2. `NAK_EXEC_BRIEF_W0_FOUNDATION_v1_0.md` — the full spec. Pay special attention to §3 (acceptance criteria) and §4 (suggested work sequence).
-3. `00_NAK/NAK_VISION_v1_0.md` §1–§5 — project orientation (skim).
-4. `00_NAK/NAK_SOP_v1_0.md` §B (file locations), §C (session ritual), §G (invariants) — the rules you operate under.
-5. `00_NAK/NAK_TRACKER_v1_0.md` §2 — confirm `active_wave: W0`, `w0_closed: false`.
-
-Do NOT read `CLAUDE.md §C items 1–11` — KARN governance is out of scope for NAK sessions.
-
-## Pre-flight gate
-
-1. Branch `nak/w0-foundation` is checked out in this worktree.
-2. `git status` is clean.
-3. `00_NAK/NAK_TRACKER_v1_0.md` §2 shows `active_wave: W0`, `w0_closed: false`.
-4. No prior W0 session has closed (this file `status: ACTIVE`, not `COMPLETE`).
+2. `NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md` — full spec. Pay special attention to §3 (AC-1 Parts A–D), §5 (suspect components list with file paths), and §6 (a11y focus areas).
+3. `00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md` Part C — the 9 suspects and the 149-component inventory.
+4. `00_NAK/NAK_TRACKER_v1_0.md` §2 — confirm `active_wave: W1`, `w0_closed: true`.
 
 ## Acceptance criteria (summary — full spec in exec brief §3)
 
-All seven must be met before claiming close:
-
-- [ ] AC-1: `00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md` committed (Parts A–D)
-- [ ] AC-2: `00_NAK/NAK_DESIGN_SYSTEM_v1_0.md` committed (status: DRAFT)
-- [ ] AC-3: `00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md` committed (status: DRAFT)
-- [ ] AC-4: Three W1 exec briefs authored and committed
-- [ ] AC-5: Three W1 CLAUDECODE_BRIEF pool files authored and committed
-- [ ] AC-6: `00_NAK/NAK_TRACKER_v1_0.md` updated (w0_closed: true, W1 flags, active_wave: W1)
-- [ ] AC-7: This file flipped to `status: COMPLETE`
+- [ ] AC-1: `00_NAK/reports/NAK_COMPONENT_AUDIT_REPORT_W1_R3_v1_0.md` committed (Parts A–D)
+- [ ] AC-2: `00_NAK/NAK_COMPONENT_AUDIT_v1_0.md` DRAFT created
+- [ ] AC-3: `NAK_TRACKER_v1_0.md` §3 W1-R3 row closed
 
 ## One-line session summary
 
-Audit `platform/src/` across design-system, error-handling, and component axes. Produce baseline docs and W1 exec briefs. Make zero code changes.
+Resolve 9 suspect duplicates, run a11y pass on user-facing surfaces, build page/layout surface map. Zero code changes.
 
 ---
