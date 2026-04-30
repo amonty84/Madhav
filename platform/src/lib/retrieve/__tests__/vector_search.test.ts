@@ -318,4 +318,69 @@ describe('vector_search tool', () => {
       expect(embeddingArg).toMatch(/^\[[\d.,]+\]$/)
     })
   })
+
+  describe('doc_type and layer filter', () => {
+    it('backward compat: no filter → null params at positions [2] and [3]', async () => {
+      await tool.retrieve(basePlan)
+
+      const dbCallArgs = mockQuery.mock.calls[0][1] as unknown[]
+      expect(dbCallArgs[2]).toBeNull()
+      expect(dbCallArgs[3]).toBeNull()
+    })
+
+    it('layer filter: plan.vector_search_filter.layer passed at position [3]', async () => {
+      const plan: QueryPlan = { ...basePlan, vector_search_filter: { layer: 'L1' } }
+      await tool.retrieve(plan)
+
+      const dbCallArgs = mockQuery.mock.calls[0][1] as unknown[]
+      expect(dbCallArgs[2]).toBeNull()
+      expect(dbCallArgs[3]).toBe('L1')
+    })
+
+    it('doc_type filter: plan.vector_search_filter.doc_type passed at position [2]', async () => {
+      const plan: QueryPlan = { ...basePlan, vector_search_filter: { doc_type: ['l1_fact'] } }
+      await tool.retrieve(plan)
+
+      const dbCallArgs = mockQuery.mock.calls[0][1] as unknown[]
+      expect(dbCallArgs[2]).toEqual(['l1_fact'])
+      expect(dbCallArgs[3]).toBeNull()
+    })
+
+    it('both filters active: both positions [2] and [3] contain the filter values', async () => {
+      const plan: QueryPlan = {
+        ...basePlan,
+        vector_search_filter: { layer: 'L2.5', doc_type: ['ucn_section', 'msr_signal'] },
+      }
+      await tool.retrieve(plan)
+
+      const dbCallArgs = mockQuery.mock.calls[0][1] as unknown[]
+      expect(dbCallArgs[2]).toEqual(['ucn_section', 'msr_signal'])
+      expect(dbCallArgs[3]).toBe('L2.5')
+    })
+
+    it('invocation_params records filter values for traceability', async () => {
+      const plan: QueryPlan = {
+        ...basePlan,
+        vector_search_filter: { layer: 'L1', doc_type: ['l1_fact'] },
+      }
+      const bundle = await tool.retrieve(plan)
+
+      const inv = bundle.invocation_params as Record<string, unknown>
+      expect(inv.doc_type_filter).toEqual(['l1_fact'])
+      expect(inv.layer_filter).toBe('L1')
+    })
+
+    it('SQL injection safety: filter values reach DB only as parameterised inputs, not interpolated', async () => {
+      const maliciousDocType = ["l1_fact'; DROP TABLE rag_chunks; --"]
+      const plan: QueryPlan = { ...basePlan, vector_search_filter: { doc_type: maliciousDocType } }
+      await tool.retrieve(plan)
+
+      // The SQL string itself must not contain the injected value
+      const sqlArg = mockQuery.mock.calls[0][0] as string
+      expect(sqlArg).not.toContain('DROP TABLE')
+      // The value must appear in the params array only
+      const dbCallArgs = mockQuery.mock.calls[0][1] as unknown[]
+      expect(dbCallArgs[2]).toEqual(maliciousDocType)
+    })
+  })
 })

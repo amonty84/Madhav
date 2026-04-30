@@ -33,6 +33,11 @@ export interface QueryPlan {
   dasha_context_required?: boolean
   graph_seed_hints?: string[]
   graph_traversal_depth?: number
+  /** Filter applied to vector_search retrieval — narrows by doc_type and/or layer. */
+  vector_search_filter?: {
+    doc_type?: string[]
+    layer?: string
+  }
   bundle_directives?: {
     floor_overrides?: string[]
     conditional_overrides?: object
@@ -40,6 +45,12 @@ export interface QueryPlan {
   adjudicator_model_id?: string
   router_confidence?: number
   router_model_id?: string
+  // Temporal extension flags (W5-R1)
+  time_window?: { start: string; end: string }
+  sade_sati_query?: boolean
+  eclipse_query?: boolean
+  retrograde_query?: boolean
+  retrograde_planet?: string
 }
 
 export interface ToolBundleResult {
@@ -64,9 +75,21 @@ export interface ToolBundle {
   schema_version: '1.0'
 }
 
+export interface MsrSqlInput {
+  /** Filter to specific signal_type values (e.g. ['yoga', 'aspect']). */
+  signal_type?: string[]
+  /** Filter to specific temporal_activation values (e.g. ['natal-permanent']). */
+  temporal_activation?: string[]
+  /** Filter to specific valence values (e.g. ['benefic', 'mixed']). */
+  valence?: string[]
+  /** Filter to signals whose entities_involved array contains any of these entity IDs. */
+  entities_involved_any?: string[]
+}
+
 export interface RetrievalTool {
   name: string
   version: string
+  description?: string
   retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle>
   secondary?: boolean  // extension — mark as secondary in registry
 }

@@ -49,7 +49,8 @@ Output:
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
   "planets": ["Mercury"],
-  "graph_seed_hints": ["PLN.MERCURY"]
+  "graph_seed_hints": ["PLN.MERCURY"],
+  "vector_search_filter": { "layer": "L1", "doc_type": ["l1_fact"] }
 }
 
 #### interpretive
@@ -69,7 +70,8 @@ Output:
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
   "dasha_context_required": false,
-  "graph_seed_hints": ["HSE.10", "PLN.MERCURY"]
+  "graph_seed_hints": ["HSE.10", "PLN.MERCURY"],
+  "vector_search_filter": { "doc_type": ["l1_fact", "ucn_section", "msr_signal", "cdlm_cell"] }
 }
 
 #### predictive
@@ -89,7 +91,8 @@ Output:
   "manifest_fingerprint": "__PLACEHOLDER__",
   "schema_version": "1.0",
   "dasha_context_required": true,
-  "graph_seed_hints": ["DSH.MD.SATURN", "PLN.SATURN"]
+  "graph_seed_hints": ["DSH.MD.SATURN", "PLN.SATURN"],
+  "vector_search_filter": { "doc_type": ["l1_fact", "msr_signal"] }
 }
 
 #### cross_domain
@@ -242,6 +245,10 @@ Choose only tools relevant to the query class:
 - query_msr_aggregate   — cross-chart aggregation queries; required for cross_native
 - cgm_graph_walk        — traverse the CGM graph from seed nodes via SUPPORTS / CONTRADICTS / CROSS_LINKS edges; use for cross-signal-relationship queries
 - vector_search         — semantic search over embedded corpus chunks including FORENSIC chart data; always include for factual, interpretive, holistic, and cross_domain queries; do NOT include for predictive
+- kp_query              — KP (Krishnamurti Paddhati) cusp and planet significator lookup; use for KP system queries, star lord / sub lord chains, cusp significators
+- saham_query           — Tajika Saham (Lot/Arabic Part) lookup for all 36 sahams; use for saham/lot/Arabic-part queries
+- divisional_query      — divisional chart (varga) placement lookup for D1–D60; use when a specific varga chart is mentioned
+- chart_facts_query     — PRIMARY tool for quantitative chart-fact retrieval; queries all 795 chart_facts rows (37 categories) with filters for category, planet, house, sign, nakshatra, keyword, and ranking; use for strength rankings, BAV bindus, yoga register, placement lookups, and any quantitative chart fact
 
 ## Rules
 1. audience_tier is provided to you — copy it exactly as given; do NOT change it.
@@ -273,6 +280,9 @@ Choose only tools relevant to the query class:
 14. cgm_graph_walk inclusion rule: whenever graph_seed_hints is non-empty (you extracted
     at least one chart entity), you MUST include "cgm_graph_walk" in tools_authorized.
     Queries that name specific chart entities always benefit from graph traversal.
+15. vector_search_filter: optional object with {doc_type?: string[], layer?: string} that
+    narrows semantic retrieval. See "## Vector Search Filter Guidance" section. When
+    unsure, omit (omit = no filter = all doc_types and layers).
 
 ## CGM Node ID reference
 
@@ -326,6 +336,144 @@ Valid edge_type values the classifier may emit in edge_type_filter:
 
 Leave edge_type_filter empty [] when the query is general or you are unsure.
 A narrow filter when one is wrong is worse than no filter.
+
+## Vector Search Filter Guidance
+
+Use vector_search_filter to narrow semantic retrieval by doc_type and/or layer. This
+helps the retrieval pipeline return the right corpus slice for each query class.
+
+Per-class defaults:
+- factual       → layer: "L1", doc_type: ["l1_fact"]
+  (chart data is in L1; no need for synthesis layer docs)
+- interpretive  → doc_type: ["l1_fact", "ucn_section", "msr_signal", "cdlm_cell"]
+  (mix of facts + synthesis; layer unset to allow L1 and L2.5)
+- cross_domain  → omit filter entirely (all doc_types needed for cross-domain synthesis)
+- discovery     → doc_type: ["msr_signal", "ucn_section", "domain_report", "cdlm_cell"]
+  (pattern-level; synthesis layer only)
+- holistic      → omit filter (comprehensive read needs all doc_types)
+- predictive    → doc_type: ["l1_fact", "msr_signal"]
+  (lean toward facts + signals for timing; vector_search rarely needed for pure predictive)
+- remedial      → doc_type: ["l4_remedial", "domain_report"] when those exist; else omit
+- cross_native  → omit filter (research mode; needs full corpus)
+
+Valid doc_type values: l1_fact, ucn_section, msr_signal, cdlm_cell, cgm_node,
+domain_report, rm_element, l4_remedial.
+Valid layer values: L1, L2.5, L3, L4, L5.
+
+When in doubt, omit — a missing filter returns all doc_types (safe default).
+
+## KP Query Guidance (kp_query tool)
+Authorize \`kp_query\` for queries about:
+- KP cusp significators: "What planets signify house 7?", "KP 7th house planets"
+- Star lord / sub lord chains: "Star lord of my 10th cusp", "sub lord of ascendant"
+- KP planet significators: "which houses does Saturn signify in KP?"
+- Any query containing "KP", "Krishnamurti", "star lord", "sub lord", "cusp significator"
+Pass \`cusp\` param when a specific house number is mentioned.
+Pass \`planet\` param when a specific planet significator is queried.
+
+## Saham Query Guidance (saham_query tool)
+Authorize \`saham_query\` for queries about:
+- Any named saham/lot: "Saham Vivaha", "Saham Raja", "Saham Putra", "Saham Mrityu"
+- Arabic parts / Tajika lots generically: "my marriage lot", "prosperity saham"
+- Any query containing "saham", "lot", "Arabic part", "Tajika"
+Pass \`saham_name\` as the named saham when specified.
+
+## Divisional Query Guidance (divisional_query tool)
+Authorize \`divisional_query\` for queries about:
+- Specific varga charts: "D9 placement of Venus", "navamsha chart", "dasamsha position"
+- Varga confirmation: "Venus in D9", "Saturn in D10", "Moon in D7"
+- Any query containing varga codes (D1–D60), "navamsha", "dasamsha", "saptamsha", "drekkana"
+Pass \`varga\` as the identified varga code (e.g. 'D9', 'D10').
+Pass \`planet\` when a specific planet is mentioned.
+
+## Chart Facts Query Guidance (chart_facts_query tool)
+
+chart_facts_query is the PRIMARY tool for quantitative chart-fact retrieval.
+Use it (and populate chart_facts_query in the QueryPlan) for queries about:
+
+**Strength rankings** (rank_by required):
+- "Rank my planets by Shadbala" → category='shadbala', rank_by='total_rupas'
+- "Which planets have highest ashtakavarga score?" → category='ashtakavarga_bav', rank_by='total_bindus'
+- "Strongest house by bhava bala" → category='bhava_bala', rank_by='bhava_bala'
+
+**Specific quantitative lookups** (category + keyword or planet):
+- "BAV of Mars in Capricorn" → category='ashtakavarga_bav', planet='Mars', sign='Capricorn'
+- "Saturn SAV score in 6th house" → category='ashtakavarga_sav', house=6
+- "Saham Vivaha" → category='saham', keyword='Vivaha'
+- "Yoga register" → category='yoga'
+- "Sasha Mahapurusha Yoga" → category='yoga', keyword='Sasha'
+- "Moon's nakshatra pada" → category='planet', planet='Moon', divisional_chart='D1'
+- "Longevity indicators" → category='longevity_indicator'
+- "Upagrahas" → category='upagraha'
+- "Mrityu Bhaga planets" → category='mrityu_bhaga'
+- "Avastha of Saturn" → category='avastha', planet='Saturn'
+
+**Placement queries**:
+- "Planets in 7th house" → category='house', house=7
+- "What is in Capricorn?" → sign='Capricorn'
+- "D9 placements" → divisional_chart='D9' (prefer divisional_query if single varga needed)
+
+**Avoid chart_facts_query for**:
+- MSR signal retrieval (use msr_sql)
+- CGM graph traversal (use cgm_graph_walk)
+- Pattern or cluster lookup (use pattern_register, cluster_atlas)
+- Temporal / dasha queries (use temporal or msr_sql with temporal_activation filter)
+
+Always set limit to a reasonable number (5–20). Set rank_by whenever ranking is implied.
+
+## Temporal Extension Guidance (temporal tool v1.1)
+
+The temporal tool supports 5 sidecar endpoints beyond /transits. Set the following
+QueryPlan fields to activate them:
+
+**dasha_chain:** Set \`dasha_context_required: true\` when the query asks:
+- "What dasha am I in on [date]?" / "What is my dasha chain for [year]?"
+- "When does [dasha] begin/end?" / Any 5-level Vimshottari chain question
+Also set \`time_window: { start: "<date>", end: "<date>" }\` when a specific date or window is mentioned.
+
+**sade_sati_query:** Set \`sade_sati_query: true\` when the query asks:
+- "Am I in Sade Sati?" / "Sade Sati phase" / "7.5 years of Saturn"
+- "Saturn transit over Moon" / "Sade Sati peak/rising/setting"
+
+**eclipse_query:** Set \`eclipse_query: true\` when the query asks:
+- "Eclipse" / "solar eclipse" / "lunar eclipse" / "Rahu-Sun conjunction"
+- Also set \`time_window\` to the relevant date range.
+
+**retrograde_query:** Set \`retrograde_query: true\` when the query asks:
+- "Retrograde" / "vakri" / "[planet] retrograde" / "station"
+- Set \`retrograde_planet\` to the planet name if specific (e.g. "Mercury", "Saturn").
+
+**forward_looking + time_window:** For ephemeris range queries:
+- Set both \`forward_looking: true\` and \`time_window: { start, end }\` for multi-day transit windows.
+
+## Domain Report Query Guidance (domain_report_query tool)
+Authorize \`domain_report_query\` for queries about:
+- Domain synthesis: "Tell me about my career", "relationships overview", "health summary"
+- Any query with domain scope + synthesis expectation (not just facts)
+- "domain report", "what does my chart say about [domain]", "[domain] analysis"
+Domains recognized: career, dharma, children, financial, wealth, health, longevity,
+parents, psychology, mind, relationships, marriage, spiritual, travel.
+Set \`domains\` param to the matched domain(s) from QueryPlan.domains.
+Set \`keyword\` if query mentions a specific theme within the domain.
+
+## Remedial Codex Query Guidance (remedial_codex_query tool)
+Authorize \`remedial_codex_query\` for queries about:
+- Remedial prescriptions: "What remedies for Saturn?", "Should I wear a gem?",
+  "Mantra for Mercury", "What yantra is prescribed?"
+- Practice types: gemstone, mantra, yantra, devata, dinacharya, propitiation
+- Any query containing "remedy", "remedial", "propitiate", "gem", "mantra", "yantra"
+Set \`planet\` param when a specific planet's remedy is asked.
+Set \`practice_type\` when a specific practice category is mentioned.
+
+## Timeline Query Guidance (timeline_query tool)
+Authorize \`timeline_query\` for queries about:
+- Life-arc synthesis: "What happens in my Ketu dasha?", "Ketu MD arc",
+  "What does my Mercury dasha show?", "life phase from 2027"
+- Long-horizon windows: "next 10 years", "my Saturn MD", "post-2027"
+- Any query that asks about a specific dasha period's arc or structural theme
+Set \`dasha_name\` param (e.g. 'Mercury MD', 'Ketu MD', 'Venus MD').
+IMPORTANT: The next MD after Mercury is KETU MD (2027-08-21 → 2034-08-21).
+Never suggest Saturn MD as upcoming — Saturn MD was historical (1992-2010).
 
 ${FEW_SHOT_EXAMPLES}
 

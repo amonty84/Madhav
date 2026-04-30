@@ -68,17 +68,24 @@ def _build_chunker_registry() -> dict[str, tuple[str, Any]]:
     from rag.chunkers.cdlm_cell import chunk_cdlm_cells
     from rag.chunkers.cgm_node import chunk_cgm_nodes
     from rag.chunkers.l1_fact import chunk_l1_facts
+    from rag.chunkers.lel_chunker import chunk_lel_sections
     from rag.chunkers.msr_signal import chunk_msr_signals
     from rag.chunkers.rm_element import chunk_rm_elements
     from rag.chunkers.ucn_section import chunk_ucn_sections
+    # Wave 5 M2-D234-BUNDLE
+    from rag.chunkers.timeline_chunker import chunk_timeline_sections
 
     return {
         "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md": ("l1_fact", chunk_l1_facts),
+        # lel_section is a log label only; actual doc_types (lel_period_summary,
+        # lel_chronic_pattern) come from the chunks themselves.
+        "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md": ("lel_section", chunk_lel_sections),
         "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md": ("msr_signal", chunk_msr_signals),
         "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md": ("ucn_section", chunk_ucn_sections),
         "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md": ("cdlm_cell", chunk_cdlm_cells),
         "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md": ("cgm_node", chunk_cgm_nodes),
         "025_HOLISTIC_SYNTHESIS/RM_v2_0.md": ("rm_element", chunk_rm_elements),
+        "05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md": ("l5_timeline", chunk_timeline_sections),
     }
 
 
@@ -332,6 +339,16 @@ def run_build(
         except Exception as exc:
             log.error("chunker_failed", asset="domain_report", error=str(exc))
             raise RuntimeError(f"Chunker failed for domain_report: {exc}") from exc
+
+        # remedial_codex: multi-file chunker (PART1 + PART2 — Wave 5 M2-D234-BUNDLE)
+        try:
+            from rag.chunkers.remedial_chunker import chunk_remedial_codex
+            rem_chunks = chunk_remedial_codex(workspace)
+            log.info("chunks_produced", asset="04_REMEDIAL_CODEX/*", doc_type="l4_remedial", count=len(rem_chunks))
+            all_chunks.extend(rem_chunks)
+        except Exception as exc:
+            log.error("chunker_failed", asset="remedial_codex", error=str(exc))
+            raise RuntimeError(f"Chunker failed for remedial_codex: {exc}") from exc
 
         log.info("total_chunks", count=len(all_chunks))
 

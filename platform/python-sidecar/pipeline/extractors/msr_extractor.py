@@ -92,6 +92,20 @@ def extract_msr_signals(repo_root: str) -> list[dict[str, Any]]:
             entities_raw = []
         planets, houses, signs = _extract_entities(entities_raw)
 
+        # 8 new source fields (raw, unmodified; None when absent)
+        signal_type_raw: str | None = data.get("signal_type") or None
+        temporal_activation_raw: str | None = data.get("temporal_activation") or None
+        valence_raw: str | None = data.get("valence") or None
+        entities_involved_raw = entities_raw if entities_raw else None
+        supporting_rules_raw = data.get("supporting_rules") or None
+        if supporting_rules_raw is not None and not isinstance(supporting_rules_raw, list):
+            supporting_rules_raw = None
+        rpt_deep_dive_raw: str | None = data.get("rpt_deep_dive") or None
+        v6_ids_consumed_raw = data.get("v6_ids_consumed") or None
+        if v6_ids_consumed_raw is not None and not isinstance(v6_ids_consumed_raw, list):
+            v6_ids_consumed_raw = None
+        prior_id_raw: str | None = data.get("prior_id") or None
+
         # Provenance dict
         provenance: dict[str, Any] = {
             "source_uri": SOURCE_FILE,
@@ -113,6 +127,15 @@ def extract_msr_signals(repo_root: str) -> list[dict[str, Any]]:
             "description": name,
             "source_section": f"MSR_v3_0 §{sig_id}",
             "provenance": provenance,
+            # New source fields for msr_signals (raw, not normalized)
+            "signal_type": signal_type_raw,
+            "temporal_activation": temporal_activation_raw,
+            "valence_raw": valence_raw,
+            "entities_involved_raw": entities_involved_raw,
+            "supporting_rules": supporting_rules_raw,
+            "rpt_deep_dive": rpt_deep_dive_raw,
+            "v6_ids_consumed": v6_ids_consumed_raw,
+            "prior_id": prior_id_raw,
         }
         rows.append(row)
 

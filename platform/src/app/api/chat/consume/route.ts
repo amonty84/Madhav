@@ -35,9 +35,11 @@ import { loadManifest } from '@/lib/bundle/manifest_reader'
 import { runAll, summarize } from '@/lib/validators/index'
 import { createOrchestrator } from '@/lib/synthesis/index'
 import { createAuditConsumer } from '@/lib/audit/consumer'
+import { writeAuditEvent, writeQueryPlan } from '@/lib/audit/audit_writer'
 import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
 import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
+import { planPerTool } from '@/lib/router/per_tool_planner'
 
 // ── Trace helpers ─────────────────────────────────────────────────────────────
 
@@ -183,6 +185,8 @@ export async function POST(request: Request) {
         })),
     })
     const queryId = queryPlan.query_plan_id
+    // Non-blocking — write query plan to query_plans table for observability
+    void writeQueryPlan(queryPlan)
     // Step 1 — classify (emit done immediately; query_id now known)
     traceEmitter.emitStep({
       event: 'step_done',
@@ -228,9 +232,59 @@ export async function POST(request: Request) {
       },
     })
 
+    // --- Step 3: plan_per_tool (Haiku per-tool parameter refinement) ---
+    const plannerStart = Date.now()
+    let perToolOverrides = new Map<string, Record<string, unknown>>()
+    const plannerEnabled = configService.getFlag('PER_TOOL_PLANNER_ENABLED')
+
+    if (plannerEnabled) {
+      const plannerResult = await planPerTool(queryPlan, queryPlan.tools_authorized)
+      perToolOverrides = plannerResult.overrides as Map<string, Record<string, unknown>>
+      traceEmitter.emitStep({
+        event: 'step_done',
+        query_id: queryId,
+        step: {
+          query_id: queryId,
+          conversation_id: finalConversationId,
+          step_seq: 3,
+          step_name: 'plan_per_tool',
+          step_type: 'llm',
+          status: 'done',
+          started_at: new Date(plannerStart).toISOString(),
+          completed_at: new Date().toISOString(),
+          latency_ms: plannerResult.latency_ms,
+          data_summary: {
+            planner_active: true,
+            tools_refined: perToolOverrides.size,
+            tool_count: plannerResult.tool_count,
+          },
+          payload: {},
+        },
+      })
+    } else {
+      // Always emit the step so A/B analysis can distinguish planner-off runs
+      traceEmitter.emitStep({
+        event: 'step_done',
+        query_id: queryId,
+        step: {
+          query_id: queryId,
+          conversation_id: finalConversationId,
+          step_seq: 3,
+          step_name: 'plan_per_tool',
+          step_type: 'llm',
+          status: 'done',
+          started_at: new Date(plannerStart).toISOString(),
+          completed_at: new Date().toISOString(),
+          latency_ms: 0,
+          data_summary: { planner_active: false, tools_refined: 0, tool_count: 0 },
+          payload: {},
+        },
+      })
+    }
+
     const cache = createToolCache()
     const toolFetchWallStart = Date.now()
-    // Steps 3…N — emit 'running' for all tools simultaneously (they fire in parallel)
+    // Steps 4…N — emit 'running' for all tools simultaneously (they fire in parallel)
     queryPlan.tools_authorized.forEach((toolName: string, idx: number) => {
       traceEmitter.emitStep({
         event: 'step_start',
@@ -238,7 +292,7 @@ export async function POST(request: Request) {
         step: {
           query_id: queryId,
           conversation_id: finalConversationId,
-          step_seq: 3 + idx,
+          step_seq: 4 + idx,
           step_name: toolName,
           step_type: toolStepType(toolName),
           status: 'running',
@@ -255,15 +309,20 @@ export async function POST(request: Request) {
         const t = getTool(toolName)
         if (!t) return null
         const toolStart = Date.now()
+        // Merge per-tool overrides (if planner ran) into a refined query plan for this tool
+        const toolOverride = perToolOverrides.get(toolName)
+        const effectivePlan = toolOverride
+          ? { ...queryPlan, ...toolOverride } as typeof queryPlan
+          : queryPlan
         try {
-          const result = await executeWithCache(t, queryPlan, cache)
+          const result = await executeWithCache(t, effectivePlan, cache)
           traceEmitter.emitStep({
             event: 'step_done',
             query_id: queryId,
             step: {
               query_id: queryId,
               conversation_id: finalConversationId,
-              step_seq: 3 + idx,
+              step_seq: 4 + idx,
               step_name: toolName,
               step_type: toolStepType(toolName),
               status: 'done',
@@ -283,7 +342,7 @@ export async function POST(request: Request) {
             step: {
               query_id: queryId,
               conversation_id: finalConversationId,
-              step_seq: 3 + idx,
+              step_seq: 4 + idx,
               step_name: toolName,
               step_type: toolStepType(toolName),
               status: 'error',
@@ -313,9 +372,9 @@ export async function POST(request: Request) {
     const audienceTier = isSuperAdmin ? 'super_admin' as const : 'client' as const
     const panelOptIn = body.panel_opt_in === true
 
-    // Emit synthesis start — seq = 3 + nTools + 1 (after context_assembly which is in single_model_strategy)
+    // Emit synthesis start — seq = 4 + nTools + 1 (plan_per_tool is step 3; tools are steps 4…4+N-1; context_assembly is in single_model_strategy)
     const nToolSteps = queryPlan.tools_authorized.length
-    const synthesisSeq = 3 + nToolSteps + 1
+    const synthesisSeq = 4 + nToolSteps + 1
     const synthesisStart = Date.now()
     traceEmitter.emitStep({
       event: 'step_start',
@@ -389,6 +448,23 @@ export async function POST(request: Request) {
       onFinish: async ({ messages: finalMessages }: { messages: UIMessage[] }) => {
         // Emit trace done sentinel so SSE endpoint closes the stream
         traceEmitter.emitStep({ event: 'done', query_id: queryId })
+        // Non-blocking — write audit event to audit_events table for observability
+        void writeAuditEvent({
+          queryId,
+          queryPlanId: queryPlan.query_plan_id,
+          queryText,
+          queryClass: queryPlan.query_class,
+          userId: user.uid,
+          chartId: chartId ?? undefined,
+          conversationId: finalConversationId,
+          toolBundles: validToolResults.map(r => ({
+            tool_name: r.tool_name,
+            item_count: r.results.length,
+            latency_ms: r.latency_ms,
+            cached: r.served_from_cache,
+          })),
+          latencyMs: Date.now() - classifyStart,
+        })
         try {
           if (pendingConversationInsert) await pendingConversationInsert
           await replaceConversationMessages({

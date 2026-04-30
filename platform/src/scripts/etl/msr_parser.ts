@@ -127,32 +127,74 @@ export function parseMsrSignals(content: string): MsrSignal[] {
     const confidenceRaw = extractField(block, 'confidence')
     const confidence = confidenceRaw ? parseFloat(confidenceRaw) : 0
 
-    // temporal_activation → is_forward_looking
+    // temporal_activation — stored raw + derived is_forward_looking
     const temporalRaw = extractField(block, 'temporal_activation')
     const is_forward_looking = temporalRaw
       ? temporalRaw.trim() !== 'natal-permanent'
       : false
+    const temporal_activation = temporalRaw ? temporalRaw.trim() : null
 
     // falsifier
     const falsifierRaw = extractField(block, 'falsifier')
     const falsifier = falsifierRaw ? stripQuotes(falsifierRaw) : null
 
-    // entities_involved: [...] → planet, house, nakshatra
+    // entities_involved: [...] → planet, house, nakshatra + raw array
     const entitiesRaw = extractField(block, 'entities_involved')
     let planet: string | null = null
     let house: number | null = null
     let nakshatra: string | null = null
+    let entities_involved: string[] | null = null
 
     if (entitiesRaw) {
       const entities = parseInlineArray(entitiesRaw)
       planet = extractEntityByPrefix(entities, 'PLN.')
       house = extractHouse(entities)
       nakshatra = extractEntityByPrefix(entities, 'NAK.')
+      entities_involved = entities.length > 0 ? entities : null
     }
+
+    // signal_type
+    const signal_type = extractField(block, 'signal_type')
+
+    // valence (raw, not normalized)
+    const valenceFieldRaw = extractField(block, 'valence')
+    const valence = valenceFieldRaw ? valenceFieldRaw.trim() : null
+
+    // supporting_rules — multi-line YAML list; collect lines that start with "    - "
+    const supportingRulesLines: string[] = []
+    const blockLinesForRules = block.split('\n')
+    let inRules = false
+    for (const line of blockLinesForRules) {
+      if (/^\s{2}supporting_rules:/.test(line)) {
+        inRules = true
+        continue
+      }
+      if (inRules) {
+        const ruleMatch = line.match(/^\s{4}-\s+(.+)$/)
+        if (ruleMatch) {
+          supportingRulesLines.push(ruleMatch[1].trim())
+        } else if (/^\s{2}\w/.test(line)) {
+          inRules = false
+        }
+      }
+    }
+    const supporting_rules = supportingRulesLines.length > 0 ? supportingRulesLines : null
+
+    // rpt_deep_dive
+    const rptRaw = extractField(block, 'rpt_deep_dive')
+    const rpt_deep_dive = rptRaw ? stripQuotes(rptRaw) : null
+
+    // v6_ids_consumed: [...] inline array
+    const v6Raw = extractField(block, 'v6_ids_consumed')
+    const v6_ids_consumed = v6Raw ? (parseInlineArray(v6Raw).length > 0 ? parseInlineArray(v6Raw) : null) : null
+
+    // prior_id
+    const priorRaw = extractField(block, 'prior_id')
+    const prior_id = priorRaw ? priorRaw.trim() : null
 
     signals.push({
       signal_id,
-      native_id: 'abhisek',
+      native_id: 'abhisek_mohanty',
       domain,
       planet,
       house,
@@ -167,6 +209,14 @@ export function parseMsrSignals(content: string): MsrSignal[] {
       source_file: 'MSR_v3_0.md',
       source_version: '3.0',
       ingested_at: new Date().toISOString(),
+      signal_type,
+      temporal_activation,
+      valence,
+      entities_involved,
+      supporting_rules,
+      rpt_deep_dive,
+      v6_ids_consumed,
+      prior_id,
     })
   }
 

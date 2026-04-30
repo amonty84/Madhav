@@ -95,7 +95,7 @@ export function ConsumeChat({
   const [traceDrawerOpen, setTraceDrawerOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
-  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(true)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
 
@@ -350,6 +350,7 @@ export function ConsumeChat({
       conversations={conversations}
       currentConversationId={currentConversationId}
       onClose={() => setMobileSidebarOpen(false)}
+      onNavigate={() => setDesktopSidebarCollapsed(true)}
       onRenamed={(id, title) =>
         setConversations(prev => prev.map(c => (c.id === id ? { ...c, title } : c)))
       }
@@ -374,15 +375,31 @@ export function ConsumeChat({
     )
 
   return (
-    <div className="consume-shell flex h-full flex-1 min-h-0 flex-col">
+    <div className="consume-shell dark flex h-full flex-1 min-h-0 flex-col">
       <ChatShell
         sidebar={sidebar}
-        rightPanel={rightPanel}
-        rightPanelLabel="Reports"
-        rightPanelBadge={reports.length}
         headerTitle={chartName}
         headerMeta={chartMeta}
         headerActions={<ShareButton conversationId={session.conversationId} />}
+        traceAction={
+          activeTier === 'super_admin' && pipelineEnabled ? (
+            <button
+              type="button"
+              onClick={() => setTraceDrawerOpen(o => !o)}
+              title="Query trace"
+              aria-label="Toggle query trace"
+              className={[
+                'inline-flex h-8 items-center gap-1.5 rounded-md border px-2.5 text-xs font-medium transition-colors',
+                traceDrawerOpen
+                  ? 'border-[rgba(212,175,55,0.45)] bg-[rgba(212,175,55,0.1)] text-[#d4af37]'
+                  : 'border-[rgba(212,175,55,0.18)] text-[rgba(212,175,55,0.5)] hover:border-[rgba(212,175,55,0.4)] hover:bg-[rgba(212,175,55,0.07)] hover:text-[#d4af37]',
+              ].join(' ')}
+            >
+              <Zap className="size-3.5" />
+              <span>Trace</span>
+            </button>
+          ) : null
+        }
         desktopSidebarCollapsed={desktopSidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onToggleDesktopSidebar={() => setDesktopSidebarCollapsed(c => !c)}
@@ -543,23 +560,6 @@ export function ConsumeChat({
                   </label>
                 )}
 
-                {/* Trace — opens drawer instead of inline panel */}
-                {activeTier === 'super_admin' && (
-                  <button
-                    type="button"
-                    onClick={() => setTraceDrawerOpen(o => !o)}
-                    className={[
-                      'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
-                      traceDrawerOpen
-                        ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
-                        : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
-                    ].join(' ')}
-                    title="Toggle query trace drawer"
-                  >
-                    <Zap className="h-3 w-3" />
-                    Trace
-                  </button>
-                )}
               </div>
             )}
           </div>

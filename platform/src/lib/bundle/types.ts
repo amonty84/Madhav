@@ -47,6 +47,7 @@ export interface QueryPlan {
     floor_overrides?: string[]
     conditional_overrides?: object
   }
+  time_window?: { start: string; end: string }
   adjudicator_model_id?: string
   router_confidence?: number
   router_model_id?: string
@@ -96,7 +97,15 @@ export interface ManifestData {
 
 // ── Bundle ───────────────────────────────────────────────────────────────────
 
-export type BundleEntryRole = 'floor' | 'interpretive' | 'predictive' | 'discovery' | 'holistic'
+export type BundleEntryRole =
+  | 'floor'
+  | 'interpretive'
+  | 'predictive'
+  | 'discovery'
+  | 'holistic'
+  | 'remedial'
+  | 'domain_report'
+  | 'temporal_engine'
 export type BundleEntrySource = 'rule_composer' | 'bundle_augmenter'
 
 export interface BundleEntry {

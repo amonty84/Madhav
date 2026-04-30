@@ -87,6 +87,19 @@ export interface Report {
   updated_at: string
 }
 
+export interface ChartFactsRow {
+  id?: string
+  fact_id: string
+  category: string
+  divisional_chart: string
+  value_text: string | null
+  value_number: number | null
+  value_json: Record<string, unknown> | null
+  source_section: string
+  provenance?: Record<string, unknown>
+  is_stale?: boolean
+}
+
 export interface MsrSignal {
   signal_id: string
   native_id: string
@@ -104,4 +117,13 @@ export interface MsrSignal {
   source_file: string
   source_version: string
   ingested_at: string
+  // 8 new source fields added in migration 028 (KARN-W2-R1)
+  signal_type?: string | null
+  temporal_activation?: string | null
+  valence?: string | null
+  entities_involved?: unknown | null
+  supporting_rules?: unknown | null
+  rpt_deep_dive?: string | null
+  v6_ids_consumed?: unknown | null
+  prior_id?: string | null
 }
