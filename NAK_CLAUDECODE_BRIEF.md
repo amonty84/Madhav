@@ -1,6 +1,6 @@
 ---
 artifact: NAK_CLAUDECODE_BRIEF (W0 instance)
-status: ACTIVE
+status: COMPLETE
 authored_on: 2026-04-30
 authored_by: Cowork (Opus)
 project: NAK — Nakula

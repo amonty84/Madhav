@@ -39,19 +39,19 @@ changelog:
 
 ```yaml
 nak_status: IN_FLIGHT              # PENDING | IN_FLIGHT | COMPLETE
-active_wave: W0                    # W0 | W1 | W2 | W3 | null (at project close)
-active_runs: []                    # e.g. [W1-R1, W1-R2] when parallel runs are open
-last_session_id: null              # set at first session close
-last_close_at: null                # ISO date
-next_committed_to: W0 Foundation   # what the next session will execute
+active_wave: W1                    # W0 | W1 | W2 | W3 | null (at project close)
+active_runs: []                    # populated when W1 runs open
+last_session_id: NAK-W0-2026-04-30
+last_close_at: 2026-04-30          # ISO date
+next_committed_to: W1 (R1, R2, R3 parallel-safe)
 
 # W0 gate flag — W1 cannot open until this is true
-w0_closed: false
+w0_closed: true
 
 # W1 fan-out readiness — all three flags must be true before W1 opens
-w1_r1_brief_authored: false
-w1_r2_brief_authored: false
-w1_r3_brief_authored: false
+w1_r1_brief_authored: true
+w1_r2_brief_authored: true
+w1_r3_brief_authored: true
 
 # W2 fan-out readiness — all three flags must be true before W2 opens
 w2_r1_brief_authored: false
@@ -82,14 +82,14 @@ test_baseline_preserved: false      # npm test passes at W3 close with no regres
 wave: W0
 title: Foundation Gate
 type: gate                   # single run; no parallelism
-status: authored             # pending | authored | in_flight | closed
+status: closed               # pending | authored | in_flight | closed
 exec_brief: NAK_EXEC_BRIEF_W0_FOUNDATION_v1_0.md
 claudecode_brief: NAK_CLAUDECODE_BRIEF_W0.md
 branch: nak/w0-foundation
 worktree: ~/Vibe-Coding/Apps/Madhav-nak-w0
-session_id: null
-started_at: null
-closed_at: null
+session_id: NAK-W0-2026-04-30
+started_at: 2026-04-30
+closed_at: 2026-04-30
 closure_report: 00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md
 
 # Scope isolation
