@@ -40,10 +40,10 @@ changelog:
 ```yaml
 nak_status: IN_FLIGHT              # PENDING | IN_FLIGHT | COMPLETE
 active_wave: W1                    # W0 | W1 | W2 | W3 | null (at project close)
-active_runs: []                    # populated when W1 runs open
-last_session_id: NAK-W0-2026-04-30
+active_runs: [W1-R2, W1-R3]       # W1-R1 closed 2026-04-30
+last_session_id: NAK-W1-R1-2026-04-30
 last_close_at: 2026-04-30          # ISO date
-next_committed_to: W1 (R1, R2, R3 parallel-safe)
+next_committed_to: W1 (R2, R3 still in flight); W2 gates on all three W1 closes
 
 # W0 gate flag — W1 cannot open until this is true
 w0_closed: true
@@ -134,14 +134,14 @@ status: pending              # pending | in_flight | closed
 runs:
   - run_id: W1-R1
     title: Design System Deep Audit
-    status: pending
+    status: closed
     exec_brief: NAK_EXEC_BRIEF_W1_R1_DESIGN_v1_0.md        # authored at W0 close
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W1_R1.md
     branch: nak/w1-r1-design-audit
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r1
-    session_id: null
-    started_at: null
-    closed_at: null
+    session_id: NAK-W1-R1-2026-04-30
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_DESIGN_SYSTEM_REPORT_W1_R1_v1_0.md
     may_touch:
       - platform/src/app/globals.css           # read + annotate
