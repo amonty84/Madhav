@@ -1,3 +1,4 @@
+// Surface: /audit (super_admin audit log + predictions). Catches query log fetch failures and prediction-pagination errors.
 'use client'
 
 import { useEffect } from 'react'

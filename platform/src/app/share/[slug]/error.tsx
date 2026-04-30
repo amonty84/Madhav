@@ -1,3 +1,4 @@
+// Surface: /share/[slug] (read-only Consume share page). Catches invalid/expired-slug errors, share-resolution failures, and answer-render errors.
 'use client'
 
 import { useEffect } from 'react'

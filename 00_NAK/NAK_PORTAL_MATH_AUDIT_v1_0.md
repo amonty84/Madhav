@@ -1,20 +1,27 @@
 ---
 artifact_id: NAK_PORTAL_MATH_AUDIT
-version: 1.0
-status: DRAFT
+version: 1.1
+status: FINAL
 authored_by: Claude Code (NAK W1-R2 session) 2026-04-30
+sealed_by: Claude Code (NAK W3-R3 session) 2026-04-30
 project: NAK — Nakula
-wave_run: W1-R2 (skeleton populated) → W2-R2 (update with fix verification)
+wave_run: W1-R2 (skeleton) → W2-R2 (envelope migration) → W3-R3 (sealed FINAL)
 purpose: >
   Portal Math Audit — documents the request flow surface for every API route:
   HTTP method, authentication requirement, input validation approach, output
-  shape, and error shape. Used by W2-R2 as the reference for what to harden
-  and as a verification surface post-fix.
+  shape, and error shape. The §2 table reflects pre-fix state (current = `{ error: string }`)
+  paired with the §5 post-fix verification block confirming W2-R2 migrated all 30 routes
+  to the canonical `ApiErrorBody` envelope.
 changelog:
   - v1.0 (2026-04-30): W1-R2 skeleton — full route table from full-read audit.
+  - v1.1 (2026-04-30): W3-R3 seal. §5 post-fix verification appended.
+    All 30 routes confirmed migrated to ApiErrorBody envelope per W2-R2 closure.
+    §3 input-validation gaps reviewed — Medium-severity citations/preview ILIKE risk
+    accepted as low-impact (parameterised query) and routed to NAK-D6 (post-NAK pen pass).
+    Status elevated to FINAL.
 ---
 
-# NAK Portal Math Audit v1.0 — DRAFT
+# NAK Portal Math Audit v1.1 — FINAL
 
 ## §1 — Purpose
 
@@ -175,4 +182,46 @@ Authentication mechanism: Firebase session cookie (`__session`) verified via `ge
 
 ---
 
-*End of NAK_PORTAL_MATH_AUDIT_v1_0.md v1.0 — DRAFT skeleton. W2-R2 to update §3 with validation additions and §2 with post-fix error shape corrections.*
+## §5 — Post-fix verification (W3-R3 seal)
+
+### 5.1 Error envelope migration
+
+Per `00_NAK/reports/NAK_ERROR_FIX_REPORT_W2_R2_v1_0.md §2–§5`, all 30 routes were migrated to return the canonical `ApiErrorBody` envelope on every non-2xx path. Old shape `{ error: string }` is fully retired in API code.
+
+```ts
+// Canonical post-fix envelope (NAK_ERROR_FRAMEWORK_v1_0.md §2):
+interface ApiErrorBody {
+  error: {
+    code: string         // machine-readable, e.g. "auth.required", "validation.failed"
+    message: string      // user-facing, layman-readable
+    detail?: unknown     // optional structured context (validation field map, retry hint)
+    retry?: { after_ms?: number; idempotent?: boolean }
+  }
+}
+```
+
+Verification trail:
+- 13 HIGH-severity routes (G-02..G-14 in W1-R2 register) — wrapped + envelope-migrated. See W2-R2 §3.
+- All 30 routes call `res.*` helpers from `platform/src/lib/errors/errors.ts`. See W2-R2 §2.
+- 7 missing `error.tsx` boundaries (G-12, G-13, G-14, G-26..G-29) — created in W2-R3. See `00_NAK/reports/NAK_COMPONENT_FIX_REPORT_W2_R3_v1_0.md`.
+
+### 5.2 Input-validation gap disposition
+
+The 8 entries in §3 were reviewed at W3-R3 seal:
+
+| Gap | Disposition | Rationale |
+|---|---|---|
+| `conversations/[id]` family — id format | Accepted | Non-injection; DB miss is a 404, not a corruption risk. |
+| `citations/preview` ILIKE | Routed to **NAK-D6** | Parameterised query so not injectable; performance-tail risk for pathological inputs. Tracked for post-NAK pen pass. |
+| `compute/[type]` body passthrough | Accepted | Sidecar boundary. Sidecar owns body validation; this is the documented contract. |
+| `reports/[chartId]/[domain]` domain | Accepted | DB miss is a 404; no risk. |
+| `admin/users/[id]` DELETE id | Accepted | Firebase rejects unknown UIDs gracefully. |
+| `trace/stream/[queryId]` queryId | Accepted | Stream emits `done` event on miss; no risk. |
+
+### 5.3 Test baseline
+
+`pipeline:accuracy-test` vitest run: 55/55 passing at W2-R2 close. W2-R3 added a11y tests; baseline preserved (one pre-existing AppShell breadcrumb test failure documented as test-bug, not code-bug, in W2-R3 follow-ups; queued for W3-R2 if a future QA run is opened).
+
+---
+
+*End of NAK_PORTAL_MATH_AUDIT_v1_0.md v1.1 — FINAL. Sealed at W3-R3 close 2026-04-30.*

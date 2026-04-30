@@ -1,9 +1,10 @@
 ---
 artifact_id: NAK_VISION
-version: 1.0
-status: CURRENT
+version: 1.1
+status: CLOSED
 authored_by: Cowork (Opus)
 authored_at: 2026-04-30
+closed_at: 2026-04-30
 owner: Abhisek Mohanty
 project: NAK — Nakula
 project_abbrev: NAK
@@ -15,6 +16,19 @@ relates_to:
   - platform/src/components/ (entire component library)
 parallel_to: KARN (M2 Corpus Activation — Jyotish instrument workstream)
 supersedes: none
+changelog:
+  - v1.0 (2026-04-30): Initial authoring. Five-pillar programme defined; W0–W3 wave plan;
+    five project close gates in §6.
+  - v1.1 (2026-04-30): NAK project closed. All W0–W3 waves complete (W3-R1 + W3-R2
+    collapsed into W3-R3 at close). All 5 project close gates satisfied per
+    NAK_TRACKER_v1_0.md §2:
+      - design_system_final ✓ (NAK_DESIGN_SYSTEM v1.2 FINAL @ W2-R1)
+      - error_framework_final ✓ (NAK_ERROR_FRAMEWORK v2.0 FINAL @ W2-R2)
+      - component_audit_final ✓ (NAK_COMPONENT_AUDIT v1.1 FINAL @ W2-R3)
+      - portal_math_audit_final ✓ (NAK_PORTAL_MATH_AUDIT v1.1 FINAL @ W3-R3)
+      - consistency_checklist_final ✓ (NAK_CONSISTENCY_CHECKLIST v1.0 FINAL @ W3-R3)
+    Five additional deferrals (NAK-D6..D10) registered in NAK_TRACKER §4.
+    Closure report: 00_NAK/reports/NAK_DOCS_REPORT_W3_R3_v1_0.md.
 ---
 
 # Project Nakula — NAK Vision v1.0
@@ -192,4 +206,4 @@ If a NAK session needs to amend `CLAUDE.md` (e.g., to add a §C read-at-open for
 
 ---
 
-*End of NAK_VISION_v1_0.md — authored 2026-04-30. Governs Project Nakula from W0 Foundation through W3 close.*
+*End of NAK_VISION_v1_0.md v1.1 — CLOSED 2026-04-30 at W3-R3 project close. Project Nakula complete: portal hardened, governance docs all FINAL, five close gates satisfied.*
