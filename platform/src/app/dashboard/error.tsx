@@ -1,3 +1,4 @@
+// Surface: /dashboard (Roster). Catches roster fetch failures, RLS denials, and any unhandled render error.
 'use client'
 
 import { useEffect } from 'react'

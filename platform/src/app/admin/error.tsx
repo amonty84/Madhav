@@ -1,3 +1,4 @@
+// Surface: /admin (super_admin user management). Catches admin-route failures (Firebase, DB, role-check denials).
 'use client'
 
 import { useEffect } from 'react'
