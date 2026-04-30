@@ -7,7 +7,7 @@ import { Suspense } from 'react'
 import type { Chart } from '@/lib/db/types'
 import { fetchConsumedTodayCount } from '@/lib/roster/stats'
 import type { ChartWithMeta, RosterStats } from '@/lib/roster/types'
-import { Mandala } from '@/components/brand/Mandala'
+import { Navagraha } from '@/components/brand/Navagraha'
 
 export default async function DashboardPage() {
   const user = await getServerUser()
@@ -89,9 +89,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="relative min-h-full overflow-hidden">
-      <Mandala
-        size={560}
-        opacity={0.13}
+      <Navagraha
+        size={600}
+        opacity={0.15}
         className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_25%,rgba(2,2,1,0.5)_65%,rgba(2,2,1,0.88)_100%)]" />
