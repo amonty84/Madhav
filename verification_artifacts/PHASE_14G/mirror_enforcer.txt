@@ -1,2 +1,0 @@
-mirror_enforcer: 0 findings; exit=0
-  pairs checked=8; passed=8; failed=0; claude_only=2

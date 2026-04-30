@@ -1,8 +1,0 @@
-{
-  "table": "l25_cgm_nodes",
-  "db_count": 234,
-  "expected_count": 234,
-  "key_nulls": 0,
-  "overall_status": "PASS",
-  "notes": "No canonical expected count in spec; 234 actual recorded"
-}

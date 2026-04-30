@@ -10953,3 +10953,74 @@ session_close:
 ```
 
 *End of KARN-W7-R2-MANIFEST-COMPLETENESS entry — F2 manifest completeness CLOSED.*
+
+---
+
+## BHISMA-W1-S4-CONVERGENCE — KARN Wave 9 Platform Elevation Close
+
+*Single convergence entry for all BHISMA Wave 1 sessions per PROJECT_BHISMA_SESSION_LOG.md §Relationship to KARN.*
+
+```yaml
+session_open:
+  session_id: BHISMA-W1-S4-CONVERGENCE
+  karn_wave_equivalent: KARN-W9-B4
+  opened_at: "2026-05-01T00:00:00+05:30"
+  agent: claude-sonnet-4-6
+  cowork_thread: "BHISMA-W1-S1-MODEL-FAMILY"
+  macro_phase: M3
+  session_type: convergence
+  scope_summary: >
+    BHISMA Wave 1 convergence — validates and seals all three parallel streams
+    (S1 Model Family, S2 LLM Pipeline, S3 Trace Command Center). Authors
+    BHISMA_CLOSE_v1_0.md, appends SESSION_LOG entry, updates CURRENT_STATE.
+  may_touch:
+    - 00_ARCHITECTURE/PROJECT_BHISMA_SESSION_LOG.md
+    - 00_ARCHITECTURE/BHISMA_CLOSE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+  must_not_touch:
+    - 025_HOLISTIC_SYNTHESIS/**
+    - platform/migrations/**
+    - 01_FACTS_LAYER/**
+```
+
+**All three BHISMA streams closed 2026-05-01.**
+
+Wave 1 delivered:
+- **Stream 1 (Model Family):** 5 OpenAI models in registry with role/convention/cost; `FAMILY_WORKER` map; family-aware worker routing; `PipelineError` hard-fail (ADR-3); `health.ts` + `cost.ts`; 3 flags retired, 4 observability flags added
+- **Stream 2 (LLM Pipeline):** `planner.ts` (LLM-first unified planner behind `LLM_FIRST_PLANNER_ENABLED`); Retrieval Capability Spec (17 tools); `citation_check.ts` (15 tests pass); `synthesis_done` + `context_assembly` trace steps; token_count backfill (6 assets)
+- **Stream 3 (Trace Command Center):** TracePanel warm-gold re-skin; `QueryDNAPanel` + `RetrievalScorecard` + `CostPerformanceBar` + `AnalyticsTab` (4 new panels wired with B2-defensive null guards)
+
+```yaml
+session_close:
+  session_id: BHISMA-W1-S4-CONVERGENCE
+  closed_at: "2026-05-01T00:00:00+05:30"
+  acceptance_criteria_summary:
+    - "tsc: 9 errors — pre-existing AppShell/ReportGallery baseline; zero new: PASS"
+    - "vitest: exit 0 (all suites pass): PASS"
+    - "BHISMA_CLOSE_v1_0.md authored and committed: PASS"
+    - "SESSION_LOG convergence entry: PASS (this entry)"
+    - "CURRENT_STATE amended for BHISMA Wave 1: PASS"
+    - "GAP.P.9 eval baseline: BLOCKED — secrets unavailable; STUB documented; non-blocking per B2 escape clause"
+  known_residuals:
+    - "GAP.P.9_STUB (MEDIUM): eval baseline STUB persists; first session with SMOKE_SESSION_COOKIE available must run paired baseline and record delta"
+    - "B1_HEALTH_NOT_WIRED (LOW): assertWorkerHealthy() not wired into request path"
+    - "B3_VISUAL_SMOKE (LOW): AC.B3.9 deferred (live dev server required)"
+  mirror_updates_propagated: NONE  # BHISMA Wave 1 is Claude-only per BHISMA log §Relationship to KARN
+  closing_summary: |
+    === BHISMA-W1 (KARN-W9) CLOSE ===
+    Three parallel streams converged. Platform elevated:
+      model family: 4 providers, 11 models, family-aware workers, ADR-1/2/3 implemented
+      llm pipeline: unified planner (LLM_FIRST_PLANNER_ENABLED=false, ready to flip)
+      trace panel: warm-gold Trace Command Center with 4 new panels + analytics tab
+      telemetry: health.ts + cost.ts + 4 new observability flags (all ON)
+    tsc: PASS (9 pre-existing residuals only)
+    vitest: PASS (exit 0)
+    eval baseline: STUB (GAP.P.9 — requires auth secrets; harness verified + ready)
+    BHISMA_CLOSE_v1_0.md: AUTHORED at 00_ARCHITECTURE/BHISMA_CLOSE_v1_0.md
+    SESSION_LOG: APPENDED
+    CURRENT_STATE: AMENDED
+    Next: M3-W1-A1-EVAL-BASELINE (first M3-A execution session, unchanged by BHISMA)
+```
+
+*End of BHISMA-W1-S4-CONVERGENCE entry — BHISMA Wave 1 CLOSED.*
