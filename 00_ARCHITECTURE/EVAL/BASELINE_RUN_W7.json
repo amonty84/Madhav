@@ -1,0 +1,18 @@
+{
+  "status": "STUB — server requires auth (401 without SMOKE_SESSION_COOKIE) in W7-R3 session",
+  "run_date": "2026-04-30",
+  "fixture_count": 24,
+  "planner_branch": "off",
+  "judge_enabled": false,
+  "aggregate": null,
+  "note": "Run manually after exporting SMOKE_SESSION_COOKIE (from browser DevTools __session cookie) and SMOKE_CHART_ID (SELECT id FROM charts LIMIT 1): python3 platform/scripts/eval/runner.py --planner-off --base-url http://localhost:3000 --output 00_ARCHITECTURE/EVAL/BASELINE_RUN_W7.json. The harness was probed against http://localhost:3000/api/chat/consume which returned HTTP 401, confirming the server is up but requires Firebase auth that the eval session cannot mint headlessly. Set ANTHROPIC_API_KEY to enable the Haiku synthesis judge; without it synthesis_score returns 0.5 for all fixtures with a logged warning per scorer.py.",
+  "ac_10_disposition": "STUB — manual run required",
+  "harness_self_check": {
+    "fixtures_loaded": 24,
+    "weights_sum_to_1": true,
+    "scorer_module_imports": true,
+    "runner_module_imports": true,
+    "ab_runner_module_imports": true,
+    "haiku_model_resolved_from_codebase": "claude-haiku-4-5"
+  }
+}
