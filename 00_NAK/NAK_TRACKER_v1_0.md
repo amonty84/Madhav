@@ -159,14 +159,14 @@ runs:
 
   - run_id: W1-R2
     title: Error Handling and Robustness Audit
-    status: pending
+    status: closed
     exec_brief: NAK_EXEC_BRIEF_W1_R2_ERROR_v1_0.md
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W1_R2.md
     branch: nak/w1-r2-error-audit
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r2
-    session_id: null
-    started_at: null
-    closed_at: null
+    session_id: NAK-W1-R2-2026-04-30
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_ERROR_AUDIT_REPORT_W1_R2_v1_0.md
     may_touch:
       - platform/src/app/api/**               # read all routes
