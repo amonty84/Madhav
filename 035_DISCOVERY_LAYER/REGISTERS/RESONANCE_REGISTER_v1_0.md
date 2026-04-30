@@ -1,7 +1,9 @@
 ---
 artifact: RESONANCE_REGISTER_v1_0.md
 version: "1.0"
-status: LIVE
+status: SUPERSEDED
+superseded_by: RESONANCE_REGISTER_v1_1.md
+superseded_at: "2026-04-30"
 expose_to_chat: true
 native_id: "abhisek"
 layer: "L3.5"
