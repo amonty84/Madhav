@@ -1495,7 +1495,7 @@ SESSION_LOG: appended
   - AC.6 (.gemini/project_state.md adapted parity, M2 closed): PASS.
   - AC.7 (mirror_updates_propagated recorded in close-checklist): PASS — see closing summary below.
   - AC.8 (SESSION_LOG W8-R2 entry appended): PASS — this entry.
-  - AC.9 (SESSION_LOG M2 seal block appended with git SHA): PASS — see seal block below (SHA filled in post-commit).
+  - AC.9 (SESSION_LOG M2 seal block appended with git SHA): PASS — git SHA `3152875` recorded in seal block below.
   - AC.10 (no changes to platform/src/**, migrations/**, corpus files): PASS — staged-set verified before commit.
   - AC.11 (committed + pushed to redesign/r0-foundation): PASS — see git SHA in seal block.
   - AC.12 (git SHA recorded in SESSION_LOG and seal block): PASS.
@@ -1538,8 +1538,8 @@ Handoff memo: 00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md
 Red-team: 00_ARCHITECTURE/EVAL/REDTEAM_M2_v1_0.md (verdict: PASS — 9/9 axes; 0 findings; 0 fixes)
 Quality bar: all 3 audits PASS (98.99% / 95.52% / 95.52%); eval harness scaffolded; pipeline live (NEW_QUERY_PIPELINE_ENABLED=true default since 2026-04-28); composition rules 39/39; per-tool planner 15/15; red-team PASS. 8 PASS / 1 WARN (eval baseline STUB; manual native follow-up) / 0 FAIL.
 Wave arc: W1 Foundation → W2 ETL Expansion → W3 Corpus Chunkers → W4 Facts Tools → W5 Narrative Tools → W6 Composition rules + per-tool planner → W7 Provenance audits + manifest completeness + eval harness scaffold → W8 Red-team (W8-R1) + M2 close (W8-R2). All eight waves CLOSED.
-Git commit: <SHA-PENDING — recorded after push>
-Branch: redesign/r0-foundation (pushed to GitHub)
+Git commit: 3152875a7a552f926abd9abe26e17655d18bcbf4 (short: 3152875)
+Branch: redesign/r0-foundation (pushed to GitHub — new remote branch published this commit)
 Next phase: M3 — Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)
 First M3 session name: KARN-W9-M3-OPEN
 
