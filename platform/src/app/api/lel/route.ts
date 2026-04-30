@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { appendEvent, appendPrediction, markPredictionOutcome } from '@/lib/lel/writer'
+import { res } from '@/lib/errors'
 import type { NewLELEvent, NewLELPrediction } from '@/lib/lel/writer'
 
 async function assertSuperAdmin(req: NextRequest): Promise<string | null> {
@@ -18,18 +19,18 @@ async function assertSuperAdmin(req: NextRequest): Promise<string | null> {
 export async function POST(req: NextRequest) {
   const uid = await assertSuperAdmin(req)
   if (!uid) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    return res.forbidden()
   }
 
   let body: unknown
   try {
     body = await req.json()
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+    return res.badRequest('Invalid JSON')
   }
 
   if (!body || typeof body !== 'object') {
-    return NextResponse.json({ error: 'Invalid body' }, { status: 400 })
+    return res.badRequest('Invalid body')
   }
 
   const { action, chartId, payload } = body as Record<string, unknown>
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
   try {
     if (action === 'append_event') {
       if (!chartId || typeof chartId !== 'string') {
-        return NextResponse.json({ error: 'chartId required' }, { status: 400 })
+        return res.badRequest('chartId required')
       }
       const result = await appendEvent(chartId, payload as NewLELEvent)
       return NextResponse.json(result)
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     if (action === 'append_prediction') {
       if (!chartId || typeof chartId !== 'string') {
-        return NextResponse.json({ error: 'chartId required' }, { status: 400 })
+        return res.badRequest('chartId required')
       }
       const result = await appendPrediction(chartId, payload as NewLELPrediction)
       return NextResponse.json(result)
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
     if (action === 'mark_outcome') {
       const { predId, outcome } = body as Record<string, unknown>
       if (!predId || typeof predId !== 'string') {
-        return NextResponse.json({ error: 'predId required' }, { status: 400 })
+        return res.badRequest('predId required')
       }
       await markPredictionOutcome(
         predId,
@@ -63,12 +64,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 })
+    return res.badRequest(`Unknown action: ${action}`)
   } catch (e) {
     console.error('[api/lel]', e)
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : 'Internal error' },
-      { status: 500 }
-    )
+    return res.internal(e instanceof Error ? e.message : undefined)
   }
 }

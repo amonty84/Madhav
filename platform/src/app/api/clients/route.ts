@@ -1,6 +1,7 @@
 import { getServerUser, adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { NextResponse } from 'next/server'
+import { res } from '@/lib/errors'
 
 async function requireSuperAdmin() {
   const user = await getServerUser()
@@ -12,7 +13,7 @@ async function requireSuperAdmin() {
 
 export async function GET() {
   const user = await requireSuperAdmin()
-  if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+  if (!user) return res.forbidden()
 
   try {
     const { rows } = await query(
@@ -27,13 +28,21 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const user = await requireSuperAdmin()
-  if (!user) return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+  if (!user) return res.forbidden()
 
-  const body = await request.json()
-  const { name, birth_date, birth_time, birth_place, birth_lat, birth_lng, client_email } = body
+  let body: Record<string, unknown>
+  try {
+    body = await request.json()
+  } catch {
+    return res.badRequest('invalid request body')
+  }
+  const { name, birth_date, birth_time, birth_place, birth_lat, birth_lng, client_email } = body as {
+    name?: string; birth_date?: string; birth_time?: string; birth_place?: string;
+    birth_lat?: string; birth_lng?: string; client_email?: string
+  }
 
   if (!name || !birth_date || !birth_time || !birth_place || !client_email) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    return res.badRequest('Missing required fields')
   }
 
   // Create Firebase user account for the client
@@ -42,7 +51,7 @@ export async function POST(request: Request) {
     firebaseUser = await adminAuth.createUser({ email: client_email, emailVerified: false })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Could not create client user'
-    return NextResponse.json({ error: message }, { status: 400 })
+    return res.internal(message)
   }
 
   const client_id = firebaseUser.uid
@@ -65,7 +74,7 @@ export async function POST(request: Request) {
   } catch (err) {
     await adminAuth.deleteUser(client_id).catch(() => {})
     const message = err instanceof Error ? err.message : 'Chart insert failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 
   const layers = [
@@ -88,7 +97,7 @@ export async function POST(request: Request) {
     await query('DELETE FROM charts WHERE id=$1', [chart.id]).catch(() => {})
     await adminAuth.deleteUser(client_id).catch(() => {})
     const message = err instanceof Error ? err.message : 'Layer insert failed.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 
   // Generate a password-reset link the admin can share with the client to let them set their password.

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 // Generates a Firebase password-reset link for the target user. Returns the
 // link to the admin UI for copy-paste.
@@ -17,14 +18,20 @@ export async function POST(
 
   const { id } = await ctx.params
 
-  const { rows } = await query<{ email: string | null }>(
-    'SELECT email FROM profiles WHERE id=$1',
-    [id]
-  )
+  let rows: { email: string | null }[]
+  try {
+    const result = await query<{ email: string | null }>(
+      'SELECT email FROM profiles WHERE id=$1',
+      [id]
+    )
+    rows = result.rows
+  } catch {
+    return res.dbError()
+  }
   const profile = rows[0] ?? null
 
   if (!profile?.email) {
-    return NextResponse.json({ error: 'User has no email on file.' }, { status: 404 })
+    return res.notFound('User has no email on file.')
   }
 
   try {
@@ -32,6 +39,6 @@ export async function POST(
     return NextResponse.json({ ok: true, reset_link: link })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Could not generate reset link.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 }
