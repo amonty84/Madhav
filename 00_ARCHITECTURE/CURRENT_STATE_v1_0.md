@@ -601,30 +601,34 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: M3-W1-OPEN-PHASE-PLAN
-    # M3 first session. Plan-only. Produced PHASE_M3_PLAN_v1_0.md (M3 phase plan analogue of
-    # PHASE_B_PLAN). KARN-equivalent session name: KARN-W9-M3-OPEN.
+  last_session_id: BHISMA-W1-S4-CONVERGENCE
+    # BHISMA Wave 1 convergence. Parallel infrastructure elevation sprint (KARN-W9).
+    # All three streams (S1 Model Family, S2 LLM Pipeline, S3 Trace Command Center) converged.
+    # Sealing artifact: 00_ARCHITECTURE/BHISMA_CLOSE_v1_0.md.
   last_session_closed_at: 2026-05-01T00:00:00+05:30
   last_session_attempted_close_at: 2026-05-01T00:00:00+05:30
   last_session_agent: claude-sonnet-4-6
-  last_session_cowork_thread_name: "M3-W1-OPEN-PHASE-PLAN"
+  last_session_cowork_thread_name: "BHISMA-W1-S1-MODEL-FAMILY"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
-    Plan-only session (no corpus or platform changes). Scripts run at close:
-    mirror_enforcer exit=0 (8/8 pairs clean); schema_validator exit=2 (100 violations —
-    pre-existing carry-forward from M2 close, no new violations); drift_detector exit=2
-    (259 findings — pre-existing carry-forward, no new regressions). No CRITICAL findings.
-    red_team_counter: 0 (plan-only session does not increment per ONGOING_HYGIENE_POLICIES §G
-    governance-aside equivalence; same pattern as COW brief-authoring sessions).
+    Governance-aside parallel workstream (platform code only; no corpus changes).
+    tsc: 9 pre-existing errors (AppShell/ReportGallery); zero new.
+    vitest: exit 0 (all suites pass).
+    Mirror scripts not re-run (BHISMA is Claude-only; no Gemini-side counterpart per
+    BHISMA log §Relationship to KARN). red_team_counter: 0 (unchanged — governance-aside
+    equivalence; BHISMA does not increment per ONGOING_HYGIENE_POLICIES §G).
   last_session_deliverable: >
-    PHASE_M3_PLAN_v1_0.md authored (v1.0, 2026-05-01). Sub-phases M3-A through M3-D
-    with scope, deliverables, and acceptance criteria per sub-phase. Eval-baseline gate
-    (BASELINE_RUN_W9.json) declared as hard prerequisite for M3-A retrieval-affecting
-    work. DIS.009 disposition decision point recorded at M3-A close (AC.M3A.4).
-    SESSION_LOG and PROJECT_M3_SESSION_LOG.md close blocks appended. CURRENT_STATE and
-    .gemini/project_state.md updated for active phase plan pointer.
-  previous_session_id: KARN-W8-R2-M2-CLOSE
-    # M2 macro-phase CLOSE artifact + mirror sync + M3 handoff. Sealed M2 (Corpus Activation).
+    BHISMA Wave 1 closed (2026-05-01). Three parallel streams converged:
+    S1 — multi-provider model family (4 providers / 11 models / FAMILY_WORKER / PipelineError
+         hard-fail / health.ts / cost.ts / 3 flags retired / 4 observability flags added).
+    S2 — LLM-first pipeline (planner.ts + RCS 17 tools / citation_check.ts / synthesis_done
+         + context_assembly trace steps / token_count backfill / LLM_FIRST_PLANNER_ENABLED=false).
+    S3 — Trace Command Center (warm-gold TracePanel + QueryDNAPanel + RetrievalScorecard
+         + CostPerformanceBar + AnalyticsTab).
+    Convergence: tsc PASS / vitest PASS / BHISMA_CLOSE_v1_0.md / SESSION_LOG appended /
+    CURRENT_STATE amended. GAP.P.9 eval STUB persists (secrets required; non-blocking).
+  previous_session_id: M3-W1-OPEN-PHASE-PLAN
+    # M3 first session. Plan-only. Produced PHASE_M3_PLAN_v1_0.md.
 
   # ------------------------------------------------------------------
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
@@ -647,10 +651,10 @@ current_state:
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
   file_updated_at: 2026-05-01T00:00:00+05:30
-  file_updated_by_session: M3-W1-OPEN-PHASE-PLAN
+  file_updated_by_session: BHISMA-W1-S4-CONVERGENCE
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, M3-W1-OPEN-PHASE-PLAN, null).
+    = (Step_15 completed, BHISMA-W1-S4-CONVERGENCE, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
@@ -659,6 +663,14 @@ current_state:
 ---
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
+
+At the close of BHISMA-W1-S4-CONVERGENCE (2026-05-01) — **BHISMA Wave 1 platform elevation CLOSED**:
+
+**BHISMA.** The parallel infrastructure elevation sprint (KARN-W9) converged. Three streams closed: S1 (multi-provider model family + hard-fail pipeline + health/cost telemetry), S2 (LLM-first unified planner behind `LLM_FIRST_PLANNER_ENABLED`, default off), S3 (warm-gold Trace Command Center with four new panels). Platform is now BHISMA-elevated. GAP.P.9 eval baseline STUB persists — first session with auth secrets runs the paired baseline and records the planner delta; that same session is the M3-W1-A1-EVAL-BASELINE session. `LLM_FIRST_PLANNER_ENABLED` flips to true after that run confirms acceptable delta. Sealing artifact: `00_ARCHITECTURE/BHISMA_CLOSE_v1_0.md`.
+
+**M3 phase plan.** Unchanged. `PHASE_M3_PLAN_v1_0.md` v1.0 is the active M3 phase plan. Next committed session remains `M3-W1-A1-EVAL-BASELINE`.
+
+*(Below: retained narrative from prior session close M3-W1-OPEN-PHASE-PLAN for audit trail.)*
 
 At the close of M3-W1-OPEN-PHASE-PLAN (2026-05-01) — **PHASE_M3_PLAN_v1_0.md authored**:
 

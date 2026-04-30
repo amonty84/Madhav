@@ -1,8 +1,0 @@
-{
-  "table": "l25_cdlm_links",
-  "db_count": 81,
-  "expected_count": 81,
-  "key_nulls": 0,
-  "overall_status": "PASS",
-  "notes": "distinct from_domain=9/9 expected; distinct to_domain=9/9 expected"
-}

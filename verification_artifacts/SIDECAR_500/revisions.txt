@@ -1,2 +1,0 @@
-REVISION                 ACTIVE  DEPLOYED  IMAGE
-amjis-sidecar-00001-s55  yes               asia-south1-docker.pkg.dev/madhav-astrology/amjis/amjis-sidecar@sha256:0753472cff3116acae8f4b6e6a1c90bb18e36df558f359260c34e84c3ba5ec64
