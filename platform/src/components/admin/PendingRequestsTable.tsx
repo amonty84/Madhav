@@ -53,15 +53,15 @@ export function PendingRequestsTable({
 
   return (
     <section className={adminCard + ' overflow-hidden'}>
-      <header className="flex items-center justify-between border-b border-[#211a08] px-6 py-4">
-        <h2 className="font-serif text-lg text-[#fce29a]">Pending access requests</h2>
-        <span className="text-[11px] uppercase tracking-[0.18em] text-[#7a5210]">
+      <header className="flex items-center justify-between border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)] px-6 py-4">
+        <h2 className="font-serif text-lg text-brand-gold-cream">Pending access requests</h2>
+        <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           {requests.length} pending
         </span>
       </header>
 
       {requests.length === 0 ? (
-        <p className="px-6 py-8 text-center text-sm text-[#7a5210]">
+        <p className="px-6 py-8 text-center text-sm text-muted-foreground">
           No pending requests.
         </p>
       ) : (
@@ -79,12 +79,12 @@ export function PendingRequestsTable({
             <tbody>
               {requests.map((r) => (
                 <tr key={r.id} className={adminTableRow}>
-                  <td className={adminTableTd + ' whitespace-nowrap text-[#9b834f]'}>
+                  <td className={adminTableTd + ' whitespace-nowrap text-muted-foreground'}>
                     {formatRelative(r.requested_at)}
                   </td>
                   <td className={adminTableTd}>{r.full_name}</td>
-                  <td className={adminTableTd + ' text-[#d4af37]'}>{r.email}</td>
-                  <td className={adminTableTd + ' max-w-md text-[#9b834f]'}>
+                  <td className={adminTableTd + ' text-brand-gold'}>{r.email}</td>
+                  <td className={adminTableTd + ' max-w-md text-muted-foreground'}>
                     <span title={r.reason ?? ''} className="line-clamp-1">
                       {r.reason || '—'}
                     </span>

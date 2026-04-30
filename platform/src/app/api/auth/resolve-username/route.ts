@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 export async function POST(request: Request) {
   let username: string | undefined
@@ -7,22 +7,29 @@ export async function POST(request: Request) {
     const body = await request.json()
     username = body?.username
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
 
   if (!username || typeof username !== 'string' || !username.trim()) {
-    return NextResponse.json({ error: 'username required' }, { status: 400 })
+    return res.badRequest('username required')
   }
 
-  const { rows } = await query<{ email: string | null; status: string }>(
-    "SELECT email, status FROM profiles WHERE lower(username)=lower($1) AND status='active' LIMIT 1",
-    [username.trim()]
-  )
+  let rows: { email: string | null; status: string }[]
+  try {
+    const result = await query<{ email: string | null; status: string }>(
+      "SELECT email, status FROM profiles WHERE lower(username)=lower($1) AND status='active' LIMIT 1",
+      [username.trim()]
+    )
+    rows = result.rows
+  } catch {
+    return res.dbError()
+  }
+
   const data = rows[0] ?? null
 
   if (!data || !data.email) {
-    return NextResponse.json({ error: 'not_found' }, { status: 404 })
+    return res.notFound()
   }
 
-  return NextResponse.json({ email: data.email })
+  return Response.json({ email: data.email })
 }

@@ -18,6 +18,7 @@ interface Props {
   height?: number
 }
 
+// CHART_PALETTE — recharts stroke/fill props below use hex literals; CSS variables are not valid recharts color props.
 export function TrendLine({ data, label, height = 180 }: Props) {
   if (!data.length) {
     return (

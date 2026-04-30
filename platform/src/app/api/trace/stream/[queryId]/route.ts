@@ -39,7 +39,14 @@ export async function GET(
 
   if (isHistorical) {
     // Replay stored steps synchronously as a one-shot stream
-    const steps = await fetchTraceSteps(queryId)
+    let steps: Awaited<ReturnType<typeof fetchTraceSteps>>
+    try {
+      steps = await fetchTraceSteps(queryId)
+    } catch (err) {
+      console.error('[api/trace/stream] fetchTraceSteps (historical) failed', err)
+      return new Response('Internal Server Error', { status: 500 })
+    }
+
     const stream = new ReadableStream({
       start(controller) {
         for (const step of steps) {
@@ -68,7 +75,15 @@ export async function GET(
     async start(controller) {
       // --- Phase 1: flush existing DB steps ---
       // Covers: (a) late-connecting client, (b) panel opened mid-pipeline.
-      const existingSteps = await fetchTraceSteps(queryId)
+      let existingSteps: Awaited<ReturnType<typeof fetchTraceSteps>>
+      try {
+        existingSteps = await fetchTraceSteps(queryId)
+      } catch (err) {
+        console.error('[api/trace/stream] fetchTraceSteps (live) failed', err)
+        controller.close()
+        return
+      }
+
       if (cancelled) return
 
       for (const step of existingSteps) {

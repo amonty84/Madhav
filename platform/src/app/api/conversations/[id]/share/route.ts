@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { getConversation } from '@/lib/conversations'
+import { res } from '@/lib/errors'
 
 async function resolveAccess(userId: string) {
   const result = await query<{ role: string }>(
@@ -23,68 +23,75 @@ function generateSlug(): string {
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
 
-  const { rows } = await query<{
-    slug: string
-    created_at: string
-    expires_at: string | null
-    revoked_at: string | null
-  }>(
-    'SELECT slug, created_at, expires_at, revoked_at FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL ORDER BY created_at DESC LIMIT 1',
-    [id]
-  )
+    const { rows } = await query<{
+      slug: string
+      created_at: string
+      expires_at: string | null
+      revoked_at: string | null
+    }>(
+      'SELECT slug, created_at, expires_at, revoked_at FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL ORDER BY created_at DESC LIMIT 1',
+      [id]
+    )
 
-  return NextResponse.json({ share: rows[0] ?? null })
+    return Response.json({ share: rows[0] ?? null })
+  } catch {
+    return res.dbError()
+  }
 }
 
 export async function POST(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
-
-  // Reuse the active share if one exists — idempotent from the user's POV.
-  const existing = await query<{ slug: string }>(
-    'SELECT slug FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL LIMIT 1',
-    [id]
-  )
-  if (existing.rows[0]) return NextResponse.json({ slug: existing.rows[0].slug })
-
-  const slug = generateSlug()
   try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
+
+    // Reuse the active share if one exists — idempotent from the user's POV.
+    const existing = await query<{ slug: string }>(
+      'SELECT slug FROM conversation_shares WHERE conversation_id=$1 AND revoked_at IS NULL LIMIT 1',
+      [id]
+    )
+    if (existing.rows[0]) return Response.json({ slug: existing.rows[0].slug })
+
+    const slug = generateSlug()
     await query(
       'INSERT INTO conversation_shares (conversation_id, slug, created_by) VALUES ($1,$2,$3) RETURNING *',
       [id, slug, user.uid]
     )
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : 'database error'
-    return NextResponse.json({ error: msg }, { status: 500 })
-  }
 
-  return NextResponse.json({ slug })
+    return Response.json({ slug })
+  } catch {
+    return res.dbError()
+  }
 }
 
 export async function DELETE(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
-  const isSuperAdmin = await resolveAccess(user.uid)
-  const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
-  if (!conv) return NextResponse.json({ error: 'not found' }, { status: 404 })
+  try {
+    const isSuperAdmin = await resolveAccess(user.uid)
+    const conv = await getConversation({ id, userId: user.uid, isSuperAdmin })
+    if (!conv) return res.notFound('conversation')
 
-  await query(
-    'UPDATE conversation_shares SET revoked_at=now() WHERE conversation_id=$1 AND revoked_at IS NULL',
-    [id]
-  )
+    await query(
+      'UPDATE conversation_shares SET revoked_at=now() WHERE conversation_id=$1 AND revoked_at IS NULL',
+      [id]
+    )
 
-  return NextResponse.json({ ok: true })
+    return Response.json({ ok: true })
+  } catch {
+    return res.dbError()
+  }
 }

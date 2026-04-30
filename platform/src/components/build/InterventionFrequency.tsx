@@ -48,6 +48,7 @@ function binByWeek(sessions: SessionIndex[], weeks = 12) {
   return weekKeys.map((k) => ({ week: k.slice(5), count: bins[k] }))
 }
 
+// CHART_PALETTE — recharts stroke/fill props below use hex literals; CSS variables are not valid recharts color props.
 export function InterventionFrequency({ sessions, height = 200 }: Props) {
   const data = binByWeek(sessions)
   const avg = data.length ? data.reduce((s, d) => s + d.count, 0) / data.length : 0

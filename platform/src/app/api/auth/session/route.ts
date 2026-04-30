@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createSessionCookie, adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 const SESSION_DURATION_MS = 60 * 60 * 24 * 14 * 1000 // 14 days
 
@@ -10,26 +11,31 @@ export async function POST(request: Request) {
     const body = await request.json()
     idToken = body?.idToken
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
-  if (!idToken) return NextResponse.json({ error: 'idToken required' }, { status: 400 })
+  if (!idToken) return res.badRequest('idToken required')
 
   let decoded
   try {
     decoded = await adminAuth.verifyIdToken(idToken)
   } catch {
-    return NextResponse.json({ error: 'invalid token' }, { status: 401 })
+    return res.unauthenticated()
   }
 
-  const { rows: existing } = await query<{ id: string; role: 'super_admin' | 'client'; status: 'pending' | 'active' | 'disabled' }>(
-    'SELECT id, role, status FROM profiles WHERE id=$1',
-    [decoded.uid]
-  )
-  const profile = existing[0] ?? null
+  let profile: { id: string; role: 'super_admin' | 'client'; status: 'pending' | 'active' | 'disabled' } | null
+  try {
+    const { rows: existing } = await query<{ id: string; role: 'super_admin' | 'client'; status: 'pending' | 'active' | 'disabled' }>(
+      'SELECT id, role, status FROM profiles WHERE id=$1',
+      [decoded.uid]
+    )
+    profile = existing[0] ?? null
+  } catch {
+    return res.dbError()
+  }
 
   if (profile) {
     if (profile.status !== 'active') {
-      return NextResponse.json({ error: 'account_inactive' }, { status: 403 })
+      return res.forbidden()
     }
   } else {
     const role =
@@ -43,11 +49,17 @@ export async function POST(request: Request) {
       )
     } catch (insertErr) {
       console.error('[session] profile insert failed', insertErr)
-      return NextResponse.json({ error: 'profile sync failed' }, { status: 500 })
+      return res.internal('profile sync failed')
     }
   }
 
-  const sessionCookie = await createSessionCookie(idToken, SESSION_DURATION_MS)
+  let sessionCookie: string
+  try {
+    sessionCookie = await createSessionCookie(idToken, SESSION_DURATION_MS)
+  } catch {
+    return res.internal('session cookie creation failed')
+  }
+
   const response = NextResponse.json({ ok: true })
   response.cookies.set('__session', sessionCookie, {
     httpOnly: true,

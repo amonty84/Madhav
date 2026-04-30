@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { getAuditRow } from '@/lib/audit/queries'
+import { res } from '@/lib/errors'
 
 export async function GET(
   _request: Request,
@@ -13,10 +14,10 @@ export async function GET(
 
   try {
     const row = await getAuditRow(query_id)
-    if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 })
+    if (!row) return res.notFound()
     return NextResponse.json({ row })
   } catch (err) {
     console.error('[api/audit/[query_id]] GET failed', err)
-    return NextResponse.json({ error: 'Failed to load audit row.' }, { status: 500 })
+    return res.internal('Failed to load audit row.')
   }
 }
