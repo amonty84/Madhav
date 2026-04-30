@@ -1,8 +1,9 @@
 ---
 artifact_id: NAK_DESIGN_SYSTEM
-version: 1.0
+version: 1.1
 status: DRAFT
 authored_by: Claude Code (NAK W0 session) 2026-04-30
+updated_by: Claude Code (NAK W1-R1 session) 2026-04-30
 project: NAK — Nakula
 wave_run: W0 (draft) → W1-R1 (populate findings) → W2-R1 (implement fixes) → final
 purpose: >
@@ -11,6 +12,10 @@ purpose: >
   W1-R1 adds deep findings. W2-R1 implements fixes and elevates to FINAL.
 changelog:
   - v1.0 (2026-04-30): W0 authoring — token inventory, typography, theme zones, shadcn set, W0 findings.
+  - v1.1 (2026-04-30): W1-R1 deep audit — §6 findings fleshed out with exact file+line counts,
+    concrete fix actions, and new findings F-DS-6 through F-DS-10. Part B confirms Tailwind v4
+    CSS-based config (no tailwind.config.ts). Brand/status tokens not mapped to Tailwind utilities.
+    Full violation register in NAK_DESIGN_SYSTEM_REPORT_W1_R1_v1_0.md.
 ---
 
 # NAK Design System v1.0 — DRAFT
@@ -243,29 +248,47 @@ The following shadcn/ui components are **not imported** anywhere in `platform/sr
 
 ---
 
-## §6 — Findings from W0 Part A (ranked by severity)
+## §6 — Findings from W1-R1 Deep Audit (ranked by severity)
 
-### F-DS-1 (HIGH) — Admin module: hardcoded hex values, zero CSS variable usage
-
-**Affected files:** All components under `platform/src/components/admin/`, plus `styles.ts` helper.
-
-**Issue:** The admin module uses hardcoded hex colour literals (#d4af37, #fce29a, #0e0b06, #9b834f, #211a08, #7a5210) throughout — including in a `styles.ts` helper that pre-composes class strings. None of the brand CSS variables (`--brand-gold`, `--brand-charcoal`, etc.) are referenced. The module does not respect the dark mode palette.
-
-**Impact:** Admin surfaces will not respond to dark mode toggles. Future palette updates require manual find/replace across multiple files. Visual inconsistency between admin and the rest of the portal.
-
-**Target fix (W2-R1):** Replace all hex literals with `var(--brand-gold)`, `var(--brand-charcoal)`, `var(--brand-ink)`, `var(--status-*)` equivalents. Remove `styles.ts` or migrate it to use Tailwind class names only.
+> **Status:** Populated by W1-R1 (2026-04-30). Full violation register: `00_NAK/reports/NAK_DESIGN_SYSTEM_REPORT_W1_R1_v1_0.md`.
 
 ---
 
-### F-DS-2 (MEDIUM) — Build, dashboard, and consume: mixed compliance
+### F-DS-1 (HIGH) — Admin module: 64 hardcoded hex violations, zero CSS variable usage
 
-**Affected dirs:** `components/build/`, `components/dashboard/`, `components/consume/`
+**Affected files:** `admin/styles.ts` (24), `admin/UsersTable.tsx` (20), `admin/PendingRequestsTable.tsx` (7), `admin/ApproveDialog.tsx` (3), `admin/ConfirmDialog.tsx` (2), `admin/EditUsernameDialog.tsx` (2), `admin/NewUserDialog.tsx` (2), `admin/AdminClient.tsx` (2), `admin/AdminSignOut.tsx` (2).
 
-**Issue:** Newer sub-components in these dirs use CSS vars correctly; older sub-components use arbitrary Tailwind color classes (`text-[#d4af37]`, `bg-[oklch(...)]`). No consistent enforcement.
+**Issue:** 64 hardcoded hex literals across 9 files. `styles.ts` is the master palette file — it pre-composes Tailwind class strings with `[#d4af37]`, `[#fce29a]`, `[#0e0b06]` etc. All downstream components import from `styles.ts`, so fixing `styles.ts` first propagates the correction automatically. The module hardcodes the dark ink-gold palette unconditionally — does not respond to the user's light/dark toggle (MISSING_DARK_MODE for entire module).
 
-**Impact:** Inconsistent visual output; arbitrary classes bypass dark mode handling.
+**Recurring hex → correct token mappings (see full report for all):**
+- `#d4af37`, `#f4d160` → `var(--brand-gold)`, `var(--brand-gold-light)`
+- `#fce29a` → `var(--brand-gold-cream)`
+- `#0e0b06`, `#0a0805` → `var(--brand-ink)`
+- `#9b834f`, `#7a5210` → `var(--muted-foreground)` (dark)
+- `rgba(212,175,55,0.35)` → `var(--brand-gold-hairline)`
 
-**Target fix (W2-R1):** Sweep each dir; replace arbitrary color classes with Tailwind token classes (`text-brand-gold`) after confirming `tailwind.config.ts` extends `brand-gold` correctly.
+**Fix action (W2-R1):**
+1. Migrate `admin/styles.ts` — replace all 24 hex literals; all downstream components inherit the fix.
+2. Sweep remaining 8 components for inline violations not coming from `styles.ts`.
+3. Ensure admin module renders correctly in both light and dark mode.
+
+---
+
+### F-DS-2 (MEDIUM) — Build module: 52 violations (chart colours + component oklch)
+
+**Affected files:** `build/colors.ts` (24), `build/InsightCards.tsx` (4), `build/CorpusDensityHero.tsx` (10), `build/HealthSparkline.tsx` (6), `build/InterventionFrequency.tsx` (3), `build/charts/TrendLine.tsx` (4), `build/charts/OnOffPlanDonut.tsx` (2), `build/charts/CadenceArea.tsx` (2).
+
+**Issue:** Two categories:
+1. **Status-palette violations (28 violations):** `colors.ts` and component-level `[oklch(...)]` classes use hardcoded colour literals that should reference `var(--status-*)` tokens. Specifically: phase status colours (completed/active/blocked), exit code colours (0=green, 2=amber, 4=red), health sparkline colours.
+2. **CHART_PALETTE exceptions (24 violations):** Session type colours (`#3b82f6` blue, `#a855f7` purple, etc.), plan-type colours (`#6366f1` indigo). These serve as categorical/data-visualization colours with no equivalent in the brand token system. Document as `CHART_PALETTE` constants — keep hardcoded but isolate in `colors.ts`.
+
+**Special consideration — recharts SVG props:** `stroke="#f59e0b"`, `fill="#ef4444"` etc. in recharts props cannot accept CSS `var()` syntax. Fix requires a `useBrandColors()` hook that resolves CSS variables at runtime.
+
+**Fix action (W2-R1):**
+1. Add `--color-status-*` mappings to `@theme inline` (see F-DS-8 prerequisite).
+2. In `build/colors.ts`: replace phase/exit-code oklch strings with `var(--status-*)` references; add JSDoc declaring session-type hex values as CHART_PALETTE exceptions.
+3. In `InsightCards.tsx`, `CorpusDensityHero.tsx`: replace `[oklch(...)]` classes with `bt-status-*` utility classes.
+4. Create `useBrandColors()` hook for recharts colour resolution.
 
 ---
 
@@ -275,28 +298,114 @@ The following shadcn/ui components are **not imported** anywhere in `platform/sr
 
 **Issue:** The cockpit error boundary uses raw Tailwind + inline style props with no design token classes. Inconsistent with `src/app/error.tsx` which properly uses the `Button` component.
 
-**Target fix (W2-R2):** Refactor to use `Button` component and standard Tailwind token classes.
+**Fix action (W2-R2):** Refactor to use `Button` component and standard Tailwind token classes.
 
 ---
 
-### F-DS-4 (LOW) — audit/ and profile/: minor inline oklch literals
+### F-DS-4 (LOW) — profile/: inline style hex fallbacks
 
-**Affected dirs:** `components/audit/`, `components/profile/`
+**Affected files:** `profile/RoomCard.tsx` (line 25, 32), `profile/ProfileSideRail.tsx` (lines 28, 79), `profile/DashaCountdown.tsx` (line 39).
 
-**Issue:** Status colours occasionally set via `style={{ color: "oklch(...)" }}` inline rather than `className="text-status-warn"` or `var(--status-warn)`.
+**Issue (updated from W0):** 5 inline `style={{ color: 'var(--token, #hex)' }}` props carry hex fallbacks that duplicate the token value. The tokens are defined and will always resolve — the fallbacks are maintenance dead-weight. The violations are NOT oklch literals but hex fallbacks in CSS variable calls.
 
-**Target fix (W2-R1):** Replace inline style props with Tailwind utility classes using the status token scale.
-
----
-
-### F-DS-5 (LOW) — Card primitive underused; .brand-card used directly
-
-**Issue:** The shadcn `Card` component is imported only twice. Most "card-like" surfaces use the `.brand-card` CSS utility class directly on `<div>` elements, bypassing the Card primitive's semantic structure.
-
-**Impact:** Inconsistent card structure; `.brand-card` cannot be themed from the token layer alone.
-
-**Target fix (W1-R1 investigate, W2-R1 decide):** Evaluate whether to deprecate `.brand-card` in favour of a `Card` variant with `data-variant="brand"`, or retain `.brand-card` as a standalone utility.
+**Fix action (W2-R1):** Remove hex fallbacks — `style={{ color: 'var(--brand-gold-cream)' }}` needs no fallback since the token is guaranteed present.
 
 ---
 
-*End of NAK_DESIGN_SYSTEM_v1_0.md v1.0 — DRAFT. W1-R1 to populate §6 with deep findings; W2-R1 to implement and flip status to FINAL.*
+### F-DS-5 (LOW) — .brand-card: defined but never used
+
+**Issue (W1-R1 finding):** `.brand-card` utility class is defined in `globals.css` (lines 182–186) but has zero usages across `platform/src/`. It is dead CSS. `.brand-cta` is actively used (3 usages) and should be retained.
+
+**Fix action (W2-R1):** Remove `.brand-card` from `globals.css`. If the ink-card aesthetic is needed in future, implement as a shadcn `Card` with `data-variant="brand"`.
+
+---
+
+### F-DS-6 (HIGH — NEW) — trace/TracePanel.tsx: 50+ slate-* violations
+
+**Affected file:** `trace/TracePanel.tsx` (~800 lines)
+
+**Issue:** Not caught in W0 (directory `trace/` was out of W0 audit scope). The entire component uses GitHub's `slate-*` dark palette (`slate-500` through `slate-900`) for all surface, text, and border colours — zero brand token usage. Also includes two hardcoded hex values: `bg-[#0d1117]` and `bg-[#161b27]`. This creates a visual inconsistency when the trace panel renders inside the consume surface (which correctly uses the brand-ink palette).
+
+**Fix action (W2-R1):** Full sweep of `TracePanel.tsx`. Replace:
+- `slate-900`, `bg-[#0d1117]` → `var(--brand-ink)` surface
+- `slate-800`, `bg-[#161b27]` → `color-mix(in oklch, var(--brand-ink) 90%, var(--brand-gold) 10%)`
+- `slate-700` borders → `color-mix(in oklch, var(--brand-gold) 15%, transparent)`
+- `slate-500` text → `var(--muted-foreground)`
+- `slate-300`, `slate-100` text → `var(--brand-gold-cream)` or `var(--foreground)`
+- `border-l-blue-500` selected state → `border-l-[var(--brand-gold)]`
+
+---
+
+### F-DS-7 (MEDIUM — NEW) — build/colors.ts: central chart palette needs documentation boundary
+
+**Affected file:** `build/colors.ts`
+
+**Issue:** The file mixes two categories: (a) phase-status colours that should reference `var(--status-*)` tokens, and (b) categorical session-type colours that have no brand-token equivalent. Currently both categories are hardcoded without distinction. This creates ambiguity for future maintainers about which values are token-fixable and which are intentional CHART_PALETTE constants.
+
+**Fix action (W2-R1):** Split the file into two named sections with JSDoc. Status-palette entries (`completed`, `active`, `blocked`, exit codes 0/2/4) → CSS variable references. Session-type entries (blue, purple, cyan, orange, etc.) → keep as hex constants with `/* CHART_PALETTE — intentional, not brand tokens */` annotation.
+
+---
+
+### F-DS-8 (MEDIUM — NEW) — Brand and status tokens not mapped as Tailwind utilities
+
+**Issue:** Tailwind v4 CSS-based config. There is no `tailwind.config.ts`. Brand tokens (`--brand-gold` etc.) are defined in `@theme inline` but without the `--color-` prefix, so `text-brand-gold` etc. do NOT exist as Tailwind utilities. Same for status tokens (`--status-warn` etc. defined in `:root`).
+
+**This is the unblocking prerequisite for all other fixes.** Until `--color-brand-*` and `--color-status-*` are added to `@theme inline`, components cannot replace `text-[var(--brand-gold)]` arbitrary classes with `text-brand-gold` clean Tailwind utilities.
+
+**Fix action (W2-R1, must be first):** Add to `@theme inline` block in `globals.css`:
+```css
+--color-brand-gold: var(--brand-gold);
+--color-brand-gold-light: var(--brand-gold-light);
+--color-brand-gold-deep: var(--brand-gold-deep);
+--color-brand-gold-cream: var(--brand-gold-cream);
+--color-brand-charcoal: var(--brand-charcoal);
+--color-brand-ink: var(--brand-ink);
+--color-brand-vellum: var(--brand-vellum);
+--color-brand-cream: var(--brand-cream);
+--color-status-warn: var(--status-warn);
+--color-status-halt: var(--status-halt);
+--color-status-info: var(--status-info);
+--color-status-success: var(--status-success);
+--color-status-warn-bg: var(--status-warn-bg);
+--color-status-halt-bg: var(--status-halt-bg);
+--color-status-info-bg: var(--status-info-bg);
+--color-status-success-bg: var(--status-success-bg);
+```
+
+---
+
+### F-DS-9 (LOW — NEW) — globals.css bt-status-* use hardcoded oklch instead of tokens
+
+**Affected file:** `platform/src/app/globals.css`, lines 355–362.
+
+**Issue:**
+```css
+.bt-status-complete { color: oklch(0.40 0.12 145); }   /* should be var(--status-success) */
+.bt-status-active   { color: oklch(0.45 0.12 75);  }   /* no --status-active token; use brand-gold or muted */
+.bt-status-blocked  { color: oklch(0.40 0.18 27);  }   /* should be var(--status-halt) */
+```
+The status utility classes in globals.css itself do not reference the `--status-*` tokens they were authored to represent.
+
+**Fix action (W2-R1):** Replace the hardcoded `oklch()` values with `var(--status-*)` references:
+```css
+.bt-status-complete { color: var(--status-success); }
+.bt-status-active   { color: var(--brand-gold); }   /* --status-warn = brand-gold; intentional */
+.bt-status-blocked  { color: var(--status-halt); }
+```
+
+---
+
+### F-DS-10 (LOW — NEW) — shadcn variant dead code
+
+**Affected files:** `ui/button.tsx`, `ui/badge.tsx`, `ui/tabs.tsx`
+
+**Issue (W1-R1 finding):** Zero-usage CVA variants identified:
+- `Button` `link` variant — 0 explicit usages
+- `Badge` `ghost` + `link` variants — 0 explicit usages
+- `TabsList` `line` variant — 0 explicit usages
+
+**Fix action (W2-R3 scope):** Remove zero-usage variants. Defer to W2-R3 (component fix wave).
+
+---
+
+*End of NAK_DESIGN_SYSTEM_v1_0.md v1.1 — DRAFT. W1-R1 deep findings populated. W2-R1 to implement fixes and flip status to FINAL.*
