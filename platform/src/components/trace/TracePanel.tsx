@@ -28,7 +28,7 @@ interface Props {
 // ── Step type display config ───────────────────────────────────────────────────
 
 const STEP_TYPE_CONFIG = {
-  deterministic: { label: 'DET', color: 'bg-slate-700 text-slate-300 border-slate-600' },
+  deterministic: { label: 'DET', color: 'bg-[color-mix(in_oklch,var(--brand-ink)_88%,var(--brand-gold)_12%)] text-brand-gold-cream border-[color-mix(in_oklch,var(--brand-gold)_18%,transparent)]' },
   llm:           { label: 'LLM', color: 'bg-violet-950 text-violet-300 border-violet-700' },
   sql:           { label: 'SQL', color: 'bg-sky-950 text-sky-300 border-sky-700' },
   vector:        { label: 'VEC', color: 'bg-emerald-950 text-emerald-300 border-emerald-700' },
@@ -36,7 +36,7 @@ const STEP_TYPE_CONFIG = {
 } as const
 
 const TIMELINE_BAR_COLOR = {
-  deterministic: 'bg-slate-500',
+  deterministic: 'bg-[color-mix(in_oklch,var(--brand-ink)_60%,var(--brand-gold)_40%)]',
   llm:           'bg-violet-600',
   sql:           'bg-sky-600',
   vector:        'bg-emerald-600',
@@ -46,7 +46,7 @@ const TIMELINE_BAR_COLOR = {
 const LAYER_COLOR = {
   L1:      { dot: 'bg-red-500', bar: 'bg-red-500', text: 'text-red-400' },
   'L2.5':  { dot: 'bg-violet-500', bar: 'bg-violet-500', text: 'text-violet-400' },
-  system:  { dot: 'bg-slate-500', bar: 'bg-slate-500', text: 'text-slate-400' },
+  system:  { dot: 'bg-muted-foreground', bar: 'bg-muted-foreground', text: 'text-muted-foreground' },
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -98,7 +98,7 @@ function StepRow({
     ? 'bg-blue-950 border-blue-600 text-blue-300 animate-pulse'
     : isError
     ? 'bg-red-950 border-red-700 text-red-400'
-    : 'bg-slate-900 border-slate-700 text-slate-500'
+    : 'bg-brand-ink border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)] text-muted-foreground'
 
   const summaryLine = stepSummaryLine(step)
   const latencyPct = step.latency_ms ? Math.min(100, (step.latency_ms / 2000) * 100) : 0
@@ -108,8 +108,8 @@ function StepRow({
       type="button"
       onClick={onClick}
       aria-label={step.step_name.replace(/_/g, ' ')}
-      className={`w-full text-left flex items-start gap-2.5 px-3 py-2 transition-colors border-l-2 hover:bg-slate-800/60 ${
-        isSelected ? 'bg-slate-800 border-l-blue-500' : 'border-l-transparent'
+      className={`w-full text-left flex items-start gap-2.5 px-3 py-2 transition-colors border-l-2 hover:bg-brand-ink/60 ${
+        isSelected ? 'bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] border-l-brand-gold' : 'border-l-transparent'
       }`}
     >
       {/* Sequence number */}
@@ -121,27 +121,27 @@ function StepRow({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 mb-0.5">
-          <span className="text-[11px] font-semibold text-slate-200 truncate">
+          <span className="text-[11px] font-semibold text-brand-gold-cream truncate">
             {step.step_name.replace(/_/g, ' ')}
           </span>
           <span className={`text-[9px] font-bold px-1 py-px rounded border ${cfg.color}`}>
             {cfg.label}
           </span>
           {step.latency_ms != null && (
-            <span className="text-[10px] text-slate-500 ml-auto">{fmtMs(step.latency_ms)}</span>
+            <span className="text-[10px] text-muted-foreground ml-auto">{fmtMs(step.latency_ms)}</span>
           )}
           {step.parallel_group && (
-            <span className="text-[9px] text-slate-600">⇉</span>
+            <span className="text-[9px] text-muted-foreground/60">⇉</span>
           )}
         </div>
 
         {summaryLine && (
-          <div className="text-[10px] text-slate-400 truncate">{summaryLine}</div>
+          <div className="text-[10px] text-muted-foreground truncate">{summaryLine}</div>
         )}
 
         {/* Latency bar */}
         {isDone && step.latency_ms != null && (
-          <div className="mt-1 h-[2px] bg-slate-800 rounded-full overflow-hidden">
+          <div className="mt-1 h-[2px] bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-500 ${TIMELINE_BAR_COLOR[step.step_type]}`}
               style={{ width: `${latencyPct}%` }}
@@ -149,7 +149,7 @@ function StepRow({
           </div>
         )}
         {isRunning && (
-          <div className="mt-1 h-[2px] bg-slate-800 rounded-full overflow-hidden">
+          <div className="mt-1 h-[2px] bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] rounded-full overflow-hidden">
             <div className="h-full w-1/3 rounded-full bg-blue-500 animate-[slide_1.2s_ease-in-out_infinite]" />
           </div>
         )}
@@ -170,10 +170,10 @@ function ParallelGroup({
   onSelect: (s: TraceStep) => void
 }) {
   return (
-    <div className="border border-slate-700/60 rounded mx-2 my-1 overflow-hidden">
-      <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-800/40 border-b border-slate-700/60">
-        <span className="text-[9px] font-bold text-slate-500 tracking-wider">⇉ PARALLEL</span>
-        <span className="text-[9px] text-slate-600">{groupSteps.length} concurrent</span>
+    <div className="border border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60 rounded mx-2 my-1 overflow-hidden">
+      <div className="flex items-center gap-1.5 px-2 py-1 bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)]/40 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60">
+        <span className="text-[9px] font-bold text-muted-foreground tracking-wider">⇉ PARALLEL</span>
+        <span className="text-[9px] text-muted-foreground/60">{groupSteps.length} concurrent</span>
       </div>
       {groupSteps.map(step => (
         <StepRow
@@ -215,7 +215,7 @@ function ContextInspector({
     return (
       <div className="flex flex-col h-full">
         {/* Drilldown header */}
-        <div className="flex items-center gap-2 px-3 py-2 border-b border-slate-700/60 flex-shrink-0">
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60 flex-shrink-0">
           <button
             type="button"
             onClick={() => setDrilldownItem(null)}
@@ -224,19 +224,19 @@ function ContextInspector({
           >
             ← Back to overview
           </button>
-          <span className="text-[10px] text-slate-500 font-mono truncate">{drilldownItem.id}</span>
+          <span className="text-[10px] text-muted-foreground font-mono truncate">{drilldownItem.id}</span>
           <span className={`text-[9px] font-bold ml-auto ${LAYER_COLOR[drilldownItem.layer]?.text ?? ''}`}>
             {drilldownItem.layer}
           </span>
         </div>
         {/* Chunk meta */}
-        <div className="flex items-center gap-3 px-3 py-1.5 border-b border-slate-700/40 flex-shrink-0">
-          <span className="text-[10px] text-slate-500">source: <span className="text-slate-300">{drilldownItem.source}</span></span>
-          <span className="text-[10px] text-slate-500">~{drilldownItem.token_estimate} tok</span>
+        <div className="flex items-center gap-3 px-3 py-1.5 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/40 flex-shrink-0">
+          <span className="text-[10px] text-muted-foreground">source: <span className="text-brand-gold-cream">{drilldownItem.source}</span></span>
+          <span className="text-[10px] text-muted-foreground">~{drilldownItem.token_estimate} tok</span>
         </div>
         {/* Chunk text */}
         <div className="flex-1 overflow-y-auto px-3 py-2">
-          <pre className="text-[11px] text-slate-300 whitespace-pre-wrap leading-relaxed font-mono">
+          <pre className="text-[11px] text-brand-gold-cream whitespace-pre-wrap leading-relaxed font-mono">
             {drilldownItem.text}
           </pre>
         </div>
@@ -251,14 +251,14 @@ function ContextInspector({
     <div className="flex flex-col h-full gap-0 overflow-y-auto">
 
       {/* Context summary card */}
-      <div className="border-b border-slate-700/60 flex-shrink-0">
-        <div className="flex items-center justify-between px-3 py-2 border-b border-slate-700/40">
+      <div className="border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60 flex-shrink-0">
+        <div className="flex items-center justify-between px-3 py-2 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/40">
           <div className="flex items-center gap-1.5">
-            <Layers size={11} className="text-slate-500" />
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Context</span>
+            <Layers size={11} className="text-muted-foreground" />
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Context</span>
           </div>
           {total > 0 && (
-            <span className="text-[10px] text-slate-400 font-semibold">{fmtTokens(total)} tokens</span>
+            <span className="text-[10px] text-muted-foreground font-semibold">{fmtTokens(total)} tokens</span>
           )}
         </div>
 
@@ -299,17 +299,17 @@ function ContextInspector({
             <div className="flex items-center gap-2 py-1.5 px-1">
               <div className="w-2 h-2 rounded-sm bg-slate-500 flex-shrink-0" />
               <div className="flex-1">
-                <div className="text-[11px] font-medium text-slate-300">System Preamble</div>
-                <div className="text-[10px] text-slate-500">static · prompt registry</div>
+                <div className="text-[11px] font-medium text-brand-gold-cream">System Preamble</div>
+                <div className="text-[10px] text-muted-foreground">static · prompt registry</div>
               </div>
               <div className="text-right">
-                <div className="text-[12px] font-bold text-slate-300">{fmtTokens(sysTok)}</div>
-                <div className="text-[9px] text-slate-500">{sysPct}%</div>
+                <div className="text-[12px] font-bold text-brand-gold-cream">{fmtTokens(sysTok)}</div>
+                <div className="text-[9px] text-muted-foreground">{sysPct}%</div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="px-3 py-3 text-[11px] text-slate-600 italic">
+          <div className="px-3 py-3 text-[11px] text-muted-foreground/60 italic">
             {steps.length === 0 ? 'Waiting for query…' : 'Context assembling…'}
           </div>
         )}
@@ -318,51 +318,51 @@ function ContextInspector({
       {/* Selected step detail */}
       {showSelectedStep && (
         <div className="flex-shrink-0">
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-700/40">
-            <Database size={11} className="text-slate-500" />
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/40">
+            <Database size={11} className="text-muted-foreground" />
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
               Step {selectedStep.step_seq} — {selectedStep.step_name.replace(/_/g, ' ')}
             </span>
-            <span className="text-[10px] text-slate-600 ml-auto">{fmtMs(selectedStep.latency_ms)}</span>
+            <span className="text-[10px] text-muted-foreground/60 ml-auto">{fmtMs(selectedStep.latency_ms)}</span>
           </div>
 
           <div className="px-3 py-2 grid grid-cols-[110px_1fr] gap-y-1 gap-x-2 text-[11px]">
-            <span className="text-slate-500">Status</span>
+            <span className="text-muted-foreground">Status</span>
             <span className={selectedStep.status === 'done' ? 'text-emerald-400' : selectedStep.status === 'running' ? 'text-blue-400' : 'text-red-400'}>
               {selectedStep.status}
             </span>
-            <span className="text-slate-500">Type</span>
-            <span className="text-slate-300">{selectedStep.step_type}</span>
+            <span className="text-muted-foreground">Type</span>
+            <span className="text-brand-gold-cream">{selectedStep.step_type}</span>
             {selectedStep.data_summary.model && (
               <>
-                <span className="text-slate-500">Model</span>
-                <span className="text-slate-300">{selectedStep.data_summary.model}</span>
+                <span className="text-muted-foreground">Model</span>
+                <span className="text-brand-gold-cream">{selectedStep.data_summary.model}</span>
               </>
             )}
             {selectedStep.data_summary.chunks_returned != null && (
               <>
-                <span className="text-slate-500">Chunks</span>
+                <span className="text-muted-foreground">Chunks</span>
                 <span className="text-emerald-400">{selectedStep.data_summary.chunks_returned} returned</span>
-                <span className="text-slate-500">Top score</span>
+                <span className="text-muted-foreground">Top score</span>
                 <span className="text-emerald-400">{selectedStep.data_summary.top_score?.toFixed(3)}</span>
               </>
             )}
             {selectedStep.data_summary.rows_returned != null && (
               <>
-                <span className="text-slate-500">Rows</span>
+                <span className="text-muted-foreground">Rows</span>
                 <span className="text-sky-400">{selectedStep.data_summary.rows_returned} returned</span>
               </>
             )}
             {selectedStep.data_summary.token_estimate != null && (
               <>
-                <span className="text-slate-500">~Tokens</span>
-                <span className="text-slate-300">{fmtTokens(selectedStep.data_summary.token_estimate)}</span>
+                <span className="text-muted-foreground">~Tokens</span>
+                <span className="text-brand-gold-cream">{fmtTokens(selectedStep.data_summary.token_estimate)}</span>
               </>
             )}
             {selectedStep.parallel_group && (
               <>
-                <span className="text-slate-500">Group</span>
-                <span className="text-slate-400">⇉ {selectedStep.parallel_group}</span>
+                <span className="text-muted-foreground">Group</span>
+                <span className="text-muted-foreground">⇉ {selectedStep.parallel_group}</span>
               </>
             )}
           </div>
@@ -370,7 +370,7 @@ function ContextInspector({
           {/* Chunk preview for tool steps */}
           {selectedStep.payload.items && selectedStep.payload.items.length > 0 && (
             <div className="px-3 pb-2">
-              <div className="text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+              <div className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-wider mb-1">
                 Retrieved items — double-click to expand
               </div>
               <div className="space-y-1">
@@ -379,18 +379,18 @@ function ContextInspector({
                     key={`${item.id}-${i}`}
                     type="button"
                     onDoubleClick={() => setDrilldownItem(item)}
-                    className="w-full text-left bg-slate-900 border border-slate-700/60 rounded p-2 hover:border-slate-600 transition-colors"
+                    className="w-full text-left bg-brand-ink border border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60 rounded p-2 hover:border-[color-mix(in_oklch,var(--brand-gold)_18%,transparent)] transition-colors"
                   >
                     <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[9px] font-mono text-slate-500 truncate max-w-[60%]">{item.id}</span>
+                      <span className="text-[9px] font-mono text-muted-foreground truncate max-w-[60%]">{item.id}</span>
                       <span className={`text-[9px] font-bold ${LAYER_COLOR[item.layer]?.text ?? ''}`}>{item.layer}</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 line-clamp-2">{item.text.slice(0, 120)}</div>
-                    <div className="text-[9px] text-slate-600 mt-0.5">double-click to expand</div>
+                    <div className="text-[10px] text-muted-foreground line-clamp-2">{item.text.slice(0, 120)}</div>
+                    <div className="text-[9px] text-muted-foreground/60 mt-0.5">double-click to expand</div>
                   </button>
                 ))}
                 {selectedStep.payload.items.length > 4 && (
-                  <div className="text-[9px] text-slate-600 px-1">
+                  <div className="text-[9px] text-muted-foreground/60 px-1">
                     +{selectedStep.payload.items.length - 4} more items
                   </div>
                 )}
@@ -401,11 +401,11 @@ function ContextInspector({
           {/* LLM prompt preview */}
           {selectedStep.payload.prompt_preview && (
             <div className="px-3 pb-2">
-              <div className="text-[9px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+              <div className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-wider mb-1">
                 Output preview (first 500 chars)
               </div>
-              <div className="bg-slate-900 border border-slate-700/60 rounded p-2">
-                <p className="text-[10px] text-slate-400 leading-relaxed">
+              <div className="bg-brand-ink border border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]/60 rounded p-2">
+                <p className="text-[10px] text-muted-foreground leading-relaxed">
                   {selectedStep.payload.prompt_preview}
                 </p>
               </div>
@@ -450,21 +450,21 @@ function LayerRow({
         onClick={onToggle}
         aria-label={`${expanded ? 'Collapse' : 'Expand'} ${label}`}
         aria-expanded={expanded}
-        className="w-full flex items-center gap-2 py-1.5 px-1 hover:bg-slate-800/40 rounded transition-colors"
+        className="w-full flex items-center gap-2 py-1.5 px-1 hover:bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)]/40 rounded transition-colors"
       >
         <div className={`w-2 h-2 rounded-sm ${cfg.dot} flex-shrink-0`} />
         <div className="flex-1 text-left min-w-0">
-          <div className="text-[11px] font-medium text-slate-300">{label}</div>
-          <div className="text-[10px] text-slate-500 truncate">{sublabel}</div>
+          <div className="text-[11px] font-medium text-brand-gold-cream">{label}</div>
+          <div className="text-[10px] text-muted-foreground truncate">{sublabel}</div>
         </div>
         <div className="text-right flex-shrink-0">
-          <div className="text-[12px] font-bold text-slate-300">{fmtTokens(tokens)}</div>
-          <div className="text-[9px] text-slate-500">{pct}%</div>
+          <div className="text-[12px] font-bold text-brand-gold-cream">{fmtTokens(tokens)}</div>
+          <div className="text-[9px] text-muted-foreground">{pct}%</div>
         </div>
         {expanded ? (
-          <ChevronDown size={11} className="text-slate-500 flex-shrink-0" />
+          <ChevronDown size={11} className="text-muted-foreground flex-shrink-0" />
         ) : (
-          <ChevronRight size={11} className="text-slate-500 flex-shrink-0" />
+          <ChevronRight size={11} className="text-muted-foreground flex-shrink-0" />
         )}
       </button>
 
@@ -476,14 +476,14 @@ function LayerRow({
               type="button"
               onDoubleClick={() => onDrilldown(item)}
               aria-label={`View context item: ${item.id}`}
-              className="w-full text-left bg-slate-900/80 border border-slate-800 rounded p-1.5 hover:border-slate-700 transition-colors"
+              className="w-full text-left bg-brand-ink/80 border border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] rounded p-1.5 hover:border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)] transition-colors"
             >
               <div className="flex items-center justify-between mb-0.5">
-                <span className="text-[9px] font-mono text-slate-600 truncate max-w-[70%]">{item.id}</span>
-                <span className="text-[9px] text-slate-600">{fmtTokens(item.token_estimate)} tok</span>
+                <span className="text-[9px] font-mono text-muted-foreground/60 truncate max-w-[70%]">{item.id}</span>
+                <span className="text-[9px] text-muted-foreground/60">{fmtTokens(item.token_estimate)} tok</span>
               </div>
-              <p className="text-[10px] text-slate-400 leading-relaxed line-clamp-2">{item.text.slice(0, 100)}</p>
-              <p className="text-[9px] text-slate-600 mt-0.5">double-click to expand</p>
+              <p className="text-[10px] text-muted-foreground leading-relaxed line-clamp-2">{item.text.slice(0, 100)}</p>
+              <p className="text-[9px] text-muted-foreground/60 mt-0.5">double-click to expand</p>
             </button>
           ))}
         </div>
@@ -535,11 +535,11 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
   const width = (start: number, end: number) => `${Math.max(0.5, ((end - start) / totalMs) * 100)}%`
 
   return (
-    <div className="border-t border-slate-800 bg-slate-900/80 px-3 py-2 flex-shrink-0">
+    <div className="border-t border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] bg-brand-ink/80 px-3 py-2 flex-shrink-0">
       <div className="flex items-center gap-2 mb-1">
-        <Clock size={10} className="text-slate-600" />
-        <span className="text-[9px] text-slate-600 uppercase tracking-wider">Timeline</span>
-        <span className="text-[10px] text-slate-400 font-semibold ml-auto">{fmtMs(totalMs)} total</span>
+        <Clock size={10} className="text-muted-foreground/60" />
+        <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider">Timeline</span>
+        <span className="text-[10px] text-muted-foreground font-semibold ml-auto">{fmtMs(totalMs)} total</span>
       </div>
 
       {/* Track area */}
@@ -585,9 +585,9 @@ function TimelineBar({ steps }: { steps: TraceStep[] }) {
 
       {/* Time labels */}
       <div className="flex justify-between mt-0.5">
-        <span className="text-[8px] text-slate-700">0ms</span>
-        <span className="text-[8px] text-slate-700">{fmtMs(totalMs / 2)}</span>
-        <span className="text-[8px] text-slate-700">{fmtMs(totalMs)}</span>
+        <span className="text-[8px] text-muted-foreground/40">0ms</span>
+        <span className="text-[8px] text-muted-foreground/40">{fmtMs(totalMs / 2)}</span>
+        <span className="text-[8px] text-muted-foreground/40">{fmtMs(totalMs)}</span>
       </div>
     </div>
   )
@@ -629,14 +629,14 @@ function TraceTimeline({
   }, [steps])
 
   return (
-    <div className="flex flex-col overflow-y-auto border-r border-slate-800 py-2">
-      <div className="px-3 pb-1.5 text-[9px] font-bold text-slate-600 uppercase tracking-wider">
+    <div className="flex flex-col overflow-y-auto border-r border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] py-2">
+      <div className="px-3 pb-1.5 text-[9px] font-bold text-muted-foreground/60 uppercase tracking-wider">
         Pipeline · {steps.length} steps
       </div>
       {renderItems.map((item, idx) =>
         item.type === 'seq' ? (
           <div key={`s-${item.step.step_seq}`}>
-            {idx > 0 && <div className="mx-4 h-3 w-px bg-slate-800" />}
+            {idx > 0 && <div className="mx-4 h-3 w-px bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)]" />}
             <StepRow
               step={item.step}
               isSelected={selectedSeq === item.step.step_seq}
@@ -645,7 +645,7 @@ function TraceTimeline({
           </div>
         ) : (
           <div key={`pg-${item.group}`}>
-            {idx > 0 && <div className="mx-4 h-3 w-px bg-slate-800" />}
+            {idx > 0 && <div className="mx-4 h-3 w-px bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)]" />}
             <ParallelGroup
               groupSteps={item.steps}
               selectedSeq={selectedSeq}
@@ -695,15 +695,15 @@ export function TracePanelContent({ queryId }: ContentProps) {
 
   const liveBadgeLabel = done ? 'DONE' : steps.length > 0 ? 'LIVE' : 'READY'
   const liveBadgeColor = done
-    ? 'bg-slate-800 text-slate-400 border-slate-700'
+    ? 'bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] text-muted-foreground border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]'
     : steps.length > 0
     ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
-    : 'bg-slate-900 text-slate-600 border-slate-800'
+    : 'bg-brand-ink text-muted-foreground/60 border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)]'
 
   return (
     <div className="flex flex-col h-full">
       {/* Sub-header: query pill + live badge + tabs */}
-      <div className="flex items-center gap-3 px-4 py-2 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 py-2 border-b border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] flex-shrink-0">
         <div className="flex items-center gap-2">
           <Zap size={12} className="text-blue-400" />
           <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${liveBadgeColor}`}>
@@ -712,23 +712,23 @@ export function TracePanelContent({ queryId }: ContentProps) {
         </div>
 
         {effectiveQueryId && (
-          <div className="flex-1 min-w-0 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] text-slate-500 font-mono truncate">
+          <div className="flex-1 min-w-0 px-2 py-0.5 bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] border border-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)] rounded text-[10px] text-muted-foreground font-mono truncate">
             {effectiveQueryId}
           </div>
         )}
 
-        <div className="flex gap-px bg-slate-800 rounded p-0.5">
+        <div className="flex gap-px bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] rounded p-0.5">
           <button
             type="button"
             onClick={() => setActiveTab('live')}
-            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'live' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'live' ? 'bg-slate-600 text-brand-gold-cream' : 'text-muted-foreground hover:text-brand-gold-cream'}`}
           >
             Live
           </button>
           <button
             type="button"
             onClick={() => { setActiveTab('history'); loadHistory() }}
-            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'history' ? 'bg-slate-600 text-slate-100' : 'text-slate-500 hover:text-slate-300'}`}
+            className={`px-3 py-1 rounded text-[11px] font-medium transition-colors ${activeTab === 'history' ? 'bg-slate-600 text-brand-gold-cream' : 'text-muted-foreground hover:text-brand-gold-cream'}`}
           >
             History
           </button>
@@ -746,27 +746,27 @@ export function TracePanelContent({ queryId }: ContentProps) {
       {activeTab === 'history' && !historyQueryId ? (
         <div className="flex-1 overflow-y-auto py-2">
           {!historyLoaded ? (
-            <div className="px-4 py-3 text-[11px] text-slate-600">Loading history…</div>
+            <div className="px-4 py-3 text-[11px] text-muted-foreground/60">Loading history…</div>
           ) : historyList.length === 0 ? (
-            <div className="px-4 py-3 text-[11px] text-slate-600">No trace history yet. Run a query first.</div>
+            <div className="px-4 py-3 text-[11px] text-muted-foreground/60">No trace history yet. Run a query first.</div>
           ) : (
             historyList.map(entry => (
               <button
                 key={entry.query_id}
                 type="button"
                 onClick={() => setHistoryQueryId(entry.query_id)}
-                className="w-full text-left px-4 py-2.5 hover:bg-slate-800/60 border-b border-slate-800/60 transition-colors"
+                className="w-full text-left px-4 py-2.5 hover:bg-brand-ink/60 border-b border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)]/60 transition-colors"
               >
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[11px] text-slate-300 truncate flex-1">
+                  <span className="text-[11px] text-brand-gold-cream truncate flex-1">
                     {entry.query_text ?? '(no text)'}
                   </span>
-                  <span className="text-[9px] text-slate-600 flex-shrink-0">{entry.step_count} steps</span>
+                  <span className="text-[9px] text-muted-foreground/60 flex-shrink-0">{entry.step_count} steps</span>
                   {entry.total_latency_ms != null && (
-                    <span className="text-[9px] text-slate-600 flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
+                    <span className="text-[9px] text-muted-foreground/60 flex-shrink-0">{fmtMs(entry.total_latency_ms)}</span>
                   )}
                 </div>
-                <div className="text-[9px] text-slate-600">
+                <div className="text-[9px] text-muted-foreground/60">
                   {new Date(entry.created_at).toLocaleString()}
                 </div>
               </button>
@@ -804,14 +804,14 @@ export function TracePanel({ queryId, isSuperAdmin, onClose }: Props) {
         className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="fixed inset-y-0 right-0 z-50 flex flex-col w-[65vw] min-w-[700px] max-w-[1100px] bg-[#0d1117] border-l border-slate-800 shadow-2xl">
-        <div className="flex items-center gap-3 px-4 py-2.5 border-b border-slate-800 bg-[#161b27] flex-shrink-0">
+      <div className="fixed inset-y-0 right-0 z-50 flex flex-col w-[65vw] min-w-[700px] max-w-[1100px] bg-brand-ink border-l border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] shadow-2xl">
+        <div className="flex items-center gap-3 px-4 py-2.5 border-b border-[color-mix(in_oklch,var(--brand-gold)_12%,transparent)] bg-[color-mix(in_oklch,var(--brand-ink)_90%,var(--brand-gold)_10%)] flex-shrink-0">
           <Zap size={13} className="text-blue-400" />
-          <span className="text-[13px] font-bold text-slate-100">Query Trace</span>
+          <span className="text-[13px] font-bold text-brand-gold-cream">Query Trace</span>
           <button
             type="button"
             onClick={onClose}
-            className="ml-auto text-slate-500 hover:text-slate-200 transition-colors"
+            className="ml-auto text-muted-foreground hover:text-brand-gold-cream transition-colors"
           >
             <X size={16} />
           </button>

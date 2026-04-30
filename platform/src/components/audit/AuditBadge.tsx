@@ -1,5 +1,9 @@
 import { cn } from '@/lib/utils'
 
+// TIER_COLOUR_EXCEPTION — audit tier and query-class badges use named Tailwind color scales
+// (rose/amber/emerald/slate etc.) rather than brand tokens. These colors carry semantic meaning
+// specific to the audit disclosure domain (access tier, query class) and are intentionally
+// distinct from the gold/ink brand palette so they read as system-status indicators, not UI chrome.
 const TIER_STYLES: Record<string, string> = {
   super_admin: 'bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-300',
   acharya_reviewer: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300',

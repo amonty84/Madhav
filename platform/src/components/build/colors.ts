@@ -1,33 +1,35 @@
 // Build tracker color system — single source of truth.
-// All values are oklch strings matching globals.css conventions.
+// Status values resolve via CSS design tokens defined in globals.css.
 
 export const statusColors = {
-  completed: 'oklch(0.78 0.13 145)',   // green
-  active:    'oklch(0.78 0.13 75)',    // warm gold (extends existing palette)
-  in_progress:'oklch(0.78 0.13 75)',
-  pending:   'oklch(0.55 0.01 75)',    // muted neutral
-  blocked:   'oklch(0.62 0.20 27)',    // red
-  unknown:   'oklch(0.60 0.005 75)',
+  completed:   'var(--status-success)',
+  active:      'var(--brand-gold)',
+  in_progress: 'var(--brand-gold)',
+  pending:     'var(--muted-foreground)',
+  blocked:     'var(--status-halt)',
+  unknown:     'var(--muted-foreground)',
 } as const
 
 export const statusBg = {
-  completed:  'bg-[oklch(0.93_0.05_145)]  dark:bg-[oklch(0.25_0.05_145)]',
-  active:     'bg-[oklch(0.95_0.04_75)]   dark:bg-[oklch(0.28_0.06_75)]',
-  in_progress:'bg-[oklch(0.95_0.04_75)]   dark:bg-[oklch(0.28_0.06_75)]',
-  pending:    'bg-muted',
-  blocked:    'bg-[oklch(0.95_0.04_27)]   dark:bg-[oklch(0.28_0.06_27)]',
-  unknown:    'bg-muted',
+  completed:   'bg-status-success-bg',
+  active:      'bg-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]',
+  in_progress: 'bg-[color-mix(in_oklch,var(--brand-gold)_15%,transparent)]',
+  pending:     'bg-muted',
+  blocked:     'bg-status-halt-bg',
+  unknown:     'bg-muted',
 } as const
 
 export const statusText = {
-  completed:  'text-[oklch(0.40_0.12_145)] dark:text-[oklch(0.78_0.13_145)]',
-  active:     'text-[oklch(0.45_0.12_75)]  dark:text-[oklch(0.78_0.13_75)]',
-  in_progress:'text-[oklch(0.45_0.12_75)]  dark:text-[oklch(0.78_0.13_75)]',
-  pending:    'text-muted-foreground',
-  blocked:    'text-[oklch(0.40_0.18_27)]  dark:text-[oklch(0.70_0.19_22)]',
-  unknown:    'text-muted-foreground',
+  completed:   'text-status-success',
+  active:      'text-brand-gold',
+  in_progress: 'text-brand-gold',
+  pending:     'text-muted-foreground',
+  blocked:     'text-status-halt',
+  unknown:     'text-muted-foreground',
 } as const
 
+// CHART_PALETTE — hex literals intentionally kept for recharts SVG stroke/fill props.
+// CSS variable references cannot be passed to recharts data-series color props directly.
 // Session-class palette — 8 classes from SESSION_LOG_SCHEMA enum
 export const classColors: Record<string, string> = {
   m2_corpus_execution:  '#3b82f6',  // blue
@@ -50,6 +52,7 @@ export function isOnPlan(cls: string): boolean {
   return cls === 'm2_corpus_execution'
 }
 
+// CHART_PALETTE — hex literals kept for recharts SVG props (see note above).
 // Severity palette for governance findings
 export const severityColors = {
   baseline: '#22c55e',  // green — exit 2, accepted residuals
@@ -58,6 +61,7 @@ export const severityColors = {
   info:     '#78716c',  // neutral
 } as const
 
+// CHART_PALETTE — hex literals kept for recharts SVG props (see note above).
 // Exit code → color mapping (used by health trends)
 export const exitCodeColor: Record<number, string> = {
   0: '#22c55e',
