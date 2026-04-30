@@ -26,6 +26,8 @@ export type FeatureFlag =
   | 'CHECKPOINT_8_5_PREDICTION_EXTRACT'
   // Phase 7 — Panel Mode
   | 'PANEL_DEGRADE_2_OF_3'
+  // Wave 6 M2-D2 — Per-tool Haiku planner (default OFF; flip after smoke verification)
+  | 'PER_TOOL_PLANNER_ENABLED'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -54,6 +56,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   CHECKPOINT_8_5_PREDICTION_EXTRACT: false,
   // Phase 7 — Panel Mode (all default OFF)
   PANEL_DEGRADE_2_OF_3: false,
+  // Wave 6 M2-D2 — Per-tool Haiku planner (default OFF; flip after smoke verification)
+  PER_TOOL_PLANNER_ENABLED: false,
 }
 
 // Numeric config keys (read via configService.getValue)

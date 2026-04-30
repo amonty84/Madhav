@@ -35,6 +35,10 @@ export interface TraceDataSummary {
   // gcs
   source_path?: string
   bytes?: number
+  // plan (per_tool_planner)
+  planner_active?: boolean
+  tools_refined?: number
+  tool_count?: number
 }
 
 /** Full drill-down content stored in payload column */

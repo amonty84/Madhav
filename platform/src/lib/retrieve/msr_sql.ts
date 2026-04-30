@@ -10,7 +10,7 @@ import type { MsrSignal } from '@/lib/db/types'
 import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
-import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
+import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool, MsrSqlInput } from './types'
 
 const TOOL_NAME = 'msr_sql'
 const TOOL_VERSION = '1.0.0'
@@ -24,6 +24,10 @@ const SQL = `
     AND ($3::varchar[] IS NULL OR planet = ANY($3::varchar[]))
     AND ($4::boolean IS NULL OR is_forward_looking = $4)
     AND confidence >= $5
+    AND ($6::text[] IS NULL OR signal_type = ANY($6::text[]))
+    AND ($7::text[] IS NULL OR temporal_activation = ANY($7::text[]))
+    AND ($8::text[] IS NULL OR valence = ANY($8::text[]))
+    AND ($9::text[] IS NULL OR entities_involved ?| $9::text[])
   ORDER BY (confidence * significance) DESC
   LIMIT 100
 `.trim()
@@ -42,12 +46,31 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     plan.planets && plan.planets.length > 0 ? plan.planets : null
   const forwardLookingFilter: boolean | null = plan.forward_looking ? true : null
 
+  // New signal-property filters (from MsrSqlInput; all optional, backward-compatible)
+  const msrInput = params as MsrSqlInput | undefined
+  const signalTypeFilter: string[] | null =
+    msrInput?.signal_type && msrInput.signal_type.length > 0 ? msrInput.signal_type : null
+  const temporalFilter: string[] | null =
+    msrInput?.temporal_activation && msrInput.temporal_activation.length > 0
+      ? msrInput.temporal_activation
+      : null
+  const valenceFilter: string[] | null =
+    msrInput?.valence && msrInput.valence.length > 0 ? msrInput.valence : null
+  const entitiesFilter: string[] | null =
+    msrInput?.entities_involved_any && msrInput.entities_involved_any.length > 0
+      ? msrInput.entities_involved_any
+      : null
+
   const { rows } = await getStorageClient().query<MsrSignal>(SQL, [
     nativeId,
     domainFilter,
     planetFilter,
     forwardLookingFilter,
     confidenceFloor,
+    signalTypeFilter,
+    temporalFilter,
+    valenceFilter,
+    entitiesFilter,
   ])
 
   // pg returns NUMERIC/DECIMAL columns as strings by default; coerce to number for schema validation
@@ -79,6 +102,10 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
       planets: plan.planets ?? [],
       forward_looking: plan.forward_looking,
       confidence_floor: confidenceFloor,
+      signal_type: signalTypeFilter,
+      temporal_activation: temporalFilter,
+      valence: valenceFilter,
+      entities_involved_any: entitiesFilter,
     },
     results,
     served_from_cache: false,

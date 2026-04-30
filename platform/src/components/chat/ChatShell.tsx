@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { PanelLeft, FileText, X, Pencil, ChevronLeft } from 'lucide-react'
+import { PanelLeft, FileText, X, Pencil, Zap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getHighlighter } from '@/lib/shiki'
 
@@ -13,6 +13,7 @@ interface Props {
   rightPanel?: ReactNode
   rightPanelLabel?: string
   rightPanelBadge?: number
+  traceAction?: ReactNode
   headerTitle?: string
   headerMeta?: string
   headerActions?: ReactNode
@@ -31,6 +32,7 @@ export function ChatShell({
   rightPanel,
   rightPanelLabel = 'Reports',
   rightPanelBadge,
+  traceAction,
   headerTitle,
   headerMeta,
   headerActions,
@@ -44,6 +46,8 @@ export function ChatShell({
 }: Props) {
   const [rightOpen, setRightOpen] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [hoverOpen, setHoverOpen] = useState(false)
+  const showSidebar = hoverOpen || !desktopSidebarCollapsed
   const [titleDraft, setTitleDraft] = useState(headerTitle ?? '')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -88,31 +92,30 @@ export function ChatShell({
 
   return (
     <div
-      className="relative flex h-[100dvh] w-full bg-background"
+      className="relative flex h-full w-full bg-background"
       style={{ ['--composer-h' as string]: '160px' }}
     >
-      <aside
-        aria-label="Conversations"
-        className={cn(
-          'hidden h-full shrink-0 border-r border-sidebar-border bg-sidebar transition-[width] duration-200 md:flex',
-          desktopSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-[260px]'
-        )}
-        aria-hidden={desktopSidebarCollapsed}
+      {/* Sidebar hover zone — thin strip when collapsed, full panel when hovered */}
+      <div
+        className="relative hidden md:block shrink-0"
+        style={{ width: showSidebar ? 260 : 8 }}
+        onMouseEnter={() => setHoverOpen(true)}
+        onMouseLeave={() => setHoverOpen(false)}
       >
-        {!desktopSidebarCollapsed && <div className="flex h-full w-[260px] flex-col">{sidebar}</div>}
-      </aside>
-
-      {/* Collapsed sidebar hover strip — desktop only */}
-      {desktopSidebarCollapsed && (
-        <button
-          type="button"
-          onClick={onToggleDesktopSidebar}
-          aria-label="Expand sidebar"
-          className="hidden md:flex fixed left-0 top-1/2 z-10 -translate-y-1/2 h-24 w-2 hover:w-8 transition-all duration-200 rounded-r bg-[color-mix(in_oklch,var(--brand-gold)_25%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-gold)_60%,transparent)] items-center justify-center overflow-hidden"
+        <aside
+          aria-label="Conversations"
+          aria-hidden={!showSidebar}
+          className={cn(
+            'absolute left-0 top-0 h-full border-r border-sidebar-border bg-sidebar',
+            'transition-[width,box-shadow] duration-200 ease-in-out overflow-hidden z-20',
+            showSidebar
+              ? 'w-[260px] shadow-[4px_0_24px_rgba(0,0,0,0.35)]'
+              : 'w-2 bg-[color-mix(in_oklch,var(--brand-gold)_10%,var(--sidebar))]'
+          )}
         >
-          <PanelLeft className="h-4 w-4 text-[var(--brand-charcoal)] opacity-0 group-hover:opacity-100 shrink-0" />
-        </button>
-      )}
+          {showSidebar && <div className="flex h-full w-[260px] flex-col">{sidebar}</div>}
+        </aside>
+      </div>
 
       <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
         <SheetContent side="left" className="w-[78%] max-w-[300px] bg-sidebar p-0 md:hidden" showCloseButton={false}>
@@ -139,16 +142,6 @@ export function ChatShell({
           >
             <PanelLeft className="size-4" />
           </button>
-
-          {/* Dashboard breadcrumb — desktop only; mobile uses sidebar drawer */}
-          <Link
-            href="/dashboard"
-            aria-label="Back to dashboard"
-            className="hidden md:inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground shrink-0"
-          >
-            <ChevronLeft className="size-3.5" />
-            <span>Dashboard</span>
-          </Link>
 
           {/* Title area — stacked: h1 title + chartMeta always visible */}
           <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -199,21 +192,7 @@ export function ChatShell({
 
           <div className="ml-auto flex items-center gap-1">
             {headerActions}
-            {rightPanel && (
-              <button
-                type="button"
-                onClick={() => setRightOpen(true)}
-                className="inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <FileText className="size-3.5" />
-                <span className="hidden sm:inline">{rightPanelLabel}</span>
-                {typeof rightPanelBadge === 'number' && rightPanelBadge > 0 && (
-                  <span className="inline-flex min-w-[18px] justify-center rounded-full bg-muted px-1.5 text-[10px] font-medium text-muted-foreground">
-                    {rightPanelBadge}
-                  </span>
-                )}
-              </button>
-            )}
+            {traceAction}
           </div>
         </header>
 
