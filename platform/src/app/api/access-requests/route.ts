@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
 
   const fullName = (body.full_name ?? '').trim()
@@ -27,25 +28,26 @@ export async function POST(request: Request) {
   const reason = (body.reason ?? '').trim().slice(0, 500) || null
 
   if (!fullName || fullName.length > 100) {
-    return NextResponse.json(
-      { error: 'Full name is required (max 100 characters).' },
-      { status: 400 },
-    )
+    return res.badRequest('Full name is required (max 100 characters).')
   }
   if (!email || !EMAIL_RE.test(email) || email.length > 254) {
-    return NextResponse.json({ error: 'A valid email address is required.' }, { status: 400 })
+    return res.badRequest('A valid email address is required.')
   }
 
   // Reject if a pending request already exists for this email.
-  const { rows: pendingRows } = await query<{ id: string }>(
-    'SELECT id FROM access_requests WHERE lower(email)=lower($1) AND status=\'pending\'',
-    [email]
-  )
-  if (pendingRows.length > 0) {
-    return NextResponse.json(
-      { error: 'A request for this email is already pending review.' },
-      { status: 409 },
+  let pendingRows: { id: string }[]
+  try {
+    const result = await query<{ id: string }>(
+      'SELECT id FROM access_requests WHERE lower(email)=lower($1) AND status=\'pending\'',
+      [email]
     )
+    pendingRows = result.rows
+  } catch (err) {
+    console.error('[access-requests] pending-check failed', err)
+    return res.dbError()
+  }
+  if (pendingRows.length > 0) {
+    return res.conflict('A request for this email is already pending review.')
   }
 
   try {
@@ -55,7 +57,7 @@ export async function POST(request: Request) {
     )
   } catch (err) {
     console.error('[access-requests] insert failed', err)
-    return NextResponse.json({ error: 'Could not submit request.' }, { status: 500 })
+    return res.internal('Could not submit request.')
   }
 
   return NextResponse.json({ ok: true })

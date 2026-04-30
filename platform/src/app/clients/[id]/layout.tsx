@@ -1,7 +1,19 @@
+import type { Metadata } from 'next'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { redirect } from 'next/navigation'
 import { AppShell } from '@/components/shared/AppShell'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const result = await query<{ name: string }>('SELECT name FROM charts WHERE id=$1', [id])
+  const name = result.rows[0]?.name
+  return { title: name ? `${name} — MARSYS-JIS` : 'Chart — MARSYS-JIS' }
+}
 
 export default async function ClientLayout({
   children,

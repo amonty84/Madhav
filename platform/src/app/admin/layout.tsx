@@ -1,6 +1,11 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { getServerUserWithProfile } from '@/lib/auth/access-control'
 import { AppShell } from '@/components/shared/AppShell'
+
+export const metadata: Metadata = {
+  title: 'Admin — MARSYS-JIS',
+}
 
 export default async function AdminLayout({
   children,

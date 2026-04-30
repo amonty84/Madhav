@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { listPredictions } from '@/lib/prediction/queries'
+import { res } from '@/lib/errors'
 import type { ListPredictionsParams } from '@/lib/prediction/queries'
 
 export async function GET(request: Request) {
@@ -35,6 +36,6 @@ export async function GET(request: Request) {
     return NextResponse.json(result)
   } catch (err) {
     console.error('[api/audit/predictions] GET failed', err)
-    return NextResponse.json({ error: 'Failed to load predictions.' }, { status: 500 })
+    return res.internal('Failed to load predictions.')
   }
 }

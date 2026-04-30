@@ -40,7 +40,7 @@ export function StreamingAnswer({
   if (messages.length === 0) return null
 
   return (
-    <div className={cn('flex w-full flex-col', className)}>
+    <div role="log" aria-label="Conversation" aria-live="polite" className={cn('flex w-full flex-col', className)}>
       {messages.map((message, idx) => {
         const isLast = idx === messages.length - 1
         const textContent = extractText(message)

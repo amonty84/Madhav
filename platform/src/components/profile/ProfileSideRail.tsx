@@ -25,7 +25,7 @@ export function ProfileSideRail({
       className="flex w-full flex-col gap-6 rounded-lg border p-5 md:w-72 md:shrink-0"
       style={{
         borderColor: 'color-mix(in oklch, var(--brand-gold) 20%, transparent)',
-        background: 'color-mix(in oklch, var(--brand-charcoal, #0d0a05) 96%, var(--brand-gold) 4%)',
+        background: 'color-mix(in oklch, var(--brand-charcoal) 96%, var(--brand-gold) 4%)',
       }}
     >
       {/* Dasha Countdown */}
@@ -76,7 +76,7 @@ export function ProfileSideRail({
           className="rounded border px-2 py-0.5 text-xs font-medium"
           style={{
             borderColor: 'color-mix(in oklch, var(--brand-gold) 35%, transparent)',
-            color: 'var(--brand-gold-cream, #fce29a)',
+            color: 'var(--brand-gold-cream)',
           }}
         >
           {audienceTier}

@@ -15,7 +15,7 @@ export function AdminSignOut() {
   return (
     <button
       onClick={handleSignOut}
-      className="text-[12px] uppercase tracking-[0.18em] text-[#d4af37] transition-colors hover:text-[#fce29a]"
+      className="text-[12px] uppercase tracking-[0.18em] text-brand-gold transition-colors hover:text-brand-gold-cream"
     >
       Sign out
     </button>

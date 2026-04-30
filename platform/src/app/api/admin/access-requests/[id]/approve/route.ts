@@ -3,6 +3,7 @@ import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
+import { res } from '@/lib/errors'
 
 interface ApproveBody {
   username?: string
@@ -28,33 +29,45 @@ export async function POST(
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
 
   const username = (body.username ?? '').trim().toLowerCase()
   const usernameError = validateUsername(username)
-  if (usernameError) return NextResponse.json({ error: usernameError }, { status: 400 })
+  if (usernameError) return res.badRequest(usernameError)
 
   const role = body.role === 'super_admin' ? 'super_admin' : 'client'
 
   // 1. Load the request row.
-  const { rows: reqRows } = await query<RequestRow>(
-    'SELECT id, full_name, email, status FROM access_requests WHERE id=$1',
-    [id]
-  )
+  let reqRows: RequestRow[]
+  try {
+    const result = await query<RequestRow>(
+      'SELECT id, full_name, email, status FROM access_requests WHERE id=$1',
+      [id]
+    )
+    reqRows = result.rows
+  } catch {
+    return res.dbError()
+  }
   const req = reqRows[0] ?? null
-  if (!req) return NextResponse.json({ error: 'not_found' }, { status: 404 })
+  if (!req) return res.notFound('not_found')
   if (req.status !== 'pending') {
-    return NextResponse.json({ error: 'Request is not pending.' }, { status: 409 })
+    return res.conflict('Request is not pending.')
   }
 
   // 2. Username uniqueness pre-check (the unique index will enforce too).
-  const { rows: dupRows } = await query<{ id: string }>(
-    'SELECT id FROM profiles WHERE lower(username)=lower($1) LIMIT 1',
-    [username]
-  )
+  let dupRows: { id: string }[]
+  try {
+    const result = await query<{ id: string }>(
+      'SELECT id FROM profiles WHERE lower(username)=lower($1) LIMIT 1',
+      [username]
+    )
+    dupRows = result.rows
+  } catch {
+    return res.dbError()
+  }
   if (dupRows.length > 0) {
-    return NextResponse.json({ error: 'Username is already taken.' }, { status: 409 })
+    return res.conflict('Username is already taken.')
   }
 
   // 3. Create the Firebase user. Random password — they set their own via the reset link.
@@ -67,7 +80,7 @@ export async function POST(
     })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Could not create user account.'
-    return NextResponse.json({ error: message }, { status: 400 })
+    return res.internal(message)
   }
 
   // 4. Insert profile row. On conflict, roll back the Firebase user.
@@ -84,7 +97,7 @@ export async function POST(
   } catch (err) {
     await adminAuth.deleteUser(uid).catch(() => {})
     const message = err instanceof Error ? err.message : 'Could not create profile.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 
   // 5. Mark the request approved.
@@ -93,8 +106,8 @@ export async function POST(
       'UPDATE access_requests SET status=\'approved\', reviewed_at=now(), reviewed_by=$1, approved_user_id=$2 WHERE id=$3',
       [auth.user.uid, uid, id]
     )
-  } catch (err) {
-    console.error('[approve] could not mark request approved', err)
+  } catch {
+    return res.internal('failed to mark request approved')
   }
 
   // 6. Generate a password-reset link.

@@ -68,7 +68,6 @@ export function AppShellRail({ user, profile }: AppShellRailProps) {
             <Link
               key={href}
               href={href}
-              title={label}
               aria-label={label}
               className={cn(
                 'flex h-11 w-11 items-center justify-center rounded text-xs font-medium transition-colors',

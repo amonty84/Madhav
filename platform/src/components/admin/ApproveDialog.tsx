@@ -55,7 +55,7 @@ function ApproveForm({
   if (resetLink) {
     return (
       <div className="space-y-4">
-        <p className="text-sm text-[#fce29a]">
+        <p className="text-sm text-brand-gold-cream">
           Share this password-reset link with the user. It is also queued for
           automatic delivery via Firebase&apos;s default email handler.
         </p>
@@ -127,10 +127,10 @@ export function ApproveDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className={adminDialog + ' sm:max-w-md'}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl font-medium tracking-wide text-[#fce29a]">
+          <DialogTitle className="font-serif text-xl font-medium tracking-wide text-brand-gold-cream">
             Approve request
           </DialogTitle>
-          <DialogDescription className="text-sm text-[#9b834f]">
+          <DialogDescription className="text-sm text-muted-foreground">
             {request ? `${request.full_name} · ${request.email}` : ''}
           </DialogDescription>
         </DialogHeader>

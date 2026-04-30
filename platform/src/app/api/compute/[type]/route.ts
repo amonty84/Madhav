@@ -1,5 +1,5 @@
 import { getServerUser } from '@/lib/firebase/server'
-import { NextResponse } from 'next/server'
+import { res } from '@/lib/errors'
 
 const SIDECAR_KEY = process.env.PYTHON_SIDECAR_API_KEY ?? ''
 
@@ -8,7 +8,7 @@ export async function POST(
   { params }: { params: Promise<{ type: string }> }
 ) {
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
   const { type } = await params
   const ALLOWED = [
@@ -21,30 +21,42 @@ export async function POST(
     'v7_additions',
   ]
   if (!ALLOWED.includes(type)) {
-    return NextResponse.json({ error: 'Unknown compute type' }, { status: 400 })
+    return res.badRequest('Unknown compute type')
   }
 
   const sidecarUrl = process.env.PYTHON_SIDECAR_URL
   if (!sidecarUrl) {
-    return NextResponse.json({ error: 'PYTHON_SIDECAR_URL is not set' }, { status: 503 })
+    return res.sidecarDown()
   }
 
-  const body = await request.json()
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return res.badRequest('invalid request body')
+  }
 
-  const response = await fetch(`${sidecarUrl}/${type}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': SIDECAR_KEY,
-    },
-    body: JSON.stringify(body),
-  })
+  let response: Response
+  try {
+    response = await fetch(`${sidecarUrl}/${type}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': SIDECAR_KEY,
+      },
+      body: JSON.stringify(body),
+    })
+  } catch {
+    return res.sidecarDown()
+  }
 
   if (!response.ok) {
-    const text = await response.text()
-    return NextResponse.json({ error: text || 'Compute error' }, { status: response.status })
+    if (response.status >= 500) {
+      return res.sidecarDown()
+    }
+    return res.internal('Compute error')
   }
 
   const data = await response.json()
-  return NextResponse.json(data)
+  return Response.json(data)
 }
