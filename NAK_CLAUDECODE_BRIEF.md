@@ -1,69 +1,55 @@
 ---
-artifact: NAK_CLAUDECODE_BRIEF (W1-R3 instance)
+artifact: NAK_CLAUDECODE_BRIEF
 status: COMPLETE
 authored_on: 2026-04-30
-authored_by: Claude Code (NAK W0 session)
+authored_by: Cowork (Opus)
 project: NAK — Nakula
-wave_run: W1-R3
-title: UX Component Audit and A11y First Pass
-governing_clause: >
-  NAK_SOP_v1_0.md §C.2 — NAK Claude Code sessions read this file first.
-  This file's status field governs the session: ACTIVE = session open;
-  COMPLETE = session closed.
-target_executor: Claude Code (CLI), Sonnet 4.6 in Anti-Gravity / VS Code
-session_class: NAK W1-R3 — audit only, no code changes
-exec_brief: NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md
-branch: nak/w1-r3-component-audit
-worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r3
-parallelizable_with: [W1-R1, W1-R2]
-unblocks: [W2-R3]
+wave_run: W2-R3
+title: Component Fix — A11y and Error Boundaries
+exec_brief: 00_NAK/NAK_EXEC_BRIEF_W2_R3_COMPONENT_FIX_v1_0.md
+branch: nak/w2-r3-component-fix
+worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r3
 ---
 
-# NAK CLAUDECODE_BRIEF — W1-R3 UX Component Audit and A11y First Pass
+# NAK CLAUDECODE_BRIEF — W2-R3 Component Fix
 
-## How to activate this brief
+Session type: W2 Fix Run — code changes permitted within may_touch scope.
 
-Copy from the brief pool to your worktree root before opening the session:
+## Acceptance criteria
 
-```bash
-cd ~/Vibe-Coding/Apps/Madhav
-git worktree add ../Madhav-nak-w1r3 -b nak/w1-r3-component-audit main
-cp NAK_CLAUDECODE_BRIEF_W1_R3.md ../Madhav-nak-w1r3/NAK_CLAUDECODE_BRIEF.md
-cd ../Madhav-nak-w1r3
-```
+- [ ] AC-1: All HIGH a11y findings fixed (A11Y-1, A11Y-2, A11Y-3)
+- [ ] AC-2: 5 error.tsx boundaries created (dashboard, admin, audit, build, share)
+- [ ] AC-3: All MEDIUM a11y findings fixed (A11Y-4 through A11Y-7) + LOW items
+- [ ] AC-4: Missing page-level metadata titles added
+- [ ] AC-5: NAK_COMPONENT_AUDIT_v1_0.md elevated DRAFT → FINAL
+- [ ] AC-6: Closure report 00_NAK/reports/NAK_COMPONENT_FIX_REPORT_W2_R3_v1_0.md committed
+- [ ] AC-7: NAK_TRACKER_v1_0.md W2-R3 row status → closed
+- [ ] AC-8: npm test passes — zero new failures vs W0 baseline
 
-Copy the exec brief and NAK governance dir (they are untracked in main):
+## may_touch
 
-```bash
-cp ~/Vibe-Coding/Apps/Madhav/NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md .
-cp -r ~/Vibe-Coding/Apps/Madhav/00_NAK .
-```
+- platform/src/components/shared/**
+- platform/src/components/chat/ChatShell.tsx
+- platform/src/components/chat/CommandPalette.tsx
+- platform/src/components/chat/AdaptiveMessageList.tsx
+- platform/src/components/consume/ConsumeChat.tsx
+- platform/src/components/consume/StreamingAnswer.tsx
+- platform/src/components/trace/TracePanel.tsx (aria only — no token changes, W2-R1 owns tokens)
+- platform/src/app/dashboard/error.tsx (new)
+- platform/src/app/admin/error.tsx (new)
+- platform/src/app/audit/error.tsx (new)
+- platform/src/app/clients/[id]/build/error.tsx (new)
+- platform/src/app/share/[slug]/error.tsx (new)
+- platform/src/app/**/layout.tsx (metadata only)
+- 00_NAK/NAK_COMPONENT_AUDIT_v1_0.md
+- 00_NAK/NAK_TRACKER_v1_0.md
 
-## Pre-flight gate
+## must_not_touch
 
-1. `git status` is clean in worktree.
-2. `00_NAK/NAK_TRACKER_v1_0.md` §2 shows `w0_closed: true`, `active_wave: W1`.
-3. `00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md` exists (Part C has the suspect list).
-
-## What this session does
-
-Resolves the 9 suspect duplicate components from W0 by reading both files in each pair. Performs an a11y first pass on the four user-facing component dirs (consume, shared, chat, ui). Maps all pages/layouts to surface coverage. Creates `NAK_COMPONENT_AUDIT_v1_0.md`. Makes **zero code changes**.
-
-## Required reads, in order
-
-1. This file.
-2. `NAK_EXEC_BRIEF_W1_R3_COMPONENT_v1_0.md` — full spec. Pay special attention to §3 (AC-1 Parts A–D), §5 (suspect components list with file paths), and §6 (a11y focus areas).
-3. `00_NAK/reports/NAK_BASELINE_AUDIT_REPORT_W0_v1_0.md` Part C — the 9 suspects and the 149-component inventory.
-4. `00_NAK/NAK_TRACKER_v1_0.md` §2 — confirm `active_wave: W1`, `w0_closed: true`.
-
-## Acceptance criteria (summary — full spec in exec brief §3)
-
-- [ ] AC-1: `00_NAK/reports/NAK_COMPONENT_AUDIT_REPORT_W1_R3_v1_0.md` committed (Parts A–D)
-- [ ] AC-2: `00_NAK/NAK_COMPONENT_AUDIT_v1_0.md` DRAFT created
-- [ ] AC-3: `NAK_TRACKER_v1_0.md` §3 W1-R3 row closed
-
-## One-line session summary
-
-Resolve 9 suspect duplicates, run a11y pass on user-facing surfaces, build page/layout surface map. Zero code changes.
-
----
+- platform/src/app/api/**
+- platform/src/lib/**
+- platform/src/app/globals.css
+- platform/src/components/admin/**
+- platform/src/components/trace/TracePanel.tsx style/token changes (W2-R1 territory)
+- 00_NAK/NAK_DESIGN_SYSTEM_v1_0.md
+- 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md

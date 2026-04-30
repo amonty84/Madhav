@@ -268,14 +268,14 @@ runs:
 
   - run_id: W2-R3
     title: Component Fix and Eliminate
-    status: pending
+    status: closed
     exec_brief: NAK_EXEC_BRIEF_W2_R3_COMPONENT_FIX_v1_0.md
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W2_R3.md
     branch: nak/w2-r3-component-fix
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r3
-    session_id: null
-    started_at: null
-    closed_at: null
+    session_id: NAK-W2-R3-2026-04-30
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_COMPONENT_FIX_REPORT_W2_R3_v1_0.md
     input_from: W1-R3 closure report
     may_touch:
@@ -283,7 +283,14 @@ runs:
       - platform/src/app/**/*.tsx
       - 00_NAK/NAK_COMPONENT_AUDIT_v1_0.md  # elevate draft → FINAL
     parallelizable_with: [W2-R1, W2-R2]
-    follow_ups: []
+    follow_ups:
+      - Login page and share/[slug] page metadata: outside may_touch scope (page.tsx not layout.tsx).
+        Deferred to W3-R1 consistency pass.
+      - Pre-existing AppShell breadcrumb test failure (test/components/AppShell.test.tsx):
+        AppShellBreadcrumb always renders <nav aria-label="Breadcrumb"> even with empty segments
+        (mobileNav renders inside it). Test expects null — test needs updating, not code. Deferred W3-R2.
+      - cockpit/error.tsx still off-brand (shows raw error.message + error.digest to user) —
+        pre-existing, outside W2-R3 may_touch. Deferred W3-R1.
 ```
 
 ---

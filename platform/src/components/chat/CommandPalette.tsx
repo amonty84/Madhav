@@ -101,9 +101,13 @@ export function CommandPalette({ open, onOpenChange, commands }: Props) {
             placeholder="Search commands…"
             className="h-11 w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
             aria-label="Search commands"
+            role="combobox"
+            aria-expanded={filtered.length > 0}
+            aria-controls="command-palette-listbox"
+            aria-activedescendant={filtered[selected] ? `cmd-${filtered[selected].id}` : undefined}
           />
         </div>
-        <div className="max-h-80 overflow-y-auto py-1">
+        <div id="command-palette-listbox" role="listbox" aria-label="Commands" className="max-h-80 overflow-y-auto py-1">
           {filtered.length === 0 && (
             <p className="px-3 py-6 text-center text-xs text-muted-foreground">
               No matching commands.
@@ -120,7 +124,10 @@ export function CommandPalette({ open, onOpenChange, commands }: Props) {
                 return (
                   <button
                     key={cmd.id}
+                    id={`cmd-${cmd.id}`}
                     type="button"
+                    role="option"
+                    aria-selected={isActive}
                     onMouseEnter={() => setSelected(idx)}
                     onClick={() => {
                       onOpenChange(false)

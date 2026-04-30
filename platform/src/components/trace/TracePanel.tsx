@@ -107,6 +107,7 @@ function StepRow({
     <button
       type="button"
       onClick={onClick}
+      aria-label={step.step_name.replace(/_/g, ' ')}
       className={`w-full text-left flex items-start gap-2.5 px-3 py-2 transition-colors border-l-2 hover:bg-slate-800/60 ${
         isSelected ? 'bg-slate-800 border-l-blue-500' : 'border-l-transparent'
       }`}
@@ -218,9 +219,10 @@ function ContextInspector({
           <button
             type="button"
             onClick={() => setDrilldownItem(null)}
+            aria-label="Back to context overview"
             className="text-[10px] text-blue-400 hover:text-blue-300 flex items-center gap-1"
           >
-            ← Back
+            ← Back to overview
           </button>
           <span className="text-[10px] text-slate-500 font-mono truncate">{drilldownItem.id}</span>
           <span className={`text-[9px] font-bold ml-auto ${LAYER_COLOR[drilldownItem.layer]?.text ?? ''}`}>
@@ -446,6 +448,8 @@ function LayerRow({
         type="button"
         onDoubleClick={onToggle}
         onClick={onToggle}
+        aria-label={`${expanded ? 'Collapse' : 'Expand'} ${label}`}
+        aria-expanded={expanded}
         className="w-full flex items-center gap-2 py-1.5 px-1 hover:bg-slate-800/40 rounded transition-colors"
       >
         <div className={`w-2 h-2 rounded-sm ${cfg.dot} flex-shrink-0`} />
@@ -471,6 +475,7 @@ function LayerRow({
               key={`${item.id}-${i}`}
               type="button"
               onDoubleClick={() => onDrilldown(item)}
+              aria-label={`View context item: ${item.id}`}
               className="w-full text-left bg-slate-900/80 border border-slate-800 rounded p-1.5 hover:border-slate-700 transition-colors"
             >
               <div className="flex items-center justify-between mb-0.5">

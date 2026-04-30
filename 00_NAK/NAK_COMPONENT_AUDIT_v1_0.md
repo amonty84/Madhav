@@ -1,18 +1,23 @@
 ---
 artifact_id: NAK_COMPONENT_AUDIT
-version: 1.0
-status: DRAFT
+version: 1.1
+status: FINAL
 authored_by: Claude Code (NAK W1-R3 session) 2026-04-30
+revised_by: Claude Code (NAK W2-R3 session) 2026-04-30
 project: NAK — Nakula
-wave_run: W1-R3
+wave_run: W2-R3 (elevated to FINAL)
 role: >
-  Living document. Carries the resolved duplicate list, a11y findings sorted by severity,
-  and the confirmed-for-deletion list. W2-R3 reads this to prioritise fix work.
+  Carries the resolved duplicate list, a11y findings sorted by severity, and the
+  confirmed-for-deletion list. Elevated to FINAL at W2-R3 close — all FIX verdicts resolved,
+  MessageList confirmed KEEP-AS-IS, no components for deletion.
 changelog:
-  - v1.0 (2026-04-30): Initial DRAFT authored by W1-R3. To be elevated to FINAL at W2-R3 close.
+  - v1.0 (2026-04-30): Initial DRAFT authored by W1-R3.
+  - v1.1 (2026-04-30): Elevated to FINAL at W2-R3 close. All HIGH + MEDIUM a11y findings fixed.
+      5 error boundaries created. Metadata added to dashboard/admin/clients layouts.
+      All LOW a11y items addressed. MessageList KEEP-AS-IS confirmed. No components deleted.
 ---
 
-# NAK Component Audit v1.0 (DRAFT)
+# NAK Component Audit v1.1 (FINAL)
 
 ---
 
@@ -39,31 +44,31 @@ All 9 suspects from the W0 baseline were false positives. See `reports/NAK_COMPO
 
 Source: `reports/NAK_COMPONENT_AUDIT_REPORT_W1_R3_v1_0.md Part B`
 
-### HIGH — Fix in W2-R3
+### HIGH — Fixed in W2-R3 ✅
 
-| ID | Component | File | Issue | Fix |
+| ID | Component | File | Issue | Resolution |
 |---|---|---|---|---|
-| A11Y-1 | AppShell | `shared/AppShell.tsx` | No skip-nav link. Keyboard users traverse entire rail + breadcrumb before reaching `<main>`. Affects all portal pages. | Add `<a href="#main-content" className="sr-only focus:not-sr-only ...">Skip to main content</a>` before AppShellRail. Add `id="main-content"` to `<main>`. |
-| A11Y-2 | ChatShell Reports button | `chat/ChatShell.tsx:206` | `<button>` with icon + text (`hidden sm:inline`) + badge. On mobile, text hidden and no `aria-label` — button is unlabelled for screen readers. | Add `aria-label={rightPanelLabel}` to the Reports toggle button. |
-| A11Y-3 | CommandPalette items | `chat/CommandPalette.tsx` | Plain `<button>` list with no `role="listbox"` / `role="option"` / `aria-selected`. Arrow navigation works but screen readers don't announce highlighted command. | Add `role="listbox"` to the list container. Add `role="option"` + `aria-selected={isActive}` to each command button. Add `aria-activedescendant` pointing to selected item id on the input element. |
+| A11Y-1 | AppShell | `shared/AppShell.tsx` | No skip-nav link. | ✅ Added `<a href="#main-content" className="sr-only focus:not-sr-only ...">Skip to main content</a>` before AppShellRail. Added `id="main-content"` to `<main>`. |
+| A11Y-2 | ChatShell Reports button | `chat/ChatShell.tsx` | No `aria-label` on mobile (text hidden). | ✅ Added `aria-label={rightPanelLabel}` to the Reports toggle button. |
+| A11Y-3 | CommandPalette items | `chat/CommandPalette.tsx` | No `role="listbox"` / `role="option"` / `aria-selected`. | ✅ Added `role="combobox"` + `aria-controls` + `aria-activedescendant` to input. Added `id="command-palette-listbox"` + `role="listbox"` to container. Added `role="option"` + `aria-selected={isActive}` + `id` to each command button. |
 
-### MEDIUM — Address in W2-R3
+### MEDIUM — Fixed in W2-R3 ✅
 
-| ID | Component | File | Issue | Fix |
+| ID | Component | File | Issue | Resolution |
 |---|---|---|---|---|
-| A11Y-4 | AdaptiveMessageList | `chat/AdaptiveMessageList.tsx` | No `role="log"` on conversation container. Screen readers don't treat it as a live conversation. | Add `role="log"` + `aria-label="Conversation"` + `aria-live="polite"` to the conversation scroll container in ChatShell/ConsumeChat. |
-| A11Y-5 | StreamingAnswer | `consume/StreamingAnswer.tsx` | Same as A11Y-4 — outer container has no `role="log"`. | Add `role="log"` + `aria-label="Conversation"` on the `<div className="flex w-full flex-col">`. |
-| A11Y-6 | trace/TracePanel StepRow buttons | `trace/TracePanel.tsx` | StepRow/LayerRow/drilldown buttons lack explicit `aria-label`. Accessible name from truncated inner text only. (super_admin only) | Add `aria-label={step.step_name.replace(/_/g, ' ')}` to each StepRow button. |
-| A11Y-7 | ConsumeChat Trace/Panel toggles | `consume/ConsumeChat.tsx:550–560` | `title` attribute only on "Trace" and "Panel" toggle buttons — not reliably announced. | Add `aria-label="Toggle query trace"` and `aria-label="Toggle panel mode"` to replace title-only labelling. |
+| A11Y-4 | ConsumeChat scroll container | `consume/ConsumeChat.tsx` | No `role="log"` on conversation scroll container. | ✅ Added `role="log"` + `aria-label="Conversation"` + `aria-live="polite"` to the scroll container div. |
+| A11Y-5 | StreamingAnswer | `consume/StreamingAnswer.tsx` | No `role="log"` on outer container. | ✅ Added `role="log"` + `aria-label="Conversation"` + `aria-live="polite"` to the outer div. |
+| A11Y-6 | trace/TracePanel buttons | `trace/TracePanel.tsx` | StepRow/LayerRow/drilldown buttons lack explicit `aria-label`. | ✅ Added `aria-label={step.step_name.replace(/_/g, ' ')}` to StepRow. Added `aria-label` + `aria-expanded` to LayerRow toggle. Added `aria-label` to drilldown item buttons. |
+| A11Y-7 | ConsumeChat Trace/Panel toggles | `consume/ConsumeChat.tsx` | `title`-only on Trace and Panel controls. | ✅ Replaced `title` with `aria-label` on Trace button and Panel label. |
 
-### LOW — Best-practice gaps, not blocking
+### LOW — Fixed in W2-R3 ✅
 
-| ID | Component | File | Issue | Fix |
+| ID | Component | File | Issue | Resolution |
 |---|---|---|---|---|
-| A11Y-8 | AppShellRail nav links | `shared/AppShellRail.tsx:70` | Both `title` and `aria-label` on same `<Link>` — redundant, creates double announcement in some AT. | Remove `title` attribute, keep `aria-label`. |
-| A11Y-9 | ChatShell mobile sidebar | `chat/ChatShell.tsx:117` | `showCloseButton={false}` on mobile Sheet — no visible close button, relies on Escape/backdrop. | Add a visible close button or ensure `showCloseButton={true}` on mobile. |
-| A11Y-10 | trace/TracePanel "← Back" | `trace/TracePanel.tsx:222` | Button text ambiguous without context. | Change to "Back to context overview" or similar. |
-| A11Y-11 | StreamingDots spans | `chat/StreamingDots.tsx` | Individual dot spans not `aria-hidden`. Loose but container `aria-label="Thinking"` covers it. | Add `aria-hidden="true"` to each dot span. |
+| A11Y-8 | AppShellRail nav links | `shared/AppShellRail.tsx` | Both `title` and `aria-label` on same `<Link>` — redundant. | ✅ Removed `title` attribute, kept `aria-label`. |
+| A11Y-9 | ChatShell mobile sidebar | `chat/ChatShell.tsx` | `showCloseButton={false}` — no visible close button. | ✅ Removed `showCloseButton={false}` (defaults to true). |
+| A11Y-10 | trace/TracePanel "← Back" | `trace/TracePanel.tsx` | Button text ambiguous without context. | ✅ Changed to "← Back to overview" with `aria-label="Back to context overview"`. |
+| A11Y-11 | StreamingDots spans | `chat/StreamingDots.tsx` | Individual dot spans not `aria-hidden`. | ✅ Added `aria-hidden="true"` to each dot span. |
 
 ### Colour Contrast
 
