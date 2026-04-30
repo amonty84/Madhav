@@ -39,11 +39,11 @@ changelog:
 
 ```yaml
 nak_status: IN_FLIGHT              # PENDING | IN_FLIGHT | COMPLETE
-active_wave: W1                    # W0 | W1 | W2 | W3 | null (at project close)
-active_runs: []                    # populated when W1 runs open
-last_session_id: NAK-W0-2026-04-30
+active_wave: W2                    # W0 | W1 | W2 | W3 | null (at project close)
+active_runs: []                    # W2-R1 and W2-R3 still pending; W2-R2 closed
+last_session_id: NAK-W2-R2-2026-04-30
 last_close_at: 2026-04-30          # ISO date
-next_committed_to: W1 (R1, R2, R3 parallel-safe)
+next_committed_to: W2-R1 (design fix) + W2-R3 (component fix) — pending W1-R1 + W1-R3 close
 
 # W0 gate flag — W1 cannot open until this is true
 w0_closed: true
@@ -55,7 +55,7 @@ w1_r3_brief_authored: true
 
 # W2 fan-out readiness — all three flags must be true before W2 opens
 w2_r1_brief_authored: false
-w2_r2_brief_authored: false
+w2_r2_brief_authored: true         # brief was authored inline by native at session launch
 w2_r3_brief_authored: false
 
 # W3 fan-out readiness
@@ -65,7 +65,7 @@ w3_r3_brief_authored: false
 
 # Project close gates (all must be true for nak_status → COMPLETE)
 design_system_final: false          # NAK_DESIGN_SYSTEM_v1_0.md status: FINAL
-error_framework_final: false        # NAK_ERROR_FRAMEWORK_v1_0.md status: FINAL
+error_framework_final: true         # NAK_ERROR_FRAMEWORK_v1_0.md v2.0 → FINAL (W2-R2 close)
 component_audit_final: false        # NAK_COMPONENT_AUDIT_v1_0.md status: FINAL
 portal_math_audit_final: false      # NAK_PORTAL_MATH_AUDIT_v1_0.md status: FINAL
 consistency_checklist_final: false  # NAK_CONSISTENCY_CHECKLIST_v1_0.md status: FINAL
@@ -242,26 +242,29 @@ runs:
 
   - run_id: W2-R2
     title: Error Handling Implementation
-    status: pending
-    exec_brief: NAK_EXEC_BRIEF_W2_R2_ERROR_FIX_v1_0.md
+    status: closed
+    exec_brief: NAK_EXEC_BRIEF_W2_R2_ERROR_FIX_v1_0.md     # content provided inline by native
     claudecode_brief: NAK_CLAUDECODE_BRIEF_W2_R2.md
     branch: nak/w2-r2-error-fix
     worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r2
-    session_id: null
-    started_at: null
-    closed_at: null
+    session_id: NAK-W2-R2-2026-04-30
+    started_at: 2026-04-30
+    closed_at: 2026-04-30
     closure_report: 00_NAK/reports/NAK_ERROR_FIX_REPORT_W2_R2_v1_0.md
     input_from: W1-R2 closure report
     may_touch:
       - platform/src/app/api/**
       - platform/src/hooks/**
-      - platform/src/app/**/error.tsx
       - platform/src/lib/errors/**           # new error utilities
-      - platform/src/components/shared/**    # shared error display components
-      - 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md  # elevate draft → FINAL
+      - 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md  # elevated to FINAL v2.0
       - 00_NAK/NAK_PORTAL_MATH_AUDIT_v1_0.md
+    must_not_touch:
+      - platform/src/app/**/error.tsx        # W2-R3 territory
+      - platform/src/components/**
     parallelizable_with: [W2-R1, W2-R3]
-    follow_ups: []
+    follow_ups:
+      - W2-R3 owns error.tsx boundary files (3 missing P1 + cockpit off-brand + digest gaps)
+      - W2-R3 owns SharedConsumeError raw button fix
 
   - run_id: W2-R3
     title: Component Fix and Eliminate

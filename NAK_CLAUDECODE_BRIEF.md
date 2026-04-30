@@ -1,22 +1,34 @@
 ---
-artifact: NAK_CLAUDECODE_BRIEF (W1-R2 instance)
+artifact: NAK_CLAUDECODE_BRIEF (W2-R2 instance)
 status: COMPLETE
 authored_on: 2026-04-30
-authored_by: Claude Code (NAK W0 session)
+authored_by: Native (NAK W2-R2 session launch)
 project: NAK — Nakula
-wave_run: W1-R2
-title: Error Handling and Robustness Audit
+wave_run: W2-R2
+title: Error Handling Implementation
 governing_clause: >
   NAK_SOP_v1_0.md §C.2 — NAK Claude Code sessions read this file first.
   This file's status field governs the session: ACTIVE = session open;
   COMPLETE = session closed.
 target_executor: Claude Code (CLI), Sonnet 4.6 in Anti-Gravity / VS Code
-session_class: NAK W1-R2 — audit only, no code changes
-exec_brief: NAK_EXEC_BRIEF_W1_R2_ERROR_v1_0.md
-branch: nak/w1-r2-error-audit
-worktree: ~/Vibe-Coding/Apps/Madhav-nak-w1r2
-parallelizable_with: [W1-R1, W1-R3]
-unblocks: [W2-R2]
+session_class: NAK W2-R2 — code changes permitted within may_touch scope
+branch: nak/w2-r2-error-fix
+worktree: ~/Vibe-Coding/Apps/Madhav-nak-w2r2
+input_from: nak/w1-r2-error-audit
+may_touch:
+  - platform/src/lib/errors/**
+  - platform/src/app/api/**
+  - platform/src/hooks/useFeedback.ts
+  - 00_NAK/NAK_ERROR_FRAMEWORK_v1_0.md
+  - 00_NAK/NAK_PORTAL_MATH_AUDIT_v1_0.md
+  - 00_NAK/NAK_TRACKER_v1_0.md
+  - 00_NAK/reports/NAK_ERROR_FIX_REPORT_W2_R2_v1_0.md
+must_not_touch:
+  - platform/src/app/**/error.tsx
+  - platform/src/components/**
+  - platform/src/app/globals.css
+  - 00_NAK/NAK_DESIGN_SYSTEM_v1_0.md
+  - 00_NAK/NAK_COMPONENT_AUDIT_v1_0.md
 ---
 
 # NAK CLAUDECODE_BRIEF — W1-R2 Error Handling and Robustness Audit

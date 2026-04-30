@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { query } from '@/lib/db/client'
+import { res } from '@/lib/errors'
 
 export async function GET() {
   const auth = await requireSuperAdmin()
@@ -21,6 +22,6 @@ export async function GET() {
     return NextResponse.json({ requests: rows })
   } catch (err) {
     console.error('[admin/access-requests] query failed', err)
-    return NextResponse.json({ error: 'Failed to load requests.' }, { status: 500 })
+    return res.internal('Failed to load requests.')
   }
 }

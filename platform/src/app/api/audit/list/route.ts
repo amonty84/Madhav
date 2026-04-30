@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { listAuditRows } from '@/lib/audit/queries'
+import { res } from '@/lib/errors'
 import type { AuditListFilters } from '@/lib/audit/queries'
 
 export async function GET(request: Request) {
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
     try {
       filters = JSON.parse(filtersParam) as AuditListFilters
     } catch {
-      return NextResponse.json({ error: 'invalid filters JSON' }, { status: 400 })
+      return res.badRequest('invalid filters JSON')
     }
   }
 
@@ -26,6 +27,6 @@ export async function GET(request: Request) {
     return NextResponse.json(result)
   } catch (err) {
     console.error('[api/audit/list] GET failed', err)
-    return NextResponse.json({ error: 'Failed to load audit rows.' }, { status: 500 })
+    return res.internal('Failed to load audit rows.')
   }
 }

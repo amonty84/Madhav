@@ -1,26 +1,35 @@
 ---
 artifact_id: NAK_ERROR_FRAMEWORK
-version: 1.1
-status: DRAFT
+version: 2.0
+status: FINAL
 authored_by: Claude Code (NAK W0 session) 2026-04-30
 revised_by: Claude Code (NAK W1-R2 session) 2026-04-30
+implemented_by: Claude Code (NAK W2-R2 session) 2026-04-30
 project: NAK — Nakula
-wave_run: W0 (draft) → W1-R2 (confirmed/extended §9) → W2-R2 (implement) → final
+wave_run: W0 (draft) → W1-R2 (confirmed/extended §9) → W2-R2 (implement) → FINAL
 purpose: >
   Defines the canonical error contract for the MARSYS-JIS platform portal.
   This is prescriptive (target state). W1-R2 audited current state in depth;
   §2–§7 required no constraint-driven revision. §8 coverage table corrected
   (all 3 "not confirmed" boundaries confirmed present + 3 new P1 gaps found).
-  §9 extended from 7 to 32 confirmed gaps. W2-R2 implements.
+  §9 extended from 7 to 32 confirmed gaps. W2-R2 implemented all 32 gaps;
+  status elevated to FINAL.
 changelog:
   - v1.0 (2026-04-30): W0 authoring — canonical error envelope, four failure modes,
       user-facing messages, display patterns, decision matrix, retry strategy.
   - v1.1 (2026-04-30): W1-R2 deep audit. §8 boundary table corrected and extended.
       §9 replaced with confirmed 32-gap register from full-read audit of all 30 routes
       and 9 hooks. No constraint found requiring revision to §2–§7 prescriptive spec.
+  - v2.0 (2026-04-30): W2-R2 implementation complete. All 32 gaps resolved:
+      platform/src/lib/errors/ created (ApiErrorBody type, factory functions, res.* helpers);
+      all 30 API routes migrated to ApiErrorBody envelope; all specific try-catch gaps
+      wrapped; useFeedback hook error state exposed. Status: DRAFT → FINAL.
+      Deferred to W2-R3: error.tsx boundary files (3 missing P1 boundaries:
+      dashboard, clients/[id]/build, share/[slug]; cockpit off-brand fix;
+      digest display on 4 boundaries; SharedConsumeError raw button).
 ---
 
-# NAK Error Framework v1.0 — DRAFT
+# NAK Error Framework v2.0 — FINAL
 
 ## §1 — Purpose
 
