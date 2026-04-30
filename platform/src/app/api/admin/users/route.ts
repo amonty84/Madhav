@@ -3,6 +3,7 @@ import { requireSuperAdmin } from '@/lib/auth/access-control'
 import { adminAuth } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
 import { validateUsername } from '@/lib/auth/username'
+import { res } from '@/lib/errors'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -33,7 +34,7 @@ export async function GET() {
     return NextResponse.json({ users: rows })
   } catch (err) {
     console.error('[admin/users] GET failed', err)
-    return NextResponse.json({ error: 'Failed to load users.' }, { status: 500 })
+    return res.internal('Failed to load users.')
   }
 }
 
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'invalid request body' }, { status: 400 })
+    return res.badRequest('invalid request body')
   }
 
   const fullName = (body.full_name ?? '').trim()
@@ -54,24 +55,28 @@ export async function POST(request: Request) {
   const role = body.role === 'super_admin' ? 'super_admin' : 'client'
 
   if (!fullName || fullName.length > 100) {
-    return NextResponse.json({ error: 'Full name is required.' }, { status: 400 })
+    return res.badRequest('Full name is required.')
   }
   if (!email || !EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 })
+    return res.badRequest('A valid email is required.')
   }
   const usernameError = validateUsername(username)
-  if (usernameError) return NextResponse.json({ error: usernameError }, { status: 400 })
+  if (usernameError) return res.badRequest(usernameError)
 
   // Duplicate email/username check
-  const { rows: dupRows } = await query<{ id: string }>(
-    'SELECT id FROM profiles WHERE lower(email)=lower($1) OR lower(username)=lower($2) LIMIT 1',
-    [email, username]
-  )
-  if (dupRows.length > 0) {
-    return NextResponse.json(
-      { error: 'A user with that email or username already exists.' },
-      { status: 409 },
+  let dupRows: { id: string }[]
+  try {
+    const result = await query<{ id: string }>(
+      'SELECT id FROM profiles WHERE lower(email)=lower($1) OR lower(username)=lower($2) LIMIT 1',
+      [email, username]
     )
+    dupRows = result.rows
+  } catch (err) {
+    console.error('[admin/users] POST dup-check failed', err)
+    return res.dbError()
+  }
+  if (dupRows.length > 0) {
+    return res.conflict('A user with that email or username already exists.')
   }
 
   let firebaseUser: Awaited<ReturnType<typeof adminAuth.createUser>>
@@ -83,7 +88,7 @@ export async function POST(request: Request) {
     })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Could not create user account.'
-    return NextResponse.json({ error: message }, { status: 400 })
+    return res.internal(message)
   }
 
   const uid = firebaseUser.uid
@@ -97,6 +102,6 @@ export async function POST(request: Request) {
   } catch (err) {
     await adminAuth.deleteUser(uid).catch(() => {})
     const message = err instanceof Error ? err.message : 'Could not create profile.'
-    return NextResponse.json({ error: message }, { status: 500 })
+    return res.internal(message)
   }
 }

@@ -38,6 +38,7 @@ import { createAuditConsumer } from '@/lib/audit/consumer'
 import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
 import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
+import { res } from '@/lib/errors'
 
 // ── Trace helpers ─────────────────────────────────────────────────────────────
 
@@ -94,20 +95,20 @@ export async function POST(request: Request) {
   const setupStart = Date.now()
 
   const user = await getServerUser()
-  if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+  if (!user) return res.unauthenticated()
 
   let body: RequestBody
   try {
     body = await request.json()
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+    return res.badRequest('Invalid JSON body')
   }
 
   const { chartId, messages } = body
   let { conversationId } = body
 
   if (!chartId || !messages) {
-    return NextResponse.json({ error: 'chartId and messages are required' }, { status: 400 })
+    return res.badRequest('chartId and messages are required')
   }
 
   const modelId = isValidModelId(body.model ?? '') ? (body.model as string) : DEFAULT_MODEL_ID
@@ -116,28 +117,35 @@ export async function POST(request: Request) {
     ? (body.style as ConsumeStyle)
     : 'acharya'
 
-  const [chartResult, profileResult, reportsResult] = await Promise.all([
-    query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string; client_id: string }>(
-      'SELECT id, name, birth_date, birth_time, birth_place, client_id FROM charts WHERE id=$1',
-      [chartId]
-    ),
-    query<{ role: string }>(
-      'SELECT role FROM profiles WHERE id=$1',
-      [user.uid]
-    ),
-    query<{ domain: string; title: string; version: string }>(
-      'SELECT domain, title, version FROM reports WHERE chart_id=$1 ORDER BY domain',
-      [chartId]
-    ),
-  ])
+  let chartResult: Awaited<ReturnType<typeof query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string; client_id: string }>>>
+  let profileResult: Awaited<ReturnType<typeof query<{ role: string }>>>
+  let reportsResult: Awaited<ReturnType<typeof query<{ domain: string; title: string; version: string }>>>
+  try {
+    ;[chartResult, profileResult, reportsResult] = await Promise.all([
+      query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string; client_id: string }>(
+        'SELECT id, name, birth_date, birth_time, birth_place, client_id FROM charts WHERE id=$1',
+        [chartId]
+      ),
+      query<{ role: string }>(
+        'SELECT role FROM profiles WHERE id=$1',
+        [user.uid]
+      ),
+      query<{ domain: string; title: string; version: string }>(
+        'SELECT domain, title, version FROM reports WHERE chart_id=$1 ORDER BY domain',
+        [chartId]
+      ),
+    ])
+  } catch {
+    return res.dbError()
+  }
 
-  if (!chartResult.rows[0]) return NextResponse.json({ error: 'Chart not found' }, { status: 404 })
+  if (!chartResult.rows[0]) return res.notFound('chart')
   const chart = chartResult.rows[0]
   const role = profileResult.rows[0]?.role
   const isSuperAdmin = role === 'super_admin'
 
   if (!isSuperAdmin && chart.client_id !== user.uid) {
-    return NextResponse.json({ error: 'forbidden' }, { status: 403 })
+    return res.forbidden()
   }
 
   let isFirstTurn = false
@@ -148,7 +156,7 @@ export async function POST(request: Request) {
   if (conversationId) {
     const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin })
     if (!existing || existing.chart_id !== chartId) {
-      return NextResponse.json({ error: 'Conversation not found' }, { status: 404 })
+      return res.notFound('conversation')
     }
   } else {
     conversationId = crypto.randomUUID()
@@ -413,7 +421,7 @@ export async function POST(request: Request) {
   } catch (pipelineError) {
     const msg = pipelineError instanceof Error ? pipelineError.message : String(pipelineError)
     console.error('[consume:v2] pre-stream error:', msg)
-    return new Response(msg, { status: 500 })
+    return res.internal(msg)
   }
   }
 
