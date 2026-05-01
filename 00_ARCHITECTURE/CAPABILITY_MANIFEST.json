@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 112,
+  "entry_count": 115,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -1153,7 +1153,20 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'",
-      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2"
+      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2",
+      "tool_name": "pattern_register",
+      "tool_description": "Queries discovery patterns by domain, forward_looking, confidence; surfaces revealed chart patterns.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": { "type": "array", "items": { "type": "string" } },
+          "forward_looking": { "type": "boolean" },
+          "confidence_floor": { "type": "number" }
+        },
+        "required": []
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "PATTERN_REGISTER_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_RESONANCES_L3",
@@ -1169,7 +1182,20 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'",
-      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7"
+      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7",
+      "tool_name": "resonance_register",
+      "tool_description": "Returns deep cross-domain resonances bridging signal pairs by theme, domains, forward_looking.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": { "type": "array", "items": { "type": "string" } },
+          "forward_looking": { "type": "boolean" },
+          "theme": { "type": "string" }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "RESONANCE_REGISTER_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_CLUSTERS",
@@ -1185,7 +1211,19 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'",
-      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00"
+      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00",
+      "tool_name": "cluster_atlas",
+      "tool_description": "Returns signal clusters by dominant domain or graph seed hints; cross-domain groupings.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": { "type": "array", "items": { "type": "string" } },
+          "graph_seed_hints": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "CLUSTER_ATLAS_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
@@ -1201,7 +1239,20 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'",
-      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4"
+      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4",
+      "tool_name": "contradiction_register",
+      "tool_description": "Returns unresolved cross-system contradictions by domain, resolution_status, conflict_type.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": { "type": "array", "items": { "type": "string" } },
+          "resolution_status": { "type": "string" },
+          "conflict_type": { "type": "string" }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "CONTRADICTION_REGISTER_v1_0"
     },
     {
       "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
@@ -1882,7 +1933,21 @@
         "REMEDIAL_CODEX_v2_0_PART1",
         "REMEDIAL_CODEX_v2_0_PART2"
       ],
-      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5"
+      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5",
+      "tool_name": "remedial_codex_query",
+      "tool_description": "Returns L4 remedial prescriptions: gemstone, mantra, yantra, devata, dinacharya, propitiation by planet.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "planet": { "type": "string" },
+          "practice_type": { "type": "string" },
+          "keyword": { "type": "string" },
+          "limit": { "type": "integer" }
+        },
+        "required": []
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "REMEDIAL_CODEX_v2_0"
     },
     {
       "canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY",
@@ -1904,10 +1969,103 @@
         "LIFETIME_TIMELINE_v1_0"
       ],
       "fingerprint": "d234_timeline_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_MSR_SQL",
+      "path": "platform/src/lib/retrieve/msr_sql.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "Filters 499 MSR signals by domain/planet/signal_type/valence/temporal_activation/forward_looking/confidence \u2014 primary structured query path for L2.5 signals.",
+      "fingerprint": "w2_manifest_msr_sql_v1_0_0",
+      "tool_name": "msr_sql",
+      "tool_description": "Filters 499 MSR signals by domain, planet, signal_type, valence, temporal_activation, forward_looking, confidence.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": { "type": "array", "items": { "type": "string" } },
+          "planets": { "type": "array", "items": { "type": "string" } },
+          "signal_type": { "type": "array", "items": { "type": "string" } },
+          "temporal_activation": { "type": "array", "items": { "type": "string" } },
+          "valence": { "type": "array", "items": { "type": "string" } },
+          "entities_involved_any": { "type": "array", "items": { "type": "string" } },
+          "forward_looking": { "type": "boolean" },
+          "confidence_floor": { "type": "number" }
+        },
+        "required": []
+      },
+      "token_cost_hint": "hi",
+      "linked_data_asset_id": "MSR_v3_0"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_CGM_GRAPH_WALK",
+      "path": "platform/src/lib/retrieve/cgm_graph_walk.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "BFS traversal of CGM graph from seed nodes outward; returns visited nodes and edges by traversal depth. Backed by l25_cgm_nodes/l25_cgm_edges.",
+      "fingerprint": "w2_manifest_cgm_graph_walk_v1_0_0",
+      "tool_name": "cgm_graph_walk",
+      "tool_description": "Traverses CGM graph from seed nodes outward; returns nodes and edges by depth.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "graph_seed_hints": { "type": "array", "items": { "type": "string" } },
+          "graph_traversal_depth": { "type": "integer" },
+          "edge_type": { "type": "string" }
+        },
+        "required": ["graph_seed_hints"]
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "CGM"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_VECTOR_SEARCH",
+      "path": "platform/src/lib/retrieve/vector_search.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "Semantic vector retrieval over rag_chunks using Vertex AI embeddings; filterable by doc_type/layer; top_k results.",
+      "fingerprint": "w2_manifest_vector_search_v1_0_0",
+      "tool_name": "vector_search",
+      "tool_description": "Semantic vector retrieval over rag_chunks by query_text; filterable by doc_type, layer; top_k.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "query_text": { "type": "string" },
+          "doc_type": { "type": "array", "items": { "type": "string" } },
+          "layer": { "type": "string" },
+          "top_k": { "type": "integer" }
+        },
+        "required": ["query_text"]
+      },
+      "token_cost_hint": "hi",
+      "linked_data_asset_id": "RAG_CHUNKS"
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30",
-  "manifest_version": "1.7",
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01",
+  "manifest_version": "1.8",
   "last_updated": "2026-05-01",
-  "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
+  "last_updated_by": "W2-MANIFEST (UQE-4a/4b/UQE-8: planner-tool metadata + 3 new primary-tool entries)"
 }
