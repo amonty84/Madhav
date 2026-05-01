@@ -11469,3 +11469,63 @@ LEL gate clearance recorded. M4-A entry unblocked.
 Next session: **M4-A-S1** — Swiss Ephemeris computation pass for 11
 `pending_computation` events; propose calibration scoring rubric to native;
 begin LEL↔MSR event-match records. First M4 substantive session.
+
+M4-A-T2-PPL-INFRA | 2026-05-01 | CLOSED
+PPL migration: PRED.M3D.HOLDOUT.001 + .002 appended to prediction_ledger.jsonl (partition: held_out). LL.1 STUB banner replaced with ACTIVE-PENDING. OBSERVATIONS/ directory scaffolded. AC.T2.1–T2.5: PASS. Commit: f7f477e
+
+M4-A-T3-RUBRIC-SCHEMA | 2026-05-01 | CLOSED
+CALIBRATION_RUBRIC_v1_0.md authored (status: AWAITING_NATIVE_APPROVAL). Three options proposed — A: binary, B: graded-proximity, C: domain-bucket. Recommendation: Option B (preserves per-signal granularity + temporal gradient, accommodates dasha/transit axis split, degrades gracefully on approximate-date events). lel_event_match_records_schema.json authored (JSON Schema draft-07, all required fields). NAP.M4.1 ready for native review. AC.T3.1–T3.7: PASS. Commit: be7134b
+
+M4-A-T1-SWISS-EPHEMERIS | 2026-05-01 | CLOSED
+Swiss Ephemeris computation pass for 11 LEL events advanced from `pending_computation` to computed state via `compute_vimshottari` / `compute_yogini` / `compute_transits` (Lahiri ayanamsha; Moshier ephemeris; pyswisseph). 9 proxy-date events (2000, 2004, 2007, 2012, 2021×2, 2022, 2025, 2026-01) + 2 exact-date events (2026-03-20, 2026-04-08). LEL v1.3→v1.4 with changelog entry; total_events_logged note refreshed; status note appended; frontmatter `version: 1.4`. No `computation_error` events — all three engines returned clean output for all 11 dates. Spot-check: 2000-06-01 Saturn-Venus-Jupiter Vimshottari + Siddha/Venus Yogini matches the populated EVT.2001.03.XX.01 neighbour (Saturn-Venus, Siddha/Venus). Per AC.M4A.1 of PHASE_M4_PLAN_v1_0.md §3.1: discharged. AC.T1.1–T1.5: PASS. Commit: 5d015bd
+
+M4-A-T4-GAP-AUDIT | 2026-05-01 | CLOSED
+LEL_GAP_AUDIT_v1_0.md: decade-by-decade gap analysis on 46 events. 11 gaps flagged (GAP.M4A.01–11); 5 accept / 6 elicit-recommended / 0 infer. Decade × category matrix produced (1984–1989: 1 event; 1990–1999: 2; 2000–2009: 11; 2010–2019: 15; 2020–2026: 17; 1.10 events/yr lifetime, 2.43 events/yr in 2020–2026). Highest-impact elicit gap is GAP.M4A.04 (travel sparsity, 1 event in 42 years) given chart's CVG.03 / SIG.MSR.004 / SIG.MSR.005 foreign-land architecture. Other elicit gaps: 1990–1999 education, 1990–1999 family, 2010–2019 health (chronic patterns active, zero discrete entries), psychological 1984–2019, spiritual 1984–2019. Six elicit-recommended gaps queued as candidates for a future LEL minor-version pass at native discretion (out of T4 scope; T1 owns LEL writes). msr_domain_buckets.json: 495 of 499 claimed MSR signals categorized across 10 domain buckets via deterministic mapping of each signal's `domains_affected` field (career→career; wealth→financial; relationships→relationship; family/parents/children→family; mind→psychological; spirit→spiritual; travel→travel; health→health). Bucket counts: career=207, education=0, health=31, relationship=39, family=20, financial=64, psychological=20, spiritual=94, travel=5, general=15. 440 signals carry multi-domain trail in `multi_domain_notes`. Education bucket empty by structural design — MSR ontology has no `education` domain tag; education event-matching in T1 should rely on house-based filtering (HSE.4 / HSE.5 / Mercury / Jupiter). 4 missing signal IDs flagged (SIG.MSR.207, .497, .498, .499 absent from MSR v3.0 file vs claimed 499 — minor MSR metadata drift recorded for M5+ disposition). 15 signals with empty `domains_affected: []` appropriately routed to general (yoga-absence, parivartana, statistics/red-team meta-signals; not fabricated). AC.T4.1–T4.6: PASS. Commit: 73d9e76
+
+---
+
+**M4-A-INTEGRATION-PASS** | 2026-05-02 | CLOSED
+
+M4-A Round 2 integration pass. Administrative session — no new corpus work; verifies
+T1–T4 non-overlap, annotates LEL §9 migration provenance, updates CURRENT_STATE, and
+appends this SESSION_LOG entry.
+
+**Non-overlap verification (PASS):**
+T1 touched only `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` (commit 5d015bd). ✓
+T2 touched only `06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl`,
+  `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md`,
+  `06_LEARNING_LAYER/OBSERVATIONS/README.md` (commit f7f477e). ✓
+T3 touched only `06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md`,
+  `06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records_schema.json` (commit be7134b). ✓
+T4 touched only `06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md`,
+  `06_LEARNING_LAYER/OBSERVATIONS/msr_domain_buckets.json` (commit 73d9e76). ✓
+Zero file conflicts. Integration precondition SATISFIED.
+
+**LEL §9 annotation (AC from M4_A_PARALLEL_BRIEFS integration checklist item 2):**
+Added `migrated: true`, `migrated_at: 2026-05-02`, `migrated_by_session: M4-A-T2-PPL-INFRA`,
+`migration_destination: 06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl`
+to both PRED.M3D.HOLDOUT.001 and PRED.M3D.HOLDOUT.002 in LEL §9. LEL bumped
+v1.4 → v1.5 with changelog entry.
+
+**NAP.M4.1 status — ready for native review:**
+`06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md` DRAFT is complete.
+Three options defined (A: binary, B: graded-proximity, C: domain-bucket). Worked
+examples for all three using EVT.2023.07.XX.01. Track T3 recommendation: Option B
+for first M4 calibration cycle. Native selects one option to unblock M4-A-S2
+(event-match record population). No time pressure — M4-A-S2 does not begin until
+NAP.M4.1 is approved.
+
+**IS.8(a) cadence — held at counter=3 (PENDING):**
+M4-A Round 2 (T1–T4) counted as one collective substantive session. Counter
+incremented 2→3. IS.8(a) discharge NOT performed in this administrative pass.
+Counter held at 3 (cadence-pending). M4-A-S2 MUST discharge IS.8(a) as first
+gate before any corpus work.
+
+**CURRENT_STATE update:**
+v1.1 → v1.2. active_phase_plan_sub_phase records Round 2 complete.
+last_session_id → M4-A-INTEGRATION-PASS-2026-05-02.
+next_session_objective → M4-A-S2 (IS.8(a) + NAP.M4.1 + event-match records).
+next_session_proposed_cowork_thread_name → "M4-A-S2 — Event-Match Records (post-NAP.M4.1)".
+red_team_counter: 2 → 3 (held, cadence-pending).
+
+**Commit:** (integration pass — LEL v1.5 + CURRENT_STATE v1.2 + SESSION_LOG append)

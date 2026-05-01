@@ -3,8 +3,8 @@ document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_2
-version: 1.4
-status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts. v1.4: 11 v1.3 pending_computation events advanced to computed state via M4-A-T1-SWISS-EPHEMERIS pass.)
+version: 1.5
+status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts. v1.4: 11 v1.3 pending_computation events advanced to computed state via M4-A-T1-SWISS-EPHEMERIS pass. v1.5: §9 PPL migration annotations added.)
 supersedes: v1.1 (same-corpus, chart-state-populated)
 author: Claude (Session 2, Claude Code instance)
 date_built: 2026-04-17
@@ -24,6 +24,10 @@ next_steps:
   - Future: Expand toward 75-100 events; drain §6 gap register
   - Future (v2.0): Pattern Library (RPT.LFE.01) when Deep Analysis v2.0 exists
 changelog:
+  - v1.5 (2026-05-02, M4-A-INTEGRATION-PASS): §9 PPL migration annotations added. Both
+    PRED.M3D.HOLDOUT.001 and PRED.M3D.HOLDOUT.002 annotated with migrated: true,
+    migrated_at, migrated_by_session, migration_destination. Migration to
+    prediction_ledger.jsonl was performed by M4-A-T2-PPL-INFRA (commit f7f477e).
   - v1.4 (2026-05-01, M4-A-T1-SWISS-EPHEMERIS): Swiss Ephemeris computation pass for 11 pending_computation events. All chart states populated (proxy dates where exact dates unavailable). M4-A AC.M4A.1 discharged.
 expose_to_chat: true
 native_id: "abhisek"
@@ -1903,6 +1907,10 @@ PRED.M3D.HOLDOUT.001:
   outcome: null
   outcome_source: null
   outcome_recorded_at: null
+  migrated: true
+  migrated_at: 2026-05-02
+  migrated_by_session: M4-A-T2-PPL-INFRA
+  migration_destination: 06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl
 
 PRED.M3D.HOLDOUT.002:
   source_artifact: 00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md §3
@@ -1929,6 +1937,10 @@ PRED.M3D.HOLDOUT.002:
   outcome: null
   outcome_source: null
   outcome_recorded_at: null
+  migrated: true
+  migrated_at: 2026-05-02
+  migrated_by_session: M4-A-T2-PPL-INFRA
+  migration_destination: 06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl
 ```
 
 *Future predictions emitted in M3 / M4 / M5 / M6 sessions append here in the
