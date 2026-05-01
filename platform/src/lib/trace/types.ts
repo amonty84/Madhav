@@ -147,11 +147,53 @@ export interface TraceStep {
   payload: TracePayload
 }
 
-/** Event sent over SSE and through the in-process emitter */
+/**
+ * Planning lifecycle events (W2-TRACE-A, UQE-5b). Emitted by manifest_planner
+ * before/after the LLM-first planner runs so the UI can show a planning
+ * indicator + materialise the plan as soon as it's available.
+ */
+export interface PlanningStartEvent {
+  event: 'planning_start'
+  query_id: string
+  planner_model_id: string
+  manifest_tool_count: number
+}
+
+export interface PlanningDoneEvent {
+  event: 'planning_done'
+  query_id: string
+  tool_count_planned: number
+  tools_selected: string[]
+  query_intent_summary: string
+  planner_latency_ms: number
+}
+
+/**
+ * Event sent over SSE and through the in-process emitter.
+ *
+ * Modeled as a single open shape (not a discriminated union) so existing
+ * consumers — notably useTraceStream which checks `event.step` directly —
+ * keep type-checking. Variant-specific fields are optional and only
+ * populated for the matching `event` value.
+ */
 export interface TraceEvent {
-  event: 'step_start' | 'step_done' | 'step_error' | 'done'
+  event:
+    | 'step_start'
+    | 'step_done'
+    | 'step_error'
+    | 'done'
+    | 'planning_start'
+    | 'planning_done'
   query_id: string
   step?: TraceStep
+  // ── planning_start fields (W2-TRACE-A) ─────────────────────────────────────
+  planner_model_id?: string
+  manifest_tool_count?: number
+  // ── planning_done fields (W2-TRACE-A) ──────────────────────────────────────
+  tool_count_planned?: number
+  tools_selected?: string[]
+  query_intent_summary?: string
+  planner_latency_ms?: number
 }
 
 // ── BHISMA-B3 analytics types ─────────────────────────────────────────────────

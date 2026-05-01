@@ -32,6 +32,7 @@ import { resolveModel } from '@/lib/models/resolver'
 import { configService } from '@/lib/config/index'
 import { classify } from '@/lib/router/router'
 import { callLlmPlanner, PlannerError, type PlanSchema } from '@/lib/pipeline/manifest_planner'
+import { plannerCircuit, PlannerCircuitOpenError } from '@/lib/pipeline/planner_circuit_breaker'
 import { compose } from '@/lib/bundle/rule_composer'
 import { getTool } from '@/lib/retrieve/index'
 import { createToolCache, executeWithCache } from '@/lib/cache/index'
@@ -45,6 +46,12 @@ import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
 import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
 import { res } from '@/lib/errors'
+import {
+  writeLlmCallLog,
+  writeQueryPlanLog,
+  writeContextAssemblyLog,
+  resolveProvider,
+} from '@/lib/db/monitoring-write'
 
 // ── Trace helpers ─────────────────────────────────────────────────────────────
 
@@ -218,16 +225,43 @@ export async function POST(request: Request) {
         role: m.role as 'user' | 'assistant',
         content: extractText(m.parts ?? []),
       }))
+    // Pre-allocate query_id so it's stable across planner + classify and can be
+    // used by all monitoring write helpers, even when the planner runs before
+    // classify() generates the QueryPlan.
+    const preAllocatedQueryId = crypto.randomUUID()
     let planSchema: PlanSchema | null = null
+    let plannerLatencyMs: number | null = null
+    let plannerModelIdUsed: string | null = null
+    let plannerErrorMsg: string | null = null
+    let plannerFallbackUsed = false
     if (configService.getFlag('LLM_FIRST_PLANNER_ENABLED')) {
+      const plannerModelId = STACK_ROUTING[selectedStack].planner_fast.primary
+      plannerModelIdUsed = plannerModelId
+      const plannerStartedAt = Date.now()
       try {
-        const plannerModelId = STACK_ROUTING[selectedStack].planner_fast.primary
-        planSchema = await callLlmPlanner(queryText, plannerHistory, plannerModelId, chartId)
+        planSchema = await plannerCircuit.call(() =>
+          callLlmPlanner(
+            queryText,
+            plannerHistory,
+            plannerModelId,
+            chartId,
+            (event) => traceEmitter.emitStep(event),
+            preAllocatedQueryId,
+          ),
+        )
+        plannerLatencyMs = Date.now() - plannerStartedAt
       } catch (err) {
-        if (err instanceof PlannerError) {
+        plannerLatencyMs = Date.now() - plannerStartedAt
+        plannerFallbackUsed = true
+        if (err instanceof PlannerCircuitOpenError) {
+          console.warn('[planner] circuit open — skipping planner, using classify() fallback')
+          plannerErrorMsg = 'circuit_open'
+        } else if (err instanceof PlannerError) {
           console.warn('[planner] LLM planner failed, falling back to classify()', err.message)
+          plannerErrorMsg = err.message
         } else {
           console.warn('[planner] unexpected planner error, falling back to classify()', err)
+          plannerErrorMsg = err instanceof Error ? err.message : String(err)
         }
         planSchema = null
       }
@@ -238,8 +272,33 @@ export async function POST(request: Request) {
       audience_tier: isSuperAdmin ? 'super_admin' : 'client',
       manifest_fingerprint: manifest.fingerprint,
       conversation_history: plannerHistory,
+      query_plan_id: preAllocatedQueryId,
     })
     const queryId = queryPlan.query_plan_id
+
+    // ── MON-6: query_plan_log write ────────────────────────────────────────
+    // Only emit when the planner actually ran. Successful planner → full plan
+    // payload; PlannerError fallback → parsing_success=false + parse_error.
+    if (plannerModelIdUsed) {
+      void writeQueryPlanLog({
+        query_id: queryId,
+        conversation_id: finalConversationId ?? null,
+        chart_id: chartId ?? null,
+        planner_model_id: plannerModelIdUsed,
+        query_text: queryText,
+        query_class: planSchema?.query_class ?? queryPlan.query_class,
+        tool_count: planSchema
+          ? planSchema.tool_calls.length
+          : queryPlan.tools_authorized.length,
+        plan_json: planSchema
+          ? (planSchema as unknown as Record<string, unknown>)
+          : null,
+        parsing_success: planSchema !== null,
+        parse_error: plannerErrorMsg,
+        fallback_used: plannerFallbackUsed,
+        planner_latency_ms: plannerLatencyMs,
+      })
+    }
 
     // When the planner produced a plan, its tool list overrides classify()'s
     // tools_authorized. classify() + compose() still run so the bundle and the
@@ -539,7 +598,10 @@ export async function POST(request: Request) {
             messages: finalMessages,
           })
           if (isFirstTurn) {
-            generateConversationTitle(finalMessages).then((title: string | null) => {
+            generateConversationTitle(finalMessages, {
+              queryId,
+              conversationId: finalConversationId,
+            }).then((title: string | null) => {
               if (title) void updateConversationTitle(finalConversationId, title)
             })
           }

@@ -30,6 +30,8 @@ import {
   type CapabilityManifest,
 } from '@/lib/pipeline/manifest_compressor'
 import { buildPlannerContext } from '@/lib/pipeline/planner_context_builder'
+import type { PlanningStartEvent, PlanningDoneEvent } from '@/lib/trace/types'
+import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 
 // ────────────────────────────────────────────────────────────────────────────
 // PlanSchema (TS) + PlannerError
@@ -187,12 +189,14 @@ export async function callLlmPlanner(
   conversationHistory: Array<{ role: string; content: string }>,
   plannerModelId: string,
   nativeId: string,
+  emitTrace?: (event: PlanningStartEvent | PlanningDoneEvent) => void,
+  queryId?: string,
 ): Promise<PlanSchema> {
   const manifest = loadManifest()
   const compressed = compressManifest(manifest)
   const compressedManifestStr = compressedManifestToString(compressed)
 
-  const ctx = await buildPlannerContext(query, conversationHistory, plannerModelId)
+  const ctx = await buildPlannerContext(query, conversationHistory, plannerModelId, queryId)
 
   // The user message is JSON the planner consumes alongside the verbatim
   // system prompt. native_id is included so the planner can keep per-native
@@ -209,6 +213,14 @@ export async function callLlmPlanner(
   }
   const userMessage = JSON.stringify(userPayload)
 
+  // nativeId doubles as the SSE query_id for the request that owns this plan.
+  emitTrace?.({
+    event: 'planning_start',
+    query_id: nativeId,
+    planner_model_id: plannerModelId,
+    manifest_tool_count: compressed.length,
+  })
+
   const start = Date.now()
   let result
   try {
@@ -220,12 +232,47 @@ export async function callLlmPlanner(
       temperature: 0,
     })
   } catch (err) {
+    if (queryId) {
+      void writeLlmCallLog({
+        query_id: queryId,
+        conversation_id: null,
+        call_stage: 'planner',
+        model_id: plannerModelId,
+        provider: resolveProvider(plannerModelId),
+        input_tokens: null,
+        output_tokens: null,
+        reasoning_tokens: null,
+        latency_ms: Date.now() - start,
+        cost_usd: null,
+        fallback_used: false,
+        error_code: err instanceof Error ? err.message : String(err),
+        payload: null,
+      })
+    }
     throw new PlannerError(
       `LLM planner call failed: ${err instanceof Error ? err.message : String(err)}`,
       err,
     )
   }
   const latency_ms = Date.now() - start
+
+  if (queryId) {
+    void writeLlmCallLog({
+      query_id: queryId,
+      conversation_id: null,
+      call_stage: 'planner',
+      model_id: plannerModelId,
+      provider: resolveProvider(plannerModelId),
+      input_tokens: result.usage?.inputTokens ?? null,
+      output_tokens: result.usage?.outputTokens ?? null,
+      reasoning_tokens: null,
+      latency_ms,
+      cost_usd: null,
+      fallback_used: false,
+      error_code: null,
+      payload: null,
+    })
+  }
 
   const parsed = PlanSchemaZod.safeParse(result.object)
   if (!parsed.success) {
@@ -234,6 +281,15 @@ export async function callLlmPlanner(
       parsed.error,
     )
   }
+
+  emitTrace?.({
+    event: 'planning_done',
+    query_id: nativeId,
+    tool_count_planned: parsed.data.tool_calls.length,
+    tools_selected: Array.from(new Set(parsed.data.tool_calls.map(tc => tc.tool_name))),
+    query_intent_summary: parsed.data.query_intent_summary,
+    planner_latency_ms: latency_ms,
+  })
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(
