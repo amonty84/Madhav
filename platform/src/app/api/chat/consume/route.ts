@@ -10,7 +10,7 @@ import type { ModelMessage, UIMessage } from 'ai'
 import { NextResponse } from 'next/server'
 import { getServerUser } from '@/lib/firebase/server'
 import { query } from '@/lib/db/client'
-import { consumeTools } from '@/lib/claude/consume-tools'
+import { consumeTools, buildConsumeTools } from '@/lib/claude/consume-tools'
 import { consumeSystemPrompt, type ConsumeStyle } from '@/lib/claude/system-prompts'
 import {
   getConversation,
@@ -95,6 +95,7 @@ interface RequestBody {
   model?: string
   style?: string
   panel_opt_in?: boolean
+  lel_context_enabled?: boolean
 }
 
 export async function POST(request: Request) {
@@ -135,6 +136,10 @@ export async function POST(request: Request) {
   const style: ConsumeStyle = ALLOWED_STYLES.includes(body.style as ConsumeStyle)
     ? (body.style as ConsumeStyle)
     : 'acharya'
+
+  // LEL context toggle. Undefined or true = informed mode (LEL included).
+  // False = blind mode (LEL excluded; query logged as prospective prediction).
+  const lelContextEnabled = body.lel_context_enabled !== false
 
   let chartResult: Awaited<ReturnType<typeof query<{ id: string; name: string; birth_date: string; birth_time: string; birth_place: string; client_id: string }>>>
   let profileResult: Awaited<ReturnType<typeof query<{ role: string }>>>
@@ -429,6 +434,30 @@ export async function POST(request: Request) {
         } catch (err) {
           console.error('[consume:v2] persistence failed', err)
         }
+        if (!lelContextEnabled) {
+          try {
+            const fs = await import('fs/promises')
+            const path = await import('path')
+            const ledgerPath = path.join(process.cwd(), '..', '06_LEARNING_LAYER',
+              'PREDICTION_LEDGER', 'prediction_ledger.jsonl')
+            const entry = JSON.stringify({
+              pred_id: `PRED.BLIND.${Date.now()}`,
+              emitted_at: new Date().toISOString(),
+              mode: 'blind',
+              chart_id: chartId,
+              conversation_id: conversationId,
+              query: extractText(messages[messages.length - 1]?.parts ?? []),
+              outcome: null,
+              confidence: null,
+              horizon: null,
+              falsifier: null,
+              note: 'Auto-logged blind-mode query. Outcome/confidence/horizon/falsifier to be filled by native.',
+            }) + '\n'
+            await fs.appendFile(ledgerPath, entry, 'utf8')
+          } catch {
+            // Non-fatal: prediction ledger write failure does not block the response.
+          }
+        }
       },
       onError: (error: unknown) => {
         const msg = error instanceof Error ? error.message : String(error)
@@ -473,7 +502,7 @@ export async function POST(request: Request) {
   // Some models (e.g. DeepSeek R1) don't support tool-use reliably; omit tools
   // entirely for those so the model answers from conversation context alone
   // rather than emitting malformed tool calls.
-  const toolsForModel = supports(modelId, 'tool-use') ? consumeTools : undefined
+  const toolsForModel = supports(modelId, 'tool-use') ? buildConsumeTools(lelContextEnabled) : undefined
 
   const result = streamText({
     model: resolveModel(modelId),
@@ -538,6 +567,30 @@ export async function POST(request: Request) {
         }
       } catch (err) {
         console.error('[consume] persistence failed', err)
+      }
+      if (!lelContextEnabled) {
+        try {
+          const fs = await import('fs/promises')
+          const path = await import('path')
+          const ledgerPath = path.join(process.cwd(), '..', '06_LEARNING_LAYER',
+            'PREDICTION_LEDGER', 'prediction_ledger.jsonl')
+          const entry = JSON.stringify({
+            pred_id: `PRED.BLIND.${Date.now()}`,
+            emitted_at: new Date().toISOString(),
+            mode: 'blind',
+            chart_id: chartId,
+            conversation_id: conversationId,
+            query: extractText(messages[messages.length - 1]?.parts ?? []),
+            outcome: null,
+            confidence: null,
+            horizon: null,
+            falsifier: null,
+            note: 'Auto-logged blind-mode query. Outcome/confidence/horizon/falsifier to be filled by native.',
+          }) + '\n'
+          await fs.appendFile(ledgerPath, entry, 'utf8')
+        } catch {
+          // Non-fatal: prediction ledger write failure does not block the response.
+        }
       }
     },
     onError: error => {

@@ -574,9 +574,16 @@ export function ConsumeChat({
                     Trace
                   </button>
                 )}
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
+          {!lelContextEnabled && (
+            <div className="mx-4 mb-2 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800 ring-1 ring-amber-200">
+              <strong>Blind mode active.</strong> Life events are excluded from
+              this query. Divergences from the historical record are the point.
+            </div>
+          )}
           <Composer
             ref={composerRef}
             onSubmit={handleSend}
