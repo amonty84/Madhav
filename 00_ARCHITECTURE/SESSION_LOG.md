@@ -12671,3 +12671,218 @@ session_close:
 
 Commit: 78449b8 (post-merge-main, 2026-05-03).
 
+---
+
+## M4-B-P3-MIRROR-MANIFEST — Mirror Sync (MP.1+MP.2) + Capability Manifest Update
+
+**Closed:** 2026-05-03
+**Branch:** post-merge-main
+**Class:** parallel-slot governance-aside (concurrent with M4-B-S5 NAP.M4.5 trigger)
+
+### Summary
+
+Mirror discipline (ND.1) bring-up after the parallel-cluster M4-B-S3 / S4 / P1 / P2 cycle. The prior MP.1 + MP.2 sync at M4-B-S2-MIRROR-TWOPASS (commit 568cfe3) discharged its window. Subsequent substantive sessions accumulated state delta — LL.2 shadow weights, KR.M4A.CLOSE.1 rubric flip, LL.3 + LL.4 recommendation docs, IS.8(a) red-team, GAP.M4A.04 partial close, NAP.M4.5 dossier — without re-propagating to the Gemini-side surfaces. This session brings `.geminirules` and `.gemini/project_state.md` to adapted parity reflecting the cumulative state at the moment M4-B-S5 opens, and registers 13 new canonical artifacts in `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` (entry_count 115→128; manifest_version 1.8→1.9).
+
+S5 runs concurrently as the NAP.M4.5 native pass_2 trigger session. Per brief AC.P3.5, this P3 session takes CURRENT_STATE v2.2 (S5 reserves v2.1). At write time S5 had not landed; merge coordination notes appear in CURRENT_STATE v2.2 changelog parallel_session_notes block.
+
+### Acceptance criteria
+
+- **AC.P3.1** ✓ Read `.geminirules`, `.gemini/project_state.md`, CURRENT_STATE v2.0. Identified delta from M4-B-S2 (commit 568cfe3) → S3 (LL.2 + rubric flip) → S4 (LL.3+LL.4 + RT) → P1 (GAP partial close) → P2 (NAP.M4.5 dossier).
+- **AC.P3.2** ✓ `.geminirules` updated — adapted-parity narrative entry appended; reflects M4-A CLOSED, M4-B in flight through S4, LL.1 shadow weights + pass_1 approved (30 production_pending_pass_2), LL.2 shadow CONDITIONAL_PASS, LL.3 + LL.4 recommendation docs, NAP.M4.5 dossier, S5 in flight.
+- **AC.P3.3** ✓ `.gemini/project_state.md` updated — `_Last updated:_` block re-authored. Includes LL.1 shadow stats (380/30/285/52/13), red_team_counter reset to 0 at S4 (F.RT.S4.* all LOW/NOTE/INFO), schema_validator baseline 108 violations.
+- **AC.P3.4** ✓ `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` updated — 13 new canonical artifact entries registered. Each entry's frontmatter read directly before registration (no memorized version strings). `ll4_prediction_priors_v1_0.json` deferred to S6 manifest pass per brief (S5 in flight as concurrent session creating that file).
+- **AC.P3.5** ✓ CURRENT_STATE v2.0 → v2.2 (frontmatter + changelog entry; S5 reserves v2.1 if it lands first, else last writer wins per merge convention). session_notes flag parallel-slot status.
+- **AC.P3.6** ✓ This SESSION_LOG entry. Commit hash will be stamped post-commit per brief.
+- **AC.P3.7** ✓ Manifest validity confirmed via Python `json.load()` — JSON_OK; entry_count=128; tail enumeration matches 13 new canonical_ids. schema_validator.py not run (lives in platform/ — must_not_touch).
+
+### Files touched (all within declared may_touch)
+
+- `.geminirules` — footer narrative appended (MP.1 mirror).
+- `.gemini/project_state.md` — `_Last updated:_` block re-authored (MP.2 composite mirror); prior M4-B-S2 narrative retained verbatim in nested block per existing convention.
+- `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` — 13 entries appended; `entry_count: 115 → 128`; `manifest_version: "1.8" → "1.9"`; `last_updated: 2026-05-01 → 2026-05-02`; `last_updated_by` rotated; `manifest_fingerprint` extended.
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — frontmatter version 2.0 → 2.2; changelog entry v2.2 prepended; §2 canonical state pointers UNCHANGED (parallel-slot governance-aside class).
+- `00_ARCHITECTURE/SESSION_LOG.md` — this entry appended.
+
+### New canonical artifacts registered (13)
+
+| canonical_id | path | version | status | layer | phase |
+|---|---|---|---|---|---|
+| SHADOW_MODE_PROTOCOL_v1_0 | 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md | 1.0 | APPROVED | L_GOVERNANCE | M4-B |
+| M4_A_CLOSE_v1_0 | 00_ARCHITECTURE/M4_A_CLOSE_v1_0.md | 1.0 | CURRENT | L_GOVERNANCE | M4-A |
+| JH_EXPORT_DISPOSITION_v1_0 | 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md | 1.0 | NATIVE_DECIDED | L_GOVERNANCE | M4-A |
+| LEL_GAP_AUDIT_v1_2 | 06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md | 1.2 | COMPLETE | L_LEARNING | M4-A |
+| LL1_TWO_PASS_APPROVAL_v1_0 | 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md | 1.0 | PASS_1_COMPLETE_PENDING_NAP_M4_5 | L_LEARNING | M4-B |
+| ll1_shadow_weights_v1_0 | 06_LEARNING_LAYER/.../shadow/ll1_shadow_weights_v1_0.json | 1.0 | SHADOW | L_LEARNING | M4-B |
+| ll1_weights_promoted_v1_0 | 06_LEARNING_LAYER/.../production/ll1_weights_promoted_v1_0.json | 1.0 | PRODUCTION_PENDING_PASS_2 | L_LEARNING | M4-B |
+| NAP_M4_5_DOSSIER_v1_0 | 00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md | 1.0 | AWAITING_NATIVE_REVIEW | L_GOVERNANCE | M4-B |
+| LL2_EDGE_WEIGHT_DESIGN_v1_0 | 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md | 1.0 | CURRENT | L_LEARNING | M4-B |
+| LL2_STABILITY_GATE_v1_0 | 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md | 1.0 | CURRENT | L_LEARNING | M4-B |
+| ll2_edge_weights_v1_0 | 06_LEARNING_LAYER/.../shadow/ll2_edge_weights_v1_0.json | 1.0 | SHADOW | L_LEARNING | M4-B |
+| LL3_DOMAIN_COHERENCE_v1_0 | 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md | 1.0 | CURRENT | L_LEARNING | M4-B |
+| LL4_PREDICTION_PRIOR_v1_0 | 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md | 1.0 | CURRENT | L_LEARNING | M4-B |
+
+### Next session objective
+
+**M4-B-S5** — NAP.M4.5 native pass-2 trigger + LL.4 follow-through (concurrent with this P3 session). After S5: M4-B-S6 manifest pass to register `ll4_prediction_priors_v1_0.json` (deferred from this session per brief).
+
+```yaml
+session_close:
+  session_id: M4-B-P3-MIRROR-MANIFEST
+  closed_at: "2026-05-03T01:00:00+05:30"
+  current_state_updated: true
+  files_touched:
+    - path: .geminirules
+      mutation_type: modified
+      justification: "AC.P3.2 — MP.1 mirror sync; footer narrative appended to adapted parity"
+      within_declared_scope: true
+    - path: .gemini/project_state.md
+      mutation_type: modified
+      justification: "AC.P3.3 — MP.2 composite mirror sync; _Last updated:_ block re-authored to adapted parity"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      mutation_type: modified
+      justification: "AC.P3.4 — 13 new entries registered; entry_count 115→128; manifest_version 1.8→1.9; manifest_fingerprint extended"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.P3.5 — frontmatter version 2.0→2.2; changelog v2.2 prepended; §2 canonical state pointers UNCHANGED (parallel-slot governance-aside)"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "AC.P3.6 — this entry appended"
+      within_declared_scope: true
+  registry_updates_made:
+    canonical_artifacts:
+      - canonical_id: SHADOW_MODE_PROTOCOL_v1_0
+        change: registered
+      - canonical_id: M4_A_CLOSE_v1_0
+        change: registered
+      - canonical_id: JH_EXPORT_DISPOSITION_v1_0
+        change: registered
+      - canonical_id: LEL_GAP_AUDIT_v1_2
+        change: registered
+      - canonical_id: LL1_TWO_PASS_APPROVAL_v1_0
+        change: registered
+      - canonical_id: ll1_shadow_weights_v1_0
+        change: registered
+      - canonical_id: ll1_weights_promoted_v1_0
+        change: registered
+      - canonical_id: NAP_M4_5_DOSSIER_v1_0
+        change: registered
+      - canonical_id: LL2_EDGE_WEIGHT_DESIGN_v1_0
+        change: registered
+      - canonical_id: LL2_STABILITY_GATE_v1_0
+        change: registered
+      - canonical_id: ll2_edge_weights_v1_0
+        change: registered
+      - canonical_id: LL3_DOMAIN_COHERENCE_v1_0
+        change: registered
+      - canonical_id: LL4_PREDICTION_PRIOR_v1_0
+        change: registered
+      - canonical_id: CURRENT_STATE
+        change: changelog_entry_added_v2_2
+        details: "frontmatter version 2.0 → 2.2; §2 canonical state pointers unchanged"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: true
+      both_updated_same_session: true
+      rationale: "MP.1 mirror sync DISCHARGED — .geminirules footer appended to adapted parity reflecting cumulative state delta from M4-B-S2 (commit 568cfe3) through S4. Claude-side CLAUDE.md unchanged this session; the cumulative delta is encoded in CURRENT_STATE / SESSION_LOG / 06_LEARNING_LAYER artifacts referenced from CLAUDE.md §C/§F by reference per CANONICAL_ARTIFACTS §1 single-source-of-truth rule."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: true
+      both_updated_same_session: true
+      rationale: "MP.2 composite mirror sync DISCHARGED — Claude-side composite (CURRENT_STATE bumped + SESSION_LOG entry appended) + Gemini-side .gemini/project_state.md _Last updated:_ block re-authored. Adapted parity, not byte-identity."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP v2.0 frozen; no cascade"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged; no cascade"
+    - pair_id: MP.5
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST updated (FILE_REGISTRY successor); 13 new entries registered. Per CANONICAL_ARTIFACTS §2 MP.5 known_asymmetries, Gemini-side carries L2.5 canonical-path subset only — new M4-B learning-layer entries are below the L2.5 surface and outside MP.5 mirror scope; no Gemini-side update required."
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"
+  red_team_pass:
+    due: false
+    performed: false
+    rationale: "Governance-aside class (mirror sync + manifest update only — no engine, retrieval, synthesis, or calibration weight work). Per ONGOING_HYGIENE_POLICIES §G governance asides do not increment the every-third counter, and do not fire IS.8(a) cadence. Counter unchanged at 0 (reset 3→0 at predecessor M4-B-S4 close). Next IS.8(a) cadence-fires at counter=3 (three substantive sessions hence). IS.8(b) macro-phase-close at M4-D."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Governance-aside scope (mirror + manifest); per brief AC.P3.7 schema_validator not run (lives in platform/ — must_not_touch). Manifest JSON validity confirmed via Python json.load(): JSON_OK; entry_count=128; tail enumeration matches 13 new canonical_ids."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: not_run
+    rationale: "Lives in platform/ — must_not_touch this session. Manifest validity confirmed via Python json.load() per AC.P3.7."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "Governance-aside scope; mirror_enforcer.py lives in platform/ — must_not_touch. MP.1+MP.2 propagation evidence carried in mirror_updates_propagated block above; both surfaces touched same-session per ND.1."
+  step_ledger_updated: n/a
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Governance-aside session; no portal-build-tracker state delta; out of P3 scope."
+  parallel_session_notes: >
+    M4-B-P3-MIRROR-MANIFEST (this close) ran as a parallel slot alongside M4-B-S5
+    (NAP.M4.5 native pass_2 trigger). The two sessions touch disjoint file scopes
+    by design: P3 owns .geminirules + .gemini/project_state.md + CAPABILITY_MANIFEST
+    + CURRENT_STATE + SESSION_LOG; S5 owns 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/**
+    + LL1_TWO_PASS_APPROVAL + CURRENT_STATE + SESSION_LOG. Conflict surface:
+    CURRENT_STATE_v1_0.md and SESSION_LOG.md. Version-coordination convention per
+    P3 brief AC.P3.5: this session writes CURRENT_STATE v2.2; S5 expected to write
+    v2.1 (the v2.1 line in changelog is RESERVED). last_session_id race: P3 leaves
+    last_session_id UNCHANGED (parallel-slot governance-aside class — no canonical
+    state pointer mutation); S5 will write its own last_session_id reflecting its
+    substantive close. At merge time, S5's pointers stand; this P3 changelog block
+    is preserved alongside S5's. Counter coordination: P3 is governance-aside
+    (no increment per ONGOING_HYGIENE_POLICIES §G); S5, if substantive, will
+    increment 0→1. Manifest deferral: ll4_prediction_priors_v1_0.json is created
+    by S5 concurrently — its registration is deferred to S6 manifest pass per
+    brief hard constraint. drift_detector.py / schema_validator.py / mirror_enforcer.py
+    re-runs to be invoked at next platform-touching close.
+  close_criteria_met: true
+  unblocks: "M4-B-S5 (NAP.M4.5 native pass-2 trigger; concurrent — already in flight); M4-B-S6 manifest pass to register ll4_prediction_priors_v1_0.json"
+  handoff_notes: >
+    Mirror discipline ND.1 obligation discharged for the cumulative M4-B-S3 / S4 /
+    P1 / P2 delta. Next MP.1+MP.2 sync window opens at the next cumulative state
+    delta (likely after NAP.M4.5 closes and LL.1 production weights flip from
+    `production_pending_pass_2` → `production`, which is a phase-class transition
+    requiring same-session mirror per protocol §K.3). CAPABILITY_MANIFEST is now
+    at v1.9 / 128 entries; the next manifest pass at S6 should register
+    ll4_prediction_priors_v1_0.json (S5's concurrent deliverable). 13 new entries
+    registered this session each have one-line description + version + status +
+    layer + phase per brief AC.P3.4; each frontmatter was read directly before
+    registration (no memorized version strings).
+```
+
+Commit: pending (post-commit hash stamp).
+

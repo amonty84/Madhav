@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 115,
+  "entry_count": 128,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -1159,9 +1159,18 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "domains": { "type": "array", "items": { "type": "string" } },
-          "forward_looking": { "type": "boolean" },
-          "confidence_floor": { "type": "number" }
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "confidence_floor": {
+            "type": "number"
+          }
         },
         "required": []
       },
@@ -1188,9 +1197,18 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "domains": { "type": "array", "items": { "type": "string" } },
-          "forward_looking": { "type": "boolean" },
-          "theme": { "type": "string" }
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "theme": {
+            "type": "string"
+          }
         },
         "required": []
       },
@@ -1217,8 +1235,18 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "domains": { "type": "array", "items": { "type": "string" } },
-          "graph_seed_hints": { "type": "array", "items": { "type": "string" } }
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "graph_seed_hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         },
         "required": []
       },
@@ -1245,9 +1273,18 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "domains": { "type": "array", "items": { "type": "string" } },
-          "resolution_status": { "type": "string" },
-          "conflict_type": { "type": "string" }
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "resolution_status": {
+            "type": "string"
+          },
+          "conflict_type": {
+            "type": "string"
+          }
         },
         "required": []
       },
@@ -1939,10 +1976,18 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "planet": { "type": "string" },
-          "practice_type": { "type": "string" },
-          "keyword": { "type": "string" },
-          "limit": { "type": "integer" }
+          "planet": {
+            "type": "string"
+          },
+          "practice_type": {
+            "type": "string"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
         },
         "required": []
       },
@@ -1990,14 +2035,48 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "domains": { "type": "array", "items": { "type": "string" } },
-          "planets": { "type": "array", "items": { "type": "string" } },
-          "signal_type": { "type": "array", "items": { "type": "string" } },
-          "temporal_activation": { "type": "array", "items": { "type": "string" } },
-          "valence": { "type": "array", "items": { "type": "string" } },
-          "entities_involved_any": { "type": "array", "items": { "type": "string" } },
-          "forward_looking": { "type": "boolean" },
-          "confidence_floor": { "type": "number" }
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "planets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "signal_type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "temporal_activation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entities_involved_any": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "confidence_floor": {
+            "type": "number"
+          }
         },
         "required": []
       },
@@ -2024,11 +2103,22 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "graph_seed_hints": { "type": "array", "items": { "type": "string" } },
-          "graph_traversal_depth": { "type": "integer" },
-          "edge_type": { "type": "string" }
+          "graph_seed_hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "graph_traversal_depth": {
+            "type": "integer"
+          },
+          "edge_type": {
+            "type": "string"
+          }
         },
-        "required": ["graph_seed_hints"]
+        "required": [
+          "graph_seed_hints"
+        ]
       },
       "token_cost_hint": "med",
       "linked_data_asset_id": "CGM"
@@ -2053,19 +2143,218 @@
       "query_schema": {
         "type": "object",
         "properties": {
-          "query_text": { "type": "string" },
-          "doc_type": { "type": "array", "items": { "type": "string" } },
-          "layer": { "type": "string" },
-          "top_k": { "type": "integer" }
+          "query_text": {
+            "type": "string"
+          },
+          "doc_type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "layer": {
+            "type": "string"
+          },
+          "top_k": {
+            "type": "integer"
+          }
         },
-        "required": ["query_text"]
+        "required": [
+          "query_text"
+        ]
       },
       "token_cost_hint": "hi",
       "linked_data_asset_id": "RAG_CHUNKS"
+    },
+    {
+      "canonical_id": "SHADOW_MODE_PROTOCOL_v1_0",
+      "path": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md",
+      "version": "1.0",
+      "status": "APPROVED",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "Per-mechanism shadow-to-production discipline for the Learning Layer (LL.1\u2013LL.7); \u00a73 promotion criteria APPROVED at NAP.M4.4 (2026-05-02): N>=3, var<=0.3, two-pass approval, validity margin match_rate>=0.4. Authoritative gate for every LL weight write in M4-B and M4-C."
+    },
+    {
+      "canonical_id": "M4_A_CLOSE_v1_0",
+      "path": "00_ARCHITECTURE/M4_A_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "M4-A sub-phase sealing artifact (LEL Ground-Truth Spine). 8 sections; 10/10 ACs PASS; 1 doc-drift carry KR.M4A.CLOSE.1 (DISCHARGED at M4-B-S3); 1 LOW carry KR.M4A.RT.LOW.1 (commit 0793719 malformed root tree). Successor sub-phase: M4-B (LL.1\u2013LL.4 activation). M4 macro-phase remains active."
+    },
+    {
+      "canonical_id": "JH_EXPORT_DISPOSITION_v1_0",
+      "path": "00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md",
+      "version": "1.0",
+      "status": "NATIVE_DECIDED",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "Native decision (NAP.M4.3 / AC.M4A.8) on KR.M3A.JH-EXPORT (DIS.009 verification path): Option Y \u2014 carry forward to M5. DIS.009 stays resolved-R3-pending-ECR. JH integration target: M5 alongside Sthana+Drik Shadbala ECR + Narayana Dasha ECR per ED.1."
+    },
+    {
+      "canonical_id": "LEL_GAP_AUDIT_v1_2",
+      "path": "06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md",
+      "version": "1.2",
+      "status": "COMPLETE",
+      "layer": "L_LEARNING",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "LEL chronological-completeness audit against v1.6 corpus (46 events). 11 gaps flagged with native dispositions (NAP.M4.2): 1 partially_closed (GAP.M4A.04 travel post-LEL-v1.6-patch) + 5 deferred + 5 accept. \u00a75.5 documents B.10-strict full-close attempt audit verdict PARTIAL_CLOSE. Implements PHASE_M4_PLAN AC.M4A.7.",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "LL1_TWO_PASS_APPROVAL_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+      "version": "1.0",
+      "status": "PASS_1_COMPLETE_PENDING_NAP_M4_5",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 two-pass approval pass_1 record for the 30 promotion-eligible signals. pass_1_reviewer = Claude-surrogate-M4-B-S2 (surrogate-for-Gemini, MACRO_PLAN \u00a7Multi-Agent flagged); 30 approved / 0 held / 0 demoted. pass_2 binding gate: native at NAP.M4.5 (M4-B close)."
+    },
+    {
+      "canonical_id": "ll1_shadow_weights_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 shadow signal-weight register (M4-B-S1). 380 signals observed across 37 training events (9 held-out excluded). Buckets: 30 promotion_eligible_pending_two_pass / 285 insufficient_observations / 52 shadow_indefinite_low_match_rate / 13 shadow_indefinite_high_variance. n=1 disclaimer binding."
+    },
+    {
+      "canonical_id": "ll1_weights_promoted_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json",
+      "version": "1.0",
+      "status": "PRODUCTION_PENDING_PASS_2",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 production-pending register (M4-B-S2 pass_1 output). 30 signals; weights_in_production_register=false; downstream pipeline must NOT consume until pass_2 (NAP.M4.5) discharges. Tier-A=24 / Tier-B=3 / Tier-C=3 (SIG.MSR.118/.119/.143 yoga-absences flagged)."
+    },
+    {
+      "canonical_id": "NAP_M4_5_DOSSIER_v1_0",
+      "path": "00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md",
+      "version": "1.0",
+      "status": "AWAITING_NATIVE_REVIEW",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "Native-facing pass_2 dossier for NAP.M4.5 \u2014 binding gate for production promotion of the 30 LL.1 signals. 6 sections incl. full 30-signal table sorted by mean_match_rate, deep-dive on 3 Tier-C yoga-absences (joint-firing analysis: empirical signature of three independent phenomena, not one phenomenon counted three times), spot-check guide, and blank pass_2 decision-record template. ~20 min review."
+    },
+    {
+      "canonical_id": "LL2_EDGE_WEIGHT_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 graph edge weight modulator design document (authored before computation per AC.S3.3). \u00a73 deterministic algorithm; \u00a73.5 EMPIRICAL ADJUSTMENT \u2014 strict cross-domain filter relaxed at compute time given LEL training corpus is domain-stratified (every event fires actual_lit_signals from a single domain bucket); \u00a75 output schema; \u00a76 known limitations at n=37."
+    },
+    {
+      "canonical_id": "LL2_STABILITY_GATE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 stability gate decision record (AC.S3.2 + AC.M4B.3). gate_decision = CONDITIONAL_PASS \u2014 LL.2 shadow writes permitted, production promotion BLOCKED until LL.1 NAP.M4.5 (pass_2) closes. Re-evaluation trigger: NAP.M4.5 close per \u00a75."
+    },
+    {
+      "canonical_id": "ll2_edge_weights_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 shadow edge-weight register (M4-B-S3). 9,922 edges (HIGH=0, MED=8 Pancha-Mahapurusha clique on SIG.MSR.117/.118/.119/.143/.145/.402, LOW=9,914, ZERO=0). cross_domain_count=0; intra_domain_count=9,922 per \u00a73.5 finding. All edges promotion_blocked pending NAP.M4.5. Held-out 9 events sacrosanct."
+    },
+    {
+      "canonical_id": "LL3_DOMAIN_COHERENCE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.3 domain-bucket coherence diagnostic recommendation (M4-B-S4). 10-bucket MSR-anchored coverage: 134/495 signals (27%) never fired across 3 unobserved buckets (family/psychological/spiritual); education structurally absent. 7 recommendations: 3 fix-before-prod (R.LL3.1\u2013.3) + 4 investigate-in-M5 (R.LL3.4\u2013.7). Recommendation document only; no shadow\u2192production split per protocol \u00a72 LL.3 row."
+    },
+    {
+      "canonical_id": "LL4_PREDICTION_PRIOR_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.4 qualitative-tier prediction prior recommendation (M4-B-S4). Training mean=0.630 / held_out=0.913 \u2014 held_out flagged as not a clean validity figure under H1 selection-bias hypothesis. classical_rule + both bases at 1.000 perfect calibration; temporal_engine 0.4267 = variance carrier. Tiers STRONG / MODERATE (0.4\u20130.5) / WEAK with date-precision modifier. Recommendation document only; no shadow\u2192production split per protocol \u00a72 LL.4 row."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01",
-  "manifest_version": "1.8",
-  "last_updated": "2026-05-01",
-  "last_updated_by": "W2-MANIFEST (UQE-4a/4b/UQE-8: planner-tool metadata + 3 new primary-tool entries)"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02",
+  "manifest_version": "1.9",
+  "last_updated": "2026-05-02",
+  "last_updated_by": "M4-B-P3-MIRROR-MANIFEST (mirror sync + 13 new M4-A/M4-B artifact entries)"
 }

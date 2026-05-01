@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 2.0
+version: 2.2
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,57 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v2.2 (2026-05-02, M4-B-P3-MIRROR-MANIFEST): Parallel-slot governance-aside session
+    running alongside M4-B-S5 (NAP.M4.5 native pass_2 trigger; in flight at write time).
+    Per brief AC.P3.5 ("CURRENT_STATE → v2.2 (S5 takes v2.1)"). At write time S5 had
+    not yet landed; this session takes v2.2 and reserves v2.1 for S5.
+    parallel_session_notes: This session does NOT alter canonical state pointers
+    (`last_session_id`, `next_session_objective`, `active_phase_plan_sub_phase`,
+    `red_team_counter`, `file_updated_at`, `file_updated_by_session` all remain as
+    set by predecessor M4-B-S4-LL3-DOMAIN-COHERENCE at v2.0). The version increment
+    reserves v2.2 in the sequence to honor the brief AC.P3.5 coordination rule.
+    Two deliverables (within may_touch only):
+    (1) `.geminirules` — footer narrative appended (MP.1 mirror sync). Adapted-parity
+    bring-up reflecting state delta from prior MP.1 sync at M4-B-S2 (commit 568cfe3)
+    through M4-B-S3 (LL.2 edge weights + KR.M4A.CLOSE.1 rubric flip), M4-B-S4
+    (LL.3 + LL.4 docs + IS.8(a) red-team), M4-B-P1 (GAP.M4A.04 partial close),
+    M4-B-P2 (NAP.M4.5 dossier).
+    (2) `.gemini/project_state.md` — `_Last updated:_` block re-authored (MP.2
+    composite mirror). Same state delta. Prior M4-B-S2 narrative retained verbatim
+    in nested `_Prior session narrative retained:_` block per existing convention.
+    (3) `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` — 13 new entries registered
+    (SHADOW_MODE_PROTOCOL_v1_0, M4_A_CLOSE_v1_0, JH_EXPORT_DISPOSITION_v1_0,
+    LEL_GAP_AUDIT_v1_2, LL1_TWO_PASS_APPROVAL_v1_0, ll1_shadow_weights_v1_0,
+    ll1_weights_promoted_v1_0, NAP_M4_5_DOSSIER_v1_0, LL2_EDGE_WEIGHT_DESIGN_v1_0,
+    LL2_STABILITY_GATE_v1_0, ll2_edge_weights_v1_0, LL3_DOMAIN_COHERENCE_v1_0,
+    LL4_PREDICTION_PRIOR_v1_0). entry_count 115→128. manifest_version 1.8→1.9.
+    manifest_fingerprint extended. ll4_prediction_priors_v1_0.json deferred to S6
+    manifest pass per brief (S5 in flight as concurrent session creating that file).
+    Each entry's frontmatter read directly before registration per brief hard
+    constraint (no memorized version strings).
+    (4) `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v2.0→v2.2 (this update; frontmatter
+    version + changelog entry; no §2 canonical state pointer changes).
+    (5) `00_ARCHITECTURE/SESSION_LOG.md` — entry appended.
+    Validation: Python `json.load()` on CAPABILITY_MANIFEST.json — JSON_OK; 128
+    entries; tail enumeration matches 13 new canonical_ids.
+    Mirror discipline: MP.1 + MP.2 propagated this session per ND.1 (Mirror
+    Discipline) bidirectional obligation. Adapted parity, not byte-identity:
+    Gemini-side asymmetries (L4 Discovery focus, no signal_weights/** access)
+    preserved per CANONICAL_ARTIFACTS §2 known_asymmetries.
+    No red-team this session (governance-aside class — small narrative + manifest
+    update; per ONGOING_HYGIENE_POLICIES §G substantive corpus/engine sessions
+    increment, governance asides do not). red_team_counter unchanged at 0.
+    Out-of-scope (per brief must_not_touch): `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**`,
+    `06_LEARNING_LAYER/OBSERVATIONS/**`, `01_FACTS_LAYER/**`,
+    `025_HOLISTIC_SYNTHESIS/**`, `platform/**`. Brief AC.P3.7: schema_validator
+    not run (lives in platform/ — must_not_touch); manifest validity confirmed via
+    Python `json.load()` only.
+    parallel_session_notes (S5 coordination): At write time S5 had not landed.
+    If S5 lands at v2.1 chronologically before this commit, no merge action needed —
+    S5 takes v2.1 and this v2.2 changelog block sits below it. If S5 lands after,
+    last writer's `last_session_id` / `file_updated_at` / `red_team_counter` (if
+    substantive at S5) wins; this session's changelog block is preserved alongside.
+    drift_detector / mirror_enforcer to be re-run after merge.
   - v2.0 (2026-05-02, M4-B-S4-LL3-DOMAIN-COHERENCE): Clean-marker version bump after
     the parallel M4-B-S3 / P1 / P2 sessions merged into v1.7–v1.9. v2.0 marks the
     landing of M4-B-S4 — substantive learning-layer-substrate session producing two
