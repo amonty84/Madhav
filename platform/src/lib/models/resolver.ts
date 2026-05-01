@@ -6,6 +6,7 @@ import { extractReasoningMiddleware, wrapLanguageModel } from 'ai'
 import type { LanguageModel } from 'ai'
 import { getModelMeta, getWorkerForModel } from './registry'
 import { getOpenAIModel } from './openai'
+import { getNvidiaModel } from './nvidia'
 
 // DeepSeek R1 wraps its chain-of-thought in <think>…</think> blocks.
 // The middleware separates them into the reasoning stream-part channel so
@@ -42,6 +43,11 @@ export function resolveModel(id: string): LanguageModel {
       return deepseek(meta.id)
     case 'openai':
       return getOpenAIModel(meta.id)
+    case 'nvidia':
+      // NVIDIA NIM — OpenAI-compatible endpoint. Models in this provider are
+      // planner-only (role='planner') and are never called from synthesis paths.
+      // Requires NVIDIA_NIM_API_KEY env variable.
+      return getNvidiaModel(meta.id)
     default: {
       const _exhaustive: never = meta.provider
       throw new Error(`Unhandled provider: ${String(_exhaustive)}`)

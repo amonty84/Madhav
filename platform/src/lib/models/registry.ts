@@ -15,7 +15,7 @@
  * convention (streamText with system message). No o-series / reasoning convention.
  */
 
-export type Provider = 'anthropic' | 'google' | 'deepseek' | 'openai'
+export type Provider = 'anthropic' | 'google' | 'deepseek' | 'openai' | 'nvidia'
 export type Capability = 'tool-use' | 'prompt-caching'
 export type SpeedTier = 'fast' | 'balanced' | 'deep'
 export type ModelTier = 'premium' | 'mid' | 'worker'
@@ -26,7 +26,12 @@ export type ModelTier = 'premium' | 'mid' | 'worker'
  * Workers are the cheapest model in their family; synthesis models are the
  * full set exposed to the user for final-answer generation.
  */
-export type ModelRole = 'worker' | 'synthesis' | 'both'
+/**
+ * planner — NVIDIA NIM models used exclusively as internal planners; never
+ * exposed to users for synthesis. Excluded from synthesisPicker() automatically
+ * since that helper only includes 'synthesis' | 'both'.
+ */
+export type ModelRole = 'worker' | 'synthesis' | 'both' | 'planner'
 
 export interface ModelMeta {
   id: string
@@ -221,6 +226,57 @@ export const MODELS: ModelMeta[] = [
     costPer1MInput: 2.00,
     costPer1MOutput: 8.00,
   },
+
+  // ── NVIDIA NIM — planner-only models ────────────────────────────────────────
+  // These models are NOT user-selectable for synthesis (role='planner').
+  // They are used exclusively as internal planners when NVIDIA_PLANNER_ENABLED=true,
+  // routed by query class via getNvidiaPlanner(). All three are available on
+  // NVIDIA's free NIM endpoint (https://integrate.api.nvidia.com/v1) —
+  // cost fields reflect the free tier ($0.00), update when billing is activated.
+  //
+  // Routing:
+  //   multi_domain | remedial | holistic  → nemotron-ultra-253b (deep CoT, 97% MATH-500)
+  //   planetary | dasha | transit         → qwen3-235b-a22b    (MoE, fast structured JSON)
+  //   summarization / fallback            → llama-3.1-8b       (worker, minimal latency)
+  {
+    id: 'nvidia/llama-3.1-nemotron-ultra-253b-v1',
+    provider: 'nvidia',
+    tier: 'premium',
+    label: 'Nemotron Ultra 253B',
+    hint: 'NVIDIA deep planner — 253B CoT, 97% MATH-500 (internal only)',
+    speedTier: 'deep',
+    maxOutputTokens: 32_768,
+    capabilities: ['tool-use'],
+    role: 'planner',
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
+  {
+    id: 'qwen/qwen3-235b-a22b',
+    provider: 'nvidia',
+    tier: 'mid',
+    label: 'Qwen3 235B-A22B',
+    hint: 'NVIDIA fast planner — MoE 22B active, excellent JSON (internal only)',
+    speedTier: 'balanced',
+    maxOutputTokens: 32_768,
+    capabilities: ['tool-use'],
+    role: 'planner',
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
+  {
+    id: 'meta/llama-3.1-8b-instruct',
+    provider: 'nvidia',
+    tier: 'worker',
+    label: 'Llama 3.1 8B',
+    hint: 'NVIDIA worker — summarization and lightweight planning (internal only)',
+    speedTier: 'fast',
+    maxOutputTokens: 8_192,
+    capabilities: [],
+    role: 'planner',
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
 ]
 
 // DeepSeek V3 is the default because it has working tool-use + low cost.
@@ -282,6 +338,7 @@ export const PROVIDER_LABEL: Record<Provider, string> = {
   google: 'Google',
   deepseek: 'DeepSeek',
   openai: 'OpenAI',
+  nvidia: 'NVIDIA NIM',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -301,10 +358,11 @@ export const PROVIDER_LABEL: Record<Provider, string> = {
  * entry reflects user-facing positioning; this map governs internal routing.
  */
 export const FAMILY_WORKER: Record<Provider, string> = {
-  anthropic: 'claude-haiku-4-5',      // tier=worker  $1.00/$5.00
-  google:    'gemini-2.0-flash-lite',  // tier=worker  $0.015/$0.06
-  openai:    'gpt-4o-mini',            // tier=worker  $0.15/$0.60
-  deepseek:  'deepseek-chat',          // tier=mid (no cheaper option) $0.27/$1.10
+  anthropic: 'claude-haiku-4-5',                // tier=worker  $1.00/$5.00
+  google:    'gemini-2.0-flash-lite',            // tier=worker  $0.015/$0.06
+  openai:    'gpt-4o-mini',                      // tier=worker  $0.15/$0.60
+  deepseek:  'deepseek-chat',                    // tier=mid (no cheaper option) $0.27/$1.10
+  nvidia:    'meta/llama-3.1-8b-instruct',       // tier=worker  $0.00 (free NIM endpoint)
 }
 
 const ULTIMATE_WORKER_FALLBACK = 'claude-haiku-4-5'
@@ -318,4 +376,52 @@ export function getWorkerForModel(synthesisModelId: string): string {
   const meta = MODEL_INDEX[synthesisModelId]
   if (!meta) return ULTIMATE_WORKER_FALLBACK
   return FAMILY_WORKER[meta.provider] ?? ULTIMATE_WORKER_FALLBACK
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NVIDIA NIM — query-class-based planner routing
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Query classes that benefit from Nemotron Ultra's deep chain-of-thought.
+ * Multi-domain, remedial, and holistic queries involve cross-layer reasoning
+ * and mathematical signal weighting — the 253B CoT model excels here.
+ */
+export const NVIDIA_DEEP_PLANNER_QUERY_CLASSES = [
+  'multi_domain',
+  'remedial',
+  'holistic',
+] as const
+
+/**
+ * Query classes that benefit from Qwen3-235B's fast MoE inference.
+ * Single-domain planetary/dasha/transit queries need tight structured JSON
+ * output; Qwen3's 22B active params deliver high-quality JSON at low latency.
+ */
+export const NVIDIA_FAST_PLANNER_QUERY_CLASSES = [
+  'planetary',
+  'dasha',
+  'transit',
+] as const
+
+/**
+ * Return the NVIDIA NIM model ID most appropriate for the given query class.
+ *
+ * Called by the UQE planner when NVIDIA_PLANNER_ENABLED is true. The caller
+ * is responsible for checking the feature flag — this function always returns
+ * a valid model ID regardless.
+ *
+ * Routing table:
+ *   multi_domain | remedial | holistic  → nemotron-ultra-253b-v1 (deep CoT)
+ *   planetary | dasha | transit         → qwen3-235b-a22b        (fast MoE)
+ *   everything else                     → llama-3.1-8b-instruct  (worker)
+ */
+export function getNvidiaPlanner(queryClass: string): string {
+  if ((NVIDIA_DEEP_PLANNER_QUERY_CLASSES as readonly string[]).includes(queryClass)) {
+    return 'nvidia/llama-3.1-nemotron-ultra-253b-v1'
+  }
+  if ((NVIDIA_FAST_PLANNER_QUERY_CLASSES as readonly string[]).includes(queryClass)) {
+    return 'qwen/qwen3-235b-a22b'
+  }
+  return 'meta/llama-3.1-8b-instruct'
 }

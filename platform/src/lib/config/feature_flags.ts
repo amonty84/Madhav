@@ -48,6 +48,12 @@ export type FeatureFlag =
   | 'DISCOVERY_RESONANCE_ENABLED'
   /** Enables cluster_atlas retrieval tool. */
   | 'DISCOVERY_CLUSTER_ENABLED'
+  // NVIDIA NIM — query-class-aware planner routing (BHISMA Wave 2 / UQE-4a).
+  // Default OFF; flip true after NVIDIA_NIM_API_KEY is provisioned and UQE-4a
+  // planner call site is wired. When ON, getNvidiaPlanner(queryClass) selects
+  // the NIM model; when OFF, FAMILY_WORKER for the synthesis model is used.
+  /** Routes UQE planner calls to NVIDIA NIM models by query class. */
+  | 'NVIDIA_PLANNER_ENABLED'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -87,6 +93,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   DISCOVERY_CONTRADICTION_ENABLED: true,
   DISCOVERY_RESONANCE_ENABLED: true,
   DISCOVERY_CLUSTER_ENABLED: true,
+  // NVIDIA NIM planner — OFF until NVIDIA_NIM_API_KEY provisioned + UQE-4a wired.
+  NVIDIA_PLANNER_ENABLED: false,
 }
 
 // Numeric config keys (read via configService.getValue)
