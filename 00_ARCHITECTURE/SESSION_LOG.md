@@ -11887,7 +11887,7 @@ M4-B parallel-slot governance-aside session running concurrently with M4-B-S3 (L
 
 **Next session.** `M4-B-S3` (parallel sibling) — LL.2 graph edge weight modulators (shadow-mode) gated on LL.1 stability per `SHADOW_MODE_PROTOCOL §3.5`; KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip. After S3 closes, the `parallel_session_notes` block in CURRENT_STATE §2 should be removed at the next steady-state close.
 
-Commit: PENDING (hash stamped via follow-up commit after this entry lands).
+Commit: d06b341b8cfacb16715977527b7bf3c9b87aaf8f (stamped via follow-up).
 
 ---
 
