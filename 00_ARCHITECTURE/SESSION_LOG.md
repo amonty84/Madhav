@@ -11716,4 +11716,4 @@ First M4-B Learning Layer computation. LL.1 Signal Weight Calibration — initia
 - AC.T2.6 PASS — summary stats printed and recorded above.
 - AC.T2.7 PASS — only files inside may_touch were modified.
 
-Commit: 8be27158dc4121d5317ff4cec895bdb1ce291663
+Commit: 550fa7770d525ab19fce4237d3fede6c9c57bf56 (stamped via follow-up; original work commit; superseded only by a hash-stamp follow-up).
