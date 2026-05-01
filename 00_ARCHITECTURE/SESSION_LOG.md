@@ -11435,3 +11435,37 @@ lel_context_enabled forwarded via extraBody in useChatSession (no hook
 edit required). Track C: consumeSystemPrompt() blindMode param + BLIND
 MODE declaration block. Track D: blindMode wire-up verified + tsc clean +
 tests confirmed. Commit: 659e031 (pre-amend hash 522229d; SESSION_LOG amend shifted to 659e031).
+
+---
+
+**Cowork-M4-W1-PLAN-AUTHORING-2026-05-01** | 2026-05-01 | CLOSED
+Cowork session. M4 plan-authoring (M4-W1) + LEL gate clearance finalization.
+
+Three deliverables:
+
+(1) **LEL v1.3 committed** (e9dc44b). 11 new events inserted via Python
+script from native voice elicitation: Aptech 2000, CMU exchange declined
+2004, sleep disorder onset 2007–08 (knee-surgery medical negligence),
+XIMB IRC President 2012, Tepper MBA selection 2021, sand quarry stalled
+2021, affair during CMU MBA 2022, sleep disorder resolved Lemborexant
+2025, focus/mental clarity shift Jan–Feb 2026, Marsys Technology closed
+20-Mar-2026, sand quarry public hearing closed 08-Apr-2026. LEL count:
+35 → 46. LEL ≥40 gate: **CLEARED**. 11 new events carry
+`chart_state_at_event: status: pending_computation` — Swiss Ephemeris
+pass is M4-A scope.
+
+(2) **PHASE_M4_PLAN_v1_0.md v1.0 authored** (3669a0a). Sub-phases M4-W1
+through M4-D defined. 5 sub-phases, 12–18 estimated sessions. ACs defined:
+AC.M4A.1–10, AC.M4B.1–10, AC.M4C.1–8, AC.M4D.1–8. 7 native-approval
+points (calibration scoring rubric, shadow-mode exit rule, LL.7 prior
+rubric, LEL audit resolution, JH-export disposition, LL.1 spot-check,
+M4 close). Dependency graph, scope boundaries, IS.8 cadence (~4× IS.8(a)
++ 1× IS.8(b)), and M5 prerequisite state documented.
+
+(3) **CURRENT_STATE updated** (f0a0cb3). `active_phase_plan`: null →
+`PHASE_M4_PLAN_v1_0.md v1.0`. `active_phase_plan_version`: null → 1.0.
+LEL gate clearance recorded. M4-A entry unblocked.
+
+Next session: **M4-A-S1** — Swiss Ephemeris computation pass for 11
+`pending_computation` events; propose calibration scoring rubric to native;
+begin LEL↔MSR event-match records. First M4 substantive session.
