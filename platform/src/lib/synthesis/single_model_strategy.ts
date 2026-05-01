@@ -22,7 +22,7 @@ import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
-import { resolveModel, isReasoningModel } from '@/lib/models/resolver'
+import { resolveModel } from '@/lib/models/resolver'
 import { getModelMeta, supports } from '@/lib/models/registry'
 import { stripThinkBlocks, extractReasoningTrace } from './think_block_filter'
 import { getDefaultRegistry } from '@/lib/prompts/index'
@@ -225,43 +225,31 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       toolsForModel = Object.keys(wrappedTools).length > 0 ? wrappedTools : undefined
     }
 
-    // BHISMA-B1 §3.2 / ADR-2 — reasoning models (o1, o3, o4-mini) reject the
-    // system role and ignore temperature. Fold the rendered prompt into the
-    // first user message and skip the dedicated system entry entirely.
-    const useReasoningConvention = isReasoningModel(selected_model_id)
-
+    // All registry models use the standard calling convention: system message
+    // + history + user turn. Prompt-caching header is added for Anthropic models.
     const historyMessages: ModelMessage[] = conversation_history.map(m => ({
       role: m.role,
       content: m.content,
     }))
 
-    let modelMessages: ModelMessage[]
-    if (useReasoningConvention) {
-      const foldedUser: ModelMessage = {
-        role: 'user',
-        content: `${renderedPrompt}\n\n---\n\nUser query:\n${query}`,
-      }
-      modelMessages = [...historyMessages, foldedUser]
-    } else {
-      const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
-        ? {
-            role: 'system',
-            content: renderedPrompt,
-            providerOptions: {
-              anthropic: { cacheControl: { type: 'ephemeral' } },
-            },
-          }
-        : {
-            role: 'system',
-            content: renderedPrompt,
-          }
+    const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
+      ? {
+          role: 'system',
+          content: renderedPrompt,
+          providerOptions: {
+            anthropic: { cacheControl: { type: 'ephemeral' } },
+          },
+        }
+      : {
+          role: 'system',
+          content: renderedPrompt,
+        }
 
-      modelMessages = [
-        systemMessage,
-        ...historyMessages,
-        { role: 'user', content: query },
-      ]
-    }
+    const modelMessages: ModelMessage[] = [
+      systemMessage,
+      ...historyMessages,
+      { role: 'user', content: query },
+    ]
 
     const modelMeta = getModelMeta(selected_model_id)
 
@@ -276,12 +264,30 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     // it is set by the time the 'finish' SSE part fires in toUIMessageStreamResponse.
     const methodologyBlockHolder: { value: string | null } = { value: null }
 
+    // UQE-16 — Per-style output token cap. Prevents over-elaboration by capping
+    // the synthesis response at a style-appropriate ceiling well below the model's
+    // hard maximum. The model's maxOutputTokens is the absolute ceiling; the style
+    // cap is a tighter practical limit so answers stay focused.
+    //
+    //   concise  → 800  tokens  (~600 words)  — direct answer, no padding
+    //   detailed → 2000 tokens  (~1500 words) — structured with evidence
+    //   technical→ 3000 tokens  (~2200 words) — full derivation + citations
+    //
+    // These caps apply to the synthesis output only, not to tool-use steps.
+    const STYLE_OUTPUT_CAP: Record<string, number> = {
+      concise: 800,
+      detailed: 2000,
+      technical: 3000,
+    }
+    const styleCap = STYLE_OUTPUT_CAP[style ?? 'detailed'] ?? 2000
+    const effectiveMaxTokens = Math.min(styleCap, modelMeta?.maxOutputTokens ?? styleCap)
+
     const result = streamText({
       model: resolveModel(selected_model_id),
       messages: modelMessages,
       tools: toolsForModel,
       stopWhen: stepCountIs(5),
-      maxOutputTokens: modelMeta?.maxOutputTokens,
+      maxOutputTokens: effectiveMaxTokens,
       experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
       onFinish: async ({
         finishReason,

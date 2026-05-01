@@ -3,48 +3,46 @@
  * The provider SDKs (`@ai-sdk/anthropic`, `@ai-sdk/google`, `@ai-sdk/deepseek`,
  * `@ai-sdk/openai`) live in a separate `resolver.ts` so they are never bundled
  * into the client.
+ *
+ * Three-tier family structure (BHISMA Wave 2):
+ *   premium — flagship/deepest model; user-selectable for synthesis.
+ *   mid     — balanced model; user-selectable for synthesis.
+ *   worker  — cheapest model in the family; used for planner + title generation.
+ *             Also user-selectable (fast/cheap chat), but labelled accordingly in UI.
+ *
+ * Every provider family must have exactly one model with tier='worker'; that model
+ * is the canonical FAMILY_WORKER entry. All models use the standard AI SDK calling
+ * convention (streamText with system message). No o-series / reasoning convention.
  */
 
 export type Provider = 'anthropic' | 'google' | 'deepseek' | 'openai'
 export type Capability = 'tool-use' | 'prompt-caching'
 export type SpeedTier = 'fast' | 'balanced' | 'deep'
+export type ModelTier = 'premium' | 'mid' | 'worker'
 
 /**
- * BHISMA-B1 ADR-1: each model declares whether it can serve as a worker
+ * ADR-1: each model declares whether it can serve as a worker
  * (planning/routing/title generation), synthesis (final answer), or both.
- * Workers are the cheapest model in their family; synthesis models include
- * the full set the user may pick from.
+ * Workers are the cheapest model in their family; synthesis models are the
+ * full set exposed to the user for final-answer generation.
  */
 export type ModelRole = 'worker' | 'synthesis' | 'both'
-
-/**
- * BHISMA-B1 ADR-2: o-series reasoning models (o1, o3, o4-mini) require a
- * separate calling convention — no system prompt, no temperature param,
- * no tool-use for o1/o3, no streaming for o1. Standard models follow the
- * usual streamText / generateText path.
- */
-export type CallingConvention = 'standard' | 'reasoning'
 
 export interface ModelMeta {
   id: string
   label: string
   hint: string
   provider: Provider
+  /** Family tier — used by the UI picker and by FAMILY_WORKER assignment. */
+  tier: ModelTier
   speedTier: SpeedTier
   maxOutputTokens: number
   capabilities: Capability[]
   role: ModelRole
-  callingConvention: CallingConvention
   /** USD cost per 1M input tokens — used by trace cost panel + telemetry. */
   costPer1MInput: number
   /** USD cost per 1M output tokens. */
   costPer1MOutput: number
-  /**
-   * False only for o1 today: the Responses API streams reasoning tokens but the
-   * AI SDK exposes a single chunk. When false, synthesis must use generateText
-   * and emit a non-streaming response. Defaults to true at lookup time.
-   */
-  supportsStreaming?: boolean
 }
 
 /**
@@ -53,210 +51,175 @@ export interface ModelMeta {
  * and capability gating simultaneously.
  */
 export const MODELS: ModelMeta[] = [
-  // Anthropic — Claude
+  // ── Anthropic — Claude ──────────────────────────────────────────────────────
+  // Worker: haiku-4-5  |  Mid: sonnet-4-6  |  Premium: opus-4-7
   {
     id: 'claude-haiku-4-5',
     provider: 'anthropic',
+    tier: 'worker',
     label: 'Haiku 4.5',
-    hint: 'Fast, lighter reasoning',
+    hint: 'Fast & cost-effective — planner + quick answers',
     speedTier: 'fast',
     maxOutputTokens: 64_000,
     capabilities: ['tool-use', 'prompt-caching'],
     role: 'both',
-    callingConvention: 'standard',
     costPer1MInput: 1.00,
     costPer1MOutput: 5.00,
   },
   {
     id: 'claude-sonnet-4-6',
     provider: 'anthropic',
+    tier: 'mid',
     label: 'Sonnet 4.6',
-    hint: 'Balanced (default)',
+    hint: 'Balanced depth and speed',
     speedTier: 'balanced',
     maxOutputTokens: 64_000,
     capabilities: ['tool-use', 'prompt-caching'],
     role: 'synthesis',
-    callingConvention: 'standard',
     costPer1MInput: 3.00,
     costPer1MOutput: 15.00,
   },
   {
     id: 'claude-opus-4-7',
     provider: 'anthropic',
+    tier: 'premium',
     label: 'Opus 4.7',
-    hint: 'Deepest analysis, slower',
+    hint: 'Deepest Jyotish analysis',
     speedTier: 'deep',
     maxOutputTokens: 64_000,
     capabilities: ['tool-use', 'prompt-caching'],
     role: 'synthesis',
-    callingConvention: 'standard',
     costPer1MInput: 15.00,
     costPer1MOutput: 75.00,
   },
-  // Google — Gemini
+
+  // ── Google — Gemini ─────────────────────────────────────────────────────────
+  // Worker: gemini-2.0-flash-lite  |  Mid: gemini-2.5-flash  |  Premium: gemini-2.5-pro
+  //
+  // gemini-2.0-flash-lite is the dedicated planner/worker: $0.015/$0.06 per 1M,
+  // supports tool-use, 1M context window, 8K max output.
+  {
+    id: 'gemini-2.0-flash-lite',
+    provider: 'google',
+    tier: 'worker',
+    label: 'Gemini 2.0 Flash Lite',
+    hint: 'Lightest Google model — planner + quick answers',
+    speedTier: 'fast',
+    maxOutputTokens: 8_192,
+    capabilities: ['tool-use'],
+    role: 'both',
+    costPer1MInput: 0.015,
+    costPer1MOutput: 0.06,
+  },
   {
     id: 'gemini-2.5-flash',
     provider: 'google',
+    tier: 'mid',
     label: 'Gemini 2.5 Flash',
-    hint: 'Fast, Google model',
-    speedTier: 'fast',
+    hint: 'Balanced Google model',
+    speedTier: 'balanced',
     maxOutputTokens: 65_536,
     capabilities: ['tool-use'],
-    role: 'both',
-    callingConvention: 'standard',
+    role: 'synthesis',
     costPer1MInput: 0.075,
     costPer1MOutput: 0.30,
   },
   {
     id: 'gemini-2.5-pro',
     provider: 'google',
+    tier: 'premium',
     label: 'Gemini 2.5 Pro',
-    hint: 'Deep reasoning, Google model',
+    hint: 'Deepest Google analysis',
     speedTier: 'deep',
     maxOutputTokens: 65_536,
     capabilities: ['tool-use'],
     role: 'synthesis',
-    callingConvention: 'standard',
     costPer1MInput: 1.25,
     costPer1MOutput: 5.00,
   },
-  // Preview models ship under non-stable slugs. Google may rename / remove
-  // them with short notice; if this 404s, check Google AI Studio for the
-  // current preview slug and update here.
-  {
-    id: 'gemini-3-pro-preview',
-    provider: 'google',
-    label: 'Gemini 3 Pro (preview)',
-    hint: 'Latest Google model — preview, may change',
-    speedTier: 'deep',
-    maxOutputTokens: 65_536,
-    capabilities: ['tool-use'],
-    role: 'synthesis',
-    callingConvention: 'standard',
-    costPer1MInput: 1.25,
-    costPer1MOutput: 5.00,
-  },
-  // DeepSeek
-  // V3 supports function calling; we expose tools. Watch the first few
-  // Jyotish-tool-heavy turns — if malformed args appear, drop 'tool-use'.
+
+  // ── DeepSeek ────────────────────────────────────────────────────────────────
+  // Worker + Mid: deepseek-chat (V3)  |  Premium: deepseek-reasoner (R1)
+  //
+  // DeepSeek's public API does not offer a sub-V3 worker model; V3 is already
+  // inexpensive ($0.27/$1.10) and serves as both worker and mid tier.
+  // R1 wraps chain-of-thought in <think>…</think> blocks — the strip-and-trace
+  // transform in single_model_strategy peels those off the displayed stream
+  // while preserving them for the trace panel. Tool-use disabled on R1 —
+  // its function-calling is unreliable; it answers from folded chart context.
   {
     id: 'deepseek-chat',
     provider: 'deepseek',
+    tier: 'mid',            // doubles as worker (FAMILY_WORKER points here)
     label: 'DeepSeek V3',
-    hint: 'Balanced, DeepSeek model',
+    hint: 'Balanced DeepSeek model — also used as planner',
     speedTier: 'balanced',
     maxOutputTokens: 8_192,
     capabilities: ['tool-use'],
     role: 'both',
-    callingConvention: 'standard',
     costPer1MInput: 0.27,
     costPer1MOutput: 1.10,
   },
-  // R1 is a reasoning model that wraps its chain-of-thought in <think>...</think>
-  // blocks. The strip-and-trace transform in single_model_strategy peels those
-  // off the displayed stream while preserving them for the trace panel. Tool
-  // use is intentionally disabled — R1's function-calling is unreliable in
-  // practice; it answers from the chart context + reports folded into history.
   {
     id: 'deepseek-reasoner',
     provider: 'deepseek',
+    tier: 'premium',
     label: 'DeepSeek R1',
-    hint: 'Deep reasoning, no tool-use',
+    hint: 'Deep chain-of-thought reasoning',
     speedTier: 'deep',
     maxOutputTokens: 8_192,
     capabilities: [],
     role: 'synthesis',
-    callingConvention: 'standard',
     costPer1MInput: 0.55,
     costPer1MOutput: 2.19,
   },
-  // OpenAI — GPT (standard tier)
-  // gpt-4.1 is the April 2025 flagship; prompt-caching is automatic on OpenAI
-  // (no explicit cache-control headers required) so 'prompt-caching' is omitted
-  // from capabilities.
-  {
-    id: 'gpt-4.1',
-    provider: 'openai',
-    label: 'GPT-4.1',
-    hint: 'OpenAI flagship',
-    speedTier: 'deep',
-    maxOutputTokens: 16_384,
-    capabilities: ['tool-use'],
-    role: 'synthesis',
-    callingConvention: 'standard',
-    costPer1MInput: 2.00,
-    costPer1MOutput: 8.00,
-  },
-  {
-    id: 'gpt-4o',
-    provider: 'openai',
-    label: 'GPT-4o',
-    hint: 'OpenAI multimodal',
-    speedTier: 'balanced',
-    maxOutputTokens: 16_384,
-    capabilities: ['tool-use'],
-    role: 'synthesis',
-    callingConvention: 'standard',
-    costPer1MInput: 2.50,
-    costPer1MOutput: 10.00,
-  },
+
+  // ── OpenAI — GPT ────────────────────────────────────────────────────────────
+  // Worker: gpt-4o-mini  |  Mid: gpt-4o  |  Premium: gpt-4.1
+  //
+  // gpt-4.1 (April 2025) is the current OpenAI flagship — better instruction
+  // following and lower cost per quality than gpt-4o. Prompt-caching on OpenAI
+  // is automatic (no explicit headers) so 'prompt-caching' is omitted from
+  // capabilities. o-series (o1, o3, o4-mini) removed — incompatible with the
+  // standard streamText calling convention and not suitable for Jyotish synthesis.
   {
     id: 'gpt-4o-mini',
     provider: 'openai',
-    label: 'GPT-4o-mini',
-    hint: 'OpenAI worker model',
+    tier: 'worker',
+    label: 'GPT-4o mini',
+    hint: 'Lightest OpenAI model — planner + quick answers',
     speedTier: 'fast',
     maxOutputTokens: 16_384,
     capabilities: ['tool-use'],
     role: 'both',
-    callingConvention: 'standard',
     costPer1MInput: 0.15,
     costPer1MOutput: 0.60,
   },
-  // OpenAI — reasoning tier (o-series)
-  // The reasoning calling convention is enforced in single_model_strategy:
-  // system prompt is folded into the first user message, temperature is
-  // omitted, tools are gated by per-model capability. o1 also disables
-  // streaming because the AI SDK exposes a single batch chunk for it.
   {
-    id: 'o4-mini',
+    id: 'gpt-4o',
     provider: 'openai',
-    label: 'o4-mini',
-    hint: 'Reasoning, balanced cost',
+    tier: 'mid',
+    label: 'GPT-4o',
+    hint: 'Balanced OpenAI model',
     speedTier: 'balanced',
     maxOutputTokens: 16_384,
     capabilities: ['tool-use'],
     role: 'synthesis',
-    callingConvention: 'reasoning',
-    costPer1MInput: 1.10,
-    costPer1MOutput: 4.40,
+    costPer1MInput: 2.50,
+    costPer1MOutput: 10.00,
   },
   {
-    id: 'o1',
+    id: 'gpt-4.1',
     provider: 'openai',
-    label: 'o1',
-    hint: 'Deepest reasoning (no streaming)',
+    tier: 'premium',
+    label: 'GPT-4.1',
+    hint: 'OpenAI flagship — best instruction following',
     speedTier: 'deep',
-    maxOutputTokens: 32_768,
-    capabilities: [],
+    maxOutputTokens: 16_384,
+    capabilities: ['tool-use'],
     role: 'synthesis',
-    callingConvention: 'reasoning',
-    costPer1MInput: 15.00,
-    costPer1MOutput: 60.00,
-    supportsStreaming: false,
-  },
-  {
-    id: 'o3',
-    provider: 'openai',
-    label: 'o3',
-    hint: 'Deep reasoning',
-    speedTier: 'deep',
-    maxOutputTokens: 32_768,
-    capabilities: [],
-    role: 'synthesis',
-    callingConvention: 'reasoning',
-    costPer1MInput: 10.00,
-    costPer1MOutput: 40.00,
+    costPer1MInput: 2.00,
+    costPer1MOutput: 8.00,
   },
 ]
 
@@ -265,9 +228,12 @@ export const MODELS: ModelMeta[] = [
 // switching this default only affects new users / new charts.
 export const DEFAULT_MODEL_ID = 'deepseek-chat'
 
-/** Title generator is pinned to the cheapest-good Anthropic model regardless
- *  of user pick. (Future: route titles through getWorkerForModel(userPick)
- *  so OpenAI users get gpt-4o-mini instead — gated on a separate flag.) */
+/**
+ * Title generator always uses the worker of the same family as the user's
+ * chosen synthesis model. Pinned to haiku-4-5 as the ultimate fallback.
+ * Use getWorkerForModel(synthesisModelId) at the call site — this constant
+ * is the fallback only.
+ */
 export const TITLE_MODEL_ID = 'claude-haiku-4-5'
 
 const MODEL_INDEX: Record<string, ModelMeta> = Object.fromEntries(
@@ -296,6 +262,21 @@ export function modelsByProvider(): Array<{ provider: Provider; models: ModelMet
   return Array.from(groups.entries()).map(([provider, models]) => ({ provider, models }))
 }
 
+/**
+ * Models available for user selection in the synthesis picker.
+ * Returns all models with role='synthesis' or role='both', grouped by provider,
+ * ordered premium → mid → worker within each group.
+ */
+export function synthesisPicker(): Array<{ provider: Provider; models: ModelMeta[] }> {
+  const TIER_ORDER: Record<ModelTier, number> = { premium: 0, mid: 1, worker: 2 }
+  return modelsByProvider().map(({ provider, models }) => ({
+    provider,
+    models: models
+      .filter(m => m.role === 'synthesis' || m.role === 'both')
+      .sort((a, b) => TIER_ORDER[a.tier] - TIER_ORDER[b.tier]),
+  }))
+}
+
 export const PROVIDER_LABEL: Record<Provider, string> = {
   anthropic: 'Anthropic',
   google: 'Google',
@@ -308,17 +289,22 @@ export const PROVIDER_LABEL: Record<Provider, string> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * The cheapest planning/worker model per family. When the user picks any
- * synthesis model, the planner and title generator should use the same
- * family's worker so the planning surface stays consistent with the chosen
- * provider — and so an OpenAI user isn't billed extra Anthropic API spend
- * for the worker step.
+ * The worker model for each provider family, used for planning, title
+ * generation, and any internal LLM call that does not require synthesis depth.
+ *
+ * Rule: FAMILY_WORKER[provider] must always point to the model in that family
+ * with tier='worker'. When updating the registry, keep this map in sync.
+ *
+ * Note on DeepSeek: V3 (deepseek-chat) is tier='mid' in the registry because
+ * there is no cheaper dedicated sub-V3 model in the DeepSeek public API.
+ * It still serves as the DeepSeek worker — the tier field on the registry
+ * entry reflects user-facing positioning; this map governs internal routing.
  */
 export const FAMILY_WORKER: Record<Provider, string> = {
-  anthropic: 'claude-haiku-4-5',
-  google: 'gemini-2.5-flash',
-  openai: 'gpt-4o-mini',
-  deepseek: 'deepseek-chat',
+  anthropic: 'claude-haiku-4-5',      // tier=worker  $1.00/$5.00
+  google:    'gemini-2.0-flash-lite',  // tier=worker  $0.015/$0.06
+  openai:    'gpt-4o-mini',            // tier=worker  $0.15/$0.60
+  deepseek:  'deepseek-chat',          // tier=mid (no cheaper option) $0.27/$1.10
 }
 
 const ULTIMATE_WORKER_FALLBACK = 'claude-haiku-4-5'

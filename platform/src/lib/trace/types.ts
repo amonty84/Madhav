@@ -97,7 +97,7 @@ export interface TraceDataSummary {
   planning_confidence?: number
   /** Provider family of the model used for this LLM step. */
   provider?: string
-  /** Whether this step's LLM call ran the reasoning calling convention (o-series). */
+  /** Whether this step's LLM call produced a reasoning trace (DeepSeek R1 only). */
   reasoning_path?: boolean
   /** step_error step: machine-readable failure reason from PipelineError. */
   error_reason?: string

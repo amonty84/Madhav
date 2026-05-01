@@ -19,13 +19,13 @@ describe('ConfigService', () => {
   })
 
   // AUDIT_ENABLED retired BHISMA-B1 §6.2; replaced by always-on observability flags.
+  // REASONING_MODEL_STREAMING retired BHISMA Wave 2; o-series models removed from registry.
   it('BHISMA-B1 observability flags default true', () => {
     const svc = createConfigService()
     const flags: FeatureFlag[] = [
       'TRACE_ANALYTICS_ENABLED',
       'COST_TRACKING_ENABLED',
       'CITATION_CHECK_ENABLED',
-      'REASONING_MODEL_STREAMING',
     ]
     for (const flag of flags) {
       expect(svc.getFlag(flag)).toBe(true)

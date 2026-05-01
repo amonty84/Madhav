@@ -36,8 +36,8 @@ export type FeatureFlag =
   | 'COST_TRACKING_ENABLED'
   /** Enables MSR signal citation count check in synthesis_done trace step. */
   | 'CITATION_CHECK_ENABLED'
-  /** When false, o-series reasoning models that don't support streaming fall back to generateText. */
-  | 'REASONING_MODEL_STREAMING'
+  // REASONING_MODEL_STREAMING retired (BHISMA Wave 2) — o-series models removed from registry.
+  // All registry models use streamText; no generateText fallback path exists.
   // M3-W1-A2 — Discovery Engine flag gates (Pattern + Contradiction + Resonance + Cluster).
   // Default false at first commit, flipped true after smoke verification within the same session.
   /** Enables pattern_register retrieval tool. */
@@ -79,7 +79,7 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   TRACE_ANALYTICS_ENABLED: true,
   COST_TRACKING_ENABLED: true,
   CITATION_CHECK_ENABLED: true,
-  REASONING_MODEL_STREAMING: true,
+  // REASONING_MODEL_STREAMING removed — retired above.
   // M3-W1-A2 Discovery Engine flag gates — flipped true after smoke verification
   // within the same session (AC.M3A.2 / AC.M3A.3). Set MARSYS_FLAG_DISCOVERY_*=false
   // in env to opt out of any individual surface.
