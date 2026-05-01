@@ -9,8 +9,8 @@
   "input_file": "06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json",
   "training_events_used": 37,
   "held_out_events_excluded": 9,
-  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §3 (NAP.M4.4 APPROVED 2026-05-02)",
-  "n1_disclaimer": "All weights in this file are derived from a single native (n=1). The dominant statistical risk is overfit. No weight in this file may be applied to cohort-level claims. Shadow-mode is the structural defense; promotion to production requires meeting all §3 criteria including two-pass approval and native notification.",
+  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md \u00a73 (NAP.M4.4 APPROVED 2026-05-02)",
+  "n1_disclaimer": "All weights in this file are derived from a single native (n=1). The dominant statistical risk is overfit. No weight in this file may be applied to cohort-level claims. Shadow-mode is the structural defense; promotion to production requires meeting all \u00a73 criteria including two-pass approval and native notification.",
   "summary": {
     "total_signals_observed": 380,
     "promotion_eligible_pending_two_pass": 30,
@@ -51,7 +51,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "CTR.02": {
       "signal_id": "CTR.02",
@@ -103,7 +118,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "CVG.01": {
       "signal_id": "CVG.01",
@@ -155,7 +185,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "CVG.04": {
       "signal_id": "CVG.04",
@@ -243,7 +288,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.8,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.01": {
       "signal_id": "SIG.01",
@@ -273,7 +333,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.07": {
       "signal_id": "SIG.07",
@@ -347,7 +422,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.10": {
       "signal_id": "SIG.10",
@@ -377,7 +467,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.11": {
       "signal_id": "SIG.11",
@@ -421,7 +526,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.13": {
       "signal_id": "SIG.13",
@@ -451,7 +571,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.14": {
       "signal_id": "SIG.14",
@@ -495,7 +630,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.001": {
       "signal_id": "SIG.MSR.001",
@@ -737,7 +887,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.014": {
       "signal_id": "SIG.MSR.014",
@@ -1041,7 +1206,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.031": {
       "signal_id": "SIG.MSR.031",
@@ -2559,7 +2739,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.119": {
       "signal_id": "SIG.MSR.119",
@@ -2617,7 +2812,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.121": {
       "signal_id": "SIG.MSR.121",
@@ -3205,7 +3415,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.144": {
       "signal_id": "SIG.MSR.144",
@@ -3281,7 +3506,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.9091,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.146": {
       "signal_id": "SIG.MSR.146",
@@ -3595,7 +3835,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.165": {
       "signal_id": "SIG.MSR.165",
@@ -3705,7 +3960,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.172": {
       "signal_id": "SIG.MSR.172",
@@ -4221,7 +4491,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.200": {
       "signal_id": "SIG.MSR.200",
@@ -4617,7 +4902,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.230": {
       "signal_id": "SIG.MSR.230",
@@ -4969,7 +5269,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.252": {
       "signal_id": "SIG.MSR.252",
@@ -5427,7 +5742,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.279": {
       "signal_id": "SIG.MSR.279",
@@ -5603,7 +5933,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.292": {
       "signal_id": "SIG.MSR.292",
@@ -5691,7 +6036,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.296": {
       "signal_id": "SIG.MSR.296",
@@ -5739,7 +6099,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.298": {
       "signal_id": "SIG.MSR.298",
@@ -5813,7 +6188,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.301": {
       "signal_id": "SIG.MSR.301",
@@ -5839,7 +6229,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.302": {
       "signal_id": "SIG.MSR.302",
@@ -7153,7 +7558,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.393": {
       "signal_id": "SIG.MSR.393",
@@ -7339,7 +7759,22 @@
       "promotion_eligible": true,
       "shadow_weight": 0.7273,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.403": {
       "signal_id": "SIG.MSR.403",
@@ -8765,7 +9200,22 @@
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": null,
-      "approval_chain": []
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "pending",
+          "pass_2_date": null,
+          "pass_2_session": null
+        }
+      ]
     },
     "SIG.MSR.479": {
       "signal_id": "SIG.MSR.479",

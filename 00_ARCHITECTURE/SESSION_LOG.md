@@ -11759,3 +11759,74 @@ M4-A SUB-PHASE FORMALLY CLOSED. Sealing artifact authored, GAP.M4A.04 partial-cl
 - `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
 
 Commit: b648884cfd2d55ad0693fd7dad01d2f1c3f70601
+
+---
+
+**M4-B-S2-MIRROR-TWOPASS** | 2026-05-02 | CLOSED
+
+M4-B-S2 substrate session: (1) MP.1 + MP.2 mirror sync (discharges the carry-forward declared at M4-A-CLOSE-LEL-PATCH); (2) LL.1 two-pass approval pass_1 for the 30 promotion-eligible signals from M4-B-S1-LL1-SHADOW-WEIGHTS, performed by **Claude-surrogate-M4-B-S2** acting as a flagged stand-in for Gemini (Gemini unavailable synchronously per `MACRO_PLAN §Multi-Agent`).
+
+**Cowork thread:** `M4-B-S2 — Mirror Sync + LL.1 Two-Pass Approval`.
+
+**Acceptance criteria** (from M4-B-S2-MIRROR-TWOPASS brief):
+- AC.S2.1 PASS — `.geminirules` updated to adapted parity. Three new footer entries appended: M4-A-CLOSE-LEL-PATCH (M4-A formally closed; sealing artifact + LEL v1.6 patch; NAP.M4.1/3/4 + partial NAP.M4.2 statuses; red_team_counter 0); M4-B-S1-LL1-SHADOW-WEIGHTS (380 signals; 30 promotion-eligible; production register empty; procedural irregularity); M4-B-S2-MIRROR-TWOPASS (this session — mirror sync + pass_1 + production-pending file + CURRENT_STATE v1.6).
+- AC.S2.2 PASS — `.gemini/project_state.md` top state-block prefix replaced to reflect M4-B-S2 in flight + summary stats (380 / 30 / 285 / 52 / 13) + holdouts sacrosanct + Gemini-surrogate disclosure + production-pending file + CURRENT_STATE v1.6 + next-session pointer.
+- AC.S2.3 PASS — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md` v1.0 created. §1 methodology cites SHADOW_MODE_PROTOCOL §3.1(c). §2 full table of all 30 signals with signal_id / domain / mean_match_rate / n_observations / variance / shadow_weight. §3 surrogate red-team review with explicit Gemini-unavailable disclosure (per brief hard constraint), tier breakdown (24 Tier-A clean / 3 Tier-B / 3 Tier-C borderline), Jyotish-plausibility check, cross-cutting checks (no Tier-A saturation; held-out untouched; kill-switch §4(a)–(e) all clear). §4 approval decisions table — 30 approved / 0 held / 0 demoted (demotion rule mean<0.4 OR var>0.3 not triggered). §5 approval_chain block with pass_1 (this session) + pass_2 (NAP.M4.5 pending) + Gemini-reachability-addendum slot. §6 5 known residuals (3 LOW + 1 DOC-ONLY + 1 DEFERRED; 0 HIGH/CRITICAL). §7 changelog.
+- AC.S2.4 PASS — `ll1_shadow_weights_v1_0.json` `approval_chain` field populated for all 30 promotion-eligible signals. Each entry carries: pass_1_reviewer = "Claude-surrogate-M4-B-S2"; pass_1_reviewer_kind = "surrogate-for-Gemini"; pass_1_date = "2026-05-02"; pass_1_session = "M4-B-S2-MIRROR-TWOPASS"; pass_1_decision = "approved"; per-signal pass_1_notes (Tier-A/B default vs Tier-C joint-firing flag); pass_1_reference = LL1_TWO_PASS_APPROVAL_v1_0.md; pass_2_reviewer = "native"; pass_2_nap_id = "NAP.M4.5"; pass_2_status = "pending". Verification: 30 / 30 entries populated.
+- AC.S2.5 PASS — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json` written. Schema mirrors shadow file entry shape (signal_id, domain, n_observations, mean_match_rate, variance, observations[], shadow_weight, production_weight, approval_chain) with `status: "production_pending_pass_2"` per brief. Outer metadata: schema_version 1.0; mechanism LL.1; phase M4-B; produced_during M4-B-S2-MIRROR-TWOPASS; produced_on 2026-05-02; rubric Option B v1.0; pass_1_count 30; pass_2_status pending_NAP.M4.5; pass_2_reviewer native; weights_in_production_register false; weights_block_reason field naming the §3.1(c)+(d) gates as the reason no downstream pipeline operation may consume these weights yet; n=1 disclaimer carried verbatim per SHADOW_MODE_PROTOCOL §7; summary block (24 Tier-A / 3 Tier-B / 3 Tier-C; 3 flagged_for_pass_2_attention).
+- AC.S2.6 PASS — `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` bumped to v1.6. last_session_id → M4-B-S2-MIRROR-TWOPASS; next_session_objective → M4-B-S3 (LL.2 shadow writes + KR.M4A.CLOSE.1 frontmatter flip). active_phase_plan_sub_phase updated. red_team_counter 0 → 1 (substantive). file_updated_at → 2026-05-02T22:30:00+05:30. file_updated_by_session → M4-B-S2-MIRROR-TWOPASS. §3 narrative top entry replaced with M4-B-S2 close narrative; predecessor M4-A-CLOSE-LEL-PATCH narrative preserved as audit trail. Changelog v1.6 entry appended.
+- AC.S2.7 PASS — this SESSION_LOG entry. mirror_updates_propagated block embedded below.
+- AC.S2.8 PENDING-AT-COMMIT — git commit hash stamped in this entry on completion.
+
+**Two-pass approval pass_1 — verdict.** 30 approved / 0 held / 0 demoted. 3 signals (SIG.MSR.118, .119, .143 — Tier-C borderline; mean=0.4545 var=0.2727 N=11; identical descriptive statistics across three signal IDs) flagged in pass_1 notes for closer NAP.M4.5 (pass_2) native scrutiny per the joint-firing question. The remaining 27 signals (24 Tier-A clean mean=1.0 var=0.0 N≥3 + 3 Tier-B with mean ≥ 0.73 var ≤ 0.22) cleared without flag.
+
+**Held-out partition discipline.** Sampling-verified at LL1_TWO_PASS_APPROVAL_v1_0.md §3.4: none of the 30 records' observation lists contain any of the 9 held-out event IDs (EVT.2008.06.09.01, EVT.2009.06.XX.01, EVT.2017.03.XX.01, EVT.2018.11.28.01, EVT.2019.05.XX.01, EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2025.05.XX.01, EVT.2026.01.XX.01). `lel_event_match_records.json` not modified by this session.
+
+**mirror_updates_propagated.**
+
+| pair_id | claude_side | gemini_side | both_updated_same_session | rationale |
+|---|---|---|---|---|
+| MP.1 | CLAUDE.md (read-only this session) | .geminirules (touched: 4 footer entries appended) | n/a | Carry-forward DISCHARGED — M4-A close was the Claude-side state authority; this session updates the Gemini-side adapted parity per ND.1 claim 2 |
+| MP.2 | composite(SESSION_LOG + CURRENT_STATE + active plan pointers) — touched: SESSION_LOG (this entry) + CURRENT_STATE v1.5 → v1.6 | .gemini/project_state.md (touched: top state block prefix replaced) | true | Both sides updated this session to adapted parity |
+| MP.3 | MACRO_PLAN_v2_0.md (must_not_touch) | compact MP ref in .geminirules + project_state.md | true | MACRO_PLAN frozen; no cascade required |
+| MP.4 | PHASE_M4_PLAN_v1_0.md (read-only this session) | M4 phase plan pointer | true | PHASE_M4_PLAN unchanged |
+| MP.5 | CAPABILITY_MANIFEST.json + FILE_REGISTRY (manifest cutover; SUPERSEDED) | L2.5 canonical-path block in .geminirules | true | No L2.5 changes; no cascade |
+| MP.6 | GOVERNANCE_STACK_v1_0.md (Claude-only) | n/a | n/a | Claude-only pair |
+| MP.7 | SESSION_LOG.md (touched: this entry) | n/a | n/a | Claude-only pair |
+| MP.8 | PROJECT_ARCHITECTURE_v2_2.md (read-only this session) | compact architecture ref | true | Architecture unchanged |
+
+`mirror_enforcer.py` not run at this close (substrate session; carries to next substantive close per ONGOING_HYGIENE_POLICIES cadence). No `DIS.class.mirror_desync` candidate opens — same-session discharge of the M4-A carry-forward closes the window.
+
+**Files changed (within may_touch only):**
+- `.geminirules` — MODIFIED (4 footer state entries appended: M4-A-CLOSE-LEL-PATCH, M4-B-S1-LL1-SHADOW-WEIGHTS, M4-B-S2-MIRROR-TWOPASS).
+- `.gemini/project_state.md` — MODIFIED (top state-block prefix replaced; M4-B-S2 in flight; full summary stats; Gemini-surrogate disclosure; carry-forward discharge note).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md` — CREATED (v1.0; 7 sections).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` — MODIFIED (approval_chain populated for 30 signals; non-eligible signals untouched; file size 225,178 → 252,005 bytes).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json` — CREATED (52,807 bytes; 30 pass_1-approved signals; status: production_pending_pass_2).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (v1.5 → v1.6; §2 state-block fields rotated; §3 narrative top entry refreshed; predecessor narrative preserved; changelog v1.6 entry).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+**Out-of-scope, deliberately not touched** (per brief must_not_touch):
+- `01_FACTS_LAYER/**` — L1 frozen.
+- `025_HOLISTIC_SYNTHESIS/**` — L2.5 frozen.
+- `06_LEARNING_LAYER/OBSERVATIONS/**` — lel_event_match_records.json + held-out manifest sacrosanct.
+- `00_ARCHITECTURE/MACRO_PLAN_v2_0.md`, `PHASE_B_PLAN_v1_0.md`, `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md` — frozen.
+- `platform/**` — out of M4-B-S2 scope.
+
+**Red-team.** No red-team this session. M4-B-S2 is a substrate session, not a sub-phase or macro-phase close. Counter increments 0 → 1 (substantive). Next IS.8(a) every-third cadence-fires at counter=3 (two substantive sessions hence). IS.8(b) macro-phase-close cadence at M4-D close.
+
+**ND.** No open native directives. ND.1 reaffirmed by same-session MP.1+MP.2 propagation discharging the M4-A-CLOSE-LEL-PATCH carry-forward.
+
+**Open NAPs after this close:**
+- NAP.M4.5 (M4-B-class — pass_2 native spot-check on the 30 LL.1 weights; binding final gate for production promotion).
+- NAP.M4.6 (M4-C-class — LL.7 discovery prior).
+- NAP.M4.7 (M4-D-class — M4 macro-phase close approval).
+
+**Carry-forwards:**
+- KR.M4A.CLOSE.1 — CALIBRATION_RUBRIC_v1_0.md frontmatter flip (out of M4-B-S2 declared may_touch; carries to M4-B-S3).
+- KR.M4A.CLOSE.2 — native review of M4-B-S1 single-track vs planned B1/B2 split (procedural; carries to NAP.M4.5).
+- Gemini reachability addendum to LL1_TWO_PASS_APPROVAL_v1_0.md §5 if Gemini becomes synchronously available before M4-B close.
+
+**Next session.** `M4-B-S3` — LL.2 graph edge weight modulators (shadow-mode) per `SHADOW_MODE_PROTOCOL §3.5` (LL.2 promotion gated on LL.1 endpoint pair being in production register; LL.1 production blocks until pass_2 NAP.M4.5 resolves) + KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip.
+
+Commit: COMMIT_HASH_PLACEHOLDER (stamped via follow-up).
