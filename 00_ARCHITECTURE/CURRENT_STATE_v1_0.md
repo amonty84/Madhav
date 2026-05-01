@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 1.6
+version: 1.9
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,121 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v1.9 (2026-05-02, M4-B-P2-NAP-M45-PREP): Parallel-slot session running alongside
+    M4-B-S3 (LL.2 shadow writes — reserved at v1.7) and M4-B-P1-GAP-TRAVEL-CLOSE
+    (v1.8, governance-aside). Per brief AC.P2.5 ("CURRENT_STATE bumped one version
+    above S3 and T2 (coordinate: if S3→v1.7 and T2→v1.8, this→v1.9); session_notes:
+    parallel slot"). At write time S3 had not yet landed; this session takes v1.9.
+    parallel_session_notes: This session does NOT alter canonical state
+    (`last_session_id`, `next_session_objective`, `active_phase_plan_sub_phase`,
+    `red_team_counter`, `file_updated_at`, `file_updated_by_session` all remain as
+    set by predecessor sessions — M4-B-P1 most recently). The version increment
+    reserves v1.9 in the sequence to honor the brief AC.P2.5 coordination rule.
+    Single deliverable (within may_touch only): a native-facing pass_2 dossier for
+    NAP.M4.5.
+    Deliverable: `00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md` v1.0 — six sections.
+    §1 Purpose — names NAP.M4.5 as the binding pass_2 final gate for production
+    promotion of the 30 LL.1 promotion-eligible signals; pass_1 was discharged at
+    M4-B-S2 by Claude-surrogate-for-Gemini.
+    §2 Full 30-signal table sorted by mean_match_rate desc — columns: signal_id,
+    signal_name (where MSR-resolvable), domain, N, mean, variance, tier
+    (A/B/C), and NAP.M4.5 flag. Tier A = 24 (mean=1.0 var=0.0); Tier B = 3
+    (mean 0.73–0.91 var 0.09–0.22); Tier C = 3 (mean 0.4545 var 0.2727).
+    §3 Deep-dive on the three Tier-C flagged signals. **All three are yoga-absences:**
+    SIG.MSR.118 = Ruchaka Yoga ABSENT (Mars-MP missing; Mars in Libra 7H enemy sign);
+    SIG.MSR.119 = Malavya Yoga ABSENT (Venus-MP missing; Venus in Sagittarius 9H);
+    SIG.MSR.143 = Sarpa Yoga ABSENT (10L Saturn exalted, opposite of debilitated).
+    Full MSR_v3_0.md entries reproduced verbatim. **Joint-firing empirical analysis:**
+    per-event firing matrix shows the three signals fire on largely *non-overlapping*
+    subsets of the 11 training events (118∩119 = 1 event; 118∩143 = 1 event;
+    119∩143 = 3 events; 118∩119∩143 = 0 events). Identical aggregate statistics
+    emerge from each signal firing on its own ~5/11 subset of *different* events —
+    the empirical signature of three independent phenomena, not one phenomenon
+    counted three times. Native ratifies (or contests) this interpretation at
+    pass_2 by inspecting whether each lit-event subset has its own thematic
+    coherence given the signal's classical content.
+    §4 Spot-check guide — approve / hold / demote semantics with downstream
+    consequences (approve → moves to live consumption with n=1 disclaimer; hold →
+    re-review at next LL refresh, blocks LL.2 endpoint-eligibility for that signal;
+    demote → shadow_indefinite). Honest stakes statement: Tier-A signals carry
+    overfit risk (held-out validity at M4-C is the second-line defense); Tier-C
+    flagged signals carry interpretation risk (demoting all three is a defensible
+    conservative outcome). Time estimate: ~20 min for a focused pass.
+    §5 Blank pass_2 decision-record template — one row per signal (verdict +
+    rationale ≤120 chars) + a joint-pass_2 question slot for the
+    one-vs-three-phenomena answer + reviewer/date/session metadata. Filled values
+    feed back into `ll1_weights_promoted_v1_0.json` `approval_chain[0].pass_2_decision`
+    and `LL1_TWO_PASS_APPROVAL_v1_0.md §5.pass_2`.
+    §6 Changelog.
+    Read-only on `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**`,
+    `06_LEARNING_LAYER/OBSERVATIONS/**`, `01_FACTS_LAYER/**`,
+    `025_HOLISTIC_SYNTHESIS/**`, `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md`,
+    `platform/**` per session brief hard constraints. No red-team this session
+    (governance-aside class, native-facing dossier authoring; per
+    `ONGOING_HYGIENE_POLICIES_v1_0.md §G` substantive corpus/engine sessions
+    increment, governance asides do not).
+  - v1.8 (2026-05-02, M4-B-P1-GAP-TRAVEL-CLOSE): Parallel-slot governance-aside session
+    running alongside M4-B-S3 (LL.2 shadow writes). Discharges GAP.M4A.04 status flip
+    and B.10-strict full-close attempt audit per CLAUDECODE_BRIEF M4-B-P1.
+    Version-skip rationale: v1.7 is reserved for the parallel M4-B-S3 session per
+    brief AC.P1.5 ("CURRENT_STATE bumped one version above whatever S3 lands on
+    — coordinate: if S3 → v1.7, this → v1.8"). At write time S3 had not yet
+    landed; this session takes v1.8 and S3 will take v1.7. If S3 lands first
+    with a different version, merge resolution applies — this session's
+    deliverables stand independent of that ordering.
+    Deliverables (within may_touch only):
+    (1) `06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md` v1.1 → v1.2.
+    Frontmatter version + last_updated_in_session + lel_version_audited
+    rotated. §5.5 added (post-LEL-v1.6-patch status flip + B.10 full-close
+    attempt audit): GAP.M4A.04 status flipped `deferred-pending-patch` →
+    `partially_closed` per §5.4 NAP.M4.2 status-flip protocol (LEL v1.6 patch
+    confirmed landed at M4-A-CLOSE-LEL-PATCH session). §5.5 also documents the
+    full-close attempt: FORENSIC §life_events does not exist (FORENSIC v8.0 is
+    a chart-data file by `PROJECT_ARCHITECTURE_v2_2.md §C.1` design); LEL §6
+    GAP.TRAVEL_MISC.01 "possibly Russia-related business trips" is explicitly
+    speculative (no dates, no destinations); LEL §4/§5/§7 surveyed and yielded
+    no further B.10-compliant promotion candidates. Verdict: no source data
+    exists to advance beyond `partially_closed` without B.10 violation;
+    residual (international business travel, pilgrimages, US-years return
+    visits) carries forward as `deferred` per NAP.M4.2 "no further elicitation
+    required" clause. §5.6 final disposition tally: 1 partially_closed
+    (GAP.M4A.04) + 5 deferred (GAP.M4A.01/.02/.03/.05/.06) + 5 accept
+    (GAP.M4A.07–.11) + 0 infer. v1.2 changelog entry added in §8.
+    (2) **LEL not modified.** Per AC.P1.4 alternative path ("PARTIAL_CLOSE with
+    residual note if insufficient source data exists to add further events
+    without fabrication"). LEL v1.6 stands; no v1.7 bump. AC.P1.3 N/A under
+    PARTIAL_CLOSE outcome.
+    (3) `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v1.6 → v1.8 (this update).
+    `last_session_id` → M4-B-P1-GAP-TRAVEL-CLOSE. `next_session_objective`
+    pointer to M4-B-S3 unchanged (still in flight as parallel session at the
+    moment of this close). `active_phase_plan_sub_phase` extended with
+    GAP.M4A.04 partially_closed status. `red_team_counter` UNCHANGED at 1
+    (governance-aside class — small status flip + audit refresh; per
+    `ONGOING_HYGIENE_POLICIES_v1_0.md §G` substantive corpus/engine sessions
+    increment, governance asides do not). `file_updated_at` →
+    2026-05-02T23:30:00+05:30. `file_updated_by_session` →
+    M4-B-P1-GAP-TRAVEL-CLOSE.
+    (4) `00_ARCHITECTURE/SESSION_LOG.md` — entry appended.
+    Out-of-scope (per brief must_not_touch): `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/**`
+    (live M4-B-S3 scope), `025_HOLISTIC_SYNTHESIS/**`,
+    `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md` (KR.M4A.CLOSE.1 still carries
+    to S3), `platform/**`. Mirror MP.1/MP.2 not propagated this session — small
+    governance-aside scope; carries to next substantive close.
+    No red-team this session (governance aside). NAP impact: NAP.M4.2 §5.4
+    patch action now **fully discharged** at the LEL_GAP_AUDIT level
+    (GAP.M4A.04 status reflected as `partially_closed` in the audit; LEL v1.6
+    patch already discharged the L1 side at M4-A-CLOSE-LEL-PATCH).
+    parallel_session_notes: >
+      Running concurrently with M4-B-S3 (LL.2 shadow writes). Both sessions
+      modify CURRENT_STATE_v1_0.md and SESSION_LOG.md. Version coordination
+      per brief AC.P1.5: this session writes v1.8, expecting S3 to write
+      v1.7. Counter coordination: this session does NOT increment
+      red_team_counter (governance-aside); S3 may increment if it is a
+      substantive corpus/engine session. At merge: if both sessions wrote
+      conflicting `last_session_id` or `file_updated_at` values, last writer
+      wins by chronological close order — operator should preserve both
+      changelog entries side-by-side and re-run drift_detector after merge.
+  - v1.7 (RESERVED — parallel M4-B-S3 session, not written by this session)
   - v1.6 (2026-05-02, M4-B-S2-MIRROR-TWOPASS): MP.1+MP.2 mirror-sync carry-forward
     DISCHARGED (this session updated .geminirules + .gemini/project_state.md to adapted
     parity reflecting M4-A CLOSED + M4-B-S1 done + M4-B-S2 in flight). LL.1 two-pass

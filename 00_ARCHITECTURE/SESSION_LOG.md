@@ -11830,3 +11830,70 @@ M4-B-S2 substrate session: (1) MP.1 + MP.2 mirror sync (discharges the carry-for
 **Next session.** `M4-B-S3` — LL.2 graph edge weight modulators (shadow-mode) per `SHADOW_MODE_PROTOCOL §3.5` (LL.2 promotion gated on LL.1 endpoint pair being in production register; LL.1 production blocks until pass_2 NAP.M4.5 resolves) + KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip.
 
 Commit: 6a4ff8a8a705166e7a8ac982c09b031dda488831 (stamped via follow-up).
+
+---
+
+**M4-B-P2-NAP-M45-PREP** | 2026-05-02 | CLOSED
+
+Parallel-slot dossier-authoring session running alongside M4-B-S3 (LL.2 shadow writes) and M4-B-P1-GAP-TRAVEL-CLOSE (governance-aside GAP.M4A.04 status flip). Sole deliverable: a native-facing pass_2 spot-check dossier for `NAP.M4.5` — the binding final gate for production promotion of the 30 LL.1 promotion-eligible signals approved-with-flags by Claude-surrogate-for-Gemini at M4-B-S2-MIRROR-TWOPASS pass_1.
+
+**Cowork thread:** `M4-B-P2 — NAP.M4.5 Preparation Dossier`.
+
+**Acceptance criteria** (from M4-B-P2-NAP-M45-PREP brief):
+- AC.P2.1 PASS — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` re-read in full via `python -c "import json; …"` direct iteration. 30 entries with `status == "promotion_eligible_pending_two_pass"` extracted; for each: `signal_id`, `domain`, `n_observations`, `mean_match_rate`, `variance`, `approval_chain[0].pass_1_decision`, `approval_chain[0].pass_1_notes`. Verification: COUNT_ELIG = 30, matches summary block `promotion_eligible_pending_two_pass: 30`. All 30 carry `pass_1_decision: "approved"` with uniform Tier-A/B baseline `pass_1_notes` text plus per-signal Tier-C joint-firing flag in notes for SIG.MSR.118/119/143.
+- AC.P2.2 PASS — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md` read in full (362 lines). Three flagged signals confirmed at §3.3 + §4 + §5.flagged_for_pass_2_attention: SIG.MSR.118, SIG.MSR.119, SIG.MSR.143 (Tier-C borderline; mean=0.4545 var=0.2727 N=11; identical descriptive statistics). Joint-firing question reproduced verbatim: *"do SIG.MSR.118, .119, .143 represent independent calibrated phenomena, or one phenomenon detected three ways?"*
+- AC.P2.3 PASS — `025_HOLISTIC_SYNTHESIS/MSR_v3_0.md` lines 2542–2562 (SIG.MSR.118), 2564–2584 (SIG.MSR.119), 3090–3110 (SIG.MSR.143) read directly. **All three signals are yoga absences:** SIG.MSR.118 = Ruchaka Yoga ABSENT (Mars-MP missing — Mars in Libra 7H enemy sign); SIG.MSR.119 = Malavya Yoga ABSENT (Venus-MP missing — Venus in Sagittarius 9H friend's sign); SIG.MSR.143 = Sarpa Yoga ABSENT (10L Saturn exalted = opposite of debilitated → actively prevents Sarpa). Full `signal_name`, `classical_source`, `entities_involved`, `strength_score`, `valence`, `temporal_activation`, `supporting_rules`, `falsifier`, `confidence` reproduced verbatim into dossier §3.1–§3.3.
+- AC.P2.4 PASS — `00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md` v1.0 created with all six sections per brief.
+  - **§1 Purpose** — names NAP.M4.5 as binding pass_2 final gate for production promotion of the 30 LL.1 promotion-eligible signals; cites `SHADOW_MODE_PROTOCOL_v1_0.md §3.1(c)+(d)`; pass_1 was discharged at M4-B-S2 by Claude-surrogate-for-Gemini.
+  - **§2 Full 30-signal table** — sorted by `mean_match_rate` desc; columns: signal_id, signal_name (where MSR-resolvable), domain, N, mean, variance, tier (A/B/C), NAP.M4.5 flag column. Tier breakdown: A = 24 (mean=1.0, var=0.0, N∈{3,4,5}); B = 3 (RPT.DSH.01 + SIG.MSR.145 + SIG.MSR.402; mean 0.73–0.91 var 0.09–0.22); C = 3 (SIG.MSR.118/119/143; mean=0.4545 var=0.2727 N=11). Domain note flags 11 unknown-domain signals as msr_domain_buckets fallthrough, not a defect.
+  - **§3 Three flagged signals deep-dive** — full MSR_v3_0.md entries reproduced verbatim for each, statistical profile, per-event firing matrix across the 11 training events, **pairwise overlap analysis** showing 118∩119=1 event (1984), 118∩143=1 event (2004), 119∩143=3 events (2000/2001/2003), 118∩119∩143=0 events. **Empirical interpretation:** identical aggregate statistics emerge from each signal firing on its own ~5/11 subset of largely *different* events — empirical signature of three independent phenomena, not one phenomenon counted three times. Native ratifies (or contests) by inspecting whether each lit-event subset has its own thematic coherence given the signal's classical content. §3.5 enumerates four things to look for at NAP.M4.5: signal-content sanity (yoga-absence as predictor); firing-pattern coherence (Ruchaka-absence may track courage/competition events; Malavya-absence may track relationship/aesthetic events; Sarpa-absence may track averted-catastrophe events); one-vs-three-phenomena test (use the §3.4 overlap pattern); demotion threshold sanity (each signal sits 0.054 above mean threshold and 0.0273 below variance threshold — "noise" verdict is allowed).
+  - **§4 Spot-check guide** — approve / hold / demote semantics with downstream consequences (approve → moves to live consumption with n=1 disclaimer; hold → blocks LL.2 endpoint-eligibility for that signal but does NOT block M4-B-S3 LL.2 shadow writes; demote → shadow_indefinite per protocol §5). Honest stakes statement: Tier-A signals carry overfit risk (held-out validity test at M4-C is the second-line defense); Tier-C flagged signals carry interpretation risk (demoting all three is a defensible conservative outcome; approving all three is a defensible acceptance of the §3.4 empirical reading). Time estimate: ~5 min Tier-A batch + ~2 min Tier-B + ~12–15 min Tier-C = ~20 min focused pass.
+  - **§5 Pass_2 decision-record template** — blank table with one row per signal (signal_id, tier, blank verdict slot, blank rationale ≤120 chars) + a joint pass_2 question slot for the one-vs-three-phenomena answer + reviewer/date/session metadata slots. Filled values feed back into `ll1_weights_promoted_v1_0.json` `approval_chain[0].pass_2_decision` and `LL1_TWO_PASS_APPROVAL_v1_0.md §5.pass_2`.
+  - **§6 Changelog** — v1.0 entry.
+  Frontmatter: `status: AWAITING_NATIVE_REVIEW`, `nap_id: NAP.M4.5`, `nap_class: M4-B`, `binding_gate_for: production promotion of 30 LL.1 signals`, `review_target_duration: ~20 minutes`, n=1 disclaimer carried verbatim per `SHADOW_MODE_PROTOCOL §7`.
+- AC.P2.5 PASS — `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` bumped v1.8 → v1.9. Per the brief AC.P2.5 coordination rule: at write time M4-B-P1 had landed (v1.6 → v1.8 reserving v1.7 for S3); this session takes v1.9 reserving v1.7 for S3 implicitly. **Canonical state pointers untouched** (`last_session_id`, `next_session_objective`, `active_phase_plan_sub_phase`, `red_team_counter`, `file_updated_at`, `file_updated_by_session` all remain as set by M4-B-P1) — the version increment is audit-trail-only. Single changelog entry at top of `changelog:` list naming this session's deliverable. `parallel_session_notes:` block added.
+- AC.P2.6 PENDING-AT-COMMIT — this SESSION_LOG entry. Git commit hash stamped on completion.
+
+**Pass_2 dossier — verdict.** Native-facing input artifact published. The empirical pairwise-overlap analysis at §3.4 of the dossier offers a direct (though non-binding) answer to the surrogate-flagged joint-firing question: with 0 events firing all three signals, 118∩119 = 1 event, 118∩143 = 1 event, 119∩143 = 3 events, the three signals are **empirically near-independent** in their firing patterns despite identical aggregate statistics. The native makes the binding pass_2 verdict at NAP.M4.5.
+
+**Held-out partition discipline.** No `06_LEARNING_LAYER/OBSERVATIONS/**` files touched; held-out manifest sacrosanct (Learning Layer discipline #4). Read-only on `signal_weights/**` per brief hard constraint.
+
+**mirror_updates_propagated.**
+
+| pair_id | claude_side | gemini_side | both_updated_same_session | rationale |
+|---|---|---|---|---|
+| MP.1 | CLAUDE.md (read-only this session) | .geminirules (untouched) | n/a | Native-facing dossier in `00_ARCHITECTURE/EVAL/`; not a Claude-Gemini-mirrored governance surface. No MP.1 trigger. |
+| MP.2 | composite (CURRENT_STATE +SESSION_LOG) — touched: CURRENT_STATE v1.8→v1.9 (audit-trail-only changelog entry) + SESSION_LOG (this entry) | .gemini/project_state.md (untouched) | false | Parallel-slot session deliberately does NOT alter canonical state; M4-B-P1 (sibling parallel session) already absorbed the carry-forward semantics for this MP.2 surface; my version bump is audit-trail-only. No `DIS.class.mirror_desync` opens because canonical state is unchanged. |
+| MP.3–MP.8 | various (read-only) | various (read-only) | n/a | No cascade required |
+
+`mirror_enforcer.py` not run at this close (parallel-slot dossier-authoring session with no canonical-state changes).
+
+**Files changed (within may_touch only):**
+- `00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md` — CREATED (v1.0; six sections; ~470 lines).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (frontmatter `version: 1.8 → 1.9`; v1.9 changelog entry prepended; canonical state pointers untouched).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+**Out-of-scope, deliberately not touched** (per brief must_not_touch):
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**` — read-only per AC.P2.1 hard constraint; no patches to approval_chain fields, no new shadow or production files.
+- `06_LEARNING_LAYER/OBSERVATIONS/**` — held-out manifest sacrosanct.
+- `01_FACTS_LAYER/**`, `025_HOLISTIC_SYNTHESIS/**` — frozen.
+- `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md` — KR.M4A.CLOSE.1 still carries to M4-B-S3.
+- `platform/**` — out of M4-B-P2 scope.
+
+**Red-team.** No red-team this session. M4-B-P2 is a parallel-slot governance-aside class session (native-facing dossier authoring; no engine, retrieval, or synthesis work). Per `ONGOING_HYGIENE_POLICIES_v1_0.md §G` substantive corpus/engine sessions increment, governance asides do not. Counter unchanged at 1 (set by M4-B-S2-MIRROR-TWOPASS).
+
+**ND.** No open native directives. ND.1 (Mirror Discipline) addressed since Step 7 close 2026-04-24.
+
+**Open NAPs after this close (unchanged):**
+- NAP.M4.5 (M4-B-class — pass_2 native spot-check on the 30 LL.1 weights; binding final gate for production promotion). **Dossier published this session.**
+- NAP.M4.6 (M4-C-class — LL.7 discovery prior).
+- NAP.M4.7 (M4-D-class — M4 macro-phase close approval).
+
+**Carry-forwards (unchanged):**
+- KR.M4A.CLOSE.1 — CALIBRATION_RUBRIC_v1_0.md frontmatter flip (still out of declared may_touch; carries to M4-B-S3).
+- KR.M4A.CLOSE.2 — native review of M4-B-S1 single-track vs planned B1/B2 split (carries to NAP.M4.5).
+- Gemini reachability addendum to LL1_TWO_PASS_APPROVAL_v1_0.md §5 if Gemini becomes synchronously available before M4-B close.
+
+**Next session.** Whatever the critical-path queue prescribes after M4-B-S3 closes — typically M4-B-S4 (LL.3/LL.4 mechanism activation) or NAP.M4.5 native review at M4-B close. The dossier published this session is the input artifact for NAP.M4.5 whenever it is convened.
+
+Commit: TBD (stamped via follow-up).
