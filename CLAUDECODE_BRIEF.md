@@ -130,55 +130,71 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
 smoke_date: 2026-05-02
-avg_tool_recall: NOT_RUN
-avg_tool_precision: NOT_RUN
-failing_entries: ALL_25 (structural — see notes)
+avg_tool_recall: 0.000
+avg_tool_precision: 0.000
+failing_entries: ALL_25 (every entry errored "LLM planner call failed: Not Found")
 flag_flipped: false
+exit_code: 1
 notes: |
-  TWO BLOCKING ISSUES — flag held false per B.10 and golden-set labeling rule.
+  Smoke RAN LIVE this session (sandbox proxy block from prior round is gone —
+  ran from dev machine directly). Result: every entry GT.001–GT.025 failed
+  with `LLM planner call failed: Not Found` (HTTP 404) at the LLM call site.
+  Predicted_tools = [] for all 25; recall/precision = 0.0 / 0.0; required
+  misses = 23 (GT.024 + GT.025 have empty required sets so register as hits).
+  Forbidden violations = 0. Pass rate = 0.000.
 
-  ISSUE 1 — NIM ENDPOINT UNREACHABLE FROM EXECUTION ENVIRONMENT (B.10):
-    The sandbox proxy (http://localhost:3128) returned HTTP 403 Forbidden
-    with header X-Proxy-Error: blocked-by-allowlist when attempting to
-    CONNECT to integrate.api.nvidia.com:443. The NVIDIA_NIM_API_KEY is
-    present in .env.local and confirmed 70-char nvapi- prefixed key.
-    tsx/esbuild also fails (darwin-arm64 binary in node_modules, sandbox
-    is linux-arm64 — npm registry also blocked in sandbox).
-    Per B.10: NIM unavailable from execution environment → flag stays false.
-    Action: run smoke manually on the dev machine before flag flip:
-      PLANNER_MODEL_ID=nvidia/llama-3.3-nemotron-super-49b-v1 \
-      CHART_ID=test-native \
-      npx tsx --conditions=react-server platform/tests/eval/planner_smoke_runner.ts
+  ROOT CAUSE — NIM PROVIDER WIRING (model/integration issue, not prompt):
+    `@ai-sdk/openai@3.0.53` (installed at platform/node_modules) defaults
+    `client(modelId)` to `createResponsesModel`, which POSTs to `/responses`
+    (the OpenAI Responses API). NVIDIA NIM (https://integrate.api.nvidia.com/v1)
+    only serves `/chat/completions`; it returns plain `404 page not found`
+    for any other path. The AI SDK surfaces this as `AI_APICallError:
+    Not Found` (statusCode 404), which `manifest_planner.ts` wraps as
+    `PlannerError("LLM planner call failed: Not Found")`.
 
-  ISSUE 2 — GOLDEN SET LABELING ERROR (EVAL-5 — separate task needed):
-    11 tools appear in expected_tools that are NOT in PRIMARY_TOOL_NAMES
-    (the 8 tools the manifest_compressor exposes to the planner):
-      chart_facts_query, divisional_query, domain_report_query, kp_query,
-      manifest_query, query_kp_ruling_planets, query_signal_state,
-      query_varshaphala, saham_query, temporal, timeline_query
-    Theoretical maximum avg_tool_recall (if planner perfectly selects all
-    primary tools in expected): 0.4553 — BELOW the 0.80 threshold.
-    This is not a prompt issue or a model issue. The golden set was authored
-    against the full tool catalog (pre-W2-MANIFEST compression) and was not
-    updated when PRIMARY_TOOL_NAMES was locked to 8 entries.
-    Entries GT.023 and GT.024 have zero primary tools in expected_tools
-    (max_recall = 0.000 even with a perfect planner).
-    Per hard constraint: "golden set edits are a separate task (EVAL-5,
-    not yet scheduled)." Opening EVAL-5 scope in session notes below.
+    Verified by direct probes from this machine:
+      • curl POST /chat/completions with model=nvidia/llama-3.3-nemotron-super-49b-v1
+        and a 5-token prompt → HTTP 200, valid completion (assistant content
+        "A simple yet effective greeting" returned). API key + endpoint healthy.
+      • curl POST /chat/completions same model + tool_calls → HTTP 200,
+        valid `tool_calls` array returned. Tool-use mode works.
+      • curl POST /chat/completions same model + response_format=json_schema
+        → HTTP 500 InternalServerError "Already borrowed" (NIM bug; unrelated).
+      • Standalone Node script: `createOpenAI(...).('nvidia/llama-3.3-nemotron-super-49b-v1')`
+        + `generateObject(...)` → 404 page not found, AI_APICallError, status 404.
+        Same script with `client.chat(modelId)` would force the chat path —
+        not tested here because the fix lives in must_not_touch.
 
-  AC.U.1 (tsc clean): PASS — zero src/ errors.
-  AC.U.2 (regression gate): PASS — Python-scored, recall=1.0, precision=1.0.
-    (vitest/rolldown also has no linux-arm64 binary in node_modules.)
-  AC.U.3 (EVAL-B live smoke): NOT_RUN — blocked by sandbox proxy + golden
-    set labeling issue makes threshold mathematically unreachable.
-  AC.U.4 / AC.U.5: SKIPPED — held pending AC.U.3.
+    Locus of fix: `platform/src/lib/models/nvidia.ts` line 60-62
+    (`getNvidiaModel`). Currently returns `getClient()(modelId)` which is
+    the responses-API factory in @ai-sdk/openai v3. Should be
+    `getClient().chat(modelId)` to force `/chat/completions`. One-line patch.
 
-  EVAL-5 SCOPE NOTE (opens here; schedules separately):
-    Fix golden_test_set.json: ensure all expected_tools entries are drawn
-    exclusively from PRIMARY_TOOL_NAMES. Rewrite or split entries whose
-    expected tools span both primary and non-primary sets. GT.023 and GT.024
-    require complete rewrites. After repair: re-run regression_baseline.json
-    fixture update + re-run smoke.
+  SCOPE — FIX IS OUT OF SESSION:
+    `platform/src/lib/models/**` is in `must_not_touch`. The NIM-wrapper fix
+    therefore cannot land in this session. Surfaced to native; flag stays
+    false per AC.U.3. Recommend a small follow-up session (no other scope)
+    that touches only `nvidia.ts` line 61 and re-runs this smoke.
+
+  SECONDARY ISSUE — GOLDEN SET LABELING (EVAL-5, still open from prior round):
+    Even with the NIM wiring repaired, 11 of the 8-tool primary set are not
+    represented in `expected_tools` correctly: the golden set was authored
+    pre-MANIFEST-compression. Theoretical max avg_recall under the current
+    PRIMARY_TOOL_NAMES (8 tools) is 0.4553, below the 0.80 threshold.
+    GT.023 and GT.024 have zero primary tools in expected_tools (max
+    recall = 0.000 even with a perfect planner). This is a separate task
+    (golden_test_set.json is in must_not_touch this session).
+
+  ACCEPTANCE STATE:
+    AC.U.1 (tsc clean):       PASS  (verified prior session)
+    AC.U.2 (regression gate): PASS  (verified prior session, mocked replay)
+    AC.U.3 (EVAL-B live):     FAIL  (recall=0.00, precision=0.00; 404 wiring bug)
+    AC.U.4 (flag flip):       SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):          this commit (test(...) variant per brief)
+
+  PROMPT RETRY: not performed — failure is not a prompt issue. Every entry
+  failed at the HTTP layer before the LLM ever saw the prompt. Updating
+  PLANNER_PROMPT_v1_0.md would have zero effect.
 ```
 
 ---
