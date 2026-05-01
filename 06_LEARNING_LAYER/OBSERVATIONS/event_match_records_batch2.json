@@ -1,0 +1,1137 @@
+{
+  "schema_version": "1.0",
+  "rubric_version": "1.0",
+  "rubric_option": "B",
+  "produced_during": "M4-A-S2-T2-BATCH2-HOLDOUT",
+  "produced_on": "2026-05-02",
+  "scope": "events 24-46 (chronological) of LEL v1.2 \u2014 second half of 2010-19 + all 2020-26",
+  "note": "Batch 2 of 2 (T1 owns batch 1 = events 1-23, event_match_records_batch1.json). NAP.M4.1 native-approved Option B (graded proximity) at session open 2026-05-02. Integration pass produces 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json.",
+  "held_out_manifest": {
+    "total_held_out": 9,
+    "decade_distribution": {
+      "2000-2009": 2,
+      "2010-2019": 3,
+      "2020-2026": 4
+    },
+    "held_out_event_ids": [
+      "EVT.2008.06.09.01",
+      "EVT.2009.06.XX.01",
+      "EVT.2017.03.XX.01",
+      "EVT.2018.11.28.01",
+      "EVT.2019.05.XX.01",
+      "EVT.2022.01.03.01",
+      "EVT.2024.02.16.01",
+      "EVT.2025.05.XX.01",
+      "EVT.2026.01.XX.01"
+    ],
+    "selection_criteria": "Decade-stratified per AC.M4A.4 (\u224820% of 46 = 9). Preference: EXACT or approx-month dates (higher-confidence test); spread of categories (career/family/health/financial/psychological); later dates within decade per brief. EXACT count: 6 of 9 (EVT.2008.06.09.01, EVT.2018.11.28.01, EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2009.06.XX.01 month-exact, EVT.2017.03.XX.01 month-exact).",
+    "note": "EVT.2008.06.09.01 and EVT.2009.06.XX.01 belong to T1's batch1; their records are NOT in this file. The integration pass (M4-A-S2 close) will apply held_out partition to those two T1 records based on this manifest. The other 7 held-out events are present in records[] below with partition: held_out."
+  },
+  "records": [
+    {
+      "event_id": "EVT.2013.12.11.01",
+      "event_date_used": "2013-12-11",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.15",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.08",
+          "signal_domain": "general",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "general",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.15",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.08",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Marriage = chart's 7H-signature stage. All 4 expected signals natal-permanent (rubric \u00a73 default = 1.0). Mercury MD/Ketu AD: Ketu AD anomalous for marriage \u2014 LEL retrodictively names this as predictor of separation trajectory; not penalized in lit_score per rubric (Ketu is the AD that activates the natal 7H structure).",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2013.XX.XX.01",
+      "event_date_used": "2013-07-01",
+      "event_date_confidence": "approx-year",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "family",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.12",
+          "signal_domain": "health",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.12",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Year-approx (month per GAP.FATHER_KIDNEY_MONTH.01); July 1 center per rubric \u00a73. Three structural signals: Jupiter Uccha-weak (CTR.03) is the foundational 9L/father vulnerability carrying the 5-year illness arc. All natal-permanent \u2192 1.0. Activator state_summary: 185 lit / 0 ripening / 310 dormant under Mercury/Ketu.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2016.XX.XX.01",
+      "event_date_used": "2016-07-01",
+      "event_date_confidence": "approx-year",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.12",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.04",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.12",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.04",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Year-exact (month unknown); July 1 center per rubric \u00a73 \u2014 falls inside the Venus AD window (Jan 2014\u2013Nov 2016). SIG.12 (Venus Shadbala-weak) directly lit by AD; full match. Company-crash coinciding with end of Venus AD is high-confidence retrodictive match per LEL.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2017.03.XX.01",
+      "event_date_used": "2017-03-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.14",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CVG.04",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "career",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.14",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.04",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Sun AD lit at event = SIG.14 direct dasha activation (1.0). Mercury MD active throughout = SIG.09 lit. 10H career-density (CVG.04) natal-permanent. Sun AD inside Mercury MD = both lords co-present in 10H Capricorn natally \u2014 one of strongest career-advancement AD configurations.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2018.11.28.01",
+      "event_date_used": "2018-11-28",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "family",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.04",
+          "signal_domain": "psychological",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.05",
+          "signal_domain": "general",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.04",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.05",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Most foundationally explained event: Mercury MD/Moon AD with Moon=AK Chalit-12 (loss). Saturn transit Sagittarius (9H from Lagna) classical father-death trigger present in chart_state. Sade Sati C2 starts ~62 days later (within \u00b190d planting window) but not formally lit. All 4 expected signals \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2019.05.XX.01",
+      "event_date_used": "2019-05-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CVG.03",
+          "signal_domain": "travel",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.05",
+          "signal_domain": "travel",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.06",
+          "signal_domain": "travel",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.15",
+          "signal_domain": "career",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CVG.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.05",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.06",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.15",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Mars AD active = SIG.15 (Mars-Saturn 7H) lit by AD-lord. CVG.03 foreign-income chain dominant for foreign moves. Bhramari/Mars Yogini doubles Mars intensity. Clean match \u2014 all 4 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2021.01.XX.01",
+      "event_date_used": "2021-01-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "psychological",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "psychological",
+          "basis": "temporal_engine"
+        },
+        {
+          "signal_id": "SIG.11",
+          "signal_domain": "psychological",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.15",
+          "signal_domain": "psychological",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "psychological",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        },
+        {
+          "signal_id": "SIG.11",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.15",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Textbook panic-onset chart: Rahu AD (anxiety karaka) + Sade Sati C2 Rising peak (~1yr in) + Bhramari/Mars Yogini (Mars adrenaline-jitters) + COVID-era US isolation. SIG.13 lit via transit (Sade Sati). SIG.10/SIG.11/SIG.15/CTR.01 lit via dasha. All 5 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2021.XX.XX.02",
+      "event_date_used": "2021-04-01",
+      "event_date_confidence": "proxy",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.07",
+          "signal_domain": "education",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "career",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.07",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 expected derived from career+education domain (Tepper sponsorship) + chart's dharma-credential pattern. Proxy date 2021-04-01 per LEL chart_state.proxy_date_used. Saraswati Yoga + Jupiter 9L dharma-credential + Mercury MD operational spine = MBA-sponsorship signature. All natal-permanent \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2021.XX.XX.03",
+      "event_date_used": "2021-09-01",
+      "event_date_confidence": "proxy",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "financial",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "psychological",
+          "basis": "temporal_engine"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 expected derived from career-financial domain (sand quarry stall) + chart pattern. Rahu AD active = SIG.10 (Rahu 2H, Rahu mining karaka). Jupiter Uccha-weak (CTR.03) explains 4-5yr stall. Sade Sati active. All 3 \u2192 1.0. Resolution at EVT.2026.04.08.01.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2022.01.03.01",
+      "event_date_used": "2022-01-03",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "family",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "family",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "family",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "TWINS = textbook Rahu-AD-multiplication signature. Jupiter transit Aquarius ON natal Moon (gajakesari-class children transit) reinforces. Solar Total Sagittarius eclipse -30d ON natal 9H Jupiter+Venus (within \u00b130d \u2192 0.5 transit). Eclipse not in expected set; recorded here for completeness. All 3 expected \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2022.XX.XX.02",
+      "event_date_used": "2022-06-01",
+      "event_date_confidence": "proxy",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.15",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "relationship",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.15",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 expected derived from relationship category. Rahu AD classically signifies unconventional/illicit attachments; SIG.10 lit by AD. Mars-Saturn 7H natal tension always operative. CTR.01 dramatic-not-compound fits affair pattern. All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2022.10.XX.01",
+      "event_date_used": "2022-10-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.12",
+          "signal_domain": "relationship",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.12",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL flagged predicted_by_chart: partial; signals_that_missed: 'specific infidelity-ending pattern not computed in v1.2.1'. Two structural signals fired (1.0 each); the missed pattern is not in expected_lit_signals (acknowledged gap, not formal expectation).",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2023.05.XX.01",
+      "event_date_used": "2023-05-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "psychological",
+          "basis": "temporal_engine"
+        },
+        {
+          "signal_id": "CVG.08",
+          "signal_domain": "general",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.03",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        },
+        {
+          "signal_id": "CVG.08",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Jupiter AD lit at event = CVG.02 directly lit by AD-lord. Sade Sati Peak Aquarius active = SIG.13 lit via transit. STRONG MATCH per LEL \u2014 single most transformative turning point of adult life. All 4 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2023.06.XX.01",
+      "event_date_used": "2023-06-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.07",
+          "signal_domain": "education",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "education",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.07",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Jupiter AD + Mercury MD = Saraswati+Lakshmi convergence in education-signal domain. Tepper/CMU = dharma-credential (CVG.02). All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2023.07.XX.01",
+      "event_date_used": "2023-07-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.08",
+          "signal_domain": "financial",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.02",
+          "signal_domain": "spiritual",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.14",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "RPT.DSH.01",
+          "signal_domain": "career",
+          "basis": "temporal_engine"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.08",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.14",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "RPT.DSH.01",
+          "lit_score": 0.2,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 0.84,
+      "match_notes": "Per rubric \u00a72.2 worked example: Mercury MD/Jupiter AD = Saraswati+Lakshmi MD/AD lords both yoga-members. RPT.DSH.01 partial (0.2 planting-phase) \u2014 Saturn AD opens 2024-12; ~17mo away beyond \u00b190d bucket but planting-phase activation acknowledged per rubric \u00a72.2.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2024.02.16.01",
+      "event_date_used": "2024-02-16",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.15",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "financial",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.08",
+          "signal_domain": "general",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.15",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.08",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "Most chart-coherent business launch in log per LEL: Chara Libra MD just shifted (Feb 5) = Saturn-exalted-7H signature becomes TIME-lord. Mercury MD/Jupiter AD = Lakshmi stack. Sand mining = Rahu earth-extraction (SIG.10) + Saturn-labor-structured (SIG.01). Triple-convergence. All 4 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2025.05.XX.01",
+      "event_date_used": "2025-05-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "financial",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "psychological",
+          "basis": "temporal_engine"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL: predicted_by_chart: partial. Saturn AD (RPT.DSH.01 critical) + Sade Sati Setting. Both formal signals \u2192 1.0. LEL flags Ketu (deception karaka) as not-yet-encoded \u2014 RPT.LFE.01 candidate; not in formal expected set.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2025.07.XX.01",
+      "event_date_used": "2025-07-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "signal_domain": "financial",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CVG.01",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "CVG.05",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "RPT.DSH.01",
+          "signal_domain": "financial",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CVG.05",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "RPT.DSH.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "STRONG MATCH per LEL. Saturn AD now active \u2014 RPT.DSH.01 compounding window OPEN (was 0.2 planting-phase in 2023; now 1.0). Mercury MD yogi + Saturn AD authority-exalted = partner-platform delivery. Single most calibration-bearing event of post-2023 corpus. All 5 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2025.XX.XX.01",
+      "event_date_used": "2025-07-01",
+      "event_date_confidence": "approx-year",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.02",
+          "signal_domain": "spiritual",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.02",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "STRONGEST retrodictive match in 2025 per LEL. CTR.02 in v1.2.1 Deep Analysis explicitly named the dual-devata tension; this 2025 shift is CTR.02 resolving in real-time. Single-signal event but the signal is exactly the predicted phenomenon.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2025.XX.XX.02",
+      "event_date_used": "2025-06-01",
+      "event_date_confidence": "proxy",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "health",
+          "basis": "temporal_engine"
+        },
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "health",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "health",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        },
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 expected derived from health-resolution category. Sade Sati Setting (release phase from C2). Saturn AD (chronic-condition closure under Saturn-AD authority). Astrological-pharmaceutical remedy = Mercury domain. All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2026.01.XX.01",
+      "event_date_used": "2026-01-15",
+      "event_date_confidence": "approx-month",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "held_out",
+      "expected_lit_signals": [
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "psychological",
+          "basis": "classical_rule"
+        },
+        {
+          "signal_id": "SIG.13",
+          "signal_domain": "psychological",
+          "basis": "temporal_engine"
+        },
+        {
+          "signal_id": "SIG.09",
+          "signal_domain": "psychological",
+          "basis": "both"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.13",
+          "lit_score": 1.0,
+          "lit_source": "transit"
+        },
+        {
+          "signal_id": "SIG.09",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 expected derived from psychological-focus category. Saturn AD compressive structure delivers focus (CTR.01). Sade Sati Setting closes ~16mo out \u2014 release-as-focus. Mercury MD operational spine sustains. All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2026.03.20.01",
+      "event_date_used": "2026-03-20",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "RPT.DSH.01",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.01",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "CTR.01",
+          "signal_domain": "financial",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "RPT.DSH.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "CTR.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 derived from career-financial close. RPT.DSH.01 compounding window active (Saturn AD); project wraps with 'enormous profits' = compounding-window crystallization. CTR.01 dramatic-not-compound captures project-ends-but-buffer-built. All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    },
+    {
+      "event_id": "EVT.2026.04.08.01",
+      "event_date_used": "2026-04-08",
+      "event_date_confidence": "exact",
+      "rubric_version": "1.0",
+      "rubric_option": "B",
+      "partition": "training",
+      "expected_lit_signals": [
+        {
+          "signal_id": "RPT.DSH.01",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.01",
+          "signal_domain": "career",
+          "basis": "both"
+        },
+        {
+          "signal_id": "SIG.10",
+          "signal_domain": "career",
+          "basis": "classical_rule"
+        }
+      ],
+      "actual_lit_signals": [
+        {
+          "signal_id": "RPT.DSH.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.01",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        },
+        {
+          "signal_id": "SIG.10",
+          "lit_score": 1.0,
+          "lit_source": "dasha"
+        }
+      ],
+      "match_rate": 1.0,
+      "match_notes": "LEL retrodictive_match: pending \u2014 derived from career-clearance. Saturn AD = authority-clearance domain. RPT.DSH.01 compounding window active = stalled-since-2021 obstacle resolves. Pre-history = EVT.2021.XX.XX.03. All 3 \u2192 1.0.",
+      "computation_session": "M4-A-S2-T2-BATCH2-HOLDOUT"
+    }
+  ]
+}
