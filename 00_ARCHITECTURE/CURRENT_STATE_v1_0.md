@@ -1338,15 +1338,36 @@ current_state:
     surrogate-for-Gemini pending pass_2 NAP.M4.5; production-pending file
     signal_weights/production/ll1_weights_promoted_v1_0.json carries
     status: production_pending_pass_2 + weights_in_production_register: false.
-    M4-B-P1-GAP-TRAVEL-CLOSE (this session) DONE 2026-05-02 (parallel slot,
-    governance-aside) — GAP.M4A.04 status flipped deferred-pending-patch →
-    partially_closed in LEL_GAP_AUDIT v1.1 → v1.2 post the L1 patch (LEL v1.6
-    dual-tag of EVT.2019.05.XX.01 + EVT.2023.05.XX.01) landing at
-    M4-A-CLOSE-LEL-PATCH. B.10-strict full-close attempt audit ran; verdict
-    PARTIAL_CLOSE (no source-backed events available; residual carries forward
-    as deferred per NAP.M4.2 "no further elicitation required"). LEL not bumped.
-    Next (parallel): M4-B-S3 (LL.2 shadow writes; LL.1 stability gate per SHADOW_MODE_PROTOCOL §3.5)
-    + KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip.
+    M4-B-S3-LL2-EDGE-WEIGHTS (this session) DONE 2026-05-02 — substantive
+    learning-layer-substrate session. Three substantive deliverables:
+    LL2_STABILITY_GATE_v1_0.md NEW (gate decision = CONDITIONAL_PASS: shadow
+    writes permitted; promotion blocked until NAP.M4.5 closes); LL2_EDGE_WEIGHT_
+    DESIGN_v1_0.md NEW (full design doc + §3.5 empirical adjustment for
+    domain-stratified corpus); ll2_edge_weights_v1_0.json NEW shadow file with
+    9,922 edges (HIGH=0, MED=8, LOW=9,914, ZERO=0; cross_domain_count=0,
+    intra_domain_count=9,922 per §3.5 finding). KR.M4A.CLOSE.1 DISCHARGED via
+    CALIBRATION_RUBRIC v1.0-DRAFT→v1.1 frontmatter flip (AWAITING_NATIVE_
+    APPROVAL → APPROVED; NAP.M4.1 audit trail recorded). Held-out 9-event
+    partition sacrosanct — verified by explicit partition filter. EMPIRICAL
+    FINDING (LL2_EDGE_WEIGHT_DESIGN §3.5 + §6.7): LEL training corpus is
+    domain-stratified — every training event fires actual_lit_signals from a
+    single domain bucket (21 single-known-domain events + 16 all-unknown-class
+    events + 0 mixed); strict cross-domain filter would yield 0 edges. Filter
+    relaxed at compute time to retain non-both-unknown co-firing pairs annotated
+    cross_domain: bool. M4-D cross-system reconciliation should consider whether
+    enriched activator output produces genuine cross-domain firings per event.
+    M4-B-P1-GAP-TRAVEL-CLOSE (parallel slot, governance-aside) DONE 2026-05-02 —
+    GAP.M4A.04 status flipped deferred-pending-patch → partially_closed in
+    LEL_GAP_AUDIT v1.1 → v1.2 post the L1 patch (LEL v1.6 dual-tag of
+    EVT.2019.05.XX.01 + EVT.2023.05.XX.01) landing at M4-A-CLOSE-LEL-PATCH.
+    B.10-strict full-close attempt audit ran; verdict PARTIAL_CLOSE (no
+    source-backed events available; residual carries forward as deferred per
+    NAP.M4.2 "no further elicitation required"). LEL not bumped.
+    M4-B-P2-NAP-M45-PREP (parallel slot, governance-aside) DONE 2026-05-02 —
+    NAP_M4_5_DOSSIER_v1_0.md authored (six sections; native-facing pass_2
+    decision dossier covering 30 signals + Tier-C joint-firing analysis).
+    Next: M4-B-S4 (LL.3 domain-bucket coherence report + NAP.M4.5 prep +
+    Gemini reachability check). LL.2 stability gate re-evaluates at NAP.M4.5 close.
     === M4-A CLOSED 2026-05-02 (preserved for audit trail) ===
     M4-A CLOSED 2026-05-02. M4_A_CLOSE_v1_0.md produced. LEL v1.6 patch applied
     (GAP.M4A.04 partial close). M4-B entry unblocked.
@@ -1726,10 +1747,10 @@ current_state:
     # platform/scripts/temporal/compute_narayana.py, 025_HOLISTIC_SYNTHESIS/**,
     # 035_DISCOVERY_LAYER/**, 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
     # (read-only for cross-check anchor only), 01_FACTS_LAYER/**. L1 frozen.
-  last_session_closed_at: 2026-05-01T23:30:00+05:30
-  last_session_attempted_close_at: 2026-05-01T23:30:00+05:30
+  last_session_closed_at: 2026-05-02T23:50:00+05:30
+  last_session_attempted_close_at: 2026-05-02T23:50:00+05:30
   last_session_agent: claude-opus-4-7[1m]
-  last_session_cowork_thread_name: "M3-W4-D1-VALIDATOR-REDTEAM"   # same Cowork thread per brief
+  last_session_cowork_thread_name: "M4-B-S3 — LL.2 Shadow Writes (gated on LL.1 stability)"
   last_session_close_state: atomically_closed
   last_session_drift_verdict: >
     M3-D Wave 4 D2 — M3 MACRO-PHASE CLOSE. Substantive governance-layer
@@ -2063,6 +2084,56 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
+    M4-B-S4 — LL.3 DOMAIN-BUCKET COHERENCE REPORT + NAP.M4.5 PREP + GEMINI REACHABILITY CHECK.
+    Predecessor: M4-B-S3-LL2-EDGE-WEIGHTS (2026-05-02 — LL.2 shadow file produced
+    9,922 edges; LL2_STABILITY_GATE_v1_0.md gate=CONDITIONAL_PASS; LL2_EDGE_WEIGHT_DESIGN
+    _v1_0.md authored with §3.5 empirical adjustment; KR.M4A.CLOSE.1 DISCHARGED via
+    CALIBRATION_RUBRIC v1.0-DRAFT→v1.1 frontmatter flip; CURRENT_STATE entered v1.7).
+    M4-B-S4 scope:
+      (a) LL.3 — Embedding-space-adaptation note. Per SHADOW_MODE_PROTOCOL §2 LL.3 row,
+          LL.3 output at M4-B is `06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/
+          adaptation_notes_M4B_v1_0.md` — a structured recommendation document, NOT an
+          adapter weight artifact. Domain-bucket coherence report: for each domain
+          bucket in msr_domain_buckets.json, audit how well the bucket's signals
+          cohere semantically (do similar-meaning signals cluster? are outliers
+          actually mis-bucketed? what re-bucketing would the embedding space suggest?).
+          Output is a recommendation document; no adapter weights, no shadow→
+          production split (those come at M5+ when adapters are emitted).
+      (b) NAP.M4.5 prep cross-check. Verify the dossier produced at M4-B-P2-NAP-M45-PREP
+          (NAP_M4_5_DOSSIER_v1_0.md) is well-formed and ready for native pass_2 review.
+          If Gemini becomes synchronously reachable in this session, append the
+          Gemini-reachability addendum to LL1_TWO_PASS_APPROVAL_v1_0.md §5 per its
+          own §6.1 self-rule, and re-evaluate Tier-C joint-firing question.
+      (c) (optional, parallel-safe) LL.4 — Prompt optimization record at M4-B.
+          Output: `06_LEARNING_LAYER/PROMPT_OPTIMIZATION/prompt_opt_record_M4B_v1_0.md`
+          per SHADOW_MODE_PROTOCOL §2 LL.4 row — recording proposed amendments;
+          amendments ship via feature flag, not shadow→production split.
+    LL.2 stability gate (LL2_STABILITY_GATE_v1_0.md) re-evaluates at NAP.M4.5 close
+      per its §5; M4-B-S4 does not advance LL.2 promotion state on its own.
+    Inherited carry-forwards (unchanged):
+      - NAP.M4.5 (M4-B-class) native spot-check on LL.1 weights at M4-B close — pass_2
+        of two-pass discipline; binding final gate for LL.1 production promotion.
+        Dossier authored at M4-B-P2: 00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md.
+      - Gemini reachability addendum to LL1_TWO_PASS_APPROVAL_v1_0.md §5 if Gemini
+        becomes synchronously available before M4-B close.
+      - KR.M4A.CLOSE.2 native review of M4-B-S1 single-track vs planned B1/B2 split
+        (procedural irregularity; accept-as-is or schedule re-split).
+      - DIS.009 pending ECR (NAP.M4.3 Option Y to HANDOFF_M4_TO_M5).
+      - DIS.010/011/012 RESOLVED-N3 (M9). Sthana+Drik ECR + Narayana ECR (M5+).
+      - KR.W9.1/2 (auth-secrets). KR.M3A2.1. AC.M3A.5.
+      - KR.M4A.RT.LOW.1 schedule tree-rewrite for commit 0793719 (not blocking).
+      - R.LL2DESIGN.1 (LOW) — LL.2 shadow path co-located with LL.1 (signal_weights/shadow)
+        rather than at SHADOW_MODE_PROTOCOL §2's declared GRAPH_EDGE_WEIGHT_LEARNING/
+        edge_modulators/shadow/ — resolution at next M4-B governance pass.
+      - GAP.M4A.04 partially_closed (residual deferred per NAP.M4.2; no further
+        elicitation per native disposition).
+      - msr_domain_buckets: 4 absent signal IDs (SIG.MSR.207/497/498/499) flagged for M5+.
+      - Domain-stratified LEL training corpus finding (LL2_EDGE_WEIGHT_DESIGN §3.5+§6.7) —
+        flag for M4-D cross-system reconciliation pass.
+    red_team_counter: 2 (M4-B-S3 substantive). Next IS.8(a) cadence-fires at counter=3
+      (one substantive session hence — likely M4-B-S4 if LL.3 work is substantive).
+      IS.8(b) macro-phase-close at M4-D.
+    === Predecessor next_session_objective (M4-B-S3 path) preserved for audit trail ===
     M4-B-S3 — LL.2 GRAPH EDGE WEIGHT MODULATORS (shadow-mode) + CALIBRATION_RUBRIC FRONTMATTER FLIP (KR.M4A.CLOSE.1).
     Predecessor: M4-B-S2-MIRROR-TWOPASS (2026-05-02 — MP.1+MP.2 mirror sync DISCHARGED;
     LL.1 two-pass approval pass_1 COMPLETE — 30 signals approved by Claude-surrogate-for-Gemini
@@ -2212,8 +2283,8 @@ current_state:
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T23:30:00+05:30
-  file_updated_by_session: M4-B-P1-GAP-TRAVEL-CLOSE
+  file_updated_at: 2026-05-02T23:50:00+05:30
+  file_updated_by_session: M4-B-S3-LL2-EDGE-WEIGHTS
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M3-W4-D2-M3-CLOSE, null).

@@ -1,8 +1,11 @@
 ---
 artifact: 06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md
-version: 1.0-DRAFT
-status: AWAITING_NATIVE_APPROVAL
-native_approval_point: NAP.M4.1 (PHASE_M4_PLAN v1.0 §5)
+version: 1.1
+status: APPROVED
+native_approval_point: NAP.M4.1 (PHASE_M4_PLAN v1.0 §5) — APPROVED 2026-05-02 (Option B)
+native_approved_on: 2026-05-02
+native_approved_in_session: M4-A-INTEGRATION-PASS-R3
+frontmatter_flipped_in_session: M4-B-S3-LL2-EDGE-WEIGHTS (KR.M4A.CLOSE.1 discharged)
 produced_during: M4-A-T3-RUBRIC-SCHEMA
 produced_on: 2026-05-01
 parent_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md §3.1 (M4-A — LEL Ground-Truth Spine)
@@ -14,6 +17,7 @@ consumers:
   - 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records_schema.json (rubric_version field references this file)
 changelog:
   - v1.0-DRAFT (2026-05-01, M4-A-T3-RUBRIC-SCHEMA): Initial proposal. Three options (A, B, C) with tradeoffs and worked examples against EVT.2023.07.XX.01. Recommendation: Option B (graded-proximity). Awaiting native approval at NAP.M4.1.
+  - v1.1 (2026-05-02, M4-B-S3-LL2-EDGE-WEIGHTS): KR.M4A.CLOSE.1 carry-forward DISCHARGED. Frontmatter status flipped AWAITING_NATIVE_APPROVAL → APPROVED to reflect the substantive NAP.M4.1 ruling already recorded in CURRENT_STATE_v1_0.md v1.3 (2026-05-02, M4-A-INTEGRATION-PASS-R3 — "NAP.M4.1 → APPROVED (Option B)") and consumed by every event-match record (rubric_option=B) and every LL.1 shadow weight (rubric_version=1.0, rubric_option=B). Body unchanged — Option B remains the ratified rubric for the first M4 calibration cycle. Native approval point NAP.M4.1 entries added: native_approved_on, native_approved_in_session. Frontmatter-flip session recorded for audit trail. R.LL1TPA.4 (DOC-ONLY) closed.
 ---
 
 # CALIBRATION SCORING RUBRIC — v1.0-DRAFT

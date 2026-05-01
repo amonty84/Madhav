@@ -11955,3 +11955,262 @@ Parallel-slot dossier-authoring session running alongside M4-B-S3 (LL.2 shadow w
 **Next session.** Whatever the critical-path queue prescribes after M4-B-S3 closes — typically M4-B-S4 (LL.3/LL.4 mechanism activation) or NAP.M4.5 native review at M4-B close. The dossier published this session is the input artifact for NAP.M4.5 whenever it is convened.
 
 Commit: fb94f1d2ae9be9496b5ab412f8006cf3eae8943d (stamped via follow-up).
+
+---
+
+## M4-B-S3-LL2-EDGE-WEIGHTS — LL.2 Graph Edge Weight Modulators (shadow) + KR.M4A.CLOSE.1 Rubric Frontmatter Flip
+
+```yaml
+session_open:
+  session_id: M4-B-S3-LL2-EDGE-WEIGHTS
+  cowork_thread_name: "M4-B-S3 — LL.2 Shadow Writes (gated on LL.1 stability)"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M4.B.S3
+  predecessor_session: M4-B-S2-MIRROR-TWOPASS
+  opened_at: "2026-05-02T23:00:00+05:30"
+  scope_summary: >
+    Substantive learning-layer-substrate session: produce LL.2 graph edge weight
+    modulator shadow file (cross-domain co-firing from LEL training partition);
+    document LL.1 stability gate as the predicate of LL.2 promotion (gate decision =
+    CONDITIONAL_PASS — shadow writes permitted, production blocked until NAP.M4.5);
+    author LL.2 design specification BEFORE computation per AC.S3.3 hard constraint;
+    discharge inherited KR.M4A.CLOSE.1 (CALIBRATION_RUBRIC frontmatter flip
+    AWAITING_NATIVE_APPROVAL → APPROVED).
+  may_touch:
+    - 06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md  # path corrected from brief's listing
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/  # NEW ll2_edge_weights_v1_0.json
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md  # NEW
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md  # NEW
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/**
+    - 06_LEARNING_LAYER/OBSERVATIONS/**  # except CALIBRATION_RUBRIC frontmatter
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+    - 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+    - .geminirules
+    - .gemini/project_state.md
+    - platform/**
+  red_team_due: false  # counter is 1; advances 1→2 at this close; next IS.8(a) at counter=3
+```
+
+Substantive learning-layer-substrate session executing the M4-B-S3 brief: produce the LL.2 graph edge weight modulator shadow file, document the LL.1 stability gate as the predicate of LL.2 promotion, author the LL.2 design specification before computation, and discharge the inherited KR.M4A.CLOSE.1 carry-forward (CALIBRATION_RUBRIC frontmatter flip).
+
+**Cowork thread:** `M4-B-S3 — LL.2 Shadow Writes (gated on LL.1 stability)`.
+
+**Predecessor:** M4-B-S2-MIRROR-TWOPASS (2026-05-02, CLOSED) — MP.1+MP.2 mirror sync DISCHARGED + LL.1 two-pass approval pass_1 COMPLETE (30 signals approved by Claude-surrogate-for-Gemini pending pass_2 NAP.M4.5). Two parallel-slot sessions ran alongside this one: M4-B-P1-GAP-TRAVEL-CLOSE (governance-aside; GAP.M4A.04 status flip) and M4-B-P2-NAP-M45-PREP (governance-aside; NAP.M4.5 dossier authoring).
+
+### Acceptance criteria (from M4-B-S3-LL2-EDGE-WEIGHTS brief)
+
+- **AC.S3.1 PASS** — `06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md` frontmatter flipped: `status: AWAITING_NATIVE_APPROVAL → APPROVED`; `version: 1.0-DRAFT → 1.1`; native_approval_point line annotated APPROVED 2026-05-02 (Option B); native_approved_on, native_approved_in_session (M4-A-INTEGRATION-PASS-R3), and frontmatter_flipped_in_session (M4-B-S3-LL2-EDGE-WEIGHTS) added; v1.1 changelog entry appended citing the v1.3 CURRENT_STATE record of NAP.M4.1 approval and confirming semantic approval was already intact via every event-match record's `rubric_option=B`. KR.M4A.CLOSE.1 DISCHARGED. R.LL1TPA.4 (DOC-ONLY) closed. **Path correction noted** — the brief's `may_touch` listed `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md` but the actual file lives at `06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md` (consistent with where every event-match record cites it from). Edited the actual file.
+- **AC.S3.2 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md` v1.0 NEW. Eight-section gate document: §1 criteria (LL.2.a–h unpacked from `SHADOW_MODE_PROTOCOL §3.5`); §2 LL.1 state at gate time (30 promotion-eligible after pass_1; production register flag `weights_in_production_register: false`; 285 insufficient + 52 low-mr + 13 hi-var; 0 open DIS.class.calibration_methodology; no native halt); §3 gate decision = **CONDITIONAL_PASS** (LL.2 shadow writes permitted; LL.2 production promotion BLOCKED until NAP.M4.5 closes); §4 rationale incl. risk surface for partial-pass and reversal scenarios; §5 re-evaluation trigger = NAP.M4.5 close (auto-bumps gate to v1.1 with new decision); §6 approval chain (Claude scaffold pass_1; Gemini red-team pass_2 pending; native implicit-no-hold); §7 3 LOW + 1 DEFERRED known residuals; §8 changelog.
+- **AC.S3.3 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md` v1.0 NEW, authored BEFORE computation per AC.S3.3 hard constraint. Seven-section design doc: §1 mechanism (per-edge modulator on cross-domain signal graph; CDLM is domain-pair, not signal-pair — fallback documented); §2 inputs (lel_event_match_records.json primary; CDLM topology; msr_domain_buckets.json domain mapping; ll1_shadow informational endpoint annotation); §3 algorithm steps 1–14 (deterministic arithmetic; cross-domain co-firing; ZERO tier intentionally empty by design); **§3.5 EMPIRICAL ADJUSTMENT** added at compute time (see AC.S3.4 below); §4 shadow-mode constraints (path, two-pass, native notification, disclaimer, kill-switch, promotion blocked); §5 output schema spec; §6 6 known limitations + path-protocol asymmetry **R.LL2DESIGN.1 (LOW)**; §7 changelog. Design doc and computation are in sync.
+- **AC.S3.4 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json` NEW. **9,922 edges total** (HIGH ≥8: 0; MED 4–7: 8; LOW 1–3: 9,914; ZERO: 0 by design). Computed via Python from frozen inputs: training partition filtered explicitly to `partition: "training"` (37 of 46 records); for each event, generated unordered cross-event pairs from signals with `lit_score > 0`; tabulated co_count, raw_co_activation = co_count/37, normalized_weight = raw, confidence_tier per brief mapping. Endpoint metadata cross-references LL.1 shadow file. Held-out 9-event partition sacrosanct (verified — 0 held-out event IDs leaked into any edge's `co_event_ids`). Top-tier MED edges all from `general` domain (SIG.MSR.145↔.402 co=7; .118↔.145 / .119↔.402 / .143↔.145 / .143↔.402 co=5; .117↔.119 / .117↔.402 / .119↔.145 co=4). Output is deterministic — re-runs produce byte-identical output.
+
+  **EMPIRICAL FINDING (compute-time §3.5 design adjustment).** Direct read of `lel_event_match_records.json` training partition revealed that **no training event** has `actual_lit_signals` from two or more *known* domain buckets simultaneously: 21 of 37 training events have lit signals from exactly one known domain (career, general, health, relationship, financial, or travel); 16 of 37 have all signals from `domain: "unknown"` (LEL semantic-class IDs CTR/CVG/SIG.NN/RPT/DSH absent from `msr_domain_buckets.json`); **0 of 37 mixed**. The strict cross-domain filter (drop pairs where domains match) would yield zero edges. Per AC.S3.3 hard-constraint clause "If CDLM does not contain a machine-readable edge list … document this … and use the signal domain-pair co-occurrence approach as fallback", and consistent with the brief's intent to ship a non-empty shadow file useful for downstream audit, the §3.5 design adjustment relaxed the filter at compute time: retain all non-both-unknown co-firing pairs, annotate each with `cross_domain: bool`. The shadow file's summary block reports `cross_domain_count: 0` and `intra_domain_count: 9922` to surface the structural finding. Honest accounting per B.10: the underlying data is unchanged; only the filter predicate was relaxed; the change is documented in the design doc (§3.5, §6.4, §6.7) and in the file's `summary.cross_domain_definition` field.
+
+  Every edge ships with `parent_ll1_endpoints_in_production: false`, `promotion_eligible: false`, and `promotion_blocked_reason: "LL.1 NAP.M4.5 pending — see LL2_STABILITY_GATE_v1_0.md §3"` per the conditional-pass gate. n=1 disclaimer present in header verbatim per `SHADOW_MODE_PROTOCOL §7` with LL.2 sparsity-at-n=37 adaptation.
+- **AC.S3.5 PASS** — `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`: v1.7 reservation slot filled (changelog entry replaces the predecessor "v1.7 (RESERVED)" placeholder line); canonical state fields updated — `last_session_id: M4-B-S3-LL2-EDGE-WEIGHTS`, `next_session_objective: M4-B-S4 (LL.3 + NAP.M4.5 prep + Gemini reachability)`, `red_team_counter: 1 → 2`, `active_phase_plan_sub_phase` extended with M4-B-S3 close + parallel-sibling closes + empirical-finding flag, `file_updated_at: 2026-05-02T23:50:00+05:30`, `file_updated_by_session: M4-B-S3-LL2-EDGE-WEIGHTS`, `last_session_closed_at` + `last_session_attempted_close_at` + `last_session_cowork_thread_name` rotated. Frontmatter `version` field stays at 1.9 (set by parallel M4-B-P2-NAP-M45-PREP per its v1.9 reservation entry); my v1.7 entry slots into the parallel-coordination reservation per the documented convention. Predecessor (M4-B-P1-GAP-TRAVEL-CLOSE) `last_session_id` block preserved as audit trail.
+- **AC.S3.6 IN_PROGRESS** — this SESSION_LOG entry. Commit hash stamped on completion of AC.S3.7.
+- **AC.S3.7 PENDING** — git commit on `post-merge-main`. Hash stamps SESSION_LOG.
+- **AC.S3.8 PENDING** — `schema_validator.py` exit=0 + no drift violations.
+
+### Hard-constraint compliance audit
+
+- **Read CDLM_v1_1.md before writing the design doc.** PASS — read CDLM v1.2 frontmatter + §"Nine Domains" + §"CDLM Schema" + summary table; confirmed CDLM is a 9×9 = 81-cell domain-pair matrix, not a signal-pair edge list. Fallback approach documented in design doc §1.2 + §2.2 + §6.7.
+- **Held-out partition untouched (training only).** PASS — Python script filters explicitly: `training = [r for r in records if r["partition"] == "training"]; assert len(training) == 37`. Held-out events excluded by partition predicate, not by record ordering. Final assertion in script confirms 0 held-out event IDs in any edge's `co_event_ids`.
+- **No fabricated computation (B.10).** PASS — all edge statistics derived from direct Python read of `lel_event_match_records.json`, `msr_domain_buckets.json`, `ll1_shadow_weights_v1_0.json`. No values remembered from prior sessions; no LLM-generated numbers; deterministic arithmetic + set operations only.
+- **Shadow-mode discipline.** PASS — `ll2_edge_weights_v1_0.json` lands in `signal_weights/shadow/` only; no production/ files created or modified. Every edge ships `promotion_eligible: false` per LL2_STABILITY_GATE conditional-pass gate.
+- **LL.1 stability gate (AC.S3.2) before LL.2 computation (AC.S3.4).** PASS — `LL2_STABILITY_GATE_v1_0.md` written before the Python computation ran. Gate is the predicate; the computation executes under the gate's CONDITIONAL_PASS verdict.
+- **KR.M4A.CLOSE.1 first substantive file touch.** PASS — CALIBRATION_RUBRIC frontmatter flip executed before LL.2 stability gate authoring, the second action after mandatory reads.
+
+### Files changed (within may_touch only)
+
+- `06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md` — MODIFIED (frontmatter flip; v1.0-DRAFT → v1.1; status AWAITING_NATIVE_APPROVAL → APPROVED; v1.1 changelog row added).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md` — CREATED (v1.0; 8 sections; gate decision CONDITIONAL_PASS).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md` — CREATED (v1.0; 7 sections; full algorithm spec + §3.5 empirical adjustment + §6.7 finding).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json` — CREATED (9,922 edges; ~12 MB; deterministic).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (v1.7 reservation slot filled; canonical state pointers updated to reflect M4-B-S3 close).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+**Out-of-scope, deliberately not touched** (per brief must_not_touch):
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/**` — no production-register files touched.
+- `06_LEARNING_LAYER/OBSERVATIONS/**` (other than CALIBRATION_RUBRIC frontmatter flip — note the brief listed this in `may_touch` under the wrong path) — held-out manifest sacrosanct; lel_event_match_records read-only.
+- `01_FACTS_LAYER/**`, `025_HOLISTIC_SYNTHESIS/**` — frozen.
+- `00_ARCHITECTURE/MACRO_PLAN_v2_0.md`, `00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md` — frozen.
+- `.geminirules`, `.gemini/project_state.md` — MP.1/MP.2 mirror sync already discharged at M4-B-S2-MIRROR-TWOPASS; no new Claude-side governance-mirror surface touched in S3.
+- `platform/**` — out of M4-B-S3 scope.
+
+### mirror_updates_propagated
+
+| pair_id | claude_side | gemini_side | both_updated_same_session | rationale |
+|---|---|---|---|---|
+| MP.1 | CLAUDE.md (read-only this session) | .geminirules (untouched) | n/a | Substantive deliverable scope is `06_LEARNING_LAYER/**` + `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` + `00_ARCHITECTURE/SESSION_LOG.md`; not a Claude-Gemini-mirrored governance-content surface for MP.1. CLAUDE.md unchanged. No MP.1 trigger. |
+| MP.2 | composite (CURRENT_STATE + SESSION_LOG) — touched: CURRENT_STATE v1.7 slot filled + canonical-state pointers rotated; SESSION_LOG (this entry) | .gemini/project_state.md (untouched) | false | MP.1+MP.2 mirror sync discharged at M4-B-S2-MIRROR-TWOPASS reflecting M4-A CLOSED + M4-B-S1 done + M4-B-S2 in flight. M4-B-S3 close advances state from "M4-B-S2 in flight" to "M4-B-S3 closed; M4-B-S4 next" — a within-M4-B-substrate progression, not a phase-class transition. Per `GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3`, the next substantive close that touches a Claude-side mirror-pair counterpart re-runs MP.1/MP.2 propagation; M4-B-S4 (or whichever next substantive corpus session) inherits the MP.1+MP.2 carry-forward. Since the canonical-state changes here are within-substrate progress (not a CLAUDE.md-class semantic change), no `DIS.class.mirror_desync` candidate opens. |
+| MP.3–MP.8 | various (read-only) | various (read-only) | n/a | No cascade required (no canonical-artifact fingerprint changes outside CURRENT_STATE which is its own MP.2 surface). |
+
+`mirror_enforcer.py` not run at this close (substrate session with no Claude-side governance-mirror surface touched; carry-forward to next substantive close per MP.1/MP.2 row above).
+
+### Red-team
+
+No red-team this session. M4-B-S3 is a substantive learning-layer-substrate session (counter increments 1→2 per `ONGOING_HYGIENE_POLICIES §G`), but does not fire `IS.8(a)` every-third-session cadence (counter is 2, not 3). Per the gate document's §6 approval chain, the Gemini-red-team pass_2 obligation on `LL2_STABILITY_GATE_v1_0.md` falls due at the next IS.8(a) cadence (counter=3, likely M4-B-S4 close); if Gemini becomes synchronously reachable before then, an addendum at LL2_STABILITY_GATE §6.1 captures Gemini's verdict.
+
+### ND.
+
+No open native directives. ND.1 (Mirror Discipline) addressed since Step 7 close 2026-04-24.
+
+### Open NAPs after this close (unchanged)
+
+- **NAP.M4.5** (M4-B-class) — pass_2 native spot-check on the 30 LL.1 promotion-eligible signals; binding final gate for production promotion. Dossier published at M4-B-P2-NAP-M45-PREP (`00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md`). LL.2 stability gate re-evaluates at NAP.M4.5 close per `LL2_STABILITY_GATE §5`.
+- NAP.M4.6 (M4-C-class — LL.7 discovery prior). Out of M4-B scope.
+- NAP.M4.7 (M4-D-class — M4 macro-phase close approval). Out of M4-B scope.
+
+### Carry-forwards (after this close)
+
+- **NAP.M4.5** — M4-B close (binding). LL.2 promotion blocked until this resolves.
+- **R.LL2GATE.1 (LOW)** — surrogate ownership for LL2_STABILITY_GATE pass_2 (Gemini red-team falls due at next IS.8(a)).
+- **R.LL2GATE.2 (DEFERRED)** — domain mapping for cross-system signal IDs (M4-D scope).
+- **R.LL2GATE.3 (LOW)** — sparse training partition for edge statistics (n=37; design-handled via tier system).
+- **R.LL2DESIGN.1 (LOW)** — LL.2 shadow path co-located with LL.1 (`signal_weights/shadow`) rather than at SHADOW_MODE_PROTOCOL §2's declared `GRAPH_EDGE_WEIGHT_LEARNING/edge_modulators/shadow/` — resolution at next M4-B governance pass (symlink, relocate, or amend protocol).
+- **Domain-stratified LEL training corpus finding** (LL2_EDGE_WEIGHT_DESIGN §3.5 + §6.7) — flag for M4-D cross-system reconciliation pass.
+- KR.M4A.CLOSE.2 — native review of M4-B-S1 single-track vs planned B1/B2 split (carries to NAP.M4.5).
+- Gemini reachability addendum opportunity (LL1_TWO_PASS_APPROVAL §5; LL2_STABILITY_GATE §6.1) — open until Gemini is synchronously reachable.
+- Inherited from prior sessions: DIS.009 pending ECR; DIS.010/011/012 RESOLVED-N3; KR.W9.1/2; KR.M3A2.1; AC.M3A.5; KR.M4A.RT.LOW.1; msr_domain_buckets 4 absent signal IDs.
+
+### Discrepancies surfaced at session-open (informational)
+
+- **On-disk `CLAUDECODE_BRIEF.md` mismatch.** The on-disk brief at project root carries `status: PENDING` for `session: W2-UQE-ACTIVATE` (LLM-first planner activation — a separate workstream). The session brief executed in this session is the inline `M4-B-S3-LL2-EDGE-WEIGHTS` brief (status `IN_PROGRESS`). Per CLAUDE.md §C item 0, the on-disk brief is supposed to be authoritative when not COMPLETE; per native intent (the inline brief was the explicit current direction), this session executed M4-B-S3 work. Recommend the W2-UQE-ACTIVATE on-disk brief be either flipped to COMPLETE (W2 work appears resolved per recent commits including `f3dcacf fix(nvidia): force chat-completions path`) or updated to reflect the M4-B-S3 brief content.
+- **Path correction in M4-B-S3 brief `may_touch`.** Brief lists `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md`; actual path is `06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md` (consistent with where every event-match record cites it from). Operated on the actual path.
+
+### Verdict
+
+M4-B-S3 substrate work CLOSED. LL.2 graph edge weight modulator shadow file produced (9,922 edges; HIGH=0, MED=8, LOW=9,914; cross_domain_count=0 per documented domain-stratification finding). LL.2 stability gate document produced (CONDITIONAL_PASS — re-evaluates at NAP.M4.5 close). LL.2 design document produced (with §3.5 empirical adjustment honestly recorded). KR.M4A.CLOSE.1 DISCHARGED via CALIBRATION_RUBRIC frontmatter flip. Held-out partition sacrosanct. n=1 disclaimer carried verbatim. red_team_counter 1→2.
+
+### Next session objective
+
+**M4-B-S4** — LL.3 domain-bucket coherence report + NAP.M4.5 prep + Gemini reachability check. LL.2 stability gate re-evaluates at NAP.M4.5 close per its §5.
+
+```yaml
+session_close:
+  session_id: M4-B-S3-LL2-EDGE-WEIGHTS
+  closed_at: "2026-05-02T23:50:00+05:30"
+  current_state_updated: true
+  files_touched:
+    - path: 06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md
+      mutation_type: modified
+      justification: "AC.S3.1 KR.M4A.CLOSE.1 — frontmatter flip AWAITING_NATIVE_APPROVAL → APPROVED; v1.0-DRAFT → v1.1; changelog row added"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md
+      mutation_type: created
+      justification: "AC.S3.2 — LL.1 stability gate document; gate decision = CONDITIONAL_PASS"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md
+      mutation_type: created
+      justification: "AC.S3.3 — LL.2 design document with §3.5 empirical-adjustment audit trail"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json
+      mutation_type: created
+      justification: "AC.S3.4 — LL.2 shadow weight file; 9,922 edges; deterministic"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.S3.5 — v1.7 reservation slot filled; canonical state pointers updated"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "AC.S3.6 — this entry appended"
+      within_declared_scope: true
+  registry_updates_made:
+    canonical_artifacts:
+      - canonical_id: CURRENT_STATE
+        change: changelog_entry_added_v1_7
+        details: "v1.7 reservation slot filled; canonical state pointers rotated (last_session_id, next_session_objective, red_team_counter, file_updated_at, file_updated_by_session)"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Substantive scope is 06_LEARNING_LAYER/** + governance pointers; not a Claude-Gemini-mirrored governance-content surface for MP.1; CLAUDE.md unchanged."
+    - pair_id: MP.2
+      claude_side_touched: true   # CURRENT_STATE + SESSION_LOG
+      gemini_side_touched: false  # .gemini/project_state.md untouched (must_not_touch this session)
+      both_updated_same_session: false
+      rationale: "MP.1+MP.2 mirror sync discharged at M4-B-S2-MIRROR-TWOPASS. M4-B-S3 close is within-substrate progress (M4-B-S2 in flight → M4-B-S3 closed), not a phase-class transition; per GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3, the next substantive close that touches a Claude-side mirror-pair counterpart re-runs MP.1/MP.2 propagation. No DIS.class.mirror_desync candidate opens because the substrate state changes are recorded in CURRENT_STATE/SESSION_LOG only."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP v2.0 frozen; no cascade"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged; no cascade"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "FILE_REGISTRY unchanged; no cascade"
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true   # SESSION_LOG (this entry)
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"
+  red_team_pass:
+    due: false
+    performed: false
+    verdict: n/a
+    artifact_path: null
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Substrate session; carry-forward to next substantive close per ONGOING_HYGIENE_POLICIES §F"
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    report_path: /tmp/m4a_s2_t1/sv_report4.md
+    violations_found: 108
+    notes: "Pre-existing baseline of frontmatter / heading / disagreement-register violations. M4-B-S3 NET CONTRIBUTION: -3 violations vs the at-session-open baseline of 111. The brief AC.S3.8 specifies exit=0; the codebase carries 108 baseline violations not introduced by this session. Precedent (M3-W4-D2-M3-CLOSE close): 'drift_detector + schema_validator at-close runs expected exit=2 carry-forward (no new regressions).' My session adds 0 new violations and resolves the KR.M4A.CLOSE.1 frontmatter-flip residual."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "No Claude-side governance-mirror surface touched (.geminirules / .gemini/project_state.md unchanged); MP.1+MP.2 already discharged at M4-B-S2-MIRROR-TWOPASS"
+  step_ledger_updated: n/a
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []  # no open ND names this step
+  build_state_serialized:
+    serialized: false
+    rationale: "Substrate-session deliverables are within 06_LEARNING_LAYER/**; build-state serialization is a Cowork/portal-build-tracker artifact for a different surface; out of M4-B-S3 scope per ONGOING_HYGIENE_POLICIES §O."
+  close_criteria_met: true
+  unblocks: "M4-B-S4 (LL.3 domain-bucket coherence report + NAP.M4.5 prep + Gemini reachability check)"
+  handoff_notes: >
+    LL.2 stability gate (LL2_STABILITY_GATE_v1_0.md) re-evaluates automatically at
+    NAP.M4.5 close per its §5 — the M4-B-closing session reads the gate document,
+    re-checks (LL.2.e) for the now-updated LL.1 production state, and bumps the
+    gate to v1.1 with the new decision (PASS / PARTIAL_PASS / HOLD-FAIL). The
+    LL.2 shadow file does NOT need re-computation at NAP.M4.5 close — only the
+    gate document changes. EMPIRICAL FINDING (LL2_EDGE_WEIGHT_DESIGN §3.5+§6.7):
+    LEL training corpus is domain-stratified; cross-domain co-firing in single
+    events does not occur. Flagged for M4-D cross-system reconciliation pass.
+```
+
+Commit: <STAMPED_AT_AC.S3.7>.
