@@ -54,7 +54,7 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
-  - v2.2 (2026-05-02, M4-B-P3-MIRROR-MANIFEST): Parallel-slot governance-aside session
+  - v2.2 (2026-05-02, M4-B-P3-MIRROR-MANIFEST, commit b41acde): Parallel-slot governance-aside session
     running alongside M4-B-S5 (NAP.M4.5 native pass_2 trigger; in flight at write time).
     Per brief AC.P3.5 ("CURRENT_STATE → v2.2 (S5 takes v2.1)"). At write time S5 had
     not yet landed; this session takes v2.2 and reserves v2.1 for S5.

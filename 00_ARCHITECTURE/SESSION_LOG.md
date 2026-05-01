@@ -12884,5 +12884,5 @@ session_close:
     registration (no memorized version strings).
 ```
 
-Commit: pending (post-commit hash stamp).
+Commit: b41acde (post-merge-main, 2026-05-03).
 
