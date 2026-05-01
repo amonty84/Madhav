@@ -1,0 +1,223 @@
+{
+  "$schema_version": "1.0",
+  "description": "W2-EVAL-B AC.V.3 regression baseline. Mock planner responses for the 25 golden_test_set entries. Each entry's mock_tool_calls mirror that entry's expected_tools, with required_tools mapped to priority 1 and the rest to priority 2. Scored against golden_test_set.json this baseline yields avg_tool_recall = 1.00 and avg_tool_precision = 1.00, well above the published thresholds (recall ≥ 0.80, precision ≥ 0.90).",
+  "entries": [
+    {
+      "id": "GT.001",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "career-domain remedial prescription (codex)" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "10H lord, Sun, Saturn natal context" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "career-domain signal lookup" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "career L3 domain narrative" }
+      ]
+    },
+    {
+      "id": "GT.002",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "mantra prescription (codex)" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "Jupiter / Ketu / 9H natal context" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "spirituality-domain signal lookup" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "spirituality L3 domain narrative" }
+      ]
+    },
+    {
+      "id": "GT.003",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "yellow-sapphire suitability rules (codex)" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Jupiter natal placement, dignity, aspects" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Jupiter signal strength" }
+      ]
+    },
+    {
+      "id": "GT.004",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mars-keyed remedial rituals/stones/mantras (codex)" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "natal Mars placement and aspects" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Mars-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.005",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "daily-ritual prescription (codex)" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "low-strength signals across grahas" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "shadbala / dignity natal context" }
+      ]
+    },
+    {
+      "id": "GT.006",
+      "mock_tool_calls": [
+        { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "fasting-practice prescription (codex)" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "health L3 domain narrative" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "health-relevant natal positions" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "health-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.007",
+      "mock_tool_calls": [
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "7H lord, occupants, aspects" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "marriage L3 domain narrative" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "marriage-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.008",
+      "mock_tool_calls": [
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Lagna, ascendant degree, shadbala" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "whole-chart signal scan" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "Lagna-strength yogas" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "overall life-path narrative" }
+      ]
+    },
+    {
+      "id": "GT.009",
+      "mock_tool_calls": [
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "named yogas (Raja, Dhana, etc.)" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "yoga-confirming placements" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "yoga-keyed signals" }
+      ]
+    },
+    {
+      "id": "GT.010",
+      "mock_tool_calls": [
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Saturn 11H placement and aspects" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Saturn / 11H signals" },
+        { "tool_name": "cgm_graph_walk", "params": {}, "token_budget": 800, "priority": 2, "reason": "Saturn-11H concept graph" }
+      ]
+    },
+    {
+      "id": "GT.011",
+      "mock_tool_calls": [
+        { "tool_name": "divisional_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "D9 Navamsha read" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "D1 7H lord and Navamsha state" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "marriage-domain signals" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "marriage L3 narrative" }
+      ]
+    },
+    {
+      "id": "GT.012",
+      "mock_tool_calls": [
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "10H lord, occupants, aspects" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "career L3 domain narrative" },
+        { "tool_name": "divisional_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "D10 Dasamsha corroboration" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "career-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.013",
+      "mock_tool_calls": [
+        { "tool_name": "timeline_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "lifetime timeline windows for Ketu MD" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "natal Ketu placement" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Ketu-domain signals" },
+        { "tool_name": "temporal", "params": {}, "token_budget": 800, "priority": 2, "reason": "current MD endpoint anchor" }
+      ]
+    },
+    {
+      "id": "GT.014",
+      "mock_tool_calls": [
+        { "tool_name": "temporal", "params": {}, "token_budget": 800, "priority": 1, "reason": "Saturn current sign/house transit" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "natal Saturn for transit relativization" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Saturn-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.015",
+      "mock_tool_calls": [
+        { "tool_name": "query_varshaphala", "params": {}, "token_budget": 800, "priority": 1, "reason": "Tajika annual-chart read" },
+        { "tool_name": "temporal", "params": {}, "token_budget": 800, "priority": 2, "reason": "current dasha pin" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "natal 10H / AmK" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "career-domain signals" }
+      ]
+    },
+    {
+      "id": "GT.016",
+      "mock_tool_calls": [
+        { "tool_name": "timeline_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "upcoming favorable windows" },
+        { "tool_name": "query_signal_state", "params": {}, "token_budget": 800, "priority": 2, "reason": "currently lit / ripening venture-positive signals" },
+        { "tool_name": "temporal", "params": {}, "token_budget": 800, "priority": 2, "reason": "current period anchor" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "venture-keyed signals" }
+      ]
+    },
+    {
+      "id": "GT.017",
+      "mock_tool_calls": [
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "L3 narratives across domains" },
+        { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 1, "reason": "dominant clusters" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "whole-chart structural facts" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-domain signals" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "named yogas across domains" },
+        { "tool_name": "cgm_graph_walk", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-domain linkage traversal" }
+      ]
+    },
+    {
+      "id": "GT.018",
+      "mock_tool_calls": [
+        { "tool_name": "contradiction_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "structural contradictions" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "named yogas / patterns" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-system resonances" },
+        { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 2, "reason": "dominant clusters" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "supporting signals" }
+      ]
+    },
+    {
+      "id": "GT.019",
+      "mock_tool_calls": [
+        { "tool_name": "cgm_graph_walk", "params": {}, "token_budget": 800, "priority": 1, "reason": "career–marriage–health graph traversal" },
+        { "tool_name": "domain_report_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "per-domain L3 narratives" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "natal anchors per domain" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-domain signals" },
+        { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-domain clusters" }
+      ]
+    },
+    {
+      "id": "GT.020",
+      "mock_tool_calls": [
+        { "tool_name": "query_signal_state", "params": {}, "token_budget": 800, "priority": 1, "reason": "date-indexed lit/dormant/ripening surface" },
+        { "tool_name": "temporal", "params": {}, "token_budget": 800, "priority": 2, "reason": "current date anchor" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "expand lit signals to full rows" }
+      ]
+    },
+    {
+      "id": "GT.021",
+      "mock_tool_calls": [
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "D1 Jupiter sign/house/aspects" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Jupiter-keyed signals" },
+        { "tool_name": "divisional_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "Jupiter across vargas" },
+        { "tool_name": "kp_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "Jupiter star/sub lord" },
+        { "tool_name": "saham_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "Guru Saham and related" }
+      ]
+    },
+    {
+      "id": "GT.022",
+      "mock_tool_calls": [
+        { "tool_name": "divisional_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mars across D1/D9/D10/D7 vargas" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "D1 Mars confirmation" },
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "Mars signals" }
+      ]
+    },
+    {
+      "id": "GT.023",
+      "mock_tool_calls": [
+        { "tool_name": "query_kp_ruling_planets", "params": {}, "token_budget": 800, "priority": 1, "reason": "engine-computed KP table for 9 grahas" },
+        { "tool_name": "kp_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "cusp-level KP read" },
+        { "tool_name": "chart_facts_query", "params": {}, "token_budget": 800, "priority": 2, "reason": "graha sidereal positions" }
+      ]
+    },
+    {
+      "id": "GT.024",
+      "mock_tool_calls": [
+        { "tool_name": "manifest_query", "params": {}, "token_budget": 600, "priority": 2, "reason": "degenerate query — safe manifest fallback" }
+      ]
+    },
+    {
+      "id": "GT.025",
+      "mock_tool_calls": [
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — named patterns" },
+        { "tool_name": "contradiction_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — contradictions" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — resonances" },
+        { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — clusters" }
+      ]
+    }
+  ]
+}

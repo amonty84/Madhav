@@ -1,0 +1,271 @@
+#!/usr/bin/env tsx
+/**
+ * planner_smoke_runner.ts — W2-EVAL-B AC.V.1
+ *
+ * CLI scorer for `callLlmPlanner` against `golden_test_set.json`. Computes
+ * per-entry tool_recall / tool_precision plus required/forbidden gate
+ * outcomes, aggregates them, and exits non-zero when the macro-averaged
+ * thresholds are not met.
+ *
+ *   tool_recall    = |predicted ∩ expected| / |expected|
+ *   tool_precision = |predicted ∩ expected| / |predicted|
+ *
+ * Exit code 0 iff `avg_tool_recall ≥ 0.80 AND avg_tool_precision ≥ 0.90`.
+ * JSON report to stdout, human-readable summary to stderr.
+ *
+ * Env:
+ *   PLANNER_MODEL_ID  (default: meta/llama-3.1-8b-instruct)
+ *   CHART_ID          (default: test-native)
+ *
+ * Usage: npx tsx --conditions=react-server platform/tests/eval/planner_smoke_runner.ts
+ */
+
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+
+// ────────────────────────────────────────────────────────────────────────────
+// Types
+// ────────────────────────────────────────────────────────────────────────────
+
+export interface GoldenEntry {
+  id: string
+  query: string
+  query_class: string
+  category: string
+  expected_tools: string[]
+  required_tools: string[]
+  forbidden_tools: string[]
+  notes?: string
+}
+
+export interface GoldenSet {
+  entries: GoldenEntry[]
+}
+
+export interface EvalResult {
+  id: string
+  query: string
+  expected_tools: string[]
+  predicted_tools: string[]
+  required_tools: string[]
+  forbidden_tools: string[]
+  tool_recall: number
+  tool_precision: number
+  required_hit: boolean
+  forbidden_violation: boolean
+  pass: boolean
+  error?: string
+}
+
+export interface AggregateResult {
+  total: number
+  passed: number
+  failed: number
+  avg_tool_recall: number
+  avg_tool_precision: number
+  forbidden_violations: number
+  required_misses: number
+  pass_rate: number
+}
+
+export type PlannerFn = (
+  query: string,
+  history: Array<{ role: string; content: string }>,
+  modelId: string,
+  chartId: string,
+) => Promise<{ tool_calls: Array<{ tool_name: string }> }>
+
+// ────────────────────────────────────────────────────────────────────────────
+// Thresholds (must match tests/eval/README.md)
+// ────────────────────────────────────────────────────────────────────────────
+
+export const RECALL_THRESHOLD = 0.8
+export const PRECISION_THRESHOLD = 0.9
+
+// ────────────────────────────────────────────────────────────────────────────
+// Pure scoring helpers (testable without LLM)
+// ────────────────────────────────────────────────────────────────────────────
+
+export function scoreEntry(
+  entry: GoldenEntry,
+  predicted: string[],
+  error?: string,
+): EvalResult {
+  const expectedSet = new Set(entry.expected_tools)
+  const predictedSet = new Set(predicted)
+  const intersectionCount = Array.from(predictedSet).filter(t => expectedSet.has(t)).length
+
+  const tool_recall =
+    entry.expected_tools.length === 0
+      ? 1
+      : intersectionCount / entry.expected_tools.length
+
+  const tool_precision =
+    predictedSet.size === 0
+      ? entry.expected_tools.length === 0
+        ? 1
+        : 0
+      : intersectionCount / predictedSet.size
+
+  const required_hit = entry.required_tools.every(t => predictedSet.has(t))
+  const forbidden_violation = entry.forbidden_tools.some(t => predictedSet.has(t))
+
+  const pass =
+    !error &&
+    tool_recall >= RECALL_THRESHOLD &&
+    tool_precision >= PRECISION_THRESHOLD &&
+    required_hit &&
+    !forbidden_violation
+
+  return {
+    id: entry.id,
+    query: entry.query,
+    expected_tools: entry.expected_tools,
+    predicted_tools: Array.from(predictedSet),
+    required_tools: entry.required_tools,
+    forbidden_tools: entry.forbidden_tools,
+    tool_recall,
+    tool_precision,
+    required_hit,
+    forbidden_violation,
+    pass,
+    error,
+  }
+}
+
+export function aggregateResults(results: EvalResult[]): AggregateResult {
+  const total = results.length
+  const passed = results.filter(r => r.pass).length
+  const sumRecall = results.reduce((s, r) => s + r.tool_recall, 0)
+  const sumPrecision = results.reduce((s, r) => s + r.tool_precision, 0)
+  return {
+    total,
+    passed,
+    failed: total - passed,
+    avg_tool_recall: total ? sumRecall / total : 0,
+    avg_tool_precision: total ? sumPrecision / total : 0,
+    forbidden_violations: results.filter(r => r.forbidden_violation).length,
+    required_misses: results.filter(r => !r.required_hit).length,
+    pass_rate: total ? passed / total : 0,
+  }
+}
+
+export function thresholdsMet(aggregate: AggregateResult): boolean {
+  return (
+    aggregate.avg_tool_recall >= RECALL_THRESHOLD &&
+    aggregate.avg_tool_precision >= PRECISION_THRESHOLD
+  )
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Runner — accepts an injectable planner so the regression gate can pass a
+// fixture-backed mock instead of `callLlmPlanner`.
+// ────────────────────────────────────────────────────────────────────────────
+
+export async function runSmoke(
+  goldenSet: GoldenSet,
+  plannerFn: PlannerFn,
+  modelId: string,
+  chartId: string,
+): Promise<{ results: EvalResult[]; aggregate: AggregateResult }> {
+  const results: EvalResult[] = []
+  for (const entry of goldenSet.entries) {
+    let predicted: string[] = []
+    let error: string | undefined
+    try {
+      const plan = await plannerFn(entry.query, [], modelId, chartId)
+      predicted = plan.tool_calls.map(tc => tc.tool_name)
+    } catch (err) {
+      error = err instanceof Error ? err.message : String(err)
+    }
+    results.push(scoreEntry(entry, predicted, error))
+  }
+  return { results, aggregate: aggregateResults(results) }
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Filesystem loader (CLI-only; tests construct GoldenSet inline)
+// ────────────────────────────────────────────────────────────────────────────
+
+export function loadGoldenSet(filePath?: string): GoldenSet {
+  const here = path.dirname(fileURLToPath(import.meta.url))
+  const resolved = filePath ?? path.resolve(here, 'golden_test_set.json')
+  return JSON.parse(readFileSync(resolved, 'utf-8')) as GoldenSet
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Human-readable summary
+// ────────────────────────────────────────────────────────────────────────────
+
+export function formatSummary(aggregate: AggregateResult, results: EvalResult[]): string {
+  const lines: string[] = []
+  lines.push('=== Planner Smoke Eval Summary ===')
+  lines.push(`Total:                ${aggregate.total}`)
+  lines.push(`Passed:               ${aggregate.passed}`)
+  lines.push(`Failed:               ${aggregate.failed}`)
+  lines.push(`Pass rate:            ${aggregate.pass_rate.toFixed(3)}`)
+  lines.push(
+    `Avg tool_recall:      ${aggregate.avg_tool_recall.toFixed(3)} (threshold ${RECALL_THRESHOLD.toFixed(2)})`,
+  )
+  lines.push(
+    `Avg tool_precision:   ${aggregate.avg_tool_precision.toFixed(3)} (threshold ${PRECISION_THRESHOLD.toFixed(2)})`,
+  )
+  lines.push(`Forbidden violations: ${aggregate.forbidden_violations}`)
+  lines.push(`Required misses:      ${aggregate.required_misses}`)
+
+  const failures = results.filter(r => !r.pass)
+  if (failures.length > 0) {
+    lines.push('')
+    lines.push('--- Failures ---')
+    for (const f of failures) {
+      const reasons: string[] = []
+      if (f.error) reasons.push(`error="${f.error}"`)
+      if (f.tool_recall < RECALL_THRESHOLD) reasons.push(`recall=${f.tool_recall.toFixed(2)}`)
+      if (f.tool_precision < PRECISION_THRESHOLD) reasons.push(`precision=${f.tool_precision.toFixed(2)}`)
+      if (!f.required_hit) reasons.push('required_miss')
+      if (f.forbidden_violation) reasons.push('forbidden_violation')
+      lines.push(
+        `  ${f.id}  [${reasons.join(' ')}]  predicted=[${f.predicted_tools.join(', ')}]`,
+      )
+    }
+  }
+
+  lines.push('')
+  lines.push(thresholdsMet(aggregate) ? 'THRESHOLDS MET ✓' : 'THRESHOLDS NOT MET ✗')
+  return lines.join('\n')
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// CLI entrypoint — dynamic import keeps server-only deps out of vitest
+// ────────────────────────────────────────────────────────────────────────────
+
+async function main(): Promise<void> {
+  const modelId = process.env.PLANNER_MODEL_ID ?? 'meta/llama-3.1-8b-instruct'
+  const chartId = process.env.CHART_ID ?? 'test-native'
+
+  // Lazy import: pulls server-only deps (resolver) only at CLI runtime.
+  const { callLlmPlanner } = await import('@/lib/pipeline/manifest_planner')
+
+  const plannerFn: PlannerFn = (query, history, modelIdArg, chartIdArg) =>
+    callLlmPlanner(query, history, modelIdArg, chartIdArg)
+
+  const goldenSet = loadGoldenSet()
+  const { results, aggregate } = await runSmoke(goldenSet, plannerFn, modelId, chartId)
+
+  process.stdout.write(JSON.stringify({ aggregate, results }, null, 2) + '\n')
+  process.stderr.write(formatSummary(aggregate, results) + '\n')
+
+  process.exit(thresholdsMet(aggregate) ? 0 : 1)
+}
+
+const invokedAsCli =
+  typeof process.argv[1] === 'string' &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+
+if (invokedAsCli) {
+  main().catch(err => {
+    console.error(err)
+    process.exit(1)
+  })
+}
