@@ -13178,5 +13178,5 @@ session_close:
     post-NAP.M4.5 PASS).
 ```
 
-Commit: [PENDING — to be stamped post-commit]
+Commit: 90508e5 (post-merge-main, 2026-05-02).
 
