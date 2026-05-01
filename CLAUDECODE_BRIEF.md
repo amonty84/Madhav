@@ -128,13 +128,57 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ## Smoke results (fill in during session)
 
 ```
-planner_model:
-smoke_date:
-avg_tool_recall:
-avg_tool_precision:
-failing_entries: []
-flag_flipped:
-notes:
+planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
+smoke_date: 2026-05-02
+avg_tool_recall: NOT_RUN
+avg_tool_precision: NOT_RUN
+failing_entries: ALL_25 (structural — see notes)
+flag_flipped: false
+notes: |
+  TWO BLOCKING ISSUES — flag held false per B.10 and golden-set labeling rule.
+
+  ISSUE 1 — NIM ENDPOINT UNREACHABLE FROM EXECUTION ENVIRONMENT (B.10):
+    The sandbox proxy (http://localhost:3128) returned HTTP 403 Forbidden
+    with header X-Proxy-Error: blocked-by-allowlist when attempting to
+    CONNECT to integrate.api.nvidia.com:443. The NVIDIA_NIM_API_KEY is
+    present in .env.local and confirmed 70-char nvapi- prefixed key.
+    tsx/esbuild also fails (darwin-arm64 binary in node_modules, sandbox
+    is linux-arm64 — npm registry also blocked in sandbox).
+    Per B.10: NIM unavailable from execution environment → flag stays false.
+    Action: run smoke manually on the dev machine before flag flip:
+      PLANNER_MODEL_ID=nvidia/llama-3.3-nemotron-super-49b-v1 \
+      CHART_ID=test-native \
+      npx tsx --conditions=react-server platform/tests/eval/planner_smoke_runner.ts
+
+  ISSUE 2 — GOLDEN SET LABELING ERROR (EVAL-5 — separate task needed):
+    11 tools appear in expected_tools that are NOT in PRIMARY_TOOL_NAMES
+    (the 8 tools the manifest_compressor exposes to the planner):
+      chart_facts_query, divisional_query, domain_report_query, kp_query,
+      manifest_query, query_kp_ruling_planets, query_signal_state,
+      query_varshaphala, saham_query, temporal, timeline_query
+    Theoretical maximum avg_tool_recall (if planner perfectly selects all
+    primary tools in expected): 0.4553 — BELOW the 0.80 threshold.
+    This is not a prompt issue or a model issue. The golden set was authored
+    against the full tool catalog (pre-W2-MANIFEST compression) and was not
+    updated when PRIMARY_TOOL_NAMES was locked to 8 entries.
+    Entries GT.023 and GT.024 have zero primary tools in expected_tools
+    (max_recall = 0.000 even with a perfect planner).
+    Per hard constraint: "golden set edits are a separate task (EVAL-5,
+    not yet scheduled)." Opening EVAL-5 scope in session notes below.
+
+  AC.U.1 (tsc clean): PASS — zero src/ errors.
+  AC.U.2 (regression gate): PASS — Python-scored, recall=1.0, precision=1.0.
+    (vitest/rolldown also has no linux-arm64 binary in node_modules.)
+  AC.U.3 (EVAL-B live smoke): NOT_RUN — blocked by sandbox proxy + golden
+    set labeling issue makes threshold mathematically unreachable.
+  AC.U.4 / AC.U.5: SKIPPED — held pending AC.U.3.
+
+  EVAL-5 SCOPE NOTE (opens here; schedules separately):
+    Fix golden_test_set.json: ensure all expected_tools entries are drawn
+    exclusively from PRIMARY_TOOL_NAMES. Rewrite or split entries whose
+    expected tools span both primary and non-primary sets. GT.023 and GT.024
+    require complete rewrites. After repair: re-run regression_baseline.json
+    fixture update + re-run smoke.
 ```
 
 ---

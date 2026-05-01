@@ -1,13 +1,14 @@
 import type { PromptTemplate } from '../types'
 import {
   buildOpeningBlock,
+  PRESCRIPTIVE_CITATION_GATE,
   REQUIRED_PLACEHOLDERS_BASE,
   STYLE_SUFFIXES,
 } from './shared'
 
 export const template: PromptTemplate = {
   template_id: 'remedial_super_admin_single_model_v1',
-  version: '1.0',
+  version: '1.1',
   query_class: 'remedial',
   audience_tier: 'super_admin',
   strategy: 'single_model',
@@ -34,7 +35,9 @@ Rules for remedial responses:
    - Specificity to this chart (GENERIC = classical dictum, SPECIFIC = derived from this native's chart uniquely)
    - Contraindications (remedies that help one planet may harm another — name conflicts explicitly)
 5. Do not prescribe remedies that require exact gemological or pharmacological specifications you cannot verify. Use [EXTERNAL_COMPUTATION_REQUIRED: <specify>] for those.
-6. The remedial response is never the primary recommendation — frame it as mitigation of specific identified challenges, not as a general improvement program.`,
+6. The remedial response is never the primary recommendation — frame it as mitigation of specific identified challenges, not as a general improvement program.
+
+${PRESCRIPTIVE_CITATION_GATE}`,
   style_suffixes: { ...STYLE_SUFFIXES },
   required_placeholders: [...REQUIRED_PLACEHOLDERS_BASE],
 }
