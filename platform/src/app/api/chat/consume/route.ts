@@ -31,6 +31,7 @@ import {
 import { resolveModel } from '@/lib/models/resolver'
 import { configService } from '@/lib/config/index'
 import { classify } from '@/lib/router/router'
+import { callLlmPlanner, PlannerError, type PlanSchema } from '@/lib/pipeline/manifest_planner'
 import { compose } from '@/lib/bundle/rule_composer'
 import { getTool } from '@/lib/retrieve/index'
 import { createToolCache, executeWithCache } from '@/lib/cache/index'
@@ -204,19 +205,52 @@ export async function POST(request: Request) {
 
     const manifest = await loadManifest('00_ARCHITECTURE/CAPABILITY_MANIFEST.json', '00_ARCHITECTURE/manifest_overrides.yaml')
 
+    // ── W2-PLANNER: LLM-first planner branch ──────────────────────────────
+    // When LLM_FIRST_PLANNER_ENABLED is true, the planner runs BEFORE classify
+    // and produces a PlanSchema that drives tool execution. On any failure
+    // (provider error, schema invalid), we fall back silently to the existing
+    // classify() + compose_bundle() path. The flag stays false in DEFAULT_FLAGS
+    // — the native controls activation.
+    const plannerHistory = messages
+      .filter(m => m.role === 'user' || m.role === 'assistant')
+      .slice(-4)
+      .map(m => ({
+        role: m.role as 'user' | 'assistant',
+        content: extractText(m.parts ?? []),
+      }))
+    let planSchema: PlanSchema | null = null
+    if (configService.getFlag('LLM_FIRST_PLANNER_ENABLED')) {
+      try {
+        const plannerModelId = STACK_ROUTING[selectedStack].planner_fast.primary
+        planSchema = await callLlmPlanner(queryText, plannerHistory, plannerModelId, chartId)
+      } catch (err) {
+        if (err instanceof PlannerError) {
+          console.warn('[planner] LLM planner failed, falling back to classify()', err.message)
+        } else {
+          console.warn('[planner] unexpected planner error, falling back to classify()', err)
+        }
+        planSchema = null
+      }
+    }
+
     const classifyStart = Date.now()
     const queryPlan = await classify(queryText, {
       audience_tier: isSuperAdmin ? 'super_admin' : 'client',
       manifest_fingerprint: manifest.fingerprint,
-      conversation_history: messages
-        .filter(m => m.role === 'user' || m.role === 'assistant')
-        .slice(-4)
-        .map(m => ({
-          role: m.role as 'user' | 'assistant',
-          content: extractText(m.parts ?? []),
-        })),
+      conversation_history: plannerHistory,
     })
     const queryId = queryPlan.query_plan_id
+
+    // When the planner produced a plan, its tool list overrides classify()'s
+    // tools_authorized. classify() + compose() still run so the bundle and the
+    // rest of queryPlan (audience_tier, query_class, panel_mode, …) remain
+    // available for downstream consumers (validators, synthesis, citation
+    // gate, audit). Per-tool param threading from planSchema.tool_calls into
+    // each retrieval tool is W2-TRACE-A scope.
+    if (planSchema) {
+      const plannerTools = Array.from(new Set(planSchema.tool_calls.map(tc => tc.tool_name)))
+      queryPlan.tools_authorized = plannerTools
+    }
 
     // UQE-9 (W2-BUGS B2W-7) — atomic per-request step_seq counter. Replaces
     // every hard-coded `step_seq: N` and `step_seq: 3 + idx` arithmetic so
