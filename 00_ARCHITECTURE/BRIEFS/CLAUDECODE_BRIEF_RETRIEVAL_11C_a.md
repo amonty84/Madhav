@@ -1,6 +1,6 @@
 ---
 brief_id: RETRIEVAL_11C_a
-status: COMPLETE
+status: PENDING
 authored_by: Claude (Cowork) 2026-04-29
 authored_for: Claude Code execution
 session_type: implementation (Python sidecar ingest change; build pipeline run; deploy; verify)
