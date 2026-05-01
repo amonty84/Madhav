@@ -95,7 +95,9 @@ export function ConsumeChat({
   const [traceDrawerOpen, setTraceDrawerOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
-  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
+  // LOCKED (2026-05-02): default `true` — sidebar is auto-collapsible, starts collapsed,
+  // expands via the hover strip or header toggle. Do not flip to `false`. See platform/AGENTS.md "Locked UI design decisions".
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(true)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
 
@@ -375,7 +377,30 @@ export function ConsumeChat({
         rightPanelBadge={reports.length}
         headerTitle={chartName}
         headerMeta={chartMeta}
-        headerActions={<ShareButton conversationId={session.conversationId} />}
+        headerActions={
+          // LOCKED (2026-05-02): Trace button lives in the top-right header (here),
+          // not in the input toolbar below the composer. Do not move back to the input
+          // panel. See platform/AGENTS.md "Locked UI design decisions".
+          <>
+            {pipelineEnabled && activeTier === 'super_admin' && (
+              <button
+                type="button"
+                onClick={() => setTraceDrawerOpen(o => !o)}
+                className={[
+                  'inline-flex h-8 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors',
+                  traceDrawerOpen
+                    ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
+                    : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
+                ].join(' ')}
+                aria-label="Toggle query trace drawer"
+              >
+                <Zap className="h-3 w-3" />
+                Trace
+              </button>
+            )}
+            <ShareButton conversationId={session.conversationId} />
+          </>
+        }
         desktopSidebarCollapsed={desktopSidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onToggleDesktopSidebar={() => setDesktopSidebarCollapsed(c => !c)}
@@ -539,23 +564,6 @@ export function ConsumeChat({
                   </label>
                 )}
 
-                {/* Trace — opens drawer instead of inline panel */}
-                {activeTier === 'super_admin' && (
-                  <button
-                    type="button"
-                    onClick={() => setTraceDrawerOpen(o => !o)}
-                    className={[
-                      'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
-                      traceDrawerOpen
-                        ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
-                        : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
-                    ].join(' ')}
-                    aria-label="Toggle query trace drawer"
-                  >
-                    <Zap className="h-3 w-3" />
-                    Trace
-                  </button>
-                )}
               </div>
             )}
           </div>
