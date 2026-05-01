@@ -11529,3 +11529,21 @@ next_session_proposed_cowork_thread_name → "M4-A-S2 — Event-Match Records (p
 red_team_counter: 2 → 3 (held, cadence-pending).
 
 **Commit:** (integration pass — LEL v1.5 + CURRENT_STATE v1.2 + SESSION_LOG append)
+
+---
+
+**M4-A-S2-T3-SHADOW-PROTOCOL** | 2026-05-02 | CLOSED
+
+SHADOW_MODE_PROTOCOL_v1_0.md: 7 sections (§1 purpose/scope, §2 per-mechanism shadow registers covering LL.1–LL.7, §3 promotion criteria, §4 kill-switch, §5 reversal, §6 audit trail, §7 n=1 disclaimer) plus §8 approval ledger and §9 changelog. NAP.M4.4 §3 promotion criteria proposed: (a) N≥3 observations, (b) match_rate variance ≤0.3 across those observations, (c) two-pass approval (Claude initial + Gemini review) per LL-Appendix.D, (d) native notified, no hold; validity margin: match_rate ≥0.4 required for promotion eligibility, <0.4 → shadow-only indefinitely with re-evaluation at 80-event LEL milestone (M5+ scope); signals with N<3 → shadow indefinitely. Kill-switches: held-out validity test fail, native halt, LEL match_rate shift >0.15 absolute, open DIS calibration entry, learning-discipline rule violation. n=1 disclaimer text verbatim per brief. Status: AWAITING_NATIVE_APPROVAL.
+
+JH_EXPORT_DISPOSITION_v1_0.md: §1 stake (DIS.009 R3 needs_verification; specific JH-D9 export confirms Moon D9=Gemini + Mercury D9=Capricorn Vargottama), §2 Option X (pursue now — JH session, EXTERNAL_COMPUTATION_LEDGER artifact, DIS.009 fully_close path) vs Option Y (carry forward — match_rate filter as empirical cross-check, M5 next pursuit window), §3 recommendation, §4 AWAITING_NATIVE_DECISION block (blank), §5 changelog. D9-dependent MSR signals: 35 of 499 (~7%) found via grep of `D9.<entity>` in `v6_ids_consumed` fields — SIG.MSR.002, .003, .004, .006, .009, .016, .018, .035, .050, .056-.061, .067, .068, .136, .208-.212, .413, .428-.433, .448, .481-.484. Recommendation: Option Y (carry forward) provisionally — 35-signal coverage manageable under shadow-mode match_rate <0.4 → shadow-only filter; M4 critical path is calibration not re-derivation; DIS.009 R3 already encodes stable needs_verification. Option X dominates if JH already operational on native's hardware OR if native has prior that D9 placements are wrong. Status: AWAITING_NATIVE_DECISION.
+
+AC.T3R3.1 PASS (SHADOW_MODE_PROTOCOL exists at correct path; §3 labeled PROPOSED — AWAITING_NATIVE_APPROVAL).
+AC.T3R3.2 PASS (all 7 required sections present; §2 covers LL.1–LL.7 per-mechanism).
+AC.T3R3.3 PASS (n=1 disclaimer verbatim in §7).
+AC.T3R3.4 PASS (JH_EXPORT_DISPOSITION exists; §4 native-decision block present and blank; Options X and Y described).
+AC.T3R3.5 PASS (§3 recommendation addresses D9-dependent MSR signals; 35 found and enumerated).
+AC.T3R3.6 PASS (no weight directories created; signal_weights/, edge_modulators/, ranker_weights/, plan_selection/ remain absent).
+AC.T3R3.7 PASS (event_match_records files NOT touched; T1/T2 scope respected).
+
+Commit: c819dbb
