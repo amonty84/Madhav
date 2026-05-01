@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import type { AudienceTier } from '@/lib/prompts/types'
 
 const TIERS: { value: AudienceTier; label: string }[] = [
-  { value: 'client',      label: 'Client'  },
-  { value: 'acharya_reviewer', label: 'Acharya' },
-  { value: 'super_admin', label: 'Super'   },
+  { value: 'super_admin',      label: 'Internal' },
+  { value: 'acharya_reviewer', label: 'Peer'     },
+  { value: 'client',           label: 'Reading'  },
 ]
 
 interface Props {

@@ -138,14 +138,7 @@ export function ConsumeChat({
     model,
     style,
     onConversationCreated: id => {
-      // First-turn URL sync without re-mounting (see comment in original).
-      if (typeof window !== 'undefined') {
-        window.history.replaceState(
-          window.history.state,
-          '',
-          `/clients/${chartId}/consume/${id}`
-        )
-      }
+      router.replace(`/clients/${chartId}/consume/${id}`, { scroll: false })
       setConversations(prev => [
         {
           id,
@@ -516,10 +509,10 @@ export function ConsumeChat({
               onStyleChange={setStyle}
               disabled={session.isStreaming || branches.isViewingArchived}
             />
-            {(panelModeEnabled || activeTier === 'super_admin') && pipelineEnabled && (
+            {(panelModeEnabled || initialAudienceTier === 'super_admin') && pipelineEnabled && (
               <div className="flex items-center gap-1.5">
-                {/* TierPicker — super_admin only */}
-                {activeTier === 'super_admin' && (
+                {/* TierPicker — visible to super_admin role regardless of currently-viewed tier */}
+                {initialAudienceTier === 'super_admin' && (
                   <TierPicker tier={activeTier} onChange={handleTierChange} />
                 )}
 
