@@ -58,6 +58,10 @@ export type FeatureFlag =
   // the NIM model; when OFF, FAMILY_WORKER for the synthesis model is used.
   /** Routes UQE planner calls to NVIDIA NIM models by query class. */
   | 'NVIDIA_PLANNER_ENABLED'
+  // W2-EVAL-A — Citation gate admin override. When true, the Layer-2 citation
+  // validator demotes ERROR to WARN so the response is still returned. Default
+  // OFF so missing-citation prescriptive queries hard-fail and surface in logs.
+  | 'CITATION_GATE_OVERRIDE'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -103,6 +107,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   // NVIDIA NIM planner — ON (NVIDIA_NIM_API_KEY provisioned 2026-05-01).
   // Routes UQE planner calls to NIM models by query class when stack=nim.
   NVIDIA_PLANNER_ENABLED: true,
+  // W2-EVAL-A — Citation gate override OFF; ERROR fails loud by default.
+  CITATION_GATE_OVERRIDE: false,
 }
 
 // Numeric config keys (read via configService.getValue)

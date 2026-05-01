@@ -1,0 +1,301 @@
+{
+  "$schema_version": "1.0",
+  "description": "Golden test set for the MARSYS-JIS query planner. 25 labeled query → expected_tool_plan pairs across 6 categories. Used by W2-EVAL-B to score planner quality with tool_recall and tool_precision metrics.",
+  "native_context": {
+    "name": "Abhisek Mohanty",
+    "birth_date": "1984-02-05",
+    "birth_time": "10:43 IST",
+    "birth_place": "Bhubaneswar, Odisha, India",
+    "lagna": "Aries 12°23′55″ (Ashwini, Pada 4)",
+    "current_dasha_at_authoring": "Mercury MD ending 2027-08-21; next is Ketu MD (2027-08-21 → 2034-08-21)"
+  },
+  "category_distribution": {
+    "remedial": 6,
+    "interpretive": 6,
+    "predictive": 4,
+    "holistic": 4,
+    "planetary": 3,
+    "edge_case": 2
+  },
+  "available_tools": [
+    "msr_sql",
+    "pattern_register",
+    "resonance_register",
+    "cluster_atlas",
+    "contradiction_register",
+    "temporal",
+    "query_msr_aggregate",
+    "cgm_graph_walk",
+    "manifest_query",
+    "vector_search",
+    "kp_query",
+    "saham_query",
+    "divisional_query",
+    "chart_facts_query",
+    "domain_report_query",
+    "remedial_codex_query",
+    "timeline_query",
+    "query_signal_state",
+    "query_kp_ruling_planets",
+    "query_varshaphala"
+  ],
+  "field_notes": {
+    "query_class": "One of the QueryPlan enum values (factual | interpretive | predictive | cross_domain | discovery | holistic | remedial | cross_native).",
+    "category": "Test-set grouping for distribution coverage. 'planetary' and 'edge_case' are not QueryPlan enum values — they describe what the test exercises about the planner.",
+    "expected_tools": "The full set of tools a correct planner SHOULD select. Subset of available_tools.",
+    "required_tools": "Subset of expected_tools that MUST appear in the planner's output. Empty list = no hard requirement.",
+    "forbidden_tools": "Tools that MUST NOT appear in the planner's output. Disjoint from expected_tools."
+  },
+  "entries": [
+    {
+      "id": "GT.001",
+      "query": "What gemstone should I wear to strengthen my career?",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query"],
+      "forbidden_tools": ["temporal"],
+      "notes": "Career-domain remedial. Must pull L4 codex for the gemstone recommendation; chart_facts + msr_sql identify which planet to strengthen (10H lord, Sun, Saturn). temporal is forbidden because the question is not transit-bound."
+    },
+    {
+      "id": "GT.002",
+      "query": "Which mantra should I recite to support spiritual progress?",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query"],
+      "forbidden_tools": ["query_varshaphala", "temporal"],
+      "notes": "Spiritual-domain remedial. Mantra is a remedial_codex artifact; chart_facts + msr_sql find Jupiter/Ketu/9H signals. No annual-return or transit dependence."
+    },
+    {
+      "id": "GT.003",
+      "query": "Should I wear a yellow sapphire?",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query", "chart_facts_query"],
+      "forbidden_tools": ["vector_search", "domain_report_query"],
+      "notes": "Single-stone remedial. Needs Jupiter's natal placement, dignity, aspects (chart_facts_query) and Jupiter signal strength (msr_sql), then codex rules. vector_search is forbidden because the query has a precise structured answer; domain_report_query is overkill."
+    },
+    {
+      "id": "GT.004",
+      "query": "What planetary remedies are recommended for my Mars?",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query", "chart_facts_query"],
+      "forbidden_tools": ["temporal"],
+      "notes": "Single-planet remedial scoped to Mars. chart_facts_query for natal Mars placement; msr_sql for Mars-domain signals; remedial_codex_query for the rituals/stones/mantras keyed to Mars."
+    },
+    {
+      "id": "GT.005",
+      "query": "Recommend a daily ritual to strengthen my chart's weakest planet.",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query", "msr_sql"],
+      "forbidden_tools": ["query_varshaphala"],
+      "notes": "Whole-chart shadbala scan + remedial. msr_sql surfaces low-strength signals; remedial_codex_query supplies the ritual."
+    },
+    {
+      "id": "GT.006",
+      "query": "Are there fasting practices that would help my health?",
+      "query_class": "remedial",
+      "category": "remedial",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "remedial_codex_query"],
+      "required_tools": ["remedial_codex_query", "domain_report_query"],
+      "forbidden_tools": ["query_varshaphala"],
+      "notes": "Health-domain remedial. Requires the Health domain report for diagnosis context plus the remedial codex for the prescription."
+    },
+    {
+      "id": "GT.007",
+      "query": "What does my 7th house say about marriage?",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query"],
+      "required_tools": ["chart_facts_query", "domain_report_query"],
+      "forbidden_tools": ["temporal", "remedial_codex_query"],
+      "notes": "House-scoped interpretive read. chart_facts_query returns 7H lord, occupants, aspects; msr_sql for marriage signals; domain_report_query for the Marriage domain L3 narrative. No remedy asked."
+    },
+    {
+      "id": "GT.008",
+      "query": "Tell me about my Lagna and overall chart strength.",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "pattern_register"],
+      "required_tools": ["chart_facts_query"],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Whole-chart interpretive. chart_facts_query is required for Lagna lord, ascendant degree, shadbala; pattern_register surfaces named yogas tied to Lagna strength."
+    },
+    {
+      "id": "GT.009",
+      "query": "What yogas are present in my chart?",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["pattern_register", "chart_facts_query", "msr_sql"],
+      "required_tools": ["pattern_register"],
+      "forbidden_tools": ["temporal", "remedial_codex_query"],
+      "notes": "Yogas are a structural pattern read. pattern_register is the L2.5 surface for named yogas (Raja, Dhana, etc.); chart_facts_query supplies confirmation placements."
+    },
+    {
+      "id": "GT.010",
+      "query": "Explain the role of Saturn in my 11th house.",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["chart_facts_query", "msr_sql", "cgm_graph_walk"],
+      "required_tools": ["chart_facts_query"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
+      "notes": "Planet-in-house interpretive. chart_facts_query returns Saturn's 11H placement; msr_sql for Saturn/11H signals; cgm_graph_walk traces conceptual links from Saturn-11H node."
+    },
+    {
+      "id": "GT.011",
+      "query": "Read my D9 Navamsha for marriage indications.",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["divisional_query", "chart_facts_query", "msr_sql", "domain_report_query"],
+      "required_tools": ["divisional_query"],
+      "forbidden_tools": ["remedial_codex_query", "temporal"],
+      "notes": "Divisional read. divisional_query (D9) is the primary surface; chart_facts_query supplies the D1 7H lord and its Navamsha state; domain_report_query for marriage narrative."
+    },
+    {
+      "id": "GT.012",
+      "query": "What does my 10th house say about my profession?",
+      "query_class": "interpretive",
+      "category": "interpretive",
+      "expected_tools": ["chart_facts_query", "divisional_query", "msr_sql", "domain_report_query"],
+      "required_tools": ["chart_facts_query", "domain_report_query"],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Career-house interpretive. divisional_query (D10 Dasamsha) corroborates D1 10H. domain_report_query for the Career L3 narrative."
+    },
+    {
+      "id": "GT.013",
+      "query": "What can I expect from the upcoming Ketu Mahadasha starting in 2027?",
+      "query_class": "predictive",
+      "category": "predictive",
+      "expected_tools": ["timeline_query", "chart_facts_query", "msr_sql", "temporal"],
+      "required_tools": ["timeline_query", "chart_facts_query"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
+      "notes": "Long-horizon dasha-based prediction. timeline_query is the L5 lifetime timeline surface; chart_facts_query supplies natal Ketu placement. temporal places the current MD endpoint."
+    },
+    {
+      "id": "GT.014",
+      "query": "Where is Saturn transiting in my chart right now and what should I expect?",
+      "query_class": "predictive",
+      "category": "predictive",
+      "expected_tools": ["temporal", "chart_facts_query", "msr_sql"],
+      "required_tools": ["temporal"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala", "timeline_query"],
+      "notes": "Live-transit prediction. temporal returns Saturn's current sign/house; chart_facts_query for natal Saturn so the transit can be related to natal context. timeline_query is forbidden — wrong horizon."
+    },
+    {
+      "id": "GT.015",
+      "query": "Will the next year bring career growth?",
+      "query_class": "predictive",
+      "category": "predictive",
+      "expected_tools": ["query_varshaphala", "temporal", "chart_facts_query", "msr_sql"],
+      "required_tools": ["query_varshaphala"],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Annual-horizon prediction. query_varshaphala is the Tajika annual-chart tool; temporal pins the current dasha; chart_facts_query for natal 10H/AmK."
+    },
+    {
+      "id": "GT.016",
+      "query": "When is my next favorable period for starting a new venture?",
+      "query_class": "predictive",
+      "category": "predictive",
+      "expected_tools": ["timeline_query", "temporal", "query_signal_state", "msr_sql"],
+      "required_tools": ["timeline_query"],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Forward-looking timing. timeline_query for upcoming favorable windows; query_signal_state for currently lit/ripening venture-positive signals; temporal for current period anchor."
+    },
+    {
+      "id": "GT.017",
+      "query": "Give me a comprehensive overview of my life path across all major domains.",
+      "query_class": "holistic",
+      "category": "holistic",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "pattern_register", "cluster_atlas", "cgm_graph_walk"],
+      "required_tools": ["domain_report_query", "cluster_atlas"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
+      "notes": "Multi-domain whole-chart synthesis. cluster_atlas surfaces the dominant clusters; domain_report_query feeds L3 narratives across domains; cgm_graph_walk shows cross-domain linkages."
+    },
+    {
+      "id": "GT.018",
+      "query": "What are the central themes and contradictions in my chart?",
+      "query_class": "holistic",
+      "category": "holistic",
+      "expected_tools": ["pattern_register", "contradiction_register", "resonance_register", "cluster_atlas", "msr_sql"],
+      "required_tools": ["contradiction_register", "pattern_register"],
+      "forbidden_tools": ["temporal", "remedial_codex_query", "query_varshaphala"],
+      "notes": "Pattern-and-contradiction holistic. contradiction_register and pattern_register are both required; resonance_register and cluster_atlas amplify the synthesis."
+    },
+    {
+      "id": "GT.019",
+      "query": "Synthesize how my career, marriage, and health interact in my chart.",
+      "query_class": "holistic",
+      "category": "holistic",
+      "expected_tools": ["chart_facts_query", "msr_sql", "domain_report_query", "cgm_graph_walk", "cluster_atlas"],
+      "required_tools": ["cgm_graph_walk", "domain_report_query"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
+      "notes": "Cross-domain synthesis (3 domains). cgm_graph_walk traverses conceptual links between career-marriage-health nodes; domain_report_query supplies the per-domain L3 narrative."
+    },
+    {
+      "id": "GT.020",
+      "query": "What signals are currently lit or ripening in my chart?",
+      "query_class": "holistic",
+      "category": "holistic",
+      "expected_tools": ["query_signal_state", "temporal", "msr_sql"],
+      "required_tools": ["query_signal_state"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala", "timeline_query"],
+      "notes": "Date-indexed signal-state holistic. query_signal_state is the date-indexed lit/dormant/ripening surface; temporal pins the date; msr_sql expands lit signals with their full row."
+    },
+    {
+      "id": "GT.021",
+      "query": "Tell me everything about Jupiter in my chart.",
+      "query_class": "interpretive",
+      "category": "planetary",
+      "expected_tools": ["chart_facts_query", "divisional_query", "msr_sql", "kp_query", "saham_query"],
+      "required_tools": ["chart_facts_query", "msr_sql"],
+      "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
+      "notes": "Single-planet deep dive. chart_facts_query for D1 Jupiter (sign/house/aspects); divisional_query across vargas; kp_query for Jupiter's star/sub lord; saham_query for Jupiter-related Sahams (Guru Saham)."
+    },
+    {
+      "id": "GT.022",
+      "query": "What is Mars's role across my divisional charts?",
+      "query_class": "interpretive",
+      "category": "planetary",
+      "expected_tools": ["divisional_query", "chart_facts_query", "msr_sql"],
+      "required_tools": ["divisional_query"],
+      "forbidden_tools": ["remedial_codex_query", "temporal"],
+      "notes": "Multi-varga single-planet read. divisional_query is the primary surface (D1, D9, D10, D7, etc.); chart_facts_query confirms D1 Mars; msr_sql for Mars signals."
+    },
+    {
+      "id": "GT.023",
+      "query": "Analyze the KP star and sub-lord chains of all 9 grahas in my chart.",
+      "query_class": "interpretive",
+      "category": "planetary",
+      "expected_tools": ["query_kp_ruling_planets", "kp_query", "chart_facts_query"],
+      "required_tools": ["query_kp_ruling_planets"],
+      "forbidden_tools": ["remedial_codex_query", "domain_report_query", "temporal"],
+      "notes": "KP-system planetary read. query_kp_ruling_planets is the engine-computed table; kp_query is the cusp-level surface; chart_facts_query confirms graha sidereal positions."
+    },
+    {
+      "id": "GT.024",
+      "query": "?",
+      "query_class": "interpretive",
+      "category": "edge_case",
+      "expected_tools": ["manifest_query"],
+      "required_tools": [],
+      "forbidden_tools": ["chart_facts_query", "remedial_codex_query", "temporal", "query_varshaphala", "timeline_query"],
+      "notes": "Edge case: degenerate single-character query. A correct planner should not fan out to chart-specific tools — manifest_query is the safe fallback. Tests planner robustness on near-empty input."
+    },
+    {
+      "id": "GT.025",
+      "query": "Tell me something interesting about the chart.",
+      "query_class": "holistic",
+      "category": "edge_case",
+      "expected_tools": ["pattern_register", "contradiction_register", "resonance_register", "cluster_atlas"],
+      "required_tools": [],
+      "forbidden_tools": ["temporal", "query_varshaphala", "remedial_codex_query", "timeline_query"],
+      "notes": "Edge case: open-ended ambiguous prompt. A correct planner should reach for L2.5 discovery surfaces (patterns, contradictions, resonances, clusters) rather than time-bound or remedial tools. No required_tools because any non-empty subset of the four discovery registers is acceptable."
+    }
+  ]
+}

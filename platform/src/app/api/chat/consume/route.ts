@@ -37,6 +37,8 @@ import { createToolCache, executeWithCache } from '@/lib/cache/index'
 import { loadManifest } from '@/lib/bundle/manifest_reader'
 import { runAll, summarize } from '@/lib/validators/index'
 import { createOrchestrator } from '@/lib/synthesis/index'
+import { validateCitations } from '@/lib/synthesis/citation_check'
+import { PipelineError } from '@/lib/router/errors'
 import { createAuditConsumer } from '@/lib/audit/consumer'
 import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
@@ -418,6 +420,66 @@ export async function POST(request: Request) {
         }
       },
       onFinish: async ({ messages: finalMessages }: { messages: UIMessage[] }) => {
+        // ── W2-EVAL-A: Layer-2 citation gate (post-synthesis) ─────────────
+        // Cross-reference SIG.MSR.NNN ids in the assistant's final text against
+        // the assembled context (bundle + tool results). Suspected training-data
+        // leaks WARN; ungrounded prescriptive answers ERROR (unless override).
+        // Field destination context_assembly_log.verified_citations lands with
+        // W2-SCHEMA; until then we keep the result local and log.
+        try {
+          const assistantMsg = finalMessages.filter((m) => m.role === 'assistant').at(-1)
+          const outputText = extractText(assistantMsg?.parts ?? [])
+          const assembledContextJson = JSON.stringify({
+            bundle,
+            tool_results: validToolResults,
+          })
+          const citationCheck = validateCitations(outputText, assembledContextJson, queryPlan.query_class)
+          const overrideOn = configService.getFlag('CITATION_GATE_OVERRIDE')
+          const effectiveResult =
+            citationCheck.gate_result === 'ERROR' && overrideOn ? 'WARN' : citationCheck.gate_result
+
+          console.log(
+            `[consume:v2] citation_gate_l2 query_id=${queryId} ` +
+              `result=${effectiveResult} layer1=${citationCheck.layer1_count} ` +
+              `verified=${citationCheck.layer2_verified} leaked=${citationCheck.layer2_leaked}` +
+              (overrideOn && citationCheck.gate_result === 'ERROR' ? ' override=on' : '') +
+              ` reason="${citationCheck.gate_reason}"`
+          )
+
+          if (effectiveResult === 'WARN') {
+            traceEmitter.emitStep({
+              event: 'step_done',
+              query_id: queryId,
+              step: {
+                query_id: queryId,
+                conversation_id: finalConversationId,
+                step_seq: synthesisSeq + 1,
+                step_name: 'citation_warn',
+                step_type: 'deterministic',
+                status: 'done',
+                started_at: new Date().toISOString(),
+                completed_at: new Date().toISOString(),
+                latency_ms: 0,
+                data_summary: {
+                  result: citationCheck.gate_reason,
+                  citation_count: citationCheck.layer1_count,
+                },
+                payload: {},
+              },
+            })
+          }
+
+          if (citationCheck.gate_result === 'ERROR' && !overrideOn) {
+            throw new PipelineError({
+              stage: 'synthesis',
+              reason: `[citation_gate_l2] ${citationCheck.gate_reason}`,
+            })
+          }
+        } catch (err) {
+          if (err instanceof PipelineError) throw err
+          console.error('[consume:v2] citation gate error', err)
+        }
+
         // Emit trace done sentinel so SSE endpoint closes the stream
         traceEmitter.emitStep({ event: 'done', query_id: queryId })
         try {
