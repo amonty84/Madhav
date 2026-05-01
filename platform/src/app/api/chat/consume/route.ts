@@ -33,6 +33,7 @@ import { configService } from '@/lib/config/index'
 import { classify } from '@/lib/router/router'
 import { callLlmPlanner, PlannerError, type PlanSchema } from '@/lib/pipeline/manifest_planner'
 import { plannerCircuit, PlannerCircuitOpenError } from '@/lib/pipeline/planner_circuit_breaker'
+import { arbitrateBudgets } from '@/lib/pipeline/budget_arbiter'
 import { compose } from '@/lib/bundle/rule_composer'
 import { getTool } from '@/lib/retrieve/index'
 import { createToolCache, executeWithCache } from '@/lib/cache/index'
@@ -307,6 +308,26 @@ export async function POST(request: Request) {
     // gate, audit). Per-tool param threading from planSchema.tool_calls into
     // each retrieval tool is W2-TRACE-A scope.
     if (planSchema) {
+      // UQE-5a: enforce a hard cap on the sum of per-tool token_budgets so
+      // retrieval cannot blow past the synthesis model's effective context
+      // window. Pure proportional trim p3 → p2 → p1, with a floor on p1 tools.
+      const arbitrated = arbitrateBudgets(
+        planSchema.tool_calls.map(tc => ({
+          tool_name: tc.tool_name,
+          priority: tc.priority,
+          token_budget: tc.token_budget,
+        })),
+        {
+          synthesis_model_max_context: modelMeta.maxInputTokens ?? 128_000,
+          system_prompt_reserve: 800,
+          synthesis_guidance_reserve: 200,
+          safety_margin: 0.85,
+          min_tokens_per_tool: 200,
+        },
+      )
+      for (let i = 0; i < planSchema.tool_calls.length; i++) {
+        planSchema.tool_calls[i].token_budget = arbitrated[i].token_budget
+      }
       const plannerTools = Array.from(new Set(planSchema.tool_calls.map(tc => tc.tool_name)))
       queryPlan.tools_authorized = plannerTools
     }
