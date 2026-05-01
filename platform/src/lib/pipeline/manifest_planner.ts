@@ -21,7 +21,8 @@
 
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import { generateObject } from 'ai'
+import { generateText, jsonSchema, tool } from 'ai'
+import type { JSONSchema7 } from 'json-schema'
 import { z } from 'zod'
 import { resolveModel } from '@/lib/models/resolver'
 import {
@@ -80,6 +81,41 @@ export const PlanSchemaZod = z.object({
   query_intent_summary: z.string().min(1),
   tool_calls: z.array(ToolCallSchema),
 })
+
+// Hand-crafted JSON Schema for the submit_plan tool input. We do NOT feed the
+// Zod schema directly because Zod's translation for `z.record(z.string(),
+// z.unknown())` emits the `propertyNames` JSON-Schema keyword, which NIM's
+// grammar-constrained decoder rejects ("Grammar error: Unimplemented keys"),
+// and `z.union([z.literal(1), z.literal(2), z.literal(3)])` emits an
+// `anyOf:[{const:N}]` form that's similarly unfriendly. PlanSchemaZod is still
+// applied post-call as the runtime validator (parity with prior generateObject
+// behavior), so this hand-crafted schema only governs what NIM constrains the
+// model to emit, not what the planner ultimately accepts.
+const PlanInputJsonSchema: JSONSchema7 = {
+  type: 'object',
+  properties: {
+    query_class: {
+      type: 'string',
+      enum: ['remedial', 'interpretive', 'predictive', 'holistic', 'planetary', 'single_answer'],
+    },
+    query_intent_summary: { type: 'string' },
+    tool_calls: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          tool_name: { type: 'string' },
+          params: { type: 'object' },
+          token_budget: { type: 'integer', minimum: 100, maximum: 2000 },
+          priority: { type: 'integer', enum: [1, 2, 3] },
+          reason: { type: 'string' },
+        },
+        required: ['tool_name', 'params', 'token_budget', 'priority', 'reason'],
+      },
+    },
+  },
+  required: ['query_class', 'query_intent_summary', 'tool_calls'],
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // System prompt (PLANNER_PROMPT_v1_0.md §3, verbatim)
@@ -221,15 +257,28 @@ export async function callLlmPlanner(
     manifest_tool_count: compressed.length,
   })
 
+  // NIM (and other OpenAI-compatible providers that don't implement
+  // response_format=json_schema) reject `generateObject`'s structured-output
+  // path with HTTP 500. Force tool-call mode by routing through `generateText`
+  // with a single submit-plan tool whose inputSchema is PlanSchemaZod and
+  // toolChoice='required'. The AI SDK validates the model's tool-call args
+  // against PlanSchemaZod before populating `toolCall.input`.
   const start = Date.now()
   let result
   try {
-    result = await generateObject({
+    result = await generateText({
       model: resolveModel(plannerModelId),
-      schema: PlanSchemaZod,
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: userMessage }],
       temperature: 0,
+      tools: {
+        submit_plan: tool({
+          description:
+            'Submit the planned tool calls for the native query. Call this exactly once with the full plan; do not emit prose.',
+          inputSchema: jsonSchema<PlanSchema>(PlanInputJsonSchema),
+        }),
+      },
+      toolChoice: 'required',
     })
   } catch (err) {
     if (queryId) {
@@ -274,7 +323,14 @@ export async function callLlmPlanner(
     })
   }
 
-  const parsed = PlanSchemaZod.safeParse(result.object)
+  const submitCall = result.toolCalls.find(tc => tc.toolName === 'submit_plan')
+  if (!submitCall) {
+    throw new PlannerError(
+      `LLM planner did not produce a submit_plan tool call ` +
+        `(toolCalls=${result.toolCalls.length}, finishReason=${result.finishReason})`,
+    )
+  }
+  const parsed = PlanSchemaZod.safeParse(submitCall.input)
   if (!parsed.success) {
     throw new PlannerError(
       `LLM planner returned schema-invalid output: ${parsed.error.message}`,

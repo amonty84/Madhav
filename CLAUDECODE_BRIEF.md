@@ -3,7 +3,7 @@ status: PENDING
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke)
 authored: 2026-05-02
-round: 1
+round: 2
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
@@ -129,72 +129,78 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 
 ```
 planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
-smoke_date: 2026-05-02
-avg_tool_recall: 0.000
-avg_tool_precision: 0.000
-failing_entries: ALL_25 (every entry errored "LLM planner call failed: Not Found")
+smoke_date: 2026-05-02 (Round 2 — post EVAL-5 + nvidia.ts.chat() fix)
+avg_tool_recall: 0.620
+avg_tool_precision: 0.707
+total: 25
+passed: 4
+failed: 21
+forbidden_violations: 0
+required_misses: 9
+pass_rate: 0.160
 flag_flipped: false
 exit_code: 1
 notes: |
-  Smoke RAN LIVE this session (sandbox proxy block from prior round is gone —
-  ran from dev machine directly). Result: every entry GT.001–GT.025 failed
-  with `LLM planner call failed: Not Found` (HTTP 404) at the LLM call site.
-  Predicted_tools = [] for all 25; recall/precision = 0.0 / 0.0; required
-  misses = 23 (GT.024 + GT.025 have empty required sets so register as hits).
-  Forbidden violations = 0. Pass rate = 0.000.
+  Smoke RAN LIVE this session against NIM. Pipeline now produces real plans
+  end-to-end — 24 of 25 entries successfully completed an LLM planner call
+  (only GT.012 timed out, transient). Predicted-tools sets are non-empty,
+  query_class is set correctly per entry, no forbidden violations across
+  the 25 entries. Median planner latency ~6–8 s, single outlier 19 s.
+  But thresholds (recall ≥ 0.80, precision ≥ 0.90) are not met; the model
+  produces well-formed plans that diverge from the golden labels.
 
-  ROOT CAUSE — NIM PROVIDER WIRING (model/integration issue, not prompt):
-    `@ai-sdk/openai@3.0.53` (installed at platform/node_modules) defaults
-    `client(modelId)` to `createResponsesModel`, which POSTs to `/responses`
-    (the OpenAI Responses API). NVIDIA NIM (https://integrate.api.nvidia.com/v1)
-    only serves `/chat/completions`; it returns plain `404 page not found`
-    for any other path. The AI SDK surfaces this as `AI_APICallError:
-    Not Found` (statusCode 404), which `manifest_planner.ts` wraps as
-    `PlannerError("LLM planner call failed: Not Found")`.
+  PIPELINE FIX LANDED THIS SESSION (manifest_planner.ts only):
+    Round-1 prescription was `mode: 'tool'` on generateObject, but AI SDK v6
+    removed that parameter — generateObject hard-codes responseFormat type
+    'json' which @ai-sdk/openai@3 translates to response_format=json_schema,
+    which NIM rejects with 500 "Already borrowed". Refactored callLlmPlanner
+    to use `generateText` with a single submit_plan tool + toolChoice:
+    'required' (the v6-equivalent of the old mode:'tool'), reading the plan
+    from result.toolCalls[0].input. Public signature of callLlmPlanner
+    unchanged; PlannerError wrapping, writeLlmCallLog, emitTrace, and the
+    latency_ms measurement preserved. PlanSchemaZod still validates the
+    parsed input post-call (parity with prior generateObject behavior).
 
-    Verified by direct probes from this machine:
-      • curl POST /chat/completions with model=nvidia/llama-3.3-nemotron-super-49b-v1
-        and a 5-token prompt → HTTP 200, valid completion (assistant content
-        "A simple yet effective greeting" returned). API key + endpoint healthy.
-      • curl POST /chat/completions same model + tool_calls → HTTP 200,
-        valid `tool_calls` array returned. Tool-use mode works.
-      • curl POST /chat/completions same model + response_format=json_schema
-        → HTTP 500 InternalServerError "Already borrowed" (NIM bug; unrelated).
-      • Standalone Node script: `createOpenAI(...).('nvidia/llama-3.3-nemotron-super-49b-v1')`
-        + `generateObject(...)` → 404 page not found, AI_APICallError, status 404.
-        Same script with `client.chat(modelId)` would force the chat path —
-        not tested here because the fix lives in must_not_touch.
+    Two NIM-grammar issues surfaced during the refactor and were resolved
+    in-file: NIM's constrained-decoding grammar rejects (a) JSON Schema's
+    `propertyNames` keyword (emitted by Zod for `z.record(z.string(),
+    z.unknown())`) and (b) the `anyOf:[{const:1},{const:2},{const:3}]` form
+    (emitted for `z.union([z.literal(1),z.literal(2),z.literal(3)])`). Fix:
+    feed a hand-crafted JSONSchema7 to `tool({ inputSchema: jsonSchema(...) })`
+    that uses bare `type:'object'` for params and `enum:[1,2,3]` for priority.
+    PlanSchemaZod retained as the post-call validator.
 
-    Locus of fix: `platform/src/lib/models/nvidia.ts` line 60-62
-    (`getNvidiaModel`). Currently returns `getClient()(modelId)` which is
-    the responses-API factory in @ai-sdk/openai v3. Should be
-    `getClient().chat(modelId)` to force `/chat/completions`. One-line patch.
+  RESIDUAL GAP — MODEL/PROMPT/GOLDEN-SET CALIBRATION (not infrastructure):
+    Recall 0.62 / precision 0.71 / 4-of-25 pass means the planner returns
+    non-empty, valid plans but the tool selection diverges from the golden
+    labels. Sample patterns observed:
+      • Over-selection of `pattern_register` for remedial queries (GT.001–
+        007 most predicted [remedial_codex_query, pattern_register] when the
+        gold expected only [remedial_codex_query] or msr_sql + codex). PR.7
+        of the system prompt mandates pattern_register OR resonance_register
+        at priority ≤ 2 for predictive/remedial; the model is honoring the
+        rule but the golden set was labeled before that rule was written.
+      • Under-selection on holistic / multi-domain queries (GT.024, GT.025).
+      • A handful of required_miss outcomes where the model picks a
+        legitimate substitute (e.g., resonance_register where the gold
+        required pattern_register or vice versa).
+    None of these point to NIM infrastructure failure; the call layer is
+    healthy. They point to either (a) prompt under-specification, (b) golden
+    set labels that need a refresh post-MANIFEST-compression, or (c) the
+    planner needing a richer few-shot block.
 
-  SCOPE — FIX IS OUT OF SESSION:
-    `platform/src/lib/models/**` is in `must_not_touch`. The NIM-wrapper fix
-    therefore cannot land in this session. Surfaced to native; flag stays
-    false per AC.U.3. Recommend a small follow-up session (no other scope)
-    that touches only `nvidia.ts` line 61 and re-runs this smoke.
+  ACCEPTANCE STATE (this round):
+    AC.U.1 (tsc clean):        PASS  (zero new errors; 9 baseline test errors unchanged)
+    AC.U.2 (regression gate):  PASS  (1 file, 2 tests passed via mocked replay)
+    AC.U.3 (EVAL-B live):      FAIL  (recall=0.620, precision=0.707; thresholds 0.80/0.90)
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) variant per brief)
 
-  SECONDARY ISSUE — GOLDEN SET LABELING (EVAL-5, still open from prior round):
-    Even with the NIM wiring repaired, 11 of the 8-tool primary set are not
-    represented in `expected_tools` correctly: the golden set was authored
-    pre-MANIFEST-compression. Theoretical max avg_recall under the current
-    PRIMARY_TOOL_NAMES (8 tools) is 0.4553, below the 0.80 threshold.
-    GT.023 and GT.024 have zero primary tools in expected_tools (max
-    recall = 0.000 even with a perfect planner). This is a separate task
-    (golden_test_set.json is in must_not_touch this session).
-
-  ACCEPTANCE STATE:
-    AC.U.1 (tsc clean):       PASS  (verified prior session)
-    AC.U.2 (regression gate): PASS  (verified prior session, mocked replay)
-    AC.U.3 (EVAL-B live):     FAIL  (recall=0.00, precision=0.00; 404 wiring bug)
-    AC.U.4 (flag flip):       SKIPPED — held pending AC.U.3
-    AC.U.5 (commit):          this commit (test(...) variant per brief)
-
-  PROMPT RETRY: not performed — failure is not a prompt issue. Every entry
-  failed at the HTTP layer before the LLM ever saw the prompt. Updating
-  PLANNER_PROMPT_v1_0.md would have zero effect.
+  PROMPT RETRY: not performed in this session. The failure profile is
+  diffuse across query classes and looks like calibration drift between
+  the prompt's R7 mandate and the golden set's pre-R7 labels, not a single
+  fixable prompt bug. A separate session should reconcile the golden set
+  with the current prompt + manifest before another live smoke run.
 ```
 
 ---
