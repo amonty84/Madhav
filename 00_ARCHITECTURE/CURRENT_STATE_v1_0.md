@@ -54,6 +54,7 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v1.1 (2026-05-01, Cowork-M4-W1-PLAN-AUTHORING): PHASE_M4_PLAN_v1_0.md authored (commit 3669a0a); active_phase_plan updated; active_phase_plan_sub_phase updated to reflect M4-A entry unblocked.
   - v1.1 (2026-05-01, Cowork-LEL-ELICITATION): LEL gate CLEARED. active_phase_plan_sub_phase updated: LEL count 35→46 events; M4-A gate met; 11 new events pending Swiss Ephemeris computation. LEL v1.3 commit e9dc44b.
   - v1.1 (2026-05-01, M4-INFRA-001): Added Platform State block recording migrations 022-031 applied to Cloud SQL.
   - v1.0 (2026-04-24, Step 10 of the Step 0 → Step 15 governance rebuild):
@@ -1042,13 +1043,12 @@ current_state:
   # Phase-plan expansion (M3 phase plan TBD; first M3 session decides whether to expand
   #   MACRO_PLAN §M3 into a PHASE_C_PLAN_v1_0.md or drive M3 directly from MACRO_PLAN.)
   # ------------------------------------------------------------------
-  active_phase_plan: null
-    # M4 phase plan authoring decision deferred to first M4 session per
-    # PHASE_M3_PLAN §5 native-approval-points table. Either:
-    #   (a) author PHASE_M4_PLAN_v1_0.md (analogue of PHASE_M3_PLAN); or
-    #   (b) drive M4 directly from MACRO_PLAN_v2_0.md §M4.
-    # M3 phase plan (PHASE_M3_PLAN_v1_0.md v1.0) is now SUPERSEDED-AS-COMPLETE.
-  active_phase_plan_version: null
+  active_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md
+    # M4 phase plan authored 2026-05-01 at Cowork-M4-W1-PLAN-AUTHORING.
+    # PHASE_M4_PLAN_v1_0.md v1.0 — sub-phases M4-W1 through M4-D.
+    # commit 3669a0a. Decision: expand into PHASE_M4_PLAN (analogue of PHASE_M3_PLAN).
+    # M3 phase plan (PHASE_M3_PLAN_v1_0.md v1.0) is SUPERSEDED-AS-COMPLETE.
+  active_phase_plan_version: "1.0"
   active_phase_plan_sub_phase: >
     M3 MACRO-PHASE CLOSED 2026-05-01 at M3-W4-D2-M3-CLOSE.
     Sealing artifact: 00_ARCHITECTURE/M3_CLOSE_v1_0.md.
@@ -1075,9 +1075,9 @@ current_state:
     LEL v1.3 committed at e9dc44b (01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md).
     11 new events have chart_state_at_event: status pending_computation
     — Swiss Ephemeris pass required (M4-A scope).
-    First M4 session decision (native-approval point): author
-    PHASE_M4_PLAN_v1_0.md (analogue of PHASE_M3_PLAN) or drive M4 directly
-    from MACRO_PLAN_v2_0.md §M4.
+    PHASE_M4_PLAN_v1_0.md v1.0 authored 2026-05-01 at Cowork-M4-W1.
+    Decision: expand into PHASE_M4_PLAN (analogue of PHASE_M3_PLAN). DONE.
+    M4-A is the next active sub-phase. Entry unblocked.
     # PHASE_M3_PLAN_v1_0.md is the active M3 phase plan (v1.0, authored 2026-05-01).
     # Sub-phases: M3-A (Discovery Engine + DIS.009) → M3-B (Vimshottari + Yogini + Transit) →
     # M3-C (Chara + Narayana + KP + Varshaphala + Shadbala) → M3-D (Validator + Close).
