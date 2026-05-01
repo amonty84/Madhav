@@ -3,7 +3,7 @@ document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_2
-version: 1.2
+version: 1.3
 status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts)
 supersedes: v1.1 (same-corpus, chart-state-populated)
 author: Claude (Session 2, Claude Code instance)
@@ -17,7 +17,7 @@ chart_state_sources:
   sade_sati: SADE_SATI_CYCLES_ALL.md + FORENSIC_ASTROLOGICAL_DATA_v8_0.md §21
   transits_eclipses_retrograde_ashtakavarga: Swiss Ephemeris self-compute (Session 4) — per-event blocks in this file + EVENT_CHART_STATES_v1_0.md; optional JH cross-check via EXTERNAL_COMPUTATION_SPEC
 retrodictive_signal_source: DEEP_ANALYSIS_Abhisek_Mohanty_v1 (v1.2.1) §D.0.F (SIG.01-15, CVG.01-08, CTR.01-07)
-total_events_logged: 36 (point events, all chart-states populated) + 5 period summaries + 6 chronic patterns
+total_events_logged: 46 (35 original + 11 added v1.3; new events have chart_state status: pending_computation) + 5 period summaries + 6 chronic patterns
 confidence_self_assessment: 0.89 (v1.2 populates transits, eclipses, retrograde, Ashtakavarga via Swiss Ephemeris pipelines. Native JH spot-check remains optional.)
 next_steps:
   - Optional v1.3: Promote eclipse/transit evidence from chart_state into each event's signals_that_matched lists (SESSION_LOG red-team note)
@@ -217,6 +217,20 @@ EVT.1998.02.16.01:
 ```
 
 ```yaml
+EVT.2000.XX.XX.01:
+  date: 2000
+  date_confidence: year-approx (post-10th board exams; native said "after 10th boards")
+  category: education
+  subcategory: advanced_course_partial
+  description: Joined Aptech computer education course post-10th board exams (~2000, age 16). Was among the brighter students. Could not sit the certification exam — the program was postgraduate level and required a graduate minimum qualification; native was pre-graduate. Course completed; certificate denied on qualification grounds.
+  magnitude: moderate
+  valence: mixed
+  native_reflection: "I joined that course and I was one of the brighter ones but I never could write the exam because it told me they can only teach me but cannot allow me to write exams and get a certificate because the minimum qualification was to be a graduate."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+
 EVT.2001.03.XX.01:
   date: 2001-03-XX
   date_confidence: month-exact (approx)
@@ -313,6 +327,21 @@ EVT.2004.01.XX.01:
 ### Era 4 continued
 
 ```yaml
+EVT.2004.XX.XX.02:
+  date: 2004
+  date_confidence: year-approx (after first year at SRM Engineering College)
+  category: education
+  subcategory: opportunity_declined
+  description: Selected by SRM Engineering College as one of 4–5 students for a 1-year exchange program at Carnegie Mellon University (CMU). Would have received a CMU certificate and returned to complete engineering at SRM. Could not accept due to health issues and financial constraints. Native experienced a "deja vu" when CMU reappeared as the Tepper School MBA sponsorship in 2021.
+  magnitude: significant
+  valence: mixed
+  native_reflection: "I was selected for Carnegie Milan University for a one-year course there... but I could not take up that opportunity in 2004 because of my health issues and financial issues. It was a deja vu incident for me."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Deja vu resolution pair — EVT.2021.XX.XX.02 (Tepper MBA selection) + EVT.2023.06.XX.01 (CMU completion).
+
 EVT.2007.06.XX.01:
   date: 2007-06-XX
   date_confidence: month-exact
@@ -344,6 +373,21 @@ EVT.2007.06.XX.01:
 ```
 
 ```yaml
+EVT.2007.XX.XX.03:
+  date: 2007
+  date_confidence: year-approx (during or shortly after knee surgery EVT.2007.06.XX.01; native confirmed 2007–2008)
+  category: health
+  subcategory: chronic_onset
+  description: Sleep disorder onset arising from medical negligence during the knee arthroscopy (EVT.2007.06.XX.01). The negligence caused a breathlessness problem which subsequently triggered a chronic sleep disorder. Persisted ~18 years across multiple doctors and medications in India and the US until resolved in 2025–2026 (EVT.2025.XX.XX.02).
+  magnitude: significant
+  valence: negative
+  native_reflection: "My sleeping disorder has been going on since my knee surgery, 2007 or 2008. Because of a certain medical negligence, I started the breathlessness problem which led to my sleep disorder. I've tried several drugs, half a dozen of doctors."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Cause — medical negligence at EVT.2007.06.XX.01. Resolution — EVT.2025.XX.XX.02.
+
 EVT.2007.06.XX.02:
   date: 2007-06-XX
   date_confidence: month-exact
@@ -623,6 +667,20 @@ EVT.2012.09.XX.01:
 ```
 
 ```yaml
+EVT.2012.XX.XX.02:
+  date: 2012
+  date_confidence: year-approx (during XIMB MBA, 2011–2013; likely second year ~2012)
+  category: education
+  subcategory: leadership_role
+  description: Elected President of the International Relations Committee (IRC) at XIMB. Had the opportunity to stand for General Secretary of the entire college (higher post) but declined — native describes his choice as "selfish," preferring to avoid the social-service load. IRC presidency gave significant access to international students and visitors; multiple short-term relationships developed (Japanese, Indian, American).
+  magnitude: moderate
+  valence: positive
+  native_reflection: "I could have become the general secretary for the entire college but I was selfish and I didn't want to put so much effort in social service. I decided to just become the President of the International Relationship Committee. That gave me a lot of access to the foreigners."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+
 EVT.2012.10.XX.01:
   date: 2012-10-XX
   date_confidence: month-exact
@@ -936,6 +994,36 @@ EVT.2021.01.XX.01:
 ```
 
 ```yaml
+EVT.2021.XX.XX.02:
+  date: 2021
+  date_confidence: year-approx (native said selected in 2021; program ran 2022–2023)
+  category: career
+  subcategory: award_selection
+  description: Selected as one of the top employees across the Mahindra Group and sponsored for a 1-year Executive MBA at Tepper School of Business, Carnegie Mellon University. Program ran 2022–2023. Native experienced this as a "deja vu" — CMU had been offered and declined in 2004 (EVT.2004.XX.XX.02); 17 years later it arrived as a sponsored award.
+  magnitude: significant
+  valence: positive
+  native_reflection: "I was selected as one of the top employees of the Mahindra group and they sponsored me for a one-year executive MBA. It was a deja vu incident for me because the university I really wished to be part of but could not because of issues at that point in time came back to me and fell in my lap."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Deja vu pair — EVT.2004.XX.XX.02 (CMU declined) → EVT.2023.06.XX.01 (CMU completed).
+
+EVT.2021.XX.XX.03:
+  date: 2021
+  date_confidence: year-approx (native said "2021 or 2022")
+  category: career
+  subcategory: business_stalled
+  description: A second sand quarry was acquired and attempted for operationalisation ~2021–2022 but could not be made operational due to public hearing requirements. Multiple attempts to bypass or resolve the public hearing were unsuccessful over ~4–5 years until April 2026.
+  magnitude: moderate
+  valence: mixed
+  native_reflection: "We had one in 2021 or 2022, we had not made it operational because of a public hearing which was a complicated thing. Lots of things we tried to avoid public hearing, but didn't happen."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Resolution — EVT.2026.04.08.01.
+
 EVT.2022.01.03.01:
   date: 2022-01-03
   date_confidence: exact
@@ -967,6 +1055,21 @@ EVT.2022.01.03.01:
 ```
 
 ```yaml
+EVT.2022.XX.XX.02:
+  date: 2022
+  date_confidence: year-approx (during CMU Tepper MBA period 2022–2023; exact month unknown)
+  category: relationship
+  subcategory: romantic_concurrent
+  description: A serious affair during the CMU Tepper Executive MBA period (2022–2023). Distinct from R#3 (ended October 2022, EVT.2022.10.XX.01). This affair generated significant marital tension and is cited by native as a direct contributing cause of the current marital separation (EVT.CURRENT.01).
+  magnitude: life-altering
+  valence: mixed
+  native_reflection: "I had a pretty serious affair at that point in time which resulted in a lot of issues in my marriage and for which I am in a separated state today."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Marital consequence — EVT.CURRENT.01.
+
 EVT.2022.10.XX.01:
   date: 2022-10-XX
   date_confidence: month-exact (estimated — user said "10 years" duration from Oct 2012)
@@ -1185,6 +1288,21 @@ EVT.2025.07.XX.01:
 ```
 
 ```yaml
+EVT.2025.XX.XX.02:
+  date: 2025
+  date_confidence: year-approx (native said "2025 or 2026"; logging as 2025)
+  category: health
+  subcategory: chronic_resolution
+  description: Chronic sleep disorder (onset EVT.2007.XX.XX.03, ~18 years) resolved via Lemborexant (brand name: Dayvigo), discovered through an astrology consultation. First medication to work without debilitating drowsiness side effects. Native had tried half a dozen doctors and multiple drugs across India and the US without success.
+  magnitude: significant
+  valence: positive
+  native_reflection: "I found the solution to my sleeping disorder in 2025 when I was consulting astrology and the astrological pharmaceutical remedy was Dayvigo drug, which is the generic name Lemborexant. I pop a pill and know without the negative impacts of drowsiness of the other drugs."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Onset — EVT.2007.XX.XX.03.
+
 EVT.2025.XX.XX.01:
   date: 2025-XX-XX
   date_confidence: year-approx
@@ -1216,6 +1334,50 @@ EVT.2025.XX.XX.01:
 ```
 
 ```yaml
+EVT.2026.01.XX.01:
+  date: 2026-01
+  date_confidence: month-approx (native said "January to February 2026")
+  category: other
+  subcategory: psychological_shift
+  description: Between January and February 2026, native experienced a marked and sustained shift to focused, one-pointed attention directed entirely at business. Long-standing distractions (relational, psychological, otherwise) described as "wiped out." Native characterises this as an entirely new operational mode — chronic distraction replaced by sustained focus.
+  magnitude: significant
+  valence: positive
+  native_reflection: "Between January to February 2026, I found an enormous amount of focus and one-pointed approach, where a lot of things that have distracted me for most part of my life have been wiped out and I'm completely focusing on business."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+
+EVT.2026.03.20.01:
+  date: 2026-03-20
+  date_confidence: exact
+  category: career
+  subcategory: business_project_closed
+  description: Marsys Technology (IT company co-founded with a MasterCard executive) wrapped up its primary project on 20 March 2026 with "enormous profits." Revenue generated steadily from 2023 through 2026, significantly supporting the native and Marsys Group through the difficult post-US-return period. Project completion ends the revenue stream; profits accumulated represent a meaningful financial buffer.
+  magnitude: significant
+  valence: mixed
+  native_reflection: "The project got wrapped up on March 20, 2026, with enormous amount of profits. Unfortunately it got wrapped up so we won't be able to make money out of it, but it's significantly helped us during the difficult times with the money that we made out of it."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Contract start — EVT.2025.07.XX.01.
+
+EVT.2026.04.08.01:
+  date: 2026-04-08
+  date_confidence: exact
+  category: career
+  subcategory: business_milestone_clearance
+  description: Public hearing for the second sand quarry (see EVT.2021.XX.XX.03) successfully closed on 8 April 2026, clearing the primary regulatory obstacle after ~4–5 years. Quarry expected to become operational by late October 2026.
+  magnitude: significant
+  valence: positive
+  native_reflection: "Eventually, on April 8, 2026, we closed the public hearing for that sand quarry and it should be operational in late October 2026."
+  chart_state_at_event:
+    status: pending_computation
+    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+  retrodictive_match: pending
+  notes: Pre-history — EVT.2021.XX.XX.03.
+
 EVT.CURRENT.01:
   date: 2026-04-17 (status as of this log version)
   date_confidence: exact
