@@ -209,6 +209,14 @@ platform/src/lib/pipeline/planner_context_builder.ts (fix only if tsc errors fou
 platform/src/lib/pipeline/budget_arbiter.ts          (fix only if tsc errors found)
 platform/src/lib/pipeline/planner_circuit_breaker.ts (fix only if tsc errors found)
 00_ARCHITECTURE/PLANNER_PROMPT_v1_0.md               (if AC.U.3 fails for prompt reason)
+
+# Scope amendment — UI restoration (added 2026-05-02 per native direction in-session):
+# Restore three Consume-module behaviors silently reverted in commits a37ede8
+# (parking bundle) and eb427e3 ("four post-redesign tweaks"). Native authorized
+# the scope expansion on chat 2026-05-02 after diagnosis. Concurrent with W2-UQE-ACTIVATE.
+platform/src/components/consume/ConsumeChat.tsx     (sidebar default + Trace button relocation)
+platform/src/components/chat/ChatShell.tsx           (no change expected — header already supports headerActions)
+platform/src/components/chat/Composer.tsx            (textarea fixed-size — drop TextareaAutosize)
 ```
 
 ## must_not_touch
@@ -219,7 +227,7 @@ platform/src/lib/synthesis/**
 platform/src/lib/retrieve/**
 platform/src/lib/router/**
 platform/src/lib/models/**
-platform/src/components/**
+platform/src/components/**                            (EXCEPT the three files in may_touch above)
 platform/src/hooks/**
 platform/migrations/**
 platform/tests/eval/golden_test_set.json             (frozen ground truth; immutable)
