@@ -79,12 +79,21 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
   const register = JSON.parse(raw) as ContradictionRegister
 
   let contradictions = register.contradictions
+  let fallback_used = false
 
   // Domain filter: domains_implicated intersection
   if (plan.domains.length > 0) {
-    contradictions = contradictions.filter(c =>
+    const filtered = contradictions.filter(c =>
       c.domains_implicated?.some(d => plan.domains.includes(d))
     )
+    if (filtered.length === 0) {
+      // UQE-7 (W2-BUGS B2W-2/3) — domain-only fallback. Surface every known
+      // contradiction rather than nothing when the requested domain doesn't
+      // yet have any contradiction entries on file.
+      fallback_used = true
+    } else {
+      contradictions = filtered
+    }
   }
 
   const results: ToolBundleResult[] = contradictions.map(contradiction => ({
@@ -122,6 +131,7 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
     invocation_params: {
       register_path: REGISTER_PATH,
       domains: plan.domains,
+      fallback_used,
     },
     results,
     served_from_cache: false,

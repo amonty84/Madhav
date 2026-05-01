@@ -61,7 +61,7 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
       ? msrInput.entities_involved_any
       : null
 
-  const { rows } = await getStorageClient().query<MsrSignal>(SQL, [
+  let { rows } = await getStorageClient().query<MsrSignal>(SQL, [
     nativeId,
     domainFilter,
     planetFilter,
@@ -72,6 +72,26 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     valenceFilter,
     entitiesFilter,
   ])
+
+  // UQE-7 (W2-BUGS B2W-2/3) — domain-only fallback. When a planet filter
+  // narrowed the result to zero, retry without the planet filter so the
+  // synthesizer still has domain-relevant signals to ground in.
+  let fallback_used = false
+  if (rows.length === 0 && planetFilter !== null) {
+    const fallback = await getStorageClient().query<MsrSignal>(SQL, [
+      nativeId,
+      domainFilter,
+      null,
+      forwardLookingFilter,
+      confidenceFloor,
+      signalTypeFilter,
+      temporalFilter,
+      valenceFilter,
+      entitiesFilter,
+    ])
+    rows = fallback.rows
+    fallback_used = true
+  }
 
   // pg returns NUMERIC/DECIMAL columns as strings by default; coerce to number for schema validation
   const results: ToolBundleResult[] = rows.map(signal => ({
@@ -106,6 +126,7 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
       temporal_activation: temporalFilter,
       valence: valenceFilter,
       entities_involved_any: entitiesFilter,
+      fallback_used,
     },
     results,
     served_from_cache: false,

@@ -217,6 +217,14 @@ export async function POST(request: Request) {
         })),
     })
     const queryId = queryPlan.query_plan_id
+
+    // UQE-9 (W2-BUGS B2W-7) — atomic per-request step_seq counter. Replaces
+    // every hard-coded `step_seq: N` and `step_seq: 3 + idx` arithmetic so
+    // parallel tools and synthesis can never collide on the same logical seq.
+    // Single-thread async context, so no locks needed.
+    let stepSeq = 0
+    const nextSeq = () => ++stepSeq
+
     // Step 1 — classify (emit done immediately; query_id now known)
     traceEmitter.emitStep({
       event: 'step_done',
@@ -224,7 +232,7 @@ export async function POST(request: Request) {
       step: {
         query_id: queryId,
         conversation_id: finalConversationId,
-        step_seq: 1,
+        step_seq: nextSeq(),
         step_name: 'classify',
         step_type: 'deterministic',
         status: 'done',
@@ -248,7 +256,7 @@ export async function POST(request: Request) {
       step: {
         query_id: queryId,
         conversation_id: finalConversationId,
-        step_seq: 2,
+        step_seq: nextSeq(),
         step_name: 'compose_bundle',
         step_type: 'deterministic',
         status: 'done',
@@ -264,6 +272,10 @@ export async function POST(request: Request) {
 
     const cache = createToolCache()
     const toolFetchWallStart = Date.now()
+    // UQE-9: pre-allocate one seq per tool BEFORE the parallel emissions so
+    // the running event and the eventual done/error event for the same logical
+    // tool step share a single step_seq.
+    const toolSeqs: number[] = queryPlan.tools_authorized.map(() => nextSeq())
     // Steps 3…N — emit 'running' for all tools simultaneously (they fire in parallel)
     queryPlan.tools_authorized.forEach((toolName: string, idx: number) => {
       traceEmitter.emitStep({
@@ -272,7 +284,7 @@ export async function POST(request: Request) {
         step: {
           query_id: queryId,
           conversation_id: finalConversationId,
-          step_seq: 3 + idx,
+          step_seq: toolSeqs[idx],
           step_name: toolName,
           step_type: toolStepType(toolName),
           status: 'running',
@@ -297,7 +309,7 @@ export async function POST(request: Request) {
             step: {
               query_id: queryId,
               conversation_id: finalConversationId,
-              step_seq: 3 + idx,
+              step_seq: toolSeqs[idx],
               step_name: toolName,
               step_type: toolStepType(toolName),
               status: 'done',
@@ -317,7 +329,7 @@ export async function POST(request: Request) {
             step: {
               query_id: queryId,
               conversation_id: finalConversationId,
-              step_seq: 3 + idx,
+              step_seq: toolSeqs[idx],
               step_name: toolName,
               step_type: toolStepType(toolName),
               status: 'error',
@@ -347,9 +359,11 @@ export async function POST(request: Request) {
     const audienceTier = isSuperAdmin ? 'super_admin' as const : 'client' as const
     const panelOptIn = body.panel_opt_in === true
 
-    // Emit synthesis start — seq = 3 + nTools + 1 (after context_assembly which is in single_model_strategy)
-    const nToolSteps = queryPlan.tools_authorized.length
-    const synthesisSeq = 3 + nToolSteps + 1
+    // UQE-9: pre-allocate context_assembly seq first (single_model_strategy
+    // emits context_assembly before synthesis_done), then the synthesis seq
+    // shared by start (here) and done (in onFinish inside the orchestrator).
+    const contextAssemblySeq = nextSeq()
+    const synthesisSeq = nextSeq()
     const synthesisStart = Date.now()
     traceEmitter.emitStep({
       event: 'step_start',
@@ -392,6 +406,8 @@ export async function POST(request: Request) {
       },
       conversation_id: finalConversationId,
       panel_opt_in: panelOptIn,
+      context_assembly_seq: contextAssemblySeq,
+      synthesis_seq: synthesisSeq,
       // AUDIT_ENABLED retired BHISMA-B1 §6.2: always-on; flag removed from type union.
       onAuditEvent: createAuditConsumer({
         query_text: queryText,
@@ -453,7 +469,7 @@ export async function POST(request: Request) {
               step: {
                 query_id: queryId,
                 conversation_id: finalConversationId,
-                step_seq: synthesisSeq + 1,
+                step_seq: nextSeq(),
                 step_name: 'citation_warn',
                 step_type: 'deterministic',
                 status: 'done',

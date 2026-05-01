@@ -86,11 +86,20 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
   // Domain filter: if domains specified, domains_bridged must include at least
   // one of the plan domains.
   let resonances = register.resonances
+  let fallback_used = false
 
   if (plan.domains.length > 0) {
-    resonances = resonances.filter(r =>
+    const filtered = resonances.filter(r =>
       r.domains_bridged?.some(d => plan.domains.includes(d))
     )
+    if (filtered.length === 0) {
+      // UQE-7 (W2-BUGS B2W-2/3) — domain-only fallback. Surface every
+      // resonance rather than nothing when the requested domains don't
+      // intersect any registered domains_bridged set.
+      fallback_used = true
+    } else {
+      resonances = filtered
+    }
   }
 
   const results: ToolBundleResult[] = resonances.map(resonance => ({
@@ -123,6 +132,7 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
       register_path: REGISTER_PATH,
       domains: plan.domains,
       forward_looking: plan.forward_looking,
+      fallback_used,
     },
     results,
     served_from_cache: false,

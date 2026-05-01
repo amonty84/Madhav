@@ -155,7 +155,10 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     {
       const qid = query_plan.query_plan_id
       const nToolSteps = query_plan.tools_authorized?.length ?? 0
-      const ctxSeq = 3 + nToolSteps       // synthesis is ctxSeq+1
+      // UQE-9: prefer caller-allocated seq (atomic counter in route.ts) so the
+      // value is unique across the per-request trace; fall back to legacy
+      // arithmetic when no seq was passed in.
+      const ctxSeq = request.context_assembly_seq ?? (3 + nToolSteps)
 
       const l1Items: TraceChunkItem[] = vsResults.map(r => ({
         id: r.signal_id ?? 'unknown',
@@ -282,12 +285,21 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     const styleCap = STYLE_OUTPUT_CAP[style ?? 'detailed'] ?? 2000
     const effectiveMaxTokens = Math.min(styleCap, modelMeta?.maxOutputTokens ?? styleCap)
 
+    // UQE-2 (W2-BUGS B2W-5) — temperature gate: deterministic for single-truth
+    // queries (factual lookups, prescriptive remedies, time-indexed predictions),
+    // mild variation for exploratory / multi-perspective queries.
+    const synthesisTemperature: number =
+      ['factual', 'remedial', 'predictive'].includes(query_plan.query_class)
+        ? 0
+        : 0.3
+
     const result = streamText({
       model: resolveModel(selected_model_id),
       messages: modelMessages,
       tools: toolsForModel,
       stopWhen: stepCountIs(5),
       maxOutputTokens: effectiveMaxTokens,
+      temperature: synthesisTemperature,
       experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
       onFinish: async ({
         finishReason,
@@ -318,7 +330,9 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         {
           const qid = query_plan.query_plan_id
           const nToolSteps = query_plan.tools_authorized?.length ?? 0
-          const synthesisSeq = 3 + nToolSteps + 1
+          // UQE-9: same precedence rule as ctxSeq above — caller's atomic
+          // counter wins when present.
+          const synthesisSeq = request.synthesis_seq ?? (3 + nToolSteps + 1)
           traceEmitter.emitStep({
             event: 'step_done',
             query_id: qid,
@@ -341,6 +355,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
                 // class. Threshold + meets-flag derived on the consumer side
                 // from query_class via citationThresholdForClass / hasMinimumCitations.
                 citation_count: countSignalCitations(cleanText),
+                temperature: synthesisTemperature,
               },
               payload: {
                 prompt_preview: cleanText.slice(0, 500),

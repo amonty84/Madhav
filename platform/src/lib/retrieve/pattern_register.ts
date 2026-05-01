@@ -88,9 +88,18 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
   // patterns with is_forward_looking == true but do not strictly exclude others
   // (they remain useful context).
   let patterns = register.patterns
+  let fallback_used = false
 
   if (plan.domains.length > 0) {
-    patterns = patterns.filter(p => plan.domains.includes(p.domain))
+    const filtered = patterns.filter(p => plan.domains.includes(p.domain))
+    if (filtered.length === 0) {
+      // UQE-7 (W2-BUGS B2W-2/3) — domain-only fallback. When the requested
+      // domain produced zero patterns, fall back to the unfiltered register so
+      // synthesis sees at least the available pattern context.
+      fallback_used = true
+    } else {
+      patterns = filtered
+    }
   }
 
   if (plan.forward_looking) {
@@ -126,6 +135,7 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
       register_path: REGISTER_PATH,
       domains: plan.domains,
       forward_looking: plan.forward_looking,
+      fallback_used,
     },
     results,
     served_from_cache: false,

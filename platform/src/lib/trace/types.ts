@@ -89,6 +89,8 @@ export interface TraceDataSummary {
   // ── BHISMA-B3 additive (all optional) ──────────────────────────────────────
   /** synthesis_done: number of SIG.MSR.NNN citations detected in response. */
   citation_count?: number
+  /** synthesis_done: temperature passed to streamText (W2-BUGS UQE-2). */
+  temperature?: number
   /** synthesis_done: did the response match expected_output_shape (heuristic). */
   output_shape_compliant?: boolean
   /** plan: query_class promoted to data_summary for compact list-row rendering. */
