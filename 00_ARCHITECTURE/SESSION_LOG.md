@@ -12213,4 +12213,4 @@ session_close:
     events does not occur. Flagged for M4-D cross-system reconciliation pass.
 ```
 
-Commit: <STAMPED_AT_AC.S3.7>.
+Commit: 883b563 (post-merge-main, 2026-05-02).
