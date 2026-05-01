@@ -11829,4 +11829,4 @@ M4-B-S2 substrate session: (1) MP.1 + MP.2 mirror sync (discharges the carry-for
 
 **Next session.** `M4-B-S3` — LL.2 graph edge weight modulators (shadow-mode) per `SHADOW_MODE_PROTOCOL §3.5` (LL.2 promotion gated on LL.1 endpoint pair being in production register; LL.1 production blocks until pass_2 NAP.M4.5 resolves) + KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip.
 
-Commit: COMMIT_HASH_PLACEHOLDER (stamped via follow-up).
+Commit: 6a4ff8a8a705166e7a8ac982c09b031dda488831 (stamped via follow-up).
