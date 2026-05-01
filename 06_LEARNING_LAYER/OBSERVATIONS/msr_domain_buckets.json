@@ -1,0 +1,6415 @@
+{
+  "schema_version": "1.0",
+  "produced_by": "M4-A-T4-GAP-AUDIT",
+  "produced_on": "2026-05-01",
+  "msr_version": "3.0",
+  "total_signals_in_msr": 499,
+  "total_signals_assigned": 495,
+  "source_file_signal_count": 495,
+  "missing_signal_ids": {
+    "ids": [
+      "SIG.MSR.207",
+      "SIG.MSR.497",
+      "SIG.MSR.498",
+      "SIG.MSR.499"
+    ],
+    "count": 4,
+    "note": "MSR_v3_0.md frontmatter and \u00a7I declare 499/500 signals respectively. The file actually contains 495 unique signal blocks numbered SIG.MSR.001 through SIG.MSR.496 with SIG.MSR.207 absent. SIG.MSR.497, .498, .499 are not present in the file. These four IDs are listed for audit transparency; they cannot be bucketed because they have no source content. Recommend: minor MSR metadata drift to flag in M4-A close or defer to M5+ MSR expansion."
+  },
+  "domain_buckets": {
+    "career": [
+      "SIG.MSR.001",
+      "SIG.MSR.003",
+      "SIG.MSR.007",
+      "SIG.MSR.009",
+      "SIG.MSR.011",
+      "SIG.MSR.014",
+      "SIG.MSR.015",
+      "SIG.MSR.016",
+      "SIG.MSR.019",
+      "SIG.MSR.020",
+      "SIG.MSR.023",
+      "SIG.MSR.024",
+      "SIG.MSR.028",
+      "SIG.MSR.029",
+      "SIG.MSR.031",
+      "SIG.MSR.034",
+      "SIG.MSR.035",
+      "SIG.MSR.036",
+      "SIG.MSR.037",
+      "SIG.MSR.038",
+      "SIG.MSR.039",
+      "SIG.MSR.044",
+      "SIG.MSR.045",
+      "SIG.MSR.046",
+      "SIG.MSR.047",
+      "SIG.MSR.050",
+      "SIG.MSR.053",
+      "SIG.MSR.056",
+      "SIG.MSR.058",
+      "SIG.MSR.061",
+      "SIG.MSR.062",
+      "SIG.MSR.063",
+      "SIG.MSR.064",
+      "SIG.MSR.067",
+      "SIG.MSR.070",
+      "SIG.MSR.071",
+      "SIG.MSR.079",
+      "SIG.MSR.085",
+      "SIG.MSR.087",
+      "SIG.MSR.088",
+      "SIG.MSR.090",
+      "SIG.MSR.094",
+      "SIG.MSR.097",
+      "SIG.MSR.100",
+      "SIG.MSR.101",
+      "SIG.MSR.106",
+      "SIG.MSR.107",
+      "SIG.MSR.108",
+      "SIG.MSR.109",
+      "SIG.MSR.110",
+      "SIG.MSR.111",
+      "SIG.MSR.114",
+      "SIG.MSR.116",
+      "SIG.MSR.121",
+      "SIG.MSR.122",
+      "SIG.MSR.123",
+      "SIG.MSR.127",
+      "SIG.MSR.128",
+      "SIG.MSR.130",
+      "SIG.MSR.131",
+      "SIG.MSR.132",
+      "SIG.MSR.133",
+      "SIG.MSR.135",
+      "SIG.MSR.137",
+      "SIG.MSR.138",
+      "SIG.MSR.140",
+      "SIG.MSR.147",
+      "SIG.MSR.152",
+      "SIG.MSR.154",
+      "SIG.MSR.155",
+      "SIG.MSR.156",
+      "SIG.MSR.158",
+      "SIG.MSR.165",
+      "SIG.MSR.168",
+      "SIG.MSR.169",
+      "SIG.MSR.172",
+      "SIG.MSR.174",
+      "SIG.MSR.175",
+      "SIG.MSR.178",
+      "SIG.MSR.179",
+      "SIG.MSR.180",
+      "SIG.MSR.181",
+      "SIG.MSR.185",
+      "SIG.MSR.186",
+      "SIG.MSR.187",
+      "SIG.MSR.190",
+      "SIG.MSR.193",
+      "SIG.MSR.194",
+      "SIG.MSR.195",
+      "SIG.MSR.200",
+      "SIG.MSR.201",
+      "SIG.MSR.208",
+      "SIG.MSR.211",
+      "SIG.MSR.213",
+      "SIG.MSR.214",
+      "SIG.MSR.215",
+      "SIG.MSR.216",
+      "SIG.MSR.224",
+      "SIG.MSR.225",
+      "SIG.MSR.230",
+      "SIG.MSR.231",
+      "SIG.MSR.236",
+      "SIG.MSR.239",
+      "SIG.MSR.240",
+      "SIG.MSR.245",
+      "SIG.MSR.248",
+      "SIG.MSR.250",
+      "SIG.MSR.252",
+      "SIG.MSR.254",
+      "SIG.MSR.255",
+      "SIG.MSR.256",
+      "SIG.MSR.257",
+      "SIG.MSR.258",
+      "SIG.MSR.259",
+      "SIG.MSR.262",
+      "SIG.MSR.265",
+      "SIG.MSR.266",
+      "SIG.MSR.267",
+      "SIG.MSR.268",
+      "SIG.MSR.269",
+      "SIG.MSR.275",
+      "SIG.MSR.280",
+      "SIG.MSR.281",
+      "SIG.MSR.282",
+      "SIG.MSR.290",
+      "SIG.MSR.292",
+      "SIG.MSR.293",
+      "SIG.MSR.296",
+      "SIG.MSR.298",
+      "SIG.MSR.302",
+      "SIG.MSR.303",
+      "SIG.MSR.307",
+      "SIG.MSR.310",
+      "SIG.MSR.312",
+      "SIG.MSR.313",
+      "SIG.MSR.315",
+      "SIG.MSR.318",
+      "SIG.MSR.322",
+      "SIG.MSR.327",
+      "SIG.MSR.329",
+      "SIG.MSR.335",
+      "SIG.MSR.339",
+      "SIG.MSR.340",
+      "SIG.MSR.341",
+      "SIG.MSR.344",
+      "SIG.MSR.346",
+      "SIG.MSR.348",
+      "SIG.MSR.349",
+      "SIG.MSR.350",
+      "SIG.MSR.352",
+      "SIG.MSR.359",
+      "SIG.MSR.363",
+      "SIG.MSR.364",
+      "SIG.MSR.366",
+      "SIG.MSR.376",
+      "SIG.MSR.378",
+      "SIG.MSR.379",
+      "SIG.MSR.380",
+      "SIG.MSR.381",
+      "SIG.MSR.382",
+      "SIG.MSR.383",
+      "SIG.MSR.384",
+      "SIG.MSR.385",
+      "SIG.MSR.386",
+      "SIG.MSR.387",
+      "SIG.MSR.388",
+      "SIG.MSR.389",
+      "SIG.MSR.390",
+      "SIG.MSR.396",
+      "SIG.MSR.399",
+      "SIG.MSR.400",
+      "SIG.MSR.405",
+      "SIG.MSR.408",
+      "SIG.MSR.413",
+      "SIG.MSR.414",
+      "SIG.MSR.415",
+      "SIG.MSR.418",
+      "SIG.MSR.420",
+      "SIG.MSR.421",
+      "SIG.MSR.422",
+      "SIG.MSR.423",
+      "SIG.MSR.425",
+      "SIG.MSR.427",
+      "SIG.MSR.429",
+      "SIG.MSR.430",
+      "SIG.MSR.431",
+      "SIG.MSR.432",
+      "SIG.MSR.433",
+      "SIG.MSR.434",
+      "SIG.MSR.438",
+      "SIG.MSR.441",
+      "SIG.MSR.444",
+      "SIG.MSR.446",
+      "SIG.MSR.448",
+      "SIG.MSR.451",
+      "SIG.MSR.457",
+      "SIG.MSR.461",
+      "SIG.MSR.462",
+      "SIG.MSR.467",
+      "SIG.MSR.469",
+      "SIG.MSR.472",
+      "SIG.MSR.474",
+      "SIG.MSR.479",
+      "SIG.MSR.480",
+      "SIG.MSR.485",
+      "SIG.MSR.486",
+      "SIG.MSR.494"
+    ],
+    "education": [],
+    "health": [
+      "SIG.MSR.013",
+      "SIG.MSR.030",
+      "SIG.MSR.049",
+      "SIG.MSR.065",
+      "SIG.MSR.072",
+      "SIG.MSR.076",
+      "SIG.MSR.086",
+      "SIG.MSR.134",
+      "SIG.MSR.163",
+      "SIG.MSR.170",
+      "SIG.MSR.183",
+      "SIG.MSR.197",
+      "SIG.MSR.198",
+      "SIG.MSR.228",
+      "SIG.MSR.229",
+      "SIG.MSR.244",
+      "SIG.MSR.247",
+      "SIG.MSR.251",
+      "SIG.MSR.270",
+      "SIG.MSR.278",
+      "SIG.MSR.291",
+      "SIG.MSR.295",
+      "SIG.MSR.297",
+      "SIG.MSR.300",
+      "SIG.MSR.301",
+      "SIG.MSR.369",
+      "SIG.MSR.373",
+      "SIG.MSR.377",
+      "SIG.MSR.442",
+      "SIG.MSR.466",
+      "SIG.MSR.476"
+    ],
+    "relationship": [
+      "SIG.MSR.002",
+      "SIG.MSR.012",
+      "SIG.MSR.022",
+      "SIG.MSR.032",
+      "SIG.MSR.057",
+      "SIG.MSR.082",
+      "SIG.MSR.096",
+      "SIG.MSR.139",
+      "SIG.MSR.149",
+      "SIG.MSR.210",
+      "SIG.MSR.222",
+      "SIG.MSR.238",
+      "SIG.MSR.261",
+      "SIG.MSR.279",
+      "SIG.MSR.299",
+      "SIG.MSR.305",
+      "SIG.MSR.319",
+      "SIG.MSR.323",
+      "SIG.MSR.324",
+      "SIG.MSR.330",
+      "SIG.MSR.334",
+      "SIG.MSR.336",
+      "SIG.MSR.338",
+      "SIG.MSR.391",
+      "SIG.MSR.398",
+      "SIG.MSR.404",
+      "SIG.MSR.410",
+      "SIG.MSR.411",
+      "SIG.MSR.424",
+      "SIG.MSR.443",
+      "SIG.MSR.445",
+      "SIG.MSR.447",
+      "SIG.MSR.459",
+      "SIG.MSR.464",
+      "SIG.MSR.465",
+      "SIG.MSR.468",
+      "SIG.MSR.471",
+      "SIG.MSR.483",
+      "SIG.MSR.484"
+    ],
+    "family": [
+      "SIG.MSR.026",
+      "SIG.MSR.066",
+      "SIG.MSR.083",
+      "SIG.MSR.113",
+      "SIG.MSR.166",
+      "SIG.MSR.226",
+      "SIG.MSR.227",
+      "SIG.MSR.246",
+      "SIG.MSR.260",
+      "SIG.MSR.276",
+      "SIG.MSR.277",
+      "SIG.MSR.283",
+      "SIG.MSR.288",
+      "SIG.MSR.320",
+      "SIG.MSR.343",
+      "SIG.MSR.439",
+      "SIG.MSR.440",
+      "SIG.MSR.487",
+      "SIG.MSR.488",
+      "SIG.MSR.496"
+    ],
+    "financial": [
+      "SIG.MSR.008",
+      "SIG.MSR.010",
+      "SIG.MSR.017",
+      "SIG.MSR.051",
+      "SIG.MSR.054",
+      "SIG.MSR.073",
+      "SIG.MSR.080",
+      "SIG.MSR.081",
+      "SIG.MSR.089",
+      "SIG.MSR.093",
+      "SIG.MSR.098",
+      "SIG.MSR.099",
+      "SIG.MSR.102",
+      "SIG.MSR.103",
+      "SIG.MSR.104",
+      "SIG.MSR.105",
+      "SIG.MSR.129",
+      "SIG.MSR.144",
+      "SIG.MSR.151",
+      "SIG.MSR.159",
+      "SIG.MSR.161",
+      "SIG.MSR.162",
+      "SIG.MSR.167",
+      "SIG.MSR.173",
+      "SIG.MSR.189",
+      "SIG.MSR.191",
+      "SIG.MSR.196",
+      "SIG.MSR.203",
+      "SIG.MSR.205",
+      "SIG.MSR.223",
+      "SIG.MSR.235",
+      "SIG.MSR.237",
+      "SIG.MSR.243",
+      "SIG.MSR.249",
+      "SIG.MSR.264",
+      "SIG.MSR.272",
+      "SIG.MSR.273",
+      "SIG.MSR.274",
+      "SIG.MSR.284",
+      "SIG.MSR.285",
+      "SIG.MSR.294",
+      "SIG.MSR.304",
+      "SIG.MSR.306",
+      "SIG.MSR.308",
+      "SIG.MSR.309",
+      "SIG.MSR.311",
+      "SIG.MSR.314",
+      "SIG.MSR.325",
+      "SIG.MSR.337",
+      "SIG.MSR.393",
+      "SIG.MSR.401",
+      "SIG.MSR.403",
+      "SIG.MSR.409",
+      "SIG.MSR.435",
+      "SIG.MSR.436",
+      "SIG.MSR.450",
+      "SIG.MSR.452",
+      "SIG.MSR.454",
+      "SIG.MSR.456",
+      "SIG.MSR.460",
+      "SIG.MSR.463",
+      "SIG.MSR.491",
+      "SIG.MSR.493",
+      "SIG.MSR.495"
+    ],
+    "psychological": [
+      "SIG.MSR.048",
+      "SIG.MSR.084",
+      "SIG.MSR.120",
+      "SIG.MSR.142",
+      "SIG.MSR.148",
+      "SIG.MSR.164",
+      "SIG.MSR.171",
+      "SIG.MSR.176",
+      "SIG.MSR.184",
+      "SIG.MSR.232",
+      "SIG.MSR.253",
+      "SIG.MSR.351",
+      "SIG.MSR.355",
+      "SIG.MSR.356",
+      "SIG.MSR.360",
+      "SIG.MSR.362",
+      "SIG.MSR.426",
+      "SIG.MSR.475",
+      "SIG.MSR.477",
+      "SIG.MSR.481"
+    ],
+    "spiritual": [
+      "SIG.MSR.004",
+      "SIG.MSR.006",
+      "SIG.MSR.021",
+      "SIG.MSR.025",
+      "SIG.MSR.033",
+      "SIG.MSR.040",
+      "SIG.MSR.041",
+      "SIG.MSR.042",
+      "SIG.MSR.043",
+      "SIG.MSR.052",
+      "SIG.MSR.055",
+      "SIG.MSR.059",
+      "SIG.MSR.060",
+      "SIG.MSR.069",
+      "SIG.MSR.074",
+      "SIG.MSR.075",
+      "SIG.MSR.077",
+      "SIG.MSR.078",
+      "SIG.MSR.091",
+      "SIG.MSR.092",
+      "SIG.MSR.095",
+      "SIG.MSR.115",
+      "SIG.MSR.126",
+      "SIG.MSR.136",
+      "SIG.MSR.150",
+      "SIG.MSR.153",
+      "SIG.MSR.157",
+      "SIG.MSR.160",
+      "SIG.MSR.177",
+      "SIG.MSR.188",
+      "SIG.MSR.192",
+      "SIG.MSR.199",
+      "SIG.MSR.202",
+      "SIG.MSR.204",
+      "SIG.MSR.206",
+      "SIG.MSR.212",
+      "SIG.MSR.217",
+      "SIG.MSR.218",
+      "SIG.MSR.219",
+      "SIG.MSR.220",
+      "SIG.MSR.221",
+      "SIG.MSR.233",
+      "SIG.MSR.234",
+      "SIG.MSR.241",
+      "SIG.MSR.242",
+      "SIG.MSR.263",
+      "SIG.MSR.271",
+      "SIG.MSR.286",
+      "SIG.MSR.287",
+      "SIG.MSR.289",
+      "SIG.MSR.316",
+      "SIG.MSR.317",
+      "SIG.MSR.321",
+      "SIG.MSR.326",
+      "SIG.MSR.328",
+      "SIG.MSR.331",
+      "SIG.MSR.332",
+      "SIG.MSR.333",
+      "SIG.MSR.342",
+      "SIG.MSR.345",
+      "SIG.MSR.347",
+      "SIG.MSR.353",
+      "SIG.MSR.354",
+      "SIG.MSR.357",
+      "SIG.MSR.358",
+      "SIG.MSR.361",
+      "SIG.MSR.365",
+      "SIG.MSR.367",
+      "SIG.MSR.368",
+      "SIG.MSR.370",
+      "SIG.MSR.371",
+      "SIG.MSR.372",
+      "SIG.MSR.374",
+      "SIG.MSR.375",
+      "SIG.MSR.392",
+      "SIG.MSR.394",
+      "SIG.MSR.395",
+      "SIG.MSR.397",
+      "SIG.MSR.406",
+      "SIG.MSR.407",
+      "SIG.MSR.412",
+      "SIG.MSR.428",
+      "SIG.MSR.437",
+      "SIG.MSR.449",
+      "SIG.MSR.453",
+      "SIG.MSR.455",
+      "SIG.MSR.458",
+      "SIG.MSR.470",
+      "SIG.MSR.473",
+      "SIG.MSR.478",
+      "SIG.MSR.482",
+      "SIG.MSR.489",
+      "SIG.MSR.490",
+      "SIG.MSR.492"
+    ],
+    "travel": [
+      "SIG.MSR.005",
+      "SIG.MSR.018",
+      "SIG.MSR.027",
+      "SIG.MSR.068",
+      "SIG.MSR.209"
+    ],
+    "general": [
+      "SIG.MSR.112",
+      "SIG.MSR.117",
+      "SIG.MSR.118",
+      "SIG.MSR.119",
+      "SIG.MSR.124",
+      "SIG.MSR.125",
+      "SIG.MSR.141",
+      "SIG.MSR.143",
+      "SIG.MSR.145",
+      "SIG.MSR.146",
+      "SIG.MSR.182",
+      "SIG.MSR.402",
+      "SIG.MSR.416",
+      "SIG.MSR.417",
+      "SIG.MSR.419"
+    ]
+  },
+  "multi_domain_notes": [
+    {
+      "signal_id": "SIG.MSR.001",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.002",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.003",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.004",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological",
+        "travel",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind",
+        "travel",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.005",
+      "primary": "travel",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "travel",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.006",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.007",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.008",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.009",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.010",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "family"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.011",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.012",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.013",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "career",
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "career",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.014",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.015",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.016",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.017",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "career",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "career",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.018",
+      "primary": "travel",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "travel",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.019",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.020",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.021",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "family",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "children",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.022",
+      "primary": "relationship",
+      "secondary": [
+        "family",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "children",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.023",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.024",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.025",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.026",
+      "primary": "family",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "children",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.027",
+      "primary": "travel",
+      "secondary": [
+        "financial",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "travel",
+        "wealth",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.028",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.030",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.031",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.032",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.033",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.034",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.035",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.036",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.037",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.038",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "relationship",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "relationships",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.039",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.040",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "health",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "health",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.041",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.042",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.043",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.044",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.045",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.046",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial",
+        "health",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth",
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.047",
+      "primary": "career",
+      "secondary": [
+        "family",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.048",
+      "primary": "psychological",
+      "secondary": [
+        "financial",
+        "travel",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "wealth",
+        "travel",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.049",
+      "primary": "health",
+      "secondary": [
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.050",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.051",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "family",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "children",
+        "parents",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.052",
+      "primary": "spiritual",
+      "secondary": [
+        "relationship",
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "relationships",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.053",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.054",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "family"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.055",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "psychological",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "mind",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.056",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.057",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.058",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.059",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.060",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.061",
+      "primary": "career",
+      "secondary": [
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.062",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.063",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.064",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.065",
+      "primary": "health",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.068",
+      "primary": "travel",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "travel",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.069",
+      "primary": "spiritual",
+      "secondary": [
+        "family",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "children",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.070",
+      "primary": "career",
+      "secondary": [
+        "family",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.071",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.072",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.073",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "children",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.074",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.075",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.076",
+      "primary": "health",
+      "secondary": [
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.077",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.078",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "career",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "career",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.079",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.080",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.081",
+      "primary": "financial",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.082",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.083",
+      "primary": "family",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.084",
+      "primary": "psychological",
+      "secondary": [
+        "travel",
+        "family",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "travel",
+        "family",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.085",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.086",
+      "primary": "health",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.087",
+      "primary": "career",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.088",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.089",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "career",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "career",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.090",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.091",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.092",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.093",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.094",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.095",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "travel",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "travel",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.096",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.097",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.098",
+      "primary": "financial",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.099",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.100",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.101",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.103",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "children"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.104",
+      "primary": "financial",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.105",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.106",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.107",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.108",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.109",
+      "primary": "career",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.110",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.113",
+      "primary": "family",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.114",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.115",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.116",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.120",
+      "primary": "psychological",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.121",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.122",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.123",
+      "primary": "career",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.126",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.127",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.128",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.130",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.131",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.132",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.133",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.134",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.135",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.136",
+      "primary": "spiritual",
+      "secondary": [
+        "travel",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.137",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.138",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.139",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual",
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.140",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.142",
+      "primary": "psychological",
+      "secondary": [
+        "family",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "family",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.144",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.147",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.148",
+      "primary": "psychological",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.149",
+      "primary": "relationship",
+      "secondary": [
+        "career",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.150",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological",
+        "health",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind",
+        "health",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.151",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.152",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.153",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.154",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.155",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.156",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.157",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "family",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "parents",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.158",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.159",
+      "primary": "financial",
+      "secondary": [
+        "family",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "family",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.160",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.161",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.162",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.163",
+      "primary": "health",
+      "secondary": [
+        "family",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "parents",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.164",
+      "primary": "psychological",
+      "secondary": [
+        "family",
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "children",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.165",
+      "primary": "career",
+      "secondary": [
+        "family",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.166",
+      "primary": "family",
+      "secondary": [
+        "psychological",
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "mind",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.167",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.168",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "psychological",
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "mind",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.169",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological",
+        "health",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind",
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.170",
+      "primary": "health",
+      "secondary": [
+        "family",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "parents",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.171",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "financial",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.172",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.173",
+      "primary": "financial",
+      "secondary": [
+        "psychological",
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "mind",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.174",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.175",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.176",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "career",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.177",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.178",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "psychological",
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "mind",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.179",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "health",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "health",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.180",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health",
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.181",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health",
+        "psychological",
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health",
+        "mind",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.183",
+      "primary": "health",
+      "secondary": [
+        "spiritual",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.184",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.185",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.186",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.187",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "health",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "health",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.188",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.189",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.190",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.191",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.192",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.193",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.194",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.195",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.196",
+      "primary": "financial",
+      "secondary": [
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.197",
+      "primary": "health",
+      "secondary": [
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.198",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "spiritual",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "spirit",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.199",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.200",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.201",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.202",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.203",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.204",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.205",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "relationship",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "relationships",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.206",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.208",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.209",
+      "primary": "travel",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "travel",
+        "wealth",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.210",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.211",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "parents",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.212",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.213",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.214",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.215",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.216",
+      "primary": "career",
+      "secondary": [
+        "travel",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "travel",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.217",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "travel",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "travel",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.218",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.219",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.220",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.221",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.222",
+      "primary": "relationship",
+      "secondary": [
+        "health",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "health",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.223",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "relationship",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "relationships",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.224",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "health",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.225",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.228",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.229",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.230",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.231",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.232",
+      "primary": "psychological",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.233",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.234",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.235",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "career",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "career",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.236",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.237",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.238",
+      "primary": "relationship",
+      "secondary": [
+        "career",
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.239",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.240",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.241",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.242",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "career",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "career",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.243",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.244",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.245",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.246",
+      "primary": "family",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.247",
+      "primary": "health",
+      "secondary": [
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.248",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "travel",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "travel",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.249",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.250",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.251",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.252",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.253",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.254",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.255",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "travel",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "travel",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.256",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "travel",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "travel",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.257",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.258",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.259",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.260",
+      "primary": "family",
+      "secondary": [
+        "psychological",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "mind",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.261",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.262",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.263",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.264",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "career",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.265",
+      "primary": "career",
+      "secondary": [
+        "health",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.266",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.267",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.268",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.269",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.270",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.271",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.272",
+      "primary": "financial",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.273",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "family"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.274",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "psychological",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "mind",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.275",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.276",
+      "primary": "family",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.277",
+      "primary": "family",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.278",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.279",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.280",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.281",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.282",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.283",
+      "primary": "family",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.284",
+      "primary": "financial",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.285",
+      "primary": "financial",
+      "secondary": [
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "children",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.286",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.287",
+      "primary": "spiritual",
+      "secondary": [
+        "health",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.289",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.290",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.291",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.292",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.293",
+      "primary": "career",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.294",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "family"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.295",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.296",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.297",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.298",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.300",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.301",
+      "primary": "health",
+      "secondary": [
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.302",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.304",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.307",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.308",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.309",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.310",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.311",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.312",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.315",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.316",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.317",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.318",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.319",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.320",
+      "primary": "family",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.321",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.322",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.324",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.325",
+      "primary": "financial",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.326",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.327",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.328",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.329",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.330",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.331",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.332",
+      "primary": "spiritual",
+      "secondary": [
+        "relationship",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "relationships",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.333",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "family",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "children",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.334",
+      "primary": "relationship",
+      "secondary": [
+        "career",
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.335",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.336",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.337",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.339",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.340",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.341",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.342",
+      "primary": "spiritual",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.343",
+      "primary": "family",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.344",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.345",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.346",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.347",
+      "primary": "spiritual",
+      "secondary": [
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.348",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.349",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.350",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.351",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.352",
+      "primary": "career",
+      "secondary": [
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.353",
+      "primary": "spiritual",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.355",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.356",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.357",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.359",
+      "primary": "career",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.360",
+      "primary": "psychological",
+      "secondary": [
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.361",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.362",
+      "primary": "psychological",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.363",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.364",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.365",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.366",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.367",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.369",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.370",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.371",
+      "primary": "spiritual",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.372",
+      "primary": "spiritual",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.373",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.374",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.375",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.376",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.377",
+      "primary": "health",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.378",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.379",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.380",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.381",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.382",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.383",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.384",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.385",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.386",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.387",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.388",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.389",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.390",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.391",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "career",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.392",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.393",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.394",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "financial",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.395",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.396",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.398",
+      "primary": "relationship",
+      "secondary": [
+        "family",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "children",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.399",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.400",
+      "primary": "career",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.401",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.403",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.404",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "career",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.405",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.406",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.407",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "career",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.408",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.409",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.410",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.411",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.412",
+      "primary": "spiritual",
+      "secondary": [
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.413",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.414",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.415",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual",
+        "health",
+        "family",
+        "psychological",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit",
+        "health",
+        "children",
+        "parents",
+        "mind",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.418",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "relationship",
+        "psychological",
+        "health",
+        "family",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "relationships",
+        "mind",
+        "health",
+        "children",
+        "parents",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.420",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "relationship",
+        "psychological",
+        "health",
+        "family",
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "relationships",
+        "mind",
+        "health",
+        "children",
+        "parents",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.421",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.422",
+      "primary": "career",
+      "secondary": [
+        "psychological",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.423",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.424",
+      "primary": "relationship",
+      "secondary": [
+        "financial",
+        "family",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth",
+        "children",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.425",
+      "primary": "career",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.426",
+      "primary": "psychological",
+      "secondary": [
+        "career",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "career",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.427",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.428",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.429",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.430",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.431",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.432",
+      "primary": "career",
+      "secondary": [
+        "relationship",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.433",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.434",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.435",
+      "primary": "financial",
+      "secondary": [
+        "career",
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.436",
+      "primary": "financial",
+      "secondary": [
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.437",
+      "primary": "spiritual",
+      "secondary": [
+        "career",
+        "psychological",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career",
+        "mind",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.438",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "relationship",
+        "health"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "relationships",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.439",
+      "primary": "family",
+      "secondary": [
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "children",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.440",
+      "primary": "family",
+      "secondary": [
+        "psychological",
+        "spiritual",
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "children",
+        "mind",
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.441",
+      "primary": "career",
+      "secondary": [
+        "financial",
+        "spiritual",
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "wealth",
+        "spirit",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.443",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual",
+        "career",
+        "financial",
+        "health",
+        "family"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit",
+        "career",
+        "wealth",
+        "health",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.444",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.445",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.448",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.449",
+      "primary": "spiritual",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.450",
+      "primary": "financial",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.451",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.453",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.454",
+      "primary": "financial",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.455",
+      "primary": "spiritual",
+      "secondary": [
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.456",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.457",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.458",
+      "primary": "spiritual",
+      "secondary": [
+        "travel"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "travel"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.459",
+      "primary": "relationship",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.460",
+      "primary": "financial",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.461",
+      "primary": "career",
+      "secondary": [
+        "family"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "parents"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.463",
+      "primary": "financial",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.464",
+      "primary": "relationship",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.466",
+      "primary": "health",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.469",
+      "primary": "career",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.470",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.471",
+      "primary": "relationship",
+      "secondary": [
+        "financial"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "wealth"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.474",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.475",
+      "primary": "psychological",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.476",
+      "primary": "health",
+      "secondary": [
+        "spiritual"
+      ],
+      "msr_domains_affected": [
+        "health",
+        "spirit"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.477",
+      "primary": "psychological",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.478",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.479",
+      "primary": "career",
+      "secondary": [
+        "relationship"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "relationships"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.481",
+      "primary": "psychological",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "mind",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.482",
+      "primary": "spiritual",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.484",
+      "primary": "relationship",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.490",
+      "primary": "spiritual",
+      "secondary": [
+        "health"
+      ],
+      "msr_domains_affected": [
+        "spirit",
+        "health"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.493",
+      "primary": "financial",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.494",
+      "primary": "career",
+      "secondary": [
+        "psychological"
+      ],
+      "msr_domains_affected": [
+        "career",
+        "mind"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.495",
+      "primary": "financial",
+      "secondary": [
+        "relationship",
+        "career"
+      ],
+      "msr_domains_affected": [
+        "wealth",
+        "relationships",
+        "career"
+      ]
+    },
+    {
+      "signal_id": "SIG.MSR.496",
+      "primary": "family",
+      "secondary": [
+        "career"
+      ],
+      "msr_domains_affected": [
+        "parents",
+        "career",
+        "children"
+      ]
+    }
+  ],
+  "empty_domain_signals": {
+    "count": 15,
+    "note": "These 15 signals have `domains_affected: []` in MSR v3.0 \u2014 i.e., MSR itself does not tag them with any life domain. They fall into three semantic groups: (a) yoga-absence signals that mark non-formation of classical yogas (KSY, Hamsa, Ruchaka, Malavya, Durudhura, Chandra-Mangala, Sarpa, Mahapurusha-for-Sun); (b) parivartana exchanges; (c) meta/statistics/red-team signals (signal-distribution stats, confidence distribution, gap registers, prior-session error correction). All are appropriately placed in the `general` bucket; do not fabricate a domain for them.",
+    "signals": [
+      {
+        "signal_id": "SIG.MSR.112",
+        "signal_name": "Kala Sarpa Yoga \u2014 ABSENT (Planets on Both Sides of Nodal Axis)"
+      },
+      {
+        "signal_id": "SIG.MSR.117",
+        "signal_name": "Hamsa Yoga Near-Miss \u2014 Jupiter in 9H (Trikona) Not Kendra"
+      },
+      {
+        "signal_id": "SIG.MSR.118",
+        "signal_name": "Ruchaka Yoga \u2014 ABSENT (Mars in Enemy Sign, Not Own/Exalted in Kendra)"
+      },
+      {
+        "signal_id": "SIG.MSR.119",
+        "signal_name": "Malavya Yoga \u2014 ABSENT (Venus Not in Own/Exalted in Kendra)"
+      },
+      {
+        "signal_id": "SIG.MSR.124",
+        "signal_name": "Durudhura Yoga \u2014 ABSENT (No Planets on Both Sides of Moon)"
+      },
+      {
+        "signal_id": "SIG.MSR.125",
+        "signal_name": "Chandra Mangala Yoga \u2014 ABSENT Natally (Moon-Mars Not in Conjunction or Mutual Kendra)"
+      },
+      {
+        "signal_id": "SIG.MSR.141",
+        "signal_name": "Yoga Absence \u2014 No Mahapurusha for Sun (No Ravi Yoga from Classical Set)"
+      },
+      {
+        "signal_id": "SIG.MSR.143",
+        "signal_name": "Yoga Presence \u2014 Sarpa Yoga ABSENT (No Three Serpent Planets in Angles)"
+      },
+      {
+        "signal_id": "SIG.MSR.145",
+        "signal_name": "Yoga \u2014 Parivartana (Exchange) Between Saturn-10L and Venus-7L (Both in Each Other's Sign)"
+      },
+      {
+        "signal_id": "SIG.MSR.146",
+        "signal_name": "Yoga \u2014 Parivartana Between Jupiter (12L) and Mars (8L) \u2014 8H-12H Exchange"
+      },
+      {
+        "signal_id": "SIG.MSR.182",
+        "signal_name": "Red-Team \u2014 Prior Session Summary Planetary Position Errors: Correction Audit Log"
+      },
+      {
+        "signal_id": "SIG.MSR.402",
+        "signal_name": "Hidden-Pinnacle 8H Architecture via Varnada+Ghati Lagnas"
+      },
+      {
+        "signal_id": "SIG.MSR.416",
+        "signal_name": "Statistics \u2014 Signal Distribution by Type (415 signals enumerated)"
+      },
+      {
+        "signal_id": "SIG.MSR.417",
+        "signal_name": "Statistics \u2014 Confidence Distribution: High (\u22650.85) vs Medium (0.70-0.84) vs Low (<0.70) Signal Breakdown"
+      },
+      {
+        "signal_id": "SIG.MSR.419",
+        "signal_name": "Statistics \u2014 Open Gaps Requiring Future Resolution (Red-Team Register)"
+      }
+    ]
+  },
+  "unread_signals": [],
+  "notes": "Domain assignments derived deterministically from each signal's `domains_affected` field in MSR v3.0 by the extraction script /tmp/msr_extract_v2.py. MSR v3.0 uses ten domain tags: career, children, family, health, mind, parents, relationships, spirit, travel, wealth. Mapping to the brief's ten buckets is one-to-many on the family side and identity elsewhere: career\u2192career; wealth\u2192financial; relationships\u2192relationship; family/parents/children\u2192family (collapsed because the family bucket absorbs all kin-related signals per the brief's category list); mind\u2192psychological; spirit\u2192spiritual; travel\u2192travel; health\u2192health. Education is absent from MSR's domain ontology, so the education bucket is empty by structural design \u2014 education-relevant signals (5H Mercury Jupiter 4H education-house architecture) flow through the career or general buckets depending on MSR's choice for each signal. M4-A T1 event-match work for education events should rely on house-based filtering (HSE.4 / HSE.5 / Mercury / Jupiter / DSH.AD lord whose karaka is education) rather than this domain bucket. Multi-domain signals are placed in their first-listed bucket (primary). Each such signal also has a row in `multi_domain_notes` recording all secondary buckets so retrieval for a given event domain can pull from primary-of-bucket-X plus secondaries-mentioning-X. No domain values fabricated; signals where MSR declares `domains_affected: []` are placed in general per the brief's uncertain-default rule and itemized in `empty_domain_signals` for audit. AC.T4.4 PASS (all 10 buckets present); AC.T4.5 PASS (495 of 499 claimed signals assigned; the 4 missing are absent from the source file, not unread); AC.T4.6 PASS (no fabrication; uncertain \u2192 general)."
+}
