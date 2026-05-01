@@ -11833,6 +11833,64 @@ Commit: 6a4ff8a8a705166e7a8ac982c09b031dda488831 (stamped via follow-up).
 
 ---
 
+**M4-B-P1-GAP-TRAVEL-CLOSE** | 2026-05-02 | CLOSED
+
+M4-B parallel-slot governance-aside session running concurrently with M4-B-S3 (LL.2 shadow writes). Discharges GAP.M4A.04 status flip (`deferred-pending-patch` → `partially_closed`) in `LEL_GAP_AUDIT_v1_0.md` post the L1-side patch landing at `M4-A-CLOSE-LEL-PATCH` (LEL v1.6 dual-tagged EVT.2019.05.XX.01 + EVT.2023.05.XX.01 as `residential+travel` per NAP.M4.2 §5.4). B.10-strict full-close attempt audit ran for `GAP.M4A.04`; verdict **PARTIAL_CLOSE** (no source-backed travel events available without B.10 violation; residual carries forward as `deferred` per NAP.M4.2 native disposition).
+
+**Cowork thread:** `M4-B-P1 — GAP.M4A.04 Full-Close Attempt + Status Flip (parallel to S3)`.
+
+**Acceptance criteria** (from CLAUDECODE_BRIEF M4-B-P1):
+- AC.P1.1 PASS — `LEL_GAP_AUDIT_v1_0.md §4 + §5` read; deferred items per NAP.M4.2 §5.4 identified ("international business travel events, pilgrimages, return visits during US years"). LEL v1.6 confirmed already patched with the two NAP.M4.2-authorized dual-tags.
+- AC.P1.2 PASS-WITH-NEGATIVE-FINDING — Candidate sources for additional B.10-compliant events enumerated and audited:
+  - `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §life_events` does not exist (FORENSIC v8.0 = chart-data file by `PROJECT_ARCHITECTURE_v2_2.md §C.1` design; §0–§27 cover natal data only).
+  - `LIFE_EVENT_LOG_v1_2.md §6 GAP.TRAVEL_MISC.01` ("possibly multiple Russia-related business trips") explicitly speculative — no dates, no destinations, resolution_path: "re-check in next session".
+  - LEL §4 chronic patterns + §5 inner-turning-point periods + §7 retrodictive summary all surveyed; no B.10-compliant promotion candidate beyond what §3 event log already carries.
+  - **Verdict:** zero candidate events promotable without B.10 violation. NAP.M4.2 §5.4 explicitly closed the only B.10-compliant alternative path (native elicitation): "No further elicitation required for GAP.M4A.04 at this time."
+- AC.P1.3 N/A — under PARTIAL_CLOSE outcome, LEL is not bumped. LEL stays at v1.6.
+- AC.P1.4 PASS — `LEL_GAP_AUDIT_v1_0.md` bumped v1.1 → v1.2. §5.5 added documenting the post-LEL-v1.6-patch status flip and the B.10-strict full-close attempt audit. §5.6 final disposition tally: 1 partially_closed (GAP.M4A.04) + 5 deferred (GAP.M4A.01/.02/.03/.05/.06) + 5 accept (GAP.M4A.07–.11) + 0 infer. §8 v1.2 changelog row appended. Frontmatter `version` "1.1" → "1.2"; `last_updated_in_session` → M4-B-P1-GAP-TRAVEL-CLOSE; `lel_version_audited` → "1.6 (46 events; LEL v1.6 dual-tagging reflected)". `status` remains COMPLETE.
+- AC.P1.5 PASS-WITH-PARALLEL-COORDINATION — `CURRENT_STATE_v1_0.md` bumped v1.6 → v1.8 (skipping v1.7, RESERVED for parallel M4-B-S3 per brief AC.P1.5 convention "if S3 → v1.7, this → v1.8"). §2 freshness fields rotated (`last_session_id` → M4-B-P1-GAP-TRAVEL-CLOSE; `file_updated_at` → 2026-05-02T23:30:00+05:30; `file_updated_by_session` → M4-B-P1-GAP-TRAVEL-CLOSE). §2 `active_phase_plan_sub_phase` extended to record this session's discharge. §2 `parallel_session_notes` block added (transient; documents the merge-coordination convention with S3 — disjoint scopes, version-skip, last-writer-wins on conflict surfaces, post-merge re-run of drift_detector / schema_validator). §3 narrative top entry replaced with M4-B-P1 close narrative; predecessor M4-B-S2 narrative preserved as audit trail. v1.7 changelog line marked RESERVED; v1.8 changelog appended.
+- AC.P1.6 PENDING-AT-COMMIT — this SESSION_LOG entry appended; commit hash stamped via follow-up after this commit lands.
+
+**Hard-constraint compliance.**
+- B.10 strictly enforced. No travel dates, destinations, or events fabricated. Every candidate source explicitly audited and ruled negative under B.10. The PARTIAL_CLOSE outcome is the brief's authorized fallback per AC.P1.4 ("PARTIAL_CLOSE with residual note if insufficient source data exists to add further events without fabrication").
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/**` not touched (live M4-B-S3 scope; conflict avoidance with parallel session).
+- CURRENT_STATE version coordination: v1.8 chosen per brief (one above S3's expected v1.7). Parallel coordination guidance recorded in `§2 parallel_session_notes`.
+
+**Files changed (within may_touch only):**
+- `06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md` — MODIFIED (v1.1 → v1.2; frontmatter rotated; §5.5 added with post-patch flip + B.10 audit narrative; §5.6 final disposition tally; §8 v1.2 changelog).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (v1.6 → v1.8; §2 freshness fields rotated; §2 last_session_id rotated; §2 active_phase_plan_sub_phase extended; §2 parallel_session_notes block added; §3 narrative top entry replaced; predecessor M4-B-S2 narrative preserved; v1.8 changelog appended; v1.7 RESERVED for parallel S3).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+**Out-of-scope, deliberately not touched (per brief must_not_touch):**
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/**` — live M4-B-S3 scope.
+- `025_HOLISTIC_SYNTHESIS/**` — L2.5 frozen.
+- `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md` — KR.M4A.CLOSE.1 still carries to S3.
+- `platform/**` — out of P1 scope.
+- `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` — was on may_touch but **not modified** (no B.10-compliant events to add; LEL v1.6 stands; AC.P1.3 N/A under PARTIAL_CLOSE).
+
+**Red-team.** No red-team this session. Governance-aside class — small status flip on a deferred gap + audit refresh; no engine, no retrieval, no synthesis, no calibration weights. Per `ONGOING_HYGIENE_POLICIES_v1_0.md §G`, governance-aside sessions do not increment the IS.8(a) every-third-session counter. Counter unchanged at 1.
+
+**ND.** No open native directives. ND.1 (Mirror Discipline) addressed since Step 7 close.
+
+**Mirror sync (MP.1/MP.2).** Not propagated this session — small governance-aside scope; deferred to next substantive close that already touches `.geminirules` / `.gemini/project_state.md`. The DIS.class.mirror_desync window opens only if no substantive session picks up the carry-forward in a reasonable cadence. M4-B-S3 (substantive sibling running in parallel) is the natural next propagation point if it declares the Gemini-side surfaces in its may_touch.
+
+**Open NAPs after this close.** Unchanged from M4-B-S2 close: NAP.M4.5 (pass_2 native spot-check on 30 LL.1 weights), NAP.M4.6 (M4-C LL.7 prior), NAP.M4.7 (M4 macro-phase close approval). NAP.M4.2 §5.4 patch action now **fully discharged at the LEL_GAP_AUDIT level**.
+
+**Carry-forwards (unchanged):**
+- KR.M4A.CLOSE.1 — `CALIBRATION_RUBRIC_v1_0.md` frontmatter flip (carries to M4-B-S3, which has it in scope).
+- KR.M4A.CLOSE.2 — native review of M4-B-S1 single-track vs planned B1/B2 split (carries to NAP.M4.5).
+- KR.M4A.RT.LOW.1 — commit 0793719 malformed root tree (carries; not blocking).
+- DIS.009 ECR (KR.M3A.JH-EXPORT) — carries to HANDOFF_M4_TO_M5.
+- 5 deferred LEL gaps (GAP.M4A.01, .02, .03, .05, .06) — candidates for future LEL minor pass at native discretion.
+- GAP.M4A.04 residual (international business travel, pilgrimages, US-years return visits) — deferred per NAP.M4.2; future closure gated on native re-decision.
+- 4 absent MSR signal IDs (SIG.MSR.207, .497, .498, .499) — flagged for M5+.
+
+**Next session.** `M4-B-S3` (parallel sibling) — LL.2 graph edge weight modulators (shadow-mode) gated on LL.1 stability per `SHADOW_MODE_PROTOCOL §3.5`; KR.M4A.CLOSE.1 CALIBRATION_RUBRIC frontmatter flip. After S3 closes, the `parallel_session_notes` block in CURRENT_STATE §2 should be removed at the next steady-state close.
+
+Commit: PENDING (hash stamped via follow-up commit after this entry lands).
+
+---
+
 **M4-B-P2-NAP-M45-PREP** | 2026-05-02 | CLOSED
 
 Parallel-slot dossier-authoring session running alongside M4-B-S3 (LL.2 shadow writes) and M4-B-P1-GAP-TRAVEL-CLOSE (governance-aside GAP.M4A.04 status flip). Sole deliverable: a native-facing pass_2 spot-check dossier for `NAP.M4.5` — the binding final gate for production promotion of the 30 LL.1 promotion-eligible signals approved-with-flags by Claude-surrogate-for-Gemini at M4-B-S2-MIRROR-TWOPASS pass_1.

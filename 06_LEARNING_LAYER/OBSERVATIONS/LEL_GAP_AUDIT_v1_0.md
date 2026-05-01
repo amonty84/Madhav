@@ -1,14 +1,14 @@
 ---
 artifact: 06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md
-version: "1.1"
+version: "1.2"
 status: COMPLETE
 produced_during: M4-A-T4-GAP-AUDIT
 produced_on: 2026-05-01
 last_updated_on: 2026-05-02
-last_updated_in_session: M4-A-S2-T3-SHADOW-PROTOCOL (NAP-decisions append)
-lel_version_audited: 1.3 (46 events)
+last_updated_in_session: M4-B-P1-GAP-TRAVEL-CLOSE (GAP.M4A.04 status flip post-LEL-v1.6-patch)
+lel_version_audited: 1.6 (46 events; LEL v1.6 dual-tagging of EVT.2019.05.XX.01 + EVT.2023.05.XX.01 reflected)
 implements: PHASE_M4_PLAN_v1_0.md AC.M4A.7
-native_approval_point: NAP.M4.2 (PHASE_M4_PLAN §5) — DECIDED 2026-05-02 (see §5.4 Native dispositions)
+native_approval_point: NAP.M4.2 (PHASE_M4_PLAN §5) — DECIDED 2026-05-02 (see §5.4 Native dispositions); §5.5 documents v1.2 post-patch status flip and B.10 close-attempt audit
 expose_to_chat: true
 native_id: "abhisek"
 ---
@@ -270,6 +270,98 @@ GAP.M4A.04 patch close. Audit re-run not required (the patch is a re-classificat
 not a new event), but the audit's §3.2 events-per-category column should be
 incremented (travel: 1 → 3) at the next audit refresh.
 
+### §5.5 — GAP.M4A.04 post-patch status flip + full-close attempt audit (M4-B-P1-GAP-TRAVEL-CLOSE, 2026-05-02)
+
+**Status flip — discharged.** The §5.4 NAP.M4.2 patch action ("Promote 2019 US
+arrival + 2023 India return from `residential` to joint `residential+travel`")
+landed in LEL v1.5 → v1.6 at session `M4-A-CLOSE-LEL-PATCH` (2026-05-02). Per
+the §5.4 status-flip protocol, **GAP.M4A.04 status is hereby flipped
+`deferred-pending-patch` → `partially_closed`.** Travel-category cell value
+1 → 3 confirmed by direct read of LIFE_EVENT_LOG_v1_2.md frontmatter (v1.6
+status string + v1.6 changelog entry). Foreign-land signal stack (CVG.03,
+SIG.MSR.004, SIG.MSR.005) now has three anchor events for M4-B calibration.
+
+**Full-close attempt — audit and verdict.** The M4-B-P1-GAP-TRAVEL-CLOSE
+session brief ran a strict-B.10 scan for additional source-backed travel
+events that could promote `partially_closed` → `closed` without further
+elicitation. Two candidate sources were enumerated and ruled negative:
+
+1. **`01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` §life_events.** No
+   such section exists. FORENSIC v8.0 carries §0–§27 of natal chart data
+   only (D1 + divisionals + KP + dasha systems + strength metrics +
+   Ashtakavarga + sensitive points + special lagnas + sahams + arudhas +
+   Navatara + Panchang + aspects + Chalit + Chandra + Kota + deities +
+   Sade Sati + Varshphal + cross-reference + longevity + JH-engine dashas +
+   yogas + completeness ledger). FORENSIC is a chart-data file by
+   architectural design (`PROJECT_ARCHITECTURE_v2_2.md §C.1` L1 separation:
+   chart facts ≠ life events). It does not and will not carry life-event
+   data. The brief's reference to `FORENSIC §life_events` resolves to
+   **null source** — there is no surface to consult.
+
+2. **LIFE_EVENT_LOG_v1_2.md §6 gap register.** Surveyed for travel
+   residuals. The relevant entry is `GAP.TRAVEL_MISC.01`:
+   > "Beyond Dec 2010 Thailand and 2019-2023 US stint, any other foreign
+   > travel? — Re-check in next session (possibly multiple Russia-related
+   > business trips for Marsys exports)"
+   The "possibly multiple Russia-related business trips" string is
+   explicitly speculative ("possibly multiple"; no dates; no destinations
+   confirmed; resolution_path is "re-check in next session"). Promoting
+   this string to a dated `EVT.YYYY.MM.DD.XX` entry would require date
+   fabrication or destination fabrication or both — a B.10 violation
+   (`PROJECT_ARCHITECTURE_v2_2.md §B.10` "No fabricated computation";
+   CLAUDE.md §I "If a computation … requires a specialist tool [or
+   elicitation] and the value is not already in L1, the session marks it
+   `[EXTERNAL_COMPUTATION_REQUIRED]`. Claude never invents [L1] values").
+   Native elicitation is the only B.10-compliant path — and NAP.M4.2 §5.4
+   explicitly closed that path: **"No further elicitation required for
+   GAP.M4A.04 at this time"**.
+
+3. **LEL §4 chronic patterns + §5 inner-turning-point periods + §7 retrodictive
+   summary.** Surveyed for any additional dated travel content that the
+   audit's §4 per-event mapping might have missed. None found beyond what
+   §3 event log already carries. PERIOD.2018_2021 native_reflection mentions
+   "running from Hyderabad to Bhubaneswar" during father's illness arc, but
+   the dated father-passing event (EVT.2018.11.28.01) is family-category by
+   correct mapping — promoting it dual-tagged residential+travel would
+   semantically distort the event (the Hyderabad↔Bhubaneswar runs were
+   domestic medical-emergency commutes, not travel events in the
+   calibration-relevant CVG.03 foreign-land sense). PERIOD.2022_2024 mentions
+   "moved to India" — already captured in EVT.2023.05.XX.01 and dual-tagged
+   in v1.6. No further B.10-compliant promotions surface.
+
+**Verdict.** No B.10-compliant source data exists to advance GAP.M4A.04
+beyond `partially_closed` in this session. **Status remains
+`partially_closed`** (post-patch state per §5.4 NAP.M4.2 protocol).
+Residual carries forward as `deferred` per NAP.M4.2 native disposition:
+international business travel events (Russia / other), pilgrimages,
+return visits to India during the US years (2019–2023). Future closure
+requires either (a) FORENSIC schema extension to carry life-event data
+(architectural change; not currently planned) — or much more naturally
+(b) native re-decision overriding the NAP.M4.2 "no further elicitation"
+clause and authorizing a Round-2 LEL elicitation pass on the residual
+items. The latter remains a candidate for a future LEL minor-version
+pass at native discretion. This audit re-run takes no action on the
+residual.
+
+### §5.6 — Disposition tally (final, post-v1.2)
+
+| Disposition (final) | Count | Gap IDs |
+|---|---|---|
+| **partially_closed (LEL v1.6 dual-tag landed; remainder deferred)** | 1 | GAP.M4A.04 |
+| **deferred (carry as candidate for future LEL minor pass)** | 5 | GAP.M4A.01, .02, .03, .05, .06 |
+| **accept** | 5 | GAP.M4A.07, .08, .09, .10, .11 |
+| **infer** | 0 | — |
+
+GAP.M4A.04 cell-value impact for the §3.3 matrix (informational; matrix
+not re-rendered): travel column 2010–2019 cell increments 1 → 2 (the 2019
+dual-tag adds an entry); 2020–2026 cell increments 0 → 1 (the 2023 dual-tag
+adds an entry). Travel category total 1 → 3. M4-B calibration consumers
+should treat the foreign-land signal stack (CVG.03, SIG.MSR.004,
+SIG.MSR.005) as having 3 anchor events rather than 1, with the
+acknowledgment that the residual deferred classes (international business
+travel, pilgrimages, return visits) keep the band somewhat wider than the
+career or education stacks per §6.
+
 ## §6 — Overall completeness assessment
 
 The LEL v1.3 is a well-constructed acharya-grade calibration corpus for the chart's strongest signal stacks (career, education, family-of-origin loss arc, marriage-and-separation arc, late-career entrepreneurship arc) and a thinly-sampled corpus for three signal stacks the chart predicts strongly (foreign-land / travel, mind / psychological, spirit / spiritual). The 46-event count clears the M4-A entry gate (≥ 40 events, ≥ 5 years) and produces an event-density profile (1.10 events/yr lifetime, 2.43 events/yr in the recent decade) consistent with the upper register of self-elicited LELs in the public Jyotish-research literature. For calibration purposes the corpus is sufficient to begin M4-B with the explicit understanding that signal-weight estimates for the travel, mind, and spirit domains will carry wider uncertainty bands than the career and education estimates, and that the 1990–1999 schooling decade is a structural blind spot for any mid-life retrodiction that pivots through that decade. The six elicit-recommended gaps in §5 are not blockers for M4-A close; they are queued candidates for a subsequent LEL minor-version pass that the native can authorize at his discretion. None of the gaps invalidates the existing LEL; each simply marks where the calibration ground will be thinnest until backfilled.
@@ -287,3 +379,4 @@ The LEL v1.3 is a well-constructed acharya-grade calibration corpus for the char
 |---|---|---|---|
 | 1.0 | 2026-05-01 | Claude (M4-A-T4-GAP-AUDIT) | Initial audit. 46-event extraction; decade × category matrix; eleven `GAP.M4A.NN` entries; six elicit-recommended; five accept; zero infer. |
 | 1.1 | 2026-05-02 | Native + Claude (M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions) | NAP.M4.2 ruling recorded. §5.4 added: 1 patch (GAP.M4A.04 — promote 2019/2023 residential events to joint residential+travel in next LEL minor bump), 5 deferred (GAP.M4A.01, .02, .03, .05, .06), 5 accept (unchanged). Action queued for T1 next LEL maintenance pass (LEL v1.5 → v1.6). AC.M4A.7 + NAP.M4.2 DISCHARGED. |
+| 1.2 | 2026-05-02 | Claude (M4-B-P1-GAP-TRAVEL-CLOSE) | Post-LEL-v1.6-patch status flip + B.10-strict full-close attempt audit. §5.4 patch confirmed landed at `M4-A-CLOSE-LEL-PATCH` session (LEL v1.5 → v1.6; EVT.2019.05.XX.01 + EVT.2023.05.XX.01 dual-tagged residential+travel). Per §5.4 protocol, **GAP.M4A.04 status flipped `deferred-pending-patch` → `partially_closed`**. §5.5 added documenting the M4-B-P1 full-close attempt: FORENSIC §life_events does not exist (chart-data file by §C.1 architecture); LEL §6 GAP.TRAVEL_MISC.01 "possibly Russia-related business trips" is explicitly speculative (no dates, no destinations); LEL §4/§5/§7 surveyed for missed dated travel content — none B.10-compliant beyond what §3 already carries. **Verdict: no source data exists to advance beyond `partially_closed` without B.10 violation.** Residual (international business travel, pilgrimages, US-years return visits) carries forward as `deferred` per NAP.M4.2 "no further elicitation" clause; future closure gated on native re-decision. §5.6 final disposition tally: 1 partially_closed + 5 deferred + 5 accept + 0 infer. Frontmatter `lel_version_audited` updated to "1.6 (46 events; LEL v1.6 dual-tagging reflected)". `last_updated_in_session` → M4-B-P1-GAP-TRAVEL-CLOSE. |
