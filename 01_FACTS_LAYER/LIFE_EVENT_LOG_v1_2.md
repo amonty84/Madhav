@@ -1552,6 +1552,75 @@ v2.0 (planned post-Deep-Analysis-v2.0):
 
 ---
 
+## §9 — PROSPECTIVE PREDICTION SUBSECTION (interim PPL surface)
+
+*Appended 2026-05-01 at M3-W4-D1-VALIDATOR-REDTEAM session per CLAUDE.md §E
+concurrent-workstream rule (Prospective Prediction Logging). This subsection
+is the interim PPL logging surface until the canonical
+`06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl` substrate
+absorbs the row. Append-only; outcome fields stay `null` until observed.*
+
+```yaml
+PRED.M3D.HOLDOUT.001:
+  source_artifact: 00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md §3
+  source_row: "Row 7 — FUTURE.2026-08-15"
+  emitted_at: 2026-05-01
+  emitted_by_session: M3-W4-D1-VALIDATOR-REDTEAM
+  prediction_window:
+    start_date: 2026-08-15
+    end_date: 2026-08-15
+  horizon_days: 106
+  confidence: MED
+  claim_text: >
+    Mercury MD final-year + Mercury-Saturn AD + Bhadrika/Mercury Yogini overlay
+    surfaces the convergent "Mercury-rule's terminal consolidation under Sade
+    Sati pressure" pattern. The native is expected to register a career-peak
+    or wealth-peak event, project completion, or consolidation milestone
+    within ±30 days of 2026-08-15.
+  falsifier_conditions:
+    - "No career-peak signature, no project completion, no consolidation event,
+       and no wealth-peak event of significance to the native occurs within
+       ±30 days of 2026-08-15."
+  related_artifact_ids: [PRED.001, PRED.005]
+  outcome: null
+  outcome_source: null
+  outcome_recorded_at: null
+
+PRED.M3D.HOLDOUT.002:
+  source_artifact: 00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md §3
+  source_row: "Row 8 — FUTURE.2027-09-12"
+  emitted_at: 2026-05-01
+  emitted_by_session: M3-W4-D1-VALIDATOR-REDTEAM
+  prediction_window:
+    start_date: 2027-08-19
+    end_date: 2027-12-31
+  horizon_days: 499
+  confidence: MED
+  claim_text: >
+    The Mercury → Ketu MD transition on 2027-08-19 manifests as a discontinuous
+    regime change for the native — a role/relationship/spiritual reorientation
+    visible within the four-and-a-half months following the transition. The
+    lit-signal collapse (248 → 79 signals) and KP Asc shift to triple-Saturn
+    (star + sub + sub-sub) at the close of August / early September 2027
+    indicates a structurally rare regime-discontinuity moment.
+  falsifier_conditions:
+    - "Mercury → Ketu MD regime change manifests as routine continuation
+       (no role change, no spiritual reorientation, no relationship recalibration,
+       no major life-frame shift) in the three to four months following 2027-08-19."
+  related_artifact_ids: [PRED.011, PRED.012, PRED.013, PRED.014]
+  outcome: null
+  outcome_source: null
+  outcome_recorded_at: null
+```
+
+*Future predictions emitted in M3 / M4 / M5 / M6 sessions append here in the
+same shape until the migration to `06_LEARNING_LAYER/PREDICTION_LEDGER/`
+absorbs this subsection. The PRED.M3D.HOLDOUT.NNN id-space is reserved for
+held-out sample predictions; other PRED.* id-spaces (PRED.001..014 already
+in `prediction_ledger.jsonl`) remain canonical for non-held-out predictions.*
+
+---
+
 **END OF LIFE EVENT LOG v1.0**
 
 *This document is L1 Facts Layer. Interpretation layer references this via `retrodictive_match` fields. Every subsequent L2/L2.5/L3 artifact that cites an event should use its `EVT.*` ID.*

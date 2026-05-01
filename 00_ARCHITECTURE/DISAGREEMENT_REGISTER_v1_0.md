@@ -571,6 +571,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8 (every cross-school dasha disagreement opens a register entry; native arbitrates at M3-C close)."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating the BPHS-Sanjay-Rath vs K.N. Rao Padakrama Chara tradition fork at M3 scope. Carry both side-by-side per §3 N3 of this entry; revisit at M9 open."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama as project-canonical Chara tradition. compute_chara.py becomes a parser of the existing 144-row table, not a from-scratch computer; engine cannot extend beyond 2059 without external acharya extension."
@@ -578,10 +582,19 @@ disagreement_register_entry:
       description: "Adopt Sanjay Rath / BPHS synthesis (compute_chara.py default variant) as project-canonical. FORENSIC §5.3 retained as alternate-tradition record. Loses retrodictive-fit work done in B.5 sessions 16-25 that referenced Padakrama dates; opens DIS sub-entries for each affected event."
     - option_id: N3
       description: "Carry both. Maintain FORENSIC §5.3 (Padakrama) + engine BPHS variant side-by-side. DB rows tagged with explicit `system='chara_padakrama'` vs `system='chara_bphs'`. Resolution deferred to M9 multi-school triangulation per phase-plan policy. **DEFAULT** per PHASE_M3_PLAN §3.3 (\"every disagreement is *logged*, not *resolved by operator preference*; resolution waits for M9\")."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: resolved
+  resolution: >
+    N3 — Deferred to M9 multi-school triangulation per PHASE_M3_PLAN §8
+    policy (default). No in-corpus authoritative reference capable of
+    arbitrating this tradition fork at M3 scope. Revisit at M9 open.
+  resolution_note: >
+    FORENSIC §5.3 (K.N. Rao Padakrama) is retained as project reference
+    data but not adopted as canonical engine rule at this stage.
+    compute_chara.py output remains needs_verification pending M9 school
+    selection. Downstream synthesis does not treat Chara MD dates as
+    settled until then.
+  resolved_on: "2026-05-01"
+  resolved_by_session: M3-PRE-D-GOVERNANCE-2026-05-01
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -639,6 +652,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating the three-way tradition fork (BPHS sign-to-lord rule vs K.N. Rao Padakrama vs brief hardcoded constants) at M3 scope. Carry all three side-by-side per §3 N3 of this entry; revisit at M9 open."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama duration table verbatim. Engine reduced to lookup, not derivation; full Padakrama rule set must be encoded in a future session if chart-extension capability is required."
@@ -646,10 +663,13 @@ disagreement_register_entry:
       description: "Adopt BPHS sign-to-lord count rule (movable forward, fixed/dual backward, count−1, 0→12). Drop the brief's hardcoded constants. Engine extensible; FORENSIC §5.3 retained as Padakrama alternate."
     - option_id: N3
       description: "Carry all three side-by-side as DIS.class.school_disagreement DB rows. Defer resolution to M9 multi-school triangulation. **DEFAULT** per phase-plan policy."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: resolved
+  resolution: >
+    N3 — Deferred to M9 multi-school triangulation per PHASE_M3_PLAN §8
+    policy (default). No in-corpus authoritative reference capable of
+    arbitrating this tradition fork at M3 scope. Revisit at M9 open.
+  resolved_on: "2026-05-01"
+  resolved_by_session: M3-PRE-D-GOVERNANCE-2026-05-01
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -707,6 +727,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8. External verification required before any synthesis claim treats Narayana Dasha output as settled."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating Narayana Dasha at M3 scope. compute_narayana.py output remains needs_verification=true; external acharya review or JH export per ED.1 carried as M4-class open item in HANDOFF_M3_TO_M4."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Commission external Vedic acharya review for Narayana Dasha verification on this chart. Acharya outputs a 70-year MD table; engine output cross-checked against acharya. ETA: open."
@@ -714,10 +738,17 @@ disagreement_register_entry:
       description: "Generate Jagannatha Hora export of Narayana Dasha for this chart per ED.1. Use JH export as cross-check reference. ETA: same as M3-D held-out cross-check window if JH export becomes part of the standard pipeline."
     - option_id: N3
       description: "Defer Narayana Dasha verification to M9 multi-school triangulation. compute_narayana.py output remains marked needs_verification=true; no synthesis claim treats it as settled until then. **DEFAULT** per phase-plan policy + ED.1 dependency status."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: resolved
+  resolution: >
+    N3 — Deferred to M9 multi-school triangulation per PHASE_M3_PLAN §8
+    policy (default). No in-corpus authoritative reference capable of
+    arbitrating this tradition fork at M3 scope. Revisit at M9 open.
+  resolution_note: >
+    compute_narayana.py output remains needs_verification=true; no
+    synthesis claim treats it as settled. External acharya review or JH
+    export per ED.1 is an M4-class open item carried in HANDOFF_M3_TO_M4.
+  resolved_on: "2026-05-01"
+  resolved_by_session: M3-PRE-D-GOVERNANCE-2026-05-01
   state_hashes:
     side_a_before: null
     side_a_after: null

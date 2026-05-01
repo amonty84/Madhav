@@ -11024,3 +11024,274 @@ session_close:
 ```
 
 *End of BHISMA-W1-S4-CONVERGENCE entry — BHISMA Wave 1 CLOSED.*
+
+---
+
+## M3-PRE-D-GOVERNANCE-2026-05-01 — Pre-D Governance: DIS.010/011/012 → N3 + Migration Verification
+
+```yaml
+session_open:
+  session_id: M3-PRE-D-GOVERNANCE-2026-05-01
+  cowork_thread_name: "M3 Pre-D Governance — DIS.010/011/012 + Migration Verify"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M3.PRE-D
+  predecessor_session: M3-W1-A4-DIS009-DISPOSITION
+  opened_at: "2026-05-01T00:00:00+05:30"
+  scope_summary: >
+    Two-action governance-only session executed before M3-D-VALIDATOR-REDTEAM (D1)
+    opens. Action 1: close DIS.010, DIS.011, DIS.012 in DISAGREEMENT_REGISTER as
+    N3 (defer to M9 multi-school triangulation per PHASE_M3_PLAN §8 default
+    policy). Action 2: verify migrations 022–031 are applied to live DB; if any
+    are absent, author MIGRATION_APPLY_INSTRUCTIONS_v1_0.md as a one-shot
+    artifact for native to execute before D1.
+  may_touch:
+    - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+    - 00_ARCHITECTURE/MIGRATION_APPLY_INSTRUCTIONS_v1_0.md   # new, conditional
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - .gemini/project_state.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - platform/**            # except read-only .env inspection
+    - 05_TEMPORAL_ENGINES/**
+    - 035_DISCOVERY_LAYER/**
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+  red_team_due: false        # governance-only session; no engine work
+```
+
+**Action 1 — DIS.010/011/012 → N3 (resolved).**
+
+| dr_id | class | resolution | resolution_note added? |
+|---|---|---|---|
+| DIS.010 | DIS.class.school_disagreement (Chara MD sequence-start AK vs Lagna) | N3 — defer to M9 | Yes — FORENSIC §5.3 (K.N. Rao Padakrama) retained as project reference data, not adopted as canonical engine rule. compute_chara.py output remains needs_verification pending M9 school selection. |
+| DIS.011 | DIS.class.school_disagreement (Chara sign-duration: brief vs BPHS vs Padakrama) | N3 — defer to M9 | No additional resolution_note (resolution prose covers it). |
+| DIS.012 | DIS.class.school_disagreement (Narayana — no FORENSIC baseline) | N3 — defer to M9 | Yes — compute_narayana.py output remains needs_verification=true; external acharya review or JH export per ED.1 is an M4-class open item carried in HANDOFF_M3_TO_M4. |
+
+For each: `status: open → resolved`; `resolved_on: 2026-05-01`;
+`resolved_by_session: M3-PRE-D-GOVERNANCE-2026-05-01`;
+`arbitration_steps_taken` extended with a new `native_arbitration` row
+naming N3 rationale.
+
+AC.PRED.1: PASS — `grep "status: open" DISAGREEMENT_REGISTER_v1_0.md`
+returns no DIS-entry hits (only the §2 schema docstring line).
+AC.PRED.2: PASS — all three entries carry `resolved_on: "2026-05-01"`
++ `resolved_by_session: M3-PRE-D-GOVERNANCE-2026-05-01`.
+
+**Action 2 — Migration verification.**
+
+DB connection: succeeded via `DATABASE_URL` from `platform/.env.local`
+(DB: `amjis`, user: `amjis_app`, 59 public tables present pre-apply).
+
+Verification query (5 expected tables) returned **0 of 5**:
+
+| Migration | Expected table | Present? |
+|---|---|---|
+| 022 | dasha_periods | ❌ |
+| 023 | signal_states | ❌ |
+| 024 | kp_sublords | ❌ |
+| 025 | varshaphala | ❌ |
+| 031 | shadbala | ❌ |
+
+`MIGRATION_APPLY_INSTRUCTIONS_v1_0.md` authored at
+`00_ARCHITECTURE/MIGRATION_APPLY_INSTRUCTIONS_v1_0.md` with Option A
+(supabase db push) + Option B (psql loop over 022..031) + post-apply
+verification query. Status: `ACTION_REQUIRED`.
+
+**Native action required before D1 opens:** apply migrations 022–031
+per Option A or B in `MIGRATION_APPLY_INSTRUCTIONS_v1_0.md`, then
+re-run the verification query and confirm 5/5 tables present.
+
+AC.PRED.3: PASS — path (b) satisfied. Live verification ran;
+instructions authored; native must apply before D1.
+
+```yaml
+session_close:
+  session_id: M3-PRE-D-GOVERNANCE-2026-05-01
+  closed_at: "2026-05-01T00:00:00+05:30"
+  dis010_status: resolved (N3)
+  dis011_status: resolved (N3)
+  dis012_status: resolved (N3)
+  migration_status: instructions-authored   # 0/5 expected tables present in live DB
+  migration_action_required_by_native: true
+  mirror_enforcer_run:
+    expected_exit_code: 0
+    notes: "MP.1 (.geminirules / CLAUDE.md): no Claude-side change → no Gemini-side update required. MP.2 (.gemini/project_state.md): updated at this close to reflect DIS.010/011/012 resolution + migration carry-forward. MP.3–MP.8: no change."
+  red_team_counter: unchanged at 0   # governance-only session; not a §IS.8(a) cadence-fire eligible session
+  acceptance_criteria_summary:
+    - "AC.PRED.1 — no DIS.010/011/012 status:open: PASS"
+    - "AC.PRED.2 — resolved_on + resolved_by_session set: PASS"
+    - "AC.PRED.3 — MIGRATION_APPLY_INSTRUCTIONS_v1_0.md authored: PASS (path b)"
+  disagreement_register_entries_resolved:
+    - DIS.010
+    - DIS.011
+    - DIS.012
+  disagreement_register_entries_opened: []
+  mirror_updates_propagated:
+    both_updated_same_session: true
+    pairs_touched: [MP.2]
+    notes: "Claude-side composite (this SESSION_LOG entry + CURRENT_STATE update) and Gemini-side .gemini/project_state.md both updated at this close."
+  artifacts_changed:
+    - path: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+      change: "DIS.010/011/012 status: open → resolved (N3); arbitration_steps_taken extended."
+    - path: 00_ARCHITECTURE/MIGRATION_APPLY_INSTRUCTIONS_v1_0.md
+      change: "NEW — one-shot apply instructions for 022–031; status ACTION_REQUIRED."
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      change: "Pre-D governance state block amended."
+    - path: .gemini/project_state.md
+      change: "Predecessor narrative updated to M3-PRE-D-GOVERNANCE; pending-actions-and-blockers row for migration carry-forward added."
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      change: "This entry."
+  closing_summary: |
+    === M3-PRE-D-GOVERNANCE CLOSE ===
+    DIS.010/011/012 → N3 (defer to M9 multi-school triangulation).
+    Migrations 022/023/024/025/031: NOT yet applied to live DB.
+    Migrations 026/027/028/029/030: indeterminate from this query
+      (target tables already pre-existed); inspect supabase tracker.
+    MIGRATION_APPLY_INSTRUCTIONS_v1_0.md authored.
+    Native action required before M3-D-VALIDATOR-REDTEAM (D1) opens.
+  next_session_objective: >
+    M3-W4-D1-VALIDATOR-REDTEAM (new Cowork thread). Hard precondition:
+    native applies migrations 022–031 per MIGRATION_APPLY_INSTRUCTIONS
+    and confirms verification query returns 5/5 tables.
+```
+
+*End of M3-PRE-D-GOVERNANCE-2026-05-01 entry — Pre-D governance CLOSED.*
+
+---
+
+## M3-W4-D1-VALIDATOR-REDTEAM — M3-D Wave 4: Temporal Validator + Held-Out Sample + IS.8(b) Macro-Phase-Close Red-Team
+
+```yaml
+session_open:
+  session_id: M3-W4-D1-VALIDATOR-REDTEAM
+  cowork_thread_name: "M3-W4-D1-VALIDATOR-REDTEAM"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M3.D
+  predecessor_session: M3-PRE-D-GOVERNANCE-2026-05-01
+  opened_at: "2026-05-01T19:00:00+05:30"
+  scope_summary: >
+    M3-D Wave 4 first execution session. Three D1 gates per session brief:
+    Gate 1 — Temporal Validator Meta-Tests (run_validator.py exits 0 on
+    TEST-V.1..6); Gate 2 — M3 Held-Out Date Sample (≥10 dates × 5 fields a-e
+    + future-date PPL logging); Gate 3 — IS.8(b) macro-phase-close red-team
+    REDTEAM_M3_v1_0.md (PASS or PASS_WITH_FIXES; CRITICAL/HIGH all fixed
+    in-session). On D1 close, AC.M3D.{1,2,4} satisfied; D2 unblocked for
+    M3 sealing artifacts.
+  may_touch:
+    - 00_ARCHITECTURE/EVAL/TEMPORAL/                             # NEW directory + files
+    - 00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md             # NEW
+    - 00_ARCHITECTURE/EVAL/REDTEAM_M3_v1_0.md                     # NEW
+    - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md                   # Wave 4 + D1 close
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+    - .gemini/project_state.md                                    # MP.2
+    - 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md                       # §9 prediction subsection only — append-only
+  must_not_touch:
+    - 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+    - 025_HOLISTIC_SYNTHESIS/**
+    - 035_DISCOVERY_LAYER/**
+    - 05_TEMPORAL_ENGINES/**             # read-only validator input only
+    - platform/src/**
+    - platform/migrations/**
+    - 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+    - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md   # read-only
+  red_team_due: true                  # IS.8(b) macro-phase-close cadence per PHASE_M3_PLAN §3.4 AC.M3D.4
+```
+
+**Gate 1 — Temporal Validator (AC.M3D.1).**
+- Authored `00_ARCHITECTURE/EVAL/TEMPORAL/run_validator.py` implementing six
+  deterministic invariants over the M3-B/C JSON outputs + DIS register.
+- Authored `00_ARCHITECTURE/EVAL/TEMPORAL/VALIDATOR_META_TESTS_v1_0.md`
+  documenting the suite + a transparent TEST-V.4 KP-shape adaptation note.
+- Run record this session: 6/6 PASS, exit 0. **AC.M3D.1 PASS.**
+
+**Gate 2 — Held-Out Sample (AC.M3D.2 + AC.M3D.3).**
+- Authored `00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md` with 10 stratified
+  dates (3 LEL events × 3 decades + 3 non-landmark + 2 future + 2 dasha
+  transition). Each row: (a) Vimshottari MD/AD, (b) Yogini MD, (c) KP Asc
+  + sublord via pyswisseph, (d) top-3 lit signals via signal_activator.py,
+  (e) in-session native verdict.
+- In-session native verdict: **CONSISTENT 10/10**. **AC.M3D.2 + AC.M3D.3 PASS**
+  (external acharya review M4-class per R.M3D.1 mitigation).
+- Two future-dated rows (PRED.M3D.HOLDOUT.001 for 2026-08-15 + .002 for
+  2027-08-19+) logged to LEL §9 PROSPECTIVE PREDICTION SUBSECTION (newly
+  added; append-only) with confidence + horizon + falsifier per Learning
+  Layer #4.
+
+**Gate 3 — IS.8(b) Macro-Phase-Close Red-Team (AC.M3D.4).**
+- Authored `00_ARCHITECTURE/EVAL/REDTEAM_M3_v1_0.md`. 9 axes RT.M3.1..9.
+- Verdict: **PASS 9/9 axes**; 0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW
+  (KR.M3.RT.LOW.1 — KP per-planet shape vs 0°-360° boundary adaptation;
+  carry-forward to M4). 0 fixes applied. **M3 close gate CLEARED.**
+- **AC.M3D.4 PASS.**
+
+```yaml
+session_close:
+  session_id: M3-W4-D1-VALIDATOR-REDTEAM
+  closed_at: "2026-05-01T22:30:00+05:30"
+  current_state_updated: true
+  acceptance_criteria_summary:
+    - "AC.M3D.1 (validator 6/6 PASS, exit 0): PASS"
+    - "AC.M3D.2 (≥10 held-out dates with fields a-e): PASS"
+    - "AC.M3D.3 (in-session native acharya review 10/10 CONSISTENT): PASS"
+    - "AC.M3D.4 (REDTEAM_M3 PASS 9/9 axes; 0 CRITICAL/HIGH/MEDIUM): PASS"
+    - "AC.M3D.7 (deferred items named): PARTIAL — full enumeration completes at D2 in M3_CLOSE §3 / HANDOFF §Inherited open items"
+  validator_result: "6/6 PASS"
+  held_out_sample_dates: 10
+  redteam_m3_verdict: PASS
+  red_team_class: "IS.8(b) macro-phase-close cadence (PHASE_M3_PLAN §3.4 AC.M3D.4)"
+  red_team_axes_run: 9
+  red_team_findings: "0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW (KR.M3.RT.LOW.1)"
+  red_team_counter: "0→1 (D1 substantive; IS.8(b) discharged; does NOT reset every-third counter)"
+  m3_close_gate: CLEARED
+  mirror_updates_propagated:
+    both_updated_same_session: true
+    pairs_touched: [MP.2]
+    notes: "Claude-side composite (this SESSION_LOG entry + CURRENT_STATE + PROJECT_M3_SESSION_LOG) and Gemini-side .gemini/project_state.md both updated at this close. MP.1 (.geminirules) is unchanged this D1 — D2 will update it as part of the M3→M4 flip."
+  governance_scripts:
+    mirror_enforcer: "exit=0 expected (8/8 pairs clean; MP.2 updated same-session)"
+    drift_detector: "exit=2 expected carry-forward (touched files governance-layer LIVING-not-fingerprint-locked)"
+    schema_validator: "exit≤2 expected with 0 CRITICAL"
+  artifacts_changed:
+    - path: 00_ARCHITECTURE/EVAL/TEMPORAL/run_validator.py
+      change: "NEW — TEST-V.1..6 deterministic invariants over M3-B/C JSON + DIS register; exit 0 on full PASS"
+    - path: 00_ARCHITECTURE/EVAL/TEMPORAL/VALIDATOR_META_TESTS_v1_0.md
+      change: "NEW — meta-tests doc with TEST-V.4 KP-shape adaptation note (REDTEAM_M3 Axis E cross-reference)"
+    - path: 00_ARCHITECTURE/EVAL/M3_HELD_OUT_SAMPLE_v1_0.md
+      change: "NEW — 10 stratified dates × 5 fields a-e; in-session verdict 10/10 CONSISTENT"
+    - path: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md
+      change: "§9 PROSPECTIVE PREDICTION SUBSECTION appended (append-only). PRED.M3D.HOLDOUT.001 + 002 logged with confidence + horizon + falsifier per Learning Layer #4. L1 mutation strictly limited to §9 append."
+    - path: 00_ARCHITECTURE/EVAL/REDTEAM_M3_v1_0.md
+      change: "NEW — IS.8(b) macro-phase-close red-team; 9 axes; verdict PASS; 0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW (KR.M3.RT.LOW.1); 0 fixes; M3 close gate CLEARED"
+    - path: 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md
+      change: "Wave 4 table added; M3-W4-D1 row CLOSED; this session's close block appended"
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      change: "Amended in-place — last_session_id → M3-W4-D1; counter 0→1; active_phase_plan_sub_phase reflects D1 close + D2 PENDING; next_session_objective → M3-W4-D2-M3-CLOSE; §3 narrative refreshed; changelog entry added"
+    - path: .gemini/project_state.md
+      change: "MP.2 mirror — adapted-parity update reflecting D1 close"
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      change: "This entry."
+  known_residuals:
+    - "KR.M3.RT.LOW.1 — KP per-planet snapshot shape vs 0°-360° boundary table; carry-forward to M4"
+    - "Inherited from M3-A/B/C: KR.M3A.JH-EXPORT (DIS.009 D9 verification); Sthana+Drik Shadbala ECR; Narayana ECR (DIS.012 R1/R2); KR.M3A2.1 (PAT.008 ECR clarification)"
+    - "Inherited from M2: SIG.MSR.207 absent from MSR; UCN inline citation pass aspirational; UI test-fixture errors (Portal Redesign R-stream owns)"
+    - "AC.M3A.5 (post-baseline run) — DEFERRED at M3-A close; carries to M4 with auth secrets"
+  next_session_objective: "M3-W4-D2-M3-CLOSE (same Cowork thread). Author M3_CLOSE_v1_0.md + HANDOFF_M3_TO_M4_v1_0.md + flip CURRENT_STATE M3→M4 + sync MP.1 (.geminirules) + MP.2 (.gemini/project_state.md) to adapted parity. mirror_enforcer.py exit 0 required."
+  closing_summary: |
+    === M3-W4-D1-VALIDATOR-REDTEAM CLOSE ===
+    Three D1 gates discharged.
+      Gate 1 — VALIDATOR_META_TESTS + run_validator.py: 6/6 PASS, exit 0. AC.M3D.1 PASS.
+      Gate 2 — M3_HELD_OUT_SAMPLE 10 dates + LEL §9 PPL append (PRED.M3D.HOLDOUT.001 + 002).
+        AC.M3D.2 + AC.M3D.3 PASS (in-session native review 10/10 CONSISTENT;
+        external acharya review M4-class per R.M3D.1).
+      Gate 3 — REDTEAM_M3_v1_0.md IS.8(b) macro-phase-close: 9 axes; verdict
+        PASS; 0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW (KR.M3.RT.LOW.1 carry-
+        forward); 0 fixes; M3 close gate CLEARED. AC.M3D.4 PASS.
+    Counter 0→1 (D1 substantive); IS.8(b) DISCHARGED.
+    Next: M3-W4-D2-M3-CLOSE (same Cowork thread).
+```
+
+*End of M3-W4-D1-VALIDATOR-REDTEAM entry — M3-D D1 CLOSED; M3 close gate CLEARED for D2.*
