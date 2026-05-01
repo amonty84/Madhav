@@ -16,6 +16,7 @@
 
 import { generateText } from 'ai'
 import { resolveModel } from '@/lib/models/resolver'
+import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 
 const MAX_TURNS = 2
 const MAX_TOKENS_PER_TURN = 300
@@ -59,6 +60,7 @@ function turnsTokens(turns: PlannerHistoryTurn[]): number {
 async function summarizeHistory(
   turns: PlannerHistoryTurn[],
   workerModelId: string,
+  queryId?: string,
 ): Promise<string> {
   const dialogue = turns
     .map(t => `${t.role.toUpperCase()}: ${t.content}`)
@@ -72,11 +74,40 @@ async function summarizeHistory(
     `Output prose only, no preface or markdown.\n\n` +
     `DIALOGUE:\n${dialogue}\n\nSUMMARY:`
 
-  const { text } = await generateText({
-    model: resolveModel(workerModelId),
-    messages: [{ role: 'user', content: prompt }],
-    maxOutputTokens: SUMMARY_TARGET_TOKENS,
-  })
+  const start = Date.now()
+  let text = ''
+  let usage: { inputTokens?: number; outputTokens?: number } | undefined
+  let errorCode: string | null = null
+  try {
+    const result = await generateText({
+      model: resolveModel(workerModelId),
+      messages: [{ role: 'user', content: prompt }],
+      maxOutputTokens: SUMMARY_TARGET_TOKENS,
+    })
+    text = result.text
+    usage = result.usage
+  } catch (err) {
+    errorCode = err instanceof Error ? err.message : String(err)
+    throw err
+  } finally {
+    if (queryId) {
+      void writeLlmCallLog({
+        query_id: queryId,
+        conversation_id: null,
+        call_stage: 'history_summary',
+        model_id: workerModelId,
+        provider: resolveProvider(workerModelId),
+        input_tokens: usage?.inputTokens ?? null,
+        output_tokens: usage?.outputTokens ?? null,
+        reasoning_tokens: null,
+        latency_ms: Date.now() - start,
+        cost_usd: null,
+        fallback_used: false,
+        error_code: errorCode,
+        payload: null,
+      })
+    }
+  }
 
   return truncateToTokens(text.trim(), SUMMARY_TARGET_TOKENS)
 }
@@ -85,6 +116,7 @@ export async function buildPlannerContext(
   query: string,
   conversationHistory: Array<{ role: string; content: string }>,
   workerModelId: string,
+  queryId?: string,
 ): Promise<PlannerContext> {
   const queryTokens = estimateTokens(query)
 
@@ -108,7 +140,7 @@ export async function buildPlannerContext(
   const rawCombined = turnsTokens(recent)
 
   if (rawCombined > HISTORY_BUDGET_TOKENS) {
-    const summary = await summarizeHistory(recent, workerModelId)
+    const summary = await summarizeHistory(recent, workerModelId, queryId)
     const summaryTokens = estimateTokens(summary)
     return {
       query,

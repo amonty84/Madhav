@@ -578,6 +578,42 @@ export async function POST(request: Request) {
             })
           }
 
+          // ── MON-8: context_assembly_log write ──────────────────────────
+          // Per-layer token breakdown derived from the validToolResults grouped
+          // by source-canonical-id (B.10: Math.ceil(str.length / 4) when no
+          // SDK-side count is available).
+          const tokensFor = (predicate: (toolName: string) => boolean): number => {
+            let chars = 0
+            for (const tb of validToolResults) {
+              if (!predicate(tb.tool_name)) continue
+              for (const r of tb.results) chars += r.content.length
+            }
+            return Math.ceil(chars / 4)
+          }
+          void writeContextAssemblyLog({
+            query_id: queryId,
+            l1_tokens: tokensFor(n => [
+              'chart_facts_query', 'divisional_query', 'kp_query',
+              'manifest_query', 'query_kp_ruling_planets', 'query_varshaphala',
+              'saham_query', 'temporal', 'timeline_query',
+            ].includes(n)),
+            l2_5_signal_tokens: tokensFor(n => [
+              'msr_sql', 'query_msr_aggregate', 'query_signal_state',
+            ].includes(n)),
+            l2_5_pattern_tokens: tokensFor(n => [
+              'pattern_register', 'resonance_register',
+              'contradiction_register', 'cluster_atlas',
+            ].includes(n)),
+            l4_tokens: tokensFor(n => ['remedial_codex_query', 'domain_report_query'].includes(n)),
+            vector_tokens: tokensFor(n => n === 'vector_search'),
+            cgm_tokens: tokensFor(n => n === 'cgm_graph_walk'),
+            synthesis_model_id: modelId,
+            model_max_context: modelMeta.maxInputTokens ?? null,
+            b3_compliant: citationCheck.gate_result === 'PASS',
+            citation_count: citationCheck.layer1_count ?? 0,
+            verified_citations: citationCheck.layer2_verified ?? 0,
+          })
+
           if (citationCheck.gate_result === 'ERROR' && !overrideOn) {
             throw new PipelineError({
               stage: 'synthesis',
@@ -774,7 +810,10 @@ export async function POST(request: Request) {
   })
 }
 
-async function generateConversationTitle(messages: UIMessage[]): Promise<string | null> {
+async function generateConversationTitle(
+  messages: UIMessage[],
+  monCtx?: { queryId?: string; conversationId?: string | null },
+): Promise<string | null> {
   const firstUser = messages.find(m => m.role === 'user')
   if (!firstUser) return null
   const text = firstUser.parts
@@ -784,20 +823,43 @@ async function generateConversationTitle(messages: UIMessage[]): Promise<string 
     .trim()
   if (!text) return null
 
+  const start = Date.now()
+  let usage: { inputTokens?: number; outputTokens?: number } | undefined
+  let errorCode: string | null = null
   try {
     // Pinned to the cheapest fast model regardless of the user's picked chat
     // model — titles are short and latency-sensitive.
-    const { text: title } = await generateText({
+    const result = await generateText({
       model: resolveModel(TITLE_MODEL_ID),
       system:
         'Summarize the user question as a concise 3-6 word chat title. No quotes, no trailing punctuation, Title Case.',
       prompt: text.slice(0, 500),
       maxOutputTokens: 40,
     })
-    const cleaned = title.replace(/^["']|["']$/g, '').trim().slice(0, 80)
+    usage = result.usage
+    const cleaned = result.text.replace(/^["']|["']$/g, '').trim().slice(0, 80)
     return cleaned || fallbackTitle(text)
-  } catch {
+  } catch (err) {
+    errorCode = err instanceof Error ? err.message : String(err)
     return fallbackTitle(text)
+  } finally {
+    if (monCtx?.queryId) {
+      void writeLlmCallLog({
+        query_id: monCtx.queryId,
+        conversation_id: monCtx.conversationId ?? null,
+        call_stage: 'title',
+        model_id: TITLE_MODEL_ID,
+        provider: resolveProvider(TITLE_MODEL_ID),
+        input_tokens: usage?.inputTokens ?? null,
+        output_tokens: usage?.outputTokens ?? null,
+        reasoning_tokens: null,
+        latency_ms: Date.now() - start,
+        cost_usd: null,
+        fallback_used: false,
+        error_code: errorCode,
+        payload: null,
+      })
+    }
   }
 }
 

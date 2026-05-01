@@ -37,6 +37,7 @@ import { runCheckpoint5_5 } from '@/lib/checkpoints/checkpoint_5_5'
 import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
 import { countSignalCitations } from './citation_check'
+import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 
 import type {
   SynthesisRequest,
@@ -376,6 +377,27 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           usage?.outputTokens ?? 0,
           0,
         )
+
+        // ── MON-5: llm_call_log write (synthesis stage) ──────────────────────
+        // Fire-and-forget. reasoning_tokens populated only for models that
+        // surface a separate reasoning trace (deepseek-reasoner today).
+        void writeLlmCallLog({
+          query_id: query_plan.query_plan_id,
+          conversation_id: conversation_id ?? null,
+          call_stage: 'synthesis',
+          model_id: selected_model_id,
+          provider: resolveProvider(selected_model_id),
+          input_tokens: usage?.inputTokens ?? null,
+          output_tokens: usage?.outputTokens ?? null,
+          reasoning_tokens: isR1 && r1Reasoning
+            ? Math.ceil(r1Reasoning.length / 4)
+            : null,
+          latency_ms: Date.now() - synthesisStartMs,
+          cost_usd: null,
+          fallback_used: false,
+          error_code: finishReason === 'error' ? finishReason : null,
+          payload: null,
+        })
 
         // ── Hook 3: Checkpoint 8.5 (post-synthesize) ─────────────────────────
         // Runs async in onFinish after stream completes. Halt verdict is logged
