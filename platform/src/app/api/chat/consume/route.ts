@@ -41,7 +41,7 @@ import { loadManifest } from '@/lib/bundle/manifest_reader'
 import { runAll, summarize } from '@/lib/validators/index'
 import { createOrchestrator } from '@/lib/synthesis/index'
 import { validateCitations } from '@/lib/synthesis/citation_check'
-import { PipelineError } from '@/lib/router/errors'
+// PipelineError import removed — citation gate no longer throws post-stream (see citation_error trace event)
 import { createAuditConsumer } from '@/lib/audit/consumer'
 import { traceEmitter } from '@/lib/trace/emitter'
 import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
@@ -557,12 +557,9 @@ export async function POST(request: Request) {
         // Field destination context_assembly_log.verified_citations lands with
         // W2-SCHEMA; until then we keep the result local and log.
         //
-        // ARCHITECTURE NOTE: gate errors are captured into deferredGateError and
-        // thrown AFTER persistence. Do NOT throw from inside the gate try block —
-        // doing so short-circuits replaceConversationMessages, which silently drops
-        // both the user and assistant messages from the DB and prevents title
-        // generation. The gate result must never corrupt conversation state.
-        let deferredGateError: PipelineError | null = null
+        // Gate errors are logged + traced but never thrown post-stream.
+        // Throwing inside onFinish propagates into the HTTP pipe machinery,
+        // causing "failed to pipe response" not a clean stream error.
         try {
           const assistantMsg = finalMessages.filter((m) => m.role === 'assistant').at(-1)
           const outputText = extractText(assistantMsg?.parts ?? [])
@@ -643,10 +640,34 @@ export async function POST(request: Request) {
           })
 
           if (citationCheck.gate_result === 'ERROR' && !overrideOn) {
-            // Capture error; throw is deferred until after persistence below.
-            deferredGateError = new PipelineError({
-              stage: 'synthesis',
-              reason: `[citation_gate_l2] ${citationCheck.gate_reason}`,
+            // Do NOT throw — onFinish fires after the HTTP response body is
+            // already being piped. Throwing here propagates into the pipe
+            // machinery, not into a clean stream-error part, causing
+            // "failed to pipe response" on the server and "Network error" on
+            // the client. The user already received the truncated response;
+            // throwing post-hoc neither retracts it nor surfaces a meaningful
+            // message. Instead: hard-block log + trace event for visibility.
+            // If enforcement is needed, gate pre-stream (before synthesis starts).
+            console.error(
+              `[consume:v2] citation_gate_l2 HARD_BLOCK (non-throwing) ` +
+              `query_id=${queryId} reason="${citationCheck.gate_reason}"`
+            )
+            traceEmitter.emitStep({
+              event: 'step_done',
+              query_id: queryId,
+              step: {
+                query_id: queryId,
+                conversation_id: finalConversationId,
+                step_seq: nextSeq(),
+                step_name: 'citation_error',
+                step_type: 'deterministic',
+                status: 'error',
+                started_at: new Date().toISOString(),
+                completed_at: new Date().toISOString(),
+                latency_ms: 0,
+                data_summary: { result: citationCheck.gate_reason, citation_count: citationCheck.layer1_count },
+                payload: {},
+              },
             })
           }
         } catch (err) {
@@ -696,10 +717,8 @@ export async function POST(request: Request) {
             // Non-fatal: prediction ledger write failure does not block the response.
           }
         }
-        // Deferred gate error: throw now that persistence has completed. The
-        // AI SDK surfaces this as a stream error to the client, which is the
-        // intended behaviour — but messages are already in the DB by this point.
-        if (deferredGateError) throw deferredGateError
+        // Note: deferredGateError pattern removed — see citation_gate block above.
+        // Citation gate errors are logged and traced but never thrown post-stream.
       },
       onError: (error: unknown) => {
         const msg = error instanceof Error ? error.message : String(error)
@@ -753,6 +772,11 @@ export async function POST(request: Request) {
     stopWhen: stepCountIs(5),
     maxOutputTokens: modelMeta.maxOutputTokens,
     experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+    // NIM retry guard — same as single_model_strategy. maxRetries: 0 prevents
+    // the 3-attempt cycle (AI_RetryError after 3× headers-timeout ≈ 5+ min).
+    // nimFetch in nvidia.ts enforces a 30 s hard abort, so worst-case hang
+    // for a dead NIM endpoint is ~30 s, not 5+ minutes.
+    ...(modelMeta.provider === 'nvidia' && { maxRetries: 0 }),
     // Google-specific: disable safety filters + cap thinking budget.
     // See resolver.googleProviderOptions for full rationale.
     ...(googleProviderOptions(modelId) && {

@@ -499,6 +499,10 @@ disagreement_register_entry:
       result: "Native verdict: R3 (RE-GROUND). Specific rewrite direction provided: keep 'identity lock' framing; replace 'Saturn governs both the D9 Karakamsa and D1 AL' with explicit two-step language — Saturn as AL lord (direct), Saturn as dispositor of Mercury in Capricorn 10H Vargottama where Mercury rules the D9 Karakamsa (Gemini), creating the Saturn-Mercury identity axis across the Capricorn-Gemini spine. [EXTERNAL_COMPUTATION_REQUIRED] added with explicit JH-export spec (D9 chart for native 1984-02-05 10:43 IST Bhubaneswar; verify Moon D9 placement confirming Gemini Karakamsa; verify Mercury D1 placement in Capricorn). PATTERN_REGISTER PAT.008 status set to needs_verification; re_validation_status flipped gemini_conflict → resolved_pending_ecr."
       timestamp: 2026-05-01
       session_id: M3-W1-A4-DIS009-DISPOSITION
+    - step: native_arbitration
+      result: "NAP.M4.3 / AC.M4A.8 ruling: Option Y — carry forward. JH access not currently operationalised on native's hardware; M4 critical path is calibration not astrological re-derivation; DIS.009 R3 rewrite already encodes a stable needs_verification state. Match_rate filter per SHADOW_MODE_PROTOCOL_v1_0.md §3.2 (match_rate < 0.4 → shadow-only indefinitely) serves as the empirical cross-check on the asserted D9 chart state for the 35 D9-dependent MSR signals during M4-B calibration. Status remains resolved-R3 (pending ECR). KR.M3A.JH-EXPORT carries forward to HANDOFF_M4_TO_M5 inherited open items. Next pursuit window: M5 open (alongside Sthana + Drik Shadbala and Narayana Dasha JH verification per ED.1). Disposition recorded in 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md §4."
+      timestamp: 2026-05-02
+      session_id: M4-A-S2-T3-SHADOW-PROTOCOL
   status: resolved
   resolution: >
     R3 (RE-GROUND) executed at M3-W1-A4-DIS009-DISPOSITION (2026-05-01) per native verdict.
@@ -528,6 +532,8 @@ disagreement_register_entry:
       linkage: evidence
     - path: 00_ARCHITECTURE/DIS009_ANALYSIS_v1_0.md
       linkage: evidence
+    - path: 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md
+      linkage: native_arbitration_record
 ```
 
 ---

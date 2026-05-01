@@ -11599,3 +11599,76 @@ AC.T1R3.6 PASS (partition: "training" on all 23 records).
 AC.T1R3.7 PASS (only the two declared output files touched; event_match_records_batch2.json not created or modified — confirmed via `git status --short`; FORENSIC, 025_HOLISTIC_SYNTHESIS, platform/src all clean).
 
 Commit: 79a6810
+
+---
+
+**M4-A-INTEGRATION-PASS-R3** | 2026-05-02 | CLOSED
+
+Round 3 integration pass for M4-A parallel execution. Administrative session merging T1 (79a6810) + T2 (d53e42d) + T3 (c819dbb) outputs.
+
+**Merge: event_match_records_batch1.json + event_match_records_batch2.json → lel_event_match_records.json**
+46 records total (37 training / 9 held_out). Stray per-record `schema_version` field stripped from 23 T1 records (batch1 artifact — not schema-compliant). EVT.2008.06.09.01 and EVT.2009.06.XX.01 partition flipped training→held_out per T2 held_out_manifest. Match rate stats: all mean=0.685 (min=0.067, max=1.000); training mean=0.630; held_out mean=0.913. Held-out IDs: EVT.2008.06.09.01, EVT.2009.06.XX.01, EVT.2017.03.XX.01, EVT.2018.11.28.01, EVT.2019.05.XX.01, EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2025.05.XX.01, EVT.2026.01.XX.01.
+
+**Schema update: lel_event_match_records_schema.json v1.0 → v1.1**
+Added: `rubric_option` (outer level + per-record, enum A/B/C); `total_events`, `held_out_count`, `training_count` (integer counts); `held_out_manifest` (object with decade_distribution, held_out_event_ids, selection_criteria, note). All added to `required` arrays. `additionalProperties: false` retained at all levels. jsonschema VALIDATION PASS confirmed.
+
+**NAP.M4.1 status:** APPROVED — Option B (graded proximity: 1.0 exact / 0.7 ±7d / 0.5 ±30d / 0.2 ±90d / 0.0 outside; dasha+transit axes via max combiner). Approved by native during Round 3 T1 execution. CALIBRATION_RUBRIC_v1_0.md status updated accordingly.
+
+**IS.8(a) status:** DISCHARGED by T1/REDTEAM_M4A_v1_0.md (PASS 6/6 axes; 0 CRITICAL/HIGH/MEDIUM; 1 LOW = KR.M4A.RT.LOW.1). red_team_counter reset 3→0.
+
+**KR.M4A.RT.LOW.1:** Commit 0793719 (Round 2 integration) has malformed root tree per `git fsck` (duplicate 01_FACTS_LAYER entry from git plumbing script `grep -v` bug). On-disk content correct; data intact. Carried forward for native scheduling of tree-rewrite.
+
+**Open NAPs after this pass:**
+- NAP.M4.4 (SHADOW_MODE_PROTOCOL §3 promotion criteria) — AWAITING_NATIVE_APPROVAL.
+- NAP.M4.3 / AC.M4A.8 (JH_EXPORT_DISPOSITION Option X or Y) — AWAITING_NATIVE_DECISION.
+- NAP.M4.2 (LEL_GAP_AUDIT 6 elicit-recommended gaps) — AWAITING_NATIVE_REVIEW.
+
+**CURRENT_STATE update:** v1.2 → v1.3. red_team_counter 3→0. last_session_id → M4-A-INTEGRATION-PASS-R3. next_session_objective → M4-A close + M4-B entry (NAP approvals first).
+
+**Files changed this pass:**
+- `06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json` — CREATED (merged, validated)
+- `06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records_schema.json` — v1.0→v1.1 (schema amended)
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — v1.2→v1.3
+- `00_ARCHITECTURE/SESSION_LOG.md` — this entry appended
+
+Commit: 4d4d33a
+
+---
+
+**M4-A-S2-T3-SHADOW-PROTOCOL** | 2026-05-02 | NAP-DECISIONS APPEND | CLOSED
+
+Three open NAPs from M4-A-INTEGRATION-PASS-R3 ruled by native:
+
+| NAP | Decision | Action |
+|---|---|---|
+| NAP.M4.4 | APPROVED — §3 as written | M4-B weight writes may begin |
+| NAP.M4.3 / AC.M4A.8 | Option Y — carry forward | DIS.009 stays resolved-R3-pending-ECR; target M5 for JH |
+| NAP.M4.2 | Defer 5 gaps; patch GAP.M4A.04 | Promote 2019/2023 residential events as joint travel entries in next LEL minor bump |
+
+**NAP.M4.4 — SHADOW_MODE_PROTOCOL §3 promotion criteria APPROVED.**
+SHADOW_MODE_PROTOCOL_v1_0.md frontmatter flipped DRAFT → 1.0; status AWAITING_NATIVE_APPROVAL → APPROVED. §3 PROPOSED banner replaced with binding-criteria banner (N≥3 observations, match_rate variance ≤0.3, two-pass approval, native-no-hold; validity margin match_rate ≥0.4, below → shadow-only indefinitely). §8 approval-ledger rows flipped PENDING → APPROVED for all four (§3, §3.2, §4, §7). §9 changelog amended with NAP-decisions row. M4-B-S1 may proceed with first LL.1 weight write under these criteria once M4-A closes.
+
+**NAP.M4.3 / AC.M4A.8 — JH_EXPORT_DISPOSITION Option Y (carry forward).**
+JH_EXPORT_DISPOSITION_v1_0.md status AWAITING_NATIVE_DECISION → NATIVE_DECIDED. §4 native_decision = "Option Y — carry forward"; rationale: JH not currently operationalised on native's hardware; M4 critical path is calibration not re-derivation; DIS.009 R3 already encodes stable needs_verification; match_rate <0.4 → shadow-only filter is empirical cross-check on D9 chart for 35 D9-dependent MSR signals. Target M5 next pursuit window (alongside Sthana + Drik Shadbala and Narayana Dasha JH verification per ED.1). DISAGREEMENT_REGISTER DIS.009 gains new native_arbitration row recording carry-forward; status remains `resolved-R3 (pending ECR)`. linked_artifacts amended to include JH_EXPORT_DISPOSITION as native_arbitration_record. KR.M3A.JH-EXPORT carries forward to HANDOFF_M4_TO_M5 inherited open items at M4-D close. AC.M4A.8 DISCHARGED via path (b) (defer with rationale).
+
+**NAP.M4.2 — LEL_GAP_AUDIT dispositions (1 patch + 5 deferred + 5 accept).**
+LEL_GAP_AUDIT_v1_0.md v1.0 → v1.1. New §5.4 native-dispositions section added.
+- **Patch:** GAP.M4A.04 (travel sparsity) — promote 2019 US arrival event and 2023 US-departure / India-return event from current `event_domain: residential` (mapped-to-other) to joint `residential+travel` in next LEL minor bump (LEL v1.5 → v1.6, owned by T1 at next LEL maintenance pass). Travel-category cell value 1 → 3; gives CVG.03 / SIG.MSR.004 / SIG.MSR.005 foreign-land stack two additional anchor events for M4-B calibration. Once patch lands: GAP.M4A.04 status flips deferred-pending-patch → partially_closed. Remainder (international business travel, pilgrimages, return visits) carries forward as deferred.
+- **Deferred (5):** GAP.M4A.01 (1990s education), GAP.M4A.02 (1990s family), GAP.M4A.03 (2010s health), GAP.M4A.05 (1984–2019 psychological), GAP.M4A.06 (1984–2019 spiritual). Carry forward as candidates for future LEL minor pass at native discretion. M4-B calibration proceeds with current LEL v1.5; signal-weight estimates for affected domains carry wider uncertainty bands per §6.
+- **Accept (5):** GAP.M4A.07, .08, .09, .10, .11 retain default `accept` disposition.
+AC.M4A.7 + NAP.M4.2 DISCHARGED.
+
+**Files changed this append:**
+- `06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md` — DRAFT → 1.0 APPROVED (frontmatter, §3 banner, §8 ledger, §9 changelog).
+- `00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md` — AWAITING → NATIVE_DECIDED (frontmatter, §4 populated, §5 changelog amended).
+- `00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md` — DIS.009 arbitration_steps_taken + linked_artifacts amended.
+- `06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md` — v1.0 → v1.1 (§5.4 native dispositions, §8 changelog amended, frontmatter).
+- `00_ARCHITECTURE/SESSION_LOG.md` — this entry appended.
+
+**Open NAPs after this append:**
+- NAP.M4.5 (M4-B-class — native spot-check of LL.1 weight assignments at M4-B close).
+- NAP.M4.6 (M4-C-class — LL.7 discovery prior rubric at M4-C entry or M4-B close).
+- NAP.M4.7 (M4-D-class — M4 macro-phase close approval).
+M4-A is now unblocked for close (AC.M4A.7 + AC.M4A.8 DISCHARGED; AC.M4A.3 + NAP.M4.1 already discharged at Round 3).
+
+Commit: (this append)

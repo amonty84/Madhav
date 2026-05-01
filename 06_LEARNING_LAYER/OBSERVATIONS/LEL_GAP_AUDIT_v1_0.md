@@ -1,11 +1,14 @@
 ---
 artifact: 06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md
-version: 1.0
+version: "1.1"
 status: COMPLETE
 produced_during: M4-A-T4-GAP-AUDIT
 produced_on: 2026-05-01
+last_updated_on: 2026-05-02
+last_updated_in_session: M4-A-S2-T3-SHADOW-PROTOCOL (NAP-decisions append)
 lel_version_audited: 1.3 (46 events)
 implements: PHASE_M4_PLAN_v1_0.md AC.M4A.7
+native_approval_point: NAP.M4.2 (PHASE_M4_PLAN §5) — DECIDED 2026-05-02 (see §5.4 Native dispositions)
 expose_to_chat: true
 native_id: "abhisek"
 ---
@@ -217,7 +220,7 @@ Eight gaps meet the three-test threshold. Two single-cell gaps and one multi-dec
 - **Why a gap:** Studenthood (financial); LEL §5 has no inner-turning-point in 2000–2007 but does locate one in 2007 which is captured as health/loss-related rather than psychological-tagged (psychological); no devotional events surfaced (spiritual).
 - **Default disposition:** **accept** across all three. The 2007 inner turning-point may surface as a psychological discrete event after GAP.M4A.05 elicitation; if so, it would partially close this cell.
 
-### §5.3 — Disposition tally
+### §5.3 — Disposition tally (default — pre-NAP.M4.2)
 
 | Disposition | Count | Gap IDs |
 |---|---|---|
@@ -226,6 +229,46 @@ Eight gaps meet the three-test threshold. Two single-cell gaps and one multi-dec
 | **infer** | 0 | — |
 
 Six elicit-recommended gaps cluster around the schooling decade (.01, .02), the chronic-condition years (.03), the foreign-land architecture (.04), the inner-life arc (.05), and the spiritual baseline (.06). Each elicit recommendation is a candidate for a follow-up native interview round — out of M4-A-T4 scope; native to triage and route to T1 (LEL writes) if approved.
+
+### §5.4 — Native dispositions (NAP.M4.2 — DECIDED 2026-05-02)
+
+NAP.M4.2 ruling at M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append:
+
+- **Defer 5 elicit-recommended gaps.** GAP.M4A.01 (1990s education), GAP.M4A.02
+  (1990s family), GAP.M4A.03 (2010s health), GAP.M4A.05 (1984–2019 psychological),
+  GAP.M4A.06 (1984–2019 spiritual) → status `deferred`. Carry forward as candidates
+  for a future LEL minor-version pass at native discretion (no immediate elicitation
+  round). M4-B calibration proceeds with current LEL v1.5; signal-weight estimates
+  for the affected domains (mind, spirit, education-1990s, family-1990s, health-2010s)
+  will carry wider uncertainty bands per §6 assessment.
+- **Patch GAP.M4A.04 (travel sparsity).** Native disposition: `patch`. Promote the
+  2019 US arrival event and the 2023 US-departure / India-return event from their
+  current `residential` (mapped-to-other) classification into joint
+  `residential+travel` entries in the next LEL minor bump (LEL v1.5 → v1.6, owned
+  by T1 at next LEL maintenance pass). This raises the travel-category cell value
+  from 1 to 3 across the corpus and gives the foreign-land signal stack (CVG.03,
+  SIG.MSR.004, SIG.MSR.005) two additional anchor events for M4-B calibration. No
+  further elicitation required for GAP.M4A.04 at this time. Once the patch lands,
+  GAP.M4A.04 status flips `deferred-pending-patch` → `partially_closed`; remainder
+  of the gap (international business travel, pilgrimages, return visits during US
+  years) carries forward as deferred.
+- **Accept 5 gaps unchanged.** GAP.M4A.07, .08, .09, .10, .11 retain their default
+  `accept` disposition.
+
+| Disposition (NAP.M4.2) | Count | Gap IDs |
+|---|---|---|
+| **patch (LEL v1.6 promote 2019/2023 residential → joint travel entries)** | 1 | GAP.M4A.04 |
+| **deferred (carry as candidate for future LEL minor pass)** | 5 | GAP.M4A.01, .02, .03, .05, .06 |
+| **accept** | 5 | GAP.M4A.07, .08, .09, .10, .11 |
+| **infer** | 0 | — |
+
+**Action queued for next LEL maintenance pass (T1-class write):**
+LEL v1.5 → v1.6 minor bump. EVT entries for the 2019 US arrival and the 2023
+US-departure / India-return move from `event_domain: residential` (mapped-to-other)
+to joint `residential+travel`. Changelog entry references this NAP.M4.2 ruling and
+GAP.M4A.04 patch close. Audit re-run not required (the patch is a re-classification,
+not a new event), but the audit's §3.2 events-per-category column should be
+incremented (travel: 1 → 3) at the next audit refresh.
 
 ## §6 — Overall completeness assessment
 
@@ -243,3 +286,4 @@ The LEL v1.3 is a well-constructed acharya-grade calibration corpus for the char
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0 | 2026-05-01 | Claude (M4-A-T4-GAP-AUDIT) | Initial audit. 46-event extraction; decade × category matrix; eleven `GAP.M4A.NN` entries; six elicit-recommended; five accept; zero infer. |
+| 1.1 | 2026-05-02 | Native + Claude (M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions) | NAP.M4.2 ruling recorded. §5.4 added: 1 patch (GAP.M4A.04 — promote 2019/2023 residential events to joint residential+travel in next LEL minor bump), 5 deferred (GAP.M4A.01, .02, .03, .05, .06), 5 accept (unchanged). Action queued for T1 next LEL maintenance pass (LEL v1.5 → v1.6). AC.M4A.7 + NAP.M4.2 DISCHARGED. |

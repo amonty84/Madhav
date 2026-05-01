@@ -273,17 +273,22 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     // hard maximum. The model's maxOutputTokens is the absolute ceiling; the style
     // cap is a tighter practical limit so answers stay focused.
     //
-    //   concise  → 800  tokens  (~600 words)  — direct answer, no padding
-    //   detailed → 2000 tokens  (~1500 words) — structured with evidence
-    //   technical→ 3000 tokens  (~2200 words) — full derivation + citations
+    // Keys MUST match ConsumeStyle values ('acharya' | 'brief' | 'client').
+    // Previous keys were 'concise'/'detailed'/'technical' — none matched the
+    // actual ConsumeStyle union, causing ALL queries to fall through to the
+    // ?? 2000 default and get truncated at ~1975 tokens (finishReason: "length").
+    //
+    //   brief   → 1200 tokens  (~900 words)  — direct answer, no padding
+    //   client  → 3500 tokens  (~2600 words) — structured with evidence
+    //   acharya → 8000 tokens  (~6000 words) — full acharya-grade depth
     //
     // These caps apply to the synthesis output only, not to tool-use steps.
     const STYLE_OUTPUT_CAP: Record<string, number> = {
-      concise: 800,
-      detailed: 2000,
-      technical: 3000,
+      brief:   1200,
+      client:  3500,
+      acharya: 8000,
     }
-    const styleCap = STYLE_OUTPUT_CAP[style ?? 'detailed'] ?? 2000
+    const styleCap = STYLE_OUTPUT_CAP[style ?? 'acharya'] ?? 8000
     const effectiveMaxTokens = Math.min(styleCap, modelMeta?.maxOutputTokens ?? styleCap)
 
     // UQE-2 (W2-BUGS B2W-5) — temperature gate: deterministic for single-truth
@@ -294,6 +299,14 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         ? 0
         : 0.3
 
+    // NIM retry guard — the AI SDK retries failed requests up to 3 times by
+    // default (AI_RetryError). For NVIDIA NIM this triples the hang window:
+    // 3 × 30 s headers-timeout = 90 s of silence before an error surfaces.
+    // Set maxRetries: 0 so the first timeout/error reaches the caller
+    // immediately. The nimFetch wrapper in nvidia.ts already enforces a 30 s
+    // hard abort on headers, so combined the worst-case NIM hang is ~30 s.
+    const isNvidiaSynthesis = modelMeta?.provider === 'nvidia'
+
     const result = streamText({
       model: resolveModel(selected_model_id),
       messages: modelMessages,
@@ -302,6 +315,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       maxOutputTokens: effectiveMaxTokens,
       temperature: synthesisTemperature,
       experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+      ...(isNvidiaSynthesis && { maxRetries: 0 }),
       // Google-specific: disable safety filters (Jyotish content triggers
       // DANGEROUS_CONTENT mid-stream) + cap thinking budget (avoids 30-90s
       // hang before first visible token). See resolver.googleProviderOptions.

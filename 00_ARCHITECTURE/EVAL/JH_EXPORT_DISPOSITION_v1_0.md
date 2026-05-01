@@ -1,8 +1,11 @@
 ---
 artifact: 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md
-version: 1.0
-status: AWAITING_NATIVE_DECISION
+version: "1.0"
+status: NATIVE_DECIDED
 native_approval_point: AC.M4A.8 (PHASE_M4_PLAN §3.1) — equivalent to NAP.M4.3 (§5)
+native_decision: "Option Y — carry forward"
+native_decided_on: 2026-05-02
+native_decided_in_session: M4-A-S2-T3-SHADOW-PROTOCOL (NAP-decisions append)
 produced_during: M4-A-S2-T3-SHADOW-PROTOCOL
 produced_on: 2026-05-02
 covers: KR.M3A.JH-EXPORT disposition (DIS.009 verification decision)
@@ -14,10 +17,10 @@ related_external_dependency: ED.1 (Jagannatha Hora export integration)
 # JH_EXPORT_DISPOSITION — Native decision on KR.M3A.JH-EXPORT (DIS.009 verification path)
 
 ```
-STATUS: AWAITING_NATIVE_DECISION.
-This document closes AC.M4A.8 once the native fills in §4.
-Until then, DIS.009 status remains `resolved-R3 (pending ECR)` per the
-M3-W1-A4-DIS009-DISPOSITION close (2026-05-01).
+STATUS: NATIVE_DECIDED 2026-05-02 — Option Y (carry forward).
+NAP.M4.3 / AC.M4A.8 discharged via path (b) (defer with rationale).
+DIS.009 remains `resolved-R3 (pending ECR)`; target M5 for JH verification.
+KR.M3A.JH-EXPORT carries to HANDOFF_M4_TO_M5 inherited open items at M4 close.
 ```
 
 ---
@@ -201,36 +204,36 @@ NAP.M4.3` default ("Carry forward if JH not yet operationalised; document ration
 
 ---
 
-## §4 — AWAITING NATIVE DECISION
-
-> The native fills in this section. Until then, the document remains
-> `AWAITING_NATIVE_DECISION` and AC.M4A.8 is unmet.
+## §4 — NATIVE DECISION (RECORDED 2026-05-02)
 
 ```yaml
-native_decision: ""              # "Option X — pursue now" | "Option Y — carry forward"
-native_rationale: ""             # brief note: why this option, and (if Option Y)
-                                 # which of the three rationales in §3 applies plus
-                                 # the next pursuit window confirmation
-recorded_at: ""                  # ISO date when native records the decision
-recorded_in_session: ""          # session ID that captured the decision
-recorded_in_session_log_entry: ""  # SESSION_LOG entry ID/anchor referencing this
+native_decision: "Option Y — carry forward"
+native_rationale: >
+  JH access is not currently operationalised on the native's hardware; M4 critical
+  path is calibration not astrological re-derivation; DIS.009 R3 rewrite already
+  encodes a stable needs_verification state and the [EXTERNAL_COMPUTATION_REQUIRED]
+  block on PAT.008 is the audit handle for future verification. Match_rate filter
+  per SHADOW_MODE_PROTOCOL §3.2 (match_rate < 0.4 → shadow-only indefinitely)
+  serves as the empirical cross-check on the asserted D9 chart state for the
+  35 D9-dependent MSR signals during M4-B calibration. Target M5 open as the next
+  meaningful pursuit window, alongside broader external-computation infrastructure
+  (Sthana + Drik Shadbala, Narayana Dasha — also flagged for JH per ED.1).
+recorded_at: 2026-05-02
+recorded_in_session: M4-A-S2-T3-SHADOW-PROTOCOL (NAP-decisions append)
+recorded_in_session_log_entry: "SESSION_LOG.md M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append"
 ```
 
-**If Option X is selected:** the next M4-A session must execute the JH verification
-before M4-A closes — it becomes the M4-A-S3 (or M4-A-S4) primary deliverable. AC.M4A.8
-discharge requires the JH export artifact + DIS.009 status update + PATTERN_REGISTER
-PAT.008 status update.
-
-**If Option Y is selected:** DIS.009 status remains `resolved-R3 (pending ECR)`; this
-document closes with the §4 block populated; the carry-forward is recorded in
-`HANDOFF_M4_TO_M5_v1_0.md §Inherited open items` at M4-D close; AC.M4A.8 discharge is
-the documented carry-forward itself (path (b) per AC.M4A.8 phrasing — "native
-explicitly defers with rationale recorded in SESSION_LOG").
-
-**Either way:** DIS.009's `arbitration_steps_taken` block in
-`DISAGREEMENT_REGISTER_v1_0.md` gains a new row recording this decision, with
-`step: native_arbitration`, `result: <Option X | Option Y, with rationale>`,
-`timestamp: <recorded_at>`, `session_id: <recorded_in_session>`.
+**Option Y selected (2026-05-02).** Consequences applied:
+- DIS.009 status remains `resolved-R3 (pending ECR)` in
+  `DISAGREEMENT_REGISTER_v1_0.md`; new `arbitration_steps_taken` row recording the
+  M4 carry-forward decision appended (see DIS.009 entry).
+- This document closes with §4 populated; AC.M4A.8 discharged via path (b).
+- KR.M3A.JH-EXPORT carries forward to `HANDOFF_M4_TO_M5_v1_0.md §Inherited open items`
+  at M4-D close. Next pursuit window: M5 open (alongside JH integration for Sthana +
+  Drik Shadbala and Narayana Dasha verification per ED.1).
+- M4-B calibration proceeds for the 35 D9-dependent MSR signals under the asserted
+  D9 chart state; match_rate < 0.4 → shadow-only indefinitely per
+  `SHADOW_MODE_PROTOCOL §3.2` is the empirical cross-check.
 
 ---
 
@@ -241,8 +244,12 @@ explicitly defers with rationale recorded in SESSION_LOG").
   defaults to Option Y based on (a) 35-signal D9 coverage manageable under shadow-mode
   filter, (b) M4 critical path is calibration not re-derivation, (c) DIS.009 R3
   rewrite already encodes a stable needs_verification state. Native may override.
+- **v1.0 (2026-05-02, NAP-decisions append):** NAP.M4.3 / AC.M4A.8 ruled by native:
+  Option Y — carry forward. §4 block populated; status flipped AWAITING_NATIVE_DECISION
+  → NATIVE_DECIDED. DIS.009 register updated with native_arbitration row. Target M5 for
+  JH verification.
 
 ---
 
-*End of JH_EXPORT_DISPOSITION_v1_0.md. Document closes AC.M4A.8 (NAP.M4.3) when §4
-is populated by the native.*
+*End of JH_EXPORT_DISPOSITION_v1_0.md. AC.M4A.8 / NAP.M4.3 DISCHARGED 2026-05-02 via
+Option Y (carry forward).*

@@ -1,8 +1,10 @@
 ---
 artifact: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md
-version: 1.0-DRAFT
-status: AWAITING_NATIVE_APPROVAL
-native_approval_point: NAP.M4.4 (§3 Promotion criteria — required before first M4-B weight write)
+version: "1.0"
+status: APPROVED
+native_approval_point: NAP.M4.4 (§3 Promotion criteria — APPROVED 2026-05-02 as written)
+native_approved_on: 2026-05-02
+native_approved_in_session: M4-A-S2-T3-SHADOW-PROTOCOL (NAP-decisions append)
 produced_during: M4-A-S2-T3-SHADOW-PROTOCOL
 produced_on: 2026-05-02
 governs: LL.1 through LL.7 (M4-B and M4-C shadow registers)
@@ -14,10 +16,10 @@ related_acceptance_criteria: AC.M4B.2, AC.M4B.6, AC.M4B.7, AC.M4B.9
 # SHADOW_MODE_PROTOCOL — Per-mechanism shadow-to-production discipline for the Learning Layer
 
 ```
-STATUS: 1.0-DRAFT — AWAITING_NATIVE_APPROVAL.
+STATUS: 1.0 — APPROVED 2026-05-02 (NAP.M4.4 APPROVED — §3 as written).
 This document is the gate for every weight write in M4-B and M4-C.
-No production register is written until §3 promotion criteria are
-native-approved (NAP.M4.4) and the M4-B-S1 session opens.
+M4-B weight writes may begin once M4-A closes (event-match records exist;
+held-out partition identified). Promotion criteria in §3 are now binding.
 ```
 
 ---
@@ -62,11 +64,12 @@ created at M4-C-S1. The protocol document itself does not pre-build any register
 
 ## §3 — Promotion criteria (NAP.M4.4 — native approval point)
 
-> **PROPOSED — awaiting NAP.M4.4 approval before first weight write at M4-B-S1.**
-> The criteria below are Claude's first-pass proposal. Native may approve as written,
-> approve with modifications, or replace. Until native sign-off is recorded in
-> `SESSION_LOG.md` at M4-B-S1 open, the LL.1 shadow register may exist but no weight
-> may be promoted to `signal_weights/production/`.
+> **APPROVED 2026-05-02 (NAP.M4.4 — §3 as written).** Native ruling recorded in
+> `SESSION_LOG.md` at the M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append entry.
+> The criteria below are now binding for all M4-B and M4-C weight writes. M4-B-S1
+> may proceed with the LL.1 shadow register write under these criteria; promotion
+> to `signal_weights/production/` requires §3.1 (a)–(d) AND §3.2 validity margin
+> ≥ 0.4 simultaneously satisfied.
 
 ### §3.1 — LL.1 promotion criteria (primary mechanism)
 
@@ -261,14 +264,14 @@ n=1 caveat for cohort-validated signals.
 
 | Approval | Required at | Status | Approved by | Approved on | Reference |
 |---|---|---|---|---|---|
-| §3 promotion criteria (NAP.M4.4) | Before first M4-B-S1 weight write | PENDING | — | — | This document §3 |
-| §3.2 validity margin (≥0.4 match_rate) | Bundled with §3 promotion criteria | PENDING | — | — | This document §3.2 |
-| §4 kill-switch list adequacy | Before first weight write | PENDING | — | — | This document §4 |
-| §7 disclaimer text exact wording | Before first weight write | PENDING | — | — | This document §7 |
+| §3 promotion criteria (NAP.M4.4) | Before first M4-B-S1 weight write | APPROVED | native | 2026-05-02 | This document §3 |
+| §3.2 validity margin (≥0.4 match_rate) | Bundled with §3 promotion criteria | APPROVED | native | 2026-05-02 | This document §3.2 |
+| §4 kill-switch list adequacy | Before first weight write | APPROVED | native | 2026-05-02 | This document §4 |
+| §7 disclaimer text exact wording | Before first weight write | APPROVED | native | 2026-05-02 | This document §7 |
 
-Each row flips to `APPROVED` only when native records the approval in
-`SESSION_LOG.md` referencing this document by version (`SHADOW_MODE_PROTOCOL_v1_0.md
-v1.0-DRAFT § N`).
+NAP.M4.4 ruling: APPROVED — §3 as written. M4-B weight writes may begin once
+M4-A closes. Native approval recorded in `SESSION_LOG.md`
+M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions entry (2026-05-02).
 
 ---
 
@@ -278,8 +281,12 @@ v1.0-DRAFT § N`).
   M4-A close stretch; deliverable for AC.M4B.6 prerequisite + NAP.M4.4 native review.
   §3 promotion criteria PROPOSED — awaiting native approval before first M4-B weight
   write.
+- **v1.0 (2026-05-02, M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append):** NAP.M4.4
+  APPROVED — §3 as written. Status flipped DRAFT → APPROVED. §8 approval ledger
+  rows flipped PENDING → APPROVED. §3 PROPOSED banner replaced with binding-criteria
+  banner. M4-B weight writes unblocked.
 
 ---
 
-*End of SHADOW_MODE_PROTOCOL_v1_0.md DRAFT. Document is gating for every weight write
-in M4-B and M4-C; do not author shadow registers until §3 native-approved.*
+*End of SHADOW_MODE_PROTOCOL_v1_0.md. Document is gating for every weight write
+in M4-B and M4-C; §3 promotion criteria are now binding (NAP.M4.4 APPROVED 2026-05-02).*
