@@ -341,32 +341,35 @@ export const MODELS: ModelMeta[] = [
   // All models served via NVIDIA's free endpoint (https://integrate.api.nvidia.com/v1).
   // Cost fields reflect the free tier ($0.00) — update if billing is activated.
   //
-  // Three models are user-selectable for synthesis (role='synthesis'|'both');
-  // three are internal-only planners (role='planner'):
+  // Confirmed-live models as of 2026-05-02 catalog check:
+  //   moonshotai/kimi-k2-instruct            ✅ — synthesis primary
+  //   nvidia/llama-3.3-nemotron-super-49b-v1 ✅ — deep planner (Nemotron Ultra successor)
+  //   nvidia/nemotron-3-super-120b-a12b      ✅ — context_assembly + fast planner
+  //   meta/llama-3.1-8b-instruct             ✅ — worker
   //
-  // Synthesis routing (when user picks a NIM synthesis model):
-  //   deepseek-ai/deepseek-v4-pro     — 1.6T params, 1M context, Think Max CoT
-  //   nvidia/llama-3.1-nemotron-ultra-253b-v1 — 253B, 128K, 97% MATH-500
-  //   moonshotai/kimi-k2-instruct     — 1T/32B MoE, 256K, agent swarm
+  // Dead / removed from NIM free tier (do not route traffic here):
+  //   deepseek-ai/deepseek-v4-pro            ⏱ TIMEOUT (no free-tier access)
+  //   nvidia/llama-3.1-nemotron-ultra-253b-v1 ❌ HTTP 404 (not on free tier)
+  //   qwen/qwen3-235b-a22b                   ⚠️ HTTP 410 EOL
+  //   All other DeepSeek + Qwen models       ❌/⚠️ 404 or EOL
   //
-  // Planner routing (internal, via getNvidiaPlanner / getNvidiaContextAssembler):
-  //   multi_domain | remedial | holistic → nemotron-ultra-253b  (deep CoT, precision)
-  //   planetary | dasha | transit        → qwen3-235b-a22b      (fast structured JSON)
-  //   context_assembly                   → nemotron-3-super-120b (1M, RULER-1M 91.64)
-  //   summarization / fallback           → llama-3.1-8b         (worker)
+  // Planner routing (via getNvidiaPlanner / getNvidiaContextAssembler):
+  //   multi_domain | remedial | holistic → nemotron-super-49b-v1  (deep CoT, Nemotron Ultra successor)
+  //   planetary | dasha | transit        → nemotron-3-super-120b  (fast structured JSON, 1M ctx)
+  //   context_assembly                   → nemotron-3-super-120b  (1M ctx, RULER-1M 91.64)
+  //   summarization / fallback           → llama-3.1-8b           (worker)
 
   // — User-selectable synthesis models —
   {
-    // PRIMARY SYNTHESIS MODEL (CALL_TYPE_ROUTING.synthesis.primary).
-    // 1.6T total / 49B active MoE. 1M-token context window.
-    // Three reasoning modes: Non-think (fast) | Think High | Think Max (full CoT).
-    // Largest model on NIM — can receive entire MARSYS L2.5 corpus (~340K tokens)
-    // in one unbroken context, enabling true Whole-Chart-Read without chunking.
+    // DEPRECATED 2026-05-02 — smoke test: ⏱ timeout (no HTTP headers in 15s on
+    // NIM free tier). Likely not yet available on free endpoint or heavily queued.
+    // Removed from STACK_ROUTING; retained as a selectable model ID for when/if
+    // NVIDIA makes it available. Do not route synthesis traffic here until re-tested.
     id: 'deepseek-ai/deepseek-v4-pro',
     provider: 'nvidia',
     tier: 'premium',
-    label: 'DeepSeek V4 Pro (NIM)',
-    hint: 'Primary synthesis — 1.6T params, 1M context, Think Max, Whole-Chart-Read',
+    label: 'DeepSeek V4 Pro (NIM) [unavailable]',
+    hint: 'UNAVAILABLE on NIM free tier — timeout on smoke test 2026-05-02',
     speedTier: 'deep',
     maxInputTokens: 1_000_000,  // Whole-Chart-Read: full L2.5 corpus in one pass
     maxOutputTokens: 32_768,
@@ -376,14 +379,13 @@ export const MODELS: ModelMeta[] = [
     costPer1MOutput: 0.00,
   },
   {
-    // Dual-use: user-selectable synthesis AND internal deep planner.
-    // 253B dense params, 128K context. Beats DeepSeek R1 on GPQA Diamond.
-    // 97% MATH-500 — optimal for mathematical signal weighting in Jyotish synthesis.
+    // DEPRECATED 2026-05-02 — smoke test: ❌ HTTP 404 (not found on NIM free tier).
+    // Model may require a paid NIM subscription. Removed from STACK_ROUTING.
     id: 'nvidia/llama-3.1-nemotron-ultra-253b-v1',
     provider: 'nvidia',
     tier: 'premium',
-    label: 'Nemotron Ultra 253B',
-    hint: 'NVIDIA flagship — 253B CoT, 97% MATH-500, 128K context',
+    label: 'Nemotron Ultra 253B [unavailable]',
+    hint: 'UNAVAILABLE on NIM free tier — HTTP 404 on smoke test 2026-05-02',
     speedTier: 'deep',
     maxOutputTokens: 32_768,
     capabilities: ['tool-use'],
@@ -410,6 +412,23 @@ export const MODELS: ModelMeta[] = [
 
   // — Internal planner-only models —
   {
+    // DEEP PLANNER MODEL — confirmed live on NIM free tier (catalog check 2026-05-02).
+    // Successor to nvidia/llama-3.1-nemotron-ultra-253b-v1 (HTTP 404 on free tier).
+    // 49B params, Llama-3.3 base, NVIDIA RLHF-tuned for reasoning and instruction following.
+    // Used for multi_domain / remedial / holistic query planning where CoT depth matters.
+    id: 'nvidia/llama-3.3-nemotron-super-49b-v1',
+    provider: 'nvidia',
+    tier: 'mid',
+    label: 'Nemotron Super 49B',
+    hint: 'Deep planner — 49B successor to Nemotron Ultra, confirmed live on NIM free tier (internal only)',
+    speedTier: 'balanced',
+    maxOutputTokens: 32_768,
+    capabilities: ['tool-use'],
+    role: 'planner',
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
+  {
     // CONTEXT ASSEMBLY MODEL (CALL_TYPE_ROUTING.context_assembly.primary).
     // 120B total / 12B active hybrid Mamba-Transformer.
     // 1M-token context window — PRACTICAL (linear-time Mamba layers, not quadratic
@@ -430,14 +449,14 @@ export const MODELS: ModelMeta[] = [
     costPer1MOutput: 0.00,
   },
   {
-    // Fast planner for single-domain queries. 235B total / 22B active MoE.
-    // Excellent structured JSON output — used by per-tool planner for
-    // planetary/dasha/transit query classes where latency matters.
+    // DEPRECATED 2026-05-02 — smoke test: ⚠️ HTTP 410 Gone.
+    // NIM API response: "The model 'qwen/qwen3-235b-a22b' has reached its end of life."
+    // Removed from STACK_ROUTING. Retained as historical record only.
     id: 'qwen/qwen3-235b-a22b',
     provider: 'nvidia',
     tier: 'mid',
-    label: 'Qwen3 235B-A22B',
-    hint: 'Fast MoE planner — 22B active, excellent JSON output (internal only)',
+    label: 'Qwen3 235B-A22B [EOL]',
+    hint: 'END OF LIFE on NIM — HTTP 410 on smoke test 2026-05-02',
     speedTier: 'balanced',
     maxOutputTokens: 32_768,
     capabilities: ['tool-use'],
@@ -466,7 +485,9 @@ export const MODELS: ModelMeta[] = [
 // overrides this. DEFAULT_MODEL_ID is now derived from the default stack —
 // kept for backward compatibility with call sites that read it directly.
 export const DEFAULT_STACK_ID = 'nim' as const
-export const DEFAULT_MODEL_ID = 'deepseek-ai/deepseek-v4-pro' // NIM stack synthesis primary
+// Updated 2026-05-02: deepseek-ai/deepseek-v4-pro timed out on NIM free tier smoke test.
+// Routing now via kimi-k2-instruct (✅ confirmed live). DEFAULT_MODEL_ID updated to match.
+export const DEFAULT_MODEL_ID = 'moonshotai/kimi-k2-instruct' // NIM stack synthesis primary
 
 /**
  * Title generator always uses the worker of the same family as the user's
@@ -595,17 +616,23 @@ export const NVIDIA_FAST_PLANNER_QUERY_CLASSES = [
  * is responsible for checking the feature flag — this function always returns
  * a valid model ID regardless.
  *
- * Routing table:
- *   multi_domain | remedial | holistic  → nemotron-ultra-253b-v1 (deep CoT, 97% MATH-500)
- *   planetary | dasha | transit         → qwen3-235b-a22b        (fast MoE, structured JSON)
- *   everything else                     → llama-3.1-8b-instruct  (worker, minimal latency)
+ * Routing table (updated 2026-05-02 — catalog check confirmed dead models):
+ *   multi_domain | remedial | holistic  → llama-3.3-nemotron-super-49b-v1  (successor; ✅ HTTP 200 744ms)
+ *                                          replaces: nemotron-ultra-253b-v1 (❌ HTTP 404 on free tier)
+ *   planetary | dasha | transit         → nemotron-3-super-120b-a12b       (✅ HTTP 200 598ms)
+ *                                          replaces: qwen3-235b-a22b        (⚠️ HTTP 410 EOL)
+ *   everything else                     → llama-3.1-8b-instruct            (worker, minimal latency)
  */
 export function getNvidiaPlanner(queryClass: string): string {
   if ((NVIDIA_DEEP_PLANNER_QUERY_CLASSES as readonly string[]).includes(queryClass)) {
-    return 'nvidia/llama-3.1-nemotron-ultra-253b-v1'
+    // Nemotron Ultra 253B is HTTP 404 on NIM free tier (catalog check 2026-05-02).
+    // Replaced with confirmed-live successor: llama-3.3-nemotron-super-49b-v1 (✅ 744ms).
+    return 'nvidia/llama-3.3-nemotron-super-49b-v1'
   }
   if ((NVIDIA_FAST_PLANNER_QUERY_CLASSES as readonly string[]).includes(queryClass)) {
-    return 'qwen/qwen3-235b-a22b'
+    // Qwen3-235B-A22B reached end of life on NIM (HTTP 410, catalog check 2026-05-02).
+    // Replaced with nemotron-3-super-120b-a12b (✅ 598ms, 1M ctx, RULER-1M 91.64).
+    return 'nvidia/nemotron-3-super-120b-a12b'
   }
   return 'meta/llama-3.1-8b-instruct'
 }
@@ -628,17 +655,22 @@ export function getNvidiaContextAssembler(): string {
 /**
  * Return the preferred NVIDIA NIM synthesis model.
  *
- * DeepSeek-V4-Pro is selected because:
- * - 1.6T total parameters / 49B active — largest model on NIM
- * - 1M-token context window — can ingest full MARSYS corpus (L1+L2.5+system)
- * - Think Max reasoning mode — full chain-of-thought for Jyotish synthesis
+ * Kimi K2 Instruct is selected because (as of 2026-05-02 catalog check):
+ * - Only confirmed-live 1M+ context synthesis model on NIM free tier
+ * - 1T total / 32B active MoE — largest active-param synthesis model available
+ * - 256K context — sufficient for full MARSYS corpus (~340K tokens with compression)
+ * - Agent-swarm capable: 100 parallel agents, 1,500 simultaneous tool calls
  *
- * This is the model the synthesis layer should use when the user selects any
- * NVIDIA NIM synthesis model and no specific override is provided.
- * Role='synthesis' in registry so it appears in synthesisPicker() under nvidia.
+ * Previous choice (deepseek-ai/deepseek-v4-pro) timed out on NIM free tier;
+ * all DeepSeek and Qwen alternatives confirmed dead (EOL or 404) in catalog check.
+ * This function returns kimi-k2-instruct until a 1M-context NIM model becomes
+ * available on the free tier again.
  */
 export function getNvidiaSynthesisModel(): string {
-  return 'deepseek-ai/deepseek-v4-pro'
+  // Updated 2026-05-02: deepseek-ai/deepseek-v4-pro timed out; catalog check
+  // confirmed all DeepSeek/Qwen NIM models are EOL or 404 on free tier.
+  // kimi-k2-instruct is the only confirmed-live synthesis-capable model.
+  return 'moonshotai/kimi-k2-instruct'
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -715,25 +747,48 @@ export const STACK_PRIMARY_PROVIDER: Record<ModelStack, Provider> = {
 export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: string; fallback: string }>> = {
 
   // ── NIM Stack (all free via https://integrate.api.nvidia.com/v1) ─────────
+  //
+  // SMOKE TEST RESULTS 2026-05-02 (nim_model_test.mjs):
+  //   deepseek-ai/deepseek-v4-pro            ⏱ TIMEOUT  — no HTTP headers in 15s
+  //   nvidia/llama-3.1-nemotron-ultra-253b-v1 ❌ HTTP 404 — not on NIM free tier
+  //   qwen/qwen3-235b-a22b                   ⚠️ HTTP 410 — EOL
+  //   moonshotai/kimi-k2-instruct            ✅ HTTP 200  — 5497ms
+  //   nvidia/nemotron-3-super-120b-a12b      ✅ HTTP 200  — 598ms
+  //   meta/llama-3.1-8b-instruct             ✅ HTTP 200  — 13638ms
+  //
+  // CATALOG CHECK RESULTS 2026-05-02 (nim_catalog_check.mjs):
+  //   deepseek-ai/deepseek-r1                ⚠️ HTTP 410 — EOL
+  //   deepseek-ai/deepseek-v3-0324           ❌ HTTP 404
+  //   deepseek-ai/deepseek-r1-0528           ⚠️ HTTP 410 — EOL
+  //   nvidia/llama-3.3-nemotron-super-49b-v1 ✅ HTTP 200  — 744ms  ← Nemotron Ultra successor
+  //   nvidia/llama-3.1-nemotron-70b-instruct ❌ HTTP 404
+  //   nvidia/nemotron-4-340b-instruct        ❌ HTTP 404
+  //   qwen/qwq-32b                           ⚠️ HTTP 410 — EOL
+  //   qwen/qwen2.5-72b-instruct              ❌ HTTP 404
+  //   qwen/qwen3-30b-a3b                     ❌ HTTP 404
+  //
+  // Conclusion: NIM free tier has removed all DeepSeek and Qwen models.
+  // Only confirmed-live NIM models: kimi-k2-instruct, nemotron-3-super-120b-a12b,
+  //   llama-3.3-nemotron-super-49b-v1 (new), meta/llama-3.1-8b-instruct.
   nim: {
     synthesis: {
-      primary:  'deepseek-ai/deepseek-v4-pro',              // 1.6T/49B, 1M ctx, Think Max
+      primary:  'moonshotai/kimi-k2-instruct',              // ✅ 1T MoE, 256K ctx, 5.5s
       fallback: 'gemini-2.5-pro',                           // 2M ctx, paid fallback
     },
     planner_deep: {
-      primary:  'nvidia/llama-3.1-nemotron-ultra-253b-v1',  // 253B, 128K, MATH-500 97%
-      fallback: 'claude-sonnet-4-6',                        // 1M ctx, tool-use
+      primary:  'nvidia/llama-3.3-nemotron-super-49b-v1',   // ✅ 49B, 744ms, Nemotron Ultra successor
+      fallback: 'moonshotai/kimi-k2-instruct',              // ✅ 256K ctx, tool-use
     },
     planner_fast: {
-      primary:  'qwen/qwen3-235b-a22b',                     // MoE 22B active, fast JSON
-      fallback: 'gemini-2.0-flash-lite',                    // $0.015, tool-use
+      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 598ms, fast structured output
+      fallback: 'meta/llama-3.1-8b-instruct',               // ✅ 8B fallback, slow but live
     },
     context_assembly: {
-      primary:  'nvidia/nemotron-3-super-120b-a12b',        // 1M ctx, RULER-1M 91.64
-      fallback: 'deepseek-ai/deepseek-v4-pro',              // 1M ctx, Think High
+      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 1M ctx, RULER-1M 91.64, 598ms
+      fallback: 'moonshotai/kimi-k2-instruct',              // ✅ 256K ctx fallback
     },
     worker: {
-      primary:  'meta/llama-3.1-8b-instruct',               // 8B, free, minimal latency
+      primary:  'meta/llama-3.1-8b-instruct',               // ✅ 8B, free, live
       fallback: 'claude-haiku-4-5',                         // prompt-caching, reliable
     },
   },

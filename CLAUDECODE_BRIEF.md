@@ -1,4 +1,207 @@
 ---
+status: PENDING
+session: W2-UQE-ACTIVATE
+scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke)
+authored: 2026-05-02
+round: 1
+critical_path: false
+blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
+supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
+---
+
+# CLAUDECODE_BRIEF — W2-UQE-ACTIVATE
+## LLM-First Planner Activation + EVAL-B Smoke
+
+Read CLAUDE.md §0 first. Copy this file to the project root as
+`CLAUDECODE_BRIEF.md` before opening the session.
+
+---
+
+## Context
+
+All Wave 2 UQE planner infrastructure was implemented in prior sessions and
+is fully wired into the consume pipeline. The planner is gated by
+`LLM_FIRST_PLANNER_ENABLED` (default `false`). This session activates it.
+
+**What is implemented and confirmed wired:**
+- `platform/src/lib/pipeline/manifest_compressor.ts` — compressed manifest ≤3K tokens
+- `platform/src/lib/pipeline/manifest_planner.ts` — LLM-first planner, `callLlmPlanner()`
+- `platform/src/lib/pipeline/planner_context_builder.ts` — conversation history ≤600 tokens
+- `platform/src/lib/pipeline/budget_arbiter.ts` — token budget enforcement, `arbitrateBudgets()`
+- `platform/src/lib/pipeline/planner_circuit_breaker.ts` — circuit breaker, 3s timeout, 5xx trips
+- `platform/src/components/trace/PlanningIndicator.tsx` — TRACE-0 planning spinner
+- `platform/src/components/trace/QueryPlan.tsx` — query plan display with planning_done hydration
+- `platform/tests/eval/golden_test_set.json` — 25 labeled query→plan pairs (EVAL-1, COMPLETE)
+- `platform/tests/eval/planner_smoke_runner.ts` — CLI scorer (EVAL-2)
+- `platform/tests/eval/planner_ab_compare.ts` — A/B compare old classify vs new planner (EVAL-3)
+- `platform/tests/eval/planner_regression_gate.test.ts` — CI regression gate (EVAL-4)
+- `00_ARCHITECTURE/PLANNER_PROMPT_v1_0.md` — system prompt + few-shot examples
+- `route.ts` — `callLlmPlanner()` + `arbitrateBudgets()` + `plannerCircuit` all imported and called
+  under the `LLM_FIRST_PLANNER_ENABLED` gate
+
+**What is NOT done (this session's scope):**
+1. `tsc --noEmit` verification across the planner files
+2. `vitest` — ensure planner_regression_gate.test.ts passes
+3. EVAL-B smoke: run `planner_smoke_runner.ts` against the NIM stack planner model
+4. Flip `LLM_FIRST_PLANNER_ENABLED: true` in `feature_flags.ts` after smoke passes
+5. Commit
+
+The NIM stack planner routing (`getNvidiaPlanner(queryClass)`) is live and the
+`NVIDIA_NIM_API_KEY` is provisioned in `.env.local`. The smoke runner uses
+`PLANNER_MODEL_ID` env var (default: `meta/llama-3.1-8b-instruct` for unit test speed;
+set to `nvidia/llama-3.3-nemotron-super-49b-v1` for a production-representative smoke).
+
+---
+
+## Acceptance criteria
+
+### AC.U.1 — tsc clean
+
+`npx tsc --noEmit` exits 0 with zero errors across all planner files and their
+consumers (`route.ts`, `single_model_strategy.ts`).
+
+If errors are found: fix them before proceeding. Do not suppress with `// @ts-ignore`.
+
+### AC.U.2 — Vitest regression gate passes
+
+```
+npx vitest run platform/tests/eval/planner_regression_gate.test.ts
+```
+
+All tests green. The regression gate replays frozen baseline mock responses —
+it does NOT make live LLM calls, so it runs offline.
+
+### AC.U.3 — EVAL-B smoke: recall ≥ 0.80, precision ≥ 0.90
+
+```
+PLANNER_MODEL_ID=nvidia/llama-3.3-nemotron-super-49b-v1 \
+CHART_ID=<any valid chart UUID from the dev DB> \
+npx tsx --conditions=react-server platform/tests/eval/planner_smoke_runner.ts
+```
+
+Exit code 0 (avg_tool_recall ≥ 0.80 AND avg_tool_precision ≥ 0.90).
+
+If thresholds not met:
+- Do NOT flip the flag.
+- Record failing entries in the `## Smoke results` section below.
+- Identify whether the failure is a prompt issue, a model issue, or a golden
+  set labelling issue.
+- If prompt issue: update `PLANNER_PROMPT_v1_0.md` and retry once.
+- If model issue: note it and leave flag at `false`; surface to native.
+- Do not iterate more than 2 rounds — if still failing after 1 prompt fix,
+  leave flag at `false` and record findings.
+
+### AC.U.4 — Flip `LLM_FIRST_PLANNER_ENABLED: true`
+
+Only after AC.U.1 + AC.U.2 + AC.U.3 all pass:
+
+In `platform/src/lib/config/feature_flags.ts`, change:
+```typescript
+// BEFORE:
+LLM_FIRST_PLANNER_ENABLED: false,
+
+// AFTER:
+// Flipped true W2-UQE-ACTIVATE (2026-05-0X) after EVAL-B smoke PASS:
+// recall=<value>, precision=<value>. NIM planner: nemotron-super-49b-v1.
+LLM_FIRST_PLANNER_ENABLED: true,
+```
+
+### AC.U.5 — Commit
+
+Single commit on the `main` branch:
+
+```
+feat(w2-uqe-activate): flip LLM_FIRST_PLANNER_ENABLED after EVAL-B smoke PASS
+
+- feature_flags: LLM_FIRST_PLANNER_ENABLED true (recall=X.XX, precision=X.XX)
+- EVAL-B smoke: nemotron-super-49b-v1, N=25 golden entries
+- tsc: clean, vitest regression gate: all pass
+```
+
+If the smoke fails and the flag is not flipped, the commit message changes to:
+```
+test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
+```
+
+---
+
+## Smoke results (fill in during session)
+
+```
+planner_model:
+smoke_date:
+avg_tool_recall:
+avg_tool_precision:
+failing_entries: []
+flag_flipped:
+notes:
+```
+
+---
+
+## may_touch
+
+```
+platform/src/lib/config/feature_flags.ts            (AC.U.4 — flag flip only)
+platform/src/lib/pipeline/manifest_planner.ts        (fix only if tsc errors found)
+platform/src/lib/pipeline/manifest_compressor.ts     (fix only if tsc errors found)
+platform/src/lib/pipeline/planner_context_builder.ts (fix only if tsc errors found)
+platform/src/lib/pipeline/budget_arbiter.ts          (fix only if tsc errors found)
+platform/src/lib/pipeline/planner_circuit_breaker.ts (fix only if tsc errors found)
+00_ARCHITECTURE/PLANNER_PROMPT_v1_0.md               (if AC.U.3 fails for prompt reason)
+```
+
+## must_not_touch
+
+```
+platform/src/app/api/chat/consume/route.ts           (already wired; no changes needed)
+platform/src/lib/synthesis/**
+platform/src/lib/retrieve/**
+platform/src/lib/router/**
+platform/src/lib/models/**
+platform/src/components/**
+platform/src/hooks/**
+platform/migrations/**
+platform/tests/eval/golden_test_set.json             (frozen ground truth; immutable)
+platform/tests/eval/fixtures/regression_baseline.json (frozen baseline; immutable)
+00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+01_FACTS_LAYER/**
+025_HOLISTIC_SYNTHESIS/**
+```
+
+---
+
+## Hard constraints
+
+- B.10: Do not fabricate planner outputs or smoke test results. The smoke runner
+  must execute against a live NIM endpoint. If NIM is unavailable, note it and
+  leave the flag at `false`.
+- The golden test set is immutable for this session. If entries appear
+  incorrectly labeled, open a note in the `## Smoke results` section;
+  golden set edits are a separate task (EVAL-5, not yet scheduled).
+- Circuit breaker timeout is 3 seconds for planning calls. Do not change this
+  value to force smoke tests to pass.
+- Do not change `DEFAULT_FLAGS.LLM_FIRST_PLANNER_ENABLED` until AC.U.1 + AC.U.2
+  + AC.U.3 are all confirmed passing within this session.
+
+---
+
+## Prerequisite checks (do at session open)
+
+1. `NVIDIA_NIM_API_KEY` present in `.env.local` — confirmed provisioned 2026-05-01.
+2. Dev DB running at `127.0.0.1:5433` (amjis) — required for chart context.
+3. `npx tsc --version` — confirm TypeScript 5.x available.
+
+---
+
+*W2-UQE-ACTIVATE · authored 2026-05-02 · unblocks W2-MON-A*
+
+---
+---
+## ARCHIVED: W2-EVAL-A (status COMPLETE 2026-05-01)
+---
+
+---
 status: COMPLETE
 session: W2-EVAL-A
 scope: UQE-3-REVISED (precision citation gate) + EVAL-1 (golden test set)
