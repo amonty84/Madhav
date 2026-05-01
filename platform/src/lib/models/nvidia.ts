@@ -58,5 +58,5 @@ function getClient(): ReturnType<typeof createOpenAI> {
 }
 
 export function getNvidiaModel(modelId: string): LanguageModel {
-  return getClient()(modelId) as LanguageModel
+  return getClient().chat(modelId) as LanguageModel
 }
