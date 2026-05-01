@@ -28,7 +28,7 @@ import {
   supports,
   type ModelStack,
 } from '@/lib/models/registry'
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
 import { configService } from '@/lib/config/index'
 import { classify } from '@/lib/router/router'
 import { callLlmPlanner, PlannerError, type PlanSchema } from '@/lib/pipeline/manifest_planner'
@@ -556,6 +556,13 @@ export async function POST(request: Request) {
         // leaks WARN; ungrounded prescriptive answers ERROR (unless override).
         // Field destination context_assembly_log.verified_citations lands with
         // W2-SCHEMA; until then we keep the result local and log.
+        //
+        // ARCHITECTURE NOTE: gate errors are captured into deferredGateError and
+        // thrown AFTER persistence. Do NOT throw from inside the gate try block —
+        // doing so short-circuits replaceConversationMessages, which silently drops
+        // both the user and assistant messages from the DB and prevents title
+        // generation. The gate result must never corrupt conversation state.
+        let deferredGateError: PipelineError | null = null
         try {
           const assistantMsg = finalMessages.filter((m) => m.role === 'assistant').at(-1)
           const outputText = extractText(assistantMsg?.parts ?? [])
@@ -636,13 +643,13 @@ export async function POST(request: Request) {
           })
 
           if (citationCheck.gate_result === 'ERROR' && !overrideOn) {
-            throw new PipelineError({
+            // Capture error; throw is deferred until after persistence below.
+            deferredGateError = new PipelineError({
               stage: 'synthesis',
               reason: `[citation_gate_l2] ${citationCheck.gate_reason}`,
             })
           }
         } catch (err) {
-          if (err instanceof PipelineError) throw err
           console.error('[consume:v2] citation gate error', err)
         }
 
@@ -689,6 +696,10 @@ export async function POST(request: Request) {
             // Non-fatal: prediction ledger write failure does not block the response.
           }
         }
+        // Deferred gate error: throw now that persistence has completed. The
+        // AI SDK surfaces this as a stream error to the client, which is the
+        // intended behaviour — but messages are already in the DB by this point.
+        if (deferredGateError) throw deferredGateError
       },
       onError: (error: unknown) => {
         const msg = error instanceof Error ? error.message : String(error)
@@ -742,6 +753,11 @@ export async function POST(request: Request) {
     stopWhen: stepCountIs(5),
     maxOutputTokens: modelMeta.maxOutputTokens,
     experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+    // Google-specific: disable safety filters + cap thinking budget.
+    // See resolver.googleProviderOptions for full rationale.
+    ...(googleProviderOptions(modelId) && {
+      providerOptions: googleProviderOptions(modelId),
+    }),
     onFinish: ({ finishReason: reason, providerMetadata, usage }) => {
       finishReason = reason
       const meta = providerMetadata?.anthropic as

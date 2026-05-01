@@ -64,3 +64,63 @@ export function resolveModel(id: string): LanguageModel {
 export function resolveWorkerModel(synthesisModelId: string): string {
   return getWorkerForModel(synthesisModelId)
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Google provider options — safety settings + thinking budget
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Google-specific safety + thinking config for streamText `providerOptions`.
+ *
+ * **Why this is necessary for MARSYS-JIS:**
+ *
+ * 1. SAFETY FILTER (root cause of "Network error after 5-6 lines"):
+ *    Google's default safety thresholds are BLOCK_MEDIUM_AND_ABOVE on all
+ *    categories. Jyotish synthesis output regularly contains:
+ *      – Health vulnerability windows (maraka dasha analysis)
+ *      – Death-timing analysis (marana karaka, 8th-lord periods)
+ *      – Predictions about suffering, challenges, adversity
+ *    These trigger HARM_CATEGORY_DANGEROUS_CONTENT mid-stream. The Google API
+ *    closes the SSE connection without a clean finishReason → the AI SDK
+ *    cannot emit a proper finish event → useChat surfaces "Network error."
+ *    Setting threshold: 'BLOCK_NONE' on all categories disables the filters
+ *    for this consenting-adult, disclosure-gated instrument.
+ *
+ * 2. EXTENDED THINKING (root cause of "query hangs with no response"):
+ *    gemini-2.5-pro has thinking enabled by default. With a 340K-token corpus
+ *    the thinking phase can run 30–90 s emitting only reasoning-delta SSE
+ *    chunks. useChat does not render reasoning tokens as visible text, so the
+ *    user sees a spinner indefinitely. Capping thinkingBudget at 8 192 tokens
+ *    (≈ 30 s max) keeps latency acceptable while preserving some CoT benefit.
+ *    Set thinkingBudget: 0 to fully disable thinking (fastest path).
+ *
+ * Returns undefined for non-Google models so callers can spread safely.
+ */
+export function googleProviderOptions(modelId: string):
+  | {
+      google: {
+        safetySettings: Array<{ category: string; threshold: 'BLOCK_NONE' }>
+        thinkingConfig: { thinkingBudget: number }
+      }
+    }
+  | undefined {
+  const meta = getModelMeta(modelId)
+  if (meta?.provider !== 'google') return undefined
+  return {
+    google: {
+      safetySettings: [
+        { category: 'HARM_CATEGORY_HATE_SPEECH',       threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_HARASSMENT',        threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+        { category: 'HARM_CATEGORY_CIVIC_INTEGRITY',   threshold: 'BLOCK_NONE' },
+      ],
+      thinkingConfig: {
+        // Cap thinking at 8 192 tokens (~30 s) for acceptable synthesis latency.
+        // Raise to 16 384 for deeper multi-domain queries if latency is acceptable;
+        // lower to 0 to disable thinking entirely (fastest, least CoT).
+        thinkingBudget: 8_192,
+      },
+    },
+  }
+}

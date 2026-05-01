@@ -11599,36 +11599,3 @@ AC.T1R3.6 PASS (partition: "training" on all 23 records).
 AC.T1R3.7 PASS (only the two declared output files touched; event_match_records_batch2.json not created or modified — confirmed via `git status --short`; FORENSIC, 025_HOLISTIC_SYNTHESIS, platform/src all clean).
 
 Commit: 79a6810
-
----
-
-**M4-A-INTEGRATION-PASS-R3** | 2026-05-02 | CLOSED
-
-Round 3 integration pass for M4-A parallel execution. Administrative session merging T1 (79a6810) + T2 (d53e42d) + T3 (c819dbb) outputs.
-
-**Merge: event_match_records_batch1.json + event_match_records_batch2.json → lel_event_match_records.json**
-46 records total (37 training / 9 held_out). Stray per-record `schema_version` field stripped from 23 T1 records (batch1 artifact — not schema-compliant). EVT.2008.06.09.01 and EVT.2009.06.XX.01 partition flipped training→held_out per T2 held_out_manifest. Match rate stats: all mean=0.685 (min=0.067, max=1.000); training mean=0.630; held_out mean=0.913. Held-out IDs: EVT.2008.06.09.01, EVT.2009.06.XX.01, EVT.2017.03.XX.01, EVT.2018.11.28.01, EVT.2019.05.XX.01, EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2025.05.XX.01, EVT.2026.01.XX.01.
-
-**Schema update: lel_event_match_records_schema.json v1.0 → v1.1**
-Added: `rubric_option` (outer level + per-record, enum A/B/C); `total_events`, `held_out_count`, `training_count` (integer counts); `held_out_manifest` (object with decade_distribution, held_out_event_ids, selection_criteria, note). All added to `required` arrays. `additionalProperties: false` retained at all levels. jsonschema VALIDATION PASS confirmed.
-
-**NAP.M4.1 status:** APPROVED — Option B (graded proximity: 1.0 exact / 0.7 ±7d / 0.5 ±30d / 0.2 ±90d / 0.0 outside; dasha+transit axes via max combiner). Approved by native during Round 3 T1 execution. CALIBRATION_RUBRIC_v1_0.md status updated accordingly.
-
-**IS.8(a) status:** DISCHARGED by T1/REDTEAM_M4A_v1_0.md (PASS 6/6 axes; 0 CRITICAL/HIGH/MEDIUM; 1 LOW = KR.M4A.RT.LOW.1). red_team_counter reset 3→0.
-
-**KR.M4A.RT.LOW.1:** Commit 0793719 (Round 2 integration) has malformed root tree per `git fsck` (duplicate 01_FACTS_LAYER entry from git plumbing script `grep -v` bug). On-disk content correct; data intact. Carried forward for native scheduling of tree-rewrite.
-
-**Open NAPs after this pass:**
-- NAP.M4.4 (SHADOW_MODE_PROTOCOL §3 promotion criteria) — AWAITING_NATIVE_APPROVAL.
-- NAP.M4.3 / AC.M4A.8 (JH_EXPORT_DISPOSITION Option X or Y) — AWAITING_NATIVE_DECISION.
-- NAP.M4.2 (LEL_GAP_AUDIT 6 elicit-recommended gaps) — AWAITING_NATIVE_REVIEW.
-
-**CURRENT_STATE update:** v1.2 → v1.3. red_team_counter 3→0. last_session_id → M4-A-INTEGRATION-PASS-R3. next_session_objective → M4-A close + M4-B entry (NAP approvals first).
-
-**Files changed this pass:**
-- `06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json` — CREATED (merged, validated)
-- `06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records_schema.json` — v1.0→v1.1 (schema amended)
-- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — v1.2→v1.3
-- `00_ARCHITECTURE/SESSION_LOG.md` — this entry appended
-
-Commit: 4d4d33a

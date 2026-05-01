@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 1.3
+version: 1.2
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,25 +54,6 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
-  - v1.3 (2026-05-02, M4-A-INTEGRATION-PASS-R3): M4-A Round 3 parallel execution complete.
-    T1 (79a6810): IS.8(a) DISCHARGED — REDTEAM_M4A_v1_0.md PASS 6/6 axes; 1 LOW carry-forward
-      (KR.M4A.RT.LOW.1); red_team_counter 3→0 (reset). NAP.M4.1 approved = Option B.
-      event_match_records_batch1.json (23 records, training, rubric Option B).
-    T2 (d53e42d): event_match_records_batch2.json (23 records; 7 held_out + 16 training;
-      held_out_manifest with all 9 held-out IDs; 22 records match_rate=1.0, 1 at 0.84).
-    T3 (c819dbb): SHADOW_MODE_PROTOCOL_v1_0.md DRAFT (AWAITING_NATIVE_APPROVAL, NAP.M4.4) +
-      JH_EXPORT_DISPOSITION_v1_0.md (AWAITING_NATIVE_DECISION, NAP.M4.3/AC.M4A.8).
-    Integration: batch1 + batch2 merged → lel_event_match_records.json (46 records, schema v1.1
-      validated PASS; stray per-record schema_version stripped from 23 T1 records; partition
-      EVT.2008.06.09.01 + EVT.2009.06.XX.01 flipped training→held_out per T2 manifest).
-      lel_event_match_records_schema.json updated v1.0→v1.1: rubric_option (outer + per-record),
-      total_events, held_out_count, training_count, held_out_manifest added to schema.
-    Stats: total=46, training=37, held_out=9; match_rate all mean=0.685, training=0.630, held_out=0.913.
-    red_team_counter: 3→0 (IS.8(a) discharged by T1/REDTEAM_M4A). NAP.M4.1 → APPROVED (Option B).
-    last_session_id → M4-A-INTEGRATION-PASS-R3.
-    next_session_objective → NAP.M4.4 review (SHADOW_MODE_PROTOCOL §3) + NAP.M4.3 decision
-      (JH_EXPORT_DISPOSITION) + NAP.M4.2 gap decisions (LEL_GAP_AUDIT 6 elicit items) +
-      M4-A close checklist (AC.M4A.2–AC.M4A.10) + M4-B entry (LL.1 shadow-mode writes).
   - v1.2 (2026-05-02, M4-A-INTEGRATION-PASS): M4-A Round 2 parallel execution complete.
     T1 (5d015bd): LEL v1.3→v1.4 (11 events Swiss Ephemeris computed, AC.M4A.1 discharged).
     T2 (f7f477e): PPL migration (PRED.M3D.HOLDOUT.001+002 → prediction_ledger.jsonl,
@@ -1155,14 +1136,15 @@ current_state:
   # ------------------------------------------------------------------
   # Red-team counter (ONGOING_HYGIENE_POLICIES §G addition at Step 12)
   # ------------------------------------------------------------------
-  red_team_counter: 0
-    # M4-A-INTEGRATION-PASS-R3 (2026-05-02) — counter reset 3→0.
-    # IS.8(a) every-third-session cadence DISCHARGED by T1/REDTEAM_M4A_v1_0.md
-    # (PASS 6/6 axes; 1 LOW carry-forward KR.M4A.RT.LOW.1). Counter resets 3→0.
-    # Previously at 3: M4-A Round 2 (T1–T4) incremented counter 2→3; cadence was
-    # held-pending in that integration pass. T1 Round 3 discharged it.
-    # M4-B sessions begin from counter=0. Next IS.8(a) fires at counter=3
-    # (three substantive M4-B sessions from now).
+  red_team_counter: 3
+    # M4-A-INTEGRATION-PASS (2026-05-02) — counter incremented 2→3.
+    # M4-A Round 2 (T1–T4) constitutes one collective substantive session.
+    # IS.8(a) every-third-session cadence DUE at counter=3. Not discharged
+    # in this administrative integration pass. Counter held at 3 (cadence-pending).
+    # NEXT substantive M4 session (M4-A-S2) MUST open with IS.8(a) discharge
+    # before any corpus work. Red-team scope for M4-A-S2 IS.8(a): validate
+    # M4-A Round 2 outputs (LEL chart states, PPL migration, rubric options,
+    # gap audit, MSR domain buckets) against B.1/B.3/B.10 discipline.
     # M3-W4-D2-M3-CLOSE close (predecessor) — counter incremented 1→2
     # (D2 substantive: M3_CLOSE + HANDOFF_M3_TO_M4 + CURRENT_STATE flip
     # M3→M4 + MP.1+MP.2 sync). M3 macro-phase CLOSED.
@@ -1221,13 +1203,11 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: M4-A-INTEGRATION-PASS-R3
-    # M4-A Round 3 integration pass (2026-05-02). Administrative session.
-    # batch1 + batch2 merged → lel_event_match_records.json (46 records, validated).
-    # Schema v1.0→v1.1 (rubric_option + manifest fields added). CURRENT_STATE v1.2→v1.3.
-    # SESSION_LOG R3 integration entry appended. 3 tracks verified PASS.
-    # NAP.M4.1 APPROVED (Option B). red_team_counter 3→0.
-    # Non-overlap confirmed: T1/T2/T3 touched only declared files.
+  last_session_id: M4-A-INTEGRATION-PASS-2026-05-02
+    # M4-A Round 2 integration pass (2026-05-02). Administrative session.
+    # LEL §9 migration annotations (v1.4→v1.5). CURRENT_STATE v1.1→v1.2.
+    # SESSION_LOG integration entry appended. 4 tracks verified PASS.
+    # Non-overlap confirmed: T1/T2/T3/T4 touched only declared files.
     # Predecessor (last substantive corpus session): M3-W4-D2-M3-CLOSE
     # (M3 MACRO-PHASE CLOSE, 2026-05-01). M4-A Round 2 tracks:
     # T1 (5d015bd) + T2 (f7f477e) + T3 (be7134b) + T4 (73d9e76).
@@ -1726,58 +1706,54 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
-    M4-A CLOSE + M4-B ENTRY.
-    Predecessor: M4-A-INTEGRATION-PASS-R3 (2026-05-02 — Round 3 integration complete).
-    GATE-1 (native-approval): Three NAP items require native decision before M4-B corpus
-    writes begin. Present these to the native in order:
-      NAP.M4.4 — SHADOW_MODE_PROTOCOL_v1_0.md §3 promotion criteria (N≥3, variance≤0.3,
-        two-pass approval, validity margin≥0.4; kill-switches). File: SHADOW_MODE_PROTOCOL_v1_0.md.
-        Status: AWAITING_NATIVE_APPROVAL. M4-B weight writes are BLOCKED until approved.
-      NAP.M4.3 / AC.M4A.8 — JH_EXPORT_DISPOSITION_v1_0.md §4 native-decision block (Option X
-        or Y for D9 verification). File: 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md.
-        Status: AWAITING_NATIVE_DECISION. 35 of 499 MSR signals reference D9 entities.
-      NAP.M4.2 — LEL_GAP_AUDIT_v1_0.md 6 elicit-recommended gaps (GAP.M4A.01-11 items).
-        File: 06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md.
-        Status: AWAITING_NATIVE_REVIEW. Default: proceed with 46 events; elicitation deferred.
-    GATE-2 (M4-A close checklist): Verify AC.M4A.2 through AC.M4A.10 from PHASE_M4_PLAN §3.1.
-      AC.M4A.1 DISCHARGED (Swiss Ephemeris chart states, T1 R2 commit 5d015bd).
-      AC.M4A.2: lel_event_match_records.json exists, 46 records, validated schema v1.1. PASS.
-      AC.M4A.3: match_rate fields populated (all 46 non-null). PASS.
-      AC.M4A.4: held_out partition = 9 events, decade-stratified. PASS.
-      AC.M4A.5: CALIBRATION_RUBRIC_v1_0.md exists, Option B approved (NAP.M4.1). PASS.
-      AC.M4A.6: LEL_GAP_AUDIT_v1_0.md exists, 11 gaps flagged. PASS.
-      AC.M4A.7: msr_domain_buckets.json exists, 495/499 signals. PASS.
-      AC.M4A.8: JH_EXPORT_DISPOSITION pending native decision. OPEN (NAP.M4.3).
-      AC.M4A.9: SHADOW_MODE_PROTOCOL_v1_0.md exists, awaiting approval. OPEN (NAP.M4.4).
-      AC.M4A.10: prediction_ledger.jsonl PRED.M3D.HOLDOUT.001+002 migrated. PASS.
-    M4-B ENTRY (after NAP approvals + M4-A close):
-      LL.1 Signal Weight Calibration — shadow-mode writes.
-      Split into 2 parallel tracks by domain bucket per msr_domain_buckets.json:
-        Track B1: career (207 signals) + financial (64) + general (15) + travel (5).
-        Track B2: spiritual (94) + relationship (39) + health (31) + family (20) +
-                  psychological (20) + education (0).
-      All weight writes shadow-mode first (per SHADOW_MODE_PROTOCOL §2).
-      Consumed input: lel_event_match_records.json training partition (37 events).
-      Acceptance criteria: PHASE_M4_PLAN §3.2 AC.M4B.1–AC.M4B.10.
-    KR.M4A.RT.LOW.1: schedule tree-rewrite for commit 0793719 malformed root tree.
-    Inherited open items (unchanged from HANDOFF_M3_TO_M4 §Inherited open items):
-      DIS.009 full closure pending JH D9 export (KR.M3A.JH-EXPORT, now Option X or Y).
+    M4-A-S2 — Event-Match Record Population (pending NAP.M4.1 approval).
+    Predecessor: M4-A-INTEGRATION-PASS-2026-05-02 (Round 2 integration).
+    GATE: Native must first approve CALIBRATION_RUBRIC_v1_0.md via NAP.M4.1
+    (select Option A / B / C). Rubric file:
+      06_LEARNING_LAYER/OBSERVATIONS/CALIBRATION_RUBRIC_v1_0.md (DRAFT, 3 options).
+      Track T3 recommendation: Option B (graded proximity). Fallback: C first cycle.
+    MANDATORY FIRST ACT of M4-A-S2 (before any corpus work):
+      IS.8(a) every-third-session red-team DISCHARGE. Counter is held at 3.
+      Scope: validate M4-A Round 2 outputs against B.1/B.3/B.10 discipline.
+      Artifacts to red-team: LEL v1.5 (11 chart states), prediction_ledger.jsonl
+        (PRED.M3D.HOLDOUT.001+002), CALIBRATION_RUBRIC DRAFT (options A/B/C),
+        LEL_GAP_AUDIT (11 gaps), msr_domain_buckets (495/499 signals).
+      After IS.8(a) PASS: proceed to event-match records.
+    M4-A-S2 PRIMARY WORK (after IS.8(a) + NAP.M4.1):
+      Populate 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json —
+      one record per LEL event (46 events). For each:
+        (a) Run signal_activator.py at the event's chart_state date.
+        (b) Score match per approved rubric (A/B/C).
+        (c) Populate expected_lit_signals + actual_lit_signals + match_rate.
+      Partition: 43 events → training; 3 → held_out (the future-dated events
+        from LEL §9 + EVT.2026.* recent events, exact partition per approved
+        rubric + PHASE_M4_PLAN §3.1 AC.M4A.4).
+    Acceptance criteria: AC.M4A.3 + AC.M4A.4 (from PHASE_M4_PLAN §3.1).
+    Note: LEL_GAP_AUDIT flagged 6 elicit-recommended gaps (GAP.M4A.* items);
+      native may review and decide on additional elicitation before or during S2.
+      Default: proceed with 46 events; elicitation deferred unless native initiates.
+    Inherited open items (HANDOFF_M3_TO_M4 §Inherited open items, unchanged):
+      DIS.009 full closure pending JH D9 export (KR.M3A.JH-EXPORT).
       DIS.010/011/012 RESOLVED-N3 (defer to M9).
       Naisargika + Nathonnatha, Sthana+Drik ECR, KR.W9.1/2, KR.M3A2.1, AC.M3A.5.
       msr_domain_buckets: 4 absent signal IDs (207, 497, 498, 499) flagged for M5+.
-  next_session_proposed_cowork_thread_name: "M4-A Close + M4-B Entry (NAP.M4.4 + LL.1 shadow-mode)"
+  next_session_proposed_cowork_thread_name: "M4-A-S2 — Event-Match Records (post-NAP.M4.1)"
   red_team_due_note: >
-    Counter reset 3→0 at M4-A-INTEGRATION-PASS-R3 (IS.8(a) discharged by T1/REDTEAM_M4A_v1_0.md
-    PASS 6/6 axes; 1 LOW carry-forward KR.M4A.RT.LOW.1).
-    Next §IS.8(a) every-third-session cadence fires at counter=3 (three substantive M4-B sessions).
-    Next §IS.8(b) macro-phase-close cadence fires at M4 close (PHASE_M4_PLAN §3.4 AC.M4D.4).
+    Counter incremented 2→3 at M4-A-INTEGRATION-PASS (M4-A Round 2 integration;
+    T1+T2+T3+T4 collectively constitute one substantive corpus session).
+    IS.8(a) every-third-session cadence DUE (counter=3). NOT YET DISCHARGED —
+    integration pass is administrative, not an IS.8(a) discharge session.
+    Counter HELD at 3 (cadence-pending). M4-A-S2 MUST discharge IS.8(a)
+    as its FIRST ACT before any corpus work. Red-team scope: M4-A Round 2
+    outputs per B.1/B.3/B.10. After discharge: counter resets 3→0.
+    Next §IS.8(b) macro-phase-close cadence fires at M4 close.
     Next §IS.8(c) every-12-months MACRO_PLAN review remains 2027-04-23 due.
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T18:00:00+05:30
-  file_updated_by_session: M4-A-INTEGRATION-PASS-R3
+  file_updated_at: 2026-05-02T12:00:00+05:30
+  file_updated_by_session: M3-W4-D2-M3-CLOSE
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M3-W4-D2-M3-CLOSE, null).

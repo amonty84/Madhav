@@ -22,7 +22,7 @@ import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
 import { getModelMeta, supports } from '@/lib/models/registry'
 import { stripThinkBlocks, extractReasoningTrace } from './think_block_filter'
 import { getDefaultRegistry } from '@/lib/prompts/index'
@@ -302,6 +302,12 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       maxOutputTokens: effectiveMaxTokens,
       temperature: synthesisTemperature,
       experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+      // Google-specific: disable safety filters (Jyotish content triggers
+      // DANGEROUS_CONTENT mid-stream) + cap thinking budget (avoids 30-90s
+      // hang before first visible token). See resolver.googleProviderOptions.
+      ...(googleProviderOptions(selected_model_id) && {
+        providerOptions: googleProviderOptions(selected_model_id),
+      }),
       onFinish: async ({
         finishReason,
         usage,
