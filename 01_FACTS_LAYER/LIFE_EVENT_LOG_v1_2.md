@@ -3,8 +3,8 @@ document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_2
-version: 1.3
-status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts)
+version: 1.4
+status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts. v1.4: 11 v1.3 pending_computation events advanced to computed state via M4-A-T1-SWISS-EPHEMERIS pass.)
 supersedes: v1.1 (same-corpus, chart-state-populated)
 author: Claude (Session 2, Claude Code instance)
 date_built: 2026-04-17
@@ -17,12 +17,14 @@ chart_state_sources:
   sade_sati: SADE_SATI_CYCLES_ALL.md + FORENSIC_ASTROLOGICAL_DATA_v8_0.md §21
   transits_eclipses_retrograde_ashtakavarga: Swiss Ephemeris self-compute (Session 4) — per-event blocks in this file + EVENT_CHART_STATES_v1_0.md; optional JH cross-check via EXTERNAL_COMPUTATION_SPEC
 retrodictive_signal_source: DEEP_ANALYSIS_Abhisek_Mohanty_v1 (v1.2.1) §D.0.F (SIG.01-15, CVG.01-08, CTR.01-07)
-total_events_logged: 46 (35 original + 11 added v1.3; new events have chart_state status: pending_computation) + 5 period summaries + 6 chronic patterns
+total_events_logged: 46 (35 original + 11 added v1.3; v1.4 advanced all 11 pending events to computed state via Swiss Ephemeris) + 5 period summaries + 6 chronic patterns
 confidence_self_assessment: 0.89 (v1.2 populates transits, eclipses, retrograde, Ashtakavarga via Swiss Ephemeris pipelines. Native JH spot-check remains optional.)
 next_steps:
   - Optional v1.3: Promote eclipse/transit evidence from chart_state into each event's signals_that_matched lists (SESSION_LOG red-team note)
   - Future: Expand toward 75-100 events; drain §6 gap register
   - Future (v2.0): Pattern Library (RPT.LFE.01) when Deep Analysis v2.0 exists
+changelog:
+  - v1.4 (2026-05-01, M4-A-T1-SWISS-EPHEMERIS): Swiss Ephemeris computation pass for 11 pending_computation events. All chart states populated (proxy dates where exact dates unavailable). M4-A AC.M4A.1 discharged.
 expose_to_chat: true
 native_id: "abhisek"
 ---
@@ -227,8 +229,22 @@ EVT.2000.XX.XX.01:
   valence: mixed
   native_reflection: "I joined that course and I was one of the brighter ones but I never could write the exam because it told me they can only teach me but cannot allow me to write exams and get a certificate because the minimum qualification was to be a graduate."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2000-06-01
+    vimshottari:
+      maha_dasha: Saturn (1991-08-19 to 2010-08-18)
+      antar_dasha: Venus (1998-06-09 to 2001-08-09)
+      pratyantar_dasha: Jupiter (2000-01-18 to 2000-06-21)
+    yogini:
+      maha_dasha: Siddha/Venus (1996-12-24 to 2003-12-24)
+      antar_dasha: Pingala/Sun (2000-02-03 to 2000-06-24)
+    key_transits:
+      saturn_sign: Aries
+      jupiter_sign: Aries
+      rahu_sign: Cancer
+      sade_sati_active: false
   retrodictive_match: pending
 
 EVT.2001.03.XX.01:
@@ -337,8 +353,22 @@ EVT.2004.XX.XX.02:
   valence: mixed
   native_reflection: "I was selected for Carnegie Milan University for a one-year course there... but I could not take up that opportunity in 2004 because of my health issues and financial issues. It was a deja vu incident for me."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2004-06-01
+    vimshottari:
+      maha_dasha: Saturn (1991-08-19 to 2010-08-18)
+      antar_dasha: Mars (2004-02-20 to 2005-03-31)
+      pratyantar_dasha: Jupiter (2004-05-15 to 2004-07-08)
+    yogini:
+      maha_dasha: Sankata/Rahu (2003-12-24 to 2011-12-24)
+      antar_dasha: Sankata/Rahu (2003-12-24 to 2005-10-04)
+    key_transits:
+      saturn_sign: Gemini
+      jupiter_sign: Leo
+      rahu_sign: Aries
+      sade_sati_active: false
   retrodictive_match: pending
   notes: Deja vu resolution pair — EVT.2021.XX.XX.02 (Tepper MBA selection) + EVT.2023.06.XX.01 (CMU completion).
 
@@ -383,8 +413,22 @@ EVT.2007.XX.XX.03:
   valence: negative
   native_reflection: "My sleeping disorder has been going on since my knee surgery, 2007 or 2008. Because of a certain medical negligence, I started the breathlessness problem which led to my sleep disorder. I've tried several drugs, half a dozen of doctors."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2007-09-01
+    vimshottari:
+      maha_dasha: Saturn (1991-08-19 to 2010-08-18)
+      antar_dasha: Rahu (2005-03-31 to 2008-02-05)
+      pratyantar_dasha: Sun (2007-07-21 to 2007-09-11)
+    yogini:
+      maha_dasha: Sankata/Rahu (2003-12-24 to 2011-12-24)
+      antar_dasha: Bhramari/Mars (2007-02-03 to 2007-12-24)
+    key_transits:
+      saturn_sign: Leo
+      jupiter_sign: Scorpio
+      rahu_sign: Aquarius
+      sade_sati_active: false
   retrodictive_match: pending
   notes: Cause — medical negligence at EVT.2007.06.XX.01. Resolution — EVT.2025.XX.XX.02.
 
@@ -677,8 +721,22 @@ EVT.2012.XX.XX.02:
   valence: positive
   native_reflection: "I could have become the general secretary for the entire college but I was selfish and I didn't want to put so much effort in social service. I decided to just become the President of the International Relationship Committee. That gave me a lot of access to the foreigners."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2012-09-01
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Mercury (2010-08-18 to 2013-01-14)
+      pratyantar_dasha: Saturn (2012-08-28 to 2013-01-14)
+    yogini:
+      maha_dasha: Mangala/Moon (2011-12-24 to 2012-12-24)
+      antar_dasha: Siddha/Venus (2012-07-24 to 2012-10-03)
+    key_transits:
+      saturn_sign: Libra
+      jupiter_sign: Taurus
+      rahu_sign: Scorpio
+      sade_sati_active: false
   retrodictive_match: pending
 
 EVT.2012.10.XX.01:
@@ -1004,8 +1062,22 @@ EVT.2021.XX.XX.02:
   valence: positive
   native_reflection: "I was selected as one of the top employees of the Mahindra group and they sponsored me for a one-year executive MBA. It was a deja vu incident for me because the university I really wished to be part of but could not because of issues at that point in time came back to me and fell in my lap."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2021-04-01
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Rahu (2020-02-14 to 2022-09-03)
+      pratyantar_dasha: Mercury (2021-04-01 to 2021-08-11)
+    yogini:
+      maha_dasha: Bhramari/Mars (2017-12-24 to 2021-12-24)
+      antar_dasha: Sankata/Rahu (2020-06-04 to 2021-04-24)
+    key_transits:
+      saturn_sign: Capricorn
+      jupiter_sign: Capricorn
+      rahu_sign: Taurus
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Deja vu pair — EVT.2004.XX.XX.02 (CMU declined) → EVT.2023.06.XX.01 (CMU completed).
 
@@ -1019,8 +1091,22 @@ EVT.2021.XX.XX.03:
   valence: mixed
   native_reflection: "We had one in 2021 or 2022, we had not made it operational because of a public hearing which was a complicated thing. Lots of things we tried to avoid public hearing, but didn't happen."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2021-09-01
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Rahu (2020-02-14 to 2022-09-03)
+      pratyantar_dasha: Ketu (2021-08-11 to 2021-10-04)
+    yogini:
+      maha_dasha: Bhramari/Mars (2017-12-24 to 2021-12-24)
+      antar_dasha: Dhanya/Jupiter (2021-08-24 to 2021-12-24)
+    key_transits:
+      saturn_sign: Capricorn
+      jupiter_sign: Aquarius
+      rahu_sign: Taurus
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Resolution — EVT.2026.04.08.01.
 
@@ -1065,8 +1151,22 @@ EVT.2022.XX.XX.02:
   valence: mixed
   native_reflection: "I had a pretty serious affair at that point in time which resulted in a lot of issues in my marriage and for which I am in a separated state today."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2022-06-01
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Rahu (2020-02-14 to 2022-09-03)
+      pratyantar_dasha: Moon (2022-04-24 to 2022-07-10)
+    yogini:
+      maha_dasha: Bhadrika/Mercury (2021-12-24 to 2026-12-24)
+      antar_dasha: Bhadrika/Mercury (2021-12-24 to 2022-09-04)
+    key_transits:
+      saturn_sign: Aquarius
+      jupiter_sign: Pisces
+      rahu_sign: Aries
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Marital consequence — EVT.CURRENT.01.
 
@@ -1298,8 +1398,22 @@ EVT.2025.XX.XX.02:
   valence: positive
   native_reflection: "I found the solution to my sleeping disorder in 2025 when I was consulting astrology and the astrological pharmaceutical remedy was Dayvigo drug, which is the generic name Lemborexant. I pop a pill and know without the negative impacts of drowsiness of the other drugs."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2025-06-01
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Saturn (2024-12-09 to 2027-08-19)
+      pratyantar_dasha: Mercury (2025-05-13 to 2025-09-30)
+    yogini:
+      maha_dasha: Bhadrika/Mercury (2021-12-24 to 2026-12-24)
+      antar_dasha: Sankata/Rahu (2024-06-24 to 2025-08-04)
+    key_transits:
+      saturn_sign: Pisces
+      jupiter_sign: Gemini
+      rahu_sign: Aquarius
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Onset — EVT.2007.XX.XX.03.
 
@@ -1344,8 +1458,22 @@ EVT.2026.01.XX.01:
   valence: positive
   native_reflection: "Between January to February 2026, I found an enormous amount of focus and one-pointed approach, where a lot of things that have distracted me for most part of my life have been wiped out and I'm completely focusing on business."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_proxy_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2026-01-15
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Saturn (2024-12-09 to 2027-08-19)
+      pratyantar_dasha: Venus (2025-11-26 to 2026-05-09)
+    yogini:
+      maha_dasha: Bhadrika/Mercury (2021-12-24 to 2026-12-24)
+      antar_dasha: Dhanya/Jupiter (2026-01-03 to 2026-06-04)
+    key_transits:
+      saturn_sign: Pisces
+      jupiter_sign: Gemini
+      rahu_sign: Aquarius
+      sade_sati_active: true
   retrodictive_match: pending
 
 EVT.2026.03.20.01:
@@ -1358,8 +1486,22 @@ EVT.2026.03.20.01:
   valence: mixed
   native_reflection: "The project got wrapped up on March 20, 2026, with enormous amount of profits. Unfortunately it got wrapped up so we won't be able to make money out of it, but it's significantly helped us during the difficult times with the money that we made out of it."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_exact_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2026-03-20
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Saturn (2024-12-09 to 2027-08-19)
+      pratyantar_dasha: Venus (2025-11-26 to 2026-05-09)
+    yogini:
+      maha_dasha: Bhadrika/Mercury (2021-12-24 to 2026-12-24)
+      antar_dasha: Dhanya/Jupiter (2026-01-03 to 2026-06-04)
+    key_transits:
+      saturn_sign: Pisces
+      jupiter_sign: Gemini
+      rahu_sign: Aquarius
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Contract start — EVT.2025.07.XX.01.
 
@@ -1373,8 +1515,22 @@ EVT.2026.04.08.01:
   valence: positive
   native_reflection: "Eventually, on April 8, 2026, we closed the public hearing for that sand quarry and it should be operational in late October 2026."
   chart_state_at_event:
-    status: pending_computation
-    note: Added v1.3 — chart state requires Swiss Ephemeris computation pass.
+    status: computed_exact_date
+    computation_date: 2026-05-01
+    computation_session: M4-A-T1-SWISS-EPHEMERIS
+    proxy_date_used: 2026-04-08
+    vimshottari:
+      maha_dasha: Mercury (2010-08-18 to 2027-08-19)
+      antar_dasha: Saturn (2024-12-09 to 2027-08-19)
+      pratyantar_dasha: Venus (2025-11-26 to 2026-05-09)
+    yogini:
+      maha_dasha: Bhadrika/Mercury (2021-12-24 to 2026-12-24)
+      antar_dasha: Dhanya/Jupiter (2026-01-03 to 2026-06-04)
+    key_transits:
+      saturn_sign: Pisces
+      jupiter_sign: Gemini
+      rahu_sign: Aquarius
+      sade_sati_active: true
   retrodictive_match: pending
   notes: Pre-history — EVT.2021.XX.XX.03.
 
