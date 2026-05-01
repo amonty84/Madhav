@@ -3,8 +3,8 @@ document: LIFE EVENT LOG — ABHISEK MOHANTY
 project: MARSYS-JIS (Abhisek Mohanty Jyotish Intelligence System)
 layer: L1 (Facts Layer)
 artifact_id: LIFE_EVENT_LOG_v1_2
-version: 1.5
-status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts. v1.4: 11 v1.3 pending_computation events advanced to computed state via M4-A-T1-SWISS-EPHEMERIS pass. v1.5: §9 PPL migration annotations added.)
+version: 1.6
+status: CLOSED (Session 4 — chart_state fields populated from Swiss Ephemeris tooling; see `.tools/` scripts. v1.4: 11 v1.3 pending_computation events advanced to computed state via M4-A-T1-SWISS-EPHEMERIS pass. v1.5: §9 PPL migration annotations added. v1.6: GAP.M4A.04 partial close — EVT.2019.05.XX.01 + EVT.2023.05.XX.01 dual-tagged residential+travel per NAP.M4.2 native disposition.)
 supersedes: v1.1 (same-corpus, chart-state-populated)
 author: Claude (Session 2, Claude Code instance)
 date_built: 2026-04-17
@@ -24,6 +24,13 @@ next_steps:
   - Future: Expand toward 75-100 events; drain §6 gap register
   - Future (v2.0): Pattern Library (RPT.LFE.01) when Deep Analysis v2.0 exists
 changelog:
+  - v1.6 (2026-05-02, M4-A-CLOSE-LEL-PATCH): GAP.M4A.04 partial close —
+    EVT.2019.05.XX.01 (US move, May 2019) and EVT.2023.05.XX.01 (India return,
+    May 2023) dual-tagged `residential+travel` per NAP.M4.2 native disposition
+    (LEL_GAP_AUDIT_v1_0.md §5.4). Subcategory notes added on both events
+    cross-referencing GAP.M4A.04. Total events unchanged: 46 (no new EVT
+    entries; both target events already existed in the corpus). chart_state
+    blocks unchanged (already populated by v1.4 Swiss Ephemeris pass).
   - v1.5 (2026-05-02, M4-A-INTEGRATION-PASS): §9 PPL migration annotations added. Both
     PRED.M3D.HOLDOUT.001 and PRED.M3D.HOLDOUT.002 annotated with migrated: true,
     migrated_at, migrated_by_session, migration_destination. Migration to
@@ -997,8 +1004,8 @@ EVT.2018.11.28.01:
 EVT.2019.05.XX.01:
   date: 2019-05-XX
   date_confidence: month-exact
-  category: residential
-  subcategory: foreign_move_start
+  category: residential+travel
+  subcategory: foreign_move_start (dual-tagged residential+travel per GAP.M4A.04 partial close, LEL v1.6)
   description: Moved to the United States on Tech Mahindra work deputation (May 2019). 4-year stint; returned to India May 2023. Correction from source doc (which said 2018): native explicitly corrected to May 2019 in Session 2.
   magnitude: life-altering
   valence: positive
@@ -1209,8 +1216,8 @@ EVT.2022.10.XX.01:
 EVT.2023.05.XX.01:
   date: 2023-05-XX
   date_confidence: month-exact
-  category: residential
-  subcategory: return_home
+  category: residential+travel
+  subcategory: foreign_return (dual-tagged residential+travel per GAP.M4A.04 partial close, LEL v1.6)
   description: Returned to India from United States (May 2023) after 4-year stint. Concurrent with US job loss (exact date unclear — see §6 Gap Register). This marks pivotal transition from salaried corporate employment to entrepreneurship.
   magnitude: life-altering
   valence: mixed

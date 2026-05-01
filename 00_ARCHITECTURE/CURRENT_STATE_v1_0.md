@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 1.4
+version: 1.5
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,31 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v1.5 (2026-05-02, M4-A-CLOSE-LEL-PATCH): M4-A SUB-PHASE FORMALLY CLOSED.
+    Sealing artifact produced: 00_ARCHITECTURE/M4_A_CLOSE_v1_0.md v1.0 (8 sections per
+    PHASE_M4_PLAN §3.1 ACs). Quality bar: 10/10 ACs PASS (1 documentation drift carry-
+    forward = KR.M4A.CLOSE.1 — CALIBRATION_RUBRIC frontmatter still reads
+    AWAITING_NATIVE_APPROVAL despite NAP.M4.1 APPROVED at v1.3; semantic approval intact
+    via every record's rubric_option=B; flip scheduled at M4-B entry).
+    LEL v1.5 → v1.6 patch applied: GAP.M4A.04 partial close per NAP.M4.2 native disposition —
+    EVT.2019.05.XX.01 (US move) and EVT.2023.05.XX.01 (India return) dual-tagged
+    `category: residential+travel` with subcategory cross-reference; total events
+    unchanged at 46.
+    Mirror sync MP.1 (.geminirules) + MP.2 (.gemini/project_state.md): propagation
+    flagged as carry-forward to next session (out of this session's may_touch scope).
+    Per GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3 the next session declares the Gemini-
+    side surfaces in its may_touch and updates them to adapted parity. If carry-forward
+    is not picked up immediately, opens DIS.class.mirror_desync candidate.
+    last_session_id → M4-A-CLOSE-LEL-PATCH.
+    next_session_objective → M4-B Round 1 parallel execution: T1 (LL.1 shadow weights B1
+    domains: career/financial/general/travel) + T2 (LL.1 shadow weights B2 domains:
+    spiritual/relationship/health/family/psychological). Input: lel_event_match_records.json
+    training partition (37 events). Shadow register:
+    06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/.
+    Protocol: SHADOW_MODE_PROTOCOL_v1_0.md §3 (binding). ACs: PHASE_M4_PLAN §3.2
+    AC.M4B.1–AC.M4B.10. red_team_counter: 0 (entering M4-B from clean reset).
+    file_updated_at → 2026-05-02T21:00:00+05:30.
+    file_updated_by_session → M4-A-CLOSE-LEL-PATCH.
   - v1.4 (2026-05-02, M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions): All three NAP items resolved.
     NAP.M4.4 APPROVED: SHADOW_MODE_PROTOCOL_v1_0.md §3 criteria binding — N≥3, variance≤0.3,
       two-pass approval, validity margin match_rate≥0.4. M4-B weight writes now unblocked.
@@ -1090,6 +1115,19 @@ current_state:
     # M3 phase plan (PHASE_M3_PLAN_v1_0.md v1.0) is SUPERSEDED-AS-COMPLETE.
   active_phase_plan_version: "1.0"
   active_phase_plan_sub_phase: >
+    M4-A CLOSED 2026-05-02. M4_A_CLOSE_v1_0.md produced. LEL v1.6 patch applied
+    (GAP.M4A.04 partial close). M4-B entry unblocked.
+    Sealing artifact: 00_ARCHITECTURE/M4_A_CLOSE_v1_0.md v1.0 (8 sections, 10/10 ACs PASS,
+    1 doc-drift carry-forward KR.M4A.CLOSE.1).
+    M4-A inputs all in place for M4-B Round 1: lel_event_match_records.json (46 records,
+    schema v1.1, 37 training / 9 held-out, decade-stratified 2/3/4); CALIBRATION_RUBRIC
+    Option B native-approved (frontmatter flip scheduled M4-B entry per KR.M4A.CLOSE.1);
+    SHADOW_MODE_PROTOCOL §3 promotion criteria APPROVED + binding; msr_domain_buckets.json
+    495/499 signals across 10 domains; LL.1 status active-pending; PPL substrate carries
+    PRED.M3D.HOLDOUT.001+002 with partition: held_out.
+    KR.M3A.JH-EXPORT carries to HANDOFF_M4_TO_M5 per NAP.M4.3 Option Y. KR.M4A.RT.LOW.1
+    (commit 0793719 malformed root tree, on-disk content correct) carries forward.
+    === M3 MACRO-PHASE CLOSED 2026-05-01 (preserved for audit trail) ===
     M3 MACRO-PHASE CLOSED 2026-05-01 at M3-W4-D2-M3-CLOSE.
     Sealing artifact: 00_ARCHITECTURE/M3_CLOSE_v1_0.md.
     Handoff memo: 00_ARCHITECTURE/HANDOFF_M3_TO_M4_v1_0.md.
@@ -1231,8 +1269,16 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: M4-A-S2-T3-SHADOW-PROTOCOL
-    # M4-A NAP decisions append (2026-05-02). Governance session.
+  last_session_id: M4-A-CLOSE-LEL-PATCH
+    # M4-A SUB-PHASE FORMALLY CLOSED (2026-05-02). Sealing-artifact + LEL-patch session.
+    # Three deliverables: (1) 00_ARCHITECTURE/M4_A_CLOSE_v1_0.md v1.0 (8-section sealing
+    # artifact; 10/10 ACs PASS verified against post-merge-main; 1 doc-drift carry-forward
+    # KR.M4A.CLOSE.1 = CALIBRATION_RUBRIC frontmatter flip scheduled M4-B entry); (2) LEL
+    # v1.5→v1.6 patch (GAP.M4A.04 partial close: EVT.2019.05.XX.01 + EVT.2023.05.XX.01
+    # dual-tagged residential+travel; 46 events unchanged); (3) CURRENT_STATE v1.4→v1.5
+    # (this update); (4) SESSION_LOG append. Mirror MP.1+MP.2 carry-forward to next session.
+    # M4-B entry now unblocked.
+    # === Predecessor session (M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append) preserved for audit trail ===
     # NAP.M4.4 APPROVED (shadow mode §3 criteria binding).
     # NAP.M4.3 Option Y (JH carry forward; DIS.009 resolved-R3-pending-ECR).
     # NAP.M4.2 partial (GAP.M4A.04 deferred-pending-patch; 5 deferred; 5 accepted).
@@ -1736,6 +1782,52 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
+    M4-B-S2 — TWO-PASS APPROVAL + NATIVE NOTIFICATION + SINGLE-TRACK / B1+B2 RECONCILIATION.
+    Predecessor: M4-A-CLOSE-LEL-PATCH (2026-05-02 — M4-A formally closed; sealing artifact
+    M4_A_CLOSE_v1_0.md; LEL v1.6 patch applied; CURRENT_STATE v1.5).
+    PROCEDURAL IRREGULARITY DOCUMENTED IN M4_A_CLOSE §8: M4-B-S1-LL1-SHADOW-WEIGHTS executed
+    AHEAD of this M4-A formal close at commit 550fa77 (hash-stamp follow-up efa599c). Single-
+    track LL.1 shadow-write (380 signals; 30 promotion-eligible pending two-pass; held-out 9
+    events excluded — Learning Layer discipline #4 respected; no production promotion). The
+    BRIEF for this session prescribed `M4-B Round 1 parallel execution (B1+B2)` as the next
+    objective — that text is preserved in the predecessor next_session_objective audit trail
+    below for governance traceability — but the FACTUAL next session is M4-B-S2 follow-up
+    work, not M4-B-R1 fresh entry.
+    M4-B-S2 scope:
+      (a) §3(c) two-pass approval — Gemini red-team review on the 30
+          promotion_eligible_pending_two_pass signals per SHADOW_MODE_PROTOCOL §3.
+      (b) §3(d) native-notification with no-hold gate per SHADOW_MODE_PROTOCOL §3.
+      (c) Native review of M4-B-S1 single-track implementation vs the planned B1/B2 split —
+          accept-as-is OR schedule a B1/B2 re-split pass.
+      (d) KR.M4A.CLOSE.1 — flip CALIBRATION_RUBRIC_v1_0.md frontmatter status
+          AWAITING_NATIVE_APPROVAL → APPROVED, version 1.0-DRAFT → 1.0, append changelog
+          entry citing NAP.M4.1 approval (2026-05-02).
+      (e) MP.1 + MP.2 mirror sync carry-forward from M4-A close — declare .geminirules and
+          .gemini/project_state.md in may_touch and update to adapted parity reflecting
+          M4-A CLOSED + M4-B-S1 done + M4-B-S2 in flight.
+      (f) LL.2 / LL.3 / LL.4 mechanism activation per PHASE_M4_PLAN §3.2 (parallelizable
+          with the two-pass approval work).
+    Acceptance criteria: PHASE_M4_PLAN §3.2 AC.M4B.1–AC.M4B.10 continue to govern; shadow-
+    only writes per SHADOW_MODE_PROTOCOL §3 until promotion criteria are met (N≥3,
+    variance≤0.3, two-pass approval, validity margin match_rate≥0.4).
+    Mirror sync MP.1 + MP.2 carry-forward from M4-A close: M4-B Round 1 entry session
+      declares .geminirules + .gemini/project_state.md in may_touch and updates them
+      to adapted parity reflecting M4-A CLOSED + M4-B in-flight (per
+      GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3).
+    Documentation hygiene at M4-B entry: KR.M4A.CLOSE.1 — flip CALIBRATION_RUBRIC_v1_0.md
+      frontmatter status AWAITING_NATIVE_APPROVAL → APPROVED, version 1.0-DRAFT → 1.0,
+      append changelog entry citing NAP.M4.1 approval (2026-05-02).
+    KR.M4A.RT.LOW.1: schedule tree-rewrite for commit 0793719 malformed root tree at
+      native convenience (not blocking M4-B).
+    Inherited open items (unchanged): DIS.009 pending ECR (NAP.M4.3 Option Y to
+      HANDOFF_M4_TO_M5), DIS.010/011/012 RESOLVED-N3 (M9), Sthana+Drik ECR + Narayana ECR
+      (M5+ alongside JH integration), KR.W9.1/2 (auth-secrets), KR.M3A2.1, AC.M3A.5.
+    msr_domain_buckets: 4 absent signal IDs (SIG.MSR.207/497/498/499) flagged for M5+
+      MSR expansion or M4-substrate cleaning pass.
+    red_team_counter: 0 (entering M4-B from clean reset; next IS.8(a) cadence-fires at
+      counter=3 — three substantive M4-B sessions hence; IS.8(b) macro-phase-close
+      cadence-fires at M4-D close).
+    === Predecessor next_session_objective (M4-A close path) preserved for audit trail ===
     M4-A CLOSE + GAP.M4A.04 LEL PATCH + M4-B ENTRY.
     Predecessor: M4-A-S2-T3-SHADOW-PROTOCOL (2026-05-02 — NAP decisions all resolved).
     NAP.M4.4 APPROVED (binding). NAP.M4.3 Option Y (carry forward). NAP.M4.2 partial (patch).
@@ -1789,7 +1881,7 @@ current_state:
       DIS.010/011/012 RESOLVED-N3 (defer to M9).
       Naisargika + Nathonnatha, Sthana+Drik ECR, KR.W9.1/2, KR.M3A2.1, AC.M3A.5.
       msr_domain_buckets: 4 absent signal IDs (207, 497, 498, 499) flagged for M5+.
-  next_session_proposed_cowork_thread_name: "M4-A Close + GAP.M4A.04 LEL Patch + M4-B Entry"
+  next_session_proposed_cowork_thread_name: "M4-B-S2 — Two-Pass Approval + Single-Track Reconciliation"
   red_team_due_note: >
     Counter reset 3→0 at M4-A-INTEGRATION-PASS-R3 (IS.8(a) discharged by T1/REDTEAM_M4A_v1_0.md
     PASS 6/6 axes; 1 LOW carry-forward KR.M4A.RT.LOW.1).
@@ -1800,8 +1892,8 @@ current_state:
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T19:30:00+05:30
-  file_updated_by_session: M4-A-S2-T3-SHADOW-PROTOCOL
+  file_updated_at: 2026-05-02T21:00:00+05:30
+  file_updated_by_session: M4-A-CLOSE-LEL-PATCH
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M3-W4-D2-M3-CLOSE, null).
@@ -1813,6 +1905,26 @@ current_state:
 ---
 
 ## §3 — Narrative (human-reading surface — must agree with §2)
+
+At the close of **M4-A-CLOSE-LEL-PATCH (2026-05-02) — M4-A SUB-PHASE FORMALLY CLOSED**:
+
+**Sub-phase.** **M4-A CLOSED.** Sealing artifact: `00_ARCHITECTURE/M4_A_CLOSE_v1_0.md` v1.0 (8 sections per M3_CLOSE template). All 10 acceptance criteria from `PHASE_M4_PLAN_v1_0.md §3.1` (AC.M4A.1 through AC.M4A.10) verified PASS against committed artifacts on `post-merge-main`. Single carry-forward at the documentation layer: `KR.M4A.CLOSE.1` — `CALIBRATION_RUBRIC_v1_0.md` frontmatter still reads `status: AWAITING_NATIVE_APPROVAL`, `version: 1.0-DRAFT` despite NAP.M4.1 APPROVED at M4-A-INTEGRATION-PASS-R3 per CURRENT_STATE v1.3. Semantic approval is intact — every event-match record cites `rubric_option: B` — and the frontmatter flip is scheduled at M4-B Round 1 entry (not blocking).
+
+**LEL v1.6 patch.** GAP.M4A.04 (travel sparsity) partial close per NAP.M4.2 native disposition. Two events dual-tagged: `EVT.2019.05.XX.01` (US move May 2019) and `EVT.2023.05.XX.01` (India return May 2023) now carry `category: residential+travel` with subcategory cross-reference (`foreign_move_start` / `foreign_return` annotated `dual-tagged residential+travel per GAP.M4A.04 partial close, LEL v1.6`). LEL frontmatter `version: 1.5 → 1.6`; changelog appended. Total events unchanged at 46 (both targets already existed in v1.3+ corpus; chart_state blocks already populated by v1.4 Swiss Ephemeris pass — no recomputation required). Remaining GAP.M4A.04 (travel-decade sparsity below the §5.2 threshold of LEL_GAP_AUDIT v1.1) carries forward as accept/defer at native discretion.
+
+**Mirror sync (MP.1 + MP.2) — carry-forward.** `.geminirules` (MP.1) and `.gemini/project_state.md` (MP.2) Gemini-side adapted-parity propagation is OUTSIDE this session's `may_touch` scope (the close brief restricted to four files: M4_A_CLOSE, LEL, CURRENT_STATE, SESSION_LOG). The propagation is **flagged as a carry-forward**: the next session that opens declares `.geminirules` + `.gemini/project_state.md` in its `may_touch` and updates them to adapted parity reflecting M4-A CLOSED + M4-B in-flight. Per `GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3`, if the carry-forward is not picked up by the immediately-following session, a `DIS.class.mirror_desync` candidate entry opens in `DISAGREEMENT_REGISTER_v1_0.md`. `mirror_enforcer.py` was not run at this close.
+
+**M4-B already partially executed — procedural irregularity.** M4-B-S1-LL1-SHADOW-WEIGHTS ran AHEAD of this M4-A formal close at commit 550fa77 (hash-stamp follow-up efa599c). On-disk evidence at HEAD: `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` exists (225,178 bytes; 380 signals observed; 30 promotion_eligible_pending_two_pass; 285 insufficient_observations; 52 shadow_indefinite_low_match_rate; 13 shadow_indefinite_high_variance; 37 training events used; 9 held-out events excluded). Implementation deviated from `PHASE_M4_PLAN §3.2` planned B1/B2 parallel split — ran as single-track all-domain shadow-write. **No production weight promoted** (production register `signal_weights/production/` does not exist; the 30 promotion-eligible signals remain blocked at §3(c) two-pass approval gate + §3(d) native-notification gate). Held-out partition discipline (Learning Layer rule #4) was respected. M4_A_CLOSE §8 + §3 item 0 (KR.M4A.CLOSE.2) document the irregularity for audit. Damage assessment: procedural-only; no calibration corruption; carry-forward at M4-B-S2 for native review (accept-as-is or schedule B1/B2 re-split).
+
+**Red-team.** No red-team this session (M4-A close is sub-phase close, not macro-phase close; IS.8(b) fires at M4-D close). IS.8(a) every-third-session counter at 0 entering M4-B; next cadence-fires at counter=3 (three substantive M4-B sessions hence). The IS.8(a) discharge for the M4-A Round-2/Round-3 cycle was REDTEAM_M4A_v1_0.md PASS 6/6 axes at M4-A-S2-T1-REDTEAM-BATCH1 (commit 79a6810).
+
+**ND.** No open native directives at M4-A close. ND.1 (Mirror Discipline) addressed since Step 7 close.
+
+**Session.** Governance / sub-phase-close session per `ONGOING_HYGIENE_POLICIES §G` — sealing-artifact authoring + L1 minor-version patch (NAP-execution writeback) + state-pointer updates + SESSION_LOG append. Strict scope respected: did NOT touch `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/` (M4-B scope; T2 owns), `06_LEARNING_LAYER/OBSERVATIONS/` (already committed; not modified this session), `025_HOLISTIC_SYNTHESIS/`, `035_DISCOVERY_LAYER/`, `platform/`. Read-only access to MSR / FORENSIC / committed M4-A artifacts for AC verification only.
+
+**Next session.** `M4-B-S2` — two-pass approval (§3(c) Gemini red-team review on the 30 promotion-eligible signals) + native notification (§3(d)) + native review of M4-B-S1 single-track implementation vs planned B1/B2 split + KR.M4A.CLOSE.1 (CALIBRATION_RUBRIC frontmatter flip) + MP.1+MP.2 mirror sync carry-forward + LL.2 / LL.3 / LL.4 mechanism activation per `PHASE_M4_PLAN §3.2`. Cowork thread proposal: `M4-B-S2 — Two-Pass Approval + Single-Track Reconciliation`.
+
+*(Below: retained narrative from prior session close M3-W4-D2-M3-CLOSE for audit trail.)*
 
 At the close of **M3-W4-D2-M3-CLOSE (2026-05-01) — M3 MACRO-PHASE CLOSED**:
 

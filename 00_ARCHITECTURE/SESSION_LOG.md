@@ -11717,3 +11717,45 @@ First M4-B Learning Layer computation. LL.1 Signal Weight Calibration — initia
 - AC.T2.7 PASS — only files inside may_touch were modified.
 
 Commit: 550fa7770d525ab19fce4237d3fede6c9c57bf56 (stamped via follow-up; original work commit; superseded only by a hash-stamp follow-up).
+
+---
+
+**M4-A-CLOSE-LEL-PATCH** | 2026-05-02 | CLOSED
+
+M4-A SUB-PHASE FORMALLY CLOSED. Sealing artifact authored, GAP.M4A.04 partial-close LEL patch applied, CURRENT_STATE rotated v1.4 → v1.5.
+
+**Cowork thread:** `M4-A Close + LEL v1.6 Patch`.
+
+**Deliverables:**
+
+(1) **`00_ARCHITECTURE/M4_A_CLOSE_v1_0.md` v1.0** — sealing artifact (8 sections per M3_CLOSE structural template). §1 quality bar: 10/10 ACs PASS verified against committed artifacts on `post-merge-main` (1 documentation drift carry-forward = `KR.M4A.CLOSE.1`: CALIBRATION_RUBRIC_v1_0.md frontmatter still reads `status: AWAITING_NATIVE_APPROVAL`/`version: 1.0-DRAFT` despite NAP.M4.1 APPROVED at v1.3; semantic approval intact via every record's rubric_option=B; flip scheduled at M4-B-S2 entry). §2 round log enumerates W1 + Round 2 (T1–T4) + Integration R2 + Round 3 (S2-T1/T2/T3) + Integration R3 + NAP-decisions append + this close session = 11 sessions in M4-A. §3 known deferred items: 19 enumerated across M4-A residuals + M3 sub-phase carry-forwards + M2-inherited (lead item is `KR.M4A.CLOSE.2` — see Procedural irregularity below). §4 red-team evidence: REDTEAM_M4A_v1_0.md PASS 6/6 axes; counter trail M4-A 0→1→2→3 (R2) → held → IS.8(a) FIRES at M4-A-S2-T1 reset 3→0 → 0→1→2 (Round 3) → 0 (cached at NAP-decisions append) → entering M4-B at 0. No IS.8(b) macro-phase RT (sub-phase close, not macro close). §5 ND status: open=[]; addressed=[ND.1]. §6 mirror sync evidence: MP.1+MP.2 propagation flagged as carry-forward to next session (out of this session's may_touch scope). §7 live platform state. §8 M4-A exit confirmed + Procedural irregularity record.
+
+(2) **LEL v1.5 → v1.6 patch** (`01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md`). GAP.M4A.04 partial close per NAP.M4.2 native disposition (LEL_GAP_AUDIT v1.1 §5.4). EVT.2019.05.XX.01 (US move May 2019) and EVT.2023.05.XX.01 (India return May 2023) dual-tagged `category: residential+travel` with subcategory cross-reference (`foreign_move_start (dual-tagged residential+travel per GAP.M4A.04 partial close, LEL v1.6)` and `foreign_return (dual-tagged residential+travel per GAP.M4A.04 partial close, LEL v1.6)`). Frontmatter version bumped 1.5 → 1.6; status string extended; changelog v1.6 entry appended documenting NAP.M4.2 execution writeback. Total events unchanged at 46 (both targets already in corpus; chart_state blocks unchanged — already populated by v1.4 Swiss Ephemeris pass).
+
+(3) **CURRENT_STATE v1.4 → v1.5** (`00_ARCHITECTURE/CURRENT_STATE_v1_0.md`). §2 state-block fields rotated: `last_session_id` → `M4-A-CLOSE-LEL-PATCH`; `active_phase_plan_sub_phase` updated to "M4-A CLOSED 2026-05-02. M4_A_CLOSE_v1_0.md produced. LEL v1.6 patch applied (GAP.M4A.04 partial close). M4-B entry unblocked." with full input-state inventory; `next_session_objective` updated to **M4-B-S2** (two-pass approval + native notification + single-track reconciliation + KR.M4A.CLOSE.1 frontmatter flip + MP.1+MP.2 mirror sync carry-forward + LL.2/3/4 activation) — see Procedural irregularity below; `next_session_proposed_cowork_thread_name` → "M4-B-S2 — Two-Pass Approval + Single-Track Reconciliation"; `file_updated_at` → 2026-05-02T21:00:00+05:30; `file_updated_by_session` → M4-A-CLOSE-LEL-PATCH. §3 narrative top entry replaced with M4-A-CLOSE-LEL-PATCH narrative; prior M3-W4-D2-M3-CLOSE entry preserved as audit trail. Changelog v1.5 entry appended.
+
+(4) **`00_ARCHITECTURE/SESSION_LOG.md`** — this entry appended.
+
+**Acceptance criteria** (from M4-A-CLOSE-LEL-PATCH brief):
+- AC.T1.1 PASS — M4_A_CLOSE_v1_0.md exists at 00_ARCHITECTURE/M4_A_CLOSE_v1_0.md with all 8 sections (§1 quality bar; §2 round log; §3 deferred items; §4 red-team evidence; §5 ND status; §6 mirror sync; §7 live platform state; §8 exit confirmed + Procedural irregularity).
+- AC.T1.2 PASS — §1 quality bar table lists AC.M4A.1–AC.M4A.10; all 10 rows show PASS (AC.M4A.3 row carries an inline carry-forward note for the documentation-frontmatter drift = KR.M4A.CLOSE.1, but the underlying acceptance criterion is satisfied via NAP.M4.1 APPROVED Option B per CURRENT_STATE v1.3 + every record citing rubric_option=B).
+- AC.T1.3 PASS — LEL frontmatter shows `version: 1.6`; EVT.2019.05.XX.01 has `category: residential+travel`; EVT.2023.05.XX.01 (India return event) has `category: residential+travel`. Subcategory cross-references applied on both events.
+- AC.T1.4 PASS — CURRENT_STATE shows `version: 1.5` and `last_session_id: M4-A-CLOSE-LEL-PATCH`.
+- AC.T1.5 PASS — SESSION_LOG has M4-A-CLOSE-LEL-PATCH entry (this entry); commit hash stamped below.
+- AC.T1.6 PASS — only files within may_touch were modified: `00_ARCHITECTURE/M4_A_CLOSE_v1_0.md` (CREATED), `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` (MODIFIED), `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (MODIFIED), `00_ARCHITECTURE/SESSION_LOG.md` (MODIFIED — this append). No files in must_not_touch (`06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/`, `06_LEARNING_LAYER/OBSERVATIONS/`, `025_HOLISTIC_SYNTHESIS/`, `035_DISCOVERY_LAYER/`, `platform/`) were modified.
+
+**Procedural irregularity record (must surface — see M4_A_CLOSE §8 + §3 item 0).** M4-B-S1-LL1-SHADOW-WEIGHTS executed AHEAD of this M4-A formal close at commit `550fa77` (with hash-stamp follow-up `efa599c`). On-disk evidence at HEAD: `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` exists (225,178 bytes; 380 signals observed; 30 promotion-eligible pending two-pass). Single-track all-domain implementation deviated from `PHASE_M4_PLAN §3.2` planned B1/B2 parallel split. **No production weight promoted** (production register empty; 30 eligible signals blocked at §3(c) two-pass approval gate + §3(d) native-notification gate). Held-out partition discipline (Learning Layer rule #4) respected. Damage assessment: procedural-only; no calibration corruption. **Native review carry-forward to M4-B-S2** (accept-as-is or schedule B1/B2 re-split). The brief for THIS close session prescribed `M4-B Round 1 parallel execution (B1+B2)` as the next_session_objective — that exact text would have been factually inaccurate given M4-B-S1 already executed; CURRENT_STATE v1.5 next_session_objective therefore reflects the actual next-session work (M4-B-S2 follow-up) with the brief-prescribed text preserved as a predecessor audit-trail line for governance traceability.
+
+**Mirror sync status (MP.1 + MP.2 — CARRY-FORWARD).** This M4-A close is a Claude-side governance milestone. Per MP.1 + MP.2 mirror discipline, Gemini-side adapted-parity update on `.geminirules` (MP.1) and `.gemini/project_state.md` (MP.2) is due. Both files are OUTSIDE this session's may_touch (the brief restricts to four files). **Therefore the propagation is FLAGGED AS A CARRY-FORWARD** to the next session per `GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3`. The next session that opens declares `.geminirules` + `.gemini/project_state.md` in its may_touch and updates them to adapted parity reflecting M4-A CLOSED + M4-B-S1 done + M4-B-S2 in flight. If the carry-forward is not picked up by the immediately-following session, a `DIS.class.mirror_desync` candidate entry opens in `DISAGREEMENT_REGISTER_v1_0.md`. `mirror_enforcer.py` was not run at this close. MP.6 (GOVERNANCE_STACK), MP.7 (SESSION_LOG) — declared Claude-only; no Gemini-side update required.
+
+**Red-team.** No red-team this session. M4-A close is a sub-phase close, not a macro-phase close; IS.8(b) cadence fires at M4 macro-phase close (M4-D-S2) per `PHASE_M4_PLAN §3.4 AC.M4D.2`. IS.8(a) every-third-session cadence was last discharged at M4-A-S2-T1-REDTEAM-BATCH1 via REDTEAM_M4A_v1_0.md PASS 6/6 axes (counter reset 3→0). Counter at this close: 0 (cached annotation in CURRENT_STATE v1.4 §2). Next IS.8(a) cadence-fires at counter=3 (three substantive M4-B sessions hence).
+
+**ND status.** No open native directives. ND.1 (Mirror Discipline) addressed since Step 7 close (2026-04-24).
+
+**Files changed (within may_touch only):**
+- `00_ARCHITECTURE/M4_A_CLOSE_v1_0.md` — CREATED (v1.0 sealing artifact).
+- `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` — MODIFIED (v1.5 → v1.6; GAP.M4A.04 patch).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (v1.4 → v1.5).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+Commit: M4A_CLOSE_LEL_PATCH_HASH_PENDING_STAMP
