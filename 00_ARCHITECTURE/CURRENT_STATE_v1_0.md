@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 1.9
+version: 2.0
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,101 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v2.0 (2026-05-02, M4-B-S4-LL3-DOMAIN-COHERENCE): Clean-marker version bump after
+    the parallel M4-B-S3 / P1 / P2 sessions merged into v1.7–v1.9. v2.0 marks the
+    landing of M4-B-S4 — substantive learning-layer-substrate session producing two
+    LL recommendation documents (LL.3 + LL.4) plus the in-session red-team obligation
+    discharged at counter=3.
+    Deliverables (within may_touch only):
+    (1) `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md` v1.0 NEW.
+    Seven-section diagnostic recommendation document discharging the M4-B LL.3
+    obligation per `SHADOW_MODE_PROTOCOL §2` LL.3 row. §2 domain coverage table
+    (10-bucket MSR-anchored): three buckets unobserved (family 0/20, psychological
+    0/20, spiritual 0/94 = 134 of 495 MSR signals or 27% never fired in 37 training
+    events); education structurally absent from MSR ontology; career fully observed
+    207/207 but yields zero promotion-eligible signals (all N<3); health
+    strongest empirical bucket (31/31 obs, 31 N≥3, 14 eligible); general carries
+    Pancha-Mahapurusha clique (5/15 eligible incl. 3 Tier-C); relationship 39/39
+    obs but 38/39 fail mean-or-variance criteria. §3 per-signal coherence: 30
+    eligible signals all fire only in their declared MSR domain — verdict is
+    structural by rubric design (per-event bucket filter prevents cross-domain
+    actual_lit_signals), not empirical validation. §4 LL.2 edge-coherence: top-10
+    edges all intra-domain (8 MED-tier are the general-bucket Pancha-Mahapurusha
+    clique on SIG.MSR.117/.118/.119/.143/.145/.402; 2 LOW-tier health pairs); zero
+    cross-domain by structural necessity (consistent with M4-B-S3 §3.5+§6.7
+    finding). §5 recommendations: 3 fix-before-production (R.LL3.1 prod-register
+    domain summary; R.LL3.2 cluster-aware consumption rule for the Pancha-MP
+    clique to prevent 6× double-counting; R.LL3.3 unweighted-MSR routing with
+    n=0 disclaimer for unobserved buckets) + 4 investigate-in-M5 (R.LL3.4
+    multi-domain activator extension; R.LL3.5 LEL inner-life-domain expansion;
+    R.LL3.6 yoga-absence M5 inspection; R.LL3.7 cross-system signal-ID
+    reconciliation at M4-D). §6 5 limitations + §7 changelog. Recommendation
+    document only; no shadow→production split per protocol §2.
+    (2) `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md`
+    v1.0 NEW. Six-section recommendation document discharging the M4-B LL.4
+    obligation per `SHADOW_MODE_PROTOCOL §2` LL.4 row. §2 baseline match-rate:
+    training mean=0.630, held_out mean=0.913 (Δ=+0.28); gap interpreted via three
+    explicit hypotheses — H1 decade-stratified-selection-bias most likely (per
+    held_out_manifest selection_criteria favoring high-confidence dates +
+    later-decade events + spread of categories — each correlates with higher
+    achievable mr); H2 LEL retrodictive_match labeling bias secondary; H3
+    honest-generalization least likely under n=37. **Held_out=0.913 explicitly
+    flagged as not a clean validity figure**; training=0.630 is the more honest
+    working baseline. §3 basis-class performance (training): classical_rule
+    (n=29) + both (n=19) at 1.000 perfect calibration; temporal_engine (n=863)
+    at 0.4267 — variance carrier of the training-mean gap; held-out sanity
+    (temporal_engine n=229 at 0.5808) consistent with H1 date-precision artifact.
+    §4 domain-class performance: career (n=431, 0.50), financial (n=69, 0.46),
+    health (n=97, 0.49), relationship (n=124, 0.41), travel (n=5, 0.40) cluster
+    in 0.40–0.50 band; general (n=168, 0.30) underperforms by Pancha-MP-cluster
+    design; psy/spi/edu/fam at n≤7 with apparent 1.00 lit-rate are sample-size
+    artifacts, not findings. §5 qualitative-tier prior recommendation: STRONG
+    (classical_rule + both bases full credit); MODERATE (career/financial/health/
+    relationship temporal — 0.4–0.5 multiplier; general temporal — 0.30 with
+    cluster-aware consolidation per LL.3 R.LL3.2); WEAK (travel n=5; psy/spi/edu/
+    fam n≤7 too thin); date-precision global modifier (exact → held-out band,
+    approx-month → training band, approx-year further reduced). Priors are
+    recommendations, not bindings; not a substitute for LL.1 weights post-NAP.M4.5.
+    §6 changelog. Recommendation document only.
+    (3) `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v1.9 → v2.0 (this update).
+    Frontmatter version flipped to v2.0; canonical state pointers rotated below.
+    (4) `00_ARCHITECTURE/SESSION_LOG.md` — entry appended.
+    Red-team pass (AC.S4.5; counter hits 3 = IS.8(a) every-third cadence fire).
+    Conducted in-session against four axes — lel_event_match_records integrity,
+    ll1_shadow_weights computation, ll2_edge_weights topology, LL1_TWO_PASS_APPROVAL
+    surrogate disclosure adequacy. AXIS-1 PASS (46 records, all required fields,
+    match_rate consistent, partition 37/9 correct, held-out manifest matches
+    records, no missing IDs). AXIS-2 PASS (30 eligible signals all satisfy N≥3 +
+    mean≥0.4 + var≤0.3; sample-recomputation matches reported stats; sample
+    variance n-1 used consistently — note F.RT.S4.1 below; no held-out leakage in
+    LL.1 observations). AXIS-3 PASS (9,922 edges, tier counts match summary, 0
+    duplicate edges, 0 self-loops, 0 held-out leakage in co_event_ids, 8 MED-tier
+    edges all on the Pancha-Mahapurusha clique with one endpoint SIG.MSR.117 not
+    in the eligible set per its mean=0.36 < 0.4 status `shadow_indefinite_low_match_rate`).
+    AXIS-4 PASS WITH CAVEATS (surrogate role flagged in 6 places: frontmatter
+    `pass_1_reviewer_kind`, §1 disclosure paragraph, §3 rubric statement, §5
+    `surrogate_disclosure` field, §6 R.LL1TPA.1 carry-forward, §7 changelog;
+    structural circularity — Claude-reviewing-Claude — acknowledged via R.LL1TPA.1;
+    pass_2 (NAP.M4.5 native) is the binding gate). Three findings: F.RT.S4.1
+    (LOW) variance-estimator unspecified in protocol §3.1(b) — shadow file uses
+    sample variance (more conservative than population); recommend protocol
+    amendment at next protocol-amendment opportunity (non-blocking). F.RT.S4.2
+    (NOTE) surrogate self-review structural circularity — already disclosed via
+    R.LL1TPA.1; no new action. F.RT.S4.3 (INFO) domain-coherence-by-rubric-design
+    acknowledged in LL3 §3.2. No HIGH/CRITICAL/MEDIUM findings; cadence
+    discharged.
+    Out-of-scope (per brief must_not_touch): `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**`
+    (no shadow or production weight files modified — LL.3/LL.4 are recommendation
+    documents only); `06_LEARNING_LAYER/OBSERVATIONS/**` (read-only); `01_FACTS_LAYER/**`;
+    `025_HOLISTIC_SYNTHESIS/**` (read-only for MSR domain reference);
+    `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md`; `platform/**`; `.geminirules`;
+    `.gemini/project_state.md` — MP.1/MP.2 mirror sync not propagated this session
+    (substrate session within already-discharged carry-forward window; see
+    mirror_updates_propagated in SESSION_LOG entry).
+    LL.2 stability gate (LL2_STABILITY_GATE_v1_0.md) re-evaluation NOT triggered
+    by this session — gate re-evaluates at NAP.M4.5 close per its §5; M4-B-S4
+    deliverables are recommendation documents that do not advance LL.1/LL.2
+    promotion state.
   - v1.9 (2026-05-02, M4-B-P2-NAP-M45-PREP): Parallel-slot session running alongside
     M4-B-S3 (LL.2 shadow writes — reserved at v1.7) and M4-B-P1-GAP-TRAVEL-CLOSE
     (v1.8, governance-aside). Per brief AC.P2.5 ("CURRENT_STATE bumped one version
@@ -1457,7 +1552,17 @@ current_state:
   # ------------------------------------------------------------------
   # Red-team counter (ONGOING_HYGIENE_POLICIES §G addition at Step 12)
   # ------------------------------------------------------------------
-  red_team_counter: 2
+  red_team_counter: 0
+    # M4-B-S4-LL3-DOMAIN-COHERENCE (2026-05-02) — counter 2→3 → IS.8(a) every-third
+    # cadence FIRES → in-session red-team conducted (4 axes: lel_event_match_records
+    # integrity / ll1_shadow_weights computation / ll2_edge_weights topology /
+    # LL1_TWO_PASS_APPROVAL surrogate disclosure). All 4 axes PASS with 3 findings
+    # (F.RT.S4.1 LOW variance-estimator-unspecified, F.RT.S4.2 NOTE surrogate
+    # self-review circularity, F.RT.S4.3 INFO rubric-coherence-by-design). 0
+    # HIGH/CRITICAL/MEDIUM. Counter resets 3→0 per ONGOING_HYGIENE_POLICIES §G
+    # cadence-reset clause. Next IS.8(a) every-third cadence-fires at counter=3
+    # (three substantive sessions hence). IS.8(b) macro-phase-close cadence at
+    # M4-D close per PHASE_M4_PLAN §3.4 AC.M4D.4.
     # M4-B-S3-LL2-EDGE-WEIGHTS (2026-05-02) — counter 1→2 (substantive learning-layer-
     # substrate session per ONGOING_HYGIENE_POLICIES §G; LL.2 shadow file produced +
     # design doc + stability gate + KR.M4A.CLOSE.1 discharge — substantive). Next
@@ -1535,7 +1640,32 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: M4-B-S3-LL2-EDGE-WEIGHTS
+  last_session_id: M4-B-S4-LL3-DOMAIN-COHERENCE
+    # M4-B-S4-LL3-DOMAIN-COHERENCE (2026-05-02). Substantive learning-layer-substrate
+    # session producing two M4-B LL recommendation documents (LL.3 + LL.4) plus the
+    # in-session IS.8(a) red-team obligation discharged at counter=3 (counter
+    # resets 3→0 per ONGOING_HYGIENE_POLICIES §G). Two substantive deliverables:
+    # (1) LL3_DOMAIN_COHERENCE_v1_0.md NEW — diagnostic recommendation document
+    # (10-bucket MSR-anchored domain coverage; per-signal coherence is structural
+    # by rubric design; LL.2 edge spot-check confirms intra-domain Pancha-MP
+    # clique; 7 recommendations across fix-before-prod and investigate-in-M5).
+    # (2) LL4_PREDICTION_PRIOR_v1_0.md NEW — qualitative-tier prior recommendation
+    # (training mean=0.630 / held_out=0.913 gap interpreted via H1 selection-bias
+    # most likely; classical_rule + both bases at 1.0 perfect calibration vs
+    # temporal_engine 0.43 in training — variance carrier; STRONG/MODERATE/WEAK
+    # tiers with date-precision global modifier). Held_out figure explicitly
+    # flagged as not a clean validity number per H1+H2 confounders. RED-TEAM
+    # PASS: 4 axes (LEL integrity / LL.1 computation / LL.2 topology /
+    # LL1_TWO_PASS_APPROVAL surrogate disclosure) all PASS with 3 findings
+    # (F.RT.S4.1 LOW variance-estimator-unspecified; F.RT.S4.2 NOTE surrogate
+    # self-review circularity; F.RT.S4.3 INFO rubric-coherence-by-design); 0
+    # HIGH/CRITICAL/MEDIUM. Held-out partition sacrosanct (verified by direct
+    # leakage scan against 9 manifest IDs — 0 leaks in LL.1 observations or LL.2
+    # co_event_ids). MP.1+MP.2 mirror sync NOT propagated (substrate session
+    # within already-discharged carry-forward window; .geminirules and
+    # .gemini/project_state.md untouched per must_not_touch). LL.2 stability
+    # gate decision unchanged (CONDITIONAL_PASS); re-evaluates at NAP.M4.5 close.
+    # === Predecessor session (M4-B-S3-LL2-EDGE-WEIGHTS) summary preserved for audit trail ===
     # M4-B-S3-LL2-EDGE-WEIGHTS (2026-05-02). Substantive learning-layer-substrate
     # session. Three substantive deliverables (LL2_STABILITY_GATE_v1_0.md NEW,
     # LL2_EDGE_WEIGHT_DESIGN_v1_0.md NEW, ll2_edge_weights_v1_0.json NEW with
@@ -2084,6 +2214,68 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
+    M4-B-S5 — LL.4 PREDICTION-PRIOR FOLLOW-THROUGH + NAP.M4.5 NATIVE-REVIEW TRIGGER + GEMINI REACHABILITY CHECK.
+    Predecessor: M4-B-S4-LL3-DOMAIN-COHERENCE (2026-05-02 — LL.3 + LL.4 recommendation
+    documents authored; in-session red-team conducted at counter=3 with 0 HIGH/CRITICAL/MEDIUM
+    findings; counter reset 3→0; CURRENT_STATE bumped v1.9→v2.0 as clean marker post all
+    parallel-session merges).
+    M4-B-S5 scope (parallel-safe; brief authoring at session open):
+      (a) NAP.M4.5 native-review trigger preparation. The dossier
+          (NAP_M4_5_DOSSIER_v1_0.md) authored at M4-B-P2 is well-formed; M4-B-S5
+          formal trigger involves: confirm dossier hasn't drifted from
+          ll1_shadow_weights, surface the 3 Tier-C joint-firing question to native
+          synchronously, capture native pass_2 verdicts in the dossier §5 template,
+          and write back to ll1_weights_promoted_v1_0.json approval_chain. Once
+          NAP.M4.5 closes, LL2_STABILITY_GATE re-evaluates per its §5 (auto-bumps
+          to v1.1 with PASS / PARTIAL_PASS / HOLD-FAIL decision). LL.1 production
+          register flag flips on full pass_2 approval.
+      (b) Gemini reachability check. If Gemini becomes synchronously reachable in
+          this session, append the addendum to LL1_TWO_PASS_APPROVAL_v1_0.md §5 per
+          its own §6.1 self-rule, plus the addendum to LL2_STABILITY_GATE §6.1 per
+          its own self-rule. If addenda contest CONDITIONAL_PASS / pass_1 verdicts,
+          open DIS.class.output_conflict per GOVERNANCE_INTEGRITY_PROTOCOL §K.3.
+      (c) (optional) LL.4 follow-through. If the M4-B-S5 brief expands LL.4, the
+          recommendation document at LL4_PREDICTION_PRIOR_v1_0.md may receive a
+          v1.1 amendment incorporating any prior-fitting first-pass numerical
+          coefficients per its §5 framing. Default: do not amend; LL.5/LL.6
+          numerical fitting waits for prediction-ledger accumulation.
+    Inherited carry-forwards (unchanged from M4-B-S3 close + M4-B-S4 additions):
+      - NAP.M4.5 (M4-B-class) — pass_2 native spot-check; binding final gate for
+        LL.1 production promotion. Dossier published at M4-B-P2-NAP-M45-PREP.
+        LL.2 stability gate re-evaluates at NAP.M4.5 close per LL2_STABILITY_GATE §5.
+      - Gemini reachability addendum opportunities (LL1_TWO_PASS_APPROVAL §5 +
+        LL2_STABILITY_GATE §6.1).
+      - R.LL2GATE.1 (LOW) surrogate ownership for LL2_STABILITY_GATE pass_2.
+      - R.LL2GATE.2 (DEFERRED) domain mapping for cross-system signal IDs (M4-D scope).
+      - R.LL2GATE.3 (LOW) sparse training partition for edge statistics.
+      - R.LL2DESIGN.1 (LOW) LL.2 shadow path co-located with LL.1 instead of
+        SHADOW_MODE_PROTOCOL §2's declared GRAPH_EDGE_WEIGHT_LEARNING/edge_modulators/shadow/.
+      - **NEW: F.RT.S4.1 (LOW)** variance-estimator unspecified in
+        SHADOW_MODE_PROTOCOL §3.1(b); shadow file uses sample variance n-1 (more
+        conservative than population). Recommend protocol amendment at next
+        protocol-amendment opportunity. Non-blocking.
+      - **NEW: R.LL3.1 + R.LL3.2 + R.LL3.3 (M4-C entry)** — LL.3 fix-before-prod
+        recommendations: prod-register domain summary; cluster-aware consumption
+        rule for the 6-signal Pancha-Mahapurusha clique (prevent 6× double-counting);
+        unweighted-MSR routing with n=0 disclaimer for unobserved buckets (family,
+        psychological, spiritual).
+      - **NEW: R.LL3.4 + R.LL3.5 + R.LL3.6 + R.LL3.7 (M5 entry)** — LL.3
+        investigate-in-M5 items: multi-domain activator extension; LEL inner-life
+        domain expansion; yoga-absence M5 inspection; cross-system signal-ID
+        reconciliation at M4-D.
+      - Domain-stratified LEL training corpus finding (LL2_EDGE_WEIGHT_DESIGN
+        §3.5+§6.7) — flag for M4-D cross-system reconciliation pass.
+      - KR.M4A.CLOSE.2 native review of M4-B-S1 single-track vs planned B1/B2
+        split (carries to NAP.M4.5).
+      - GAP.M4A.04 partially_closed (residual deferred per NAP.M4.2).
+      - msr_domain_buckets: 4 absent signal IDs (SIG.MSR.207/497/498/499) flagged
+        for M5+.
+      - Inherited from prior sessions: DIS.009 pending ECR; DIS.010/011/012
+        RESOLVED-N3; KR.W9.1/2; KR.M3A2.1; AC.M3A.5; KR.M4A.RT.LOW.1.
+    red_team_counter: 0 (post M4-B-S4 cadence-fire reset; 3→0). Next IS.8(a)
+      cadence-fires at counter=3 (three substantive sessions hence — likely after
+      NAP.M4.5 closure work). IS.8(b) macro-phase-close at M4-D.
+    === Predecessor next_session_objective (M4-B-S4 path) preserved for audit trail ===
     M4-B-S4 — LL.3 DOMAIN-BUCKET COHERENCE REPORT + NAP.M4.5 PREP + GEMINI REACHABILITY CHECK.
     Predecessor: M4-B-S3-LL2-EDGE-WEIGHTS (2026-05-02 — LL.2 shadow file produced
     9,922 edges; LL2_STABILITY_GATE_v1_0.md gate=CONDITIONAL_PASS; LL2_EDGE_WEIGHT_DESIGN
@@ -2272,19 +2464,25 @@ current_state:
       DIS.010/011/012 RESOLVED-N3 (defer to M9).
       Naisargika + Nathonnatha, Sthana+Drik ECR, KR.W9.1/2, KR.M3A2.1, AC.M3A.5.
       msr_domain_buckets: 4 absent signal IDs (207, 497, 498, 499) flagged for M5+.
-  next_session_proposed_cowork_thread_name: "M4-B-S3 — LL.2 Shadow Writes (gated on LL.1 stability)"
+  next_session_proposed_cowork_thread_name: "M4-B-S5 — NAP.M4.5 Native Pass-2 Trigger + LL.4 Follow-through"
   red_team_due_note: >
-    Counter reset 3→0 at M4-A-INTEGRATION-PASS-R3 (IS.8(a) discharged by T1/REDTEAM_M4A_v1_0.md
+    Counter reset 3→0 at M4-B-S4-LL3-DOMAIN-COHERENCE (IS.8(a) every-third cadence
+    discharged in-session via 4-axis red-team: lel_event_match_records integrity /
+    ll1_shadow_weights computation / ll2_edge_weights topology / LL1_TWO_PASS_APPROVAL
+    surrogate disclosure adequacy. PASS with 3 findings: F.RT.S4.1 LOW, F.RT.S4.2 NOTE,
+    F.RT.S4.3 INFO; 0 HIGH/CRITICAL/MEDIUM. See SESSION_LOG entry red_team_findings block).
+    Predecessor reset: M4-A-INTEGRATION-PASS-R3 (IS.8(a) discharged by T1/REDTEAM_M4A_v1_0.md
     PASS 6/6 axes; 1 LOW carry-forward KR.M4A.RT.LOW.1).
-    Next §IS.8(a) every-third-session cadence fires at counter=3 (three substantive M4-B sessions).
+    Next §IS.8(a) every-third-session cadence fires at counter=3 (three substantive sessions
+    hence — likely after NAP.M4.5 closure work).
     Next §IS.8(b) macro-phase-close cadence fires at M4 close (PHASE_M4_PLAN §3.4 AC.M4D.4).
     Next §IS.8(c) every-12-months MACRO_PLAN review remains 2027-04-23 due.
 
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T23:50:00+05:30
-  file_updated_by_session: M4-B-S3-LL2-EDGE-WEIGHTS
+  file_updated_at: 2026-05-03T00:30:00+05:30
+  file_updated_by_session: M4-B-S4-LL3-DOMAIN-COHERENCE
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M3-W4-D2-M3-CLOSE, null).

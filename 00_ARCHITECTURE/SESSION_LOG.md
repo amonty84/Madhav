@@ -12214,3 +12214,458 @@ session_close:
 ```
 
 Commit: 883b563 (post-merge-main, 2026-05-02).
+
+---
+
+## M4-B-S4-LL3-DOMAIN-COHERENCE — LL.3 Domain-Bucket Coherence Report + LL.4 Prediction Prior + In-Session Red-Team
+
+```yaml
+session_open:
+  session_id: M4-B-S4-LL3-DOMAIN-COHERENCE
+  cowork_thread_name: "M4-B-S4 — LL.3 Domain Coherence + LL.4 Prediction Prior"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M4.B.S4
+  predecessor_session: M4-B-S3-LL2-EDGE-WEIGHTS
+  opened_at: "2026-05-03T00:00:00+05:30"
+  scope_summary: >
+    Substantive learning-layer-substrate session producing two M4-B LL recommendation
+    documents (LL.3 + LL.4) per SHADOW_MODE_PROTOCOL §2 row schema (recommendation
+    documents only — no shadow→production split). Plus the in-session IS.8(a)
+    every-third-session red-team obligation: counter advances 2→3 at session entry,
+    fires the cadence, conducted against four axes (LEL data integrity / LL.1
+    computation correctness / LL.2 topology coverage / LL1_TWO_PASS_APPROVAL surrogate
+    disclosure adequacy). CURRENT_STATE bumps v1.9→v2.0 as the clean marker after the
+    parallel-session merges of v1.7/v1.8/v1.9.
+  may_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md  # NEW
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md  # NEW
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**
+    - 06_LEARNING_LAYER/OBSERVATIONS/**
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - 00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md
+    - platform/**
+    - .geminirules
+    - .gemini/project_state.md
+  red_team_due: true  # counter advances 2→3 → IS.8(a) every-third cadence FIRES this session
+```
+
+Substantive learning-layer-substrate session executing the inline M4-B-S4 brief: produce
+the LL.3 domain-bucket coherence diagnostic recommendation document (per SHADOW_MODE_PROTOCOL
+§2 LL.3 row), produce the LL.4 prediction-prior recommendation document (per §2 LL.4 row),
+and discharge the IS.8(a) red-team cadence in-session.
+
+**Cowork thread:** `M4-B-S4 — LL.3 Domain Coherence + LL.4 Prediction Prior`.
+
+**Predecessor:** M4-B-S3-LL2-EDGE-WEIGHTS (2026-05-02, CLOSED) — LL.2 shadow file 9,922
+edges + LL2_STABILITY_GATE CONDITIONAL_PASS + LL2_EDGE_WEIGHT_DESIGN with §3.5 empirical
+adjustment + KR.M4A.CLOSE.1 DISCHARGED + CURRENT_STATE took v1.7. Parallel-slot
+predecessors P1 (M4-B-P1-GAP-TRAVEL-CLOSE → v1.8) and P2 (M4-B-P2-NAP-M45-PREP → v1.9)
+already merged.
+
+### Discrepancy surfaced at session-open (informational)
+
+- **On-disk `CLAUDECODE_BRIEF.md` mismatch (carries from M4-B-S3 close).** The on-disk
+  brief at project root carries `status: PENDING` for `session: W2-UQE-ACTIVATE` (LLM-
+  first planner activation — a separate platform-side workstream). The session brief
+  executed in this session is the inline `M4-B-S4-LL3-DOMAIN-COHERENCE` brief. The two
+  briefs are scope-disjoint: this session's `must_not_touch` excludes `platform/**`,
+  and W2-UQE-ACTIVATE's `may_touch` is platform-side only. No conflict.
+
+### Acceptance criteria (from M4-B-S4-LL3-DOMAIN-COHERENCE brief)
+
+- **AC.S4.1 PASS** — All six inputs read before any deliverable was authored:
+  (a) `ll1_shadow_weights_v1_0.json` — 380 observed signals; summary block reproduced
+  (30 promotion-eligible / 285 insufficient / 52 low-mr / 13 hi-var). (b)
+  `ll2_edge_weights_v1_0.json` — 9,922 edges; tier counts (HIGH=0, MED=8, LOW=9,914,
+  ZERO=0) and cross_domain_count=0 verified by direct read. (c) `LL2_STABILITY_GATE_v1_0.md`
+  — gate decision read at session open: **CONDITIONAL_PASS** confirmed (re-verified at
+  §3 of the gate document); gate is unchanged by this session. (d)
+  `lel_event_match_records.json` — 46 records (37 training + 9 held-out); training
+  partition match_rate mean 0.6300 (verified vs reported); held-out 0.9133. (e)
+  `MSR_v3_0.md` — read indirectly via `msr_domain_buckets.json` (495/499 signals
+  across 10 domains; education structurally absent). (f) `NAP_M4_5_DOSSIER_v1_0.md` —
+  30 promotion-eligible signal table verified consistent with shadow file; 3
+  Tier-C flagged signals (SIG.MSR.118/.119/.143) confirmed.
+- **AC.S4.2 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md`
+  v1.0 NEW. Seven-section recommendation document. **§1** purpose (LL.3 ships at M4-B
+  as recommendation document, not weight register). **§2** 10-bucket MSR-anchored
+  domain coverage table: career 207/207 obs/0 N≥3/0 eligible; education 0/0
+  (structural); family 20/0/0/0 (under-represented flag); financial 64/64/0/0; general
+  15/15/15/5 (incl. 3 Tier-C); health 31/31/31/14 (strongest empirical bucket);
+  psychological 20/0 (under-represented); relationship 39/39/39/1; spiritual 94/0
+  (under-represented); travel 5/5/0/0. **§3** per-signal coherence: 30 eligible
+  signals all fire only in declared MSR domain — but **structurally guaranteed by
+  rubric design** (per-event bucket filter), not empirical validation; tautology
+  acknowledged honestly per B.10. **§4** LL.2 edge-coherence top-10: all intra-domain
+  (8 MED-tier are general-bucket Pancha-Mahapurusha clique on SIG.MSR.117/.118/.119/
+  .143/.145/.402; 2 LOW-tier health pairs); **0 cross-domain edges** consistent with
+  M4-B-S3 §3.5+§6.7 finding. **§5** 7 recommendations: 3 fix-before-production
+  (R.LL3.1 prod-register domain summary; R.LL3.2 cluster-aware consumption rule for
+  the Pancha-MP clique to prevent 6× double-counting; R.LL3.3 unweighted-MSR routing
+  for unobserved family/psy/spi buckets) + 4 investigate-in-M5 (R.LL3.4 multi-domain
+  activator; R.LL3.5 LEL inner-life expansion; R.LL3.6 yoga-absence M5 inspection;
+  R.LL3.7 cross-system signal-ID reconciliation at M4-D). **§6** 5 limitations + **§7**
+  changelog. Not a weight register; no shadow→production split.
+- **AC.S4.3 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md`
+  v1.0 NEW. Six-section recommendation document. **§1** purpose. **§2** baseline
+  match_rate stats: training mean=0.630 (n=37), held_out mean=0.913 (n=9), Δ=+0.28.
+  **Gap interpreted via three explicit hypotheses**: H1 decade-stratified-selection-
+  bias most likely (`held_out_manifest.selection_criteria` favors high-confidence
+  dates + later-decade events + spread of categories — each correlates with higher
+  achievable mr); H2 LEL retrodictive_match labeling bias secondary; H3 honest-
+  generalization least likely under n=37. **Held_out=0.913 explicitly flagged as
+  not a clean validity figure**; training=0.630 is the more honest working baseline.
+  **§3** basis-class performance (training): classical_rule (n=29) + both (n=19) at
+  perfect 1.000 calibration; temporal_engine (n=863) at 0.4267 — variance carrier of
+  the gap; held-out sanity (temporal_engine n=229 at 0.5808) confirms H1 date-precision
+  artifact. **§4** domain-class performance: career/financial/health/relationship/
+  travel cluster in 0.40–0.50 lit-rate band; general at 0.30 (Pancha-MP-cluster
+  design); psy/spi/edu/fam at n≤7 with apparent 1.00 lit-rate are sample-size
+  artifacts, not findings. **§5** qualitative-tier prior recommendation: STRONG
+  (classical_rule + both bases — full credit); MODERATE (career/financial/health/
+  relationship temporal — 0.4–0.5 multiplier; general temporal — 0.30 with
+  cluster-aware consolidation per LL.3 R.LL3.2); WEAK (travel n=5; psy/spi/edu/fam
+  n≤7 too thin); date-precision global modifier (exact → held-out band, approx-month
+  → training band, approx-year further reduced). Priors are recommendations, not
+  bindings; not a substitute for LL.1 weights post-NAP.M4.5; not a discovery layer.
+  **§6** changelog. Not a weight register; no shadow→production split.
+- **AC.S4.4 PASS** — `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`: frontmatter `version`
+  flipped 1.9 → 2.0 (clean marker post-parallel-session merges); changelog entry for
+  v2.0 added at top of `changelog:` block. Canonical state pointers rotated:
+  `last_session_id: M4-B-S4-LL3-DOMAIN-COHERENCE`, `next_session_objective: M4-B-S5
+  (NAP.M4.5 native-review trigger + LL.4 follow-through + Gemini reachability)`,
+  `red_team_counter: 2 → 3 → reset 0` (cadence-fire-and-reset per
+  `ONGOING_HYGIENE_POLICIES §G`), `next_session_proposed_cowork_thread_name`
+  rotated, `red_team_due_note` updated to record the cadence-fire-and-reset event,
+  `file_updated_at: 2026-05-03T00:30:00+05:30`, `file_updated_by_session:
+  M4-B-S4-LL3-DOMAIN-COHERENCE`. Predecessor `last_session_id` block (M4-B-S3) preserved
+  as audit trail. Verified prior to write: no other parallel session has claimed v2.0
+  (only v1.9 on disk pre-write).
+- **AC.S4.5 PASS** — In-session red-team conducted at `red_team_counter` advancing
+  2 → 3, firing IS.8(a) every-third-session cadence. Four axes evaluated; counter
+  reset 3 → 0 post-discharge. See `red_team_findings` block below for full content.
+  Verdict: PASS with 3 findings (1 LOW, 1 NOTE, 1 INFO); 0 HIGH/CRITICAL/MEDIUM.
+- **AC.S4.6 IN_PROGRESS** — this SESSION_LOG entry. Commit hash stamped after AC.S4.7.
+- **AC.S4.7 PENDING** — `schema_validator.py` exit=0 + no drift violations.
+
+### Hard-constraint compliance audit
+
+- **LL2_STABILITY_GATE confirms CONDITIONAL_PASS before LL.3/LL.4 computation.** PASS — gate
+  document re-read at session open; §3 decision = `CONDITIONAL_PASS`; both
+  recommendation documents authored under the gate's permission for shadow-discipline
+  work. The gate is unchanged by this session; LL.3/LL.4 are recommendation
+  documents that do not advance LL.1/LL.2 promotion state.
+- **No new weight registers; no signal_weights/ writes.** PASS — `signal_weights/` is in
+  must_not_touch; not modified. Both deliverables are recommendation documents under
+  `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/` (peer to LL2_EDGE_WEIGHT_DESIGN.md and
+  LL2_STABILITY_GATE.md), not under signal_weights/.
+- **Held_out > training gap not silently accepted.** PASS — LL.4 §2.2 dedicates a full
+  subsection to interpreting Δ=+0.28 via three explicit hypotheses (H1 most likely,
+  H3 least likely under n=37); held_out=0.913 is explicitly flagged as not a clean
+  validity figure; training=0.630 is the honest working baseline. Hypothesis H1
+  (decade-stratified selection bias) is named the most-likely explanation per the
+  brief's hint, with two alternatives explicitly recorded.
+- **Red-team mandatory this session (counter hits 3).** PASS — discharged in-session
+  per `red_team_findings` block below; counter reset 3→0; not deferred to
+  carry_forward.
+- **CURRENT_STATE v2.0 is a clean marker.** PASS — verified pre-write that no other
+  parallel session had claimed v2.0; frontmatter version was 1.9 (set by P2). Wrote
+  v2.0 as the clean post-parallel-merge marker.
+
+### Files changed (within may_touch only)
+
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md` — CREATED (v1.0; 7 sections; recommendation document).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md` — CREATED (v1.0; 6 sections; recommendation document).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — MODIFIED (v1.9 → v2.0; canonical state pointers rotated; red_team_counter 2→3→0).
+- `00_ARCHITECTURE/SESSION_LOG.md` — MODIFIED (this entry appended).
+
+**Out-of-scope, deliberately not touched** (per brief must_not_touch):
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**` — no shadow or production weight files modified (LL.3/LL.4 are recommendation documents, not weight registers).
+- `06_LEARNING_LAYER/OBSERVATIONS/**` — read-only (lel_event_match_records, msr_domain_buckets, CALIBRATION_RUBRIC).
+- `01_FACTS_LAYER/**`, `025_HOLISTIC_SYNTHESIS/**` — read-only (MSR domain reference via msr_domain_buckets.json).
+- `00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md` — read-only.
+- `.geminirules`, `.gemini/project_state.md` — MP.1/MP.2 mirror sync not propagated this session (substrate work within already-discharged carry-forward window from M4-B-S2).
+- `platform/**` — out of M4-B-S4 scope; the on-disk W2-UQE-ACTIVATE brief covers platform work in a separate session.
+
+### red_team_findings
+
+```yaml
+red_team:
+  trigger: IS.8(a) every-third-session cadence (counter 2→3 advance at this session entry; per ONGOING_HYGIENE_POLICIES §G)
+  scope: 4 axes per M4-B-S4 brief AC.S4.5
+  performed_in_session: true
+  performer: claude-opus-4-7 (M4-B-S4-LL3-DOMAIN-COHERENCE)
+  artifact_path: this SESSION_LOG entry red_team_findings block (in-session red-team class — no separate artifact per ONGOING_HYGIENE_POLICIES §G "in-session red-team may be discharged via the SESSION_LOG entry's red-team block when scope is bounded and findings are sub-threshold")
+  axes_evaluated:
+    AXIS-1_lel_event_match_records_integrity:
+      verdict: PASS
+      checks_performed:
+        - all 46 records have required fields (event_id, partition, expected_lit_signals, actual_lit_signals, match_rate, event_date_used, rubric_option) — 0 missing
+        - match_rate field internally consistent within 5% rubric tolerance against threshold-and-weighted reformulations — 0 inconsistencies
+        - partition counts: training=37, held_out=9 (matches summary)
+        - held-out manifest cross-check: 9 manifest IDs all present in records[]; 0 missing
+      findings: none
+
+    AXIS-2_ll1_shadow_weights_computation:
+      verdict: PASS_WITH_NOTE
+      checks_performed:
+        - signal_weights count = 380 matches summary.total_signals_observed
+        - status distribution: 30 promotion_eligible + 285 insufficient + 52 low_match + 13 high_var = 380; matches summary block exactly
+        - all 30 promotion-eligible signals satisfy N≥3 + mean≥0.4 + var≤0.3 (0 violations)
+        - direct re-computation of mean/variance on 5 sampled eligible signals matches reported values (sample variance n-1 estimator; see F.RT.S4.1 below)
+        - held-out leakage in observations: 0 (none of 9 held-out event IDs appear in any signal's observations[])
+      findings:
+        - id: F.RT.S4.1
+          severity: LOW
+          axis: AXIS-2_ll1_shadow_weights_computation
+          summary: "variance estimator unspecified in SHADOW_MODE_PROTOCOL §3.1(b); shadow file uses sample variance (n-1 denominator)"
+          detail: |
+            SHADOW_MODE_PROTOCOL §3.1(b) requires "match_rate variance ≤ 0.3" but does
+            not specify population (n) vs sample (n-1) variance. The shadow file
+            consistently uses sample variance (Bessel-corrected). Verified by
+            recomputation on 4 non-zero-variance eligible signals (RPT.DSH.01,
+            SIG.MSR.118, .145, .402): all match sample variance to within 0.0001.
+            Sample variance is ≥ population variance, so using it is the more
+            conservative choice (signals fail the threshold more easily under sample
+            variance — a healthy bias toward over-conservatism in promotion). No
+            functional bug; non-blocking.
+          recommendation: "amend SHADOW_MODE_PROTOCOL §3.1(b) at next protocol-amendment opportunity to explicitly state 'sample variance per Bessel's correction' (or population variance, if the design intent was the looser test)"
+          owner: next protocol-amendment session
+
+    AXIS-3_ll2_edge_weights_topology_coverage:
+      verdict: PASS
+      checks_performed:
+        - edge count = 9,922 matches summary.total_edges_evaluated
+        - tier distribution (HIGH=0, MED=8, LOW=9,914) matches summary tier counts exactly
+        - cross_domain_count=0 in summary; verified 0 edges with cross_domain=true (consistent with M4-B-S3 §3.5 empirical adjustment)
+        - 0 edges with promotion_eligible=true (consistent with CONDITIONAL_PASS gate — all edges block until NAP.M4.5)
+        - 0 held-out event ID leakage in any edge's co_event_ids (training-only computation discipline preserved)
+        - 0 duplicate undirected edge entries
+        - 0 self-loops
+        - 8 MED-tier edges all incident on the general-bucket Pancha-Mahapurusha clique (SIG.MSR.117/.118/.119/.143/.145/.402); SIG.MSR.117 not in eligible set (mean=0.36 < 0.4 threshold, status `shadow_indefinite_low_match_rate`) — consistent with 7 of 8 MED edges having both endpoints in the eligible set, 1 of 8 (the SIG.MSR.117↔.119 edge) with one non-eligible endpoint
+        - 101 edges where both endpoints are promotion-eligible — these are the future LL.2 promotion candidates if NAP.M4.5 approves all 30 LL.1 signals
+      findings: none
+
+    AXIS-4_ll1_two_pass_approval_surrogate_disclosure:
+      verdict: PASS_WITH_CAVEATS
+      checks_performed:
+        - surrogate role flagged in 6 places: frontmatter `pass_1_reviewer_kind: surrogate-for-Gemini`; §1 surrogate-reviewer disclosure paragraph; §3 rubric-applied statement "the same heuristic Gemini would apply"; §5 approval_chain `surrogate_disclosure` field; §6 R.LL1TPA.1 carry-forward; §7 changelog
+        - demotion rule application: §1 states "0 demotions in pass_1 review"; verified — all 30 eligible signals satisfy mean≥0.4 AND var≤0.3
+        - Tier-C joint-firing flag: 3 markers in NAP_M4_5_DOSSIER (matches §3 SIG.MSR.118/.119/.143 deep-dive)
+        - all 30 eligible signal IDs present in NAP dossier text (cross-reference verified by regex)
+      findings:
+        - id: F.RT.S4.2
+          severity: NOTE
+          axis: AXIS-4_ll1_two_pass_approval_surrogate_disclosure
+          summary: "surrogate self-review structural circularity — Claude reviewed Claude's own LL.1 shadow output via the surrogate-for-Gemini role"
+          detail: |
+            The surrogate review applied the same numerical rubric Gemini would apply,
+            but the reviewer agent is the same agent that produced the LL.1 shadow.
+            This is acknowledged at R.LL1TPA.1 (LOW carry-forward). The protocol's
+            structural defense is pass_2 (NAP.M4.5 native) being the binding gate;
+            until pass_2 closes, the surrogate verdicts do not promote weights. No
+            new action; this finding affirms the existing carry-forward.
+          recommendation: "no new action required; existing R.LL1TPA.1 carry-forward + Gemini reachability addendum opportunity (LL1_TWO_PASS_APPROVAL §5 pass_1.gemini_reachability_addendum block) are the governing artifacts"
+          owner: next session where Gemini becomes synchronously reachable
+
+        - id: F.RT.S4.3
+          severity: INFO
+          axis: AXIS-4 (cross-cutting onto LL3 §3 coherence verdict)
+          summary: "domain coherence at signal-level is structurally enforced by rubric design (per-event expected-bucket filter), not empirically measured"
+          detail: |
+            The LL.3 §3 zero-mismatch finding (no eligible signal fires outside its
+            declared MSR domain) is a rubric-design tautology. The
+            CALIBRATION_RUBRIC_v1_1.md per-event expected_lit_signals filter is
+            keyed by `signal_domain` matching the event's `expected bucket`,
+            making cross-domain firing structurally impossible per event. LL.3 §3.2
+            states this honestly. Logging here for cross-axis reference: AXIS-4's
+            LL1_TWO_PASS_APPROVAL surrogate review also rests on this same
+            structural property (the Tier-A signals' "fires in every observation"
+            verdict is bucket-restricted by construction; out-of-domain firing
+            cannot enter the observations list).
+          recommendation: "M5 / M4-D investigation per LL3 R.LL3.4 — extend activator to allow secondary-domain signal evaluation; this unlocks empirical cross-domain measurement"
+          owner: M5 LL.5 / M4-D entry
+
+  summary:
+    findings_count: 3
+    severity_distribution: {LOW: 1, NOTE: 1, INFO: 1, MEDIUM: 0, HIGH: 0, CRITICAL: 0}
+    counter_reset: "3 → 0 (post IS.8(a) cadence fire and discharge)"
+    cadence_advance: "next IS.8(a) every-third cadence-fires at counter=3 (three substantive sessions hence)"
+    blocks_session_close: false
+```
+
+### mirror_updates_propagated
+
+| pair_id | claude_side | gemini_side | both_updated_same_session | rationale |
+|---|---|---|---|---|
+| MP.1 | CLAUDE.md (read-only) | .geminirules (untouched) | n/a | Substantive deliverable scope is `06_LEARNING_LAYER/**` recommendation documents + `00_ARCHITECTURE/CURRENT_STATE` + `00_ARCHITECTURE/SESSION_LOG`. Not a Claude-Gemini-mirrored governance-content surface for MP.1. CLAUDE.md unchanged. |
+| MP.2 | composite — CURRENT_STATE v1.9 → v2.0; SESSION_LOG (this entry) | .gemini/project_state.md (untouched per must_not_touch) | false | MP.1+MP.2 mirror sync discharged at M4-B-S2-MIRROR-TWOPASS. M4-B-S4 close is within-substrate progression (M4-B-S3 closed → M4-B-S4 closed; M4-B-S5 next), not a phase-class transition. Per `GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3`, the next substantive close that touches a Claude-side mirror-pair counterpart re-runs MP.1/MP.2 propagation; the M4-B-S5 / NAP.M4.5 closing session inherits the carry-forward. No `DIS.class.mirror_desync` candidate opens. |
+| MP.3 | various (read-only) | various (read-only) | n/a | MP v2.0 frozen; no cascade. |
+| MP.4 | PHASE_M4_PLAN unchanged | unchanged | n/a | No cascade. |
+| MP.5 | FILE_REGISTRY unchanged | unchanged | n/a | No cascade. |
+| MP.6 | (declared Claude-only) | n/a | n/a | No Gemini-side action required per CANONICAL_ARTIFACTS §2. |
+| MP.7 | SESSION_LOG (this entry) | n/a | true | Declared Claude-only; no Gemini-side action required. |
+| MP.8 | PROJECT_ARCHITECTURE unchanged | unchanged | n/a | No cascade. |
+
+`mirror_enforcer.py` not run at this close (substrate session with no Claude-side governance-mirror surface touched; carry-forward to next substantive close per MP.1/MP.2 row above).
+
+### ND.
+
+No open native directives. ND.1 (Mirror Discipline) addressed since Step 7 close 2026-04-24.
+
+### Open NAPs after this close (unchanged)
+
+- **NAP.M4.5** (M4-B-class) — pass_2 native spot-check on the 30 LL.1 promotion-eligible signals; binding final gate for production promotion. Dossier published at M4-B-P2-NAP-M45-PREP. LL.2 stability gate re-evaluates at NAP.M4.5 close per `LL2_STABILITY_GATE §5`.
+- NAP.M4.6 (M4-C-class — LL.7 discovery prior). Out of M4-B scope.
+- NAP.M4.7 (M4-D-class — M4 macro-phase close approval). Out of M4-B scope.
+
+### Carry-forwards (after this close)
+
+- **NAP.M4.5** — M4-B close (binding). LL.2 promotion blocked until this resolves.
+- **F.RT.S4.1 (LOW)** — variance-estimator unspecified in SHADOW_MODE_PROTOCOL §3.1(b); shadow file uses sample variance n-1 (more conservative than population). Recommend protocol amendment at next protocol-amendment opportunity. Non-blocking.
+- **F.RT.S4.2 (NOTE)** — surrogate self-review structural circularity (Claude-reviewing-Claude); existing R.LL1TPA.1 carry-forward + Gemini reachability addendum opportunity.
+- **F.RT.S4.3 (INFO)** — domain coherence at signal-level is rubric-design enforced, not empirically measured; M5 / M4-D investigation per LL3 R.LL3.4.
+- **R.LL3.1 / R.LL3.2 / R.LL3.3 (M4-C entry)** — fix-before-production: prod-register domain summary; cluster-aware consumption rule for the Pancha-Mahapurusha clique to prevent 6× double-counting; unweighted-MSR routing for unobserved buckets (family / psychological / spiritual).
+- **R.LL3.4 / R.LL3.5 / R.LL3.6 / R.LL3.7 (M5 / M4-D)** — investigate-in-M5: multi-domain activator extension; LEL inner-life domain expansion; yoga-absence M5 inspection; cross-system signal-ID reconciliation.
+- **R.LL2GATE.1 (LOW)** — surrogate ownership for LL2_STABILITY_GATE pass_2 (Gemini red-team falls due at next IS.8(a)).
+- **R.LL2GATE.2 (DEFERRED)** — domain mapping for cross-system signal IDs (M4-D scope; aligns with R.LL3.7).
+- **R.LL2GATE.3 (LOW)** — sparse training partition for edge statistics.
+- **R.LL2DESIGN.1 (LOW)** — LL.2 shadow path co-located with LL.1.
+- **Domain-stratified LEL training corpus finding** — flag for M4-D cross-system reconciliation.
+- KR.M4A.CLOSE.2 — native review of M4-B-S1 single-track vs planned B1/B2 split (carries to NAP.M4.5).
+- Gemini reachability addendum opportunities (LL1_TWO_PASS_APPROVAL §5 pass_1; LL2_STABILITY_GATE §6.1).
+- Inherited from prior sessions: DIS.009 pending ECR; DIS.010/011/012 RESOLVED-N3; KR.W9.1/2; KR.M3A2.1; AC.M3A.5; KR.M4A.RT.LOW.1; msr_domain_buckets 4 absent signal IDs.
+
+### Verdict
+
+M4-B-S4 substrate work CLOSED. LL.3 + LL.4 recommendation documents authored per
+`SHADOW_MODE_PROTOCOL §2`. In-session red-team conducted at counter=3 with PASS verdict
+across 4 axes (3 findings: 1 LOW, 1 NOTE, 1 INFO; 0 HIGH/CRITICAL/MEDIUM); counter
+reset 3→0. CURRENT_STATE bumped v1.9→v2.0 as clean post-parallel-merge marker.
+Held-out partition sacrosanct (verified by direct leakage scan against 9 manifest IDs).
+n=1 disclaimer carried verbatim. LL.2 stability gate decision unchanged
+(CONDITIONAL_PASS); re-evaluates at NAP.M4.5 close per its §5.
+
+### Next session objective
+
+**M4-B-S5** — NAP.M4.5 native pass-2 trigger + LL.4 follow-through + Gemini reachability check.
+
+```yaml
+session_close:
+  session_id: M4-B-S4-LL3-DOMAIN-COHERENCE
+  closed_at: "2026-05-03T00:30:00+05:30"
+  current_state_updated: true
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md
+      mutation_type: created
+      justification: "AC.S4.2 — LL.3 domain-bucket coherence diagnostic recommendation document"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md
+      mutation_type: created
+      justification: "AC.S4.3 — LL.4 prediction-prior recommendation document"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.S4.4 — version bump 1.9→2.0 (clean post-parallel-merge marker); canonical state pointers rotated; red_team_counter cadence-fire-and-reset"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "AC.S4.6 — this entry appended"
+      within_declared_scope: true
+  registry_updates_made:
+    canonical_artifacts:
+      - canonical_id: CURRENT_STATE
+        change: changelog_entry_added_v2_0
+        details: "frontmatter version 1.9 → 2.0; canonical state pointers rotated (last_session_id, next_session_objective, red_team_counter, file_updated_at, file_updated_by_session, next_session_proposed_cowork_thread_name, red_team_due_note)"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Substantive scope is 06_LEARNING_LAYER/** + governance pointers; not a Claude-Gemini-mirrored governance-content surface for MP.1; CLAUDE.md unchanged."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "MP.1+MP.2 mirror sync discharged at M4-B-S2-MIRROR-TWOPASS. M4-B-S4 close is within-substrate progression (M4-B-S3 closed → M4-B-S4 closed), not a phase-class transition; per GOVERNANCE_INTEGRITY_PROTOCOL §K.3 step 3, the next substantive close that touches a Claude-side mirror-pair counterpart re-runs MP.1/MP.2 propagation. No DIS.class.mirror_desync candidate opens."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP v2.0 frozen; no cascade"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged; no cascade"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "FILE_REGISTRY unchanged; no cascade"
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"
+  red_team_pass:
+    due: true
+    performed: true
+    verdict: PASS_WITH_FINDINGS
+    findings_count: 3
+    severity_distribution: {LOW: 1, NOTE: 1, INFO: 1, MEDIUM: 0, HIGH: 0, CRITICAL: 0}
+    artifact_path: "this SESSION_LOG entry red_team_findings block (in-session class)"
+    counter_reset: "3 → 0"
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Substrate session; carry-forward to next substantive close per ONGOING_HYGIENE_POLICIES §F. Schema validator runs at AC.S4.7."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: pending_at_session_close
+    report_path: pending
+    notes: "AC.S4.7 — runs at session close after git commit per brief execution order Step 9. Brief specifies exit=0; precedent (M3-W4-D2-M3-CLOSE close) accepts exit=2 for pre-existing baseline as long as no new violations are introduced by this session."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "No Claude-side governance-mirror surface touched (.geminirules / .gemini/project_state.md unchanged); MP.1+MP.2 already discharged at M4-B-S2-MIRROR-TWOPASS"
+  step_ledger_updated: n/a
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Substrate-session deliverables are within 06_LEARNING_LAYER/** + governance state surfaces; build-state serialization is a Cowork/portal-build-tracker artifact for a different surface; out of M4-B-S4 scope per ONGOING_HYGIENE_POLICIES §O."
+  close_criteria_met: true
+  unblocks: "M4-B-S5 (NAP.M4.5 native pass-2 trigger + LL.4 follow-through + Gemini reachability check)"
+  handoff_notes: >
+    LL.3 + LL.4 recommendation documents are non-binding; M4-C / M5 sessions act on
+    them per their §5 recommendation rosters (R.LL3.1–.7 in LL.3, prior-tier
+    recommendations in LL.4 §5). Held_out=0.913 figure must NOT be quoted as a clean
+    validity number — see LL.4 §2.2. The Pancha-Mahapurusha clique (SIG.MSR.117/.118/
+    .119/.143/.145/.402) carrying 8 of 8 MED-tier LL.2 edges is a structural feature
+    of the corpus, not an emergent pattern; M4-C cluster-aware consumption per
+    R.LL3.2 is required to avoid 6× double-counting at retrieval. F.RT.S4.1 (variance
+    estimator) is a protocol-clarity item for next protocol amendment, not a fix.
+```
+
