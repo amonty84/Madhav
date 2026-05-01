@@ -38,7 +38,7 @@ function TierIcon({ tier, className }: { tier: SpeedTier; className?: string }) 
 export const STYLE_OPTIONS: { id: StyleId; label: string; hint: string }[] = [
   { id: 'acharya', label: 'Acharya depth', hint: 'Full rigor, technical Jyotish' },
   { id: 'brief', label: 'Brief', hint: '1–2 short paragraphs, lead with the answer' },
-  { id: 'client', label: 'Client-facing', hint: 'Plain language, no Sanskrit' },
+  { id: 'client', label: 'Simple', hint: 'Plain language for someone unfamiliar with Jyotish' },
 ]
 
 interface Props {

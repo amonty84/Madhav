@@ -27,9 +27,8 @@ export function useChatSession({
   const lastSeenQueryId = useRef<string | undefined>(undefined)
 
   useEffect(() => {
-    // Sync state with incoming prop when navigating between conversations.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (conversationId) setPersistedId(conversationId)
+    setPersistedId(conversationId)
   }, [conversationId])
 
   const transport = useMemo(
