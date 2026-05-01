@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 1.0
+version: 1.1
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,7 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v1.1 (2026-05-01, M4-INFRA-001): Added Platform State block recording migrations 022-031 applied to Cloud SQL.
   - v1.0 (2026-04-24, Step 10 of the Step 0 → Step 15 governance rebuild):
       Initial state file. §2 canonical state block (YAML) populated to reflect the moment
       of this Step 10 close: M2 paused, PHASE_B_PLAN v1.0.2 paused, Step 10 completed,
@@ -2097,6 +2098,25 @@ GA.1/GA.2 (MSR version drift) are not closed by this file — they are closed by
 `CANONICAL_ARTIFACTS_v1_0.md` being authoritative and `drift_detector.py` enforcing the
 cross-surface consistency. This file references CANONICAL_ARTIFACTS rather than duplicating
 its canonical-path declarations, consistent with the cite-by-reference discipline.
+
+---
+
+## Platform State — Database Migrations
+
+last_migration_apply_session: M4-INFRA-001
+last_migration_apply_date: 2026-05-01
+migrations_applied: 022 through 031
+tables_confirmed_present:
+  - dasha_periods
+  - signal_states
+  - kp_sublords
+  - varshaphala
+  - audit_events
+  - query_plans
+  - shadbala
+notes: msr_signals updated via ALTER ADD COLUMN IF NOT EXISTS (028);
+  chart_facts and cgm_edges received index additions only (029, 030).
+  All migrations idempotent. Cloud SQL Auth Proxy (port 5433) used for apply.
 
 ---
 

@@ -11410,3 +11410,15 @@ session_close:
 ```
 
 *End of M3-W4-D2-M3-CLOSE entry — M3 MACRO-PHASE CLOSED; M4 ACTIVE.*
+
+---
+
+---
+
+**M4-INFRA-001** | 2026-05-01 | CLOSED
+Infra maintenance session. Fixed stale `supabase db push` reference in
+`MIGRATION_APPLY_INSTRUCTIONS_v1_0.md` (v1.0 → v1.1) — project uses Google
+Cloud SQL exclusively. Applied migrations 022–031 to `amjis-postgres` via
+Cloud SQL Auth Proxy (port 5433). All 10 migrations idempotent; applied
+without errors. Verified 5 primary tables present: dasha_periods,
+signal_states, kp_sublords, varshaphala, shadbala. Commit: 762521f.
