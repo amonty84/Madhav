@@ -1,0 +1,25 @@
+# .gcloudignore — excludes large/unnecessary dirs from Cloud Build tarball upload
+# Cloud Build runs npm install itself, so node_modules must not be uploaded
+
+.git
+.gitignore
+node_modules/
+.next/
+.turbo/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.*
+!.env.production
+coverage/
+.nyc_output/
+dist/
+out/
+
+# Python sidecar — venv is never uploaded; Cloud Build installs from requirements.txt
+python-sidecar/venv/
+python-sidecar/__pycache__/
+python-sidecar/**/__pycache__/
+python-sidecar/**/*.pyc

@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1",
+  "produced_by_session": "Madhav_M2A_Exec_11",
+  "produced_at": "2026-04-27T05:45:12.682092+00:00",
+  "sweep_type": "retroactive",
+  "validator": "p6_uvc_consistency.scan_ucn_vs_l3",
+  "ucn_source": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+  "l3_reports_scanned": [
+    "REPORT_CAREER_DHARMA_v1_1.md",
+    "REPORT_CHILDREN_v1_1.md",
+    "REPORT_FINANCIAL_v2_1.md",
+    "REPORT_HEALTH_LONGEVITY_v1_1.md",
+    "REPORT_PARENTS_v1_1.md",
+    "REPORT_PSYCHOLOGY_MIND_v1_1.md",
+    "REPORT_RELATIONSHIPS_v1_1.md",
+    "REPORT_SPIRITUAL_v1_1.md",
+    "REPORT_TRAVEL_v1_1.md"
+  ],
+  "implementation_notes": [
+    "PARTIAL-IMPL: keyword-level heuristic scan only (antonym pairs, magnitude scalars, planetary-state inversions).",
+    "Timing inconsistency detection deferred — requires ephemeris integration.",
+    "Full semantic P6 enforcement with LLM-assisted conflict detection is M3/B.6 scope.",
+    "This retroactive sweep satisfies PHASE_B_PLAN §H B.5 AC.9 obligation at available implementation depth."
+  ],
+  "total_flags": 0,
+  "flags_by_severity": {
+    "HIGH": 0,
+    "MED": 0,
+    "LOW": 0
+  },
+  "conflict_flags": [],
+  "residual_status": {
+    "known_residuals": 0,
+    "whitelist_status": "p6_retroactive_partial_impl — PARTIAL-IMPL flags are accepted-as-residual per ONGOING_HYGIENE_POLICIES §G (CI exit-code-3 whitelist).",
+    "action_required": "None for B.5 close. Schedule full semantic P6 enforcement for B.6/M3."
+  }
+}

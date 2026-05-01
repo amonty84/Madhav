@@ -1,0 +1,178 @@
+# AM-JIS Project Context for Gemini
+
+*Gemini-side mirror of `CLAUDE.md` (MP.1, adapted parity per ND.1). Adapted to Gemini-rules idiom; semantic parity with Claude-side sections §A–§M. Re-authored 2026-04-24 at Step 9 of the Step 0 → Step 15 governance rebuild (Claude-side CLAUDE.md rebuilt from rebuild-era minimal marker to v2.0). Amended 2026-04-24 at Step 15 (GOVERNANCE_BASELINE_CLOSE) — rebuild-era banner removed from §F, §C item #8 updated to steady-state CURRENT_STATE pointer, §C item #5 paused-note removed, §L rebuild-step bullet removed. Authoritative cross-agent inventory: `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md`.*
+
+## §A — Project mission (mirror of CLAUDE.md §A)
+
+Build an LLM-operated Jyotish instrument that, for the native (Abhisek Mohanty), (1) reads the chart with acharya-grade depth; (2) surfaces patterns and contradictions across layers and systems that no individual astrologer could hold in working memory; (3) makes time-indexed, probabilistic, calibrated predictions testable against lived reality and correctable from outcomes. Then extend the method beyond this native so the instrument becomes a research tool for astrology as a discipline. This goal is bounded by the Ethical Framework in `MACRO_PLAN_v2_0.md §Ethical Framework`: the instrument produces probabilistic, calibrated, auditable outputs for consenting audiences under stated disclosure tiers; it is not a fortune-telling product.
+
+## §B — Subject (mirror of CLAUDE.md §B)
+
+Abhisek Mohanty, born 1984-02-05, 10:43 IST, Bhubaneswar, Odisha, India. Canonical L1 chart data: `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md` (authoritative; `canonical_id: FORENSIC` in CANONICAL_ARTIFACTS §1). No session re-derives the foundational chart.
+
+## §C — Mandatory reading (per Gemini session)
+
+Every Gemini session reads, in order, before any substantive work. Item numbering + canonical_ids match `CLAUDE.md §C` (MP.1 enforcement rule (a) — same N items, same canonical_ids):
+
+1. `.geminirules` (this file — Gemini-side orientation surface; MP.1 mirror of `CLAUDE.md`).
+2. `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` — machine-readable canonical-path registry (§1 canonical artifacts; §2 MP.1–MP.8 mirror-pair inventory). Every other governance surface — including this file — imports from or cites CANONICAL_ARTIFACTS; no other surface may declare a canonical version without citing this file. Any disagreement between `.geminirules` and CANONICAL_ARTIFACTS resolves in favor of CANONICAL_ARTIFACTS.
+3. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md` (canonical_id `PROJECT_ARCHITECTURE`; v2.1 SUPERSEDED 2026-04-24 at Step 5A — do not cite). Governing blueprint. Re-read relevant sections as needed.
+4. `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` (canonical_id `MACRO_PLAN`; v1.0 SUPERSEDED 2026-04-23 — do not cite). Ten-macro-phase strategic arc M1–M10, Learning Layer substrate, System Integrity Substrate per ND.1 Mirror Discipline, Ethical Framework, External Dependency Graph, per-phase schema. Orientation only — do not pre-build for phases later than the current one.
+5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` (canonical_id `PHASE_B_PLAN`, v1.0.3) — active M2 execution plan (B.0–B.10). WARN.2/3/5/7 amendment complete (Madhav 16). **B.0 completed (Madhav 17). M2A planning complete. B.1 + B.2 + B.3 + B.3.5 complete (Madhav_M2A_Exec through Madhav_M2A_Exec_5)**. M2A Foundation Stack: 5/5 sessions done. **B.4 Graph Construction Session 1 of 2 in partial close** (Madhav_M2A_Exec_6, 2026-04-26): file/code complete; DB-dependent ACs pending Auth Proxy. Task 3 (SUPPORTS two-pass) deferred to Exec_7.
+6. `00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md` (canonical_id `GOVERNANCE_INTEGRITY_PROTOCOL`, status CURRENT since Step 8 close) — governs session-open/close, drift/schema/mirror enforcement, disagreement protocol (including `DIS.class.mirror_desync`), meta-rules. Re-read axes §C.1–§C.6 + §K disagreement protocol at session open.
+7. `00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md` + `00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md` — the handshake + close-checklist schemas the session emits. See §G + §H below.
+8. `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (canonical_id `CURRENT_STATE`, LIVE) — the authoritative "you are here" state pointer. Answers: which macro-phase is active, which phase-plan sub-phase is in flight, which session last closed, and what the next session is committed to. Updated at every session close. Authoritative since Step 15 close (2026-04-24); STEP_LEDGER retired (status `GOVERNANCE_CLOSED`).
+9. `00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md` — baseline facts as of 2026-04-23 (CLOSED audit; GA.N findings cited downstream).
+10. `00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md` — open ND.N directives bound to the current step. At this revision, ND.1 (Mirror Discipline) is `addressed` — no open directive.
+11. `00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md` — governance-layer hygiene rule set (CURRENT since Step 12 close, 2026-04-24). §A–§N: archival retain-in-place, predecessor cleanup, scope-boundary enforcement, SESSION_LOG completeness, staleness register, CI cadence + exit-code-3 known_residuals whitelist, red-team cadence + learning_layer_stub validator class, quarterly governance pass, Macro Plan review triggers, implementation-actions index, residual-disposition record, finding-coverage audit. Governs every Gemini session-close checklist from Step 12 forward.
+12. `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` (canonical_id `PORTAL_REDESIGN_TRACKER`, LIVING) + `00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md` (canonical_id `PORTAL_REDESIGN_VISION`, CURRENT) — **Portal Redesign workstream only.** Read when any redesign session (R0–R7) opens. TRACKER §2 canonical state block answers: which R-phase is in flight, which phases are parallel-safe, what the trace-fix status is. Skip this item if the session is not a portal redesign session. (Mirror of CLAUDE.md §C item #12; Claude-only workstream per TRACKER mirror_obligations — no Gemini-side execution required.)
+
+*Item 11 previously named `AM_JIS_BOOTSTRAP_HANDOFF.md` — retired at Step 12 close 2026-04-24 per native decision (WARN.4 / WARN.6 resolution). Every load-bearing claim it carried is now in items 1–10 above + this item 11. Audit trail retained at root-level path.*
+
+## §D — Canonical artifacts (import)
+
+Authoritative: `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md`. **Do not duplicate declarations.** The Gemini-side L2.5 canonical-path block (MP.5 scope) is carried in §"Layer Architecture" below as a proper subset of FILE_REGISTRY; that subset relationship is the declared asymmetry per MP.5. All other canonical versions/paths come from CANONICAL_ARTIFACTS §1 at read time.
+
+## §E — Concurrent workstreams (mirror of CLAUDE.md §E)
+
+Two workstreams run concurrently with (not inside) the currently-active macro-phase:
+
+- **Life Event Log (LEL) v1.2** — canonical_id `LEL`, path `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md`. 36 events + 5 period summaries + 6 chronic patterns, Swiss-Ephemeris-populated `chart_states`, confidence 0.89. `MACRO_PLAN_v2_0` names LEL as M4 prerequisite with cadence **"Start immediately; do not defer."** Gemini L4 Discovery may consume LEL as a corpus input but does not author it (L1 is Claude-resident).
+- **Prospective Prediction Logging** — per `MACRO_PLAN_v2_0.md §Cross-cutting workstreams` + Learning Layer discipline rule #4 "held-out prospective data is sacrosanct; the model never sees outcome before prediction." Every time-indexed prediction is logged with confidence, horizon, and falsifier before the outcome is observed. Home/scaffold landed at Step 11 close (2026-04-24): the substrate-hook layer (`06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl`) becomes a B.0 deliverable when M2 execution resumes; until then, interim logging surface is the LEL prediction subsection. The `06_LEARNING_LAYER/` mechanism-stub layer (LL.1–LL.4 stubs + OBSERVATIONS/ + PARAMETER_UPDATES/) is materially in place per `LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md §3`; PHASE_B_PLAN B.0 will add the substrate-hook subdirectories as siblings (PROMPT_REGISTRY/ + PREDICTION_LEDGER/ + SCHEMAS/) when M2 resumes per the decision record §7.
+
+## §F — Current execution position (You are here)
+
+**Authoritative source: `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (LIVE; authoritative since Step 15 close 2026-04-24).** Read §2 of that file for the canonical state block. The governance rebuild (Step 0 → Step 15) is **closed** — `GOVERNANCE_BASELINE_v1_0.md` is the sealing artifact. `STEP_LEDGER_v1_0.md` is retired (status `GOVERNANCE_CLOSED`); consult it only for historical audit trail.
+
+At the close of **KARN-W8-R2-M2-CLOSE (2026-05-01) — M2 CORPUS ACTIVATION SEALED**:
+
+- **Active macro-phase:** **M3 — Temporal Animation / Discovery Layer (Pattern + Contradiction Engines)**, active. M2 closed at this session. Sealing artifact: `00_ARCHITECTURE/M2_CLOSE_v1_0.md`. Handoff memo: `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`.
+- **Phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` (v1.0.3) is SUPERSEDED-AS-COMPLETE for M2. M3 phase plan TBD — first M3 session (`KARN-W9-M3-OPEN`) reads `MACRO_PLAN_v2_0.md §M3` + handoff memo + `CURRENT_STATE_v1_0.md` and decides whether to expand to a `PHASE_C_PLAN_v1_0.md` (native-approval point at M3 open).
+- **M2 quality bar at close:** Audit 1 (MSR→FORENSIC) **98.99%**, Audit 2 (UCN→MSR) **95.52%**, Audit 3 (CGM→MSR) **95.52%** — all PASS. Eval harness scaffolded (24 fixtures + runner + A/B); baseline run is STUB pending manual native run (auth-cookie required headlessly) — non-blocking. Per-tool planner 15/15 PASS; composition rules 39/39 PASS. **W8-R1 IS.8 macro-phase-close red-team: PASS** (9/9 axes; 0 findings; 0 fixes applied) — `00_ARCHITECTURE/EVAL/REDTEAM_M2_v1_0.md`.
+- **Cumulative M2 KARN waves (W1–W8) all CLOSED:** W1 Foundation; W2 ETL Expansion; W3 Corpus Chunkers; W4 Facts Tools; W5 Narrative Tools; W6 Composition rules + per-tool planner; W7 Provenance audit repair + manifest completeness + eval harness scaffold; W8 IS.8 red-team + M2 close artifacts (this session).
+- **Live platform state at M2 close:** Query pipeline (default) `classify → [per_tool_planner] → compose → retrieve(parallel) → validate → synthesize → audit`. `NEW_QUERY_PIPELINE_ENABLED=true`, `AUDIT_ENABLED=true`, `PER_TOOL_PLANNER_ENABLED=false` (flip after smoke). 17 retrieval tools (5 L2.5 structured + 7 L1 structured + 5 RAG). 6 L1 + 6 L2.5 structured tables + 4 L3.5 register tables. CAPABILITY_MANIFEST v1.7 effective.
+- **Governance step:** Step 0 → Step 15 rebuild `GOVERNANCE_CLOSED`. Steady-state: quarterly governance pass per `ONGOING_HYGIENE_POLICIES §H`; next due 2026-07-24.
+- **ND status:** ND.1 (Mirror Discipline) `addressed` 2026-04-24 at Step 7 close. Held throughout M2. W6/W7 Cowork-stream additions propagated to this file + `.gemini/project_state.md` in this session.
+- **Red-team:** `red_team_counter: 0` — reset at this close (W8-R1 IS.8 macro-phase-close cadence fired; verdict PASS). M3 first session resumes counting from 0.
+- **Open items inherited from M2 (non-blocking — see `M2_CLOSE_v1_0.md §Known deferred items`):** (1) CAPABILITY_MANIFEST `entry_count` +3 latent miscount; (2) SIG.MSR.207 absent from MSR; (3) UCN inline citation pass (Option A) — aspirational; (4) Eval baseline manual run — M3-S1 hard prerequisite; (5) UI-test fixture errors (`AppShell.test.tsx`, `ReportGallery.test.tsx`) — pre-W6 drift; (6) DIS.009 (`DIS.class.output_conflict` on PAT.008) — Q2 soft-gated; resolve alongside M3 Pattern Engine activation.
+- **FILE_REGISTRY / CAPABILITY_MANIFEST:** Manifest v1.7 (109 entries effective, +3 latent); FILE_REGISTRY v1.15 superseded by manifest cutover.
+
+## §G — Session-open handshake (reference)
+
+Every Gemini session begins by emitting the SESSION_OPEN artifact per `00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md`. The handshake is validated by `platform/scripts/governance/schema_validator.py` before any substantive tool call. A session whose handshake fails validation halts and reports to the native; it does not proceed.
+
+Per `CONVERSATION_NAMING_CONVENTION_v1_0.md §4`, the session proposes its Cowork thread name at the top of the first substantive response; the proposal must match the handshake's `cowork_thread_name` field.
+
+## §H — Session-close checklist (reference)
+
+Every Gemini session ends by emitting the SESSION_CLOSE artifact per `00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md`. Validated as the last action; only after validation passes does the SESSION_LOG append happen atomically. A session whose close-checklist fails does not claim close.
+
+## §I — Operating principles (summarized — mirror of CLAUDE.md §I)
+
+Full principle list: `PROJECT_ARCHITECTURE_v2_2.md §B` (B.1–B.12). Cross-cutting substrates: `MACRO_PLAN_v2_0.md §Learning Layer` + `§System Integrity Substrate`. Five most-violated principles (seeded from GROUNDING_AUDIT findings):
+
+- **B.1 — Facts/Interpretation separation.** Facts at L1; derivations at the L1/L2 boundary with explicit ledger; interpretations at L2+ only.
+- **B.3 — Derivation-ledger mandate.** Every L2+ claim carries a `DERIVATION_LEDGER` entry listing specific L1 fact IDs it consumes. No "as is known classically" without source.
+- **B.8 — Versioning discipline.** Every canonical artifact carries frontmatter `version`, `status`, and a changelog. Registries must not disagree.
+- **B.10 — No fabricated computation.** Missing computational data is marked `[EXTERNAL_COMPUTATION_REQUIRED]` — never invented.
+- **B.11 — Whole-Chart-Read discipline.** Every query routes through L2.5 Holistic Synthesis first, surfaces cross-domain signals via CDLM, then produces its domain answer. Skipping L2.5 is a procedural violation.
+
+Two substrate-layer rules apply at every session:
+
+- **Mirror Discipline (MP.1 + ND.1).** Any Gemini-side governance change is mirrored to the Claude side in the same session to adapted parity; and symmetrically. `mirror_enforcer.py` exits non-zero on desync; silent overwriting is forbidden per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K.3 step 3`.
+- **Scope declaration.** Every session declares `may_touch` and `must_not_touch` globs at session open. An empty `must_not_touch` fails the handshake.
+
+## §J — Quality standard (mirror of CLAUDE.md §J)
+
+Acharya-grade. An independent senior Jyotish acharya reviewing this corpus should reach one of: "this is my own level", "this is above my own level", or "this reveals things I wouldn't have seen on first pass". Nothing less.
+
+## §K — Collaboration with Claude (ND.1 Mirror Discipline, Gemini-side)
+
+You are working alongside Claude on this project. Governance is specified in:
+
+- `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K` — multi-agent disagreement protocol (five classes including `DIS.class.mirror_desync`; arbitration §K.3 with forbidden-silent-overwrite rule).
+- `CANONICAL_ARTIFACTS_v1_0.md §2` — machine-readable MP.1–MP.8 mirror-pair inventory with per-pair `enforcement_rule` + `known_asymmetries` (authoritative).
+- `PROJECT_ARCHITECTURE_v2_2.md §D.11` — architecture-layer Multi-Agent Collaboration workstream.
+- `NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md §1 ND.1` — Mirror Discipline directive (status: `addressed` 2026-04-24 at Step 7 close).
+
+**Three load-bearing claims of ND.1 (verbatim per MP v2.0 §IS.2):**
+
+1. **Bidirectional obligation.** Every Gemini-side governance file with a Claude-side counterpart MUST be kept in continuous semantic parity. Any change on the Gemini side triggers a mirror update on the Claude side in the same session. Symmetrically, any Claude-side change triggers mirror updates here (`.geminirules`) and in `.gemini/project_state.md`.
+2. **Adapted parity, not byte-identity.** The mirror is *semantically* equivalent, not *textually* identical. This file speaks in Gemini's conventions; `CLAUDE.md` speaks in Claude's conventions. The mirror principle is *semantic parity of governance content, not feature parity of agent capabilities.*
+3. **Scope is not limited to this file.** The principle extends to every governance surface with a cross-agent reference or counterpart. The authoritative machine-enforceable inventory is `CANONICAL_ARTIFACTS_v1_0.md §2` (MP.1–MP.8).
+
+**Mechanical enforcement.** `platform/scripts/governance/mirror_enforcer.py` operates over the full MP.1–MP.8 inventory and exits non-zero on desync. Detected desyncs open a `DIS.class.mirror_desync` entry in `00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md`; silent overwriting — updating the non-authoritative side without logging the divergence — is **forbidden** per `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K.3 step 3`.
+
+**Operational mirror rule.** Whenever you update this file (`.geminirules`) or `.gemini/project_state.md`, or make significant state changes, you MUST simultaneously update the equivalent state in Claude's configuration (`CLAUDE.md` or the relevant `00_ARCHITECTURE/*.md` file) to adapted parity. Never leave Claude's plan or state files out-of-date after executing a major phase or making architectural changes. Record the cross-propagation in the session's close-checklist `mirror_updates_propagated` block per `SESSION_CLOSE_TEMPLATE_v1_0.md`.
+
+## §L — Do not (mirror of CLAUDE.md §L)
+
+- Produce generic astrology.
+- Collapse layer separation (facts into interpretations or vice versa).
+- Skip the Whole-Chart-Read Protocol (B.11 / PROJECT_ARCHITECTURE §H.4).
+- Abandon versioning discipline.
+- Change architecture without native's explicit approval + version bump.
+- Duplicate canonical-artifact paths or versions outside `CANONICAL_ARTIFACTS_v1_0.md`.
+- Silently overwrite a mirror-pair counterpart. Desync opens a `DIS.class.mirror_desync` entry per protocol §K.3 step 3.
+- Pre-build infrastructure for macro-phases later than the currently-active one (MACRO_PLAN §Scope Boundary).
+- Claim a session is closed without emitting and validating the `session_close` checklist.
+
+## §M — Cadence (mirror of CLAUDE.md §M)
+
+Daily sessions. Closed-artifact-per-session discipline. Red-team passes at three cadences per `MACRO_PLAN_v2_0 §IS.8`: (a) every third session by default; (b) every macro-phase close before the SESSION_LOG seal; (c) every 12 months for MP itself regardless of phase state. A macro-phase does not close without its red-team. The session-open handshake validates the cadence obligation via `red_team_due`; the close checklist validates the obligation was discharged if due.
+
+---
+
+## Layer Architecture (Gemini-specific elaboration — L2.5 canonical-path subset per MP.5)
+
+- **L0 (Source Data)**: raw computation inputs (read-only).
+- **L1 (Facts Layer)**: single ground-truth canonical data (e.g., `01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md`, `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md`). **DO NOT EDIT.** L1 is Claude-resident; Gemini consumes at L4.
+- **L2 (Analytical Layer)**: derived matrices (Houses, Planets, Signs, Dashas, Divisionals).
+- **L2.5 (Holistic Synthesis)**: canonical versioned paths per CANONICAL_ARTIFACTS §1 + MP.5 mirror:
+  - MSR → `025_HOLISTIC_SYNTHESIS/MSR_v3_0.md` (499 signals)
+  - UCN → `025_HOLISTIC_SYNTHESIS/UCN_v4_0.md`
+  - CDLM → `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md`
+  - CGM → `025_HOLISTIC_SYNTHESIS/CGM_v9_0.md` (234 nodes, 8-karaka; CGM_v2_0.md SUPERSEDED at B.3.5 close)
+  - RM → `025_HOLISTIC_SYNTHESIS/RM_v2_0.md`
+  Any disagreement between this block and CANONICAL_ARTIFACTS §1 is resolved in favor of CANONICAL_ARTIFACTS.
+- **L3 (Domain Reports)**: chart-first reveals with call-to-action (Career, Finance, Health, etc.). All at v1.1+.
+- **L4 (Discovery Layer — current focus post-rebuild)**: an LLM-facing pattern-discovery engine treating the L1–L3 corpus as a graph/vector space. M2 execution resumes from `PHASE_B_PLAN_v1_0.md` v1.0.3; see CURRENT_STATE for active position. PATTERN_REGISTER + RESONANCE_REGISTER active.
+
+## Gemini's Specific Role in L4 (Discovery Layer)
+
+- **Connector Pass**: propose patterns, resonances, and contradictions liberally with evidence, mechanisms, and counter-cases. Claude Opus 4.7 acts as the skeptical reconciler against the project's nine core principles.
+- **Append-Only Ledger**: all proposals logged in the provenance ledger.
+- **Strict Format**: emit structured candidates based on the defined schemas (PATTERN.001, RESONANCE.001, etc.).
+- **Two-Pass Execution**: for the Discovery Layer (L4), Gemini 2.5 Pro is the promiscuous connector (proposing patterns); Claude Opus 4.7 is the skeptical reconciler.
+
+Follow these principles rigorously to ensure pipeline integrity and downstream vectorization validity.
+
+---
+
+## Asymmetries (per MP.1 known_asymmetries; authoritative per `CANONICAL_ARTIFACTS_v1_0.md §2`)
+
+Claude-side files and Gemini-side files each contain agent-specific constructs without a counterpart on the other side. The mirror does **not** synthesize fake counterparts.
+
+- **Claude-only, no Gemini mirror:**
+  - `CLAUDE.md` Claude Code / MCP server / skills references (CLI-tool integration; product-specific feature of the Claude Code environment with no Gemini equivalent).
+  - `CLAUDE.md` `<system-reminder>`-style anchored prompt conventions and Claude-tool expectations.
+  - `00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md` — declared Claude-only at MP.6.
+  - `00_ARCHITECTURE/SESSION_LOG.md` — declared Claude-only at MP.7 (session history authored by Claude sessions; Gemini state reflected via MP.2 composite, not a separate Gemini log).
+  - `00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md` itself — Claude-resident; this file cites it by reference rather than duplicating content.
+  - `00_ARCHITECTURE/STEP_BRIEFS/` — per-step briefs are Claude-resident; Gemini sessions read but do not author.
+- **Gemini-only, no Claude mirror:**
+  - `.geminirules` Gemini-rules idiom and "Gemini's Specific Role in L4" addressing pattern — addressed at this agent.
+  - `.gemini/project_state.md` state-pointer file — adapted format for Gemini's construct; Claude-side equivalent is the composite of SESSION_LOG + STEP_LEDGER + active plan pointers (MP.2 composite).
+
+These asymmetries are tracked per-pair in `CANONICAL_ARTIFACTS_v1_0.md §2 known_asymmetries`. Drift between this aggregate declaration and per-pair declarations is itself a finding (class `asymmetry_declaration_drift`) caught by `mirror_enforcer.py`.
+
+Follow these principles rigorously.
+
+---
+
+*End of .geminirules — footer amended 2026-04-27 at Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING (Cowork governance aside — B.6 brief authored): CLAUDECODE_BRIEF.md for Exec_12 READY; §F state unchanged (B.5 COMPLETE; red_team_counter: 0); next execution session: Madhav_M2A_Exec_12 (B.6 Hybrid Retrieval Library). §F substantive state block will be updated at Exec_12 close by the Claude Code executor.*
+*Footer amended 2026-04-27 at Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING (Cowork governance aside — B.7 brief authored): CLAUDECODE_BRIEF.md for Exec_13 READY; §F state unchanged (B.6 COMPLETE, M2B CLOSED; red_team_counter: 0); next execution session: Madhav_M2A_Exec_13 (B.7 Router + Plan Library, M2C begins). Router runtime = claude-opus-4-6 (Q1); no M2C_EXEC_PLAN (Q2).*
+*B.7 COMPLETE — Madhav_M2A_Exec_13 (2026-04-27): Router + Plan Library. QueryPlan schema (7 fields), plans_v1_0.md taxonomy (5 types), router_v1_0.md prompt (2 disambiguation rules), router.py (claude-opus-4-6, WCR enforcer), rag_router.py (POST /rag/route), routerClient.ts, golden eval 20/20 PASS (100%), WCR invariant 15/15 PASS. red_team_counter: 1. M2C active. Next: Madhav_M2A_Exec_14 (B.8).*
+*B.8 COMPLETE — Madhav_M2A_Exec_14 (2026-04-28): Synthesis Layer. synthesis_v1_0.md prompt (P5/P6/P7 enforcement), synthesize.py (claude-opus-4-6, temp=0.2, max_tokens=4096), rag_synthesize.py (POST /rag/synthesize — composite classify→retrieve→synthesize), synthesizeClient.ts, golden eval 10/10 PASS (derivation/P7/P5 all 100%), SynthesisAnswer schema (11 fields) + DerivationEntry (5 fields). red_team_counter: 2. Next: Madhav_M2A_Exec_15 (B.9).*
+
+*Phase 11A COMPLETE — Madhav_PHASE11A_CUTOVER_STAGE1 (2026-04-28): Pipeline Cutover Stage 1 (flag flip). NEW_QUERY_PIPELINE_ENABLED + AUDIT_ENABLED defaults flipped true in feature_flags.ts. Legacy code path still present (Phase 11B scope). Smoke script: npm run cutover:stage1-smoke. red_team_counter: 2 (governance aside — no increment). Next: Madhav_M2A_Exec_15 (B.9).*

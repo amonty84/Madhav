@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<!--
+  ================================================================
+  AM-JIS Governance Artifact — Frontmatter
+  ================================================================
+  artifact: STEPS_PHASES_LAYERS_MAP_v1_0.html
+  version: 1.0
+  status: LIVING
+  role: >
+    Interactive visual explainer for the three orthogonal indexing
+    systems that govern the AM-JIS project: (1) Layers L1..L6+
+    (architecture), (2) Phases M1..M10 (macro arc), (3) Steps 0..15
+    (governance rebuild workflow). Clarifies that Steps operate on
+    the governance infrastructure and do NOT build Layers; Layers
+    are built and activated by Phases; Phases advance chronologically
+    while the Steps workflow is a one-off meta-task that has M2
+    currently paused.
+  produced_during: STEP_2_MACRO_PLAN_REVISION_SPEC (2026-04-23)
+  inputs:
+    - 00_ARCHITECTURE/MACRO_PLAN_v1_0.md
+    - 00_ARCHITECTURE/STEP_LEDGER_v1_0.md
+    - 00_ARCHITECTURE/MACRO_PLAN_REVISION_SPEC_v1_0.md (this step)
+    - 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
+    - 00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md
+    - CLAUDE.md
+  consumers:
+    - any fresh session needing to orient within the rebuild
+    - native, for situational awareness across phases/steps/layers
+  update_policy: >
+    Update the "current position" marker and any Phase/Step/Layer
+    status when the ledger advances. Minor updates → patch version
+    bump in filename or inline. Major redesign → v2.0 artifact.
+  canonical_source_of_truth: >
+    This artifact is a DERIVED visualization. Authoritative state
+    lives in STEP_LEDGER_v1_0.md (for Steps), MACRO_PLAN_v1_0/v2_0.md
+    (for Phases), and PROJECT_ARCHITECTURE (for Layers). If this
+    artifact contradicts any of them, the authoritative source wins.
+  ================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AM-JIS — Steps × Phases × Layers Map v1.0</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --fg-muted: #555;
+      --fg-soft: #888;
+      --bg: #fafaf8;
+      --bg-panel: #ffffff;
+      --bg-raised: #f4f2ec;
+      --border: #d9d5cd;
+      --border-soft: #e8e5dd;
+      --accent: #2d5f9a;
+      --accent-soft: rgba(45, 95, 154, 0.1);
+      --accent-strong: rgba(45, 95, 154, 0.35);
+      --warning: #a15b1d;
+      --done: #2a6f4a;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #e8e6df;
+        --fg-muted: #a8a59d;
+        --fg-soft: #6f6d66;
+        --bg: #18181a;
+        --bg-panel: #222225;
+        --bg-raised: #2a2a2e;
+        --border: #3a3a3e;
+        --border-soft: #2f2f33;
+        --accent: #7fb3f0;
+        --accent-soft: rgba(127, 179, 240, 0.12);
+        --accent-strong: rgba(127, 179, 240, 0.4);
+        --warning: #d68c4c;
+        --done: #5fb585;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    header .meta {
+      font-size: 12px;
+      color: var(--fg-muted);
+      font-family: var(--mono);
+    }
+    header .lede {
+      margin-top: 14px;
+      color: var(--fg-muted);
+      font-size: 14px;
+      max-width: 780px;
+    }
+    .instruction {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      margin: 20px 0 24px;
+      font-size: 13px;
+      color: var(--fg);
+      border-radius: 0 4px 4px 0;
+    }
+    .instruction strong { color: var(--accent); font-weight: 600; }
+
+    /* Filter bar */
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+    .filters button {
+      font-family: var(--sans);
+      font-size: 12px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      color: var(--fg);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filters button:hover { background: var(--bg-raised); }
+    .filters button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    @media (prefers-color-scheme: dark) {
+      .filters button.active { color: #18181a; }
+    }
+
+    /* SVG container */
+    .diagram-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    svg.map { display: block; width: 100%; height: auto; max-width: 100%; }
+    svg.map text { fill: var(--fg); }
+    svg.map .muted { fill: var(--fg-muted); }
+    svg.map .soft { fill: var(--fg-soft); }
+
+    /* Interactive cell/element styling */
+    .hit { cursor: pointer; transition: filter 0.15s, stroke-width 0.15s; }
+    .hit:hover { filter: brightness(1.15); }
+    .hit:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .hit.selected { stroke: var(--accent) !important; stroke-width: 2.4 !important; }
+    .hit.dimmed { opacity: 0.25; }
+
+    /* SVG fill classes */
+    .step-cell-base { fill: var(--fg); fill-opacity: 0.05; stroke: var(--fg); stroke-opacity: 0.3; }
+    .step-done { fill: var(--done); fill-opacity: 0.22; stroke: var(--done); stroke-opacity: 0.5; }
+    .step-current { fill: var(--accent); fill-opacity: 0.38; stroke: var(--accent); stroke-width: 1.6; }
+    .phase-closed { fill: var(--done); fill-opacity: 0.22; stroke: var(--done); stroke-opacity: 0.45; }
+    .phase-paused { fill: var(--accent); fill-opacity: 0.14; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 3 2; }
+    .phase-pending { fill: var(--fg); fill-opacity: 0.04; stroke: var(--fg); stroke-opacity: 0.25; stroke-dasharray: 2 2; }
+    .cell-build { fill: var(--done); fill-opacity: 0.32; stroke: var(--done); stroke-opacity: 0.4; }
+    .cell-active { fill: var(--accent); fill-opacity: 0.45; stroke: var(--accent); stroke-opacity: 0.55; }
+    .cell-scaffold { fill: var(--fg); fill-opacity: 0.12; stroke: var(--fg); stroke-opacity: 0.3; stroke-dasharray: 2 1; }
+    .cell-extend { fill: var(--warning); fill-opacity: 0.2; stroke: var(--warning); stroke-opacity: 0.35; }
+    .cell-empty { fill: none; stroke: var(--fg); stroke-opacity: 0.1; }
+
+    /* Detail panel */
+    .detail {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 26px;
+      min-height: 240px;
+      margin-bottom: 36px;
+    }
+    .detail-placeholder {
+      color: var(--fg-soft);
+      font-style: italic;
+      padding: 40px 0 20px;
+      text-align: center;
+    }
+    .detail-placeholder strong { color: var(--fg-muted); font-style: normal; }
+    .detail h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .detail .kind-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 2px 8px;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--fg-muted);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .detail .status {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+    .detail .status.completed { background: rgba(42, 111, 74, 0.18); color: var(--done); }
+    .detail .status.in_progress, .detail .status.paused, .detail .status.current {
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .detail .status.pending { background: var(--bg-raised); color: var(--fg-muted); }
+    .detail .status.closed { background: rgba(42, 111, 74, 0.18); color: var(--done); }
+    .detail .subtitle {
+      color: var(--fg-muted);
+      font-size: 13px;
+      margin: 4px 0 18px;
+    }
+    .detail .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--fg-soft);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    .detail p { margin: 0 0 10px; }
+    .detail ul { margin: 6px 0 12px; padding-left: 22px; }
+    .detail ul li { margin: 4px 0; }
+    .detail code {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      background: var(--bg-raised);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+    .detail .close-btn {
+      float: right;
+      font-family: var(--sans);
+      font-size: 12px;
+      background: none;
+      color: var(--fg-muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .detail .close-btn:hover { background: var(--bg-raised); color: var(--fg); }
+
+    /* Narrative sections */
+    .narrative {
+      margin-top: 36px;
+    }
+    .narrative h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 32px 0 10px;
+      letter-spacing: -0.005em;
+    }
+    .narrative h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 18px 0 6px;
+      color: var(--fg);
+    }
+    .narrative p { margin: 0 0 12px; color: var(--fg); }
+    .narrative code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg-raised);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px 20px;
+      margin: 14px 0;
+      font-size: 12.5px;
+    }
+    .legend-grid .swatch {
+      display: inline-block;
+      width: 20px;
+      height: 14px;
+      vertical-align: middle;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--fg-soft);
+      font-family: var(--mono);
+    }
+    footer a { color: var(--accent); }
+
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      pointer-events: none;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 3px;
+      font-family: var(--sans);
+      opacity: 0;
+      transition: opacity 0.12s;
+      z-index: 1000;
+      max-width: 280px;
+      line-height: 1.4;
+    }
+    .tooltip.show { opacity: 0.94; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>AM-JIS — Steps × Phases × Layers Map</h1>
+      <div class="meta">v1.0 · 2026-04-23 · produced during STEP_2_MACRO_PLAN_REVISION_SPEC · living artifact</div>
+      <p class="lede">
+        The project runs on three orthogonal indexing systems that are easy to conflate. This map shows all three at once and the current position within each. Click any element (Step, Phase, Layer, or grid cell) to read what it means and where to find its authoritative artifact.
+      </p>
+    </header>
+
+    <div class="instruction">
+      <strong>How to read this:</strong> The top strip is a one-off governance rebuild workflow. The grid below is the actual project — phases horizontally, layers vertically. The two axes are largely independent; the rebuild pauses the phase work until Step 15 closes.
+    </div>
+
+    <div class="filters" role="toolbar" aria-label="Highlight axis">
+      <button type="button" class="active" data-filter="all">All axes</button>
+      <button type="button" data-filter="steps">Steps only</button>
+      <button type="button" data-filter="phases">Phases only</button>
+      <button type="button" data-filter="layers">Layers only</button>
+    </div>
+
+    <div class="diagram-card">
+      <svg class="map" viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="map-title map-desc">
+        <title id="map-title">AM-JIS Steps, Phases, Layers</title>
+        <desc id="map-desc">Top strip: 17 governance-rebuild steps (S0, S1, S2, S3, S4, S5, S5A, S6 through S15). Grid below: 10 phases (M1 through M10) as columns, 6 layers (L1 Facts, L2 Signals, L2.5 Synthesis, L3 Domains, L4 Discovery, L5/L6 Learning+Time) as rows. Current position: Step 2, Phase M2 (paused).</desc>
+
+        <!-- ===== PANEL A: Governance Rebuild Steps ===== -->
+        <text x="20" y="22" font-size="14" font-weight="600">Governance Rebuild Workflow (one-off meta-task, pauses the macro arc)</text>
+        <text x="20" y="38" font-size="11" class="muted">A 16-step sequence that rebuilds the governance layer. Produces policies, ledgers, scripts — not corpus content.</text>
+
+        <g transform="translate(30, 56)" id="steps-group">
+          <!-- Each step rect is interactive with data-kind="step" data-id="S*" -->
+          <g class="hit" tabindex="0" data-kind="step" data-id="S0">
+            <rect class="step-done" x="0" y="0" width="51" height="34" rx="3"/>
+            <text x="25.5" y="15" text-anchor="middle" font-size="11">S0</text>
+            <text x="25.5" y="28" text-anchor="middle" font-size="9" class="soft">Ground</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S1">
+            <rect class="step-done" x="52" y="0" width="51" height="34" rx="3"/>
+            <text x="77.5" y="15" text-anchor="middle" font-size="11">S1</text>
+            <text x="77.5" y="28" text-anchor="middle" font-size="9" class="soft">Critique</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S2">
+            <rect class="step-current" x="104" y="0" width="51" height="34" rx="3"/>
+            <text x="129.5" y="15" text-anchor="middle" font-size="11" font-weight="600">S2</text>
+            <text x="129.5" y="28" text-anchor="middle" font-size="9" class="soft">Rev. Spec</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S3">
+            <rect class="step-cell-base" x="156" y="0" width="51" height="34" rx="3"/>
+            <text x="181.5" y="15" text-anchor="middle" font-size="11">S3</text>
+            <text x="181.5" y="28" text-anchor="middle" font-size="9" class="soft">Rewrite</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S4">
+            <rect class="step-cell-base" x="208" y="0" width="51" height="34" rx="3"/>
+            <text x="233.5" y="15" text-anchor="middle" font-size="11">S4</text>
+            <text x="233.5" y="28" text-anchor="middle" font-size="9" class="soft">Red-team</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S5">
+            <rect class="step-cell-base" x="260" y="0" width="51" height="34" rx="3"/>
+            <text x="285.5" y="15" text-anchor="middle" font-size="11">S5</text>
+            <text x="285.5" y="28" text-anchor="middle" font-size="9" class="soft">Close MP</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S5A">
+            <rect class="step-cell-base" x="312" y="0" width="51" height="34" rx="3"/>
+            <text x="337.5" y="15" text-anchor="middle" font-size="11">S5A</text>
+            <text x="337.5" y="28" text-anchor="middle" font-size="9" class="soft">Arch v2.2</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S6">
+            <rect class="step-cell-base" x="364" y="0" width="51" height="34" rx="3"/>
+            <text x="389.5" y="15" text-anchor="middle" font-size="11">S6</text>
+            <text x="389.5" y="28" text-anchor="middle" font-size="9" class="soft">Integ. spec</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S7">
+            <rect class="step-cell-base" x="416" y="0" width="51" height="34" rx="3"/>
+            <text x="441.5" y="15" text-anchor="middle" font-size="11">S7</text>
+            <text x="441.5" y="28" text-anchor="middle" font-size="9" class="soft">Integ. impl</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S8">
+            <rect class="step-cell-base" x="468" y="0" width="51" height="34" rx="3"/>
+            <text x="493.5" y="15" text-anchor="middle" font-size="11">S8</text>
+            <text x="493.5" y="28" text-anchor="middle" font-size="9" class="soft">Red-team</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S9">
+            <rect class="step-cell-base" x="520" y="0" width="51" height="34" rx="3"/>
+            <text x="545.5" y="15" text-anchor="middle" font-size="11">S9</text>
+            <text x="545.5" y="28" text-anchor="middle" font-size="9" class="soft">CLAUDE.md</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S10">
+            <rect class="step-cell-base" x="572" y="0" width="51" height="34" rx="3"/>
+            <text x="597.5" y="15" text-anchor="middle" font-size="11">S10</text>
+            <text x="597.5" y="28" text-anchor="middle" font-size="9" class="soft">Log schema</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S11">
+            <rect class="step-cell-base" x="624" y="0" width="51" height="34" rx="3"/>
+            <text x="649.5" y="15" text-anchor="middle" font-size="11">S11</text>
+            <text x="649.5" y="28" text-anchor="middle" font-size="9" class="soft">LL scaffold</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S12">
+            <rect class="step-cell-base" x="676" y="0" width="51" height="34" rx="3"/>
+            <text x="701.5" y="15" text-anchor="middle" font-size="11">S12</text>
+            <text x="701.5" y="28" text-anchor="middle" font-size="9" class="soft">Hygiene</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S13">
+            <rect class="step-cell-base" x="728" y="0" width="51" height="34" rx="3"/>
+            <text x="753.5" y="15" text-anchor="middle" font-size="11">S13</text>
+            <text x="753.5" y="28" text-anchor="middle" font-size="9" class="soft">Drift run</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S14">
+            <rect class="step-cell-base" x="780" y="0" width="51" height="34" rx="3"/>
+            <text x="805.5" y="15" text-anchor="middle" font-size="11">S14</text>
+            <text x="805.5" y="28" text-anchor="middle" font-size="9" class="soft">Schema run</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="step" data-id="S15">
+            <rect class="step-cell-base" x="832" y="0" width="51" height="34" rx="3"/>
+            <text x="857.5" y="15" text-anchor="middle" font-size="11">S15</text>
+            <text x="857.5" y="28" text-anchor="middle" font-size="9" class="soft">Baseline</text>
+          </g>
+        </g>
+
+        <line x1="159.5" y1="94" x2="159.5" y2="108" stroke="var(--accent)" stroke-width="1.6"/>
+        <text x="159.5" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">you are here</text>
+
+        <line x1="20" y1="138" x2="940" y2="138" stroke="var(--fg)" stroke-opacity="0.15" stroke-dasharray="3 3"/>
+
+        <!-- ===== PANEL B: Macro Arc × Layers grid ===== -->
+        <text x="20" y="160" font-size="14" font-weight="600">Macro Arc × Layers — the actual project (paused at M2 until the rebuild closes)</text>
+        <text x="20" y="176" font-size="11" class="muted">Phases = what the project does over time (horizontal). Layers = where knowledge lives (vertical).</text>
+
+        <!-- Phase header row (interactive) -->
+        <g id="phases-group" transform="translate(150, 194)">
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M1">
+            <rect x="0" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="36" y="10" text-anchor="middle" font-size="11" font-weight="600">M1</text>
+            <text x="36" y="22" text-anchor="middle" font-size="9" class="soft">Corpus complete</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M2">
+            <rect x="72" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="108" y="10" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">M2</text>
+            <text x="108" y="22" text-anchor="middle" font-size="9" fill="var(--accent)">Activation (paused)</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M3">
+            <rect x="144" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="180" y="10" text-anchor="middle" font-size="11">M3</text>
+            <text x="180" y="22" text-anchor="middle" font-size="9" class="soft">Temporal</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M4">
+            <rect x="216" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="252" y="10" text-anchor="middle" font-size="11">M4</text>
+            <text x="252" y="22" text-anchor="middle" font-size="9" class="soft">Calibration</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M5">
+            <rect x="288" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="324" y="10" text-anchor="middle" font-size="11">M5</text>
+            <text x="324" y="22" text-anchor="middle" font-size="9" class="soft">Probabilistic</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M6">
+            <rect x="360" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="396" y="10" text-anchor="middle" font-size="11">M6</text>
+            <text x="396" y="22" text-anchor="middle" font-size="9" class="soft">Prospective</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M7">
+            <rect x="432" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="468" y="10" text-anchor="middle" font-size="11">M7</text>
+            <text x="468" y="22" text-anchor="middle" font-size="9" class="soft">Cohort</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M8">
+            <rect x="504" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="540" y="10" text-anchor="middle" font-size="11">M8</text>
+            <text x="540" y="22" text-anchor="middle" font-size="9" class="soft">Classical x-ref</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M9">
+            <rect x="576" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="612" y="10" text-anchor="middle" font-size="11">M9</text>
+            <text x="612" y="22" text-anchor="middle" font-size="9" class="soft">Triangulation</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="phase" data-id="M10">
+            <rect x="648" y="0" width="72" height="32" rx="2" fill="transparent"/>
+            <text x="684" y="10" text-anchor="middle" font-size="11">M10</text>
+            <text x="684" y="22" text-anchor="middle" font-size="9" class="soft">Acharya interface</text>
+          </g>
+        </g>
+
+        <!-- Layer label + cell rows -->
+        <!-- Row templates: transform translate(30, y) with label, then cells at x=120,192,264,336,408,480,552,624,696,768 width=72 height=38 -->
+
+        <!-- Row L1 -->
+        <g id="row-L1" transform="translate(30, 232)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L1">
+            <rect x="0" y="0" width="115" height="38" rx="2" fill="transparent"/>
+            <text x="0" y="18" font-size="11" font-weight="600">L1 · Facts</text>
+            <text x="0" y="32" font-size="9" class="soft">FORENSIC v8.0</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M1"><rect class="cell-build" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M2"><rect class="phase-paused" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M3"><rect class="cell-extend" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M4"><rect class="cell-empty" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M5"><rect class="cell-empty" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M6"><rect class="cell-empty" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M7"><rect class="cell-extend" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M8"><rect class="cell-empty" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M9"><rect class="cell-empty" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L1:M10"><rect class="cell-empty" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Row L2 -->
+        <g id="row-L2" transform="translate(30, 276)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L2">
+            <rect x="0" y="0" width="115" height="38" rx="2" fill="transparent"/>
+            <text x="0" y="18" font-size="11" font-weight="600">L2 · Signals</text>
+            <text x="0" y="32" font-size="9" class="soft">MSR v3.0 (499)</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M1"><rect class="cell-build" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M2"><rect class="phase-paused" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M3"><rect class="cell-empty" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M4"><rect class="cell-empty" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M5"><rect class="cell-empty" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M6"><rect class="cell-empty" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M7"><rect class="cell-extend" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M8"><rect class="cell-empty" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M9"><rect class="cell-extend" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2:M10"><rect class="cell-empty" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Row L2.5 -->
+        <g id="row-L2_5" transform="translate(30, 320)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L2.5">
+            <rect x="0" y="0" width="115" height="38" rx="2" fill="transparent"/>
+            <text x="0" y="18" font-size="11" font-weight="600">L2.5 · Synthesis</text>
+            <text x="0" y="32" font-size="9" class="soft">UCN CDLM CGM RM</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M1"><rect class="cell-build" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M2"><rect class="phase-paused" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M3"><rect class="cell-empty" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M4"><rect class="cell-empty" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M5"><rect class="cell-empty" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M6"><rect class="cell-empty" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M7"><rect class="cell-extend" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M8"><rect class="cell-empty" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M9"><rect class="cell-extend" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L2.5:M10"><rect class="cell-empty" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Row L3 -->
+        <g id="row-L3" transform="translate(30, 364)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L3">
+            <rect x="0" y="0" width="115" height="38" rx="2" fill="transparent"/>
+            <text x="0" y="18" font-size="11" font-weight="600">L3 · Domains</text>
+            <text x="0" y="32" font-size="9" class="soft">9 reports v1.1</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M1"><rect class="cell-build" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M2"><rect class="phase-paused" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M3"><rect class="cell-empty" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M4"><rect class="cell-empty" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M5"><rect class="cell-empty" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M6"><rect class="cell-empty" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M7"><rect class="cell-empty" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M8"><rect class="cell-empty" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M9"><rect class="cell-empty" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L3:M10"><rect class="cell-extend" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Row L4 -->
+        <g id="row-L4" transform="translate(30, 408)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L4">
+            <rect x="0" y="0" width="115" height="38" rx="2" fill="transparent"/>
+            <text x="0" y="18" font-size="11" font-weight="600">L4 · Discovery</text>
+            <text x="0" y="32" font-size="9" class="soft">Graph+RAG (Gemini)</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M1"><rect class="cell-empty" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M2"><rect class="cell-active" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M3"><rect class="cell-empty" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M4"><rect class="cell-empty" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M5"><rect class="cell-empty" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M6"><rect class="cell-empty" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M7"><rect class="cell-extend" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M8"><rect class="cell-extend" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M9"><rect class="cell-extend" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L4:M10"><rect class="cell-extend" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Row L5/L6 -->
+        <g id="row-L5_6" transform="translate(30, 452)">
+          <g class="hit" tabindex="0" data-kind="layer" data-id="L5_6">
+            <rect x="0" y="0" width="115" height="48" rx="2" fill="transparent"/>
+            <text x="0" y="14" font-size="11" font-weight="600">L5/L6 ·</text>
+            <text x="0" y="28" font-size="11" font-weight="600">Learning + Time</text>
+            <text x="0" y="42" font-size="9" class="soft">LL.1–10 · DBN · PPL</text>
+          </g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M1"><rect class="cell-empty" x="120" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M2"><rect class="cell-scaffold" x="192" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M3"><rect class="cell-active" x="264" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M4"><rect class="cell-active" x="336" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M5"><rect class="cell-active" x="408" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M6"><rect class="cell-active" x="480" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M7"><rect class="cell-active" x="552" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M8"><rect class="cell-active" x="624" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M9"><rect class="cell-active" x="696" y="0" width="72" height="38" rx="2"/></g>
+          <g class="hit" tabindex="0" data-kind="cell" data-id="L5_6:M10"><rect class="cell-active" x="768" y="0" width="72" height="38" rx="2"/></g>
+        </g>
+
+        <!-- Bottom note -->
+        <g transform="translate(30, 558)">
+          <rect x="0" y="0" width="900" height="62" rx="4" fill="var(--accent)" fill-opacity="0.07" stroke="var(--accent)" stroke-opacity="0.3"/>
+          <text x="12" y="18" font-size="11" font-weight="600" fill="var(--accent)">Key insight — the three axes don't mix</text>
+          <text x="12" y="36" font-size="10" class="muted">Steps (top strip) are a one-off meta-workflow. They rebuild the rules about how the project evolves. They do NOT build Layers.</text>
+          <text x="12" y="52" font-size="10" class="muted">Phases (grid columns) build Layers (grid rows). M1 built L1+L2+L2.5+L3. M2 will build L4 &amp; scaffold L5/L6. M4+ activates the Learning substrate.</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="detail" id="detail" aria-live="polite">
+      <div class="detail-placeholder">
+        <p><strong>Click any Step, Phase, Layer, or grid cell</strong> to see its role, status, and canonical artifact.</p>
+        <p>Use Tab and Enter for keyboard navigation.</p>
+      </div>
+    </div>
+
+    <section class="narrative">
+      <h2>Three orthogonal axes</h2>
+      <p>The project runs on three separate indexing systems that mean different things. The Macro Plan references all three without flagging that they're different in kind — and that's the cognitive cost this map exists to remove.</p>
+
+      <h3>Layers (L1 → L6+) — the architecture</h3>
+      <p>This is <em>where knowledge lives</em>, ordered by derivation depth. <strong>L1</strong> is the raw fact base — the chart computations and the biographical timeline. <strong>L2</strong> is atomized signals (the Master Signal Register, 499 entries). <strong>L2.5</strong> is holistic synthesis across signals (UCN, CDLM, CGM, RM). <strong>L3</strong> is consumer-facing domain reports. <strong>L4</strong> is the Discovery Layer where Gemini surfaces patterns. <strong>L5/L6</strong> is the Learning Layer substrate plus temporal and probabilistic layers. Layers are static architecture — they describe the shape of the corpus, not what's happening at any moment.</p>
+
+      <h3>Phases (M1 → M10) — the arc</h3>
+      <p>This is <em>what the project does over time</em>. Each phase builds layers, activates them, or extends them. <strong>M1</strong> built L1 + L2 + L2.5 + L3 and is empirically closed as of 2026-04-19. <strong>M2</strong> activates L2.5 via graph-RAG and builds L4 while scaffolding L5/L6 — it's the current phase, currently paused pending the governance rebuild. <strong>M3–M10</strong> progressively add temporal computations, calibration, probabilistic modelling, prospective testing, cohort extension, classical cross-reference, multi-school triangulation, and the final acharya-facing interface. Phases are chronological — only one is active at a time.</p>
+
+      <h3>Steps (0 → 15) — the governance rebuild</h3>
+      <p>This is a <em>one-off meta-task</em>, not part of the macro arc at all. It pauses M2 to rebuild the project's governance infrastructure — the ledgers, registries, protocols, drift-detectors, and templates that keep multi-session work coherent. Steps produce governance artifacts; they do not touch L1, L2, L2.5, or any layer content. We're at Step 2 right now; the step will close once the native signs off on the revision spec, then Steps 3 through 15 produce the rewritten Macro Plan, the Integrity Protocol, the rebuilt CLAUDE.md, and finally the <code>GOVERNANCE_BASELINE_v1_0.md</code> that unfreezes M2.</p>
+
+      <h2>How they connect</h2>
+      <p>The current Step (Step 2) writes a spec <em>about</em> how the new Macro Plan will describe the Phases and Layers. Step 3 produces <code>MACRO_PLAN_v2_0.md</code>, which is the document that <em>names</em> the phases and points to the layers. After Step 15, M2 phase work resumes at B.0 of the <code>PHASE_B_PLAN</code> — and that work is what actually builds L4 Discovery and scaffolds the Learning Layer. So Step 2 → Step 15 is governance housekeeping; then the project returns to M2 corpus-activation, which is phase-work that builds layers.</p>
+
+      <h2>Cell-colour legend</h2>
+      <div class="legend-grid">
+        <div><span class="swatch" style="background:rgba(42,111,74,0.32); border:1px solid rgba(42,111,74,0.4)"></span>built / closed (layer exists)</div>
+        <div><span class="swatch" style="background:rgba(45,95,154,0.14); border:1.4px dashed rgb(45,95,154)"></span>paused (M2 — current, held)</div>
+        <div><span class="swatch" style="background:rgba(45,95,154,0.45); border:1px solid rgba(45,95,154,0.55)"></span>primary build / active here</div>
+        <div><span class="swatch" style="background:rgba(26,26,26,0.12); border:1px dashed rgba(26,26,26,0.3)"></span>scaffolded (infra; not active)</div>
+        <div><span class="swatch" style="background:rgba(161,91,29,0.2); border:1px solid rgba(161,91,29,0.35)"></span>extends / refines existing layer</div>
+        <div><span class="swatch" style="border:1px solid rgba(26,26,26,0.1)"></span>not applicable at this phase</div>
+      </div>
+
+      <h2>Current position (as of 2026-04-23)</h2>
+      <p><strong>Steps axis:</strong> Step 2 is <code>in_progress</code>; deliverable produced (<code>MACRO_PLAN_REVISION_SPEC_v1_0.md</code>), awaiting native review. Steps 0 and 1 completed; Steps 3–15 pending.</p>
+      <p><strong>Phases axis:</strong> M1 empirically closed 2026-04-19. M2 is the current phase and is paused pending Step 15 close. M3–M10 pending.</p>
+      <p><strong>Layers axis:</strong> L1 at v8.0, L2 at v3.0 (499 signals), L2.5 complete at current versions (UCN v4.0, CDLM v1.1, CGM v2.0, RM v2.0), L3 all 9 reports at v1.1+, L4 not yet built, L5/L6 not yet scaffolded (will scaffold during M2 close per the revision spec).</p>
+
+      <h2>Native-directive axis (cross-cutting)</h2>
+      <p>ND.1 (Mirror Discipline) is a separate cross-cutting driver that touches Steps 2, 3, 4, 5A, 6, 7 — it requires every Claude-side governance file to be kept in adapted parity with its Gemini-side counterpart. It doesn't live on any of the three axes here; it's a discipline that <em>governs</em> work on all three. Future native directives (ND.2, ND.3, …) will extend this cross-cutting layer.</p>
+    </section>
+
+    <footer>
+      <div>Authoritative sources: <code>STEP_LEDGER_v1_0.md</code> · <code>MACRO_PLAN_v1_0.md</code> (→ <code>v2_0</code>) · <code>MACRO_PLAN_REVISION_SPEC_v1_0.md</code> · <code>NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md</code></div>
+      <div style="margin-top:6px">This file is DERIVED. If it contradicts an authoritative source, the source wins.</div>
+    </footer>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <script>
+    // ===== Data model =====
+    const STEPS = {
+      "S0": { title: "Step 0 — Grounding", status: "completed", subtitle: "Baseline audit of the governance surface",
+        description: "Produced the grounding audit, 16 step briefs, the step ledger, and a minimal CLAUDE.md marker. The seed of the rebuild workflow.",
+        deliverables: ["00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md", "00_ARCHITECTURE/STEP_LEDGER_v1_0.md", "00_ARCHITECTURE/STEP_BRIEFS/ (16 files)"], date: "2026-04-23 closed" },
+      "S1": { title: "Step 1 — Macro Plan Critique", status: "completed", subtitle: "14-dimension forensic critique of MP v1.0",
+        description: "132 in-schema findings + 4 out-of-schema findings across 14 dimensions. 12 CRITICALs. Evidence base for Step 2.",
+        deliverables: ["00_ARCHITECTURE/MACRO_PLAN_CRITIQUE_v1_0.md"], date: "2026-04-23 closed" },
+      "S2": { title: "Step 2 — Macro Plan Revision Spec", status: "in_progress", subtitle: "Blueprint for MP v2.0 (current step)",
+        description: "Finding-by-finding spec that directs Step 3's rewrite. Calls v2.0 (not v1.1) on the strength of 12 CRITICALs and a substrate addition. Adds System Integrity Substrate, Ethical Framework, External Dependency Graph, five more top-level sections. Currently awaiting native review before close.",
+        deliverables: ["00_ARCHITECTURE/MACRO_PLAN_REVISION_SPEC_v1_0.md"], date: "2026-04-23 (draft produced; review pending)" },
+      "S3": { title: "Step 3 — Macro Plan Rewrite", status: "pending", subtitle: "Produce MACRO_PLAN_v2_0.md",
+        description: "Fresh conversation writes v2.0 per the Step 2 spec verbatim. No critique re-litigation.",
+        deliverables: ["00_ARCHITECTURE/MACRO_PLAN_v2_0.md (DRAFT_PENDING_REDTEAM)"] },
+      "S4": { title: "Step 4 — Red-team MP v2.0", status: "pending", subtitle: "Adversarial validation of the rewrite",
+        description: "T.1–T.7 adversarial tests including the native-directive enactment test (T.7).",
+        deliverables: ["00_ARCHITECTURE/MACRO_PLAN_REDTEAM_v1_0.md"] },
+      "S5": { title: "Step 5 — Close MP + propagate", status: "pending", subtitle: "Mirror the new MP across all surfaces",
+        description: "MP v1.0 → SUPERSEDED. Update FILE_REGISTRY, GOVERNANCE_STACK, CLAUDE.md, .geminirules, .gemini/project_state.md. Atomic mirror pass per ND.1.",
+        deliverables: ["Multi-file edits per spec §5.1", "SESSION_LOG entry"] },
+      "S5A": { title: "Step 5A — Project Architecture refresh", status: "pending", subtitle: "PROJECT_ARCHITECTURE v2.1 → v2.2",
+        description: "Refresh the architectural blueprint to match post-M2-kickoff reality, and formalize the mirror-pair inventory per ND.1.",
+        deliverables: ["00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md", "Mirror updates (5 surfaces)"] },
+      "S6": { title: "Step 6 — Governance Integrity Protocol design", status: "pending", subtitle: "Specification-only design doc",
+        description: "Six-axis protocol spec covering data integrity, accuracy, consistency, goal-alignment, hygiene, and multi-agent collaboration.",
+        deliverables: ["00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md"] },
+      "S7": { title: "Step 7 — Governance Integrity implementation", status: "pending", subtitle: "Scripts, registries, templates",
+        description: "First step that writes code. Produces CANONICAL_ARTIFACTS, drift_detector.py, schema_validator.py, mirror_enforcer.py, SESSION_OPEN/CLOSE templates, DISAGREEMENT_REGISTER. Flips ND.1 from open → addressed.",
+        deliverables: ["CANONICAL_ARTIFACTS_v1_0.md", "platform/scripts/governance/*", "Session templates", "DRIFT_REPORT_STEP_7", "SCHEMA_VALIDATION_REPORT_STEP_7"] },
+      "S8": { title: "Step 8 — Red-team Integrity", status: "pending", subtitle: "Adversarial validation of the integrity layer",
+        description: "Attempts to bypass drift-detector, break mirror-enforcer, etc.",
+        deliverables: ["00_ARCHITECTURE/GOVERNANCE_INTEGRITY_REDTEAM_v1_0.md"] },
+      "S9": { title: "Step 9 — CLAUDE.md rebuild", status: "pending", subtitle: "Rewrite the master Claude-side instructions",
+        description: "Replaces the current ad-hoc CLAUDE.md with a structured governance-aware version. Mirrored to .geminirules per ND.1.",
+        deliverables: ["/CLAUDE.md (new)", ".geminirules mirror update"] },
+      "S10": { title: "Step 10 — SESSION_LOG schema + CURRENT_STATE", status: "pending", subtitle: "Session-log format + 'you are here' file",
+        description: "Formalizes the session naming convention, the next-session-objective schema, and adds a CURRENT_STATE pointer.",
+        deliverables: ["SESSION_LOG_SCHEMA_v1_0.md", "CURRENT_STATE_v1_0.md", "schema_validator extension"] },
+      "S11": { title: "Step 11 — Learning Layer scaffold decision", status: "pending", subtitle: "Scaffold 06_LEARNING_LAYER/ or defer",
+        description: "The moment we decide whether to create the L5/L6 substrate folder now (with placeholder README) or defer to M4 opening.",
+        deliverables: ["LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md", "Either 06_LEARNING_LAYER/ bundle OR MP wording amendment"] },
+      "S12": { title: "Step 12 — Ongoing hygiene policies", status: "pending", subtitle: "Cadences and schedules for drift prevention",
+        description: "Policies that bind governance scripts to a cadence (per-phase-close, monthly, annual).",
+        deliverables: ["ONGOING_HYGIENE_POLICIES_v1_0.md", "schema_validator extensions"] },
+      "S13": { title: "Step 13 — Drift-detection baseline run", status: "pending", subtitle: "First full drift_detector.py run",
+        description: "Runs the detector produced in Step 7 against the entire post-rebuild governance surface. Expected: CLEAN or limited RESIDUAL.",
+        deliverables: ["DRIFT_REPORT_STEP_13_v1_0.md"] },
+      "S14": { title: "Step 14 — Schema-validator baseline run", status: "pending", subtitle: "First full schema_validator.py run",
+        description: "Validates frontmatter across all 00_ARCHITECTURE and 025_HOLISTIC_SYNTHESIS files.",
+        deliverables: ["SCHEMA_VALIDATION_REPORT_STEP_14_v1_0.md"] },
+      "S15": { title: "Step 15 — Governance baseline close", status: "pending", subtitle: "Seals the rebuild; unfreezes M2",
+        description: "Produces the governance baseline artifact. After this closes, M2 phase work resumes from PHASE_B_PLAN B.0. The rebuild banner in CLAUDE.md is replaced with a steady-state pointer.",
+        deliverables: ["GOVERNANCE_BASELINE_v1_0.md", "CLAUDE.md banner update"] }
+    };
+
+    const PHASES = {
+      "M1": { title: "M1 — Corpus Completeness", status: "closed", subtitle: "Closed 2026-04-19",
+        description: "L1 facts v8.0, L2 signals (MSR 437 → 499), L2.5 synthesis, 9 L3 reports v1.1+. All known gaps resolved (CGM rebuilt on v8.0; L3 staleness cleared; GAP.13 resolved).",
+        layers_touched: ["L1 built", "L2 built", "L2.5 built", "L3 built"],
+        artifacts: ["FORENSIC_ASTROLOGICAL_DATA_v8_0.md", "MSR_v3_0.md", "UCN_v4_0.md", "CDLM_v1_1.md", "CGM_v2_0.md", "RM_v2_0.md", "9 L3 Domain Reports v1.1+"] },
+      "M2": { title: "M2 — Corpus Activation", status: "current", subtitle: "Current phase · PAUSED pending Step 15",
+        description: "Turns the static corpus into an LLM-navigable graph + vector + discovery engine. Batch discovery surfaces patterns, resonances, contradictions, clusters. Also scaffolds the Learning Layer substrate (LL.1–4 at M2).",
+        layers_touched: ["L2.5 activated (consumed by Graph-RAG)", "L4 built (Discovery)", "L5/L6 scaffolded (LL.1–4)"],
+        artifacts: ["PHASE_B_PLAN_v1_0.md v1.0.2 (active execution plan)", "02_ACTIVATION_LAYER/ (pending)", "04_DISCOVERY_LAYER/ (pending)"] },
+      "M3": { title: "M3 — Temporal Animation", status: "pending", subtitle: "Add time to the model",
+        description: "Vimshottari and cross-check dashas, transits, Varshaphala, KP sublord timing, shadbala over time. Produces a time-indexed event surface.",
+        layers_touched: ["L1 extended (temporal computations)", "L5/L6 active (temporal layer)"],
+        artifacts: ["05_TEMPORAL_ENGINES/ (pending)"] },
+      "M4": { title: "M4 — Empirical Calibration", status: "pending", subtitle: "First phase where learning fires on real data",
+        description: "Life Event Log becomes ground-truth spine. Every significant life event maps to which signals should have fired. Produces per-signal, per-domain calibration tables.",
+        layers_touched: ["L5/L6 activates (LL.1 signal-weight recalibration)"],
+        consumes: ["CW.LEL (Life Event Log, ≥ 40 events threshold)"],
+        artifacts: ["06_LEARNING_LAYER/ calibration tables"] },
+      "M5": { title: "M5 — Probabilistic Model", status: "pending", subtitle: "Dynamic Bayesian Network",
+        description: "DBN over (signals × time) → (life-domain outcomes). Signal embeddings become learned vectors. Outputs become probabilities with confidence intervals.",
+        layers_touched: ["L5/L6 active (Bayesian model updating LL.8)"],
+        artifacts: ["DBN spec + parameters"] },
+      "M6": { title: "M6 — Prospective Testing", status: "pending", subtitle: "The only real accuracy measurement",
+        description: "Forward predictions with falsifiable windows. Automated scoring at window close. Counterfactual learning from misses.",
+        layers_touched: ["L5/L6 active (counterfactual learning LL.9)"],
+        consumes: ["CW.PPL (Prospective Prediction Log, ≥ 50 predictions with ≥ 6-month horizon)"],
+        artifacts: ["07_PROSPECTIVE_TESTING/ scoring dashboards"] },
+      "M7": { title: "M7 — Population Extension", status: "pending", subtitle: "Cohort beyond the native",
+        description: "Family, public figures with reliable birth data, research corpus. Desha-kala-patra modulators learned. LLM fine-tuning becomes feasible. Consent and ethical review mandatory per §Ethical Framework.",
+        layers_touched: ["L1 extended (per-subject facts)", "L2 extended (per-subject signals)", "L2.5 extended (per-subject synthesis)", "L5/L6 active (LL.10 fine-tuning)"],
+        artifacts: ["Per-subject L2+ corpora; cohort registry"] },
+      "M8": { title: "M8 — Classical Text Cross-Reference", status: "pending", subtitle: "Index and attribute to BPHS etc.",
+        description: "BPHS, Phaladeepika, Saravali, Uttara Kalamrita, Jaimini Sutra, Prashna Marga, Hora Sara, KP texts. Every discovered pattern cross-referenced to classical attribution.",
+        layers_touched: ["L5/L6 active (classical-chain strengthening LL.3)"],
+        artifacts: ["Classical attribution registry"] },
+      "M9": { title: "M9 — Multi-School Triangulation", status: "pending", subtitle: "Parashari + Jaimini + Tajika + KP + Nadi + BNN + Yogini",
+        description: "Convergence across lenses as a precision signal. Requires MSR expansion to cover Nadi + BNN schools as a pre-requirement.",
+        layers_touched: ["L2 extended (Nadi/BNN signals)", "L2.5 extended (cross-school linkages)", "L5/L6 active"],
+        artifacts: ["Multi-school convergence scoring"] },
+      "M10": { title: "M10 — LLM-Acharya Interface + External Validation", status: "pending", subtitle: "Blind-test against independent acharyas",
+        description: "Full wiring. Blind-test against acharyas reading the same chart. Publish the methodology. Acharya reviewer pool ≥ 3 required.",
+        layers_touched: ["L3 extended (acharya-facing refinement)", "L5/L6 active"],
+        artifacts: ["99_PUBLICATIONS/", "LLM-acharya interface spec", "Blind-test reports"] }
+    };
+
+    const LAYERS = {
+      "L1": { title: "L1 — Facts Layer", status: "current version v8.0", subtitle: "Raw chart + biographical data",
+        description: "The irreducible facts: Swiss-Ephemeris-computed chart positions, dashas, divisional charts, plus the Life Event Log. No interpretation. All L2+ claims cite L1 IDs via derivation ledger.",
+        canonical_artifacts: ["01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md", "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md"],
+        phases_that_touch: ["M1 built", "M3 extends (temporal ephemeris)", "M7 extends (cohort facts)"] },
+      "L2": { title: "L2 — Signals Layer", status: "current version v3.0 (499 signals)", subtitle: "Master Signal Register",
+        description: "Atomic signals derived from L1. Each signal carries type, derivation ledger, confidence, and cross-references. Parashari + Jaimini + Tajika + KP + Nakshatra + Panchang + Sensitive Points + Divisional + Transit categories today; Nadi + BNN expansion pending M9.",
+        canonical_artifacts: ["025_HOLISTIC_SYNTHESIS/MSR_v3_0.md"],
+        phases_that_touch: ["M1 built", "M7 extends (cohort signals)", "M9 extends (Nadi/BNN categories)"] },
+      "L2.5": { title: "L2.5 — Holistic Synthesis Layer", status: "current", subtitle: "Cross-signal narratives and graphs",
+        description: "Four artifacts that express the chart as a whole: UCN (narrative), CDLM (cross-domain linkages), CGM (signal graph), RM (resonance map).",
+        canonical_artifacts: ["025_HOLISTIC_SYNTHESIS/UCN_v4_0.md", "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md", "025_HOLISTIC_SYNTHESIS/CGM_v2_0.md (→ v9_0 at M2 B.3.5)", "025_HOLISTIC_SYNTHESIS/RM_v2_0.md"],
+        phases_that_touch: ["M1 built", "M2 consumes via Graph-RAG", "M7 extends", "M9 extends"] },
+      "L3": { title: "L3 — Domain Reports Layer", status: "current (9 reports at v1.1+)", subtitle: "Consumer-facing domain narratives",
+        description: "Career, Health, Relationships, Finance, Travel, Psychology, Children, Parents, Spirituality. Mode A (curated) and Mode B (exhaustive) per architecture.",
+        canonical_artifacts: ["03_DOMAIN_REPORTS/ (9 files v1.1+)"],
+        phases_that_touch: ["M1 built", "M10 refines (acharya-facing)"] },
+      "L4": { title: "L4 — Discovery Layer", status: "not yet built", subtitle: "Graph + vector + discovery engine",
+        description: "Gemini-side. Batch discovery surfaces patterns, resonances, contradictions, clusters across the L2.5 corpus. The primary M2 deliverable.",
+        canonical_artifacts: ["04_DISCOVERY_LAYER/ (pending M2)"],
+        phases_that_touch: ["M2 builds (primary)", "M7/M8/M9/M10 extend"] },
+      "L5_6": { title: "L5/L6 — Learning + Temporal + Probabilistic Substrate", status: "not yet scaffolded", subtitle: "The cross-cutting substrate",
+        description: "Ten Learning Layer mechanisms (LL.1–10), the temporal engine, and the DBN probabilistic model. Substrate rather than a phase: present cross-cutting from M2 (scaffold) onward, progressively activating through M4–M10.",
+        canonical_artifacts: ["06_LEARNING_LAYER/ (scaffold decision is Step 11)", "05_TEMPORAL_ENGINES/ (M3 deliverable)"],
+        phases_that_touch: ["M2 scaffolds", "M3 temporal active", "M4 LL.1 active", "M5 LL.8 DBN", "M6 LL.9 counterfactual", "M7 LL.10 fine-tune", "M8 LL.3 classical", "M9/M10 active"] }
+    };
+
+    function getCellData(id) {
+      const [layer, phase] = id.split(":");
+      const layerData = LAYERS[layer];
+      const phaseData = PHASES[phase];
+      if (!layerData || !phaseData) return null;
+      const cellMeaning = (function() {
+        // Determine meaning by re-deriving from both dimensions
+        const p = phase, l = layer;
+        // Built cells
+        if ((l === "L1" || l === "L2" || l === "L2.5" || l === "L3") && p === "M1") return { fill: "built", text: "BUILT — M1 produced this layer in its closed form." };
+        if (l === "L4" && p === "M2") return { fill: "active", text: "PRIMARY BUILD — L4 Discovery Layer is the core deliverable of M2." };
+        // Paused cells (anything with M2 other than L4 and L5_6)
+        if (p === "M2" && (l === "L1" || l === "L2" || l === "L2.5" || l === "L3")) return { fill: "paused", text: "PAUSED — M2 is the current phase but is held until Step 15 of the governance rebuild closes. No further changes to this layer within M2 scope beyond what M1 produced." };
+        // Scaffold cells
+        if (l === "L5_6" && p === "M2") return { fill: "scaffold", text: "SCAFFOLDED — M2 stands up the Learning Layer infrastructure. LL.1–4 are declared at M2; full activation is M4+." };
+        // Active Learning substrate
+        if (l === "L5_6" && ["M3","M4","M5","M6","M7","M8","M9","M10"].includes(p)) {
+          const mapping = { M3: "Temporal computations (LL.6 timing-signature).", M4: "LL.1 signal-weight calibration activates.", M5: "LL.8 Bayesian DBN.", M6: "LL.9 counterfactual from misses.", M7: "LL.10 fine-tuning; desha-kala-patra modulators.", M8: "LL.3 classical-chain strengthening.", M9: "Multi-school triangulation mechanics.", M10: "Acharya-interface wiring." };
+          return { fill: "active", text: "ACTIVE — " + (mapping[p] || "") };
+        }
+        // Extend cells
+        if ((l === "L1" || l === "L2" || l === "L2.5") && p === "M7") return { fill: "extend", text: "EXTENDS — per-subject L1/L2/L2.5 corpora are added during cohort extension." };
+        if (l === "L1" && p === "M3") return { fill: "extend", text: "EXTENDS — temporal ephemeris computations layered over the L1 facts spine." };
+        if ((l === "L2" || l === "L2.5") && p === "M9") return { fill: "extend", text: "EXTENDS — Nadi/BNN signal categories added to MSR (L2) and linked into L2.5." };
+        if (l === "L3" && p === "M10") return { fill: "extend", text: "EXTENDS — L3 Domain Reports refined for acharya-facing interface." };
+        if (l === "L4" && ["M7","M8","M9","M10"].includes(p)) return { fill: "extend", text: "EXTENDS — L4 Discovery queries extend to cohort / classical / multi-school / acharya-facing content." };
+        // Empty
+        return { fill: "empty", text: "NOT APPLICABLE — this phase does not touch this layer directly." };
+      })();
+      return {
+        kind: "cell",
+        title: `${layerData.title.split(" — ")[0]} × ${phase}`,
+        subtitle: `${phaseData.title.split(" — ")[1]} on ${layerData.title.split(" — ")[1]}`,
+        status: cellMeaning.fill,
+        description: cellMeaning.text,
+        layer: layerData,
+        phase: phaseData
+      };
+    }
+
+    // ===== Interactive behavior =====
+    const detailEl = document.getElementById("detail");
+    const tooltip = document.getElementById("tooltip");
+    let selectedEl = null;
+
+    function renderDetail(kind, id) {
+      let data;
+      if (kind === "step") data = STEPS[id];
+      else if (kind === "phase") data = PHASES[id];
+      else if (kind === "layer") data = LAYERS[id];
+      else if (kind === "cell") data = getCellData(id);
+
+      if (!data) return;
+
+      let html = `<button class="close-btn" type="button" id="close-detail" aria-label="Close detail">Close ×</button>`;
+      html += `<div>`;
+      html += `<span class="kind-badge">${kind.toUpperCase()}: ${id}</span>`;
+      if (data.status) html += `<span class="status ${String(data.status).toLowerCase().replace(/\s/g, '_')}">${data.status}</span>`;
+      html += `</div>`;
+      html += `<h2>${data.title}</h2>`;
+      if (data.subtitle) html += `<div class="subtitle">${data.subtitle}</div>`;
+      if (data.description) html += `<p>${data.description}</p>`;
+
+      if (data.deliverables) {
+        html += `<div class="section-label">Deliverables</div><ul>`;
+        data.deliverables.forEach(d => html += `<li><code>${d}</code></li>`);
+        html += `</ul>`;
+      }
+      if (data.canonical_artifacts) {
+        html += `<div class="section-label">Canonical artifacts</div><ul>`;
+        data.canonical_artifacts.forEach(d => html += `<li><code>${d}</code></li>`);
+        html += `</ul>`;
+      }
+      if (data.artifacts) {
+        html += `<div class="section-label">Artifacts</div><ul>`;
+        data.artifacts.forEach(d => html += `<li><code>${d}</code></li>`);
+        html += `</ul>`;
+      }
+      if (data.layers_touched) {
+        html += `<div class="section-label">Layers this phase touches</div><ul>`;
+        data.layers_touched.forEach(d => html += `<li>${d}</li>`);
+        html += `</ul>`;
+      }
+      if (data.phases_that_touch) {
+        html += `<div class="section-label">Phases that touch this layer</div><ul>`;
+        data.phases_that_touch.forEach(d => html += `<li>${d}</li>`);
+        html += `</ul>`;
+      }
+      if (data.consumes) {
+        html += `<div class="section-label">Consumes</div><ul>`;
+        data.consumes.forEach(d => html += `<li>${d}</li>`);
+        html += `</ul>`;
+      }
+      if (kind === "cell" && data.layer && data.phase) {
+        html += `<div class="section-label">See also</div><p style="font-size:13px;color:var(--fg-muted)">Click <code>${id.split(":")[0]}</code> or <code>${id.split(":")[1]}</code> directly for full detail.</p>`;
+      }
+      if (data.date) html += `<div class="section-label">Date</div><p style="font-size:13px;color:var(--fg-muted)">${data.date}</p>`;
+
+      detailEl.innerHTML = html;
+
+      document.getElementById("close-detail").addEventListener("click", clearSelection);
+    }
+
+    function clearSelection() {
+      if (selectedEl) {
+        selectedEl.classList.remove("selected");
+        selectedEl = null;
+      }
+      detailEl.innerHTML = `<div class="detail-placeholder">
+        <p><strong>Click any Step, Phase, Layer, or grid cell</strong> to see its role, status, and canonical artifact.</p>
+        <p>Use Tab and Enter for keyboard navigation.</p>
+      </div>`;
+    }
+
+    function selectElement(el) {
+      const kind = el.dataset.kind;
+      const id = el.dataset.id;
+      if (selectedEl) selectedEl.classList.remove("selected");
+      // Find the rect inside the g group to apply selection style
+      const rect = el.querySelector("rect:not([fill='transparent'])") || el.querySelector("rect");
+      if (rect) {
+        el.classList.add("selected");
+        selectedEl = el;
+      }
+      renderDetail(kind, id);
+      detailEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // Bind click + keyboard
+    document.querySelectorAll(".hit").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectElement(el);
+      });
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          selectElement(el);
+        }
+        if (e.key === "Escape") clearSelection();
+      });
+      // Tooltip on hover
+      el.addEventListener("mouseenter", (e) => {
+        const kind = el.dataset.kind;
+        const id = el.dataset.id;
+        let text = "";
+        if (kind === "step") text = STEPS[id] ? `${id}: ${STEPS[id].title.split(' — ')[1]} (${STEPS[id].status})` : id;
+        else if (kind === "phase") text = PHASES[id] ? `${id}: ${PHASES[id].title.split(' — ')[1]} (${PHASES[id].status})` : id;
+        else if (kind === "layer") text = LAYERS[id] ? `${id}: ${LAYERS[id].title.split(' — ')[1]}` : id;
+        else if (kind === "cell") {
+          const d = getCellData(id);
+          text = d ? `${id} — ${d.description.split(' — ')[0]}` : id;
+        }
+        tooltip.textContent = text + " · click for detail";
+        tooltip.classList.add("show");
+        tooltip.setAttribute("aria-hidden", "false");
+      });
+      el.addEventListener("mousemove", (e) => {
+        tooltip.style.left = (e.clientX + 14) + "px";
+        tooltip.style.top = (e.clientY + 14) + "px";
+      });
+      el.addEventListener("mouseleave", () => {
+        tooltip.classList.remove("show");
+        tooltip.setAttribute("aria-hidden", "true");
+      });
+    });
+
+    // Global escape to clear
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") clearSelection();
+    });
+
+    // Filter bar
+    const filterButtons = document.querySelectorAll(".filters button");
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.dataset.filter;
+        document.querySelectorAll(".hit").forEach(el => {
+          const kind = el.dataset.kind;
+          if (filter === "all") el.classList.remove("dimmed");
+          else if (filter === "steps") el.classList.toggle("dimmed", kind !== "step");
+          else if (filter === "phases") el.classList.toggle("dimmed", kind !== "phase" && kind !== "cell");
+          else if (filter === "layers") el.classList.toggle("dimmed", kind !== "layer" && kind !== "cell");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

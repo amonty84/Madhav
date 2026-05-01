@@ -1,0 +1,44 @@
+import type { Metadata, Viewport } from 'next'
+import { Inter, Source_Serif_4 } from 'next/font/google'
+import './globals.css'
+import { Toaster } from '@/components/ui/sonner'
+import { Providers } from './providers'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const serif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+})
+
+export const metadata: Metadata = {
+  title: 'MARSYS-JIS',
+  description: 'Jyotish Intelligence System',
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f7f6f4' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1c1a' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+  interactiveWidget: 'resizes-content',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${serif.variable}`}>
+      <body className="bg-background font-sans text-foreground antialiased">
+        <Providers>{children}</Providers>
+        <Toaster />
+      </body>
+    </html>
+  )
+}

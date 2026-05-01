@@ -1,0 +1,19 @@
+{
+  "canonical_id": "RESONANCE_REGISTER_JSON",
+  "local_path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
+  "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.json",
+  "local_sha256": "c6e337bdd6b958cc8db3725bf5bacc439186d8bd80ea0e5076133d72ccca807d",
+  "gcs_sha256": "c6e337bdd6b958cc8db3725bf5bacc439186d8bd80ea0e5076133d72ccca807d",
+  "gcs_sha256_embedded_metadata": "c6e337bdd6b958cc8db3725bf5bacc439186d8bd80ea0e5076133d72ccca807d",
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "xNYXCg==",
+  "gcs_size_bytes": 27797,
+  "local_size_bytes": 27797,
+  "match": true,
+  "gcs_generation": "1777392221914469",
+  "gcs_upload_time": "2026-04-28T16:03:41+0000",
+  "local_commits_after_gcs_upload": [
+    "e4a77c8 chore: commit prior multi-session work before Phase 14.0 asset inventory"
+  ],
+  "divergence_type": "none"
+}

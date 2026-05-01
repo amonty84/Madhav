@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marsys-jis.example/schemas/build_state_phase_detail.schema.json",
+  "title": "MARSYS-JIS Build State — Phase Detail Shard",
+  "description": "Per-phase rollup shard stored at gs://marsys-jis-build-state/phases/{phase_id}.json. Aggregates every session that touched a given PHASE_B_PLAN sub-phase (B.N), with spec pointer, status, AC progress, deliverables lists, and inbound/outbound dependencies.",
+  "type": "object",
+  "required": ["phase_id", "schema_version", "title", "status"],
+  "additionalProperties": true,
+  "properties": {
+    "phase_id": { "type": "string", "description": "e.g. B.4" },
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.-]+)?$" },
+    "title": { "type": "string" },
+    "macro_phase": { "type": ["string", "null"], "description": "e.g. M2" },
+    "spec_pointer": {
+      "type": ["string", "null"],
+      "description": "Path + anchor to the phase entry in PHASE_B_PLAN."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "in_progress", "pending", "unknown"]
+    },
+    "session_count_actual": { "type": ["integer", "null"] },
+    "session_count_estimated": { "type": ["integer", "null"] },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "session_id": { "type": "string" },
+          "contribution": { "type": ["string", "null"] },
+          "deliverables": { "type": "array", "items": { "type": "string" } },
+          "residuals_carry_forward": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ac_id": { "type": "string" },
+          "status": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "deliverables_complete": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "deliverables_pending": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependencies_inbound": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependencies_outbound": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

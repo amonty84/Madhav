@@ -1,0 +1,34 @@
+{
+  "produced_at": "2026-04-26T10:41:07.497743+00:00",
+  "producer": "Madhav_M2A_Exec_6 \u2014 KR-1/KR-2 DB verification",
+  "kr1": {
+    "sql": "SELECT count(*) FROM rag_chunks WHERE doc_type='domain_report' AND is_stale=true",
+    "db_result": 16,
+    "expected": 16,
+    "file_side_baseline": "STALENESS_REGISTER.md: 4 stale L3 reports \u00d7 4 chunks each = 16",
+    "pass": true,
+    "disposition": "CLOSED \u2014 RT4 stale-L3 propagation verified DB-side at Madhav_M2A_Exec_6"
+  },
+  "kr2": {
+    "sql": "SELECT doc_type, max(token_count) FROM rag_chunks GROUP BY doc_type",
+    "db_result": {
+      "cdlm_cell": 400,
+      "cgm_node": 192,
+      "domain_report": 1500,
+      "l1_fact": 1000,
+      "msr_signal": 800,
+      "ucn_section": 1500
+    },
+    "ceilings": {
+      "msr_signal": 800,
+      "ucn_section": 1500,
+      "cdlm_cell": 400,
+      "l1_fact": 1000,
+      "domain_report": 1500,
+      "cgm_node": 600
+    },
+    "violations": {},
+    "pass": true,
+    "disposition": "CLOSED \u2014 RT5 token ceiling enforcement verified DB-side at Madhav_M2A_Exec_6"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "mirror_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-04-24T17:08:43.476745+00:00",
+    "pairs_checked": 8,
+    "pairs_passed": 7,
+    "pairs_failed": 1,
+    "pairs_claude_only": 2,
+    "pairs_gemini_only": 0,
+    "findings": [
+      {
+        "pair_id": "MP.4",
+        "finding_class": "mirror_desync",
+        "severity": "HIGH",
+        "authoritative_side": "claude",
+        "which_side_stale": "gemini",
+        "section_affected": ".geminirules / PBP pointer",
+        "evidence_claude": "PBP v1.0.2 CURRENT",
+        "evidence_gemini": ".geminirules does not cite v1.0.2",
+        "suggested_remediation": "Update .geminirules item #4 to PBP v1.0.2"
+      }
+    ],
+    "exit_code": 1
+  }
+}

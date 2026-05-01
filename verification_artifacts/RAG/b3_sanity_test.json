@@ -1,0 +1,40 @@
+{
+  "produced_at": "2026-04-26T10:37:33.651066+00:00",
+  "producer": "embed.py \u2014 M2A-Exec Session 4 (Madhav_M2A_Exec_4)",
+  "embedding_model": "text-multilingual-embedding-002",
+  "query": "Saturn 7th house Libra",
+  "top_3": [
+    {
+      "chunk_id": "3ff4c5162a493b4ed9174538554fcce9",
+      "doc_type": "ucn_section",
+      "layer": "L2.5",
+      "content_preview": "## Part VII \u2014 The Authority-Through-Tension Pattern / ### VII.2 \u2014 The Internal Architecture in Depth\n\nSaturn-Mars sharing 7H Libra: the specific structural relationship between these two planets in th",
+      "similarity": 0.763598
+    },
+    {
+      "chunk_id": "cc43991ebd5e7b21077818f6d1131c8b",
+      "doc_type": "domain_report",
+      "layer": "L3",
+      "content_preview": "## \u00a75. The Career House: 10H Capricorn / ### \u00a75.3 The Dispositor Chain: 10L Saturn Exalted 7H\n### \u00a75.3 The Dispositor Chain: 10L Saturn Exalted 7H\n\nSaturn is the 10th lord. As 10L, Saturn is the plane",
+      "similarity": 0.749541
+    },
+    {
+      "chunk_id": "3a6fafc3b364151fee6745963e8bda79",
+      "doc_type": "ucn_section",
+      "layer": "L2.5",
+      "content_preview": "## Part IX \u2014 The Contradictions and What They Mean / ### IX.2 \u2014 The Seven Contradictions\n\n**Contradiction 1: Maximum Dignity in Minimum Container**\nSaturn: exalted (highest classical dignity in the ch",
+      "similarity": 0.736404
+    }
+  ],
+  "doc_type_distinct_count": 2,
+  "hnsw_latency": {
+    "min_ms": 43.78,
+    "max_ms": 126.773,
+    "p50_ms": 45.913,
+    "p95_ms": 111.855,
+    "mean_ms": 53.658,
+    "sample_count": 100
+  },
+  "ac_b3_4_pass": true,
+  "ac_b3_3_pass": false
+}

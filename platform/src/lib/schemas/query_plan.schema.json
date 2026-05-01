@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marsys-jis/schemas/query_plan.schema.json",
+  "title": "QueryPlan",
+  "description": "Structured query plan produced by the Router (C2.1) that drives every downstream pipeline stage",
+  "version": "1.0",
+  "type": "object",
+  "required": ["query_plan_id", "query_text", "query_class", "domains", "forward_looking", "audience_tier", "tools_authorized", "history_mode", "panel_mode", "expected_output_shape", "manifest_fingerprint", "schema_version"],
+  "properties": {
+    "query_plan_id": { "type": "string", "format": "uuid" },
+    "query_text": { "type": "string" },
+    "query_class": { "type": "string", "enum": ["factual", "interpretive", "predictive", "cross_domain", "discovery", "holistic", "remedial", "cross_native"] },
+    "domains": { "type": "array", "items": { "type": "string" } },
+    "forward_looking": { "type": "boolean" },
+    "audience_tier": { "type": "string", "enum": ["super_admin", "acharya_reviewer", "client", "public_redacted"] },
+    "tools_authorized": { "type": "array", "items": { "type": "string" } },
+    "history_mode": { "type": "string", "enum": ["synthesized", "research"] },
+    "panel_mode": { "type": "boolean" },
+    "expected_output_shape": { "type": "string", "enum": ["single_answer", "three_interpretation", "time_indexed_prediction", "structured_data"] },
+    "manifest_fingerprint": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1.0" },
+    "planets": { "type": "array", "items": { "type": "string" } },
+    "houses": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 12 } },
+    "dasha_context_required": { "type": "boolean" },
+    "graph_seed_hints": { "type": "array", "items": { "type": "string" } },
+    "edge_type_filter": { "type": "array", "items": { "type": "string" } },
+    "graph_traversal_depth": { "type": "integer", "minimum": 0 },
+    "vector_search_filter": {
+      "type": "object",
+      "properties": {
+        "doc_type": { "type": "array", "items": { "type": "string" } },
+        "layer": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "bundle_directives": {
+      "type": "object",
+      "properties": {
+        "floor_overrides": { "type": "array", "items": { "type": "string" } },
+        "conditional_overrides": { "type": "object" }
+      }
+    },
+    "adjudicator_model_id": { "type": "string" },
+    "router_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "router_model_id": { "type": "string" }
+  },
+  "additionalProperties": false
+}

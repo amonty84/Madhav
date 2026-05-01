@@ -1,0 +1,19 @@
+{
+  "canonical_id": "EVENT_CHART_STATES_v1_0",
+  "local_path": "01_FACTS_LAYER/SOURCES/EVENT_CHART_STATES_v1_0.md",
+  "gcs_uri": "gs://madhav-marsys-sources/L1/sources/EVENT_CHART_STATES_v1_0.md",
+  "local_sha256": "957e58bbd523d981ac08a6c9a525987b787d3cca066ec78104e8e703fbd1c343",
+  "gcs_sha256": "957e58bbd523d981ac08a6c9a525987b787d3cca066ec78104e8e703fbd1c343",
+  "gcs_sha256_embedded_metadata": "957e58bbd523d981ac08a6c9a525987b787d3cca066ec78104e8e703fbd1c343",
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "vDh2TA==",
+  "gcs_size_bytes": 57976,
+  "local_size_bytes": 57976,
+  "match": true,
+  "gcs_generation": "1777392212719736",
+  "gcs_upload_time": "2026-04-28T16:03:32+0000",
+  "local_commits_after_gcs_upload": [
+    "e4a77c8 chore: commit prior multi-session work before Phase 14.0 asset inventory"
+  ],
+  "divergence_type": "none"
+}

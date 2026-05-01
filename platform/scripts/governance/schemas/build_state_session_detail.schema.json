@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marsys-jis.example/schemas/build_state_session_detail.schema.json",
+  "title": "MARSYS-JIS Build State — Session Detail Shard",
+  "description": "Per-session detail shard stored at gs://marsys-jis-build-state/sessions/{session_id}.json. Contains session_open + session_close YAML blocks extracted from SESSION_LOG.md, plus files_touched, deliverables, residuals, and linked governance reports. Legacy entries (pre-Step-10) carry null YAML blocks and render as '[legacy entry — structured YAML absent]' in the portal.",
+  "type": "object",
+  "required": ["session_id", "schema_version"],
+  "additionalProperties": true,
+  "properties": {
+    "session_id": { "type": "string" },
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.-]+)?$" },
+    "header": {
+      "type": ["object", "null"],
+      "properties": {
+        "date": { "type": ["string", "null"] },
+        "title": { "type": ["string", "null"] },
+        "agent": { "type": ["string", "null"] },
+        "cowork_thread": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "session_open": {
+      "type": ["object", "null"],
+      "description": "Verbatim session_open YAML block from SESSION_LOG entry; null for legacy entries."
+    },
+    "session_close": {
+      "type": ["object", "null"],
+      "description": "Verbatim session_close YAML block from SESSION_LOG entry; null for legacy entries."
+    },
+    "body_excerpts": {
+      "type": ["object", "null"],
+      "properties": {
+        "objective": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "files_touched": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "deliverables": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "residuals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "linked_reports": {
+      "type": "object",
+      "properties": {
+        "drift": { "type": ["string", "null"] },
+        "schema": { "type": ["string", "null"] },
+        "mirror": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "halts_encountered": {
+      "type": "array",
+      "description": "Optional halts_encountered block per SESSION_CLOSE_TEMPLATE §2 extension.",
+      "items": { "type": "object", "additionalProperties": true }
+    },
+    "native_overrides": {
+      "type": "array",
+      "description": "Optional native_overrides block per SESSION_CLOSE_TEMPLATE §2 extension.",
+      "items": { "type": "object", "additionalProperties": true }
+    },
+    "phase_id": { "type": ["string", "null"] },
+    "session_class": { "type": ["string", "null"] },
+    "previous_session_id": { "type": ["string", "null"] },
+    "next_session_id": { "type": ["string", "null"] },
+    "_note": {
+      "type": ["string", "null"],
+      "description": "Human-readable note, e.g. for legacy entries without structured YAML."
+    }
+  }
+}
