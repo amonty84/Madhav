@@ -11547,3 +11547,31 @@ AC.T3R3.6 PASS (no weight directories created; signal_weights/, edge_modulators/
 AC.T3R3.7 PASS (event_match_records files NOT touched; T1/T2 scope respected).
 
 Commit: c819dbb
+
+---
+
+**M4-A-S2-T2-BATCH2-HOLDOUT** | 2026-05-02 | CLOSED
+
+NAP.M4.1 approved: Option B (graded proximity: 1.0 exact / 0.7 ±7d / 0.5 ±30d / 0.2 ±90d / 0.0 outside; separate dasha/transit axes combined via max()).
+
+event_match_records_batch2.json: 23 records (events EVT.2013.12.11.01 through EVT.2026.04.08.01 — second half of 2010-19 plus all 2020-26). Rubric: v1.0, Option B. signal_activator.py executed at all 23 event_date_used values per CALIBRATION_RUBRIC §3 default (mid-month for approx-month, July 1 for approx-year, LEL proxy_date for proxy); state_summary captured (lit counts ranged 174–265 SIG.MSR.* signals out of 495 universe). Expected_lit_signals drawn from LEL retrodictive_match.signals_that_matched where present (LEL signal namespace SIG.NN/CVG.NN/CTR.NN/RPT.*); for the 5 events with retrodictive_match: pending (EVT.2021.XX.XX.02, EVT.2021.XX.XX.03, EVT.2022.XX.XX.02, EVT.2025.XX.XX.02, EVT.2026.01.XX.01) expected derived from category + chart_state + classical-rule heuristics, basis-tagged accordingly. Match_rates: 22 records at 1.0; 1 record at 0.84 (EVT.2023.07.XX.01 — RPT.DSH.01 scored 0.2 planting-phase per rubric §2.2 worked example, Saturn AD 17mo from event date).
+
+Held-out partition: 9 events selected — EVT.2008.06.09.01, EVT.2009.06.XX.01 (T1 batch — 2000-09), EVT.2017.03.XX.01, EVT.2018.11.28.01, EVT.2019.05.XX.01 (mine — 2010-19), EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2025.05.XX.01, EVT.2026.01.XX.01 (mine — 2020-26).
+
+Decade distribution: 2000-09: 2 / 2010-19: 3 / 2020-26: 4.
+
+Selection criteria: EXACT/approx-month preference (6 EXACT + 3 approx-month of 9), category spread (career×3, family×3, financial×1, psychological×1, residential×1), later-in-decade preference. Held-out events in T1 batch flagged in held_out_manifest.held_out_event_ids; integration pass will apply partition: held_out to those 2 T1 records.
+
+Script errors: none (all 23 signal_activator runs completed; active_dasha computed by activator matched LEL chart_state_at_event in every case).
+
+Schema note: per-record `rubric_option: "B"` field included per brief STEP E + AC.T2R3.2; current schema lel_event_match_records_schema.json does not declare `rubric_option` in inner records and is `additionalProperties: false`. Brief takes precedence; integration pass should amend schema to admit rubric_option (or drop additionalProperties: false at record level).
+
+AC.T2R3.1 PASS (records[] = 23).
+AC.T2R3.2 PASS (all 23 records carry rubric_option: "B").
+AC.T2R3.3 PASS (held_out_manifest present; total_held_out=9; decade_distribution sums to 9).
+AC.T2R3.4 PASS (7 held-out events in batch2 records carry partition: "held_out"; remaining 16 carry partition: "training"; 2 T1-batch held-out events listed in manifest only).
+AC.T2R3.5 PASS (no fabricated actual_lit_signals; every entry derives from LEL chart_state_at_event or LEL retrodictive_match.signals_that_matched; no SCRIPT_ERROR records — all activator runs succeeded).
+AC.T2R3.6 PASS (event_match_records_batch1.json untouched — does not yet exist; T1 in flight).
+AC.T2R3.7 PASS (lel_event_match_records.json NOT created — integration pass scope).
+
+Commit: d53e42d
