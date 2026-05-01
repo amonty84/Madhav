@@ -11575,3 +11575,27 @@ AC.T2R3.6 PASS (event_match_records_batch1.json untouched — does not yet exist
 AC.T2R3.7 PASS (lel_event_match_records.json NOT created — integration pass scope).
 
 Commit: d53e42d
+
+
+---
+
+**M4-A-S2-T1-REDTEAM-BATCH1** | 2026-05-02 | CLOSED
+
+IS.8(a) DISCHARGED — REDTEAM_M4A_v1_0.md PASS (6/6 axes; 0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW = KR.M4A.RT.LOW.1). Counter resets 3→0. Scope: M4-A Round 2 outputs (commits 5d015bd / f7f477e / be7134b / 73d9e76 / 0793719). Axes: RT.M4A.1 B.10 plausibility on 11 computed chart_state_at_event values (sample-checked Saturn/Jupiter/Rahu positions for 2000-06-01 within ayanamsa tolerance); RT.M4A.2 PRED.M3D.HOLDOUT.001+002 outcome=null partition=held_out; RT.M4A.3 CALIBRATION_RUBRIC worked examples cite EVT.2023.07.XX.01 + SIG.08/CVG.02/SIG.09/SIG.14/RPT.DSH.01; RT.M4A.4 LEL_GAP_AUDIT decade×category matrix totals to 46 + 6 elicit + 5 accept dispositions; RT.M4A.5 msr_domain_buckets 495 signals (no duplicates; 5/5 spot-check clean); RT.M4A.6 substantive Round 2 commits did not modify forbidden paths (PASS_WITH_NOTE on integration-pass commit 0793719 malformed-tree finding).
+
+NAP.M4.1 approved: Option B (graded proximity).
+
+event_match_records_batch1.json: 23 records (events EVT.1984.02.05.01 through EVT.2013.05.XX.01; chronological by LEL §3 line order). Per-record event_date_used per CALIBRATION_RUBRIC §3 (mid-month for month-exact, Jul-1 for year-approx, proxy_date_used for proxy, exact for exact); 23 signal_activator runs at event_date_used (single-run interpretation of Option B; lit→1.0, ripening→0.5, dormant→0.0 mapping documented in match_notes). expected_lit_signals = full domain-bucket per LEL category mapping (LEL_GAP_AUDIT §4); LEL §7 classical signals (SIG.04/.08/.09/.10/.13, CVG.02/.03/.07, CTR.03) cited in match_notes as cross-namespace audit-only (not directly matched against SIG.MSR.NNN actuals). All 23 partition: "training" — held-out tagging across full 46-event set is T2 + integration-pass scope; T2 manifest already lists 2 T1-batch held-out candidates (EVT.2008.06.09.01, EVT.2009.06.XX.01) for integration-pass partition update. match_rate range across 23 records: 0.0667 (EVT.2011.06.XX.01, MBA-enrolled) – 0.65 (EVT.2009.06.XX.01, grandfather passing).
+
+Rubric option used: B.
+Script errors: none.
+
+AC.T1R3.1 PASS (REDTEAM_M4A_v1_0.md exists; 6 axes evaluated; verdict PASS).
+AC.T1R3.2 PASS (counter reset note "counter resets 3→0" present in REDTEAM_M4A §3 + §4).
+AC.T1R3.3 PASS (records array length = 23).
+AC.T1R3.4 PASS (all 23 records carry rubric_option: "B").
+AC.T1R3.5 PASS (no SCRIPT_ERROR — all 23 signal_activator runs succeeded; actual_lit_signals derived from activator output, no fabrication).
+AC.T1R3.6 PASS (partition: "training" on all 23 records).
+AC.T1R3.7 PASS (only the two declared output files touched; event_match_records_batch2.json not created or modified — confirmed via `git status --short`; FORENSIC, 025_HOLISTIC_SYNTHESIS, platform/src all clean).
+
+Commit: 79a6810
