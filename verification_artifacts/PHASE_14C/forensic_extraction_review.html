@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CHART_FACTS_EXTRACTION_v1_0 — Review Report (Phase 14C Stream B)</title>
+<style>
+  body { font-family: monospace; background: #0d1117; color: #c9d1d9; margin: 20px; font-size: 13px; }
+  h1 { color: #f0f6fc; font-size: 18px; border-bottom: 1px solid #30363d; padding-bottom: 8px; }
+  h2 { color: #79c0ff; font-size: 14px; margin-top: 24px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+  th { background: #161b22; color: #8b949e; text-align: left; padding: 6px 10px; border: 1px solid #30363d; }
+  td { padding: 5px 10px; border: 1px solid #21262d; vertical-align: top; }
+  tr:hover td { background: #161b22; }
+  .ok { color: #3fb950; }
+  .warn { color: #d29922; }
+  .err { color: #f85149; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 11px; margin-left: 6px; }
+  .badge-green { background: #1a4428; color: #3fb950; }
+  .badge-yellow { background: #3d2f0b; color: #d29922; }
+  .meta { color: #8b949e; font-size: 11px; }
+  .section-sep { border-top: 1px solid #21262d; margin: 16px 0; }
+  pre { background: #161b22; padding: 8px 12px; border-radius: 4px; overflow-x: auto; font-size: 11px; color: #8b949e; }
+  .note-box { border: 1px solid #3d2f0b; background: #1c1610; padding: 8px 12px; border-radius: 4px; margin: 8px 0; color: #d29922; }
+</style>
+</head>
+<body>
+
+<h1>CHART_FACTS_EXTRACTION_v1_0 — Extraction Review Report</h1>
+<div class="meta">Phase 14C Stream B &nbsp;|&nbsp; Generated: 2026-04-29 &nbsp;|&nbsp; Source: FORENSIC_ASTROLOGICAL_DATA_v8_0.md</div>
+
+<h2>§1 — Summary</h2>
+<table>
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Total facts</td><td><span class="ok">589</span></td></tr>
+  <tr><td>YAML schema validation</td><td><span class="ok">PASS</span> <span class="badge badge-green">all required fields present</span></td></tr>
+  <tr><td>Category enum compliance</td><td><span class="ok">PASS</span> <span class="badge badge-green">all 18 categories valid</span></td></tr>
+  <tr><td>Divisional chart compliance</td><td><span class="ok">PASS</span></td></tr>
+  <tr><td>Cross-check finding</td><td><span class="warn">ENGINE DELTA DOCUMENTED</span> <span class="badge badge-yellow">0.003°–0.027° JH vs pyswisseph</span></td></tr>
+  <tr><td>Source</td><td>FORENSIC_ASTROLOGICAL_DATA_v8_0.md (32 sections, 1936 lines)</td></tr>
+  <tr><td>Extractor</td><td>Claude Code (Sonnet 4.6) — direct_read + regex+llm</td></tr>
+</table>
+
+<div class="note-box">
+<strong>Cross-check finding:</strong> All 9 natal planets show delta 0.003°–0.027° between FORENSIC (JH engine)
+and EVENT_CHART_STATES (pyswisseph). This is a known engine divergence (ayanamsha calculation differences),
+not a transcription error. FORENSIC values used as canonical per CLAUDE.md §B and §E dual-engine policy.
+</div>
+
+<h2>§2 — Facts by Category</h2>
+<table>
+  <tr><th>Category</th><th>Count</th><th>Sample IDs</th></tr>
+  <tr><td>birth_metadata</td><td>22</td><td class="meta">MET.NAME, MET.BIRTH.DATE, MET.BIRTH.TIME …</td></tr>
+  <tr><td>planet</td><td>54</td><td class="meta">PLN.SUN, PLN.MOON, PLN.MARS … KRK.C.ATMA … UPG.GULIKA …</td></tr>
+  <tr><td>house</td><td>149</td><td class="meta">HSE.1–HSE.12 (D1) + D2–D60 house placements</td></tr>
+  <tr><td>cusp</td><td>12</td><td class="meta">CSP.1–CSP.12</td></tr>
+  <tr><td>strength</td><td>9</td><td class="meta">CSI.SUN–CSI.KETU (Shadbala composite)</td></tr>
+  <tr><td>kp_cusp</td><td>12</td><td class="meta">KP.CUSP.1–KP.CUSP.12</td></tr>
+  <tr><td>kp_planet</td><td>9</td><td class="meta">KP.PLN.SUN–KP.PLN.KETU</td></tr>
+  <tr><td>kp_significator</td><td>7</td><td class="meta">KP.SIG.1, KP.SIG.2, KP.SIG.6 …</td></tr>
+  <tr><td>dasha_vimshottari</td><td>50</td><td class="meta">DSH.V.001–DSH.V.050 (50 MD-AD pairs)</td></tr>
+  <tr><td>dasha_yogini</td><td>17</td><td class="meta">DSH.Y.001–DSH.Y.017 (17 Yogini periods)</td></tr>
+  <tr><td>dasha_chara</td><td>144</td><td class="meta">DSH.C.001–DSH.C.144 (144 Chara MD-AD pairs)</td></tr>
+  <tr><td>special_lagna</td><td>9</td><td class="meta">LAG.BHAVA, LAG.HORA, LAG.GHATI, LAG.VIGHATI, LAG.VARNADA, LAG.SHREE, LAG.PRANAPADA, LAG.INDU, LAG.BB</td></tr>
+  <tr><td>saham</td><td>36</td><td class="meta">SAH.PUNYA–SAH.LABHA (full 36-saham JH register)</td></tr>
+  <tr><td>arudha</td><td>9</td><td class="meta">ARD.AL, ARD.A2, ARD.A6, ARD.A7, ARD.A10, ARD.A11, ARD.UL, ARD.AL.D9, ARD.AL.D10</td></tr>
+  <tr><td>navatara</td><td>12</td><td class="meta">NVT.01.JANMA–NVT.09.PARAM + NVT.16, NVT.22, NVT.25</td></tr>
+  <tr><td>panchang</td><td>12</td><td class="meta">PCG.VARA, PCG.TITHI, PCG.NAKSHATRA, PCG.YOGA, PCG.YOGA.LORD, PCG.KARANA, PCG.DAGDHA + Avakahada</td></tr>
+  <tr><td>yoga</td><td>18</td><td class="meta">YGA.D1.* (9), YGA.D9.* (5), YGA.D10.* (2), YGA.D2.* (2)</td></tr>
+  <tr><td>mercury_convergence</td><td>8</td><td class="meta">MCS.1–MCS.8 (Eight-System Convergence)</td></tr>
+  <tr><td><strong>TOTAL</strong></td><td><strong>589</strong></td><td></td></tr>
+</table>
+
+<h2>§3 — Facts by Divisional Chart</h2>
+<table>
+  <tr><th>Divisional Chart</th><th>Count</th></tr>
+  <tr><td>BIRTH</td><td>24</td></tr>
+  <tr><td>D1</td><td>150</td></tr>
+  <tr><td>D2</td><td>4</td></tr>
+  <tr><td>D3</td><td>12</td></tr>
+  <tr><td>D4</td><td>12</td></tr>
+  <tr><td>D7</td><td>12</td></tr>
+  <tr><td>D9</td><td>23</td></tr>
+  <tr><td>D10</td><td>13</td></tr>
+  <tr><td>D12</td><td>12</td></tr>
+  <tr><td>D16</td><td>12</td></tr>
+  <tr><td>D20</td><td>12</td></tr>
+  <tr><td>D24</td><td>12</td></tr>
+  <tr><td>D30</td><td>12</td></tr>
+  <tr><td>D40</td><td>12</td></tr>
+  <tr><td>D45</td><td>12</td></tr>
+  <tr><td>D60</td><td>12</td></tr>
+  <tr><td>KP</td><td>28</td></tr>
+  <tr><td>VIMSHOTTARI</td><td>54</td></tr>
+  <tr><td>YOGINI</td><td>17</td></tr>
+  <tr><td>CHARA</td><td>144</td></tr>
+  <tr><td><strong>TOTAL</strong></td><td><strong>589</strong></td></tr>
+</table>
+
+<h2>§4 — Key Fact Spot-checks</h2>
+<table>
+  <tr><th>Fact ID</th><th>Expected</th><th>Status</th></tr>
+  <tr><td>MET.BIRTH.DATE</td><td>1984-02-05</td><td class="ok">✓</td></tr>
+  <tr><td>MET.BIRTH.TIME</td><td>10:43 IST</td><td class="ok">✓</td></tr>
+  <tr><td>MET.AYAN.VAL</td><td>23°37′58″ (Lahiri)</td><td class="ok">✓</td></tr>
+  <tr><td>PLN.SUN (abs_lon_deg)</td><td>291.96°</td><td class="ok">✓</td></tr>
+  <tr><td>PLN.MOON (abs_lon_deg)</td><td>327.05°</td><td class="ok">✓</td></tr>
+  <tr><td>PLN.RAHU (is_retrograde)</td><td>true</td><td class="ok">✓</td></tr>
+  <tr><td>KRK.C.ATMA</td><td>Moon (27°02′)</td><td class="ok">✓</td></tr>
+  <tr><td>KRK.C.DARA</td><td>Mercury (00°50′)</td><td class="ok">✓</td></tr>
+  <tr><td>LAG.HORA</td><td>Gemini H3 (v8.0 corrected from Libra)</td><td class="ok">✓ corrected noted</td></tr>
+  <tr><td>LAG.VARNADA</td><td>Cancer H4 (v8.0 corrected from Scorpio)</td><td class="ok">✓ corrected noted</td></tr>
+  <tr><td>SAH.ROGA</td><td>Taurus H2 (v8.0 corrected from Libra H7)</td><td class="ok">✓ corrected noted</td></tr>
+  <tr><td>SAH.VIVAHA</td><td>Cancer H4 (v8.0 corrected from Gemini H3)</td><td class="ok">✓ corrected noted</td></tr>
+  <tr><td>DSH.V.023 (CURRENT AD)</td><td>Mercury–Saturn 2024-12-12 to 2027-08-21</td><td class="ok">✓ CURRENT marked</td></tr>
+  <tr><td>DSH.Y.010 (CURRENT Yogini)</td><td>Bhadrika/Mercury 2021-12-22 to 2026-12-22</td><td class="ok">✓ CURRENT marked</td></tr>
+  <tr><td>DSH.C.085 (CURRENT Chara MD)</td><td>Scorpio–Libra 2026-02-05 to 2027-01-05</td><td class="ok">✓ CURRENT marked</td></tr>
+  <tr><td>PCG.YOGA.LORD</td><td>Mercury (57.13% remaining)</td><td class="ok">✓</td></tr>
+  <tr><td>MCS.8</td><td>Siva Yoga Lord (v8.0 addition)</td><td class="ok">✓</td></tr>
+</table>
+
+<h2>§5 — v8.0 Critical Corrections Documented</h2>
+<table>
+  <tr><th>Fact ID</th><th>v6.0 Value (WRONG)</th><th>v8.0 Corrected Value</th><th>notes field</th></tr>
+  <tr><td>LAG.HORA</td><td>Libra 10°11′</td><td>Gemini H3 Mrigashira</td><td class="ok">✓</td></tr>
+  <tr><td>LAG.GHATI</td><td>Scorpio 6°53′</td><td>Sagittarius H9 Purva Ashadha</td><td class="ok">✓</td></tr>
+  <tr><td>LAG.VARNADA</td><td>Scorpio 12°23′</td><td>Cancer H4 Pushya</td><td class="ok">✓ (Invalidates RM.21)</td></tr>
+  <tr><td>LAG.SHREE</td><td>Sagittarius 24°15′</td><td>Libra H7 Vishakha</td><td class="ok">✓ (joins Saturn+Mars in 7H)</td></tr>
+  <tr><td>SAH.ROGA</td><td>7H Libra</td><td>Taurus H2 Mrigashira</td><td class="ok">✓</td></tr>
+  <tr><td>SAH.MAHATMYA</td><td>7H Libra</td><td>Sagittarius H9 Moola</td><td class="ok">✓</td></tr>
+  <tr><td>SAH.VIVAHA</td><td>3H Gemini Ardra</td><td>Cancer H4 Pushya</td><td class="ok">✓</td></tr>
+</table>
+
+<h2>§6 — Namespace Coverage</h2>
+<pre>
+MET  — Birth Metadata     22 facts   ✓
+PLN  — Planets (D1)        9 facts   ✓
+HSE  — Houses             12 facts   ✓ (D1); 12 per divisional (D2–D60)
+CSP  — Cusps              12 facts   ✓
+KP   — KP System          28 facts   ✓ (cusps + planets + significators)
+DSH  — Dasha Systems     211 facts   ✓ (50 Vimshottari + 17 Yogini + 144 Chara)
+KRK  — Chara Karakas      15 facts   ✓ (7-karaka + 8-karaka)
+UPG  — Upagrahas           9 facts   ✓
+LAG  — Special Lagnas      9 facts   ✓
+SAH  — Sahams             36 facts   ✓
+ARD  — Arudhas             9 facts   ✓
+NVT  — Navatara           12 facts   ✓
+PCG  — Panchang           12 facts   ✓
+CSI  — Strength (Shadbala) 9 facts   ✓
+YGA  — Yogas              18 facts   ✓
+MCS  — Mercury Convergence 8 facts   ✓
+</pre>
+
+<h2>§7 — Acceptance Status</h2>
+<table>
+  <tr><th>Criterion</th><th>Result</th></tr>
+  <tr><td>589 facts extracted (target: 580+)</td><td class="ok">✓ PASS</td></tr>
+  <tr><td>YAML parses without error</td><td class="ok">✓ PASS</td></tr>
+  <tr><td>All facts pass CHART_FACTS_SCHEMA_v1_0.json validation</td><td class="ok">✓ PASS</td></tr>
+  <tr><td>Cross-check delta documented in header</td><td class="ok">✓ PASS</td></tr>
+  <tr><td>v8.0 critical corrections reflected in notes fields</td><td class="ok">✓ PASS (7 corrections)</td></tr>
+  <tr><td>CURRENT dasha periods marked</td><td class="ok">✓ PASS (3 markers)</td></tr>
+  <tr><td>forensic_extractor.py written and importable</td><td class="ok">✓ PASS</td></tr>
+</table>
+
+<div class="section-sep"></div>
+<div class="meta">Report generated by: Claude Code (Sonnet 4.6) — Phase 14C Stream B close — 2026-04-29</div>
+
+</body>
+</html>

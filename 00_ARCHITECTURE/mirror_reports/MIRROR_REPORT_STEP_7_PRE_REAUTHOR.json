@@ -1,0 +1,25 @@
+{
+  "mirror_report": {
+    "session_id": "STEP_7_PRE_REAUTHOR",
+    "run_at": "2026-04-23T19:46:18.644884+00:00",
+    "pairs_checked": 8,
+    "pairs_passed": 7,
+    "pairs_failed": 1,
+    "pairs_claude_only": 2,
+    "pairs_gemini_only": 0,
+    "findings": [
+      {
+        "pair_id": "MP.2",
+        "finding_class": "mirror_desync",
+        "severity": "MEDIUM",
+        "authoritative_side": "claude",
+        "which_side_stale": "gemini",
+        "section_affected": ".gemini/project_state.md / next step",
+        "evidence_claude": "STEP_LEDGER ready row: Step 8 (red-team)",
+        "evidence_gemini": "project_state.md does not name Step 8 as next",
+        "suggested_remediation": "Update project_state.md next-step to Step 8"
+      }
+    ],
+    "exit_code": 1
+  }
+}

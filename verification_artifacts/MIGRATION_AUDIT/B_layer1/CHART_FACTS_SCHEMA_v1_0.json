@@ -1,0 +1,17 @@
+{
+  "canonical_id": "CHART_FACTS_SCHEMA_v1_0",
+  "local_path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+  "gcs_uri": "gs://madhav-marsys-sources/L1/facts/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+  "local_sha256": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
+  "gcs_sha256": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
+  "gcs_sha256_embedded_metadata": null,
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "MlTeqA==",
+  "gcs_size_bytes": 5302,
+  "local_size_bytes": 5302,
+  "match": true,
+  "gcs_generation": "1777428171893768",
+  "gcs_upload_time": "2026-04-29T02:02:51+0000",
+  "local_commits_after_gcs_upload": [],
+  "divergence_type": "none"
+}

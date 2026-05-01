@@ -1,0 +1,17 @@
+{
+  "canonical_id": "EPHEMERIS_MONTHLY",
+  "local_path": "01_FACTS_LAYER/EPHEMERIS_MONTHLY_1900_2100.csv",
+  "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/EPHEMERIS_MONTHLY_1900_2100.csv",
+  "local_sha256": "a0e8fbac0178610faa00fcbdc4f63b89b4071d8936ce8691eafb57ebb2a9791a",
+  "gcs_sha256": "a0e8fbac0178610faa00fcbdc4f63b89b4071d8936ce8691eafb57ebb2a9791a",
+  "gcs_sha256_embedded_metadata": null,
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "Xdoxsg==",
+  "gcs_size_bytes": 1690822,
+  "local_size_bytes": 1690822,
+  "match": true,
+  "gcs_generation": "1777426759480204",
+  "gcs_upload_time": "2026-04-29T01:39:19+0000",
+  "local_commits_after_gcs_upload": [],
+  "divergence_type": "none"
+}

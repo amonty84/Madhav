@@ -1,0 +1,316 @@
+'use client'
+
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type ClipboardEvent,
+  type DragEvent,
+  type KeyboardEvent,
+} from 'react'
+import TextareaAutosize from 'react-textarea-autosize'
+import { ArrowUp, Square, Paperclip, X, FileText, Loader2, AlertCircle } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import type { Attachment } from '@/hooks/useAttachments'
+
+export interface ComposerHandle {
+  focus: () => void
+  setValue: (value: string) => void
+}
+
+interface Props {
+  onSubmit: (text: string, attachments: Attachment[]) => void
+  onStop?: () => void
+  isStreaming?: boolean
+  placeholder?: string
+  autoFocus?: boolean
+  className?: string
+  disabled?: boolean
+  attachments: Attachment[]
+  onAddFiles: (files: FileList | File[]) => void
+  onRemoveAttachment: (id: string) => void
+  attachmentsReady: boolean
+}
+
+export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
+  {
+    onSubmit,
+    onStop,
+    isStreaming = false,
+    placeholder = 'Reply to Claude…',
+    autoFocus = true,
+    className,
+    disabled = false,
+    attachments,
+    onAddFiles,
+    onRemoveAttachment,
+    attachmentsReady,
+  },
+  ref
+) {
+  const [value, setValue] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
+  const [isDragOver, setIsDragOver] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useImperativeHandle(ref, () => ({
+    focus: () => textareaRef.current?.focus(),
+    setValue,
+  }))
+
+  useEffect(() => {
+    if (autoFocus) textareaRef.current?.focus()
+  }, [autoFocus])
+
+  function send() {
+    const trimmed = value.trim()
+    const readyAttachments = attachments.filter(a => a.status === 'ready')
+    const hasContent = trimmed.length > 0 || readyAttachments.length > 0
+    if (!hasContent || isStreaming || disabled || !attachmentsReady) return
+    onSubmit(trimmed, readyAttachments)
+    setValue('')
+  }
+
+  function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault()
+      send()
+      return
+    }
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault()
+      send()
+      return
+    }
+    if (e.key === 'Escape' && isStreaming && onStop) {
+      e.preventDefault()
+      onStop()
+    }
+  }
+
+  function handleFileInput(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) onAddFiles(e.target.files)
+    // Reset so the same file can be re-selected after removal.
+    e.target.value = ''
+  }
+
+  function handlePaste(e: ClipboardEvent<HTMLTextAreaElement>) {
+    const files: File[] = []
+    for (const item of e.clipboardData.items) {
+      if (item.kind === 'file') {
+        const f = item.getAsFile()
+        if (f) files.push(f)
+      }
+    }
+    if (files.length > 0) {
+      e.preventDefault()
+      onAddFiles(files)
+    }
+  }
+
+  function handleDrop(e: DragEvent<HTMLDivElement>) {
+    e.preventDefault()
+    setIsDragOver(false)
+    if (e.dataTransfer.files.length > 0) onAddFiles(e.dataTransfer.files)
+  }
+
+  function handleDragOver(e: DragEvent<HTMLDivElement>) {
+    if (e.dataTransfer.types.includes('Files')) {
+      e.preventDefault()
+      setIsDragOver(true)
+    }
+  }
+
+  function handleDragLeave(e: DragEvent<HTMLDivElement>) {
+    if (e.currentTarget.contains(e.relatedTarget as Node)) return
+    setIsDragOver(false)
+  }
+
+  const trimmed = value.trim()
+  const hasReadyAttachment = attachments.some(a => a.status === 'ready')
+  const canSend = (trimmed.length > 0 || hasReadyAttachment) && attachmentsReady && !disabled
+  const showStop = isStreaming && onStop
+
+  return (
+    <div className={cn('mx-auto w-full max-w-4xl px-4 pb-3 pt-1', className)}>
+      <div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        className={cn(
+          'relative flex flex-col rounded-3xl border border-border/70 bg-background shadow-sm transition-all duration-200',
+          isFocused && 'border-ring/60 shadow-md ring-2 ring-[var(--brand-gold)]/40',
+          isDragOver && 'border-ring/80 bg-ring/5 ring-4 ring-[var(--brand-gold)]/30 shadow-lg',
+          disabled && 'opacity-60'
+        )}
+      >
+        {attachments.length > 0 && (
+          <div className="flex flex-wrap gap-2 px-4 pt-3">
+            {attachments.map(att => (
+              <AttachmentChip
+                key={att.id}
+                attachment={att}
+                onRemove={() => onRemoveAttachment(att.id)}
+              />
+            ))}
+          </div>
+        )}
+        <TextareaAutosize
+          ref={textareaRef}
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder={placeholder}
+          minRows={1}
+          maxRows={10}
+          disabled={disabled}
+          className={cn(
+            'w-full resize-none rounded-3xl bg-transparent px-5 py-4 text-[15px] leading-[1.55] text-foreground outline-none placeholder:text-muted-foreground/70 placeholder:transition-colors focus:placeholder:text-muted-foreground/50',
+            'disabled:cursor-not-allowed'
+          )}
+          aria-label="Message composer"
+        />
+        {value === '/' && (
+          <p className="px-5 pb-0.5 text-[11px] text-muted-foreground/70">
+            Use{' '}
+            <kbd className="rounded border border-border bg-muted px-1 font-mono text-[10px]">⌘K</kbd>
+            {' '}for commands
+          </p>
+        )}
+        <div className="flex items-center justify-between gap-2 px-3 pb-3 pt-0.5">
+          <div className="flex items-center gap-1">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,application/pdf"
+              multiple
+              onChange={handleFileInput}
+              className="sr-only"
+              aria-hidden
+              tabIndex={-1}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              aria-label="Attach file"
+              title="Attach image or PDF"
+              disabled={disabled}
+              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-all duration-150 hover:bg-muted/80 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:opacity-50"
+            >
+              <Paperclip className="size-4" />
+            </button>
+            <span className="hidden md:inline pl-1 text-[10px] uppercase tracking-[0.18em] text-[var(--brand-cream)]/40">
+              ↵ Send · ⇧ ↵ New line
+            </span>
+          </div>
+          <div className="ml-auto flex items-center gap-1">
+            {showStop ? (
+              <button
+                type="button"
+                onClick={onStop}
+                aria-label="Stop generating"
+                className="inline-flex size-9 items-center justify-center rounded-full bg-foreground text-background transition-all duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/30"
+              >
+                <Square className="size-3.5 fill-current" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={send}
+                disabled={!canSend}
+                aria-label="Send message"
+                className={cn(
+                  'inline-flex size-9 items-center justify-center rounded-full transition-all duration-200',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-charcoal)]',
+                  canSend
+                    ? 'brand-cta active:scale-95'
+                    : 'bg-muted text-muted-foreground/50 cursor-not-allowed'
+                )}
+              >
+                <ArrowUp className="size-4" />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+})
+
+function AttachmentChip({
+  attachment,
+  onRemove,
+}: {
+  attachment: Attachment
+  onRemove: () => void
+}) {
+  const isImage = attachment.mime.startsWith('image/')
+  const isError = attachment.status === 'error'
+  const isUploading = attachment.status === 'uploading'
+
+  return (
+    <div
+      className={cn(
+        'group/chip relative flex items-center gap-2 rounded-lg border bg-muted/40 pr-2 transition-colors',
+        isError ? 'border-destructive/50' : 'border-border'
+      )}
+    >
+      {isImage && attachment.previewUrl ? (
+        <div className="relative size-10 shrink-0 overflow-hidden rounded-l-lg bg-muted">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={attachment.previewUrl}
+            alt=""
+            className={cn(
+              'size-full object-cover',
+              isUploading && 'opacity-60',
+              isError && 'opacity-40'
+            )}
+          />
+          {isUploading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Loader2 className="size-4 animate-spin text-foreground/80" />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-l-lg bg-muted text-muted-foreground">
+          {isError ? (
+            <AlertCircle className="size-4 text-destructive" />
+          ) : isUploading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            <FileText className="size-4" />
+          )}
+        </div>
+      )}
+      <div className="min-w-0 max-w-[180px] pr-1">
+        <div className="truncate text-xs font-medium text-foreground">{attachment.filename}</div>
+        <div className="truncate text-[10px] text-muted-foreground">
+          {isError ? attachment.errorMsg : formatSize(attachment.size)}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label={`Remove ${attachment.filename}`}
+        className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      >
+        <X className="size-3" />
+      </button>
+    </div>
+  )
+}
+
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
+}

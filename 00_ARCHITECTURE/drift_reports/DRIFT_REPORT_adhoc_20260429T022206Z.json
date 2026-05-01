@@ -1,0 +1,3211 @@
+{
+  "drift_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-04-29T02:22:06.228015+00:00",
+    "findings": [
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PATTERN_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "06_LEARNING_LAYER/SCHEMAS/pattern_schema_v0_1.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=d328860e1a98b639c559036594cc7f880033baa288301fafaa3b6dddf5c561dd observed=55c23858f1bcca725dcc1bc4dd33100ebaed2c157ef203a94e7671635a184d7b",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PREDICTION_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "06_LEARNING_LAYER/SCHEMAS/prediction_schema_v0_1.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=1db6a742f1fde19507b6c4c7ad1679c70f50f3286673a95960afea5f79f7da96 observed=bf1189997a5d8e80798a7dde27d69f39d2f1d24bf845a64e768783b0328f9654",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TWO_PASS_EVENTS_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "06_LEARNING_LAYER/SCHEMAS/two_pass_events_schema_v0_1.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=0ed502f6994726f37f7d5e34997e0411d937188674b1022429234e3bcc820e4e observed=e7003c5911edd8f74b4fb0a7d7fd46add4812fe8c46254e5f54513be366f8e36",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PROMPT_REGISTRY_INDEX",
+        "surfaces_involved": [
+          "06_LEARNING_LAYER/PROMPT_REGISTRY/INDEX.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=74ffef4271ca6168227e22af21099cc187490401431f13c57aa6ded119e9c71b observed=ee986600a0eecf33e2b61645056a7b76dea88019981280980b7aa2d5d87c846b",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PREDICTION_LEDGER_JSONL",
+        "surfaces_involved": [
+          "06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=47ac93ebb6449f8c94a17758baf8c993ee09238f48a3b97ae6c270bc45113627 observed=90261c966341d5a090eadcb9dfcd350c8eef7669869867fc94097cd73b025bd1",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PATTERN_REGISTER_JSON",
+        "surfaces_involved": [
+          "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=729d850720a4986389c451b3e0c425dc05c9f31ebb60dbe281ad387d275ec7a5 observed=0108db4660c1f26b01e46ba4ccaabf5b8ee2ef947f9fd63667874d1914cc3513",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "RESONANCE_REGISTER_JSON",
+        "surfaces_involved": [
+          "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=ac9f284bd591dc69c7ebf4bba3104b9f64c266f4340524eec46590203d23154d observed=c6e337bdd6b958cc8db3725bf5bacc439186d8bd80ea0e5076133d72ccca807d",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CONTRADICTION_REGISTER_JSON",
+        "surfaces_involved": [
+          "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=1e2fd304e400aee529eb3800f0e5facf4755de9bdb6e09878c11a6528ed80f68 observed=de3d1cd5b86f484fe10920bfd7cc9a38de32fb2fe35abf6aa1393576aa85f3ea",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CLUSTER_ATLAS_JSON",
+        "surfaces_involved": [
+          "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=59d5d90c1759dce79ed83e4c47134b5d37b9ff36f926a1f639f7add0a50b233f observed=ac01116aa8ce3d7ef7ac6a59ac23733a78540c5d79203d27e896ba15ba863444",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "DISCOVERY_REGISTERS_INDEX",
+        "surfaces_involved": [
+          "035_DISCOVERY_LAYER/REGISTERS/INDEX.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=f6891c9a2813a1e7c94c4d8eed6ba39d577575218109dddc0a29fec182f61f07 observed=6b51b187a4a5ea0dddb2d6f9e158d5a5b20b51a86b44350469423f41dfb78e28",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_019_L3_REGISTERS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/019_l3_registers.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=163a6e41cd18cf25c836d2ab646e4286596a5d88e178da7d10b29c9b01d2478a",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "INGEST_L3_REGISTERS",
+        "surfaces_involved": [
+          "platform/python-sidecar/pipeline/ingest_l3_registers.py",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=bab85f68e386dd556bb9de214a66f5c59f3e405c0c486d0beca15c49ea2330e5",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/L3_DISCOVERY_REGISTERS_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=66bd48df0d5e43fb2f4c9d7813fe05698a6b72c425c50891cc6f10f86024956b",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_14E_L3_REGISTERS_REPORT_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=c763d37a080ffac00fce63cae8bf2cb85fe48db09c55e5f6165a87109da2283d",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_PATTERNS",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_patterns.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_RESONANCES_L3",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_resonances_l3.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_CLUSTERS",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_clusters.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_contradictions.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_MSR_SIGNALS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_UCN_SECTIONS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_CDLM_LINKS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_CGM_NODES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_CGM_EDGES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L25_RM_RESONANCES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/018_l2_5_structured.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L2_5_STRUCTURED_LAYER_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/L2_5_STRUCTURED_LAYER_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=07aae69a77926b16ec830130a9e68dc048882699516ca3ce662e6802097554d3",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PHASE_14D_L2_5_PARITY_REPORT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_14D_L2_5_PARITY_REPORT_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=55483ae04a6a1a3a643991bd187b2ae2c651e7e79cac89551e6a66b7d601e20c",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_014_CHART_FACTS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/014_chart_facts.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "platform/supabase/migrations/015_ephemeris_daily.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
+        "surfaces_involved": [
+          "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_CHART_FACTS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/014_chart_facts.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "platform/supabase/migrations/015_ephemeris_daily.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_ECLIPSES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_RETROGRADES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/016_eclipses_retrogrades.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_LIFE_EVENTS",
+        "surfaces_involved": [
+          "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "L1_SADE_SATI_PHASES",
+        "surfaces_involved": [
+          "platform/supabase/migrations/017_life_events_and_sade_sati.sql",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CHART_FACTS_EXTRACTION",
+        "surfaces_involved": [
+          "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CHART_FACTS_SCHEMA",
+        "surfaces_involved": [
+          "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_CHART_FACT",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_chart_fact.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=825156fc229fdca5ac3a495fb2a6ca311e58f56d9a1193e3c382ce488eb1b729",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_PLANET_POSITION",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_planet_position.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=b7ac9579bd01393515c4a65967666c7b04ccc5d5cba06248126f502c8ceb70b4",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_eclipse_window.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=29cc7ad7cb2fa32477d2db3dba9f39c08b4329aceb209853a8174842c340ea50",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_retrograde_window.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=17705da56a075070ce0dd828c02405cb85554b728fd743373280a0921a8d7f62",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_life_events.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=294eb75a428eca6b39a667e718d9585666b52ea6c70ec54cee33fe988395f1aa",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_SADE_SATI",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_sade_sati.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=b6d9e95c615db16722f1178e9561a2f18c88515dc99ee44bb6fb7727fb7e7d00",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "TOOL_QUERY_DASHA",
+        "surfaces_involved": [
+          "platform/src/lib/tools/structured/query_dasha.ts",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared= observed=e507c2298ae0c5c49f57a389e30cdb30c7c1555695195c2e9fe823e37c8f5ba1",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CGP_AUDIT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CGP_AUDIT_v1_0.md'",
+        "suggested_remediation": "Add a row for CGP_AUDIT_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v2_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'EXTERNAL_COMPUTATION_SPEC_v2_0.md'",
+        "suggested_remediation": "Add a row for EXTERNAL_COMPUTATION_SPEC_v2_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "FORENSIC_ASTROLOGICAL_DATA_v8_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'FORENSIC_ASTROLOGICAL_DATA_v8_0.md'",
+        "suggested_remediation": "Add a row for FORENSIC_ASTROLOGICAL_DATA_v8_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "LIFE_EVENT_LOG_v1_2",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'LIFE_EVENT_LOG_v1_2.md'",
+        "suggested_remediation": "Add a row for LIFE_EVENT_LOG_v1_2.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "SADE_SATI_CYCLES_ALL",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'SADE_SATI_CYCLES_ALL.md'",
+        "suggested_remediation": "Add a row for SADE_SATI_CYCLES_ALL.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "EVENT_CHART_STATES_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'EVENT_CHART_STATES_v1_0.md'",
+        "suggested_remediation": "Add a row for EVENT_CHART_STATES_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "JHORA_TRANSCRIPTION_v8_0_SOURCE",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'JHORA_TRANSCRIPTION_v8_0_SOURCE.md'",
+        "suggested_remediation": "Add a row for JHORA_TRANSCRIPTION_v8_0_SOURCE.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CDLM_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CDLM_v1_1.md'",
+        "suggested_remediation": "Add a row for CDLM_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CGM",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CGM_v9_0.md'",
+        "suggested_remediation": "Add a row for CGM_v9_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MSR_v3_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'MSR_v3_0.md'",
+        "suggested_remediation": "Add a row for MSR_v3_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RED_TEAM_L2_5_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RED_TEAM_L2_5_v1_0.md'",
+        "suggested_remediation": "Add a row for RED_TEAM_L2_5_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RM_v2_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RM_v2_0.md'",
+        "suggested_remediation": "Add a row for RM_v2_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "UCN_v4_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'UCN_v4_0.md'",
+        "suggested_remediation": "Add a row for UCN_v4_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CROSS_REPORT_COHERENCE_AUDIT_v1_0.md'",
+        "suggested_remediation": "Add a row for CROSS_REPORT_COHERENCE_AUDIT_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RED_TEAM_L3_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RED_TEAM_L3_v1_0.md'",
+        "suggested_remediation": "Add a row for RED_TEAM_L3_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CAREER_DHARMA_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_CAREER_DHARMA_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_CAREER_DHARMA_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CAREER_DHARMA_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_CAREER_DHARMA_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_CAREER_DHARMA_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CHILDREN_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_CHILDREN_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_CHILDREN_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CHILDREN_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_CHILDREN_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_CHILDREN_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_FINANCIAL_v2_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_FINANCIAL_v2_0.md'",
+        "suggested_remediation": "Add a row for REPORT_FINANCIAL_v2_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_FINANCIAL_v2_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_FINANCIAL_v2_1.md'",
+        "suggested_remediation": "Add a row for REPORT_FINANCIAL_v2_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_HEALTH_LONGEVITY_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_HEALTH_LONGEVITY_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_HEALTH_LONGEVITY_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_HEALTH_LONGEVITY_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PARENTS_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_PARENTS_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_PARENTS_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PARENTS_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_PARENTS_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_PARENTS_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_PSYCHOLOGY_MIND_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_PSYCHOLOGY_MIND_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_PSYCHOLOGY_MIND_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_PSYCHOLOGY_MIND_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_RELATIONSHIPS_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_RELATIONSHIPS_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_RELATIONSHIPS_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_RELATIONSHIPS_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_RELATIONSHIPS_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_RELATIONSHIPS_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_SPIRITUAL_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_SPIRITUAL_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_SPIRITUAL_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_SPIRITUAL_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_SPIRITUAL_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_SPIRITUAL_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_TRAVEL_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_TRAVEL_v1_0.md'",
+        "suggested_remediation": "Add a row for REPORT_TRAVEL_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_TRAVEL_v1_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'REPORT_TRAVEL_v1_1.md'",
+        "suggested_remediation": "Add a row for REPORT_TRAVEL_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "DECISION_SUPPORT_PLAYBOOK_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'DECISION_SUPPORT_PLAYBOOK_v1_0.md'",
+        "suggested_remediation": "Add a row for DECISION_SUPPORT_PLAYBOOK_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "QUERY_PROMPT_LIBRARY_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'QUERY_PROMPT_LIBRARY_v1_0.md'",
+        "suggested_remediation": "Add a row for QUERY_PROMPT_LIBRARY_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md'",
+        "suggested_remediation": "Add a row for SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "035_DISCOVERY_LAYER/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CLUSTER_ATLAS_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CLUSTER_ATLAS_v1_0.md'",
+        "suggested_remediation": "Add a row for CLUSTER_ATLAS_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CONTRADICTION_REGISTER_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CONTRADICTION_REGISTER_v1_0.md'",
+        "suggested_remediation": "Add a row for CONTRADICTION_REGISTER_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_REGISTER_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'PATTERN_REGISTER_v1_0.md'",
+        "suggested_remediation": "Add a row for PATTERN_REGISTER_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RESONANCE_REGISTER_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RESONANCE_REGISTER_v1_0.md'",
+        "suggested_remediation": "Add a row for RESONANCE_REGISTER_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "SCHEMAS/chunker_spec_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'chunker_spec_v1_0.md'",
+        "suggested_remediation": "Add a row for chunker_spec_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'README.md'",
+        "suggested_remediation": "Add a row for README.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'pattern_schema_v0_1.json'",
+        "suggested_remediation": "Add a row for pattern_schema_v0_1.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PREDICTION_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'prediction_schema_v0_1.json'",
+        "suggested_remediation": "Add a row for prediction_schema_v0_1.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TWO_PASS_EVENTS_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'two_pass_events_schema_v0_1.json'",
+        "suggested_remediation": "Add a row for two_pass_events_schema_v0_1.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PROMPT_REGISTRY_INDEX",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'INDEX.json'",
+        "suggested_remediation": "Add a row for INDEX.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PREDICTION_LEDGER_JSONL",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'prediction_ledger.jsonl'",
+        "suggested_remediation": "Add a row for prediction_ledger.jsonl in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_REGISTER_JSON",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'PATTERN_REGISTER_v1_0.json'",
+        "suggested_remediation": "Add a row for PATTERN_REGISTER_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RESONANCE_REGISTER_JSON",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RESONANCE_REGISTER_v1_0.json'",
+        "suggested_remediation": "Add a row for RESONANCE_REGISTER_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CONTRADICTION_REGISTER_JSON",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CONTRADICTION_REGISTER_v1_0.json'",
+        "suggested_remediation": "Add a row for CONTRADICTION_REGISTER_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CLUSTER_ATLAS_JSON",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CLUSTER_ATLAS_v1_0.json'",
+        "suggested_remediation": "Add a row for CLUSTER_ATLAS_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "DISCOVERY_REGISTERS_INDEX",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'INDEX.json'",
+        "suggested_remediation": "Add a row for INDEX.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "BUILD_PIPELINE_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'BUILD_PIPELINE_v1_0.md'",
+        "suggested_remediation": "Add a row for BUILD_PIPELINE_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14B_BUILD_PIPELINE_REPORT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md'",
+        "suggested_remediation": "Add a row for PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CLOUDBUILD_YAML",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'cloudbuild.yaml'",
+        "suggested_remediation": "Add a row for cloudbuild.yaml in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "DOCKERFILE_PIPELINE",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'Dockerfile.pipeline'",
+        "suggested_remediation": "Add a row for Dockerfile.pipeline in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_013_BUILD_PIPELINE_STAGING",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '013_build_pipeline_staging.sql'",
+        "suggested_remediation": "Add a row for 013_build_pipeline_staging.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_EXTRACTION_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CHART_FACTS_EXTRACTION_v1_0.yaml'",
+        "suggested_remediation": "Add a row for CHART_FACTS_EXTRACTION_v1_0.yaml in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_SCHEMA_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CHART_FACTS_SCHEMA_v1_0.json'",
+        "suggested_remediation": "Add a row for CHART_FACTS_SCHEMA_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_019_L3_REGISTERS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '019_l3_registers.sql'",
+        "suggested_remediation": "Add a row for 019_l3_registers.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "INGEST_L3_REGISTERS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'ingest_l3_registers.py'",
+        "suggested_remediation": "Add a row for ingest_l3_registers.py in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'L3_DISCOVERY_REGISTERS_v1_0.md'",
+        "suggested_remediation": "Add a row for L3_DISCOVERY_REGISTERS_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'PHASE_14E_L3_REGISTERS_REPORT_v1_0.md'",
+        "suggested_remediation": "Add a row for PHASE_14E_L3_REGISTERS_REPORT_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_PATTERNS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_patterns.ts'",
+        "suggested_remediation": "Add a row for query_patterns.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_RESONANCES_L3",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_resonances_l3.ts'",
+        "suggested_remediation": "Add a row for query_resonances_l3.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CLUSTERS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_clusters.ts'",
+        "suggested_remediation": "Add a row for query_clusters.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_contradictions.ts'",
+        "suggested_remediation": "Add a row for query_contradictions.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_MSR_SIGNALS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_UCN_SECTIONS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CDLM_LINKS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CGM_NODES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CGM_EDGES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_RM_RESONANCES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '018_l2_5_structured.sql'",
+        "suggested_remediation": "Add a row for 018_l2_5_structured.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L2_5_STRUCTURED_LAYER_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'L2_5_STRUCTURED_LAYER_v1_0.md'",
+        "suggested_remediation": "Add a row for L2_5_STRUCTURED_LAYER_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14D_L2_5_PARITY_REPORT_v1_0",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'PHASE_14D_L2_5_PARITY_REPORT_v1_0.md'",
+        "suggested_remediation": "Add a row for PHASE_14D_L2_5_PARITY_REPORT_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_014_CHART_FACTS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '014_chart_facts.sql'",
+        "suggested_remediation": "Add a row for 014_chart_facts.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '015_ephemeris_daily.sql'",
+        "suggested_remediation": "Add a row for 015_ephemeris_daily.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '016_eclipses_retrogrades.sql'",
+        "suggested_remediation": "Add a row for 016_eclipses_retrogrades.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '017_life_events_and_sade_sati.sql'",
+        "suggested_remediation": "Add a row for 017_life_events_and_sade_sati.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_CHART_FACTS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '014_chart_facts.sql'",
+        "suggested_remediation": "Add a row for 014_chart_facts.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '015_ephemeris_daily.sql'",
+        "suggested_remediation": "Add a row for 015_ephemeris_daily.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_ECLIPSES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '016_eclipses_retrogrades.sql'",
+        "suggested_remediation": "Add a row for 016_eclipses_retrogrades.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_RETROGRADES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '016_eclipses_retrogrades.sql'",
+        "suggested_remediation": "Add a row for 016_eclipses_retrogrades.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_LIFE_EVENTS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '017_life_events_and_sade_sati.sql'",
+        "suggested_remediation": "Add a row for 017_life_events_and_sade_sati.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_SADE_SATI_PHASES",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name '017_life_events_and_sade_sati.sql'",
+        "suggested_remediation": "Add a row for 017_life_events_and_sade_sati.sql in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_EXTRACTION",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CHART_FACTS_EXTRACTION_v1_0.yaml'",
+        "suggested_remediation": "Add a row for CHART_FACTS_EXTRACTION_v1_0.yaml in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_SCHEMA",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CHART_FACTS_SCHEMA_v1_0.json'",
+        "suggested_remediation": "Add a row for CHART_FACTS_SCHEMA_v1_0.json in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CHART_FACT",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_chart_fact.ts'",
+        "suggested_remediation": "Add a row for query_chart_fact.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_PLANET_POSITION",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_planet_position.ts'",
+        "suggested_remediation": "Add a row for query_planet_position.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_eclipse_window.ts'",
+        "suggested_remediation": "Add a row for query_eclipse_window.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_retrograde_window.ts'",
+        "suggested_remediation": "Add a row for query_retrograde_window.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_life_events.ts'",
+        "suggested_remediation": "Add a row for query_life_events.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_SADE_SATI",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_sade_sati.ts'",
+        "suggested_remediation": "Add a row for query_sade_sati.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_DASHA",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'query_dasha.ts'",
+        "suggested_remediation": "Add a row for query_dasha.ts in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "FORENSIC",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'FORENSIC_ASTROLOGICAL_DATA_v8_0.md'",
+        "suggested_remediation": "Add a row for FORENSIC_ASTROLOGICAL_DATA_v8_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "LEL",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'LIFE_EVENT_LOG_v1_2.md'",
+        "suggested_remediation": "Add a row for LIFE_EVENT_LOG_v1_2.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "MSR",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'MSR_v3_0.md'",
+        "suggested_remediation": "Add a row for MSR_v3_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "UCN",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'UCN_v4_0.md'",
+        "suggested_remediation": "Add a row for UCN_v4_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "CDLM",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'CDLM_v1_1.md'",
+        "suggested_remediation": "Add a row for CDLM_v1_1.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "RM",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_14.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'RM_v2_0.md'",
+        "suggested_remediation": "Add a row for RM_v2_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "HIGH",
+        "canonical_id": null,
+        "surfaces_involved": [
+          ".geminirules",
+          "AM_JIS_BOOTSTRAP_HANDOFF.md"
+        ],
+        "evidence": "Live pointer `AM_JIS_BOOTSTRAP_HANDOFF.md` in .geminirules does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Fix the pointer, add to _FUTURE_ARTIFACTS if forward-ref, or remove the reference",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/gemini/cluster_annotation_v1.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/gemini/cluster_annotation_v1.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "reconciler_v1_3.md"
+        ],
+        "evidence": "Live pointer `reconciler_v1_3.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/eval_baseline.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/eval_baseline.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RED_TEAM_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RED_TEAM_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/synthesize.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/synthesize.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/prompts/synthesis.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/prompts/synthesis.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/validate.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/validate.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/RED_TEAM/probes_v1.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/RED_TEAM/probes_v1.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/eval_baseline.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/eval_baseline.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RED_TEAM_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RED_TEAM_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CGP_AUDIT_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CGP_AUDIT_v1_0 (CGP_AUDIT_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register CGP_AUDIT_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v2_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical EXTERNAL_COMPUTATION_SPEC_v2_0 (EXTERNAL_COMPUTATION_SPEC_v2_0.md) not referenced in any surface",
+        "suggested_remediation": "Register EXTERNAL_COMPUTATION_SPEC_v2_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "SADE_SATI_CYCLES_ALL",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical SADE_SATI_CYCLES_ALL (SADE_SATI_CYCLES_ALL.md) not referenced in any surface",
+        "suggested_remediation": "Register SADE_SATI_CYCLES_ALL.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "EVENT_CHART_STATES_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical EVENT_CHART_STATES_v1_0 (EVENT_CHART_STATES_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register EVENT_CHART_STATES_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "JHORA_TRANSCRIPTION_v8_0_SOURCE",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical JHORA_TRANSCRIPTION_v8_0_SOURCE (JHORA_TRANSCRIPTION_v8_0_SOURCE.md) not referenced in any surface",
+        "suggested_remediation": "Register JHORA_TRANSCRIPTION_v8_0_SOURCE.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "RED_TEAM_L2_5_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical RED_TEAM_L2_5_v1_0 (RED_TEAM_L2_5_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register RED_TEAM_L2_5_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CROSS_REPORT_COHERENCE_AUDIT_v1_0 (CROSS_REPORT_COHERENCE_AUDIT_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register CROSS_REPORT_COHERENCE_AUDIT_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "RED_TEAM_L3_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical RED_TEAM_L3_v1_0 (RED_TEAM_L3_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register RED_TEAM_L3_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CAREER_DHARMA_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_CAREER_DHARMA_v1_0 (REPORT_CAREER_DHARMA_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_CAREER_DHARMA_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CAREER_DHARMA_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_CAREER_DHARMA_v1_1 (REPORT_CAREER_DHARMA_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_CAREER_DHARMA_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CHILDREN_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_CHILDREN_v1_0 (REPORT_CHILDREN_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_CHILDREN_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_CHILDREN_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_CHILDREN_v1_1 (REPORT_CHILDREN_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_CHILDREN_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_FINANCIAL_v2_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_FINANCIAL_v2_0 (REPORT_FINANCIAL_v2_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_FINANCIAL_v2_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_FINANCIAL_v2_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_FINANCIAL_v2_1 (REPORT_FINANCIAL_v2_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_FINANCIAL_v2_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_HEALTH_LONGEVITY_v1_0 (REPORT_HEALTH_LONGEVITY_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_HEALTH_LONGEVITY_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_HEALTH_LONGEVITY_v1_1 (REPORT_HEALTH_LONGEVITY_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_HEALTH_LONGEVITY_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PARENTS_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_PARENTS_v1_0 (REPORT_PARENTS_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_PARENTS_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PARENTS_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_PARENTS_v1_1 (REPORT_PARENTS_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_PARENTS_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_PSYCHOLOGY_MIND_v1_0 (REPORT_PSYCHOLOGY_MIND_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_PSYCHOLOGY_MIND_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_PSYCHOLOGY_MIND_v1_1 (REPORT_PSYCHOLOGY_MIND_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_PSYCHOLOGY_MIND_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_RELATIONSHIPS_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_RELATIONSHIPS_v1_0 (REPORT_RELATIONSHIPS_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_RELATIONSHIPS_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_RELATIONSHIPS_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_RELATIONSHIPS_v1_1 (REPORT_RELATIONSHIPS_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_RELATIONSHIPS_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_SPIRITUAL_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_SPIRITUAL_v1_0 (REPORT_SPIRITUAL_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_SPIRITUAL_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_SPIRITUAL_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_SPIRITUAL_v1_1 (REPORT_SPIRITUAL_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_SPIRITUAL_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_TRAVEL_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_TRAVEL_v1_0 (REPORT_TRAVEL_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_TRAVEL_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "REPORT_TRAVEL_v1_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical REPORT_TRAVEL_v1_1 (REPORT_TRAVEL_v1_1.md) not referenced in any surface",
+        "suggested_remediation": "Register REPORT_TRAVEL_v1_1.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "DECISION_SUPPORT_PLAYBOOK_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical DECISION_SUPPORT_PLAYBOOK_v1_0 (DECISION_SUPPORT_PLAYBOOK_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register DECISION_SUPPORT_PLAYBOOK_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "QUERY_PROMPT_LIBRARY_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical QUERY_PROMPT_LIBRARY_v1_0 (QUERY_PROMPT_LIBRARY_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register QUERY_PROMPT_LIBRARY_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0 (SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "035_DISCOVERY_LAYER/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 035_DISCOVERY_LAYER/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CLUSTER_ATLAS_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CLUSTER_ATLAS_v1_0 (CLUSTER_ATLAS_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register CLUSTER_ATLAS_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CONTRADICTION_REGISTER_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CONTRADICTION_REGISTER_v1_0 (CONTRADICTION_REGISTER_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register CONTRADICTION_REGISTER_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_REGISTER_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PATTERN_REGISTER_v1_0 (PATTERN_REGISTER_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register PATTERN_REGISTER_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "RESONANCE_REGISTER_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical RESONANCE_REGISTER_v1_0 (RESONANCE_REGISTER_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register RESONANCE_REGISTER_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "SCHEMAS/chunker_spec_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical SCHEMAS/chunker_spec_v1_0 (chunker_spec_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register chunker_spec_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 06_LEARNING_LAYER/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README (README.md) not referenced in any surface",
+        "suggested_remediation": "Register README.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PATTERN_SCHEMA_v0_1 (pattern_schema_v0_1.json) not referenced in any surface",
+        "suggested_remediation": "Register pattern_schema_v0_1.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PREDICTION_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PREDICTION_SCHEMA_v0_1 (prediction_schema_v0_1.json) not referenced in any surface",
+        "suggested_remediation": "Register prediction_schema_v0_1.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TWO_PASS_EVENTS_SCHEMA_v0_1",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TWO_PASS_EVENTS_SCHEMA_v0_1 (two_pass_events_schema_v0_1.json) not referenced in any surface",
+        "suggested_remediation": "Register two_pass_events_schema_v0_1.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PROMPT_REGISTRY_INDEX",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PROMPT_REGISTRY_INDEX (INDEX.json) not referenced in any surface",
+        "suggested_remediation": "Register INDEX.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PATTERN_REGISTER_JSON",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PATTERN_REGISTER_JSON (PATTERN_REGISTER_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register PATTERN_REGISTER_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "RESONANCE_REGISTER_JSON",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical RESONANCE_REGISTER_JSON (RESONANCE_REGISTER_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register RESONANCE_REGISTER_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CONTRADICTION_REGISTER_JSON",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CONTRADICTION_REGISTER_JSON (CONTRADICTION_REGISTER_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register CONTRADICTION_REGISTER_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CLUSTER_ATLAS_JSON",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CLUSTER_ATLAS_JSON (CLUSTER_ATLAS_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register CLUSTER_ATLAS_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "DISCOVERY_REGISTERS_INDEX",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical DISCOVERY_REGISTERS_INDEX (INDEX.json) not referenced in any surface",
+        "suggested_remediation": "Register INDEX.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "BUILD_PIPELINE_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical BUILD_PIPELINE_v1_0 (BUILD_PIPELINE_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register BUILD_PIPELINE_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14B_BUILD_PIPELINE_REPORT_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PHASE_14B_BUILD_PIPELINE_REPORT_v1_0 (PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CLOUDBUILD_YAML",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CLOUDBUILD_YAML (cloudbuild.yaml) not referenced in any surface",
+        "suggested_remediation": "Register cloudbuild.yaml in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "DOCKERFILE_PIPELINE",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical DOCKERFILE_PIPELINE (Dockerfile.pipeline) not referenced in any surface",
+        "suggested_remediation": "Register Dockerfile.pipeline in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_013_BUILD_PIPELINE_STAGING",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_013_BUILD_PIPELINE_STAGING (013_build_pipeline_staging.sql) not referenced in any surface",
+        "suggested_remediation": "Register 013_build_pipeline_staging.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_EXTRACTION_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CHART_FACTS_EXTRACTION_v1_0 (CHART_FACTS_EXTRACTION_v1_0.yaml) not referenced in any surface",
+        "suggested_remediation": "Register CHART_FACTS_EXTRACTION_v1_0.yaml in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_SCHEMA_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CHART_FACTS_SCHEMA_v1_0 (CHART_FACTS_SCHEMA_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register CHART_FACTS_SCHEMA_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_019_L3_REGISTERS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_019_L3_REGISTERS (019_l3_registers.sql) not referenced in any surface",
+        "suggested_remediation": "Register 019_l3_registers.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "INGEST_L3_REGISTERS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical INGEST_L3_REGISTERS (ingest_l3_registers.py) not referenced in any surface",
+        "suggested_remediation": "Register ingest_l3_registers.py in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L3_DISCOVERY_REGISTERS_v1_0 (L3_DISCOVERY_REGISTERS_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register L3_DISCOVERY_REGISTERS_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PHASE_14E_L3_REGISTERS_REPORT_v1_0 (PHASE_14E_L3_REGISTERS_REPORT_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register PHASE_14E_L3_REGISTERS_REPORT_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_PATTERNS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_PATTERNS (query_patterns.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_patterns.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_RESONANCES_L3",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_RESONANCES_L3 (query_resonances_l3.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_resonances_l3.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CLUSTERS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_CLUSTERS (query_clusters.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_clusters.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_CONTRADICTIONS (query_contradictions.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_contradictions.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_018_L2_5_STRUCTURED (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_MSR_SIGNALS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_MSR_SIGNALS (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_UCN_SECTIONS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_UCN_SECTIONS (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CDLM_LINKS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_CDLM_LINKS (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CGM_NODES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_CGM_NODES (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_CGM_EDGES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_CGM_EDGES (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L25_RM_RESONANCES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L25_RM_RESONANCES (018_l2_5_structured.sql) not referenced in any surface",
+        "suggested_remediation": "Register 018_l2_5_structured.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L2_5_STRUCTURED_LAYER_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L2_5_STRUCTURED_LAYER_v1_0 (L2_5_STRUCTURED_LAYER_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register L2_5_STRUCTURED_LAYER_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "PHASE_14D_L2_5_PARITY_REPORT_v1_0",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical PHASE_14D_L2_5_PARITY_REPORT_v1_0 (PHASE_14D_L2_5_PARITY_REPORT_v1_0.md) not referenced in any surface",
+        "suggested_remediation": "Register PHASE_14D_L2_5_PARITY_REPORT_v1_0.md in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_014_CHART_FACTS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_014_CHART_FACTS (014_chart_facts.sql) not referenced in any surface",
+        "suggested_remediation": "Register 014_chart_facts.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_015_EPHEMERIS_DAILY (015_ephemeris_daily.sql) not referenced in any surface",
+        "suggested_remediation": "Register 015_ephemeris_daily.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_016_ECLIPSES_RETROGRADES (016_eclipses_retrogrades.sql) not referenced in any surface",
+        "suggested_remediation": "Register 016_eclipses_retrogrades.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical MIGRATION_017_LIFE_EVENTS_SADE_SATI (017_life_events_and_sade_sati.sql) not referenced in any surface",
+        "suggested_remediation": "Register 017_life_events_and_sade_sati.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_CHART_FACTS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_CHART_FACTS (014_chart_facts.sql) not referenced in any surface",
+        "suggested_remediation": "Register 014_chart_facts.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_EPHEMERIS_DAILY",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_EPHEMERIS_DAILY (015_ephemeris_daily.sql) not referenced in any surface",
+        "suggested_remediation": "Register 015_ephemeris_daily.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_ECLIPSES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_ECLIPSES (016_eclipses_retrogrades.sql) not referenced in any surface",
+        "suggested_remediation": "Register 016_eclipses_retrogrades.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_RETROGRADES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_RETROGRADES (016_eclipses_retrogrades.sql) not referenced in any surface",
+        "suggested_remediation": "Register 016_eclipses_retrogrades.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_LIFE_EVENTS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_LIFE_EVENTS (017_life_events_and_sade_sati.sql) not referenced in any surface",
+        "suggested_remediation": "Register 017_life_events_and_sade_sati.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "L1_SADE_SATI_PHASES",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical L1_SADE_SATI_PHASES (017_life_events_and_sade_sati.sql) not referenced in any surface",
+        "suggested_remediation": "Register 017_life_events_and_sade_sati.sql in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_EXTRACTION",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CHART_FACTS_EXTRACTION (CHART_FACTS_EXTRACTION_v1_0.yaml) not referenced in any surface",
+        "suggested_remediation": "Register CHART_FACTS_EXTRACTION_v1_0.yaml in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "CHART_FACTS_SCHEMA",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical CHART_FACTS_SCHEMA (CHART_FACTS_SCHEMA_v1_0.json) not referenced in any surface",
+        "suggested_remediation": "Register CHART_FACTS_SCHEMA_v1_0.json in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_CHART_FACT",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_CHART_FACT (query_chart_fact.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_chart_fact.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_PLANET_POSITION",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_PLANET_POSITION (query_planet_position.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_planet_position.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_ECLIPSE_WINDOW (query_eclipse_window.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_eclipse_window.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_RETROGRADE_WINDOW (query_retrograde_window.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_retrograde_window.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_LIFE_EVENTS (query_life_events.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_life_events.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_SADE_SATI",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_SADE_SATI (query_sade_sati.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_sade_sati.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "canonical_unreferenced",
+        "severity": "MEDIUM",
+        "canonical_id": "TOOL_QUERY_DASHA",
+        "surfaces_involved": [
+          "CLAUDE.md",
+          ".geminirules",
+          "FILE_REGISTRY"
+        ],
+        "evidence": "Canonical TOOL_QUERY_DASHA (query_dasha.ts) not referenced in any surface",
+        "suggested_remediation": "Register query_dasha.ts in CLAUDE.md / .geminirules / FILE_REGISTRY",
+        "whitelist_ticket": null
+      }
+    ],
+    "summary": {
+      "total": 258,
+      "by_class": {
+        "fingerprint_mismatch": 46,
+        "registry_disagreement": 106,
+        "phantom_reference": 14,
+        "canonical_unreferenced": 92
+      },
+      "by_severity": {
+        "HIGH": 47,
+        "MEDIUM": 211
+      },
+      "whitelisted": 13
+    },
+    "exit_code": 2
+  }
+}

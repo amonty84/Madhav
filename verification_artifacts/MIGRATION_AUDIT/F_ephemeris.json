@@ -1,0 +1,153 @@
+{
+  "total_count": 660726,
+  "date_range": {
+    "min": "1900-01-01",
+    "max": "2100-12-31"
+  },
+  "planets": [
+    "jupiter",
+    "ketu",
+    "mars",
+    "mercury",
+    "moon",
+    "rahu",
+    "saturn",
+    "sun",
+    "venus"
+  ],
+  "null_longitude_count": 0,
+  "determinism_check": {
+    "sample_size": 10,
+    "computation_params": {
+      "time": "midnight UT (hour=0.0) \u2014 confirmed from birth-date calibration",
+      "ayanamsa": "Lahiri (SIDM_LAHIRI)",
+      "node_type": "TRUE_NODE for Rahu/Ketu (not MEAN_NODE)"
+    },
+    "all_match": true,
+    "max_delta_degrees": 1.45e-06,
+    "mismatches": [],
+    "sample_details": [
+      {
+        "date": "1986-10-25",
+        "planet": "mercury",
+        "db_lon": 211.6476974,
+        "computed_lon": 211.6476974,
+        "delta": 3e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2001-02-15",
+        "planet": "saturn",
+        "db_lon": 30.6033052,
+        "computed_lon": 30.6033052,
+        "delta": 1e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "1906-03-28",
+        "planet": "mercury",
+        "db_lon": 356.6078913,
+        "computed_lon": 356.6078913,
+        "delta": 2e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2001-05-05",
+        "planet": "mercury",
+        "db_lon": 33.7916364,
+        "computed_lon": 33.7916364,
+        "delta": 2e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2073-07-23",
+        "planet": "saturn",
+        "db_lon": 203.9230931,
+        "computed_lon": 203.9230931,
+        "delta": 2e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "1937-08-02",
+        "planet": "rahu",
+        "db_lon": 230.7060653,
+        "computed_lon": 230.7060667,
+        "delta": 1.45e-06,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2083-07-09",
+        "planet": "mercury",
+        "db_lon": 102.721333,
+        "computed_lon": 102.721333,
+        "delta": 0.0,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "1979-10-15",
+        "planet": "mars",
+        "db_lon": 108.0885296,
+        "computed_lon": 108.0885296,
+        "delta": 2e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2094-08-20",
+        "planet": "moon",
+        "db_lon": 221.1781527,
+        "computed_lon": 221.1781527,
+        "delta": 1e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      },
+      {
+        "date": "2005-06-26",
+        "planet": "jupiter",
+        "db_lon": 165.6304167,
+        "computed_lon": 165.6304167,
+        "delta": 2e-08,
+        "sign_match": true,
+        "nak_match": true,
+        "pada_match": true
+      }
+    ]
+  },
+  "boundary_check": {
+    "1900-01-01": "ok",
+    "2100-12-31": "ok",
+    "1900-01-01_detail": {
+      "planet": "sun",
+      "lon": 257.6879884
+    },
+    "2100-12-31_detail": {
+      "planet": "sun",
+      "lon": 254.0739878
+    }
+  },
+  "audit_findings": [
+    "DB uses TRUE_NODE (not MEAN_NODE) for Rahu/Ketu \u2014 confirmed by calibration against 1987-08-17 Rahu row",
+    "DB uses midnight UT (hour=0.0) \u2014 confirmed by calibration against 1984-02-05 birth date Sun/Moon rows",
+    "Nakshatra 'Moola' in DB is an alternate spelling of 'Mula' \u2014 same nakshatra, not a data error",
+    "Nakshatra 'Dhanishta' in DB vs 'Dhanishtha' \u2014 spelling variant only, same nakshatra",
+    "Planet names stored lowercase in DB (sun, moon, etc.)",
+    "9 planets: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Rahu, Ketu"
+  ],
+  "overall_status": "PASS"
+}

@@ -1,0 +1,2055 @@
+{
+  "summary": {
+    "generated_at": "2026-04-19T16:56:18",
+    "files_scanned": 37,
+    "versions_excluded": 18,
+    "candidates_sent_to_workers": 90,
+    "live_errors": 0,
+    "historical_docs": 0,
+    "regex_false_positives": 90,
+    "msr_orphaned_citations": 2,
+    "matrix_inconsistencies": 95
+  },
+  "live_errors": [],
+  "msr_citation_check": {
+    "registry_path": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+    "valid_range": "MSR.001–MSR.496 + MSR.402b",
+    "total_citations": 536,
+    "unique_cited_ids": 110,
+    "orphaned_ids": {
+      "391c": [
+        "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md:337",
+        "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md:11",
+        "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md:127"
+      ],
+      "391d": [
+        "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md:337"
+      ]
+    }
+  },
+  "matrix_spot_checks": [
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md",
+      "line": 275,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Sagittarius 9H",
+      "context": "**SOUL-LEVEL EVENT WINDOW.** Moon AK AD = soul-level activation. Father's death triggers: (1) Moon as 4L (home-security-ending with paternal-loss), (2) Moon Chalit-12 (loss-house), (3) CTR.03 Jupiter-"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DASHA_PERIODS.md",
+      "line": 355,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Scorpio 8H",
+      "context": "**MD REGIME CHANGE.** Mercury-era (17 years operational spine) ends. Ketu MD begins — 7 years of exalted-Ketu-8H-Scorpio delivery. Classical: Ketu MD transitions often feel ABRUPT unless AD bridges sm"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 104,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Cancer 4H",
+      "context": "d1_cross_validation: D1 4H Cancer (empty Rashi but strong SAV 32 + Jupiter aspect). D4 should confirm with Moon (4L) strong position."
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 115,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Scorpio 8H",
+      "context": "d1_cross_validation: D1 5H Leo empty, Ketu in 5H in Rashi? No — Ketu is in 8H Scorpio natally. 5H signification via Sun (5L in 10H) + Jupiter (putra karaka, 5L-from-Moon). Twin-birth under Rahu AD = u"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 132,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Gemini 12H",
+      "context": "- SIG.06 D9 12H Gemini stellium (Moon + Jupiter + Rahu tenants; Mercury Vargottama dispositor)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 136,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Gemini 12H",
+      "context": "- Moon: D9 Gemini (12H from D9 Lagna Cancer — stellium member, dispersed to foreign/loss)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 137,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Pisces 9H",
+      "context": "- Mars: D9 Pisces (9H from D9 Lagna — dharmic-Mars; connects to D1 7H Mars via dharma-vector)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 139,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Gemini 12H",
+      "context": "- Jupiter: D9 Gemini (12H from D9 Lagna — stellium member)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 142,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Gemini 12H",
+      "context": "- Rahu: D9 Gemini (12H from D9 Lagna — stellium member)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 143,
+      "entity": "Ketu",
+      "expected": "Scorpio 8H",
+      "found": "Sagittarius 6H",
+      "context": "- Ketu: D9 Sagittarius (6H from D9 Lagna)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 153,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Cancer 12H",
+      "context": "D9 Lagna Cancer (Moon-ruled) + Moon in D9 12H (Gemini) = emotional-foundation located in foreign/dissolution territory. Native's foreign-residence in 30s-40s (US 2019-2023) is textbook D9 12H stellium"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 167,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Scorpio 4H",
+      "context": "- Moon: D10 Scorpio 4H (home-of-career — work-as-home signature)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 170,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Pisces 8H",
+      "context": "- Jupiter: D10 Pisces 8H (own-sign — career-transformation / crisis-to-wisdom)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 171,
+      "entity": "Venus",
+      "expected": "Sagittarius 9H",
+      "found": "Gemini 11H",
+      "context": "- Venus: D10 Gemini 11H (career-gains-from-communication)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 172,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Taurus 10H",
+      "context": "- Saturn: D10 Taurus 10H (D10 Midheaven — Saturn as 10H career AT the D10 MC)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 173,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Cancer 12H",
+      "context": "- Rahu: D10 Cancer 12H (foreign-career)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 174,
+      "entity": "Ketu",
+      "expected": "Scorpio 8H",
+      "found": "Capricorn 6H",
+      "context": "- Ketu: D10 Capricorn 6H (career-enemies/competition register)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 177,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Taurus 10H",
+      "context": "- Saturn in D10 10H Taurus = career-permanence (Saturn in Kendra at D10 Lagna's 10th)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 178,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Pisces 8H",
+      "context": "- Jupiter in D10 own-sign Pisces 8H = transformative-dharmic career theme (crisis converts to expansion)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 179,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Cancer 12H",
+      "context": "- Rahu in D10 12H Cancer = foreign-career engine (matches US stint reality)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 180,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Taurus 10H",
+      "context": "d1_cross_validation: STRONGLY CONFIRMS D1 career density. Saturn in D10 10H Taurus (D10 Midheaven own-kendra) + Sun/Mars in D10 9H (trine to D10 Lagna) + Mercury in D10 2H own-sign = multi-kendra/trin"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 185,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Taurus 10H",
+      "context": "D10 is exceptionally strong for native. The combination of Saturn at D10 Midheaven (own-sign Taurus 10H in D10) + Sun+Mars in D10 9H + Mercury own-sign 2H D10 creates a multi-Kendra + dharmic-angle ca"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 198,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Scorpio 4H",
+      "context": "- Moon in D12 Scorpio (4H from D12 Lagna — 4H paternal-home signification)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 200,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Gemini 11H",
+      "context": "- Saturn + Ketu in D12 Gemini (11H from D12 Lagna — paternal-gains/networks)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 219,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Taurus 10H",
+      "context": "- Mercury + Jupiter in D16 Taurus (10H from D16 Lagna Leo)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 220,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Gemini 11H",
+      "context": "- Rahu + Ketu in D16 Gemini (11H from D16 Lagna)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 237,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Capricorn 3H",
+      "context": "- Mars + Rahu in D20 Capricorn (3H from D20 Lagna — effortful sadhana)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 239,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 5H",
+      "context": "- Sun in D20 Pisces (5H from D20 Lagna — Vishnu-affinity trine)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 241,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 5H",
+      "context": "**CTR.02 SPIRITUAL VALIDATION**: v1.2.1 names a Dharma Devata tension between classical Venkateshwara (Vishnu) and operational Jagannath. D20 shows **SUN IN PISCES (5H from D20 Lagna)** — Pisces is Vi"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 245,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 5H",
+      "context": "D20 is the chart's spiritual-architecture X-ray. Scorpio D20 Lagna + Jupiter AT Lagna = research-oriented + guru-anchored spiritual path. Sun in D20 5H Pisces is a rarely-discussed but significant Vis"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 246,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Capricorn 3H",
+      "context": "Mars + Rahu in D20 3H Capricorn = effortful-unconventional sadhana signature (Tantric affinity to Maa Ugratara per doc is this pattern — Tantric practice = \"unconventional-effortful sadhana\"). D20 con"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 258,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Cancer 3H",
+      "context": "- Mercury in D24 3H Cancer (effort-based-communication knowledge)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 259,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Libra 6H",
+      "context": "- Mars + Rahu + Ketu in D24 6H Libra (nodal axis + Mars on 6H — competitive education)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 260,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Pisces 11H",
+      "context": "- Jupiter in D24 11H Pisces (own-sign gains from knowledge)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 261,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Sagittarius 8H",
+      "context": "- Sun in D24 8H Sagittarius (deep-research knowledge)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 262,
+      "entity": "Venus",
+      "expected": "Sagittarius 9H",
+      "found": "Scorpio 7H",
+      "context": "- Venus in D24 7H Scorpio (partnered-learning theme)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 263,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Capricorn 9H",
+      "context": "- Saturn in D24 9H Capricorn (own-sign dharmic-scholarship)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 264,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 11H",
+      "context": "d1_cross_validation: STRONGLY CONFIRMS Saraswati Yoga (Jupiter+Mercury+Venus). D24 shows Jupiter in own-sign (Pisces) in 11H, Saturn in own-sign Capricorn 9H (dharmic-scholarship), Mercury in 3H. Mult"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 298,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Aquarius 2H",
+      "context": "- Jupiter in D30 2H Aquarius (financial-dharma tension)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 299,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Pisces 3H",
+      "context": "- Ketu + Rahu in D30 3H Pisces (nodal axis amplified in 3H — courage/effort register)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 300,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Taurus 5H",
+      "context": "- Mercury in D30 5H Taurus"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 301,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Gemini 6H",
+      "context": "- Saturn + Mars + Venus in D30 6H Gemini (triple-conjunction in 6H — internal conflict zone)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 302,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Libra 10H",
+      "context": "- Moon in D30 10H Libra (emotional-career-register misfortunes)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 307,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Aquarius 2H",
+      "context": "Jupiter in D30 2H Aquarius = dharmic-wealth-pressure (connects to CTR.03 Jupiter-weakness at D1 level). Nodal axis in D30 3H = courage/effort pressure — native's IIT attempt failure and 2016 Mahindra "
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 319,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Scorpio 3H",
+      "context": "- Mercury + Rahu + Ketu in D40 3H Scorpio (nodal amplification + Mercury at competitive 3H)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 321,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 7H",
+      "context": "- Sun in D40 7H Pisces (partnership-as-dharmic-devotion signature)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 339,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Sagittarius 3H",
+      "context": "- Sun + Moon + Rahu + Ketu cluster in D45 3H Sagittarius (father-house theme Sagittarius amplified)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 340,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Capricorn 4H",
+      "context": "- Saturn in D45 4H Capricorn (home/paternal discipline)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 341,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Aquarius 5H",
+      "context": "- Jupiter in D45 5H Aquarius"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 343,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Taurus 8H",
+      "context": "- Mercury in D45 8H Taurus"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 344,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Cancer 10H",
+      "context": "- Mars in D45 10H Cancer (debilitated Mars at career-kendra D45 — structural challenge)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 346,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Sagittarius 3H",
+      "context": "D45 places Sun/Moon/nodes all in Sagittarius 3H from D45 Lagna Libra. Sagittarius = D1 9H = father-house. D45 places 4 lights-and-nodes in the father-equivalent-house = paternal-lineage signature inte"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 350,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Cancer 10H",
+      "context": "Mars debilitated in D45 10H Cancer = additional weakness layer at paternal-purity level. Contrast with D10 where Mars is in 9H (dharmic). D45 says paternal-lineage purity-challenges persist; D10 says "
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 364,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Cancer 2H",
+      "context": "- Rahu + Jupiter in D60 2H Cancer (karmic-wealth + dharmic-karma)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 366,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Scorpio 6H",
+      "context": "- Mars in D60 6H Scorpio (Mars at own-sign in 6H = warrior-past-karma)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 368,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Aquarius 9H",
+      "context": "- Mercury + Venus in D60 9H Aquarius (dharma-wealth-knowledge karmic continuity)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 375,
+      "entity": "Mercury",
+      "expected": "Capricorn 10H",
+      "found": "Aquarius 9H",
+      "context": "The 2025 Vishnu-Venkateshwara gravitation (EVT.2025.XX.XX.01) gains additional depth: D60 Mercury+Venus in 9H Aquarius = dharma-wealth-knowledge karmic continuity. The spiritual-shift IS karmic-comple"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 410,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 5H",
+      "context": "- D20 Sun Pisces 5H (strongest Vishnu-marker per CTR.02 resolution)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 411,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Pisces 7H",
+      "context": "- D40 Sun Pisces 7H"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_DIVISIONALS.md",
+      "line": 412,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Sagittarius 3H",
+      "context": "- D45 Sun Sagittarius 3H (not Pisces — but in Vishnu's own-sign-of-Sagittarius for Jupiter)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 83,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Libra 12H",
+      "context": "- **SAV bindu extremes**: highest Libra+Scorpio 33, lowest Aquarius+Pisces 23 — Moon + 12H in weakest SAV zones"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 149,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Taurus 2H",
+      "context": "- Jupiter transit Taurus 2025-2026 (Jupiter activates 2H during Saturn AD — wealth-expansion window)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 151,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Taurus 4H",
+      "context": "- Saturn transit Taurus 2029-2032 (Kantaka Shani 4H from Moon per §V7.A)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 178,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Gemini 12H",
+      "context": "- D9 12H Gemini stellium (Moon+Jupiter+Rahu in D9 Gemini) — SIG.06 — significant foreign-architecture signal loop-closes through Gemini"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 224,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Cancer 4H",
+      "context": "- Jupiter transit Cancer 2026 (expansion on 4H — native's home/stability favorable)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 228,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Cancer 4H",
+      "context": "Jupiter's 7th-aspect from 9H delivers dharmic-guru-like beneficial energy to home-life. A2 (dhana-arudha) here = family's financial representation. The 2010 real-estate windfall (EVT.2010.XX.XX.01) is"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 243,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Capricorn 10H",
+      "context": "sign_lord_placement: 10H Capricorn (Sun's enemy sign — Saturn's own, Saturn is Sun's enemy; NOT Sun's debilitation which is Libra) with Mercury, AL, Vyatipata"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 249,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Scorpio 8H",
+      "context": "yogas_involving: [Ketu in 5H D1? No — Ketu is in 8H Scorpio natally. A3 arudha in 5H. Sun-5L in 10H = creativity-as-career]"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 263,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Aquarius 11H",
+      "context": "Saturn's 3rd-aspect from 7H onto 5H (60 virupa full) is the creativity-through-discipline signature: artistic/creative output requires Saturnine structure. Twins' birth (EVT.2022.01.03.01) timing vali"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 337,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Libra 7H",
+      "context": "- Jupiter transit Libra 2030 — benefic 7H activation"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 423,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Sagittarius 9H",
+      "context": "- Saturn transit Sagittarius 2047-2050 (Sade Sati Cycle 3 Rising from Moon-Aq-perspective; 9H from Aries Lagna — mid-life father-arc revisit)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 511,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Aquarius 10H",
+      "context": "- EVT.2017.03.XX.01 (career upgrade — 10H Sun AD with 11H Aquarius receiving Saturn-lord activation)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 542,
+      "entity": "Mars",
+      "expected": "Libra 7H",
+      "found": "Pisces 2H",
+      "context": "aspects_received_vedic: [Jupiter 5th-from-9H = Aries, 9th-from-9H = Leo. So Jupiter doesn't directly aspect 12H from 9H via 5/9 special. 7th from 9H = 3H Gem. Mars 8th from 7H = Pisces 12H (Mars speci"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 545,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Cancer 12H",
+      "context": "- **SIG.06 D9 12H Gemini stellium** (in D9 chart, 12H from D9 Lagna Cancer = Gemini; contains Moon+Jupiter+Rahu — THIS is the chart's strongest foreign/moksha signal loop-closure point)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 559,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Pisces 12H",
+      "context": "- Jupiter transit Pisces 2022-2023, 2034, 2046 — benefic 12H activations"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 568,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Pisces 12H",
+      "context": "No arudha in Pisces — only sign where no arudha lands (per v6.0 §13.2). Combined with empty Rashi + low SAV, this creates a \"quiet powerhouse\" — the chart's MOKSHA-LEANING architecture operates backgr"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 608,
+      "entity": "Ketu",
+      "expected": "Scorpio 8H",
+      "found": "Cancer 4H",
+      "context": "- Single-arudha houses: Aries 1H (A10), Cancer 4H (A2), Leo 5H (A3), Scorpio 8H (Ketu-only no arudha), Aquarius 11H (A7)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 99,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Gemini 12H",
+      "context": "- SIG.06 D9 12H Gemini stellium (Moon is one of 3 tenants)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 145,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Capricorn 10H",
+      "context": "Mars as Avayogi (§11.3) is crucial — Avayogi is the \"obstacle-karaka\" opposite of Yogi Mercury. Mars obstacles operate THROUGH partnership-body (7H) + action (Mars kinetic). The 2007 knee surgery fits"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 285,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Sagittarius 9H",
+      "context": "- EVT.2018.11.28.01 (father passed — Saturn transit Sagittarius=9H classical trigger)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 324,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Gemini 12H",
+      "context": "- D9 12H stellium member (Rahu in D9 Gemini per SIG.06)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 341,
+      "entity": "Rahu",
+      "expected": "Taurus 2H",
+      "found": "Gemini 12H",
+      "context": "Rahu-Ketu as D9 12H Gemini stellium tenants (SIG.06) closes the foreign architecture loop at the soul-D9 level. Rahu is not \"classical-dignified\" so interpretation works via sign + house + yogas rathe"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 355,
+      "entity": "Ketu",
+      "expected": "Scorpio 8H",
+      "found": "Sagittarius 9H",
+      "context": "- D9 context: Ketu in D9 Sagittarius (9H placement in D9) — transformation-via-dharma signature"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_PLANETS.md",
+      "line": 359,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Cancer 10H",
+      "context": "- EVT.2018.11.28.01 (father passed — Mercury-Moon AD, but Ketu transit Cancer-axis aspecting 10H)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 72,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Capricorn 10H",
+      "context": "- **Sun in Capricorn (10H)**: Enemy's sign (Saturn's own; Saturn is Sun's enemy). NOT debilitated (Sun debilitates in Libra). Strengthened by 10H Kendra (max Dig Bala 60 virupa) + Vargottama Mercury +"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 75,
+      "entity": "Ketu",
+      "expected": "Scorpio 8H",
+      "found": "Taurus 2H",
+      "context": "**Both Rahu and Ketu are EXALTED in native's chart** — unusual. The nodal-axis (2H-Taurus / 8H-Scorpio) carries maximum-nodal-amplification possible. This is why:"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 133,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Taurus 4H",
+      "context": "- Saturn Kantaka Taurus 2029-2032 (per §V7.A — 4H from Moon = Dhaiya)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 134,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Taurus 2H",
+      "context": "- Jupiter transit Taurus 2025-2026 (current/imminent — expansion 2H)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 164,
+      "entity": "Moon",
+      "expected": "Aquarius 11H",
+      "found": "Gemini 12H",
+      "context": "- D9 12H Gemini stellium (Moon+Jupiter+Rahu in D9 Gemini) — SIG.06 loop-closure point"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 198,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Cancer 4H",
+      "context": "- Jupiter transit Cancer 2026 (EXALTED — major 4H benefic window for home)"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 204,
+      "entity": "Saturn",
+      "expected": "Libra 7H",
+      "found": "Cancer 4H",
+      "context": "- Saturn-in-Cancer 2032-2035 = 4H pressure on home/foundations"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 302,
+      "entity": "Sun",
+      "expected": "Capricorn 10H",
+      "found": "Libra 7H",
+      "context": "- Sun-in-Libra annually (debilitated) briefly: brief 7H Sun-weakness trigger each Oct-Nov"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 472,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Gemini 12H",
+      "context": "yogas_hosted: [D9 12H Gemini stellium dispositor = Jupiter in D1 9H manages 12H foreign-signals]"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 481,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Pisces 12H",
+      "context": "- Jupiter-Pisces own-sign 2034 = dharmic-12H peak benefic"
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 533,
+      "entity": "Jupiter",
+      "expected": "Sagittarius 9H",
+      "found": "Cancer 4H",
+      "context": "4. Cancer — Jupiter exalt 2026 + Saturn 2032-35 = 4H dual-benefic-then-pressure"
+    }
+  ],
+  "historical_docs": [],
+  "false_positives": [
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 86,
+      "entity": "Saham Mahatmya",
+      "trigger": "Mahatmya Saham in 7H (should be 9H Sagittarius)",
+      "match": "Original claim: \"Saturn + Mars + BB + HL + Saham Roga + Saham Mahatmya = six-layer convergence in Libra 7H\"",
+      "context": "    L81: \n    L82: ### §3.1 MSR.391 — \"7H Six-Layer Convergence\" (0.97 confidence)\n    L83: \n    L84: **CRITICAL REVIEW REQUIRED**\n    L85: \n>>> L86: Original claim: \"Saturn + Mars + BB + HL + Saham Roga + Saham Mahatmya = six-layer convergence in Libra 7H\"\n    L87: \n    L88: Per JH authoritative data:\n    L89: - Saturn in 7H ✓ CONFIRMED\n    L90: - Mars in 7H ✓ CONFIRMED\n    L91: - BB in 7H ✓ CONFIRMED",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 138,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "### §3.4 MSR.402 — \"Hidden-Pinnacle 8H Architecture\" (Varnada + Ghati in 8H Scorpio)",
+      "context": "    L133: \n    L134: > **NEW PRINCIPLE**: Lakshmi-grace enters this chart through the 7H relational axis. Wealth is anchored to partnership-quality, not to dharmic 9H directly. This modifies — but does not eliminate — UCN §IV.4's wealth-as-dharmic-output principle. Dharmic 9H remains wealth-supportive via Jupiter-Venus; but the Lakshmi-entry-point itself is 7H.\n    L135: \n    L136: This is actually CONSISTENT with the 7H karmic vortex narrative and the Mercury-Pentagram-UL-lord-governs-wealth framework. The two findings reinforce each other: 7H is the wealth-relational nexus, with Saturn AmK (career-planet) exalted there and Lakshmi-grace anchored there.\n    L137: \n>>> L138: ### §3.4 MSR.402 — \"Hidden-Pinnacle 8H Architecture\" (Varnada + Ghati in 8H Scorpio)\n    L139: \n    L140: **CRITICAL — MATERIALLY FALSE**\n    L141: \n    L142: Original claim: Varnada Lagna + Ghati Lagna both in 8H Scorpio = hidden-pinnacle authority architecture activating in Ketu MD 2031-2038.\n    L143: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 121,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "Original claim: Shree Lagna in 9H Sagittarius + Jupiter + Venus = Laxmi-Narayana-adjacent architecture.",
+      "context": "    L116: \n    L117: **MSR.404 status**: UPGRADED from 0.86 → 0.94. Hora Lagna in 3H + BB-UL 2026 convergence = 5-fold activation.\n    L118: \n    L119: ### §3.3 MSR.407 — \"9H Laxmi-Narayana-Adjacent\"\n    L120: \n>>> L121: Original claim: Shree Lagna in 9H Sagittarius + Jupiter + Venus = Laxmi-Narayana-adjacent architecture.\n    L122: \n    L123: Per JH:\n    L124: - Jupiter in 9H ✓ CONFIRMED\n    L125: - Venus in 9H ✓ CONFIRMED\n    L126: - **Shree Lagna NOT in 9H** — actually in 7H Libra",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/FINANCIAL_REPORT_Abhisek_Mohanty.md",
+      "line": 775,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "Jupiter is not a current dasha lord — Mercury is the MD lord, Saturn is the AD lord. The Yellow Sapphire (Pukhraj) is therefore not architecturally indicated as",
+      "context": "    L770: \n    L771: **Combustion protocol.** Mercury combusts briefly once or twice per year for approximately three to four weeks each. Your memory framework specifies removing the Emerald during Mercury-combustion windows. This is architecturally correct — combusting planets classically should not be reinforced through their stones, as the reinforcement amplifies the combust condition rather than mitigating it. The specific Mercury-combust windows within the 36-month horizon are approximately: May 2026 (approximately May 5 – May 25, verify via ephemeris), May-June 2027 (similar pattern), and May-June 2028. During these windows, the Emerald is removed and re-worn on the first non-combust day.\n    L772: \n    L773: **Yellow Sapphire (Jupiter) — conditional wearing during Jupiter exaltation transit.**\n    L774: \n>>> L775: Jupiter is not a current dasha lord — Mercury is the MD lord, Saturn is the AD lord. The Yellow Sapphire (Pukhraj) is therefore not architecturally indicated as a continuous-wearing gem during the 36-month horizon. However, Jupiter enters his exaltation sign Cancer on June 2, 2026 and remains there through October 31, 2026. This five-month window is the natural activation trigger for a Yellow Sapphire: Jupiter is at his peak dignity, and his seventh aspect directly illuminates your 10H career-density axis.\n    L776: \n    L777: **The conditional wearing protocol.** Consider activating a Yellow Sapphire at Jupiter's Cancer ingress on June 2, 2026 and wearing it continuously through October 31, 2026 (the exit back to Leo). This is a five-month conditional-wearing window specifically aligned with the Year Lord's transit-exaltation. The stone amplifies Jupiter's Lakshmi-Yoga and 9L-dharma-wealth contributions during the specific window when Jupiter's capacity to deliver is architecturally peak.\n    L778: \n    L779: **Specification.** 4-6 Ratti natural unheated yellow sapphire (Ceylon or Kashmir origin preferred for Jupiter-associated stones), set in 22-karat gold, worn on the right hand's index finger (Jupiter's finger — the Tarjani). Consecration prayer: Brihaspati Gayatri plus the Jupiter-specific verses from Saurashtra-Kalpa.\n    L780: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1274,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "**Sessions 16-17 refresh recommendation**: A focused review pass on Sessions 16 and 17 reports to verify no residual v1.0-UCN Jupiter-4H claims remain. Recommen",
+      "context": "    L1269: - **REPORT_FINANCIAL_v2_0.md (Session 17)**: Also predates red-team. May contain residual v1.0-UCN dependencies. Priority: LOW (wealth-as-dharmic-output principle derives from Jupiter's 9L lordship, not from disputed aspects).\n    L1270: - **REPORT_HEALTH_LONGEVITY_v1_0.md (Session 18)**: Written post-red-team; uses corrected Jupiter architecture throughout. No refresh required.\n    L1271: - **REPORT_RELATIONSHIPS_v1_0.md (Session 19)**: Uses corrected Jupiter architecture. No refresh required.\n    L1272: - **REPORT_PSYCHOLOGY_MIND_v1_0.md (Session 20)**: Uses corrected Jupiter architecture. No refresh required.\n    L1273: \n>>> L1274: **Sessions 16-17 refresh recommendation**: A focused review pass on Sessions 16 and 17 reports to verify no residual v1.0-UCN Jupiter-4H claims remain. Recommended for Session 27 (Cross-Report Coherence Audit).\n    L1275: \n    L1276: ---\n    L1277: \n    L1278: ## §VERSION METADATA\n    L1279: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 269,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "net_resonance: \"STRONGLY AMPLIFIED — hidden-pinnacle moksha architecture\"",
+      "context": "    L264:   - Indu Lagna in 8H Scorpio (new in v8.0) = wealth-from-Moon indicator in transformation house\n    L265: destructive_resonance:\n    L266:   - Nodal-axis inherent retrograde\n    L267:   - 8H as longevity-house carries inherent stress\n    L268:   - Gandanta-proximal at Jyeshtha end\n>>> L269: net_resonance: \"STRONGLY AMPLIFIED — hidden-pinnacle moksha architecture\"\n    L270: interpretive_note: \"Ketu MD 2031-2038 is the chart's deepest authority activation. v2.0: Indu Lagna (Moon-based wealth indicator) confirmed in 8H Jyeshtha — wealth through transformation/hidden channels is an additional 8H theme.\"\n    L271: v2_0_correction: \"Added Indu Lagna 8H Jyeshtha (new per FORENSIC v8.0).\"\n    L272: ```\n    L273: \n    L274: ### RM.10 — Ascendant Aries 12°23'55\" Ashwini Pada 4",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/FINANCIAL_REPORT_Abhisek_Mohanty.md",
+      "line": 1152,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "**Dig Bala (DIG)** — directional strength. Each planet has a specific house where its Dig Bala is maximum (60) — Sun in 10H, Moon in 4H, Mars in 10H, Mercury in",
+      "context": "    L1147: \n    L1148: **CYSS (Composite Yoga Signal Score)** — analytical framework score normalizing yoga-strength to 0-100. Integrates constituent planetary Shadbala, Vimsopaka, house-Bhavabala, Ashtakavarga, and specific dignity-bonuses. Scores >90 are peak-amplitude yogas; 70-90 are operational; <70 are technically-present but not strongly-delivering.\n    L1149: \n    L1150: **DAS (Dasha Activation Score)** — analytical framework score combining eight activation factors to produce a per-month 0-100 activation-level assessment. Tier thresholds: dormant <40, baseline 40-59, elevated 60-74, peak 75-89, critical 90-100.\n    L1151: \n>>> L1152: **Dig Bala (DIG)** — directional strength. Each planet has a specific house where its Dig Bala is maximum (60) — Sun in 10H, Moon in 4H, Mars in 10H, Mercury in 1H, Jupiter in 1H, Venus in 4H, Saturn in 7H.\n    L1153: \n    L1154: **D1, D9, D10, etc.** — Rashi (D1), Navamsa (D9), Dashamsha (D10), and other divisional charts. Each divisional divides each sign into equal divisions and re-assigns the planets. Classical tradition uses D1 for general, D9 for dharma-marriage, D10 for career, D12 for family-ancestry, etc.\n    L1155: \n    L1156: **Exaltation / Debilitation** — specific signs where each planet is classically considered strongest (exalted) or weakest (debilitated). Exaltation signs: Sun-Aries, Moon-Taurus, Mars-Capricorn, Mercury-Virgo, Jupiter-Cancer, Venus-Pisces, Saturn-Libra. Debilitation signs are 180° opposite each exaltation.\n    L1157: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 142,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "Original claim: Varnada Lagna + Ghati Lagna both in 8H Scorpio = hidden-pinnacle authority architecture activating in Ketu MD 2031-2038.",
+      "context": "    L137: \n    L138: ### §3.4 MSR.402 — \"Hidden-Pinnacle 8H Architecture\" (Varnada + Ghati in 8H Scorpio)\n    L139: \n    L140: **CRITICAL — MATERIALLY FALSE**\n    L141: \n>>> L142: Original claim: Varnada Lagna + Ghati Lagna both in 8H Scorpio = hidden-pinnacle authority architecture activating in Ketu MD 2031-2038.\n    L143: \n    L144: Per JH authoritative:\n    L145: - **Varnada Lagna is in 4H Cancer** (not 8H Scorpio)\n    L146: - **Ghati Lagna is in 9H Sagittarius** (not 8H Scorpio)\n    L147: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1402,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "**Context**: AUDIT_REPORT_v1_0 (2026-04-18) found that the corpus's own red-teams (RED_TEAM_L3 Session 24, CROSS_REPORT_COHERENCE_AUDIT Session 27) missed 11 re",
+      "context": "    L1397: \n    L1398: UCN v1.1 §X documents 5 operating instructions (OI1-OI5). This v2.0 adds a 6th derived from the governance-failure discovery in AUDIT_REPORT_v1_0.\n    L1399: \n    L1400: ### OI6 — Maintain Mechanical Verification Discipline\n    L1401: \n>>> L1402: **Context**: AUDIT_REPORT_v1_0 (2026-04-18) found that the corpus's own red-teams (RED_TEAM_L3 Session 24, CROSS_REPORT_COHERENCE_AUDIT Session 27) missed 11 residual Jupiter-4H claims in REPORT_CAREER_DHARMA_v1_0. The red-teams used sampled narrative spot-checks, which missed the residuals. Exhaustive mechanical grep verification found them immediately.\n    L1403: \n    L1404: **The instruction**: For any cross-artifact correction-propagation claim (e.g., \"the Jupiter correction is complete,\" \"all reports use UCN v1.1\"), use mechanical verification (grep/sed sweeps for the corrected terms), not narrative sampling. Narrative sampling produces false-negatives that governance registers as resolved when residuals remain.\n    L1405: \n    L1406: **Application to the native**: This is not only a process rule for Claude/red-teams. It generalizes to the native's own decision-support discipline: when applying the chart's operating instructions, verify application mechanically (tangible outputs, concrete behaviors) rather than by narrative self-assessment. \"I am tending the 7H with Saturn-discipline\" (narrative) ≠ specific verifiable commitments tended consistently over time (mechanical).\n    L1407: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 31,
+      "entity": "Varnada Lagna",
+      "trigger": "Varnada Lagna in 8H (should be 4H Cancer)",
+      "match": "- Varnada Lagna: Cancer 4H Pushya Pada 3 (was Scorpio 8H — corrected)",
+      "context": "    L26: All RM v2.0 element blocks use the corrected Special Lagna and Saham architecture from FORENSIC_ASTROLOGICAL_DATA_v8_0.md.\n    L27: \n    L28: **Special Lagnas (v8.0 corrected)**:\n    L29: - Hora Lagna: Gemini 3H Mrigashira Pada 3 (was Libra 7H — corrected)\n    L30: - Ghati Lagna: Sagittarius 9H Purva Ashadha Pada 1 (was Scorpio 8H — corrected)\n>>> L31: - Varnada Lagna: Cancer 4H Pushya Pada 3 (was Scorpio 8H — corrected)\n    L32: - Shree Lagna: Libra 7H Vishakha Pada 1 (was Sagittarius 9H — corrected)\n    L33: - Vighati Lagna: Leo 5H Purva Phalguni Pada 3 (new in v8.0)\n    L34: - Pranapada Lagna: Leo 5H Purva Phalguni Pada 3 (new/confirmed in v8.0)\n    L35: - Indu Lagna: Scorpio 8H Jyeshtha Pada 4 (new in v8.0)\n    L36: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 329,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "interpretive_note: \"Marriage-quality indicator receives Jupiter + Venus aspects simultaneously = dharmic-aesthetic partner-image. 2026 is crystallization window",
+      "context": "    L324:   - Hora Lagna in 3H Gemini (v2.0 confirmed) = annual-finance-power point in UL-house\n    L325: destructive_resonance:\n    L326:   - 3H effort/agitation house = spouse domain carries activity-intensity\n    L327:   - Ardra-Pada overlay (Rahu-nakshatra) introduces karmic complication\n    L328: net_resonance: \"STRONGLY AMPLIFIED in 2026 BB-UL convergence window\"\n>>> L329: interpretive_note: \"Marriage-quality indicator receives Jupiter + Venus aspects simultaneously = dharmic-aesthetic partner-image. 2026 is crystallization window. v2.0: Hora Lagna confirmed in 3H Gemini (was incorrectly in 7H in v1.1) — annual finance-power point co-located with UL strengthens the 3H career-communication-marriage triad.\"\n    L330: v2_0_correction: \"Added Hora Lagna 3H (confirmed per FORENSIC v8.0; was erroneously in 7H in v1.1 CDLM); updated D3.D3 anchor from 0.95 to 0.93.\"\n    L331: ```\n    L332: \n    L333: ### RM.13 — 4H Cancer (Mother / Sanctuary / Varnada Lagna) [v1.1 CORRECTED; v2.0 UPDATED]\n    L334: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md",
+      "line": 163,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "**Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupit",
+      "context": "    L158: \n    L159: **First**, the 10th house is among the chart's three strongest houses by Bhavabala (rank 3 of 12). It hosts the Sun-Mercury stellium, receives the Arudha Lagna (the native's public projected identity lives here), is aspected by Mars from 7H (executive drive) and will be touched by Jupiter's influence (dharmic authorization). The 10H is the chart's most multiply-loaded career house.\n    L160: \n    L161: **Second**, Mercury's seven-system convergence (MSR.413, confidence 0.98) is the chart's single highest-confidence analytical finding. In seventeen years of the current Mahadasha, every institutional career success retrodictively traces to Mercury's activation. The native who deploys Mercury fully — intellectual mastery, communicative precision, knowledge-synthesis in institutional contexts — is working in maximal alignment with the chart's design.\n    L162: \n>>> L163: **Third**, the Saraswati-Lakshmi-Raja Yoga stack provides the classical formal authorization for exceptional career achievement. Saraswati Yoga (Mercury + Jupiter + Venus in kendra/trikona) bestows the intellectual foundation; the Lakshmi Yoga signature (Shree Lagna in 7H Libra Vishakha, Venus 2L in 9H) wires wealth through the relationship domain into dharmic career output (RM_v2_0 RM.20); the triple Raja Yoga (Jupiter 9L in own sign 9H Trikona, Sun 5L in 10H Kendra, Saturn 10L exalted 7H Kendra) provides the formal classical authority-authorization.\n    L164: \n    L165: **Fourth**, the Sade Sati Paradox (MSR.396, three-system confirmation) is the career's empirical validation. The period 2022–2025 — classically predicted to be career-suppressive — was retrodictively documented as the most consequential career period of the native's life to date. This is not coincidence but architecture: the Authority-Through-Tension Pattern (UCN Part VII) produces maximum career output when institutional pressure is maximum. Pressure is the generator, not the suppressant.\n    L166: \n    L167: **Fifth**, the D10 Dashamsha (the divisional chart specifically governing career) independently confirms the D1's promise. Saturn in D10 at its Midheaven (own-sign Taurus 10H of the D10) is among the most auspicious possible Dashamsha configurations. The soul-lens (D9, D10) fully endorses what the circumstantial-lens (D1) promises.\n    L168: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 151,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "- **\"Hidden-pinnacle 8H architecture\" is a FALSE ARCHITECTURAL CLAIM.** 8H has only Ketu (exalted) as its primary feature. The Varnada+Ghati double-loading of 8",
+      "context": "    L146: - **Ghati Lagna is in 9H Sagittarius** (not 8H Scorpio)\n    L147: \n    L148: **MSR.402 status**: MATERIALLY FALSE as stated. Both special lagnas are NOT in 8H.\n    L149: \n    L150: **Consequences**:\n>>> L151: - **\"Hidden-pinnacle 8H architecture\" is a FALSE ARCHITECTURAL CLAIM.** 8H has only Ketu (exalted) as its primary feature. The Varnada+Ghati double-loading of 8H does not exist.\n    L152: - **UCN §VI.4 Seven-Mechanism Spiritual Amplification**: Mechanism #5 (Varnada+Ghati in 8H) was wrong. Real mechanisms reduce to 6:\n    L153:   1. Jupiter own-sign 9H ✓\n    L154:   2. Venus 9H (Ishta Devata) ✓\n    L155:   3. Shree Lagna (in 7H, not 9H) — REFRAMED\n    L156:   4. Ketu exalted 8H ✓",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1268,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- **REPORT_CAREER_DHARMA_v1_0.md (Session 16)**: Written before the red-team discovered the Jupiter-placement error. May contain residual v1.0-UCN claims that d",
+      "context": "    L1263: \n    L1264: ## §DOWNSTREAM IMPACT — HOW THIS REVISION AFFECTS L3 DOMAIN REPORTS\n    L1265: \n    L1266: The L3 Domain Reports produced in Sessions 16-20 used the corrected Jupiter position exclusively (per the Session 18 red-team intervention that predated Session 19 and 20 reports). Therefore:\n    L1267: \n>>> L1268: - **REPORT_CAREER_DHARMA_v1_0.md (Session 16)**: Written before the red-team discovered the Jupiter-placement error. May contain residual v1.0-UCN claims that depend on the erroneous Jupiter-4H placement. Flagged for potential v1.1 refresh in a future session. Priority: LOW (the Career Report's core Mercury-architecture is independent of Jupiter aspects).\n    L1269: - **REPORT_FINANCIAL_v2_0.md (Session 17)**: Also predates red-team. May contain residual v1.0-UCN dependencies. Priority: LOW (wealth-as-dharmic-output principle derives from Jupiter's 9L lordship, not from disputed aspects).\n    L1270: - **REPORT_HEALTH_LONGEVITY_v1_0.md (Session 18)**: Written post-red-team; uses corrected Jupiter architecture throughout. No refresh required.\n    L1271: - **REPORT_RELATIONSHIPS_v1_0.md (Session 19)**: Uses corrected Jupiter architecture. No refresh required.\n    L1272: - **REPORT_PSYCHOLOGY_MIND_v1_0.md (Session 20)**: Uses corrected Jupiter architecture. No refresh required.\n    L1273: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1693,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- 7H architectural framing (v3.0 §XVII supersedes any \"six-layer\" or \"Shree Lagna in 9H\" claims)",
+      "context": "    L1688: | **UCN_v3_0.md** | v8.0 reconciliation corrections (this file) | CURRENT for §XVII–§XXV |\n    L1689: \n    L1690: **Reading convention**: UCN content is the UNION of all four layers. Later versions override earlier where topics overlap. UCN v3.0 does NOT replace Parts I-XIV of v1.0/v1.1/v2.0. It adds Parts XVII-XXV (new sections) and supersedes UCN v2.0 §VI.4 (Seven-Mechanism → Six-Mechanism correction).\n    L1691: \n    L1692: **Readers**: Always consult v3.0 §XVII-XXV BEFORE citing v1.0/v1.1/v2.0 on the following topics:\n>>> L1693: - 7H architectural framing (v3.0 §XVII supersedes any \"six-layer\" or \"Shree Lagna in 9H\" claims)\n    L1694: - Spiritual mechanism count (v3.0 §XVIII supersedes v2.0 §VI.4)\n    L1695: - Ketu MD 2031-2038 framing (v3.0 §XIX supersedes any \"Varnada+Ghati 8H\" claims)\n    L1696: - Mercury system count (v3.0 §XX supersedes v2.0 \"Seven-System\" references)\n    L1697: - Special Lagna placement citations (v3.0 §XVII and all sub-sections supersede v6.0 values)\n    L1698: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 354,
+      "entity": "Varnada Lagna",
+      "trigger": "Varnada Lagna in 8H (should be 4H Cancer)",
+      "match": "v2_0_correction: \"Added Varnada Lagna 4H Cancer (was in 8H Scorpio in v1.1 — fully corrected per FORENSIC v8.0); added Saham Vivaha 4H Cancer.\"",
+      "context": "    L349:   - Lord Moon far in 11H = mother-significator displaced\n    L350:   - [CORRECTED v1.1]: Jupiter does NOT tenant 4H\n    L351:   - Rank 8 Bhavabala (mid-low house strength)\n    L352: net_resonance: \"MIXED — sanctuary structurally supported by aspects; Mandi shadow creates background difficulty; Varnada and Vivaha Saham add home-grounding importance\"\n    L353: interpretive_note: \"Inner sanctuary is aspect-governed (Mercury+Sun+Saturn+Ketu), not tenant-governed. v2.0: Varnada Lagna confirmed in 4H Cancer (was erroneously in 8H Scorpio in v1.1) — the chart's path-activation lagna is in the home-emotional domain, suggesting dharmic engagement requires emotional-home stability. Saham Vivaha in 4H means marriage formation has a home-sanctuary component.\"\n>>> L354: v2_0_correction: \"Added Varnada Lagna 4H Cancer (was in 8H Scorpio in v1.1 — fully corrected per FORENSIC v8.0); added Saham Vivaha 4H Cancer.\"\n    L355: ```\n    L356: \n    L357: ### RM.14 — 7H Libra (Relational Axis — Five-Layer Convergence) [v2.0 CORRECTED]\n    L358: \n    L359: ```yaml",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md",
+      "line": 537,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- The Lakshmi-Through-Relationship pathway (Shree Lagna 7H Libra Vishakha + Venus 2L in 9H) is most directly activated: Lakshmi enters through the relationship ",
+      "context": "    L532: The correct navigation: treat Ketu AD as the Mercury MD's intellectual-deepening interval. Use it for the knowledge-legacy work that Saturn AD's structural demands left insufficient time for. Do not interpret reduced institutional enthusiasm as decline; it is the chart's architectural pause before the Venus AD's recognition phase.\n    L533: \n    L534: ### §10.4 Venus AD and Sun AD: The Recognition Phase (2028–2030)\n    L535: \n    L536: Venus AD (approximately 2028–2029): Venus as 2L (wealth lord) in 9H Sagittarius activates the Lakshmi Yoga signature's most direct material and relational expression. Within Mercury MD, Venus AD is the sub-period when:\n>>> L537: - The Lakshmi-Through-Relationship pathway (Shree Lagna 7H Libra Vishakha + Venus 2L in 9H) is most directly activated: Lakshmi enters through the relationship domain (7H), with Venus's dharmic positioning (9H) as the bridge (RM_v2_0 RM.20)\n    L538: - Significant partnerships may be crystallized at the Venus level (Venus as 7L, MK)\n    L539: - Institutional recognition of the Mercury MD's intellectual legacy may become most publicly visible\n    L540: - The Saraswati Yoga fires with Venus's aesthetic-grace component most fully expressed\n    L541: \n    L542: Sun AD (approximately 2029–2030): Sun as 5L in 10H activates the solar authority dimension directly. Within Mercury MD, Sun AD reinforces the career's public visibility (AL in 10H, Dig Bala). The Mercury MD concludes on a note of visible career recognition and institutional acknowledgment: the decade's intellectual work becomes publicly legible as a completed arc, not merely an ongoing project.",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 152,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "- **UCN §VI.4 Seven-Mechanism Spiritual Amplification**: Mechanism #5 (Varnada+Ghati in 8H) was wrong. Real mechanisms reduce to 6:",
+      "context": "    L147: \n    L148: **MSR.402 status**: MATERIALLY FALSE as stated. Both special lagnas are NOT in 8H.\n    L149: \n    L150: **Consequences**:\n    L151: - **\"Hidden-pinnacle 8H architecture\" is a FALSE ARCHITECTURAL CLAIM.** 8H has only Ketu (exalted) as its primary feature. The Varnada+Ghati double-loading of 8H does not exist.\n>>> L152: - **UCN §VI.4 Seven-Mechanism Spiritual Amplification**: Mechanism #5 (Varnada+Ghati in 8H) was wrong. Real mechanisms reduce to 6:\n    L153:   1. Jupiter own-sign 9H ✓\n    L154:   2. Venus 9H (Ishta Devata) ✓\n    L155:   3. Shree Lagna (in 7H, not 9H) — REFRAMED\n    L156:   4. Ketu exalted 8H ✓\n    L157:   5. ~~Varnada+Ghati 8H~~ — **REMOVED** (false)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1695,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "- Ketu MD 2031-2038 framing (v3.0 §XIX supersedes any \"Varnada+Ghati 8H\" claims)",
+      "context": "    L1690: **Reading convention**: UCN content is the UNION of all four layers. Later versions override earlier where topics overlap. UCN v3.0 does NOT replace Parts I-XIV of v1.0/v1.1/v2.0. It adds Parts XVII-XXV (new sections) and supersedes UCN v2.0 §VI.4 (Seven-Mechanism → Six-Mechanism correction).\n    L1691: \n    L1692: **Readers**: Always consult v3.0 §XVII-XXV BEFORE citing v1.0/v1.1/v2.0 on the following topics:\n    L1693: - 7H architectural framing (v3.0 §XVII supersedes any \"six-layer\" or \"Shree Lagna in 9H\" claims)\n    L1694: - Spiritual mechanism count (v3.0 §XVIII supersedes v2.0 §VI.4)\n>>> L1695: - Ketu MD 2031-2038 framing (v3.0 §XIX supersedes any \"Varnada+Ghati 8H\" claims)\n    L1696: - Mercury system count (v3.0 §XX supersedes v2.0 \"Seven-System\" references)\n    L1697: - Special Lagna placement citations (v3.0 §XVII and all sub-sections supersede v6.0 values)\n    L1698: \n    L1699: ---\n    L1700: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 637,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "net_resonance: \"STRONGLY AMPLIFIED HIDDEN-PINNACLE (threefold stack)\"",
+      "context": "    L632:   - Indu Lagna in 8H Jyeshtha (v2.0 confirmed per FORENSIC v8.0) = Moon-based wealth indicator in transformation house\n    L633:   - Jyeshtha/Anuradha nakshatras bordering\n    L634: destructive_resonance:\n    L635:   - 8H classical shadow\n    L636:   - [v2.0]: Varnada Lagna now confirmed in 4H Cancer (NOT 8H); Ghati Lagna confirmed in 9H Sagittarius (NOT 8H); 8H fourfold-stack from v1.1 corrected to threefold\n>>> L637: net_resonance: \"STRONGLY AMPLIFIED HIDDEN-PINNACLE (threefold stack)\"\n    L638: interpretive_note: \"Chart's deepest-authority architecture. Ketu MD 2031-2038 activates this entire stack. v2.0: Varnada and Ghati Lagnas corrected out of 8H (both were wrong in v1.1 RM.21); 8H is now a cleaner Ketu-exalted + Indu Lagna stack — still the hidden-pinnacle domain but with a different lagna architecture than previously thought. The 8H's authority is Ketu-exalted + transformation-purification, not the compound of four special lagnas. Ketu MD 2031-2038 remains the activation window.\"\n    L639: v2_0_correction: \"CORRECTED from fourfold-stack (Ketu + Scorpio + Varnada + Ghati) to threefold (Ketu + Scorpio + Indu Lagna); Varnada removed (now 4H Cancer per v8.0); Ghati removed (now 9H Sagittarius per v8.0); Indu Lagna added (new per FORENSIC v8.0).\"\n    L640: ```\n    L641: \n    L642: ### RM.27 — Ketu MD 2031-2038 (Future)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+      "line": 40,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "v2.0 §6.1 established \"Wealth as Dharmic Output\" (UCN §IV.4) as the singular organizing principle, with Shree Lagna in 9H as the Lakshmi-anchor for dharmic weal",
+      "context": "    L35: \n    L36: ---\n    L37: \n    L38: ## §6.1 CORRECTED — The Organizing Principle: Two-Channel Lakshmi Architecture\n    L39: \n>>> L40: v2.0 §6.1 established \"Wealth as Dharmic Output\" (UCN §IV.4) as the singular organizing principle, with Shree Lagna in 9H as the Lakshmi-anchor for dharmic wealth.\n    L41: \n    L42: **CORRECTED: The wealth architecture has TWO Lakshmi channels, not one.**\n    L43: \n    L44: ### Channel 1: Dharmic-Lakshmi via 9H (Jupiter-Venus constellation)\n    L45: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 163,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "- **UCN §XII \"Ketu MD hidden pinnacle activation\"**: The specific \"Varnada+Ghati hidden-pinnacle in Ketu's 8H\" claim is false. Ketu MD 2031-2038 is still signif",
+      "context": "    L158:   6. Yogi Point 12H ✓\n    L159:   7. Devata Triple-Lock ✓\n    L160:   \n    L161:   **Revised: Six-Mechanism Spiritual Amplification.** Still high but refactored.\n    L162: \n>>> L163: - **UCN §XII \"Ketu MD hidden pinnacle activation\"**: The specific \"Varnada+Ghati hidden-pinnacle in Ketu's 8H\" claim is false. Ketu MD 2031-2038 is still significant due to:\n    L164:   - Ketu exalted 8H (confirmed)\n    L165:   - 8H = 4-house from 12H moksha\n    L166:   - Ketu MD as 7-year moksha-karaka period\n    L167:   - NOT because of Varnada/Ghati 8H support (which doesn't exist)\n    L168:   ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1175,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "v1.0 referenced \"Jupiter's aspect from 4H on 11H\" as part of the Moon-AK blessing architecture. This aspect does not exist. Moon AK in 11H has no direct Jupiter",
+      "context": "    L1170: \n    L1171: ## §V.6 — 11H AK SOCIAL ECOSYSTEM: CORRECTED\n    L1172: \n    L1173: *(Minor correction to UCN v1.0 §V.6 — Jupiter aspect on 11H.)*\n    L1174: \n>>> L1175: v1.0 referenced \"Jupiter's aspect from 4H on 11H\" as part of the Moon-AK blessing architecture. This aspect does not exist. Moon AK in 11H has no direct Jupiter aspect from Jupiter's actual 9H position.\n    L1176: \n    L1177: **Corrected Moon-AK support architecture**:\n    L1178: - Moon's nakshatra = Purva Bhadrapada (Jupiter-ruled). The Moon's dignity is supported by Jupiter through nakshatra-rulership, not through direct drishti.\n    L1179: - Moon is in Aquarius (Saturn's own sign). Saturn's 7th aspect on Moon reaches Leo (5H), not Aquarius (11H). Saturn does not aspect Moon directly.\n    L1180: - Moon's Jaimini Rashi Drishti: Aquarius (fixed sign) aspects Aries + Cancer + Libra (Taurus-Cancer-Libra is the fixed-sign aspect pattern for Aquarius). So Moon from Aquarius 11H Jaimini-aspects 1H (Aries), 4H (Cancer), and 7H (Libra).",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1709,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "4. Hora Lagna (claimed to be in 7H Libra — v6.0 error)",
+      "context": "    L1704: \n    L1705: UCN v1.0/v1.1/v2.0 described the 7H as a \"six-layer convergence\" or \"supreme six-layer karmic vortex\" with the following composition:\n    L1706: 1. Saturn exalted\n    L1707: 2. Mars (Lagna lord)\n    L1708: 3. Bhrigu Bindu\n>>> L1709: 4. Hora Lagna (claimed to be in 7H Libra — v6.0 error)\n    L1710: 5. Saham Roga (claimed to be in 7H Libra — v6.0 error)\n    L1711: 6. Saham Mahatmya (claimed to be in 7H Libra — v6.0 error)\n    L1712: Plus KP sub-lord Saturn.\n    L1713: \n    L1714: **Per JH v8.0 authoritative data (JHORA_TRANSCRIPTION_v8_0_SOURCE §2.1–2.2)**:",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 638,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "interpretive_note: \"Chart's deepest-authority architecture. Ketu MD 2031-2038 activates this entire stack. v2.0: Varnada and Ghati Lagnas corrected out of 8H (b",
+      "context": "    L633:   - Jyeshtha/Anuradha nakshatras bordering\n    L634: destructive_resonance:\n    L635:   - 8H classical shadow\n    L636:   - [v2.0]: Varnada Lagna now confirmed in 4H Cancer (NOT 8H); Ghati Lagna confirmed in 9H Sagittarius (NOT 8H); 8H fourfold-stack from v1.1 corrected to threefold\n    L637: net_resonance: \"STRONGLY AMPLIFIED HIDDEN-PINNACLE (threefold stack)\"\n>>> L638: interpretive_note: \"Chart's deepest-authority architecture. Ketu MD 2031-2038 activates this entire stack. v2.0: Varnada and Ghati Lagnas corrected out of 8H (both were wrong in v1.1 RM.21); 8H is now a cleaner Ketu-exalted + Indu Lagna stack — still the hidden-pinnacle domain but with a different lagna architecture than previously thought. The 8H's authority is Ketu-exalted + transformation-purification, not the compound of four special lagnas. Ketu MD 2031-2038 remains the activation window.\"\n    L639: v2_0_correction: \"CORRECTED from fourfold-stack (Ketu + Scorpio + Varnada + Ghati) to threefold (Ketu + Scorpio + Indu Lagna); Varnada removed (now 4H Cancer per v8.0); Ghati removed (now 9H Sagittarius per v8.0); Indu Lagna added (new per FORENSIC v8.0).\"\n    L640: ```\n    L641: \n    L642: ### RM.27 — Ketu MD 2031-2038 (Future)\n    L643: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+      "line": 62,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "This is a STRONGER wealth finding than the v2.0 reading, which placed Shree Lagna in 9H (dharmic house — already well-resourced). Having Shree Lagna in 7H means",
+      "context": "    L57: \n    L58: **NEW FINDING (from v8.0 reconciliation)**:\n    L59: \n    L60: JH v8.0 confirms: **Shree Lagna = Libra 23°19' Vishakha Pada 1 (7H)** — Lakshmi's grace-point is in the relational-partnership house.\n    L61: \n>>> L62: This is a STRONGER wealth finding than the v2.0 reading, which placed Shree Lagna in 9H (dharmic house — already well-resourced). Having Shree Lagna in 7H means:\n    L63: \n    L64: **Lakshmi-grace enters this chart through the relational axis.**\n    L65: \n    L66: The 7H carries: Saturn exalted (AmK, 10L+11L) + Mars (1L, Lagna lord) + Bhrigu Bindu (fortune-timing nexus) + **Shree Lagna (Lakshmi's seat)** + KP sub-lord Saturn.\n    L67: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 169,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**\"Hidden pinnacle\" reframe needed**: Ketu MD remains scheduled as a moksha-oriented period, but the strength of the \"hidden-pinnacle\" claim reduces. More accur",
+      "context": "    L164:   - Ketu exalted 8H (confirmed)\n    L165:   - 8H = 4-house from 12H moksha\n    L166:   - Ketu MD as 7-year moksha-karaka period\n    L167:   - NOT because of Varnada/Ghati 8H support (which doesn't exist)\n    L168:   \n>>> L169:   **\"Hidden pinnacle\" reframe needed**: Ketu MD remains scheduled as a moksha-oriented period, but the strength of the \"hidden-pinnacle\" claim reduces. More accurately described as \"Ketu MD as naturally moksha-oriented for this chart.\"\n    L170: \n    L171: - **Varnada in 4H Cancer (NEW)**: Varnada = social/caste authority lagna. In 4H Cancer (Jupiter's exaltation sign + Moon's own sign) = native's social authority is rooted in domestic/maternal/sanctuary themes. This is an entirely different social-authority reading than 8H Scorpio gave.\n    L172: \n    L173: - **Ghati in 9H Sagittarius (NEW)**: Ghati = strength-timing lagna. In 9H Jupiter's own sign = strength comes through dharmic/paternal/long-journey channels. Reinforces the 9H dharmic concentration.\n    L174: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1710,
+      "entity": "Saham Roga",
+      "trigger": "Roga Saham in 7H (should be 2H Taurus)",
+      "match": "5. Saham Roga (claimed to be in 7H Libra — v6.0 error)",
+      "context": "    L1705: UCN v1.0/v1.1/v2.0 described the 7H as a \"six-layer convergence\" or \"supreme six-layer karmic vortex\" with the following composition:\n    L1706: 1. Saturn exalted\n    L1707: 2. Mars (Lagna lord)\n    L1708: 3. Bhrigu Bindu\n    L1709: 4. Hora Lagna (claimed to be in 7H Libra — v6.0 error)\n>>> L1710: 5. Saham Roga (claimed to be in 7H Libra — v6.0 error)\n    L1711: 6. Saham Mahatmya (claimed to be in 7H Libra — v6.0 error)\n    L1712: Plus KP sub-lord Saturn.\n    L1713: \n    L1714: **Per JH v8.0 authoritative data (JHORA_TRANSCRIPTION_v8_0_SOURCE §2.1–2.2)**:\n    L1715: - Hora Lagna is in **Gemini 3H** (not Libra 7H)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 650,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "- Aligns with hidden-pinnacle 8H architecture (Ketu exalted + Indu Lagna)",
+      "context": "    L645: element: \"Ketu Mahadasha 7-year window, age 47-54\"\n    L646: domains_primary: [D6, D8]\n    L647: msr_anchors: [MSR.335, MSR.402]\n    L648: cdlm_anchors: [D6.D6=0.94]\n    L649: constructive_resonance:\n>>> L650:   - Aligns with hidden-pinnacle 8H architecture (Ketu exalted + Indu Lagna)\n    L651:   - Moksha-karaka activates moksha-house themes\n    L652:   - Ketu exalted natal → MD delivery at maximum dignity\n    L653:   - Ghati Lagna (9H) and Varnada Lagna (4H) will be active dharmic-home dimensions during Ketu MD — these route through different domains than the 8H themes\n    L654: destructive_resonance:\n    L655:   - Mercury MD identity-investment must release (transition stress)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+      "line": 88,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "v2.0 §6.3 described \"The Secondary Pathway — Lakshmi (9H Dharmic-Wealth)\" and included Shree Lagna in 9H as a key component.",
+      "context": "    L83: \n    L84: ---\n    L85: \n    L86: ## §6.3 CORRECTED — The Lakshmi Pathway (Secondary Pathway Revision)\n    L87: \n>>> L88: v2.0 §6.3 described \"The Secondary Pathway — Lakshmi (9H Dharmic-Wealth)\" and included Shree Lagna in 9H as a key component.\n    L89: \n    L90: **CORRECTED**: Shree Lagna is NOT in 9H. The 9H Lakshmi pathway is supported by:\n    L91: - Jupiter 9L (own sign) = dharmic wealth authorization\n    L92: - Venus 9H = Mahalakshmi (Ishta Devata) in the dharmic domain\n    L93: - Mahatmya Saham in 9H = honor/greatness through dharmic channels",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "00_ARCHITECTURE/V8_0_RECONCILIATION_REPORT.md",
+      "line": 197,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- MSR signals citing Shree Lagna 9H need correction (Shree is in 7H)",
+      "context": "    L192: - MSR.397 (Devata Triple-Lock) — derived from Karakamsa; confirmed\n    L193: - FS1-FS5 generally — structural, not dependent on errored lagnas (except FS5 Panchang which is now UPGRADED with Siva Yoga confirmation)\n    L194: \n    L195: **POTENTIAL MINOR ADJUSTMENTS**:\n    L196: - MSR signals citing HL-in-7H need correction (HL is in 3H)\n>>> L197: - MSR signals citing Shree Lagna 9H need correction (Shree is in 7H)\n    L198: \n    L199: ---\n    L200: \n    L201: ## §4 — NEW FINDINGS FROM JH (candidates for MSR v2.0 addition)\n    L202: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1711,
+      "entity": "Saham Mahatmya",
+      "trigger": "Mahatmya Saham in 7H (should be 9H Sagittarius)",
+      "match": "6. Saham Mahatmya (claimed to be in 7H Libra — v6.0 error)",
+      "context": "    L1706: 1. Saturn exalted\n    L1707: 2. Mars (Lagna lord)\n    L1708: 3. Bhrigu Bindu\n    L1709: 4. Hora Lagna (claimed to be in 7H Libra — v6.0 error)\n    L1710: 5. Saham Roga (claimed to be in 7H Libra — v6.0 error)\n>>> L1711: 6. Saham Mahatmya (claimed to be in 7H Libra — v6.0 error)\n    L1712: Plus KP sub-lord Saturn.\n    L1713: \n    L1714: **Per JH v8.0 authoritative data (JHORA_TRANSCRIPTION_v8_0_SOURCE §2.1–2.2)**:\n    L1715: - Hora Lagna is in **Gemini 3H** (not Libra 7H)\n    L1716: - Saham Roga is in **Taurus 2H** (not Libra 7H)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 670,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- Lakshmi: Shree Lagna in 7H Libra + Venus 2L in 9H + Jupiter 9L in 9H (own-sign) — v2.0 corrected: Shree Lagna now in 7H",
+      "context": "    L665: domains_primary: [D1, D2, D8]\n    L666: msr_anchors: [MSR.143, MSR.146]\n    L667: cdlm_anchors: [D8.D8=0.95]\n    L668: constructive_resonance:\n    L669:   - Saraswati: Mercury Kendra 10H + Jupiter Trikona 9H + Venus Trikona 9H = Kendra-Trikona yoga intact\n>>> L670:   - Lakshmi: Shree Lagna in 7H Libra + Venus 2L in 9H + Jupiter 9L in 9H (own-sign) — v2.0 corrected: Shree Lagna now in 7H\n    L671:   - Lakshmi Yoga reinterpretation: Shree Lagna in 7H means Lakshmi-yoga activates through relationship channels, not directly through the 9H dharma domain; Venus 2L in 9H remains the direct wealth-dharma link\n    L672:   - Raja Yoga 1: Jupiter 9L in own-sign 9H (Bhagya Yoga variant) [v1.1 CORRECTED — prior v1.0 cited this as \"Jupiter 9L in 4H Kendra DKA\"]\n    L673:   - Raja Yoga 2: Sun 5L in 10H Kendra (classical Trikona-in-Kendra)\n    L674:   - Raja Yoga 3: Saturn 10L exalted in 7H Kendra (Sasha Mahapurusha)\n    L675: destructive_resonance:",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 135,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "v2_0_correction: \"CDLM anchor updated D6.D6=0.94 (was 0.96 in v1.1); added Ghati Lagna 9H co-tenancy (was incorrectly in 8H in v1.1).\"",
+      "context": "    L130:   - Moola nakshatra Pada 3 (Ketu-ruled, transformational destabilization)\n    L131:   - Naisargika Bala weakest in chart\n    L132:   - [CORRECTED v1.1]: Jupiter does NOT aspect 4H/8H/10H/12H; prior v1.0 RM claims of these aspects were false\n    L133: net_resonance: \"STRONGLY AMPLIFIED by dignity; Uccha-Bala weakness requires active dharmic engagement\"\n    L134: interpretive_note: \"Dignity-strong-by-sign; Uccha-Bala-weak-by-metric. v2.0: Ghati Lagna confirmed in 9H Sagittarius — power-activation now in the dharma house rather than the 8H transformation house. This adds Ghati's temporal-power dimension to Jupiter's dharmic authority.\"\n>>> L135: v2_0_correction: \"CDLM anchor updated D6.D6=0.94 (was 0.96 in v1.1); added Ghati Lagna 9H co-tenancy (was incorrectly in 8H in v1.1).\"\n    L136: ```\n    L137: \n    L138: ### RM.04 — Venus 9H Sagittarius (Relational Significator)\n    L139: \n    L140: ```yaml",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 32,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- Shree Lagna: Libra 7H Vishakha Pada 1 (was Sagittarius 9H — corrected)",
+      "context": "    L27: \n    L28: **Special Lagnas (v8.0 corrected)**:\n    L29: - Hora Lagna: Gemini 3H Mrigashira Pada 3 (was Libra 7H — corrected)\n    L30: - Ghati Lagna: Sagittarius 9H Purva Ashadha Pada 1 (was Scorpio 8H — corrected)\n    L31: - Varnada Lagna: Cancer 4H Pushya Pada 3 (was Scorpio 8H — corrected)\n>>> L32: - Shree Lagna: Libra 7H Vishakha Pada 1 (was Sagittarius 9H — corrected)\n    L33: - Vighati Lagna: Leo 5H Purva Phalguni Pada 3 (new in v8.0)\n    L34: - Pranapada Lagna: Leo 5H Purva Phalguni Pada 3 (new/confirmed in v8.0)\n    L35: - Indu Lagna: Scorpio 8H Jyeshtha Pada 4 (new in v8.0)\n    L36: \n    L37: **Sahams (key v2.0 corrections)**:",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+      "line": 91,
+      "entity": "Saham Roga",
+      "trigger": "Roga Saham in 7H (should be 2H Taurus)",
+      "match": "The entire §6.5 analysis of v1.0 (\"Saham Roga in 7H — Health and Relationships Architecturally Linked\") rested on a false computational premise and is hereby re",
+      "context": "    L86: \n    L87: **Correction statement.** Saham Roga (the disease-focus Tajika sensitive point) does NOT fall in Libra 7H. The v8.0 JH export (JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.2, FORENSIC_ASTROLOGICAL_DATA_v8_0.md §12.2) establishes:\n    L88: \n    L89: > **Roga Saham: Taurus 2H (18°32'), nakshatra span Mrigashira-Krittika**\n    L90: \n>>> L91: The entire §6.5 analysis of v1.0 (\"Saham Roga in 7H — Health and Relationships Architecturally Linked\") rested on a false computational premise and is hereby replaced.\n    L92: \n    L93: ### Roga Saham in 2H: The Corrected Architecture\n    L94: \n    L95: **House signification.** The 2H governs: speech and the voice, the throat and neck (anatomical governance in the Jyotish body-map), family and lineage (kutumba), accumulated wealth and food intake, and the right eye. Saham Roga's placement in the 2H means: the chart's primary disease-concentration point is located in the domains of speech, nutrition, throat health, and family-wealth dynamics — not in the relational-negotiation axis.\n    L96: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "line": 465,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "primary_mechanism: \"8H Ketu (exalted, transformation) = health challenges are met with Ketu's capacity for complete dissolution and rebirth; Jupiter+Venus (9H) ",
+      "context": "    L460: \n    L461: CDLM.D4.D4:\n    L462:   row_domain: Health\n    L463:   col_domain: Health (self-reference)\n    L464:   linkage_type: compensates\n>>> L465:   primary_mechanism: \"8H Ketu (exalted, transformation) = health challenges are met with Ketu's capacity for complete dissolution and rebirth; Jupiter+Venus (9H) Jaimini Dual-sign aspects Scorpio 8H = the benefics supervise the health-transformation domain from 9H; Ketu (exalted) = any health challenges are navigated with maximum Ketu-strength (past-life healing capacity, intuitive health awareness); the health domain compensates its own challenges through Ketu's exalted regeneration\"\n    L466:   msr_anchors: [MSR.402, MSR.333, MSR.347]\n    L467:   strength: 0.80\n    L468:   direction: bidirectional\n    L469:   valence: mixed\n    L470:   key_finding: \"The health domain is self-compensating — Ketu exalted in 8H means health challenges are met with extraordinary regenerative capacity; Jupiter+Venus's Jaimini supervision of 8H provides dharmic protection.\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1779,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "5. Varnada + Ghati Lagnas both in 8H Scorpio ← **WRONG** — neither is in 8H",
+      "context": "    L1774: UCN v2.0 §VI.4 documented \"Seven-Mechanism Spiritual Amplification\" with these seven mechanisms:\n    L1775: 1. Jupiter 9L in own-sign 9H ✓\n    L1776: 2. Venus 9H (Ishta Devata) ✓\n    L1777: 3. Shree Lagna in 9H ← **WRONG** — Shree Lagna is in 7H, not 9H\n    L1778: 4. Ketu exalted in 8H Scorpio ✓\n>>> L1779: 5. Varnada + Ghati Lagnas both in 8H Scorpio ← **WRONG** — neither is in 8H\n    L1780: 6. Yogi Point in 12H Pisces ✓\n    L1781: 7. Devata Triple-Lock ✓\n    L1782: \n    L1783: Mechanism #3 is corrected (Shree Lagna relocated to 7H — not a spiritual-domain mechanism, though it reinforces the wealth-relational axis).\n    L1784: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 672,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- Raja Yoga 1: Jupiter 9L in own-sign 9H (Bhagya Yoga variant) [v1.1 CORRECTED — prior v1.0 cited this as \"Jupiter 9L in 4H Kendra DKA\"]",
+      "context": "    L667: cdlm_anchors: [D8.D8=0.95]\n    L668: constructive_resonance:\n    L669:   - Saraswati: Mercury Kendra 10H + Jupiter Trikona 9H + Venus Trikona 9H = Kendra-Trikona yoga intact\n    L670:   - Lakshmi: Shree Lagna in 7H Libra + Venus 2L in 9H + Jupiter 9L in 9H (own-sign) — v2.0 corrected: Shree Lagna now in 7H\n    L671:   - Lakshmi Yoga reinterpretation: Shree Lagna in 7H means Lakshmi-yoga activates through relationship channels, not directly through the 9H dharma domain; Venus 2L in 9H remains the direct wealth-dharma link\n>>> L672:   - Raja Yoga 1: Jupiter 9L in own-sign 9H (Bhagya Yoga variant) [v1.1 CORRECTED — prior v1.0 cited this as \"Jupiter 9L in 4H Kendra DKA\"]\n    L673:   - Raja Yoga 2: Sun 5L in 10H Kendra (classical Trikona-in-Kendra)\n    L674:   - Raja Yoga 3: Saturn 10L exalted in 7H Kendra (Sasha Mahapurusha)\n    L675: destructive_resonance:\n    L676:   - Mercury 6L co-governance adds dual-edge\n    L677:   - All yogas fire during Mercury MD only (conditional, not natal-permanent)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md",
+      "line": 30,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "D7 covers: father (9H, Sun karaka), mother (4H, Moon karaka), paternal dharmic transmission (9H Jupiter), maternal emotional foundation (4H Cancer, Mandi-shadow",
+      "context": "    L25: \n    L26: ## PART I — EXECUTIVE ORIENTATION\n    L27: \n    L28: ### §1 — Scope\n    L29: \n>>> L30: D7 covers: father (9H, Sun karaka), mother (4H, Moon karaka), paternal dharmic transmission (9H Jupiter), maternal emotional foundation (4H Cancer, Mandi-shadow), parental longevity themes, and the generational dharmic flow through the 1H-5H-9H trine.\n    L31: \n    L32: ### §2 — Executive Summary\n    L33: \n    L34: The parental domain architecture:\n    L35: - **Father (9H)**: Jupiter+Venus tenants; Sun (father karaka) in 10H Capricorn (Sun's enemy sign but Dig Bala max); father's dharmic-spiritual quality structurally strong",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "line": 579,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "primary_mechanism: \"5H Leo = empty (no natal planet) = a seeming weakness; BUT: Jupiter (GK, own sign 9H) Jaimini Dual-sign aspects Leo 5H = the most dharmic pl",
+      "context": "    L574: \n    L575: CDLM.D5.D5:\n    L576:   row_domain: Children\n    L577:   col_domain: Children (self-reference)\n    L578:   linkage_type: compensates\n>>> L579:   primary_mechanism: \"5H Leo = empty (no natal planet) = a seeming weakness; BUT: Jupiter (GK, own sign 9H) Jaimini Dual-sign aspects Leo 5H = the most dharmic planet (Jupiter own-sign = maximum strength) provides Jaimini Rashi Drishti to the children-house; this compensates for the 5H's emptiness with Jupiter's maximum-strength wisdom-aspect; Leo 5H = Sun-ruled = Sun in 10H (career) = the 5H lord is strong; the children domain compensates its natal emptiness through Jupiter's supervision and Sun's 10H strength\"\n    L580:   msr_anchors: [MSR.333, MSR.341]\n    L581:   strength: 0.75\n    L582:   direction: bidirectional\n    L583:   valence: benefic\n    L584:   key_finding: \"The children domain compensates its natal emptiness — Jupiter's maximum-strength Jaimini aspect on Leo 5H provides the missing planet's energy; children-domain results come through dharmic effort (Jupiter-quality) rather than spontaneous ease.\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1840,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "UCN v2.0 §VI.4 and multiple downstream reports (REPORT_SPIRITUAL_v1_0) framed the Ketu MD (2031-2038) as \"hidden-pinnacle activation\" via:",
+      "context": "    L1835: \n    L1836: ## §XIX — KETU MD 2031-2038 REFRAME\n    L1837: \n    L1838: ### §XIX.1 — The Invalidated Claim\n    L1839: \n>>> L1840: UCN v2.0 §VI.4 and multiple downstream reports (REPORT_SPIRITUAL_v1_0) framed the Ketu MD (2031-2038) as \"hidden-pinnacle activation\" via:\n    L1841: > \"Varnada + Ghati Lagnas both in 8H Scorpio = the hidden-pinnacle authority architecture that activates in Ketu MD 2031-2038\"\n    L1842: \n    L1843: This framing is **invalidated**. Varnada Lagna is in 4H Cancer. Ghati Lagna is in 9H Sagittarius. Neither is in 8H. The \"hidden-pinnacle 8H\" via special lagnas does not exist as claimed.\n    L1844: \n    L1845: ### §XIX.2 — The Correct Ketu MD Architecture",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 21,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "v4.0 was a layered merge preserving Parts I–III with archival Jupiter-4H and other v6.0-era errors",
+      "context": "    L16:   All parts now reflect v8.0-authoritative placements throughout.\n    L17: composition_note: >-\n    L18:   Prior standalone files remain in-repo as archival slices; new L3 citations should use **UCN_v4_0.md** (v4.1).\n    L19: quality_standard: Acharya-grade unified narrative per PROJECT_ARCHITECTURE_v2_1 §C.3.\n    L20: v4_1_changelog: >-\n>>> L21:   v4.0 was a layered merge preserving Parts I–III with archival Jupiter-4H and other v6.0-era errors\n    L22:   intact (by design, with Part IV precedence). v4.1 strips those errors directly from Parts I–III so\n    L23:   that the document is clean throughout, eliminating the need for reader-applied precedence rules.\n    L24:   Corrections applied: (1) Jupiter placement: Cancer 4H → Sagittarius 9H throughout Parts I–III;\n    L25:   (2) Jupiter aspects: 8H/10H/12H from 4H → 1H/3H/5H from 9H throughout; (3) Shree Lagna: 9H → 7H Libra;\n    L26:   (4) Hora Lagna: 7H → 3H Gemini; (5) Varnada Lagna: 8H Scorpio → 4H Cancer;",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "line": 94,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**Revised 8H reading**: Ketu exalted in 8H remains the primary 8H spiritual mechanism. The \"hidden-pinnacle\" quality of the 8H is supported ONLY by Ketu's own e",
+      "context": "    L89: - **Varnada Lagna = Cancer 12 deg 25 min Pushya Pada 3 (4H)** — not Scorpio 8H\n    L90: - **Ghati Lagna = Sagittarius 13 deg 56 min Purva Ashadha Pada 1 (9H)** — not Scorpio 8H\n    L91: \n    L92: **The 8H (Scorpio) contains**: Ketu (exalted) + Indu Lagna (27 Sc 04' Jyeshtha 8H) + Yasas Saham + Gaurava Saham.\n    L93: \n>>> L94: **Revised 8H reading**: Ketu exalted in 8H remains the primary 8H spiritual mechanism. The \"hidden-pinnacle\" quality of the 8H is supported ONLY by Ketu's own exalted dignity — not by Varnada or Ghati which are in different houses.\n    L95: \n    L96: **Indu Lagna (new from JH)**: Scorpio 27°04' Jyeshtha 8H. Indu Lagna relates to material prosperity/financial luck. In 8H Scorpio with Ketu = material luck through transformation/hidden knowledge. This is a CONFIRMED 8H element (new to corpus) but does not restore the false Varnada/Ghati claims.\n    L97: \n    L98: ---\n    L99: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "line": 675,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "primary_mechanism: \"Ketu (exalted, 8H) = moksha-liberation energy in the health-transformation house = spiritual depth compensates health challenges; Jupiter+Ve",
+      "context": "    L670: \n    L671: CDLM.D6.D4:\n    L672:   row_domain: Spirit\n    L673:   col_domain: Health\n    L674:   linkage_type: compensates\n>>> L675:   primary_mechanism: \"Ketu (exalted, 8H) = moksha-liberation energy in the health-transformation house = spiritual depth compensates health challenges; Jupiter+Venus (9H) Jaimini-aspects Scorpio 8H (health-transformation) = the spiritual benefics provide dharmic protection to the health domain; the native's spiritual evolution (Vishnu devotion, 2025) activates the Palana Devata (Mercury = sustaining) and Dharma Devata (Saturn = Venkateswara) = spiritual alignment with the devatas sustains health through dharmic protection\"\n    L676:   msr_anchors: [MSR.402, MSR.397, MSR.347]\n    L677:   strength: 0.80\n    L678:   direction: row→col\n    L679:   valence: benefic\n    L680:   key_finding: \"Spirit compensates health challenges — Ketu exalted in 8H means health transformations are spiritually guided; Jupiter+Venus's 9H-to-8H Jaimini supervision provides dharmic protection for health.\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1841,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "> \"Varnada + Ghati Lagnas both in 8H Scorpio = the hidden-pinnacle authority architecture that activates in Ketu MD 2031-2038\"",
+      "context": "    L1836: ## §XIX — KETU MD 2031-2038 REFRAME\n    L1837: \n    L1838: ### §XIX.1 — The Invalidated Claim\n    L1839: \n    L1840: UCN v2.0 §VI.4 and multiple downstream reports (REPORT_SPIRITUAL_v1_0) framed the Ketu MD (2031-2038) as \"hidden-pinnacle activation\" via:\n>>> L1841: > \"Varnada + Ghati Lagnas both in 8H Scorpio = the hidden-pinnacle authority architecture that activates in Ketu MD 2031-2038\"\n    L1842: \n    L1843: This framing is **invalidated**. Varnada Lagna is in 4H Cancer. Ghati Lagna is in 9H Sagittarius. Neither is in 8H. The \"hidden-pinnacle 8H\" via special lagnas does not exist as claimed.\n    L1844: \n    L1845: ### §XIX.2 — The Correct Ketu MD Architecture\n    L1846: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 431,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "**Motherly wisdom as a Jupiterian quality.** Because Cancer is Jupiter's exaltation sign, the 4H carries a Jupiterian resonance — wisdom, philosophical depth, e",
+      "context": "    L426: \n    L427: 4H Cancer is untenanted. The house's character is determined by (a) Cancer as the sign — Moon-ruled, nurturing, maternal, the house of psychological foundations — and (b) Cancer being Jupiter's exaltation sign, which gives the 4H a Jupiterian quality through sign-resonance even without Jupiter physically present. Jupiter from 9H does not aspect the 4H directly (Jupiter's aspects from 9H cover 1H, 3H, and 5H). The domestic domain draws its Jupiterian quality through Jupiter's *exaltation-sign ownership* of Cancer, not through planetary tenancy or aspect.\n    L428: \n    L429: The actual governance of 4H runs through Moon as the sign lord of Cancer. Moon as AK is in 11H Aquarius — the domestic foundation is governed by a Moon that is operating in the gains-and-collective domain (11H), structured through Saturnian Aquarius, oriented toward organized community rather than private nurturance. This means the native's 4H psychological foundation is present but operates from a distance — the domestic and maternal root is available but the Moon's primary orientation is outward (gains, networks, structured collective), not inward (private emotional nurturance, domestic immersion).\n    L430: \n>>> L431: **Motherly wisdom as a Jupiterian quality.** Because Cancer is Jupiter's exaltation sign, the 4H carries a Jupiterian resonance — wisdom, philosophical depth, expansiveness — as a sign-level quality, regardless of Jupiter's physical placement. Venus as MK (Matrikaraka = the mother's karaka) in 9H confirms: the mother's influence is dharmic and spiritually oriented, not materially constraining. The 4H Cancer sign-quality (Jupiter's exaltation imprint) combined with Venus MK in Jupiter's 9H sign creates a mother-dharma axis that is among the chart's most harmonious structural connections — even though Jupiter is physically in 9H rather than 4H.\n    L432: \n    L433: **Home as contemplative space.** The 4H Cancer's character asks for a domestic environment that supports Moon's Aquarian needs: sufficient intellectual structure, organized stillness, and community-oriented purpose. The native's optimal domestic environment is one that provides both roots (Cancer's nurturance quality) and a launching pad for organized collective engagement (Moon AK 11H's natural direction). A domestic environment that is merely sensory or emotionally cocooning without intellectual or community dimensions will feel limiting.\n    L434: \n    L435: **Domestic-professional integration.** A stable domestic foundation (4H Cancer, psychologically sound) is a structural prerequisite for the Saraswati Yoga and the four-house material axis to fire at full intensity. The 4H's stability is a bedrock for everything above it in the chart's vertical axis, even without Jupiter's physical tenancy.\n    L436: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "line": 132,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "> \"Ketu MD = the 'hidden pinnacle' activation (Varnada+Ghati Lagnas in 8H Scorpio = Ketu's exaltation sign)\"",
+      "context": "    L127: ## §10 CORRECTED — The Three-Phase Spiritual Arc: Ketu MD Reframe\n    L128: \n    L129: ### §10.1 Phase 2 — Ketu MD (2031-2038): CORRECTED FRAMING\n    L130: \n    L131: v1.0 §10 Phase 2 stated:\n>>> L132: > \"Ketu MD = the 'hidden pinnacle' activation (Varnada+Ghati Lagnas in 8H Scorpio = Ketu's exaltation sign)\"\n    L133: \n    L134: **THIS CLAIM IS INVALIDATED.** Neither Varnada nor Ghati is in 8H Scorpio. The \"hidden pinnacle via special lagnas\" framing is false.\n    L135: \n    L136: **CORRECTED Ketu MD (2031-2038) architecture**:\n    L137: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MASTER_SYNTHESIS_v1_0.md",
+      "line": 103,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "3. Shree Lagna 9H (Lakshmi-grace point)",
+      "context": "    L98: ## §9 — THE SPIRITUAL ARCHITECTURE\n    L99: \n    L100: Seven distinct spiritual activation mechanisms:\n    L101: 1. Jupiter own-sign 9H (dharma lord max dignity)\n    L102: 2. Venus 9H (Ishta Devata Mahalakshmi in dharma trine)\n>>> L103: 3. Shree Lagna 9H (Lakshmi-grace point)\n    L104: 4. Ketu exalted 8H (moksha-karaka max dignity)\n    L105: 5. Varnada Lagna + Ghati Lagna 8H Scorpio (hidden-pinnacle authority)\n    L106: 6. Yogi Point 12H Pisces (fortune-point in moksha house)\n    L107: 7. Devata Triple-Lock: Mercury-Vishnu (Palana) + Saturn-Venkateshwara (Dharma) + Venus-Mahalakshmi (Ishta)\n    L108: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/FINANCIAL_REPORT_Abhisek_Mohanty.md",
+      "line": 343,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "**Fifth-pass audit findings (RPT.AUD.13-15 in the deep analysis).** The final pass resolved the Narayana Dasha computation and closed remaining gaps. The estima",
+      "context": "    L338: \n    L339: The complete 27-tara Navatara map produced two high-significance findings. **Ketu sits in Sampat (wealth) tara** — the upcoming Mahadasha lord (from August 2027) occupies a *wealth-favorable* stellar position relative to your Moon. This is a specifically positive indicator for Ketu-MD financial outcomes that the dasha-transition analysis alone did not surface, and it moderates the \"regime-shift-to-Ketu-is-financially-challenging\" framing. Combined with the nakshatra-dispositor triangle (Ketu carries Saturn-quality forward), Ketu-MD's financial profile is more favorable than previously assessed. Separately, **Venus sits in Pratyak (obstacles) tara** — the chart's already most-vulnerable planet now carries a *ninth* overlapping condition: 2L + 7L + double-Maraka + Kendradhipati + Shadbala-weakest + D9-debilitated + Maha Dhana gateway + Ishta-ruler + Pratyak tara. Nine layers on one planet. Mars, by contrast, sits in **Parama Mitra (great friend)** — the single most favorable tara position — meaning the Lagna lord's self-assertion capacity is stellarly blessed.\n    L340: \n    L341: Two specific Venus transit windows for 2026 are identified: Venus in own-sign Taurus (approximately May-June 2026) directly activates the second-house wealth-axis from Venus's strongest transit position, and Venus in own-sign Libra (approximately September-October 2026) activates the seventh-house partnership-axis. These are the annual windows where the otherwise-weak Venus temporarily operates at full strength and should be used for Venus-axis-dependent financial activities (savings commitments, partnership arrangements, Mahalakshmi-aligned wealth decisions).\n    L342: \n>>> L343: **Fifth-pass audit findings (RPT.AUD.13-15 in the deep analysis).** The final pass resolved the Narayana Dasha computation and closed remaining gaps. The estimated Narayana Dasha (Jaimini's sign-based temporal system, computed with moderate confidence pending software verification) places the current period as **Libra from approximately February 2026 through February 2029**. If correct, this means a **quadruple temporal convergence** on Libra/7H as the current operative axis: (1) Vimshottari Mercury-Saturn AD with Saturn occupying Libra 7H; (2) Yogini transitioning to Ulka ruled by Saturn (Libra occupant); (3) Varshphal Muntha in Libra 7H for 2026-2027; and (4) Narayana Dasha in Libra sign-period. Combined with the Hora Lagna in Libra 7H, **five independent temporal and structural indicators** converge on the partnership-authority-contract axis as the operative focal point for the current window. For financial purposes, this quadruple-to-quintuple convergence specifically elevates the §5.3 hidden Raja Yoga from a structural finding to a *temporally-activated* finding: the 2026-2029 period is configured for partnership-wealth, contract-based income, and authority-through-counterpart mechanisms at an intensity that multiple independent systems flag simultaneously.\n    L344: \n    L345: Audit coverage is now estimated at **92-95%** of total classical analytical space. The remaining 5-8% consists entirely of data not present in v6.0 and not derivable without dedicated computation software (Kalachakra Dasha, D27 Nakshatramsha, full Prastara Ashtakavarga 672-cell matrix, exact Mars/Mercury monthly transit positions). No structural conclusion would change with these gaps filled. The audit is **complete** to the maximum extent the available data permits.\n    L346: \n    L347: ## §6. The Friction Map\n    L348: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1866,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**Accurate framing**: \"Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Exalted Ketu in 8H activates 7 years of transformation-depth, in",
+      "context": "    L1861: **Mechanism 5 — Jupiter (9L own sign) as Ketu's Dispositor in 9H**\n    L1862: Ketu in Scorpio is disposited by Mars (Scorpio's ruler). Mars in Libra is disposited by Venus. Venus in Sagittarius is disposited by Jupiter. The ultimate dispositor of Ketu's chain = Jupiter (9L, own sign, 9H). Thus the Ketu MD, despite its 8H placement, ultimately flows through the dharmic authority of Jupiter 9H. Ketu MD = moksha activation governed by dharmic-intelligence (Jupiter 9L) at the final dispositor level.\n    L1863: \n    L1864: ### §XIX.3 — Recalibrated Ketu MD Description\n    L1865: \n>>> L1866: **Accurate framing**: \"Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Exalted Ketu in 8H activates 7 years of transformation-depth, inner work, and liberation orientation. The period is characterized by deepening of the Mercury MD's dharmic-intellectual foundation into experiential-transformational wisdom. Authority during Ketu MD is inner-transformational rather than institutional-external. Peak authority expression comes through the Saturn AD sub-period within Ketu MD. The period is not a hidden-pinnacle via special lagnas (that claim was false) — it is a genuine moksha-depth period via Ketu's own exalted dignity in the transformation house.\"\n    L1867: \n    L1868: **Falsifier of old claim**: The claim that Varnada+Ghati in 8H amplified Ketu MD has been falsified by JH v8.0. Ketu MD's significance rests on Ketu's own exalted placement, not on special-lagna support.\n    L1869: \n    L1870: **Cross-reference**: MSR.402 (INVALIDATED), MSR.402b (replacement), REPORT_SPIRITUAL_v1_1\n    L1871: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 477,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "The 4H's Jupiterian sanctuary makes the 7H's tension navigable. The 3H's UL intellectual companionship makes the 12H's dissolving boundary experienceable withou",
+      "context": "    L472: \n    L473: Reading the six relational domains together:\n    L474: \n    L475: The **7H** (Saturn-Mars tension) is the karmic workshop: intense, high-consequence, paradoxically productive, structurally amplified. The **4H** (Cancer, Jupiter's exaltation sign, untenanted) is the psychological sanctuary: the relational foundation from which the karmic workshop's intensity can be navigated without being overwhelmed — its Jupiterian quality operating through sign-resonance rather than planetary tenancy. The **3H** (UL Gemini, Mercury-signed) is the partnership template: intellectual peer-equality, communicative depth, dual-natured. The **5H** (Sun 5L in 10H) is the creative legacy channel: the native's \"children\" are primarily intellectual and professional, expressed through career. The **11H** (Moon AK, A7) is the social ecosystem: networks and organized collectives as the natural relational medium, where the soul's gains-path and the partnership Arudha align. The **12H** (Jupiter 12L in own sign) is the transcendent relational boundary: spiritually significant connections at the edge of ordinary social reality.\n    L476: \n>>> L477: The 4H's Jupiterian sanctuary makes the 7H's tension navigable. The 3H's UL intellectual companionship makes the 12H's dissolving boundary experienceable without loss of self. The 11H's networked social ecosystem provides the scale through which the 5H's creative-intellectual progeny reaches its intended audience. The web is not six independent relational domains; it is one organism, where each domain is connected to the others through the underlying planetary architecture (Jupiter governing 4H-9H-12H; Mercury governing 3H-10H-UL; Saturn governing 7H-11H; Moon governing 4H and residing in 11H).\n    L478: \n    L479: The relational ecosystem's overall health depends on the health of its most structurally complex node: the 7H karmic vortex. When the 7H is being worked with consciously — when the Mars-Saturn tension is held rather than projected — the entire relational web functions with greater coherence. When the 7H tension is being projected (the native externalizing either the Mars urgency or the Saturn constraint onto partners), the disruption propagates through the web's planetary connections and destabilizes the otherwise supportive 4H, 11H, and 3H domains.\n    L480: \n    L481: The relational operating principle for this chart: **tend the karmic workshop (7H) first; everything else follows from how that central tension is held.**\n    L482: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "line": 150,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**CORRECTED framing**: \"Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Not a 'hidden pinnacle' via special lagnas (that claim was fals",
+      "context": "    L145: \n    L146: 4. **Jupiter as Ketu's chain dispositor**: Ketu in Scorpio → Mars (Scorpio lord) in Libra → Venus (Libra lord) in Sagittarius → Jupiter (Sagittarius lord, 9L own-sign). The final dispositor of Ketu's chain = Jupiter 9L. Ketu MD ultimately flows through the dharmic authority of Jupiter. Ketu MD = moksha activation under dharmic-intelligence authorization.\n    L147: \n    L148: 5. **Saturn AD within Ketu MD (anticipated)**: Saturn's 9:1 beneficial Phala (Ishta 43.28) activating during Ketu MD's transformational context = the period of most concentrated depth-authority delivery.\n    L149: \n>>> L150: **CORRECTED framing**: \"Ketu MD (2031-2038) is the chart's primary moksha-oriented dasha period. Not a 'hidden pinnacle' via special lagnas (that claim was false) but a genuine 7-year transformation-depth period via Ketu's own exalted dignity in the transformation house.\"\n    L151: \n    L152: **MSR reference**: MSR.402 (INVALIDATED), MSR.402b (replacement: domestic-dharmic authority architecture), UCN_v4_0 Part IV §XIX\n    L153: \n    L154: ### §10.2 Varnada Lagna and Ghati Lagna: Correct Readings\n    L155: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MASTER_SYNTHESIS_v1_0.md",
+      "line": 105,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "5. Varnada Lagna + Ghati Lagna 8H Scorpio (hidden-pinnacle authority)",
+      "context": "    L100: Seven distinct spiritual activation mechanisms:\n    L101: 1. Jupiter own-sign 9H (dharma lord max dignity)\n    L102: 2. Venus 9H (Ishta Devata Mahalakshmi in dharma trine)\n    L103: 3. Shree Lagna 9H (Lakshmi-grace point)\n    L104: 4. Ketu exalted 8H (moksha-karaka max dignity)\n>>> L105: 5. Varnada Lagna + Ghati Lagna 8H Scorpio (hidden-pinnacle authority)\n    L106: 6. Yogi Point 12H Pisces (fortune-point in moksha house)\n    L107: 7. Devata Triple-Lock: Mercury-Vishnu (Palana) + Saturn-Venkateshwara (Dharma) + Venus-Mahalakshmi (Ishta)\n    L108: \n    L109: CDLM.D6.D6 = 0.96 (highest self-amplification in matrix). Spiritual evolution is structurally unstoppable.\n    L110: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "line": 3805,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "- Jupiter's 7th aspect from exalted Cancer lands on 10H Cap Sun+Mercury+AL during his year-lordship — DIRECT YEAR-LORD AMPLIFICATION of career-density axis",
+      "context": "    L3800:     - Saraswati Yoga (SIG.07, CYSS 91): Jupiter is member → Varshesha supports knowledge-wealth channel\n    L3801:     - Hamsa MPY (absent per YOG.01.B, needed Jupiter in kendra — FAILS 9H-is-trikona-not-kendra): not amplified\n    L3802:   transit_alignment:\n    L3803:     - Jupiter Cancer exaltation Jun 2 2026 to Oct 31 2026 runs WITHIN the Varshphal validity window (Feb 5 2026 to Feb 5 2027). VARSHESH IS EXALTED IN TRANSIT for 5 months of his own year.\n    L3804:     - Jupiter's second Cancer exaltation pass ~2027-04 falls OUTSIDE this Varshphal year (next year)\n>>> L3805:     - Jupiter's 7th aspect from exalted Cancer lands on 10H Cap Sun+Mercury+AL during his year-lordship — DIRECT YEAR-LORD AMPLIFICATION of career-density axis\n    L3806:   dasha_alignment:\n    L3807:     - Current Mer MD + Sat AD (through 2027-08) — neither is Jupiter, so Year-Lord-Jupiter operates as an OVERLAY on the prevailing Vimshottari, not a dominant driver\n    L3808:     - Jupiter PD within Mer-Sat AD estimated 2027-04-22 to 2027-08-21 per DSH.01.B — this sub-period falls at the END of the 2026-27 Varshphal year and extends into next year\n    L3809:   muntha_coherence:\n    L3810:     - Muntha in Libra 7H, Muntha Lord Venus (weak)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 612,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "An acharya reviewing this chart would observe that the native's most genuine second-life-phase authority is Ketu's — not the former \"hidden pinnacle\" encoding, ",
+      "context": "    L607: \n    L608: Per v8.0 correction: Varnada Lagna = Cancer 4H; Ghati Lagna = Sagittarius 9H. The earlier v6.0 claim that both GL and VL were in Scorpio 8H (the \"hidden-pinnacle\" formulation) is falsified. The corrected picture: GL in 9H Sagittarius (the dharma house, Jupiter's own sign) indicates the chart's highest Hora-level expression is dharmic-intellectual; VL in 4H Cancer indicates the native's deepest status and recognition is anchored in the domestic-psychological foundation.\n    L609: \n    L610: The Ketu MD (2031–2038) carries a different but equally valid authority structure: Ketu in 8H Scorpio (the transformation house in the occult sign) is the chart's prior-mastery domain. When Ketu MD activates, the native enters a period of transformation-depth authority — wisdom accumulated through having navigated the full arc of Mercury MD's institutional achievement. The institutional authority of Saturn AmK (D1 career authority) and the intellectual authority of Mercury (seven-system convergence) are the preparation; the Ketu-period depth-authority (transformation, inner knowledge, conscious relinquishment) is the culmination. This means the native's most authentic life-authority arrives in the second half, but through Ketu's 8H mastery quality rather than through the now-falsified GL-VL-8H convergence claim.\n    L611: \n>>> L612: An acharya reviewing this chart would observe that the native's most genuine second-life-phase authority is Ketu's — not the former \"hidden pinnacle\" encoding, but the dharmic-intellectual arc (GL 9H Sagittarius) completing into transformation-depth wisdom (Ketu 8H Scorpio). The Mercury-period prepares; Ketu's period deepens.\n    L613: \n    L614: **Preparing During Mercury MD:**\n    L615: \n    L616: The most important Ketu MD preparation task is one that requires Saturn AD specifically: institutionalizing the Mercury MD's intellectual legacy into forms that can survive and function without the native's continuous executive presence.\n    L617: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "line": 174,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "v1.0 also listed: \"D6.D2 (Wealth) 0.88: Shree Lagna 9H + Lakshmi (Venus Ishta) 9H\"",
+      "context": "    L169: - Jupiter 9L (own sign 9H) feeding 10H via trine-to-kendra adjacency (9H→10H)\n    L170: - Jupiter's 5th aspect from 9H → Lagna (1H Aries) — dharmic authorization of identity\n    L171: - Ghati Lagna in 9H strengthens the dharmic channel that feeds career\n    L172: - Mahatmya Saham in 9H = career greatness/honor through dharmic channels\n    L173: \n>>> L174: v1.0 also listed: \"D6.D2 (Wealth) 0.88: Shree Lagna 9H + Lakshmi (Venus Ishta) 9H\"\n    L175: \n    L176: **CORRECTED mechanism**: The D6.D2 linkage is now via:\n    L177: - Venus (Ishta Devata Mahalakshmi) in 9H → wealth through devotion/dharma\n    L178: - Jupiter-Venus 9H conjunction = wealth-dharma synthesis\n    L179: - Shree Lagna (Lakshmi's grace) is in 7H — this creates a SECOND wealth channel (relational-Lakshmi via 7H) that supplements the dharmic-Lakshmi via 9H. Both channels are real.",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 97,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "- **All signals citing \"Hora Lagna in 7H\" or \"HL = Libra\"**: Updated to Gemini 3H.",
+      "context": "    L92: - **MSR.402**: SUPERSEDED/INVALIDATED. \"Hidden-pinnacle 8H architecture via Varnada+Ghati\" is factually false — both lagnas are confirmed NOT in 8H by JH. Replacement signal MSR.402b documents Varnada in 4H Cancer + Ghati in 9H Sagittarius as domestic-dharmic authority architecture.\n    L93: - **MSR.404**: Confidence upgraded 0.86 → 0.94. Hora Lagna now confirmed in Gemini 3H (not Libra 7H as v6.0 claimed) — HL joins UL in Gemini 3H, making BB-UL convergence a five-fold quadruple-loaded activation.\n    L94: - **MSR.407**: Confidence 0.87 → 0.82. Shree Lagna NOT in 9H (it is in 7H). Jupiter-Venus 9H conjunction retains Laxmi-Narayana-adjacent character without Shree Lagna reinforcement.\n    L95: - **MSR.413**: Upgraded from \"Seven-System Convergence\" to \"Eight-System Convergence.\" Eighth designation: Mercury is the lord of Birth Yoga = Siva (JH confirms; GAP.01 resolved).\n    L96: - **MSR.022**: Vivaha Saham corrected — Cancer 4H Pushya (not Gemini Ardra 3H).\n>>> L97: - **All signals citing \"Hora Lagna in 7H\" or \"HL = Libra\"**: Updated to Gemini 3H.\n    L98: - **All signals citing \"Shree Lagna in 9H\"**: Updated to Libra 7H.\n    L99: - **All signals citing \"Varnada Lagna in 8H\"**: Updated to Cancer 4H.\n    L100: - **All signals citing \"Ghati Lagna in 8H\"**: Updated to Sagittarius 9H.\n    L101: - **MSR.024 (CTR.01 / Saturn CTR)**: Updated — Ishta/Kashta Phala now REVERSES the \"Dramatic-Not-Compound\" reading for Saturn. JH confirms Saturn Ishta 43.28 / Kashta 4.81 = ~9:1 beneficial. Saturn IS the chart's most beneficial planet by Phala. CTR.01 revised.\n    L102: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "line": 3815,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "primary: \"Dharma-wealth + knowledge-pathway year with exalted-transit amplification; authority-platform strengthening via Jupiter's 7th aspect to 10H\"",
+      "context": "    L3810:     - Muntha in Libra 7H, Muntha Lord Venus (weak)\n    L3811:     - Year Lord Jupiter CASTS 5TH ASPECT on Aries 1H from Sag 9H natally — supporting self/Lagna dimension while Muntha tests the partnership axis\n    L3812:     - Year Lord Jupiter does NOT aspect 7H Libra (Jupiter's 5/7/9 aspects from Sag miss Libra) — Jupiter-Year-Lord provides SUPPORT TO SELF but NOT TO MUNTHA-SIGN directly. Operational implication: the native must personally bridge Year-Lord-Jupiter's support to Muntha-Libra's focus — i.e., consciously apply Jupiter-wisdom/dharma to Libra-partnership/balance themes.\n    L3813: \n    L3814: varshphal_year_theme:\n>>> L3815:   primary: \"Dharma-wealth + knowledge-pathway year with exalted-transit amplification; authority-platform strengthening via Jupiter's 7th aspect to 10H\"\n    L3816:   secondary: \"Muntha-in-fragile-7H tests partnership; but Year-Lord Jupiter does not aspect 7H — partnership-tests must be navigated through self-effort (Jupiter's 5th aspect on Lagna)\"\n    L3817:   tertiary: \"Jupiter-combust Jul 14-Aug 12 2026 INTERRUPTS Year-Lord potency for 30 days mid-year; combust-period requires Brihaspati-Gayatri mitigation\"\n    L3818: ```\n    L3819: \n    L3820: #### VAR.01.D — Mudda Dasha (Tajika Annual Dasha) — Structural Framework",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1095,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "**Corrected longevity assessment**: The chart does NOT have a \"Jupiter-protected longevity house\" as v1.0 claimed. The longevity picture is architecturally more",
+      "context": "    L1090: **What Jupiter DOES protect from 9H**:\n    L1091: - **1H Lagna (constitution)**: Jupiter's 5th special aspect directly protects the identity-body. This is a genuine and significant protective configuration — but for the container (1H), not for the longevity house (8H).\n    L1092: - **3H (UL house, communication, effort)**: Jupiter's 7th aspect blesses the partnership-image and effort/communication domain.\n    L1093: - **5H (creativity, children, buddhi)**: Jupiter's 9th special aspect blesses the intelligence-discrimination faculty.\n    L1094: \n>>> L1095: **Corrected longevity assessment**: The chart does NOT have a \"Jupiter-protected longevity house\" as v1.0 claimed. The longevity picture is architecturally more reliant on Lagna-constitution protection (where Jupiter does aspect) than on 8H protection (where no benefic aspect reaches). This is why the REPORT_HEALTH_LONGEVITY_v1_0.md (Session 18) emphasized Lagna-level vitality and constitution as the primary longevity mechanism rather than 8H-tenant quality.\n    L1096: \n    L1097: **Longevity operating principle (revised)**:\n    L1098: - Protect the Lagna (1H) as the primary longevity strategy (constitution-maintenance, Vata-Pitta balance, Saturn-discipline preserving physical frame)\n    L1099: - Do not rely on 8H-Jupiter protection that does not architecturally exist\n    L1100: - The 8H (Ketu + longevity) is protected only by the nodal axis and by the chart's absence of malefic war/combustion, not by Jupiter's direct aspect",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "line": 187,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "v1.0 cited MSR.407 for the Shree Lagna-in-9H-near-Venus architectural claim. This is corrected:",
+      "context": "    L182: \n    L183: ---\n    L184: \n    L185: ## §11 CORRECTED — MSR.407 Confidence Update\n    L186: \n>>> L187: v1.0 cited MSR.407 for the Shree Lagna-in-9H-near-Venus architectural claim. This is corrected:\n    L188: \n    L189: **MSR.407 v2.0**: Confidence 0.87 → 0.82. The 9H Laxmi-Narayana-adjacent architecture (Jupiter-Venus) remains but without Shree Lagna reinforcement. The 9H retains its Laxmi-Narayana character via planetary presence (Jupiter-Venus) even without the Shree Lagna point.\n    L190: \n    L191: ---\n    L192: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 98,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- **All signals citing \"Shree Lagna in 9H\"**: Updated to Libra 7H.",
+      "context": "    L93: - **MSR.404**: Confidence upgraded 0.86 → 0.94. Hora Lagna now confirmed in Gemini 3H (not Libra 7H as v6.0 claimed) — HL joins UL in Gemini 3H, making BB-UL convergence a five-fold quadruple-loaded activation.\n    L94: - **MSR.407**: Confidence 0.87 → 0.82. Shree Lagna NOT in 9H (it is in 7H). Jupiter-Venus 9H conjunction retains Laxmi-Narayana-adjacent character without Shree Lagna reinforcement.\n    L95: - **MSR.413**: Upgraded from \"Seven-System Convergence\" to \"Eight-System Convergence.\" Eighth designation: Mercury is the lord of Birth Yoga = Siva (JH confirms; GAP.01 resolved).\n    L96: - **MSR.022**: Vivaha Saham corrected — Cancer 4H Pushya (not Gemini Ardra 3H).\n    L97: - **All signals citing \"Hora Lagna in 7H\" or \"HL = Libra\"**: Updated to Gemini 3H.\n>>> L98: - **All signals citing \"Shree Lagna in 9H\"**: Updated to Libra 7H.\n    L99: - **All signals citing \"Varnada Lagna in 8H\"**: Updated to Cancer 4H.\n    L100: - **All signals citing \"Ghati Lagna in 8H\"**: Updated to Sagittarius 9H.\n    L101: - **MSR.024 (CTR.01 / Saturn CTR)**: Updated — Ishta/Kashta Phala now REVERSES the \"Dramatic-Not-Compound\" reading for Saturn. JH confirms Saturn Ishta 43.28 / Kashta 4.81 = ~9:1 beneficial. Saturn IS the chart's most beneficial planet by Phala. CTR.01 revised.\n    L102: \n    L103: **ADDITIONS (MSR.421–MSR.437)**:",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "line": 4273,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "During Jupiter Cancer exaltation (Jun-Oct 2026), Jupiter's 7th aspect hits Capricorn (10H),",
+      "context": "    L4268:     interpretation: >\n    L4269:       Jupiter's strongest BAV is on the 7H — the Raja Yoga seat. Jupiter's BAV partially compensates\n    L4270:       for 7H's Bhavabala weakness. When Jupiter transits Libra (distant — not in 36-month window)\n    L4271:       or aspects Libra (7th aspect from Aries hits Libra — Saturn in Aries mid-2026 to 2028 means\n    L4272:       Saturn+Jupiter would need co-transit patterns for this), the 7H receives maximum Jupiter support.\n>>> L4273:       During Jupiter Cancer exaltation (Jun-Oct 2026), Jupiter's 7th aspect hits Capricorn (10H),\n    L4274:       NOT Libra — so the Cancer transit doesn't activate this BAV finding directly.\n    L4275: \n    L4276:   saturn_bav_highlights:\n    L4277:     - \"Saturn BAV on Capricorn (10H) = 2 (WEAK). Saturn gives minimal support to his OWN 10H. Converges with CTR.01 — Saturn's delivery on his own career-house is bindu-impaired.\"\n    L4278:     - \"Saturn BAV on Aquarius (11H) = 4 (moderate). Saturn moderately supports his own gains-house.\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1115,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- **Jupiter's relationship to 4H**: Jupiter exalts in Cancer — Cancer is Jupiter's exaltation sign. However, Jupiter is not physically in Cancer. Therefore:",
+      "context": "    L1110: The v1.0 claim — \"Jupiter tenants 4H as a sanctuary anchor; the inner home is Jupiter's domain\" — was false on the tenancy side. Jupiter is not in 4H physically. The 4H (Cancer) is untenanted in D1.\n    L1111: \n    L1112: **Corrected 4H architecture**:\n    L1113: - **4H Cancer**: Untenanted in D1\n    L1114: - **4H lord**: Moon (Cancer's ruler), positioned in 11H Aquarius (Purva Bhadrapada Pada 3)\n>>> L1115: - **Jupiter's relationship to 4H**: Jupiter exalts in Cancer — Cancer is Jupiter's exaltation sign. However, Jupiter is not physically in Cancer. Therefore:\n    L1116:    - Transits through Cancer (4H) activate Jupiter's exaltation energy\n    L1117:    - Planets transiting Cancer encounter a Jupiter-exalted environmental quality in the native's 4H domain\n    L1118:    - The 4H's highest expression is Jupiter-calibrated (wise, expansive, nurturing, dharmic) even though Jupiter is not present\n    L1119: - **Mandi in 4H**: Upagraha Mandi (Saturn's sub-point) is at Cancer 14°13' (FORENSIC §11.5, `HAZ.MANDI`). The 4H has a Saturn-Mandi background challenge — a subtle, background-level disturbance in the emotional-security domain.\n    L1120: - **Mercury's 7th aspect on 4H** (from 10H Capricorn): Mercury aspects 4H from the career house with a 7th full aspect. The analytical mind casts its discipline-structured quality onto the emotional-sanctuary domain. The 4H's character is therefore co-shaped by Moon (lord from 11H) + Mandi (Saturn-shadow in residence) + Mercury (7th aspect from 10H) + Jupiter's exaltation-sign-quality as environmental backdrop.",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md",
+      "line": 58,
+      "entity": "Saham Vivaha",
+      "trigger": "Vivaha Saham in 3H (should be 4H Cancer)",
+      "match": "- Saham Vivaha in 3H (marriage lot in travel-communication house)",
+      "context": "    L53: ### §3 — The Three Travel Houses\n    L54: \n    L55: **3H Gemini (short travel, communication, effort)**:\n    L56: - Untenanted in D1; holds UL + A11 + A5 (triple Arudha)\n    L57: - Receives Jupiter's 7th aspect from 9H (UL house benediction)\n>>> L58: - Saham Vivaha in 3H (marriage lot in travel-communication house)\n    L59: - Lord Mercury in 10H (career house)\n    L60: \n    L61: **9H Sagittarius (long travel, pilgrimage, dharma)**:\n    L62: - Jupiter (9L own sign) + Venus (7L, 2L, MK)\n    L63: - The dharmic-foreign-pilgrimage domain at maximum benefic density",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 99,
+      "entity": "Varnada Lagna",
+      "trigger": "Varnada Lagna in 8H (should be 4H Cancer)",
+      "match": "- **All signals citing \"Varnada Lagna in 8H\"**: Updated to Cancer 4H.",
+      "context": "    L94: - **MSR.407**: Confidence 0.87 → 0.82. Shree Lagna NOT in 9H (it is in 7H). Jupiter-Venus 9H conjunction retains Laxmi-Narayana-adjacent character without Shree Lagna reinforcement.\n    L95: - **MSR.413**: Upgraded from \"Seven-System Convergence\" to \"Eight-System Convergence.\" Eighth designation: Mercury is the lord of Birth Yoga = Siva (JH confirms; GAP.01 resolved).\n    L96: - **MSR.022**: Vivaha Saham corrected — Cancer 4H Pushya (not Gemini Ardra 3H).\n    L97: - **All signals citing \"Hora Lagna in 7H\" or \"HL = Libra\"**: Updated to Gemini 3H.\n    L98: - **All signals citing \"Shree Lagna in 9H\"**: Updated to Libra 7H.\n>>> L99: - **All signals citing \"Varnada Lagna in 8H\"**: Updated to Cancer 4H.\n    L100: - **All signals citing \"Ghati Lagna in 8H\"**: Updated to Sagittarius 9H.\n    L101: - **MSR.024 (CTR.01 / Saturn CTR)**: Updated — Ishta/Kashta Phala now REVERSES the \"Dramatic-Not-Compound\" reading for Saturn. JH confirms Saturn Ishta 43.28 / Kashta 4.81 = ~9:1 beneficial. Saturn IS the chart's most beneficial planet by Phala. CTR.01 revised.\n    L102: \n    L103: **ADDITIONS (MSR.421–MSR.437)**:\n    L104: - 17 new classical yoga signals from JH v8.0 transcription",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "line": 5038,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "Combined with the Hora Lagna finding (Hora Lagna also in Libra 7H), FIVE independent",
+      "context": "    L5033:       (4) Narayana: Libra sign-period (2026-2029)\n    L5034:       \n    L5035:       FOUR independent temporal systems converge on Libra/7H as the active axis. This is\n    L5036:       a QUADRUPLE TEMPORAL CONVERGENCE on the partnership-authority-contract house.\n    L5037:       \n>>> L5038:       Combined with the Hora Lagna finding (Hora Lagna also in Libra 7H), FIVE independent\n    L5039:       indicators point to 7H Libra as the current operative axis.\n    L5040:       \n    L5041:       For financial purposes: the 2026-2029 period is SPECIFICALLY configured for partnership-\n    L5042:       wealth, contract-based-income, and authority-through-counterpart mechanisms. This\n    L5043:       reinforces §5.3 (Hidden Raja Yoga) as not merely a structural finding but a TEMPORALLY-",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1117,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- Planets transiting Cancer encounter a Jupiter-exalted environmental quality in the native's 4H domain",
+      "context": "    L1112: **Corrected 4H architecture**:\n    L1113: - **4H Cancer**: Untenanted in D1\n    L1114: - **4H lord**: Moon (Cancer's ruler), positioned in 11H Aquarius (Purva Bhadrapada Pada 3)\n    L1115: - **Jupiter's relationship to 4H**: Jupiter exalts in Cancer — Cancer is Jupiter's exaltation sign. However, Jupiter is not physically in Cancer. Therefore:\n    L1116:    - Transits through Cancer (4H) activate Jupiter's exaltation energy\n>>> L1117:    - Planets transiting Cancer encounter a Jupiter-exalted environmental quality in the native's 4H domain\n    L1118:    - The 4H's highest expression is Jupiter-calibrated (wise, expansive, nurturing, dharmic) even though Jupiter is not present\n    L1119: - **Mandi in 4H**: Upagraha Mandi (Saturn's sub-point) is at Cancer 14°13' (FORENSIC §11.5, `HAZ.MANDI`). The 4H has a Saturn-Mandi background challenge — a subtle, background-level disturbance in the emotional-security domain.\n    L1120: - **Mercury's 7th aspect on 4H** (from 10H Capricorn): Mercury aspects 4H from the career house with a 7th full aspect. The analytical mind casts its discipline-structured quality onto the emotional-sanctuary domain. The 4H's character is therefore co-shaped by Moon (lord from 11H) + Mandi (Saturn-shadow in residence) + Mercury (7th aspect from 10H) + Jupiter's exaltation-sign-quality as environmental backdrop.\n    L1121: \n    L1122: **Corrected psychological implication**: The inner sanctuary is not a warm, Jupiter-tenanted home domain. It is:",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART1.md",
+      "line": 65,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- **Shree Sukta**: Weekly recitation (Friday preferred). The Shree Lagna in 9H is activated directly by Shree Sukta practice.",
+      "context": "    L60: \n    L61: **Why**: Venus = Ishta Devata (Mahalakshmi); 2L+7L governing wealth + relationship; in 9H Sagittarius (Jupiter's sign); conjoined with Jupiter producing Lakshmi-Narayana-adjacent configuration; MK (Matrukaraka, mother significator).\n    L62: \n    L63: **Practices**:\n    L64: - **Mahalakshmi Ashtakam**: Friday morning, Venus's vara. Lakshmi Ishta Devata activation through explicit Ishta-alignment practice.\n>>> L65: - **Shree Sukta**: Weekly recitation (Friday preferred). The Shree Lagna in 9H is activated directly by Shree Sukta practice.\n    L66: - **Temple visit (Lakshmi shrines)**: Friday preferred. Venkateshwara temples (Tirumala form combines Vishnu + Lakshmi alignment through Vishnu's consort) are ideal given the triple-devata alignment.\n    L67: - **Dana**: White rice, sugar, white flowers, silver items on Friday. Modest, not elaborate.\n    L68: - **Practice of aesthetic beauty appreciation**: Venus governs aesthetic quality. Deliberate engagement with music, classical art forms, refined aesthetic environments is Venus-strengthening.\n    L69: \n    L70: ### §1.4 — Sun — MODERATE SUPPORTIVE RECOMMENDATION",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/DEEP_ANALYSIS_Abhisek_Mohanty_v1.md",
+      "line": 6269,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "- \"Jupiter casts 7th aspect from Cancer onto 10H Cap Sun+Mercury+AL = direct Year-Lord-amplification of career-density axis\"",
+      "context": "    L6264:     key_findings:\n    L6265:       - \"YEAR LORD DETERMINED: Jupiter (Thursday Day Lord) — probable Varshesha\"\n    L6266:       - \"Pancha-Vargiya Bala scoring: Jupiter ~50 (Sva own-sign dominance), Mars ~43 (Janma Lagnesh), Venus ~29 (Muntha Lord weak)\"\n    L6267:       - \"Trirashi Lord and Varsha-Lagnesh require exact solar-return time (±1 sign uncertainty); their possible range ~30-40 does not exceed Jupiter's ~50\"\n    L6268:       - \"Jupiter-Year-Lord transits own EXALTATION in Cancer Jun-Oct 2026 (within year 2026-02-05 to 2027-02-05) = RARE Year-Lord-own-exaltation amplification\"\n>>> L6269:       - \"Jupiter casts 7th aspect from Cancer onto 10H Cap Sun+Mercury+AL = direct Year-Lord-amplification of career-density axis\"\n    L6270:       - \"Year-Lord-Jupiter does NOT aspect 7H Libra — native must consciously bridge Jupiter-support to Muntha-partnership axis\"\n    L6271:       - \"Mudda Dasha opens with Jupiter Mudda (~48 days, Feb 5 – Mar 25 2026)\"\n    L6272:       - \"Jupiter-combust Jul 14-Aug 12 2026 requires Brihaspati-Gayatri mitigation — Year-Lord weakens mid-year for 30 days\"\n    L6273:     confidence: 0.72\n    L6274:     resolves: \"Varshphal Year-Lord — previously flagged as 'requires v6.1 data regeneration'; actually derivable from v6.0 + external weekday check + Tajika Pancha-Vargiya Bala scoring\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 100,
+      "entity": "Ghati Lagna",
+      "trigger": "Ghati Lagna in 8H (should be 9H Sagittarius)",
+      "match": "- **All signals citing \"Ghati Lagna in 8H\"**: Updated to Sagittarius 9H.",
+      "context": "    L95: - **MSR.413**: Upgraded from \"Seven-System Convergence\" to \"Eight-System Convergence.\" Eighth designation: Mercury is the lord of Birth Yoga = Siva (JH confirms; GAP.01 resolved).\n    L96: - **MSR.022**: Vivaha Saham corrected — Cancer 4H Pushya (not Gemini Ardra 3H).\n    L97: - **All signals citing \"Hora Lagna in 7H\" or \"HL = Libra\"**: Updated to Gemini 3H.\n    L98: - **All signals citing \"Shree Lagna in 9H\"**: Updated to Libra 7H.\n    L99: - **All signals citing \"Varnada Lagna in 8H\"**: Updated to Cancer 4H.\n>>> L100: - **All signals citing \"Ghati Lagna in 8H\"**: Updated to Sagittarius 9H.\n    L101: - **MSR.024 (CTR.01 / Saturn CTR)**: Updated — Ishta/Kashta Phala now REVERSES the \"Dramatic-Not-Compound\" reading for Saturn. JH confirms Saturn Ishta 43.28 / Kashta 4.81 = ~9:1 beneficial. Saturn IS the chart's most beneficial planet by Phala. CTR.01 revised.\n    L102: \n    L103: **ADDITIONS (MSR.421–MSR.437)**:\n    L104: - 17 new classical yoga signals from JH v8.0 transcription\n    L105: - See §NEW below",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1139,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- v1.0 referenced \"Jupiter's aspect from 4H on 10H\" as part of the Mercury-blessing architecture linked to the 7H's relational-career integration. This aspect d",
+      "context": "    L1134: *(Selective corrections to UCN v1.0 §V.1; primary 7H content remains.)*\n    L1135: \n    L1136: The 7H (Libra) architecture established in v1.0 — Saturn exalted AmK + Mars (Lagna lord, Avayogi, PK) + BB + HL + Saham Roga + Saham Mahatmya — is unchanged. The Sasha Mahapurusha Yoga, ATT pattern, and six-layer convergence (MSR.391) are unchanged.\n    L1137: \n    L1138: **v1.0 Jupiter-aspect claims on 7H that require correction**:\n>>> L1139: - v1.0 referenced \"Jupiter's aspect from 4H on 10H\" as part of the Mercury-blessing architecture linked to the 7H's relational-career integration. This aspect does not exist. Mercury's 10H dignity does NOT derive from Jupiter's aspect.\n    L1140: - Instead, the corrected architecture: Mercury's 10H dignity derives from (a) Vargottama, (b) Yogi Planet designation, (c) Karakamsa-sign lordship, (d) KP cusp 11 sub-lord, (e) Uttara Ashadha nakshatra (Sun-ruled, giving Sun-Mercury cross-connection through 10H co-tenancy). Mercury is the Seven-System Convergence (MSR.413, 0.98) — and this cross-system designation does NOT include any Jupiter-aspect component.\n    L1141: \n    L1142: **The corrected Mercury support architecture**: Mercury is maximally supported by seven independent classical systems, none of which is a direct Jupiter aspect. Mercury stands on its own dignity in 10H without needing Jupiter's external benediction — which is itself architecturally significant. The chart's primary instrument does not require dharmic planetary reinforcement from aspect; it is architecturally self-standing through its multi-system designation.\n    L1143: \n    L1144: ---",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART1.md",
+      "line": 283,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**Focus**: The hidden-pinnacle authority activation. Remedial practice shifts emphasis toward Ketu-aligned.",
+      "context": "    L278: - Study of moksha-path texts begins\n    L279: - Physical/material simplification: one domain at a time (e.g., digital consumption reduction, possessions decluttering)\n    L280: \n    L281: ### §5.3 — Ketu MD (2031-2038) — Future Orientation\n    L282: \n>>> L283: **Focus**: The hidden-pinnacle authority activation. Remedial practice shifts emphasis toward Ketu-aligned.\n    L284: \n    L285: - Primary practice shifts from mantra-japa toward silent meditation\n    L286: - External practice reduces; internal practice deepens\n    L287: - Teaching/offering activity becomes primary (vs. building/acquiring)\n    L288: - The \"Build to Offer, Not to Own\" operating instruction becomes the lived orientation",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 184,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "falsifier: \"If JH recomputation of Varnada/Ghati with corrected inputs yields 8H placements, MSR.402 would be partially restored. JH v8.0 is authoritative; fals",
+      "context": "    L179:     - \"Varnada Lagna: Cancer 12°25' Pushya Pada 3 (4H) — JH AUTHORITATIVE. Varnada = social/caste/community authority. In 4H Cancer (Moon's own sign, Jupiter's exaltation sign) = native's social authority is rooted in domestic/sanctuary/maternal themes.\"\n    L180:     - \"Ghati Lagna: Sagittarius 13°56' Purva Ashadha Pada 1 (9H) — JH AUTHORITATIVE. Ghati = strength-timing lagna. In 9H Sagittarius (Jupiter's own sign) = native's strength and timing are most potent when operating through dharmic/higher-purpose/guru-transmission channels.\"\n    L181:     - \"Combined reading: Social authority (Varnada 4H) + strength-timing peak (Ghati 9H) = a native whose deepest authority operates through home-sanctuary base + dharmic-purposive engagement. NOT through public spectacle or 8H transformation-depth as MSR.402 (now invalidated) claimed.\"\n    L182:     - \"Ghati Lagna in 9H reinforces the already dense 9H (Jupiter + Venus + Mahatmya Saham + Mrityu Saham) — the native's peak-strength timing is in dharmic contexts.\"\n    L183:     - \"Varnada in 4H joins: Moon-ruled 4H + Mitra Saham + Samartha Saham + Vivaha Saham + Kali Saham + Matru Saham = the domestic-relational sanctuary is the native's social authority base.\"\n>>> L184:   falsifier: \"If JH recomputation of Varnada/Ghati with corrected inputs yields 8H placements, MSR.402 would be partially restored. JH v8.0 is authoritative; falsification requires new birth-data recalculation.\"\n    L185:   domains_affected: [relationships, spirit, career, parents]\n    L186:   confidence: 0.85\n    L187:   v6_ids_consumed: [LAG.VARNADA, LAG.GHATI, HSE.4, HSE.9]\n    L188:   rpt_deep_dive: \"UCN_v3_0 §XIX, REPORT_SPIRITUAL_v1_1\"\n    L189:   reconciliation: \"FIX_SESSION_003 2026-04-18 — NEW SIGNAL. Replaces invalidated MSR.402. Documents corrected Varnada (4H) and Ghati (9H) placements and their architectural meaning.\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 212,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "aspects_received_vedic: [Jupiter 7th from 9H (Jupiter full aspect on 4H — beneficial \"mother's luck\" signature)]",
+      "context": "    L207: sign_lord: Moon\n    L208: sign_lord_placement: 11H Aquarius (Rashi) / 12H Pisces (Chalit per CTR.04)\n    L209: bhavabala_total: 474.87 virupa\n    L210: bhavabala_rank: 6 of 12\n    L211: sav_bindu: 32 (high)\n>>> L212: aspects_received_vedic: [Jupiter 7th from 9H (Jupiter full aspect on 4H — beneficial \"mother's luck\" signature)]\n    L213: aspects_received_jaimini: [Taurus (Rahu), Scorpio (Ketu), Aquarius (Moon), Capricorn (Sun+Merc) — Cancer is movable; aspects fixed signs EX-adjacent (Leo). So aspects Taurus, Scorpio, Aquarius. HITS Rahu+Ketu+Moon.]\n    L214: yogas_involving: [Jupiter's aspect to 4H creates \"Gajakesari-class\" mother/home benefic; BB lord Moon in 11H gives gain-via-home]\n    L215: arudhas_in_house: [A2 (Dhana/Family arudha in 4H — family-wealth-reflected-in-home)]\n    L216: d9_house_lord_location: Moon in D9 → Gemini (12H of D9 — part of the D9 12H stellium SIG.06)\n    L217: d10_house_lord_location: Moon in D10 location per v6.0 §3.6",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1148,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "*(Supersedes UCN v1.0 §VI.1 claims about Jupiter aspects on 12H.)*",
+      "context": "    L1143: \n    L1144: ---\n    L1145: \n    L1146: ## §VI.1 — FOREIGN/MOKSHA SIGNATURE: CORRECTED\n    L1147: \n>>> L1148: *(Supersedes UCN v1.0 §VI.1 claims about Jupiter aspects on 12H.)*\n    L1149: \n    L1150: ### Corrected 12H architecture\n    L1151: \n    L1152: v1.0 claimed \"Jupiter from 4H aspects 12H — the most auspicious planet gazes on the moksha house, blessing the foreign residence with dharmic authorization.\" This is false by aspect architecture. Jupiter does not aspect 12H from 9H.\n    L1153: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v1_0_PART2.md",
+      "line": 27,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "**Chart rationale**: Shree Lagna in 9H + Venus (Ishta Devata Mahalakshmi) 9H + Lakshmi-Narayana-adjacent configuration = Shree Yantra is the most architecturall",
+      "context": "    L22: \n    L23: Yantras are geometric-diagrammatic meditative tools. Chart-aligned yantras for this native:\n    L24: \n    L25: ### §1.1 — Primary: Shree Yantra\n    L26: \n>>> L27: **Chart rationale**: Shree Lagna in 9H + Venus (Ishta Devata Mahalakshmi) 9H + Lakshmi-Narayana-adjacent configuration = Shree Yantra is the most architecturally-aligned yantra. It is the geometric representation of Shree (Lakshmi-dharma) — the same principle as the Shree Lagna in 9H.\n    L28: \n    L29: **Installation**:\n    L30: - Silver-plated or gold-plated (preferred) — Venus's metal aligns\n    L31: - Size: Tabletop 4-6 inch; larger for pooja room\n    L32: - Placement: North-east corner of home, or personal dharmic-practice space",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 224,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "signal_name: \"9H Jupiter-Venus Laxmi-Narayana-Adjacent Architecture — Shree Lagna CORRECTED OUT of 9H (v2.0)\"",
+      "context": "    L219: ---\n    L220: \n    L221: ### MSR.407 — CORRECTED v2.0\n    L222: \n    L223: SIG.MSR.407:\n>>> L224:   signal_name: \"9H Jupiter-Venus Laxmi-Narayana-Adjacent Architecture — Shree Lagna CORRECTED OUT of 9H (v2.0)\"\n    L225:   signal_type: convergence\n    L226:   classical_source: \"BPHS Ch.24 (Lakshmi Yoga); UCN §IV.4; JHORA_TRANSCRIPTION_v8_0_SOURCE.md §2.1; V8_0_RECONCILIATION_REPORT §3.3\"\n    L227:   entities_involved: [PLN.JUPITER, PLN.VENUS, HSE.9, SGN.SAGITTARIUS, SAH.MAHATMYA, SAH.MRITYU]\n    L228:   strength_score: 0.80\n    L229:   valence: benefic",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 214,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "yogas_involving: [Jupiter's aspect to 4H creates \"Gajakesari-class\" mother/home benefic; BB lord Moon in 11H gives gain-via-home]",
+      "context": "    L209: bhavabala_total: 474.87 virupa\n    L210: bhavabala_rank: 6 of 12\n    L211: sav_bindu: 32 (high)\n    L212: aspects_received_vedic: [Jupiter 7th from 9H (Jupiter full aspect on 4H — beneficial \"mother's luck\" signature)]\n    L213: aspects_received_jaimini: [Taurus (Rahu), Scorpio (Ketu), Aquarius (Moon), Capricorn (Sun+Merc) — Cancer is movable; aspects fixed signs EX-adjacent (Leo). So aspects Taurus, Scorpio, Aquarius. HITS Rahu+Ketu+Moon.]\n>>> L214: yogas_involving: [Jupiter's aspect to 4H creates \"Gajakesari-class\" mother/home benefic; BB lord Moon in 11H gives gain-via-home]\n    L215: arudhas_in_house: [A2 (Dhana/Family arudha in 4H — family-wealth-reflected-in-home)]\n    L216: d9_house_lord_location: Moon in D9 → Gemini (12H of D9 — part of the D9 12H stellium SIG.06)\n    L217: d10_house_lord_location: Moon in D10 location per v6.0 §3.6\n    L218: lel_events_tagged:\n    L219:   - EVT.2023.05.XX.01 (US→India return — home/residence shift, 4H-primary event)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1161,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "- NOT through Jupiter's direct aspect on 12H (this was the v1.0 error)",
+      "context": "    L1156: - **12H lord**: Jupiter (Pisces's ruler), positioned in 9H Sagittarius (own sign)\n    L1157: - **Jupiter's relationship to 12H**: Jupiter rules Pisces (12L). Jupiter does NOT aspect 12H from 9H via any drishti. But Jupiter's lordship of 12H means Jupiter is structurally the 12L — the planet that governs the foreign/moksha/release domain from a distance.\n    L1158: - **Ketu's 5th aspect on 12H** (from 8H Scorpio → 12H Pisces): Ketu's 5th special aspect reaches 12H. This is the moksha-karaka (Ketu) aspecting the moksha house. Ketu's 5th aspect + Jupiter's 12L lordship = the only direct aspect on 12H is Ketu's (spiritual/release karaka) and the only planetary governance of 12H is Jupiter's (dharma lord ruling from 9H own sign).\n    L1159: \n    L1160: **Corrected foreign/moksha reading**: The foreign blessing is architecturally valid but its mechanism is revised:\n>>> L1161: - NOT through Jupiter's direct aspect on 12H (this was the v1.0 error)\n    L1162: - YES through Jupiter's 12L ownership from the 9H own-sign position (Jupiter ruling 12H from its dharmic throne)\n    L1163: - YES through the Shree Lagna in 9H (fortune's lagna in dharma trine + Jupiter's own-sign placement = Lakshmi Yoga's dharma-fortune anchor)\n    L1164: - YES through Ketu's 5th aspect on 12H (moksha-significator directly blessing moksha-house)\n    L1165: - YES through Venus 2L in 9H (wealth-lord in dharma trine, supported by Jupiter-sign)\n    L1166: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md",
+      "line": 291,
+      "entity": "hidden pinnacle",
+      "trigger": "Hidden pinnacle / Varnada+Ghati in 8H (falsified)",
+      "match": "**Focus**: The hidden-pinnacle authority activation. Remedial practice shifts emphasis toward Ketu-aligned.",
+      "context": "    L286: - Study of moksha-path texts begins\n    L287: - Physical/material simplification: one domain at a time (e.g., digital consumption reduction, possessions decluttering)\n    L288: \n    L289: ### §5.3 — Ketu MD (2031-2038) — Future Orientation\n    L290: \n>>> L291: **Focus**: The hidden-pinnacle authority activation. Remedial practice shifts emphasis toward Ketu-aligned.\n    L292: \n    L293: - Primary practice shifts from mantra-japa toward silent meditation\n    L294: - External practice reduces; internal practice deepens\n    L295: - Teaching/offering activity becomes primary (vs. building/acquiring)\n    L296: - The \"Build to Offer, Not to Own\" operating instruction becomes the lived orientation",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 301,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "reconciliation: \"FIX_SESSION_003 2026-04-18 — CORRECTED. Hora Lagna moved from 7H to 3H Gemini (JH authoritative) — ADDS to Gemini 3H nexus. Vivaha Saham moved ",
+      "context": "    L296:   falsifier: \"If Arudha calculations yielded different house placements (alternate house-skipping rules), this nexus would partially dissolve. JH confirms HL in Gemini 3H independently of Arudha calculations.\"\n    L297:   domains_affected: [relationships, children, wealth]\n    L298:   confidence: 0.82\n    L299:   v6_ids_consumed: [ARD.UL, ARD.A5, ARD.A11, LAG.HORA, SAH.VIVAHA, UPG.GULIKA, UPG.DHUMA, HSE.3, HSE.4]\n    L300:   rpt_deep_dive: \"RPT.HSE.02.C, REPORT_RELATIONSHIPS_v1_1\"\n>>> L301:   reconciliation: \"FIX_SESSION_003 2026-04-18 — CORRECTED. Hora Lagna moved from 7H to 3H Gemini (JH authoritative) — ADDS to Gemini 3H nexus. Vivaha Saham moved from 3H to 4H Cancer (JH authoritative) — REMOVES from this signal, noted separately. Strength_score upgraded slightly from 0.75 to 0.82 due to HL addition.\"\n    L302: \n    L303: ---\n    L304: \n    L305: ### MSR.024 (CTR.01) — SUBSTANTIALLY REVISED v2.0\n    L306: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 224,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- Jupiter transit Cancer 2026 (expansion on 4H — native's home/stability favorable)",
+      "context": "    L219:   - EVT.2023.05.XX.01 (US→India return — home/residence shift, 4H-primary event)\n    L220:   - EVT.2010.XX.XX.01 (family real estate windfall — 4H/property event)\n    L221:   - All residence-change events\n    L222: transit_activation_windows_2026_2044:\n    L223:   - Saturn transit Cancer 2032-2035 (8th from Moon — heavy transit, classical turmoil window)\n>>> L224:   - Jupiter transit Cancer 2026 (expansion on 4H — native's home/stability favorable)\n    L225: mode_a_rpt_coverage: [RPT.STR.01, CTR.04 Moon Rashi-11/Chalit-12]\n    L226: interpretation: |\n    L227:   **Cancer 4H is the chart's home/mother/land signifier — strong SAV-32 + Jupiter aspect from 9H.** Despite empty Rashi, this house is among the better-positioned (rank 6, SAV 32). Moon as 4L in 11H = home-as-gain-platform (Moon Chalit-12 complicates: home as *loss/foreign* platform per CTR.04 — retrodictively fits the 4-year US stint).\n    L228:   Jupiter's 7th-aspect from 9H delivers dharmic-guru-like beneficial energy to home-life. A2 (dhana-arudha) here = family's financial representation. The 2010 real-estate windfall (EVT.2010.XX.XX.01) is a textbook A2-in-4H event. Future Saturn transit Cancer 2032-2035 is an 8th-from-Moon pressure period worth flagging in Temporal Engines.\n    L229: ```",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1163,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- YES through the Shree Lagna in 9H (fortune's lagna in dharma trine + Jupiter's own-sign placement = Lakshmi Yoga's dharma-fortune anchor)",
+      "context": "    L1158: - **Ketu's 5th aspect on 12H** (from 8H Scorpio → 12H Pisces): Ketu's 5th special aspect reaches 12H. This is the moksha-karaka (Ketu) aspecting the moksha house. Ketu's 5th aspect + Jupiter's 12L lordship = the only direct aspect on 12H is Ketu's (spiritual/release karaka) and the only planetary governance of 12H is Jupiter's (dharma lord ruling from 9H own sign).\n    L1159: \n    L1160: **Corrected foreign/moksha reading**: The foreign blessing is architecturally valid but its mechanism is revised:\n    L1161: - NOT through Jupiter's direct aspect on 12H (this was the v1.0 error)\n    L1162: - YES through Jupiter's 12L ownership from the 9H own-sign position (Jupiter ruling 12H from its dharmic throne)\n>>> L1163: - YES through the Shree Lagna in 9H (fortune's lagna in dharma trine + Jupiter's own-sign placement = Lakshmi Yoga's dharma-fortune anchor)\n    L1164: - YES through Ketu's 5th aspect on 12H (moksha-significator directly blessing moksha-house)\n    L1165: - YES through Venus 2L in 9H (wealth-lord in dharma trine, supported by Jupiter-sign)\n    L1166: \n    L1167: The foreign/moksha picture is architecturally real but operates through lordship and through Ketu's aspect, not through Jupiter's direct drishti. The practical implication is unchanged: Singapore-as-dharmic-base remains chart-congruent; the mechanism is revised from \"Jupiter-aspect on 12H\" to \"Jupiter-ownership of 12H from own-sign 9H + Ketu's 5th aspect on 12H + the 2H-8H Rahu-Ketu axis as the transformation polarity enabling foreign residence.\"\n    L1168: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/MSR_v2_0.md",
+      "line": 1103,
+      "entity": "Shree Lagna",
+      "trigger": "Shree Lagna in 9H (should be 7H Libra)",
+      "match": "- \"Supports Laxmi-Narayana thesis without needing Shree Lagna in 9H\"",
+      "context": "    L1098:   strength_score: 0.82\n    L1099:   valence: benefic\n    L1100:   temporal_activation: natal-permanent\n    L1101:   supporting_rules:\n    L1102:     - \"Venus MK in same sign as Jupiter — pada-adjacent grace packing in 9H\"\n>>> L1103:     - \"Supports Laxmi-Narayana thesis without needing Shree Lagna in 9H\"\n    L1104:   falsifier: \"Standard falsifier on Venus sign/house.\"\n    L1105:   domains_affected: [wealth, relationships]\n    L1106:   confidence: 0.80\n    L1107:   v6_ids_consumed: [NAK.PSHA]\n    L1108:   rpt_deep_dive: \"REPORT_FINANCIAL\"",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_HOUSES.md",
+      "line": 542,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "aspects_received_vedic: [Jupiter 5th-from-9H = Aries, 9th-from-9H = Leo. So Jupiter doesn't directly aspect 12H from 9H via 5/9 special. 7th from 9H = 3H Gem. M",
+      "context": "    L537: sign_lord: Jupiter\n    L538: sign_lord_placement: 9H Sagittarius (own sign for 12L)\n    L539: bhavabala_total: 506.09 virupa\n    L540: bhavabala_rank: **1 of 12 (STRONGEST)**\n    L541: sav_bindu: 23 (lowest tied with 11H)\n>>> L542: aspects_received_vedic: [Jupiter 5th-from-9H = Aries, 9th-from-9H = Leo. So Jupiter doesn't directly aspect 12H from 9H via 5/9 special. 7th from 9H = 3H Gem. Mars 8th from 7H = Pisces 12H (Mars special 60 virupa full aspect on 12H). Saturn 3rd from 7H = Sag 9H; 10th = Cancer 4H.]\n    L543: aspects_received_jaimini: [Gemini, Virgo (A4+A8+A9), Sagittarius (Jup+Ven) — Pisces dual aspects other duals. Jup+Ven reciprocal from 9H. Virgo reciprocal.]\n    L544: yogas_involving:\n    L545:   - **SIG.06 D9 12H Gemini stellium** (in D9 chart, 12H from D9 Lagna Cancer = Gemini; contains Moon+Jupiter+Rahu — THIS is the chart's strongest foreign/moksha signal loop-closure point)\n    L546:   - **CVG.03 Moon AK foreign-income chain** routes through D1 12H indirectly\n    L547:   - Jupiter 12L in 9H = classical \"loss-through-dharma\" or \"dharma-as-loss-liberation\" — ambiguous; the positional refinement makes this benefic (Jupiter in own sign as 12L = disciplined loss-conversion to dharmic gain)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "line": 1167,
+      "entity": "Jupiter",
+      "trigger": "Jupiter aspecting 10H/8H/12H from wrong position",
+      "match": "The foreign/moksha picture is architecturally real but operates through lordship and through Ketu's aspect, not through Jupiter's direct drishti. The practical ",
+      "context": "    L1162: - YES through Jupiter's 12L ownership from the 9H own-sign position (Jupiter ruling 12H from its dharmic throne)\n    L1163: - YES through the Shree Lagna in 9H (fortune's lagna in dharma trine + Jupiter's own-sign placement = Lakshmi Yoga's dharma-fortune anchor)\n    L1164: - YES through Ketu's 5th aspect on 12H (moksha-significator directly blessing moksha-house)\n    L1165: - YES through Venus 2L in 9H (wealth-lord in dharma trine, supported by Jupiter-sign)\n    L1166: \n>>> L1167: The foreign/moksha picture is architecturally real but operates through lordship and through Ketu's aspect, not through Jupiter's direct drishti. The practical implication is unchanged: Singapore-as-dharmic-base remains chart-congruent; the mechanism is revised from \"Jupiter-aspect on 12H\" to \"Jupiter-ownership of 12H from own-sign 9H + Ketu's 5th aspect on 12H + the 2H-8H Rahu-Ketu axis as the transformation polarity enabling foreign residence.\"\n    L1168: \n    L1169: ---\n    L1170: \n    L1171: ## §V.6 — 11H AK SOCIAL ECOSYSTEM: CORRECTED\n    L1172: ",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "line": 29,
+      "entity": "Hora Lagna",
+      "trigger": "Hora Lagna in 7H (should be 3H Gemini)",
+      "match": "- Hora Lagna: Gemini 3H Mrigashira Pada 3 (was Libra 7H — corrected)",
+      "context": "    L24: ## §0 — CORRECTED LAGNA AND SAHAM FOUNDATION (v2.0)\n    L25: \n    L26: All RM v2.0 element blocks use the corrected Special Lagna and Saham architecture from FORENSIC_ASTROLOGICAL_DATA_v8_0.md.\n    L27: \n    L28: **Special Lagnas (v8.0 corrected)**:\n>>> L29: - Hora Lagna: Gemini 3H Mrigashira Pada 3 (was Libra 7H — corrected)\n    L30: - Ghati Lagna: Sagittarius 9H Purva Ashadha Pada 1 (was Scorpio 8H — corrected)\n    L31: - Varnada Lagna: Cancer 4H Pushya Pada 3 (was Scorpio 8H — corrected)\n    L32: - Shree Lagna: Libra 7H Vishakha Pada 1 (was Sagittarius 9H — corrected)\n    L33: - Vighati Lagna: Leo 5H Purva Phalguni Pada 3 (new in v8.0)\n    L34: - Pranapada Lagna: Leo 5H Purva Phalguni Pada 3 (new/confirmed in v8.0)",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 198,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "- Jupiter transit Cancer 2026 (EXALTED — major 4H benefic window for home)",
+      "context": "    L193: jaimini_aspects_cast: [Taurus (Rahu), Scorpio (Ketu), Aquarius (Moon)]\n    L194: jaimini_aspects_received: [Libra (Mars+Saturn), Scorpio (Ketu), Taurus (Rahu), Capricorn (Sun+Mercury)]  # movable aspects fixed ex-adjacent Leo\n    L195: yogas_hosted: [Jupiter's 7th-aspect from Sagittarius to Cancer = beneficial 4H (classical \"gajakesari-like\" home benefic); A2 arudha]\n    L196: arudhas_landing_here: [A2]\n    L197: transit_density_2026_2044:\n>>> L198:   - Jupiter transit Cancer 2026 (EXALTED — major 4H benefic window for home)\n    L199:   - Saturn transit Cancer 2032-2035 (8th from Moon = heavy turmoil transit)\n    L200:   - Rahu transit Cancer 2027-2029\n    L201: dignity_events_in_transit:\n    L202:   - Jupiter-in-Cancer 2026 = exalted Jupiter peak benefic transit; will overlap native's age 42-43 (home/stability favorable)\n    L203:   - Mars-in-Cancer (debilitated) briefly each 2 years: mental-tension windows",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    },
+    {
+      "file": "02_ANALYTICAL_LAYER/MATRIX_SIGNS.md",
+      "line": 533,
+      "entity": "Jupiter",
+      "trigger": "Jupiter associated with 4H",
+      "match": "4. Cancer — Jupiter exalt 2026 + Saturn 2032-35 = 4H dual-benefic-then-pressure",
+      "context": "    L528: \n    L529: **Highest transit-activity signs (frequency × significance-weight)**:\n    L530: 1. Aquarius — Sade Sati Peak ending 2025 + Jupiter 2033+2045 + Rahu 2031-33 = MAX emotional/AK transits\n    L531: 2. Pisces — current Sade Sati Setting + Jupiter 2034+2046 = spiritual transition hub\n    L532: 3. Libra — Saturn own-exaltation return 2041-2044 = lifetime structural closure\n>>> L533: 4. Cancer — Jupiter exalt 2026 + Saturn 2032-35 = 4H dual-benefic-then-pressure\n    L534: 5. Aries — multiple nodal transits + Jupiter 2035 = identity-renewal hub\n    L535: \n    L536: **Lowest transit-activity**: Leo, Virgo, Gemini — less slow-planet activity in 2026-2044 window.\n    L537: \n    L538: ### §4.4 — New SIG candidates from Sign Matrix",
+      "worker_result": {
+        "classification": "REGEX_FP",
+        "confidence": 0.0,
+        "reason": "API error: \"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+        "what_is_wrong": null
+      }
+    }
+  ]
+}

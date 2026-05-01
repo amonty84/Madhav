@@ -1,0 +1,1913 @@
+{
+  "generated_at": "2026-04-28T00:00:00Z",
+  "generator_version": "1.0",
+  "entry_count": 112,
+  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
+  "entries": [
+    {
+      "canonical_id": "CGP_AUDIT_v1_0",
+      "path": "01_FACTS_LAYER/CGP_AUDIT_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "223f04bb9b3e755298cd0d2759a028d336f89793860c57952c6deb367f8f35cf",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/CGP_AUDIT_v1_0.md"
+    },
+    {
+      "canonical_id": "EXTERNAL_COMPUTATION_SPEC_v2_0",
+      "path": "01_FACTS_LAYER/EXTERNAL_COMPUTATION_SPEC_v2_0.md",
+      "version": "2",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "3db9b40bbbfe695f3e17cc4450c6bde0a11b34f2adf73d0375e7468cd3f109aa",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/EXTERNAL_COMPUTATION_SPEC_v2_0.md"
+    },
+    {
+      "canonical_id": "FORENSIC_ASTROLOGICAL_DATA_v8_0",
+      "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "version": "8",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f06d8a0554434fff6db6be1a39c6bd38b7c0fb626fb20d20201806fb13be185c",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "factual",
+        "interpretive",
+        "predictive",
+        "holistic"
+      ],
+      "cost_weight": 1,
+      "always_required": true,
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "token_count": 12000
+    },
+    {
+      "canonical_id": "LIFE_EVENT_LOG_v1_2",
+      "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
+      "version": "1.2",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "83ab441e9df30113df69bb8f3f9cbe2f92a8f5eb8ad7360d7a8f180b2b33a7e7",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "factual",
+        "temporal",
+        "retrodictive"
+      ],
+      "cost_weight": 0.8,
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md"
+    },
+    {
+      "canonical_id": "SADE_SATI_CYCLES_ALL",
+      "path": "01_FACTS_LAYER/SADE_SATI_CYCLES_ALL.md",
+      "version": "unknown",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "716bcb8c8830324e1f6d8cd36e0682ca0b39e1df0840380c37746359e16ad808",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/SADE_SATI_CYCLES_ALL.md"
+    },
+    {
+      "canonical_id": "EVENT_CHART_STATES_v1_0",
+      "path": "01_FACTS_LAYER/SOURCES/EVENT_CHART_STATES_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "957e58bbd523d981ac08a6c9a525987b787d3cca066ec78104e8e703fbd1c343",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/sources/EVENT_CHART_STATES_v1_0.md"
+    },
+    {
+      "canonical_id": "JHORA_TRANSCRIPTION_v8_0_SOURCE",
+      "path": "01_FACTS_LAYER/SOURCES/JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
+      "version": "8.0-source",
+      "status": "LOCKED",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "29dd7839ff5fbbbebd704e8703e26fb75db94c31317587c0a3b1516ed23668ba",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/sources/JHORA_TRANSCRIPTION_v8_0_SOURCE.md"
+    },
+    {
+      "canonical_id": "CDLM_v1_1",
+      "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "version": "1.2",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "3e64d5e512f37ee86152bac976f9f10a0355ceece9d1dce4fb874a8c0c13ed55",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "cross_domain",
+        "discovery"
+      ],
+      "cost_weight": 0.7,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md",
+      "token_count": 25000
+    },
+    {
+      "canonical_id": "CGM",
+      "path": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
+      "version": "9",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f22905cf3b740bee99d765b0a5c22b0a1730f0b03d11959d6ae4c42fd281d3ed",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "cross_domain",
+        "holistic"
+      ],
+      "cost_weight": 1,
+      "always_required": true,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md",
+      "token_count": 60000
+    },
+    {
+      "canonical_id": "MSR_v3_0",
+      "path": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
+      "version": "3",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "980baac0afa3a9870a02b44db2b67498e21d645f6380d828d0f758b0d13a6ef9",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "factual",
+        "interpretive",
+        "cross_domain"
+      ],
+      "cost_weight": 0.9,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md",
+      "token_count": 180000
+    },
+    {
+      "canonical_id": "RED_TEAM_L2_5_v1_0",
+      "path": "025_HOLISTIC_SYNTHESIS/RED_TEAM_L2_5_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "5202ed3bc7c5827213707a60154bd7d36eb7299bda2de5ef074fa20fed1337a2",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RED_TEAM_L2_5_v1_0.md"
+    },
+    {
+      "canonical_id": "RM_v2_0",
+      "path": "025_HOLISTIC_SYNTHESIS/RM_v2_0.md",
+      "version": "2.1",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f0c31e13521a3d6cf3a9a5973be6fcc11e48963e07200c72b6b8eca28d35ba6d",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "resonance",
+        "cross_domain"
+      ],
+      "cost_weight": 0.6,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md",
+      "token_count": 18000
+    },
+    {
+      "canonical_id": "UCN_v4_0",
+      "path": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "version": "4.1",
+      "status": "LOCKED",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f9c4939f77055a4559ffed5d1038c31833cae773823c43744ef23081e5e3c6bd",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "cross_domain",
+        "holistic"
+      ],
+      "cost_weight": 0.8,
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md",
+      "token_count": 95000
+    },
+    {
+      "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
+      "path": "03_DOMAIN_REPORTS/CROSS_REPORT_COHERENCE_AUDIT_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f05867f4a868bf11b352d8296a90977d4e823de3071838b88bea85ce13ac3a95",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "RED_TEAM_L3_v1_0",
+      "path": "03_DOMAIN_REPORTS/RED_TEAM_L3_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "edeb13c2c56efb8b0b9ec2fd763187893ea4382b3b96fc405c384ac1f5856b65",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_CAREER_DHARMA_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_0.md",
+      "version": "1.0.1",
+      "status": "PREDECESSOR",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "b1f8048aadb65d0455db4bf6f3bc4751d6a1f69039ecedb28128321079988221",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_CAREER_DHARMA_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "0fdf54edc68e738d7fea85db4c99c1d619c90f077fc01664783ccad67687f2c5",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "career",
+        "domain_specific"
+      ],
+      "cost_weight": 0.7
+    },
+    {
+      "canonical_id": "REPORT_CHILDREN_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_0.md",
+      "version": "1",
+      "status": "PREDECESSOR",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "51cde6430ebb1ec6c310aa836b6057e2db9a879acd3edcb6264aa7d901693d4f",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_CHILDREN_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "b6ffadd036b04554824eebdb58bc3996a750de054b3f41587ced2b701f9ad326",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_FINANCIAL_v2_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_0.md",
+      "version": "unknown",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "b780b32aa93d725d794dc1baf6f20f8522d2cef983cb757bb19a23df823cd8bb",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_FINANCIAL_v2_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+      "version": "unknown",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "172e77bc1c1332fa826d133dc8e4bc59c76cf8bfda06c3c29fff9c15c2ca538d",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "financial",
+        "domain_specific"
+      ],
+      "cost_weight": 0.7
+    },
+    {
+      "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_0.md",
+      "version": "unknown",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "079c598162059ff22d277b266e60bb088926b00fc925f6f629c82f33d79312c0",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_HEALTH_LONGEVITY_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+      "version": "unknown",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "7f15c3b7047710677b3f724721c90e875da5fa063c371d49f20e8fe3adaaaad5",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "health",
+        "domain_specific"
+      ],
+      "cost_weight": 0.7
+    },
+    {
+      "canonical_id": "REPORT_PARENTS_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_0.md",
+      "version": "1.0.1",
+      "status": "PREDECESSOR",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "6a5b737674194d4b9fb71d55764301b89520d18f54f0aaba425541ee8a2f8c6e",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_PARENTS_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "033b94042df5c58c455896d8e5e35eb2844d17924100eada736996b6b45dc45b",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_0.md",
+      "version": "1",
+      "status": "PREDECESSOR",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "81d0a1044b1fef16eb57b250d68cc0b44e004ca7d46b7287b75f3b05eff3d9b3",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_PSYCHOLOGY_MIND_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "6ef5e2202e8609bf22a22c9adc18e7ffab8d7047e21fe90082f69bb9753ff6a8",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_RELATIONSHIPS_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "dd22afd58ee58fc117b81e4887cc1b01964880c82633db90be78169e229642b5",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_RELATIONSHIPS_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "5ee3c60add8e7e074451650fe221d41f8930357c997a97f5327294c064848439",
+      "native_id": "abhisek",
+      "preferred_for": [
+        "interpretive",
+        "relationships",
+        "domain_specific"
+      ],
+      "cost_weight": 0.7
+    },
+    {
+      "canonical_id": "REPORT_SPIRITUAL_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "0c7d05fa7143931c9ea79351332b30030395355f4933980aa8e4416793cb018b",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_SPIRITUAL_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "35f4e125d64442010f413161e90e7be23150df67196b50693921837ded7b07af",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_TRAVEL_v1_0",
+      "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_0.md",
+      "version": "1.0.1",
+      "status": "PREDECESSOR",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "6c018cb7c824ac103ce268f85e7e887f7a99d7f437293e94ffdab7c3ef36400f",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "REPORT_TRAVEL_v1_1",
+      "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md",
+      "version": "1.1",
+      "status": "CURRENT",
+      "layer": "L3",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "d06cad2a1146cfb70b60b05af2f1179f878f9a08dd652d1d2af61566a809c57b",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "DECISION_SUPPORT_PLAYBOOK_v1_0",
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/DECISION_SUPPORT_PLAYBOOK_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "5ca2c1cac4b0932ef230d70613d72c3514ab41a0fb69d3809d33ac0f8ff704ce",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "QUERY_PROMPT_LIBRARY_v1_0",
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/QUERY_PROMPT_LIBRARY_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "7da8bb2bc252f3b4e056bec545b3c5e9705f6019297e65491bac3f37f920a545",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0",
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/SESSION_PROTOCOL_QUESTION_TAXONOMY_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "7a86a7abf83a9ee84a803bb8d90283cb6119be265d1bfa87f2bac9b72aa4c6c0",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "plans_v1_0",
+      "path": "035_DISCOVERY_LAYER/QUERY_TAXONOMY/plans_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "56605639e0441e2bfade2d8308bb4f9b40593df391cb689889373a54738afd01",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "035_DISCOVERY_LAYER/README",
+      "path": "035_DISCOVERY_LAYER/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "6f57969a7c1042abbc74636b6c0f6014dd8f1eb76044bb67ea813bdb91ad285a",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "CLUSTER_ATLAS_v1_0",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "2ed3f8df9b970f3c85e3aed877e04244eabebc521a3e845adbcbed379e46aac8",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.md"
+    },
+    {
+      "canonical_id": "CONTRADICTION_REGISTER_v1_0",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "7d1acea5dc195716e15248c67a272aa0fb3b9b211f1a6110e4074052b0dfe8e8",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.md"
+    },
+    {
+      "canonical_id": "PATTERN_REGISTER_v1_0",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "b8eaf9402827c55d03eaf73f1b4d1a903f06ccb2dbd3eb0e28775b292991e974",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.md"
+    },
+    {
+      "canonical_id": "RESONANCE_REGISTER_v1_0",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.md",
+      "version": "1",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "3faca59472859d801c5502ac72276e58853d1b8299ca7b0f3979704e9ddd7b07",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.md"
+    },
+    {
+      "canonical_id": "SCHEMAS/chunker_spec_v1_0",
+      "path": "035_DISCOVERY_LAYER/SCHEMAS/chunker_spec_v1_0.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "1fee971c9f607b7f81691639da69e5796b880f488cad8bd95cfdf2746d070453",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README",
+      "path": "06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "5ffd760c2d33a40af68e6ccfc67dc23dfa26ad66be4b74f9ccd8e947d7142a4a",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README",
+      "path": "06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "2cb652b28a15b401eb59cf5ebdf0c4ed6cf660fa34f2546f6f4bb516e3ad39b3",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README",
+      "path": "06_LEARNING_LAYER/PROMPT_OPTIMIZATION/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "aa63903bf91550c716a07a7ba4b84f53d87d2935d021c7c4478545d80c0b35ac",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "06_LEARNING_LAYER/README",
+      "path": "06_LEARNING_LAYER/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "23e84433b70e2ce62eff2705502bb701cef923e98b090cdc1b599403f68e84e4",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md",
+      "version": "1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "2b1abe7540bdc1a8fab84f4a6a84a24c6e77c3540d30e37bef83f316ffab8f73",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "PATTERN_SCHEMA_v0_1",
+      "path": "06_LEARNING_LAYER/SCHEMAS/pattern_schema_v0_1.json",
+      "version": "0.1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "d328860e1a98b639c559036594cc7f880033baa288301fafaa3b6dddf5c561dd",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "PREDICTION_SCHEMA_v0_1",
+      "path": "06_LEARNING_LAYER/SCHEMAS/prediction_schema_v0_1.json",
+      "version": "0.1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "1db6a742f1fde19507b6c4c7ad1679c70f50f3286673a95960afea5f79f7da96",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "TWO_PASS_EVENTS_SCHEMA_v0_1",
+      "path": "06_LEARNING_LAYER/SCHEMAS/two_pass_events_schema_v0_1.json",
+      "version": "0.1",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "0ed502f6994726f37f7d5e34997e0411d937188674b1022429234e3bcc820e4e",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "PROMPT_REGISTRY_INDEX",
+      "path": "06_LEARNING_LAYER/PROMPT_REGISTRY/INDEX.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "74ffef4271ca6168227e22af21099cc187490401431f13c57aa6ded119e9c71b",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "PREDICTION_LEDGER_JSONL",
+      "path": "06_LEARNING_LAYER/PREDICTION_LEDGER/prediction_ledger.jsonl",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L6",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "47ac93ebb6449f8c94a17758baf8c993ee09238f48a3b97ae6c270bc45113627",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "PATTERN_REGISTER_JSON",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json",
+      "version": "1.0",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "729d850720a4986389c451b3e0c425dc05c9f31ebb60dbe281ad387d275ec7a5",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.json",
+      "tool_binding": "pattern_register"
+    },
+    {
+      "canonical_id": "RESONANCE_REGISTER_JSON",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
+      "version": "1.0",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "ac9f284bd591dc69c7ebf4bba3104b9f64c266f4340524eec46590203d23154d",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.json",
+      "tool_binding": "resonance_register"
+    },
+    {
+      "canonical_id": "CONTRADICTION_REGISTER_JSON",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/CONTRADICTION_REGISTER_v1_0.json",
+      "version": "1.0",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "1e2fd304e400aee529eb3800f0e5facf4755de9bdb6e09878c11a6528ed80f68",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.json",
+      "tool_binding": "contradiction_register"
+    },
+    {
+      "canonical_id": "CLUSTER_ATLAS_JSON",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json",
+      "version": "1.0",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "59d5d90c1759dce79ed83e4c47134b5d37b9ff36f926a1f639f7add0a50b233f",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.json",
+      "tool_binding": "cluster_atlas"
+    },
+    {
+      "canonical_id": "DISCOVERY_REGISTERS_INDEX",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/INDEX.json",
+      "version": "1.0",
+      "status": "LOCKED",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "f6891c9a2813a1e7c94c4d8eed6ba39d577575218109dddc0a29fec182f61f07",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/INDEX.json"
+    },
+    {
+      "canonical_id": "REMEDIAL_CODEX_v2_0_PART1",
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md",
+      "version": "2.0",
+      "status": "CURRENT",
+      "layer": "L4",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "56e2312c0e18c56b5cd56731aa44bf823efaebe6c6222d8b0c9b8c66f8717a0d",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART1.md",
+      "phase": "M2-D3 Wave5",
+      "description": "Remedial Codex Part 1 \u2014 planetary propitiation, gemology, mantra practice, daily dinacharya. Chart-first remedial philosophy: strengthen architecturally-strong planets, dharmic register over ritual-density, befriend (not pacify) AmK Saturn / Avayogi Mars / exalted Ketu. Source for doc_type=l4_remedial RAG chunks.",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
+    },
+    {
+      "canonical_id": "REMEDIAL_CODEX_v2_0_PART2",
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART2.md",
+      "version": "2.0",
+      "status": "CURRENT",
+      "layer": "L4",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "fbc1cd8e52bbc55dc21fabaa5c93ce76902a5bcbefcd85e55b360034b953707c",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART2.md",
+      "phase": "M2-D3 Wave5",
+      "description": "Remedial Codex Part 2 \u2014 yantra recommendations (Shree Yantra primary), devata-specific practices, temporal interventions, domain-specific remedies, intervention heatmap. Source for doc_type=l4_remedial RAG chunks.",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
+    },
+    {
+      "canonical_id": "LIFETIME_TIMELINE_v1_0",
+      "path": "05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md",
+      "version": "1.0.1",
+      "status": "CLOSED",
+      "layer": "L5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "176a2dc6706866239b731e611c2c58cd1bb472427b043daf7703e96c115b91eb",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L5/temporal/LIFETIME_TIMELINE_v1_0.md",
+      "phase": "M2-D4 Wave5",
+      "description": "Lifetime Jyotish timeline \u2014 life arc from 1984 birth through Saturn Libra return 2041\u20132044. Phase-by-phase Vimshottari + Chara dasha progression, major event windows, structural inflection points (Saturn returns, Jupiter cycles, eclipses). v1.0.1 carries CORR.TL.01 correction (Ghati Lagna 9H Sagittarius / Varnada 4H Cancer; lagna-based 'hidden-pinnacle' framing falsified, Ketu MD arc preserved via Ketu-8H exaltation). Source for doc_type=l5_timeline RAG chunks (9 chunks).",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY"
+    },
+    {
+      "canonical_id": "BUILD_PIPELINE_v1_0",
+      "path": "00_ARCHITECTURE/BUILD_PIPELINE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "ef1d5accc6a45245f19af94421b54b4747fb8938b3efc78b13a90ceea3e737a6",
+      "phase": "14B",
+      "description": "Canonical specification for the build pipeline (Cloud Run Job, staging-then-swap, writer interface)"
+    },
+    {
+      "canonical_id": "PHASE_14B_BUILD_PIPELINE_REPORT_v1_0",
+      "path": "00_ARCHITECTURE/PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "fd1bc552c7716835be9efcc5e5a8135eb67a0b74e635f96dc4f18d50f16ab6e5",
+      "phase": "14B",
+      "description": "Phase 14B execution report; first promotion run result (941 chunks live)"
+    },
+    {
+      "canonical_id": "CLOUDBUILD_YAML",
+      "path": "cloudbuild.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "627cabf9a134f1655fefaac62fde6921415b3fd0703b19fba05cc3e19dbe8d32",
+      "phase": "14B",
+      "description": "Cloud Build config: build pipeline image, push, deploy Cloud Run Job"
+    },
+    {
+      "canonical_id": "DOCKERFILE_PIPELINE",
+      "path": "platform/python-sidecar/Dockerfile.pipeline",
+      "version": "1.0.3",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "3cecdd7e7f16fb45a4e8da392a100b31acd15a04fa3f09776999268419b2bf6d",
+      "phase": "14B",
+      "description": "Docker image for marsys-build-pipeline Cloud Run Job (linux/amd64, dev-layout mirror)"
+    },
+    {
+      "canonical_id": "MIGRATION_013_BUILD_PIPELINE_STAGING",
+      "path": "platform/migrations/013_build_pipeline_staging.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "2ced8ad389e02b367dde094522636247a4a0f546986ec404f66a39a61403742b",
+      "phase": "14B",
+      "description": "rag_chunks_staging, rag_embeddings_staging, build_manifests tables"
+    },
+    {
+      "canonical_id": "CHART_FACTS_EXTRACTION_v1_0",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "notes": "589-fact structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md. Phase 14C Stream B 2026-04-29."
+    },
+    {
+      "canonical_id": "CHART_FACTS_SCHEMA_v1_0",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+      "notes": "JSON Schema for chart_facts table and CHART_FACTS_EXTRACTION YAML. Phase 14C Stream B 2026-04-29."
+    },
+    {
+      "canonical_id": "MIGRATION_019_L3_REGISTERS",
+      "path": "platform/migrations/019_l3_registers.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Four L3 discovery register tables + staging counterparts (pattern, resonance, cluster, contradiction)",
+      "fingerprint": "163a6e41cd18cf25c836d2ab646e4286596a5d88e178da7d10b29c9b01d2478a"
+    },
+    {
+      "canonical_id": "INGEST_L3_REGISTERS",
+      "path": "platform/python-sidecar/pipeline/ingest_l3_registers.py",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "One-shot L3 register ingest runner: load from JSON, validate FKs, stage, append-only swap to live",
+      "fingerprint": "bab85f68e386dd556bb9de214a66f5c59f3e405c0c486d0beca15c49ea2330e5"
+    },
+    {
+      "canonical_id": "L3_DISCOVERY_REGISTERS_v1_0",
+      "path": "00_ARCHITECTURE/L3_DISCOVERY_REGISTERS_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Canonical spec for L3 register tables: schemas, architectural commitments, pipeline integration, tool surface",
+      "fingerprint": "66bd48df0d5e43fb2f4c9d7813fe05698a6b72c425c50891cc6f10f86024956b"
+    },
+    {
+      "canonical_id": "PHASE_14E_L3_REGISTERS_REPORT_v1_0",
+      "path": "00_ARCHITECTURE/PHASE_14E_L3_REGISTERS_REPORT_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "Phase 14E execution report; 54 register entries live (22+12+12+8); all done-criteria met",
+      "fingerprint": "c763d37a080ffac00fce63cae8bf2cb85fe48db09c55e5f6165a87109da2283d"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_PATTERNS",
+      "path": "platform/src/lib/tools/structured/query_patterns.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'",
+      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_RESONANCES_L3",
+      "path": "platform/src/lib/tools/structured/query_resonances_l3.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'",
+      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CLUSTERS",
+      "path": "platform/src/lib/tools/structured/query_clusters.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'",
+      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
+      "path": "platform/src/lib/tools/structured/query_contradictions.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14E",
+      "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'",
+      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4"
+    },
+    {
+      "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "description": "Six l25_* tables + staging counterparts for L2.5 structured projection (MSR, UCN, CDLM, CGM nodes/edges, RM resonances)",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_MSR_SIGNALS",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_msr_signals",
+      "row_count": 499,
+      "native_id": "abhisek",
+      "llm_tool": "query_msr_signals",
+      "preferred_for": [
+        "interpretive",
+        "cross_domain",
+        "signal_lookup"
+      ],
+      "description": "499 MSR signals with category, valence, planet/house/sign arrays \u2014 queryable by deterministic filters",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_UCN_SECTIONS",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_ucn_sections",
+      "row_count": 134,
+      "native_id": "abhisek",
+      "llm_tool": "query_ucn_section",
+      "preferred_for": [
+        "interpretive",
+        "holistic",
+        "domain_narrative"
+      ],
+      "description": "134 UCN sections with domain, title, content, derived_from_signals",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_CDLM_LINKS",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_cdlm_links",
+      "row_count": 81,
+      "native_id": "abhisek",
+      "llm_tool": "query_cdlm_link",
+      "preferred_for": [
+        "cross_domain",
+        "interpretive"
+      ],
+      "description": "81-cell 9\u00d79 CDLM matrix \u2014 from_domain/to_domain/link_type/strength for all domain pair relationships",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_CGM_NODES",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_cgm_nodes",
+      "row_count": 234,
+      "native_id": "abhisek",
+      "llm_tool": "query_cgm",
+      "preferred_for": [
+        "interpretive",
+        "graph_query"
+      ],
+      "description": "234 CGM nodes: PLN(9), HSE(12), SGN(12), KRK(18), NAK(15), DVS(77), SEN(42), DSH(30), YOG(19)",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_CGM_EDGES",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_cgm_edges",
+      "row_count": 21,
+      "native_id": "abhisek",
+      "llm_tool": "query_cgm",
+      "preferred_for": [
+        "interpretive",
+        "graph_query"
+      ],
+      "description": "21 CGM edges (DISPOSITED_BY, NAKSHATRA_LORD_IS, etc.) joining CGM nodes; served via query_cgm with include_edges=true",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L25_RM_RESONANCES",
+      "path": "platform/migrations/018_l2_5_structured.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L2.5",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "table_name": "l25_rm_resonances",
+      "row_count": 28,
+      "native_id": "abhisek",
+      "llm_tool": "query_resonance",
+      "preferred_for": [
+        "interpretive",
+        "resonance",
+        "cross_domain"
+      ],
+      "description": "28 RM signal resonance pairs with type (reinforce/amplify/modulate/cancel/tension) and theme",
+      "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
+    },
+    {
+      "canonical_id": "L2_5_STRUCTURED_LAYER_v1_0",
+      "path": "00_ARCHITECTURE/L2_5_STRUCTURED_LAYER_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "description": "Canonical spec for L2.5 structured Postgres tables \u2014 schemas, pipeline integration, tool surface, naming conventions, findings",
+      "fingerprint": "07aae69a77926b16ec830130a9e68dc048882699516ca3ce662e6802097554d3"
+    },
+    {
+      "canonical_id": "PHASE_14D_L2_5_PARITY_REPORT_v1_0",
+      "path": "00_ARCHITECTURE/PHASE_14D_L2_5_PARITY_REPORT_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14D",
+      "description": "Phase 14D execution report \u2014 done criteria verification, stream log, spot-check results, findings, follow-ups",
+      "fingerprint": "55483ae04a6a1a3a643991bd187b2ae2c651e7e79cac89551e6a66b7d601e20c"
+    },
+    {
+      "canonical_id": "L25_TOOLS_v1_0",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C/14D",
+      "tools": [
+        "query_msr_signals",
+        "query_ucn_section",
+        "query_cdlm_link",
+        "query_cgm",
+        "query_resonance",
+        "query_chart_fact",
+        "query_planet_position",
+        "query_eclipse_window",
+        "query_retrograde_window",
+        "query_life_events",
+        "query_sade_sati",
+        "query_dasha"
+      ],
+      "description": "Twelve deterministic LLM tools in consumeTools: 5 L2.5 (Phase 14D) + 7 L1 (Phase 14C).",
+      "fingerprint": "UNKNOWN_PATH",
+      "path": "platform/src/lib/claude/consume-tools.ts"
+    },
+    {
+      "canonical_id": "MIGRATION_014_CHART_FACTS",
+      "path": "platform/migrations/014_chart_facts.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 014: chart_facts + chart_facts_staging tables.",
+      "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
+    },
+    {
+      "canonical_id": "MIGRATION_015_EPHEMERIS_DAILY",
+      "path": "platform/migrations/015_ephemeris_daily.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 015: ephemeris_daily + staging. Swiss Ephemeris Lahiri, 1900-2100.",
+      "fingerprint": "6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f"
+    },
+    {
+      "canonical_id": "MIGRATION_016_ECLIPSES_RETROGRADES",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 016: eclipses + retrogrades + staging tables.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
+    },
+    {
+      "canonical_id": "MIGRATION_017_LIFE_EVENTS_SADE_SATI",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "infra",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Migration 017: life_events + sade_sati_phases + staging tables.",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
+    },
+    {
+      "canonical_id": "L1_CHART_FACTS",
+      "path": "platform/migrations/014_chart_facts.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "chart_facts",
+      "row_count": 589,
+      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams.",
+      "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
+    },
+    {
+      "canonical_id": "L1_EPHEMERIS_DAILY",
+      "path": "platform/migrations/015_ephemeris_daily.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "ephemeris_daily",
+      "row_count": 660726,
+      "description": "660726 daily ephemeris rows 1900-01-01..2100-12-31, 9 graha, Lahiri sidereal Swiss Ephemeris.",
+      "fingerprint": "6cdb0a156541f1ac7e2366dde89da9671815d7c1489f167ddc3038b6b460a91f"
+    },
+    {
+      "canonical_id": "L1_ECLIPSES",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "eclipses",
+      "row_count": 913,
+      "description": "913 solar/lunar eclipse events 1900-2100, Lahiri sidereal, nakshatra + visibility region.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
+    },
+    {
+      "canonical_id": "L1_RETROGRADES",
+      "path": "platform/migrations/016_eclipses_retrogrades.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "retrogrades",
+      "row_count": 2462,
+      "description": "2462 station rows (retrograde_start + retrograde_end) for Mercury/Venus/Mars/Jupiter/Saturn 1900-2100.",
+      "fingerprint": "2aa8a6ebaacb1202d9e88fe1b832949599b5933bf16fa7da46a5aa343eaad708"
+    },
+    {
+      "canonical_id": "ECLIPSES_1900_2100",
+      "path": "01_FACTS_LAYER/ECLIPSES_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "fbacc50f1c0d0b3ed33b02341c3f2497eb04ee77d37efe3f6fbca21c15d1b1c2",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/ECLIPSES_1900_2100.csv",
+      "downstream_table": "eclipses",
+      "downstream_row_count": 913,
+      "notes": "Eclipse events 1900\u20132100 source CSV. Ingested into eclipses table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
+      "canonical_id": "RETROGRADES_1900_2100",
+      "path": "01_FACTS_LAYER/RETROGRADES_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "17fa17153c02887295fba6794283ca9b3573071afad7d1a9b4412990109d6ace",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/RETROGRADES_1900_2100.csv",
+      "downstream_table": "retrogrades",
+      "downstream_row_count": 2462,
+      "notes": "Planetary retrograde periods 1900\u20132100 source CSV. Ingested into retrogrades table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
+      "canonical_id": "EPHEMERIS_MONTHLY_1900_2100",
+      "path": "01_FACTS_LAYER/EPHEMERIS_MONTHLY_1900_2100.csv",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "fingerprint": "a0e8fbac0178610faa00fcbdc4f63b89b4071d8936ce8691eafb57ebb2a9791a",
+      "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/EPHEMERIS_MONTHLY_1900_2100.csv",
+      "notes": "Monthly planetary positions 1900\u20132100 source CSV (summary; daily detail in ephemeris_daily table). Confirmed in GCS by forensic migration audit 2026-04-29. Remediation REM-A-002."
+    },
+    {
+      "canonical_id": "L1_LIFE_EVENTS",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "life_events",
+      "row_count": 36,
+      "description": "36 life events from LIFE_EVENT_LOG_v1_2.md with Swiss Ephemeris chart_state snapshots.",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
+    },
+    {
+      "canonical_id": "L1_SADE_SATI_PHASES",
+      "path": "platform/migrations/017_life_events_and_sade_sati.sql",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": true,
+      "representations": [
+        "db_table"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "table_name": "sade_sati_phases",
+      "row_count": 46,
+      "description": "46 sade sati phase rows across 4 Saturn cycles (pre-birth + 3 lifetime).",
+      "fingerprint": "78c5125af62507792e612398120e6ca5e8dc0487e4483e0f1e69d11b3ce4407f"
+    },
+    {
+      "canonical_id": "CHART_FACTS_EXTRACTION",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_EXTRACTION_v1_0.yaml",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated.",
+      "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66"
+    },
+    {
+      "canonical_id": "CHART_FACTS_SCHEMA",
+      "path": "01_FACTS_LAYER/STRUCTURED/CHART_FACTS_SCHEMA_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L1",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "JSON Schema governing CHART_FACTS_EXTRACTION_v1_0.yaml.",
+      "fingerprint": "52362ebe5c914f8b6baaf6f95b98a1f1d363a0759f0ba3389ce1e96e684c3d64"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_CHART_FACT",
+      "path": "platform/src/lib/tools/structured/query_chart_fact.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query chart_facts by fact_id/category/divisional_chart.",
+      "fingerprint": "825156fc229fdca5ac3a495fb2a6ca311e58f56d9a1193e3c382ce488eb1b729"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_PLANET_POSITION",
+      "path": "platform/src/lib/tools/structured/query_planet_position.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query ephemeris_daily for planetary positions on a specific date.",
+      "fingerprint": "b7ac9579bd01393515c4a65967666c7b04ccc5d5cba06248126f502c8ceb70b4"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_ECLIPSE_WINDOW",
+      "path": "platform/src/lib/tools/structured/query_eclipse_window.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query eclipses within a date window.",
+      "fingerprint": "29cc7ad7cb2fa32477d2db3dba9f39c08b4329aceb209853a8174842c340ea50"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_RETROGRADE_WINDOW",
+      "path": "platform/src/lib/tools/structured/query_retrograde_window.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query retrograde stations within a date window.",
+      "fingerprint": "17705da56a075070ce0dd828c02405cb85554b728fd743373280a0921a8d7f62"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_LIFE_EVENTS",
+      "path": "platform/src/lib/tools/structured/query_life_events.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query life_events by category/date range. 36 life events with chart_state JSONB.",
+      "fingerprint": "294eb75a428eca6b39a667e718d9585666b52ea6c70ec54cee33fe988395f1aa"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_SADE_SATI",
+      "path": "platform/src/lib/tools/structured/query_sade_sati.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query sade_sati_phases by date/cycle/phase.",
+      "fingerprint": "b6d9e95c615db16722f1178e9561a2f18c88515dc99ee44bb6fb7727fb7e7d00"
+    },
+    {
+      "canonical_id": "TOOL_QUERY_DASHA",
+      "path": "platform/src/lib/tools/structured/query_dasha.ts",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "llm_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "14C",
+      "description": "LLM tool: query dasha balance facts from chart_facts (category=dasha_balance).",
+      "fingerprint": "e507c2298ae0c5c49f57a389e30cdb30c7c1555695195c2e9fe823e37c8f5ba1"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_CHART_FACTS_QUERY",
+      "path": "platform/src/lib/retrieve/chart_facts_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-C1 Wave4",
+      "description": "Parametric retrieval over chart_facts (795 rows, 37 categories). Primary gateway for quantitative chart-fact queries: shadbala rankings, BAV bindus, yoga register, saham lookups, placements, longevity indicators. Filters: category, planet, house, sign, nakshatra, nakshatra_pada, divisional_chart, keyword, rank_by, limit.",
+      "categories": [
+        "house",
+        "dasha_chara",
+        "planet",
+        "dasha_vimshottari",
+        "saham",
+        "sensitive_point",
+        "birth_metadata",
+        "strength_extra",
+        "yoga",
+        "dasha_yogini",
+        "deity_assignment",
+        "shadbala",
+        "ashtakavarga_sav",
+        "kp_cusp",
+        "navatara",
+        "panchang",
+        "cusp",
+        "arudha_occupancy",
+        "bhava_bala",
+        "chandra_placement",
+        "mrityu_bhaga",
+        "longevity_indicator",
+        "arudha",
+        "aspect",
+        "chalit_shift",
+        "kp_planet",
+        "special_lagna",
+        "strength",
+        "upagraha",
+        "ashtakavarga_bav",
+        "kakshya_zone",
+        "mercury_convergence",
+        "ashtakavarga_pinda",
+        "ishta_kashta",
+        "kp_significator",
+        "varshphal",
+        "avastha"
+      ],
+      "row_count": 795,
+      "native_id": "abhisek_mohanty",
+      "fingerprint": "c54c7548dc2a6609950d5e52965df7aa9c18d1a5585a201207fbb97dc8a622c5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_DOMAIN_REPORT_QUERY",
+      "path": "platform/src/lib/retrieve/domain_report_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D2 Wave5",
+      "description": "Queries rag_chunks where doc_type='domain_report' (L3). Returns domain synthesis content for 9 domains: career, children, financial, health, parents, psychology, relationships, spiritual, travel. Filter by domain name(s) mapped to source_doc pattern, or by keyword. No new chunking needed \u2014 domain_report chunks pre-exist from Pre-KARN-4.",
+      "doc_type": "domain_report",
+      "layer_source": "L3",
+      "domains_covered": [
+        "career",
+        "children",
+        "financial",
+        "health",
+        "parents",
+        "psychology",
+        "relationships",
+        "spiritual",
+        "travel"
+      ],
+      "fingerprint": "d234_domain_report_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY",
+      "path": "platform/src/lib/retrieve/remedial_codex_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D3 Wave5",
+      "description": "Queries rag_chunks where doc_type='l4_remedial' (L4). Returns remedial prescriptions from REMEDIAL_CODEX_v2_0 PART1+PART2 (21 chunks). Filter by planet (Mercury, Saturn, Mars, etc.) or practice_type (gemstone, mantra, yantra, devata, dinacharya, propit). Chunked by remedial_chunker.py Wave5.",
+      "doc_type": "l4_remedial",
+      "layer_source": "L4",
+      "source_canonical_ids": [
+        "REMEDIAL_CODEX_v2_0_PART1",
+        "REMEDIAL_CODEX_v2_0_PART2"
+      ],
+      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY",
+      "path": "platform/src/lib/retrieve/timeline_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D4 Wave5",
+      "description": "Queries rag_chunks where doc_type='l5_timeline' (L5). Returns lifetime timeline content from LIFETIME_TIMELINE_v1_0 (9 chunks) \u2014 dasha phase arcs, event windows, structural inflection points. Filter by dasha_name or keyword. NOTE: Next MD after Mercury is Ketu MD (2027-08-21). Chunked by timeline_chunker.py Wave5.",
+      "doc_type": "l5_timeline",
+      "layer_source": "L5",
+      "source_canonical_ids": [
+        "LIFETIME_TIMELINE_v1_0"
+      ],
+      "fingerprint": "d234_timeline_query_v1_0_0_wave5"
+    }
+  ],
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30",
+  "manifest_version": "1.7",
+  "last_updated": "2026-05-01",
+  "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
+}

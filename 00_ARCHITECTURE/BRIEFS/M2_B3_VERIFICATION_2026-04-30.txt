@@ -1,0 +1,129 @@
+M2_B3_CLUSTER_RECLUSTER — Verification Record
+Generated: 2026-04-30T10:52:07+00:00
+Session: M2_B3_CLUSTER_RECLUSTER
+Branch: redesign/r0-foundation
+
+=== PRE-STATE (CLUSTER_ATLAS_v1_0) ===
+
+  Register ID:     CLUSTER_ATLAS_v1_0
+  Status:          LIVE (before this session)
+  n_clusters:      12
+  signals_covered: ~170 (sample signal_ids only; not exhaustive assignment)
+  coverage:        ~34%
+  centroid_method: kmeans
+  Acceptance:      Below all threshold targets
+
+=== POST-STATE (CLUSTER_ATLAS_v1_1) ===
+
+  Register ID:     CLUSTER_ATLAS_v1_1
+  Status:          CURRENT
+  Supersedes:      CLUSTER_ATLAS_v1_0
+  n_clusters:      34
+  signals_covered: 495
+  total_signals:   499
+  coverage:        99.2%
+  centroid_method: semantic_thematic
+  pass_1_actor:    gemini-web-2026-04-30
+  pass_2_actor:    claude-cowork-2026-04-30
+
+=== ACCEPTANCE CRITERIA CHECK ===
+
+  AC.1  n_clusters in [25, 35]               → 34            PASS
+  AC.2  coverage ≥ 80%                        → 99.2%         PASS
+  AC.3  every domain in ≥2 clusters           → all 9 pass    PASS
+  AC.4  every planet centered in ≥1 cluster   → all 9 pass    PASS
+  AC.5  pass 1 artifact exists                → PASS
+  AC.6  pass 2 artifact exists                → PASS
+  AC.7  v1_0 superseded                       → PASS
+  AC.8  no cluster > 30 signals               → max=28        PASS
+  AC.9  no cluster < 5 signals                → min=5         PASS
+  AC.10 verification file (this file)         → PASS
+  AC.11 two_pass_events.jsonl updated         → +34 lines     PASS
+  AC.12 INDEX.json updated                    → PASS
+
+  OVERALL: ALL 12 ACCEPTANCE CRITERIA PASS
+
+=== PER-DOMAIN CLUSTER COUNT ===
+
+  Domain          | Dominant | Dominant+SubDomain
+  ----------------|----------|--------------------
+  career          |       19 |        34
+  wealth          |        3 |        22
+  spirit          |        3 |        26
+  relationships   |        3 |        13
+  mind            |        2 |        16
+  health          |        1 |         7
+  travel          |        1 |         3
+  children        |        1 |         2
+  parents         |        1 |         2
+
+  AC.3 requires ≥2 for every domain (dominant + sub_domain combined).
+  Minimum observed: children=2, parents=2. Both pass. ✓
+
+=== PER-PLANET CENTERING ===
+
+  Planet    | Centered In | Cluster Label
+  ----------|-------------|-------------------------------------------
+  Saturn    | CLUS.001    | Saturn Dual-Karaka Career Authority
+  Sun       | CLUS.002    | Sun 10H Career-Density Stellium
+  Mercury   | CLUS.003    | Mercury Vargottama Operational Spine
+  Rahu      | CLUS.006    | Rahu 2H Wealth Drive
+  Jupiter   | CLUS.007    | Jupiter-Venus Dharma-Lakshmi Engine
+  Ketu      | CLUS.009    | Ketu 8H Moksha-Occult Mastery
+  Moon      | CLUS.010    | Moon AK Soul-Network Fortune
+  Mars      | CLUS.012    | Mars-Saturn 7H Iron Forge Partnership Paradox
+  Venus     | CLUS.013    | Venus Relationships & Aesthetic Dignity
+
+  All 9 planets centered. ✓
+
+=== CLUSTER SIZE DISTRIBUTION ===
+
+  CLUS.001  20   CLUS.002   8   CLUS.003  11   CLUS.004  11
+  CLUS.005  20   CLUS.006   5   CLUS.007  14   CLUS.008   7
+  CLUS.009  11   CLUS.010   5   CLUS.011  11   CLUS.012  16
+  CLUS.013   5   CLUS.014  28   CLUS.015  26   CLUS.016  20
+  CLUS.017  17   CLUS.018  22   CLUS.019  18   CLUS.020  17
+  CLUS.021  10   CLUS.022   6   CLUS.023  17   CLUS.024  21
+  CLUS.025  22   CLUS.026  27   CLUS.027  13   CLUS.028  11
+  CLUS.029  10   CLUS.030   9   CLUS.031  11   CLUS.032   9
+  CLUS.033  14   CLUS.034  23
+
+  Sum: 495 signals assigned
+  Min: 5 (CLUS.006, CLUS.010, CLUS.013)
+  Max: 28 (CLUS.014)
+  All within [5, 30]. ✓
+
+=== COVERAGE GAP NOTE ===
+
+  MSR_v3_0 declares 499 signals in its header, but only 495 were
+  parseable by the regex extractor (^(SIG\.MSR\.\d+): pattern). The
+  4 unparsed signals are not assigned to any cluster. Coverage is
+  computed as 495/499 = 99.2%. The 4 missing signals represent a
+  parser gap, not a coverage gap from the clustering algorithm.
+  This is above the ≥80% AC.2 threshold. No cluster correction required.
+
+=== FILES CREATED / MODIFIED ===
+
+  CREATED:
+    035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_1.json
+    035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_1.md
+    035_DISCOVERY_LAYER/PROMPTS/gemini/responses/2026-04-30_cluster_recluster_batch1_raw.md
+    035_DISCOVERY_LAYER/PROMPTS/claude/responses/2026-04-30_cluster_recluster_pass2.md
+    00_ARCHITECTURE/BRIEFS/M2_B3_VERIFICATION_2026-04-30.txt (this file)
+
+  MODIFIED:
+    035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.json (status→SUPERSEDED)
+    035_DISCOVERY_LAYER/REGISTERS/CLUSTER_ATLAS_v1_0.md (status→SUPERSEDED)
+    035_DISCOVERY_LAYER/REGISTERS/INDEX.json (cluster_atlas→v1_1)
+    06_LEARNING_LAYER/LEDGER/two_pass_events.jsonl (+34 EVT.CLUS.* lines)
+    00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_B3_CLUSTER_RECLUSTER.md (status→COMPLETE)
+    00_ARCHITECTURE/PROJECT_KARN_SESSION_LOG.md (+1 session entry)
+
+=== HALT CONDITIONS (all clear) ===
+
+  - Unreconcilable two-pass disagreement: NONE
+  - n_clusters outside [20, 40] hard limit: NO (34)
+  - coverage below 70%: NO (99.2%)
+  - any domain with 0 clusters: NONE
+
+=== END OF VERIFICATION ===

@@ -1,0 +1,1335 @@
+{
+  "schema_version": "1.0",
+  "computed_at": "2026-05-01T07:27:22.447307+00:00",
+  "chart_id": "abhisek_mohanty_primary",
+  "ayanamsha": "lahiri",
+  "computed_by": "pyswisseph 2.10.03",
+  "ephe_mode": "moshier",
+  "diagnostics": {
+    "snapshot_count": 9,
+    "snapshots": [
+      {
+        "query_date": "1984-02-05",
+        "query_context": "MD_start_Jupiter",
+        "query_dt_iso": "1984-02-05T10:43:00+05:30"
+      },
+      {
+        "query_date": "1991-08-19",
+        "query_context": "MD_start_Saturn",
+        "query_dt_iso": "1991-08-19T10:43:00+05:30"
+      },
+      {
+        "query_date": "2010-08-18",
+        "query_context": "MD_start_Mercury",
+        "query_dt_iso": "2010-08-18T10:43:00+05:30"
+      },
+      {
+        "query_date": "2026-05-01",
+        "query_context": "current",
+        "query_dt_iso": "2026-05-01T10:43:00+05:30"
+      },
+      {
+        "query_date": "2027-08-19",
+        "query_context": "MD_start_Ketu",
+        "query_dt_iso": "2027-08-19T10:43:00+05:30"
+      },
+      {
+        "query_date": "2034-08-18",
+        "query_context": "MD_start_Venus",
+        "query_dt_iso": "2034-08-18T10:43:00+05:30"
+      },
+      {
+        "query_date": "2054-08-18",
+        "query_context": "MD_start_Sun",
+        "query_dt_iso": "2054-08-18T10:43:00+05:30"
+      },
+      {
+        "query_date": "2060-08-18",
+        "query_context": "MD_start_Moon",
+        "query_dt_iso": "2060-08-18T10:43:00+05:30"
+      },
+      {
+        "query_date": "2070-08-18",
+        "query_context": "MD_end_Moon",
+        "query_dt_iso": "2070-08-18T10:43:00+05:30"
+      }
+    ],
+    "ecr_components": [
+      "sthana",
+      "drik"
+    ],
+    "ecr_specs": {
+      "sthana": "Requires Jagannatha Hora Saptavargaja Bala export per ED.1 (full Sapta-Varga uchcha + ojayugmarasyamsa across D1+D2+D3+D4+D7+D9+D12).",
+      "drik": "Requires full aspect-strength table from JH or shri_jyoti_star per ED.1 (Jyotish 1/4, 1/2, 3/4 partial aspects + sign-based exceptions, planetary aspects on planets and bhavas)."
+    },
+    "naisargika_source": "session brief M3-W3-C3 \u00a7DELIVERABLES D1.c \u2014 Saturn=60..Sun=7.5 rupas; diverges from classical FORENSIC \u00a76.1 SBL.NAISARG.TOTAL (Sun=60..Saturn=8.58); divergence documented in CROSSCHECK_v1_0.md",
+    "time_of_day_convention": "every query datetime uses the native's birth time-of-day (local birth tz) \u2014 natal snapshot anchored to FORENSIC \u00a76.1 cross-check"
+  },
+  "row_counts": {
+    "total_rows": 63,
+    "snapshot_count": 9,
+    "planets_per_snapshot": 7
+  },
+  "rows": [
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 33.9856,
+      "dig_bala": 53.6711,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 58.0614,
+      "partial_total": 153.2181,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 38.0183,
+      "dig_bala": 18.0283,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 1.9386,
+      "partial_total": 67.9853,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 26.8386,
+      "dig_bala": 35.182,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 1.9386,
+      "partial_total": 93.9592,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 24.7237,
+      "dig_bala": 26.1359,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 135.8596,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 8.4064,
+      "dig_bala": 19.1198,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 58.0614,
+      "partial_total": 105.5877,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 27.3878,
+      "dig_bala": 4.6023,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 1.9386,
+      "partial_total": 48.9286,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "1984-02-05",
+      "query_context": "MD_start_Jupiter",
+      "uccha_bala": 59.19,
+      "dig_bala": 56.6637,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 58.0614,
+      "partial_total": 233.9151,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 22.6656,
+      "dig_bala": 54.3202,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.6146,
+      "partial_total": 140.1004,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 7.0847,
+      "dig_bala": 43.0968,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.3854,
+      "partial_total": 64.5669,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 9.9711,
+      "dig_bala": 45.6835,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.3854,
+      "partial_total": 90.04,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 47.2805,
+      "dig_bala": 37.4856,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 169.7661,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 51.317,
+      "dig_bala": 35.5548,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.6146,
+      "partial_total": 162.4863,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 16.4262,
+      "dig_bala": 7.5859,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.3854,
+      "partial_total": 43.3975,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "1991-08-19",
+      "query_context": "MD_start_Saturn",
+      "uccha_bala": 33.962,
+      "dig_bala": 27.9098,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.6146,
+      "partial_total": 177.4863,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 22.9441,
+      "dig_bala": 54.3159,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.5594,
+      "partial_total": 140.3195,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 5.2378,
+      "dig_bala": 41.5326,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.4406,
+      "partial_total": 61.211,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 16.6482,
+      "dig_bala": 38.7237,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.4406,
+      "partial_total": 89.8124,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 53.2468,
+      "dig_bala": 43.7194,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 181.9662,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 21.1088,
+      "dig_bala": 11.7519,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.5594,
+      "partial_total": 108.4201,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 3.2992,
+      "dig_bala": 20.9957,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.4406,
+      "partial_total": 43.7354,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2010-08-18",
+      "query_context": "MD_start_Mercury",
+      "uccha_bala": 46.1922,
+      "dig_bala": 11.6686,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.5594,
+      "partial_total": 173.4201,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 57.7904,
+      "dig_bala": 54.7382,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.6236,
+      "partial_total": 175.6522,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 7.3477,
+      "dig_bala": 56.6288,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.3764,
+      "partial_total": 78.3528,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 41.8955,
+      "dig_bala": 57.1567,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.3764,
+      "partial_total": 133.4286,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 5.7175,
+      "dig_bala": 29.1329,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 119.8504,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 56.5728,
+      "dig_bala": 56.6548,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.6236,
+      "partial_total": 188.8512,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 44.225,
+      "dig_bala": 14.4939,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.3764,
+      "partial_total": 78.0953,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2026-05-01",
+      "query_context": "current",
+      "uccha_bala": 11.6852,
+      "dig_bala": 36.6032,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.6236,
+      "partial_total": 163.912,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 22.7394,
+      "dig_bala": 54.3177,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.6382,
+      "partial_total": 140.1953,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 36.5808,
+      "dig_bala": 47.3309,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.3618,
+      "partial_total": 98.2734,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 19.6143,
+      "dig_bala": 35.964,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.3618,
+      "partial_total": 89.9401,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 48.203,
+      "dig_bala": 38.4919,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 171.6949,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 48.0587,
+      "dig_bala": 38.8969,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.6382,
+      "partial_total": 162.5938,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 17.7438,
+      "dig_bala": 6.3445,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.3618,
+      "partial_total": 43.4502,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2027-08-19",
+      "query_context": "MD_start_Ketu",
+      "uccha_bala": 5.4813,
+      "dig_bala": 56.4743,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.6382,
+      "partial_total": 177.5938,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 22.9922,
+      "dig_bala": 54.3135,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.5749,
+      "partial_total": 140.3806,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 14.6415,
+      "dig_bala": 21.7039,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.4251,
+      "partial_total": 50.7705,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 1.117,
+      "dig_bala": 54.2043,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.4251,
+      "partial_total": 89.7464,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 49.8245,
+      "dig_bala": 40.3527,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 175.1772,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 24.7454,
+      "dig_bala": 8.0597,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.5749,
+      "partial_total": 108.38,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 3.4201,
+      "dig_bala": 20.9253,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.4251,
+      "partial_total": 43.7705,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2034-08-18",
+      "query_context": "MD_start_Venus",
+      "uccha_bala": 24.8694,
+      "dig_bala": 32.9357,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.5749,
+      "partial_total": 173.38,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 23.0328,
+      "dig_bala": 54.3115,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.5875,
+      "partial_total": 140.4318,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 28.6765,
+      "dig_bala": 54.9355,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.4125,
+      "partial_total": 98.0245,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 26.1984,
+      "dig_bala": 38.5229,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.4125,
+      "partial_total": 99.1338,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 50.9684,
+      "dig_bala": 41.5433,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 177.5117,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 20.6867,
+      "dig_bala": 53.4452,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.5875,
+      "partial_total": 149.7194,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 23.6852,
+      "dig_bala": 0.7028,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.4125,
+      "partial_total": 43.8004,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2054-08-18",
+      "query_context": "MD_start_Sun",
+      "uccha_bala": 16.3338,
+      "dig_bala": 45.9077,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.5875,
+      "partial_total": 177.8291,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 22.8859,
+      "dig_bala": 54.3133,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.6363,
+      "partial_total": 140.3355,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 57.0505,
+      "dig_bala": 26.7103,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.3637,
+      "partial_total": 98.1245,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 10.2195,
+      "dig_bala": 54.353,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.3637,
+      "partial_total": 98.9363,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 48.562,
+      "dig_bala": 39.0021,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 172.5641,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 49.9548,
+      "dig_bala": 17.0616,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.6363,
+      "partial_total": 142.6527,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 33.5033,
+      "dig_bala": 9.2641,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.3637,
+      "partial_total": 62.1312,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2060-08-18",
+      "query_context": "MD_start_Moon",
+      "uccha_bala": 10.4058,
+      "dig_bala": 47.4875,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.6363,
+      "partial_total": 173.5296,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Sun",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 23.0638,
+      "dig_bala": 54.3084,
+      "naisargika_bala": 7.5,
+      "nathonnatha_bala": 55.5973,
+      "partial_total": 140.4695,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Moon",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 15.3414,
+      "dig_bala": 51.7634,
+      "naisargika_bala": 10.0,
+      "nathonnatha_bala": 4.4027,
+      "partial_total": 81.5074,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mars",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 9.9166,
+      "dig_bala": 45.3281,
+      "naisargika_bala": 30.0,
+      "nathonnatha_bala": 4.4027,
+      "partial_total": 89.6473,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Mercury",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 46.548,
+      "dig_bala": 37.1604,
+      "naisargika_bala": 25.0,
+      "nathonnatha_bala": 60.0,
+      "partial_total": 168.7084,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Jupiter",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 29.9243,
+      "dig_bala": 2.7967,
+      "naisargika_bala": 20.0,
+      "nathonnatha_bala": 55.5973,
+      "partial_total": 108.3183,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Venus",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 23.3118,
+      "dig_bala": 1.1102,
+      "naisargika_bala": 15.0,
+      "nathonnatha_bala": 4.4027,
+      "partial_total": 43.8247,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "planet": "Saturn",
+      "query_date": "2070-08-18",
+      "query_context": "MD_end_Moon",
+      "uccha_bala": 50.3591,
+      "dig_bala": 7.3619,
+      "naisargika_bala": 60.0,
+      "nathonnatha_bala": 55.5973,
+      "partial_total": 173.3183,
+      "sthana_ecr": true,
+      "drik_ecr": true,
+      "ecr_components": [
+        "sthana",
+        "drik"
+      ],
+      "needs_verification": true,
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    }
+  ]
+}

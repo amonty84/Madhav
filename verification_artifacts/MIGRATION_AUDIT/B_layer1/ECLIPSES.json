@@ -1,0 +1,17 @@
+{
+  "canonical_id": "ECLIPSES",
+  "local_path": "01_FACTS_LAYER/ECLIPSES_1900_2100.csv",
+  "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/ECLIPSES_1900_2100.csv",
+  "local_sha256": "fbacc50f1c0d0b3ed33b02341c3f2497eb04ee77d37efe3f6fbca21c15d1b1c2",
+  "gcs_sha256": "fbacc50f1c0d0b3ed33b02341c3f2497eb04ee77d37efe3f6fbca21c15d1b1c2",
+  "gcs_sha256_embedded_metadata": null,
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "z7i5EQ==",
+  "gcs_size_bytes": 67786,
+  "local_size_bytes": 67786,
+  "match": true,
+  "gcs_generation": "1777426757653946",
+  "gcs_upload_time": "2026-04-29T01:39:17+0000",
+  "local_commits_after_gcs_upload": [],
+  "divergence_type": "none"
+}

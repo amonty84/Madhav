@@ -1,0 +1,550 @@
+{
+  "drift_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-04-24T21:40:28.930056+00:00",
+    "findings": [
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "FILE_REGISTRY",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_4.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=51e66af50482db10b47db5d3e2a4b06dc03303b63581422b742f840f2c3bc0b4 observed=5254ffca94df4244140c55073c5e4682acd486c1132ddf7a76f922c1dd044a8a",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_bootstrap_placeholder",
+        "severity": "LOW",
+        "canonical_id": "SESSION_LOG",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/SESSION_LOG.md"
+        ],
+        "evidence": "declared_fingerprint='<populated-at-step-15-close-after-session-log-entry-appended>' (bootstrap placeholder)",
+        "suggested_remediation": "Session-close populates real fingerprint at Step 7 close",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CONVERSATION_NAMING_CONVENTION",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=ROTATED_COW03_2026-04-25 observed=42372dbcae145c5a035d4b03b7eaf5899ce764c69ee3874f6674ea08bbc0406e",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_bootstrap_placeholder",
+        "severity": "LOW",
+        "canonical_id": "CANONICAL_ARTIFACTS",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md"
+        ],
+        "evidence": "declared_fingerprint='<populated-at-step-15-close>' (bootstrap placeholder)",
+        "suggested_remediation": "Session-close populates real fingerprint at Step 7 close",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "GEMINIRULES",
+        "surfaces_involved": [
+          ".geminirules",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=d179fc1637c608d956a7193ac69bde2a0966e0309b737863b11a0f9f107c93cf observed=6a72cccd6b0e414c8a605258ac6fe2e816811de3424940f26ade2c856d83300d",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "PROJECT_STATE",
+        "surfaces_involved": [
+          ".gemini/project_state.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=e972a4b56fe1fba787227df9918a1ba9054991689d9ca0fb6a9df0af4d850bbd observed=44b364f1a4b17b9e4660feb4987f472320f890d37611681f6648963ba7761f33",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "fingerprint_mismatch",
+        "severity": "HIGH",
+        "canonical_id": "CURRENT_STATE",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/CURRENT_STATE_v1_0.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "declared=ffeecf7d412fd250278985f7583bde81879367357bb1c05000a3ecbfa60ba9f8 observed=24b2979ccce4cad1891c965997c8324cee8f7abcd0baff666ddbd39741f5718b",
+        "suggested_remediation": "Rotate the row's fingerprint_sha256 AND update last_verified_session/last_verified_on",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "registry_disagreement",
+        "severity": "MEDIUM",
+        "canonical_id": "GOVERNANCE_BASELINE",
+        "surfaces_involved": [
+          "00_ARCHITECTURE/FILE_REGISTRY_v1_3.md",
+          "CANONICAL_ARTIFACTS"
+        ],
+        "evidence": "FILE_REGISTRY does not name 'GOVERNANCE_BASELINE_v1_0.md'",
+        "suggested_remediation": "Add a row for GOVERNANCE_BASELINE_v1_0.md in FILE_REGISTRY",
+        "whitelist_ticket": null
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "STALENESS_REGISTER.md"
+        ],
+        "evidence": "Live pointer `STALENESS_REGISTER.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/gemini/cluster_annotation_v1.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/gemini/cluster_annotation_v1.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "fixtures/p1_trigger_vocab.json"
+        ],
+        "evidence": "Live pointer `fixtures/p1_trigger_vocab.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "pattern_mining_v1_0.md"
+        ],
+        "evidence": "Live pointer `pattern_mining_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "reconciler_v1_3.md"
+        ],
+        "evidence": "Live pointer `reconciler_v1_3.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "STALENESS_REGISTER.md"
+        ],
+        "evidence": "Live pointer `STALENESS_REGISTER.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "00_ARCHITECTURE/STALENESS_REGISTER.md"
+        ],
+        "evidence": "Live pointer `00_ARCHITECTURE/STALENESS_REGISTER.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/ingestion_manifest.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/ingestion_manifest.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "00_ARCHITECTURE/STALENESS_REGISTER.md"
+        ],
+        "evidence": "Live pointer `00_ARCHITECTURE/STALENESS_REGISTER.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/ingestion_manifest.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/ingestion_manifest.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/chunking_report.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/chunking_report.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/graph.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/graph.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/batch_acceptance_rates.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/batch_acceptance_rates.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/batch_acceptance_rates.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/batch_acceptance_rates.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/retrieveClient.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/retrieveClient.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/QUERY_TAXONOMY/plans_v1_0.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/QUERY_TAXONOMY/plans_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/claude/router_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/eval_baseline.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/eval_baseline.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RED_TEAM_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RED_TEAM_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/synthesize.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/synthesize.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/prompts/synthesis.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/prompts/synthesis.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "platform/src/lib/rag/validate.ts"
+        ],
+        "evidence": "Live pointer `platform/src/lib/rag/validate.ts` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/RED_TEAM/probes_v1.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/RED_TEAM/probes_v1.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "00_ARCHITECTURE/STALENESS_REGISTER.md"
+        ],
+        "evidence": "Live pointer `00_ARCHITECTURE/STALENESS_REGISTER.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/ingestion_manifest.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/ingestion_manifest.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/chunking_report.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/chunking_report.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/graph.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/graph.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/eval_baseline.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/eval_baseline.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RED_TEAM_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RED_TEAM_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "verification_artifacts/RAG/batch_acceptance_rates.json"
+        ],
+        "evidence": "Live pointer `verification_artifacts/RAG/batch_acceptance_rates.json` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md"
+        ],
+        "evidence": "Live pointer `035_DISCOVERY_LAYER/PROMPTS/gemini/cgm_edge_proposals_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      },
+      {
+        "class": "phantom_reference",
+        "severity": "MEDIUM",
+        "canonical_id": null,
+        "surfaces_involved": [
+          "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+          "RAG_READINESS_REPORT_v1_0.md"
+        ],
+        "evidence": "Live pointer `RAG_READINESS_REPORT_v1_0.md` in 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md does not resolve (neither relative to repo nor by basename search)",
+        "suggested_remediation": "Whitelist or resolve at PHASE_B_PLAN v1.0.3 amendment cycle",
+        "whitelist_ticket": "WARN.2"
+      }
+    ],
+    "summary": {
+      "total": 44,
+      "by_class": {
+        "fingerprint_mismatch": 5,
+        "fingerprint_bootstrap_placeholder": 2,
+        "registry_disagreement": 1,
+        "phantom_reference": 36
+      },
+      "by_severity": {
+        "HIGH": 5,
+        "LOW": 2,
+        "MEDIUM": 37
+      },
+      "whitelisted": 36
+    },
+    "exit_code": 2
+  }
+}

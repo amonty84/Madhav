@@ -1,0 +1,13 @@
+{
+  "table": "cluster_register",
+  "json_count": 12,
+  "db_count": 12,
+  "count_match": true,
+  "spot_check": {
+    "checked": 5,
+    "matched": 5,
+    "unmatched": []
+  },
+  "null_ids": 0,
+  "overall_status": "PASS"
+}

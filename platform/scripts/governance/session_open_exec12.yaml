@@ -1,0 +1,164 @@
+session_open:
+  session_id: Madhav_M2A_Exec_12
+  cowork_thread_name: "Madhav M2A-Exec-12 — B.6 Hybrid Retrieval Library"
+  agent_name: claude-sonnet-4-6
+  agent_version: claude-sonnet-4-6
+  step_number_or_macro_phase: M2.B.6
+  predecessor_session: Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING
+
+  mandatory_reading_confirmation:
+    - file: CLAUDECODE_BRIEF.md
+      fingerprint_sha256: 8c51decd17fc1412cd8d3c6ebf55cd7e12370a16f2878ea934accb20e47ad159
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: CLAUDE.md
+      fingerprint_sha256: 439281c58fccb3e134f17f5833f37b0b3a4d131b545aa9c0b922bad7c72833d1
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      fingerprint_sha256: c3dec0db5074223bc0a2f02dd825a68149b44c7d7163cc7ad7e5a396ed1643de
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      fingerprint_sha256: ebc24ddd62115bfa8f7bb3005c64003b598761da032a399e65faebff3735a46f
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      fingerprint_sha256: f340f140a8d79aea46c216961c5486087e2b03e2c5366f60bb0706dd32bd14e9
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+      fingerprint_sha256: aa5dfed844ca256b73f50d1fcec699a026aee02abaa59577c5f866d6df3809d3
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+      fingerprint_sha256: 56ab1ae0327bd27c02b2f98379c466a0cafbc84ba32774cc267f04625f1a4da0
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: d47a4c8470f92b93a8f52720348ef640e02457cf78ace6d064d6f9a494afc0eb
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/GROUNDING_AUDIT_v1_0.md
+      fingerprint_sha256: 8bbdc249686b3c528abb38dc0e6fb66c80214c4ab780ec64efec888a7b1d5223
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
+      fingerprint_sha256: 9e44283f237f33cfde5de2a409440fb8d28f52b9afc31a9f76a5a19c0e53154b
+      read_at: 2026-04-27T00:00:00+05:30
+    - file: 00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md
+      fingerprint_sha256: a0ea9fb2923a97f0bafc83459e1692a68c8667d5e6688e7711ae5c6e0835bfe3
+      read_at: 2026-04-27T00:00:00+05:30
+
+  canonical_artifact_fingerprint_check:
+    - canonical_id: MACRO_PLAN
+      declared_fingerprint: 2fef28fdcfa54c425ce96c0dd82e8016a47d907545915139c39688f19ab451c3
+      observed_fingerprint: f340f140a8d79aea46c216961c5486087e2b03e2c5366f60bb0706dd32bd14e9
+      match: "stale_ca_row_pre_existing_residual"
+      note: "MACRO_PLAN is must_not_touch this session; CA row last verified at STEP_7; this mismatch is a known drift_detector baseline residual, not a fresh mutation"
+    - canonical_id: CANONICAL_ARTIFACTS
+      declared_fingerprint: "<populated-at-step-15-close>"
+      observed_fingerprint: c3dec0db5074223bc0a2f02dd825a68149b44c7d7163cc7ad7e5a396ed1643de
+      match: "placeholder_pattern_low_baseline"
+    - canonical_id: CURRENT_STATE
+      declared_fingerprint: ffeecf7d412fd250278985f7583bde81879367357bb1c05000a3ecbfa60ba9f8
+      observed_fingerprint: d47a4c8470f92b93a8f52720348ef640e02457cf78ace6d064d6f9a494afc0eb
+      match: "stale_ca_row_pre_existing_residual"
+      note: "CURRENT_STATE amended many times since CA row last rotated at Madhav_16; will be rotated at this session's close (may_touch)"
+
+  declared_scope:
+    may_touch:
+      - platform/python-sidecar/rag/reconcilers/run_pattern_pipeline.py
+      - platform/python-sidecar/rag/tests/test_run_pattern_pipeline.py
+      - platform/python-sidecar/rag/retrieve.py
+      - platform/python-sidecar/rag/routers/rag_retrieve.py
+      - platform/python-sidecar/main.py
+      - platform/src/lib/rag/retrieveClient.ts
+      - verification_artifacts/RAG/retrieval_golden_v1_0.json
+      - verification_artifacts/RAG/retrieval_eval_v1_0.json
+      - verification_artifacts/RAG/RED_TEAM_M2B_PHASE_B6_v1_0.md
+      - 00_ARCHITECTURE/FILE_REGISTRY_v1_13.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      - 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md
+      - .geminirules
+      - .gemini/project_state.md
+      - CLAUDECODE_BRIEF.md
+    must_not_touch:
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 03_DOMAIN_REPORTS/**
+      - 035_DISCOVERY_LAYER/**
+      - 06_LEARNING_LAYER/**
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      - 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+      - 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+      - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+      - platform/python-sidecar/rag/reconcilers/pattern_mining_reconciler.py
+      - platform/python-sidecar/rag/reconcilers/resonance_walk_reconciler.py
+      - platform/python-sidecar/rag/reconcilers/cluster_reconciler.py
+      - platform/python-sidecar/rag/reconcilers/contradiction_reconciler.py
+      - platform/python-sidecar/rag/embed.py
+      - platform/python-sidecar/rag/graph.py
+
+  mirror_pair_freshness_check:
+    - pair_id: MP.1
+      claude_side: CLAUDE.md
+      gemini_side: .geminirules
+      last_verified_on: 2026-04-27
+      days_since_verification: 0
+      stale: false
+    - pair_id: MP.2
+      claude_side: "composite(SESSION_LOG + CURRENT_STATE + active plan pointers)"
+      gemini_side: .gemini/project_state.md
+      last_verified_on: 2026-04-27
+      days_since_verification: 0
+      stale: false
+    - pair_id: MP.3
+      claude_side: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      gemini_side: "compact MP summary in .geminirules + .gemini/project_state.md"
+      last_verified_on: 2026-04-24
+      days_since_verification: 3
+      stale: false
+    - pair_id: MP.4
+      claude_side: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+      gemini_side: "current-phase pointer in .gemini/project_state.md + .geminirules item #4"
+      last_verified_on: 2026-04-27
+      days_since_verification: 0
+      stale: false
+    - pair_id: MP.5
+      claude_side: 00_ARCHITECTURE/FILE_REGISTRY_v1_12.md
+      gemini_side: "L2.5 canonical-path block in .geminirules"
+      last_verified_on: 2026-04-27
+      days_since_verification: 0
+      stale: false
+    - pair_id: MP.6
+      claude_side: 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md
+      gemini_side: null
+      last_verified_on: 2026-04-24
+      days_since_verification: 3
+      stale: false
+      claude_only: true
+    - pair_id: MP.7
+      claude_side: 00_ARCHITECTURE/SESSION_LOG.md
+      gemini_side: null
+      last_verified_on: 2026-04-27
+      days_since_verification: 0
+      stale: false
+      claude_only: true
+    - pair_id: MP.8
+      claude_side: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      gemini_side: "compact architecture block in .geminirules + .gemini/project_state.md"
+      last_verified_on: 2026-04-24
+      days_since_verification: 3
+      stale: false
+
+  native_directive_obligations: []
+
+  red_team_due: false
+
+  notes: >
+    B.6 Hybrid Retrieval Library. AC.0 pre-flight: run_pattern_pipeline.py DR-write fix.
+    AC.1-5: retrieve.py 5-mode library. AC.6: FastAPI + TS shim. AC.7-8: golden eval.
+    AC.9: 11-probe red-team + M2B milestone close. AC.10-16: governance close chain.
+    MACRO_PLAN and CURRENT_STATE CA fingerprint mismatches are pre-existing residuals
+    (known drift_detector baseline pattern; must_not_touch both files this session).

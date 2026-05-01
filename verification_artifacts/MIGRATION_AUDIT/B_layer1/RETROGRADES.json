@@ -1,0 +1,17 @@
+{
+  "canonical_id": "RETROGRADES",
+  "local_path": "01_FACTS_LAYER/RETROGRADES_1900_2100.csv",
+  "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/RETROGRADES_1900_2100.csv",
+  "local_sha256": "17fa17153c02887295fba6794283ca9b3573071afad7d1a9b4412990109d6ace",
+  "gcs_sha256": "17fa17153c02887295fba6794283ca9b3573071afad7d1a9b4412990109d6ace",
+  "gcs_sha256_embedded_metadata": null,
+  "gcs_md5": "UNKNOWN",
+  "gcs_crc32c": "auVjBA==",
+  "gcs_size_bytes": 81681,
+  "local_size_bytes": 81681,
+  "match": true,
+  "gcs_generation": "1777426757870892",
+  "gcs_upload_time": "2026-04-29T01:39:17+0000",
+  "local_commits_after_gcs_upload": [],
+  "divergence_type": "none"
+}

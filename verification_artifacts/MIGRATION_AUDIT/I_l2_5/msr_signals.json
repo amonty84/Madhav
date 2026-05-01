@@ -1,0 +1,8 @@
+{
+  "table": "msr_signals",
+  "db_count": 499,
+  "expected_count": 499,
+  "key_nulls": 0,
+  "overall_status": "PASS",
+  "notes": "Legacy table retained alongside l25_msr_signals; both carry 499 rows"
+}

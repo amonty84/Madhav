@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marsys-jis/schemas/asset_entry.schema.json",
+  "title": "AssetEntry",
+  "description": "Catalog entry for a MARSYS-JIS corpus asset in the Capability Manifest",
+  "version": "1.0",
+  "type": "object",
+  "required": ["canonical_id", "path", "version", "status", "layer", "expose_to_chat", "representations", "interface_version", "fingerprint", "native_id"],
+  "properties": {
+    "canonical_id": { "type": "string", "description": "Stable identifier e.g. FORENSIC, CGM" },
+    "path": { "type": "string", "description": "Filesystem path" },
+    "version": { "type": "string", "description": "e.g. v8.0" },
+    "status": { "type": "string", "enum": ["CURRENT", "PREDECESSOR", "ARCHIVE", "SOURCE", "QUALITY"] },
+    "layer": { "type": "string", "enum": ["L1", "L2", "L2.5", "L3", "L3.5", "L4", "L5", "L6", "Foundation"] },
+    "expose_to_chat": { "type": "boolean" },
+    "representations": { "type": "array", "items": { "type": "string", "enum": ["file", "chunks", "embedding", "graph", "register"] }, "minItems": 1 },
+    "interface_version": { "type": "string" },
+    "fingerprint": { "type": "string", "description": "SHA256 for change detection" },
+    "native_id": { "type": "string", "description": "Multi-native namespacing; default: universal" },
+    "preferred_for": { "type": "array", "items": { "type": "string" } },
+    "always_required": { "type": "boolean" },
+    "tool_binding": { "type": "string" },
+    "cost_weight": { "type": "number", "minimum": 0 },
+    "supplements_parent": { "type": "string" }
+  },
+  "additionalProperties": false
+}

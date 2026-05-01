@@ -1,0 +1,428 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "katex/dist/katex.min.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-serif);
+  --font-serif: var(--font-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Brand spine — shared across login + consume + admin. Hex equivalents
+     come from src/app/login/page.tsx (canonical reference). */
+  --brand-gold:        oklch(0.78 0.13 80);     /* ≈ #d4af37 */
+  --brand-gold-light:  oklch(0.86 0.13 88);     /* ≈ #f4d160 */
+  --brand-gold-deep:   oklch(0.55 0.13 70);     /* ≈ #a26d0e */
+  --brand-gold-cream:  oklch(0.92 0.075 88);    /* ≈ #fce29a */
+  --brand-charcoal:    oklch(0.10 0.012 70);    /* ≈ #0d0a05 */
+  --brand-ink:         oklch(0.04 0.005 70);    /* ≈ #020201 */
+  --brand-vellum:      oklch(0.94 0.02 80);     /* warm paper for light mode */
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+:root {
+  /* Warm paper-neutral palette — low chroma around hue 75 (warm yellow-beige) */
+  --background: oklch(0.992 0.004 75);
+  --foreground: oklch(0.175 0.006 75);
+  --card: oklch(0.992 0.004 75);
+  --card-foreground: oklch(0.175 0.006 75);
+  --popover: oklch(0.998 0.003 75);
+  --popover-foreground: oklch(0.175 0.006 75);
+  --primary: oklch(0.22 0.006 75);
+  --primary-foreground: oklch(0.985 0.004 75);
+  --secondary: oklch(0.955 0.006 75);
+  --secondary-foreground: oklch(0.22 0.006 75);
+  --muted: oklch(0.955 0.006 75);
+  --muted-foreground: oklch(0.525 0.008 75);
+  --accent: oklch(0.94 0.008 75);
+  --accent-foreground: oklch(0.22 0.006 75);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.905 0.008 75);
+  --input: oklch(0.905 0.008 75);
+  --ring: oklch(0.68 0.008 75);
+  --chart-1: oklch(0.87 0.006 75);
+  --chart-2: oklch(0.556 0.006 75);
+  --chart-3: oklch(0.439 0.006 75);
+  --chart-4: oklch(0.371 0.006 75);
+  --chart-5: oklch(0.269 0.006 75);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.97 0.008 75);
+  --sidebar-foreground: oklch(0.22 0.006 75);
+  --sidebar-primary: oklch(0.22 0.006 75);
+  --sidebar-primary-foreground: oklch(0.985 0.004 75);
+  --sidebar-accent: oklch(0.92 0.01 75);
+  --sidebar-accent-foreground: oklch(0.22 0.006 75);
+  --sidebar-border: oklch(0.895 0.008 75);
+  --sidebar-ring: oklch(0.68 0.008 75);
+
+  /* Brand alpha tokens — consumed by consume shell and chat components. */
+  --brand-cream: oklch(0.92 0.10 90);
+
+  /* Citation palette — tonal variants in the gold family, distinct enough
+     to carry type meaning while living in the same warm register as the brand. */
+  --cite-signal:    oklch(0.78 0.13 80);
+  --cite-asset:     oklch(0.72 0.10 60);
+  --cite-chunk:     oklch(0.66 0.06 50);
+  --cite-signal-bg: oklch(0.78 0.13 80 / 0.10);
+  --cite-asset-bg:  oklch(0.72 0.10 60 / 0.10);
+  --cite-chunk-bg:  oklch(0.66 0.06 50 / 0.10);
+  --brand-charcoal-deep: oklch(0.05 0.005 70);
+  --brand-form-fill: oklch(0.13 0.01 70 / 0.86);
+  --brand-gold-hairline: oklch(0.78 0.13 80 / 0.35);
+  --brand-gold-glow: oklch(0.78 0.13 80 / 0.20);
+  --brand-gold-faint: oklch(0.78 0.13 80 / 0.12);
+}
+
+/* Consume-shell scope: applies the brand gold/ink palette only to the consume
+   chat surface, leaving build/audit/admin dark-mode pages untouched. Mounted
+   on ConsumeChat's root via the .consume-shell class (which also carries `dark`
+   directly, avoiding the display:contents ancestor paint-invalidation quirk).
+   The radial-gradient matches login's bg treatment. Tokens (--accent, --ring,
+   --primary) are re-pointed to gold so any descendant focus-ring / accent picks
+   up the brand without per-component overrides. */
+.consume-shell {
+  --background: var(--brand-charcoal);
+  --accent: var(--brand-gold);
+  --accent-foreground: var(--brand-ink);
+  --ring: var(--brand-gold);
+  --primary: var(--brand-gold);
+  --primary-foreground: var(--brand-ink);
+  /* Gold-tinted borders throughout the consume surface */
+  --border: color-mix(in oklch, var(--brand-gold) 20%, transparent);
+  --sidebar-border: color-mix(in oklch, var(--brand-gold) 24%, transparent);
+  background: radial-gradient(
+    ellipse at top,
+    oklch(0.10 0.012 70) 0%,
+    oklch(0.04 0.005 70) 100%
+  );
+}
+
+/* Right-side border mirrors the sidebar's left border, completing the gold frame
+   around the main chat viewport. Subtle outer glow adds depth without noise. */
+.consume-shell main[aria-label="Chat"] {
+  border-right: 1px solid color-mix(in oklch, var(--brand-gold) 22%, transparent);
+  box-shadow: 4px 0 24px -8px color-mix(in oklch, var(--brand-gold) 6%, transparent);
+}
+
+/* Brand CTA — used for primary gold-on-ink actions (composer send,
+   sidebar New chat). Layered gradient + warm shadow matches login's
+   sign-in button. */
+.brand-cta {
+  background: linear-gradient(
+    180deg,
+    var(--brand-gold-light) 0%,
+    var(--brand-gold) 50%,
+    var(--brand-gold-deep) 100%
+  );
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in oklch, var(--brand-gold) 50%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--brand-gold) 25%, transparent),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: filter 150ms ease;
+}
+.brand-cta:hover {
+  filter: brightness(1.08);
+}
+.brand-cta:disabled,
+.brand-cta[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Soft hairline brand card — translucent ink fill, gold edge. */
+.brand-card {
+  border: 1px solid color-mix(in oklch, var(--brand-gold) 25%, transparent);
+  background: color-mix(in oklch, var(--brand-ink) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.dark {
+  /* Warm-charcoal dark palette — subtle warmth in the shadows */
+  --background: oklch(0.175 0.006 75);
+  --foreground: oklch(0.97 0.006 75);
+  --card: oklch(0.225 0.007 75);
+  --card-foreground: oklch(0.97 0.006 75);
+  --popover: oklch(0.225 0.007 75);
+  --popover-foreground: oklch(0.97 0.006 75);
+  --primary: oklch(0.92 0.006 75);
+  --primary-foreground: oklch(0.22 0.007 75);
+  --secondary: oklch(0.285 0.008 75);
+  --secondary-foreground: oklch(0.97 0.006 75);
+  --muted: oklch(0.275 0.008 75);
+  --muted-foreground: oklch(0.72 0.008 75);
+  --accent: oklch(0.29 0.01 75);
+  --accent-foreground: oklch(0.97 0.006 75);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.58 0.008 75);
+  --chart-1: oklch(0.87 0.006 75);
+  --chart-2: oklch(0.556 0.006 75);
+  --chart-3: oklch(0.439 0.006 75);
+  --chart-4: oklch(0.371 0.006 75);
+  --chart-5: oklch(0.269 0.006 75);
+  --sidebar: oklch(0.2 0.007 75);
+  --sidebar-foreground: oklch(0.97 0.006 75);
+  --sidebar-primary: oklch(0.92 0.006 75);
+  --sidebar-primary-foreground: oklch(0.22 0.007 75);
+  --sidebar-accent: oklch(0.27 0.009 75);
+  --sidebar-accent-foreground: oklch(0.97 0.006 75);
+  --sidebar-border: oklch(1 0 0 / 9%);
+  --sidebar-ring: oklch(0.58 0.008 75);
+
+  /* Brand override: accent + ring + primary become gold in dark mode. */
+  --accent: var(--brand-gold);
+  --accent-foreground: var(--brand-charcoal);
+  --ring: var(--brand-gold);
+  --primary: var(--brand-gold);
+  --primary-foreground: var(--brand-charcoal);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@keyframes chat-dot {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes chat-caret {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Inline caret trailing the last character of a streaming markdown block.
+   Attached to the deepest leaf of the final block-level child so it sits
+   at the end of the last line rather than on its own row. */
+.chat-stream-caret > *:last-child::after,
+.chat-stream-caret > *:last-child > *:last-child::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  transform: translateY(2px);
+  background-color: color-mix(in oklab, var(--brand-gold) 80%, transparent);
+  vertical-align: baseline;
+  animation: chat-caret 1s steps(1) infinite;
+}
+/* Avoid a doubled caret: hide the outer one when a nested one is present. */
+.chat-stream-caret > *:last-child:has(> *:last-child)::after {
+  content: none;
+}
+/* Don't draw a caret inside code blocks (they have their own styling). */
+.chat-stream-caret pre::after,
+.chat-stream-caret code::after {
+  content: none !important;
+}
+
+/* Build-portal typography scale — strict 5-step ladder.
+   Use these classes anywhere in /build/* instead of arbitrary text-* utilities.
+   Display / Heading: serif (page titles + section heads only).
+   Body / Label / Mono: sans + mono. */
+.bt-display {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.bt-heading {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.bt-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.bt-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-muted-foreground);
+}
+/* Use bt-label-upper for metadata/badge contexts that require ALL CAPS. */
+.bt-label-upper {
+  text-transform: uppercase;
+}
+.bt-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.bt-num {
+  font-family: var(--font-sans);
+  font-size: 1.625rem;
+  line-height: 1.1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+/* Hero stat size — 2.5-3× bt-body; used for corpus density numbers */
+.bt-mega {
+  font-family: var(--font-sans);
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/*
+ * Semantic status tokens:
+ *   warn    = system is OK but flagging — use for truncation, cautions
+ *   halt    = system declined to proceed — use for validator failures, blocks
+ *   info    = neutral metadata — use for disclosure tier, non-critical notes
+ *   success = passed validation / completed — use for confirmed states
+ */
+:root {
+  --status-warn:       oklch(0.78 0.13 80);
+  --status-halt:       oklch(0.55 0.20 25);
+  --status-info:       oklch(0.70 0.10 230);
+  --status-success:    oklch(0.70 0.12 145);
+  --status-warn-bg:    oklch(0.78 0.13 80 / 0.10);
+  --status-halt-bg:    oklch(0.55 0.20 25 / 0.10);
+  --status-info-bg:    oklch(0.70 0.10 230 / 0.10);
+  --status-success-bg: oklch(0.70 0.12 145 / 0.10);
+}
+
+/* Status color utilities */
+.bt-status-complete { color: oklch(0.40 0.12 145); }
+.bt-status-active   { color: oklch(0.45 0.12 75);  }
+.bt-status-pending  { color: var(--color-muted-foreground); }
+.bt-status-blocked  { color: oklch(0.40 0.18 27);  }
+
+.dark .bt-status-complete { color: oklch(0.78 0.13 145); }
+.dark .bt-status-active   { color: oklch(0.78 0.13 75);  }
+.dark .bt-status-blocked  { color: oklch(0.70 0.19 22);  }
+
+/* Page-entry ascend — translate-y + fade over 200 ms for layout <main> children. */
+@keyframes page-ascend {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-ascend {
+  animation: page-ascend 200ms ease-out both;
+}
+
+/* Mandala slow clockwise drift — 240 s full rotation. Paused by prefers-reduced-motion. */
+@keyframes mandala-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mandala-spin {
+  animation: mandala-spin 240s linear infinite;
+}
+
+/* Emanating vibration rings — gossamer circles */
+@keyframes mandala-ring-expand {
+  0%   { transform: translate(-50%, -50%) scale(0.55); opacity: 0.55; }
+  60%  { opacity: 0.18; }
+  100% { transform: translate(-50%, -50%) scale(1.55); opacity: 0; }
+}
+
+/* Emanating glow rings — softer, slower */
+@keyframes mandala-ring-glow {
+  0%   { transform: translate(-50%, -50%) scale(0.45); opacity: 0.38; }
+  50%  { opacity: 0.12; }
+  100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
+}
+
+/* Rotating diamond rings */
+@keyframes mandala-diamond-expand {
+  0%   { transform: translate(-50%, -50%) rotate(45deg) scale(0.5); opacity: 0.45; }
+  100% { transform: translate(-50%, -50%) rotate(65deg) scale(1.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Devanagari double-danda accent — applied once, on the Welcome H2 only.
+   Do not add to other elements; over-use dilutes the domain marker. */
+.bt-devanagari-rule::before {
+  content: "॥";
+  margin-right: 0.5em;
+  opacity: 0.6;
+  color: var(--brand-gold);
+  font-family: var(--font-serif);
+}
+.bt-devanagari-rule::after {
+  content: "॥";
+  margin-left: 0.5em;
+  opacity: 0.6;
+  color: var(--brand-gold);
+  font-family: var(--font-serif);
+}

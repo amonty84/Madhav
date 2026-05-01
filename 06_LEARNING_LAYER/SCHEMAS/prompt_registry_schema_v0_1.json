@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "prompt_registry_schema_v0_1",
+  "version": "0.1",
+  "title": "MARSYS-JIS Prompt Registry Entry Schema v0.1",
+  "produced_at": "2026-04-24",
+  "produced_by_session": "Madhav_17_B0",
+  "type": "object",
+  "required": ["prompt_id", "version", "path", "hash", "introduced_at"],
+  "properties": {
+    "prompt_id": {"type": "string"},
+    "version": {"type": "string"},
+    "path": {"type": "string"},
+    "hash": {"type": "string", "pattern": "^sha256:"},
+    "introduced_at": {"type": "string"},
+    "deprecated_at": {"type": ["string", "null"]},
+    "event_count": {"type": "integer", "minimum": 0},
+    "performance_metrics": {"type": "object"}
+  }
+}

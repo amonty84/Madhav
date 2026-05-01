@@ -1,0 +1,85 @@
+{
+  "description": "B.8 synthesis golden set — 10 queries (5 P7-gated, 5 standard). Authored Madhav_M2A_Exec_14. All P7-gated queries confirmed significance >= 0.7 via classify_query() on 2026-04-28.",
+  "queries": [
+    {
+      "query_id": "SQ.001",
+      "query_text": "How do career and wealth domains interact in Abhisek's chart, and what planetary configurations produce the tensions between material achievement and dharmic purpose?",
+      "expected_p7_triggered": true,
+      "expected_plan_type": "interpretive_multidomain",
+      "confirmed_significance": 0.80,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.002",
+      "query_text": "What is the core psychological tension that runs through Abhisek's natal chart, and how do the major planetary combinations reinforce or resist each other at the deepest level?",
+      "expected_p7_triggered": true,
+      "expected_plan_type": "interpretive_multidomain",
+      "confirmed_significance": 0.90,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.003",
+      "query_text": "What does Abhisek's chart reveal about his relationship patterns — the karmic inheritances, capacity for intimacy, and the planetary configurations that shape how he bonds?",
+      "expected_p7_triggered": true,
+      "expected_plan_type": "interpretive_single",
+      "confirmed_significance": 0.75,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.004",
+      "query_text": "When and how will the career themes in Abhisek's chart crystallize in the upcoming dasha periods, and what do the timing indicators suggest about the key activation windows?",
+      "expected_p7_triggered": true,
+      "expected_plan_type": "timing",
+      "confirmed_significance": 0.75,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.005",
+      "query_text": "What is the spiritual and dharmic mission encoded in Abhisek's chart, and how do the 9th, 12th, and Ketu placements synthesize into a coherent karmic arc?",
+      "expected_p7_triggered": true,
+      "expected_plan_type": "interpretive_multidomain",
+      "confirmed_significance": 0.80,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.006",
+      "query_text": "What planet lords Abhisek's 7th house?",
+      "expected_p7_triggered": false,
+      "expected_plan_type": "factual",
+      "confirmed_significance": 0.30,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.007",
+      "query_text": "Which planet occupies the 10th house in Abhisek's chart?",
+      "expected_p7_triggered": false,
+      "expected_plan_type": "factual",
+      "confirmed_significance": 0.30,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.008",
+      "query_text": "What is the active mahadasha for Abhisek currently?",
+      "expected_p7_triggered": false,
+      "expected_plan_type": "factual",
+      "confirmed_significance": 0.35,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.009",
+      "query_text": "How does this instrument handle conflicting interpretations from different Jyotish traditions?",
+      "expected_p7_triggered": false,
+      "expected_plan_type": "meta",
+      "confirmed_significance": 0.30,
+      "notes": "Confirmed via classify_query() 2026-04-28"
+    },
+    {
+      "query_id": "SQ.010",
+      "query_text": "What section headings are contained in the UCN document for Abhisek?",
+      "expected_p7_triggered": false,
+      "expected_plan_type": "factual",
+      "confirmed_significance": 0.30,
+      "notes": "Confirmed via classify_query() 2026-04-28. Original 'UCN core narrative' phrasing scored 0.80 — revised to factual per CF.3 protocol."
+    }
+  ]
+}

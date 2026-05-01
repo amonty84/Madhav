@@ -1,0 +1,137 @@
+{
+  "audit_stream": "C",
+  "audit_label": "RAG Chunk Integrity Verification",
+  "produced_at": "2026-04-29T00:00:00Z",
+  "phase_14b_commit": "dc6d922",
+  "total_chunk_count": 941,
+  "sources_with_chunks": [
+    {
+      "source_file": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "source_version": "8.0",
+      "doc_type": "l1_fact",
+      "chunk_count": 102,
+      "gcs_path": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "gcs_verified": true,
+      "gcs_uploaded_by": "phase_14A",
+      "gcs_created": "2026-04-28T16:03:28Z"
+    },
+    {
+      "source_file": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
+      "source_version": "1.1",
+      "doc_type": "cdlm_cell",
+      "chunk_count": 81,
+      "gcs_path": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md",
+      "gcs_verified": true,
+      "gcs_uploaded_by": "phase_14A",
+      "gcs_created": "2026-04-28T16:03:37Z"
+    },
+    {
+      "source_file": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
+      "source_version": "9.0",
+      "doc_type": "cgm_node",
+      "chunk_count": 234,
+      "gcs_path": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md",
+      "gcs_verified": true,
+      "gcs_uploaded_by": "phase_14A",
+      "gcs_created": "2026-04-28T16:03:39Z"
+    },
+    {
+      "source_file": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
+      "source_version": "3.0",
+      "doc_type": "msr_signal",
+      "chunk_count": 499,
+      "gcs_path": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md",
+      "gcs_verified": true,
+      "gcs_uploaded_by": "phase_14A",
+      "gcs_created": "2026-04-28T16:03:35Z"
+    },
+    {
+      "source_file": "025_HOLISTIC_SYNTHESIS/UCN_v4_0.md",
+      "source_version": "4.0",
+      "doc_type": "ucn_section",
+      "chunk_count": 25,
+      "gcs_path": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md",
+      "gcs_verified": true,
+      "gcs_uploaded_by": "phase_14A",
+      "gcs_created": "2026-04-28T16:03:36Z",
+      "note": "DB source_version=4.0; CLAUDE.md canonical table lists UCN as 4.1 (internal bump). GCS object is UCN_v4_0.md. Chunking was done against v4.0 — no discrepancy at GCS/DB level; CLAUDE.md internal version label is not load-bearing for chunk_id derivation."
+    }
+  ],
+  "doc_type_breakdown": {
+    "msr_signal": 499,
+    "ucn_section": 25,
+    "cdlm_cell": 81,
+    "l1_fact": 102,
+    "domain_report": 0,
+    "cgm_node": 234
+  },
+  "chunk_id_format": {
+    "algorithm": "sha256(content.encode())[:32]",
+    "length": 32,
+    "format": "hex",
+    "note": "32-char hex (not UUID-36). Consistent across all rows. Idempotent: same content → same chunk_id."
+  },
+  "duplicate_chunk_ids": 0,
+  "null_content_chunks": 0,
+  "null_chunk_id_chunks": 0,
+  "orphaned_source_refs": [],
+  "chunker_code_commits_after_14b": [],
+  "chunker_git_log": {
+    "phase_14b_commit": "dc6d922",
+    "commits_after_14b_touching_chunkers": 0,
+    "conclusion": "No chunker code was modified after Phase 14B. Re-running the chunker against the same GCS source content will produce identical chunk_ids."
+  },
+  "gcs_objects_not_in_db": [
+    {
+      "path": "gs://madhav-marsys-sources/L2_5/RED_TEAM_L2_5_v1_0.md",
+      "note": "Present in GCS L2_5/ but no corresponding rows in rag_chunks. Not orphaned in DB — this is an unprocessed source, not a stale DB reference."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md",
+      "note": "Present in GCS L2_5/ but no corresponding rows in rag_chunks. domain_report doc_type count is 0 — RM and RED_TEAM were uploaded to GCS but not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md",
+      "note": "Present in GCS L1/facts/ but not in rag_chunks. Not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/facts/CGP_AUDIT_v1_0.md",
+      "note": "Present in GCS L1/facts/ but not in rag_chunks. Not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/facts/EXTERNAL_COMPUTATION_SPEC_v2_0.md",
+      "note": "Present in GCS L1/facts/ but not in rag_chunks. Not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/facts/SADE_SATI_CYCLES_ALL.md",
+      "note": "Present in GCS L1/facts/ but not in rag_chunks. Not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/sources/EVENT_CHART_STATES_v1_0.md",
+      "note": "Present in GCS L1/sources/ but not in rag_chunks. Not yet chunked."
+    },
+    {
+      "path": "gs://madhav-marsys-sources/L1/sources/JHORA_TRANSCRIPTION_v8_0_SOURCE.md",
+      "note": "Present in GCS L1/sources/ but not in rag_chunks. Not yet chunked."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "W-C-01",
+      "severity": "INFO",
+      "message": "8 GCS objects have no corresponding rag_chunks rows. These are unprocessed sources (chunking not yet run), not stale DB references. No DB rows reference non-existent GCS objects."
+    },
+    {
+      "code": "W-C-02",
+      "severity": "INFO",
+      "message": "domain_report doc_type has 0 chunks in DB. chunker code exists (chunkers/domain_report.py) but was not run in Phase 14B. RM_v2_0.md and RED_TEAM_L2_5_v1_0.md are in GCS but unchunked."
+    },
+    {
+      "code": "W-C-03",
+      "severity": "INFO",
+      "message": "UCN DB source_version is '4.0'; CLAUDE.md canonical table notes '4.1 (internal)'. GCS object filename is UCN_v4_0.md. The internal 4.1 bump was not re-uploaded to GCS before Phase 14B chunking. Chunk IDs are consistent with v4.0 GCS content. No DB integrity issue; version label drift noted for awareness."
+    }
+  ],
+  "overall_status": "PASS",
+  "summary": "941 chunks across 5 sources. 0 duplicate chunk_ids. 0 null content. 0 null chunk_ids. All 5 chunked sources have verified GCS objects. No chunker code commits after Phase 14B (dc6d922) — re-running produces identical chunk_ids. chunk_id format is sha256[:32] hex (32 chars), consistent across all rows. 8 additional GCS objects exist but have no DB rows (unprocessed, not orphaned)."
+}

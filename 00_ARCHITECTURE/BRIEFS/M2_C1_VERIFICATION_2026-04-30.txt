@@ -1,0 +1,94 @@
+VERIFICATION — M2_C1_CHART_FACTS_QUERY
+Session: KARN-W4-R3-CHART-FACTS-QUERY
+Date: 2026-04-30
+
+=== Pre-flight Results ===
+
+PF.1 Branch: redesign/r0-foundation ✅
+PF.2 Working tree: Pre-existing modifications from parallel sessions (W4-R1 python-sidecar, portal redesign, W4-R2 retrieve tools). All in must_not_touch territory — not touched. ✅
+PF.3 chart_facts row count: 795 ✅
+PF.4 Category inventory: 37 categories confirmed (all match brief's enum):
+  arudha(9), arudha_occupancy(12), ashtakavarga_bav(8), ashtakavarga_pinda(7),
+  ashtakavarga_sav(13), aspect(9), avastha(7), bhava_bala(12), birth_metadata(22),
+  chalit_shift(9), chandra_placement(12), cusp(12), dasha_chara(144), dasha_vimshottari(50),
+  dasha_yogini(17), deity_assignment(16), house(149), ishta_kashta(7), kakshya_zone(8),
+  kp_cusp(12), kp_planet(9), kp_significator(7), longevity_indicator(10), mercury_convergence(8),
+  mrityu_bhaga(11), navatara(12), panchang(12), planet(45), saham(36), sensitive_point(25),
+  shadbala(14), special_lagna(9), strength(9), strength_extra(21), upagraha(9), varshphal(5),
+  yoga(18)
+PF.5/6 value_json shape findings — CORRECTIONS vs brief expectation:
+  shadbala (SBL.TOTAL.*): {planet, forensic_rupas, jh_rupas, forensic_rank, jh_rank, min_required_rupas}
+    — brief said 'total_rupas'; actual field is 'forensic_rupas'. rank_by='total_rupas' maps to forensic_rupas in ORDER BY.
+  shadbala (SHB.*): component-level {planet, dig_bala, sthana_bala, kala_bala, ...} — no total field.
+  ashtakavarga_bav: {planet, by_sign{}, total_bindus} — matches brief. ✅
+  bhava_bala (BVB.JH.*): {house, engine, jh_rank, jh_rupas, life_area} — brief said 'bhava_bala' field; actual is 'jh_rupas'.
+  yoga: {type, source, key_configuration} — brief said {name, planets, houses, classification}. Shape different.
+  saham: {sign, house, meaning, longitude, nakshatra} — no 'name' field (name is in fact_id after 'SAH.').
+  avastha: {role, baladi, planet, deeptadi, jagratadi, explanation} — no 'lajjitadi' field.
+PF.7 Test baseline: 964 pass, 13 fail (pre-existing ESM failures)
+PF.8 W4-R2 tools status: kp_query.ts existed at pre-flight; saham_query.ts and divisional_query.ts
+  were found on disk by the time implementation started (W4-R2 committed concurrently). All three
+  were NOT touched. W4-R2 also pre-populated index.ts with their imports — chart_facts_query was
+  appended without touching W4-R2 entries.
+PF.9 RETRIEVAL_TOOLS count before: 13 (10 original + 3 from W4-R2). After: 14.
+
+=== AC Verification ===
+
+AC.1  PASS — git branch: redesign/r0-foundation
+AC.2  PASS — platform/src/lib/retrieve/chart_facts_query.ts created
+AC.3  PASS — index.ts has import * as chartFactsQuery + chartFactsQuery.tool in RETRIEVAL_TOOLS
+AC.4  PASS — router/types.ts has chart_facts_query?: ChartFactsQueryInput
+AC.5  PASS — router/prompt.ts has 5+ chart_facts_query references (tool list + guidance block)
+AC.6  PASS — Live DB: shadbala returns 14 rows; top result SBL.TOTAL.SUN (forensic_rupas=8.51)
+AC.7  PASS — Live DB: SAH.VIVAHA returned for keyword='Vivaha' (meaning='Marriage')
+AC.8  PASS — Live DB: 18 yoga rows
+AC.9  PASS — Tests TC.8 confirmed: limit=5→LIMIT 5, limit=200→LIMIT 100
+AC.10 PASS — tsc --noEmit: 0 new errors from chart_facts_query.ts or type additions
+              (pre-existing errors in tests/components/ are unrelated to this work)
+AC.11 PASS — 12/12 new tests pass; full suite: 991 pass, 13 fail (no regressions vs 964 baseline)
+AC.12 PASS — Cloud Run revision amjis-web-00035-4ll serving 100% traffic (prior: 00034-9sx)
+
+=== Files Created/Modified ===
+
+CREATED:
+  platform/src/lib/retrieve/chart_facts_query.ts
+  platform/src/lib/retrieve/__tests__/chart_facts_query.test.ts
+  00_ARCHITECTURE/BRIEFS/M2_C1_VERIFICATION_2026-04-30.txt (this file)
+
+MODIFIED:
+  platform/src/lib/retrieve/index.ts — appended Wave 4 M2-C1 import + RETRIEVAL_TOOLS entry
+  platform/src/lib/router/types.ts — added chart_facts_query?: ChartFactsQueryInput to QueryPlan
+  platform/src/lib/router/prompt.ts — added chart_facts_query to ## Tools list + full guidance block
+  00_ARCHITECTURE/CAPABILITY_MANIFEST.json — appended RETRIEVAL_TOOL_CHART_FACTS_QUERY entry (entry_count: 106)
+  00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_C1_CHART_FACTS_QUERY.md — status flipped to COMPLETE
+
+NOT MODIFIED (as required):
+  platform/migrations/**, platform/python-sidecar/**, all existing retrieve tools,
+  platform/src/app/**, platform/src/components/**, 035_DISCOVERY_LAYER/**, sibling briefs
+
+=== Test Delta ===
+
+Before: 964 passed / 13 failed
+After:  991 passed / 13 failed
+New passing: +27 (12 chart_facts_query + 15 from W4-R2 tools that ran for the first time)
+New failures: 0
+
+=== Cloud Run ===
+
+Prior revision: amjis-web-00034-9sx
+New revision:   amjis-web-00035-4ll
+Build ID: d266fc08-081f-4467-a656-636905a7315f (SUCCESS, 3m27s)
+Service URL: https://amjis-web-938361928218.asia-south1.run.app
+
+=== Key Implementation Notes ===
+
+1. rank_by='total_rupas' maps to ORDER BY (value_json->>'forensic_rupas')::numeric DESC
+   (not total_rupas — that field doesn't exist in DB; forensic_rupas is the actual total)
+2. rank_by='bhava_bala' maps to ORDER BY (value_json->>'jh_rupas')::numeric DESC
+   (bhava_bala rows use jh_rupas as the score field)
+3. nakshatra_pada filter is ready for W4-R1 population (passes-through safely when field absent)
+4. planet filter uses ILIKE on both value_json->>'planet' AND fact_id (covers both patterns)
+5. validate() and telemetry.recordLatency() calls match existing tool conventions
+
+Brief status: COMPLETE
+Next in stream: M2_C5_TEMPORAL_EXTENSION (W5-R1) — after Wave 4 closes
