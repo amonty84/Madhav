@@ -94,7 +94,7 @@ See `DISAGREEMENT_REGISTER_v1_0.md` entry DIS.009 for full record.
 
 ---
 
-## Wave 1 — M3-OPEN + Sub-phase A (Active)
+## Wave 1 — M3-OPEN + Sub-phase A (**CLOSED 2026-05-01**)
 
 **Entry state:** M2 CLOSED; CURRENT_STATE active_macro_phase = M3
 **Governing handoff:** `00_ARCHITECTURE/HANDOFF_M2_TO_M3_v1_0.md`
@@ -106,7 +106,7 @@ See `DISAGREEMENT_REGISTER_v1_0.md` entry DIS.009 for full record.
 | M3-W1-A1-EVAL-BASELINE | A | BASELINE_RUN_W9_MANUAL_v1_0.md + DIS009_ANALYSIS_v1_0.md | CLOSED | 2026-05-01 | — |
 | M3-W1-A2-PATTERN-ENGINE | A | Pattern + Contradiction + Resonance + Cluster flag-gating; CAPABILITY_MANIFEST entry_count fix; IS.8(a) red-team | CLOSED | 2026-05-01 | (close-time) |
 | M3-W1-A3-CONTRADICTION-ENGINE | A | Synthesis-prompt amendment for contradiction-framing rubric (B.1/B.3 compliant) in shared preamble | CLOSED | 2026-05-01 | (close-time) |
-| M3-W1-A4-DIS009-DISPOSITION | A | DIS.009 disposition + M3-A close | PENDING | — | — |
+| M3-W1-A4-DIS009-DISPOSITION | A | DIS.009 R3 disposition + IS.8(a) RT + **M3-A SUB-PHASE CLOSED** | CLOSED | 2026-05-01 | (close-time) |
 
 _Session IDs above reflect PHASE_M3_PLAN_v1_0.md §3.1 session estimates. Actual IDs finalized at each session open; pattern may compress A2/A3/A4 or expand further depending on scope._
 
@@ -968,3 +968,86 @@ notes: >
   (validator + held-out sample + IS.8(b) red-team + M3_CLOSE_v1_0.md +
   HANDOFF_M3_TO_M4_v1_0.md per PHASE_M3_PLAN §3.4).
 
+
+=== M3-W1-A4-DIS009-DISPOSITION CLOSE ===
+closed: 2026-05-01
+git_sha: (close-time)
+session_agent: claude-opus-4-7[1m]
+cowork_thread_name: "M3-W1-A4-DIS009-DISPOSITION"
+predecessor_session: M3-W3-C3-SHADBALA
+track: "Track 1 (Discovery Engine + DIS.009) closing session — M3-A SUB-PHASE CLOSE. DIS.009 R3 disposition + IS.8(a) cadence-fire red-team + M3-A close-checklist all in this session. Tracks 2 + 3 unaffected (Track 3 already CLOSED at C3; Track 2 has B3 optional or close en bloc at M3-D)."
+deliverables:
+  - 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json: "PAT.008 mechanism re-grounded per native R3 verdict at Gate 1; claim_text rewritten with two-step Saturn-Mercury identity-axis framing; mechanism text rewritten to make AL-direct + Karakamsa-via-Mercury-dispositorship explicit; [EXTERNAL_COMPUTATION_REQUIRED] block added per CLAUDE.md §I B.10 (JH D9 export to verify Moon D9 = Gemini + Mercury D1 = Capricorn); status set to needs_verification; re_validation_status flipped gemini_conflict → resolved_pending_ecr; resolution_session + resolution_note added"
+  - 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md: "companion .md updated to match JSON; Status line added; DIS.009 resolution paragraph appended"
+  - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md: "DIS.009 status open → resolved; resolution prose authored; resolved_on=2026-05-01; resolved_by_session=M3-W1-A4-DIS009-DISPOSITION; arbitration_steps_taken extended with reconciler_resolution (A1 analysis) + native_arbitration (this session R3 verdict); linked_artifacts extended with DIS009_ANALYSIS_v1_0.md + PATTERN_REGISTER_v1_0.md companion"
+  - 00_ARCHITECTURE/EVAL/REDTEAM_M3A2_v1_0.md: "new — IS.8(a) every-third-session cadence-fire red-team; counter trail A2-fire-reset → A3=1 → C3=2 → A4=3 → fires + resets to 0; 7 axes (B.1 layer-separation, B.3 derivation-ledger, B.10 no-fabricated-computation, flag-gate correctness, DIS.009 consistency, eval baseline integrity, scope compliance); verdict PASS 7/7; 0 CRITICAL/0 HIGH/0 MEDIUM/1 LOW (ECR clarification carry-forward KR.M3A2.1)"
+  - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md: "Wave 1 row M3-W1-A4-DIS009-DISPOSITION flipped PENDING → CLOSED; Wave 1 header updated to 'CLOSED 2026-05-01'; this close block appended"
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md: "amended in-place — last_session_id → M3-W1-A4-DIS009-DISPOSITION; red_team_counter 2→3 (IS.8(a) FIRES) → reset to 0; active_phase_plan_sub_phase reflects M3-A CLOSED; next_session_objective updated; §3 narrative refreshed; changelog entry added"
+  - .gemini/project_state.md: "MP.2 mirror — adapted-parity update reflecting DIS.009 resolved + M3-A closed + counter reset"
+  - 00_ARCHITECTURE/SESSION_LOG.md: "session_open + session_close blocks appended atomically"
+acceptance_criteria_passed:
+  - "AC.M3A.1 — BASELINE_RUN_W9_MANUAL_v1_0.md exists, non-stub, all six metric rows populated (manual-capture mode per phase-plan entry-gate clause; numerical values await KR.W9.1 auth secrets); native-accepted at A1 close 2026-05-01"
+  - "AC.M3A.2 — Pattern Engine tool ships behind DISCOVERY_PATTERN_ENABLED flag; default false at first commit, flipped true after smoke (REDTEAM_M3A §3 8/8 PASS); durable in feature_flags.ts:86 default-true"
+  - "AC.M3A.3 — Contradiction Engine tool ships behind DISCOVERY_CONTRADICTION_ENABLED flag; same wiring + smoke pattern as AC.M3A.2; durable in feature_flags.ts:87"
+  - "AC.M3A.4 — DIS.009 has terminal status (resolved); native R3 verdict recorded; PAT.008 mechanism re-grounded; ECR added per B.10"
+  - "AC.M3A.6 — chart_facts and FORENSIC remain mandatory floor in every retrieved bundle (composition layer must_not_touch this session; held over from W6/W7 audit)"
+  - "AC.M3A.7 — Pattern + Contradiction tool catalog entries in CAPABILITY_MANIFEST.json: PATTERN_REGISTER_JSON tool_binding=pattern_register, TOOL_QUERY_PATTERNS, CONTRADICTION_REGISTER_JSON tool_binding=contradiction_register, TOOL_QUERY_CONTRADICTIONS; entry_count=112 matches len(entries)=112"
+  - "AC.M3A.8 — Synthesis prompt amendments preserve B.1 layer-separation (CONTRADICTION_FRAMING preamble in shared.ts is instructional prose with explicit B.1+B.3 enforcement clauses; covered by RT.M3A2.1)"
+  - "AC.M3A.9 — IS.8(a) cadence discharged; REDTEAM_M3A2_v1_0.md PASS 7/7 axes 0 CRITICAL/HIGH/MEDIUM 1 LOW; counter 2→3 fires + resets 3→0"
+acceptance_criteria_deferred:
+  - "AC.M3A.5 — BASELINE_RUN_M3A_POST.json: DEFERRED. Rationale: auth wall (HTTP 401 on /api/chat/consume; Firebase __session cookie unavailable in headless session) prevented both pre-baseline and post-baseline numerical capture. BASELINE_RUN_W9_MANUAL_v1_0.md §6 native-acceptance scope of acceptance allowed AC.M3A.5 to be (a) waived metric-delta with descriptive delta or (b) require secrets to land before M3-A close. Native-accepted defer at this session close. Target session: first M3-A-post / M3-D session with auth secrets."
+governance_scripts:
+  mirror_enforcer: "exit=0 (8/8 pairs clean; claude_only=2)"
+  drift_detector: "(at-close run; expected exit=2 carry-forward, no new regressions — all touched files are governance-layer artifacts; no canonical-artifact fingerprint changes outside CURRENT_STATE/.gemini/project_state.md/SESSION_LOG/PROJECT_M3_SESSION_LOG/DISAGREEMENT_REGISTER all of which are LIVING-not-fingerprint-locked)"
+  schema_validator: "(at-close run; expected exit=2 carry-forward; no new CRITICAL)"
+red_team_due: true (IS.8(a) every-third-session cadence)
+red_team_performed: true (REDTEAM_M3A2_v1_0.md PASS)
+red_team_counter_after: 0 (cadence fired 2→3, reset to 0)
+known_residuals:
+  - "KR.W9.1 (carry-forward from A1) — Non-stub BASELINE_RUN_W9.json not yet captured; auth secrets unavailable. Severity MEDIUM. Target: first M3-A-post / M3-D session with auth."
+  - "KR.W9.2 (carry-forward from A1) — Runner --fixture-ids parser quirk (empty default → empty filter → zero matches). Severity LOW. Target: hygiene-pass session."
+  - "KR.M3A2.1 (new this session) — PAT.008 ECR text could explicitly cite FORENSIC §3.5 as in-corpus L1 source for what JH is being asked to verify (Moon D9 = Gemini + Mercury D9 = Capricorn Vargottama already L1-attested). Severity LOW (documentation clarity, not B.10 violation). Native-instructed ECR text held verbatim per Gate 1 hard constraint. Target: M3-D acharya-grade chart-reading review or any session where native revisits PAT.008."
+  - "KR.M3A.JH-EXPORT — DIS.009 R3 disposition embeds [EXTERNAL_COMPUTATION_REQUIRED]; full DIS.009 closure pending JH D9 export per ED.1 to confirm Moon D9 = Gemini + Mercury D1 = Capricorn (ECR is belt-and-suspenders since both already in FORENSIC §3.5 + §1; native-instructed verification path). Target: M3-B-class verification window."
+  - "Inherited from M2 close (carry-forward; not blocking M3-A close): SIG.MSR.207 absent from MSR_v3_0.md (read-only investigation); UCN inline citation pass (aspirational); TypeScript test-fixture errors in tests/components/AppShell.test.tsx + ReportGallery.test.tsx (Portal Redesign R-stream owns)"
+notes: >
+  M3-A SUB-PHASE CLOSED 2026-05-01 at this session. Track 1 deliverable arc complete:
+  A1 (eval baseline + DIS.009 written analysis) → A2 (Pattern + Contradiction +
+  Resonance + Cluster flag-gating + manifest entry_count fix + REDTEAM_M3A IS.8(a)
+  fire) → A3 (synthesis-prompt CONTRADICTION_FRAMING amendment) → A4 (this session:
+  DIS.009 R3 disposition + REDTEAM_M3A2 IS.8(a) cadence-fire + M3-A close).
+
+  Gate 1 (DIS.009 disposition): native chose R3 (RE-GROUND) with specific rewrite
+  direction. PAT.008 mechanism rewritten in-place to make the two-step architecture
+  explicit — Saturn directly governs the AL (L1-clean from FORENSIC §17 + Capricorn
+  rulership), and Saturn disposits Mercury in Capricorn 10H Vargottama (L1-attested
+  at FORENSIC §1 line 160 + §3.5 line 285) where Mercury rules the D9 Karakamsa
+  (Gemini, derived from AK = Moon + Moon D9 = Gemini + Mercury rulership of Gemini).
+  The Saturn-Mercury identity axis across the Capricorn-Gemini spine is the
+  corrected mechanism. [EXTERNAL_COMPUTATION_REQUIRED] block added per native
+  instruction; status: needs_verification; re_validation_status: resolved_pending_ecr.
+  DIS.009 status: resolved; resolved_on: 2026-05-01.
+
+  Gate 2 (IS.8(a) red-team): REDTEAM_M3A2_v1_0.md authored as the second IS.8(a)
+  cadence-fire in M3 (counter trail: A2-fire-reset 3→0; A3 0→1; C3-Shadbala 1→2;
+  A4 2→3 → FIRES → reset 3→0). Seven axes: B.1 layer-separation, B.3
+  derivation-ledger, B.10 no-fabricated-computation, flag-gate correctness,
+  DIS.009 consistency, eval baseline integrity, scope compliance. Verdict PASS
+  7/7; 0 CRITICAL / 0 HIGH / 0 MEDIUM / 1 LOW. The single LOW (KR.M3A2.1) is a
+  documentation-clarity carry-forward — the native-instructed ECR text could
+  reference FORENSIC §3.5 as in-corpus L1 source for what JH is asked to verify.
+  Held verbatim per Gate 1 hard constraint.
+
+  Gate 3 (M3-A close): 8 of 9 ACs PASS; AC.M3A.5 DEFERRED with rationale (auth
+  wall blocks both pre and post baseline numerical capture; phase-plan entry-gate
+  clause + native-acceptance scope at A1 close authorize defer). M3-A SUB-PHASE
+  CLOSED.
+
+  Scope strictly respected: did NOT touch platform/src/lib/retrieve/**,
+  platform/src/lib/synthesis/**, platform/src/lib/bundle/**, 01_FACTS_LAYER/**,
+  05_TEMPORAL_ENGINES/**, platform/migrations/**, 025_HOLISTIC_SYNTHESIS/**,
+  PHASE_M3_PLAN_v1_0.md, CAPABILITY_MANIFEST.json (read-only verification of
+  AC.M3A.7). L1 frozen.
+
+  Next session: native to choose M3-W2-B3-ANTARDASHA-CROSSCHECK (standalone
+  Track 2 wrap-up) OR M3-W4-D1-VALIDATOR-REDTEAM (close Track 2 en bloc at M3-D
+  per PHASE_M3_PLAN §3.2).

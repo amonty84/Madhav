@@ -491,10 +491,29 @@ disagreement_register_entry:
       result: "Q2 soft gate: gemini_conflict annotation added to PATTERN_REGISTER. B.5 close NOT blocked per Q2 native decision 2026-04-27. Resolution deferred to post-B.5 scope."
       timestamp: 2026-04-27
       session_id: Madhav_M2A_Exec_11
-  status: open
-  resolution: null
-  resolved_on: null
-  resolved_by_session: null
+    - step: reconciler_resolution
+      result: "Read-only structured analysis authored at M3-A entry: DIS009_ANALYSIS_v1_0.md frames evidence (§1) and three resolution options R1 (split), R2 (withdraw), R3 (re-ground) (§2) with Claude's recommendation R3-with-R1-fallback (§3). Read-only, modified no live artifact."
+      timestamp: 2026-05-01
+      session_id: M3-W1-A1-EVAL-BASELINE
+    - step: native_arbitration
+      result: "Native verdict: R3 (RE-GROUND). Specific rewrite direction provided: keep 'identity lock' framing; replace 'Saturn governs both the D9 Karakamsa and D1 AL' with explicit two-step language — Saturn as AL lord (direct), Saturn as dispositor of Mercury in Capricorn 10H Vargottama where Mercury rules the D9 Karakamsa (Gemini), creating the Saturn-Mercury identity axis across the Capricorn-Gemini spine. [EXTERNAL_COMPUTATION_REQUIRED] added with explicit JH-export spec (D9 chart for native 1984-02-05 10:43 IST Bhubaneswar; verify Moon D9 placement confirming Gemini Karakamsa; verify Mercury D1 placement in Capricorn). PATTERN_REGISTER PAT.008 status set to needs_verification; re_validation_status flipped gemini_conflict → resolved_pending_ecr."
+      timestamp: 2026-05-01
+      session_id: M3-W1-A4-DIS009-DISPOSITION
+  status: resolved
+  resolution: >
+    R3 (RE-GROUND) executed at M3-W1-A4-DIS009-DISPOSITION (2026-05-01) per native verdict.
+    PAT.008 mechanism text rewritten in-place to make the two-step architecture explicit:
+    AL component is L1-clean and active (Saturn directly governs Capricorn AL); D9 Karakamsa
+    component carries [EXTERNAL_COMPUTATION_REQUIRED] per CLAUDE.md §I B.10 with explicit
+    JH-export spec — verify Moon D9 = Gemini (Karakamsa = Mercury-ruled) and Mercury D1 =
+    Capricorn (Vargottama dispositorship). Saturn-Mercury identity axis across the
+    Capricorn-Gemini spine is the corrected mechanism (Saturn → disposits → Mercury → rules
+    → Karakamsa); the original literal-but-false "Saturn governs both surfaces" framing is
+    superseded. Pattern-level downstream references (resonance/cluster cross-links) preserved
+    intact. PAT.008 status: needs_verification; re_validation_status: resolved_pending_ecr.
+    Full resolution pending JH export per ED.1 (M3-B-class verification window).
+  resolved_on: 2026-05-01
+  resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -502,8 +521,12 @@ disagreement_register_entry:
     side_b_after: null
   linked_artifacts:
     - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json
-      linkage: registry_updated
+      linkage: remediation
+    - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md
+      linkage: remediation
     - path: 035_DISCOVERY_LAYER/PROMPTS/gemini/responses/2026-04-27_B5_revalidation_batch1_raw.md
+      linkage: evidence
+    - path: 00_ARCHITECTURE/DIS009_ANALYSIS_v1_0.md
       linkage: evidence
 ```
 
