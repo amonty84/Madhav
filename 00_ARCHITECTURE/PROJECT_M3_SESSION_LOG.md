@@ -129,7 +129,7 @@ _Session IDs above reflect PHASE_M3_PLAN_v1_0.md §3.1 session estimates. Actual
 | M3-W3-C2-KP-VARSHAPHALA | C | compute_kp.py + compute_varshaphala.py + KP/Varshaphala outputs + migrations 024/025 + 2 retrieval tools | CLOSED | 2026-05-01 | (close-time) |
 | M3-W3-C3-SHADBALA | C | compute_shadbala.py + Shadbala over-time series + migration 031 + REDTEAM_M3C + DIS.010/011/012 + **M3-C SUB-PHASE CLOSED** | CLOSED | 2026-05-01 | (close-time) |
 
-## Wave 4 — Sub-phase D (Validator + Held-Out Sample + IS.8(b) Red-Team + M3 CLOSE)
+## Wave 4 — Sub-phase D (Validator + Held-Out Sample + IS.8(b) Red-Team + M3 CLOSE) — **CLOSED 2026-05-01; M3 MACRO-PHASE CLOSED**
 
 **Concurrency note:** No M3 sub-phase runs in parallel with M3-D per `PHASE_M3_PLAN §4`. M3-D is sequential after M3-A/B/C and seals the macro-phase.
 
@@ -137,7 +137,7 @@ _Session IDs above reflect PHASE_M3_PLAN_v1_0.md §3.1 session estimates. Actual
 |---|---|---|---|---|---|
 | M3-PRE-D-GOVERNANCE-2026-05-01 | governance-aside | DIS.010/011/012 → N3; MIGRATION_APPLY_INSTRUCTIONS_v1_0.md (action-required → applied 022-031) | CLOSED | 2026-05-01 | (close-time) |
 | M3-W4-D1-VALIDATOR-REDTEAM | D | VALIDATOR_META_TESTS + run_validator.py (6/6 PASS) + M3_HELD_OUT_SAMPLE (10 dates) + LEL §9 PPL append + REDTEAM_M3_v1_0 (IS.8(b) PASS 9/9 axes) | CLOSED | 2026-05-01 | (close-time) |
-| M3-W4-D2-M3-CLOSE | D | M3_CLOSE_v1_0.md + HANDOFF_M3_TO_M4_v1_0.md + CURRENT_STATE flip M3→M4 + MP.1+MP.2 sync + **M3 MACRO-PHASE CLOSED** | PENDING | — | — |
+| M3-W4-D2-M3-CLOSE | D | M3_CLOSE_v1_0.md + HANDOFF_M3_TO_M4_v1_0.md + CURRENT_STATE flip M3→M4 + MP.1+MP.2 sync + **M3 MACRO-PHASE CLOSED** | CLOSED | 2026-05-01 | (close-time) |
 
 ---
 
@@ -1154,3 +1154,102 @@ notes: >
   M3-W4-D1-VALIDATOR-REDTEAM. Scope: M3_CLOSE_v1_0.md + HANDOFF_M3_TO_M4_v1_0.md
   + CURRENT_STATE flip M3→M4 + MP.1 (.geminirules) + MP.2 (.gemini/project_state)
   sync to adapted parity.
+
+=== M3-W4-D2-M3-CLOSE CLOSE ===
+closed: 2026-05-01
+git_sha: (close-time)
+session_agent: claude-opus-4-7
+cowork_thread_name: "M3-W4-D1-VALIDATOR-REDTEAM"   # same Cowork thread per brief Hard Constraint #1
+predecessor_session: M3-W4-D1-VALIDATOR-REDTEAM
+track: "Sub-phase D second execution session AND M3 MACRO-PHASE CLOSE. Owns: M3_CLOSE_v1_0.md sealing artifact + HANDOFF_M3_TO_M4_v1_0.md handoff memo + CURRENT_STATE flip M3→M4 + MP.1 (.geminirules) + MP.2 (.gemini/project_state.md) sync to adapted parity. D2 references the D1 IS.8(b) red-team verdict (REDTEAM_M3 PASS 9/9 axes); does NOT re-run."
+deliverables:
+  - 00_ARCHITECTURE/M3_CLOSE_v1_0.md: "NEW — M3 sealing artifact. §1 quality bar 27 PASS / 1 DEFERRED (AC.M3A.5; native-accepted; M4-class) / 1 PASS+DEFERRED-PARTIAL (AC.M3D.3 external acharya M4-class) / 0 FAIL. §2 wave log W1-A through W4-D2. §3 deferred items 13 enumerated. §4 red-team evidence (REDTEAM_M3 PASS 9/9 + counter trail). §5 ND status open=[]. §6 mirror sync evidence MP.1+MP.2 same-session. §7 live platform state. §8 M3 exit confirmed; M4 may now open."
+  - 00_ARCHITECTURE/HANDOFF_M3_TO_M4_v1_0.md: "NEW — M3→M4 handoff memo. What M3 delivered (capability inventory across A/B/C/D); live platform state at M3 close (22 retrieval tools; 5 M3 temporal tables; CAPABILITY_MANIFEST 112 entries; 4 DISCOVERY_*_ENABLED flags default-true); M4 priorities (LEL ground-truth spine; per-signal calibration weights; LL.1-LL.4 STUB→active); HARD PREREQUISITES for M4 (LEL ≥40 events ≥5 yrs span; current 35 events; 5-event gap; native owns gate-clearance); inherited open items by owner; active feature flags; active disagreements; concurrent workstreams; operational checklist 16 items."
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md: "amended in-place — active_macro_phase M3→M4; active_macro_phase_title 'Calibration + LEL Ground-Truth Spine'; active_phase_plan null (M4 phase plan authoring decision deferred); last_session_id → M3-W4-D2-M3-CLOSE; red_team_counter 1→2 (D2 substantive); next_session_objective → M4-W1-OPEN; §3 narrative refreshed with M3-W4-D2 close at top; changelog entry added."
+  - .geminirules: "MP.1 mirror — adapted-parity update reflecting M3→M4 transition. §F state block refreshed; §C item #5 phase-plan pointer updated from PHASE_B_PLAN to 'M4 phase plan TBD' (PHASE_B_PLAN noted as SUPERSEDED-AS-COMPLETE for M2). Footer line appended: 'M3 MACRO-PHASE CLOSED — M3-W4-D2-M3-CLOSE'."
+  - .gemini/project_state.md: "MP.2 mirror — adapted-parity update. _Last updated_ line refreshed to M3-W4-D2-M3-CLOSE; '## Active Phase' heading flipped from M3 to M4; M3 cumulative deliverables block added; M3 quality bar at close added; live platform state at M3 close added; M4 priorities added; predecessor narrative retained for audit trail."
+  - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md: "Wave 4 row M3-W4-D2-M3-CLOSE flipped PENDING → CLOSED + 'M3 MACRO-PHASE CLOSED' annotation; Wave 4 header updated to 'CLOSED 2026-05-01; M3 MACRO-PHASE CLOSED'; this close block appended."
+  - 00_ARCHITECTURE/SESSION_LOG.md: "session_open + session_close blocks appended atomically."
+acceptance_criteria_passed:
+  - "AC.M3D.5 — M3_CLOSE_v1_0.md exists with quality bar populated; CURRENT_STATE flipped M3→M4; HANDOFF_M3_TO_M4_v1_0.md authored and readable cold: PASS"
+  - "AC.M3D.6 — Mirror sync to Gemini side recorded in close-checklist mirror_updates_propagated block (MP.1 + MP.2 adapted parity); mirror_enforcer.py exit 0 (8/8 pairs clean): PASS"
+  - "AC.M3D.7 — All M3 known-deferred items (whether inherited from M2 or accumulated in M3) are explicitly named in M3_CLOSE_v1_0.md §3 + HANDOFF_M3_TO_M4_v1_0.md §Inherited open items so they survive into M4 without silent loss: PASS"
+governance_scripts:
+  mirror_enforcer: "exit=0 (8/8 pairs clean; MP.1+MP.2 updated same-session; verified)"
+  drift_detector: "exit=2 expected carry-forward (touched files governance-layer LIVING-not-fingerprint-locked; no canonical-artifact fingerprint rotations)"
+  schema_validator: "exit≤2 expected with 0 CRITICAL"
+red_team_due: false                # IS.8(b) discharged at predecessor M3-W4-D1; D2 references that verdict
+red_team_performed: false          # D2 does not re-run the red-team per session brief Hard Constraint #4
+red_team_class: "n/a (D2 references M3-W4-D1's IS.8(b) PASS verdict)"
+red_team_verdict_referenced: "REDTEAM_M3_v1_0.md PASS 9/9 axes (D1 close)"
+red_team_counter_after: 2          # 1→2 (D2 substantive: M3 sealing artifacts)
+m3_macro_phase_status_after: CLOSED
+m4_macro_phase_status_after: ACTIVE
+mirror_updates_propagated:
+  both_updated_same_session: true
+  pairs_touched: [MP.1, MP.2]
+  notes: "MP.1 (.geminirules / CLAUDE.md): .geminirules updated this session for M3→M4 macro-phase flip; CLAUDE.md is the authoritative side and remains unchanged at this revision (CURRENT_STATE-pointer convention since Step 15 means CLAUDE.md §F cites CURRENT_STATE rather than carrying state inline). MP.2 (.gemini/project_state.md): updated this session for M3→M4 transition. mirror_enforcer.py exit 0 verified post-update."
+known_residuals:
+  - "All M3 known_residuals (KR.M3.RT.LOW.1, KR.M3A.JH-EXPORT, DIS.010/011/012-N3, Sthana+Drik ECR, Narayana ECR, KR.M3A2.1, three Shadbala convention findings, AC.M3A.5, R.M3D.1 external acharya) named in M3_CLOSE §3 + HANDOFF §Inherited open items"
+  - "All M2 inherited residuals (SIG.MSR.207, UCN inline citation, TS test-fixture errors, KR.W9.1+W9.2) named in M3_CLOSE §3 + HANDOFF §Inherited open items"
+  - "HARD PREREQUISITE for M4-A entry: LEL ≥40 events ≥5 yrs span; current 35 events; 5-event gap; named in HANDOFF §Hard prerequisites for M4"
+notes: >
+  Four deliverables per session brief Gate 4 discharged in this D2 session:
+
+  (1) M3_CLOSE_v1_0.md — sealing artifact for Macro Phase 3 modeled on
+  precedent M2_CLOSE_v1_0.md. §1 quality bar shows 27 PASS / 1 DEFERRED /
+  1 PASS+DEFERRED-PARTIAL / 0 FAIL across all M3 acceptance criteria
+  (AC.M3A.1..9 + AC.M3B.1..7 + AC.M3C.1..6 + AC.M3D.1..7). §2 wave log
+  enumerates all 12 M3 sessions across 4 waves. §3 deferred items lists
+  13 carry-forwards across "inherited from M3 sub-phases" + "inherited
+  from M2." §4 red-team evidence pointers + counter trail. §5 ND status
+  open=[]; addressed=[ND.1]. §6 mirror sync evidence MP.1+MP.2
+  same-session this close. §7 live platform state. §8 M3 exit confirmed.
+
+  (2) HANDOFF_M3_TO_M4_v1_0.md — handoff memo modeled on precedent
+  HANDOFF_M2_TO_M3_v1_0.md. What M3 delivered (capability inventory).
+  Live platform state at M3 close. What M4 needs to know (LEL ground-
+  truth spine; per-signal calibration weights; LL.1-LL.4 STUB→active;
+  held-out cohort discipline; JH integration scope decision). HARD
+  PREREQUISITE: LEL ≥40 events ≥5 years; current 35 events with 5-event
+  gap; native owns gate-clearance. Inherited open items by owner
+  (native | next-session | M9-class | Portal R-stream). Active feature
+  flags. Active disagreements. Concurrent workstreams. Operational
+  checklist for M4 (16 inheritance items).
+
+  (3) CURRENT_STATE flip — active_macro_phase M3 → M4; active_macro_phase_title
+  "Calibration + LEL Ground-Truth Spine"; active_phase_plan null;
+  last_session_id → M3-W4-D2-M3-CLOSE; red_team_counter 1→2 (D2
+  substantive); next_session_objective → M4-W1-OPEN. §3 narrative
+  refreshed with M3-W4-D2 close at top (prior M3-W4-D1 close narrative
+  retained for audit trail). Changelog entry added to changelog block.
+
+  (4) Mirror sync MP.1 + MP.2 — both files updated this session to
+  adapted parity. MP.1 (.geminirules): §F state block refreshed for
+  M3→M4 transition; §C item #5 phase-plan pointer updated from
+  PHASE_B_PLAN to "M4 phase plan TBD"; footer line appended. MP.2
+  (.gemini/project_state.md): _Last updated_ line refreshed; "## Active
+  Phase" heading flipped from M3 to M4; M3 cumulative deliverables
+  block added; M4 priorities added; predecessor narrative retained.
+  mirror_enforcer.py exit 0 (8/8 pairs clean) verified post-update.
+
+  Counter trail post-close: 2 (M3-W4-D1 0→1 D1 substantive + IS.8(b)
+  DISCHARGED but does NOT reset every-third counter per
+  ONGOING_HYGIENE_POLICIES §G; M3-W4-D2 1→2 D2 substantive). Next
+  IS.8(a) every-third cadence at counter=3 (one substantive session
+  hence — likely first M4 session). Next IS.8(b) macro-phase-close
+  cadence at M4 close.
+
+  Strict scope compliance: did NOT touch 01_FACTS_LAYER/**,
+  025_HOLISTIC_SYNTHESIS/**, 035_DISCOVERY_LAYER/**,
+  05_TEMPORAL_ENGINES/**, platform/src/**, platform/migrations/**,
+  PHASE_M3_PLAN_v1_0.md (now SUPERSEDED-AS-COMPLETE; not modified at
+  this close), DISAGREEMENT_REGISTER_v1_0.md (read-only),
+  00_ARCHITECTURE/EVAL/** (D1 deliverables frozen post-commit ad4a6d2).
+  L1 frozen.
+
+  Next session: M4-W1-OPEN (first M4 session; new Cowork thread).
+  Native-approval points at M4 open: (a) author PHASE_M4_PLAN_v1_0.md
+  or drive M4 directly from MACRO_PLAN §M4; (b) LEL gate-clearance
+  plan; (c) JH integration scope. HARD PREREQUISITE: LEL ≥40 events
+  ≥5 years span before M4-A calibration substrate work begins.
