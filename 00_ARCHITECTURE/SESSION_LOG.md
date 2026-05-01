@@ -11672,3 +11672,48 @@ AC.M4A.7 + NAP.M4.2 DISCHARGED.
 M4-A is now unblocked for close (AC.M4A.7 + AC.M4A.8 DISCHARGED; AC.M4A.3 + NAP.M4.1 already discharged at Round 3).
 
 Commit: 0694447f76d1aba56ad5e52caa91d035051c344a
+
+---
+
+**M4-B-S1-LL1-SHADOW-WEIGHTS** | 2026-05-02 | CLOSED
+
+First M4-B Learning Layer computation. LL.1 Signal Weight Calibration — initial shadow-register write under SHADOW_MODE_PROTOCOL §3 binding criteria (NAP.M4.4 APPROVED 2026-05-02). No production weight written.
+
+**Computation summary** (training partition only; held-out 9 events excluded per Learning Layer discipline rule #4):
+
+| Bucket | Count |
+|---|---|
+| Total signals observed in training expected_lit_signals | 380 |
+| `promotion_eligible_pending_two_pass` (N≥3, variance≤0.3, mean_match_rate≥0.4) | 30 |
+| `insufficient_observations` (N<3) | 285 |
+| `shadow_indefinite_low_match_rate` (N≥3 AND mean_match_rate<0.4) | 52 |
+| `shadow_indefinite_high_variance` (N≥3 AND variance>0.3) | 13 |
+| Training events used | 37 |
+| Held-out events excluded | 9 |
+
+**Output file:** `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` (225,178 bytes; valid JSON; schema_version "1.0", mechanism "LL.1", phase "M4-B", rubric Option B v1.0).
+
+**Held-out partition discipline:** the 9 held-out LEL events (EVT.2008.06.09.01, EVT.2009.06.XX.01, EVT.2017.03.XX.01, EVT.2018.11.28.01, EVT.2019.05.XX.01, EVT.2022.01.03.01, EVT.2024.02.16.01, EVT.2025.05.XX.01, EVT.2026.01.XX.01) contributed ZERO observations to any signal weight in this file. `held_out_events_excluded: 9` recorded in output frontmatter.
+
+**Production register state:** `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/` was NOT created and contains NO files. No weight has been promoted; the 30 `promotion_eligible_pending_two_pass` signals remain in shadow until §3(c) two-pass approval (Gemini red-team review) and §3(d) native notification with no hold complete.
+
+**n=1 disclaimer:** carried verbatim in the output JSON's top-level `n1_disclaimer` field per SHADOW_MODE_PROTOCOL §7.
+
+**Domain mapping note:** msr_domain_buckets.json is keyed by MSR signal IDs (`SIG.MSR.NNN`); LEL events use semantic-class IDs (CTR, CVG, SIG.NN, RPT, DSH). Most observed signals therefore record `domain: "unknown"` in the shadow register — this is expected fallback, not a defect; cross-system signal-ID reconciliation is M4-D scope per PHASE_M4_PLAN. Where the same signal ID appears in both registries (notably some `SIG.MSR.*` entries that carry over), the bucket lookup resolves correctly.
+
+**Files changed:**
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` — CREATED (225,178 bytes).
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/README.md` — CREATED.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/README.md` — CREATED.
+- `00_ARCHITECTURE/SESSION_LOG.md` — this entry appended.
+
+**Acceptance criteria** (from M4-B-S1-LL1-SHADOW-WEIGHTS brief):
+- AC.T2.1 PASS — output is valid JSON.
+- AC.T2.2 PASS — schema_version "1.0", mechanism "LL.1", training_events_used 37.
+- AC.T2.3 PASS — `signal_weights/production/` does not exist (no writes).
+- AC.T2.4 PASS — held_out_events_excluded 9.
+- AC.T2.5 PASS — n1_disclaimer field present verbatim.
+- AC.T2.6 PASS — summary stats printed and recorded above.
+- AC.T2.7 PASS — only files inside may_touch were modified.
+
+Commit: 8be27158dc4121d5317ff4cec895bdb1ce291663
