@@ -11896,4 +11896,4 @@ Parallel-slot dossier-authoring session running alongside M4-B-S3 (LL.2 shadow w
 
 **Next session.** Whatever the critical-path queue prescribes after M4-B-S3 closes — typically M4-B-S4 (LL.3/LL.4 mechanism activation) or NAP.M4.5 native review at M4-B close. The dossier published this session is the input artifact for NAP.M4.5 whenever it is convened.
 
-Commit: TBD (stamped via follow-up).
+Commit: fb94f1d2ae9be9496b5ab412f8006cf3eae8943d (stamped via follow-up).
