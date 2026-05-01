@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "fixture_role": "regression-eval anchor for Vimshottari Mahadasha sequence",
+  "chart_id": "abhisek_mohanty_primary",
+  "ayanamsha": "lahiri",
+  "computed_by": "pyswisseph",
+  "ground_truth_reference": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u00a75.1",
+  "tolerance_days": 3,
+  "mahadashas": [
+    {
+      "planet": "Jupiter",
+      "level": "M",
+      "start_date": "1984-02-05",
+      "end_date": "1991-08-19"
+    },
+    {
+      "planet": "Saturn",
+      "level": "M",
+      "start_date": "1991-08-19",
+      "end_date": "2010-08-18"
+    },
+    {
+      "planet": "Mercury",
+      "level": "M",
+      "start_date": "2010-08-18",
+      "end_date": "2027-08-19"
+    },
+    {
+      "planet": "Ketu",
+      "level": "M",
+      "start_date": "2027-08-19",
+      "end_date": "2034-08-18"
+    },
+    {
+      "planet": "Venus",
+      "level": "M",
+      "start_date": "2034-08-18",
+      "end_date": "2054-08-18"
+    },
+    {
+      "planet": "Sun",
+      "level": "M",
+      "start_date": "2054-08-18",
+      "end_date": "2060-08-18"
+    },
+    {
+      "planet": "Moon",
+      "level": "M",
+      "start_date": "2060-08-18",
+      "end_date": "2070-08-18"
+    }
+  ]
+}

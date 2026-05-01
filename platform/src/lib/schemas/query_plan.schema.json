@@ -25,6 +25,14 @@
     "graph_seed_hints": { "type": "array", "items": { "type": "string" } },
     "edge_type_filter": { "type": "array", "items": { "type": "string" } },
     "graph_traversal_depth": { "type": "integer", "minimum": 0 },
+    "vector_search_filter": {
+      "type": "object",
+      "properties": {
+        "doc_type": { "type": "array", "items": { "type": "string" } },
+        "layer": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
     "bundle_directives": {
       "type": "object",
       "properties": {

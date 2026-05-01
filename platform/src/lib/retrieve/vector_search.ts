@@ -42,6 +42,8 @@ const SQL_VECTOR_SEARCH = `
   FROM rag_embeddings e
   JOIN rag_chunks c ON e.chunk_id = c.chunk_id
   WHERE c.is_stale = false
+    AND ($3::text[] IS NULL OR c.doc_type = ANY($3::text[]))
+    AND ($4::text IS NULL OR c.layer = $4)
   ORDER BY e.embedding <=> $1::vector
   LIMIT $2
 `.trim()
@@ -206,6 +208,10 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
   const topK =
     typeof params?.top_k === 'number' && params.top_k > 0 ? params.top_k : configTopK
 
+  // Resolve filter: from plan.vector_search_filter; null = no filter (all doc_types/layers)
+  const docTypeFilter = plan.vector_search_filter?.doc_type ?? null
+  const layerFilter = plan.vector_search_filter?.layer ?? null
+
   // --- Feature flag gate ---
   if (!getFlag('VECTOR_SEARCH_ENABLED')) {
     return buildEmptyBundle(start, nativeId, topK, queryText)
@@ -236,6 +242,8 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     const result = await storage.query<ChunkRow>(SQL_VECTOR_SEARCH, [
       embeddingParam,
       topK,
+      docTypeFilter,
+      layerFilter,
     ])
     rows = result.rows
   } catch (err) {
@@ -271,7 +279,13 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
     tool_bundle_id: crypto.randomUUID(),
     tool_name: TOOL_NAME,
     tool_version: TOOL_VERSION,
-    invocation_params: { native_id: nativeId, top_k: topK, query_text: queryText },
+    invocation_params: {
+      native_id: nativeId,
+      top_k: topK,
+      query_text: queryText,
+      doc_type_filter: docTypeFilter,
+      layer_filter: layerFilter,
+    },
     results,
     served_from_cache: false,
     latency_ms,

@@ -1,0 +1,4391 @@
+{
+  "schema_version": "1.0",
+  "computed_at": "2026-04-30T22:54:40.553643+00:00",
+  "chart_id": "abhisek_mohanty_primary",
+  "ayanamsha": "lahiri",
+  "computed_by": "pyswisseph",
+  "diagnostics": {
+    "ephe_mode": "moshier",
+    "ayanamsha": "lahiri",
+    "computed_by": "pyswisseph",
+    "birth_iso": "1984-02-05T10:43:00+05:30",
+    "natal_jd_ut": 2445735.717361111,
+    "natal_sun_sidereal_lon_deg": 291.9568422705657,
+    "birth_lat": 20.2961,
+    "birth_lon": 85.8245,
+    "year_start": 1984,
+    "year_end": 2061,
+    "search_precision_minutes": 0.5
+  },
+  "row_count": 78,
+  "rows": [
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1984,
+      "solar_return_utc": "1984-02-05T05:13:04+00:00",
+      "ascendant_sidereal_lon": 12.441046769597094,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568890417378,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 327.05559076742975,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 198.51596873181546,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mercury": {
+          "sidereal_lon": 270.8289444248864,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 249.78073543770108,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Venus": {
+          "sidereal_lon": 259.16339803050545,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 202.4301162201608,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Rahu": {
+          "sidereal_lon": 49.03304165653089,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Ketu": {
+          "sidereal_lon": 229.03304165653088,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1985,
+      "solar_return_utc": "1985-02-04T11:27:29+00:00",
+      "ascendant_sidereal_lon": 103.3424089148368,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568311002436,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 96.60511183646341,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Mars": {
+          "sidereal_lon": 337.6761746424002,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 281.4122405689324,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 275.85572410817645,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 338.288276091938,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 213.667504144514,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Rahu": {
+          "sidereal_lon": 29.677173414717846,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        },
+        "Ketu": {
+          "sidereal_lon": 209.67717341471786,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1986,
+      "solar_return_utc": "1986-02-04T17:44:21+00:00",
+      "ascendant_sidereal_lon": 190.26021531344463,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568765339269,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 235.44795609945194,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mars": {
+          "sidereal_lon": 217.79751819214204,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mercury": {
+          "sidereal_lon": 294.671457562375,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 302.5201177990743,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Venus": {
+          "sidereal_lon": 295.81391629348997,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 224.5512075138692,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Rahu": {
+          "sidereal_lon": 10.321214977432238,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Ketu": {
+          "sidereal_lon": 190.32121497743225,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1987,
+      "solar_return_utc": "1987-02-04T23:50:20+00:00",
+      "ascendant_sidereal_lon": 274.2633168553709,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569192651711,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 14.155229463352573,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mars": {
+          "sidereal_lon": 355.50154152830396,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mercury": {
+          "sidereal_lon": 307.74655112480417,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 330.4657041968453,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 246.17516618414095,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 235.1490948559538,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Rahu": {
+          "sidereal_lon": 350.96565799731917,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Ketu": {
+          "sidereal_lon": 170.9656579973191,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1988,
+      "solar_return_utc": "1988-02-05T06:04:03+00:00",
+      "ascendant_sidereal_lon": 27.084220348718084,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95689480543024,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 137.71630255684013,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Mars": {
+          "sidereal_lon": 234.75782944168256,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mercury": {
+          "sidereal_lon": 303.54530337525955,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 0.3583676135561408,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Venus": {
+          "sidereal_lon": 331.19677651042264,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 245.5313515638541,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Rahu": {
+          "sidereal_lon": 331.6098167179154,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Ketu": {
+          "sidereal_lon": 151.6098167179154,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1989,
+      "solar_return_utc": "1989-02-04T12:09:40+00:00",
+      "ascendant_sidereal_lon": 112.7624484413277,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568216352176,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 267.5301564628772,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mars": {
+          "sidereal_lon": 15.48916954130548,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mercury": {
+          "sidereal_lon": 272.3880532422107,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 32.77732616654338,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Venus": {
+          "sidereal_lon": 277.279468141504,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 255.76620691605774,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 312.2542733627478,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Ketu": {
+          "sidereal_lon": 132.25427336274782,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1990,
+      "solar_return_utc": "1990-02-04T18:18:27+00:00",
+      "ascendant_sidereal_lon": 197.97843549610025,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567397091505,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 48.10193658274375,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mars": {
+          "sidereal_lon": 250.7316531179851,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mercury": {
+          "sidereal_lon": 267.09850514880713,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 67.74989261763406,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Venus": {
+          "sidereal_lon": 267.4676989196014,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 265.92002759528975,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 292.8986138686449,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Ketu": {
+          "sidereal_lon": 112.89861386864487,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1991,
+      "solar_return_utc": "1991-02-05T00:34:17+00:00",
+      "ascendant_sidereal_lon": 286.06597920200966,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568647891797,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 184.47215507128425,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Mars": {
+          "sidereal_lon": 40.44338311992973,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mercury": {
+          "sidereal_lon": 274.8858264365651,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 103.91803640311262,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Venus": {
+          "sidereal_lon": 314.7623146553509,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 276.0588981687921,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 273.542695887666,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 93.54269588766601,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1992,
+      "solar_return_utc": "1992-02-05T06:34:17+00:00",
+      "ascendant_sidereal_lon": 35.25098383827451,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568320924027,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 308.1079819546291,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mars": {
+          "sidereal_lon": 266.4070421742065,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 286.8146385723904,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 138.83575038585323,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Venus": {
+          "sidereal_lon": 259.72071406283527,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 286.2462782275766,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Rahu": {
+          "sidereal_lon": 254.18736042737655,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 74.18736042737657,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1993,
+      "solar_return_utc": "1993-02-04T12:43:46+00:00",
+      "ascendant_sidereal_lon": 120.46041183598318,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569243927948,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 77.89439380651534,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Mars": {
+          "sidereal_lon": 75.65915100396477,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Mercury": {
+          "sidereal_lon": 300.6216363026204,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 170.86179885665183,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Venus": {
+          "sidereal_lon": 338.0051873032897,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 296.5458633724346,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Rahu": {
+          "sidereal_lon": 234.83167596321,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Ketu": {
+          "sidereal_lon": 54.83167596320999,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1994,
+      "solar_return_utc": "1994-02-04T18:56:04+00:00",
+      "ascendant_sidereal_lon": 206.40017731784627,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95687103925985,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 220.64333099753017,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mars": {
+          "sidereal_lon": 282.1571726820016,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mercury": {
+          "sidereal_lon": 310.22394633029853,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 200.00599585889213,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Venus": {
+          "sidereal_lon": 296.44370734903515,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 307.0202957455148,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Rahu": {
+          "sidereal_lon": 215.4758883293833,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Ketu": {
+          "sidereal_lon": 35.47588832938334,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1995,
+      "solar_return_utc": "1995-02-05T00:56:04+00:00",
+      "ascendant_sidereal_lon": 292.20304616393685,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567930157876,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 354.4123222384161,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mars": {
+          "sidereal_lon": 121.89557451363076,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Mercury": {
+          "sidereal_lon": 289.5396763358258,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 227.15584467014864,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Venus": {
+          "sidereal_lon": 246.4291252510362,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 317.73249393832873,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Rahu": {
+          "sidereal_lon": 196.1205538923004,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Ketu": {
+          "sidereal_lon": 16.120553892300393,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1996,
+      "solar_return_utc": "1996-02-05T07:09:47+00:00",
+      "ascendant_sidereal_lon": 44.402546995479454,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95693464943906,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 118.9858491313047,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Mars": {
+          "sidereal_lon": 298.1325845593662,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Mercury": {
+          "sidereal_lon": 267.2497419362417,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 253.33619144104202,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 331.67342835868055,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 328.7459426873424,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 176.76471523130385,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        },
+        "Ketu": {
+          "sidereal_lon": 356.76471523130385,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1997,
+      "solar_return_utc": "1997-02-04T13:20:20+00:00",
+      "ascendant_sidereal_lon": 128.81536385174223,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567368609067,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 248.95047882765004,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mars": {
+          "sidereal_lon": 162.09233252856663,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mercury": {
+          "sidereal_lon": 269.6257360267078,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 279.4478535652941,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 277.89870266623933,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 340.12148737109123,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 157.40899346215846,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 337.4089934621585,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1998,
+      "solar_return_utc": "1998-02-04T19:33:20+00:00",
+      "ascendant_sidereal_lon": 214.66736037046448,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95690651722924,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 32.978644542392125,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Mars": {
+          "sidereal_lon": 314.3839459872101,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mercury": {
+          "sidereal_lon": 279.619480679561,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 306.25651938906867,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Venus": {
+          "sidereal_lon": 264.6616429221821,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 351.918789264588,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Rahu": {
+          "sidereal_lon": 138.05318148561187,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 318.05318148561184,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 1999,
+      "solar_return_utc": "1999-02-05T01:51:37+00:00",
+      "ascendant_sidereal_lon": 308.7514249396599,
+      "ascendant_sign": "Aquarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568591438743,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 164.3623266738388,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mars": {
+          "sidereal_lon": 189.85035486198012,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mercury": {
+          "sidereal_lon": 292.58515826526616,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 334.44905206510083,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 315.36714467660704,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 4.189548068890792,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Rahu": {
+          "sidereal_lon": 118.69717590641416,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Ketu": {
+          "sidereal_lon": 298.69717590641415,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2000,
+      "solar_return_utc": "2000-02-05T07:52:41+00:00",
+      "ascendant_sidereal_lon": 54.92051579016662,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569239902302,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 289.5230254785298,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mars": {
+          "sidereal_lon": 331.00919355073154,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 306.12668385606645,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 4.683733759594646,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Venus": {
+          "sidereal_lon": 260.2819363392656,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 16.973446576356803,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Rahu": {
+          "sidereal_lon": 99.34180470116563,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Ketu": {
+          "sidereal_lon": 279.34180470116564,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2001,
+      "solar_return_utc": "2001-02-04T14:00:25+00:00",
+      "ascendant_sidereal_lon": 138.08568293763,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567460396709,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 60.10916718977804,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Mars": {
+          "sidereal_lon": 210.65650526726287,
+          "sign": "Scorpio",
+          "nakshatra": "Vishakha"
+        },
+        "Mercury": {
+          "sidereal_lon": 306.8035189233922,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 37.49831620550124,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Venus": {
+          "sidereal_lon": 337.65255594595044,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 30.29704085117973,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Rahu": {
+          "sidereal_lon": 79.98618809406295,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Ketu": {
+          "sidereal_lon": 259.986188094063,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2002,
+      "solar_return_utc": "2002-02-04T20:15:11+00:00",
+      "ascendant_sidereal_lon": 223.9084422497847,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95675079299025,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 205.46565375646895,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Mars": {
+          "sidereal_lon": 348.37406758683034,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mercury": {
+          "sidereal_lon": 275.73921201929363,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 72.7457803548867,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Venus": {
+          "sidereal_lon": 297.07779052119616,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 44.159148501746174,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Rahu": {
+          "sidereal_lon": 60.630313119920245,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Ketu": {
+          "sidereal_lon": 240.63031311992023,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2003,
+      "solar_return_utc": "2003-02-05T02:16:35+00:00",
+      "ascendant_sidereal_lon": 316.54500065624563,
+      "ascendant_sign": "Aquarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567763863982,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 334.34709178275443,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 228.2890805259439,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mercury": {
+          "sidereal_lon": 266.63827033106134,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 108.84356852765214,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Venus": {
+          "sidereal_lon": 246.7064709779444,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 58.51492627567408,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        },
+        "Rahu": {
+          "sidereal_lon": 41.274930148367446,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Ketu": {
+          "sidereal_lon": 221.27493014836745,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2004,
+      "solar_return_utc": "2004-02-05T08:29:35+00:00",
+      "ascendant_sidereal_lon": 63.59389170619593,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569188676202,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 100.10080517174418,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Mars": {
+          "sidereal_lon": 7.317586870542934,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Mercury": {
+          "sidereal_lon": 273.3657702935449,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 143.36426728648738,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Venus": {
+          "sidereal_lon": 332.14645409387725,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 73.26316188815002,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Rahu": {
+          "sidereal_lon": 21.91912063372707,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Ketu": {
+          "sidereal_lon": 201.91912063372706,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2005,
+      "solar_return_utc": "2005-02-04T14:37:19+00:00",
+      "ascendant_sidereal_lon": 146.6999245238159,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95690997239103,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 231.55298764093237,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mars": {
+          "sidereal_lon": 244.5469243374105,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mercury": {
+          "sidereal_lon": 284.86658914748716,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 174.9259935522165,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        },
+        "Venus": {
+          "sidereal_lon": 278.52201839129066,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 88.24775206858847,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Rahu": {
+          "sidereal_lon": 2.563505524272539,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Ketu": {
+          "sidereal_lon": 182.56350552427253,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2006,
+      "solar_return_utc": "2006-02-04T20:43:39+00:00",
+      "ascendant_sidereal_lon": 230.1996099055706,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95688564143546,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 16.938593079097817,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mars": {
+          "sidereal_lon": 29.83443608872498,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        },
+        "Mercury": {
+          "sidereal_lon": 298.53267766671894,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 203.72709174313232,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Venus": {
+          "sidereal_lon": 262.1233769294104,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 103.27627402297888,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Rahu": {
+          "sidereal_lon": 343.2079424834515,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Ketu": {
+          "sidereal_lon": 163.20794248345146,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2007,
+      "solar_return_utc": "2007-02-05T02:57:22+00:00",
+      "ascendant_sidereal_lon": 329.6279808665315,
+      "ascendant_sign": "Aquarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95694466102674,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 144.4541449852015,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Mars": {
+          "sidereal_lon": 260.29732187888544,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 309.82585480646264,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 230.7037081339855,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Venus": {
+          "sidereal_lon": 315.9645599417997,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 118.14450334966433,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Rahu": {
+          "sidereal_lon": 323.85210802494225,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Ketu": {
+          "sidereal_lon": 143.85210802494225,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2008,
+      "solar_return_utc": "2008-02-05T09:00:11+00:00",
+      "ascendant_sidereal_lon": 70.57968031902917,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95672055717887,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 270.59822415345565,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mars": {
+          "sidereal_lon": 60.28763208379374,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Mercury": {
+          "sidereal_lon": 295.0045910777887,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 256.8617050952084,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 260.84064583707936,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 132.66998191900413,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Rahu": {
+          "sidereal_lon": 304.49667497863294,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Ketu": {
+          "sidereal_lon": 124.49667497863294,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2009,
+      "solar_return_utc": "2009-02-04T15:11:47+00:00",
+      "ascendant_sidereal_lon": 154.77660433974165,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95686237628604,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 43.69743747029409,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mars": {
+          "sidereal_lon": 275.9885642175755,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 268.4166291286472,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 283.07490056530867,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Venus": {
+          "sidereal_lon": 337.2244712200099,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 146.71751575731798,
+          "sign": "Leo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Rahu": {
+          "sidereal_lon": 285.1409188438308,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Ketu": {
+          "sidereal_lon": 105.14091884383078,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2010,
+      "solar_return_utc": "2010-02-04T21:31:07+00:00",
+      "ascendant_sidereal_lon": 240.81896865406094,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95694835090353,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 188.5833228247074,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mars": {
+          "sidereal_lon": 103.40044758753105,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Mercury": {
+          "sidereal_lon": 268.56915070754343,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 310.0868757989736,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Venus": {
+          "sidereal_lon": 297.7097514241815,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 160.20958364617383,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Rahu": {
+          "sidereal_lon": 265.7848784554431,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 85.7848784554431,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2011,
+      "solar_return_utc": "2011-02-05T03:35:41+00:00",
+      "ascendant_sidereal_lon": 342.070806576254,
+      "ascendant_sign": "Pisces",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567993692665,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 314.5822668780852,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mars": {
+          "sidereal_lon": 291.85398352494127,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mercury": {
+          "sidereal_lon": 277.8864928557982,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 338.5648631232884,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 247.00538523640998,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 173.1217108365833,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Rahu": {
+          "sidereal_lon": 246.42938181547137,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Ketu": {
+          "sidereal_lon": 66.4293818154714,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2012,
+      "solar_return_utc": "2012-02-05T09:45:32+00:00",
+      "ascendant_sidereal_lon": 80.73985485941418,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567992618368,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 80.73823047171187,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Mars": {
+          "sidereal_lon": 148.07472417015865,
+          "sign": "Leo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Mercury": {
+          "sidereal_lon": 290.51454449728925,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 9.15322557036816,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Venus": {
+          "sidereal_lon": 332.60857994816183,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 185.47265722563228,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Rahu": {
+          "sidereal_lon": 227.0736914508536,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Ketu": {
+          "sidereal_lon": 47.07369145085363,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2013,
+      "solar_return_utc": "2013-02-04T15:55:01+00:00",
+      "ascendant_sidereal_lon": 164.92462035874655,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569630182193,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 216.05153969643868,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mars": {
+          "sidereal_lon": 307.9979274862115,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mercury": {
+          "sidereal_lon": 304.2968867189665,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 42.328765691861015,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Venus": {
+          "sidereal_lon": 279.147246762039,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 197.31010573386402,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Rahu": {
+          "sidereal_lon": 207.71801435743993,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Ketu": {
+          "sidereal_lon": 27.718014357439927,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2014,
+      "solar_return_utc": "2014-02-04T22:02:45+00:00",
+      "ascendant_sidereal_lon": 248.03872497440358,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95690768238245,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 359.49002531279956,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mars": {
+          "sidereal_lon": 180.1383098432777,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Mercury": {
+          "sidereal_lon": 308.92512957512815,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 77.79060626067603,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Venus": {
+          "sidereal_lon": 259.82190603890416,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 208.6955424887921,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Rahu": {
+          "sidereal_lon": 188.3624022664954,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Ketu": {
+          "sidereal_lon": 8.362402266495394,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2015,
+      "solar_return_utc": "2015-02-05T04:16:28+00:00",
+      "ascendant_sidereal_lon": 355.1587451983779,
+      "ascendant_sign": "Pisces",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95688594570333,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 125.1939131595312,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Mars": {
+          "sidereal_lon": 324.46427152471233,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 279.97631872778817,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 113.77457761043613,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Venus": {
+          "sidereal_lon": 316.56646515379794,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 219.69879551938664,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Rahu": {
+          "sidereal_lon": 169.0065705936777,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Ketu": {
+          "sidereal_lon": 349.0065705936777,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2016,
+      "solar_return_utc": "2016-02-05T10:20:20+00:00",
+      "ascendant_sidereal_lon": 88.44046621521323,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95675552435,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 251.1883992111843,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mars": {
+          "sidereal_lon": 203.0595754345544,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Mercury": {
+          "sidereal_lon": 266.4855700667542,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 147.90554568737136,
+          "sign": "Leo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Venus": {
+          "sidereal_lon": 261.40885471850237,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 230.3915828829252,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Rahu": {
+          "sidereal_lon": 149.65110146397873,
+          "sign": "Leo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 329.65110146397876,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2017,
+      "solar_return_utc": "2017-02-04T16:26:40+00:00",
+      "ascendant_sidereal_lon": 172.31176516512312,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569644497058,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 28.614360888904628,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        },
+        "Mars": {
+          "sidereal_lon": 341.45847147039854,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 271.94236955780275,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 179.04217576518386,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        },
+        "Venus": {
+          "sidereal_lon": 336.7057347295292,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 240.8431858924537,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Rahu": {
+          "sidereal_lon": 130.29554211456855,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Ketu": {
+          "sidereal_lon": 310.29554211456855,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2018,
+      "solar_return_utc": "2018-02-04T22:39:19+00:00",
+      "ascendant_sidereal_lon": 256.6141281584941,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95676026226516,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 169.94375789177954,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mars": {
+          "sidereal_lon": 221.65606239380568,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mercury": {
+          "sidereal_lon": 282.96640154754675,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 207.53876420133926,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Venus": {
+          "sidereal_lon": 298.3370743659817,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 251.121887215166,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Rahu": {
+          "sidereal_lon": 110.93975031765773,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Ketu": {
+          "sidereal_lon": 290.93975031765774,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2019,
+      "solar_return_utc": "2019-02-05T04:42:50+00:00",
+      "ascendant_sidereal_lon": 3.395309747072222,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569150318646,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 295.3957938788192,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Mars": {
+          "sidereal_lon": 359.6167415671112,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mercury": {
+          "sidereal_lon": 296.42452923727757,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 234.36046450957045,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Venus": {
+          "sidereal_lon": 247.31798108843662,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 261.29290856408306,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 91.5842953224202,
+          "sign": "Cancer",
+          "nakshatra": "Punarvasu"
+        },
+        "Ketu": {
+          "sidereal_lon": 271.5842953224202,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2020,
+      "solar_return_utc": "2020-02-05T10:51:37+00:00",
+      "ascendant_sidereal_lon": 95.34405450997633,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568341039342,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 61.3061711256317,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Mars": {
+          "sidereal_lon": 238.30331810006146,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mercury": {
+          "sidereal_lon": 308.8640190296754,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 260.49548586157186,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 333.0595965908908,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 271.419894042524,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 72.22864668875422,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Ketu": {
+          "sidereal_lon": 252.22864668875422,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2021,
+      "solar_return_utc": "2021-02-04T17:07:05+00:00",
+      "ascendant_sidereal_lon": 181.68087617059106,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95696101472157,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 201.68450615038267,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Mars": {
+          "sidereal_lon": 20.39943232968232,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mercury": {
+          "sidereal_lon": 300.01702594760366,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 286.79261700478287,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Venus": {
+          "sidereal_lon": 279.76965599594894,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 281.56706473018323,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Rahu": {
+          "sidereal_lon": 52.872752679999266,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Ketu": {
+          "sidereal_lon": 232.87275267999928,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2022,
+      "solar_return_utc": "2022-02-04T23:19:24+00:00",
+      "ascendant_sidereal_lon": 266.39767183213996,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95693313121734,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 340.4819825320937,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 254.17203635386497,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 270.25341742103365,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 313.9704644091028,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Venus": {
+          "sidereal_lon": 257.7605813526009,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 291.7987320990132,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Rahu": {
+          "sidereal_lon": 33.51697549892852,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Ketu": {
+          "sidereal_lon": 213.5169754989285,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2023,
+      "solar_return_utc": "2023-02-05T05:33:27+00:00",
+      "ascendant_sidereal_lon": 18.520322007262763,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95682283086705,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 106.09416870789752,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Mars": {
+          "sidereal_lon": 47.07892033437773,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mercury": {
+          "sidereal_lon": 267.68341605747025,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 342.68725719147915,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 317.16483507454467,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 302.1784028676151,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Rahu": {
+          "sidereal_lon": 14.161134007244232,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Ketu": {
+          "sidereal_lon": 194.16113400724424,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2024,
+      "solar_return_utc": "2024-02-05T11:38:44+00:00",
+      "ascendant_sidereal_lon": 105.79381696980592,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95673838379616,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 231.81360349720924,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mars": {
+          "sidereal_lon": 269.8543445108362,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 276.22232396198996,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 13.5771204252117,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Venus": {
+          "sidereal_lon": 261.9806174609676,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 312.7669413313158,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Rahu": {
+          "sidereal_lon": 354.8056162900285,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Ketu": {
+          "sidereal_lon": 174.80561629002852,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2025,
+      "solar_return_utc": "2025-02-04T17:44:21+00:00",
+      "ascendant_sidereal_lon": 190.21313473597903,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95678115671956,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 14.164430764338535,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mars": {
+          "sidereal_lon": 85.23075308888914,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Mercury": {
+          "sidereal_lon": 288.4841347423439,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 47.07059576724264,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Venus": {
+          "sidereal_lon": 336.0921765051952,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 323.62619602424763,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 335.4500859987277,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Ketu": {
+          "sidereal_lon": 155.45008599872767,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2026,
+      "solar_return_utc": "2026-02-04T23:59:07+00:00",
+      "ascendant_sidereal_lon": 276.60254237575685,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568782229957,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 150.6244247253153,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Mars": {
+          "sidereal_lon": 285.63705925365616,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mercury": {
+          "sidereal_lon": 302.33468256908316,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 82.7080935031537,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Venus": {
+          "sidereal_lon": 298.97039616356045,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 334.81865781420925,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 316.0942196869339,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Ketu": {
+          "sidereal_lon": 136.0942196869339,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2027,
+      "solar_return_utc": "2027-02-05T06:03:41+00:00",
+      "ascendant_sidereal_lon": 27.04227037945233,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568031567772,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 276.5445217414374,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mars": {
+          "sidereal_lon": 131.89929785079616,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Mercury": {
+          "sidereal_lon": 310.0056796929379,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 118.56352361163134,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Venus": {
+          "sidereal_lon": 247.65281466498467,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 346.40558898732803,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 296.73872890711317,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Ketu": {
+          "sidereal_lon": 116.73872890711317,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2028,
+      "solar_return_utc": "2028-02-05T12:10:43+00:00",
+      "ascendant_sidereal_lon": 112.94648288526187,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569168201299,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 42.66791942519469,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mars": {
+          "sidereal_lon": 301.6465365588936,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Mercury": {
+          "sidereal_lon": 284.9910958019979,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 152.33700121142175,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Venus": {
+          "sidereal_lon": 333.50280496031206,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 358.44627456774117,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Rahu": {
+          "sidereal_lon": 277.3831478497838,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 97.38314784978382,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2029,
+      "solar_return_utc": "2029-02-04T18:21:16+00:00",
+      "ascendant_sidereal_lon": 198.56078987889146,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569048264252,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 186.97939601156463,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mars": {
+          "sidereal_lon": 169.10819107261574,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mercury": {
+          "sidereal_lon": 266.7118044695728,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 183.10224369147187,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Venus": {
+          "sidereal_lon": 280.39411062532537,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Saturn": {
+          "sidereal_lon": 10.990505981415271,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Rahu": {
+          "sidereal_lon": 258.02743763935064,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 78.02743763935064,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2030,
+      "solar_return_utc": "2030-02-05T00:27:57+00:00",
+      "ascendant_sidereal_lon": 284.3760406186392,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567741182044,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 320.7056301613756,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 317.9636514971868,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mercury": {
+          "sidereal_lon": 270.63070219769776,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 211.33454505119263,
+          "sign": "Scorpio",
+          "nakshatra": "Vishakha"
+        },
+        "Venus": {
+          "sidereal_lon": 255.93431843019937,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 24.073771230900633,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Rahu": {
+          "sidereal_lon": 238.67187009313548,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Ketu": {
+          "sidereal_lon": 58.67187009313545,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2031,
+      "solar_return_utc": "2031-02-05T06:38:09+00:00",
+      "ascendant_sidereal_lon": 36.29788027298048,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95685673652395,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 86.68641825658742,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Mars": {
+          "sidereal_lon": 194.84615276599823,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mercury": {
+          "sidereal_lon": 281.1191239760298,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 238.01846083658296,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Venus": {
+          "sidereal_lon": 317.75522502146185,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 37.70675562923803,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Rahu": {
+          "sidereal_lon": 219.31617352380871,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Ketu": {
+          "sidereal_lon": 39.31617352380874,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2032,
+      "solar_return_utc": "2032-02-05T12:46:35+00:00",
+      "ascendant_sidereal_lon": 121.05449967235892,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95696142434593,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 213.68049293696384,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mars": {
+          "sidereal_lon": 334.7250099842199,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 294.3232614194492,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 264.1261828187212,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 262.5498147721267,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 51.86041460258331,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Rahu": {
+          "sidereal_lon": 199.96054199375206,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Ketu": {
+          "sidereal_lon": 19.96054199375203,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2033,
+      "solar_return_utc": "2033-02-04T18:56:47+00:00",
+      "ascendant_sidereal_lon": 206.50049152186497,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.956833569822,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 359.1104821074574,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mars": {
+          "sidereal_lon": 214.7244251421144,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mercury": {
+          "sidereal_lon": 307.49552518725386,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 290.48713283765017,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Venus": {
+          "sidereal_lon": 335.378716064511,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 66.45915297971109,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Rahu": {
+          "sidereal_lon": 180.60484612803359,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Ketu": {
+          "sidereal_lon": 0.6048461280336141,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2034,
+      "solar_return_utc": "2034-02-05T01:15:04+00:00",
+      "ascendant_sidereal_lon": 297.82834587646124,
+      "ascendant_sign": "Capricorn",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95674339837626,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 131.28472828855251,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Mars": {
+          "sidereal_lon": 352.3373668915822,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mercury": {
+          "sidereal_lon": 304.16512258607344,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 317.8161314355536,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Venus": {
+          "sidereal_lon": 299.60137657708384,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 81.37326062876409,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Rahu": {
+          "sidereal_lon": 161.24885305168218,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Ketu": {
+          "sidereal_lon": 341.2488530516822,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2035,
+      "solar_return_utc": "2035-02-05T07:21:44+00:00",
+      "ascendant_sidereal_lon": 47.389306595592856,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568045808076,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 257.15996202370854,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mars": {
+          "sidereal_lon": 231.95071820872857,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mercury": {
+          "sidereal_lon": 272.881283426498,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 346.772037595556,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Venus": {
+          "sidereal_lon": 248.0032771607344,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 96.42476578000591,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Rahu": {
+          "sidereal_lon": 141.89328726445908,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 321.8932872644591,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2036,
+      "solar_return_utc": "2036-02-05T13:28:25+00:00",
+      "ascendant_sidereal_lon": 130.64245702471788,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95689895591954,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 25.337643613272352,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mars": {
+          "sidereal_lon": 11.825240605431391,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Mercury": {
+          "sidereal_lon": 267.00961505507416,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 17.989636724012357,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Venus": {
+          "sidereal_lon": 333.9357544233538,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 111.41160916485966,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Rahu": {
+          "sidereal_lon": 122.53772182899267,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Ketu": {
+          "sidereal_lon": 302.5377218289927,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2037,
+      "solar_return_utc": "2037-02-04T19:38:58+00:00",
+      "ascendant_sidereal_lon": 215.85470111219823,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95685419679575,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 170.8924341595794,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mars": {
+          "sidereal_lon": 248.02554115037708,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mercury": {
+          "sidereal_lon": 274.6346910855761,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 51.83409998835586,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Venus": {
+          "sidereal_lon": 281.02140462492144,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Saturn": {
+          "sidereal_lon": 126.13651185291745,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Rahu": {
+          "sidereal_lon": 103.18201443292088,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Ketu": {
+          "sidereal_lon": 283.1820144329209,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2038,
+      "solar_return_utc": "2038-02-05T01:48:49+00:00",
+      "ascendant_sidereal_lon": 308.0129843371435,
+      "ascendant_sign": "Aquarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569392484096,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 301.47302162135077,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Mars": {
+          "sidereal_lon": 35.63535444946116,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Mercury": {
+          "sidereal_lon": 286.4996326605751,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 87.66272531203505,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Venus": {
+          "sidereal_lon": 254.2978964528114,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 140.4376648300715,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Rahu": {
+          "sidereal_lon": 83.82633326355281,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        },
+        "Ketu": {
+          "sidereal_lon": 263.8263332635528,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2039,
+      "solar_return_utc": "2039-02-05T07:58:18+00:00",
+      "ascendant_sidereal_lon": 56.238999670637,
+      "ascendant_sign": "Taurus",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95685327353334,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 67.04858987642795,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Mars": {
+          "sidereal_lon": 263.7106944318024,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 300.28529389395914,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 123.38550802722999,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Venus": {
+          "sidereal_lon": 318.3504027319837,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 154.20746837545605,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Rahu": {
+          "sidereal_lon": 64.47066538348855,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Ketu": {
+          "sidereal_lon": 244.47066538348855,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2040,
+      "solar_return_utc": "2040-02-05T14:05:20+00:00",
+      "ascendant_sidereal_lon": 139.19874045514666,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95689342672824,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 197.50013987728485,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mars": {
+          "sidereal_lon": 68.71279986661544,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Mercury": {
+          "sidereal_lon": 310.2051891579042,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 156.79274869836567,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Venus": {
+          "sidereal_lon": 263.1277081144605,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 167.39762233584727,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Rahu": {
+          "sidereal_lon": 45.115088417593206,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Ketu": {
+          "sidereal_lon": 225.1150884175932,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2041,
+      "solar_return_utc": "2041-02-04T20:10:57+00:00",
+      "ascendant_sidereal_lon": 222.91265616142934,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567968260531,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 342.41604381763335,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 279.4247829387391,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 290.44869658055757,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 187.17443776278196,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Venus": {
+          "sidereal_lon": 334.54144219848257,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 180.01095812536872,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Rahu": {
+          "sidereal_lon": 25.759563553479435,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Ketu": {
+          "sidereal_lon": 205.75956355347944,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2042,
+      "solar_return_utc": "2042-02-05T02:21:30+00:00",
+      "ascendant_sidereal_lon": 318.25797704957887,
+      "ascendant_sign": "Aquarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567249051606,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 112.1414148851301,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Mars": {
+          "sidereal_lon": 113.94243148058956,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Mercury": {
+          "sidereal_lon": 267.4054231189782,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 215.11990849610845,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Venus": {
+          "sidereal_lon": 300.22678653723995,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 192.0878446037106,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Rahu": {
+          "sidereal_lon": 6.403857916236998,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Ketu": {
+          "sidereal_lon": 186.403857916237,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2043,
+      "solar_return_utc": "2043-02-05T08:28:11+00:00",
+      "ascendant_sidereal_lon": 63.22641273182586,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569352520935,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 236.9908901780913,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Mars": {
+          "sidereal_lon": 295.3545410771938,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Mercury": {
+          "sidereal_lon": 269.44587506928696,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 241.63547131692886,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Venus": {
+          "sidereal_lon": 248.36530963275393,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 203.68767234465378,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Rahu": {
+          "sidereal_lon": 347.0482949431267,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Ketu": {
+          "sidereal_lon": 167.04829494312662,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2044,
+      "solar_return_utc": "2044-02-05T14:35:34+00:00",
+      "ascendant_sidereal_lon": 146.254146686609,
+      "ascendant_sign": "Leo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95677409960274,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 9.521829079056682,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Mars": {
+          "sidereal_lon": 156.2734902073841,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Mercury": {
+          "sidereal_lon": 279.3313610936732,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 267.68249369891646,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 334.35501946064704,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 214.87510459145702,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Rahu": {
+          "sidereal_lon": 327.6927064468475,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Ketu": {
+          "sidereal_lon": 147.69270644684752,
+          "sign": "Leo",
+          "nakshatra": "UttaraPhalguni"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2045,
+      "solar_return_utc": "2045-02-04T20:51:02+00:00",
+      "ascendant_sidereal_lon": 231.78675188408775,
+      "ascendant_sign": "Scorpio",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569377031256,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 153.2741532094991,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Mars": {
+          "sidereal_lon": 311.5574713011843,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Mercury": {
+          "sidereal_lon": 292.23957917432676,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 294.08311349995563,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Venus": {
+          "sidereal_lon": 281.6465169916659,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Saturn": {
+          "sidereal_lon": 225.7186980724569,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Rahu": {
+          "sidereal_lon": 308.33682073991645,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Ketu": {
+          "sidereal_lon": 128.33682073991645,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2046,
+      "solar_return_utc": "2046-02-05T03:05:48+00:00",
+      "ascendant_sidereal_lon": 332.5336512018232,
+      "ascendant_sign": "Pisces",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567646427825,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 282.82636153607837,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mars": {
+          "sidereal_lon": 185.77651333378893,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Mercury": {
+          "sidereal_lon": 305.83980636814107,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 321.5495447876227,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 252.85191788423916,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 236.28735580605235,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Rahu": {
+          "sidereal_lon": 288.98096125974905,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Ketu": {
+          "sidereal_lon": 108.98096125974905,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2047,
+      "solar_return_utc": "2047-02-05T09:14:56+00:00",
+      "ascendant_sidereal_lon": 73.86344257771188,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569537230763,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 47.125645476851986,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Mars": {
+          "sidereal_lon": 328.10696400569816,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 307.2306362019027,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 350.7522588683861,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Venus": {
+          "sidereal_lon": 318.94159792401246,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 246.64880706270978,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Rahu": {
+          "sidereal_lon": 269.62530913122384,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Ketu": {
+          "sidereal_lon": 89.62530913122384,
+          "sign": "Gemini",
+          "nakshatra": "Punarvasu"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2048,
+      "solar_return_utc": "2048-02-05T15:21:58+00:00",
+      "ascendant_sidereal_lon": 157.14585893475888,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95677867421574,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 182.44196112223946,
+          "sign": "Libra",
+          "nakshatra": "Chitra"
+        },
+        "Mars": {
+          "sidereal_lon": 207.41047128899189,
+          "sign": "Libra",
+          "nakshatra": "Vishakha"
+        },
+        "Mercury": {
+          "sidereal_lon": 276.3841153359424,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 22.32380650068613,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Venus": {
+          "sidereal_lon": 263.7078392553156,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 256.8712883847939,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 250.2697349793706,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Ketu": {
+          "sidereal_lon": 70.26973497937058,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2049,
+      "solar_return_utc": "2049-02-04T21:29:21+00:00",
+      "ascendant_sidereal_lon": 240.37243861240643,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567489671633,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 324.0498482904186,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 345.30479205614915,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mercury": {
+          "sidereal_lon": 266.5961993984344,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 56.55320331162194,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        },
+        "Venus": {
+          "sidereal_lon": 333.57983726660814,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 267.0211169834512,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 230.9141482417817,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        },
+        "Ketu": {
+          "sidereal_lon": 50.91414824178173,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2050,
+      "solar_return_utc": "2050-02-05T03:40:15+00:00",
+      "ascendant_sidereal_lon": 343.7129738767464,
+      "ascendant_sign": "Pisces",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568099617809,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 93.30690176514688,
+          "sign": "Cancer",
+          "nakshatra": "Punarvasu"
+        },
+        "Mars": {
+          "sidereal_lon": 225.4090225526313,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mercury": {
+          "sidereal_lon": 273.1322390619258,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 92.58540446708277,
+          "sign": "Cancer",
+          "nakshatra": "Punarvasu"
+        },
+        "Venus": {
+          "sidereal_lon": 300.85834797615263,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 277.16336812492835,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Rahu": {
+          "sidereal_lon": 211.55843248097688,
+          "sign": "Scorpio",
+          "nakshatra": "Vishakha"
+        },
+        "Ketu": {
+          "sidereal_lon": 31.558432480976876,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2051,
+      "solar_return_utc": "2051-02-05T09:49:45+00:00",
+      "ascendant_sidereal_lon": 81.6181098345105,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95678229731396,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 217.06782610638507,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Mars": {
+          "sidereal_lon": 3.892189969566247,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Mercury": {
+          "sidereal_lon": 284.55732003130186,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 128.15388533028135,
+          "sign": "Leo",
+          "nakshatra": "Magha"
+        },
+        "Venus": {
+          "sidereal_lon": 248.74548539629973,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 287.3623054839151,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Rahu": {
+          "sidereal_lon": 192.20276882189637,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Ketu": {
+          "sidereal_lon": 12.20276882189637,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2052,
+      "solar_return_utc": "2052-02-05T15:54:19+00:00",
+      "ascendant_sidereal_lon": 164.72669739924004,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9569017828614,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 354.8543928467179,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Mars": {
+          "sidereal_lon": 241.81244129778128,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Mercury": {
+          "sidereal_lon": 298.18893365876465,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 161.16640845345475,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Venus": {
+          "sidereal_lon": 334.765122091107,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 297.6811930791065,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Rahu": {
+          "sidereal_lon": 172.8472866393771,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Ketu": {
+          "sidereal_lon": 352.8472866393771,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2053,
+      "solar_return_utc": "2053-02-04T22:03:27+00:00",
+      "ascendant_sidereal_lon": 248.16479737411566,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95678635722254,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 134.77355817950348,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Mars": {
+          "sidereal_lon": 25.588678630877762,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Mercury": {
+          "sidereal_lon": 309.70017669008166,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 191.14932915232777,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Venus": {
+          "sidereal_lon": 282.27215015672743,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Saturn": {
+          "sidereal_lon": 308.18327305517766,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Rahu": {
+          "sidereal_lon": 153.49163662122768,
+          "sign": "Virgo",
+          "nakshatra": "UttaraPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 333.4916366212277,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2054,
+      "solar_return_utc": "2054-02-05T04:14:21+00:00",
+      "ascendant_sidereal_lon": 354.6340007270163,
+      "ascendant_sign": "Pisces",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568698512279,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 264.05332572845646,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mars": {
+          "sidereal_lon": 257.6047635187079,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 295.8751335979798,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 218.81944461596518,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        },
+        "Venus": {
+          "sidereal_lon": 251.58825294096897,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 318.9317962361105,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Rahu": {
+          "sidereal_lon": 134.1359222673476,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Ketu": {
+          "sidereal_lon": 314.1359222673476,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2055,
+      "solar_return_utc": "2055-02-05T10:20:20+00:00",
+      "ascendant_sidereal_lon": 88.3779929337997,
+      "ascendant_sign": "Gemini",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95673385366706,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 27.411881248491383,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        },
+        "Mars": {
+          "sidereal_lon": 54.28403168403413,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        },
+        "Mercury": {
+          "sidereal_lon": 268.67486457708696,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 245.20212266071175,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Venus": {
+          "sidereal_lon": 319.52470105409964,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Saturn": {
+          "sidereal_lon": 329.99009324615344,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 114.78038938995485,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Ketu": {
+          "sidereal_lon": 294.78038938995485,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2056,
+      "solar_return_utc": "2056-02-05T16:30:53+00:00",
+      "ascendant_sidereal_lon": 173.2605618127339,
+      "ascendant_sign": "Virgo",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95680908066714,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 167.344045669152,
+          "sign": "Virgo",
+          "nakshatra": "Hasta"
+        },
+        "Mars": {
+          "sidereal_lon": 273.28064413325836,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Mercury": {
+          "sidereal_lon": 268.4125252057988,
+          "sign": "Sagittarius",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 271.24591430401637,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Venus": {
+          "sidereal_lon": 264.2865622681705,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        },
+        "Saturn": {
+          "sidereal_lon": 341.42015692541963,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Rahu": {
+          "sidereal_lon": 95.42468867701,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Ketu": {
+          "sidereal_lon": 275.42468867701,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2057,
+      "solar_return_utc": "2057-02-04T22:43:53+00:00",
+      "ascendant_sidereal_lon": 257.6924844103747,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95678082050097,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 305.180801333426,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Mars": {
+          "sidereal_lon": 95.38334766830559,
+          "sign": "Cancer",
+          "nakshatra": "Pushya"
+        },
+        "Mercury": {
+          "sidereal_lon": 277.6132955745025,
+          "sign": "Capricorn",
+          "nakshatra": "UttaraAshadha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 297.754534879469,
+          "sign": "Capricorn",
+          "nakshatra": "Dhanishta"
+        },
+        "Venus": {
+          "sidereal_lon": 332.4792297010714,
+          "sign": "Pisces",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 353.2801877031713,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Rahu": {
+          "sidereal_lon": 76.06889775333056,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Ketu": {
+          "sidereal_lon": 256.0688977533306,
+          "sign": "Sagittarius",
+          "nakshatra": "PurvaAshadha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2058,
+      "solar_return_utc": "2058-02-05T04:57:15+00:00",
+      "ascendant_sidereal_lon": 7.92245125013536,
+      "ascendant_sign": "Aries",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568146885332,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 74.3180113363338,
+          "sign": "Gemini",
+          "nakshatra": "Ardra"
+        },
+        "Mars": {
+          "sidereal_lon": 289.1033721991191,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Mercury": {
+          "sidereal_lon": 290.1844188079972,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 325.43246113981013,
+          "sign": "Aquarius",
+          "nakshatra": "PurvaBhadrapada"
+        },
+        "Venus": {
+          "sidereal_lon": 301.48828043038094,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Saturn": {
+          "sidereal_lon": 5.6222276756291665,
+          "sign": "Aries",
+          "nakshatra": "Ashwini"
+        },
+        "Rahu": {
+          "sidereal_lon": 56.713094243861036,
+          "sign": "Taurus",
+          "nakshatra": "Mrigashira"
+        },
+        "Ketu": {
+          "sidereal_lon": 236.71309424386104,
+          "sign": "Scorpio",
+          "nakshatra": "Jyeshtha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2059,
+      "solar_return_utc": "2059-02-05T11:06:44+00:00",
+      "ascendant_sidereal_lon": 98.6361396252336,
+      "ascendant_sign": "Cancer",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9567802399452,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 198.20970828130478,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        },
+        "Mars": {
+          "sidereal_lon": 141.3301682798965,
+          "sign": "Leo",
+          "nakshatra": "PurvaPhalguni"
+        },
+        "Mercury": {
+          "sidereal_lon": 303.9837428897736,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Jupiter": {
+          "sidereal_lon": 354.9475660586126,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Venus": {
+          "sidereal_lon": 249.13967647759048,
+          "sign": "Sagittarius",
+          "nakshatra": "Mula"
+        },
+        "Saturn": {
+          "sidereal_lon": 18.48339641170053,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Rahu": {
+          "sidereal_lon": 37.357433398466966,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Ketu": {
+          "sidereal_lon": 217.35743339846698,
+          "sign": "Scorpio",
+          "nakshatra": "Anuradha"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2060,
+      "solar_return_utc": "2060-02-05T17:11:40+00:00",
+      "ascendant_sidereal_lon": 182.69386489164714,
+      "ascendant_sign": "Libra",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.9568771201376,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 339.8078036217988,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Mars": {
+          "sidereal_lon": 305.1932082998709,
+          "sign": "Aquarius",
+          "nakshatra": "Dhanishta"
+        },
+        "Mercury": {
+          "sidereal_lon": 309.1733330009908,
+          "sign": "Aquarius",
+          "nakshatra": "Shatabhisha"
+        },
+        "Jupiter": {
+          "sidereal_lon": 26.910808219155342,
+          "sign": "Aries",
+          "nakshatra": "Krittika"
+        },
+        "Venus": {
+          "sidereal_lon": 335.1613736692084,
+          "sign": "Pisces",
+          "nakshatra": "UttaraBhadrapada"
+        },
+        "Saturn": {
+          "sidereal_lon": 31.882047406867546,
+          "sign": "Taurus",
+          "nakshatra": "Krittika"
+        },
+        "Rahu": {
+          "sidereal_lon": 18.001941092093684,
+          "sign": "Aries",
+          "nakshatra": "Bharani"
+        },
+        "Ketu": {
+          "sidereal_lon": 198.0019410920937,
+          "sign": "Libra",
+          "nakshatra": "Swati"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    },
+    {
+      "chart_id": "abhisek_mohanty_primary",
+      "year": 2061,
+      "solar_return_utc": "2061-02-04T23:20:48+00:00",
+      "ascendant_sidereal_lon": 266.755908398162,
+      "ascendant_sign": "Sagittarius",
+      "planets": {
+        "Sun": {
+          "sidereal_lon": 291.95690163659066,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Moon": {
+          "sidereal_lon": 116.12562445453851,
+          "sign": "Cancer",
+          "nakshatra": "Ashlesha"
+        },
+        "Mars": {
+          "sidereal_lon": 175.5291081175043,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        },
+        "Mercury": {
+          "sidereal_lon": 280.76798582549935,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Jupiter": {
+          "sidereal_lon": 61.48957291881135,
+          "sign": "Gemini",
+          "nakshatra": "Mrigashira"
+        },
+        "Venus": {
+          "sidereal_lon": 282.90121698740086,
+          "sign": "Capricorn",
+          "nakshatra": "Shravana"
+        },
+        "Saturn": {
+          "sidereal_lon": 45.811215737326314,
+          "sign": "Taurus",
+          "nakshatra": "Rohini"
+        },
+        "Rahu": {
+          "sidereal_lon": 358.6462938876098,
+          "sign": "Pisces",
+          "nakshatra": "Revati"
+        },
+        "Ketu": {
+          "sidereal_lon": 178.64629388760977,
+          "sign": "Virgo",
+          "nakshatra": "Chitra"
+        }
+      },
+      "computed_by": "pyswisseph",
+      "ayanamsha": "lahiri"
+    }
+  ]
+}

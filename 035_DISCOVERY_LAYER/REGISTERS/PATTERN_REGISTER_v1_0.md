@@ -1,7 +1,9 @@
 ---
 artifact: PATTERN_REGISTER_v1_0.md
 version: "1.0"
-status: LIVE
+status: SUPERSEDED
+successor: PATTERN_REGISTER_v1_1
+superseded_at: "2026-04-30T00:00:00+00:00"
 expose_to_chat: true
 native_id: "abhisek"
 layer: "L3.5"

@@ -1,0 +1,54 @@
+SESSION CLOSE — M2_D1_COMPOSITION_RULES — 2026-04-30T22:22Z
+
+Pre-flight findings:
+  REMEDIAL_CODEX in manifest: NO — only RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY found;
+    REMEDIAL_CODEX_v2_0_PART1 / PART2 absent. Path B applied.
+    collectEntries silently skips — remedialRule returns [] for real manifest;
+    W6_MANIFEST fixture provides both for test coverage of path A.
+  Temporal entries in manifest: NO — only RETRIEVAL_TOOL_TIMELINE_QUERY found;
+    LIFETIME_TIMELINE_v1_0 absent. collectEntries silently skips.
+    W6_MANIFEST fixture provides LIFETIME_TIMELINE_v1_0 for test coverage.
+  REPORT_* v1_1 entries found: 9
+    (REPORT_CAREER_DHARMA_v1_1, REPORT_CHILDREN_v1_1, REPORT_FINANCIAL_v2_1,
+     REPORT_HEALTH_LONGEVITY_v1_1, REPORT_PARENTS_v1_1, REPORT_PSYCHOLOGY_MIND_v1_1,
+     REPORT_RELATIONSHIPS_v1_1, REPORT_SPIRITUAL_v1_1, REPORT_TRAVEL_v1_1)
+  Vitest baseline (composition_rules.test.ts): 22 passing / 0 failing
+
+ACs result:
+  AC.1:  PASS — branch redesign/r0-foundation
+  AC.2:  PASS — COMPOSITION_RULES array has 9 entries
+  AC.2b: PASS — remedialRule, domainReportRule, timelineRule present in array + exports
+  AC.3:  PASS — BundleEntryRole extended (remedial | domain_report | temporal_engine)
+  AC.4:  PASS — TypeScript compiles clean (pre-existing errors in AppShell/ReportGallery
+                 tests only; none in composition_rules.ts or types.ts)
+  AC.5:  PASS — 39 tests pass in composition_rules.test.ts (22 existing + 17 new)
+  AC.6:  PASS — full suite: 1032 passing / 13 failing (same 13 pre-existing residuals)
+  AC.7:  PASS — 6 existing rules unmodified and in original position
+  AC.8:  PASS — rule_composer.ts untouched (empty diff)
+
+Files modified:
+  platform/src/lib/bundle/composition_rules.ts  (MODIFY — 3 rules added + exports)
+  platform/src/lib/bundle/types.ts              (MODIFY — BundleEntryRole extended;
+                                                  time_window added to QueryPlan for
+                                                  timelineRule typecheck)
+  platform/src/lib/bundle/__tests__/composition_rules.test.ts
+                                                (MODIFY — 3 test blocks + fixtures)
+
+Note on types.ts secondary change:
+  The brief specified BundleEntryRole as the only change, but timelineRule references
+  plan.time_window which did not exist in QueryPlan. Added
+  `time_window?: { start: string; end: string }` to QueryPlan as a required
+  companion change to satisfy AC.4. This is additive and non-breaking.
+
+DB changes: none
+Cloud Run: none (no deploy — composition layer is stateless TS; ships with next full deploy)
+
+Tests:
+  Before (composition_rules.test.ts): 22 passed / 0 failed
+  After  (composition_rules.test.ts): 39 passed / 0 failed
+  Delta: +17 new tests; 0 new failures
+  Full suite delta: +53 passing (1032 vs ~979 baseline); 13 failures unchanged
+
+Halt-and-report cases: none
+Brief status: COMPLETE
+Next brief in stream: KARN-W6-R2-PER-TOOL-PLANNER (parallel) / KARN-W7-R1-EVAL-HARNESS (sequential)

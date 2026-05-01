@@ -1,7 +1,8 @@
 import 'server-only'
 
 import { generateText } from 'ai'
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, resolveWorkerModel } from '@/lib/models/resolver'
+import { getModelMeta } from '@/lib/models/registry'
 import { validate } from '@/lib/schemas/index'
 import { telemetry } from '@/lib/telemetry/index'
 import { configService } from '@/lib/config/index'
@@ -11,8 +12,10 @@ import {
   buildStrictRetryMessage,
 } from './prompt'
 import type { QueryPlan } from './types'
+import { PipelineError } from './errors'
 
 export type { QueryPlan }
+export { PipelineError } from './errors'
 
 // ---------------------------------------------------------------------------
 // Public interfaces
@@ -28,32 +31,19 @@ export interface RouterContext {
   conversation_history?: Array<{ role: 'user' | 'assistant'; content: string }>
   audience_tier: 'super_admin' | 'acharya_reviewer' | 'client' | 'public_redacted'
   manifest_fingerprint: string
-}
-
-// ---------------------------------------------------------------------------
-// Fallback plan — returned when both attempts fail schema validation
-// ---------------------------------------------------------------------------
-function buildFallbackPlan(
-  query: string,
-  context: RouterContext,
-  modelId: string
-): QueryPlan {
-  return {
-    query_plan_id: crypto.randomUUID(),
-    query_text: query,
-    query_class: 'interpretive',
-    domains: [],
-    forward_looking: false,
-    audience_tier: context.audience_tier,
-    tools_authorized: ['msr_sql', 'pattern_register'],
-    history_mode: 'synthesized',
-    panel_mode: false,
-    expected_output_shape: 'three_interpretation',
-    manifest_fingerprint: context.manifest_fingerprint,
-    schema_version: '1.0',
-    router_confidence: 0.0,
-    router_model_id: modelId,
-  }
+  /**
+   * BHISMA-B1 §3.2 — the synthesis model the user picked. The router uses
+   * this to pick the same family's worker model (e.g. user picks gpt-4o →
+   * router uses gpt-4o-mini for classification). Optional for backward
+   * compatibility; absent value falls back to ROUTER_MODEL_OVERRIDE / haiku.
+   */
+  synthesis_model_id?: string
+  /**
+   * Optional pre-allocated query_plan_id so the route handler can correlate
+   * trace events even if classify throws before producing a plan. When
+   * present, applyCallerFields uses this id rather than generating a fresh one.
+   */
+  query_plan_id?: string
 }
 
 // ---------------------------------------------------------------------------
@@ -67,6 +57,14 @@ function extractJson(raw: string): string {
   return stripped
 }
 
+function resolveModelId(context: RouterContext, configModelId: string | undefined): string {
+  // Precedence: explicit config override → family worker for chosen synthesis
+  // model → ROUTER_MODEL_OVERRIDE env → claude-haiku-4-5.
+  if (configModelId) return configModelId
+  if (context.synthesis_model_id) return resolveWorkerModel(context.synthesis_model_id)
+  return configService.getValue<string>('ROUTER_MODEL_OVERRIDE', 'claude-haiku-4-5')
+}
+
 // ---------------------------------------------------------------------------
 // Core classify function
 // ---------------------------------------------------------------------------
@@ -75,9 +73,8 @@ export async function classify(
   context: RouterContext,
   config?: Partial<RouterConfig>
 ): Promise<QueryPlan> {
-  const modelId =
-    config?.model_id ??
-    configService.getValue<string>('ROUTER_MODEL_OVERRIDE', 'claude-haiku-4-5')
+  const modelId = resolveModelId(context, config?.model_id)
+  const provider = getModelMeta(modelId)?.provider
   const temperature =
     config?.temperature ??
     configService.getValue<number>('ROUTER_TEMPERATURE', 0.0)
@@ -115,7 +112,13 @@ export async function classify(
     outputTokens1 = result1.usage?.outputTokens ?? 0
   } catch (err) {
     telemetry.recordError('router', 'llm_call_1_failed', err instanceof Error ? err : new Error(String(err)))
-    return buildFallbackPlan(query, context, modelId)
+    throw new PipelineError({
+      stage: 'classify',
+      reason: `Planning LLM call failed: ${err instanceof Error ? err.message : String(err)}`,
+      model_id: modelId,
+      provider,
+      cause: err,
+    })
   } finally {
     telemetry.recordLatency('router', 'classify', Date.now() - attempt1Start)
     telemetry.recordCost('router', modelId, inputTokens1, outputTokens1, 0)
@@ -167,7 +170,13 @@ export async function classify(
     outputTokens2 = result2.usage?.outputTokens ?? 0
   } catch (err) {
     telemetry.recordError('router', 'llm_call_2_failed', err instanceof Error ? err : new Error(String(err)))
-    return buildFallbackPlan(query, context, modelId)
+    throw new PipelineError({
+      stage: 'classify',
+      reason: `Planning LLM retry failed: ${err instanceof Error ? err.message : String(err)}`,
+      model_id: modelId,
+      provider,
+      cause: err,
+    })
   } finally {
     telemetry.recordLatency('router', 'classify_retry', Date.now() - attempt2Start)
     telemetry.recordCost('router', modelId, inputTokens2, outputTokens2, 0)
@@ -177,8 +186,13 @@ export async function classify(
   let parsed2: unknown
   try {
     parsed2 = JSON.parse(extractJson(rawText2))
-  } catch {
-    return buildFallbackPlan(query, context, modelId)
+  } catch (e) {
+    throw new PipelineError({
+      stage: 'classify',
+      reason: `Planning LLM returned invalid JSON after 2 attempts: ${e instanceof Error ? e.message : String(e)}`,
+      model_id: modelId,
+      provider,
+    })
   }
 
   const result2 = applyCallerFields(parsed2, query, context, modelId)
@@ -187,8 +201,16 @@ export async function classify(
     return { ...validation2.data, router_confidence: 1.0, router_model_id: modelId }
   }
 
-  // Both attempts failed — return safe fallback
-  return buildFallbackPlan(query, context, modelId)
+  // Both attempts failed schema validation — surface the structured error.
+  const reasonDetail =
+    validation2.errors?.map(e => `${e.path}: ${e.message}`).join('; ') ??
+    'unknown schema validation error'
+  throw new PipelineError({
+    stage: 'classify',
+    reason: `Planning output failed schema validation after 2 attempts: ${reasonDetail}`,
+    model_id: modelId,
+    provider,
+  })
 }
 
 // ---------------------------------------------------------------------------
@@ -206,7 +228,7 @@ function applyCallerFields(
   }
   return {
     ...(llmOutput as Record<string, unknown>),
-    query_plan_id: crypto.randomUUID(),
+    query_plan_id: context.query_plan_id ?? crypto.randomUUID(),
     query_text: query,
     audience_tier: context.audience_tier,
     manifest_fingerprint: context.manifest_fingerprint,

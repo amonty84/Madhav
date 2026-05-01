@@ -141,11 +141,12 @@ body {
 
 /* Consume-shell scope: applies the brand gold/ink palette only to the consume
    chat surface, leaving build/audit/admin dark-mode pages untouched. Mounted
-   on ConsumeChat's root via the .consume-shell class. The radial-gradient
-   matches login's bg treatment. Tokens (--accent, --ring, --primary) are
-   re-pointed to gold so any descendant focus-ring / accent picks up the
-   brand without per-component overrides. */
-.dark .consume-shell {
+   on ConsumeChat's root via the .consume-shell class (which also carries `dark`
+   directly, avoiding the display:contents ancestor paint-invalidation quirk).
+   The radial-gradient matches login's bg treatment. Tokens (--accent, --ring,
+   --primary) are re-pointed to gold so any descendant focus-ring / accent picks
+   up the brand without per-component overrides. */
+.consume-shell {
   --background: var(--brand-charcoal);
   --accent: var(--brand-gold);
   --accent-foreground: var(--brand-ink);
@@ -164,7 +165,7 @@ body {
 
 /* Right-side border mirrors the sidebar's left border, completing the gold frame
    around the main chat viewport. Subtle outer glow adds depth without noise. */
-.dark .consume-shell main[aria-label="Chat"] {
+.consume-shell main[aria-label="Chat"] {
   border-right: 1px solid color-mix(in oklch, var(--brand-gold) 22%, transparent);
   box-shadow: 4px 0 24px -8px color-mix(in oklch, var(--brand-gold) 6%, transparent);
 }
@@ -386,14 +387,34 @@ body {
   animation: page-ascend 200ms ease-out both;
 }
 
-/* Mandala slow clockwise drift — 90 s full rotation. Paused by prefers-reduced-motion. */
+/* Mandala slow clockwise drift — 240 s full rotation. Paused by prefers-reduced-motion. */
 @keyframes mandala-spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
 .mandala-spin {
-  animation: mandala-spin 90s linear infinite;
+  animation: mandala-spin 240s linear infinite;
+}
+
+/* Emanating vibration rings — gossamer circles */
+@keyframes mandala-ring-expand {
+  0%   { transform: translate(-50%, -50%) scale(0.55); opacity: 0.55; }
+  60%  { opacity: 0.18; }
+  100% { transform: translate(-50%, -50%) scale(1.55); opacity: 0; }
+}
+
+/* Emanating glow rings — softer, slower */
+@keyframes mandala-ring-glow {
+  0%   { transform: translate(-50%, -50%) scale(0.45); opacity: 0.38; }
+  50%  { opacity: 0.12; }
+  100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
+}
+
+/* Rotating diamond rings */
+@keyframes mandala-diamond-expand {
+  0%   { transform: translate(-50%, -50%) rotate(45deg) scale(0.5); opacity: 0.45; }
+  100% { transform: translate(-50%, -50%) rotate(65deg) scale(1.6); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

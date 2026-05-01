@@ -252,3 +252,114 @@ describe('Template body integrity', () => {
     },
   )
 })
+
+// ---------------------------------------------------------------------------
+// M3-W1-A3 — Contradiction-framing rubric (PHASE_M3_PLAN §3.1 R.M3A.3 / AC.M3A.8)
+// ---------------------------------------------------------------------------
+
+describe('Contradiction-framing rubric in shared preamble', () => {
+  // Templates inheriting buildOpeningBlock() — every active synthesis class
+  // except the cross_native Phase-7 stub.
+  const ACTIVE_QUERY_CLASSES: QueryClass[] = [
+    'factual',
+    'interpretive',
+    'predictive',
+    'cross_domain',
+    'discovery',
+    'holistic',
+    'remedial',
+  ]
+
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'template "%s" rendered output includes the L3.5 Contradiction Register reference',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('L3.5 Contradiction Register')
+    },
+  )
+
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'template "%s" rendered output enforces "surface, do not synthesize away"',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      // (a) Surface, do not synthesize away.
+      expect(rendered).toContain('surface each contradiction explicitly')
+      expect(rendered).toContain('Do not average, smooth, or synthesize the contradiction away')
+    },
+  )
+
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'template "%s" rendered output enforces contradiction_id citation (B.3)',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      // (b) Cite the contradiction_id for each contradiction surfaced.
+      expect(rendered).toContain('contradiction_id')
+      expect(rendered).toContain('Cite the contradiction_id for each contradiction')
+      expect(rendered).toContain('CON.')
+    },
+  )
+
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'template "%s" rendered output prohibits fabricated L1 resolution (B.1)',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      // (c) Layer-separation: surface resolution_options if present;
+      //     do not invent a resolution.
+      expect(rendered).toContain('resolution_options')
+      expect(rendered).toContain('Do not fabricate L1 facts')
+      expect(rendered).toContain('B.1 layer-separation')
+      expect(rendered).toContain('B.3 derivation-ledger')
+    },
+  )
+
+  it('rubric is injected from a single shared location (worked example appears exactly once per template)', () => {
+    // The CON.007 worked example is unique to the rubric. If the rubric is
+    // accidentally injected twice (e.g. via both shared preamble and a
+    // class-specific tail), the example string would appear more than once.
+    const registry = getDefaultRegistry()
+    for (const qc of ACTIVE_QUERY_CLASSES) {
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      const occurrences = rendered.split('[timing_conflict] (CON.007)').length - 1
+      expect(occurrences).toBe(1)
+    }
+  })
+
+  it('renders the worked CON.<id> example so the model has a citation pattern', () => {
+    const registry = getDefaultRegistry()
+    const tmpl = registry.get('discovery', 'super_admin', 'single_model')
+    const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+    // The canonical example anchors the model on the exact citation form.
+    expect(rendered).toContain('[timing_conflict] (CON.007)')
+    expect(rendered).toContain('open contradiction, not a resolved discrepancy')
+  })
+
+  it('rubric is dormant when no contradiction-register chunks present (instruction is conditional)', () => {
+    const registry = getDefaultRegistry()
+    const tmpl = registry.get('factual', 'super_admin', 'single_model')
+    const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+    // The rubric must explicitly instruct that absence of contradictions
+    // means the rubric does not fire — guards against over-application
+    // on plain factual queries.
+    expect(rendered).toContain(
+      "When no contradiction-register chunks appear in the retrieved context, this rubric is dormant",
+    )
+  })
+
+  it('cross_native stub is unaffected (does not inherit buildOpeningBlock)', () => {
+    const registry = getDefaultRegistry()
+    const tmpl = registry.get('cross_native', 'super_admin', 'single_model')
+    const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+    expect(rendered).not.toContain('L3.5 Contradiction Register')
+    // The stub body remains the unimplemented marker.
+    expect(rendered).toContain('Phase 7 deliverable')
+  })
+})

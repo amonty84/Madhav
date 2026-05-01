@@ -6,6 +6,7 @@ vi.mock('server-only', () => ({}))
 // Mock the model resolver — we don't want real LLM calls
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5' })),
+  resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
 }))
 
 // Mock generateText at the ai module level
@@ -471,5 +472,79 @@ describe('Router classify() — CGM graph_seed_hints and edge_type_filter extrac
 
     expect(plan.query_class).toBe('factual')
     expect(plan.graph_seed_hints).toEqual(['KRK.C8.AK'])
+  })
+})
+
+describe('Router classify() — vector_search_filter emission per query class', () => {
+  it('factual class: classifier emits layer=L1 and doc_type=[l1_fact]', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'factual',
+      domains: [],
+      tools_authorized: ['msr_sql', 'vector_search'],
+      expected_output_shape: 'single_answer',
+      planets: ['Mercury'],
+      graph_seed_hints: ['PLN.MERCURY'],
+      vector_search_filter: { layer: 'L1', doc_type: ['l1_fact'] },
+    }))
+
+    const plan = await classify('What sign is my Mercury?', BASE_CONTEXT)
+
+    expect(plan.query_class).toBe('factual')
+    expect(plan.vector_search_filter).toEqual({ layer: 'L1', doc_type: ['l1_fact'] })
+  })
+
+  it('interpretive class: classifier emits doc_type covering L1+L2.5 and no layer restriction', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'interpretive',
+      domains: ['career'],
+      tools_authorized: ['msr_sql', 'pattern_register', 'vector_search'],
+      expected_output_shape: 'three_interpretation',
+      vector_search_filter: { doc_type: ['l1_fact', 'ucn_section', 'msr_signal', 'cdlm_cell'] },
+    }))
+
+    const plan = await classify('What does my chart say about career?', BASE_CONTEXT)
+
+    expect(plan.query_class).toBe('interpretive')
+    expect(plan.vector_search_filter?.doc_type).toEqual(
+      expect.arrayContaining(['l1_fact', 'ucn_section', 'msr_signal', 'cdlm_cell'])
+    )
+    expect(plan.vector_search_filter?.layer).toBeUndefined()
+  })
+
+  it('discovery class: classifier emits doc_type limited to synthesis-layer signals', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'discovery',
+      domains: [],
+      tools_authorized: ['msr_sql', 'pattern_register', 'cluster_atlas', 'vector_search'],
+      history_mode: 'research',
+      expected_output_shape: 'structured_data',
+      vector_search_filter: { doc_type: ['msr_signal', 'ucn_section', 'domain_report', 'cdlm_cell'] },
+    }))
+
+    const plan = await classify('What unusual patterns does my chart show?', BASE_CONTEXT)
+
+    expect(plan.query_class).toBe('discovery')
+    expect(plan.vector_search_filter?.doc_type).toEqual(
+      expect.arrayContaining(['msr_signal', 'ucn_section', 'domain_report', 'cdlm_cell'])
+    )
+  })
+
+  it('predictive class: classifier emits doc_type=[l1_fact, msr_signal]', async () => {
+    mockLLMResponse(makeResponse({
+      query_class: 'predictive',
+      domains: ['career'],
+      forward_looking: true,
+      tools_authorized: ['msr_sql', 'temporal', 'vector_search'],
+      expected_output_shape: 'time_indexed_prediction',
+      dasha_context_required: true,
+      vector_search_filter: { doc_type: ['l1_fact', 'msr_signal'] },
+    }))
+
+    const plan = await classify('When is my next career change?', BASE_CONTEXT)
+
+    expect(plan.query_class).toBe('predictive')
+    expect(plan.vector_search_filter?.doc_type).toEqual(
+      expect.arrayContaining(['l1_fact', 'msr_signal'])
+    )
   })
 })

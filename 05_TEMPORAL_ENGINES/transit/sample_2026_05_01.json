@@ -1,0 +1,127 @@
+{
+  "query_date": "2026-05-01",
+  "ayanamsha": "lahiri",
+  "computed_by": "pyswisseph",
+  "ephe_mode": "moshier",
+  "natal_moon_sign": "Aquarius",
+  "planets": {
+    "Sun": {
+      "sidereal_lon_deg": 16.417777879879157,
+      "sign": "Aries",
+      "sign_idx_0_based": 0,
+      "degrees_in_sign": 16.417777879879157,
+      "nakshatra": "Bharani",
+      "nakshatra_idx_0_based": 1,
+      "degrees_in_nakshatra": 3.0844445465458232,
+      "speed_deg_per_day": 0.9706490063241038,
+      "is_retrograde": false
+    },
+    "Moon": {
+      "sidereal_lon_deg": 188.30520612785725,
+      "sign": "Libra",
+      "sign_idx_0_based": 6,
+      "degrees_in_sign": 8.305206127857247,
+      "nakshatra": "Swati",
+      "nakshatra_idx_0_based": 14,
+      "degrees_in_nakshatra": 1.638539461190561,
+      "speed_deg_per_day": 12.213762097790609,
+      "is_retrograde": false
+    },
+    "Mars": {
+      "sidereal_lon_deg": 352.14694818561924,
+      "sign": "Pisces",
+      "sign_idx_0_based": 11,
+      "degrees_in_sign": 22.146948185619237,
+      "nakshatra": "Revati",
+      "nakshatra_idx_0_based": 26,
+      "degrees_in_nakshatra": 5.480281518952552,
+      "speed_deg_per_day": 0.7661659991650344,
+      "is_retrograde": false
+    },
+    "Mercury": {
+      "sidereal_lon_deg": 1.7462275640691807,
+      "sign": "Aries",
+      "sign_idx_0_based": 0,
+      "degrees_in_sign": 1.7462275640691807,
+      "nakshatra": "Ashwini",
+      "nakshatra_idx_0_based": 0,
+      "degrees_in_nakshatra": 1.7462275640691807,
+      "speed_deg_per_day": 1.8661782636174857,
+      "is_retrograde": false
+    },
+    "Jupiter": {
+      "sidereal_lon_deg": 84.68809065119788,
+      "sign": "Gemini",
+      "sign_idx_0_based": 2,
+      "degrees_in_sign": 24.688090651197882,
+      "nakshatra": "Punarvasu",
+      "nakshatra_idx_0_based": 6,
+      "degrees_in_nakshatra": 4.688090651197882,
+      "speed_deg_per_day": 0.1393036698200124,
+      "is_retrograde": false
+    },
+    "Venus": {
+      "sidereal_lon_deg": 44.062037748361526,
+      "sign": "Taurus",
+      "sign_idx_0_based": 1,
+      "degrees_in_sign": 14.062037748361526,
+      "nakshatra": "Rohini",
+      "nakshatra_idx_0_based": 3,
+      "degrees_in_nakshatra": 4.062037748361526,
+      "speed_deg_per_day": 1.210570411898967,
+      "is_retrograde": false
+    },
+    "Saturn": {
+      "sidereal_lon_deg": 344.919881695329,
+      "sign": "Pisces",
+      "sign_idx_0_based": 11,
+      "degrees_in_sign": 14.919881695329025,
+      "nakshatra": "UttaraBhadrapada",
+      "nakshatra_idx_0_based": 25,
+      "degrees_in_nakshatra": 11.586548361995654,
+      "speed_deg_per_day": 0.11271114320522334,
+      "is_retrograde": false
+    },
+    "Rahu": {
+      "sidereal_lon_deg": 312.78237367164206,
+      "sign": "Aquarius",
+      "sign_idx_0_based": 10,
+      "degrees_in_sign": 12.782373671642063,
+      "nakshatra": "Shatabhisha",
+      "nakshatra_idx_0_based": 23,
+      "degrees_in_nakshatra": 6.115707004975377,
+      "speed_deg_per_day": -0.17177371836171526,
+      "is_retrograde": false
+    },
+    "Ketu": {
+      "sidereal_lon_deg": 132.78237367164206,
+      "sign": "Leo",
+      "sign_idx_0_based": 4,
+      "degrees_in_sign": 12.782373671642063,
+      "nakshatra": "Magha",
+      "nakshatra_idx_0_based": 9,
+      "degrees_in_nakshatra": 12.782373671642063,
+      "speed_deg_per_day": 0.17177371836171526,
+      "is_retrograde": false
+    }
+  },
+  "sade_sati": {
+    "active": true,
+    "phase": "third_dhaiya_2nd",
+    "saturn_sign": "Pisces"
+  },
+  "eclipse_proximity": [
+    {
+      "planet": "Sun",
+      "nearest_node": "Rahu",
+      "distance_deg": 63.635404208237105,
+      "near_eclipse_point": false
+    },
+    {
+      "planet": "Moon",
+      "nearest_node": "Ketu",
+      "distance_deg": 55.522832456215184,
+      "near_eclipse_point": false
+    }
+  ]
+}

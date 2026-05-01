@@ -1,0 +1,29 @@
+{
+  "schema_validation_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-04-30T23:25:37.782561+00:00",
+    "violations": [
+      {
+        "rule": "close_drift_detector_run_nonzero_exit",
+        "severity": "HIGH",
+        "path": "<close>.drift_detector_run",
+        "evidence": "exit_code=2 for drift_detector_run (not in whitelist {0, 3+known_residuals})",
+        "suggested_remediation": "Inspect the run's report; resolve or block close"
+      },
+      {
+        "rule": "close_schema_validator_run_nonzero_exit",
+        "severity": "HIGH",
+        "path": "<close>.schema_validator_run",
+        "evidence": "exit_code=2 for schema_validator_run (not in whitelist {0, 3+known_residuals})",
+        "suggested_remediation": "Inspect the run's report; resolve or block close"
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "by_severity": {
+        "HIGH": 2
+      }
+    },
+    "exit_code": 2
+  }
+}

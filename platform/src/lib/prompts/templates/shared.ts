@@ -23,6 +23,8 @@ const ACHARYA_GRADE = `Respond at acharya grade — the depth and precision expe
 
 const NO_FABRICATION = `If a numerical value is required but absent from the context bundle, write [EXTERNAL_COMPUTATION_REQUIRED: <specify what>] rather than inventing it.`
 
+const CONTRADICTION_FRAMING = `When the retrieved bundle contains entries from the L3.5 Contradiction Register (chunks beginning with a "[<contradiction_class>]" tag and carrying a contradiction_id such as CON.003), surface each contradiction explicitly in your answer — name the [<contradiction_class>] and cite the (CON.<id>) register row, e.g. "The corpus contains a [timing_conflict] (CON.007) between X and Y — this is an open contradiction, not a resolved discrepancy." Do not average, smooth, or synthesize the contradiction away into a unified narrative. If the chunk surfaces resolution_options, present those options as recorded; if no resolution is recorded, state that the contradiction is open and that resolution requires further data, computation, or native-acharya arbitration. Do not fabricate L1 facts or invent a resolution that the register does not record. Cite the contradiction_id for each contradiction you surface so the response is auditable back to the L3.5 Contradiction Register (B.1 layer-separation; B.3 derivation-ledger discipline). When no contradiction-register chunks appear in the retrieved context, this rubric is dormant — proceed with the query class's normal synthesis.`
+
 export const THREE_INTERPRETATION_GATE = `Provide three orthogonal interpretations grounded in distinct chart elements.`
 
 export const FALSIFIER_GATE = `Every time-indexed claim must include a falsifier — a specific observable condition that, if it fails to manifest within the named horizon, falsifies the prediction.`
@@ -63,6 +65,8 @@ ${ACHARYA_GRADE}
 ${CITATION_DISCIPLINE}
 
 ${NO_FABRICATION}
+
+${CONTRADICTION_FRAMING}
 
 ${METHODOLOGY_INSTRUCTION}`
 }

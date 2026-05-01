@@ -94,8 +94,20 @@ export default function LoginPage() {
   return (
     <ZoneRoot zone="ink">
       <div className="relative h-[100dvh] min-h-[640px] w-full overflow-hidden bg-[radial-gradient(ellipse_at_50%_50%,#0d0a05_0%,#020201_100%)] text-[#fce29a]">
-        {/* Mandala — centered behind everything */}
+        {/* Mandala — centered behind everything, with emanating vibration rings */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {/* Gossamer circle rings */}
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(212,175,55,0.22)]" style={{ animation: 'mandala-ring-expand 16s ease-out infinite', animationDelay: '0s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(212,175,55,0.18)]" style={{ animation: 'mandala-ring-expand 16s ease-out infinite', animationDelay: '-4s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(212,175,55,0.14)]" style={{ animation: 'mandala-ring-expand 16s ease-out infinite', animationDelay: '-8s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(212,175,55,0.1)]"  style={{ animation: 'mandala-ring-expand 16s ease-out infinite', animationDelay: '-12s' }} />
+          {/* Soft glow rings */}
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(244,209,96,0.1)]"  style={{ animation: 'mandala-ring-glow 26s ease-out infinite', animationDelay: '0s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(244,209,96,0.07)]" style={{ animation: 'mandala-ring-glow 26s ease-out infinite', animationDelay: '-8.66s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] rounded-full border border-[rgba(244,209,96,0.05)]" style={{ animation: 'mandala-ring-glow 26s ease-out infinite', animationDelay: '-17.33s' }} />
+          {/* Diamond rings */}
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] border border-[rgba(212,175,55,0.12)]" style={{ animation: 'mandala-diamond-expand 20s ease-out infinite', animationDelay: '0s' }} />
+          <div className="absolute left-1/2 top-1/2 h-[760px] w-[760px] border border-[rgba(212,175,55,0.08)]" style={{ animation: 'mandala-diamond-expand 20s ease-out infinite', animationDelay: '-10s' }} />
           <Mandala size={760} opacity={0.95} rotate />
         </div>
 

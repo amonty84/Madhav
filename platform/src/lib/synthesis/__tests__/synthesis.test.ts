@@ -6,6 +6,9 @@ vi.mock('server-only', () => ({}))
 // Mock the model resolver — we don't want real LLM calls
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5', provider: 'anthropic' })),
+  isReasoningModel: vi.fn(() => false),
+  resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
+  supportsStreaming: vi.fn(() => true),
 }))
 
 // Mock streamText at the ai module level — must be before any imports
