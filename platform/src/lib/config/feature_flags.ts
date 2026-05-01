@@ -48,6 +48,10 @@ export type FeatureFlag =
   | 'DISCOVERY_RESONANCE_ENABLED'
   /** Enables cluster_atlas retrieval tool. */
   | 'DISCOVERY_CLUSTER_ENABLED'
+  // M4-FEAT-LEL-TOGGLE — Blind mode. When false, query_life_events is
+  // excluded from consumeTools and the query is tagged as a prospective
+  // blind-mode prediction. Default true (informed mode).
+  | 'LEL_CONTEXT_ENABLED'
   // NVIDIA NIM — query-class-aware planner routing (BHISMA Wave 2 / UQE-4a).
   // Default OFF; flip true after NVIDIA_NIM_API_KEY is provisioned and UQE-4a
   // planner call site is wired. When ON, getNvidiaPlanner(queryClass) selects
@@ -93,8 +97,12 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   DISCOVERY_CONTRADICTION_ENABLED: true,
   DISCOVERY_RESONANCE_ENABLED: true,
   DISCOVERY_CLUSTER_ENABLED: true,
-  // NVIDIA NIM planner — OFF until NVIDIA_NIM_API_KEY provisioned + UQE-4a wired.
-  NVIDIA_PLANNER_ENABLED: false,
+  // M4-FEAT-LEL-TOGGLE — default true (informed mode).
+  // Override via MARSYS_FLAG_LEL_CONTEXT_ENABLED=false in env.
+  LEL_CONTEXT_ENABLED: true,
+  // NVIDIA NIM planner — ON (NVIDIA_NIM_API_KEY provisioned 2026-05-01).
+  // Routes UQE planner calls to NIM models by query class when stack=nim.
+  NVIDIA_PLANNER_ENABLED: true,
 }
 
 // Numeric config keys (read via configService.getValue)

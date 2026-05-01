@@ -8,18 +8,16 @@ import {
   PanelLeft,
   FileText,
   Keyboard,
-  Gauge,
+  Database,
   Zap,
-  Sparkles,
   FileQuestion,
   BookOpenText,
   User,
   Columns3,
   LayoutGrid,
   List,
-  type LucideIcon,
 } from 'lucide-react'
-import { MODELS, PROVIDER_LABEL, type SpeedTier } from '@/lib/models/registry'
+import { stackPicker } from '@/lib/models/registry'
 import { ChatShell } from '@/components/chat/ChatShell'
 import { ConversationSidebar } from '@/components/chat/ConversationSidebar'
 import { AdaptiveMessageList } from '@/components/chat/AdaptiveMessageList'
@@ -98,6 +96,7 @@ export function ConsumeChat({
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
+  const [lelContextEnabled, setLelContextEnabled] = useState(true)
 
   // View preference persisted to localStorage
   const [reportView, setReportView] = useState<'list' | 'gallery'>(() => {
@@ -129,13 +128,13 @@ export function ConsumeChat({
     ReturnType<typeof parseValidatorError>
   >(null)
 
-  const { model, style, setModel, setStyle } = useChatPreferences(chartId)
+  const { stack, style, setStack, setStyle } = useChatPreferences(chartId)
 
   const session = useChatSession({
     chartId,
     conversationId: currentConversationId,
     initialMessages,
-    model,
+    stack,
     style,
     onConversationCreated: id => {
       router.replace(`/clients/${chartId}/consume/${id}`, { scroll: false })
@@ -186,11 +185,14 @@ export function ConsumeChat({
           mediaType: a.mime,
           url: a.url!,
         }))
-      session.send(text, files, panelOptIn ? { panel_opt_in: true } : undefined)
+      session.send(text, files, {
+        lel_context_enabled: lelContextEnabled,
+        ...(panelOptIn ? { panel_opt_in: true } : {}),
+      })
       setPanelOptIn(false)
       if (files.length > 0) attachmentsApi.clear()
     },
-    [session, attachmentsApi, panelOptIn]
+    [session, attachmentsApi, panelOptIn, lelContextEnabled]
   )
 
   const handleRegenerate = useCallback(() => {
@@ -220,18 +222,13 @@ export function ConsumeChat({
   })
 
   const paletteCommands = useMemo<Command[]>(() => {
-    const iconByTier: Record<SpeedTier, LucideIcon> = {
-      fast: Zap,
-      balanced: Gauge,
-      deep: Sparkles,
-    }
-    const modelCommands: Command[] = MODELS.map(m => ({
-      id: `model-${m.id}`,
-      label: `Model: ${m.label} (${PROVIDER_LABEL[m.provider]})`,
-      icon: iconByTier[m.speedTier],
-      section: 'Model',
-      keywords: `${m.provider} ${m.speedTier} ${m.id} ${m.label}`,
-      run: () => setModel(m.id),
+    const stackCommands: Command[] = stackPicker().map(s => ({
+      id: `stack-${s.stack}`,
+      label: `Stack: ${s.label}`,
+      icon: Database,
+      section: 'Stack',
+      keywords: `${s.stack} ${s.synthesisModelId}`,
+      run: () => setStack(s.stack),
     }))
 
     return [
@@ -282,7 +279,7 @@ export function ConsumeChat({
         section: 'Help',
         run: () => setShortcutsOpen(true),
       },
-      ...modelCommands,
+      ...stackCommands,
       {
         id: 'style-acharya',
         label: 'Style: Acharya depth',
@@ -308,7 +305,7 @@ export function ConsumeChat({
         run: () => setStyle('client'),
       },
     ]
-  }, [chartId, router, desktopSidebarCollapsed, setModel, setStyle, handleReportViewChange])
+  }, [chartId, router, desktopSidebarCollapsed, setStack, setStyle, handleReportViewChange])
 
   useEffect(() => {
     if (!session.isStreaming) composerRef.current?.focus()
@@ -503,14 +500,35 @@ export function ConsumeChat({
           )}
           <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-2 px-4 py-1.5">
             <ModelStylePicker
-              model={model}
+              stack={stack}
               style={style}
-              onModelChange={setModel}
+              onStackChange={setStack}
               onStyleChange={setStyle}
               disabled={session.isStreaming || branches.isViewingArchived}
             />
-            {(panelModeEnabled || initialAudienceTier === 'super_admin') && pipelineEnabled && (
-              <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setLelContextEnabled(v => !v)}
+                title={
+                  lelContextEnabled
+                    ? 'Informed mode: life events included. Click for Blind mode.'
+                    : 'Blind mode: life events excluded. Click for Informed mode.'
+                }
+                className={[
+                  'flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors',
+                  lelContextEnabled
+                    ? 'bg-muted text-muted-foreground hover:bg-muted/80'
+                    : 'bg-amber-100 text-amber-800 ring-1 ring-amber-300 hover:bg-amber-200',
+                ].join(' ')}
+              >
+                {lelContextEnabled ? (
+                  <><BookOpenText className="h-3.5 w-3.5" /><span>Informed</span></>
+                ) : (
+                  <><Zap className="h-3.5 w-3.5" /><span>Blind</span></>
+                )}
+              </button>
+              {(panelModeEnabled || initialAudienceTier === 'super_admin') && pipelineEnabled && (
+                <>
                 {/* TierPicker — visible to super_admin role regardless of currently-viewed tier */}
                 {initialAudienceTier === 'super_admin' && (
                   <TierPicker tier={activeTier} onChange={handleTierChange} />

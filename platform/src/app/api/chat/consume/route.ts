@@ -20,10 +20,13 @@ import {
 } from '@/lib/conversations'
 import {
   DEFAULT_MODEL_ID,
+  DEFAULT_STACK_ID,
   TITLE_MODEL_ID,
+  STACK_ROUTING,
   getModelMeta,
   isValidModelId,
   supports,
+  type ModelStack,
 } from '@/lib/models/registry'
 import { resolveModel } from '@/lib/models/resolver'
 import { configService } from '@/lib/config/index'
@@ -86,6 +89,9 @@ interface RequestBody {
   chartId?: string
   conversationId?: string
   messages?: UIMessage[]
+  /** Stack name from ModelStack — replaces the legacy `model` field. */
+  stack?: string
+  /** @deprecated Kept for backward compat with in-flight requests; ignored when `stack` is provided. */
   model?: string
   style?: string
   panel_opt_in?: boolean
@@ -111,8 +117,21 @@ export async function POST(request: Request) {
     return res.badRequest('chartId and messages are required')
   }
 
-  const modelId = isValidModelId(body.model ?? '') ? (body.model as string) : DEFAULT_MODEL_ID
-  const modelMeta = getModelMeta(modelId)!
+  // Resolve synthesis model from stack. Stack takes precedence over the legacy
+  // `model` field. Unknown/missing stacks fall back to the default NIM stack.
+  const VALID_STACKS = Object.keys(STACK_ROUTING) as ModelStack[]
+  const selectedStack: ModelStack = VALID_STACKS.includes(body.stack as ModelStack)
+    ? (body.stack as ModelStack)
+    : DEFAULT_STACK_ID
+  const stackSynthPrimary = STACK_ROUTING[selectedStack].synthesis.primary
+  // Backward-compat: if the legacy `model` field is a known model ID AND no
+  // stack was sent (old client), honour it directly so sessions mid-upgrade
+  // don't silently switch models on the user.
+  const modelId =
+    !body.stack && isValidModelId(body.model ?? '')
+      ? (body.model as string)
+      : stackSynthPrimary
+  const modelMeta = getModelMeta(modelId) ?? getModelMeta(DEFAULT_MODEL_ID)!
   const style: ConsumeStyle = ALLOWED_STYLES.includes(body.style as ConsumeStyle)
     ? (body.style as ConsumeStyle)
     : 'acharya'
@@ -366,16 +385,15 @@ export async function POST(request: Request) {
       },
       conversation_id: finalConversationId,
       panel_opt_in: panelOptIn,
-      onAuditEvent: configService.getFlag('AUDIT_ENABLED')
-        ? createAuditConsumer({
-            query_text: queryText,
-            query_plan: queryPlan,
-            bundle,
-            tool_results: validToolResults,
-            validator_results: bundleValidations,
-            disclosure_tier: audienceTier,
-          })
-        : undefined,
+      // AUDIT_ENABLED retired BHISMA-B1 §6.2: always-on; flag removed from type union.
+      onAuditEvent: createAuditConsumer({
+        query_text: queryText,
+        query_plan: queryPlan,
+        bundle,
+        tool_results: validToolResults,
+        validator_results: bundleValidations,
+        disclosure_tier: audienceTier,
+      }),
     })
 
     result.consumeStream()
@@ -385,10 +403,10 @@ export async function POST(request: Request) {
       generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
       messageMetadata: ({ part }: { part: { type: string } }) => {
         if (part.type === 'start' && isFirstTurn) {
-          return { conversationId: finalConversationId, model: modelId, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
+          return { conversationId: finalConversationId, model: modelId, stack: selectedStack, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
         }
         if (part.type === 'start') {
-          return { model: modelId, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
+          return { model: modelId, stack: selectedStack, style, disclosure_tier: audienceTier, pipeline: 'v2', queryId }
         }
         if (part.type === 'finish') {
           return { methodology_block: methodologyBlockHolder?.value ?? null }
@@ -427,7 +445,7 @@ export async function POST(request: Request) {
 
   const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style)
 
-  console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  model=${modelId}  style=${style}`)
+  console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  stack=${selectedStack}  model=${modelId}  style=${style}`)
 
   // Provider-specific system message handling. Anthropic supports ephemeral
   // prompt caching on the stable prefix; Gemini does not. Attach cache control
@@ -494,10 +512,10 @@ export async function POST(request: Request) {
     generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
     messageMetadata: ({ part }) => {
       if (part.type === 'start' && isFirstTurn) {
-        return { conversationId: finalConversationId, model: modelId }
+        return { conversationId: finalConversationId, model: modelId, stack: selectedStack }
       }
       if (part.type === 'start') {
-        return { model: modelId }
+        return { model: modelId, stack: selectedStack }
       }
       // Emitted after streamText.onFinish has run, so finishReason is set.
       if (part.type === 'finish' && finishReason === 'length') {
