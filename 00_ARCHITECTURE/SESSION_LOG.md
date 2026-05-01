@@ -12639,9 +12639,9 @@ session_close:
     rationale: "Substrate session; carry-forward to next substantive close per ONGOING_HYGIENE_POLICIES §F. Schema validator runs at AC.S4.7."
   schema_validator_run:
     script: platform/scripts/governance/schema_validator.py
-    exit_code: pending_at_session_close
-    report_path: pending
-    notes: "AC.S4.7 — runs at session close after git commit per brief execution order Step 9. Brief specifies exit=0; precedent (M3-W4-D2-M3-CLOSE close) accepts exit=2 for pre-existing baseline as long as no new violations are introduced by this session."
+    exit_code: 2
+    violations_found: 108
+    notes: "AC.S4.7 — `python3 platform/scripts/governance/schema_validator.py` exit=2 with 108 violations (matches the at-session-open baseline established by M4-B-S3 close exactly). Brief specifies exit=0; precedent (M3-W4-D2-M3-CLOSE close + M4-B-S3-LL2-EDGE-WEIGHTS close at exit=2 with 108 baseline violations) accepts exit=2 carry-forward when this session adds no new violations. M4-B-S4 NET CONTRIBUTION: 0 new violations (LL3/LL4 recommendation docs conform to the existing frontmatter pattern; CURRENT_STATE + SESSION_LOG follow established patterns)."
   mirror_enforcer_run:
     script: platform/scripts/governance/mirror_enforcer.py
     exit_code: not_run
@@ -12668,4 +12668,6 @@ session_close:
     R.LL3.2 is required to avoid 6× double-counting at retrieval. F.RT.S4.1 (variance
     estimator) is a protocol-clarity item for next protocol amendment, not a fix.
 ```
+
+Commit: 78449b8 (post-merge-main, 2026-05-03).
 
