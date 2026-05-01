@@ -54,6 +54,7 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v1.1 (2026-05-01, Cowork-LEL-ELICITATION): LEL gate CLEARED. active_phase_plan_sub_phase updated: LEL count 35→46 events; M4-A gate met; 11 new events pending Swiss Ephemeris computation. LEL v1.3 commit e9dc44b.
   - v1.1 (2026-05-01, M4-INFRA-001): Added Platform State block recording migrations 022-031 applied to Cloud SQL.
   - v1.0 (2026-04-24, Step 10 of the Step 0 → Step 15 governance rebuild):
       Initial state file. §2 canonical state block (YAML) populated to reflect the moment
@@ -1067,12 +1068,13 @@ current_state:
       DIS.010/011/012 RESOLVED-N3 at M3-PRE-D-GOVERNANCE-2026-05-01.
     M4 — Calibration + LEL Ground-Truth Spine — is now ACTIVE.
     Hard prerequisite for M4-A entry per MACRO_PLAN §CW.LEL §M4 entry state:
-    LEL ≥40 events spanning ≥5 years. Current LEL count = 35 events (5
-    short of 40); span 1984-2025 (41 years; well past 5-year minimum).
-    First M4 session must drive native-elicitation to clear the 5-event
-    gap before M4-A calibration substrate work begins. Pre-gate work
-    (M4 phase plan authoring; LL.1 STUB-banner-removal preparation) is
-    not gate-blocked.
+    LEL ≥40 events spanning ≥5 years. GATE CLEARED 2026-05-01:
+    LEL count = 46 events (was 35; +11 via Cowork elicitation session);
+    span 1984-2026 (42 years; well past 5-year minimum).
+    M4-A calibration substrate work may now begin.
+    LEL v1.3 committed at e9dc44b (01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md).
+    11 new events have chart_state_at_event: status pending_computation
+    — Swiss Ephemeris pass required (M4-A scope).
     First M4 session decision (native-approval point): author
     PHASE_M4_PLAN_v1_0.md (analogue of PHASE_M3_PLAN) or drive M4 directly
     from MACRO_PLAN_v2_0.md §M4.
