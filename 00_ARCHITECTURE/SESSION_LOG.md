@@ -12886,3 +12886,297 @@ session_close:
 
 Commit: b41acde (post-merge-main, 2026-05-03).
 
+---
+
+## 2026-05-02 — M4-B-P4-S6-PREDRAFT — M4-B Sub-Phase Close Pre-Draft (parallel to M4-B-S5)
+
+**M4-B-P4-S6-PREDRAFT** | 2026-05-02 | CLOSED
+
+```yaml
+session_open:
+  session_id: M4-B-P4-S6-PREDRAFT
+  cowork_thread_name: "M4-B-P4 — S6 Close Pre-Draft (parallel to S5)"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M4.B.P4
+  predecessor_session: M4-B-S4-LL3-DOMAIN-COHERENCE
+  opened_at: "2026-05-02T22:00:00+05:30"
+  scope_summary: >
+    Parallel-slot governance-aside session running alongside M4-B-S5 (NAP.M4.5
+    native pass_2 trigger) and M4-B-P3-MIRROR-MANIFEST. Authors a structural
+    pre-draft of the M4-B sub-phase sealing artifact (`M4_B_CLOSE_v1_0.md`) so
+    that the formal close session (M4-B-S6) can read this skeleton and resolve
+    [PENDING-S5] / [PENDING-S6] tokens against the actual S5 outcome rather than
+    authoring from scratch. All S5-dependent fields are held as literal
+    [PENDING-S5] tokens with one-line descriptions per the brief hard constraint.
+    Document status: DRAFT (sealed at S6).
+  may_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md  # NEW
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md
+    - 06_LEARNING_LAYER/OBSERVATIONS/**
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - platform/**
+    - .geminirules
+    - .gemini/project_state.md
+  red_team_due: false  # governance-aside class; no IS.8(a) cadence-fire eligible per ONGOING_HYGIENE_POLICIES §G
+```
+
+Parallel-slot governance-aside session executing the inline M4-B-P4 brief: pre-draft
+the M4-B sub-phase sealing artifact as a structural skeleton with all S5-dependent
+fields held as `[PENDING-S5]` tokens.
+
+**Cowork thread:** `M4-B-P4 — S6 Close Pre-Draft (parallel to S5)`.
+
+**Predecessor:** M4-B-S4-LL3-DOMAIN-COHERENCE (2026-05-02, CLOSED) — LL.3 + LL.4
+recommendation documents authored; in-session red-team PASS_WITH_FINDINGS; counter
+reset 3→0; CURRENT_STATE bumped v1.9→v2.0 as clean-marker post all parallel-session
+merges.
+
+**Concurrent sessions at write time.** This session ran alongside two others:
+
+- **M4-B-S5-NAP-M45-EXECUTE** (substantive — NAP.M4.5 native pass_2 trigger). At
+  read time during my session it had landed at CURRENT_STATE v2.3 with verdict
+  30/30 approved. Its SESSION_LOG entry was not yet appended at my read.
+- **M4-B-P3-MIRROR-MANIFEST** (governance-aside — MP.1+MP.2 mirror sync +
+  CAPABILITY_MANIFEST 13-entry registration). Landed at v2.2 (commit b41acde).
+
+The brief AC.P4.3 prescribed `S5→v2.1, P3→v2.2, this→v2.3`. The actual landing
+order in flight was: P3 took v2.2 first; S5 then took v2.3 (per its own
+version_collision_note since v2.1 reservation was not picked up by anyone).
+v2.1 is now permanently vacant — auditable gap, not silent skip. This session
+adapts to **v2.4** per the brief hard_constraint operational rule "check the file
+before writing; take whatever version is current + 1." Documented in CURRENT_STATE
+v2.4 changelog block.
+
+### Acceptance criteria (from M4-B-P4-S6-PREDRAFT brief)
+
+- **AC.P4.1 PASS** — All 8 input files read before drafting:
+  (a) `ll1_shadow_weights_v1_0.json` — summary block reproduced (380 observed
+  signals; 30 promotion-eligible / 285 insufficient / 52 low-mr / 13 hi-var).
+  (b) `ll2_edge_weights_v1_0.json` — summary block reproduced (9,922 edges;
+  HIGH=0/MED=8/LOW=9,914/ZERO=0; cross_domain_count=0). (c) `LL3_DOMAIN_COHERENCE_v1_0.md`
+  — §5 recommendations roster verified (R.LL3.1–.7; 3 fix-before-prod + 4
+  investigate-in-M5). (d) `LL4_PREDICTION_PRIOR_v1_0.md` — §5 qualitative tier
+  recommendation roster verified (STRONG / MODERATE / WEAK; date-precision global
+  modifier). (e) `LL2_STABILITY_GATE_v1_0.md` — gate decision read at session open:
+  CONDITIONAL_PASS confirmed (the gate has subsequently been re-evaluated to
+  FULL_PASS by concurrent S5; my pre-draft preserves the CONDITIONAL_PASS state
+  with [PENDING-S5] flip placeholder per brief). (f) `M4_A_CLOSE_v1_0.md` — known
+  residuals list inventoried (KR.M4A.RT.LOW.1; KR.M4A.CLOSE.1 [discharged at S3];
+  KR.M4A.CLOSE.2 [carries to NAP.M4.5 native acceptance]; etc.). (g)
+  `SHADOW_MODE_PROTOCOL_v1_0.md §3` — promotion criteria binding throughout M4-B
+  per NAP.M4.4 APPROVED. (h) `SESSION_LOG.md` — all M4-B session entries (S1, S2,
+  P1, P2, S3, S4, P3) reviewed.
+
+- **AC.P4.2 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md`
+  v1.0 DRAFT NEW. Nine-section sub-phase close artifact pre-draft with frontmatter
+  `status: DRAFT`. **§1** scope (mechanism scope LL.1–LL.4; sub-phase rounds S1–S6
+  + Px parallel slots; out-of-scope verification — L1 + 025 + platform + migrations
+  all untouched). **§2** acceptance criteria ledger (PHASE_M4_PLAN §3.2 AC.M4B.1–10
+  = 9 PASS / 1 PASS-with-PENDING-S5 = AC.M4B.8 pass_2 clause; per-session brief ACs
+  PASS for S1–S4 + P1–P2; S5 ACs marked [PENDING-S5]; S6 close-checklist ACs marked
+  [PENDING-S6]). **§3** deliverables inventory (12 substantive files + 4
+  governance-state files + 7 file scopes verified untouched). **§4** NAP decisions
+  (NAP.M4.4 RESOLVED at M4-A close, binding throughout M4-B; NAP.M4.5 [PENDING-S5];
+  NAP.M4.6 + NAP.M4.7 cross-referenced as still-open; NAP.M4.1/2/3 RESOLVED at M4-A
+  close cross-referenced). **§5** Learning Layer status: LL.1 [PENDING-S5 —
+  promotion count + gate status]; LL.2 CONDITIONAL_PASS [PENDING-S5 — gate flip];
+  LL.3 COMPLETE (recommendation document; 7 findings); LL.4 COMPLETE
+  (recommendation document; [PENDING-S5 machine-readable priors file if S5 brief
+  expands]). **§6** known residuals (11 from M4-B substrate including KR.M4A.RT.LOW.1
+  + F.RT.S4.1 [PENDING-S5 closure track via variance_estimator field] + F.RT.S4.2
+  + F.RT.S4.3 + GAP.M4A.04 PARTIAL_CLOSE + GAP.TRAVEL_MISC.01 speculative + 4
+  R.LL2GATE.* / R.LL2DESIGN.1 + domain-stratified-corpus finding; 2 [PENDING-S5]
+  items = Gemini reachability + LL.2 gate flip; 14 inherited = NAP.M4.6/7 +
+  KR.M3A.JH-EXPORT + GAP.M4A.01-06 deferred + DIS.010/011/012 + Sthana/Drik ECR +
+  Narayana ECR + KR.M3A2.1 + AC.M3A.5 + acharya review + missing MSR IDs + UCN
+  citations + TS test fixtures + KR.W9.1/2 + KR.M4A.CLOSE.2; total 27 items).
+  **§7** red-team summary (IS.8(a) cadence trail in M4-B; FIRES at S4 PASS_WITH_FINDINGS
+  with 0 HIGH/CRITICAL/MEDIUM, counter reset 3→0; IS.8(b) sub-phase-close
+  [PENDING-S6 — author REDTEAM_M4B_v1_0.md or accept M4-B-S4 in-session as
+  discharge per ONGOING_HYGIENE_POLICIES §G]). **§8** approval (M4-B sub-phase
+  close = internal AC gate, no NAP; surrogate-disclosure ledger preserved; native
+  no-hold default carries; if Gemini becomes reachable at S5/S6 addendum target
+  per protocol §K.3). **§9** changelog (v1.0 DRAFT). All 9 sections substantively
+  populated; every S5-dependent field carries `[PENDING-S5]` literal token with
+  one-line description.
+
+- **AC.P4.3 PASS (with version coordination shift)** — `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`
+  frontmatter version 2.3 → 2.4 (brief prescribed v2.3 but S5 took v2.3 first;
+  this session adapts to v2.4 per the hard_constraint operational rule "take
+  whatever version is current + 1"). Changelog v2.4 entry added at top of
+  `changelog:` block with full version_coordination prose. New field
+  `predraft_available: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md`
+  added to §2 canonical state block (with companion fields predraft_status: DRAFT,
+  predraft_authored_by: M4-B-P4-S6-PREDRAFT, predraft_authored_on: 2026-05-02,
+  predraft_consumer: M4-B-S6) per brief explicit instruction. `next_session_objective`
+  pointer left UNCHANGED — already correctly set by S5 at v2.3 to point to M4-B-S6
+  (S5 owns that pointer per brief). All other §2 canonical state pointers
+  (`last_session_id`, `active_phase_plan_sub_phase`, `red_team_counter`,
+  `file_updated_at`, `file_updated_by_session`) left UNCHANGED — held at the
+  values set by chronologically-most-recent prior session (M4-B-S5-NAP-M45-EXECUTE
+  at v2.3) per parallel-coordination convention.
+
+- **AC.P4.4 PASS** — SESSION_LOG entry (this entry) appended; commit hash to be
+  stamped post-commit per ONGOING_HYGIENE_POLICIES §F (chore commit pattern
+  matching prior M4-B sessions).
+
+### Discrepancy surfaced at session-open (informational)
+
+- **On-disk `CLAUDECODE_BRIEF.md` mismatch (carries from M4-B-S4 close).** The
+  on-disk brief at project root carries `status: PENDING` for `session: W2-UQE-ACTIVATE`
+  (LLM-first planner activation — a separate platform-side workstream). The session
+  brief executed in this session is the inline `M4-B-P4-S6-PREDRAFT` brief from
+  the user prompt. The two briefs are scope-disjoint: this session's `must_not_touch`
+  excludes `platform/**`, and W2-UQE-ACTIVATE's `may_touch` is platform-side only.
+  No conflict. The brief mismatch is a pre-existing M4-B carry-forward; W2 platform
+  workstream uses the on-disk brief, M4-B uses inline briefs supplied at session open.
+
+### Concurrent-session interaction at session open
+
+- **CURRENT_STATE was at v2.0 at first read.** I drafted M4_B_CLOSE_v1_0.md against
+  the v2.0 state (which still showed LL.2 = CONDITIONAL_PASS and NAP.M4.5 = pending).
+- **CURRENT_STATE was at v2.3 at second read** (when I attempted to bump frontmatter).
+  Two parallel sessions had landed in flight: M4-B-P3-MIRROR-MANIFEST at v2.2 and
+  M4-B-S5-NAP-M45-EXECUTE at v2.3. S5's v2.3 changelog records 30/30 approved at
+  NAP.M4.5; LL.1 production register flag flipped true; LL2_STABILITY_GATE re-evaluated
+  to FULL_PASS; F.RT.S4.1 closed via variance_estimator field; Gemini reachability
+  check NOT_REACHABLE.
+- **My pre-draft preserves [PENDING-S5] tokens despite S5 having closed.** Per the
+  brief hard constraint "Do NOT attempt to pre-decide S5's NAP.M4.5 outcome. Every
+  S5-dependent field gets [PENDING-S5] with a one-line description of what it is
+  waiting for", this is the intended behavior even though S5's outcome is now
+  factually known. The pre-draft is a structural skeleton; S6 reads the actual S5
+  outcome from CURRENT_STATE + shadow/production files + SESSION_LOG and resolves
+  the [PENDING-S5] tokens by sealing the document at S6 close (frontmatter
+  `status: DRAFT` → `CURRENT`).
+
+### Out-of-scope verification
+
+Strict scope compliance verified per brief must_not_touch declaration. Did NOT touch:
+`06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**` (LL.1 production
+register and LL.2 shadow file owned by S5/S3); `LL1_TWO_PASS_APPROVAL_v1_0.md` (owned
+by S2/S5); `LL2_STABILITY_GATE_v1_0.md` (owned by S3/S5); `06_LEARNING_LAYER/OBSERVATIONS/**`
+(read-only LEL + rubric + msr_domain_buckets); `01_FACTS_LAYER/**` (FORENSIC + LEL
+frozen); `025_HOLISTIC_SYNTHESIS/**` (read-only MSR for context only — and even then
+only via NAP.M4.5 dossier indirection); `platform/**`; `.geminirules`;
+`.gemini/project_state.md` (MP.1/MP.2 carry-forward to S6 close per existing convention).
+
+```yaml
+session_close:
+  session_id: M4-B-P4-S6-PREDRAFT
+  closed_at: "2026-05-02T22:30:00+05:30"
+  current_state_updated: true
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md
+      mutation_type: created
+      justification: "AC.P4.2 — M4-B sub-phase close artifact pre-draft (DRAFT); 9 sections per brief schema; [PENDING-S5] tokens for S5-dependent fields"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.P4.3 — frontmatter version bump 2.3→2.4 (per hard_constraint operational rule; brief-prescribed v2.3 was taken by S5 first); changelog v2.4 entry added; predraft_available field added to §2"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "AC.P4.4 — this entry appended"
+      within_declared_scope: true
+  registry_updates_made:
+    canonical_artifacts:
+      - canonical_id: CURRENT_STATE
+        change: changelog_entry_added_v2_4
+        details: "frontmatter version 2.3 → 2.4 (version coordination shift documented); new §2 fields predraft_available + predraft_status + predraft_authored_by + predraft_authored_on + predraft_consumer; canonical state pointers UNCHANGED (last_session_id remains M4-B-S5-NAP-M45-EXECUTE at v2.3; next_session_objective remains M4-B-S6 close)"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Governance-aside class — pre-draft skeleton authoring. CLAUDE.md unchanged; .geminirules in must_not_touch."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "MP.2 Claude-side touched (CURRENT_STATE v2.4 frontmatter + changelog + predraft_available field); Gemini-side .gemini/project_state.md is in must_not_touch this session — governance-aside scope. Carries forward to next substantive close (M4-B-S6) per existing convention. Note: P3 (M4-B-P3-MIRROR-MANIFEST) propagated MP.1+MP.2 to adapted parity for the S2→S4 cumulative delta at v2.2; the v2.4 delta this session adds is a single pre-draft pointer + version bump and does not require a new MP.2 propagation cycle."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP v2.0 frozen; no cascade"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged; no cascade"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "FILE_REGISTRY / CAPABILITY_MANIFEST unchanged; no cascade"
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"
+  red_team_pass:
+    due: false
+    performed: false
+    verdict: not_applicable
+    rationale: "Governance-aside class — pre-draft skeleton authoring; per ONGOING_HYGIENE_POLICIES §G governance-aside sessions do not increment red_team_counter and are not eligible for IS.8(a) cadence-fire. Counter unchanged at 1 (set by predecessor M4-B-S5-NAP-M45-EXECUTE)."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Governance-aside session; carry-forward to next substantive close (M4-B-S6) per ONGOING_HYGIENE_POLICIES §F."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: not_run
+    rationale: "Governance-aside session; M4-B-P4 deliverable is a pre-draft DRAFT artifact whose frontmatter conforms to the existing pattern. Schema validator runs at next substantive close that touches platform/**-adjacent surfaces."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "No Claude-side governance-mirror surface touched this session in must_not_touch (.geminirules / .gemini/project_state.md); mirror sync was discharged at concurrent M4-B-P3-MIRROR-MANIFEST."
+  step_ledger_updated: n/a
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Governance-aside pre-draft session; no portal/build surface touched."
+  close_criteria_met: true
+  unblocks: "M4-B-S6 (M4-B sub-phase close — reads M4_B_CLOSE_v1_0.md DRAFT and resolves [PENDING-S5]/[PENDING-S6] tokens; conducts IS.8(b) sub-phase-close red-team or accepts M4-B-S4 in-session as discharge; flips status DRAFT → CURRENT; CURRENT_STATE flip)"
+  handoff_notes: >
+    M4_B_CLOSE_v1_0.md DRAFT is now in place as the structural skeleton for M4-B
+    sub-phase close. S6 reads CURRENT_STATE §2 `predraft_available` field, opens
+    the named file, resolves every literal `[PENDING-S5]` token against the actual
+    S5 outcome (visible at CURRENT_STATE v2.3 changelog: NAP.M4.5 = 30/30 approved;
+    LL.1 production flag = true; LL2_STABILITY_GATE = FULL_PASS; LL.4 priors
+    machine-readable JSON landed; Gemini NOT_REACHABLE; F.RT.S4.1 closed via
+    variance_estimator field), then resolves every `[PENDING-S6]` token by
+    conducting (or accepting-as-discharged) the IS.8(b) sub-phase-close red-team,
+    flips frontmatter status DRAFT → CURRENT, and rotates CURRENT_STATE pointers
+    to "M4-B CLOSED [date]". Once sealed, M4-C may open per `PHASE_M4_PLAN §3.3`
+    entry-gate clause (LL.1 weights stable + N-threshold met — both satisfied
+    post-NAP.M4.5 PASS).
+```
+
+Commit: [PENDING — to be stamped post-commit]
+
