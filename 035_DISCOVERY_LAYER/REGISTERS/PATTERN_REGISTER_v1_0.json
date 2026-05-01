@@ -950,5 +950,8 @@
       "re_validation_status": "not_required",
       "re_validation_event_id": null
     }
-  ]
+  ],
+  "status": "SUPERSEDED",
+  "successor": "PATTERN_REGISTER_v1_1",
+  "superseded_at": "2026-04-30T00:00:00+00:00"
 }

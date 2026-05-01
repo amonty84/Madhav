@@ -1,6 +1,6 @@
 """
 Tests for pipeline.extractors.cgm_extractor.
-Covers AC.1–AC.4 from CLAUDECODE_BRIEF_RETRIEVAL_11C_a.
+Updated for KARN-W2-R3-CGM-FULL-EDGES: covers all 15 edge types + AC.5/AC.6/AC.7 criteria.
 """
 from __future__ import annotations
 
@@ -8,6 +8,25 @@ import pytest
 
 # Repo root is two levels up from this file: tests/extractors/../../..
 REPO_ROOT = str(__import__("pathlib").Path(__file__).resolve().parents[4])
+
+# All 15 edge types required by brief AC.7
+ALL_EDGE_TYPES = [
+    "RULES_OVER",
+    "DISPOSES",
+    "NAKSHATRA_OF",
+    "KARAKA_OF",
+    "CONJUNCT",
+    "DASHA_GIVES",
+    "ASPECTS",
+    "AFFLICTS",
+    "SUPPORTS",
+    "ARUDHA_OF",
+    "CO_OCCURS",
+    "DUAL_SYSTEM_DIVERGENCE",
+    "SEC_REFERENCES",
+    "RESONATES_WITH",
+    "CONTRADICTS_WITH",
+]
 
 _AC4_TARGETS = [
     "UCN.SEC.II.2", "UCN.SEC.III.4",
@@ -95,7 +114,7 @@ def test_extract_cgm_nodes_collision_raises():
 
 
 def test_extract_cgm_edges_valid_count():
-    """AC.6: with merged node_ids, valid edges ≥122 and orphan edges ≤4."""
+    """AC.6: with merged node_ids, valid edges ≥320 and orphan edges = 0."""
     from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
 
     nodes = extract_cgm_nodes(REPO_ROOT)
@@ -105,5 +124,89 @@ def test_extract_cgm_edges_valid_count():
     valid = sum(1 for e in edges if e["status"] == "valid")
     orphan = sum(1 for e in edges if e["status"] == "orphan")
 
-    assert valid >= 122, f"Expected ≥122 valid edges, got {valid}"
-    assert orphan <= 4, f"Expected ≤4 orphan edges, got {orphan}"
+    assert valid >= 320, f"Expected ≥320 valid edges, got {valid}"
+    assert orphan == 0, f"Expected 0 orphan edges, got {orphan}"
+
+
+def test_extract_cgm_edges_all_types_present():
+    """AC.7: all 15 edge_types must appear with non-zero counts."""
+    from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
+
+    nodes = extract_cgm_nodes(REPO_ROOT)
+    node_ids = {n["node_id"] for n in nodes}
+    edges = extract_cgm_edges(REPO_ROOT, node_ids)
+
+    present_types = {e["edge_type"] for e in edges if e["status"] == "valid"}
+    missing = [t for t in ALL_EDGE_TYPES if t not in present_types]
+    assert missing == [], f"Missing edge types: {missing}"
+
+
+def test_extract_cgm_edges_per_type_counts():
+    """AC.7: per-type counts within reasonable bounds."""
+    from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
+    from collections import Counter
+
+    nodes = extract_cgm_nodes(REPO_ROOT)
+    node_ids = {n["node_id"] for n in nodes}
+    edges = extract_cgm_edges(REPO_ROOT, node_ids)
+
+    counts = Counter(e["edge_type"] for e in edges if e["status"] == "valid")
+
+    # Minimum counts per type (conservative lower bounds)
+    min_counts = {
+        "RULES_OVER": 10,
+        "DISPOSES": 10,
+        "NAKSHATRA_OF": 10,
+        "KARAKA_OF": 15,
+        "CONJUNCT": 4,
+        "DASHA_GIVES": 20,
+        "ASPECTS": 15,
+        "AFFLICTS": 4,
+        "SUPPORTS": 2,
+        "ARUDHA_OF": 10,
+        "CO_OCCURS": 50,
+        "DUAL_SYSTEM_DIVERGENCE": 3,
+        "SEC_REFERENCES": 5,
+        "RESONATES_WITH": 10,
+        "CONTRADICTS_WITH": 3,
+    }
+    for edge_type, min_count in min_counts.items():
+        actual = counts.get(edge_type, 0)
+        assert actual >= min_count, (
+            f"{edge_type}: expected ≥{min_count}, got {actual}"
+        )
+
+
+def test_extract_cgm_edges_no_orphans():
+    """AC.5: orphan count must be 0 after extracting with full merged node_ids."""
+    from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
+
+    nodes = extract_cgm_nodes(REPO_ROOT)
+    node_ids = {n["node_id"] for n in nodes}
+    edges = extract_cgm_edges(REPO_ROOT, node_ids)
+
+    orphans = [e for e in edges if e["status"] == "orphan"]
+    assert orphans == [], (
+        f"Expected 0 orphans, got {len(orphans)}: "
+        + str([(e["edge_id"], e.get("orphan_reason")) for e in orphans[:5]])
+    )
+
+
+def test_extract_cgm_edges_required_fields():
+    """AC.4: every valid edge has required fields populated."""
+    from pipeline.extractors.cgm_extractor import extract_cgm_nodes, extract_cgm_edges
+
+    nodes = extract_cgm_nodes(REPO_ROOT)
+    node_ids = {n["node_id"] for n in nodes}
+    edges = extract_cgm_edges(REPO_ROOT, node_ids)
+
+    required = ["edge_id", "source_node_id", "target_node_id", "edge_type", "source_section"]
+    for e in edges:
+        if e.get("status") != "valid":
+            continue
+        for field in required:
+            assert e.get(field), f"Edge {e.get('edge_id', '?')} missing {field}"
+        # No self-loops
+        assert e["source_node_id"] != e["target_node_id"], (
+            f"Self-loop detected: {e['edge_id']}"
+        )

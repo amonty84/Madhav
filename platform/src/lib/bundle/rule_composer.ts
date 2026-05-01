@@ -119,21 +119,11 @@ function enforceTokenBudget(
   _manifest: ManifestData,
   maxTokens: number,
 ): Array<{ asset: AssetEntry; role: BundleEntryRole }> {
-  const getTokens = (e: { asset: AssetEntry }) =>
-    typeof e.asset.cost_weight === 'number'
-      ? // if manifest carries a token_count use it; otherwise 0
-        0
-      : 0
-
-  // Compute actual token counts from manifest entries that carry them
-  const tokenFor = (e: { asset: AssetEntry }): number => {
-    // The manifest schema does not currently include a token_count field on
-    // AssetEntry; when Phase 2 populates it, this will pick it up.  For now
-    // all counts default to 0 and degradation is a no-op unless the caller
-    // supplies a very small max_bundle_tokens in tests.
-    const raw = (e.asset as unknown as Record<string, unknown>)['token_count']
-    return typeof raw === 'number' ? raw : 0
-  }
+  // BHISMA §4.9 / GAP.A.6 — AssetEntry now carries an optional `token_count`
+  // populated by CAPABILITY_MANIFEST.json. Missing values default to 0, the
+  // same as before this field existed, so unmeasured entries can't trigger
+  // a drop and the function remains a no-op when no entry has a token_count.
+  const tokenFor = (e: { asset: AssetEntry }): number => e.asset.token_count ?? 0
 
   const total = () => entries.reduce((s, e) => s + tokenFor(e), 0)
 
@@ -173,10 +163,7 @@ function normaliseRole(role: string): BundleEntryRole {
 }
 
 function toBundleEntry(asset: AssetEntry, role: BundleEntryRole): BundleEntry {
-  const tokenCount: number =
-    typeof (asset as unknown as Record<string, unknown>)['token_count'] === 'number'
-      ? ((asset as unknown as Record<string, unknown>)['token_count'] as number)
-      : 0
+  const tokenCount: number = asset.token_count ?? 0
 
   const version = asset.version ?? '1.0'
 

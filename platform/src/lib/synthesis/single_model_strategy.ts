@@ -22,8 +22,9 @@ import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, isReasoningModel } from '@/lib/models/resolver'
 import { getModelMeta, supports } from '@/lib/models/registry'
+import { stripThinkBlocks, extractReasoningTrace } from './think_block_filter'
 import { getDefaultRegistry } from '@/lib/prompts/index'
 import { renderTemplate } from '@/lib/prompts/types'
 import { getTool } from '@/lib/retrieve/index'
@@ -35,6 +36,7 @@ import { runCheckpoint4_5 } from '@/lib/checkpoints/checkpoint_4_5'
 import { runCheckpoint5_5 } from '@/lib/checkpoints/checkpoint_5_5'
 import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
+import { countSignalCitations } from './citation_check'
 
 import type {
   SynthesisRequest,
@@ -67,6 +69,9 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     } = request
 
     const started_at = new Date().toISOString()
+    // BHISMA §4.6 — wall-clock start so the synthesis_done step carries
+    // real latency, not 0. Captured at synthesize() entry; onFinish reads it.
+    const synthesisStartMs = Date.now()
 
     // ── Hook 1: Checkpoint 4.5 (post-resolve, pre-retrieve) ──────────────────
     // No-op when CHECKPOINT_4_5_ENABLED=false (flag-OFF = skipped result returned).
@@ -123,7 +128,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         .map(r => `[chunk:${r.signal_id ?? 'unknown'}]\n${r.content}`)
         .join('\n\n---\n\n')
       const truncated = chunks.length > maxChars ? chunks.slice(0, maxChars) + '\n[...truncated]' : chunks
-      renderedPrompt += `\n\n<CHART_CONTEXT_BLOCK source="vector_search">\n${truncated}\n</CHART_CONTEXT_BLOCK>`
+      renderedPrompt += `\n\n<CHART_CONTEXT_BLOCK source="vector_search\n${truncated}\n</CHART_CONTEXT_BLOCK>`
     }
 
     // ── FUB-3: Append pre-fetched tool_results (non-vector_search) ─────────────
@@ -220,29 +225,43 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       toolsForModel = Object.keys(wrappedTools).length > 0 ? wrappedTools : undefined
     }
 
-    const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
-      ? {
-          role: 'system',
-          content: renderedPrompt,
-          providerOptions: {
-            anthropic: { cacheControl: { type: 'ephemeral' } },
-          },
-        }
-      : {
-          role: 'system',
-          content: renderedPrompt,
-        }
+    // BHISMA-B1 §3.2 / ADR-2 — reasoning models (o1, o3, o4-mini) reject the
+    // system role and ignore temperature. Fold the rendered prompt into the
+    // first user message and skip the dedicated system entry entirely.
+    const useReasoningConvention = isReasoningModel(selected_model_id)
 
     const historyMessages: ModelMessage[] = conversation_history.map(m => ({
       role: m.role,
       content: m.content,
     }))
 
-    const modelMessages: ModelMessage[] = [
-      systemMessage,
-      ...historyMessages,
-      { role: 'user', content: query },
-    ]
+    let modelMessages: ModelMessage[]
+    if (useReasoningConvention) {
+      const foldedUser: ModelMessage = {
+        role: 'user',
+        content: `${renderedPrompt}\n\n---\n\nUser query:\n${query}`,
+      }
+      modelMessages = [...historyMessages, foldedUser]
+    } else {
+      const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
+        ? {
+            role: 'system',
+            content: renderedPrompt,
+            providerOptions: {
+              anthropic: { cacheControl: { type: 'ephemeral' } },
+            },
+          }
+        : {
+            role: 'system',
+            content: renderedPrompt,
+          }
+
+      modelMessages = [
+        systemMessage,
+        ...historyMessages,
+        { role: 'user', content: query },
+      ]
+    }
 
     const modelMeta = getModelMeta(selected_model_id)
 
@@ -273,9 +292,19 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         usage?: { inputTokens?: number; outputTokens?: number }
         text?: string
       }) => {
+        // BHISMA-B1 §3.4 — defensive: even with extractReasoningMiddleware,
+        // strip any stray <think>…</think> from the final text before downstream
+        // use so neither the audit, methodology-block extractor, nor the trace
+        // payload preview accidentally captures reasoning content.
+        const isR1 = selected_model_id === 'deepseek-reasoner'
+        const rawText = text ?? ''
+        const { reasoning: r1Reasoning, answer: cleanText } = isR1
+          ? extractReasoningTrace(rawText)
+          : { reasoning: '', answer: stripThinkBlocks(rawText) }
+
         // Synchronous extraction — before any await — so the value is
         // available when the 'finish' SSE part fires in the route handler.
-        const mbMatch = (text ?? '').match(/^```marsys_methodology_block\n([\s\S]*?)\n```/m)
+        const mbMatch = cleanText.match(/^```marsys_methodology_block\n([\s\S]*?)\n```/m)
         methodologyBlockHolder.value = mbMatch ? mbMatch[1].trim() : null
 
         // ── Trace: synthesis done ─────────────────────────────────────────────
@@ -294,16 +323,22 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
               step_name: 'synthesis',
               step_type: 'llm',
               status: 'done',
-              started_at: new Date().toISOString(),
+              started_at: new Date(synthesisStartMs).toISOString(),
               completed_at: new Date().toISOString(),
-              latency_ms: 0,             // wall-clock tracked by consume/route
+              latency_ms: Date.now() - synthesisStartMs,
               data_summary: {
                 model: selected_model_id,
                 input_tokens: usage?.inputTokens ?? 0,
                 output_tokens: usage?.outputTokens ?? 0,
+                // BHISMA §4.6 + §4.7 — citation count on the synthesis output
+                // so the trace panel can flag low-citation responses per query
+                // class. Threshold + meets-flag derived on the consumer side
+                // from query_class via citationThresholdForClass / hasMinimumCitations.
+                citation_count: countSignalCitations(cleanText),
               },
               payload: {
-                prompt_preview: (text ?? '').slice(0, 500),
+                prompt_preview: cleanText.slice(0, 500),
+                ...(isR1 && r1Reasoning ? { reasoning_trace: r1Reasoning.slice(0, 4000) } : {}),
               },
             },
           })
@@ -329,7 +364,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         if (getFlag('CHECKPOINT_8_5_ENABLED')) {
           try {
             c8_5Result = await runCheckpoint8_5({
-              synthesized_text: text ?? '',
+              synthesized_text: cleanText,
               query_class: query_plan.query_class,
               validator_results: [],
             })
@@ -351,7 +386,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           finished_at: new Date().toISOString(),
           input_tokens: usage?.inputTokens ?? 0,
           output_tokens: usage?.outputTokens ?? 0,
-          final_output: text ?? '',
+          final_output: cleanText,
           // Phase 6: checkpoint payloads (undefined when flags OFF)
           checkpoints: (c4_5Result || c5_5Result || c8_5Result)
             ? { c4_5: c4_5Result, c5_5: c5_5Result, c8_5: c8_5Result }

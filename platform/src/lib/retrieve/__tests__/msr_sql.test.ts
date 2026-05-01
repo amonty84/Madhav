@@ -164,4 +164,68 @@ describe('msr_sql tool', () => {
     const callArgs = mockQuery.mock.calls[0]
     expect(callArgs[1][0]).toBe('abhisek_mohanty')
   })
+
+  // AC.11 — new filter params tests
+
+  it('AC.11.1: signal_type filter passed as $6 param', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    await tool.retrieve(basePlan, { signal_type: ['yoga', 'aspect'] })
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][5]).toEqual(['yoga', 'aspect'])
+  })
+
+  it('AC.11.2: temporal_activation filter passed as $7 param', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    await tool.retrieve(basePlan, { temporal_activation: ['natal-permanent'] })
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][6]).toEqual(['natal-permanent'])
+  })
+
+  it('AC.11.3: valence filter passed as $8 param', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    await tool.retrieve(basePlan, { valence: ['benefic', 'mixed'] })
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][7]).toEqual(['benefic', 'mixed'])
+  })
+
+  it('AC.11.4: backward compat — no new filters → $6-$9 all null', async () => {
+    mockQuery.mockResolvedValue({ rows: [baseSignal], rowCount: 1 })
+
+    await tool.retrieve(basePlan)
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][5]).toBeNull()
+    expect(callArgs[1][6]).toBeNull()
+    expect(callArgs[1][7]).toBeNull()
+    expect(callArgs[1][8]).toBeNull()
+  })
+
+  it('AC.11.5: entities_involved_any filter passed as $9 param', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    await tool.retrieve(basePlan, { entities_involved_any: ['PLN.SATURN', 'HSE.7'] })
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][8]).toEqual(['PLN.SATURN', 'HSE.7'])
+  })
+
+  it('AC.11.6: filter values are passed as parameterized array (SQL injection safe)', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    const maliciousInput = ["'; DROP TABLE msr_signals; --"]
+    await tool.retrieve(basePlan, { signal_type: maliciousInput })
+
+    const callArgs = mockQuery.mock.calls[0]
+    // Value is passed as a parameter array, never interpolated into the SQL string
+    expect(callArgs[1][5]).toEqual(maliciousInput)
+    // The SQL string itself should not contain the malicious value
+    const sqlString = callArgs[0] as string
+    expect(sqlString).not.toContain('DROP TABLE')
+  })
 })

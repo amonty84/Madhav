@@ -1,6 +1,11 @@
 /**
  * MARSYS-JIS Query Trace Panel — shared types
- * schema_version: 1.0
+ * schema_version: 1.1
+ *
+ * v1.1 (BHISMA-B3, 2026-05-01): additive extensions for the Trace Command
+ * Center. New fields are all OPTIONAL; existing emit sites continue to satisfy
+ * the schema. Stream B2 will populate the new fields on context_assembly +
+ * synthesis_done + plan emit; B3 panels guard every read with null checks.
  */
 
 export type StepType = 'deterministic' | 'llm' | 'sql' | 'vector' | 'gcs'
@@ -13,6 +18,48 @@ export interface TraceChunkItem {
   layer: 'L1' | 'L2.5' | 'system'
   token_estimate: number
   text: string                // full raw text
+  /** Optional similarity / relevance score, when the source tool emits one. */
+  score?: number
+  /** Optional doc_type for vector_search results (l1_fact|ucn_section|msr_signal|cdlm_cell|domain_report|rm_element). */
+  doc_type?: string
+}
+
+/**
+ * Per-tool plan call, produced by the planner step. Mirrors
+ * BHISMA_PLAN §4.2 ToolCallSpec without coupling to the router module.
+ */
+export interface TraceToolCallSpec {
+  tool_name: string
+  params: Record<string, unknown>
+  priority: 1 | 2 | 3
+  reason?: string
+}
+
+/**
+ * Compact mirror of QueryPlan / RichQueryPlan attached to the planning step's
+ * payload. Defined locally to avoid pulling router types into trace types
+ * (router is must_not_touch in B3 scope; trace stays a pure consumer).
+ */
+export interface TraceQueryPlan {
+  query_plan_id?: string
+  query_class?: string
+  domains?: string[]
+  tools_authorized?: string[]
+  forward_looking?: boolean
+  dasha_context_required?: boolean
+  graph_seed_hints?: string[]
+  planets?: string[]
+  houses?: number[]
+  time_window?: { start: string; end: string }
+  expected_output_shape?: string
+  router_confidence?: number
+  // RichQueryPlan additions (BHISMA-B2, may be absent pre-B2)
+  query_intent_summary?: string
+  planning_rationale?: string
+  synthesis_guidance?: string
+  tool_calls?: TraceToolCallSpec[]
+  planning_model_id?: string
+  planning_latency_ms?: number
 }
 
 /** Lightweight statistics stored in data_summary column */
@@ -35,6 +82,27 @@ export interface TraceDataSummary {
   // gcs
   source_path?: string
   bytes?: number
+  // plan (per_tool_planner / unified planner)
+  planner_active?: boolean
+  tools_refined?: number
+  tool_count?: number
+  // ── BHISMA-B3 additive (all optional) ──────────────────────────────────────
+  /** synthesis_done: number of SIG.MSR.NNN citations detected in response. */
+  citation_count?: number
+  /** synthesis_done: did the response match expected_output_shape (heuristic). */
+  output_shape_compliant?: boolean
+  /** plan: query_class promoted to data_summary for compact list-row rendering. */
+  query_class?: string
+  /** plan: planner confidence (0.0 = fallback). */
+  planning_confidence?: number
+  /** Provider family of the model used for this LLM step. */
+  provider?: string
+  /** Whether this step's LLM call ran the reasoning calling convention (o-series). */
+  reasoning_path?: boolean
+  /** step_error step: machine-readable failure reason from PipelineError. */
+  error_reason?: string
+  /** step_error step: which pipeline stage failed (classify|compose|tool_fetch|synthesis). */
+  error_stage?: string
 }
 
 /** Full drill-down content stored in payload column */
@@ -50,6 +118,15 @@ export interface TracePayload {
   l2_items?: TraceChunkItem[]
   // llm steps
   prompt_preview?: string
+  // ── BHISMA-B3 additive (all optional) ──────────────────────────────────────
+  /** Planning step: full QueryPlan / RichQueryPlan emitted for QueryDNAPanel. */
+  query_plan?: TraceQueryPlan
+  /** Planning step: per-tool calls with priorities (subsumes plan_per_tool overrides). */
+  tool_calls?: TraceToolCallSpec[]
+  /** DeepSeek R1: extracted think-block reasoning trace (optional, hidden by default). */
+  reasoning_trace?: string
+  /** step_error step: human-readable detail for inline display. */
+  error_message?: string
 }
 
 /** One pipeline step record (maps 1:1 to a query_trace_steps row) */
@@ -73,4 +150,24 @@ export interface TraceEvent {
   event: 'step_start' | 'step_done' | 'step_error' | 'done'
   query_id: string
   step?: TraceStep
+}
+
+// ── BHISMA-B3 analytics types ─────────────────────────────────────────────────
+
+/** Single-row summary returned by /api/trace/history (default mode). */
+export interface TraceHistoryRow {
+  query_id: string
+  query_text: string | null
+  created_at: string
+  step_count: number
+  total_latency_ms: number | null
+  // ── analytics-mode additions (all optional; populated when ?mode=analytics) ─
+  query_class?: string | null
+  plan_latency_ms?: number | null
+  synthesis_latency_ms?: number | null
+  tool_fetch_latency_ms?: number | null
+  citation_count?: number | null
+  planning_confidence?: number | null
+  has_error?: boolean
+  tools_used?: string[]
 }

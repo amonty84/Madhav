@@ -10,6 +10,7 @@ import crypto from 'crypto'
 import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
+import { getFlag } from '@/lib/config'
 import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
 
 // Map categorical confidence labels used in the register JSON to numeric values
@@ -53,8 +54,31 @@ interface PatternRegister {
   patterns: PatternEntry[]
 }
 
+function disabledBundle(start: number): ToolBundle {
+  const latency_ms = Date.now() - start
+  return {
+    tool_bundle_id: crypto.randomUUID(),
+    tool_name: TOOL_NAME,
+    tool_version: TOOL_VERSION,
+    invocation_params: {
+      register_path: REGISTER_PATH,
+      disabled: true,
+      reason: 'DISCOVERY_PATTERN_ENABLED=false',
+    },
+    results: [],
+    served_from_cache: false,
+    latency_ms,
+    result_hash: 'sha256:' + crypto.createHash('sha256').update('disabled').digest('hex'),
+    schema_version: '1.0',
+  }
+}
+
 async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
+
+  if (!getFlag('DISCOVERY_PATTERN_ENABLED')) {
+    return disabledBundle(start)
+  }
 
   const raw = await getStorageClient().readFile(REGISTER_PATH)
   const register = JSON.parse(raw) as PatternRegister

@@ -1,8 +1,8 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 83,
-  "fingerprint": "73010a7fd9e471691f19a9abf967bf968dfa189d846e3525a596a56c119b74f5",
+  "entry_count": 112,
+  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -55,7 +55,8 @@
       ],
       "cost_weight": 1,
       "always_required": true,
-      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+      "token_count": 12000
     },
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
@@ -142,7 +143,8 @@
         "discovery"
       ],
       "cost_weight": 0.7,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CDLM_v1_1.md",
+      "token_count": 25000
     },
     {
       "canonical_id": "CGM",
@@ -164,7 +166,8 @@
       ],
       "cost_weight": 1,
       "always_required": true,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/CGM_v9_0.md",
+      "token_count": 60000
     },
     {
       "canonical_id": "MSR_v3_0",
@@ -185,7 +188,8 @@
         "cross_domain"
       ],
       "cost_weight": 0.9,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/MSR_v3_0.md",
+      "token_count": 180000
     },
     {
       "canonical_id": "RED_TEAM_L2_5_v1_0",
@@ -221,7 +225,8 @@
         "cross_domain"
       ],
       "cost_weight": 0.6,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/RM_v2_0.md",
+      "token_count": 18000
     },
     {
       "canonical_id": "UCN_v4_0",
@@ -242,7 +247,8 @@
         "holistic"
       ],
       "cost_weight": 0.8,
-      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L2_5/UCN_v4_0.md",
+      "token_count": 95000
     },
     {
       "canonical_id": "CROSS_REPORT_COHERENCE_AUDIT_v1_0",
@@ -845,7 +851,8 @@
       "interface_version": "1.0",
       "fingerprint": "729d850720a4986389c451b3e0c425dc05c9f31ebb60dbe281ad387d275ec7a5",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.json"
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.json",
+      "tool_binding": "pattern_register"
     },
     {
       "canonical_id": "RESONANCE_REGISTER_JSON",
@@ -860,7 +867,8 @@
       "interface_version": "1.0",
       "fingerprint": "ac9f284bd591dc69c7ebf4bba3104b9f64c266f4340524eec46590203d23154d",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.json"
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/RESONANCE_REGISTER_v1_0.json",
+      "tool_binding": "resonance_register"
     },
     {
       "canonical_id": "CONTRADICTION_REGISTER_JSON",
@@ -875,7 +883,8 @@
       "interface_version": "1.0",
       "fingerprint": "1e2fd304e400aee529eb3800f0e5facf4755de9bdb6e09878c11a6528ed80f68",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.json"
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CONTRADICTION_REGISTER_v1_0.json",
+      "tool_binding": "contradiction_register"
     },
     {
       "canonical_id": "CLUSTER_ATLAS_JSON",
@@ -890,7 +899,8 @@
       "interface_version": "1.0",
       "fingerprint": "59d5d90c1759dce79ed83e4c47134b5d37b9ff36f926a1f639f7add0a50b233f",
       "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.json"
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/CLUSTER_ATLAS_v1_0.json",
+      "tool_binding": "cluster_atlas"
     },
     {
       "canonical_id": "DISCOVERY_REGISTERS_INDEX",
@@ -906,6 +916,60 @@
       "fingerprint": "f6891c9a2813a1e7c94c4d8eed6ba39d577575218109dddc0a29fec182f61f07",
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L3/registers/INDEX.json"
+    },
+    {
+      "canonical_id": "REMEDIAL_CODEX_v2_0_PART1",
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md",
+      "version": "2.0",
+      "status": "CURRENT",
+      "layer": "L4",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "56e2312c0e18c56b5cd56731aa44bf823efaebe6c6222d8b0c9b8c66f8717a0d",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART1.md",
+      "phase": "M2-D3 Wave5",
+      "description": "Remedial Codex Part 1 \u2014 planetary propitiation, gemology, mantra practice, daily dinacharya. Chart-first remedial philosophy: strengthen architecturally-strong planets, dharmic register over ritual-density, befriend (not pacify) AmK Saturn / Avayogi Mars / exalted Ketu. Source for doc_type=l4_remedial RAG chunks.",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
+    },
+    {
+      "canonical_id": "REMEDIAL_CODEX_v2_0_PART2",
+      "path": "04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART2.md",
+      "version": "2.0",
+      "status": "CURRENT",
+      "layer": "L4",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "fbc1cd8e52bbc55dc21fabaa5c93ce76902a5bcbefcd85e55b360034b953707c",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L4/remedial/REMEDIAL_CODEX_v2_0_PART2.md",
+      "phase": "M2-D3 Wave5",
+      "description": "Remedial Codex Part 2 \u2014 yantra recommendations (Shree Yantra primary), devata-specific practices, temporal interventions, domain-specific remedies, intervention heatmap. Source for doc_type=l4_remedial RAG chunks.",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY"
+    },
+    {
+      "canonical_id": "LIFETIME_TIMELINE_v1_0",
+      "path": "05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md",
+      "version": "1.0.1",
+      "status": "CLOSED",
+      "layer": "L5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "176a2dc6706866239b731e611c2c58cd1bb472427b043daf7703e96c115b91eb",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L5/temporal/LIFETIME_TIMELINE_v1_0.md",
+      "phase": "M2-D4 Wave5",
+      "description": "Lifetime Jyotish timeline \u2014 life arc from 1984 birth through Saturn Libra return 2041\u20132044. Phase-by-phase Vimshottari + Chara dasha progression, major event windows, structural inflection points (Saturn returns, Jupiter cycles, eclipses). v1.0.1 carries CORR.TL.01 correction (Ghati Lagna 9H Sagittarius / Varnada 4H Cancer; lagna-based 'hidden-pinnacle' framing falsified, Ketu MD arc preserved via Ketu-8H exaltation). Source for doc_type=l5_timeline RAG chunks (9 chunks).",
+      "downstream_canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY"
     },
     {
       "canonical_id": "BUILD_PIPELINE_v1_0",
@@ -1175,7 +1239,7 @@
         "cross_domain",
         "signal_lookup"
       ],
-      "description": "499 MSR signals with category, valence, planet/house/sign arrays — queryable by deterministic filters",
+      "description": "499 MSR signals with category, valence, planet/house/sign arrays \u2014 queryable by deterministic filters",
       "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
@@ -1222,7 +1286,7 @@
         "cross_domain",
         "interpretive"
       ],
-      "description": "81-cell 9×9 CDLM matrix — from_domain/to_domain/link_type/strength for all domain pair relationships",
+      "description": "81-cell 9\u00d79 CDLM matrix \u2014 from_domain/to_domain/link_type/strength for all domain pair relationships",
       "fingerprint": "60619d9a0880a0089016c54be6e47de8aba7dd65ab8be850d5a39558464661d4"
     },
     {
@@ -1307,7 +1371,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Canonical spec for L2.5 structured Postgres tables — schemas, pipeline integration, tool surface, naming conventions, findings",
+      "description": "Canonical spec for L2.5 structured Postgres tables \u2014 schemas, pipeline integration, tool surface, naming conventions, findings",
       "fingerprint": "07aae69a77926b16ec830130a9e68dc048882699516ca3ce662e6802097554d3"
     },
     {
@@ -1322,7 +1386,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14D",
-      "description": "Phase 14D execution report — done criteria verification, stream log, spot-check results, findings, follow-ups",
+      "description": "Phase 14D execution report \u2014 done criteria verification, stream log, spot-check results, findings, follow-ups",
       "fingerprint": "55483ae04a6a1a3a643991bd187b2ae2c651e7e79cac89551e6a66b7d601e20c"
     },
     {
@@ -1428,7 +1492,7 @@
       "phase": "14C",
       "table_name": "chart_facts",
       "row_count": 589,
-      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md — planets, houses, cusps, yogas, dashas, sahams.",
+      "description": "589 structured facts from FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 planets, houses, cusps, yogas, dashas, sahams.",
       "fingerprint": "4d5faf84162b8803f3d7f437b467d0d1879d1e2b1a3669d295bc5bb0e22de304"
     },
     {
@@ -1489,14 +1553,17 @@
       "status": "CURRENT",
       "layer": "L1",
       "expose_to_chat": false,
-      "representations": ["file", "db_table"],
+      "representations": [
+        "file",
+        "db_table"
+      ],
       "interface_version": "1.0",
       "phase": "14C",
       "fingerprint": "fbacc50f1c0d0b3ed33b02341c3f2497eb04ee77d37efe3f6fbca21c15d1b1c2",
       "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/ECLIPSES_1900_2100.csv",
       "downstream_table": "eclipses",
       "downstream_row_count": 913,
-      "notes": "Eclipse events 1900–2100 source CSV. Ingested into eclipses table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+      "notes": "Eclipse events 1900\u20132100 source CSV. Ingested into eclipses table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
     },
     {
       "canonical_id": "RETROGRADES_1900_2100",
@@ -1505,14 +1572,17 @@
       "status": "CURRENT",
       "layer": "L1",
       "expose_to_chat": false,
-      "representations": ["file", "db_table"],
+      "representations": [
+        "file",
+        "db_table"
+      ],
       "interface_version": "1.0",
       "phase": "14C",
       "fingerprint": "17fa17153c02887295fba6794283ca9b3573071afad7d1a9b4412990109d6ace",
       "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/RETROGRADES_1900_2100.csv",
       "downstream_table": "retrogrades",
       "downstream_row_count": 2462,
-      "notes": "Planetary retrograde periods 1900–2100 source CSV. Ingested into retrogrades table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
+      "notes": "Planetary retrograde periods 1900\u20132100 source CSV. Ingested into retrogrades table via bootstrap_ephemeris.py. Confirmed in GCS + DB by forensic migration audit 2026-04-29. Remediation REM-A-002."
     },
     {
       "canonical_id": "EPHEMERIS_MONTHLY_1900_2100",
@@ -1521,12 +1591,14 @@
       "status": "CURRENT",
       "layer": "L1",
       "expose_to_chat": false,
-      "representations": ["file"],
+      "representations": [
+        "file"
+      ],
       "interface_version": "1.0",
       "phase": "14C",
       "fingerprint": "a0e8fbac0178610faa00fcbdc4f63b89b4071d8936ce8691eafb57ebb2a9791a",
       "gcs_uri": "gs://madhav-marsys-sources/L1/ephemeris/EPHEMERIS_MONTHLY_1900_2100.csv",
-      "notes": "Monthly planetary positions 1900–2100 source CSV (summary; daily detail in ephemeris_daily table). Confirmed in GCS by forensic migration audit 2026-04-29. Remediation REM-A-002."
+      "notes": "Monthly planetary positions 1900\u20132100 source CSV (summary; daily detail in ephemeris_daily table). Confirmed in GCS by forensic migration audit 2026-04-29. Remediation REM-A-002."
     },
     {
       "canonical_id": "L1_LIFE_EVENTS",
@@ -1574,7 +1646,7 @@
       ],
       "interface_version": "1.0",
       "phase": "14C",
-      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md — 589 facts, native-validated.",
+      "description": "Canonical structured projection of FORENSIC_ASTROLOGICAL_DATA_v8_0.md \u2014 589 facts, native-validated.",
       "fingerprint": "e2ac2907997f8bb86bf6628420a7aec263a4d5d394a45db8a96755f3deb2ac66"
     },
     {
@@ -1703,10 +1775,139 @@
       "phase": "14C",
       "description": "LLM tool: query dasha balance facts from chart_facts (category=dasha_balance).",
       "fingerprint": "e507c2298ae0c5c49f57a389e30cdb30c7c1555695195c2e9fe823e37c8f5ba1"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_CHART_FACTS_QUERY",
+      "path": "platform/src/lib/retrieve/chart_facts_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-C1 Wave4",
+      "description": "Parametric retrieval over chart_facts (795 rows, 37 categories). Primary gateway for quantitative chart-fact queries: shadbala rankings, BAV bindus, yoga register, saham lookups, placements, longevity indicators. Filters: category, planet, house, sign, nakshatra, nakshatra_pada, divisional_chart, keyword, rank_by, limit.",
+      "categories": [
+        "house",
+        "dasha_chara",
+        "planet",
+        "dasha_vimshottari",
+        "saham",
+        "sensitive_point",
+        "birth_metadata",
+        "strength_extra",
+        "yoga",
+        "dasha_yogini",
+        "deity_assignment",
+        "shadbala",
+        "ashtakavarga_sav",
+        "kp_cusp",
+        "navatara",
+        "panchang",
+        "cusp",
+        "arudha_occupancy",
+        "bhava_bala",
+        "chandra_placement",
+        "mrityu_bhaga",
+        "longevity_indicator",
+        "arudha",
+        "aspect",
+        "chalit_shift",
+        "kp_planet",
+        "special_lagna",
+        "strength",
+        "upagraha",
+        "ashtakavarga_bav",
+        "kakshya_zone",
+        "mercury_convergence",
+        "ashtakavarga_pinda",
+        "ishta_kashta",
+        "kp_significator",
+        "varshphal",
+        "avastha"
+      ],
+      "row_count": 795,
+      "native_id": "abhisek_mohanty",
+      "fingerprint": "c54c7548dc2a6609950d5e52965df7aa9c18d1a5585a201207fbb97dc8a622c5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_DOMAIN_REPORT_QUERY",
+      "path": "platform/src/lib/retrieve/domain_report_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D2 Wave5",
+      "description": "Queries rag_chunks where doc_type='domain_report' (L3). Returns domain synthesis content for 9 domains: career, children, financial, health, parents, psychology, relationships, spiritual, travel. Filter by domain name(s) mapped to source_doc pattern, or by keyword. No new chunking needed \u2014 domain_report chunks pre-exist from Pre-KARN-4.",
+      "doc_type": "domain_report",
+      "layer_source": "L3",
+      "domains_covered": [
+        "career",
+        "children",
+        "financial",
+        "health",
+        "parents",
+        "psychology",
+        "relationships",
+        "spiritual",
+        "travel"
+      ],
+      "fingerprint": "d234_domain_report_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_REMEDIAL_CODEX_QUERY",
+      "path": "platform/src/lib/retrieve/remedial_codex_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D3 Wave5",
+      "description": "Queries rag_chunks where doc_type='l4_remedial' (L4). Returns remedial prescriptions from REMEDIAL_CODEX_v2_0 PART1+PART2 (21 chunks). Filter by planet (Mercury, Saturn, Mars, etc.) or practice_type (gemstone, mantra, yantra, devata, dinacharya, propit). Chunked by remedial_chunker.py Wave5.",
+      "doc_type": "l4_remedial",
+      "layer_source": "L4",
+      "source_canonical_ids": [
+        "REMEDIAL_CODEX_v2_0_PART1",
+        "REMEDIAL_CODEX_v2_0_PART2"
+      ],
+      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY",
+      "path": "platform/src/lib/retrieve/timeline_query.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "M2-D4 Wave5",
+      "description": "Queries rag_chunks where doc_type='l5_timeline' (L5). Returns lifetime timeline content from LIFETIME_TIMELINE_v1_0 (9 chunks) \u2014 dasha phase arcs, event windows, structural inflection points. Filter by dasha_name or keyword. NOTE: Next MD after Mercury is Ketu MD (2027-08-21). Chunked by timeline_chunker.py Wave5.",
+      "doc_type": "l5_timeline",
+      "layer_source": "L5",
+      "source_canonical_ids": [
+        "LIFETIME_TIMELINE_v1_0"
+      ],
+      "fingerprint": "d234_timeline_query_v1_0_0_wave5"
     }
   ],
-  "manifest_fingerprint": "sha256:f1222d74f741c16c5f59d66ca38e854760e2de6009d141212e6c0680585c4a1f",
-  "manifest_version": "1.5",
-  "last_updated": "2026-04-29",
-  "last_updated_by": "Phase-14G-lockdown"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30",
+  "manifest_version": "1.7",
+  "last_updated": "2026-05-01",
+  "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
 }

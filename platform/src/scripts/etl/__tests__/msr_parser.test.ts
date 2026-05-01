@@ -34,9 +34,9 @@ describe('parseMsrSignals', () => {
     }
   })
 
-  it('all signals have native_id abhisek', () => {
+  it('all signals have native_id abhisek_mohanty', () => {
     for (const s of signals) {
-      expect(s.native_id).toBe('abhisek')
+      expect(s.native_id).toBe('abhisek_mohanty')
     }
   })
 

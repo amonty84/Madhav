@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 vi.mock('server-only', () => ({}))
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5' })),
+  resolveWorkerModel: vi.fn((id: string) => id),
 }))
 
 const mockGenerateText = vi.fn()
@@ -10,7 +11,7 @@ vi.mock('ai', () => ({
   generateText: (...args: unknown[]) => mockGenerateText(...args),
 }))
 
-import { classify } from '../router'
+import { classify, PipelineError } from '../router'
 import type { RouterContext } from '../router'
 
 const BASE_CONTEXT: RouterContext = {
@@ -23,7 +24,7 @@ beforeEach(() => {
 })
 
 // ---------------------------------------------------------------------------
-// Helper to simulate the two generateText calls
+// Helpers to simulate the two generateText calls
 // ---------------------------------------------------------------------------
 
 function mockBothCallsWithInvalidJson() {
@@ -99,66 +100,45 @@ function mockFirstCallSchemaInvalidSecondCallValid() {
 }
 
 // ---------------------------------------------------------------------------
-// Fallback behaviour — both attempts fail
+// Hard-fail behaviour — both attempts return invalid JSON
+// BHISMA-B1 §3.3 / ADR-3: silent fallback removed; classify throws
+// PipelineError so the route can return a structured error to the user.
 // ---------------------------------------------------------------------------
 
-describe('Fallback — both LLM attempts return invalid JSON', () => {
-  it('returns fallback plan with router_confidence: 0.0', async () => {
+describe('Hard-fail — both LLM attempts return invalid JSON', () => {
+  it('throws PipelineError(stage="classify") instead of returning a plan', async () => {
     mockBothCallsWithInvalidJson()
-    const plan = await classify('What does my chart say?', BASE_CONTEXT)
-    expect(plan.router_confidence).toBe(0.0)
+    await expect(classify('What does my chart say?', BASE_CONTEXT)).rejects.toBeInstanceOf(PipelineError)
   })
 
-  it('fallback plan query_class is "interpretive"', async () => {
+  it('PipelineError carries the planning model id and provider', async () => {
     mockBothCallsWithInvalidJson()
-    const plan = await classify('What does my chart say?', BASE_CONTEXT)
-    expect(plan.query_class).toBe('interpretive')
+    try {
+      await classify('test query', BASE_CONTEXT)
+      throw new Error('expected throw')
+    } catch (err) {
+      expect(err).toBeInstanceOf(PipelineError)
+      const pe = err as PipelineError
+      expect(pe.stage).toBe('classify')
+      expect(pe.model_id).toBe('claude-haiku-4-5')
+      expect(pe.reason).toMatch(/JSON|schema/i)
+    }
   })
 
-  it('fallback plan audience_tier matches context', async () => {
+  it('still makes exactly 2 generateText calls before failing', async () => {
     mockBothCallsWithInvalidJson()
-    const plan = await classify('test query', BASE_CONTEXT)
-    expect(plan.audience_tier).toBe('client')
-  })
-
-  it('fallback plan manifest_fingerprint matches context', async () => {
-    mockBothCallsWithInvalidJson()
-    const plan = await classify('test query', BASE_CONTEXT)
-    expect(plan.manifest_fingerprint).toBe('fallback-test-fingerprint')
-  })
-
-  it('fallback plan has a valid UUID', async () => {
-    mockBothCallsWithInvalidJson()
-    const plan = await classify('test query', BASE_CONTEXT)
-    expect(plan.query_plan_id).toMatch(
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-    )
-  })
-
-  it('fallback plan schema_version is "1.0"', async () => {
-    mockBothCallsWithInvalidJson()
-    const plan = await classify('test query', BASE_CONTEXT)
-    expect(plan.schema_version).toBe('1.0')
-  })
-
-  it('makes exactly 2 generateText calls before giving up', async () => {
-    mockBothCallsWithInvalidJson()
-    await classify('test query', BASE_CONTEXT)
+    await expect(classify('test query', BASE_CONTEXT)).rejects.toBeInstanceOf(PipelineError)
     expect(mockGenerateText).toHaveBeenCalledTimes(2)
-  })
-
-  it('preserves query_text from input', async () => {
-    mockBothCallsWithInvalidJson()
-    const plan = await classify('My unique test query text', BASE_CONTEXT)
-    expect(plan.query_text).toBe('My unique test query text')
   })
 })
 
 // ---------------------------------------------------------------------------
-// Fallback behaviour — schema validation failure on attempt 1
+// Retry success — first JSON is schema-invalid, second attempt succeeds.
+// (Retry-on-recoverable-failure is preserved; only the silent-fallback after
+// both attempts fail was removed.)
 // ---------------------------------------------------------------------------
 
-describe('Fallback — first JSON is schema-invalid, second attempt succeeds', () => {
+describe('Retry success — first JSON is schema-invalid, second attempt succeeds', () => {
   it('retry resolves with valid plan and router_confidence: 1.0', async () => {
     mockFirstCallSchemaInvalidSecondCallValid()
     const plan = await classify('test query', BASE_CONTEXT)
@@ -173,11 +153,7 @@ describe('Fallback — first JSON is schema-invalid, second attempt succeeds', (
   })
 })
 
-// ---------------------------------------------------------------------------
-// Retry on invalid JSON — first call invalid JSON, second call valid JSON
-// ---------------------------------------------------------------------------
-
-describe('Retry — first call returns non-JSON, second call succeeds', () => {
+describe('Retry success — first call returns non-JSON, second call succeeds', () => {
   it('second call result is used (router_confidence: 1.0)', async () => {
     mockFirstCallInvalidJsonSecondCallValid()
     const plan = await classify('test query', BASE_CONTEXT)
@@ -193,15 +169,23 @@ describe('Retry — first call returns non-JSON, second call succeeds', () => {
 })
 
 // ---------------------------------------------------------------------------
-// LLM call throws (network error etc)
+// LLM call throws (network error etc) — surfaces as PipelineError
 // ---------------------------------------------------------------------------
 
-describe('Fallback — LLM call throws an exception', () => {
-  it('returns fallback plan when generateText throws', async () => {
+describe('Hard-fail — LLM call throws an exception', () => {
+  it('throws PipelineError when the first generateText call rejects', async () => {
     mockGenerateText.mockRejectedValueOnce(new Error('network timeout'))
+    await expect(classify('test query', BASE_CONTEXT)).rejects.toBeInstanceOf(PipelineError)
+  })
 
-    const plan = await classify('test query', BASE_CONTEXT)
-    expect(plan.router_confidence).toBe(0.0)
-    expect(plan.query_class).toBe('interpretive')
+  it('PipelineError reason wraps the underlying error message', async () => {
+    mockGenerateText.mockRejectedValueOnce(new Error('network timeout'))
+    try {
+      await classify('test query', BASE_CONTEXT)
+      throw new Error('expected throw')
+    } catch (err) {
+      expect(err).toBeInstanceOf(PipelineError)
+      expect((err as PipelineError).reason).toContain('network timeout')
+    }
   })
 })

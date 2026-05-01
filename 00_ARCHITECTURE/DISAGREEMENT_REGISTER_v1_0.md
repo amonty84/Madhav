@@ -506,3 +506,207 @@ disagreement_register_entry:
     - path: 035_DISCOVERY_LAYER/PROMPTS/gemini/responses/2026-04-27_B5_revalidation_batch1_raw.md
       linkage: evidence
 ```
+
+---
+
+### DIS.010 — DIS.class.school_disagreement (Chara Dasha sequence-start: AK sign vs Lagna sign)
+
+```yaml
+disagreement_register_entry:
+  dr_id: DIS.010
+  class: DIS.class.school_disagreement
+  opened_on: 2026-05-01
+  opened_by_session: M3-W3-C3-SHADBALA
+  parties: [bphs-sanjay-rath-tradition, kn-rao-padakrama-tradition]
+  description: >
+    Chara Dasha (Jaimini) Mahadasha sequence-start convention is unsettled across
+    two well-established Vedic-tradition lineages. The Sanjay Rath / BPHS-Jaimini
+    synthesis begins the MD sequence at the Atmakaraka sign (Aquarius for this
+    native, AK = Moon at 27°02′ AQ). The K.N. Rao Padakrama tradition (used in
+    FORENSIC §5.3 DSH.C.001..144) begins the MD sequence at the Lagna sign
+    (Aries for this native, Lagna = 12°23′55″ AR). Both lineages are respected
+    in the contemporary Jaimini literature and produce different Chara MD
+    sequences for the same chart. The compute_chara.py engine variants emit
+    BPHS-Sanjay-Rath sequence by default (and `bphs` sub-variant); FORENSIC §5.3
+    is the K.N. Rao Padakrama sequence. Cross-check at M3-W3-C1 was FAIL with
+    every MD-start delta exceeding the 7-day threshold by orders of magnitude
+    (see 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md §3.1 §3.2).
+    Per PHASE_M3_PLAN §3.3 + §8, this is logged not silently resolved by
+    operator preference; M9 multi-school triangulation is the structural
+    resolution layer.
+  authoritative_side: none
+  evidence_side_a:
+    source: 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md
+    excerpt: "Engine variants start the sequence at the Atmakaraka sign (Aquarius), per the 'Sanjay Rath / BPHS-Jaimini synthesis' rule named in the session brief."
+    sha256: 83f80114d99c822d369a598d7bb15ca33c3284e41ae8899b744662f305e391a1
+  evidence_side_b:
+    source: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §5.3 (DSH.C.001..144)
+    excerpt: "FORENSIC §5.3 sequence is Aries → Taurus → Gemini → … starting at the native's Lagna sign (Aries) on 1984-02-05."
+    sha256: f06d8a0554434fff6db6be1a39c6bd38b7c0fb626fb20d20201806fb13be185c
+  arbitration_steps_taken:
+    - step: cross_reg_registration
+      result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8 (every cross-school dasha disagreement opens a register entry; native arbitrates at M3-C close)."
+      timestamp: 2026-05-01
+      session_id: M3-W3-C3-SHADBALA
+  resolution_options:
+    - option_id: N1
+      description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama as project-canonical Chara tradition. compute_chara.py becomes a parser of the existing 144-row table, not a from-scratch computer; engine cannot extend beyond 2059 without external acharya extension."
+    - option_id: N2
+      description: "Adopt Sanjay Rath / BPHS synthesis (compute_chara.py default variant) as project-canonical. FORENSIC §5.3 retained as alternate-tradition record. Loses retrodictive-fit work done in B.5 sessions 16-25 that referenced Padakrama dates; opens DIS sub-entries for each affected event."
+    - option_id: N3
+      description: "Carry both. Maintain FORENSIC §5.3 (Padakrama) + engine BPHS variant side-by-side. DB rows tagged with explicit `system='chara_padakrama'` vs `system='chara_bphs'`. Resolution deferred to M9 multi-school triangulation per phase-plan policy. **DEFAULT** per PHASE_M3_PLAN §3.3 (\"every disagreement is *logged*, not *resolved by operator preference*; resolution waits for M9\")."
+  status: open
+  resolution: pending_native_verdict
+  resolved_on: null
+  resolved_by_session: null
+  state_hashes:
+    side_a_before: null
+    side_a_after: null
+    side_b_before: null
+    side_b_after: null
+  linked_artifacts:
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md
+      linkage: evidence
+    - path: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+      linkage: evidence
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/CHARA_RAW_v1_0.json
+      linkage: evidence
+    - path: 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+      linkage: cause           # §3.3 AC.M3C.5 + §8 mandate this entry
+```
+
+---
+
+### DIS.011 — DIS.class.school_disagreement (Chara Dasha sign-duration rule)
+
+```yaml
+disagreement_register_entry:
+  dr_id: DIS.011
+  class: DIS.class.school_disagreement
+  opened_on: 2026-05-01
+  opened_by_session: M3-W3-C3-SHADBALA
+  parties: [bphs-sign-to-lord-rule, kn-rao-padakrama-rule, brief-hardcoded-constants]
+  description: >
+    Chara Dasha sign-duration assignment for each rashi is not unambiguously
+    fixed across Jaimini lineages. The session brief (M3-W3-C1) stipulated
+    hardcoded constants (Ar=7, Ta=6, Ge=5, Cn=4, Le=3, Vi=8, Li=9, Sc=10,
+    Sg=9, Cp=10, Aq=11, Pi=12) framed as "standard Jaimini Chara". The
+    BPHS sign-to-lord count rule (movable forward, fixed/dual backward;
+    count − 1; 0 → 12) produces a different table for this native (Ar=6,
+    Ta=5, Ge=7, Cn=7, Le=7, Vi=4, Li=2, Sc=1, Sg=12, Cp=9, Aq=4, Pi=3).
+    The K.N. Rao Padakrama tradition produces a third table per FORENSIC §5.3
+    (Ar=6, Ta=7, Ge=7, Cn=5, Le=7, Vi=8, Li=2, Sc=11, Sg=12, Cp=3, Aq=4,
+    Pi=3). Inspection in 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md
+    §4 Cause 2 suggests Padakrama applies additional rules beyond a simple
+    sign-to-lord count (likely involving AK sign reference + lord-in-own-sign
+    + lord-in-7th-or-1st + debilitation/exaltation adjustments per K.N. Rao
+    published text). The brief's hardcoded constants match neither the BPHS
+    rule nor the Padakrama rule unambiguously; they are a third alternative.
+  authoritative_side: none
+  evidence_side_a:
+    source: 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md §4 Cause 2
+    excerpt: "Brief constant column matches some BPHS-rule outputs (Aries, Aquarius, Sagittarius, Pisces, Libra) and diverges on others (Taurus, Cancer, Leo, Virgo, Scorpio, Capricorn). The K.N. Rao Padakrama column matches some BPHS-rule outputs and diverges on others."
+    sha256: 83f80114d99c822d369a598d7bb15ca33c3284e41ae8899b744662f305e391a1
+  evidence_side_b:
+    source: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md §5.3
+    excerpt: "144 entries DSH.C.001..144 with chart-specific durations; not derivable from a single fixed rule per the cross-check analysis."
+    sha256: f06d8a0554434fff6db6be1a39c6bd38b7c0fb626fb20d20201806fb13be185c
+  arbitration_steps_taken:
+    - step: cross_reg_registration
+      result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8."
+      timestamp: 2026-05-01
+      session_id: M3-W3-C3-SHADBALA
+  resolution_options:
+    - option_id: N1
+      description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama duration table verbatim. Engine reduced to lookup, not derivation; full Padakrama rule set must be encoded in a future session if chart-extension capability is required."
+    - option_id: N2
+      description: "Adopt BPHS sign-to-lord count rule (movable forward, fixed/dual backward, count−1, 0→12). Drop the brief's hardcoded constants. Engine extensible; FORENSIC §5.3 retained as Padakrama alternate."
+    - option_id: N3
+      description: "Carry all three side-by-side as DIS.class.school_disagreement DB rows. Defer resolution to M9 multi-school triangulation. **DEFAULT** per phase-plan policy."
+  status: open
+  resolution: pending_native_verdict
+  resolved_on: null
+  resolved_by_session: null
+  state_hashes:
+    side_a_before: null
+    side_a_after: null
+    side_b_before: null
+    side_b_after: null
+  linked_artifacts:
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md
+      linkage: evidence
+    - path: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+      linkage: evidence
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/CHARA_RAW_v1_0.json
+      linkage: evidence
+    - path: 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+      linkage: cause
+    - path: 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md#DIS.010
+      linkage: evidence           # DIS.010 + DIS.011 are tightly coupled
+```
+
+---
+
+### DIS.012 — DIS.class.school_disagreement (Narayana Dasha — no FORENSIC baseline)
+
+```yaml
+disagreement_register_entry:
+  dr_id: DIS.012
+  class: DIS.class.school_disagreement
+  opened_on: 2026-05-01
+  opened_by_session: M3-W3-C3-SHADBALA
+  parties: [compute_narayana-engine-output, external-acharya-or-jh-export]
+  description: >
+    Narayana Dasha (Jaimini) computation has no FORENSIC §5.3-class baseline
+    in the project corpus. The compute_narayana.py engine (M3-W3-C1 deliverable)
+    emits a 70-year MD sequence per its internal rule set; FORENSIC carries
+    no published Narayana table for this native, so no in-corpus cross-check
+    is possible. Per PHASE_M3_PLAN §3.3, Narayana Dasha is a M3-C deliverable;
+    per §8 cross-school disagreements log to this register. The disagreement
+    here is the absence of an authoritative reference table — the engine
+    output cannot be treated as verified until either (a) an external
+    Vedic acharya provides a Padakrama-class authoritative Narayana table
+    for this chart, or (b) a Jagannatha Hora export is generated and used
+    as the cross-check reference per ED.1. Until then, the engine output
+    is needs_verification=true and is not consumed by downstream synthesis
+    as a settled fact.
+  authoritative_side: none
+  evidence_side_a:
+    source: 05_TEMPORAL_ENGINES/dasha/jaimini/NARAYANA_RAW_v1_0.json
+    excerpt: "compute_narayana.py engine output; needs_verification: true on every row per CROSSCHECK §6."
+    sha256: null
+  evidence_side_b:
+    source: 01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md
+    excerpt: "No §5.4 (or analogous) Narayana table exists in FORENSIC; absence is the disagreement-evidence."
+    sha256: f06d8a0554434fff6db6be1a39c6bd38b7c0fb626fb20d20201806fb13be185c
+  arbitration_steps_taken:
+    - step: cross_reg_registration
+      result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8. External verification required before any synthesis claim treats Narayana Dasha output as settled."
+      timestamp: 2026-05-01
+      session_id: M3-W3-C3-SHADBALA
+  resolution_options:
+    - option_id: N1
+      description: "Commission external Vedic acharya review for Narayana Dasha verification on this chart. Acharya outputs a 70-year MD table; engine output cross-checked against acharya. ETA: open."
+    - option_id: N2
+      description: "Generate Jagannatha Hora export of Narayana Dasha for this chart per ED.1. Use JH export as cross-check reference. ETA: same as M3-D held-out cross-check window if JH export becomes part of the standard pipeline."
+    - option_id: N3
+      description: "Defer Narayana Dasha verification to M9 multi-school triangulation. compute_narayana.py output remains marked needs_verification=true; no synthesis claim treats it as settled until then. **DEFAULT** per phase-plan policy + ED.1 dependency status."
+  status: open
+  resolution: pending_native_verdict
+  resolved_on: null
+  resolved_by_session: null
+  state_hashes:
+    side_a_before: null
+    side_a_after: null
+    side_b_before: null
+    side_b_after: null
+  linked_artifacts:
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/NARAYANA_RAW_v1_0.json
+      linkage: evidence
+    - path: 05_TEMPORAL_ENGINES/dasha/jaimini/CROSSCHECK_v1_0.md
+      linkage: evidence
+    - path: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      linkage: cause           # ED.1 (Jagannatha Hora) external dependency
+    - path: 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+      linkage: cause
+```

@@ -1,0 +1,81 @@
+ count 
+-------
+     5
+(1 row)
+
+                  id                  | query_class  | latency_ms | tools 
+--------------------------------------+--------------+------------+-------
+ e07a202f-1f2e-45af-b13e-b4f4a711ee59 | factual      |        850 |     2
+ dcaf9626-7db0-4933-92af-8cad3b79d269 | factual      |        780 |     2
+ 2d2f78bd-9f83-4f54-bce7-3d03ededa621 | interpretive |       1200 |     3
+ 91b8a13c-b1e4-4638-a5e8-f2c985a3be79 | interpretive |        950 |     2
+ 61148e35-c4c4-4070-a11a-6a2cc6887428 | predictive   |       1100 |     3
+(5 rows)
+
+ count 
+-------
+     5
+(1 row)
+
+ query_class  |  domains  |         planets         |            tools_authorized             
+--------------+-----------+-------------------------+-----------------------------------------
+ factual      | {planets} | {Mercury}               | {msr_sql,vector_search}
+ factual      | {houses}  |                         | {cgm_graph_walk,vector_search}
+ interpretive | {career}  | {Mercury}               | {msr_sql,cgm_graph_walk,vector_search}
+ interpretive | {yoga}    | {Jupiter,Mercury,Venus} | {cgm_graph_walk,vector_search}
+ predictive   | {dasha}   | {Saturn}                | {cgm_graph_walk,temporal,vector_search}
+(5 rows)
+
+PROBE 6 — Recent audit_events: per-query tool firing breakdown
+Purpose: see which tools fire / return empty / are skipped
+for the last 5 real queries.
+================================================================
+                  id                  |          created_at          |            query_preview             | latency_ms | tools_fired 
+--------------------------------------+------------------------------+--------------------------------------+------------+-------------
+ e07a202f-1f2e-45af-b13e-b4f4a711ee59 | 2026-04-30 01:28:27.65524+00 | What sign is my Mercury placed in?   |        850 |           2
+ dcaf9626-7db0-4933-92af-8cad3b79d269 | 2026-04-30 01:28:27.65524+00 | What is in my 7th house?             |        780 |           2
+ 2d2f78bd-9f83-4f54-bce7-3d03ededa621 | 2026-04-30 01:28:27.65524+00 | What does my chart say about career? |       1200 |           3
+ 91b8a13c-b1e4-4638-a5e8-f2c985a3be79 | 2026-04-30 01:28:27.65524+00 | Tell me about my Saraswati yoga.     |        950 |           2
+ 61148e35-c4c4-4070-a11a-6a2cc6887428 | 2026-04-30 01:28:27.65524+00 | What does my Saturn dasha bring?     |       1100 |           3
+(5 rows)
+
+
+--- per-tool result counts for the LAST query ---
+     tool      | ms  | result_count 
+---------------+-----+--------------
+ msr_sql       |  45 |             
+ vector_search | 120 |             
+(2 rows)
+
+
+--- per-tool average result count over last 20 queries ---
+      tool      | invocations | avg_results | zero_result_runs 
+----------------+-------------+-------------+------------------
+ vector_search  |           5 |             |                0
+ temporal       |           1 |             |                0
+ msr_sql        |           2 |             |                0
+ cgm_graph_walk |           4 |             |                0
+(4 rows)
+
+
+================================================================
+PROBE 7 — query_plans content: what is the classifier emitting?
+Purpose: see whether classifier populates planet_hints, 
+graph_seed_hints, etc. or leaves them empty.
+================================================================
+          created_at           | query_class  | forward_looking |  domains  |         planets         |   graph_seed_hints   |            tools_authorized             
+-------------------------------+--------------+-----------------+-----------+-------------------------+----------------------+-----------------------------------------
+ 2026-04-30 01:28:27.565605+00 | factual      | f               | {planets} | {Mercury}               | {PLN.MERCURY}        | {msr_sql,vector_search}
+ 2026-04-30 01:28:27.565605+00 | factual      | f               | {houses}  |                         | {HSE.7}              | {cgm_graph_walk,vector_search}
+ 2026-04-30 01:28:27.565605+00 | interpretive | f               | {career}  | {Mercury}               | {HSE.10,PLN.MERCURY} | {msr_sql,cgm_graph_walk,vector_search}
+ 2026-04-30 01:28:27.565605+00 | interpretive | f               | {yoga}    | {Jupiter,Mercury,Venus} | {YOG.SARASWATI}      | {cgm_graph_walk,vector_search}
+ 2026-04-30 01:28:27.565605+00 | predictive   | t               | {dasha}   | {Saturn}                | {DSH.MD.SATURN}      | {cgm_graph_walk,temporal,vector_search}
+(5 rows)
+
+
+================================================================
+PROBE 8 — query_trace_steps: contribution per stage per recent query
+
+=== PROBE 6 + 7 appended. Verification complete. ===
+Cloud Run revision: amjis-web-00030-4zk
+Verified at: 2026-04-30T01:28:49Z

@@ -15,6 +15,9 @@ vi.mock('server-only', () => ({}))
 // ── Model resolver ─────────────────────────────────────────────────────────────
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn((id: string) => ({ id, provider: 'anthropic' })),
+  isReasoningModel: vi.fn(() => false),
+  resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
+  supportsStreaming: vi.fn(() => true),
 }))
 
 // ── AI SDK ─────────────────────────────────────────────────────────────────────

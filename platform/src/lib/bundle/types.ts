@@ -47,6 +47,7 @@ export interface QueryPlan {
     floor_overrides?: string[]
     conditional_overrides?: object
   }
+  time_window?: { start: string; end: string }
   adjudicator_model_id?: string
   router_confidence?: number
   router_model_id?: string
@@ -70,6 +71,11 @@ export interface AssetEntry {
   cost_weight?: number
   always_required?: boolean
   tier?: number // 1 = Tier-1, computed during merge
+  // BHISMA §4.9 / GAP.A.6 — populated for high-cost assets so the budget
+  // enforcer in rule_composer.ts can drop low-priority entries when context
+  // is tight. Optional because not every manifest entry has been measured;
+  // a missing value is treated as 0 (the same as before this field existed).
+  token_count?: number
 }
 
 export interface RawManifest {
@@ -96,8 +102,16 @@ export interface ManifestData {
 
 // ── Bundle ───────────────────────────────────────────────────────────────────
 
-export type BundleEntryRole = 'floor' | 'interpretive' | 'predictive' | 'discovery' | 'holistic'
-export type BundleEntrySource = 'rule_composer' | 'bundle_augmenter'
+export type BundleEntryRole =
+  | 'floor'
+  | 'interpretive'
+  | 'predictive'
+  | 'discovery'
+  | 'holistic'
+  | 'remedial'
+  | 'domain_report'
+  | 'temporal_engine'
+export type BundleEntrySource = 'rule_composer' | 'bundle_augmenter' | 'planner'
 
 export interface BundleEntry {
   canonical_id: string

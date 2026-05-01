@@ -549,7 +549,7 @@ SIG.MSR.025:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit, mind]
   confidence: 0.75
-  v6_ids_consumed: [D20.SUN, D40.SUN]
+  v6_ids_consumed: [D20.PISCES, PLN.SUN, PLN.VENUS]
   rpt_deep_dive: "RPT.DEV.01.C, RPT.DEV.01.F"
   prior_id: CTR.02
 
@@ -949,7 +949,7 @@ SIG.MSR.043:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit, mind]
   confidence: 0.72
-  v6_ids_consumed: [D20.SUN, D40.SUN, SGN.PISCES]
+  v6_ids_consumed: [D20.PISCES, D40.10, PLN.SUN, HSE.12]
   rpt_deep_dive: "MATRIX_DIVISIONALS §4.D20, §4.D40"
   prior_id: SIG.28
 
@@ -1607,7 +1607,7 @@ SIG.MSR.074:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit, health]
   confidence: 0.72
-  v6_ids_consumed: [D27.LAGNA, SGN.PISCES]
+  v6_ids_consumed: [PLN.JUPITER, HSE.12]
   rpt_deep_dive: "SIG.MSR.041"
 
 SIG.MSR.075:
@@ -8256,7 +8256,7 @@ SIG.MSR.354:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit]
   confidence: 0.00
-  v6_ids_consumed: [PCH.YOGA]
+  v6_ids_consumed: [PCG.YOGA]
   rpt_deep_dive: "v6.0 §9 (Panchang — Yoga)"
 
 SIG.MSR.355:
@@ -8556,7 +8556,7 @@ SIG.MSR.367:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit, career, mind]
   confidence: 0.78
-  v6_ids_consumed: [PCH.TITHI, PCH.VARA, PCH.NAKSHATRA, PCH.KARANA]
+  v6_ids_consumed: [PCG.TITHI, PCG.VARA, PCG.NAKSHATRA, PCG.KARANA]
   rpt_deep_dive: "MSR.351-366 (full panchang section)"
 
 SIG.MSR.368:
@@ -8743,7 +8743,7 @@ SIG.MSR.375:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [spirit, career, mind]
   confidence: 0.87
-  v6_ids_consumed: [PCH.TITHI, PCH.VARA, PCH.NAKSHATRA, PCH.KARANA]
+  v6_ids_consumed: [PCG.TITHI, PCG.VARA, PCG.NAKSHATRA, PCG.KARANA]
   rpt_deep_dive: "MSR.351-374 (full §13 panchang section)"
 
 SIG.MSR.376:
@@ -9767,7 +9767,7 @@ SIG.MSR.416:
   provenance: v1_0-confirmed-by-v8
   domains_affected: []
   confidence: 1.00
-  v6_ids_consumed: []
+  v6_ids_consumed: []  # FORENSIC_GAP: meta-statistics signal (signal-distribution audit) has no chart-fact FORENSIC ID
   rpt_deep_dive: "Architecture §C.3.2; §J.1"
 
 SIG.MSR.417:
@@ -9789,7 +9789,7 @@ SIG.MSR.417:
   provenance: v1_0-confirmed-by-v8
   domains_affected: []
   confidence: 1.00
-  v6_ids_consumed: []
+  v6_ids_consumed: []  # FORENSIC_GAP: meta-statistics signal (confidence distribution) has no chart-fact FORENSIC ID
   rpt_deep_dive: "Architecture §B.6"
 
 SIG.MSR.418:
@@ -9816,7 +9816,7 @@ SIG.MSR.418:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [career, wealth, spirit, relationships, mind, health, children, parents, travel]
   confidence: 0.90
-  v6_ids_consumed: []
+  v6_ids_consumed: []  # FORENSIC_GAP: meta-statistics signal (domain coverage matrix) has no chart-fact FORENSIC ID
   rpt_deep_dive: "Architecture §C.3.2; feeds CDLM_v1_0.md (Session 13)"
 
 SIG.MSR.419:
@@ -9841,7 +9841,7 @@ SIG.MSR.419:
   provenance: v1_0-confirmed-by-v8
   domains_affected: []
   confidence: 1.00
-  v6_ids_consumed: []
+  v6_ids_consumed: []  # FORENSIC_GAP: meta-statistics signal (open gaps register) has no chart-fact FORENSIC ID
   rpt_deep_dive: "Architecture §B.4; §B.12; §J.1"
 
 SIG.MSR.420:
@@ -9870,7 +9870,7 @@ SIG.MSR.420:
   provenance: v1_0-confirmed-by-v8
   domains_affected: [career, wealth, spirit, relationships, mind, health, children, parents, travel]
   confidence: 1.00
-  v6_ids_consumed: []
+  v6_ids_consumed: []  # FORENSIC_GAP: meta-statistics signal (completeness certificate) has no chart-fact FORENSIC ID
   rpt_deep_dive: "Architecture §C.3.2; §J.1"
 
 SIG.MSR.421:
@@ -10211,7 +10211,7 @@ SIG.MSR.436:
   provenance: v2_0-new-421-443
   domains_affected: [wealth, spirit, mind]
   confidence: 0.78
-  v6_ids_consumed: [D2.MERCURY, D2.JUPITER]
+  v6_ids_consumed: [D2.CANCER, D2.LEO, PLN.MERCURY, PLN.JUPITER]
   rpt_deep_dive: "UCN_v3_0 §XXII, REPORT_SPIRITUAL_v1_1"
 
 SIG.MSR.437:
@@ -10395,7 +10395,7 @@ SIG.MSR.444:
   provenance: v2_0-new-444-496
   domains_affected: [career, mind]
   confidence: 0.78
-  v6_ids_consumed: [NAK.ASHWINI]
+  v6_ids_consumed: [MET.LAGNA.NAK, MET.LAGNA.PADA]
   rpt_deep_dive: "DEEP_ANALYSIS FS5"
 
 SIG.MSR.445:
@@ -10413,7 +10413,7 @@ SIG.MSR.445:
   provenance: v2_0-new-444-496
   domains_affected: [relationships, spirit]
   confidence: 0.84
-  v6_ids_consumed: [NAK.PBHA]
+  v6_ids_consumed: [NAK.PURVA_BHADRAPADA, MET.MOON.NAK, MET.MOON.PADA]
   rpt_deep_dive: "UCN_v4_0 Part I"
 
 SIG.MSR.446:
@@ -10431,7 +10431,7 @@ SIG.MSR.446:
   provenance: v2_0-new-444-496
   domains_affected: [career]
   confidence: 0.82
-  v6_ids_consumed: [NAK.SRAVANA]
+  v6_ids_consumed: [PLN.SUN]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
 
 SIG.MSR.447:
@@ -10449,7 +10449,7 @@ SIG.MSR.447:
   provenance: v2_0-new-444-496
   domains_affected: [relationships]
   confidence: 0.80
-  v6_ids_consumed: [NAK.SWATI]
+  v6_ids_consumed: [PLN.MARS]
   rpt_deep_dive: "REPORT_RELATIONSHIPS"
 
 SIG.MSR.448:
@@ -10467,7 +10467,7 @@ SIG.MSR.448:
   provenance: v2_0-new-444-496
   domains_affected: [career, mind]
   confidence: 0.88
-  v6_ids_consumed: [NAK.USHA]
+  v6_ids_consumed: [PLN.MERCURY, D9.MERCURY]
   rpt_deep_dive: "MSR.413"
 
 SIG.MSR.449:
@@ -10485,7 +10485,7 @@ SIG.MSR.449:
   provenance: v2_0-new-444-496
   domains_affected: [spirit, wealth]
   confidence: 0.82
-  v6_ids_consumed: [NAK.PSHA]
+  v6_ids_consumed: [PLN.JUPITER]
   rpt_deep_dive: "REPORT_SPIRITUAL"
 
 SIG.MSR.450:
@@ -10503,7 +10503,7 @@ SIG.MSR.450:
   provenance: v2_0-new-444-496
   domains_affected: [wealth, relationships]
   confidence: 0.80
-  v6_ids_consumed: [NAK.PSHA]
+  v6_ids_consumed: [PLN.VENUS]
   rpt_deep_dive: "REPORT_FINANCIAL"
 
 SIG.MSR.451:
@@ -10521,7 +10521,7 @@ SIG.MSR.451:
   provenance: v2_0-new-444-496
   domains_affected: [career, relationships]
   confidence: 0.86
-  v6_ids_consumed: [NAK.VISA]
+  v6_ids_consumed: [PLN.SATURN]
   rpt_deep_dive: "MSR.391"
 
 SIG.MSR.452:
@@ -10539,7 +10539,7 @@ SIG.MSR.452:
   provenance: v2_0-new-444-496
   domains_affected: [wealth]
   confidence: 0.84
-  v6_ids_consumed: [NAK.ROHI]
+  v6_ids_consumed: [PLN.RAHU]
   rpt_deep_dive: "REPORT_FINANCIAL"
 
 SIG.MSR.453:
@@ -10557,7 +10557,7 @@ SIG.MSR.453:
   provenance: v2_0-new-444-496
   domains_affected: [spirit, health]
   confidence: 0.80
-  v6_ids_consumed: [NAK.JYE]
+  v6_ids_consumed: [PLN.KETU]
   rpt_deep_dive: "REPORT_HEALTH_LONGEVITY"
 
 SIG.MSR.454:
@@ -10839,7 +10839,7 @@ SIG.MSR.469:
   provenance: v2_0-new-444-496
   domains_affected: [career, spirit]
   confidence: 0.78
-  v6_ids_consumed: [DSH.HANDOFF.2027]
+  v6_ids_consumed: [DSH.V.MD.MERCURY.2010]
   rpt_deep_dive: "LIFETIME_TIMELINE"
 
 SIG.MSR.470:
@@ -10857,7 +10857,7 @@ SIG.MSR.470:
   provenance: v2_0-new-444-496
   domains_affected: [spirit, health]
   confidence: 0.85
-  v6_ids_consumed: [DSH.V.KETU]
+  v6_ids_consumed: [DSH.V.MD.MERCURY.2010]
   rpt_deep_dive: "UCN_v4_0"
 
 SIG.MSR.471:
@@ -10875,7 +10875,7 @@ SIG.MSR.471:
   provenance: v2_0-new-444-496
   domains_affected: [relationships, wealth]
   confidence: 0.77
-  v6_ids_consumed: [DSH.V.VENUS]
+  v6_ids_consumed: [DSH.V.MD.MERCURY.2010]
   rpt_deep_dive: "MAINTENANCE_SCHEDULE"
 
 SIG.MSR.472:
@@ -10893,7 +10893,7 @@ SIG.MSR.472:
   provenance: v2_0-new-444-496
   domains_affected: [career]
   confidence: 0.84
-  v6_ids_consumed: [DSH.CURRENT]
+  v6_ids_consumed: [DSH.V.MD.MERCURY.2010]
   rpt_deep_dive: "REPORT_CAREER_DHARMA"
 
 SIG.MSR.473:
@@ -10911,7 +10911,7 @@ SIG.MSR.473:
   provenance: v2_0-new-444-496
   domains_affected: [spirit]
   confidence: 0.65
-  v6_ids_consumed: [DSH.AD]
+  v6_ids_consumed: [DSH.V.MD.MERCURY.2010]
   rpt_deep_dive: "FALSIFIER preview §2.10"
 
 SIG.MSR.474:
@@ -10929,7 +10929,7 @@ SIG.MSR.474:
   provenance: v2_0-new-444-496
   domains_affected: [career, mind]
   confidence: 0.72
-  v6_ids_consumed: [DSH.CHARA]
+  v6_ids_consumed: [DSH.C.SCORPIO.2026]
   rpt_deep_dive: "DEEP_ANALYSIS"
 
 SIG.MSR.475:
@@ -10947,7 +10947,7 @@ SIG.MSR.475:
   provenance: v2_0-new-444-496
   domains_affected: [mind, health]
   confidence: 0.70
-  v6_ids_consumed: [DSH.Y.YOGINI]
+  v6_ids_consumed: [DSH.Y.BHADRIKA.2021]
   rpt_deep_dive: "LIFE_EVENT_LOG"
 
 SIG.MSR.476:
@@ -10965,7 +10965,7 @@ SIG.MSR.476:
   provenance: v2_0-new-444-496
   domains_affected: [health, spirit]
   confidence: 0.75
-  v6_ids_consumed: [TRS.SS3]
+  v6_ids_consumed: [TRS.SS.FUT1, TRS.SS.FUT2]
   rpt_deep_dive: "MAINTENANCE_SCHEDULE"
 
 SIG.MSR.477:
@@ -10983,7 +10983,7 @@ SIG.MSR.477:
   provenance: v2_0-new-444-496
   domains_affected: [mind, career]
   confidence: 0.86
-  v6_ids_consumed: [TRS.SATURN]
+  v6_ids_consumed: [TRS.SS.C2.P1, TRS.SS.C2.P6, PLN.SATURN]
   rpt_deep_dive: "MATRIX_SIGNS"
 
 SIG.MSR.478:
@@ -11001,7 +11001,7 @@ SIG.MSR.478:
   provenance: v2_0-new-444-496
   domains_affected: [spirit, career]
   confidence: 0.68
-  v6_ids_consumed: [TRS.JUPITER]
+  v6_ids_consumed: [PLN.JUPITER]
   rpt_deep_dive: "LEL cluster"
 
 SIG.MSR.479:
@@ -11019,7 +11019,7 @@ SIG.MSR.479:
   provenance: v2_0-new-444-496
   domains_affected: [career, relationships]
   confidence: 0.70
-  v6_ids_consumed: [TRS.RAHU]
+  v6_ids_consumed: [PLN.RAHU]
   rpt_deep_dive: "FALSIFIER §2.7 cousin"
 
 SIG.MSR.480:
@@ -11037,7 +11037,7 @@ SIG.MSR.480:
   provenance: v2_0-new-444-496
   domains_affected: [career]
   confidence: 0.84
-  v6_ids_consumed: [TRS.SATURN.RETURN]
+  v6_ids_consumed: [PLN.SATURN, TRS.SS.FUT1]
   rpt_deep_dive: "MSR.046"
 
 SIG.MSR.481:
@@ -11163,7 +11163,7 @@ SIG.MSR.487:
   provenance: v2_0-new-444-496
   domains_affected: [parents]
   confidence: 0.68
-  v6_ids_consumed: [D12.SUN]
+  v6_ids_consumed: [PLN.SUN]
   rpt_deep_dive: "REPORT_PARENTS"
 
 SIG.MSR.488:
@@ -11181,7 +11181,7 @@ SIG.MSR.488:
   provenance: v2_0-new-444-496
   domains_affected: [children]
   confidence: 0.74
-  v6_ids_consumed: [D7.MOON]
+  v6_ids_consumed: [PLN.MOON]
   rpt_deep_dive: "REPORT_CHILDREN"
 
 SIG.MSR.489:
@@ -11199,7 +11199,7 @@ SIG.MSR.489:
   provenance: v2_0-new-444-496
   domains_affected: [spirit]
   confidence: 0.70
-  v6_ids_consumed: [D20.SUN]
+  v6_ids_consumed: [D20.PISCES, PLN.SUN]
   rpt_deep_dive: "REPORT_SPIRITUAL"
 
 SIG.MSR.490:
@@ -11217,7 +11217,7 @@ SIG.MSR.490:
   provenance: v2_0-new-444-496
   domains_affected: [spirit, health]
   confidence: 0.65
-  v6_ids_consumed: [D27]
+  v6_ids_consumed: [PLN.MOON]
   rpt_deep_dive: "MATRIX_DIVISIONALS"
 
 SIG.MSR.491:
@@ -11235,7 +11235,7 @@ SIG.MSR.491:
   provenance: v2_0-new-444-496
   domains_affected: [wealth]
   confidence: 0.64
-  v6_ids_consumed: [D40.VENUS]
+  v6_ids_consumed: [PLN.VENUS]
   rpt_deep_dive: "FORENSIC divisionals"
 
 SIG.MSR.492:
@@ -11253,7 +11253,7 @@ SIG.MSR.492:
   provenance: v2_0-new-444-496
   domains_affected: [spirit]
   confidence: 0.60
-  v6_ids_consumed: [D60]
+  v6_ids_consumed: [D60.LAGNA]
   rpt_deep_dive: "MSR.042"
 
 SIG.MSR.493:
@@ -11271,7 +11271,7 @@ SIG.MSR.493:
   provenance: v2_0-new-444-496
   domains_affected: [wealth, career]
   confidence: 0.72
-  v6_ids_consumed: [UPG.MAANDI]
+  v6_ids_consumed: [UPG.MANDI]
   rpt_deep_dive: "JH §1"
 
 SIG.MSR.494:
@@ -11307,7 +11307,7 @@ SIG.MSR.495:
   provenance: v2_0-new-444-496
   domains_affected: [wealth, relationships, career]
   confidence: 0.85
-  v6_ids_consumed: [YOG.CROSSWEAVE.37]
+  v6_ids_consumed: [HSE.7, HSE.3, LAG.SHREE, ARD.UL]
   rpt_deep_dive: "MSR.443"
 
 SIG.MSR.496:
@@ -11325,6 +11325,6 @@ SIG.MSR.496:
   provenance: v2_0-new-444-496
   domains_affected: [parents, career, children]
   confidence: 0.74
-  v6_ids_consumed: [EVT.ECLIPSE]
+  v6_ids_consumed: [PLN.RAHU, PLN.KETU]
   rpt_deep_dive: "LIFE_EVENT_LOG"
 

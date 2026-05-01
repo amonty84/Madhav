@@ -20,6 +20,10 @@ import {
   holisticRemainderRule,
   crossNativeMetaRule,
   CROSS_NATIVE_PLACEHOLDER,
+  remedialRule,
+  domainReportRule,
+  timelineRule,
+  DOMAIN_TO_CANONICAL,
 } from '../composition_rules'
 import type { AssetEntry, ManifestData, QueryPlan } from '../types'
 
@@ -62,6 +66,13 @@ function makePlan(query_class: QueryPlan['query_class'], forward_looking = false
   }
 }
 
+function makePlanWith(
+  query_class: QueryPlan['query_class'],
+  overrides: Partial<QueryPlan> = {},
+): QueryPlan {
+  return { ...makePlan(query_class), ...overrides }
+}
+
 function makeManifest(entries: AssetEntry[]): ManifestData {
   const byId = new Map(entries.map(e => [e.canonical_id, e]))
   return { fingerprint: 'fp', entries, byId }
@@ -81,6 +92,19 @@ const RESONANCE = makeAsset('RESONANCE_REGISTER_v1_0', '035_DISCOVERY_LAYER/REGI
 
 const FULL_MANIFEST = makeManifest([
   FORENSIC, CGM, UCN, CDLM, RM, LEL, SADE, PATTERN, CONTRADICTION, CLUSTER, RESONANCE,
+])
+
+// W6-R1 fixtures
+const REMEDIAL_P1 = makeAsset('REMEDIAL_CODEX_v2_0_PART1', '04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md')
+const REMEDIAL_P2 = makeAsset('REMEDIAL_CODEX_v2_0_PART2', '04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART2.md')
+const REPORT_CAREER = makeAsset('REPORT_CAREER_DHARMA_v1_1', '03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md')
+const REPORT_RELATIONSHIPS = makeAsset('REPORT_RELATIONSHIPS_v1_1', '03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md')
+const REPORT_FINANCIAL = makeAsset('REPORT_FINANCIAL_v2_1', '03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md')
+const TIMELINE = makeAsset('LIFETIME_TIMELINE_v1_0', '05_TEMPORAL_ENGINES/LIFETIME_TIMELINE_v1_0.md')
+
+const W6_MANIFEST = makeManifest([
+  FORENSIC, CGM, UCN, CDLM, RM, LEL, SADE, PATTERN, CONTRADICTION, CLUSTER, RESONANCE,
+  REMEDIAL_P1, REMEDIAL_P2, REPORT_CAREER, REPORT_RELATIONSHIPS, REPORT_FINANCIAL, TIMELINE,
 ])
 
 // ── floor rule ──────────────────────────────────────────────────────────────
@@ -235,5 +259,130 @@ describe('crossNativeMetaRule', () => {
 
   it('role is cross_native_meta', () => {
     expect(crossNativeMetaRule.role).toBe('cross_native_meta')
+  })
+})
+
+// ── W6-R1: remedialRule ─────────────────────────────────────────────────────
+
+describe('remedialRule', () => {
+  it('applies only to remedial query class', () => {
+    expect(remedialRule.applies(makePlan('remedial'))).toBe(true)
+    for (const c of ['factual', 'interpretive', 'predictive', 'cross_domain',
+                     'discovery', 'holistic', 'cross_native'] as const) {
+      expect(remedialRule.applies(makePlan(c))).toBe(false)
+    }
+  })
+
+  it('adds REMEDIAL_CODEX PART1 and PART2 when present in manifest', () => {
+    const assets = remedialRule.assets_to_add(makePlan('remedial'), W6_MANIFEST)
+    const ids = assets.map(a => a.canonical_id)
+    expect(ids).toContain('REMEDIAL_CODEX_v2_0_PART1')
+    expect(ids).toContain('REMEDIAL_CODEX_v2_0_PART2')
+  })
+
+  it('returns empty array (no error) when REMEDIAL_CODEX absent from manifest', () => {
+    const emptyManifest = makeManifest([FORENSIC, CGM])
+    const assets = remedialRule.assets_to_add(makePlan('remedial'), emptyManifest)
+    expect(assets).toEqual([])
+  })
+
+  it('role is remedial', () => {
+    expect(remedialRule.role).toBe('remedial')
+  })
+})
+
+// ── W6-R1: domainReportRule ─────────────────────────────────────────────────
+
+describe('domainReportRule', () => {
+  it('applies when plan.domains is non-empty', () => {
+    expect(domainReportRule.applies(makePlanWith('interpretive', { domains: ['career'] }))).toBe(true)
+    expect(domainReportRule.applies(makePlanWith('factual', { domains: ['health', 'mind'] }))).toBe(true)
+  })
+
+  it('does not apply when domains is empty', () => {
+    expect(domainReportRule.applies(makePlan('interpretive'))).toBe(false)
+    expect(domainReportRule.applies(makePlan('holistic'))).toBe(false)
+  })
+
+  it('adds the matched REPORT_* entry for career domain', () => {
+    const plan = makePlanWith('interpretive', { domains: ['career'] })
+    const assets = domainReportRule.assets_to_add(plan, W6_MANIFEST)
+    expect(assets.map(a => a.canonical_id)).toContain('REPORT_CAREER_DHARMA_v1_1')
+  })
+
+  it('deduplicates when career and dharma both appear (same report)', () => {
+    const plan = makePlanWith('interpretive', { domains: ['career', 'dharma'] })
+    const assets = domainReportRule.assets_to_add(plan, W6_MANIFEST)
+    const careerEntries = assets.filter(a => a.canonical_id === 'REPORT_CAREER_DHARMA_v1_1')
+    expect(careerEntries).toHaveLength(1)
+  })
+
+  it('returns empty for unrecognized domain without error', () => {
+    const plan = makePlanWith('factual', { domains: ['alchemy'] })
+    const assets = domainReportRule.assets_to_add(plan, W6_MANIFEST)
+    expect(assets).toEqual([])
+  })
+
+  it('role is domain_report', () => {
+    expect(domainReportRule.role).toBe('domain_report')
+  })
+})
+
+// ── W6-R1: timelineRule ─────────────────────────────────────────────────────
+
+describe('timelineRule', () => {
+  it('applies when forward_looking=true AND time_window is set', () => {
+    const plan = makePlanWith('predictive', {
+      forward_looking: true,
+      time_window: { start: '2026-01-01', end: '2029-12-31' },
+    })
+    expect(timelineRule.applies(plan)).toBe(true)
+  })
+
+  it('does not apply when forward_looking=true but time_window absent', () => {
+    const plan = makePlanWith('predictive', { forward_looking: true })
+    expect(timelineRule.applies(plan)).toBe(false)
+  })
+
+  it('does not apply when time_window set but forward_looking=false', () => {
+    const plan = makePlanWith('factual', {
+      forward_looking: false,
+      time_window: { start: '2026-01-01', end: '2029-12-31' },
+    })
+    expect(timelineRule.applies(plan)).toBe(false)
+  })
+
+  it('adds LIFETIME_TIMELINE_v1_0 when in manifest', () => {
+    const plan = makePlanWith('predictive', {
+      forward_looking: true,
+      time_window: { start: '2026-01-01', end: '2029-12-31' },
+    })
+    const assets = timelineRule.assets_to_add(plan, W6_MANIFEST)
+    expect(assets.map(a => a.canonical_id)).toContain('LIFETIME_TIMELINE_v1_0')
+  })
+
+  it('returns empty array without error when temporal entries absent from manifest', () => {
+    const emptyManifest = makeManifest([FORENSIC, CGM])
+    const plan = makePlanWith('predictive', {
+      forward_looking: true,
+      time_window: { start: '2027-01-01', end: '2028-12-31' },
+    })
+    const assets = timelineRule.assets_to_add(plan, emptyManifest)
+    expect(assets).toEqual([])
+  })
+
+  it('role is temporal_engine', () => {
+    expect(timelineRule.role).toBe('temporal_engine')
+  })
+})
+
+// ── W6-R1: DOMAIN_TO_CANONICAL export ──────────────────────────────────────
+
+describe('DOMAIN_TO_CANONICAL', () => {
+  it('is exported and contains expected domain keys', () => {
+    expect(DOMAIN_TO_CANONICAL).toBeDefined()
+    expect(DOMAIN_TO_CANONICAL['career']).toBeDefined()
+    expect(DOMAIN_TO_CANONICAL['financial'].canonicalId).toBe('REPORT_FINANCIAL_v2_1')
+    expect(DOMAIN_TO_CANONICAL['marriage'].canonicalId).toBe('REPORT_RELATIONSHIPS_v1_1')
   })
 })

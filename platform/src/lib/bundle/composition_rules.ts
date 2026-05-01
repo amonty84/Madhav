@@ -181,6 +181,112 @@ const crossNativeMetaRule: CompositionRule = {
   },
 }
 
+// ── Rule 7: remedial ──────────────────────────────────────────────────────────
+
+/**
+ * For remedial queries: add REMEDIAL_CODEX source entries (L4) so the
+ * synthesizer has the full codex in context alongside the retrieval tool results.
+ *
+ * PATH A: REMEDIAL_CODEX_v2_0_PART1 + PART2 are in the manifest — add them directly.
+ * PATH B: Not in manifest — rule fires but adds no assets (the remedial_codex_query
+ *         retrieval tool already surfaces the content via rag_chunks; this rule is a
+ *         no-op bundle-layer gate that logs a missing-entry advisory).
+ */
+const remedialRule: CompositionRule = {
+  name: 'remedial',
+  role: 'remedial',
+
+  applies(plan: QueryPlan): boolean {
+    return plan.query_class === 'remedial'
+  },
+
+  assets_to_add(_plan: QueryPlan, manifest: ManifestData): AssetEntry[] {
+    return collectEntries(manifest, [
+      { canonicalId: 'REMEDIAL_CODEX_v2_0_PART1', pathSubstring: 'REMEDIAL_CODEX_v2_0_PART1' },
+      { canonicalId: 'REMEDIAL_CODEX_v2_0_PART2', pathSubstring: 'REMEDIAL_CODEX_v2_0_PART2' },
+    ])
+    // collectEntries silently skips missing entries — path B is naturally handled.
+  },
+}
+
+// ── Rule 8: domain_report ─────────────────────────────────────────────────────
+
+/**
+ * When a query references specific domains, add the matching REPORT_* manifest
+ * entries so the synthesizer has the full L3 domain synthesis in context.
+ *
+ * Domain → canonical_id mapping uses v1_1 (or v2_1 for financial) per current manifest.
+ * collectEntries silently skips any missing entry.
+ */
+
+const DOMAIN_TO_CANONICAL: Record<string, { canonicalId: string; pathSubstring: string }> = {
+  career:        { canonicalId: 'REPORT_CAREER_DHARMA_v1_1',     pathSubstring: 'REPORT_CAREER_DHARMA' },
+  dharma:        { canonicalId: 'REPORT_CAREER_DHARMA_v1_1',     pathSubstring: 'REPORT_CAREER_DHARMA' },
+  children:      { canonicalId: 'REPORT_CHILDREN_v1_1',          pathSubstring: 'REPORT_CHILDREN' },
+  financial:     { canonicalId: 'REPORT_FINANCIAL_v2_1',         pathSubstring: 'REPORT_FINANCIAL' },
+  finance:       { canonicalId: 'REPORT_FINANCIAL_v2_1',         pathSubstring: 'REPORT_FINANCIAL' },
+  wealth:        { canonicalId: 'REPORT_FINANCIAL_v2_1',         pathSubstring: 'REPORT_FINANCIAL' },
+  health:        { canonicalId: 'REPORT_HEALTH_LONGEVITY_v1_1',  pathSubstring: 'REPORT_HEALTH_LONGEVITY' },
+  longevity:     { canonicalId: 'REPORT_HEALTH_LONGEVITY_v1_1',  pathSubstring: 'REPORT_HEALTH_LONGEVITY' },
+  parents:       { canonicalId: 'REPORT_PARENTS_v1_1',           pathSubstring: 'REPORT_PARENTS' },
+  psychology:    { canonicalId: 'REPORT_PSYCHOLOGY_MIND_v1_1',   pathSubstring: 'REPORT_PSYCHOLOGY_MIND' },
+  mind:          { canonicalId: 'REPORT_PSYCHOLOGY_MIND_v1_1',   pathSubstring: 'REPORT_PSYCHOLOGY_MIND' },
+  relationships: { canonicalId: 'REPORT_RELATIONSHIPS_v1_1',     pathSubstring: 'REPORT_RELATIONSHIPS' },
+  marriage:      { canonicalId: 'REPORT_RELATIONSHIPS_v1_1',     pathSubstring: 'REPORT_RELATIONSHIPS' },
+  spiritual:     { canonicalId: 'REPORT_SPIRITUAL_v1_1',         pathSubstring: 'REPORT_SPIRITUAL' },
+  travel:        { canonicalId: 'REPORT_TRAVEL_v1_1',            pathSubstring: 'REPORT_TRAVEL' },
+}
+
+const domainReportRule: CompositionRule = {
+  name: 'domain_report',
+  role: 'domain_report',
+
+  applies(plan: QueryPlan): boolean {
+    return plan.domains.length > 0
+  },
+
+  assets_to_add(plan: QueryPlan, manifest: ManifestData): AssetEntry[] {
+    const targets: Array<{ canonicalId: string; pathSubstring: string }> = []
+    const seen = new Set<string>()
+    for (const domain of plan.domains) {
+      const mapping = DOMAIN_TO_CANONICAL[domain.toLowerCase()]
+      if (mapping && !seen.has(mapping.canonicalId)) {
+        targets.push(mapping)
+        seen.add(mapping.canonicalId)
+      }
+    }
+    return collectEntries(manifest, targets)
+  },
+}
+
+// ── Rule 9: temporal_engine ───────────────────────────────────────────────────
+
+/**
+ * For forward-looking queries with a time_window: add 05_TEMPORAL_ENGINES
+ * manifest entries (lifetime timeline, sade sati cycles) so the synthesizer
+ * has the temporal arc documents in context.
+ *
+ * Gate: both forward_looking AND time_window must be set. Forward-looking alone
+ * (no explicit window) does not fire this rule — the predictiveRule already
+ * adds LEL and SADE_SATI_CYCLES_ALL for that case.
+ */
+const timelineRule: CompositionRule = {
+  name: 'temporal_engine',
+  role: 'temporal_engine',
+
+  applies(plan: QueryPlan): boolean {
+    return plan.forward_looking === true && plan.time_window != null
+  },
+
+  assets_to_add(_plan: QueryPlan, manifest: ManifestData): AssetEntry[] {
+    return collectEntries(manifest, [
+      { canonicalId: 'LIFETIME_TIMELINE_v1_0',   pathSubstring: 'LIFETIME_TIMELINE_v1_0' },
+      { canonicalId: 'SADE_SATI_CYCLES_ALL',      pathSubstring: 'SADE_SATI_CYCLES_ALL' },
+    ])
+    // collectEntries silently skips entries absent from manifest.
+  },
+}
+
 // ── Exported rule registry ────────────────────────────────────────────────────
 
 /**
@@ -194,6 +300,9 @@ export const COMPOSITION_RULES: CompositionRule[] = [
   discoveryRule,
   holisticRemainderRule,
   crossNativeMetaRule,
+  remedialRule,       // W6-R1
+  domainReportRule,   // W6-R1
+  timelineRule,       // W6-R1
 ]
 
 export {
@@ -204,4 +313,8 @@ export {
   holisticRemainderRule,
   crossNativeMetaRule,
   CROSS_NATIVE_PLACEHOLDER,
+  remedialRule,       // W6-R1
+  domainReportRule,   // W6-R1
+  timelineRule,       // W6-R1
+  DOMAIN_TO_CANONICAL, // W6-R1 — exported for test use
 }

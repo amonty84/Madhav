@@ -1,6 +1,9 @@
 {
   "schema": "06_LEARNING_LAYER/SCHEMAS/cluster_schema_v0_1.json",
   "version": "1.0",
+  "status": "SUPERSEDED",
+  "successor": "CLUSTER_ATLAS_v1_1",
+  "superseded_at": "2026-04-30T10:52:07+00:00",
   "produced_by_session": "Madhav_M2A_Exec_11",
   "produced_at": "2026-04-27",
   "clusters": [
