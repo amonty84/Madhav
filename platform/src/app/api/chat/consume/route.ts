@@ -472,7 +472,7 @@ export async function POST(request: Request) {
   }
   }
 
-  const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style)
+  const systemPrompt = consumeSystemPrompt(chart, reportsResult.rows, style, !lelContextEnabled)
 
   console.log(`[consume] pre-stream setup: ${Date.now() - setupStart}ms  stack=${selectedStack}  model=${modelId}  style=${style}`)
 

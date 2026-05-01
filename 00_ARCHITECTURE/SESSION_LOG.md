@@ -11422,3 +11422,16 @@ Cloud SQL exclusively. Applied migrations 022–031 to `amjis-postgres` via
 Cloud SQL Auth Proxy (port 5433). All 10 migrations idempotent; applied
 without errors. Verified 5 primary tables present: dasha_periods,
 signal_states, kp_sublords, varshaphala, shadbala. Commit: 762521f.
+
+---
+
+**M4-FEAT-LEL-TOGGLE** | 2026-05-01 | CLOSED
+Three-track parallel feature build. LEL context toggle (Blind Mode) for
+the Consume tab. Track A: LEL_CONTEXT_ENABLED flag + buildConsumeTools()
++ route.ts lel_context_enabled parsing + blind-mode PREDICTION_LEDGER
+logging (uses extractText() per UIMessage.parts type). Track B:
+ConsumeChat.tsx Informed/Blind toggle button + amber banner +
+lel_context_enabled forwarded via extraBody in useChatSession (no hook
+edit required). Track C: consumeSystemPrompt() blindMode param + BLIND
+MODE declaration block. Track D: blindMode wire-up verified + tsc clean +
+tests confirmed. Commit: 659e031 (pre-amend hash 522229d; SESSION_LOG amend shifted to 659e031).
