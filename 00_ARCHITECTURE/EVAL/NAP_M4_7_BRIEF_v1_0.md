@@ -2,7 +2,7 @@
 artifact: 00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md
 canonical_id: NAP_M4_7_BRIEF
 version: "1.0"
-status: PENDING_NATIVE_DECISION
+status: M4_APPROVED
 authored_by: M4-C-P7-M4D-ENTRY-PREP
 authored_at: 2026-05-02
 nap_id: NAP.M4.7
