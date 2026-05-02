@@ -17611,3 +17611,191 @@ session_close:
 S1.10 / S1.11 / S1.12 — three UI component sessions (KPI tiles, Charts, Drill-down). All can run in parallel after this S1.9 close per `OBSERVATORY_PLAN §6.1`. They consume the AuthGate + Layout shell + typed API client this session lands. S1.13 wiring + e2e is the funnel session that follows.
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-9-frontend-scaffold`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_4_ANTHROPIC_OBSERVED_ADAPTER (2026-05-03)
+
+**Session.** Phase O sub-phase O.1 fourth implementation session — Anthropic provider adapter (S1.4 of the OBSERVATORY_PLAN §5.1 13-session decomposition). Cowork thread: `Ustad S1.4 — Anthropic observed adapter`. Worktree: `feature/phase-o-observatory-ustad-s1-4-anthropic` (cut from umbrella `feature/phase-o-observatory` at commit `0bec216`).
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_4_ANTHROPIC_OBSERVED_ADAPTER
+  cowork_thread_name: "Ustad S1.4 — Anthropic observed adapter"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O1.S1.4
+  predecessor_session: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/providers/anthropic_observed.ts
+      - platform/src/lib/llm/providers/__tests__/anthropic_observed.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md   # close-time append only
+    must_not_touch:
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/openai_observed.ts
+      - platform/src/lib/llm/providers/gemini_observed.ts
+      - platform/src/lib/llm/providers/deepseek_observed.ts
+      - platform/src/lib/llm/providers/nim_observed.ts
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - platform/src/app/**
+      - platform/src/components/**
+      - 00_ARCHITECTURE/**   # except SESSION_LOG.md per may_touch
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: platform/src/lib/llm/observability/types.ts
+      fingerprint_sha256: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a
+    - file: platform/src/lib/llm/observability/observe.ts
+      fingerprint_sha256: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0
+    - file: platform/src/lib/llm/observability/index.ts
+      fingerprint_sha256: 708ce5e49064076557432e93aa6ce1cbadfe1aaca274d2540db59fe6fa208ef4
+  canonical_artifact_fingerprint_check:
+    - {canonical_id: MACRO_PLAN, declared_fingerprint: 4ed721349441dc15dc9042428f28095c08d5be66af31707beab33d48f9235223, observed_fingerprint: 4ed721349441dc15dc9042428f28095c08d5be66af31707beab33d48f9235223, match: true}
+    - {canonical_id: CANONICAL_ARTIFACTS, declared_fingerprint: 8ec04dfc8007b72f8a6c82db2814183ce9ceba9436c104f384217d5a3595d12a, observed_fingerprint: 8ec04dfc8007b72f8a6c82db2814183ce9ceba9436c104f384217d5a3595d12a, match: true}
+    - {canonical_id: CLAUDE, declared_fingerprint: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797, observed_fingerprint: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797, match: true}
+    - {canonical_id: OBSERVATORY_PLAN_v1_0, declared_fingerprint: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b, observed_fingerprint: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b, match: true}
+  mirror_pair_freshness_check:
+    - {pair_id: MP.1, claude_side: CLAUDE.md, gemini_side: .geminirules, stale: false}
+    - {pair_id: MP.2, claude_side: "composite(SESSION_LOG + CURRENT_STATE + active plan pointers)", gemini_side: .gemini/project_state.md, stale: false}
+    - {pair_id: MP.3, claude_side: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md, gemini_side: "compact MP ref in .geminirules + .gemini/project_state.md", stale: false}
+    - {pair_id: MP.4, claude_side: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md, gemini_side: "Phase-B pointer in .gemini/project_state.md", stale: false}
+    - {pair_id: MP.5, claude_side: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json, gemini_side: "canonical-path block in .geminirules", stale: false}
+    - {pair_id: MP.6, claude_side: 00_ARCHITECTURE/GOVERNANCE_STACK_v1_0.md, gemini_side: null, claude_only: true, stale: false}
+    - {pair_id: MP.7, claude_side: 00_ARCHITECTURE/SESSION_LOG.md, gemini_side: null, claude_only: true, stale: false}
+    - {pair_id: MP.8, claude_side: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md, gemini_side: "compact architecture ref in .geminirules + .gemini/project_state.md", stale: false}
+    - {pair_id: MP.9, claude_side: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md, gemini_side: ".geminirules §E + .gemini/project_state.md Phase O block", stale: false}
+  native_directive_obligations: []
+  red_team_due: false
+  notes: "Phase O sub-phase O.1 implementation session (S1.4 Anthropic adapter). Parallel-safe with S1.5–S1.8 (disjoint may_touch siblings under platform/src/lib/llm/providers/). SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables (W1–W3)
+
+**W1. Anthropic observed adapter authored.** [`platform/src/lib/llm/providers/anthropic_observed.ts`](../platform/src/lib/llm/providers/anthropic_observed.ts) (sha256 `c21c0f64055ef3ca37ca50eccb91ad4951c0280dbdb7c190def3c1ea732c591f`, 422 LOC) — `wrapAnthropic(client, ctx, db)` returns a structurally-typed `ObservedAnthropicAdapter` whose `messages.create()` signature is identical to the underlying `AnthropicClient`'s. Three branches: (a) **non-streaming success** runs `client.messages.create()` once, then forwards to `observe()` with a providerCall that returns the cached raw response — exactly one SDK call, exactly one observe() invocation, exactly one `llm_usage_events` row; (b) **non-streaming HTTP error (4xx/5xx/429)** maps the error code via `mapAnthropicError()` and attaches the mapped code to the error's `.code` so `observe()`'s built-in extractor picks it up — re-throws the original SDK error to the caller; (c) **non-streaming timeout** bypasses `observe()` (which hardcodes `status='error'` for thrown errors) and calls `persistObservation` directly with `status='timeout'`, `error_code='timeout'`, then re-throws. **Streaming** is pass-through via `observeStream()` — yields each chunk immediately; accumulates usage from `message_start.message.usage` (initial input_tokens) and `message_delta.usage` (output + cache deltas); single persist after stream completes.
+  - **Token extraction.** `extractAnthropicUsage()` maps `response.usage` → `TokenUsage` per OBSERVATORY_PLAN §4.1: `input_tokens`/`output_tokens` direct, `cache_creation_input_tokens` → `cache_write_tokens`, `cache_read_input_tokens` → `cache_read_tokens`, `reasoning_tokens` always 0 (Anthropic does not expose this field today).
+  - **provider_request_id.** `extractAnthropicRequestId()` reads `_request_id` (raw SDK convention), `request_id`, then `headers['request-id']` / `headers['x-request-id']` from the response object, with fallback to caller-provided `options.headers`. Headers may be either a `Headers` instance or a plain `Record<string, string | string[] | undefined>`.
+  - **Error mapping.** `mapAnthropicError()` returns `{status, error_code}`: timeout detection on `code/name` ∈ {`ETIMEDOUT`, `AbortError`, `TimeoutError`, `timeout`} or message contains "timeout" / "timed out" → `{timeout, timeout}`; HTTP 429 → `{error, rate_limited}`; HTTP 5xx → `{error, server_error}`; HTTP 400/401/403 → `{error, error.type}` if present, else `{error, http_<status>}`; otherwise falls back to `code`/`name` or `unknown_error`.
+  - **No provider SDK import.** Adapter uses structural typing for `AnthropicClient`/`AnthropicMessageResponse`/`AnthropicStreamEvent`/`AnthropicCreateParams`/`AnthropicCallOptions`. The project does not currently depend on `@anthropic-ai/sdk`; the adapter is the integration surface for any path that adopts the raw SDK.
+  - **Parameters jsonb.** `buildBaseRequest()` strips the `messages` field from `params` before stuffing into `parameters` jsonb, to keep PII gated solely by the `OBSERVATORY_HASH_PROMPTS` redaction policy on `prompt_text`/`system_prompt`/`response_text`.
+
+**W2. Test suite authored.** [`platform/src/lib/llm/providers/__tests__/anthropic_observed.test.ts`](../platform/src/lib/llm/providers/__tests__/anthropic_observed.test.ts) (sha256 `b27e2e8fb341828a77d9e94f407645e5a063ae6ff10b3726f73325845b5f3933`). 11 cases across the brief's 8 ACs (cases 2, 3, 8 split into helper-function + end-to-end pairs). All pass.
+  - **Test 1.** Non-streaming success: persisted row carries correct `conversation_id` / `prompt_id` / `provider='anthropic'` / `model='claude-opus-4-7'` / `pipeline_stage='synthesize'` / `prompt_text` / `system_prompt` / `status='success'` / `input_tokens=100` / `output_tokens=50` / `reasoning_tokens=0`. `parameters` jsonb contains `model` + `max_tokens` but NOT `messages`.
+  - **Test 2.** Standard usage extraction (no cache): `extractAnthropicUsage` direct unit + end-to-end persisted-row verification.
+  - **Test 3.** Cache usage extraction: `cache_creation_input_tokens=2048` → `cache_write_tokens=2048`; `cache_read_input_tokens=8192` → `cache_read_tokens=8192`; computed cost = 0.0111876 USD per the seeded pricing fixture (3.0/15.0/0.3/3.75 per million for input/output/cache_read/cache_write).
+  - **Test 4.** Streaming: 7-event mock stream (`message_start`, content blocks, `message_delta`, `message_stop`); all chunks forwarded in order; one INSERT after stream completes; row reflects `input_tokens=200`, `output_tokens=75`, `cache_write_tokens=64`, `cache_read_tokens=256`.
+  - **Test 5.** HTTP 429 → row has `status='error'`, `error_code='rate_limited'`; original error re-thrown.
+  - **Test 6.** HTTP 500 → row has `status='error'`, `error_code='server_error'`; original error re-thrown.
+  - **Test 7.** Timeout (`AbortError` + `code='ETIMEDOUT'`) → row has `status='timeout'`, `error_code='timeout'`, `input_tokens=0`, `output_tokens=0`; original error re-thrown.
+  - **Test 8.** Compile-time signature parity (type-level `AdapterCreate ≡ ClientCreate`); helper function spot-checks (request-id from `_request_id` / headers / `x-request-id`; error-code mapping for 429 / 503 / 401-with-error.type / `AbortError`).
+  - **Result:** **vitest 11/11 PASS** (357 ms duration; 5 test files passed when running the full LLM regression suite — 23 tests total, no observability shim regression).
+
+**W3. Governance scripts run.**
+  - `mirror_enforcer.py`: 0 findings; **exit 0**; 9 pairs checked (MP.1–MP.9); 9 passed; 2 declared claude_only (MP.6, MP.7). Clean.
+  - `drift_detector.py`: 327 findings; **exit 2**. Identical 327 carry-forward as S1.3/S1.2/S1.1 close baselines — all pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on canonical-corpus tree (declared in must_not_touch). **NONE introduced by this S1.4 session.**
+  - `schema_validator.py` (full corpus): 107 violations; **exit 2**. Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries; **NONE introduced by this session**. None of the 107 violations name a file from this session's may_touch.
+  - `schema_validator.py --close-checklist`: 3 HIGH violations; **exit 2**. (1) `close_drift_detector_run_nonzero_exit` + (2) `close_schema_validator_run_nonzero_exit` — same documented governance-protocol gap S1.1/S1.2/S1.3/S0.1/M4-D-S1 hit (validator's strict whitelist `{0, 3+known_residuals}` does not yet implement the §F policy intent for HIGH-tier carry-forwards). (3) `scope_boundary_violation` on `00_ARCHITECTURE/SESSION_LOG.md` — same gap S1.1/S1.3 hit; brief explicitly allows SESSION_LOG.md append at close as the only `00_ARCHITECTURE/**` exception, but the validator does not honor that exception. Brief AC (`schema_validator.py exits 0 or exit 2`) + ONGOING_HYGIENE_POLICIES §F policy intent govern; close proceeds per S1.1/S1.2/S1.3/S0.1/M4-D-S1 precedent.
+  - `schema_validator.py --handshake`: 0 violations; **exit 0**.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_4_ANTHROPIC_OBSERVED_ADAPTER
+  closed_at: 2026-05-03T03:15:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/providers/anthropic_observed.ts, mutation: created, sha256_after: c21c0f64055ef3ca37ca50eccb91ad4951c0280dbdb7c190def3c1ea732c591f, scope: in}
+    - {path: platform/src/lib/llm/providers/__tests__/anthropic_observed.test.ts, mutation: created, sha256_after: b27e2e8fb341828a77d9e94f407645e5a063ae6ff10b3726f73325845b5f3933, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_4 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session — implementation-class session per OBSERVATORY_PLAN §6.3 mirror-update funneling"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude-side composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); .gemini/project_state.md unchanged — funneled at sub-phase O.1 close per §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, claude_only: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.4 — per-provider implementation session, not plan revision"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Identical 327 carry-forward as S1.3 close baseline. NONE introduced by this S1.4 session. Acceptable per ONGOING_HYGIENE_POLICIES §F + S1.1/S1.2/S1.3 close precedents."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    rationale: "Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries; NONE introduced by this session. Brief AC permits exit 2."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: 0, desync_pairs: [], rationale: "9 pairs checked; 9 passed; 2 declared claude_only. Clean."}
+  known_residuals:
+    - {finding_id: WL.14G.02, validator: drift_detector, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1/S1.2/S1.3 baselines"}
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.4 session does not rotate CURRENT_STATE pointers; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase O.1 close per §6.2/§6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Concurrent-workstream session — main-thread build state unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.3 precedent."
+  open_decisions:
+    - id: OD.S1.3.1
+      summary: "Raw provider payload capture — does the Anthropic adapter need a separate llm_provider_raw_responses table or use llm_usage_events.parameters jsonb?"
+      disposition: |
+        S1.4 declines raw payload capture. The adapter persists a structured subset of request
+        params (sans `messages` to avoid PII bleed into a column not gated by
+        OBSERVATORY_HASH_PROMPTS) into `llm_usage_events.parameters` jsonb. Token totals +
+        provider_request_id + status fields capture sufficient observability for §S2.2
+        reconciliation cross-check; full raw_response_payload is not required for Anthropic
+        at S1.4. Final decision on a separate raw-payload table remains DEFERRED to S1.13
+        per brief OD.S1.3.1.
+  close_criteria_met: true
+  unblocks: "Sibling provider adapters S1.5/S1.6/S1.7/S1.8 (parallel-safe; disjoint may_touch under platform/src/lib/llm/providers/). S1.9 frontend scaffold (depends on S1.3 — already unblocked)."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-4-anthropic
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+  handoff_notes: >
+    Sibling provider adapter sessions S1.5 (OpenAI), S1.6 (Gemini), S1.7 (DeepSeek), S1.8 (NIM)
+    are parallel-safe with this S1.4 — each owns a disjoint sibling under
+    platform/src/lib/llm/providers/. Each consumes the same observe()/observeStream()/
+    persistObservation primitives from platform/src/lib/llm/observability/ (frozen S1.2
+    contract). One non-trivial design carry-forward to siblings: observe() hardcodes
+    status='error' for thrown errors and cannot natively produce status='timeout'; this
+    adapter handles that case by detecting timeouts before observe() is called and routing
+    to persistObservation directly. S1.5–S1.8 should adopt the same pattern, or a future
+    refactor session amends the observability contract to accept a status hint.
+```
+
+### Next session objective
+
+**S1.5 (OpenAI), S1.6 (Gemini), S1.7 (DeepSeek), S1.8 (NIM) — four sibling provider adapters**, each parallel-safe with this S1.4 per OBSERVATORY_PLAN §5.1 + §6.1 (disjoint may_touch siblings). **S1.9 (Frontend scaffold)** is also unblocked from S1.3. **OD.S1.3.1** raw-payload disposition for S1.4: declined; structured params captured to `parameters` jsonb (sans `messages`); deferred final-decision to S1.13.
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-4-anthropic`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
