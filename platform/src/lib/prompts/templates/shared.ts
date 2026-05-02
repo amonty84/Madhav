@@ -29,25 +29,6 @@ export const THREE_INTERPRETATION_GATE = `Provide three orthogonal interpretatio
 
 export const FALSIFIER_GATE = `Every time-indexed claim must include a falsifier — a specific observable condition that, if it fails to manifest within the named horizon, falsifies the prediction.`
 
-/**
- * PRESCRIPTIVE_CITATION_GATE — appended to remedial and predictive templates.
- *
- * The L2 citation gate hard-fails any prescriptive response that contains zero
- * SIG.MSR.NNN citations, because guidance without a grounded signal chain cannot
- * be audited or calibrated. This block makes the requirement explicit at the
- * synthesis step so models cannot overlook it.
- *
- * Format note: the context bundle delivers MSR signals with chunk labels of the
- * form [chunk:SIG.MSR.142] — those labels ARE the signal IDs. Copy them into
- * your response text as bare SIG.MSR.NNN references (e.g. SIG.MSR.142), not as
- * bracket-wrapped chunk labels. The grounding gate matches the pattern
- * SIG.MSR.NNN (exactly three digits) and cross-references each id against the
- * assembled context. Invented ids that do not appear in the bundle will be
- * flagged as training-data leaks — only cite ids you can see in the context.
- */
-export const PRESCRIPTIVE_CITATION_GATE = `CITATION GATE (mandatory for this query class):
-Your response MUST contain at least one MSR signal citation in the exact format SIG.MSR.NNN, where NNN is a three-digit number (e.g. SIG.MSR.142, SIG.MSR.007). These ids appear in the context bundle as chunk labels [chunk:SIG.MSR.NNN] — use those exact ids. Do not invent ids not present in the bundle. A response with zero SIG.MSR.NNN citations will fail the grounding audit. If no MSR signals have been retrieved yet, call the msr_sql or query_signal_state tool to fetch relevant signals before composing your answer.`
-
 export const REQUIRED_PLACEHOLDERS_BASE = [
   'chart_name',
   'birth_date',

@@ -8,16 +8,18 @@ import {
   PanelLeft,
   FileText,
   Keyboard,
-  Database,
+  Gauge,
   Zap,
+  Sparkles,
   FileQuestion,
   BookOpenText,
   User,
   Columns3,
   LayoutGrid,
   List,
+  type LucideIcon,
 } from 'lucide-react'
-import { stackPicker } from '@/lib/models/registry'
+import { MODELS, PROVIDER_LABEL, type SpeedTier } from '@/lib/models/registry'
 import { ChatShell } from '@/components/chat/ChatShell'
 import { ConversationSidebar } from '@/components/chat/ConversationSidebar'
 import { AdaptiveMessageList } from '@/components/chat/AdaptiveMessageList'
@@ -93,10 +95,11 @@ export function ConsumeChat({
   const [traceDrawerOpen, setTraceDrawerOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [paletteOpen, setPaletteOpen] = useState(false)
-  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false)
+  // LOCKED (2026-05-02): default `true` — sidebar is auto-collapsible, starts collapsed,
+  // expands via the hover strip or header toggle. Do not flip to `false`. See platform/AGENTS.md "Locked UI design decisions".
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(true)
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
-  const [lelContextEnabled, setLelContextEnabled] = useState(true)
 
   // View preference persisted to localStorage
   const [reportView, setReportView] = useState<'list' | 'gallery'>(() => {
@@ -128,13 +131,13 @@ export function ConsumeChat({
     ReturnType<typeof parseValidatorError>
   >(null)
 
-  const { stack, style, setStack, setStyle } = useChatPreferences(chartId)
+  const { model, style, setModel, setStyle } = useChatPreferences(chartId)
 
   const session = useChatSession({
     chartId,
     conversationId: currentConversationId,
     initialMessages,
-    stack,
+    model,
     style,
     onConversationCreated: id => {
       router.replace(`/clients/${chartId}/consume/${id}`, { scroll: false })
@@ -185,14 +188,11 @@ export function ConsumeChat({
           mediaType: a.mime,
           url: a.url!,
         }))
-      session.send(text, files, {
-        lel_context_enabled: lelContextEnabled,
-        ...(panelOptIn ? { panel_opt_in: true } : {}),
-      })
+      session.send(text, files, panelOptIn ? { panel_opt_in: true } : undefined)
       setPanelOptIn(false)
       if (files.length > 0) attachmentsApi.clear()
     },
-    [session, attachmentsApi, panelOptIn, lelContextEnabled]
+    [session, attachmentsApi, panelOptIn]
   )
 
   const handleRegenerate = useCallback(() => {
@@ -222,13 +222,18 @@ export function ConsumeChat({
   })
 
   const paletteCommands = useMemo<Command[]>(() => {
-    const stackCommands: Command[] = stackPicker().map(s => ({
-      id: `stack-${s.stack}`,
-      label: `Stack: ${s.label}`,
-      icon: Database,
-      section: 'Stack',
-      keywords: `${s.stack} ${s.synthesisModelId}`,
-      run: () => setStack(s.stack),
+    const iconByTier: Record<SpeedTier, LucideIcon> = {
+      fast: Zap,
+      balanced: Gauge,
+      deep: Sparkles,
+    }
+    const modelCommands: Command[] = MODELS.map(m => ({
+      id: `model-${m.id}`,
+      label: `Model: ${m.label} (${PROVIDER_LABEL[m.provider]})`,
+      icon: iconByTier[m.speedTier],
+      section: 'Model',
+      keywords: `${m.provider} ${m.speedTier} ${m.id} ${m.label}`,
+      run: () => setModel(m.id),
     }))
 
     return [
@@ -279,7 +284,7 @@ export function ConsumeChat({
         section: 'Help',
         run: () => setShortcutsOpen(true),
       },
-      ...stackCommands,
+      ...modelCommands,
       {
         id: 'style-acharya',
         label: 'Style: Acharya depth',
@@ -305,7 +310,7 @@ export function ConsumeChat({
         run: () => setStyle('client'),
       },
     ]
-  }, [chartId, router, desktopSidebarCollapsed, setStack, setStyle, handleReportViewChange])
+  }, [chartId, router, desktopSidebarCollapsed, setModel, setStyle, handleReportViewChange])
 
   useEffect(() => {
     if (!session.isStreaming) composerRef.current?.focus()
@@ -372,7 +377,30 @@ export function ConsumeChat({
         rightPanelBadge={reports.length}
         headerTitle={chartName}
         headerMeta={chartMeta}
-        headerActions={<ShareButton conversationId={session.conversationId} />}
+        headerActions={
+          // LOCKED (2026-05-02): Trace button lives in the top-right header (here),
+          // not in the input toolbar below the composer. Do not move back to the input
+          // panel. See platform/AGENTS.md "Locked UI design decisions".
+          <>
+            {pipelineEnabled && activeTier === 'super_admin' && (
+              <button
+                type="button"
+                onClick={() => setTraceDrawerOpen(o => !o)}
+                className={[
+                  'inline-flex h-8 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors',
+                  traceDrawerOpen
+                    ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
+                    : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
+                ].join(' ')}
+                aria-label="Toggle query trace drawer"
+              >
+                <Zap className="h-3 w-3" />
+                Trace
+              </button>
+            )}
+            <ShareButton conversationId={session.conversationId} />
+          </>
+        }
         desktopSidebarCollapsed={desktopSidebarCollapsed}
         mobileSidebarOpen={mobileSidebarOpen}
         onToggleDesktopSidebar={() => setDesktopSidebarCollapsed(c => !c)}
@@ -500,35 +528,14 @@ export function ConsumeChat({
           )}
           <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-2 px-4 py-1.5">
             <ModelStylePicker
-              stack={stack}
+              model={model}
               style={style}
-              onStackChange={setStack}
+              onModelChange={setModel}
               onStyleChange={setStyle}
               disabled={session.isStreaming || branches.isViewingArchived}
             />
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setLelContextEnabled(v => !v)}
-                title={
-                  lelContextEnabled
-                    ? 'Informed mode: life events included. Click for Blind mode.'
-                    : 'Blind mode: life events excluded. Click for Informed mode.'
-                }
-                className={[
-                  'flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors',
-                  lelContextEnabled
-                    ? 'bg-muted text-muted-foreground hover:bg-muted/80'
-                    : 'bg-amber-100 text-amber-800 ring-1 ring-amber-300 hover:bg-amber-200',
-                ].join(' ')}
-              >
-                {lelContextEnabled ? (
-                  <><BookOpenText className="h-3.5 w-3.5" /><span>Informed</span></>
-                ) : (
-                  <><Zap className="h-3.5 w-3.5" /><span>Blind</span></>
-                )}
-              </button>
-              {(panelModeEnabled || initialAudienceTier === 'super_admin') && pipelineEnabled && (
-                <>
+            {(panelModeEnabled || initialAudienceTier === 'super_admin') && pipelineEnabled && (
+              <div className="flex items-center gap-1.5">
                 {/* TierPicker — visible to super_admin role regardless of currently-viewed tier */}
                 {initialAudienceTier === 'super_admin' && (
                   <TierPicker tier={activeTier} onChange={handleTierChange} />
@@ -557,33 +564,9 @@ export function ConsumeChat({
                   </label>
                 )}
 
-                {/* Trace — opens drawer instead of inline panel */}
-                {activeTier === 'super_admin' && (
-                  <button
-                    type="button"
-                    onClick={() => setTraceDrawerOpen(o => !o)}
-                    className={[
-                      'inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px] font-medium transition-colors',
-                      traceDrawerOpen
-                        ? 'border-[color-mix(in_oklch,var(--status-warn)_60%,transparent)] bg-[var(--status-warn-bg)] text-[var(--status-warn)] hover:bg-[var(--status-warn-bg)]'
-                        : 'border-border text-muted-foreground hover:border-[color-mix(in_oklch,var(--status-warn)_40%,transparent)] hover:bg-[var(--status-warn-bg)] hover:text-[var(--status-warn)]',
-                    ].join(' ')}
-                    aria-label="Toggle query trace drawer"
-                  >
-                    <Zap className="h-3 w-3" />
-                    Trace
-                  </button>
-                )}
-                </>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-          {!lelContextEnabled && (
-            <div className="mx-4 mb-2 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800 ring-1 ring-amber-200">
-              <strong>Blind mode active.</strong> Life events are excluded from
-              this query. Divergences from the historical record are the point.
-            </div>
-          )}
           <Composer
             ref={composerRef}
             onSubmit={handleSend}

@@ -52,10 +52,9 @@ const STYLE_SUFFIX: Record<ConsumeStyle, string> = {
 export function consumeSystemPrompt(
   chart: ChartContext,
   reports: ReportEntry[],
-  style: ConsumeStyle = 'acharya',
-  blindMode: boolean = false
+  style: ConsumeStyle = 'acharya'
 ): string {
-  let systemPrompt = `You are a Jyotish intelligence system for ${chart.name} (born ${chart.birth_date}, ${chart.birth_place}).
+  return `You are a Jyotish intelligence system for ${chart.name} (born ${chart.birth_date}, ${chart.birth_place}).
 
 Chart ID: ${chart.id}
 
@@ -67,21 +66,4 @@ Quality standard: Acharya-grade. Be precise about confidence levels.
 
 Available reports:
 ${reports.map(r => `- ${r.domain}: ${r.title} (v${r.version})`).join('\n')}${STYLE_SUFFIX[style]}`
-
-  if (blindMode) {
-    systemPrompt += `
-
----
-MODE: BLIND (Chart-Only)
-Life event data has been excluded from this session at the native's request.
-Do NOT reference specific life events, dates of known events, or outcomes
-you would only know from the life event log. Reason from the chart, temporal
-engines, and synthesis layers only. If the query invites prediction, emit
-predictions without knowing whether they match the historical record.
-Divergences from reality are calibration data, not errors. This session will
-be logged as a prospective prediction.
----`
-  }
-
-  return systemPrompt
 }

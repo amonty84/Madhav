@@ -11,7 +11,6 @@ import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
 import { getFlag } from '@/lib/config'
-import { writeToolExecutionLog } from '@/lib/db/monitoring-write'
 import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
 
 const TOOL_NAME = 'contradiction_register'
@@ -71,27 +70,7 @@ function disabledBundle(start: number): ToolBundle {
 
 async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
-  try {
-    return await retrieveImpl(plan, start)
-  } catch (err) {
-    void writeToolExecutionLog({
-      query_id: plan.query_plan_id,
-      tool_name: TOOL_NAME,
-      params_json: { domains: plan.domains },
-      status: 'error',
-      rows_returned: 0,
-      latency_ms: Date.now() - start,
-      token_estimate: 0,
-      data_asset_id: 'CONTRADICTION_REGISTER_v1_0',
-      error_code: err instanceof Error ? err.message : String(err),
-      served_from_cache: false,
-      fallback_used: false,
-    })
-    throw err
-  }
-}
 
-async function retrieveImpl(plan: QueryPlan, start: number): Promise<ToolBundle> {
   if (!getFlag('DISCOVERY_CONTRADICTION_ENABLED')) {
     return disabledBundle(start)
   }
@@ -100,21 +79,12 @@ async function retrieveImpl(plan: QueryPlan, start: number): Promise<ToolBundle>
   const register = JSON.parse(raw) as ContradictionRegister
 
   let contradictions = register.contradictions
-  let fallback_used = false
 
   // Domain filter: domains_implicated intersection
   if (plan.domains.length > 0) {
-    const filtered = contradictions.filter(c =>
+    contradictions = contradictions.filter(c =>
       c.domains_implicated?.some(d => plan.domains.includes(d))
     )
-    if (filtered.length === 0) {
-      // UQE-7 (W2-BUGS B2W-2/3) — domain-only fallback. Surface every known
-      // contradiction rather than nothing when the requested domain doesn't
-      // yet have any contradiction entries on file.
-      fallback_used = true
-    } else {
-      contradictions = filtered
-    }
   }
 
   const results: ToolBundleResult[] = contradictions.map(contradiction => ({
@@ -152,7 +122,6 @@ async function retrieveImpl(plan: QueryPlan, start: number): Promise<ToolBundle>
     invocation_params: {
       register_path: REGISTER_PATH,
       domains: plan.domains,
-      fallback_used,
     },
     results,
     served_from_cache: false,
@@ -169,20 +138,6 @@ async function retrieveImpl(plan: QueryPlan, start: number): Promise<ToolBundle>
   }
 
   telemetry.recordLatency(TOOL_NAME, 'retrieve', latency_ms)
-
-  void writeToolExecutionLog({
-    query_id: plan.query_plan_id,
-    tool_name: TOOL_NAME,
-    params_json: bundle.invocation_params as Record<string, unknown>,
-    status: results.length === 0 ? 'zero_rows' : 'ok',
-    rows_returned: results.length,
-    latency_ms,
-    token_estimate: Math.ceil(JSON.stringify(results).length / 4),
-    data_asset_id: 'CONTRADICTION_REGISTER_v1_0',
-    error_code: null,
-    served_from_cache: false,
-    fallback_used,
-  })
 
   return bundle
 }
