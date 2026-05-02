@@ -1,8 +1,8 @@
 ---
 artifact: CDLM_v1_1.md
-version: 1.2
+version: 1.3
 status: CURRENT
-session: FIX_SESSION_003_deferred
+session: M4-D-P1-CDLM-PATCH
 date_opened: 2026-04-18
 native: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
 primary_inputs: [MSR_v1_0.md, CGM_v1_0.md, MATRIX_HOUSES.md, MATRIX_PLANETS.md, FORENSIC_ASTROLOGICAL_DATA_v8_0.md]
@@ -12,6 +12,7 @@ supersedes: CDLM_v1_0.md
 corrections_applied: 9
 correction_basis: "FORENSIC_ASTROLOGICAL_DATA_v8_0.md — Special Lagna positions corrected (Hora Lagna→3H Gemini, Ghati→9H Sagittarius, Varnada→4H Cancer, Shree→7H Libra); Saham Roga confirmed in 2H Taurus (NOT 7H Libra)"
 v1_2_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief. See 00_ARCHITECTURE/AUDIT_REPORT_v1_0.md for history."
+v1_3_changelog: "CF.LL7.1 Pancha-MP msr_anchors patch (M4-D-P1-CDLM-PATCH 2026-05-02) — appended MSR.117 (Saturn/Sasha-Kendra) to CDLM.D1.D1; MSR.118 (Venus/Malavya) to CDLM.D5.D5; MSR.119 (Mars/Ruchaka) to CDLM.D5.D6; MSR.143 (Jupiter/Hamsa) to CDLM.D5.D7. MSR.145 (Mercury/Bhadra) status per OPEN_ITEM.P1.1 — Mercury Bhadra cell does not exist in CDLM (no planet-specific cells; 81-cell domain-pair structure); MSR.145 cannot be anchored at this surgical pass; carried to M5 CDLM expansion. Brief assumed file at v1.1 → v1.2; actual current internal version was 1.2 from 2026-04-19 corpus cleanup pass; patch took next clean version 1.3. No re-run of LL.N computation; LL.7 JSON outputs untouched (substrate corrected for future runs only)."
 layer: "L2.5"
 expose_to_chat: true
 native_id: "abhisek"
@@ -19,7 +20,7 @@ native_id: "abhisek"
 
 # CDLM_v1_1 — Cross-Domain Linkage Matrix
 ## Abhisek Mohanty Jyotish Intelligence System
-### v1.2 — Cross-Domain Linkage Matrix
+### v1.3 — Cross-Domain Linkage Matrix
 
 ### Purpose
 
@@ -98,7 +99,7 @@ CDLM.D1.D1:
   col_domain: Career (self-reference)
   linkage_type: mirrors
   primary_mechanism: "10H Capricorn = AL (Arudha Lagna) + Sun + Mercury Vargottama + Saturn AmK (7L disposits to Saturn) + KP cusp 10 sub=Saturn + Jaimini Rashi Drishti from Rahu+Ketu on 10H = the career domain is the chart's self-amplifying apex; every major system designates 10H as primary delivery point"
-  msr_anchors: [MSR.390, MSR.413, MSR.339, MSR.349]
+  msr_anchors: [MSR.390, MSR.413, MSR.339, MSR.349, MSR.117]
   strength: 1.00
   direction: bidirectional
   valence: benefic
@@ -553,7 +554,7 @@ CDLM.D5.D5:
   col_domain: Children (self-reference)
   linkage_type: compensates
   primary_mechanism: "5H Leo = empty (no natal planet) = a seeming weakness; BUT: Jupiter (GK, own sign 9H) Jaimini Dual-sign aspects Leo 5H = the most dharmic planet (Jupiter own-sign = maximum strength) provides Jaimini Rashi Drishti to the children-house; this compensates for the 5H's emptiness with Jupiter's maximum-strength wisdom-aspect; Leo 5H = Sun-ruled = Sun in 10H (career) = the 5H lord is strong; the children domain compensates its natal emptiness through Jupiter's supervision and Sun's 10H strength"
-  msr_anchors: [MSR.333, MSR.341]
+  msr_anchors: [MSR.333, MSR.341, MSR.118]
   strength: 0.75
   direction: bidirectional
   valence: benefic
@@ -564,7 +565,7 @@ CDLM.D5.D6:
   col_domain: Spirit
   linkage_type: mirrors
   primary_mechanism: "5H = creativity + intelligence + past-life merit (purva punya); in Jyotish, 5H is also the house of mantras, spiritual practices, and devotion; Jupiter (5L by its own reckoning as the natural 5H significator = Jupiter is karka of 5H in Parashari) is the GK and own-sign in 9H = the spiritual benefic is the children-domain natural karaka; Jupiter-5H-9H = the children and spiritual domains share Jupiter as their common benefic energy"
-  msr_anchors: [MSR.333, MSR.341, MSR.406]
+  msr_anchors: [MSR.333, MSR.341, MSR.406, MSR.119]
   strength: 0.78
   direction: bidirectional
   valence: benefic
@@ -575,7 +576,7 @@ CDLM.D5.D7:
   col_domain: Parents
   linkage_type: feeds
   primary_mechanism: "5H (children, next generation) and 4H (mother, previous generation) = the generational flow; 5H Leo lord = Sun; 9H (father) = Jupiter+Venus; classical: the trinal houses (1H, 5H, 9H) form the dharmic-purva-punya axis = the ancestors (9H father-dharma) feed the progeny (5H children) through the native (1H); the native is the middle link in the generational dharmic chain; parental blessings (9H) enable children-fulfillment (5H)"
-  msr_anchors: [MSR.394, MSR.407]
+  msr_anchors: [MSR.394, MSR.407, MSR.143]
   strength: 0.72
   direction: row→col
   valence: benefic

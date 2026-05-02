@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 137,
+  "entry_count": 138,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -127,7 +127,7 @@
     {
       "canonical_id": "CDLM_v1_1",
       "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
-      "version": "1.2",
+      "version": "1.3",
       "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
@@ -135,7 +135,8 @@
         "file"
       ],
       "interface_version": "1.0",
-      "fingerprint": "3e64d5e512f37ee86152bac976f9f10a0355ceece9d1dce4fb874a8c0c13ed55",
+      "fingerprint": "21443a36f9e11f1a055c5c9b6ac42c006321e9acfc5f3de5f2fb1bc5940273be",
+      "last_modified": "2026-05-02",
       "native_id": "abhisek",
       "preferred_for": [
         "interpretive",
@@ -2481,10 +2482,26 @@
       "interface_version": "1.0",
       "phase": "M4-C",
       "description": "M4-C sub-phase sealing artifact (LL.5/LL.6/LL.7 native-only activation). PHASE_M4_PLAN AC.M4C.1-5 = 5/5 PASS; per-session brief ACs S1.1-S4.9 = 32/32 PASS; in-document IS.8(b) red-team PASS 5/5 axes 0 findings. LL.5 Dasha-Transit axis-weight modulator first shadow write (380 signals); LL.6 Temporal Density Modulator first shadow write (255/380 meaningful adjustment, H2 rejected); LL.7 Discovery Prior first SHADOW write per NAP.M4.6 OPTION_B_APPROVED_LITERAL_CONSTRUCTION + DECISION-2 (243 edges = 107 novel + 136 unconfirmed; sanity 8/8 novel PASS; CF.LL7.1 deferred). DECISION-1 R.LL5DESIGN.1 mechanism-naming propagated to MACRO_PLAN v2.1 + PHASE_M4C_PLAN v1.0.1 + SHADOW_MODE_PROTOCOL v1.0.1. Successor sub-phase: M4-D (M4 macro-phase close)."
+    },
+    {
+      "canonical_id": "M4_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/M4_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-D",
+      "fingerprint": "1378f4f9d3a85a1893fd4e95df02f6c2efa4cc6fb10675f9b9ebdad57dbd3f11",
+      "last_modified": "2026-05-02",
+      "description": "M4 MACRO-PHASE sealing artifact (M4-D-S1 single-session substantive close). NAP.M4.7 APPROVED (pre-decided per execution brief; CF.LL7.1 = alpha CDLM patch parallel session M4-D-P1; KR.M4A.RT.LOW.1 = DEFER; R.LL1TPA.1 = FINAL_NOT_REACHABLE). IS.8(b) macro-phase-close red-team PASS 5/5 axes 0 findings (RT.1 LL.N computation discharge; RT.2 NAP.M4.1-7 verdicts; RT.3 shadow-mode discipline; RT.4 CURRENT_STATE v-sequence audit; RT.5 schema_validator baseline 108). Six sections: §1 LL.1-LL.7 outcomes; §2 NAP registry; §3 carry-forward roster (35-item enumeration with final dispositions); §4 IS.8(b) red-team verdicts; §5 M5 setup recommendations (8 items); §6 known asymmetries (R.LL1TPA.1 Gemini gap; CF.LL7.1 parallel patch; KR.M4A.RT.LOW.1 deferred tree). Successor macro-phase: M5."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02",
-  "manifest_version": "2.3",
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02",
+  "manifest_version": "2.5",
   "last_updated": "2026-05-02",
-  "last_updated_by": "M4-C-S4-CLOSE"
+  "last_updated_by": "M4-D-S1"
 }

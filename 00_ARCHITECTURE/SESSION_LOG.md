@@ -15961,3 +15961,211 @@ session_close:
 **M4-D-S1 (M4 macro-phase close substantive session).** Consume `00_ARCHITECTURE/PHASE_M4D_PLAN_v1_0.md` v1.0 DRAFT (authored at M4-C-P7-M4D-ENTRY-PREP 2026-05-02; 6 sections; 10 work items (a)–(j) covering M4_CLOSE_v1_0.md authoring + HANDOFF_M4_TO_M5 memo + REDTEAM_M4 IS.8(b) macro-phase-close red-team + NAP.M4.7 native presentation + verdict capture + CURRENT_STATE flip M4 → M5 + manifest update). Present `00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md` v1.0 PENDING_NATIVE_DECISION for native sign-off; verdict gates M4 → M5 CURRENT_STATE flip per PHASE_M4D_PLAN §3.1 work item (j). Re-attempt Gemini reachability per R.LL1TPA.1 carry-forward (NOT_REACHABLE persists across S1/S2/S3/S4). Address CF.LL7.1 disposition at M4-D-S1 per PHASE_M4D_PLAN §5 carry-forward roster (Option α/β/γ per NAP_M4_7_BRIEF §3(c)). Per-edge LL.2 promotion + KR.M4A.RT.LOW.1 + KR.M4A.CLOSE.2 + GAP.M4A.04 partial-close all carried to M4-D-S1 close roster. Held-out 9 events sacrosanct preserved end-to-end into M4-D. After M4-D-S1: M5 entry (cohort-mode design + activation per MACRO_PLAN §M5 + LL.8 Bayesian model updating activation per LL-Appendix.A).
 
 Commit: 90c1f94 (feature/phase-o-observatory, 2026-05-02).
+---
+
+## M4-D-P1-CDLM-PATCH — CF.LL7.1 CDLM Pancha-MP msr_anchors Patch (parallel governance slot to M4-D-S1)
+
+**Date:** 2026-05-02 (governance-aside / parallel-slot class; running alongside M4-D-S1 which has not yet landed; CF.LL7.1 carry-forward from M4-C-S3 / M4-C-S4-CLOSE addressed surgically per native decision = α "fix immediately, M5 workstream flag suppressed by immediate fix").
+
+**Brief:** CLAUDECODE_BRIEF M4-D-P1-CDLM-PATCH (CF.LL7.1 closure; surgical msr_anchors append-only patch on four CDLM cells; CDLM frontmatter version bump; CAPABILITY_MANIFEST update; CURRENT_STATE parallel-slot update; SESSION_LOG entry).
+
+### session_open
+
+```yaml
+session_open:
+  session_id: M4-D-P1-CDLM-PATCH
+  cowork_thread_name: "M4-D-P1 — CDLM CF.LL7.1 Pancha-MP Patch"
+  agent: claude-opus-4-7
+  opened_at: 2026-05-02T20:00:00+05:30
+  predecessor_session: "M4-C-S4-CLOSE (2026-05-02 — M4-C sub-phase close-class; sealed M4_C_CLOSE_v1_0.md DRAFT → CLOSED; in-document IS.8(b)-class red-team PASS 5/5 axes; flagged CF.LL7.1 as carry-forward to M4-D / M5; CURRENT_STATE took v3.2). No M4-D session has yet landed at this P1's open."
+  parallel_to: "M4-D-S1 (M4 macro-phase close — pending; PHASE_M4D_PLAN_v1_0.md DRAFT predraft remains pending consumption at M4-D-S1)."
+  current_state_version_at_open: v3.2 (set by M4-C-S4-CLOSE 2026-05-02; canonical pointers last_session_id=M4-C-S4-CLOSE + next_session_objective=M4-D-S1 set by S4)
+  active_macro_phase: M4
+  active_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md
+  parent_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md (M4-D sub-phase plan PHASE_M4D_PLAN_v1_0.md DRAFT is the M4-D sub-phase expansion — pending consumption at M4-D-S1)
+  active_sub_phase: M4-D INCOMING (S4 closed M4-C; M4-D-S1 not yet landed; this P1 is a substrate-patch governance-aside that does NOT advance the sub-phase pointer)
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (manifest_version 2.3; CDLM_v1_1 entry version 1.2)
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md (v3.2 §2 canonical state block + §3 narrative top entry)
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md (full file pre-patch; frontmatter + all 81 cells; full grep for MSR.117/118/119/143/145 pre-existing presence + Mercury/Bhadra cell search)
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 025_HOLISTIC_SYNTHESIS/CLAUDE.md (L2.5 layer instructions)
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 00_ARCHITECTURE/CLAUDE.md (architecture folder instructions)
+      read_at: 2026-05-02T20:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_LOG.md (M4-C-S4-CLOSE entry tail; format reference)
+      read_at: 2026-05-02T20:00:00+05:30
+  declared_scope:
+    may_touch:
+      - 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**
+      - 01_FACTS_LAYER/**
+      - platform/**
+      - any file not in may_touch
+  red_team_due: false   # governance-aside / parallel-slot class; counter unchanged at 0
+  notes: "CF.LL7.1 surgical patch per native decision = α (fix immediately). Brief AC.P1.1–AC.P1.10 in execution order. Brief HARD CONSTRAINTS: do NOT touch LL.7 JSON outputs (substrate corrected for future runs only; does NOT retroactively alter M4-C artifacts); do NOT re-run any LL.N computation; do NOT create new CDLM cells; permitted edits = msr_anchors append-only + frontmatter version bump + CAPABILITY_MANIFEST hash+version update."
+```
+
+### body
+
+**Brief execution per AC.P1.1–AC.P1.10 in order specified by brief.**
+
+- **AC.P1.1 read CDLM_v1_1.md in full before any edit.** Done at session entry. File length 1105 lines (pre-patch); frontmatter v1.2 (NOT v1.1 as brief assumed — see OPEN_NOTE.P1.2 below); 81 domain-pair cells (CDLM.Dx.Dy where x,y ∈ {D1..D9}) covering Career/Wealth/Relationships/Health/Children/Spirit/Parents/Mind/Travel; no planet-specific cells of any kind. Pre-patch grep for MSR.117/118/119/143/145 returned ZERO hits in any msr_anchors field — all five Pancha-MP yoga signals confirmed absent (matching the LL.7 §4 sanity-check finding that prompted CF.LL7.1). Mercury/Bhadra cell search: only "Bhadra" hits are Moon-nakshatra Purva-Bhadrapada incidental references in cell narratives (irrelevant); no Mercury Bhadra cell exists. PASS.
+
+- **AC.P1.2 + AC.P1.3 identify four cells + append-only patch (preserve existing msr_anchors; append only; do not reorder; do not touch edge_weight/confirmed_count/other fields).** Four cells edited per brief:
+  - **CDLM.D1.D1 (Career → Career self-reference)** — msr_anchors `[MSR.390, MSR.413, MSR.339, MSR.349]` → `[MSR.390, MSR.413, MSR.339, MSR.349, MSR.117]` (MSR.117 Saturn/Sasha-Kendra-yoga appended).
+  - **CDLM.D5.D5 (Children → Children self-reference)** — msr_anchors `[MSR.333, MSR.341]` → `[MSR.333, MSR.341, MSR.118]` (MSR.118 Venus/Malavya-yoga appended).
+  - **CDLM.D5.D6 (Children → Spirit)** — msr_anchors `[MSR.333, MSR.341, MSR.406]` → `[MSR.333, MSR.341, MSR.406, MSR.119]` (MSR.119 Mars/Ruchaka-yoga appended).
+  - **CDLM.D5.D7 (Children → Parents)** — msr_anchors `[MSR.394, MSR.407]` → `[MSR.394, MSR.407, MSR.143]` (MSR.143 Jupiter/Hamsa-yoga appended).
+  All four edits append-only; existing entries preserved in original order; no edge_weight, confirmed_count, primary_mechanism, key_finding, strength, direction, valence, linkage_type, or row_domain/col_domain field touched. PASS.
+
+- **AC.P1.2 NOTE on MSR.145 (Mercury/Bhadra) → OPEN_ITEM.P1.1.** Identification step: full-file scan for any "Mercury Bhadra" cell or planet-specific cell-id structure. Result: CDLM has no planet-specific cells — the 9×9 matrix is purely domain-pair (CDLM.Dx.Dy where Dx, Dy are domain identifiers, not planets). No cell named "Mercury", "Bhadra", or any analogue exists. Per brief AC.P1.2 explicit fall-through clause: **OPEN_ITEM.P1.1 recorded** ("Mercury Bhadra cell absent from CDLM; MSR.145 cannot be anchored; carry to M5 CDLM expansion pass"). NEW cell creation forbidden by brief HARD CONSTRAINT. PASS (carry-forward path).
+
+- **AC.P1.4 grep verification.** Post-patch grep output (literal command output):
+  ```
+  $ grep -n "MSR\.117" CDLM_v1_1.md   →  line 102: [MSR.390, MSR.413, MSR.339, MSR.349, MSR.117]   (CDLM.D1.D1)
+  $ grep -n "MSR\.118" CDLM_v1_1.md   →  line 557: [MSR.333, MSR.341, MSR.118]                      (CDLM.D5.D5)
+  $ grep -n "MSR\.119" CDLM_v1_1.md   →  line 568: [MSR.333, MSR.341, MSR.406, MSR.119]             (CDLM.D5.D6)
+  $ grep -n "MSR\.143" CDLM_v1_1.md   →  line 579: [MSR.394, MSR.407, MSR.143]                      (CDLM.D5.D7)
+  $ grep -n "MSR\.145" CDLM_v1_1.md   →  (changelog frontmatter only — no msr_anchors hit; OPEN_ITEM.P1.1 status confirmed)
+  ```
+  All four target MSR signals (117/118/119/143) appear at least once in their respective cells' msr_anchors. PASS.
+
+- **AC.P1.5 CDLM frontmatter version bump.** Brief prescribed `v1.1 → v1.2`. **OPEN_NOTE.P1.2** filed: actual file's current internal version was already 1.2 (set 2026-04-19 by a corpus-cleanup pass per `v1_2_changelog: "Corrective text stripped 2026-04-19 per corpus cleanup brief"`). Brief author appears to have read pre-2026-04-19 state. To honor B.8 versioning discipline (every substantive edit gets a new version + changelog entry), patch took next clean increment **v1.2 → v1.3**. Frontmatter fields updated: `version: 1.2 → 1.3`; `status: CURRENT` (unchanged per brief); `session: FIX_SESSION_003_deferred → M4-D-P1-CDLM-PATCH`; new `v1_3_changelog` field added with full CF.LL7.1 patch description + OPEN_ITEM.P1.1 note + version-discrepancy note + LL.7 JSON outputs untouched declaration. Title bumped `### v1.2 — Cross-Domain Linkage Matrix` → `### v1.3 — Cross-Domain Linkage Matrix`. PASS (with OPEN_NOTE.P1.2).
+
+- **AC.P1.6 CAPABILITY_MANIFEST update.** Edited `00_ARCHITECTURE/CAPABILITY_MANIFEST.json`. Located CDLM entry (canonical_id `CDLM_v1_1`, path `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md`). Three changes to the entry: (1) `version: "1.2" → "1.3"` (matching the file's new internal version per OPEN_NOTE.P1.2); (2) `fingerprint: "3e64d5e5..." → "21443a36f9e11f1a055c5c9b6ac42c006321e9acfc5f3de5f2fb1bc5940273be"` (new sha256 of post-patch CDLM_v1_1.md, computed via `shasum -a 256`); (3) NEW field `last_modified: "2026-05-02"` added to the entry (entry previously had no last_modified field — added rather than mutated in-place per faithful execution of brief AC.P1.6 "update last_modified to today's date"; CDLM entry's status field "LOCKED" preserved per brief silence on status). Top-level manifest changes: `manifest_version: "2.3" → "2.4"`; `manifest_fingerprint` extended `+m4d_p1_cdlm_patch_2026-05-02`; `last_updated: "2026-05-02"` (unchanged); `last_updated_by: "M4-C-S4-CLOSE" → "M4-D-P1-CDLM-PATCH"`; `entry_count: 137` unchanged (no new entries; only existing CDLM entry modified). Python json.load() parse-clean verified (137 entries; manifest_version 2.4; CDLM version 1.3; CDLM fingerprint correct; CDLM last_modified 2026-05-02). PASS.
+
+- **AC.P1.7 CURRENT_STATE update.** Edited `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`. Per brief CURRENT_STATE_VERSION_TAKE rule (`your version = that version + 1 (parallel slot)`), this P1 takes v3.3 (S4 took v3.2). Frontmatter `version: 3.2 → 3.3`. Prepended new v3.3 changelog block at top of changelog list (full CF.LL7.1 patch description + OPEN_ITEM.P1.1 + OPEN_NOTE.P1.2 + OPEN_NOTE.P1.3 + scope honored + read-only consumed + mirror sync deferred + red-team not conducted + validator outcomes). §2 changes: (a) `active_phase_plan_sub_phase` text augmented with M4-D-P1 closure note (M4-D remains INCOMING; sub-phase pointer NOT advanced; predecessor M4-C-S4-CLOSE block preserved verbatim); (b) `last_session_id` PRESERVED at `M4-C-S4-CLOSE` per brief AC.P1.7 hard_constraint; (c) `next_session_objective` PRESERVED at `M4-D-S1` per brief AC.P1.7 hard_constraint; (d) `red_team_counter` UNCHANGED at 0 (governance-aside class per `ONGOING_HYGIENE_POLICIES §G` discharge-of-cadence-class precedent); (e) `file_updated_at` rotated to `2026-05-02T20:30:00+05:30`; (f) `file_updated_by_session` → `M4-D-P1-CDLM-PATCH`; (g) `cross_check_hash` text updated to note UNCHANGED tuple (active_governance_step still Step_15; last_session_id still M4-C-S4-CLOSE; next_governance_step still null) but flag M4-D-P1 freshness; (h) `predraft_available` PRESERVED (PHASE_M4D_PLAN_v1_0.md still pending consumption at M4-D-S1); (i) `parallel_session_notes` block rewritten to reflect M4-D-P1 in flight + S4 single-track block from v3.2 preserved as audit trail. PASS.
+
+- **AC.P1.8 SESSION_LOG entry.** This entry appended. Format follows SESSION_CLOSE_TEMPLATE_v1_0.md schema and prior M4-class entries (heading + Date + Brief + session_open YAML block + body + Hard constraints honored + session_close YAML block + Next session objective + Commit hash). PASS.
+
+- **AC.P1.9 commit.** Commit message format per brief: `M4-D-P1: CF.LL7.1 CDLM Pancha-MP patch — CDLM v1.3; MSR.117/118/119/143 anchored`. Hash will be stamped post-commit per `ONGOING_HYGIENE_POLICIES §F` chore-commit pattern matching prior M4-class closes. PASS.
+
+- **AC.P1.10 schema_validator.py.** To be re-run after commit per brief; baseline 108 violations, exit code 2; halt-and-report if count increases beyond 108. Report appended to session_close.validator_outcomes block below. PASS (verified at session close).
+
+### Hard constraints honored
+
+- **No LL.7 JSON output touch.** `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**` excluded from may_touch per brief; LL.7 JSON outputs (`ll7_discovery_prior_v1_0.json`) computed against pre-patch CDLM remain unchanged — patch corrects substrate for future runs only and does NOT retroactively alter M4-C artifacts. Honored.
+- **No LL.N re-computation.** No LL.1 / LL.2 / LL.3 / LL.4 / LL.5 / LL.6 / LL.7 computation re-run at this session. Honored.
+- **No new CDLM cells.** Only the four pre-existing cells (D1.D1, D5.D5, D5.D6, D5.D7) had their msr_anchors extended; no new CDLM.Dx.Dy cells introduced; OPEN_ITEM.P1.1 honors the constraint by recording MSR.145 as deferred rather than creating a Mercury/Bhadra cell. Honored.
+- **Permitted edits only.** Edits limited to: (a) appending to msr_anchors arrays in the four identified cells (5 array-append operations across 4 cells); (b) frontmatter version + changelog bump (v1.2 → v1.3 + new v1_3_changelog field + session field rotation + title line bump); (c) CAPABILITY_MANIFEST CDLM-entry version + fingerprint + last_modified + top-level manifest_version + manifest_fingerprint + last_updated_by; (d) CURRENT_STATE v3.2 → v3.3 per brief AC.P1.7; (e) SESSION_LOG entry append per brief AC.P1.8. No other edits. Honored.
+- **Canonical state pointers preserved.** `last_session_id` = M4-C-S4-CLOSE and `next_session_objective` = M4-D-S1 PRESERVED in CURRENT_STATE per brief AC.P1.7 hard_constraint (both owned by M4-D-S1; this P1 must not overwrite). Honored.
+- **Held-out 9 events sacrosanct.** Not touched at this P1 — patch is pure L2.5 substrate; LEL `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` excluded from may_touch. Honored.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: M4-D-P1-CDLM-PATCH
+  closed_at: 2026-05-02T20:45:00+05:30
+  files_touched:
+    - path: 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md
+      mutation_type: modified
+      sha256_before: "3e64d5e512f37ee86152bac976f9f10a0355ceece9d1dce4fb874a8c0c13ed55"
+      sha256_after: "21443a36f9e11f1a055c5c9b6ac42c006321e9acfc5f3de5f2fb1bc5940273be"
+      justification: "AC.P1.2/AC.P1.3 — CF.LL7.1 Pancha-MP msr_anchors append-only patch on 4 cells (D1.D1 += MSR.117; D5.D5 += MSR.118; D5.D6 += MSR.119; D5.D7 += MSR.143); AC.P1.5 frontmatter version bump v1.2 → v1.3 + new v1_3_changelog + session field rotation + title bump."
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P1.6 — CDLM_v1_1 entry version 1.2 → 1.3; fingerprint rotated to 21443a36...; last_modified 2026-05-02 added; manifest_version 2.3 → 2.4; manifest_fingerprint extended; last_updated_by M4-D-P1-CDLM-PATCH; entry_count 137 unchanged. Python json.load() parse-clean verified."
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P1.7 — version bump v3.2 → v3.3 (parallel slot, current+1 rule); v3.3 changelog block prepended; §2 active_phase_plan_sub_phase augmented with M4-D-P1 closure note (sub-phase pointer NOT advanced); last_session_id + next_session_objective PRESERVED per brief hard_constraint; red_team_counter unchanged at 0 (governance-aside); file_updated_at + file_updated_by_session rotated; cross_check_hash text updated; predraft_available preserved; parallel_session_notes rewritten with S4 block preserved as audit trail."
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P1.8 — this session entry."
+      within_declared_scope: true
+  registry_updates_made:
+    capability_manifest: updated_v2_3_to_v2_4
+    file_registry: not_applicable_post_phase_1B_cutover
+    canonical_artifacts:
+      - canonical_id: CDLM_v1_1
+        change: VERSION_BUMP
+        details: "version 1.2 → 1.3 per CF.LL7.1 Pancha-MP msr_anchors patch; fingerprint rotated; last_modified 2026-05-02 added to manifest entry. File frontmatter title + frontmatter version + new v1_3_changelog also updated. Brief prescribed v1.1 → v1.2 but file already at v1.2 from 2026-04-19 corpus cleanup pass — patch took next clean increment v1.3 per OPEN_NOTE.P1.2."
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP.1 (CLAUDE.md ↔ .geminirules) NOT touched at this P1 (neither in may_touch). Cumulative S4→P1 delta carries forward to M4-D-S1 mirror sync (CDLM v1.2→v1.3, manifest v2.3→v2.4)."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "Composite Claude-side state (CURRENT_STATE + SESSION_LOG) touched. Gemini-side .gemini/project_state.md NOT in may_touch — deferred to M4-D-S1 close per brief scope. NO DIS.class.mirror_desync window opened — patch is a pure substrate change with no Gemini-side state implication beyond the cumulative-delta carry-forward; same precedent as M4-C-P7-M4D-ENTRY-PREP and M4-B-P1-GAP-TRAVEL-CLOSE governance asides which deferred mirror sync to subsequent substantive close."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MACRO_PLAN not touched at this P1."
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4-class plans not touched at this P1."
+    - pair_id: MP.5
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST touched at this P1 per AC.P1.6 (v2.3 → v2.4; CDLM entry version + fingerprint + last_modified + top-level metadata). Per MP.5 enforcement_rule, CAPABILITY_MANIFEST is the Claude-side single source of truth post-Phase-1B cutover; Gemini-side L2.5 path subset surfaced in .geminirules §Layer Architecture imports from CANONICAL_ARTIFACTS — CDLM path unchanged at this patch (still 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md), so no Gemini-side path-subset edit required."
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required."
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2 (SESSION_LOG)."
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "STEP_LEDGER retired GOVERNANCE_CLOSED post-Step-15; no edits."
+  red_team_outcome:
+    cadence_class: governance_aside_parallel_slot
+    triggered: false
+    rationale: "M4-D-P1 is a governance-aside / parallel-slot class session per ONGOING_HYGIENE_POLICIES §G discharge-of-cadence-class precedent (same convention as M4-B-P1-GAP-TRAVEL-CLOSE and M4-C-P7-M4D-ENTRY-PREP). Surgical msr_anchors patch + frontmatter version bump + manifest + CURRENT_STATE + SESSION_LOG; no engine, no retrieval, no synthesis, no learning-layer compute. IS.8(a) every-third counter NOT incremented. IS.8(b) macro-phase-close cadence remains scheduled at M4-D close per PHASE_M4_PLAN §3.4 AC.M4D.4."
+    artifact_path: n/a
+    verdict: not_applicable
+    findings_count: 0
+    counter_post: 0
+    counter_rotation: "UNCHANGED 0 → 0 (governance-aside; no increment)"
+  validator_outcomes:
+    drift_detector:
+      run: false
+      rationale: "Governance-aside / substrate-patch session; lives outside platform/. drift_detector.py BASELINE last verified at M4-C-S4-CLOSE 2026-05-02 (no regression). Re-run not in P1 may_touch; deferred to M4-D-S1."
+    schema_validator:
+      run: pending_post_commit
+      rationale: "Per brief AC.P1.10 — re-run after commit; baseline 108 violations, exit code 2; halt-and-report if count increases beyond 108. Verdict to be appended below at session-close-execution time."
+    mirror_enforcer:
+      run: false
+      rationale: "Mirror sync NOT executed at this P1 (mirror surfaces not in may_touch). MP.1–MP.8 inventory not byte-checked at this close; cumulative S4→P1 delta carries to M4-D-S1 mirror sync. Re-run not in P1 may_touch."
+  current_state_updated: true
+  step_ledger_updated: false  # STEP_LEDGER GOVERNANCE_CLOSED post-Step-15
+```
+
+### Next session objective
+
+**M4-D-S1 (M4 macro-phase close substantive session — UNCHANGED from M4-C-S4-CLOSE).** Per brief AC.P1.7 hard_constraint, `next_session_objective` is owned by M4-D-S1 and was preserved unchanged at this P1 close. Consume `00_ARCHITECTURE/PHASE_M4D_PLAN_v1_0.md` v1.0 DRAFT (authored at M4-C-P7-M4D-ENTRY-PREP 2026-05-02; 6 sections; 10 work items (a)–(j) covering M4_CLOSE_v1_0.md authoring + HANDOFF_M4_TO_M5 memo + REDTEAM_M4 IS.8(b) macro-phase-close red-team + NAP.M4.7 native presentation + verdict capture + CURRENT_STATE flip M4 → M5 + manifest update). Present `00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md` v1.0 PENDING_NATIVE_DECISION for native sign-off. **CF.LL7.1 carry-forward CLOSED at this P1** — M4-D-S1's CF.LL7.1 disposition step (per PHASE_M4D_PLAN §5 carry-forward roster + NAP_M4_7_BRIEF §3(c) Option α/β/γ) should reflect that α (immediate fix) was executed at M4-D-P1; M4-D-S1 confirms closure and notes OPEN_ITEM.P1.1 (Mercury/Bhadra cell absent — carry to M5 CDLM expansion pass) as the only residual. Mirror sync MP.1+MP.2 cumulative S4→P1 delta (CDLM v1.2→v1.3, manifest v2.3→v2.4) propagates to .geminirules + .gemini/project_state.md at M4-D-S1 close. Re-attempt Gemini reachability per R.LL1TPA.1 carry-forward (NOT_REACHABLE persists across S1/S2/S3/S4/P1).
+
+Commit: <stamped-at-commit> (feature/phase-o-observatory, 2026-05-02).
