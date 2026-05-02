@@ -18114,4 +18114,169 @@ session_close:
 
 **S1.4 / S1.5 / S1.6 / S1.7 — remaining four per-provider adapters (parallel-safe)** and **S1.9 — Frontend scaffold** per OBSERVATORY_PLAN §5.1. Once all five adapters (S1.4–S1.8) merge, **S2.x reconciliation work** unblocks. **S2.5 (DeepSeek + NIM manual-reconciliation UI)** specifically depends on this S1.8 close + S1.7 close. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
+---
+
+## USTAD_S1_11_OBSERVATORY_CHARTS — Phase O Observatory O.1 charts session (CostOverTime / CostByModel / CacheSavings + BudgetUtilization placeholder + 8-test suite)
+
+**Session.** Phase O sub-phase O.1 charts session — the third of the three parallel-safe S1.10 / S1.11 / S1.12 widget sessions per OBSERVATORY_PLAN §5.1 + §6.1. Cowork thread: `ustad-s1-11-charts`. Worktree: `feature/phase-o-observatory-ustad-s1-11-charts` (cut from umbrella `feature/phase-o-observatory` at commit `e0ad911`). Pre-existing `recharts@3.8.1` dependency reused — no `package.json` change needed.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_11_OBSERVATORY_CHARTS
+  cowork_thread_name: "ustad-s1-11-charts"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.1.S1.11
+  predecessor_session: USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD
+  declared_scope:
+    may_touch:
+      - platform/src/lib/components/observatory/charts/**
+      - platform/src/lib/components/observatory/__tests__/charts/**
+      - 00_ARCHITECTURE/SESSION_LOG.md     # close-time append only
+    must_not_touch:
+      - platform/src/lib/components/observatory/kpi/**
+      - platform/src/lib/components/observatory/filters/**
+      - platform/src/lib/components/observatory/events/**
+      - platform/src/lib/components/observatory/Layout.tsx
+      - platform/src/app/api/**
+      - platform/src/lib/observatory/queries/**
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - 00_ARCHITECTURE/**   # except SESSION_LOG.md at close
+      - .geminirules
+      - .gemini/project_state.md
+      - CLAUDE.md
+  red_team_due: false
+  notes: "Pre-existing recharts@3.8.1 covers all chart needs; no new dependency."
+```
+
+### Body — substantive deliverables
+
+- **W1. utils.ts (palette + formatters).** `PROVIDER_COLORS` (5 providers), `STAGE_COLORS` (6 pipeline stages), `colorForProvider/Stage/Dimension` lookups with neutral-slate fallback, `formatCostUSD` (≥$1 → 2dp, sub-cent → 6dp), `formatTokenCount` (M/K/raw integer), `formatBucketTime` (granularity-aware: "14:00" / "May 2"). One file, no recharts dependency.
+- **W2. CostOverTimeChart.tsx.** Stacked area chart over `TimeseriesResponse`. Default + most-prominent visual treatment when `dimension='pipeline_stage'` (per AC: "single most insight-rich view"). States: loading skeleton, empty ("No data in this range"), error with retry. Pure helpers `flattenTimeseries`, `bucketWindow`, `buildDrillDownTarget` exported for test + S1.13 wiring. Drill-down emitted via chart-level `onClick` (recharts `activeTooltipIndex` resolves bucket; topmost `activePayload` resolves dimensionValue — best-effort, S1.13 may refine).
+- **W3. CostByModelChart.tsx.** Horizontal bar chart over `BreakdownsResponse`. Top-15-then-Other roll-up via pure `rollUpModels(data)` helper. Tooltip shows cost + request_count.
+- **W4. CacheSavingsChart.tsx.** Grouped bar chart computed client-side via `computeCacheSavings(data)`. Display-only price proxies hardcoded per provider (Anthropic $3/M, OpenAI $2.50/M, Gemini $1.25/M, DeepSeek $0.27/M, NIM $0.50/M); fixed 0.1× cache-read discount per Anthropic-style proxy. Providers with `cache_tokens === 0` omitted. UI label: "estimated savings — uses a fixed display-only price proxy".
+- **W5. BudgetUtilizationChart.tsx.** Placeholder scaffold renders "Budget rules not yet configured"; signature reserved for S1.13 wiring once O.3 lands.
+- **W6. index.ts barrel.** Re-exports the four chart components, their props, and the pure transformation helpers used by tests + downstream wiring.
+- **W7. 8-test suite (`__tests__/charts/charts.test.tsx`).** All 8 ACs covered. Recharts mocked at module level to bypass jsdom dimension issues; pure helpers (`rollUpModels`, `computeCacheSavings`, `buildDrillDownTarget`, formatters) tested directly.
+
+### Test count
+
+8 tests in `platform/src/lib/components/observatory/__tests__/charts/charts.test.tsx` — all pass. Combined with the pre-existing 5-test AuthGate suite, the observatory `__tests__` tree now runs 13 tests, all green.
+
+### Governance scripts run
+
+- `schema_validator.py --repo-root .` → exit 2, 109 violations (pre-existing residuals; no new HIGH/CRITICAL introduced; AC permits exit 2). No violation names a file from this session's may_touch.
+- `drift_detector.py` / `mirror_enforcer.py` not run by this implementation-class session per OBSERVATORY_PLAN §6.2 + §6.3 (registry-update + mirror-update funneling — neither was touched).
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_11_OBSERVATORY_CHARTS
+  closed_at: 2026-05-03T03:55:00+05:30
+  files_touched:
+    - path: platform/src/lib/components/observatory/charts/utils.ts
+      mutation_type: created
+      sha256_after: b449486886f5e9c67b8cced2b4527cef218920a515c0f025c80e4962ec2590dc
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/charts/CostOverTimeChart.tsx
+      mutation_type: created
+      sha256_after: 8f00be898fa7031eed58eb2c3940a2b407d9e615aa26eb409601c2b2190957c5
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/charts/CostByModelChart.tsx
+      mutation_type: created
+      sha256_after: 71209e8b48b1c22197480eb4d4ffe1757e9742e0d8733a4dfc1f2f58ba6207d9
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/charts/CacheSavingsChart.tsx
+      mutation_type: created
+      sha256_after: 7259c2160fc40ab3b5f7552ab8fa860039e1d45fd3feaf41b79f17e89e2aa7a8
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/charts/BudgetUtilizationChart.tsx
+      mutation_type: created
+      sha256_after: eab6cb824f324580b6239038f413bcc5bf6cec535a6902fb7e8ef06ffb92fef0
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/charts/index.ts
+      mutation_type: created
+      sha256_after: df1f53bf574c46b0c955d6c4f3cb212713e41ce8166920c64ccbf7db011a4ea9
+      within_declared_scope: true
+    - path: platform/src/lib/components/observatory/__tests__/charts/charts.test.tsx
+      mutation_type: created
+      sha256_after: 6a10a8fcf066ce131899ca3095d3349dc635b24c21fc57f70516bc787252b9ad
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "Close-time append (open + body + close blocks for this session)"
+      within_declared_scope: true
+  registry_updates_made:
+    file_registry:
+      - row_before: "n/a — manifest-mode active per Phase 1B cutover; CAPABILITY_MANIFEST not touched by this implementation-class session"
+        row_after: "no change"
+        version_of_registry: "manifest-mode (CAPABILITY_MANIFEST.json)"
+    canonical_artifacts: []
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Implementation session — no governance change; OBSERVATORY_PLAN §6.3 funnels mirror updates to gate + sub-phase-close sessions only."
+    - pair_id: MP.2
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Same — implementation session does not rotate composite-state mirrors."
+    - pair_id: MP.9
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "OBSERVATORY_PLAN unchanged this session."
+  red_team_pass:
+    due: false
+    performed: false
+    verdict: n/a
+    artifact_path: null
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: n/a
+    classification: not_run_implementation_session
+    rationale: "Implementation session in concurrent workstream per OBSERVATORY_PLAN §6.2 funneling — drift run defers to sub-phase-close (S1.13 / O.1 close)."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 109
+    classification: at_baseline_target
+    rationale: "exit 2 = pre-existing residuals; AC permits exit 0 or exit 2 (no new HIGH/CRITICAL). No violation names a file from this session's may_touch."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: n/a
+    classification: not_run_implementation_session
+    rationale: "No mirror-pair surface touched per §6.3 funneling."
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.11 session; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/.../S1.8 precedent."
+  close_criteria_met: true
+  unblocks: "S1.13 (Wiring + e2e integration) per OBSERVATORY_PLAN §5.1 — depends on S1.10, S1.11, and S1.12 closing. S1.10 and S1.12 run in parallel with this S1.11; once all three close, S1.13 unblocks."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-11-charts
+    cut_from_commit: e0ad911
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.13 — Wiring + e2e integration** per OBSERVATORY_PLAN §5.1 — unblocks once all three of S1.10 (KPI tiles + Filters bar), S1.11 (this session — charts), and S1.12 (drill-down event explorer + side panel) close. The S1.13 wiring will (a) consume the four chart components from `@/lib/components/observatory/charts` (drillDown handler navigates to events page with pre-applied filters), (b) wire the BudgetUtilizationChart placeholder once O.3 lands (deferred), and (c) compose KPI tiles + filters + charts + drill-down on the Overview page. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE.
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-11-charts`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-8-nim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
