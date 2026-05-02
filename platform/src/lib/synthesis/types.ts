@@ -25,6 +25,32 @@ export interface ChartContext {
   birth_place: string // e.g. "Bhubaneswar, Odisha, India"
 }
 
+/**
+ * W2-CTX-ASSEMBLY — Wrapping bundle returned by `contextAssembler()`.
+ *
+ * Wraps the (possibly LLM-compressed/reordered) ToolBundle[] together with
+ * per-layer token estimates and the model that ran the assembly pass.
+ * `tool_bundles` is the array passed downstream to synthesis when the
+ * CONTEXT_ASSEMBLY_ENABLED flag is ON; when OFF, route.ts skips this layer
+ * and forwards the raw ToolBundle[] directly (no behaviour change).
+ *
+ * `context_assembly_compressed: true` indicates the bundle has been processed
+ * by the assembler step — distinct from `context_assembly_model_id` which
+ * disambiguates pass-through (`'pass-through'`) from a real LLM compression.
+ */
+export interface ContextBundle {
+  tool_bundles: ToolBundle[]
+  context_assembly_compressed: true
+  context_assembly_model_id: string
+  context_assembly_latency_ms: number
+  l1_tokens: number
+  l2_5_tokens: number
+  l4_tokens: number
+  vector_tokens: number
+  cgm_tokens: number
+  total_tokens: number
+}
+
 export interface SynthesisRequest {
   query: string
   query_plan: QueryPlan
