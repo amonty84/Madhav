@@ -13594,5 +13594,6 @@ session_close:
     S6 will require its own red-team per AC.S5.9.
 ```
 
-Commit: STAMPED_AT_COMMIT (post-merge-main, 2026-05-02). Schema validator result also stamped post-commit.
+Commit: b508d6e (feature/phase-o-observatory, 2026-05-02).
+schema_validator.py: exit=1; total violations 112 (vs 108 M4-B-S4 baseline = +4 NEW from concurrent parallel slots P3 + P4, none from M4-B-S5; AC.S5.11 NEW-violation contribution = 0).
 
