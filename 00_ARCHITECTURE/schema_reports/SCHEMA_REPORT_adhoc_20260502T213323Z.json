@@ -1,0 +1,766 @@
+{
+  "schema_validation_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-05-02T21:33:23.761193+00:00",
+    "violations": [
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14E_L3_REGISTERS_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/DATA_INTEGRITY_AUDIT_PLAN_v1_0.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CLAUDECODE_BRIEF_PORTAL_BUILD_TRACKER_IMPL_v0_1_HOLD.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/ASSET_INVENTORY_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/M1_M2_EXECUTION_PLAN_v1_0_DRAFT.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/MACRO_PLAN_v2_0.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_1.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CONSUME_DESIGN_v0_1.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/RETRIEVAL_PRODUCTIVITY_PLAN_v0_1_DRAFT.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14A_GCS_FOUNDATION_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R3_HOOK_COMPAT_AUDIT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14B_BUILD_PIPELINE_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/M1_M2_ACTIVATION_MASTER_PLAN_v0_1_DRAFT.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CUTOVER_2026-04-27.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14F_L2_ARCHIVE_AND_GOVERNANCE_REFRESH_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/CLAUDECODE_BRIEF_M2A_Exec_10_SEEDS_APPENDIX.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/PROJECT_KARN_PROTOCOL.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/PANEL_SYNTHESIS_ADDENDUM_v0_1.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R3_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/MARSYS_JIS_ARCHITECTURE_v1_0.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R4_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CLAUDECODE_BRIEF_PORTAL_QUALITY_v0_1.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/BHISMA_WAVE2_PLAN_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14D_L2_5_PARITY_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/BUILD_PIPELINE_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R5_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/BHISMA_WAVE2_PLAN_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/FILE_REGISTRY_v1_1.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_B_PLAN_v1_0_RECONCILER_PASS_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_BUILD_TRACKER_PLAN_v0_2.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R2_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/MARSYS_JIS_PROJECT_PLAN_v1_0.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R0_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/L2_5_STRUCTURED_LAYER_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/MACRO_PLAN_v1_0.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R6_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PHASE_14A_FOLLOWUP_IAM_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CLAUDE.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PORTAL_REDESIGN_R1_REPORT_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[architecture_governance]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/B0_KICKOFF_PROMPT_FOR_CLAUDE_CODE.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'version', 'status']"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/artifact]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/M1_M2_ACTIVATION_MATRIX.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[architecture_governance/version]",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/M1_M2_ACTIVATION_MATRIX.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l1_facts/artifact]",
+        "severity": "MEDIUM",
+        "path": "01_FACTS_LAYER/FORENSIC_ASTROLOGICAL_DATA_v8_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l1_facts/artifact]",
+        "severity": "LOW",
+        "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l2_5_msr/signal_count]",
+        "severity": "MEDIUM",
+        "path": "025_HOLISTIC_SYNTHESIS/MSR_v3_0.md",
+        "evidence": "Required key 'signal_count' not present",
+        "suggested_remediation": "Add `signal_count:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l2_5_cgm/artifact]",
+        "severity": "MEDIUM",
+        "path": "025_HOLISTIC_SYNTHESIS/CGM_v9_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_RELATIONSHIPS_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_CHILDREN_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_0.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_CAREER_DHARMA_v1_1.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_PARENTS_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_PSYCHOLOGY_MIND_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/version]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_0.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/status]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_0.md",
+        "evidence": "Required key 'status' not present",
+        "suggested_remediation": "Add `status:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/version]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/status]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_1.md",
+        "evidence": "Required key 'status' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `status:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_0.md",
+        "evidence": "Required key 'artifact' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `artifact:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/version]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_0.md",
+        "evidence": "Required key 'version' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `version:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/status]",
+        "severity": "LOW",
+        "path": "03_DOMAIN_REPORTS/REPORT_HEALTH_LONGEVITY_v1_0.md",
+        "evidence": "Required key 'status' not present (loose-YAML frontmatter)",
+        "suggested_remediation": "Add `status:` at line start"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/version]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+        "evidence": "Required key 'version' not present",
+        "suggested_remediation": "Add `version:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/status]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_FINANCIAL_v2_1.md",
+        "evidence": "Required key 'status' not present",
+        "suggested_remediation": "Add `status:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_field_missing[l3_domain_reports/artifact]",
+        "severity": "MEDIUM",
+        "path": "03_DOMAIN_REPORTS/REPORT_TRAVEL_v1_0.md",
+        "evidence": "Required key 'artifact' not present",
+        "suggested_remediation": "Add `artifact:` to frontmatter"
+      },
+      {
+        "rule": "frontmatter_missing[learning_layer_stub]",
+        "severity": "MEDIUM",
+        "path": "06_LEARNING_LAYER/OBSERVATIONS/README.md",
+        "evidence": "No frontmatter `---` block found",
+        "suggested_remediation": "Add YAML frontmatter with keys ['artifact', 'mechanism_id', 'status', 'produced_during']"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT",
+        "evidence": "Heading says `Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT`; session_open.session_id says `Madhav_M2A_Plan_Foundation_Stack`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT",
+        "evidence": "Heading says `Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT`; session_close.session_id says `Madhav_M2A_Plan_Foundation_Stack`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_6",
+        "evidence": "Heading says `Madhav_M2A_Exec_6`; session_open.session_id says `Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_6",
+        "evidence": "Heading says `Madhav_M2A_Exec_6`; session_close.session_id says `Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_1`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3",
+        "evidence": "Heading says `Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3`; session_open.session_id says `Madhav_M2A_Exec_7`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3",
+        "evidence": "Heading says `Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3`; session_close.session_id says `Madhav_M2A_Exec_7`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_8",
+        "evidence": "Heading says `Madhav_M2A_Exec_8`; session_open.session_id says `Madhav_M2A_Exec_9`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_8",
+        "evidence": "Heading says `Madhav_M2A_Exec_8`; session_close.session_id says `Madhav_M2A_Exec_9`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING",
+        "evidence": "Heading says `Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING`; session_open.session_id says `Madhav_M2A_Exec_11`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING",
+        "evidence": "Heading says `Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING`; session_close.session_id says `Madhav_M2A_Exec_11`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING",
+        "evidence": "Heading says `Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING`; session_open.session_id says `Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING",
+        "evidence": "Heading says `Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING`; session_close.session_id says `Madhav_COW_M2A_Exec_13_BRIEF_AUTHORING`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_COW_M2A_Exec_12_BRIEF_AUTHORING",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_13",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_M2A_Exec_14",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Madhav_PHASE11A_CUTOVER_STAGE1",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_open",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Phase_14G_Lockdown_Verification",
+        "evidence": "Heading says `Phase_14G_Lockdown_Verification`; session_open.session_id says `redesign-r7-polish-2026-04-30`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_session_id_disagreement_heading_close",
+        "severity": "HIGH",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Phase_14G_Lockdown_Verification",
+        "evidence": "Heading says `Phase_14G_Lockdown_Verification`; session_close.session_id says `redesign-r7-polish-2026-04-30`",
+        "suggested_remediation": "Reconcile per SESSION_LOG_SCHEMA_v1_0.md \u00a71.4"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#Phase_14G_Lockdown_Verification",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#KARN-W7-R2-MANIFEST-COMPLETENESS",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#BHISMA-W1-S4-CONVERGENCE",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#M3-PRE-D-GOVERNANCE-2026-05-01",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#M3-W4-D1-VALIDATOR-REDTEAM",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "session_log_entry_missing_next_objective_heading",
+        "severity": "LOW",
+        "path": "00_ARCHITECTURE/SESSION_LOG.md#M3-W4-D2-M3-CLOSE",
+        "evidence": "No `### Next session objective` heading found",
+        "suggested_remediation": "Add the heading per SESSION_LOG_SCHEMA_v1_0.md \u00a72.f"
+      },
+      {
+        "rule": "current_state_last_session_id_disagreement",
+        "severity": "MEDIUM",
+        "path": "00_ARCHITECTURE/CURRENT_STATE_v1_0.md",
+        "evidence": "CURRENT_STATE.last_session_id=`M4-D-S1` but SESSION_LOG tail entry is `USTAD_S1_3_OBSERVATORY_BACKEND_API`",
+        "suggested_remediation": "Update CURRENT_STATE \u00a72 or append the missing SESSION_LOG entry (whichever is authoritative per \u00a75)"
+      },
+      {
+        "rule": "learning_layer_population_gate_violation",
+        "severity": "HIGH",
+        "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md",
+        "evidence": "STATUS ACTIVE but `activation_session_id` missing from frontmatter",
+        "suggested_remediation": "Populate activation_session_id + either activation_lel_entry or activation_ppl_entry"
+      },
+      {
+        "rule": "learning_layer_population_gate_violation",
+        "severity": "HIGH",
+        "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md",
+        "evidence": "STATUS ACTIVE but neither activation_lel_entry nor activation_ppl_entry present",
+        "suggested_remediation": "Populate at least one of: activation_lel_entry, activation_ppl_entry"
+      },
+      {
+        "rule": "learning_layer_stub_banner_missing",
+        "severity": "HIGH",
+        "path": "06_LEARNING_LAYER/OBSERVATIONS/README.md",
+        "evidence": "No `STATUS: STUB|ACTIVE \u2014 ...` banner found",
+        "suggested_remediation": "Prepend STATUS banner matching regex `^STATUS:\\s*(STUB|ACTIVE)\\s*[\u2014-]\\s*.*$`"
+      }
+    ],
+    "summary": {
+      "total": 107,
+      "by_severity": {
+        "MEDIUM": 62,
+        "LOW": 28,
+        "HIGH": 17
+      }
+    },
+    "exit_code": 2
+  }
+}
