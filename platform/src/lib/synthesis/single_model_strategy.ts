@@ -22,7 +22,7 @@ import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
-import { resolveModel, isReasoningModel } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
 import { getModelMeta, supports } from '@/lib/models/registry'
 import { stripThinkBlocks, extractReasoningTrace } from './think_block_filter'
 import { getDefaultRegistry } from '@/lib/prompts/index'
@@ -37,6 +37,7 @@ import { runCheckpoint5_5 } from '@/lib/checkpoints/checkpoint_5_5'
 import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
 import { countSignalCitations } from './citation_check'
+import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 
 import type {
   SynthesisRequest,
@@ -155,7 +156,10 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     {
       const qid = query_plan.query_plan_id
       const nToolSteps = query_plan.tools_authorized?.length ?? 0
-      const ctxSeq = 3 + nToolSteps       // synthesis is ctxSeq+1
+      // UQE-9: prefer caller-allocated seq (atomic counter in route.ts) so the
+      // value is unique across the per-request trace; fall back to legacy
+      // arithmetic when no seq was passed in.
+      const ctxSeq = request.context_assembly_seq ?? (3 + nToolSteps)
 
       const l1Items: TraceChunkItem[] = vsResults.map(r => ({
         id: r.signal_id ?? 'unknown',
@@ -225,43 +229,31 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       toolsForModel = Object.keys(wrappedTools).length > 0 ? wrappedTools : undefined
     }
 
-    // BHISMA-B1 §3.2 / ADR-2 — reasoning models (o1, o3, o4-mini) reject the
-    // system role and ignore temperature. Fold the rendered prompt into the
-    // first user message and skip the dedicated system entry entirely.
-    const useReasoningConvention = isReasoningModel(selected_model_id)
-
+    // All registry models use the standard calling convention: system message
+    // + history + user turn. Prompt-caching header is added for Anthropic models.
     const historyMessages: ModelMessage[] = conversation_history.map(m => ({
       role: m.role,
       content: m.content,
     }))
 
-    let modelMessages: ModelMessage[]
-    if (useReasoningConvention) {
-      const foldedUser: ModelMessage = {
-        role: 'user',
-        content: `${renderedPrompt}\n\n---\n\nUser query:\n${query}`,
-      }
-      modelMessages = [...historyMessages, foldedUser]
-    } else {
-      const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
-        ? {
-            role: 'system',
-            content: renderedPrompt,
-            providerOptions: {
-              anthropic: { cacheControl: { type: 'ephemeral' } },
-            },
-          }
-        : {
-            role: 'system',
-            content: renderedPrompt,
-          }
+    const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
+      ? {
+          role: 'system',
+          content: renderedPrompt,
+          providerOptions: {
+            anthropic: { cacheControl: { type: 'ephemeral' } },
+          },
+        }
+      : {
+          role: 'system',
+          content: renderedPrompt,
+        }
 
-      modelMessages = [
-        systemMessage,
-        ...historyMessages,
-        { role: 'user', content: query },
-      ]
-    }
+    const modelMessages: ModelMessage[] = [
+      systemMessage,
+      ...historyMessages,
+      { role: 'user', content: query },
+    ]
 
     const modelMeta = getModelMeta(selected_model_id)
 
@@ -276,13 +268,60 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     // it is set by the time the 'finish' SSE part fires in toUIMessageStreamResponse.
     const methodologyBlockHolder: { value: string | null } = { value: null }
 
+    // UQE-16 — Per-style output token cap. Prevents over-elaboration by capping
+    // the synthesis response at a style-appropriate ceiling well below the model's
+    // hard maximum. The model's maxOutputTokens is the absolute ceiling; the style
+    // cap is a tighter practical limit so answers stay focused.
+    //
+    // Keys MUST match ConsumeStyle values ('acharya' | 'brief' | 'client').
+    // Previous keys were 'concise'/'detailed'/'technical' — none matched the
+    // actual ConsumeStyle union, causing ALL queries to fall through to the
+    // ?? 2000 default and get truncated at ~1975 tokens (finishReason: "length").
+    //
+    //   brief   → 1200 tokens  (~900 words)  — direct answer, no padding
+    //   client  → 3500 tokens  (~2600 words) — structured with evidence
+    //   acharya → 8000 tokens  (~6000 words) — full acharya-grade depth
+    //
+    // These caps apply to the synthesis output only, not to tool-use steps.
+    const STYLE_OUTPUT_CAP: Record<string, number> = {
+      brief:   1200,
+      client:  3500,
+      acharya: 8000,
+    }
+    const styleCap = STYLE_OUTPUT_CAP[style ?? 'acharya'] ?? 8000
+    const effectiveMaxTokens = Math.min(styleCap, modelMeta?.maxOutputTokens ?? styleCap)
+
+    // UQE-2 (W2-BUGS B2W-5) — temperature gate: deterministic for single-truth
+    // queries (factual lookups, prescriptive remedies, time-indexed predictions),
+    // mild variation for exploratory / multi-perspective queries.
+    const synthesisTemperature: number =
+      ['factual', 'remedial', 'predictive'].includes(query_plan.query_class)
+        ? 0
+        : 0.3
+
+    // NIM retry guard — the AI SDK retries failed requests up to 3 times by
+    // default (AI_RetryError). For NVIDIA NIM this triples the hang window:
+    // 3 × 30 s headers-timeout = 90 s of silence before an error surfaces.
+    // Set maxRetries: 0 so the first timeout/error reaches the caller
+    // immediately. The nimFetch wrapper in nvidia.ts already enforces a 30 s
+    // hard abort on headers, so combined the worst-case NIM hang is ~30 s.
+    const isNvidiaSynthesis = modelMeta?.provider === 'nvidia'
+
     const result = streamText({
       model: resolveModel(selected_model_id),
       messages: modelMessages,
       tools: toolsForModel,
       stopWhen: stepCountIs(5),
-      maxOutputTokens: modelMeta?.maxOutputTokens,
+      maxOutputTokens: effectiveMaxTokens,
+      temperature: synthesisTemperature,
       experimental_transform: smoothStream({ delayInMs: 20, chunking: 'word' }),
+      ...(isNvidiaSynthesis && { maxRetries: 0 }),
+      // Google-specific: disable safety filters (Jyotish content triggers
+      // DANGEROUS_CONTENT mid-stream) + cap thinking budget (avoids 30-90s
+      // hang before first visible token). See resolver.googleProviderOptions.
+      ...(googleProviderOptions(selected_model_id) && {
+        providerOptions: googleProviderOptions(selected_model_id),
+      }),
       onFinish: async ({
         finishReason,
         usage,
@@ -312,7 +351,9 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         {
           const qid = query_plan.query_plan_id
           const nToolSteps = query_plan.tools_authorized?.length ?? 0
-          const synthesisSeq = 3 + nToolSteps + 1
+          // UQE-9: same precedence rule as ctxSeq above — caller's atomic
+          // counter wins when present.
+          const synthesisSeq = request.synthesis_seq ?? (3 + nToolSteps + 1)
           traceEmitter.emitStep({
             event: 'step_done',
             query_id: qid,
@@ -335,6 +376,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
                 // class. Threshold + meets-flag derived on the consumer side
                 // from query_class via citationThresholdForClass / hasMinimumCitations.
                 citation_count: countSignalCitations(cleanText),
+                temperature: synthesisTemperature,
               },
               payload: {
                 prompt_preview: cleanText.slice(0, 500),
@@ -355,6 +397,27 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           usage?.outputTokens ?? 0,
           0,
         )
+
+        // ── MON-5: llm_call_log write (synthesis stage) ──────────────────────
+        // Fire-and-forget. reasoning_tokens populated only for models that
+        // surface a separate reasoning trace (deepseek-reasoner today).
+        void writeLlmCallLog({
+          query_id: query_plan.query_plan_id,
+          conversation_id: conversation_id ?? null,
+          call_stage: 'synthesis',
+          model_id: selected_model_id,
+          provider: resolveProvider(selected_model_id),
+          input_tokens: usage?.inputTokens ?? null,
+          output_tokens: usage?.outputTokens ?? null,
+          reasoning_tokens: isR1 && r1Reasoning
+            ? Math.ceil(r1Reasoning.length / 4)
+            : null,
+          latency_ms: Date.now() - synthesisStartMs,
+          cost_usd: null,
+          fallback_used: false,
+          error_code: finishReason === 'error' ? finishReason : null,
+          payload: null,
+        })
 
         // ── Hook 3: Checkpoint 8.5 (post-synthesize) ─────────────────────────
         // Runs async in onFinish after stream completes. Halt verdict is logged

@@ -11,6 +11,7 @@ import {
   type DragEvent,
   type KeyboardEvent,
 } from 'react'
+import TextareaAutosize from 'react-textarea-autosize'
 import { ArrowUp, Square, Paperclip, X, FileText, Loader2, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Attachment } from '@/hooks/useAttachments'
@@ -158,10 +159,7 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
             ))}
           </div>
         )}
-        {/* LOCKED (2026-05-02): plain <textarea rows={3}> — fixed-size composer.
-            Do not reintroduce TextareaAutosize / minRows / maxRows / field-sizing.
-            Long prompts scroll inside the box. See platform/AGENTS.md "Locked UI design decisions". */}
-        <textarea
+        <TextareaAutosize
           ref={textareaRef}
           value={value}
           onChange={e => setValue(e.target.value)}
@@ -170,10 +168,11 @@ export const Composer = forwardRef<ComposerHandle, Props>(function Composer(
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          rows={3}
+          minRows={1}
+          maxRows={10}
           disabled={disabled}
           className={cn(
-            'w-full resize-none overflow-y-auto rounded-3xl bg-transparent px-5 py-4 text-[15px] leading-[1.55] text-foreground outline-none placeholder:text-muted-foreground/70 placeholder:transition-colors focus:placeholder:text-muted-foreground/50',
+            'w-full resize-none rounded-3xl bg-transparent px-5 py-4 text-[15px] leading-[1.55] text-foreground outline-none placeholder:text-muted-foreground/70 placeholder:transition-colors focus:placeholder:text-muted-foreground/50',
             'disabled:cursor-not-allowed'
           )}
           aria-label="Message composer"
