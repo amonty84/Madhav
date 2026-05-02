@@ -16973,3 +16973,187 @@ session_close:
 Concurrently: M5-S1 (main-thread M5 macro-phase opening) remains the next main-thread session per CURRENT_STATE v3.5 main-thread canonical pointers UNCHANGED.
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-2-llmclient-shim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+---
+
+## USTAD_S1_3_OBSERVATORY_BACKEND_API — Phase O Observatory O.1 second implementation session (5 read-only GET endpoints + OpenAPI 3.1 spec + 12-case test suite)
+
+**Date:** 2026-05-03 (concurrent-workstream session; Phase O sub-phase O.1; second implementation session past S0.1 gate; concurrent with S1.2 LLM shim and M5 INCOMING main thread).
+
+**Brief:** Inline execution brief delivered via Cowork prompt (USTAD_S1_3 — Observatory Backend API). Build five read-only GET endpoints under `/api/admin/observatory/*` (summary, timeseries, breakdowns, events, event/[id]) + a pure SQL query layer + OpenAPI 3.1 spec + 11 test cases. Worktree-isolated execution under `feature/phase-o-observatory-ustad-s1-3-backend-api` (cut from umbrella tip 5cf16fd). Parallel-safe with S1.2 LLM shim — disjoint may_touch.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  cowork_thread_name: "ustad-s1-3-backend-api"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.1.S1.3
+  predecessor_session: USTAD_S1_1_OBSERVATORY_SCHEMA
+  current_state_version_at_open: v3.5
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - platform/src/app/api/admin/observatory/**
+      - platform/src/lib/observatory/queries.ts
+      - platform/src/lib/observatory/types.ts
+      - platform/src/lib/observatory/__tests__/queries.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/**
+      - platform/src/app/(super-admin)/**
+      - platform/src/lib/components/**
+      - platform/src/components/**
+      - platform/migrations/**
+      - platform/src/lib/db/schema/**
+      - 00_ARCHITECTURE/**  # except SESSION_LOG.md per may_touch
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: 23d18c34c4a05ce7505c738cd07a249a88fd7cb95d4c7292a76b7ed66dce2c84
+    - file: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      fingerprint_sha256: b2898c9fa9e38d6ac8683b55692d1ba96ab1d811f0964b92de89764bed6a86ae
+    - file: platform/src/lib/db/schema/observatory.ts
+      fingerprint_sha256: ec7079747b10c1fc384e7126a7519f20544bab1b7be40a154072f799ccc36e81
+  red_team_due: false
+  notes: "Phase O sub-phase O.1 second implementation session. Builds 5 read-only GET endpoints + OpenAPI spec + 12 test cases. Parallel with S1.2 LLM shim — disjoint may_touch (S1.2 owns platform/src/lib/llm/**). No dependency on S1.2 for read-side queries. SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables (W1–W7)
+
+**W1. Pure SQL query layer authored.** [`platform/src/lib/observatory/queries.ts`](platform/src/lib/observatory/queries.ts) (sha256 `8f82baa4f4dc99fce7ab812b2d2a102237b5580517d5ab1487b6d645d2231153`) — five exported async functions, one per endpoint: `getSummary`, `getTimeseries`, `getBreakdowns`, `getEvents`, `getEventById`. All filtering pushed into SQL `WHERE` predicates with bound parameters; no string interpolation of caller input; no post-fetch in-memory filtering. `applyFilters()` helper centralizes the `(provider, model, pipeline_stage)` filter shape. `truncUnit()` and `dimensionColumn()` allow-list dimension/granularity inputs. Latency percentiles via `percentile_cont(0.5|0.95) WITHIN GROUP (ORDER BY latency_ms)`. Keyset pagination on `(started_at DESC, event_id DESC)` with base64url-encoded opaque cursor; total count computed via `COUNT(*)` against the same predicate set (cursor narrows page, not total).
+
+**W2. API response-shape types authored.** [`platform/src/lib/observatory/types.ts`](platform/src/lib/observatory/types.ts) (sha256 `4f166969b7d3a32b9d2c5b9a85c3f32262fdab08934a60c6515836852a783765`) — `SummaryResponse` / `TimeseriesResponse` / `BreakdownsResponse` / `EventsResponse` / `EventDetailResponse` plus the matching `*QueryInput` types and shared `ObservatoryFilters`. `EVENTS_DEFAULT_LIMIT` (50) + `EVENTS_MAX_LIMIT` (200). Re-uses row types from `@/lib/db/schema/observatory` (no duplicate column declarations).
+
+**W3. Five route handlers authored.** All gated by the shared `guardObservatoryRoute()` helper at [`platform/src/app/api/admin/observatory/_guard.ts`](platform/src/app/api/admin/observatory/_guard.ts) (sha256 `f3861af884209706201ce5800a6f185d2c88bbb6aa912d429913ec9432996f1e`) — two-stage gate: (a) env flag `MARSYS_FLAG_OBSERVATORY_ENABLED === 'true'` (TODO(S1.9) wire feature-flag service); (b) `requireSuperAdmin()` from `@/lib/auth/access-control`. Query-string parsing centralized in [`platform/src/app/api/admin/observatory/_parse.ts`](platform/src/app/api/admin/observatory/_parse.ts) (sha256 `0d0747a574b430478ce0ea82e6f69863022b35aa0503da808bace6b751755731`); `ObservatoryBadRequestError` surfaces as `400` via the canonical `res.badRequest(detail)` helper.
+  - [`summary/route.ts`](platform/src/app/api/admin/observatory/summary/route.ts) (sha256 `2ede960146350f138778f7361f00b856f6ac92cbdb2e93381588e0a38ae4964e`) — KPI rollup + optional `compare_to_previous` deltas + reconciliation context.
+  - [`timeseries/route.ts`](platform/src/app/api/admin/observatory/timeseries/route.ts) (sha256 `434efcade2887e3b04ae13130cef9abe772cac250bc4d3e63f618db65a32b42a`) — `date_trunc(granularity, started_at)` buckets × dimension series.
+  - [`breakdowns/route.ts`](platform/src/app/api/admin/observatory/breakdowns/route.ts) (sha256 `c458bc6af20b7018629559731353af835d0d3a8bedc4252400b024353d47f69b`) — per-dimension rollup sorted by `cost_usd DESC`; `conversation` dimension uses `COALESCE(conversation_name, conversation_id)`.
+  - [`events/route.ts`](platform/src/app/api/admin/observatory/events/route.ts) (sha256 `af3b7bbe21eecc82732eda8f56f36849d9456c7ed7ce97d77aee815acf323f76`) — keyset paginated explorer; 11 filter params; ILIKE search bound (not interpolated).
+  - [`event/[id]/route.ts`](platform/src/app/api/admin/observatory/event/[id]/route.ts) (sha256 `5947e8ac6f7b9db03db7c309981e5cc11a9ddacf28e5fd186b69a09f9172c1aa`) — full row fetch by UUID; `400` on malformed id, `404` on miss.
+
+**W4. OpenAPI 3.1 spec authored.** [`platform/src/app/api/admin/observatory/openapi.yaml`](platform/src/app/api/admin/observatory/openapi.yaml) (sha256 `76bf2ce4eb27df9cdd5febbe0a83c54d9b19bacc200a65934ecf6661d6b37b4c`) — five paths, full parameter constraints (enum `provider`/`pipeline_stage`/`status`, integer min/max for cost/latency, default+max for `limit`), error envelope schema mirroring `@/lib/errors` `ApiErrorBody`, response schemas for every successful return. `400/401/403/404/500` documented per endpoint. Frontend sessions S1.9–S1.12 consume this spec as the API contract.
+
+**W5. Test suite authored.** [`platform/src/lib/observatory/__tests__/queries.test.ts`](platform/src/lib/observatory/__tests__/queries.test.ts) (sha256 `375d55516592a288359be509b343c276bcf2a7bf086c79faf3f175f1d17ff5c1`). Two-layer design mirroring `observatory_schema.test.ts`:
+  - **Layer 1 — always-run unit tests (2 cases).** Mock `@/lib/auth/access-control` and `server-only`; verify (a) `requireSuperAdmin` returning 403 → guard returns 403 (test 11 of brief AC), (b) flag-off → guard returns 403.
+  - **Layer 2 — integration tests (10 cases) gated on `OBSERVATORY_TEST_DATABASE_URL`.** beforeAll seeds **140 rows** (≥100 per brief) spanning **3 providers** (anthropic / openai / gemini), **4 models**, **3 pipeline stages**, **7 days** of `started_at`, mix of success/error statuses. Cases: (1) summary totals correct vs JS recomputation; (2) `compare_to_previous` delta = current − previous within window pairs; (3) provider filter narrows results; (4) day granularity produces 7 buckets for 7-day range; (5) provider series keys present; (6) breakdowns sorted DESC + cross-checks per-stage; (7) keyset pagination — first page returns `limit + cursor`, second page returns remainder, no event_id duplicates; (8) ILIKE search matches `prompt_text` substring count; (9) `min_cost` filter excludes rows below threshold; (10) `getEventById` round-trip + nonexistent-UUID returns null.
+  - **Result:** **12/12 PASS** with `OBSERVATORY_TEST_DATABASE_URL=postgresql://Dev@localhost:5432/observatory_test_s13`. **2/12 PASS, 10/12 SKIPPED** when env unset (existing project gating pattern).
+
+**W6. EXPLAIN plans verified.** Against a 50K-row test set (post-`ANALYZE`), both representative queries use `idx_llm_usage_events_started_at`:
+  - **Summary query** (date range + provider filter):
+    ```
+    Aggregate  (cost=13.52..13.54 rows=1 width=56)
+      ->  Index Scan using idx_llm_usage_events_started_at on llm_usage_events
+            Index Cond: (started_at >= ... AND started_at < ...)
+            Filter: (provider = ANY (...))
+    ```
+  - **Events query** (date range + provider filter + keyset order/limit):
+    ```
+    Limit  (cost=13.54..13.56 rows=7 width=180)
+      ->  Sort  (... Sort Key: started_at DESC, event_id DESC)
+            ->  Index Scan Backward using idx_llm_usage_events_started_at
+                  Index Cond: (started_at >= ... AND started_at < ...)
+                  Filter: (provider = ANY (...))
+    ```
+  Date-range index drives both. At smaller cardinalities (~140 rows) the planner correctly chose Seq Scan (cheaper) — that's expected behavior, not a regression.
+
+**W7. Governance scripts run.**
+  - `mirror_enforcer.py`: 0 findings; **exit 0**; 9 pairs checked (MP.1–MP.9); 9 passed; 2 declared claude_only (MP.6, MP.7). Clean.
+  - `schema_validator.py` (full corpus): **107 violations; exit 2**. Identical to S1.1 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries — NONE introduced by this session. None of the 107 violations name a file from this session's may_touch.
+  - `drift_detector.py`: **327 findings; exit 2**. Identical 327 carry-forward as S0.1 + S1.1 — all pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on canonical-corpus tree (declared in must_not_touch).
+  - `schema_validator.py --close-checklist`: **3 HIGH violations; exit 2**. (1) `close_drift_detector_run_nonzero_exit` + (2) `close_schema_validator_run_nonzero_exit` — same documented governance-protocol gap S1.1 / S0.1 / M4-D-S1 hit (validator's strict whitelist `{0, 3+known_residuals}` does not yet implement the §F policy intent for HIGH-tier carry-forwards). (3) `scope_boundary_violation` on `00_ARCHITECTURE/SESSION_LOG.md` — same gap S1.1 hit; brief explicitly allows SESSION_LOG.md append at close as the only `00_ARCHITECTURE/**` exception, but the validator does not honor that exception. Brief AC (`schema_validator.py exits 0 or exit 2`) + ONGOING_HYGIENE_POLICIES §F policy intent govern; close proceeds per S0.1/S1.1/M4-D-S1 precedent.
+  - `schema_validator.py --handshake`: 0 violations; **exit 0**.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  closed_at: 2026-05-03T02:42:00+05:30
+  files_touched:
+    - {path: platform/src/lib/observatory/types.ts, mutation: created, sha256_after: 4f166969b7d3a32b9d2c5b9a85c3f32262fdab08934a60c6515836852a783765, scope: in}
+    - {path: platform/src/lib/observatory/queries.ts, mutation: created, sha256_after: 8f82baa4f4dc99fce7ab812b2d2a102237b5580517d5ab1487b6d645d2231153, scope: in}
+    - {path: platform/src/lib/observatory/__tests__/queries.test.ts, mutation: created, sha256_after: 375d55516592a288359be509b343c276bcf2a7bf086c79faf3f175f1d17ff5c1, scope: in}
+    - {path: platform/src/app/api/admin/observatory/_guard.ts, mutation: created, sha256_after: f3861af884209706201ce5800a6f185d2c88bbb6aa912d429913ec9432996f1e, scope: in}
+    - {path: platform/src/app/api/admin/observatory/_parse.ts, mutation: created, sha256_after: 0d0747a574b430478ce0ea82e6f69863022b35aa0503da808bace6b751755731, scope: in}
+    - {path: platform/src/app/api/admin/observatory/summary/route.ts, mutation: created, sha256_after: 2ede960146350f138778f7361f00b856f6ac92cbdb2e93381588e0a38ae4964e, scope: in}
+    - {path: platform/src/app/api/admin/observatory/timeseries/route.ts, mutation: created, sha256_after: 434efcade2887e3b04ae13130cef9abe772cac250bc4d3e63f618db65a32b42a, scope: in}
+    - {path: platform/src/app/api/admin/observatory/breakdowns/route.ts, mutation: created, sha256_after: c458bc6af20b7018629559731353af835d0d3a8bedc4252400b024353d47f69b, scope: in}
+    - {path: platform/src/app/api/admin/observatory/events/route.ts, mutation: created, sha256_after: af3b7bbe21eecc82732eda8f56f36849d9456c7ed7ce97d77aee815acf323f76, scope: in}
+    - {path: 'platform/src/app/api/admin/observatory/event/[id]/route.ts', mutation: created, sha256_after: 5947e8ac6f7b9db03db7c309981e5cc11a9ddacf28e5fd186b69a09f9172c1aa, scope: in}
+    - {path: platform/src/app/api/admin/observatory/openapi.yaml, mutation: created, sha256_after: 76bf2ce4eb27df9cdd5febbe0a83c54d9b19bacc200a65934ecf6661d6b37b4c, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_3 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session — declared in must_not_touch"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude-side composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); Gemini-side .gemini/project_state.md unchanged — implementation-class session, mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.3 (read-side API implementation, not plan revision)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Identical 327 carry-forward as S0.1/S1.1 close — all HIGH findings are pre-existing fingerprint_mismatch residuals on canonical L1/L2.5/L3.5 entries. NONE introduced by this S1.3 session. Acceptable per ONGOING_HYGIENE_POLICIES §F WL.14G.02 + S0.1/S1.1 close precedents."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    baseline_target: 108
+    rationale: "Identical to S1.1 close (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: 0, desync_pairs: [], rationale: "9 pairs checked; 9 passed; 2 declared claude_only. Clean."}
+  known_residuals:
+    - {finding_id: WL.14G.02, validator: drift_detector, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + Phase_14G_Lockdown_Verification / PHASE_14_FINDINGS_DISCHARGE_v1_0 D.2", rationale: "Pre-existing stale fingerprints in CANONICAL_ARTIFACTS; resolve at retirement pass"}
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1 baseline note", rationale: "M2/Portal-era SESSION_LOG entries emit session_id-disagreement-heading violations; quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.3 session does not rotate CURRENT_STATE pointers; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized: {serialized: false, rationale: "Implementation-class concurrent-workstream session — main M5 thread build state captured at M4-D-S1 close is unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1 + S1.1 precedent."}
+  open_decisions:
+    - id: OD.S1.3.1
+      summary: "Full provider raw_payload — current schema (migration 038) has no raw_payload column on llm_usage_events. S1.4–S1.8 may need a separate llm_provider_raw_responses table if full provider payloads are required for forensic replay."
+      disposition: "DEFERRED to S1.4–S1.8 per per-provider adapter sessions. No schema change made in S1.3."
+  close_criteria_met: true
+  unblocks: "Phase O sub-phase O.1 next sessions per OBSERVATORY_PLAN §5.1: S1.4–S1.8 (5 provider adapters; depend on S1.2 closed; can run concurrently after S1.2 lands per §6.1). S1.9 (Frontend scaffold) consumes openapi.yaml as its API contract."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-3-backend-api
+    cut_from_commit: 5cf16fd
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.4 / S1.5 / S1.6 / S1.7 / S1.8 — five per-provider adapters (parallel-safe after S1.2)** and **S1.9 — Frontend scaffold (depends on S1.3 — i.e., now)** per OBSERVATORY_PLAN §5.1. S1.9 consumes [`platform/src/app/api/admin/observatory/openapi.yaml`](platform/src/app/api/admin/observatory/openapi.yaml) as its API contract. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-3-backend-api`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.

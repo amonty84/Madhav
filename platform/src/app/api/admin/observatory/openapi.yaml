@@ -1,0 +1,435 @@
+openapi: 3.1.0
+info:
+  title: Observatory Admin API
+  description: |
+    Read-only super-admin endpoints over the Observatory two-layer ledger
+    (telemetry + reconciliation). Authored by USTAD_S1_3_OBSERVATORY_BACKEND_API
+    per OBSERVATORY_PLAN_v1_0.md §3 (data model) and §4 (dashboard UX). All
+    endpoints gate on (a) the env flag `MARSYS_FLAG_OBSERVATORY_ENABLED` and
+    (b) `requireSuperAdmin()`. Frontend sessions S1.9–S1.12 consume this spec.
+  version: 1.0.0
+servers:
+  - url: /api/admin/observatory
+    description: Same-origin admin API
+tags:
+  - name: observatory
+    description: Phase O Observatory backend
+paths:
+  /summary:
+    get:
+      tags: [observatory]
+      summary: KPI rollup for a date range
+      description: |
+        Total cost / requests / token sums + p50/p95 latency over `[from, to)`,
+        with optional period-over-period delta (`compare_to_previous=true`).
+        Reconciliation context (most recent variance through a date strictly
+        before `to`) attached when available.
+      parameters:
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - name: compare_to_previous
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+          description: When true, response carries `_delta` fields for every numeric KPI.
+        - $ref: '#/components/parameters/ProviderFilter'
+        - $ref: '#/components/parameters/ModelFilter'
+        - $ref: '#/components/parameters/PipelineStageFilter'
+      responses:
+        '200':
+          description: Summary metrics (with optional deltas).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SummaryResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /timeseries:
+    get:
+      tags: [observatory]
+      summary: Time-bucketed cost over a chosen dimension
+      parameters:
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - name: granularity
+          in: query
+          required: true
+          schema: { type: string, enum: [hour, day, week] }
+        - name: dimension
+          in: query
+          required: true
+          schema: { type: string, enum: [provider, model, pipeline_stage] }
+        - $ref: '#/components/parameters/ProviderFilter'
+        - $ref: '#/components/parameters/ModelFilter'
+        - $ref: '#/components/parameters/PipelineStageFilter'
+      responses:
+        '200':
+          description: Time-series buckets.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TimeseriesResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /breakdowns:
+    get:
+      tags: [observatory]
+      summary: Per-dimension cost breakdown, sorted by cost DESC
+      parameters:
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - name: dimension
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [provider, model, pipeline_stage, conversation]
+        - $ref: '#/components/parameters/ProviderFilter'
+        - $ref: '#/components/parameters/ModelFilter'
+        - $ref: '#/components/parameters/PipelineStageFilter'
+      responses:
+        '200':
+          description: Breakdown rows.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BreakdownsResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /events:
+    get:
+      tags: [observatory]
+      summary: Paginated event-row explorer
+      description: |
+        Keyset-paginated, filterable list of `llm_usage_events` rows. All
+        filters are pushed into SQL predicates; no post-fetch in-memory
+        filtering. Pagination is on `(started_at DESC, event_id DESC)`; the
+        `cursor` returned in `next_cursor` is opaque (base64url of
+        `<started_at>|<event_id>`).
+      parameters:
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/ProviderFilter'
+        - $ref: '#/components/parameters/ModelFilter'
+        - $ref: '#/components/parameters/PipelineStageFilter'
+        - name: conversation_id
+          in: query
+          required: false
+          schema: { type: string }
+        - name: user_id
+          in: query
+          required: false
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [success, error, timeout] }
+        - name: min_cost
+          in: query
+          required: false
+          schema: { type: number, format: double, minimum: 0 }
+        - name: max_cost
+          in: query
+          required: false
+          schema: { type: number, format: double, minimum: 0 }
+        - name: min_latency
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0 }
+        - name: max_latency
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0 }
+        - name: search
+          in: query
+          required: false
+          schema: { type: string }
+          description: ILIKE substring against (prompt_text, response_text).
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+        - name: cursor
+          in: query
+          required: false
+          schema: { type: string }
+          description: Opaque cursor from a prior `next_cursor`.
+      responses:
+        '200':
+          description: One page of events plus pagination metadata.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EventsResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /event/{id}:
+    get:
+      tags: [observatory]
+      summary: Single full `llm_usage_events` row by event_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Full event row (includes prompt_text, response_text, parameters).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EventDetailResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+components:
+  parameters:
+    From:
+      name: from
+      in: query
+      required: true
+      schema: { type: string, format: date-time }
+      description: ISO 8601 timestamp; range is half-open `[from, to)`.
+    To:
+      name: to
+      in: query
+      required: true
+      schema: { type: string, format: date-time }
+      description: ISO 8601 timestamp; must be strictly after `from`.
+    ProviderFilter:
+      name: provider
+      in: query
+      required: false
+      explode: true
+      schema:
+        type: array
+        items: { type: string, enum: [anthropic, openai, gemini, deepseek, nim] }
+    ModelFilter:
+      name: model
+      in: query
+      required: false
+      explode: true
+      schema:
+        type: array
+        items: { type: string }
+    PipelineStageFilter:
+      name: pipeline_stage
+      in: query
+      required: false
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+          enum: [classify, compose, retrieve, synthesize, audit, other]
+
+  responses:
+    BadRequest:
+      description: Validation failed.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    Unauthorized:
+      description: No authenticated user.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    Forbidden:
+      description: Caller is not super-admin or feature flag is off.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    NotFound:
+      description: No row matches the given id.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ApiError' }
+
+  schemas:
+    ApiError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            detail: { type: string }
+            retry: { type: boolean }
+
+    SummaryResponse:
+      type: object
+      required:
+        - total_cost_usd
+        - total_requests
+        - total_input_tokens
+        - total_output_tokens
+        - total_cache_tokens
+        - avg_cost_per_request
+        - p50_latency_ms
+        - p95_latency_ms
+        - reconciliation_variance_pct
+        - reconciliation_through_date
+      properties:
+        total_cost_usd: { type: number }
+        total_requests: { type: integer }
+        total_input_tokens: { type: integer }
+        total_output_tokens: { type: integer }
+        total_cache_tokens: { type: integer }
+        avg_cost_per_request: { type: number }
+        p50_latency_ms: { type: number }
+        p95_latency_ms: { type: number }
+        reconciliation_variance_pct: { type: number, nullable: true }
+        reconciliation_through_date: { type: string, nullable: true }
+        total_cost_usd_delta: { type: number }
+        total_requests_delta: { type: integer }
+        total_input_tokens_delta: { type: integer }
+        total_output_tokens_delta: { type: integer }
+        total_cache_tokens_delta: { type: integer }
+        avg_cost_per_request_delta: { type: number }
+        p50_latency_ms_delta: { type: number }
+        p95_latency_ms_delta: { type: number }
+
+    TimeseriesBucket:
+      type: object
+      required: [time, series]
+      properties:
+        time: { type: string, format: date-time }
+        series:
+          type: object
+          additionalProperties: { type: number }
+
+    TimeseriesResponse:
+      type: object
+      required: [buckets]
+      properties:
+        buckets:
+          type: array
+          items: { $ref: '#/components/schemas/TimeseriesBucket' }
+
+    BreakdownRow:
+      type: object
+      required:
+        - dim_value
+        - cost_usd
+        - request_count
+        - input_tokens
+        - output_tokens
+        - cache_tokens
+        - avg_latency_ms
+      properties:
+        dim_value: { type: string }
+        cost_usd: { type: number }
+        request_count: { type: integer }
+        input_tokens: { type: integer }
+        output_tokens: { type: integer }
+        cache_tokens: { type: integer }
+        avg_latency_ms: { type: number }
+
+    BreakdownsResponse:
+      type: object
+      required: [rows]
+      properties:
+        rows:
+          type: array
+          items: { $ref: '#/components/schemas/BreakdownRow' }
+
+    ObservatoryEventListRow:
+      type: object
+      required:
+        - event_id
+        - conversation_id
+        - prompt_id
+        - user_id
+        - provider
+        - model
+        - pipeline_stage
+        - status
+        - started_at
+      properties:
+        event_id: { type: string, format: uuid }
+        conversation_id: { type: string }
+        conversation_name: { type: string, nullable: true }
+        prompt_id: { type: string }
+        user_id: { type: string }
+        provider: { type: string }
+        model: { type: string }
+        pipeline_stage: { type: string }
+        input_tokens: { type: integer, nullable: true }
+        output_tokens: { type: integer, nullable: true }
+        cache_read_tokens: { type: integer, nullable: true }
+        cache_write_tokens: { type: integer, nullable: true }
+        computed_cost_usd: { type: number, nullable: true }
+        latency_ms: { type: integer, nullable: true }
+        status: { type: string }
+        error_code: { type: string, nullable: true }
+        started_at: { type: string, format: date-time }
+        finished_at: { type: string, nullable: true, format: date-time }
+
+    EventsResponse:
+      type: object
+      required: [events, next_cursor, total_count]
+      properties:
+        events:
+          type: array
+          items: { $ref: '#/components/schemas/ObservatoryEventListRow' }
+        next_cursor: { type: string, nullable: true }
+        total_count: { type: integer }
+
+    EventDetailResponse:
+      type: object
+      description: Full `llm_usage_events` row including prompt_text, response_text, parameters, feature_flag_state.
+      required:
+        - event_id
+        - conversation_id
+        - prompt_id
+        - user_id
+        - provider
+        - model
+        - pipeline_stage
+        - status
+        - started_at
+        - created_at
+      properties:
+        event_id: { type: string, format: uuid }
+        conversation_id: { type: string }
+        conversation_name: { type: string, nullable: true }
+        prompt_id: { type: string }
+        parent_prompt_id: { type: string, nullable: true }
+        user_id: { type: string }
+        provider: { type: string }
+        model: { type: string }
+        pipeline_stage: { type: string }
+        prompt_text: { type: string, nullable: true }
+        response_text: { type: string, nullable: true }
+        system_prompt: { type: string, nullable: true }
+        parameters: { nullable: true }
+        input_tokens: { type: integer, nullable: true }
+        output_tokens: { type: integer, nullable: true }
+        cache_read_tokens: { type: integer, nullable: true }
+        cache_write_tokens: { type: integer, nullable: true }
+        reasoning_tokens: { type: integer, nullable: true }
+        computed_cost_usd: { type: number, nullable: true }
+        pricing_version_id: { type: string, format: uuid, nullable: true }
+        latency_ms: { type: integer, nullable: true }
+        status: { type: string }
+        error_code: { type: string, nullable: true }
+        provider_request_id: { type: string, nullable: true }
+        started_at: { type: string, format: date-time }
+        finished_at: { type: string, nullable: true, format: date-time }
+        feature_flag_state: { nullable: true }
+        client_ip_hash: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
