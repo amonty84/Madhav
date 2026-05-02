@@ -14726,4 +14726,4 @@ M4-C-S3 (LL.7 first artifact write per NAP.M4.6 Option B + 3 refinements) is
 sequenced after S1 + S2. M4-C-S4 (sub-phase close) consumes the pre-draft authored
 at this P6 session.
 
-Commit: `[PENDING — to be stamped post-commit]` (feature/phase-o-observatory, 2026-05-03).
+Commit: 0934efb (feature/phase-o-observatory, 2026-05-03).
