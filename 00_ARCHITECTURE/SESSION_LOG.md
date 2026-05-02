@@ -14484,4 +14484,4 @@ M4-C-S3 unblocks at the moment the M4-C-S1/S2 sub-phases complete AND the §2.3 
 - red_team_counter: unchanged (M4-B-S6-CLOSE's count remains authoritative; governance-aside per ONGOING_HYGIENE_POLICIES §G).
 - Mirror MP.1/MP.2: not propagated by this append (governance-aside; if the next substantive close touches `.geminirules` / `.gemini/project_state.md`, it should reflect the NAP.M4.6 verdict in adapted parity).
 
-Commit: <stamped-at-commit-end>.
+Commit: af82d8e (feature/phase-o-observatory, 2026-05-03).
