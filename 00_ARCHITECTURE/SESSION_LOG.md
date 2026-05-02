@@ -14993,6 +14993,6 @@ per NAP.M4.6 Option B + 3 refinements) is sequenced after S1 + S2. M4-C-S4
 (sub-phase close) consumes the M4_C_CLOSE_v1_0.md DRAFT pre-draft authored at
 M4-C-P6-S4-PREDRAFT.
 
-Commit: <stamped-at-commit>.
+Commit: f30f696 (feature/phase-o-observatory, 2026-05-02).
 
 Commit: 0934efb (feature/phase-o-observatory, 2026-05-03).
