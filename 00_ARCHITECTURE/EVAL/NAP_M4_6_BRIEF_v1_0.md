@@ -1,8 +1,8 @@
 ---
 artifact: 00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md
 canonical_id: NAP_M4_6_BRIEF
-version: "1.1"
-status: OPTION_B_APPROVED
+version: "1.2"
+status: OPTION_B_APPROVED_LITERAL_CONSTRUCTION
 authored_by: M4-B-P5-M4C-ENTRY-PREP
 authored_on: 2026-05-02
 nap_id: NAP.M4.6
@@ -43,13 +43,16 @@ changelog:
 ## LL.7 Discovery Prior Rubric (native-only mode at M4-C)
 
 ```
-STATUS: OPTION_B_APPROVED (2026-05-02).
+STATUS: OPTION_B_APPROVED_LITERAL_CONSTRUCTION (v1.2, 2026-05-02).
 NAP.M4.6 verdict received from native at M4-B-P5-M4C-ENTRY-PREP NAP-decisions
 append (2026-05-02): Option B — Classical-seeded. Three native refinements
-captured in frontmatter and §6 below. M4-C-S3 (LL.7 first artifact write) is
-unblocked; the algorithm follows §4.2 with the §6 refinements applied.
-The brief's §1–§4 body is preserved as authored 2026-05-02 for audit trail;
-§6 captures the verdict + refinements; v1.1 changelog records the decision.
+captured in frontmatter and §6 below.
+DECISION-2 (CDLM construction, 2026-05-02): literal msr_anchors-clique union.
+Empirical consequence — 8 MED-tier LL.2 anchor pairs classify as `novel` (not
+`confirmed`); §6.3.A correction added at M4-C-S3-LL7-DISCOVERY-PRIOR 2026-05-02.
+LL.7 first SHADOW write CLOSED at M4-C-S3 (sanity-check gate PASS, 8/8 anchors
+in `novel` class). The algorithm follows §4.2 with the §6 refinements applied
+under literal-construction rules from §6.3.A.
 ```
 
 ---
@@ -471,6 +474,20 @@ With refinements (a), (b), (c) applied, the §4.2 expected output shape becomes:
 - **NAP_M4_6_BRIEF_v1_0.md status.** PENDING_NATIVE_DECISION → OPTION_B_APPROVED
   (this v1.1 update).
 
+### §6.3.A — Literal-construction correction (added v1.2, 2026-05-02, M4-C-S3-LL7-DISCOVERY-PRIOR)
+
+Under the msr_anchors-clique construction approved by native DECISION-2 (2026-05-02), the 8 MED-tier LL.2 anchor pairs classify as **`novel`** (not `confirmed`).
+
+The §6.2 native rationale ("The 8 MED-tier edges LL.2 already found are all confirmed CDLM edges — this option would have found them too") was **intuition-correct** at the conceptual level (Pancha-Mahapurusha yogas govern multiple domains, so they *should* appear as cross-domain anchors in CDLM) but **operationally incorrect** under literal construction: the operational CDLM corpus does not yet anchor MSR.117/.118/.119/.143/.145 in any cell, and MSR.402 (the only one of the six present) is anchored in 4 cells (CDLM.D4.D4 / D4.D6 / D6.D4 / D6.D6) but is never co-anchored with any of the other five.
+
+**Novel classification is the higher-fidelity result.** It surfaces the Pancha-MP cluster as a genuine **discovery gap** in CDLM — exactly what the discovery layer is designed to do. The classification is correct under the joint NAP.M4.6 verdict (Option B classical-seeded) AND DECISION-2 (literal msr_anchors-clique construction); §6.2 was anticipatory, not descriptive.
+
+**CDLM-patch carry-forward (CF.LL7.1).** Adding MSR.117 / .118 / .119 / .143 / .145 to the msr_anchors of governing CDLM cells (D1.D1 Sasha-Saturn-Kendra; D5.D5 Venus-Malavya; D5.D6 Mars-Ruchaka; D5.D7 Jupiter-Hamsa — illustrative, exact cell selection requires an L2.5 CDLM authoring session) is flagged as a future workstream for M4-D or M5. Until patched, the 8 MED-tier pairs remain in LL.7's `novel` class — this is correct under the current CDLM, not a defect of LL.7 or of the data.
+
+**Threshold mechanics (raw N≥3, density-weighted reported alongside).** The §6.3(b) refinement said "implements N≥3 as the default empirical-confirmation threshold" with no "density-weighted" qualifier. M4-C-S3 implements gate = raw N≥3 per the verbatim authority, with density-weighted count reported alongside as informational (per LL.6 design's H2-rejected, informational-only stance). At first write, this matters in exactly one case: pair MSR.118 ↔ MSR.145 has raw N=5 but density-weighted count 2.9485 (because the 5 events fell in the 2007 dense cluster). A purely density-weighted gate would have failed the 8-anchor sanity-check by classifying this pair below threshold.
+
+**Reference.** Full design doc + audit trail: `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL7_DISCOVERY_PRIOR_DESIGN_v1_0.md` §1 + §4. First-write artifact: `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll7_discovery_prior_v1_0.json`.
+
 ### §6.6 — What the native verdict does NOT change
 
 - §SHADOW_MODE_PROTOCOL §3 (NAP.M4.4) is unchanged. LL.7 native-only mode
@@ -484,6 +501,20 @@ With refinements (a), (b), (c) applied, the §4.2 expected output shape becomes:
 ---
 
 ## §5 — Changelog
+
+- **v1.2 (2026-05-02, M4-C-S3-LL7-DISCOVERY-PRIOR):** §6.3.A literal-construction
+  correction added. Native DECISION-2 (CDLM construction = literal
+  msr_anchors-clique union, approved 2026-05-02) means the 8 MED-tier LL.2 anchor
+  pairs classify as `novel` (not `confirmed`) at LL.7 first write. §6.2's
+  "all confirmed CDLM edges" rationale was anticipatory and operationally
+  incorrect under literal construction; novel classification is the higher-
+  fidelity outcome and surfaces the Pancha-MP cluster as a genuine discovery
+  gap in CDLM (CF.LL7.1 carry-forward flagged for M4-D/M5). Threshold mechanics
+  clarified: raw N≥3 gate per §6.3(b) verbatim, with density-weighted count
+  reported alongside as informational (a purely density-weighted gate would
+  have failed the 8-anchor sanity-check on pair MSR.118 ↔ MSR.145 at
+  weighted=2.9485 / raw=5). Status flipped OPTION_B_APPROVED →
+  OPTION_B_APPROVED_LITERAL_CONSTRUCTION.
 
 - **v1.1 (2026-05-02, M4-B-P5-M4C-ENTRY-PREP NAP-decisions append):** Native
   verdict received: Option B — Classical-seeded, with three refinements
@@ -520,7 +551,9 @@ With refinements (a), (b), (c) applied, the §4.2 expected output shape becomes:
 
 ---
 
-*End of NAP_M4_6_BRIEF_v1_1.md. Native verdict received 2026-05-02: Option B —
-Classical-seeded, with three refinements captured in §6. M4-C-S3 (LL.7 first
-artifact write) is unblocked when its other entry gates (M4-B-S6 sealed;
-Gemini reachability re-check) are also satisfied per PHASE_M4C_PLAN §2.*
+*End of NAP_M4_6_BRIEF v1.2 (file path remains v1_0; in-file version 1.2 after
+M4-C-S3 literal-construction correction added §6.3.A). Native verdict received
+2026-05-02: Option B — Classical-seeded, with three refinements captured in §6.
+DECISION-2 (literal msr_anchors-clique CDLM construction) approved 2026-05-02.
+LL.7 first SHADOW write closed at M4-C-S3-LL7-DISCOVERY-PRIOR 2026-05-02:
+sanity-check gate sanity_anchor_novel_count=8 PASS.*

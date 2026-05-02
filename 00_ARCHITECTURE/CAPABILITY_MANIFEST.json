@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 133,
+  "entry_count": 135,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -2424,10 +2424,39 @@
       "interface_version": "1.0",
       "phase": "M4-C",
       "description": "LL.6 Temporal Density Modulator shadow register (M4-C-S2). 37 events with cluster_size + density_weight (distribution {1:7, 2:10, 3:11, 4:8, 5:1}); 380 LL.1-observed signals with mean_lit_score_density_adjusted + delta + meaningful_flag (255 of 380 = 67% meaningful_flag at delta>0.1; mean delta 0.2202; max 0.5693). Summary block carries H2 dense-cluster-inflation test result (gap_reduction \u22120.0069 weighted; informational only \u2014 no LL.1 weight revision)."
+    },
+    {
+      "canonical_id": "LL7_DISCOVERY_PRIOR_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL7_DISCOVERY_PRIOR_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.7 Discovery Prior Rubric design document (M4-C-S3). Implements NAP.M4.6 Option B (classical-seeded) under DECISION-2 literal msr_anchors-clique CDLM construction approved 2026-05-02. Four-class taxonomy confirmed/unconfirmed/novel/contradicted (noise excluded). Empirical-confirmation gate = raw N\u22653 per NAP \u00a76.3(b) verbatim; density-weighted count reported alongside as informational per LL.6 design's H2-rejected stance. \u00a74 sanity-check: 8 MED-tier LL.2 anchors classify as `novel` (not `confirmed`) under literal construction \u2014 NAP \u00a76.2 anticipatory-rationale clarification recorded in NAP \u00a76.3.A v1.2. CF.LL7.1 CDLM-patch carry-forward flagged for M4-D/M5."
+    },
+    {
+      "canonical_id": "ll7_discovery_prior_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll7_discovery_prior_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.7 Discovery Prior shadow register (M4-C-S3). CDLM literal msr_anchors-clique union over 81 cells = 136 unique edges (58 anchor signals). 37 training events; 9 held-out excluded. Density-weighted pair co-activations computed; threshold = raw N\u22653 (density-weighted reported alongside as informational, NOT the gate). Summary: 0 confirmed / 136 unconfirmed / 107 novel / 0 contradicted; 9867 noise pairs excluded; 243 emitted edges. Sanity-check gate sanity_anchor_novel_count=8 PASS \u2014 all 8 MED-tier LL.2 anchors carry cdlm_declared:false and support='novel'. Native-only mode \u2014 no shadow\u2192prod split per SHADOW_MODE_PROTOCOL \u00a72 LL.7 row."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02",
-  "manifest_version": "2.1",
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02",
+  "manifest_version": "2.2",
   "last_updated": "2026-05-02",
-  "last_updated_by": "M4-C-S2-LL6-TEMPORAL-DENSITY"
+  "last_updated_by": "M4-C-S3-LL7-DISCOVERY-PRIOR"
 }
