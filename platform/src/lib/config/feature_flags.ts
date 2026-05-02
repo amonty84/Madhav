@@ -65,6 +65,11 @@ export type FeatureFlag =
   // validator demotes ERROR to WARN so the response is still returned. Default
   // OFF so missing-citation prescriptive queries hard-fail and surface in logs.
   | 'CITATION_GATE_OVERRIDE'
+  // Phase O Observatory (USTAD_S1_9). Gates the super-admin Observatory dashboard
+  // route, AuthGate, and the typed API client. Default OFF; flip via env
+  // MARSYS_FLAG_OBSERVATORY_ENABLED=true. Mirrors the env-var gate already used
+  // by the backend at platform/src/app/api/admin/observatory/_guard.ts.
+  | 'OBSERVATORY_ENABLED'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -114,6 +119,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   NVIDIA_PLANNER_ENABLED: true,
   // W2-EVAL-A — Citation gate override OFF; ERROR fails loud by default.
   CITATION_GATE_OVERRIDE: false,
+  // Phase O Observatory — default OFF; flip via MARSYS_FLAG_OBSERVATORY_ENABLED=true.
+  OBSERVATORY_ENABLED: false,
 }
 
 // Numeric config keys (read via configService.getValue)
