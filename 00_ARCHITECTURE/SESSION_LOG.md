@@ -17157,3 +17157,160 @@ session_close:
 **S1.4 / S1.5 / S1.6 / S1.7 / S1.8 — five per-provider adapters (parallel-safe after S1.2)** and **S1.9 — Frontend scaffold (depends on S1.3 — i.e., now)** per OBSERVATORY_PLAN §5.1. S1.9 consumes [`platform/src/app/api/admin/observatory/openapi.yaml`](platform/src/app/api/admin/observatory/openapi.yaml) as its API contract. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-3-backend-api`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_5_OPENAI_OBSERVED_ADAPTER (Phase O sub-phase O.1, OpenAI provider adapter) — 2026-05-03 (close)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_5_OPENAI_OBSERVED_ADAPTER
+  cowork_thread_name: "ustad-s1-5-openai"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.1.S1.5
+  predecessor_session: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  current_state_version_at_open: v3.5
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/providers/openai_observed.ts
+      - platform/src/lib/llm/providers/__tests__/openai_observed.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/anthropic_observed.ts
+      - platform/src/lib/llm/providers/gemini_observed.ts
+      - platform/src/lib/llm/providers/deepseek_observed.ts
+      - platform/src/lib/llm/providers/nim_observed.ts
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - platform/src/app/**
+      - platform/src/components/**
+      - 00_ARCHITECTURE/**  # except SESSION_LOG.md per may_touch
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: 23d18c34c4a05ce7505c738cd07a249a88fd7cb95d4c7292a76b7ed66dce2c84
+    - file: platform/src/lib/llm/observability/types.ts
+      fingerprint_sha256: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a
+    - file: platform/src/lib/llm/observability/observe.ts
+      fingerprint_sha256: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0
+  red_team_due: false
+  notes: "Phase O sub-phase O.1, fifth implementation session (OpenAI provider adapter). Cuts from feature/phase-o-observatory commit 0bec216 (S1.3 merged; S1.2 ancestor). Parallel with S1.4/S1.6–S1.9 — disjoint may_touch (this session only owns openai_observed.{ts,test}). Observability shim (S1.2) is frozen — must_not_touch. SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables (W1–W4)
+
+**W1. `openai_observed.ts` authored** ([platform/src/lib/llm/providers/openai_observed.ts](platform/src/lib/llm/providers/openai_observed.ts), sha256 `acad8520f403006a72a82907288203b9bad3c50d49750e4185218d7bd5efd39a`). Class `ObservedOpenAIClient(client, db)` exposes `chat.completions.create(params, ctx)` and `responses.create(params, ctx)` matching the OpenAI Node SDK shape. Token extraction (`extractUsage`) normalizes both Chat Completions (`prompt_tokens`/`completion_tokens` + `prompt_tokens_details.cached_tokens` + `completion_tokens_details.reasoning_tokens`) and Responses API (`input_tokens`/`output_tokens` + `input_tokens_details.cached_tokens` + `output_tokens_details.reasoning_tokens`) shapes into the shim's `TokenUsage` (5 fields). `cache_write_tokens` defaults to 0 — OpenAI does not currently expose a cache-write count. `extractRequestId` reads `_request_id` (Node SDK convention) then falls back to fetch-style `headers.get('x-request-id')` and finally to plain header bags. `mapErrorCode` discriminates timeout (`APIConnectionTimeoutError` / `AbortError` / `ETIMEDOUT` / `ECONNABORTED` / message regex) → `status='timeout'`; HTTP 429 → `rate_limited`; 5xx → `server_error`; 400/401/403/404 → response body `error.code`. Streaming: `withChatStreamUsage(params)` injects `stream_options: { include_usage: true }` on every Chat Completions stream call regardless of caller intent. `wrapStream` accumulates usage from the final chunk for both Chat Completions (`chunk.usage`) and Responses API (`event.type === 'response.completed'`). The wrapper composes `computeCost` + `persistObservation` from the public `@/lib/llm/observability` surface — observability shim files are unchanged.
+
+**W2. Test suite authored** ([platform/src/lib/llm/providers/__tests__/openai_observed.test.ts](platform/src/lib/llm/providers/__tests__/openai_observed.test.ts), sha256 `3c7392e53286cca3cd7e2f386b98facd7070629c1f4431452d3ce9df3fe64f9c`). 10 brief acceptance cases as 16 `it` blocks (multiple cases each carry both an integration test and a unit test of the supporting helper). All 16 PASS. Result: **16/16 PASS** (1 file, 359ms duration). Full LLM suite: **28/28 PASS** across 5 test files (existing 12 from S1.2 + new 16 from S1.5).
+
+**W3. TypeScript typecheck.** `tsc --noEmit -p tsconfig.json` produced 0 new errors against the new files. The pre-existing project-wide TS errors (AppShell.test.tsx + ReportGallery.test.tsx) are unrelated to this session's may_touch; they predate Phase O.
+
+**W4. Governance scripts run.**
+  - `mirror_enforcer.py`: 0 findings; **exit 0**; 9 pairs checked (MP.1–MP.9); 9 passed; 2 declared claude_only (MP.6, MP.7). Clean.
+  - `schema_validator.py` (full corpus): **107 violations; exit 2**. Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries — NONE introduced by this session. None of the 107 violations name a file from this session's may_touch.
+  - `drift_detector.py`: **327 findings; exit 2**. Identical 327 carry-forward as S0.1/S1.1/S1.3 — all pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on canonical-corpus tree (declared in must_not_touch).
+  - `schema_validator.py --handshake`: 0 violations; **exit 0**.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_5_OPENAI_OBSERVED_ADAPTER
+  closed_at: 2026-05-03T03:05:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/providers/openai_observed.ts, mutation: created, sha256_after: acad8520f403006a72a82907288203b9bad3c50d49750e4185218d7bd5efd39a, scope: in}
+    - {path: platform/src/lib/llm/providers/__tests__/openai_observed.test.ts, mutation: created, sha256_after: 3c7392e53286cca3cd7e2f386b98facd7070629c1f4431452d3ce9df3fe64f9c, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_5 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session — declared in must_not_touch"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude-side composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); Gemini-side .gemini/project_state.md unchanged — implementation-class session, mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.5 (provider adapter, not plan revision)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Identical 327 carry-forward as S0.1/S1.1/S1.3 close — all HIGH findings are pre-existing fingerprint_mismatch residuals on canonical L1/L2.5/L3.5 entries. NONE introduced by this S1.5 session. Acceptable per ONGOING_HYGIENE_POLICIES §F WL.14G.02 + S0.1/S1.1/S1.3 close precedents."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    baseline_target: 107
+    rationale: "Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: 0, desync_pairs: [], rationale: "9 pairs checked; 9 passed; 2 declared claude_only. Clean."}
+  known_residuals:
+    - {finding_id: WL.14G.02, validator: drift_detector, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + Phase_14G_Lockdown_Verification / PHASE_14_FINDINGS_DISCHARGE_v1_0 D.2", rationale: "Pre-existing stale fingerprints in CANONICAL_ARTIFACTS; resolve at retirement pass"}
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1 baseline note", rationale: "M2/Portal-era SESSION_LOG entries emit session_id-disagreement-heading violations; quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.5 session does not rotate CURRENT_STATE pointers; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized: {serialized: false, rationale: "Implementation-class concurrent-workstream session — main M5 thread build state captured at M4-D-S1 close is unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.3 precedent."}
+  open_decisions:
+    - id: OD.S1.3.1
+      summary: "Full provider raw_payload — current schema (migration 038) has no raw_payload column on llm_usage_events. S1.4–S1.8 may need a separate llm_provider_raw_responses table if full provider payloads are required for forensic replay."
+      disposition: "S1.5 finding: CONFIRMED no schema change required for OpenAI capture. Per brief OD.S1.3.1 directive ('do not create new tables; use parameters jsonb if needed'), the OpenAI adapter uses the existing `parameters jsonb` column to capture the full request params (model, messages, temperature, max_tokens, stream, stream_options, response_format, tools, tool_choice, etc.). Token-class fields (input/output/cache_read/cache_write/reasoning) and `provider_request_id` are first-class columns on llm_usage_events and require no jsonb fallback. Forensic replay of the *response* body (full chat completion or Responses API output) is NOT captured by S1.5 and remains DEFERRED — the existing schema has no `response_body_jsonb` column and adding one would be a new schema migration, which is out of S1.5 scope per OD.S1.3.1. The `response_text` column captures the assistant message content (Chat Completions: choices[0].message.content; Responses API: response.output_text); structured tool_calls / multipart content / o-series reasoning intermediate state are NOT captured. Recommend S2.3 (OpenAI reconciler) or a future S4.x session evaluate whether a separate `llm_provider_raw_responses` table is warranted; the cross-check against `provider_request_id` is sufficient for reconciliation purposes."
+  close_criteria_met: true
+  unblocks: "Phase O sub-phase O.1 sibling sessions per OBSERVATORY_PLAN §5.1: S1.4 (Anthropic adapter), S1.6 (Gemini adapter), S1.7 (DeepSeek adapter), S1.8 (NIM adapter), S1.9 (Frontend scaffold). All five remaining adapters share the same may_touch convention (one provider file each, no overlap with this session's openai_observed.ts) and are parallel-safe."
+  handoff_notes: >
+    The OpenAI observed adapter at platform/src/lib/llm/providers/openai_observed.ts
+    is the canonical pattern for the four remaining provider adapters (S1.4 Anthropic,
+    S1.6 Gemini, S1.7 DeepSeek, S1.8 NIM). Sibling sessions should mirror its three
+    pillars: (1) ObservedXxxClient class wrapping a structurally-typed provider client;
+    (2) extractUsage() that normalizes provider-specific token shapes into the shim's
+    5-field TokenUsage; (3) mapErrorCode() that discriminates timeout/rate_limited/
+    server_error/body-error-code per the brief's error mapping table. Streaming usage
+    is accumulated from the final chunk via wrapStream(). The observability shim
+    (platform/src/lib/llm/observability/**) remains frozen; provider adapters import
+    only from the public @/lib/llm/observability surface (computeCost, persistObservation,
+    ZERO_USAGE, types). OD.S1.3.1 finding for OpenAI: confirmed no schema change
+    needed — full request params captured in existing parameters jsonb column;
+    response-body-jsonb capture remains DEFERRED to a future session if forensic
+    replay of structured tool_calls / multipart content is required.
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-5-openai
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.4 (Anthropic), S1.6 (Gemini), S1.7 (DeepSeek), S1.8 (NIM) — four remaining per-provider adapters (parallel-safe; same disjoint-may_touch pattern as S1.5)** and **S1.9 — Frontend scaffold (depends on S1.3)** per OBSERVATORY_PLAN §5.1. M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-5-openai`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
