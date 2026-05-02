@@ -3,11 +3,16 @@ status: BLOCKED
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
-round: 4
+round: 5
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
 flag_flipped: false
+round_5_state:
+  prompt_doc_code_mirror_gap: RESOLVED (manifest_planner.ts now loads §3 + §4 from PLANNER_PROMPT_v1_0.md at module init)
+  nim_tool_call_500: RECOVERED (probe + 20/25 live plans returned valid tool_calls; 5 transient timeouts, no 500s)
+  smoke_outcome: FAIL (recall=0.607, precision=0.527; thresholds 0.80/0.90)
+  follow_up: prompt/few-shot calibration drift — model now over-applies resonance_register + vector_search after the §4.2 alignment few-shot took effect; needs targeted prompt tuning, not infrastructure work
 round_4_blockers:
   - NIM_TOOL_CALL_500 (constrained-decoding endpoint returning 25/25 hard 500s on smoke payload while direct chat + small tool-call probes return 200; not a prompt-fix issue)
   - PROMPT_DOC_CODE_MIRROR_GAP (runtime SYSTEM_PROMPT in manifest_planner.ts is a hardcoded copy of PLANNER_PROMPT_v1_0.md §3; markdown-only edits do not propagate; §4 few-shots are not loaded at runtime at all)
@@ -128,6 +133,170 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 
 ---
+
+## Smoke results (Round 5 — SYSTEM_PROMPT synced, NIM healthy)
+
+```
+planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
+smoke_date: 2026-05-02 (Round 5 — prompt doc/code mirror closed via runtime markdown load)
+avg_tool_recall: 0.607
+avg_tool_precision: 0.527
+total: 25
+passed: 2
+failed: 23
+forbidden_violations: 1
+required_misses: 9
+pass_rate: 0.080
+flag_flipped: false
+exit_code: 1
+notes: |
+  Round 5 closed the Round-4 doc/code mirror gap and re-ran the smoke against
+  a healthy NIM tool-call backend. Both Round-4 blockers resolved.
+
+  CHANGE LANDED THIS ROUND (manifest_planner.ts only):
+    Refactored the SYSTEM_PROMPT const from a hand-copied string of
+    PLANNER_PROMPT_v1_0.md §3 to a module-init function that reads the
+    markdown at runtime and assembles §3 (system prompt body) + §4 (all
+    three few-shot examples). The QUERY_CLASS_EXTENSION (one paragraph
+    that lives only in code, predating its addition to the markdown) is
+    appended between §3 and §4. PROMPT_PATH mirrors MANIFEST_PATH:
+    `path.join(process.cwd(), '..', '00_ARCHITECTURE',
+    'PLANNER_PROMPT_v1_0.md')`. Two small extractor functions
+    (extractSystemPromptBody, extractFewShotSection) parse the headings
+    + fenced code blocks; no third-party markdown lib needed.
+
+    Effect: assembled prompt grew from ~900 tokens (§3 only) to
+    ~2234 tokens (§3 + QUERY_CLASS_EXTENSION + §4 with all 3 few-shots).
+    All Round-4 markdown edits (R8 = msr_sql priority 1 on remedials,
+    R7 elaboration on lens choice, the new §4.2 alignment-character
+    few-shot, renumbered R9/R10) are now in the model's context.
+    Sanity-check probe confirmed: R7 Saturn-friction + yellow-sapphire
+    examples present, R8 msr_sql/calibrated text present, §4.1/4.2/4.3
+    headings + JSON examples present, no leftover R8="Output JSON"
+    numbering.
+
+    No code outside manifest_planner.ts changed. PlanInputJsonSchema,
+    callLlmPlanner signature, NIM grammar workarounds, generateText +
+    submit_plan tool flow, error handling, writeLlmCallLog, emitTrace —
+    all preserved.
+
+  NIM TOOL-CALL BACKEND: HEALTHY THIS ROUND.
+    Pre-smoke probe: POST /v1/chat/completions with tool_choice=required
+    + small pong tool → HTTP 200 in <30 s, valid tool_call returned.
+    Smoke run: 20/25 entries returned valid plans (median latency
+    ~6-10 s). 5 entries timed out (GT.002, GT.009, GT.013, GT.014,
+    GT.020) — transient. No 500s on any payload.
+
+  PROMPT EDITS NOW ACTIVE IN MODEL BEHAVIOR (round-over-round delta):
+    Round 3 (markdown matched runtime, no §4 in runtime):
+      recall=0.500 precision=0.667 passed=4/25
+    Round 5 (markdown NOW loaded into runtime including §4):
+      recall=0.607 precision=0.527 passed=2/25
+    Δrecall=+0.107, Δprecision=-0.140, Δpassed=-2.
+
+    The recall lift confirms the prompt-doc edits ARE now influencing
+    the model — specifically, the alignment-character remedials
+    (GT.001-004, GT.006) now correctly get resonance_register where
+    Round 3 they got pattern_register. Five entries each gained an
+    expected tool from the §4.2 few-shot's calibration.
+
+  REMAINING GAP — MODEL OVER-GENERALIZES THE §4.2 FEW-SHOT:
+    The new §4.2 alignment few-shot includes vector_search (for L3
+    long-form on gemstone-alignment principles). The model now copies
+    vector_search into ~13/20 non-timeout plans, including interpretive
+    queries (GT.007/008/010-012), planetary queries (GT.021/022),
+    and even GT.003 where vector_search is FORBIDDEN — the only
+    forbidden_violation this round.
+
+    Similarly, the model now picks resonance_register for almost every
+    remedial AND interpretive AND predictive query, where the golden
+    set wants pattern_register on recurring-pattern remedials (GT.005),
+    interpretive queries (GT.008/017/018), and predictive queries
+    (GT.015). The §4.2 lens-split heuristic is too subtle for the model
+    to distinguish reliably without more contrasting examples.
+
+    Top 5 non-timeout failures (predicted vs. expected diffs):
+
+      GT.017  (holistic, "comprehensive overview of life path")
+        expected:  [cluster_atlas, vector_search, pattern_register, cgm_graph_walk]
+        predicted: [msr_sql, pattern_register, resonance_register, vector_search]
+        recall=0.50 precision=0.50 required_miss(cluster_atlas)
+        diagnosis: model substitutes msr_sql + resonance_register for
+                   cluster_atlas + cgm_graph_walk on holistic queries
+
+      GT.018  (holistic, "central themes and contradictions")
+        expected:  [pattern_register, contradiction_register, resonance_register, cluster_atlas]
+        predicted: [msr_sql, contradiction_register, resonance_register, vector_search]
+        recall=0.50 precision=0.50 required_miss(pattern_register)
+        diagnosis: dropped pattern_register + cluster_atlas; added
+                   msr_sql + vector_search
+
+      GT.022  (planetary, "Mars across divisional charts")
+        expected:  [msr_sql, pattern_register]
+        predicted: [msr_sql, cgm_graph_walk, resonance_register, vector_search]
+        recall=0.50 precision=0.25
+        diagnosis: 4-tool plan vs. expected 2-tool; pattern_register
+                   replaced by resonance_register; cgm_graph_walk + vector_search added
+
+      GT.005  (remedial, "ritual for weakest planet")
+        expected:  [remedial_codex_query, msr_sql, pattern_register]
+        predicted: [msr_sql, remedial_codex_query, resonance_register]
+        recall=0.67 precision=0.67 required_miss(pattern_register)
+        diagnosis: alignment-vs-pattern lens picked wrong way — the
+                   "weakest planet" framing is recurring-pattern, but
+                   the model defaults to resonance_register for any
+                   remedial after the §4.2 example
+
+      GT.024  (holistic, "high-level read of the chart")
+        expected:  [pattern_register, cluster_atlas]
+        predicted: [msr_sql, cluster_atlas, resonance_register]
+        recall=0.50 precision=0.33
+        diagnosis: pattern_register dropped in favor of msr_sql +
+                   resonance_register
+
+    Forbidden violation:
+      GT.003  (remedial, "should I wear a yellow sapphire?")
+        expected:  [remedial_codex_query, msr_sql, resonance_register]
+        predicted: [msr_sql, remedial_codex_query, resonance_register, vector_search]
+        forbidden: [vector_search, domain_report_query]
+        recall=1.00 precision=0.75 — recall perfect, precision damaged
+        by vector_search inclusion (which is exactly the §4.2 few-shot's
+        4th tool — the model copied the example structure).
+
+  ACCEPTANCE STATE (Round 5):
+    AC.U.1 (tsc clean):        PASS  (9 baseline errors unchanged, zero new from refactor)
+    AC.U.2 (regression gate):  not re-run — fixture did not change
+    AC.U.3 (EVAL-B live):      FAIL  (recall=0.607, precision=0.527; thresholds 0.80/0.90)
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) round-5 variant per brief §10)
+
+  FINAL DETERMINATION:
+    Mirror gap closed structurally — future PLANNER_PROMPT_v1_0.md
+    edits will land in runtime without code changes. NIM healthy.
+    Smoke did not pass thresholds. Flag remains false.
+
+    The remaining failure mode is calibration, not infrastructure. The
+    §4.2 alignment few-shot is too "complete" — its 4-tool plan is
+    being template-copied across query classes that should pick
+    smaller, differently-shaped plans. Two natural next steps for a
+    follow-up session (both prompt-only):
+
+      (a) Tighten §4.2 to a smaller 3-tool plan (drop vector_search
+          from the example) so the model stops template-copying it
+          across classes. This directly fixes GT.003 forbidden
+          violation and the GT.007/008/010-012/021/022 precision drag.
+
+      (b) Add a pattern-vs-resonance contrast few-shot — e.g., a
+          remedial that resolves to pattern_register (the "weakest
+          planet" case GT.005 is the natural example) — so the model
+          learns the lens distinction is real, not the default
+          resonance_register-everywhere behavior it now defaults to.
+
+    No model swap warranted. Recall is moving the right direction
+    (+0.107 round-over-round) once the markdown actually reaches
+    the model. Precision needs a couple of targeted prompt tweaks.
+
+```
 
 ## Smoke results (Round 4 — second prompt attempt + NIM tool-call outage)
 

@@ -118,83 +118,77 @@ const PlanInputJsonSchema: JSONSchema7 = {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// System prompt (PLANNER_PROMPT_v1_0.md §3, verbatim)
+// System prompt — loaded at module init from PLANNER_PROMPT_v1_0.md §3 + §4.
 // ────────────────────────────────────────────────────────────────────────────
+//
+// Why load from markdown instead of hardcoding (W2-UQE-ACTIVATE round 5):
+//   Round 4 surfaced a load-bearing defect — markdown edits to R8 + the second
+//   remedial few-shot (resonance_register for alignment-character remedials)
+//   never reached the runtime, because SYSTEM_PROMPT was a hand-copied string
+//   constant of §3 only. §4 (few-shots) had never been at runtime at all.
+//   Loading at module init eliminates the drift permanently: the markdown is
+//   the single source of truth.
+//
+// Output schema extension (W2-PLANNER) — appended to the markdown body since
+// §3 in the doc predates the query_class addition. This is the only piece of
+// the runtime prompt not in the markdown today; folding it into the markdown
+// is a follow-up.
 
-const SYSTEM_PROMPT = `You are the MARSYS-JIS query planner. Your job is to decide which retrieval
-tools the system should call to answer the native's query. You do NOT answer
-the query yourself — a separate synthesis pass does that, using the data your
-plan retrieves.
+const PROMPT_PATH = path.join(
+  process.cwd(),
+  '..',
+  '00_ARCHITECTURE',
+  'PLANNER_PROMPT_v1_0.md',
+)
 
-Inputs you receive:
-
-  1. <manifest>   — JSON array of tool descriptors. Each entry has fields:
-       t = tool_name
-       d = ≤15-word description
-       p = list of param names this tool accepts
-       c = token-cost hint, one of "low" | "med" | "hi"
-       a = linked data-asset id
-
-  2. <history>    — at most the last two conversation turns, each ≤300 tokens,
-                    or a ≤150-token summary if the raw history exceeded
-                    600 tokens. May be empty.
-
-  3. <query>      — the native's current query, ≤400 tokens.
-
-Output a single JSON object that conforms to this schema:
-
-  {
-    "query_intent_summary": "<≤20 words>",
-    "tool_calls": [
-      {
-        "tool_name": "<one of the t-values in <manifest>>",
-        "params":    { "<param>": <value>, ... },
-        "token_budget": <integer 100..2000>,
-        "priority":    1 | 2 | 3,
-        "reason":      "<≤15 words>"
-      },
-      ...
-    ]
-  }
-
-Hard rules:
-
-  R1. Only call tools whose tool_name appears in <manifest>.
-  R2. Every key inside \`params\` for a given tool MUST be one of that tool's \`p\`
-      values. No invented params.
-  R3. Allocate token_budget proportional to the tool's \`c\` hint:
-        c = "low"  → 100..400
-        c = "med"  → 300..900
-        c = "hi"   → 600..2000
-  R4. Cumulative token_budget across priority-1 calls MUST be ≤ 4000.
-  R5. Use priority 1 only for tools whose results are required to answer the
-      query. Priority 2 = nice-to-have supporting evidence. Priority 3 =
-      cross-checks that may be skipped under tight budgets.
-  R6. Prefer the smallest set of tools that covers the query. Adding tools
-      "to be safe" is a calibration error and will be flagged by the
-      evaluation rubric.
-  R7. For predictive or remedial queries, ALWAYS include \`pattern_register\`
-      OR \`resonance_register\` at priority ≤ 2 — you must surface at least one
-      cross-domain lens before recommending action.
-  R8. Output JSON only — no preface, no trailing prose, no markdown fence.
-  R9. If the query is unanswerable from the available tools, return
-      tool_calls: [] and put the reason in query_intent_summary.
-
-Style rules:
-
-  S1. \`query_intent_summary\` is a neutral gloss, not a re-quote of the query.
-  S2. \`reason\` cites the specific signal-class, domain, or asset the call
-      targets. "needed for answer" is not acceptable; "covers domain career
-      forward-looking" is.
-  S3. Do not repeat the manifest's \`d\` field as your \`reason\`. Reason explains
-      THIS specific call, not the tool generally.
-
+const QUERY_CLASS_EXTENSION = `
 Output schema extension (W2-PLANNER):
 
   In addition to the schema above, also include a top-level \`query_class\`
   field. Pick exactly one of: "remedial" | "interpretive" | "predictive" |
   "holistic" | "planetary" | "single_answer". This field drives downstream
   bundle assembly and synthesis-guidance routing.`
+
+function extractSystemPromptBody(md: string): string {
+  // §3 is "## 3. System prompt (verbatim — copy into code)" followed by a
+  // ```...``` fenced code block. Pull out just the fenced contents.
+  const headerIdx = md.indexOf('## 3. System prompt')
+  if (headerIdx < 0) {
+    throw new Error('PLANNER_PROMPT_v1_0.md: §3 header not found')
+  }
+  const fenceOpen = md.indexOf('```', headerIdx)
+  if (fenceOpen < 0) {
+    throw new Error('PLANNER_PROMPT_v1_0.md: §3 opening fence not found')
+  }
+  const bodyStart = md.indexOf('\n', fenceOpen) + 1
+  const fenceClose = md.indexOf('```', bodyStart)
+  if (fenceClose < 0) {
+    throw new Error('PLANNER_PROMPT_v1_0.md: §3 closing fence not found')
+  }
+  return md.slice(bodyStart, fenceClose).trimEnd()
+}
+
+function extractFewShotSection(md: string): string {
+  // §4 is "## 4. Few-shot examples" through (but not including) "## 5.".
+  const startIdx = md.indexOf('## 4. Few-shot examples')
+  if (startIdx < 0) {
+    throw new Error('PLANNER_PROMPT_v1_0.md: §4 header not found')
+  }
+  const endIdx = md.indexOf('\n## 5.', startIdx)
+  if (endIdx < 0) {
+    throw new Error('PLANNER_PROMPT_v1_0.md: §5 boundary not found')
+  }
+  return md.slice(startIdx, endIdx).trimEnd()
+}
+
+function buildSystemPrompt(): string {
+  const md = readFileSync(PROMPT_PATH, 'utf-8')
+  const body = extractSystemPromptBody(md)
+  const fewShots = extractFewShotSection(md)
+  return `${body}\n${QUERY_CLASS_EXTENSION}\n\n---\n\n${fewShots}\n`
+}
+
+const SYSTEM_PROMPT = buildSystemPrompt()
 
 // ────────────────────────────────────────────────────────────────────────────
 // Manifest loading (read-once, lazy)
