@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 3.4
+version: 3.5
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,47 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v3.5 (2026-05-02, PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP):
+    **Phase O Observatory concurrent workstream OPENED.** Gate session S0.1
+    closed; OBSERVATORY_PLAN_v1_0.md authored as a concurrent workstream
+    governance plan alongside the main M5 INCOMING thread. Five deliverables:
+    (1) `00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md` v1.0.0 NEW CURRENT
+    (10 sections; 30-session O.0–O.4 sub-phase decomposition; two-layer
+    telemetry + reconciliation ledger over five providers Anthropic / OpenAI
+    / Gemini / DeepSeek / NIM; 5-table data model; wall-clock projections
+    4-way / 8-way concurrency; Phase O close acceptance criteria 12 items;
+    risks + open decisions deferred to native).
+    (2) `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` v2.5 → v2.6
+    (OBSERVATORY_PLAN_v1_0 entry registered as L_GOVERNANCE class;
+    entry_count 138 → 139; manifest_fingerprint extended
+    `+phase_o_s0_1_observatory_plan_2026-05-02`; last_updated_by →
+    PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP).
+    (3) `00_ARCHITECTURE/manifest_overrides.yaml` MP.9 mirror pair declared
+    (OBSERVATORY_PLAN ↔ Gemini-side concurrent-workstream summary block in
+    `.geminirules §E` + `.gemini/project_state.md`; mirror_mode
+    adapted_parity_summary; authoritative_side claude; declared_at_session
+    PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP).
+    (4) CURRENT_STATE v3.4 → v3.5 (this update). New
+    `concurrent_workstreams:` field added to §2 with `phase_o_observatory`
+    block (active_since: 2026-05-02; gate_session: S0.1; gate_status: closed;
+    plan_artifact: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md; next_sessions:
+    "parallel-safe per OBSERVATORY_PLAN §5"; branch:
+    feature/phase-o-observatory). Canonical pointers `active_macro_phase`
+    M5 / `active_macro_phase_status` incoming / `last_session_id` /
+    `next_session_objective` UNCHANGED — Phase O is a CONCURRENT WORKSTREAM
+    not the main thread; main thread state continues from v3.4 (M4 CLOSED;
+    M5 INCOMING). Only `file_updated_at` and `file_updated_by_session`
+    rotated to S0.1 timestamps. `red_team_counter` UNCHANGED at 0
+    (concurrent-workstream gate session; not a main-thread substantive
+    session for IS.8(a) cadence purposes).
+    (5) `00_ARCHITECTURE/SESSION_LOG.md` PHASE_O_S0_1 entry appended per
+    SESSION_CLOSE_TEMPLATE format (open + body + close atomic append).
+    Mirror MP.1 + MP.2 + MP.9 propagated this session: `.geminirules §E`
+    Concurrent workstreams updated with Phase O block; `.gemini/project_state.md`
+    Phase O concurrent-workstream section appended. Schema_validator,
+    drift_detector, mirror_enforcer all run at close. No DR entries opened.
+    Branch: feature/phase-o-observatory (umbrella; sub-branches per session
+    past S0.1 per PHASE_O_CLAUDE_CODE_PROMPTS.md).
   - v3.4 (2026-05-02, M4-D-S1): **M4 MACRO-PHASE CLOSED.** Single-session
     substantive close-class session sealing the M4 macro-phase. Eight
     substantive deliverables: (1) `06_LEARNING_LAYER/M4_CLOSE_v1_0.md` v1.0
@@ -4725,10 +4766,37 @@ current_state:
     Next §IS.8(c) every-12-months MACRO_PLAN review remains 2027-04-23 due.
 
   # ------------------------------------------------------------------
+  # Concurrent workstreams (added at v3.5 by PHASE_O_S0_1; main-thread state continues
+  # from v3.4. Phase O is a parallel governance workstream alongside the M-phase thread.)
+  # ------------------------------------------------------------------
+  concurrent_workstreams:
+    phase_o_observatory:
+      active_since: 2026-05-02
+      gate_session: S0.1
+      gate_session_id: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
+      gate_status: closed
+      phase_status: active_o_0_closed              # O.0 closed; O.1 ready
+      plan_artifact: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      plan_version: 1.0.0
+      plan_status: CURRENT
+      manifest_entry: OBSERVATORY_PLAN_v1_0       # registered at v2.6 manifest bump
+      mirror_pair: MP.9                            # declared at this S0.1 close in manifest_overrides.yaml
+      next_sessions: "parallel-safe per OBSERVATORY_PLAN §5 (5 provider-adapters S1.4–S1.8 can run concurrently after S1.2 closes; 4 reconcilers S2.2–S2.5 after S2.1; 6 analytics S4.1–S4.6 after O.1 closes)"
+      branch: feature/phase-o-observatory
+      umbrella_branch_pushed_to_origin: true
+      sub_branch_convention: "feature/phase-o-observatory/<kebab-id> per non-gate session, kebab map in PHASE_O_CLAUDE_CODE_PROMPTS.md"
+      session_count: 30                            # S0.1 + 13 (O.1) + 6 (O.2) + 4 (O.3) + 6 (O.4)
+      sessions_closed_count: 1                     # S0.1 only at this state snapshot
+      sessions_remaining: 29
+      next_session_objective: "S1.1 — Schema migrations (5 tables under platform/db/migrations/*observatory* + idempotent pricing seed v1)"
+      ethical_framing_anchor: "MACRO_PLAN §Ethical Framework — disclosure tier 1 (super-admin only) by default; cost figures never surfaced to chat path"
+      working_aid: PHASE_O_CLAUDE_CODE_PROMPTS.md  # 30-session prompts for Claude Code execution
+
+  # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T22:00:00+05:30
-  file_updated_by_session: M4-D-S1
+  file_updated_at: 2026-05-02T22:30:00+05:30
+  file_updated_by_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M4-D-S1, null). ROTATED from v3.3 — M4-D-S1 is the

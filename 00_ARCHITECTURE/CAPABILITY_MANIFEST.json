@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 138,
+  "entry_count": 139,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -2497,11 +2497,27 @@
       "phase": "M4-D",
       "fingerprint": "1378f4f9d3a85a1893fd4e95df02f6c2efa4cc6fb10675f9b9ebdad57dbd3f11",
       "last_modified": "2026-05-02",
-      "description": "M4 MACRO-PHASE sealing artifact (M4-D-S1 single-session substantive close). NAP.M4.7 APPROVED (pre-decided per execution brief; CF.LL7.1 = alpha CDLM patch parallel session M4-D-P1; KR.M4A.RT.LOW.1 = DEFER; R.LL1TPA.1 = FINAL_NOT_REACHABLE). IS.8(b) macro-phase-close red-team PASS 5/5 axes 0 findings (RT.1 LL.N computation discharge; RT.2 NAP.M4.1-7 verdicts; RT.3 shadow-mode discipline; RT.4 CURRENT_STATE v-sequence audit; RT.5 schema_validator baseline 108). Six sections: §1 LL.1-LL.7 outcomes; §2 NAP registry; §3 carry-forward roster (35-item enumeration with final dispositions); §4 IS.8(b) red-team verdicts; §5 M5 setup recommendations (8 items); §6 known asymmetries (R.LL1TPA.1 Gemini gap; CF.LL7.1 parallel patch; KR.M4A.RT.LOW.1 deferred tree). Successor macro-phase: M5."
+      "description": "M4 MACRO-PHASE sealing artifact (M4-D-S1 single-session substantive close). NAP.M4.7 APPROVED (pre-decided per execution brief; CF.LL7.1 = alpha CDLM patch parallel session M4-D-P1; KR.M4A.RT.LOW.1 = DEFER; R.LL1TPA.1 = FINAL_NOT_REACHABLE). IS.8(b) macro-phase-close red-team PASS 5/5 axes 0 findings (RT.1 LL.N computation discharge; RT.2 NAP.M4.1-7 verdicts; RT.3 shadow-mode discipline; RT.4 CURRENT_STATE v-sequence audit; RT.5 schema_validator baseline 108). Six sections: \u00a71 LL.1-LL.7 outcomes; \u00a72 NAP registry; \u00a73 carry-forward roster (35-item enumeration with final dispositions); \u00a74 IS.8(b) red-team verdicts; \u00a75 M5 setup recommendations (8 items); \u00a76 known asymmetries (R.LL1TPA.1 Gemini gap; CF.LL7.1 parallel patch; KR.M4A.RT.LOW.1 deferred tree). Successor macro-phase: M5."
+    },
+    {
+      "canonical_id": "OBSERVATORY_PLAN_v1_0",
+      "path": "00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s0-1",
+      "fingerprint": "07c513804a6d6a7348e91d46489fb1c6983e369b73b0f37bf9728bc5089dfb32",
+      "last_modified": "2026-05-02",
+      "description": "Phase O Observatory governance plan. Two-layer ledger (telemetry + reconciliation) over LLM cost & usage across five providers (Anthropic, OpenAI, Gemini, DeepSeek, NIM). 5-table data model: llm_usage_events, llm_pricing_versions, llm_provider_cost_reports, llm_cost_reconciliation, llm_budget_rules. 30-session O.0\u2013O.4 sub-phase decomposition with full session matrix. Wall-clock projections 4-way / 8-way concurrency. MP.9 mirror pair declared at this S0.1 close. Concurrent workstream alongside the main M-phase thread (currently M5 INCOMING)."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02",
-  "manifest_version": "2.5",
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02",
+  "manifest_version": "2.6",
   "last_updated": "2026-05-02",
-  "last_updated_by": "M4-D-S1"
+  "last_updated_by": "PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP"
 }

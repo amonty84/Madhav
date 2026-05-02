@@ -16399,3 +16399,213 @@ session_close:
 **M5-S1** — open M5 macro-phase. Read `MACRO_PLAN_v2_0.md §M5` (Probabilistic Engine — DBN topology + signal-embedding refit-stability test design + CW.PPL volume gate verification). Decide whether to expand MACRO_PLAN §M5 into `PHASE_M5_PLAN_v1_0.md` (analogue of PHASE_M4_PLAN + PHASE_M3_PLAN) or drive M5 directly from MACRO_PLAN. M5-S1 priority order per M4_CLOSE §5: (1) PHASE_M5_PLAN authoring; (2) PPL volume-gate verification (current 16 predictions vs ≥50 target with ≥6 months elapsed — hard prerequisite); (3) consume M4-D-P1 patched CDLM v1.3 + re-emit ll7_discovery_prior; (4) Gemini synchronization re-attempt per R.LL1TPA.1; (5) JH-export workstream; (6) LL.3 fix-before-prod; (7) LL.2 per-edge promotion campaign; (8) MSR signal-completeness pass.
 
 Commit: 80d5c51 (feature/phase-o-observatory, 2026-05-02). Post-commit schema_validator re-run: 108 violations / exit=2 (matches baseline; RT.5 PASS verified). Hash stamp follow-up to land in next chore-commit per ONGOING_HYGIENE_POLICIES §F pattern.
+
+---
+
+## PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP — Phase O Observatory CONCURRENT WORKSTREAM OPENED (gate session S0.1; OBSERVATORY_PLAN_v1_0.md NEW; CAPABILITY_MANIFEST v2.5 → v2.6; CURRENT_STATE v3.4 → v3.5; MP.9 declared)
+
+**Date:** 2026-05-02 (gate session for Phase O Observatory concurrent workstream; first session past M4 macro-phase close in temporal order; concurrent with M5 INCOMING main thread).
+
+**Brief:** Inline execution brief from `PHASE_O_CLAUDE_CODE_PROMPTS.md` §S0.1 — Phase O governance bootstrap. Author OBSERVATORY_PLAN_v1_0.md (10 sections; 30-session O.0–O.4 sub-phase decomposition; two-layer telemetry + reconciliation ledger over five providers); register in CAPABILITY_MANIFEST; declare MP.9 mirror pair; propagate to .geminirules + .gemini/project_state.md; append concurrent_workstreams block to CURRENT_STATE §2; bump CURRENT_STATE v3.4 → v3.5.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
+  cowork_thread_name: "phase-o-s0-1-governance-bootstrap"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: O.0.1
+  predecessor_session: M4-D-S1
+  current_state_version_at_open: v3.4 (set by M4-D-S1 2026-05-02 — M4 macro-phase close; M5 INCOMING)
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/manifest_overrides.yaml
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - .geminirules
+      - .gemini/project_state.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+      - 00_ARCHITECTURE/drift_reports/**
+      - 00_ARCHITECTURE/schema_reports/**
+      - 00_ARCHITECTURE/mirror_reports/**
+    must_not_touch:
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - platform/**
+      - 06_LEARNING_LAYER/**
+      - 02_ANALYTICAL_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 035_DISCOVERY_LAYER/**
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      - 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+      - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      - 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      - 00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md
+      - 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+      - 00_ARCHITECTURE/NATIVE_DIRECTIVES_FOR_REVISION_v1_0.md
+      - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+      - 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md
+      - 00_ARCHITECTURE/CGM_v9_0.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: f665f0f4c53d49ddf3331a831fd1a81823e7d48f58c280483ca63d8b510021be
+    - file: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      fingerprint_sha256: b75ae8e6b34b256b9ddbadd81fef03b290d7abe4b8465ad3e39cc658b58cc699
+    - file: 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      fingerprint_sha256: 1c27372a47cf6aff557da5ee418fd9d95b602996db2d8d8688c8ddc850c1add8
+    - file: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      fingerprint_sha256: 4ed721349441dc15dc9042428f28095c08d5be66af31707beab33d48f9235223
+    - file: 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+      fingerprint_sha256: 93538a3b988b28af9b9785b42a6f7e6d78e5b988b187cd9a11815c6dcc1a9a87
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: 1413cff2774b7b44eb78026b40011b49fb945cbdcb1f99c154857680f0c06108
+    - file: 00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md
+      fingerprint_sha256: 56ab1ae0327bd27c02b2f98379c466a0cafbc84ba32774cc267f04625f1a4da0
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      fingerprint_sha256: 8ec04dfc8007b72f8a6c82db2814183ce9ceba9436c104f384217d5a3595d12a
+    - file: 00_ARCHITECTURE/ONGOING_HYGIENE_POLICIES_v1_0.md
+      fingerprint_sha256: cc99ff79c54cf01506ac7372abb84267942daf6f7e7b5e1fe24fb99309285fc2
+    - file: .geminirules
+      fingerprint_sha256: 7621f102f3e554123ab57cc2e99c67858271da3bf02bccdf6899d08cfdf4ec96
+    - file: .gemini/project_state.md
+      fingerprint_sha256: 8cb62324f956445605b346a0244f04994ec21b1fb855b9677a43ef2891e418b9
+    - file: PHASE_O_CLAUDE_CODE_PROMPTS.md
+      fingerprint_sha256: 134199ac0539d6a2338751a7e99033163575f39c39bda5bee1e4bb1c12343bd6
+  red_team_due: false
+  notes: "Phase O Observatory gate session. New concurrent workstream; main M5 thread state unchanged. SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables (W1–W7)
+
+**W1. OBSERVATORY_PLAN_v1_0.md authored.** Path `00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md` v1.0.0 NEW CURRENT (43,581 bytes / 499 lines / sha256 `07c513804a6d6a7348e91d46489fb1c6983e369b73b0f37bf9728bc5089dfb32`). Ten sections: §1 Mission and ethical framing (probabilistic, calibrated, auditable cost observability for super-admin; tier-1 disclosure; six binding ethical principles per MACRO_PLAN); §2 Architecture (two-layer ledger — telemetry computed from versioned pricing; reconciliation pulled from each provider's admin/billing API; per-request inference responses do NOT return cost — cost is computed locally); §3 Data model (5 tables with full column lists + indices: `llm_usage_events`, `llm_pricing_versions`, `llm_provider_cost_reports`, `llm_cost_reconciliation`, `llm_budget_rules`); §4 Provider integration matrix (Anthropic / OpenAI / Gemini / DeepSeek / NIM — per-request capture + authoritative source + lag + gotchas including cache token semantics, reasoning tokens, streaming chunk semantics); §5 Sub-phase decomposition O.0–O.4 with full 30-session matrix (each session: ID, kebab-id, may_touch summary, must_not_touch summary, deps, deliverable; branch model `feature/phase-o-observatory/<kebab-id>` per session past S0.1); §6 Parallelization discipline (file-tree partitioning — 5 providers + 3 UI + 4 reconcilers + 6 analytics all sibling-disjoint; registry-update funneling — only S0.1/S2.1/S3.1/S4-last touch CAPABILITY_MANIFEST; mirror-update funneling — only governance-shaped sessions touch Gemini surfaces); §7 Wall-clock projection (sequential 83h / 4-way 44h / 8-way 39.5h; calendar 14 / 7–8 / 7 working days); §8 Phase O close acceptance criteria (12 items); §9 Risks and mitigations (10 risks); §10 Open decisions deferred to native (7 decisions: storage layer / retention / multi-tenancy / quality probe spec / disclosure tier / MP.9 declaration / self-hosted NIM v2 deferral). Resolution at this S0.1 close per §10 decision-7: **MP.9 declared**.
+
+**W2. CAPABILITY_MANIFEST.json registered.** v2.5 → v2.6. New entry `OBSERVATORY_PLAN_v1_0` (canonical_id `OBSERVATORY_PLAN_v1_0`; layer `L_GOVERNANCE`; version `1.0.0`; status `CURRENT`; phase `phase-o-s0-1`; fingerprint `07c513804a6d6a7348e91d46489fb1c6983e369b73b0f37bf9728bc5089dfb32`; last_modified `2026-05-02`; description per §1+§2 of plan). entry_count 138 → 139. manifest_fingerprint extended `+phase_o_s0_1_observatory_plan_2026-05-02`. last_updated `2026-05-02`; last_updated_by `PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP`. Python `json.load()` parse-clean verified.
+
+**W3. manifest_overrides.yaml — MP.9 declared.** New mirror pair `MP.9` added to `mirror_pairs:` block. Claude side `00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md`. Gemini side `Phase O concurrent-workstream block in .geminirules §E + .gemini/project_state.md`. enforcement_rule: compare OBSERVATORY_PLAN version pointer + Phase O sub-phase status flags O.0..O.4 + concurrent-workstream gate-status; FAIL on version disagreement or status-flag drift. mirror_mode `adapted_parity_summary`. authoritative_side `claude`. declared_at_session `PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP`. Two known_asymmetries declared.
+
+**W4. CURRENT_STATE_v1_0.md updated to v3.5.** Frontmatter version 3.4 → 3.5. v3.5 changelog entry added describing all five W1–W5 deliverables. New `concurrent_workstreams.phase_o_observatory` block added to §2 (gate_session: S0.1; gate_status: closed; phase_status: active_o_0_closed; plan_artifact: OBSERVATORY_PLAN_v1_0.md; plan_version: 1.0.0; manifest_entry: OBSERVATORY_PLAN_v1_0; mirror_pair: MP.9; next_session_objective: "S1.1 — Schema migrations"; session_count 30; sessions_closed_count 1; sessions_remaining 29; branch: feature/phase-o-observatory; ethical_framing_anchor cited). Main-thread canonical pointers (`active_macro_phase`=M5/INCOMING; `last_session_id`=M4-D-S1; `next_session_objective`=M5-S1; `red_team_counter`=0) UNCHANGED — Phase O is concurrent, not main thread. Only `file_updated_at` rotated to 2026-05-02T22:30:00+05:30 and `file_updated_by_session` rotated to PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP.
+
+**W5. Mirror surfaces propagated.** `.geminirules §E Concurrent workstreams` expanded from 2 → 3 entries with the new Phase O block (semantic parity with CLAUDE.md §E + this SESSION_LOG entry; mirror per MP.1 + MP.9). `.gemini/project_state.md` new top-level section `## Concurrent Workstream — Phase O Observatory (OPENED 2026-05-02)` inserted between Governance Rebuild block and Active Phase block (mirror per MP.2 + MP.9). Adapted parity, not byte-identity.
+
+**W6. Governance scripts run.**
+- `mirror_enforcer.py`: 0 findings; exit 0; 9 pairs checked (MP.1–MP.9; MP.9 declared this session); 9 passed; 2 declared claude_only (MP.6, MP.7). Report `00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.md`. **PASS.**
+- `schema_validator.py`: 106 violations; exit 2. **Below the 108 baseline target referenced at M4-D-S1 close.** Net change 108 → 106 (improvement of 2). All HIGH findings are pre-existing SESSION_LOG-entry session_id-disagreement-heading-{open,close} residuals from M2/Portal-era entries (Madhav_16_PHASE_B_PLAN_v1_0_3_AMENDMENT, Madhav_M2A_Exec_6, Madhav_PORTAL_BUILD_TRACKER_IMPL_v0_3, Madhav_M2A_Exec_8, Madhav_COW_M2A_Exec_10_BRIEF_AUTHORING). NONE introduced by this S0.1 session. Acceptable per M4-D-S1 baseline-target precedent. Report `00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.md`.
+- `drift_detector.py`: 327 findings; exit 2. All HIGH findings are pre-existing `fingerprint_mismatch` residuals on canonical L1/L2.5/L3.5 entries (LIFE_EVENT_LOG_v1_2, MSR_v3_0, CLUSTER_ATLAS_v1_0, CONTRADICTION_REGISTER_v1_0, PATTERN_REGISTER_v1_0, RESONANCE_REGISTER_v1_0, learning-layer README) — these are CANONICAL_ARTIFACTS row staleness carry-forwards from prior calibration sessions, NOT introduced by this S0.1 session (S0.1 must_not_touch CANONICAL_ARTIFACTS). Acceptable per ONGOING_HYGIENE_POLICIES §F exit-code-2 carry-forward policy. Report `00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.md`.
+
+**W7. SESSION_OPEN handshake schema-validated.** `python3 platform/scripts/governance/schema_validator.py --handshake /tmp/session_open_phase_o_s0_1.yaml`: 0 violations; exit 0. **PASS.**
+
+### session_close
+
+```yaml
+session_close:
+  session_id: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
+  closed_at: 2026-05-02T22:30:00+05:30
+  files_touched:
+    - {path: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md, mutation: created, sha256_after: 07c513804a6d6a7348e91d46489fb1c6983e369b73b0f37bf9728bc5089dfb32, scope: in}
+    - {path: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json, mutation: modified, sha256_after: a1c65e0d2949d9bb6c71fb3649ff6d2e45a2e26acca8c9a291dc93dc60a5ce02, scope: in, change: "v2.5 → v2.6; entry_count 138 → 139"}
+    - {path: 00_ARCHITECTURE/manifest_overrides.yaml, mutation: modified, sha256_after: 68d7e6a7fa011c59f266d4f15cf969b8e1311a05eab782189acd362f9364cb43, scope: in, change: "MP.9 declared"}
+    - {path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md, mutation: modified, sha256_after: 23d18c34c4a05ce7505c738cd07a249a88fd7cb95d4c7292a76b7ed66dce2c84, scope: in, change: "v3.4 → v3.5; concurrent_workstreams.phase_o_observatory block added"}
+    - {path: .geminirules, mutation: modified, sha256_after: 91ce9b454a92b3b1b1f06c5920f5774baf0eba13374d0bbc527e74a1262ef11e, scope: in, change: "§E expanded with Phase O block (MP.1 + MP.9 mirror)"}
+    - {path: .gemini/project_state.md, mutation: modified, sha256_after: b629392ac120ecb4ff74210b6cb25aa48a3998af849d5a58013650c07fff5004, scope: in, change: "Concurrent Workstream — Phase O Observatory section added (MP.2 + MP.9 mirror)"}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+    - {path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.{md,json}, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.{md,json}, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP_*.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.{md,json}, mutation: created, scope: in}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: OBSERVATORY_PLAN_v1_0, change: registered_new, layer: L_GOVERNANCE, version: 1.0.0, status: CURRENT}
+      - {canonical_id: CAPABILITY_MANIFEST, change: version_bumped, details: "v2.5 → v2.6; entry_count 138 → 139"}
+      - {canonical_id: CURRENT_STATE, change: version_bumped, details: "v3.4 → v3.5; concurrent_workstreams added"}
+      - {canonical_id: GEMINIRULES, change: fingerprint_rotated, details: "§E expanded with Phase O block"}
+      - {canonical_id: PROJECT_STATE, change: fingerprint_rotated, details: "new Concurrent Workstream — Phase O Observatory section"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: true, both_updated_same_session: true, rationale: "Gemini-side §E expanded with Phase O block per MP.9; Claude-side CLAUDE.md §E project-lifetime stable for existing two workstreams (LEL + PPL); cumulative MP.1 sync against CLAUDE.md §E flagged for next CLAUDE.md amendment session — not desync; Phase O surface is MP.9 (new pair), not MP.1's structural-block subset"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: true, both_updated_same_session: true, rationale: "CURRENT_STATE v3.4 → v3.5 ↔ project_state.md Phase O section. Adapted parity confirmed by mirror_enforcer 0 findings"}
+    - {pair_id: MP.5, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST v2.5 → v2.6 (Claude-side); OBSERVATORY_PLAN is L_GOVERNANCE not L2.5 → no Gemini-side L2.5 path-subset edit obligated per MP.5 known_asymmetries"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.9, claude_side_touched: true, gemini_side_touched: true, both_updated_same_session: true, rationale: "MP.9 declared at this S0.1 close; both sides authored in same session"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged this session (must_not_touch); no cascade required"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+  red_team_outcome:
+    cadence_class: concurrent_workstream_gate
+    triggered: false
+    rationale: "Concurrent-workstream gate session for a new workstream — not a substantive M-phase session. IS.8(a) every-third counter NOT incremented (concurrent-workstream gate is governance-aside class per ONGOING_HYGIENE_POLICIES §G discharge-of-cadence-class precedent). IS.8(b) macro-phase-close cadence remains scheduled at Phase O close (after S4.6) per OBSERVATORY_PLAN §8 + MACRO_PLAN §IS.8."
+    artifact_path: n/a
+    verdict: not_applicable
+    findings_count: 0
+    counter_post: 0
+    counter_rotation: "UNCHANGED 0 → 0 (concurrent-workstream gate)"
+  validator_outcomes:
+    drift_detector:
+      run: true
+      exit_code: 2
+      findings_count: 327
+      classification: known_residuals_pre_existing
+      report_path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.md
+      rationale: "All HIGH findings are pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on L1/L2.5/L3.5 entries (LIFE_EVENT_LOG_v1_2, MSR_v3_0, CLUSTER_ATLAS_v1_0, CONTRADICTION_REGISTER_v1_0, PATTERN_REGISTER_v1_0, RESONANCE_REGISTER_v1_0, learning-layer README). NONE introduced by this S0.1 session. S0.1 must_not_touch CANONICAL_ARTIFACTS. Acceptable carry-forward."
+    schema_validator:
+      run: true
+      exit_code: 2
+      violations_count: 106
+      classification: below_baseline_target
+      baseline_target: 108
+      report_path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.md
+      rationale: "Net change 108 → 106 (improvement of 2). All HIGH findings are pre-existing SESSION_LOG-entry session_id-disagreement-heading residuals from M2/Portal-era entries. NONE introduced by this S0.1 session. Acceptable per M4-D-S1 baseline-target precedent."
+    mirror_enforcer:
+      run: true
+      exit_code: 0
+      findings_count: 0
+      pairs_checked: 9
+      pairs_passed: 9
+      pairs_failed: 0
+      claude_only_pairs: 2
+      report_path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.md
+      rationale: "Clean. MP.9 declared at this session and immediately verified."
+    handshake_validator:
+      run: true
+      exit_code: 0
+      violations_count: 0
+      handshake_path: /tmp/session_open_phase_o_s0_1.yaml
+      rationale: "SESSION_OPEN handshake clean."
+  current_state_updated: true
+  step_ledger_updated: false  # STEP_LEDGER GOVERNANCE_CLOSED post-Step-15
+  session_log_appended: true
+  build_state_serialized:
+    serialized: false
+    rationale: "Concurrent-workstream gate session does not perturb the M-phase main-thread build state captured at M4-D-S1 close. Per ONGOING_HYGIENE_POLICIES §O the obligation is per substantive close; concurrent-workstream gate sessions for distinct workstreams are a defensible carry-forward to the next main-thread substantive session. LOW finding accepted."
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  close_criteria_met: true
+  unblocks: "Phase O sub-phase O.1 sessions. Per OBSERVATORY_PLAN §5 next session is S1.1 — Schema migrations (5 tables under platform/db/migrations/*observatory* + idempotent pricing seed v1) in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-1-schema."
+```
+
+### Next session objective
+
+**S1.1 — Schema migrations (Phase O Observatory).** First substantive O.1 session. Reads OBSERVATORY_PLAN §3 (data model). Authors:
+1. Migration files for the 5 tables under `platform/db/migrations/*observatory*` (up + down each idempotent).
+2. Schema file `platform/src/lib/db/schema/observatory.ts` exporting types matching every column.
+3. Idempotent seed script `platform/src/lib/db/seed/observatory_pricing/seed_v1.ts` populating `llm_pricing_versions` with current published rates as of 2026-05-02 across the five providers (Anthropic / OpenAI / Gemini / DeepSeek / NIM) with citations.
+4. Tests covering migration up + down + seed idempotency.
+
+Branch: `feature/phase-o-observatory/s1-1-schema` (sub-branch under umbrella) per `PHASE_O_CLAUDE_CODE_PROMPTS.md` worktree spawn helper. Worktree: `/Users/Dev/Vibe-Coding/Apps/Madhav-s1-1-schema`. The session's prompt is the §S1.1 block in `PHASE_O_CLAUDE_CODE_PROMPTS.md`.
+
+Concurrently: M5-S1 (main-thread M5 macro-phase opening) remains the next main-thread session per CURRENT_STATE v3.5 main-thread canonical pointers UNCHANGED.
+
+Commit: <stamped-at-commit> (feature/phase-o-observatory, 2026-05-02). Post-commit schema_validator re-run pending.
+
