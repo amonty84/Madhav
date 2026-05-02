@@ -2511,7 +2511,7 @@
       ],
       "interface_version": "1.0",
       "phase": "phase-o-s0-1",
-      "fingerprint": "07c513804a6d6a7348e91d46489fb1c6983e369b73b0f37bf9728bc5089dfb32",
+      "fingerprint": "6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b",
       "last_modified": "2026-05-02",
       "description": "Phase O Observatory governance plan. Two-layer ledger (telemetry + reconciliation) over LLM cost & usage across five providers (Anthropic, OpenAI, Gemini, DeepSeek, NIM). 5-table data model: llm_usage_events, llm_pricing_versions, llm_provider_cost_reports, llm_cost_reconciliation, llm_budget_rules. 30-session O.0\u2013O.4 sub-phase decomposition with full session matrix. Wall-clock projections 4-way / 8-way concurrency. MP.9 mirror pair declared at this S0.1 close. Concurrent workstream alongside the main M-phase thread (currently M5 INCOMING)."
     }
