@@ -16398,4 +16398,4 @@ session_close:
 
 **M5-S1** — open M5 macro-phase. Read `MACRO_PLAN_v2_0.md §M5` (Probabilistic Engine — DBN topology + signal-embedding refit-stability test design + CW.PPL volume gate verification). Decide whether to expand MACRO_PLAN §M5 into `PHASE_M5_PLAN_v1_0.md` (analogue of PHASE_M4_PLAN + PHASE_M3_PLAN) or drive M5 directly from MACRO_PLAN. M5-S1 priority order per M4_CLOSE §5: (1) PHASE_M5_PLAN authoring; (2) PPL volume-gate verification (current 16 predictions vs ≥50 target with ≥6 months elapsed — hard prerequisite); (3) consume M4-D-P1 patched CDLM v1.3 + re-emit ll7_discovery_prior; (4) Gemini synchronization re-attempt per R.LL1TPA.1; (5) JH-export workstream; (6) LL.3 fix-before-prod; (7) LL.2 per-edge promotion campaign; (8) MSR signal-completeness pass.
 
-Commit: <stamped-at-commit> (feature/phase-o-observatory, 2026-05-02).
+Commit: 80d5c51 (feature/phase-o-observatory, 2026-05-02). Post-commit schema_validator re-run: 108 violations / exit=2 (matches baseline; RT.5 PASS verified). Hash stamp follow-up to land in next chore-commit per ONGOING_HYGIENE_POLICIES §F pattern.
