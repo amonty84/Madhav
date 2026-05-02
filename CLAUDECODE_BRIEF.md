@@ -3,11 +3,32 @@ status: BLOCKED
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
-round: 6
+round: 7
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
 flag_flipped: false
+round_7_state:
+  scope: model-swap probe (registry.ts getNvidiaPlanner only) — switch off nemotron-super-49b-v1 to eliminate 3s-breaker trips
+  candidate_1: meta/llama-3.1-8b-instruct
+  candidate_1_outcome: FAIL (exit 1; recall=0.750, precision=0.631; 0 NIM errors / 0 smoke-level timeouts)
+  candidate_1_binding_constraint: precision (gap to 0.90 = 0.27; gap to Case-B 0.85 floor = 0.22)
+  candidate_1_latency_ms: {min:1523, median:2718, max:4726, count_over_3000:10}
+  candidate_2: nvidia/llama-3.1-nemotron-nano-8b-v1
+  candidate_2_outcome: FAIL (exit 1; "Unknown model id" — local registry resolver allowlist rejects; cannot run smoke without registry catalog edit, which is out of scope per round-7 brief)
+  candidate_2_nim_probe: HTTP 200 in 28.6s on a "Say only OK" prompt — model exists at NIM, but base latency would 100% trip the 3s production circuit breaker even if allowlisted
+  decision: Case C — registry.ts unchanged, flag held false, no further rounds
+  side_finding_for_native: |
+    The brief's "28% timeout rate against 3s circuit breaker" framing is incorrect.
+    The 3s circuit breaker is wired only at route.ts:243 (wrapping callLlmPlanner
+    inside the consume request handler). The smoke runner bypasses it — it calls
+    callLlmPlanner directly without the breaker. The 7/25 round-6 errors were
+    NIM-level transient errors / network timeouts, not breaker trips. Production
+    behavior with 8B would actually have a HIGHER fallback rate (≈40%) than 49B's
+    smoke timeout rate (28%): 10/25 of 8B's smoke calls completed in 3.0–4.7 s,
+    which would all trip the production breaker → graceful fallback to classify().
+    Net effect on user-facing precision/recall is neutral (breaker fallback is
+    silent), but the planner would be bypassed on ≈40% of remedial/holistic queries.
 round_6_state:
   prompt_edits: §4.2 tightened to 3 tools (vector_search dropped, annotation added) + new §4.3 contrast few-shot (weakest-planet → pattern_register) + interpretive renumbered §4.3 → §4.4
   smoke_outcome: FAIL (recall=0.530, precision=0.500; thresholds 0.80/0.90)
@@ -140,6 +161,136 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 
 ---
+
+## Smoke results (Round 7 — model-swap probe; registry.ts NOT modified)
+
+```
+planner_model_candidate_1: meta/llama-3.1-8b-instruct
+planner_model_candidate_2: nvidia/llama-3.1-nemotron-nano-8b-v1
+smoke_date: 2026-05-02 (Round 7 — model-swap probe per native-authorized round-7 brief)
+flag_flipped: false
+exit_code_candidate_1: 1
+exit_code_candidate_2: 1
+registry_modified: false   # Case C: do not update registry.ts
+notes: |
+  Round 7 was authorized by the native to probe whether swapping the
+  deep-planner from nemotron-super-49b-v1 to a faster 8B candidate would
+  give the prompt a fair test (round-6 binding diagnosis: model too slow
+  given the 3s production breaker; non-timeout subset showed recall=0.736,
+  precision=0.694 — so the prompt is calibrated). The brief authorized
+  ONLY a change to getNvidiaPlanner() in platform/src/lib/models/registry.ts
+  if a candidate passed thresholds. No prompt changes, no breaker changes,
+  no golden-set / regression-baseline changes.
+
+  CANDIDATE 1 — meta/llama-3.1-8b-instruct
+    Smoke aggregate:
+      avg_tool_recall:      0.750  (threshold 0.80 ; gap 0.05)
+      avg_tool_precision:   0.631  (threshold 0.90 ; gap 0.27)
+      passed:               3 / 25
+      forbidden_violations: 0
+      required_misses:      5
+      smoke_errors / NIM-level timeouts: 0
+    Latency distribution (callLlmPlanner returned successfully; smoke
+    runner does NOT enforce the 3s circuit breaker):
+      min=1523ms, median=2718ms, max=4726ms
+      latencies > 3000ms: 10 / 25 (40%)
+    Diagnosis vs Case-B gate:
+      Case-B requires: timeouts ≤ 2 AND (recall ≥ 0.75 OR precision ≥ 0.85)
+      timeouts = 0 ✓
+      recall = 0.750 (exactly at the 0.75 floor) ✓ — Case-B applies
+      → fall through to candidate 2
+
+  CANDIDATE 2 — nvidia/llama-3.1-nemotron-nano-8b-v1
+    Smoke aggregate:
+      All 25 entries returned: "LLM planner call failed: Unknown model id:
+      nvidia/llama-3.1-nemotron-nano-8b-v1"
+      The error is raised by the local resolver allowlist in
+      platform/src/lib/models/resolver.ts / nvidia.ts — NIM is not reached.
+      Adding this model to the registry's catalog is out of scope for this
+      round (brief constrains to getNvidiaPlanner() only).
+    Direct NIM probe (independent of the smoke runner):
+      curl POST /v1/chat/completions with "Say only OK" prompt:
+        HTTP 200 in 28.6 s
+      Conclusion: model exists at NIM but base latency on a trivial prompt
+      already 100%-trips the 3s production circuit breaker. Even if
+      allowlisted, this candidate is structurally unsuitable for a planner
+      gated at 3s.
+    → fall through to Case C
+
+  CASE C OUTCOME (per round-7 brief):
+    - registry.ts is NOT modified.
+    - feature_flags.ts is NOT flipped (LLM_FIRST_PLANNER_ENABLED stays false).
+    - Commit captures probe results for both models; status remains BLOCKED.
+    - No further rounds.
+
+  BINDING-CONSTRAINT SUMMARY:
+    Candidate 1 (8B):
+      Binding constraint = precision (0.27 below threshold; 0.22 below
+      the Case-B 0.85 floor). Recall is acceptable. Forbidden = 0,
+      required_misses = 5.
+    Candidate 2 (nano-8B):
+      Not loadable in current registry. NIM-level latency (28.6s on a
+      trivial prompt) makes it unsuitable regardless.
+
+  PRODUCTION-LATENCY CORRECTION FOR THE NATIVE:
+    The round-7 brief framed the issue as "nemotron-super-49b-v1 times
+    out on 28% of smoke entries (7/25) against the 3-second circuit
+    breaker." That framing is incorrect: the 3s circuit breaker is
+    wrapped only at platform/src/app/api/chat/consume/route.ts:243
+    (wrapping callLlmPlanner inside the consume request handler). The
+    smoke runner calls callLlmPlanner directly, with NO breaker
+    enforcement. So:
+      - The 7/25 errors in round 6 against the 49B were NIM-level
+        transient errors (network or vendor-side), not breaker trips.
+      - The 0 errors in round 7 against the 8B do NOT mean the 8B
+        avoids breaker trips in production. With the 3s breaker
+        enforced, 10/25 (40%) of 8B's smoke calls would trip the
+        breaker and gracefully fall back to classify().
+      - Net effect of a model swap to 8B in production: planner
+        coverage drops from "≈72% of remedial/holistic queries served
+        by planner" (49B, ~7/25 vendor errors) to "≈60% served by
+        planner" (8B, 10/25 over the 3s budget). The SAVING is in
+        per-call latency variance, not in breaker-trip rate.
+
+  TWO PATHS FORWARD (need native decision in a follow-up brief):
+
+    (A) RAISE THE PRODUCTION CIRCUIT BREAKER from 3s to 5s. With a
+        5s budget, 22/25 of 8B's calls would clear (88% planner
+        coverage), and the 8B's recall=0.75 / precision=0.63 becomes
+        the operational metric — still below 0.80/0.90 thresholds
+        but with a known, calibratable gap. Risk: real users see
+        +2s tail latency on the worst planner calls. The brief's
+        round-7 hard constraint forbade raising the breaker; lifting
+        that constraint is a native decision, not a prompt one.
+
+    (B) ADD nemotron-nano-8b-v1 OR A 70B-CLASS MODEL TO THE REGISTRY
+        ALLOWLIST. The nano model's 28s NIM latency disqualifies it.
+        A 70B-class model on the same Nemotron family (e.g.
+        nvidia/llama-3.3-nemotron-70b-instruct, if available on the
+        free tier) might land in a sweet spot. This requires a
+        registry catalog edit (out of round-7 scope) plus a fresh
+        smoke. Risk: similar precision/recall calibration to the 49B
+        with marginally lower latency — may not move the needle.
+
+    Both paths are infrastructure or routing decisions, not prompt
+    calibration. The remaining 0.27 precision gap on the 8B is a
+    prompt/calibration concern for a separate round (would need
+    further few-shot tightening — the 8B's failure mode is identical
+    to the 49B's: it picks resonance_register + cgm_graph_walk +
+    vector_search across query classes, identifying the cluster_atlas
+    + pattern_register substitutes the golden set encodes).
+
+  ACCEPTANCE STATE (Round 7):
+    AC.U.1 (tsc clean):        not re-run — no code edits this round
+    AC.U.2 (regression gate):  not re-run — fixture did not change
+    AC.U.3 (EVAL-B live):      FAIL  (8B: recall=0.750, precision=0.631;
+                                      nano-8b: not loadable)
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) round-7 variant per
+                               brief Case C: "model-swap probe — both 8B
+                               candidates below threshold, flag held false")
+
+```
 
 ## Smoke results (Round 6 — §4.2 tightened + §4.3 contrast few-shot)
 
