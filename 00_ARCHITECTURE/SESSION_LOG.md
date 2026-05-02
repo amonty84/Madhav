@@ -14421,4 +14421,5 @@ session_close:
     fires at M4-C-S3 entry. NAP.M4.7 at M4-D macro-phase close.
 ```
 
-Commit: <to be stamped post-commit per ONGOING_HYGIENE_POLICIES §F chore commit pattern>.
+Commit: 007c718 (feature/phase-o-observatory, 2026-05-03).
+schema_validator.py: exit=2 with 108 violations (matches the established 108-baseline; AC.S6.4 target met).

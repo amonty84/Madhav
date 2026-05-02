@@ -274,7 +274,7 @@ and status. Sealed status flag flips at S6.
 | `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md` | 1.0 | CURRENT (recommendation document) | 78449b8 / 6c2dfc1 | M4-B-S4 |
 | `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md` | 1.0 → **1.1** | CURRENT — recommendation document; v1.1 amendment adds `machine_readable_view` frontmatter field + new §8 cross-reference to companion JSON view (placement rationale + consumer contract) | 78449b8 (S4 v1.0); b508d6e (S5 v1.1) | M4-B-S4 + amended M4-B-S5 |
 | `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json` | 1.0 | CURRENT — **NEW at S5**: machine-readable view of LL4 §4–§5 priors (10 domain priors + 3 signal-class priors + date-precision global modifier). Placed in `signal_weights/` (NOT `shadow/`) per recommendation-artifact rationale (not a weight register subject to shadow→production rules). Manifest entry deferred from P3 to S6 (this session) per brief. | b508d6e | M4-B-S5 |
-| `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md` | 1.0 | **CLOSED** (this document; sealed at M4-B-S6-CLOSE 2026-05-03 per §1.2 row + §9 v1.0 SEAL changelog entry) | 90508e5 (P4 DRAFT); (this commit) (S6 SEAL) | M4-B-P4-S6-PREDRAFT (DRAFT) + sealed M4-B-S6-CLOSE |
+| `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md` | 1.0 | **CLOSED** (this document; sealed at M4-B-S6-CLOSE 2026-05-03 per §1.2 row + §9 v1.0 SEAL changelog entry) | 90508e5 (P4 DRAFT); 007c718 (S6 SEAL) | M4-B-P4-S6-PREDRAFT (DRAFT) + sealed M4-B-S6-CLOSE |
 
 ### §3.2 — Governance-state deliverables (touched by M4-B sessions)
 

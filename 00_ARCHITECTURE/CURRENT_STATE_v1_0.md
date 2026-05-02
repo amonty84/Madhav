@@ -54,7 +54,7 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
-  - v2.6 (2026-05-03, M4-B-S6-CLOSE): **M4-B SUB-PHASE CLOSED.** Substantive close-class
+  - v2.6 (2026-05-03, M4-B-S6-CLOSE, commit 007c718): **M4-B SUB-PHASE CLOSED.** Substantive close-class
     session. The M4-B sealing artifact `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/
     M4_B_CLOSE_v1_0.md` was sealed at this session — frontmatter `status: DRAFT` →
     `CLOSED`; new fields `sealed_by: M4-B-S6-CLOSE` + `sealed_at: 2026-05-03` added; all
