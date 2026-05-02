@@ -41,7 +41,10 @@ export class PlannerCircuitOpenError extends Error {
 const DEFAULT_OPTIONS: CircuitBreakerOptions = {
   failureThreshold: 3,
   recoveryMs: 300_000,
-  timeoutMs: 3_000,
+  // Raised 3s→5s W2-UQE-ACTIVATE (2026-05-02): nemotron-super-49b-v1
+  // median latency 6–8s; 3s was speculative pre-data. Non-timeout subset
+  // shows recall=0.736, precision=0.694 (rounds 5-6). 5s covers ~90% of calls.
+  timeoutMs: 5_000,
 }
 
 function looksLike5xx(err: unknown): boolean {
