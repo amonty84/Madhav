@@ -13882,5 +13882,5 @@ session_close:
     + 4 carry-throughs from M3.
 ```
 
-Commit: <stamped-at-commit-end>.
+Commit: e3997cc (feature/phase-o-observatory, 2026-05-02).
 schema_validator.py: not_run (governance-aside; recommend re-run at M4-B-S6 close).
