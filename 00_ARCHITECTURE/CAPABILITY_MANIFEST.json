@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 128,
+  "entry_count": 129,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -2351,10 +2351,25 @@
       "interface_version": "1.0",
       "phase": "M4-B",
       "description": "LL.4 qualitative-tier prediction prior recommendation (M4-B-S4). Training mean=0.630 / held_out=0.913 \u2014 held_out flagged as not a clean validity figure under H1 selection-bias hypothesis. classical_rule + both bases at 1.000 perfect calibration; temporal_engine 0.4267 = variance carrier. Tiers STRONG / MODERATE (0.4\u20130.5) / WEAK with date-precision modifier. Recommendation document only; no shadow\u2192production split per protocol \u00a72 LL.4 row."
+    },
+    {
+      "canonical_id": "ll4_prediction_priors_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.4 machine-readable prior view (M4-B-S5). Companion JSON for LL4_PREDICTION_PRIOR_v1_0.md \u00a74\u2013\u00a75 qualitative findings: 10 domain priors + 3 signal-class priors (classical_rule / both / temporal_engine) + date-precision global modifier. Placed in signal_weights/ (not shadow/) per recommendation-artifact rationale \u2014 not a weight register subject to shadow\u2192production rules; consumer contract documented in JSON.consumer_contract + LL4 \u00a78. Authored at NAP.M4.5 close (M4-B-S5)."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02",
-  "manifest_version": "1.9",
-  "last_updated": "2026-05-02",
-  "last_updated_by": "M4-B-P3-MIRROR-MANIFEST (mirror sync + 13 new M4-A/M4-B artifact entries)"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03",
+  "manifest_version": "2.0",
+  "last_updated": "2026-05-03",
+  "last_updated_by": "M4-B-S6-CLOSE (M4-B sub-phase close marker; +1 entry: ll4_prediction_priors_v1_0; v1.9 \u2192 v2.0 clean M4-B-close marker)"
 }
