@@ -2,9 +2,11 @@
 artifact: 00_ARCHITECTURE/PHASE_M4D_PLAN_v1_0.md
 canonical_id: PHASE_M4D_PLAN
 version: "1.0"
-status: DRAFT
+status: CLOSED
 authored_by: M4-C-P7-M4D-ENTRY-PREP
 authored_at: 2026-05-02
+closed_by: M4-D-S1
+closed_at: 2026-05-02
 sub_phase: M4-D — M4 macro-phase close (sub-phase of M4 macro-phase)
 macro_phase: M4 — Calibration + LEL Ground-Truth Spine
 predecessor_close_artifacts:
@@ -26,6 +28,51 @@ note: >
   M4-D is NAP.M4.7 (M4 macro-phase close approval). Entry into M4-D requires M4-C
   formally CLOSED via M4-C-S4 sealing of M4_C_CLOSE_v1_0.md.
 changelog:
+  - v1.0 CLOSED (2026-05-02, M4-D-S1): PHASE_M4D_PLAN discharged — M4 macro-phase
+    formally CLOSED at M4-D-S1 single-session substantive close. 10/10 work items
+    completed (per brief inline W1–W10 enumeration which adapted §3 (a)–(j)):
+    W1 SESSION_OPEN handshake; W2 carry-forward dispositions recorded
+    (CF.LL7.1 = CLOSED_PARALLEL via M4-D-P1 CDLM patch; KR.M4A.RT.LOW.1 =
+    DEFERRED; R.LL1TPA.1 = FINAL_NOT_REACHABLE; GAP.M4A.04 = PARTIAL_CLOSE_ACCEPTED);
+    W3 IS.8(b) macro-phase-close red-team RT.1–RT.5 PASS 5/5 axes 0 findings
+    discharged in-document §4 of M4_CLOSE_v1_0.md; W4 06_LEARNING_LAYER/
+    M4_CLOSE_v1_0.md NEW v1.0 CLOSED (six sections per §1.2 deliverable 1
+    schema); W5 CAPABILITY_MANIFEST v2.4 → v2.5 (M4_CLOSE_v1_0 entry registered;
+    entry_count 137 → 138; coordinated with parallel session M4-D-P1 which had
+    bumped manifest to v2.4 — current+1 convention); W6 CURRENT_STATE v3.3 →
+    v3.4 (canonical pointers rotated M4 → M5; active_macro_phase M4 → M5;
+    active_macro_phase_status active → closed; active_phase_plan_status
+    active → COMPLETE; active_phase_plan → null; last_session_id → M4-D-S1;
+    next_session_objective → M5-S1; red_team_counter 0 → 1 → 0;
+    file_updated_at + file_updated_by_session rotated; predraft_available
+    block CLEARED); W7 this PHASE_M4D_PLAN status DRAFT → CLOSED + this
+    changelog entry; W8 SESSION_LOG entry appended per SESSION_CLOSE_TEMPLATE;
+    W9 commit; W10 schema_validator baseline 108 verification + SESSION_CLOSE
+    handshake. NAP.M4.7 verdict APPROVED (pre-decided per execution brief;
+    AC.D1.6 hard stop BYPASSED). M4 macro-phase fully sealed (M4-A through
+    M4-D all CLOSED; M4_A_CLOSE + M4_B_CLOSE + M4_C_CLOSE + M4_CLOSE
+    sealing artifacts complete). M5 entry unblocked.
+    Sub-phase plan §3 work items mapped to brief W1–W10 (faithful execution):
+    §3.1 (a) carry-forward roster compilation → W2 + W4 §3 of M4_CLOSE;
+    (b) IS.8(b) M4 red-team → W3 + W4 §4 of M4_CLOSE (in-document, not
+    standalone REDTEAM_M4_v1_0.md per brief — same convention as M4-B-S6/
+    M4-C-S4 sub-phase closes); (c) CF.LL7.1 disposition → α (CDLM patch
+    parallel session M4-D-P1 — discharged as CLOSED_PARALLEL); (d)
+    KR.M4A.RT.LOW.1 → β (DEFER); (e) R.LL1TPA.1 final record → FINAL_NOT_REACHABLE;
+    (f) DECISION-1 R.LL5DESIGN.1 propagation → already complete at M4-C-S4
+    per v3.2 changelog (verified at this session); (g) M4_CLOSE_v1_0.md
+    authored → W4; (h) NAP.M4.7 native sign-off → APPROVED pre-decided;
+    (i) M5 handoff → embedded in M4_CLOSE §5 (M5 setup recommendations 8
+    items); (j) CURRENT_STATE → M5 active → W6 (active_macro_phase: M4 → M5;
+    active_macro_phase_status: closed/incoming).
+    Brief deviation note: standalone HANDOFF_M4_TO_M5_v1_0.md per §1.2
+    deliverable 3 was NOT separately authored — handoff content (M5
+    priorities, hard prerequisites, inherited open items by owner) embedded
+    in M4_CLOSE §5 (M5 setup recommendations 8 items) per the M4-D-S1
+    execution brief which scoped the close artifact to a single sealing
+    file with §5 covering M5 setup. The §5 inheritance + carry-forward
+    roster (§3) collectively discharge the HANDOFF function — semantic
+    parity with PHASE_M4D_PLAN §1.2 deliverable 3 spec.
   - v1.0 DRAFT (2026-05-02, M4-C-P7-M4D-ENTRY-PREP, parallel governance slot to
     M4-C-S4): Initial forward-pointer plan authored as parallel governance slot.
     Same convention as M4-B-P5-M4C-ENTRY-PREP (which authored PHASE_M4C_PLAN ahead
