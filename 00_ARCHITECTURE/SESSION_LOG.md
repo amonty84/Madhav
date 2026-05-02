@@ -18280,3 +18280,164 @@ session_close:
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-11-charts`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-8-nim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_10_KPI_TILES_FILTERS_BAR — Phase O Observatory O.1 KPI tiles row + Filters bar (URL-state UI shell)
+
+**Cowork thread:** ustad-s1-10-kpi-filters
+**Closed:** 2026-05-03 (Phase O · O.1 · S1.10 — KPI Tiles + Filters Bar)
+**Branch:** feature/phase-o-observatory-ustad-s1-10-kpi-filters (merges into umbrella feature/phase-o-observatory)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_10_KPI_TILES_FILTERS_BAR
+  cowork_thread_name: "ustad-s1-10-kpi-filters"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.1.S1.10
+  predecessor_session: USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD
+  declared_scope:
+    may_touch:
+      - platform/src/lib/components/observatory/kpi/**
+      - platform/src/lib/components/observatory/filters/**
+      - platform/src/lib/components/observatory/__tests__/kpi/**
+      - platform/src/lib/components/observatory/__tests__/filters/**
+      - 00_ARCHITECTURE/SESSION_LOG.md  # close-time append only
+    must_not_touch:
+      - platform/src/lib/components/observatory/charts/**
+      - platform/src/lib/components/observatory/events/**
+      - platform/src/lib/components/observatory/Layout.tsx
+      - platform/src/app/api/**
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - 00_ARCHITECTURE/** (except SESSION_LOG.md append)
+      - 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**
+      - .geminirules, .gemini/project_state.md
+  red_team_due: false
+  native_directive_obligations: []
+  notes: "Implementation-class O.1 session under OBSERVATORY_PLAN §6.3 mirror-funneling and §6.2 registry-funneling rules; no MP.1/MP.5/MP.9 cascade obligated. Parallel-safe with S1.11/S1.12 (disjoint may_touch)."
+```
+
+### Body summary
+
+**S1.10 deliverables.** Two presentational components plus a URL-state hook, all under `platform/src/lib/components/observatory/{kpi,filters}/`. Layout.tsx is intentionally untouched — S1.13 will swap the date-range placeholder for the `<FiltersBar>` and wire `<KpiTilesRow>` to a `getSummary()` call.
+
+1. **KpiTilesRow** — [`kpi/KpiTilesRow.tsx`](platform/src/lib/components/observatory/kpi/KpiTilesRow.tsx). Six tiles laid out as a responsive `grid-cols-2 sm:grid-cols-3 lg:grid-cols-6`: Total cost, Requests, Total tokens (with 3-segment input/output/cache split bar in the footer), Avg cost / request, Latency (p50 primary + p95 secondary), Reconciliation variance (with hover tooltip carrying `reconciliation_through_date`). Three states per tile via the inner `<KpiTile>`: success (formatted value + delta pill), `loading=true` (animated skeleton bars), `error=true` (alert with retry callback). Lower-is-better tone semantics for cost / avg cost / latency tiles (decrease → green, increase → red); neutral for requests + tokens.
+2. **FiltersBar** — [`filters/FiltersBar.tsx`](platform/src/lib/components/observatory/filters/FiltersBar.tsx). Composes `<DateRangePicker>` (8 preset buttons + Custom dual-`<input type="date">`), a compare-to-previous checkbox, four `<MultiSelect>` chip rows (Provider / Model / Stage / Status — provider+stage+status from static enum lists per OBSERVATORY_PLAN §3.1; models passed in from parent so S1.13 can fill from `/breakdowns?dimension=model`), a debounced `<input type="search">`, and a Clear-all button. Search is debounced 400ms by default with the timer pinned to the latest draft value (`searchDebounceMs` is prop-overridable for tests).
+3. **URL state** — [`filters/useObservatoryFilters.ts`](platform/src/lib/components/observatory/filters/useObservatoryFilters.ts) + [`filters/serialization.ts`](platform/src/lib/components/observatory/filters/serialization.ts). The hook reads from `useSearchParams()` and writes via `router.replace(qs ? path?qs : path, { scroll: false })`, matching the project pattern in `components/dashboard/ClientRoster.tsx`. `parseFilters()` and `filtersToParams()` are the round-trip primitives — used directly in tests so URL serialization can be exercised without next-router setup.
+4. **Date math** — [`filters/dateRange.ts`](platform/src/lib/components/observatory/filters/dateRange.ts). `presetToRange(preset, now)` is pure; the `now` parameter exists so tests can pin a clock. Presets: today / yesterday / 7d / 30d / 90d / mtd / last_month / custom (custom seeds with today's date until the user picks).
+5. **Exported types for S1.13** — [`filters/types.ts`](platform/src/lib/components/observatory/filters/types.ts) carries `ObservatoryFilters` (the rich UI-side shape — distinct from the API query shape of the same name in `@/lib/observatory/types`), `DateRange`, `DateRangePresetId`, `LlmProviderId`, `PipelineStageId`, `CallStatusId`, plus the static option lists. Re-exported from a barrel [`filters/index.ts`](platform/src/lib/components/observatory/filters/index.ts) (and `kpi/index.ts`) so S1.13 imports are one-liners.
+
+### Acceptance criteria — verification
+
+- ✅ KpiTilesRow renders all 6 tiles in all 3 states; delta colours correct (test: cost decrease → `data-tone="good"`; cost increase → `data-tone="bad"`).
+- ✅ FiltersBar URL round-trip verified by test (`filtersToParams(original) → parseFilters(...) → equals`).
+- ✅ All tests pass (10 / 10 across 2 files; brief floor was 8). Date-preset tests cover 30d, MTD, and Last month exactly per brief; round-trip + clear-all + 400ms-debounce tests included.
+- ✅ `ObservatoryFilters` type exported from `platform/src/lib/components/observatory/filters/types.ts` (and re-exported from the `filters/index.ts` barrel) for S1.13 consumption.
+- ✅ Zero modifications to `Layout.tsx`. Skeleton teardown + real component wiring is S1.13's job; S1.10 only delivers the building blocks.
+- ✅ schema_validator.py: exit 2 (109 violations; **0 named in this session's may_touch**). HIGH/MEDIUM/LOW counts are all from pre-existing 00_ARCHITECTURE artifacts and SESSION_LOG entries from prior sessions. Brief AC ("exits 0 or exit 2; no new HIGH/CRITICAL") satisfied.
+- ✅ SESSION_LOG appended atomically with this entry.
+
+### Test count
+
+- vitest: **10 / 10 passed** across:
+  - `__tests__/kpi/KpiTilesRow.test.tsx` — 4 tests (formatted-values success, loading skeletons, error+retry, delta tone good vs bad).
+  - `__tests__/filters/FiltersBar.test.tsx` — 6 tests (URL round-trip, 30d preset, MTD preset, Last-month preset, Clear-all, 400ms debounce).
+- `tsc --noEmit` on touched files: 0 errors.
+- `eslint` on touched directories: 0 errors / 0 warnings.
+
+### Exported types S1.13 will consume
+
+- `ObservatoryFilters` — rich UI-side filter shape (date_range, preset, compare_to_previous, providers[], models[], pipeline_stages[], statuses[], search).
+- `DateRange`, `DateRangePresetId`, `LlmProviderId`, `PipelineStageId`, `CallStatusId` — discriminated string unions.
+- `PROVIDER_OPTIONS`, `PIPELINE_STAGE_OPTIONS`, `STATUS_OPTIONS`, `DATE_RANGE_PRESETS` — constants.
+- `KpiTilesRow`, `KpiTilesRowProps` — `{ summary?, loading?, error?, onRetry? }`.
+- `FiltersBar`, `FiltersBarProps` — `{ filters, modelOptions, onFiltersChange, searchDebounceMs? }`.
+- `useObservatoryFilters` — hook returning `{ filters, setFilters, patchFilters, clearAll }`.
+- `defaultFilters`, `DEFAULT_FILTERS`, `parseFilters`, `filtersToParams`, `presetToRange`, `isValidIsoDate` — serialization + date-math helpers.
+
+### Governance scripts run
+
+- `schema_validator.py` (full corpus): **109 violations; exit 2**. Severity breakdown: 19 HIGH / 62 MEDIUM / 28 LOW. **Zero violations name a file from this session's may_touch.** Delta vs S1.9 close baseline (107 → 109): the +2 HIGH are pre-existing `session_log_entry_session_id_disagreement_heading_open|close` findings on the `USTAD_S1_6_GEMINI_PROVIDER_ADAPTER` SESSION_LOG entry that landed in the umbrella between S1.9 and S1.10 — not introduced by this session. AC threshold satisfied.
+- `drift_detector.py` / `mirror_enforcer.py`: not run in-worktree (implementation-class session under OBSERVATORY_PLAN §6.3 mirror-funneling and §6.2 registry-funneling — declared `must_not_touch` for `.geminirules`, `.gemini/project_state.md`, and `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` means no mirror cascade nor manifest fingerprint rotation is obligated). Per S1.3 / S1.9 close precedent.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_10_KPI_TILES_FILTERS_BAR
+  closed_at: 2026-05-03T17:30:00+05:30
+  files_touched:
+    - {path: platform/src/lib/components/observatory/kpi/KpiTile.tsx, mutation: created, sha256_after: 233a8c5dcb2f5487e18fe2e842cfb51c9e5e886f197c73c4ab9ad97e856542a3, scope: in}
+    - {path: platform/src/lib/components/observatory/kpi/KpiTilesRow.tsx, mutation: created, sha256_after: a1dc4f1008e09cbe55aca2da295461b0cd79b824d0f2456626c9cdf8a678ff0f, scope: in}
+    - {path: platform/src/lib/components/observatory/kpi/TokenSplitBar.tsx, mutation: created, sha256_after: 4e86d61f903ccb21cfd1868aba4b7392df16549ce5a69f83c7417e8a350a0d99, scope: in}
+    - {path: platform/src/lib/components/observatory/kpi/format.ts, mutation: created, sha256_after: d1fb28016b162363a102f2fac5eb0c94fc4028ee3a02f7b0f093f65366d390d1, scope: in}
+    - {path: platform/src/lib/components/observatory/kpi/index.ts, mutation: created, sha256_after: 9a297001e4a16d0972fcf1c89075bca1402aeeb0e2695bf4bd1a52988a26ef01, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/DateRangePicker.tsx, mutation: created, sha256_after: 064762d7c8431b76ccd84242df7c8f83dc78c29ed487b9f954b97e692bc8f483, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/FiltersBar.tsx, mutation: created, sha256_after: ad0ad548d46599e0ff7845126b6b075c859904089dfd0eed52c594ccc2310891, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/MultiSelect.tsx, mutation: created, sha256_after: f1978debb5512c179b8c7b3ca178fee1c17e0698e0dfd008690a2e579e780661, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/dateRange.ts, mutation: created, sha256_after: beb91d496cfa6c665c867ad4807380cdb3fbd9fc9aeb804901ded64849cb2e4f, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/index.ts, mutation: created, sha256_after: 1e223ef243ad8e5bfc2edb489e801138aa19d081f5bf39eaabd91d7d560d2a25, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/serialization.ts, mutation: created, sha256_after: 4acabbc55059516bbcbb306968390dd01fba542b74bc3b1fd8ad9a56dc91c725, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/types.ts, mutation: created, sha256_after: 5918fcf0e512fd2a790d912b4d4d8cfe9d762dde3555737a98cc882e1c8c665a, scope: in}
+    - {path: platform/src/lib/components/observatory/filters/useObservatoryFilters.ts, mutation: created, sha256_after: 5d91a5697179aacc0f5296a0f709897d2a0d6f4456296584f559f7eeb9a994f8, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/kpi/KpiTilesRow.test.tsx, mutation: created, sha256_after: 7eab8c025504e5b982068dd17f134052f0befd4c76d821d5285c934b55eccba6, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/filters/FiltersBar.test.tsx, mutation: created, sha256_after: 7208ece092ee2752d120379c7c1209fcab40396f2063f44f025b3b61a921880b, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_10 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Implementation-class session under mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.10 (UI-shell implementation session)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Implementation-class session under OBSERVATORY_PLAN §6.2 + §6.3 funneling; declared must_not_touch on .geminirules / .gemini/project_state.md / CAPABILITY_MANIFEST.json. Per S1.3 / S1.9 precedent."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 109
+    classification: at_baseline_target
+    rationale: "0 violations name a file from this session's may_touch. Delta vs S1.9 baseline (107 → 109) is +2 pre-existing SESSION_LOG-entry HIGH findings against the USTAD_S1_6 entry that merged into umbrella between S1.9 and S1.10. None introduced by this session."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "No mirror-pair cascade obligated for this implementation-class session; per OBSERVATORY_PLAN §6.3 + S1.3 / S1.9 close precedent."
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.10 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1 / S1.1 / S1.2 / S1.8 / S1.9 precedent."
+  close_criteria_met: true
+  unblocks: "S1.13 (wiring + e2e integration) — once S1.11 (charts) and S1.12 (drill-down) also close, S1.13 can wire all three subcomponents into Layout.tsx and replace the date-range-placeholder with <FiltersBar>. Concurrently parallel-safe with S1.11 + S1.12 (disjoint may_touch)."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-10-kpi-filters
+    cut_from_commit: e0ad911
+    code_commit: 6bf6405a07d7fbeae8bbb48ebdc13fe5cbfaaec9
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.11 (Charts)** and **S1.12 (Drill-down event explorer)** are parallel-safe with this S1.10 close (disjoint may_touch under `observatory/charts/**` and `observatory/events/**`). Once S1.11 + S1.12 close, **S1.13 (Wiring + e2e integration)** unblocks — that session drops `<KpiTilesRow>`, `<FiltersBar>`, the charts, and the drill-down into `Layout.tsx` (replacing the `data-testid="date-range-placeholder"` shim) and wires the typed API client to live data.
+
+Commit: `6bf6405a07d7fbeae8bbb48ebdc13fe5cbfaaec9` (feat) on `feature/phase-o-observatory-ustad-s1-10-kpi-filters`. SESSION_LOG-append commit follows. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
