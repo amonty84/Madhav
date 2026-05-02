@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 3.1
+version: 3.2
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,157 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v3.2 (2026-05-02, M4-C-S4-CLOSE): **M4-C SUB-PHASE CLOSED.** Sub-phase
+    close-class substantive session sealing M4_C_CLOSE_v1_0.md DRAFT → CLOSED;
+    in-document IS.8(b)-class M4-C sub-phase-close red-team conducted per
+    PHASE_M4C_PLAN §3.4 AC.M4C.S4.3 (5 axes, PASS, 0 CRITICAL/HIGH/MEDIUM/LOW/
+    NOTE/INFO new findings). Sequential after M4-C-S3 (single-track) and parallel-
+    safe with the M4-C-P7-M4D-ENTRY-PREP governance slot which took v3.1 with
+    canonical pointers UNCHANGED — this S4 close reads live v3.1 state and adapts
+    to v3.2 per "current+1" operational rule.
+    Substantive deliverables (within may_touch only):
+    (1) `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md` v1.0
+        DRAFT → CLOSED — sealed by resolving every `[PENDING-S*]` token against
+        actual S1/S2/S3 outcomes read from sealed shadow registers + design docs +
+        NAP_M4_6_BRIEF v1.2 + CURRENT_STATE v2.7→v2.8→v2.9→v3.0→v3.1 changelog
+        blocks + SESSION_LOG entries. §1.1 mechanism scope rewritten with
+        renamed LL.5 + ACTUAL paths (signal_weights/shadow/) + DECISION-2 literal
+        CDLM construction. §1.2 sub-phase rounds populated with all 5 sessions
+        (S1 + P6 + S2 + S3 + S4). §2 ACs: PHASE_M4_PLAN §3.3 AC.M4C.1–5 = 5/5
+        PASS; per-sub-phase ACs S1.1–S4.5 PASS with 2 informational deferrals
+        (LL.3 fix-before-prod → M4-D; stability-gate convention → informational);
+        per-session brief ACs S1.1–S1.7 + S2.1–S2.7 + S3.1–S3.9 + S4.1–S4.9 =
+        32/32 PASS. §3 deliverables fully populated. §5 LL status fully populated
+        (LL.5 380 signals tier breakdown; LL.6 H2 rejected; LL.7 243 edges with
+        sanity 8/8 novel PASS). §6 residuals: §6.1 9 substrate items; §6.2 10
+        inherited items; §6.3+§6.4 unchanged; CF.LL7.1 NEW; F.M4CS3.MIRROR.1 +
+        F.RT.S6.M.1 + F.RT.S6.M.2 + R.LL5DESIGN.1 + R.LL6DESIGN.1 CLOSED at
+        this S4. §7.2 in-document IS.8(b)-class red-team verdict PASS 5/5 axes.
+        §8 approval populated. §9 v1.0 SEAL changelog entry.
+    (2) `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` v2.0 → v2.1 — DECISION-1 propagation
+        (R.LL5DESIGN.1 Option A approved 2026-05-02): LL.5 mechanism name updated
+        from "Retrieval ranking learning" → "Dasha-Transit axis-weight modulator"
+        in three places (§LL-Appendix.A activation matrix LL.5 row;
+        §LL-Appendix.B LL.5 per-mechanism heading; §LL-Appendix narrative inline
+        mention). Surgical naming-only edit per brief; no semantic protocol
+        changes. v2.1 changelog entry recorded.
+    (3) `00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md` v1.0 → v1.0.1 — DECISION-1
+        propagation (frontmatter `governs:` field; §1.1 LL.5 mechanism heading;
+        §3.1 S1 scope heading). Status remains DRAFT. v1.0.1 §7 changelog entry.
+    (4) `06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md` v1.0 → v1.0.1 —
+        DECISION-1 propagation (§1 narrative mention; §2 per-mechanism shadow-
+        register table LL.5 row). Status remains APPROVED (NAP.M4.4 verdict scope
+        unaffected — naming surface only). v1.0.1 §9 changelog entry.
+    (5) `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` v2.2 → v2.3 — registered TWO
+        new entries (M4_B_CLOSE_v1_0 closing F.RT.S6.M.2 LOW carry-forward;
+        M4_C_CLOSE_v1_0 NEW for this session); bumped one existing entry
+        (SHADOW_MODE_PROTOCOL_v1_0 version 1.0 → 1.0.1 per DECISION-1 propagation).
+        entry_count 135 → 137; manifest_fingerprint extended with
+        `+m4c_s4_close_2026-05-02`; last_updated 2026-05-02; last_updated_by
+        M4-C-S4-CLOSE. Python json.load() parse-clean (verified). MACRO_PLAN
+        + PHASE_M4C_PLAN are NOT in the manifest at all (governance docs in
+        00_ARCHITECTURE/) — version bumps recorded in their own changelogs but
+        not in manifest entries.
+    (6) `.geminirules` — appended M4-C-S4 footer entry capturing cumulative
+        S2+S3+P6+P7+S4 delta + LL.5/LL.6/LL.7 status + DECISION-1+DECISION-2
+        propagation + CF.LL7.1 carry + R.LL1TPA.1 NOT_REACHABLE persists +
+        F.M4CS3.MIRROR.1 + F.M4CP7.MIRROR.1 LOW DISCHARGED at this S4 mirror sync.
+    (7) `.gemini/project_state.md` — banner narrative line-3 rewritten with M4-C-S4
+        narrative (prior M4-C-S1 narrative preserved as `_Prior session narrative
+        retained_`); §"Active Phase" header section rewritten with M4-C SUB-PHASE
+        CLOSED + M4-D INCOMING block + LL.1–LL.7 status + carry-forwards roster.
+    (8) `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v3.1 → v3.2 (this update). Canonical
+        state pointers ROTATED per AC.S4.7: `last_session_id` → M4-C-S4-CLOSE;
+        `next_session_objective` rewritten → M4-D-S1 (M4 macro-phase close per
+        PHASE_M4D_PLAN_v1_0.md authored at P7); `active_phase_plan_sub_phase`
+        rewritten with "M4-C CLOSED 2026-05-02; M4-D incoming"; `red_team_counter`
+        0 → 1 (S4 substantive close-class) → 0 (IS.8(b)-class sub-phase-close
+        cadence DISCHARGED in-document §7.2 per ONGOING_HYGIENE_POLICIES §G
+        discharge-of-cadence-class clause); `file_updated_at` rotated to
+        2026-05-02T19:00:00+05:30; `file_updated_by_session` → M4-C-S4-CLOSE;
+        `cross_check_hash` updated; `predraft_available` block PRESERVED
+        (PHASE_M4D_PLAN_v1_0.md still pending consumption at M4-D-S1; M4_C_CLOSE
+        DRAFT pre-draft consumed at this S4 close — historical note removed
+        from the predraft-availability block since the consumption happened);
+        `parallel_session_notes` block rewritten to NONE (S4 single-track close-
+        class; prior P7 governance-aside block preserved as audit trail).
+    (9) `00_ARCHITECTURE/SESSION_LOG.md` — entry appended (commit hash stamped
+        post-commit per ONGOING_HYGIENE_POLICIES §F chore-commit pattern matching
+        prior M4-class closes).
+    Read-only consumed: CLAUDE.md (§C items 1–11; project instructions);
+    CURRENT_STATE v3.1 §2 canonical state block + v3.0 + v3.1 changelog entries;
+    PHASE_M4C_PLAN §3 + §LL.5/§LL.6/§LL.7 (M4-C deliverable list; per-sub-phase
+    ACs); PHASE_M4_PLAN §3.3 (M4-C entry/close gate); MACRO_PLAN §LL-Appendix.A
+    + §LL-Appendix.B LL.5/LL.6/LL.7 rows; M4_B_CLOSE_v1_0.md §6 + §7 (residual
+    inheritance + IS.8(b) red-team precedent); SHADOW_MODE_PROTOCOL §3 + §3.5
+    (promotion criteria); LL5_DASHA_TRANSIT_DESIGN_v1_0.md §1 + §6 (mechanism
+    + R.LL5DESIGN.1 logged); LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md (mechanism +
+    H2 rejected); LL7_DISCOVERY_PRIOR_DESIGN_v1_0.md §1 + §4 + §7 (algorithm +
+    sanity-check + CF.LL7.1); ll5_dasha_transit_v1_0.json (380 signals tier
+    breakdown summary); ll6_temporal_density_v1_0.json (255/380 meaningful +
+    H2 finding); ll7_discovery_prior_v1_0.json (243 edges + DECISION-1+DECISION-2
+    + sanity-check); NAP_M4_6_BRIEF v1.2 (§6.3.A literal-construction correction);
+    SESSION_LOG.md (M4-C-S1 + M4-C-S2 + M4-C-S3 + M4-C-P6 + M4-C-P7 entries
+    for AC ledger + deliverables + counter trail). Out-of-scope (per brief
+    must_not_touch): `025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md` (CF.LL7.1 CDLM patch
+    deferred to M4-D/M5); `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_
+    weights/**` (M4-A/B/C substrate frozen — read-only for residual compilation);
+    `06_LEARNING_LAYER/OBSERVATIONS/**` (LEL frozen; held-out 9 sacrosanct);
+    `01_FACTS_LAYER/**`; `platform/**`. Scope honored.
+    Red-team: IS.8(b)-class sub-phase-close red-team CONDUCTED in-document
+    §7.2 of M4_C_CLOSE_v1_0.md per PHASE_M4C_PLAN §3.4 AC.M4C.S4.3. 5 axes:
+    (a) LL.5/LL.6/LL.7 held-out partition spot-check across all 3 shadow files
+    — 37 training + 9 held_out_excluded verified PASS; (b) DECISION-1 + DECISION-2
+    audit trail — traceable across NAP_M4_6_BRIEF v1.2 + ll7_discovery_prior_v1_0.json
+    outer metadata + SESSION_LOG M4-C-S3 entry + M4_C_CLOSE_v1_0.md PASS;
+    (c) CF.LL7.1 documented in 3+ places — LL7_DISCOVERY_PRIOR_DESIGN §4 (5 hits)
+    + NAP_M4_6_BRIEF §6.3.A (2 hits) + M4_C_CLOSE §6 (9 hits) PASS; (d) Naming
+    propagation (AC.S4.3) — old name "Retrieval ranking learning" present only
+    in changelog audit-trail entries (3 instances: MACRO_PLAN line 35; PHASE_M4C_PLAN
+    line 540; SHADOW_MODE_PROTOCOL line 282); substantive references all updated
+    PASS; (e) Mirror sync (AC.S4.1) — `.geminirules` reflects M4-C-S4 footer +
+    `.gemini/project_state.md` reflects M4-C SUB-PHASE CLOSED banner + §Active
+    Phase header rewrite PASS. Verdict: **PASS** 5/5 axes; 0 CRITICAL/HIGH/MEDIUM/
+    LOW/NOTE/INFO new findings. Counter rotation: 0 → 1 (S4 substantive close-class)
+    → 0 (IS.8(b)-class sub-phase-close cadence discharge per ONGOING_HYGIENE_POLICIES
+    §G; same convention as M4-B-S6-CLOSE). Next IS.8(a) every-third cadence-fires
+    at counter=3 (three substantive sessions hence — likely after first three
+    M4-D sessions). Next IS.8(b) macro-phase-close cadence at M4-D close per
+    PHASE_M4_PLAN §3.4 AC.M4D.4. Next §IS.8(c) every-12-months MACRO_PLAN review
+    remains 2027-04-23 due.
+    Substantive findings to flag forward (carry-forwards):
+      - **CF.LL7.1** (carries from S3) — CDLM Pancha-MP anchor patch deferred
+        M4-D/M5; required by L2.5 CDLM authoring session.
+      - **R.LL1TPA.1** (carries — NOT_REACHABLE persists at S4) — Gemini
+        reachability final M4 re-attempt obligation at M4-D entry per
+        LL1_TWO_PASS_APPROVAL §5.5.
+      - **R.LL5DESIGN.1** + **R.LL6DESIGN.1** CLOSED at this S4 via DECISION-1
+        propagation.
+      - **F.M4CS3.MIRROR.1** + **F.M4CP7.MIRROR.1** + **F.RT.S6.M.1** CLOSED at
+        this S4 via mirror sync execution (AC.S4.1 FIRST act).
+      - **F.RT.S6.M.2** CLOSED at this S4 via M4_B_CLOSE manifest registration
+        (AC.S4.6).
+      - **R.LL6FINDING.1** (carries informational) — H2 rejected; informational
+        input to M4-D's hypothesis ranking on LL.4 §2.2.
+      - **F.RT.S6.N.1** (still carries) — parallel-session version-coordination
+        protocol formalization at next quarterly governance pass 2026-07-24.
+      - **F.RT.S6.I.1** (carries) — outer-metadata stale-doc-hint at next
+        LL.1 production-register touch (M4-D / M5).
+      - **R.LL3.1/.2/.3** (carries, deferred-to-M4D-pipeline-change).
+      - **R.LL5DESIGN.2** (carries informational) — lit_source=both 0.5/0.5
+        fixed-point convention; revisit at M5 cohort-mode.
+      - Per-edge LL.2 promotion (carries) — M4-D scope.
+      - KR.M4A.RT.LOW.1 + KR.M4A.CLOSE.2 + GAP.M4A.04 partial-close (carries).
+    parallel_session_notes: This S4 ran as a single-track sub-phase close-class
+    session (no parallel slots open at S4 entry). The M4-C-P6-S4-PREDRAFT
+    (M4_C_CLOSE pre-draft, 2026-05-03) and M4-C-P7-M4D-ENTRY-PREP (PHASE_M4D_PLAN
+    + NAP_M4_7_BRIEF, 2026-05-02 v3.1) governance asides preceded this S4 close
+    chronologically; both pre-drafts pending consumption at the time of S4 entry.
+    M4_C_CLOSE pre-draft CONSUMED + sealed at this S4 close. PHASE_M4D_PLAN +
+    NAP_M4_7_BRIEF remain pending consumption at M4-D-S1 (M4 macro-phase close
+    future session). drift_detector.py / schema_validator.py / mirror_enforcer.py
+    re-run at this S4 close to confirm no cross-check regression (AC.S4.9 baseline
+    target 108 violations).
   - v3.1 (2026-05-02, M4-C-P7-M4D-ENTRY-PREP): Parallel governance slot —
     forward-pointer plan + decision-pending NAP brief authored ahead of
     M4-D macro-phase close. Same convention as M4-B-P5-M4C-ENTRY-PREP
@@ -2409,8 +2560,32 @@ current_state:
     # M3 phase plan (PHASE_M3_PLAN_v1_0.md v1.0) is SUPERSEDED-AS-COMPLETE.
   active_phase_plan_version: "1.0"
   active_phase_plan_sub_phase: >
-    M4-C ACTIVE — first-shadow-write trio M4-C-S1 + M4-C-S2 + M4-C-S3 all CLOSED
-    as of 2026-05-02. S3 (M4-C-S3-LL7-DISCOVERY-PRIOR, this update at v3.0):
+    M4-C CLOSED 2026-05-02 at M4-C-S4-CLOSE (this update at v3.2). M4-D
+    INCOMING — M4 macro-phase close (M4 cross-system reconciliation +
+    NAP.M4.7 native verdict + IS.8(b) macro-phase-close red-team) per
+    PHASE_M4_PLAN §3.4 + PHASE_M4D_PLAN_v1_0.md DRAFT (authored at
+    M4-C-P7-M4D-ENTRY-PREP 2026-05-02, parallel governance slot to this S4).
+    M4_C_CLOSE_v1_0.md sealed DRAFT → CLOSED with all [PENDING-S*] tokens
+    resolved against actual S1/S2/S3 outcomes; in-document IS.8(b)-class
+    M4-C sub-phase-close red-team conducted §7.2 verdict PASS 5/5 axes 0
+    findings. PHASE_M4_PLAN AC.M4C.1–5 = 5/5 PASS; per-session brief ACs
+    S1.1–S4.9 = 32/32 PASS. LL.5 (Dasha-Transit axis-weight modulator —
+    renamed at this S4 per DECISION-1 propagation to MACRO_PLAN v2.1 +
+    PHASE_M4C_PLAN v1.0.1 + SHADOW_MODE_PROTOCOL v1.0.1) shadow ACTIVE
+    (380 signals; HIGH 2/MED 12/LOW 252/ZERO 114). LL.6 (Temporal Density
+    Modulator) shadow ACTIVE (255/380 meaningful adjustment; H2 rejected).
+    LL.7 (Discovery Prior native-only mode) SHADOW ACTIVE per NAP.M4.6
+    OPTION_B_APPROVED_LITERAL_CONSTRUCTION + DECISION-2 (243 edges = 107 novel +
+    136 unconfirmed; sanity 8/8 novel PASS; CF.LL7.1 deferred). Mirror sync
+    AC.S4.1 executed FIRST at this S4 entry — F.M4CS3.MIRROR.1 + F.M4CP7.MIRROR.1
+    LOW DISCHARGED. CAPABILITY_MANIFEST v2.2 → v2.3 (M4_B_CLOSE + M4_C_CLOSE
+    registered closing F.RT.S6.M.2; SHADOW_MODE_PROTOCOL bumped to 1.0.1;
+    entry_count 135 → 137). Held-out 9 events sacrosanct verified end-to-end
+    across LL.5/LL.6/LL.7 (37 training + 9 held_out_excluded in each). Open
+    NAPs: NAP.M4.7 (M4 macro-phase close approval; M4-D-class; brief authored
+    at P7 PENDING_NATIVE_DECISION).
+    === Predecessor M4-C-S3 close preserved for audit trail ===
+    M4-C-S3 (M4-C-S3-LL7-DISCOVERY-PRIOR, this update at v3.0):
     LL.7 design doc LL7_DISCOVERY_PRIOR_DESIGN_v1_0.md v1.0 + signal_weights/
     shadow/ll7_discovery_prior_v1_0.json (CDLM literal msr_anchors-clique union
     over 81 cells = 136 unique edges over 58 anchor signals; 37 training events;
@@ -2637,6 +2812,32 @@ current_state:
   # Red-team counter (ONGOING_HYGIENE_POLICIES §G addition at Step 12)
   # ------------------------------------------------------------------
   red_team_counter: 0
+    # M4-C-S4-CLOSE (2026-05-02) — counter 0 → 1 → 0. Sub-phase close-class
+    # substantive session. Counter increments 0 → 1 (S4 substantive close-class
+    # per ONGOING_HYGIENE_POLICIES §G; predecessor counter at 0 set by S3 IS.8(a)
+    # discharge); IS.8(b)-class sub-phase-close cadence FIRES in-document §7.2 of
+    # M4_C_CLOSE_v1_0.md at counter=1 per PHASE_M4C_PLAN §3.4 AC.M4C.S4.3 (analogue
+    # of macro-phase-close cadence at sub-phase granularity; same convention as
+    # M4-B-S6-CLOSE which conducted IS.8(b)-class sub-phase-close at S6); 5-axis
+    # red-team conducted (a) LL.5/LL.6/LL.7 held-out partition spot-check
+    # (37 training + 9 held_out_excluded verified across all 3 shadow files);
+    # (b) DECISION-1 + DECISION-2 audit trail (NAP_M4_6_BRIEF v1.2 + LL.7 outer
+    # metadata + SESSION_LOG + M4_C_CLOSE PASS); (c) CF.LL7.1 documented in 3+
+    # places (LL7_DESIGN §4 + NAP_M4_6 §6.3.A + M4_C_CLOSE §6 PASS);
+    # (d) Naming propagation AC.S4.3 (old name "Retrieval ranking learning"
+    # present only in changelog audit-trail entries; substantive references
+    # all updated PASS); (e) Mirror sync AC.S4.1 (.geminirules + .gemini/project_state.md
+    # reflect M4-C SUB-PHASE CLOSED PASS). Verdict: PASS 5/5 axes; 0 CRITICAL/HIGH/
+    # MEDIUM/LOW/NOTE/INFO new findings beyond §6 dispositions. Counter resets
+    # 1 → 0 per ONGOING_HYGIENE_POLICIES §G discharge-of-cadence-class clause.
+    # Next IS.8(a) every-third cadence-fires at counter=3 (three substantive
+    # sessions hence — likely after M4-D-S1 if M4-D has multiple substantive
+    # sessions; M4-D-S1 is the macro-phase-close session). Next IS.8(b) macro-
+    # phase-close cadence at M4-D-S1 per PHASE_M4_PLAN §3.4 AC.M4D.4. Next
+    # §IS.8(c) every-12-months MACRO_PLAN review remains 2027-04-23 due.
+    # M4-C-P7-M4D-ENTRY-PREP (2026-05-02) — counter unchanged at 0 (governance-
+    # aside class — forward-pointer plan + decision-pending NAP brief authoring;
+    # per ONGOING_HYGIENE_POLICIES §G governance asides do not increment counter).
     # M4-C-S3-LL7-DISCOVERY-PRIOR (2026-05-02) — counter 2 → 3 → 0.
     # Substantive learning-layer-substrate session — third M4-C session, sequential
     # after S1+S2 parallel-pair landed. LL.7 first SHADOW write per NAP.M4.6
@@ -2794,7 +2995,32 @@ current_state:
   # ------------------------------------------------------------------
   # Last-session pointer
   # ------------------------------------------------------------------
-  last_session_id: M4-C-S3-LL7-DISCOVERY-PRIOR
+  last_session_id: M4-C-S4-CLOSE
+    # M4-C-S4-CLOSE (2026-05-02). Sub-phase close-class substantive session sealing
+    # M4-C. Eight substantive deliverables: (1) M4_C_CLOSE_v1_0.md DRAFT → CLOSED
+    # with all [PENDING-S*] tokens resolved against actual S1/S2/S3 outcomes (status
+    # flipped; IS.8(b)-class red-team in §7.2 PASS 5/5 axes 0 findings); (2) MACRO_PLAN_
+    # v2_0.md v2.0 → v2.1 (DECISION-1 R.LL5DESIGN.1 propagation: LL.5 mechanism name
+    # "Retrieval ranking learning" → "Dasha-Transit axis-weight modulator" in three
+    # places — §LL-Appendix.A activation matrix LL.5 row + §LL-Appendix.B per-mechanism
+    # heading + §LL-Appendix narrative inline mention); (3) PHASE_M4C_PLAN_v1_0.md v1.0
+    # → v1.0.1 (DECISION-1 propagation: frontmatter governs field + §1.1 mechanism
+    # heading + §3.1 S1 scope heading); (4) SHADOW_MODE_PROTOCOL_v1_0.md v1.0 → v1.0.1
+    # (DECISION-1 propagation: §1 narrative + §2 LL.5 row); (5) CAPABILITY_MANIFEST.json
+    # v2.2 → v2.3 (registered M4_B_CLOSE_v1_0 closing F.RT.S6.M.2 LOW carry + M4_C_CLOSE_v1_0
+    # NEW + SHADOW_MODE_PROTOCOL_v1_0 version 1.0 → 1.0.1; entry_count 135 → 137; manifest_
+    # fingerprint extended; Python json.load() validated); (6) `.geminirules` MP.1 mirror
+    # footer entry M4-C-S4 cumulative S2+S3+P6+P7+S4 delta + LL.5/LL.6/LL.7 status +
+    # CF.LL7.1 + R.LL1TPA.1 carries + F.M4CS3.MIRROR.1 + F.M4CP7.MIRROR.1 DISCHARGED;
+    # (7) `.gemini/project_state.md` MP.2 mirror banner narrative + §Active Phase header
+    # rewrite reflecting M4-C SUB-PHASE CLOSED + M4-D INCOMING; (8) CURRENT_STATE v3.1
+    # → v3.2 (this update — canonical state pointers ROTATED). Gemini reachability
+    # re-check at S4: NOT_REACHABLE persists; R.LL1TPA.1 carries to M4-D as final M4
+    # re-attempt obligation per LL1_TWO_PASS_APPROVAL §5.5. Counter rotation 0 → 1 → 0
+    # (S4 substantive close-class increment + IS.8(b)-class sub-phase-close cadence
+    # discharge per ONGOING_HYGIENE_POLICIES §G; same convention as M4-B-S6-CLOSE).
+    # PHASE_M4_PLAN AC.M4C.1–5 = 5/5 PASS; per-session brief ACs S1.1–S4.9 = 32/32 PASS.
+    # === Predecessor M4-C-S3-LL7-DISCOVERY-PRIOR preserved for audit trail ===
     # M4-C-S3-LL7-DISCOVERY-PRIOR (2026-05-02). Substantive learning-layer-substrate
     # session — third M4-C session, sequential after S1+S2 parallel-pair. LL.7
     # (Discovery Prior Rubric, native-only mode) first SHADOW write per NAP.M4.6
@@ -3526,6 +3752,58 @@ current_state:
   # Next-session commitment (single committed objective per SESSION_LOG_SCHEMA §4)
   # ------------------------------------------------------------------
   next_session_objective: >
+    M4-D-S1 — M4 MACRO-PHASE CLOSE (M4 cross-system reconciliation + NAP.M4.7
+    native verdict + IS.8(b) macro-phase-close red-team). Per PHASE_M4_PLAN §3.4
+    + PHASE_M4D_PLAN_v1_0.md v1.0 DRAFT (authored 2026-05-02 at M4-C-P7-M4D-ENTRY-PREP
+    parallel governance slot to this S4). Single-session substantive close per
+    PHASE_M4D_PLAN §3.1 with 10 work items (a)–(j) covering M4 close artifact
+    authoring (M4_CLOSE_v1_0.md), HANDOFF_M4_TO_M5 memo, REDTEAM_M4 IS.8(b)
+    macro-phase-close red-team, NAP.M4.7 native presentation + verdict capture,
+    CURRENT_STATE flip M4 → M5, manifest update. NAP_M4_7_BRIEF v1.0 PENDING_NATIVE_
+    DECISION presented at M4-D-S1; native verdict gates M4 → M5 CURRENT_STATE flip.
+    Predecessor: M4-C-S4-CLOSE (2026-05-02 — sub-phase close-class; M4_C_CLOSE
+    v1.0 sealed; PHASE_M4_PLAN AC.M4C.1–5 = 5/5 PASS; in-document IS.8(b)-class
+    red-team PASS 5/5 axes 0 findings; mirror sync executed FIRST discharging
+    F.M4CS3.MIRROR.1 + F.M4CP7.MIRROR.1; CAPABILITY_MANIFEST v2.2 → v2.3 closing
+    F.RT.S6.M.2; DECISION-1 R.LL5DESIGN.1 propagated to MACRO_PLAN v2.1 +
+    PHASE_M4C_PLAN v1.0.1 + SHADOW_MODE_PROTOCOL v1.0.1; CURRENT_STATE bumped
+    v3.1 → v3.2; red_team_counter 0 → 1 → 0).
+    M4-D-S1 entry gates per PHASE_M4D_PLAN §2:
+      (1) M4-C formally CLOSED [SATISFIED at this S4 close];
+      (2) NAP.M4.7 brief authored + ready for native review [SATISFIED at P7];
+      (3) IS.8(b) macro-phase-close red-team scoped per PHASE_M4_PLAN §3.4;
+      (4) all open M4 carry-forwards either resolved or explicitly accepted
+          (carry-forward roster compiled at PHASE_M4D_PLAN §5).
+    Inherited carry-forwards (post-M4-C-S4-CLOSE):
+      - **CF.LL7.1** (CDLM Pancha-MP anchor patch — deferred M4-D/M5 per
+        PHASE_M4D_PLAN §5; required by L2.5 CDLM authoring session);
+      - **R.LL1TPA.1** (Gemini reachability — NOT_REACHABLE persists at S4;
+        final M4 re-attempt obligation at M4-D-S1 entry per LL1_TWO_PASS_APPROVAL
+        §5.5; if becomes synchronously reachable, ratify/contest LL.5/LL.6/LL.7
+        surrogate decisions retroactively per protocol §K.3);
+      - **R.LL3.1/.2/.3** (LL.3 fix-before-prod — deferred-to-M4D-pipeline-change
+        per LL3_DOMAIN_COHERENCE §5.1);
+      - **R.LL5DESIGN.1** + **R.LL6DESIGN.1** CLOSED at S4 (DECISION-1 propagation);
+      - **R.LL5DESIGN.2** (carries informational — lit_source=both 0.5/0.5 split);
+      - **R.LL6FINDING.1** (carries informational — H2 rejected; input to M4-D
+        hypothesis ranking on LL.4 §2.2);
+      - **F.RT.S6.M.1** + **F.RT.S6.M.2** + **F.M4CS3.MIRROR.1** + **F.M4CP7.MIRROR.1**
+        CLOSED at S4;
+      - **F.RT.S6.N.1** (still carries) — parallel-session version-coordination
+        protocol formalization at next quarterly governance pass 2026-07-24;
+      - **F.RT.S6.I.1** (carries) — outer-metadata stale-doc-hint at next LL.1
+        production-register touch;
+      - Per-edge LL.2 promotion (carries — M4-D scope per PHASE_M4D_PLAN §3);
+      - KR.M4A.RT.LOW.1 + KR.M4A.CLOSE.2 + GAP.M4A.04 partial-close (carries —
+        M4-D close roster per PHASE_M4D_PLAN §5);
+      - **NAP.M4.7** PENDING_NATIVE_DECISION — M4 macro-phase close gate.
+    red_team_counter: 0 (post M4-C-S4-CLOSE substantive close-class increment 0→1
+      + IS.8(b)-class sub-phase-close cadence DISCHARGED 1→0). Next IS.8(a)
+      cadence-fires at counter=3 (three substantive sessions hence — likely
+      after first three M4-D substantive sessions if any beyond S1; M4-D-S1
+      itself is the macro-phase-close substantive session). Next IS.8(b) macro-
+      phase-close cadence at M4-D-S1 close per PHASE_M4_PLAN §3.4 AC.M4D.4.
+    === Predecessor next_session_objective (M4-C-S4 path from M4-C-S3) preserved for audit trail ===
     M4-C-S4 — M4-C SUB-PHASE CLOSE (sealing artifact + IS.8(b)-class red-team).
     Predecessor: M4-C-S3-LL7-DISCOVERY-PRIOR (2026-05-02 — third M4-C session;
     LL.7 design doc + ll7_discovery_prior_v1_0.json shadow register; CDLM literal
@@ -4040,50 +4318,58 @@ current_state:
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T17:30:00+05:30
-  file_updated_by_session: M4-C-S3-LL7-DISCOVERY-PRIOR
+  file_updated_at: 2026-05-02T19:00:00+05:30
+  file_updated_by_session: M4-C-S4-CLOSE
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
-    = (Step_15 completed, M4-C-S3-LL7-DISCOVERY-PRIOR, null).
+    = (Step_15 completed, M4-C-S4-CLOSE, null).
     STEP_LEDGER is GOVERNANCE_CLOSED; drift_detector.py cross-checks against
     SESSION_LOG's latest `session_close.session_id` (always).
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
 
   # ------------------------------------------------------------------
-  # Pre-draft availability flag — RE-SET at M4-C-P7-M4D-ENTRY-PREP (2026-05-02)
+  # Pre-draft availability flag — pointer to PHASE_M4D_PLAN preserved at v3.2
   # ------------------------------------------------------------------
-  # Set by M4-C-P7-M4D-ENTRY-PREP (2026-05-02; this v3.1 update; parallel governance
-  # slot to M4-C-S4). Forward-pointer plan authored at
-  # 00_ARCHITECTURE/PHASE_M4D_PLAN_v1_0.md (M4-D execution plan; 6 sections);
-  # decision-pending NAP brief at 00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md
-  # (PENDING_NATIVE_DECISION; 6 sections). Consumer = M4-D-S1 (M4 macro-phase
-  # close substantive session; future). Same convention as M4-B-P5-M4C-ENTRY-PREP
-  # (parallel to M4-B-S6; PHASE_M4C_PLAN + NAP_M4_6_BRIEF authored as forward-
-  # pointer pair).
+  # Set by M4-C-P7-M4D-ENTRY-PREP (2026-05-02; parallel governance slot that
+  # took v3.1) and PRESERVED at this v3.2 update (M4-C-S4-CLOSE) — PHASE_M4D_PLAN
+  # remains pending consumption at M4-D-S1. The M4_C_CLOSE_v1_0.md pre-draft
+  # authored by M4-C-P6-S4-PREDRAFT (2026-05-03; commit 0934efb) was CONSUMED +
+  # sealed at this S4 close (2026-05-02; status flipped DRAFT → CLOSED). Forward-
+  # pointer plan still active at 00_ARCHITECTURE/PHASE_M4D_PLAN_v1_0.md (M4-D
+  # execution plan; 6 sections); decision-pending NAP brief still active at
+  # 00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md (PENDING_NATIVE_DECISION;
+  # 6 sections). Consumer = M4-D-S1 (M4 macro-phase close substantive session;
+  # future).
   predraft_available: PHASE_M4D_PLAN_v1_0.md
   predraft_status: DRAFT
   predraft_authored_by: M4-C-P7-M4D-ENTRY-PREP
   predraft_authored_on: 2026-05-02
   predraft_consumer: M4-D-S1 (M4 macro-phase close — future)
   predraft_companion_brief: 00_ARCHITECTURE/EVAL/NAP_M4_7_BRIEF_v1_0.md (PENDING_NATIVE_DECISION; consumed at M4-D-S1 work item (h))
-  # Historical record (preserved): the prior pre-draft artifact at
-  # 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md was authored by
-  # M4-C-P6-S4-PREDRAFT (2026-05-03; commit 0934efb) as DRAFT and remains pending
-  # consumption at M4-C-S4 sub-phase close (future; not yet landed at this v3.1
-  # update). The M4_C_CLOSE pre-draft is independent of and parallel-safe with
-  # this M4-D forward-pointer plan: M4-C-S4 will seal M4_C_CLOSE before M4-D-S1
-  # opens. Field is rotated to PHASE_M4D_PLAN per AC.P7.4 brief instruction
-  # (single-value field; M4_C_CLOSE remains discoverable via the §3.2
-  # governance-state row in the M4-C close artifact pre-draft itself + via
-  # SESSION_LOG M4-C-P6-S4-PREDRAFT entry). Earlier prior: the M4-B
-  # pre-draft at 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md
-  # authored by M4-B-P4-S6-PREDRAFT (2026-05-02; commit 90508e5) as DRAFT and
-  # consumed/sealed at M4-B-S6-CLOSE (2026-05-03; commit 007c718) as CLOSED.
+  # Historical record (preserved): the M4_C_CLOSE_v1_0.md pre-draft at
+  # 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md authored by
+  # M4-C-P6-S4-PREDRAFT (2026-05-03; commit 0934efb) was CONSUMED + sealed at
+  # M4-C-S4-CLOSE (2026-05-02; this v3.2 update; status flipped DRAFT → CLOSED;
+  # all [PENDING-S*] tokens resolved). Earlier prior: the M4-B pre-draft at
+  # 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md authored by
+  # M4-B-P4-S6-PREDRAFT (2026-05-02; commit 90508e5) as DRAFT and consumed/
+  # sealed at M4-B-S6-CLOSE (2026-05-03; commit 007c718) as CLOSED. PHASE_M4D_PLAN
+  # remains the only currently-pending pre-draft.
 
   # ------------------------------------------------------------------
   # Parallel-session coordination notes (re-introduced at v3.1 — P7 governance aside)
   # ------------------------------------------------------------------
   parallel_session_notes: >
+    M4-C-S4-CLOSE (this update at v3.2) ran as a SINGLE-TRACK SUB-PHASE CLOSE-CLASS
+    session; no parallel slots open at S4 entry. The two preceding governance-aside
+    parallel slots (M4-C-P6-S4-PREDRAFT 2026-05-03 commit 0934efb authoring
+    M4_C_CLOSE pre-draft; M4-C-P7-M4D-ENTRY-PREP 2026-05-02 v3.1 authoring
+    PHASE_M4D_PLAN + NAP_M4_7_BRIEF) preceded this S4 close chronologically; their
+    pre-drafts were respectively CONSUMED at this S4 (M4_C_CLOSE sealed DRAFT →
+    CLOSED) and remain pending consumption at M4-D-S1 (PHASE_M4D_PLAN +
+    NAP_M4_7_BRIEF). drift_detector.py / schema_validator.py / mirror_enforcer.py
+    re-run at this S4 close per AC.S4.9 baseline target (108 violations).
+    === Predecessor parallel_session_notes block (P7 governance aside, v3.1) preserved for audit trail ===
     M4-C-P7-M4D-ENTRY-PREP (this update at v3.1) ran as a PARALLEL GOVERNANCE
     SLOT alongside M4-C-S4 (M4-C sub-phase close — not yet landed at this
     session's open). Same convention as M4-B-P5-M4C-ENTRY-PREP (parallel to

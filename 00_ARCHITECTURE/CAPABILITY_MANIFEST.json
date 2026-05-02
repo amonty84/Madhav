@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 135,
+  "entry_count": 137,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -2169,7 +2169,7 @@
     {
       "canonical_id": "SHADOW_MODE_PROTOCOL_v1_0",
       "path": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md",
-      "version": "1.0",
+      "version": "1.0.1",
       "status": "APPROVED",
       "layer": "L_GOVERNANCE",
       "expose_to_chat": false,
@@ -2453,10 +2453,38 @@
       "interface_version": "1.0",
       "phase": "M4-C",
       "description": "LL.7 Discovery Prior shadow register (M4-C-S3). CDLM literal msr_anchors-clique union over 81 cells = 136 unique edges (58 anchor signals). 37 training events; 9 held-out excluded. Density-weighted pair co-activations computed; threshold = raw N\u22653 (density-weighted reported alongside as informational, NOT the gate). Summary: 0 confirmed / 136 unconfirmed / 107 novel / 0 contradicted; 9867 noise pairs excluded; 243 emitted edges. Sanity-check gate sanity_anchor_novel_count=8 PASS \u2014 all 8 MED-tier LL.2 anchors carry cdlm_declared:false and support='novel'. Native-only mode \u2014 no shadow\u2192prod split per SHADOW_MODE_PROTOCOL \u00a72 LL.7 row."
+    },
+    {
+      "canonical_id": "M4_B_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "M4-B sub-phase sealing artifact (LL.1-LL.4 activation). PHASE_M4_PLAN AC.M4B.1-10 = 10/10 PASS; in-document IS.8(b) red-team PASS_WITH_FINDINGS; 0 CRITICAL/HIGH; 4 carry-forwards (F.RT.S6.M.1 mirror DISCHARGED at M4-C-S1; F.RT.S6.M.2 manifest-entry CLOSED at this M4-C-S4 registration; F.RT.S6.N.1 parallel-version-coordination open; F.RT.S6.I.1 outer-metadata doc-hint open). Successor sub-phase: M4-C."
+    },
+    {
+      "canonical_id": "M4_C_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "M4-C sub-phase sealing artifact (LL.5/LL.6/LL.7 native-only activation). PHASE_M4_PLAN AC.M4C.1-5 = 5/5 PASS; per-session brief ACs S1.1-S4.9 = 32/32 PASS; in-document IS.8(b) red-team PASS 5/5 axes 0 findings. LL.5 Dasha-Transit axis-weight modulator first shadow write (380 signals); LL.6 Temporal Density Modulator first shadow write (255/380 meaningful adjustment, H2 rejected); LL.7 Discovery Prior first SHADOW write per NAP.M4.6 OPTION_B_APPROVED_LITERAL_CONSTRUCTION + DECISION-2 (243 edges = 107 novel + 136 unconfirmed; sanity 8/8 novel PASS; CF.LL7.1 deferred). DECISION-1 R.LL5DESIGN.1 mechanism-naming propagated to MACRO_PLAN v2.1 + PHASE_M4C_PLAN v1.0.1 + SHADOW_MODE_PROTOCOL v1.0.1. Successor sub-phase: M4-D (M4 macro-phase close)."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02",
-  "manifest_version": "2.2",
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02",
+  "manifest_version": "2.3",
   "last_updated": "2026-05-02",
-  "last_updated_by": "M4-C-S3-LL7-DISCOVERY-PRIOR"
+  "last_updated_by": "M4-C-S4-CLOSE"
 }

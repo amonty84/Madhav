@@ -1,6 +1,6 @@
 ---
 artifact: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md
-version: "1.0"
+version: "1.0.1"
 status: APPROVED
 native_approval_point: NAP.M4.4 (§3 Promotion criteria — APPROVED 2026-05-02 as written)
 native_approved_on: 2026-05-02
@@ -36,7 +36,7 @@ dominant statistical risk of overfit (`MACRO_PLAN_v2_0.md §3.5.A Principle 1` �
 single native, overfit is the dominant statistical risk, not underfit"); shadow mode is
 the structural defense, not a procedural nicety. It governs LL.1 (signal weight
 calibration), LL.2 (graph edge weight learning), LL.3 (embedding space adaptation,
-where applicable), and LL.4 (prompt optimization) at M4-B; LL.5 (retrieval ranking),
+where applicable), and LL.4 (prompt optimization) at M4-B; LL.5 (Dasha-Transit axis-weight modulator),
 LL.6 (plan selection), and LL.7 (discovery prior shaping, native-only mode) at M4-C.
 LL.8 is at SCAFFOLD only at M4 and does not produce shadow weights until M5; LL.9 and
 LL.10 are out of scope for this protocol version (M5+ and M7+ activation respectively).
@@ -51,7 +51,7 @@ LL.10 are out of scope for this protocol version (M5+ and M7+ activation respect
 | LL.2 — Graph edge weight modulators | `06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/edge_modulators/shadow/` | `06_LEARNING_LAYER/GRAPH_EDGE_WEIGHT_LEARNING/edge_modulators/production/` | M4-B (after LL.1 stable) | Per-edge modulators keyed by edge ID (CGM edge or pair `(signal_a, signal_b)`). LL.1 stability gate is documented in SESSION_LOG before first LL.2 shadow write per `PHASE_M4_PLAN §3.2 AC.M4B.3`. |
 | LL.3 — Embedding space adaptation | n/a (document only at M4-B) | n/a (re-index requires native approval) | M4-B | LL.3 output at the first calibration cycle is `06_LEARNING_LAYER/EMBEDDING_SPACE_ADAPTATION/adaptation_notes_M4B_v1_0.md` — a structured recommendation document, not an adapter weight artifact. No shadow/production split applies until adapters are emitted (M5+). Embedding re-indexing is a separate native-approval point. |
 | LL.4 — Prompt optimization | n/a (document only at M4-B) | n/a (amendments ship via feature flag) | M4-B | LL.4 output at M4-B is `06_LEARNING_LAYER/PROMPT_OPTIMIZATION/prompt_opt_record_M4B_v1_0.md` recording proposed amendments. Amendment landing is gated by feature flag, not by shadow/production register split. The flag ramp is the analog of promotion. |
-| LL.5 — Retrieval ranking learning | `06_LEARNING_LAYER/RANKER_WEIGHTS/shadow/` | `06_LEARNING_LAYER/RANKER_WEIGHTS/production/` | M4-C | Ranker weights modulate retrieval pipeline ordering. Production register only after LL.3 stability gate + held-out probe passes per kill-switch §4.b. |
+| LL.5 — Dasha-Transit axis-weight modulator | `06_LEARNING_LAYER/RANKER_WEIGHTS/shadow/` | `06_LEARNING_LAYER/RANKER_WEIGHTS/production/` | M4-C | Ranker weights modulate retrieval pipeline ordering. Production register only after LL.3 stability gate + held-out probe passes per kill-switch §4.b. |
 | LL.6 — Plan selection learning | `06_LEARNING_LAYER/PLAN_SELECTION/shadow/` | `06_LEARNING_LAYER/PLAN_SELECTION/production/` | M4-C | Plan-selector weights keyed by `(query_type, chart_context_class)`. Production register only after LL.4 stability + held-out plan-selection probe per kill-switch §4.b. |
 | LL.7 — Discovery prior shaping (native-only mode) | `06_LEARNING_LAYER/discovery_priors/native_priors_M4C_v1_0.json` (single artifact) | n/a | M4-C | LL.7 native-only mode is a single native-approved artifact, not a shadow→production register split. The native IS the gate — every prior modification requires explicit native sign-off per `MACRO_PLAN §LL-Appendix.D` ownership rule. Cohort mode (M7) is out of scope here. |
 
@@ -277,6 +277,14 @@ M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions entry (2026-05-02).
 
 ## §9 — Changelog
 
+- **v1.0.1 (2026-05-02, M4-C-S4-CLOSE):** Surgical naming propagation per
+  DECISION-1 (R.LL5DESIGN.1 native arbitration 2026-05-02 — Option A).
+  LL.5 mechanism name updated from "Retrieval ranking learning" →
+  "Dasha-Transit axis-weight modulator" in two places: (a) §1 narrative
+  inline mention; (b) §2 per-mechanism shadow-register table LL.5 row.
+  No semantic protocol changes; promotion criteria, paths, kill-switch
+  rules, NAP.M4.4 binding scope unchanged. Status remains APPROVED
+  (NAP.M4.4 verdict scope unaffected — naming surface only).
 - **v1.0-DRAFT (2026-05-02, M4-A-S2-T3-SHADOW-PROTOCOL):** Initial DRAFT authored at
   M4-A close stretch; deliverable for AC.M4B.6 prerequisite + NAP.M4.4 native review.
   §3 promotion criteria PROPOSED — awaiting native approval before first M4-B weight

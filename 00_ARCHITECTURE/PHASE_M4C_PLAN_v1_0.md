@@ -1,7 +1,7 @@
 ---
 artifact: 00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md
 canonical_id: PHASE_M4C_PLAN
-version: "1.0"
+version: "1.0.1"
 status: DRAFT
 authored_by: M4-B-P5-M4C-ENTRY-PREP
 authored_on: 2026-05-02
@@ -9,7 +9,7 @@ sub_phase: M4-C — Discovery / Retrieval / Plan-Selection Activation (sub-phase
 macro_phase: M4 — Calibration + LEL Ground-Truth Spine
 parent_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md (M4-C row)
 authoritative_spec: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md §M4 + §LL-Appendix.A + §LL-Appendix.B (LL.5/LL.6/LL.7 rows)
-governs: M4-C entry through close — mechanism activation for LL.5 (retrieval ranking), LL.6 (plan selection), LL.7 (discovery prior shaping, native-only mode)
+governs: M4-C entry through close — mechanism activation for LL.5 (Dasha-Transit axis-weight modulator), LL.6 (plan selection), LL.7 (discovery prior shaping, native-only mode)
 inputs_from_M4B:
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json (30 promoted; weights_in_production_register=true)
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json (9,922 edges; LL.2 stability gate FULL_PASS)
@@ -58,7 +58,7 @@ slated `active` from M4 per `MACRO_PLAN §LL-Appendix.A`. M4-B activated LL.1–
 (per the M4-B sub-phase plan); M4-C activates LL.5–LL.7 (native-only mode for
 LL.7; cohort mode is M7+ scope).
 
-**LL.5 — Retrieval ranking learning.** Per `MACRO_PLAN §LL-Appendix.B LL.5`:
+**LL.5 — Dasha-Transit axis-weight modulator.** Per `MACRO_PLAN §LL-Appendix.B LL.5`:
 - **Input.** Query-result-relevance judgements (acharya-grade pseudo-clicks);
   ranker features derived from the post-M4-B retrieval pipeline; per-query
   Discovery-Engine outputs.
@@ -234,7 +234,7 @@ session decision. M4-C operates within the §3 envelope as approved.
 
 M4-C decomposes into four sequential-with-parallel-slot-opportunities sub-phases.
 
-### §3.1 — M4-C-S1: LL.5 Retrieval Ranking — first shadow write
+### §3.1 — M4-C-S1: LL.5 Dasha-Transit axis-weight modulator — first shadow write
 
 **Scope.**
 - Address LL.3 §5.1 fix-before-prod recommendations (R.LL3.1, R.LL3.2, R.LL3.3
@@ -535,6 +535,15 @@ envelope as approved.
 
 ## §7 — Changelog
 
+- **v1.0.1 (2026-05-02, M4-C-S4-CLOSE):** Surgical naming propagation per
+  DECISION-1 (R.LL5DESIGN.1 native arbitration 2026-05-02 — Option A).
+  LL.5 mechanism name updated from "Retrieval ranking learning" →
+  "Dasha-Transit axis-weight modulator" in three places: (a) frontmatter
+  `governs:` field; (b) §1.1 mechanism definition heading; (c) §3.1 S1
+  scope heading. No structural changes; no semantic plan changes; sub-phase
+  ordering, gates, ACs, parallel-slot rules unchanged. Status remains
+  DRAFT (M4-C-S4 close consumes plan; SUPERSEDED-AS-COMPLETE flip is M4-D
+  scope per the same convention as PHASE_B/M3 plan closes).
 - **v1.0 DRAFT (2026-05-02, M4-B-P5-M4C-ENTRY-PREP, parallel governance slot):**
   Initial DRAFT of M4-C execution plan. Authored as a forward pointer alongside
   M4-B-S6 (M4-B sub-phase close); not a substantive plan-activation. Plan

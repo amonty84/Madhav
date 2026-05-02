@@ -2,7 +2,7 @@
 document: MARSYS-JIS MACRO PLAN — STRATEGIC ARC
 project_name: Abhisek Mohanty — Jyotish Intelligence System (MARSYS-JIS)
 subject: Abhisek Mohanty (b. 1984-02-05, 10:43 IST, Bhubaneswar)
-version: 2.0
+version: 2.1
 status: CURRENT
 supersedes: MACRO_PLAN_v1_0.md (SUPERSEDED 2026-04-23 at Step 5 of the Step 0→15 governance rebuild)
 closed_on: 2026-04-23 (Step 5 of the Step 0→15 governance rebuild)
@@ -29,6 +29,20 @@ operational_rule: >
   For the canonical reading order across all governance surfaces, see
   CLAUDE.md §Mandatory reading before any work.
 changelog:
+  - v2.1 (2026-05-02, M4-C-S4-CLOSE): Surgical naming propagation per
+    DECISION-1 (R.LL5DESIGN.1 native arbitration 2026-05-02 — Option A
+    "rename mechanism in governance docs to match brief"). LL.5 mechanism
+    name updated from "Retrieval ranking learning" → "Dasha-Transit
+    axis-weight modulator" in three places: (a) §LL-Appendix.A activation
+    matrix LL.5 row; (b) §LL-Appendix.B per-mechanism heading LL.5;
+    (c) §LL-Appendix narrative inline mention. No structural changes; no
+    semantic protocol changes; substrate I/O / kill-switch / owner /
+    dependency declarations unchanged (mechanism still "ranker weights
+    consuming relevance judgements" — name now reflects the Dasha-vs-Transit
+    axis-attribution character of the M4-C-S1 first shadow write per
+    LL5_DASHA_TRANSIT_DESIGN_v1_0.md design). R.LL5DESIGN.1 CLOSED at this
+    propagation. Resolves the M4-C-S1 brief-vs-MACRO_PLAN naming divergence
+    flagged in LL5_DASHA_TRANSIT_DESIGN §6.5.
   - v2.0 CLOSED (2026-04-23, Step 5 of the Step 0→15 governance rebuild):
     Status flipped DRAFT_PENDING_REDTEAM → CURRENT. MACRO_PLAN_v1_0.md marked
     SUPERSEDED in the same atomic close. Cross-surface propagation executed
@@ -147,7 +161,7 @@ MP v2.0 is produced in Step 3 of the Step 0→15 governance rebuild, which close
 
 Progressive calibration is woven through M2–M10, not treated as a single phase. It sits in `06_LEARNING_LAYER/` as a sibling to the Discovery Layer. **Directory `06_LEARNING_LAYER/` is scaffold-pending as of v2.0 publication; the LL scaffold decision is Step 11 of the governance rebuild. Sessions reading v2.0 before Step 11 closes must not assume the directory exists.**
 
-Ten mechanisms, roughly in order of feasibility: signal weight calibration (LL.1), graph edge weight learning (LL.2), embedding space adaptation (LL.3), prompt optimization (LL.4), retrieval ranking learning (LL.5), plan selection learning (LL.6), discovery prior shaping (LL.7), Bayesian model updating (LL.8), counterfactual learning from misses (LL.9), LLM fine-tuning (LL.10). Per-mechanism specifications (input, output, activation phase, kill-switch, owner, inter-mechanism dependency, workstream interaction) are in the Learning Layer Specification Appendix immediately below. The first four become available during M2. The rest activate at M4, M5, M6, M7 respectively per the activation matrix in §LL-Appendix.A.
+Ten mechanisms, roughly in order of feasibility: signal weight calibration (LL.1), graph edge weight learning (LL.2), embedding space adaptation (LL.3), prompt optimization (LL.4), Dasha-Transit axis-weight modulator (LL.5), plan selection learning (LL.6), discovery prior shaping (LL.7), Bayesian model updating (LL.8), counterfactual learning from misses (LL.9), LLM fine-tuning (LL.10). Per-mechanism specifications (input, output, activation phase, kill-switch, owner, inter-mechanism dependency, workstream interaction) are in the Learning Layer Specification Appendix immediately below. The first four become available during M2. The rest activate at M4, M5, M6, M7 respectively per the activation matrix in §LL-Appendix.A.
 
 **Learning discipline — non-negotiable across all macro-phases:**
 
@@ -176,7 +190,7 @@ Cell values: `scaffold` = infrastructure built; not active. `active` = mechanism
 | LL.2 Graph edge weight learning | n/a | scaffold | scaffold | active | active | active | active | active | active | active |
 | LL.3 Embedding space adaptation | n/a | scaffold | scaffold | active | active | active | active | active | active | active |
 | LL.4 Prompt optimization | n/a | scaffold | scaffold | active | active | active | active | active | active | active |
-| LL.5 Retrieval ranking learning | n/a | scaffold | dormant | active | active | active | active | active | active | active |
+| LL.5 Dasha-Transit axis-weight modulator | n/a | scaffold | dormant | active | active | active | active | active | active | active |
 | LL.6 Plan selection learning | n/a | scaffold | dormant | active | active | active | active | active | active | active |
 | LL.7 Discovery prior shaping | n/a | scaffold | dormant | active | active | active | active | active | active | active |
 | LL.8 Bayesian model updating | n/a | n/a | n/a | scaffold | active | active | active | active | active | active |
@@ -229,7 +243,7 @@ Cell values: `scaffold` = infrastructure built; not active. `active` = mechanism
 - **Dependency on other LL.M:** none.
 - **Interaction with workstreams:** consumes CW.PPL outcome records tied to specific prompt versions.
 
-#### LL.5 — Retrieval ranking learning
+#### LL.5 — Dasha-Transit axis-weight modulator
 
 - **Input:** query-result-click (pseudo-click = acharya-grade relevance judgement); ranker features.
 - **Output:** Ranker weights in `06_LEARNING_LAYER/retrieval_rankers/` (scaffold-pending).
