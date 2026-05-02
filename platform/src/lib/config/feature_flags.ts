@@ -29,6 +29,9 @@ export type FeatureFlag =
   // BHISMA Stream 2 — LLM-first planner replaces classify+compose+plan_per_tool when ON.
   // Default OFF; old path remains reachable. Flip after smoke + post-BHISMA eval comparison.
   | 'LLM_FIRST_PLANNER_ENABLED'
+  // W2-CTX-ASSEMBLY: context assembly LLM step between retrieval and synthesis.
+  // Default OFF. Flip true after smoke verification. Model: STACK_ROUTING[stack].context_assembly.primary.
+  | 'CONTEXT_ASSEMBLY_ENABLED'
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   /** Enables the Trace Analytics tab and cross-query history aggregations. */
   | 'TRACE_ANALYTICS_ENABLED'
@@ -89,6 +92,8 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_DEGRADE_2_OF_3: false,
   // BHISMA Stream 2 — LLM-first planner. Default OFF; old path is the live one.
   LLM_FIRST_PLANNER_ENABLED: false,
+  // W2-CTX-ASSEMBLY — context assembly LLM step. Default OFF; flip after smoke.
+  CONTEXT_ASSEMBLY_ENABLED: false,
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   TRACE_ANALYTICS_ENABLED: true,
   COST_TRACKING_ENABLED: true,
