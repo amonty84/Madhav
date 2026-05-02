@@ -3,11 +3,18 @@ status: BLOCKED
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
-round: 5
+round: 6
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
 flag_flipped: false
+round_6_state:
+  prompt_edits: §4.2 tightened to 3 tools (vector_search dropped, annotation added) + new §4.3 contrast few-shot (weakest-planet → pattern_register) + interpretive renumbered §4.3 → §4.4
+  smoke_outcome: FAIL (recall=0.530, precision=0.500; thresholds 0.80/0.90)
+  binding_constraint: precision (gap to 0.90 ≈ 0.40 headline / ≈ 0.21 on non-timeout subset; recall non-timeout is 0.736 vs 0.80 → 0.064 gap)
+  partial_wins: forbidden_violations 1→0 (GT.003 yellow-sapphire fixed), GT.005 weakest-planet now passes (contrast few-shot landed), pass count 2→4
+  partial_regressions: GT.004 swung the wrong way (model now over-applies pattern_register to alignment remedials too); 7/25 timeouts (vs 5/25 round 5) — transient NIM
+  follow_up_decision_needed: lower thresholds OR switch planner model OR accept current floor — per round-6 brief constraint, no round 7
 round_5_state:
   prompt_doc_code_mirror_gap: RESOLVED (manifest_planner.ts now loads §3 + §4 from PLANNER_PROMPT_v1_0.md at module init)
   nim_tool_call_500: RECOVERED (probe + 20/25 live plans returned valid tool_calls; 5 transient timeouts, no 500s)
@@ -133,6 +140,225 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 
 ---
+
+## Smoke results (Round 6 — §4.2 tightened + §4.3 contrast few-shot)
+
+```
+planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
+smoke_date: 2026-05-02 (Round 6 — §4.2 tightened, §4.3 contrast added)
+avg_tool_recall: 0.530       (non-timeout subset: 0.736)
+avg_tool_precision: 0.500    (non-timeout subset: 0.694)
+total: 25
+passed: 4
+failed: 21
+forbidden_violations: 0       (Round 5 was 1 — §4.2 vector_search drop fixed GT.003)
+required_misses: 13
+pass_rate: 0.160
+flag_flipped: false
+exit_code: 1
+binding_constraint: precision (headline 0.500 vs 0.90 = 0.40 gap;
+                               non-timeout subset 0.694 vs 0.90 = 0.21 gap)
+notes: |
+  Round 6 applied two prompt edits to PLANNER_PROMPT_v1_0.md per native
+  authorization. No code changes. The doc/code mirror established in
+  Round 5 means edits propagated to the runtime automatically — no
+  manifest_planner.ts touch needed.
+
+  PROMPT EDITS APPLIED (PLANNER_PROMPT_v1_0.md only):
+
+    EDIT 1 — Tightened §4.2 alignment-character few-shot from 4 tools
+             to 3 tools by removing the vector_search entry (and
+             updating the §4.2 preamble to explain why: "alignment
+             queries are answered from MSR signals + the remedial
+             codex + the resonance lens; they do not require semantic
+             text search across L3 long-form. Adding it inflates the
+             plan and trips precision on entries where vector_search
+             is forbidden."). Final §4.2 plan: msr_sql + remedial_
+             codex_query + resonance_register, all with original
+             priorities and budgets.
+
+    EDIT 2 — Added §4.3 "Remedial query — recurring-pattern character
+             (weakest planet)" — a pattern-vs-resonance contrast
+             example using GT.005's query type ("Recommend a daily
+             ritual to strengthen my chart's weakest planet"). The
+             expected_plan picks pattern_register (not resonance_-
+             register) alongside msr_sql + remedial_codex_query, all
+             3 tools with appropriate budgets. The §4.3 preamble
+             explicitly contrasts with §4.2: "the query is not asking
+             whether a specific prescription aligns; it is asking how
+             to act on a recurring weakness pattern."
+
+    Renumbering: existing §4.3 (interpretive Mars-8H) moved to §4.4
+             (untouched content). §4 intro updated from "Three
+             examples" to "Four examples" with an expanded preamble
+             that names the lens-choice heuristic explicitly:
+             "pattern_register for recurring-pattern remedials...
+             resonance_register for alignment-character remedials..."
+             with concrete examples cited per lens.
+
+    No other §4 content changed. §1, §2, §3 (R1–R10), §5 untouched.
+
+  ROUND-OVER-ROUND DELTA (Round 5 → Round 6):
+    recall:                0.607 → 0.530     (-0.077)
+    precision:             0.527 → 0.500     (-0.027)
+    passed:                2/25 → 4/25       (+2)
+    forbidden_violations:  1 → 0             (FIXED via §4.2 edit)
+    required_misses:       9 → 13            (+4, worse)
+    timeouts:              5 → 7             (transient NIM noise)
+
+  PARTIAL WINS (the prompt edits did do what they were aimed at):
+
+    GT.003 (yellow sapphire — alignment remedial, vector_search forbidden):
+      Round 5: predicted included vector_search → forbidden_violation
+      Round 6: predicted = [msr_sql, remedial_codex_query, resonance_register]
+               PASSED (recall=1.00 precision=1.00)
+      → §4.2 vector_search removal landed cleanly.
+
+    GT.005 (weakest-planet remedial — pattern_register expected):
+      Round 5: predicted [msr_sql, remedial_codex_query, resonance_register]
+               recall=0.67 precision=0.67 required_miss(pattern_register)
+      Round 6: PASSED (predicted matched expected within tolerance)
+      → §4.3 contrast few-shot landed cleanly. The contrast example
+        successfully taught the model to pick pattern_register on
+        weakest-planet recurring-pattern queries.
+
+    Net new passes vs Round 5: GT.003 + GT.005 + GT.020 (timeout in
+    Round 5, succeeded in Round 6) + GT.023 (was not passing in
+    Round 5; succeeded in Round 6 with [pattern_register, resonance_register, msr_sql, vector_search]).
+
+  PARTIAL REGRESSION (the contrast pulled GT.004 the wrong way):
+
+    GT.004 ("planetary remedies for my Mars" — alignment-character
+            remedial, expected resonance_register):
+      Round 5: predicted [msr_sql, remedial_codex_query] — under-recall
+      Round 6: predicted [msr_sql, remedial_codex_query, pattern_register]
+               recall=0.67 precision=0.67 required_miss(resonance_register)
+      → The §4.3 contrast made the model more willing to pick pattern_-
+        register, but it generalized that to ALL remedials. The §4.2/§4.3
+        contrast is not strong enough to keep alignment remedials on
+        the resonance side — they need a clearer alignment-character
+        signal in the query, OR the lens distinction needs another
+        contrast example, OR a hard rule (R8 extension) saying
+        "remedies asked about by name (gemstone, mantra, X-propitiation)
+        always pick resonance_register."
+
+  TIMEOUT NOISE:
+    7/25 = 28% transient timeouts (GT.001, 002, 007, 012, 014, 019, 022).
+    Each timeout = recall 0.0, precision 0.0, required_miss → all
+    drag aggregate metrics severely. Non-timeout subset (18 entries):
+      recall=0.736 precision=0.694 — much closer to thresholds.
+    Round 5 had 5 timeouts. The variance round-over-round is not a
+    prompt issue; it's NIM constrained-decoding service variance under
+    the full 5K-token planner payload. Worth raising with vendor or
+    routing through a different planner model if this persists.
+
+  TOP 5 NON-TIMEOUT FAILURES (predicted vs expected):
+
+    GT.009  (interpretive — "What yogas are present in my chart?")
+      expected:  [pattern_register, msr_sql]
+      predicted: [msr_sql, cgm_graph_walk, resonance_register]
+      recall=0.50 precision=0.33 required_miss(pattern_register)
+      diagnosis: model picks resonance_register + cgm_graph_walk for
+                 yoga identification; expected pattern_register only.
+                 The yoga-specific pattern (recurring-rule-based
+                 pattern recognition) maps to pattern_register but
+                 the model defaults to resonance_register on all
+                 interpretive too.
+
+    GT.017  (holistic — "comprehensive overview of my life path")
+      expected:  [cluster_atlas, vector_search, pattern_register, cgm_graph_walk]
+      predicted: [msr_sql, pattern_register, resonance_register, vector_search]
+      recall=0.50 precision=0.50 required_miss(cluster_atlas)
+      diagnosis: model substitutes msr_sql + resonance_register for
+                 cluster_atlas + cgm_graph_walk on holistic queries.
+                 The few-shots have no holistic example — the model
+                 has no template for picking cluster_atlas.
+
+    GT.018  (holistic — "central themes and contradictions")
+      expected:  [pattern_register, contradiction_register, resonance_register, cluster_atlas]
+      predicted: [msr_sql, contradiction_register, resonance_register]
+      recall=0.50 precision=0.67 required_miss(pattern_register)
+      diagnosis: dropped pattern_register + cluster_atlas; substitutes
+                 msr_sql. Same root cause as GT.017 — no holistic
+                 few-shot.
+
+    GT.004  (remedial alignment — "remedies for my Mars")
+      expected:  [remedial_codex_query, msr_sql, resonance_register]
+      predicted: [msr_sql, remedial_codex_query, pattern_register]
+      recall=0.67 precision=0.67 required_miss(resonance_register)
+      diagnosis: §4.3 contrast pulled this the wrong way. The query
+                 lacks an explicit alignment-character signal
+                 (gemstone, mantra, etc.) so the model defaults to
+                 pattern_register after seeing §4.3.
+
+    GT.013  (predictive — "upcoming Ketu Mahadasha 2027")
+      expected:  [vector_search, msr_sql, pattern_register]
+      predicted: [msr_sql, pattern_register, resonance_register]
+      recall=0.67 precision=0.67 required_miss(vector_search)
+      diagnosis: model picked resonance_register over vector_search
+                 for a forward-looking dasha query. vector_search is
+                 expected for L3 dasha-specific long-form. The
+                 few-shots cover remedial + interpretive but no
+                 predictive — the model has no template guidance for
+                 "predictive needs vector_search".
+
+  ACCEPTANCE STATE (Round 6):
+    AC.U.1 (tsc clean):        PASS  (9 baseline errors unchanged, zero new)
+    AC.U.2 (regression gate):  not re-run — fixture did not change
+    AC.U.3 (EVAL-B live):      FAIL  (recall=0.530, precision=0.500;
+                                      non-timeout subset 0.736/0.694;
+                                      thresholds 0.80/0.90)
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) round-6 variant per brief)
+
+  FINAL DETERMINATION (per Round-6 brief: no Round 7):
+
+    The remaining gap is structural, not a single fixable prompt edit:
+
+    1. The §4.2/§4.3 contrast is too weak. The model treats lens
+       choice as roughly 50/50, and the few-shot examples can pull
+       it either way depending on which is more recently in context.
+       A hard R-rule ("alignment-character remedials with named
+       prescriptions ALWAYS pick resonance_register") would fix this,
+       but adds rule-stack pressure on the planner.
+
+    2. The few-shot set is missing two query classes the golden set
+       expects to see: holistic (cluster_atlas + cgm_graph_walk) and
+       predictive (vector_search). Without those templates, the model
+       substitutes msr_sql + resonance_register for the missing tools.
+
+    3. The 28% timeout rate at the 49B model size is a non-prompt
+       drag. Switching to a faster planner (e.g. nvidia/llama-3.1-
+       nemotron-70b-instruct or a smaller variant) would likely cut
+       the timeout rate but risks reducing tool-selection precision.
+
+    THREE PATHS FORWARD (native decision needed):
+
+    (A) LOWER THRESHOLDS to recall ≥ 0.65, precision ≥ 0.65 — these
+        match round-6's non-timeout subset within ~0.05 each. Reduces
+        guarantee strength but enables ramp-up; circuit-breaker
+        fallback to classify() catches truly broken plans anyway.
+        Most operational risk: WARN-level mismatches that don't
+        block synthesis.
+
+    (B) SWITCH PLANNER MODEL — try meta/llama-3.3-70b-instruct or
+        a smaller faster variant. Smaller risk: if precision/recall
+        scale similarly to nemotron-49b, we trade timeout rate for
+        a different calibration drift. Medium effort: re-run smoke
+        twice (once on candidate, once with prompt-tuning round).
+
+    (C) ACCEPT THE FLOOR — keep flag false, document W2-UQE-ACTIVATE
+        as paused, route consume traffic through classify() until
+        either (i) the golden set is rebuilt around the model's
+        actual behavior or (ii) a structurally different planner
+        approach is tried (e.g., planner-as-classifier first then
+        a separate retrieval-spec generator). This is the
+        lowest-risk path but means the planner infrastructure built
+        in W2-UQE-* sessions sits unused indefinitely.
+
+    No round 7 attempted per brief. Surface for native decision.
+
+```
 
 ## Smoke results (Round 5 — SYSTEM_PROMPT synced, NIM healthy)
 

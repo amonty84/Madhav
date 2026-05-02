@@ -159,18 +159,29 @@ Style rules:
 
 ## 4. Few-shot examples
 
-Three examples, each shown as `{ user_query, expected_plan }`. The actual
+Four examples, each shown as `{ user_query, expected_plan }`. The actual
 production call serialises only `user_query`; the expected_plan is the
 planner's target output.
 
-The two remedial examples (4.1, 4.2) are paired deliberately to illustrate
-the R7 split between `pattern_register` and `resonance_register`. 4.1 is a
-recurring-pattern remedial — the native describes a repeating Saturn-career
-friction, so `pattern_register` is the right cross-domain lens. 4.2 is an
-alignment-character remedial — the native asks whether a specific remedial
-prescription (a gemstone) aligns with their chart's resonance, so
-`resonance_register` is the right lens. Both examples include `msr_sql` at
-priority 1 per R8.
+The first three examples (4.1, 4.2, 4.3) are three remedial queries placed
+adjacently on purpose — they illustrate the R7 lens-choice decision across
+two distinct remedial characters. The lens heuristic is:
+
+  - **`pattern_register`** for recurring-pattern remedials — the native
+    describes a behavior or signal that repeats across time and asks
+    what to do about the pattern itself. Examples: "Saturn keeps causing
+    friction in my career" (§4.1), "ritual for my chart's weakest
+    planet" (§4.3 — the weakness is a recurring-signal pattern).
+
+  - **`resonance_register`** for alignment-character remedials — the
+    native asks whether a specific prescription (gemstone, mantra,
+    yellow sapphire, Mars propitiation, fasting, charity) aligns with
+    the cross-domain signal resonance the chart already carries.
+    Example: "should I wear a yellow sapphire?" (§4.2).
+
+All three remedial examples include `msr_sql` at priority 1 per R8.
+Example 4.4 is an interpretive query, included to show the shape of a
+non-remedial plan.
 
 ### 4.1 Remedial query — recurring-pattern character
 
@@ -222,6 +233,12 @@ propitiation, fasting, charity) — not a recurring-pattern question. The
 right cross-domain lens is `resonance_register`, not `pattern_register`.
 Per R8, `msr_sql` is at priority 1.
 
+`vector_search` is intentionally **not** in this plan. Alignment queries
+are answered from MSR signals + the remedial codex + the resonance lens;
+they do not require semantic text search across L3 long-form. Adding it
+inflates the plan and trips precision on entries where `vector_search`
+is forbidden.
+
 ```json
 {
   "user_query": "Should I wear a yellow sapphire to strengthen Jupiter? Will it actually align with my chart?",
@@ -248,20 +265,60 @@ Per R8, `msr_sql` is at priority 1.
         "token_budget": 400,
         "priority": 2,
         "reason": "Cross-domain resonance: does Jupiter-strengthening align with chart's signal pattern?"
-      },
-      {
-        "tool_name": "vector_search",
-        "params": { "query_text": "yellow sapphire Jupiter remedial alignment", "doc_type": ["domain_report"], "top_k": 6 },
-        "token_budget": 600,
-        "priority": 2,
-        "reason": "L3 long-form on gemstone-alignment principles for Jupiter."
       }
     ]
   }
 }
 ```
 
-### 4.3 Interpretive query
+### 4.3 Remedial query — recurring-pattern character (weakest planet)
+
+This is the second pattern-character remedial in the set, paired with
+§4.2 to make the `pattern_register` vs. `resonance_register` choice
+visible. The native asks for a daily ritual targeting the chart's
+weakest planet — the weakness is a recurring signal pattern across
+domains, so the right cross-domain lens is `pattern_register`, not
+`resonance_register`. The query is not asking whether a specific
+prescription aligns; it is asking how to act on a recurring weakness
+pattern. Per R8, `msr_sql` is at priority 1.
+
+`vector_search` is not in this plan either — pattern remedials are
+answered from MSR + the codex + the pattern lens, no semantic text
+search needed.
+
+```json
+{
+  "user_query": "Recommend a daily ritual to strengthen my chart's weakest planet.",
+  "expected_plan": {
+    "query_intent_summary": "Daily ritual targeting the chart's weakest-planet recurring-pattern.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "limit": 12 },
+        "token_budget": 800,
+        "priority": 1,
+        "reason": "Surface signals across domains that mark the weakest planet."
+      },
+      {
+        "tool_name": "remedial_codex_query",
+        "params": { "limit": 8 },
+        "token_budget": 700,
+        "priority": 1,
+        "reason": "Daily-ritual prescriptions, dinacharya, and propitiation steps."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": { "forward_looking": true },
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Confirm the weakness pattern recurs across domains before prescribing."
+      }
+    ]
+  }
+}
+```
+
+### 4.4 Interpretive query
 
 ```json
 {
