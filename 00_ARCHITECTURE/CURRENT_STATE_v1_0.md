@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 2.4
+version: 2.5
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,73 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v2.5 (2026-05-02, M4-B-P5-M4C-ENTRY-PREP): Parallel-slot governance-aside session.
+    Authored as a forward-pointer slot alongside (and before) M4-B-S6 (M4-B sub-phase
+    close). At my read time the file was at v2.4 (set by M4-B-P4-S6-PREDRAFT); v2.5
+    is the next slot per the brief hard_constraint operational rule "check the live
+    file before writing; take whatever is current + 1." S6 has not yet landed at the
+    moment of this close (last commit b388350 is unrelated W7 W2-UQE work; latest
+    M4-B commit is S5 b508d6e); when S6 lands it takes v2.6 (or higher) per the
+    same current+1 convention.
+    parallel_session_notes: This session does NOT alter canonical state pointers
+    (`last_session_id`, `next_session_objective`, `active_phase_plan_sub_phase`,
+    `red_team_counter`, `file_updated_at`, `file_updated_by_session` all remain as
+    set by predecessor M4-B-S5-NAP-M45-EXECUTE at v2.3 and preserved by P4 at v2.4).
+    The brief AC.P5.4 hard_constraint explicitly stated "session_notes: parallel
+    governance slot; canonical state pointers (last_session_id, next_session_objective)
+    UNCHANGED — S6 owns those" — that constraint is honored.
+    Two deliverables (within may_touch only):
+    (1) `00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md` v1.0 DRAFT — M4-C execution plan.
+        7 sections: §1 Scope (LL.5 retrieval ranking + LL.6 plan selection + LL.7
+        discovery prior native-only mode; M4-B inputs from S5 promotion + LL.2
+        shadow + LL.4 priors + LL3 recommendations; outputs as shadow registers
+        for LL.5/LL.6 + single artifact for LL.7; out-of-scope explicitly named
+        for LL.2 per-edge promotion + LL.3 adapters + LL.4 prompt refits + LL.7
+        cohort + LL.8 + M4 macro-phase close). §2 Entry gates (M4-B closed via
+        M4_B_CLOSE_v1_0.md sealed; NAP.M4.6 issued for LL.7 sub-phase only;
+        Gemini reachability re-check per R.LL1TPA.1 carry-forward; SHADOW_MODE_
+        PROTOCOL §3 unchanged). §3 Sub-phase plan (S1 LL.5 first shadow write;
+        S2 LL.6 first shadow write; S3 NAP.M4.6 + LL.7 first artifact; S4
+        sub-phase close + red-team). §4 Parallel-slot opportunities (LL.5 ⊥ LL.6
+        parallel-safe; LL.7 sequenced after; S4 not parallel-safe). §5 Known
+        residuals entering M4-C from M4-B (KR.M4A.RT.LOW.1 OPEN-carry-forward;
+        GAP.M4A.04 PARTIAL_CLOSE deferred; R.LL1TPA.1 OPEN-carry-forward to M4-C
+        entry; LL.3 §5.1 R.LL3.1/2/3 fix-before-prod at S1; LL.4 §5.4 date-precision
+        global modifier informational; per-edge LL.2 promotion deferred; M4-D
+        deferrals; M3 carry-throughs). §6 NAP gates (NAP.M4.6 at S3 entry;
+        NAP.M4.7 at M4-D, NOT M4-C scope). §7 Changelog.
+    (2) `00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md` v1.0 PENDING_NATIVE_DECISION
+        — decision brief for native. 5 sections: §1 What NAP.M4.6 decides
+        (context: LL.7 native-only mode at M4-C; three options A/B/C presented
+        structurally — A pure empirical N≥5 no classical seed; B classical-seeded
+        CDLM-as-prior with confirmed/contradicted/classical_only/novel_candidate
+        four-class; C discovery-first all co-activation above threshold with
+        post-hoc CDLM cross-reference column). §2 Recommendation: Option B,
+        grounded in four axes (discipline rule #1 priors-locked; n=1 risk + Pancha-
+        MP clique sample shape; LL3 §4 finding 8 MED-tier CDLM edges already
+        empirically confirmed; LL4 §3.1 classical_rule basis at 1.0 calibration).
+        Trade-off acknowledgment for higher implementation cost. Reasoning against
+        Options A + C at native-only n=37 scale. §3 Decision template (Option A/B/C
+        verdict ≤200 char rationale; hybrid acceptable; rejection re-opens). §4
+        Downstream consequences per option (algorithm at S3, expected output
+        shape, S3 effort estimate 1-2 sessions, M4-D/M5 implications). §5
+        Changelog.
+    Read-only consumed: MACRO_PLAN §M4 + §LL-Appendix.A + §LL-Appendix.B (LL.5/
+    LL.6/LL.7 rows); LL3_DOMAIN_COHERENCE §5 §4 §3.2; LL4_PREDICTION_PRIOR §5;
+    SHADOW_MODE_PROTOCOL §3 + §2 LL.7 row; PHASE_M4_PLAN.
+    `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v2.4 → v2.5 (this update; canonical
+    state pointers UNCHANGED per AC.P5.4 hard_constraint).
+    `00_ARCHITECTURE/SESSION_LOG.md` — entry appended.
+    Out-of-scope (per brief must_not_touch): `06_LEARNING_LAYER/**`,
+    `01_FACTS_LAYER/**`, `025_HOLISTIC_SYNTHESIS/**`,
+    `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` (S6 owns), `.geminirules`,
+    `.gemini/project_state.md`, `platform/**`. Scope honored.
+    No red-team this session (governance-aside class — forward-pointer plan +
+    decision-pending brief; per ONGOING_HYGIENE_POLICIES §G governance-aside
+    sessions do not increment counter). red_team_counter unchanged at 1 (set by
+    S5 at v2.3; preserved at v2.4 by P4; preserved at v2.5 by this session).
+    Mirror MP.1/MP.2 not propagated (governance-aside; carry-forward to next
+    substantive close that already touches .geminirules / .gemini/project_state.md).
   - v2.4 (2026-05-02, M4-B-P4-S6-PREDRAFT): Parallel-slot governance-aside session
     running alongside M4-B-S5 (NAP.M4.5 native pass_2 trigger) and M4-B-P3-MIRROR-MANIFEST.
     Per brief AC.P4.3 prescription "S5→v2.1, P3→v2.2, this→v2.3" — but coordination
