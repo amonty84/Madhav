@@ -18115,3 +18115,171 @@ session_close:
 **S1.4 / S1.5 / S1.6 / S1.7 — remaining four per-provider adapters (parallel-safe)** and **S1.9 — Frontend scaffold** per OBSERVATORY_PLAN §5.1. Once all five adapters (S1.4–S1.8) merge, **S2.x reconciliation work** unblocks. **S2.5 (DeepSeek + NIM manual-reconciliation UI)** specifically depends on this S1.8 close + S1.7 close. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-8-nim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_12_EVENT_EXPLORER_SIDE_PANEL — 2026-05-03
+
+Phase O sub-phase O.1, drill-down session (S1.12). Built the Observatory event explorer (virtualized table + cursor pagination + column visibility + sortable headers + status badges) and the slide-in 3-tab side panel (Prompt / Response / Meta + conversation-thread mini-list). UI-only session, parallel-safe with S1.10 (KPIs + filters) and S1.11 (charts). Worktree: `feature/phase-o-observatory-ustad-s1-12-events` cut from umbrella `feature/phase-o-observatory` at e0ad911.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_12_EVENT_EXPLORER_SIDE_PANEL
+  cowork_thread_name: "ustad-s1-12-events"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.1.S1.12
+  predecessor_session: USTAD_S1_8_NIM_PROVIDER_ADAPTER
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: platform/src/lib/components/observatory/Layout.tsx
+      fingerprint_sha256: 38925f0ed2c30ab1538c8ba0cee2302f5a7e79148d4036cc09efab9ef2cae71e
+    - file: platform/src/lib/api-clients/observatory.ts
+      fingerprint_sha256: 103b69abfc2a71e72b4ab7906bb0eabfcd190be57879e393701b944afe09663a
+    - file: platform/src/lib/observatory/types.ts
+      fingerprint_sha256: 4f166969b7d3a32b9d2c5b9a85c3f32262fdab08934a60c6515836852a783765
+  declared_scope:
+    may_touch:
+      - platform/src/lib/components/observatory/events/**
+      - platform/src/lib/components/observatory/__tests__/events/**
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/components/observatory/kpi/**
+      - platform/src/lib/components/observatory/filters/**
+      - platform/src/lib/components/observatory/charts/**
+      - platform/src/lib/components/observatory/Layout.tsx
+      - platform/src/app/api/**
+      - platform/src/lib/db/**
+      - platform/migrations/**
+      - 00_ARCHITECTURE/** (except SESSION_LOG.md append at close)
+      - .geminirules
+      - .gemini/project_state.md
+  red_team_due: false
+  notes: "S1.12 — Event explorer + side panel. Brief is governing scope (overrides plan's older DrillDown.tsx/EventDetail.tsx filenames in OBSERVATORY_PLAN §5.1)."
+```
+
+### Body — substantive deliverables
+
+**W1. EventTable** (`platform/src/lib/components/observatory/events/EventTable.tsx`, sha256 `0e3ab753c906d63d985ae66666e670219fe5b439ab735ebd74641e4bff1a9f7c`). Virtualized scrollable table consuming `getEvents()` from `@/lib/api-clients/observatory`. Default visible columns: timestamp, conversation_name, provider, model, pipeline_stage, input_tokens, output_tokens, cost_usd, latency_ms, status. All toggleable columns include the four extras prompt_id, user_id, cache_tokens (sum of cache_read + cache_write), error_code. Sortable client-side over loaded rows: timestamp (desc default), cost_usd, latency_ms — keyset cursor pagination is timestamp-ordered server-side, so client-side re-sort is over the loaded buffer. Status rendered via `StatusBadge` with green/red/amber tones. Cost formatted to 6 decimal places. Cursor pagination via `Load more` button; total count surfaced as `Showing N of M`. Row click invokes the parent's `onRowClick` handler.
+
+**W2. VirtualList** (`platform/src/lib/components/observatory/events/VirtualList.tsx`, sha256 `5878241291c338d70f465fe9738350e47f462d7ee603e237687bb971323405ed`). Dependency-free fixed-row-height windowing (no `react-virtual` / `@tanstack/react-virtual` dep added — `package.json` carried no existing virtualization library, and the inline windowing approach keeps the bundle and surface narrow). Computes `startIndex` from `scrollTop / rowHeight`, renders `[startIndex, startIndex + visibleCount + overscan*2)` rows absolutely-positioned inside a full-height spacer. Tested with viewport 200px + rowHeight 40 → 8 rows in DOM out of 20 fixture rows.
+
+**W3. EventSidePanel** (`platform/src/lib/components/observatory/events/EventSidePanel.tsx`, sha256 `757f07bd364d787e1a19786aaaffff52db5f314c0cc9a65ce436a7a1ed7fc15f`). Slide-in panel (right edge, max-w-2xl). Fetches the full event via `getEvent(id)` on open and the conversation-thread siblings via `getEvents({ conversation_id, limit: 50 })`. Three tabs:
+- **Prompt**: `prompt_text` in a `<pre>`, `system_prompt` (collapsible), `parameters` (collapsible JSON tree).
+- **Response**: `response_text`, status badge, optional `error_code`.
+- **Meta**: provider_request_id, started_at, finished_at, latency_ms, cost_usd, pricing_version_id, formatted feature_flag_state JSON.
+
+Per the brief's OD.S1.3.1 disposition (no `raw_payload` table created in S1.3), the Meta tab carries the standardized note: *"Raw provider payload not captured for this event (super-admin note: capture can be enabled in a future release)."* No separate raw-payload tab.
+
+Conversation-thread mini-list at panel bottom: siblings ordered by `started_at` ASC, each rendered as `provider/model • cost • latency`, with the active event marked `aria-current` and disabled. Clicking a sibling re-targets the panel via the parent's `onSelectEvent` callback.
+
+**W4. Column visibility** (`useColumnVisibility.ts`, sha256 `2b331e9e539ac85ea06fe2e29a7e7fd093a6656697e98c13382ed8f0f385782e`). `useState` seeded from `localStorage.getItem("observatory_event_columns")`; an effect persists subsequent state changes. Reset action restores `DEFAULT_VISIBLE_COLUMNS`. Storage value is JSON-validated on read and falls back to defaults on parse error or unknown column ids.
+
+**W5. Status badges** (`StatusBadge.tsx`, sha256 `f3ac420b40cf4556de785e1c8d15823feab8cb87ff91d7affd29100fd7b604dd`). Tailwind tone map: success → green-100/800/300, error → red-100/800/300, timeout → amber-100/800/300, fallback → gray. Rendered with `data-status` attribute for test selection.
+
+**W6. Format helpers + types** (`format.ts`, `types.ts`, `index.ts`, `fixtures.ts`). Cell formatters factored out for testability; `EventColumnId` enum + `COLUMN_LABELS` map drives header rendering and column-toggle UI; localStorage key constant exported as `COLUMN_STORAGE_KEY`.
+
+### Tests (6 total, all pass)
+
+`vitest run src/lib/components/observatory/__tests__/events/`:
+
+1. **EventTable virtualization** — 20 fixture rows in viewport 200/40 → only ~8 rows in DOM (assertion: `< 20`). PASS.
+2. **EventTable load-more** — first page returns `cursor-2`, second click triggers fetcher with `cursor: 'cursor-2'`, count goes `Showing 10 of 20` → `Showing 20 of 20`. PASS.
+3. **EventTable column visibility** — toggle `model` off → header removed from DOM; localStorage receives the new visible set; remount with same fixture → `model` still hidden. PASS.
+4. **EventTable status badges** — three rows with status `success`/`error`/`timeout` render badges with class containing `green`/`red`/`amber` respectively. PASS.
+5. **EventSidePanel tab switching** — Prompt tab default; switching to Response renders `response_text` and removes `prompt_text`; switching to Meta surfaces `provider_request_id` and the raw-payload note. PASS.
+6. **EventSidePanel conversation-thread navigation** — 4 siblings rendered; clicking sibling 3 re-targets the panel (`event-side-panel-id` updates to `evt-sibling-3`, prompt text updates to `SIBLING-3-PROMPT`, fetchEvent called for both ids). PASS.
+
+**Test results.** `vitest run src/lib/components/observatory/`: **3 files, 11 tests passed (5 pre-existing AuthGate + 6 new), 0 failed**.
+
+**Typecheck.** `tsc --noEmit -p tsconfig.json` (filtered to new paths): zero TS errors in `platform/src/lib/components/observatory/events/` and `platform/src/lib/components/observatory/__tests__/events/`.
+
+**Lint.** `eslint src/lib/components/observatory/events/ src/lib/components/observatory/__tests__/events/`: 0 errors, 0 warnings. Two `react-hooks/set-state-in-effect` directives applied at known fetch-on-mount sites (matching the repo-wide pattern in `ChatShell.tsx`, `CommandPalette.tsx`, `WelcomeGreeting.tsx`).
+
+### Governance
+
+- **schema_validator.py** (full corpus): 109 violations, exit 2. Same shape as the trajectory: 107 at S1.8 close, +2 from S1.10 + S1.11 merges since (KPI + Filters / Charts), 0 from this session. **0 violations name a file in `events/` scope**, 0 HIGH/CRITICAL introduced. Acceptable per ONGOING_HYGIENE_POLICIES §F + brief AC ("schema_validator.py exits 0 or exit 2; no new HIGH/CRITICAL").
+- **mirror_enforcer.py**: 0 findings; exit 0; 9 pairs checked; 9 passed; 2 declared claude_only. **PASS.**
+- **drift_detector.py**: 327 findings; exit 2. Same 327 carry-forward as S0.1/S1.1/S1.2/S1.8. 0 introduced by this session.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_12_EVENT_EXPLORER_SIDE_PANEL
+  closed_at: 2026-05-03T03:58:00+05:30
+  files_touched:
+    - {path: platform/src/lib/components/observatory/events/EventTable.tsx, mutation: created, sha256_after: 0e3ab753c906d63d985ae66666e670219fe5b439ab735ebd74641e4bff1a9f7c, scope: in}
+    - {path: platform/src/lib/components/observatory/events/EventSidePanel.tsx, mutation: created, sha256_after: 757f07bd364d787e1a19786aaaffff52db5f314c0cc9a65ce436a7a1ed7fc15f, scope: in}
+    - {path: platform/src/lib/components/observatory/events/VirtualList.tsx, mutation: created, sha256_after: 5878241291c338d70f465fe9738350e47f462d7ee603e237687bb971323405ed, scope: in}
+    - {path: platform/src/lib/components/observatory/events/StatusBadge.tsx, mutation: created, sha256_after: f3ac420b40cf4556de785e1c8d15823feab8cb87ff91d7affd29100fd7b604dd, scope: in}
+    - {path: platform/src/lib/components/observatory/events/useColumnVisibility.ts, mutation: created, sha256_after: 2b331e9e539ac85ea06fe2e29a7e7fd093a6656697e98c13382ed8f0f385782e, scope: in}
+    - {path: platform/src/lib/components/observatory/events/format.ts, mutation: created, sha256_after: 944d6177885875eea3ad509a44c9cd0c054805b4ecccf3845c72bf897e54b64a, scope: in}
+    - {path: platform/src/lib/components/observatory/events/types.ts, mutation: created, sha256_after: 613c70eae78f977d4bf4378bd473a40bf8da9c6f796b534e1e252768abe022eb, scope: in}
+    - {path: platform/src/lib/components/observatory/events/index.ts, mutation: created, sha256_after: 0ca1f2fe6fde2984c0b0e51d28efcec43d1fd1f994f60da07c8474a41725a5f5, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/events/EventTable.test.tsx, mutation: created, sha256_after: 1cd66878b6d669f3ee01b58fa38a70f058293c77dec22fd313a8be4fe7caa850, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/events/EventSidePanel.test.tsx, mutation: created, sha256_after: 5c7fac61cdfe7c66b1aa90075adb2d0589f6aa047910b1e405001d51a30acb19, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/events/fixtures.ts, mutation: created, sha256_after: 4b714e679b89ac00f31eed89b25a8da10d66b52d0d670c32355daabf153d274f, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_12 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Implementation-class session under mirror-update funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.12 (UI implementation)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Same 327 carry-forward as S0.1/S1.1/S1.2/S1.8. NONE introduced by this S1.12 session."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 109
+    classification: at_baseline_target
+    rationale: "+2 vs S1.8's 107 from S1.10/S1.11 merges; 0 introduced by this S1.12 session; 0 violations name a file in events/ scope; 0 HIGH/CRITICAL introduced."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: 0
+    desync_pairs: []
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.12 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8 precedent."
+  close_criteria_met: true
+  unblocks: "S1.13 (Wiring + e2e integration) — depends on S1.10 + S1.11 + S1.12 all closed; with this S1.12 close, the trio is now closed and S1.13 unblocks. O.1 close (after S1.13) follows. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-12-events
+    cut_from_commit: e0ad911
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.13 — Wiring + e2e integration** per OBSERVATORY_PLAN §5.1. With S1.10 (KPIs + Filters), S1.11 (Charts), and S1.12 (Event explorer + Side panel) all closed, the Observatory page can now be wired end-to-end (FiltersBar → URL state → KPI tiles + charts + event table + side panel; e2e test against backend). After S1.13: Phase O sub-phase O.1 close (IS.8(b)-class red-team) per §5.1 close criteria. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
