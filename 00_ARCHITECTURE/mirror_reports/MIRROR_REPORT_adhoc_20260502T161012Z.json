@@ -1,0 +1,13 @@
+{
+  "mirror_report": {
+    "session_id": "adhoc",
+    "run_at": "2026-05-02T16:10:12.731204+00:00",
+    "pairs_checked": 9,
+    "pairs_passed": 9,
+    "pairs_failed": 0,
+    "pairs_claude_only": 2,
+    "pairs_gemini_only": 0,
+    "findings": [],
+    "exit_code": 0
+  }
+}

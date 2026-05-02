@@ -16519,10 +16519,13 @@ session_close:
     - {path: .geminirules, mutation: modified, sha256_after: 91ce9b454a92b3b1b1f06c5920f5774baf0eba13374d0bbc527e74a1262ef11e, scope: in, change: "§E expanded with Phase O block (MP.1 + MP.9 mirror)"}
     - {path: .gemini/project_state.md, mutation: modified, sha256_after: b629392ac120ecb4ff74210b6cb25aa48a3998af849d5a58013650c07fff5004, scope: in, change: "Concurrent Workstream — Phase O Observatory section added (MP.2 + MP.9 mirror)"}
     - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
-    - {path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.{md,json}, mutation: created, scope: in}
-    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.{md,json}, mutation: created, scope: in}
-    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP_*.md, mutation: created, scope: in}
-    - {path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.{md,json}, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T161012Z.json, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_adhoc_20260502T161009Z.json, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/schema_reports/SCHEMA_REPORT_PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP_v1_0.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T161012Z.json, mutation: created, scope: in}
   registry_updates_made:
     canonical_artifacts:
       - {canonical_id: OBSERVATORY_PLAN_v1_0, change: registered_new, layer: L_GOVERNANCE, version: 1.0.0, status: CURRENT}
@@ -16607,5 +16610,5 @@ Branch: `feature/phase-o-observatory/s1-1-schema` (sub-branch under umbrella) pe
 
 Concurrently: M5-S1 (main-thread M5 macro-phase opening) remains the next main-thread session per CURRENT_STATE v3.5 main-thread canonical pointers UNCHANGED.
 
-Commit: <stamped-at-commit> (feature/phase-o-observatory, 2026-05-02). Post-commit schema_validator re-run pending.
+Commit: 3c8a312 (feature/phase-o-observatory, 2026-05-02). Chore/defect-fixes: 107 violations exit 2 (MEDIUM/LOW only; no HIGH/CRITICAL; post-fix re-run stamped here per D4 resolution; chore commit: see SESSION_LOG §chore-defect-fixes-20260502).
 

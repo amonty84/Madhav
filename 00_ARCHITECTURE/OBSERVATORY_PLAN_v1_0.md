@@ -1,6 +1,6 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
-canonical_id: OBSERVATORY_PLAN
+canonical_id: OBSERVATORY_PLAN_v1_0
 version: 1.0.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
