@@ -10,8 +10,6 @@ canonical_phase_plan: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md (will be created 
 
 # Phase O — Observatory: Claude Code Session Prompts
 
-This file is a working aid, not a governance artifact. It contains one prompt per Phase O session (30 total). Paste a prompt into Claude Code in Antigravity IDE to execute that session.
-
 ## How to use this file
 
 This file is a working aid, not a governance artifact. It contains one prompt per Phase O session (30 total). Paste a prompt into Claude Code in Antigravity IDE to execute that session.
