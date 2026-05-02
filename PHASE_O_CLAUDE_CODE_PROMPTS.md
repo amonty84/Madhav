@@ -1,5 +1,5 @@
 ---
-title: Phase O Observatory — Claude Code Prompts
+title: Ustad — Phase O Observatory: Claude Code Session Prompts
 status: WORKING_AID
 not_a_canonical_artifact: true
 purpose: Self-contained prompts for Claude Code (in Antigravity IDE) to execute every session of Phase O — LLM Cost & Usage Observatory build.
@@ -8,7 +8,7 @@ session_count: 30
 canonical_phase_plan: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md (will be created by S0.1)
 ---
 
-# Phase O — Observatory: Claude Code Session Prompts
+# Ustad — Phase O Observatory: Claude Code Session Prompts
 
 ## How to use this file
 
@@ -37,7 +37,7 @@ cd /Users/Dev/Vibe-Coding/Apps/Madhav
 git fetch origin
 git checkout feature/phase-o-observatory
 git pull
-SESSION_ID=s1-1-schema   # change per session — see mapping
+SESSION_ID=ustad-s1-1-schema   # change per session — see mapping (format: ustad-s{phase}-{seq}-{slug})
 git worktree add "../Madhav-${SESSION_ID}" -b "feature/phase-o-observatory/${SESSION_ID}" feature/phase-o-observatory
 ```
 Then open a new Antigravity IDE window pointed at `/Users/Dev/Vibe-Coding/Apps/Madhav-${SESSION_ID}` and paste the session prompt.
@@ -49,10 +49,10 @@ Every parallel Phase O session has its own git worktree, branch, and Antigravity
 
 ## Phase O.0 — Governance Bootstrap
 
-### S0.1 — Phase O Plan Artifact
+### USTAD_S0_1 — Phase O Plan Artifact
 
 ```
-Execute Session S0.1 — Phase O Observatory Governance Bootstrap.
+Ustad — Execute Session USTAD_S0_1 — Phase O Observatory Governance Bootstrap.
 
 # Branch
 git checkout feature/phase-o-observatory
@@ -133,10 +133,10 @@ Emit SESSION_CLOSE per template. Append SESSION_LOG entry atomically. Commit and
 
 ## Phase O.1 — Telemetry + Overview Dashboard (the MVP)
 
-### S1.1 — Schema migrations
+### USTAD_S1_1 — Schema migrations
 
 ```
-Execute Session S1.1 — Observatory Schema Migrations.
+Ustad — Execute Session USTAD_S1_1 — Observatory Schema Migrations.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-1-schema on branch feature/phase-o-observatory/s1-1-schema.
@@ -159,7 +159,7 @@ Refresh from umbrella's latest tip:
 7. platform/src/lib/db/schema/ (existing schema files — match conventions)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-1-schema. Emit and validate.
+Cowork thread: ustad-s1-1-schema. Emit and validate.
 
 # Scope
 may_touch:
@@ -217,10 +217,10 @@ Instruct the user to run from the main working directory:
 Standard close per template. Report commit SHA, migration filenames, and test pass count.
 ```
 
-### S1.2 — LLMClient instrumentation shim
+### USTAD_S1_2 — LLMClient instrumentation shim
 
 ```
-Execute Session S1.2 — LLMClient Instrumentation Shim.
+Ustad — Execute Session USTAD_S1_2 — LLMClient Instrumentation Shim.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-2-llmclient-shim on branch feature/phase-o-observatory/s1-2-llmclient-shim.
@@ -241,7 +241,7 @@ Refresh from umbrella's latest tip:
 5. platform/src/lib/db/schema/observatory.ts (from S1.1)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-2-llmclient-shim.
+Cowork thread: ustad-s1-2-llmclient-shim.
 
 # Scope
 may_touch:
@@ -293,10 +293,10 @@ Instruct the user to run from the main working directory:
 Standard close. Report commit SHA, test count, coverage report.
 ```
 
-### S1.3 — Backend API for dashboard
+### USTAD_S1_3 — Backend API for dashboard
 
 ```
-Execute Session S1.3 — Observatory Backend API.
+Ustad — Execute Session USTAD_S1_3 — Observatory Backend API.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-3-backend-api on branch feature/phase-o-observatory/s1-3-backend-api.
@@ -317,7 +317,7 @@ Refresh from umbrella's latest tip:
 5. platform/src/app/api/admin/ (existing admin API patterns — match auth, error handling, response shapes)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-3-backend-api.
+Cowork thread: ustad-s1-3-backend-api.
 
 # Scope
 may_touch:
@@ -379,10 +379,10 @@ Instruct the user to run from the main working directory:
 Standard close. Report commit SHA, endpoint list, test pass count.
 ```
 
-### S1.4 — Anthropic provider adapter
+### USTAD_S1_4 — Anthropic provider adapter
 
 ```
-Execute Session S1.4 — Anthropic Provider Adapter.
+Ustad — Execute Session USTAD_S1_4 — Anthropic Provider Adapter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-4-anthropic on branch feature/phase-o-observatory/s1-4-anthropic.
@@ -403,7 +403,7 @@ Refresh from umbrella's latest tip:
 5. Anthropic Messages API docs for usage block schema (input_tokens, output_tokens, cache_creation_input_tokens, cache_read_input_tokens)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-4-anthropic.
+Cowork thread: ustad-s1-4-anthropic.
 
 # Scope
 may_touch:
@@ -454,10 +454,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.5 — OpenAI provider adapter
+### USTAD_S1_5 — OpenAI provider adapter
 
 ```
-Execute Session S1.5 — OpenAI Provider Adapter.
+Ustad — Execute Session USTAD_S1_5 — OpenAI Provider Adapter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-5-openai on branch feature/phase-o-observatory/s1-5-openai.
@@ -478,7 +478,7 @@ Refresh from umbrella's latest tip:
 5. OpenAI Chat Completions and Responses API docs for usage schema (prompt_tokens, completion_tokens, prompt_tokens_details.cached_tokens, completion_tokens_details.reasoning_tokens)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-5-openai.
+Cowork thread: ustad-s1-5-openai.
 
 # Scope
 may_touch:
@@ -517,10 +517,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.6 — Gemini provider adapter
+### USTAD_S1_6 — Gemini provider adapter
 
 ```
-Execute Session S1.6 — Gemini Provider Adapter.
+Ustad — Execute Session USTAD_S1_6 — Gemini Provider Adapter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-6-gemini on branch feature/phase-o-observatory/s1-6-gemini.
@@ -541,7 +541,7 @@ Refresh from umbrella's latest tip:
 5. Gemini API docs for usageMetadata (promptTokenCount, candidatesTokenCount, thoughtsTokenCount, cachedContentTokenCount)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-6-gemini.
+Cowork thread: ustad-s1-6-gemini.
 
 # Scope
 may_touch:
@@ -579,10 +579,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.7 — DeepSeek provider adapter
+### USTAD_S1_7 — DeepSeek provider adapter
 
 ```
-Execute Session S1.7 — DeepSeek Provider Adapter.
+Ustad — Execute Session USTAD_S1_7 — DeepSeek Provider Adapter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-7-deepseek on branch feature/phase-o-observatory/s1-7-deepseek.
@@ -603,7 +603,7 @@ Refresh from umbrella's latest tip:
 5. DeepSeek API docs (OpenAI-compatible Chat Completions; usage extension fields prompt_cache_hit_tokens and prompt_cache_miss_tokens)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-7-deepseek.
+Cowork thread: ustad-s1-7-deepseek.
 
 # Scope
 may_touch:
@@ -641,10 +641,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.8 — NIM provider adapter
+### USTAD_S1_8 — NIM provider adapter
 
 ```
-Execute Session S1.8 — NVIDIA NIM Provider Adapter.
+Ustad — Execute Session USTAD_S1_8 — NVIDIA NIM Provider Adapter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-8-nim on branch feature/phase-o-observatory/s1-8-nim.
@@ -664,7 +664,7 @@ Refresh from umbrella's latest tip:
 4. NVIDIA NIM / NGC API docs (OpenAI-compatible Chat Completions surface)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-8-nim.
+Cowork thread: ustad-s1-8-nim.
 
 # Scope
 may_touch:
@@ -698,10 +698,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.9 — Frontend scaffold
+### USTAD_S1_9 — Frontend scaffold
 
 ```
-Execute Session S1.9 — Observatory Frontend Scaffold.
+Ustad — Execute Session USTAD_S1_9 — Observatory Frontend Scaffold.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-9-frontend-scaffold on branch feature/phase-o-observatory/s1-9-frontend-scaffold.
@@ -722,7 +722,7 @@ Refresh from umbrella's latest tip:
 5. platform/src/app/api/admin/observatory/openapi.yaml (from S1.3)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-9-frontend-scaffold.
+Cowork thread: ustad-s1-9-frontend-scaffold.
 
 # Scope
 may_touch:
@@ -772,10 +772,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.10 — KPI tiles + Filters bar
+### USTAD_S1_10 — KPI tiles + Filters bar
 
 ```
-Execute Session S1.10 — KPI Tiles + Filters Bar.
+Ustad — Execute Session USTAD_S1_10 — KPI Tiles + Filters Bar.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-10-kpi-filters on branch feature/phase-o-observatory/s1-10-kpi-filters.
@@ -795,7 +795,7 @@ Refresh from umbrella's latest tip:
 4. platform/src/lib/api-clients/observatory.ts (from S1.9)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-10-kpi-filters.
+Cowork thread: ustad-s1-10-kpi-filters.
 
 # Scope
 may_touch:
@@ -849,10 +849,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.11 — Charts
+### USTAD_S1_11 — Charts
 
 ```
-Execute Session S1.11 — Observatory Charts.
+Ustad — Execute Session USTAD_S1_11 — Observatory Charts.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-11-charts on branch feature/phase-o-observatory/s1-11-charts.
@@ -871,7 +871,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/components/ (existing chart library used elsewhere — match it; if none, propose a single addition with rationale)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-11-charts.
+Cowork thread: ustad-s1-11-charts.
 
 # Scope
 may_touch:
@@ -917,10 +917,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.12 — Drill-down event explorer + side panel
+### USTAD_S1_12 — Drill-down event explorer + side panel
 
 ```
-Execute Session S1.12 — Event Explorer + Side Panel.
+Ustad — Execute Session USTAD_S1_12 — Event Explorer + Side Panel.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-12-events on branch feature/phase-o-observatory/s1-12-events.
@@ -940,7 +940,7 @@ Refresh from umbrella's latest tip:
 4. platform/src/lib/api-clients/observatory.ts
 
 # Session-open handshake
-Cowork thread: phase-o-s1-12-events.
+Cowork thread: ustad-s1-12-events.
 
 # Scope
 may_touch:
@@ -982,10 +982,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S1.13 — Wiring + e2e integration
+### USTAD_S1_13 — Wiring + e2e integration
 
 ```
-Execute Session S1.13 — Observatory MVP Wiring + Smoke Test.
+Ustad — Execute Session USTAD_S1_13 — Observatory MVP Wiring + Smoke Test.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s1-13-wiring on branch feature/phase-o-observatory/s1-13-wiring.
@@ -1005,7 +1005,7 @@ Refresh from umbrella's latest tip:
 4. Existing smoke test scripts (e.g., platform/scripts/cutover-stage1-smoke.ts referenced in CLAUDE.md Phase 11A)
 
 # Session-open handshake
-Cowork thread: phase-o-s1-13-wiring.
+Cowork thread: ustad-s1-13-wiring.
 
 # Scope
 may_touch:
@@ -1053,10 +1053,10 @@ Standard close. Mark Phase O.1 complete in CURRENT_STATE_v1_0.md (this is one of
 
 ## Phase O.2 — Reconciliation
 
-### S2.1 — Reconciliation framework
+### USTAD_S2_1 — Reconciliation framework
 
 ```
-Execute Session S2.1 — Reconciliation Framework.
+Ustad — Execute Session USTAD_S2_1 — Reconciliation Framework.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-1-reconciliation-framework on branch feature/phase-o-observatory/s2-1-reconciliation-framework.
@@ -1076,7 +1076,7 @@ Refresh from umbrella's latest tip:
 4. Existing cron infrastructure in the project (find it; match patterns)
 
 # Session-open handshake
-Cowork thread: phase-o-s2-1-reconciliation-framework.
+Cowork thread: ustad-s2-1-reconciliation-framework.
 
 # Scope
 may_touch:
@@ -1122,10 +1122,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S2.2 — Anthropic reconciler
+### USTAD_S2_2 — Anthropic reconciler
 
 ```
-Execute Session S2.2 — Anthropic Cost & Usage Reconciler.
+Ustad — Execute Session USTAD_S2_2 — Anthropic Cost & Usage Reconciler.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-2-anthropic-reconciler on branch feature/phase-o-observatory/s2-2-anthropic-reconciler.
@@ -1145,7 +1145,7 @@ Refresh from umbrella's latest tip:
 4. Anthropic Admin API docs: organizations/usage_report/messages and organizations/cost_report endpoints
 
 # Session-open handshake
-Cowork thread: phase-o-s2-2-anthropic-reconciler.
+Cowork thread: ustad-s2-2-anthropic-reconciler.
 
 # Scope
 may_touch:
@@ -1192,10 +1192,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S2.3 — OpenAI reconciler
+### USTAD_S2_3 — OpenAI reconciler
 
 ```
-Execute Session S2.3 — OpenAI Costs & Usage Reconciler.
+Ustad — Execute Session USTAD_S2_3 — OpenAI Costs & Usage Reconciler.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-3-openai-reconciler on branch feature/phase-o-observatory/s2-3-openai-reconciler.
@@ -1215,7 +1215,7 @@ Refresh from umbrella's latest tip:
 4. OpenAI Admin API docs: /v1/organization/usage/* and /v1/organization/costs
 
 # Session-open handshake
-Cowork thread: phase-o-s2-3-openai-reconciler.
+Cowork thread: ustad-s2-3-openai-reconciler.
 
 # Scope
 may_touch:
@@ -1252,10 +1252,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S2.4 — Gemini Cloud Billing reconciler
+### USTAD_S2_4 — Gemini Cloud Billing reconciler
 
 ```
-Execute Session S2.4 — Gemini / Vertex AI Cloud Billing Reconciler.
+Ustad — Execute Session USTAD_S2_4 — Gemini / Vertex AI Cloud Billing Reconciler.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-4-gemini-reconciler on branch feature/phase-o-observatory/s2-4-gemini-reconciler.
@@ -1274,7 +1274,7 @@ Refresh from umbrella's latest tip:
 3. Google Cloud Billing BigQuery export schema docs (services.id, sku.description, cost, usage.amount)
 
 # Session-open handshake
-Cowork thread: phase-o-s2-4-gemini-reconciler.
+Cowork thread: ustad-s2-4-gemini-reconciler.
 
 # Scope
 may_touch:
@@ -1311,10 +1311,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S2.5 — DeepSeek + NIM manual-reconciliation UI
+### USTAD_S2_5 — DeepSeek + NIM manual-reconciliation UI
 
 ```
-Execute Session S2.5 — Manual Reconciliation Upload UI (DeepSeek + NIM).
+Ustad — Execute Session USTAD_S2_5 — Manual Reconciliation Upload UI (DeepSeek + NIM).
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-5-manual-reconciliation on branch feature/phase-o-observatory/s2-5-manual-reconciliation.
@@ -1334,7 +1334,7 @@ Refresh from umbrella's latest tip:
 4. platform/src/app/api/admin/observatory/openapi.yaml
 
 # Session-open handshake
-Cowork thread: phase-o-s2-5-manual-reconciliation.
+Cowork thread: ustad-s2-5-manual-reconciliation.
 
 # Scope
 may_touch:
@@ -1374,10 +1374,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S2.6 — Reconciliation banner UI
+### USTAD_S2_6 — Reconciliation banner UI
 
 ```
-Execute Session S2.6 — Reconciliation Banner.
+Ustad — Execute Session USTAD_S2_6 — Reconciliation Banner.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s2-6-reconciliation-banner on branch feature/phase-o-observatory/s2-6-reconciliation-banner.
@@ -1396,7 +1396,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/components/observatory/ (existing layout)
 
 # Session-open handshake
-Cowork thread: phase-o-s2-6-reconciliation-banner.
+Cowork thread: ustad-s2-6-reconciliation-banner.
 
 # Scope
 may_touch:
@@ -1436,10 +1436,10 @@ Standard close. Mark Phase O.2 complete in CURRENT_STATE_v1_0.md (allowed except
 
 ## Phase O.3 — Budgets, Alerts, Exports
 
-### S3.1 — Budget rules schema + API
+### USTAD_S3_1 — Budget rules schema + API
 
 ```
-Execute Session S3.1 — Budget Rules Schema + API.
+Ustad — Execute Session USTAD_S3_1 — Budget Rules Schema + API.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s3-1-budgets-schema-api on branch feature/phase-o-observatory/s3-1-budgets-schema-api.
@@ -1458,7 +1458,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/db/schema/observatory.ts (llm_budget_rules table from S1.1)
 
 # Session-open handshake
-Cowork thread: phase-o-s3-1-budgets-schema-api.
+Cowork thread: ustad-s3-1-budgets-schema-api.
 
 # Scope
 may_touch:
@@ -1500,10 +1500,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S3.2 — Alert evaluator
+### USTAD_S3_2 — Alert evaluator
 
 ```
-Execute Session S3.2 — Budget Alert Evaluator.
+Ustad — Execute Session USTAD_S3_2 — Budget Alert Evaluator.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s3-2-alert-evaluator on branch feature/phase-o-observatory/s3-2-alert-evaluator.
@@ -1523,7 +1523,7 @@ Refresh from umbrella's latest tip:
 4. Existing email/webhook delivery code in the project
 
 # Session-open handshake
-Cowork thread: phase-o-s3-2-alert-evaluator.
+Cowork thread: ustad-s3-2-alert-evaluator.
 
 # Scope
 may_touch:
@@ -1562,10 +1562,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S3.3 — Budgets UI
+### USTAD_S3_3 — Budgets UI
 
 ```
-Execute Session S3.3 — Budgets UI.
+Ustad — Execute Session USTAD_S3_3 — Budgets UI.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s3-3-budgets-ui on branch feature/phase-o-observatory/s3-3-budgets-ui.
@@ -1584,7 +1584,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/app/(super-admin)/observatory/budgets/page.tsx (skeleton from S1.9)
 
 # Session-open handshake
-Cowork thread: phase-o-s3-3-budgets-ui.
+Cowork thread: ustad-s3-3-budgets-ui.
 
 # Scope
 may_touch:
@@ -1622,10 +1622,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S3.4 — Export endpoints + UI
+### USTAD_S3_4 — Export endpoints + UI
 
 ```
-Execute Session S3.4 — CSV/JSON Export.
+Ustad — Execute Session USTAD_S3_4 — CSV/JSON Export.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s3-4-export on branch feature/phase-o-observatory/s3-4-export.
@@ -1644,7 +1644,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/app/api/admin/observatory/ (existing endpoints)
 
 # Session-open handshake
-Cowork thread: phase-o-s3-4-export.
+Cowork thread: ustad-s3-4-export.
 
 # Scope
 may_touch:
@@ -1686,10 +1686,10 @@ Standard close.
 
 ## Phase O.4 — Insights
 
-### S4.1 — Cache effectiveness
+### USTAD_S4_1 — Cache effectiveness
 
 ```
-Execute Session S4.1 — Cache Effectiveness Analytics.
+Ustad — Execute Session USTAD_S4_1 — Cache Effectiveness Analytics.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-1-cache-effectiveness on branch feature/phase-o-observatory/s4-1-cache-effectiveness.
@@ -1709,7 +1709,7 @@ Refresh from umbrella's latest tip:
 4. platform/src/lib/components/observatory/{kpi,charts}/**
 
 # Session-open handshake
-Cowork thread: phase-o-s4-1-cache-effectiveness.
+Cowork thread: ustad-s4-1-cache-effectiveness.
 
 # Scope
 may_touch:
@@ -1747,10 +1747,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S4.2 — Cost per quality
+### USTAD_S4_2 — Cost per quality
 
 ```
-Execute Session S4.2 — Cost-per-Quality Analytics.
+Ustad — Execute Session USTAD_S4_2 — Cost-per-Quality Analytics.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-2-cost-per-quality on branch feature/phase-o-observatory/s4-2-cost-per-quality.
@@ -1769,7 +1769,7 @@ Refresh from umbrella's latest tip:
 3. Existing audit-stage code that emits quality scores. If no quality score is currently captured, this session must first surface that as a blocker and propose a minimal capture path (extend llm_usage_events with a quality_score nullable column via a small migration). Decide in-session and proceed.
 
 # Session-open handshake
-Cowork thread: phase-o-s4-2-cost-per-quality.
+Cowork thread: ustad-s4-2-cost-per-quality.
 
 # Scope
 may_touch:
@@ -1804,10 +1804,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S4.3 — Conversation cost arc
+### USTAD_S4_3 — Conversation cost arc
 
 ```
-Execute Session S4.3 — Per-Conversation Cost Arc.
+Ustad — Execute Session USTAD_S4_3 — Per-Conversation Cost Arc.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-3-cost-arc on branch feature/phase-o-observatory/s4-3-cost-arc.
@@ -1826,7 +1826,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/components/observatory/events/**
 
 # Session-open handshake
-Cowork thread: phase-o-s4-3-cost-arc.
+Cowork thread: ustad-s4-3-cost-arc.
 
 # Scope
 may_touch:
@@ -1861,10 +1861,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S4.4 — Pricing diff alerter
+### USTAD_S4_4 — Pricing diff alerter
 
 ```
-Execute Session S4.4 — Pricing Diff Alerter.
+Ustad — Execute Session USTAD_S4_4 — Pricing Diff Alerter.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-4-pricing-diff on branch feature/phase-o-observatory/s4-4-pricing-diff.
@@ -1883,7 +1883,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/db/seed/observatory_pricing/seed_v1.ts (from S1.1)
 
 # Session-open handshake
-Cowork thread: phase-o-s4-4-pricing-diff.
+Cowork thread: ustad-s4-4-pricing-diff.
 
 # Scope
 may_touch:
@@ -1920,10 +1920,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S4.5 — Replay & re-cost engine
+### USTAD_S4_5 — Replay & re-cost engine
 
 ```
-Execute Session S4.5 — Replay & Re-cost Engine.
+Ustad — Execute Session USTAD_S4_5 — Replay & Re-cost Engine.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-5-replay-recost on branch feature/phase-o-observatory/s4-5-replay-recost.
@@ -1942,7 +1942,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/observatory/cost.ts (cost computation)
 
 # Session-open handshake
-Cowork thread: phase-o-s4-5-replay-recost.
+Cowork thread: ustad-s4-5-replay-recost.
 
 # Scope
 may_touch:
@@ -1983,10 +1983,10 @@ Instruct the user to run from the main working directory:
 Standard close.
 ```
 
-### S4.6 — Anomaly detection
+### USTAD_S4_6 — Anomaly detection
 
 ```
-Execute Session S4.6 — Anomaly Detection Job.
+Ustad — Execute Session USTAD_S4_6 — Anomaly Detection Job.
 
 # Worktree
 You are running in worktree /Users/Dev/Vibe-Coding/Apps/Madhav-s4-6-anomaly on branch feature/phase-o-observatory/s4-6-anomaly.
@@ -2005,7 +2005,7 @@ Refresh from umbrella's latest tip:
 3. platform/src/lib/observatory/ (existing analytics)
 
 # Session-open handshake
-Cowork thread: phase-o-s4-6-anomaly.
+Cowork thread: ustad-s4-6-anomaly.
 
 # Scope
 may_touch:
