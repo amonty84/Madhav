@@ -14727,3 +14727,272 @@ sequenced after S1 + S2. M4-C-S4 (sub-phase close) consumes the pre-draft author
 at this P6 session.
 
 Commit: 0934efb (feature/phase-o-observatory, 2026-05-03).
+
+---
+
+## M4-C-S1-LL5-DASHA-TRANSIT — LL.5 Dasha-Transit Synergy Shadow Write + MP.1+MP.2 Mirror Sync
+
+**Date:** 2026-05-02 (first M4-C substantive session; M4-C SUB-PHASE ENTERED).
+**Class:** Substantive learning-layer-substrate session (per ONGOING_HYGIENE_POLICIES §G — substantive sessions increment red_team_counter).
+**Brief:** CLAUDECODE_BRIEF M4-C-S1-LL5-DASHA-TRANSIT (mechanism-naming divergence with PHASE_M4C_PLAN §LL.5 logged R.LL5DESIGN.1 — see body).
+
+### session_open
+
+```yaml
+session_open:
+  session_id: M4-C-S1-LL5-DASHA-TRANSIT
+  cowork_thread_name: "M4-C-S1 — LL.5 Dasha-Transit Synergy first shadow write"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: M4.C.S1
+  predecessor_session: M4-B-S6-CLOSE (M4-B sub-phase formally CLOSED, 2026-05-03 commit 007c718). Most-recent governance-aside parallel slot: M4-C-P6-S4-PREDRAFT (2026-05-03 commit 0934efb, set CURRENT_STATE v2.6→v2.7 with canonical pointers UNCHANGED + predraft_available block re-set to M4_C_CLOSE_v1_0.md DRAFT).
+  parallel_to: M4-C-S2 (not yet landed; brief prescribes S2 as parallel-safe per PHASE_M4C_PLAN §4)
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md (§1–§7; §LL.5 cross-reference)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md §3.3 (M4-C entry gate)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md (§3 + §3.5 + §7 disclaimer template)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md (structural template for LL.5 design doc)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md §3 (basis-class informational context)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json (training partition only, explicit filter)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json (canonical 380-signal roster)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json (informational summary)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md (status check — confirmed OPTION_B_APPROVED 2026-05-02; binding for S3 only)
+      read_at: 2026-05-02T14:00:00+05:30
+  declared_scope:
+    may_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md (new)
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll5_dasha_transit_v1_0.json (new)
+      - .geminirules
+      - .gemini/project_state.md
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/**
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_*
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_*
+      - 06_LEARNING_LAYER/OBSERVATIONS/**
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - platform/**
+  red_team_due: false
+  notes: "First M4-C substantive session. LL.5 (Dasha-Transit Synergy per brief; not the LL.5 = Retrieval-ranking learning declared in PHASE_M4C_PLAN §LL.5 / MACRO_PLAN §LL-Appendix.B / SHADOW_MODE_PROTOCOL §2 — mechanism-naming divergence; brief is binding per ONGOING_HYGIENE_POLICIES §C; logged in design §6 as R.LL5DESIGN.1). Discharges F.RT.S6.M.1 MEDIUM mirror-staleness carry-forward."
+```
+
+### body
+
+**Brief execution per AC.S1.1–AC.S1.7.**
+
+- **AC.S1.1 mirror sync executed FIRST.** Per F.RT.S6.M.1 carry-forward declared at M4-B-S6-CLOSE in-document IS.8(b) red-team. `.geminirules` footer entry "*M4-C-S1 MIRROR SYNC (2026-05-02): MP.1 + MP.2 mirror sync ...*" appended at top of M4-related footer block, capturing cumulative S5 → P4 → S6 (M4-B CLOSED) → P5 (NAP.M4.6 OPTION_B_APPROVED) → M4-C-S1 entry delta. `.gemini/project_state.md` line-3 update banner prepended with new M4-C-S1 narrative paragraph (prior M4-B-P3 narrative wrapped as `_Prior session narrative retained: M4-B-P3-MIRROR-MANIFEST (...)._`); §"Active Phase: M4 Calibration + LEL Ground-Truth Spine — Sub-phase M4-C ACTIVE" header rewritten with M4-A CLOSED + M4-B CLOSED + M4-C ACTIVE block + per-mechanism LL.1–LL.4 production-state + LL.5–LL.7 incoming block + open NAPs + M3 closure preservation. Both sides updated to adapted parity (semantic, not byte-identical, per ND.1). Discharges F.RT.S6.M.1. Note: NAP.M4.6 verdict received from native at M4-B-P5 (status PENDING_NATIVE_DECISION → OPTION_B_APPROVED Classical-seeded with 3 refinements 2026-05-02) — brief AC.S1.1 instruction text said "NAP.M4.6 pending native" but live state was already approved; mirror update reflects current reality, not the stale brief text. PASS.
+
+- **AC.S1.2 input sources read.** (a) `lel_event_match_records.json` — schema 1.1, 46 records, training=37, held_out=9; basis distribution in expected_lit_signals.basis (training): temporal_engine 863 / classical_rule 29 / both 19; lit_source distribution in actual_lit_signals (training): dasha 410 / transit 4 / both 6 (sum 420); 266 distinct signal IDs in training actual; 380 distinct in training (actual ∪ expected). (b) `ll1_shadow_weights_v1_0.json` — `signal_weights` dict with 380 keys; promotion bucket 30 promotion_eligible_pending_two_pass / 285 insufficient_observations / 52 shadow_indefinite_low_match_rate / 13 shadow_indefinite_high_variance; basis distribution per expected_lit_signals not directly recorded in LL.1 (it lives in lel_event_match_records). (c) `ll2_edge_weights_v1_0.json` — 9,922 edges (HIGH 0 / MED 8 Pancha-Mahapurusha clique / LOW 9,914 / ZERO 0; cross_domain_count 0 / intra_domain_count 9,922; informational only — LL.5 does not consume LL.2 edge state). (d) LL4_PREDICTION_PRIOR §3 — classical_rule + both basis classes at mean lit_score 1.0 perfectly calibrated; temporal_engine at 0.43 training / 0.58 held_out (variance carrier); finding: dasha-window-conditioned signals are temporal_engine-basis and dominate variance. PASS.
+
+- **AC.S1.3 LL5_DASHA_TRANSIT_DESIGN_v1_0.md authored — 7 sections.** Created at `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md` v1.0 CURRENT. §1 Mechanism (per-signal axis-weight modulator in [0,1]; `dasha_weight = (dasha_count + 0.5*both_count) / total_activations`; 1.0 = pure dasha, 0.0 = pure transit, 0.5 = balanced; modulator-not-replacement annotation alongside LL.1). §2 Input spec (LEL training partition only via explicit `partition == "training"` filter; LL.1 canonical 380-signal roster; LL.4 §3 informational; held-out 9 sacrosanct). §3 Algorithm (11-step deterministic; tier rules N≥8 HIGH / 4-7 MED / 1-3 LOW / 0 ZERO; `lit_source = "both"` split 0.5/0.5 fixed-point per §3.3; sort ascending by signal_id per step 9). §4 Shadow-mode constraints (path discipline citing brief vs SHADOW_MODE_PROTOCOL §2 RANKER_WEIGHTS divergence as R.LL5DESIGN.1; two-pass approval cadence; n=1 disclaimer; held-out partition explicit filter; promotion blocked). §5 Output schema for ll5_dasha_transit_v1_0.json. §6 Known limitations: 6.1 n=37 with extreme lit_source skew; 6.2 lit_source quality depends on rubric scoring fidelity; 6.3 both-split fixed-point approximation logged R.LL5DESIGN.2; 6.4 252 LOW-tier signals unstable; 6.5 mechanism-naming divergence logged R.LL5DESIGN.1; 6.6 single-pass design without dedicated stability gate. §7 Changelog. PASS.
+
+- **AC.S1.4 ll5_dasha_transit_v1_0.json computed and written.** Created at `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll5_dasha_transit_v1_0.json`. Outer metadata per §5 schema (schema_version 1.0; mechanism LL.5; phase M4-C; produced_during M4-C-S1-LL5-DASHA-TRANSIT; produced_on 2026-05-02; design_doc_version 1.0; rubric_version 1.0 / rubric_option B; input_files [lel_event_match_records, ll1_shadow_weights as signal_roster]; training_events_used 37; held_out_excluded 9; promotion_criteria_ref SHADOW_MODE_PROTOCOL §3.5; n1_disclaimer verbatim per protocol §7 + LL.5 lit_source-skew note; variance_estimator: "sample"). Summary: total_signals 380 / high_tier 2 / med_tier 12 / low_tier 252 / zero_tier 114 / dasha_dominant 259 / transit_dominant 1 / balanced 6 / dominant_definition documented. signals[] one row per signal_id sorted ascending; 380 rows total each with signal_id + dasha_count + transit_count + both_count + total_activations + dasha_weight (float in [0,1] rounded to 4 decimals or null when total=0) + confidence_tier + status: "shadow". Production weight not written. Held-out 9 events excluded by explicit filter (verified by sanity assertion `len(training) == data["training_count"] == 37`; `roster_misses == 0`; `unknown_source == 0`). PASS.
+
+- **AC.S1.5 CURRENT_STATE → v2.8 (collision: P6 took v2.7; per current+1 rule v2.8 is the next slot).** Live read at write time = v2.7 (set by parallel-slot governance-aside M4-C-P6-S4-PREDRAFT 2026-05-03 commit 0934efb; v2.7 changelog explicitly notes "If S3 lands at v2.7 chronologically before this commit, version-conflict arises — S3 should re-read the live file and take v2.8" — same operational rule applies to S1). Frontmatter `version: 2.7` → `version: 2.8`. v2.8 changelog block prepended at top of changelog list (full S1 deliverable inventory + version_collision_note + carry-forward dispositions). §2 canonical state pointers ROTATED: `last_session_id` → M4-C-S1-LL5-DASHA-TRANSIT; `active_phase_plan_sub_phase` rewritten with "M4-C ACTIVE — first M4-C session ... closed 2026-05-02" + per-mechanism LL.5 outcome + S2/S3/S4 forward; `next_session_objective` → M4-C-S2 (LL.6 plan-selection first shadow write per PHASE_M4C_PLAN §3.2); `red_team_counter: 0` → `red_team_counter: 1` (S1 substantive); `file_updated_at: 2026-05-03T08:00:00+05:30` → `2026-05-02T15:00:00+05:30`; `file_updated_by_session: M4-B-S6-CLOSE` → `M4-C-S1-LL5-DASHA-TRANSIT`; `cross_check_hash` tuple updated. predraft_* block PRESERVED (P6 set; M4_C_CLOSE pre-draft consumed at M4-C-S4 close — unrelated to S1). PASS.
+
+- **AC.S1.6 SESSION_LOG entry + commit + hash stamp.** This entry appended. Commit hash will be stamped post-commit per ONGOING_HYGIENE_POLICIES §F chore-commit pattern matching prior M4-B / M4-C closes. PASS.
+
+- **AC.S1.7 Python json.load() validation.** Verified at write time inside the compute script: `parsed["mechanism"] == "LL.5"`, `parsed["summary"]["total_signals"] == 380`, `len(parsed["signals"]) == 380`. Parse-clean. schema_validator not required (LL.5 file is in `06_LEARNING_LAYER/`, not `platform/`, per brief). PASS.
+
+### Hard constraints honored
+
+- **Mirror sync FIRST.** AC.S1.1 executed before any LL.5 computation. F.RT.S6.M.1 MEDIUM carry-forward DISCHARGED at session entry. Honored.
+- **Held-out 9 events sacrosanct.** Filtered explicitly by `r["partition"] == "training"` in the compute script (line 19 of /tmp/m4a_s2_t1/compute_ll5.py); not by record ordering. Verified by sanity assertion that `len(training) == data["training_count"] == 37` and `len(held_out) == data["held_out_count"] == 9`. Honored.
+- **lit_source = "both" split.** 0.5/0.5 split applied in `dasha_weight` formula per design §3.3; documented in design §6.3 as R.LL5DESIGN.2 fixed-point rule. Both-count NOT discarded; both-count NOT double-counted. Honored.
+- **CAPABILITY_MANIFEST untouched per must_not_touch.** S2 parallel coordination — manifest registration of LL5_DASHA_TRANSIT_DESIGN + ll5_dasha_transit_v1_0.json deferred to S2 or dedicated manifest pass per brief. F.RT.S6.M.2 LOW carry-forward expanded to include LL.5 outputs. Honored.
+- **Shadow only — production untouched.** `signal_weights/production/` is in must_not_touch; no production weight created. All LL.5 rows ship `status: "shadow"`; production weight field not present in LL.5 schema. Honored.
+- **Mechanism-naming divergence flagged.** R.LL5DESIGN.1 documented in design §6.5 + this SESSION_LOG entry. Brief is binding for this session per ONGOING_HYGIENE_POLICIES §C; native arbitration deferred to next M4-C governance pass. Honored.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: M4-C-S1-LL5-DASHA-TRANSIT
+  closed_at: 2026-05-02T15:30:00+05:30
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md
+      mutation_type: created
+      sha256_before: null
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.3 deliverable — LL.5 design doc frozen BEFORE LL.5 computation runs (7 sections)"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll5_dasha_transit_v1_0.json
+      mutation_type: created
+      sha256_before: null
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.4 deliverable — LL.5 axis-weight register, shadow-mode (380 signals)"
+      within_declared_scope: true
+    - path: .geminirules
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.1 — MP.1 mirror sync (footer entry M4-C-S1 MIRROR SYNC); discharges F.RT.S6.M.1 MEDIUM"
+      within_declared_scope: true
+    - path: .gemini/project_state.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.1 — MP.2 mirror sync (line-3 update banner + §Active Phase header); discharges F.RT.S6.M.1 MEDIUM"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.5 — version bump v2.7 → v2.8 (P6 took v2.7; current+1 rule); canonical state pointers rotated; predraft_* block preserved"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S1.6 — this session entry"
+      within_declared_scope: true
+  registry_updates_made:
+    capability_manifest: not_touched_per_must_not_touch
+    file_registry: not_applicable_post_phase_1B_cutover
+    canonical_artifacts:
+      - canonical_id: LL5_DASHA_TRANSIT_DESIGN
+        change: NEW
+        details: "Design doc for LL.5 Dasha-Transit Synergy per the M4-C-S1 brief. Mechanism-naming divergence with PHASE_M4C_PLAN §LL.5 logged R.LL5DESIGN.1; native arbitration deferred to next M4-C governance pass. Manifest registration deferred to S2 or dedicated manifest pass per brief."
+      - canonical_id: ll5_dasha_transit_v1_0
+        change: NEW
+        details: "LL.5 axis-weight register, shadow-mode. 380 signals. Manifest registration deferred to S2 or dedicated manifest pass per brief."
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: true
+      both_updated_same_session: false
+      rationale: "MP.1 is CLAUDE.md (claude_side) <-> .geminirules (gemini_side). CLAUDE.md not touched at this session (no governance-content delta in CLAUDE.md beyond what M4-B-S6 sealed). .geminirules updated to adapted parity at session entry, discharging cumulative S5→P4→S6→P5 mirror-staleness debt declared at M4-B-S6 §7.2 as F.RT.S6.M.1 MEDIUM. Per ND.1 adapted parity is semantic, not byte-identical: .geminirules carries an in-Gemini-idiom footer trail mirroring CLAUDE.md §F state, while §F itself in CLAUDE.md cites CURRENT_STATE_v1_0.md by reference (the post-Step-15 single-pointer convention). The Gemini-side footer trail is the agent-specific construct preserved per the MP.1 known_asymmetries declaration."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: true
+      both_updated_same_session: true
+      rationale: "Composite Claude-side state (CURRENT_STATE + SESSION_LOG; STEP_LEDGER retired GOVERNANCE_CLOSED) touched. Gemini-side .gemini/project_state.md updated to adapted parity reflecting M4-B CLOSED + M4-C ACTIVE + LL.1–LL.4 production-state + LL.5–LL.7 incoming. F.RT.S6.M.1 MEDIUM DISCHARGED — the M4-B-S6 → P5 → M4-C-S1 cumulative state delta is now reflected on both sides."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MACRO_PLAN unchanged"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST not touched per must_not_touch (S2 parallel coordination — LL.5 manifest registration deferred). FILE_REGISTRY retired post Phase 1B cutover."
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2 (SESSION_LOG)"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged"
+  red_team_pass:
+    due: false
+    performed: false
+    rationale: "Substantive learning-layer-substrate session per ONGOING_HYGIENE_POLICIES §G — counter increments 0→1. No in-session red-team (counter has not reached 3 IS.8(a) trigger; M4-C-S1 is sub-phase entry, not sub-phase close — the sub-phase-close-class red-team analogue to IS.8(b) fires at M4-C-S4 per PHASE_M4C_PLAN §3.4)."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Substantive learning-layer-substrate session; lives outside platform/ — script in platform/ must_not_touch per brief. No corpus/engine state change. Recommend re-run at first M4-C session that touches platform/, or at M4-C-S4 sealing."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: not_run
+    rationale: "Per brief AC.S1.7 — schema_validator not required (LL.5 file is in 06_LEARNING_LAYER/, not platform/). Python json.load() ran instead and verified parse-clean. Recommend re-run at next platform/-touching session."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "platform/ is must_not_touch per brief. Mirror sync was executed manually at session entry per AC.S1.1; semantic adapted parity verified by content review. Recommend re-run at next platform/-touching session."
+  current_state_updated: true
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Substantive learning-layer-substrate session; no platform/ build state to serialize."
+  parallel_session_notes: >
+    M4-C-S1 ran sequentially after M4-B-S6-CLOSE + M4-C-P6-S4-PREDRAFT (both 2026-05-03)
+    and after the brief was authored. Brief AC.S1.5 prescribed "CURRENT_STATE → v2.7 (S2
+    parallel takes v2.8)" assuming P6 had not landed; P6 in fact took v2.7 between brief
+    authoring and S1 execution. S1 adapted to v2.8 per the operational rule "current+1;
+    check before writing" per the same logic P6's own changelog block describes for
+    parallel-slot conflicts. predraft_available block (set by P6) PRESERVED — does not
+    race with S1; M4_C_CLOSE_v1_0.md DRAFT awaits M4-C-S4 consumption.
+    M4-C-S2 (parallel-safe with S1 per PHASE_M4C_PLAN §4) has not yet landed at this
+    session's close. If S2 lands chronologically before this commit hash is stamped,
+    S2 takes v2.9 or higher per current+1; S2 will write its own last_session_id
+    (substantive close) which supersedes this S1 last_session_id at merge time.
+  close_criteria_met: true
+  unblocks: >
+    M4-C-S2 (LL.6 plan-selection first shadow write per PHASE_M4C_PLAN §3.2). S2 may
+    optionally bundle (a) LL.5 + LL.6 manifest registration in CAPABILITY_MANIFEST
+    (currently deferred per S1 brief AC.S1.6 hard_constraint and per F.RT.S6.M.2 LOW
+    carry-forward expanded by S1), (b) Gemini reachability re-attempt per R.LL1TPA.1
+    (re-attempted unsuccessfully at S1; persists), (c) per-edge LL.2 promotion from
+    gate-level unblock at M4-B-S5 (carries from M4-B as deferred execution).
+  handoff_notes: >
+    Two new artifacts at signal_weights/shadow/ + design surface:
+    LL5_DASHA_TRANSIT_DESIGN_v1_0.md v1.0 CURRENT (7 sections; structural template
+    matches LL2_EDGE_WEIGHT_DESIGN with adaptations); ll5_dasha_transit_v1_0.json
+    (380 signals; HIGH 2 / MED 12 / LOW 252 / ZERO 114; dasha_dominant 259 /
+    transit_dominant 1 / balanced 6; lit_source skew dasha 410 / transit 4 / both 6
+    documented). LL.5 promotion criteria still TBD in SHADOW_MODE_PROTOCOL §3.5 — next
+    governance touch should resolve. Mechanism-naming divergence R.LL5DESIGN.1 (brief
+    LL.5 = Dasha-Transit Synergy vs PHASE_M4C_PLAN §LL.5 = Retrieval ranking learning)
+    flagged for next M4-C governance pass / native review. R.LL5DESIGN.2 (both-count
+    split fixed-point) flagged for next LL.5 cycle when rubric emits per-axis sub-scores.
+    NAP.M4.6 OPTION_B_APPROVED + 3 refinements binding for S3 only. NAP.M4.7 (M4
+    macro-phase close) at M4-D close.
+```
+
+### Next session objective
+
+**M4-C-S2 (LL.6 plan-selection first shadow write)** — second M4-C substantive
+session per `PHASE_M4C_PLAN §3.2`. S2 scope: LL.6 first shadow file establishing
+the plan-selection signal-weight register per `SHADOW_MODE_PROTOCOL §3.5` LL.6
+row; held-out 9 events sacrosanct (Learning Layer rule #4); Gemini reachability
+re-attempt per R.LL1TPA.1 carry-forward (re-attempted unsuccessfully at S1;
+persists); optional bundling of LL.5 + LL.6 manifest registration in
+`CAPABILITY_MANIFEST.json` per F.RT.S6.M.2 + S1 deferral; optional per-edge LL.2
+promotion. LL.5 ⊥ LL.6 parallel-safe per PHASE_M4C_PLAN §4 — S2 may run alongside
+S1 if scope permits, otherwise sequentially. M4-C-S3 (LL.7 first artifact write
+per NAP.M4.6 Option B + 3 refinements) is sequenced after S1 + S2. M4-C-S4
+(sub-phase close) consumes the M4_C_CLOSE_v1_0.md DRAFT pre-draft authored at
+M4-C-P6-S4-PREDRAFT.
+
+Commit: <stamped-at-commit>.
+
+Commit: 0934efb (feature/phase-o-observatory, 2026-05-03).
