@@ -22,3 +22,21 @@ __pycache__/
 .playwright-mcp/
 .superpowers/
 .memory/
+
+# Governance auto-generated reports (not source artifacts — regenerated on demand)
+00_ARCHITECTURE/drift_reports/
+00_ARCHITECTURE/mirror_reports/
+00_ARCHITECTURE/schema_reports/
+
+# Failed git rewrite leftovers (crashed session artifacts)
+.git.failed-rewrite-*/
+
+# NVIDIA NIM ad-hoc test scripts (not source — one-off diagnostics)
+platform/scripts/nim_*.mjs
+platform/scripts/run_nim_*.command
+NVIDIA_NIM_LLM_Report.docx
+
+# Git worktree sibling directories (created by parallel session setup)
+# Pattern: ../Madhav-{session-id}/ — these are worktrees, not subdirectories,
+# but listing them here prevents accidental tracking if someone nests them.
+# Actual worktree exclusion is handled by git automatically.

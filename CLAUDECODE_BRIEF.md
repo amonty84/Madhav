@@ -1,79 +1,156 @@
 ---
-artifact: CLAUDECODE_BRIEF.md (R3 instance)
-status: COMPLETE
-authored_on: 2026-04-30
-authored_by: Cowork (Opus)
-authored_during: "Portal Redesign — R3 Build mode upgrade"
-governing_clause: CLAUDE.md §C item #0 — overrides items 1–11 for the duration of the session
-target_executor: Claude Code (CLI), Sonnet 4.6 in Anti-Gravity / VS Code
-session_class: Portal Redesign — UX workstream inside M2 Corpus Activation
-exec_brief_to_execute: EXEC_BRIEF_PORTAL_REDESIGN_R3_BUILD_UPGRADE_v1_0.md
-phase_id: R3
-parent_artifacts:
-  - 00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md (CURRENT)
-  - 00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md (LIVING)
-worktree_path: ~/Vibe-Coding/Apps/Madhav-r3
-branch: redesign/r3-build-upgrade
-parallelizable_with: [R7]
-unblocks: []
+# ROOT BRIEF DISPATCHER — read this first, then navigate to your domain brief.
+# This file is NOT a session brief. It is a routing table.
+# A Claude Code or Cowork session opens this file, reads its domain row, and
+# loads the domain-specific brief. It does NOT execute from this file.
+#
+# HARD RULE: Engineering sessions must_not_touch 00_ARCHITECTURE/ 01_FACTS_LAYER/ 06_LEARNING_LAYER/
+#            Governance sessions must_not_touch platform/src/ platform/tests/
+# Any commit mixing both domains is a scope violation and must be split.
+#
+# BOOTSTRAP TRIGGERS (for new Cowork conversations / new account):
+#   "BHISMA"  → read 00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md first
+#   "KARN"    → read 00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md first
+#   "USTAD"   → open /Users/Dev/Vibe-Coding/Apps/Ustad/ as workspace (separate repo)
+#   "MARSYS"  → read CLAUDE.md §C items 1–11 (full project orientation)
 ---
 
-# CLAUDECODE_BRIEF — Portal Redesign R3 Build mode upgrade
+# CLAUDECODE_BRIEF — Session Router
 
-## How this file got here
+## §1 — Domain map (all active workstreams)
 
-Copied into the R3 worktree from the project's per-phase brief pool. Renamed from `CLAUDECODE_BRIEF_R3.md` → `CLAUDECODE_BRIEF.md` to activate `CLAUDE.md §C item #0`.
+| Domain | Bootstrap / Brief | Active? | Status | Next session |
+|--------|------------------|---------|--------|-------------|
+| BHISMA Engineering | `00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md` → `platform/CLAUDECODE_BRIEF.md` | NO | PARTIAL-COMPLETE — W2 code done; LLM planner PARKED (Lever 3 NAP needed) | W2-PLANNER-L3 (if Lever 3 authorized) |
+| MARSYS-JIS Governance (M5) | `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` → author M5-S1 brief | NO | M4 CLOSED 2026-05-02; M5 INCOMING | M5-S1 (not yet authored) |
+| KARN Corpus Activation | `00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md` → latest W* brief in `00_ARCHITECTURE/BRIEFS/` | NO | M2 CLOSED; M3 INCOMING | KARN-W9-M3-OPEN |
+| Project Ustad | `/Users/Dev/Vibe-Coding/Apps/Ustad/` (separate repo) | UNKNOWN | Check Ustad workspace directly | N/A from here |
+| Portal redesign | `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` | NO | COMPLETE 2026-04-30 (R0–R2, R4–R7 closed; R3 deferred) | — |
 
-## Governing scope
+## §2 — Parallel session anti-entanglement matrix
 
-R3 brings the per-client Build chat to feature parity with the Consume chat shell, then composes the existing build widgets into a right pane. Two parts internally: R3a (hook-compatibility audit, the gate) and R3b (UI swap + right-pane composition). If the audit's verdict is C (substantial adapter needed), R3 splits — R3b becomes its own session.
+Can sessions A and B run simultaneously? Check the matrix:
 
-Executes `EXEC_BRIEF_PORTAL_REDESIGN_R3_BUILD_UPGRADE_v1_0.md`. Produces `00_ARCHITECTURE/PORTAL_REDESIGN_R3_REPORT_v1_0.md`.
+| Session A → | BHISMA Eng | MARSYS Governance | KARN | Ustad |
+|-------------|-----------|-------------------|------|-------|
+| **BHISMA Engineering** | ✗ (same files) | ⚠ SESSION_LOG conflict | ✓ safe | ✓ safe |
+| **MARSYS Governance** | ⚠ SESSION_LOG conflict | ✗ (same files) | ⚠ 00_ARCH/ conflict | ✓ safe |
+| **KARN** | ✓ safe | ⚠ 00_ARCH/ conflict | ✗ (same files) | ✓ safe |
+| **Ustad** | ✓ safe | ✓ safe | ✓ safe | ✗ (same files) |
 
-## Required reads, in order
+**Legend:**
+- ✓ safe — no file overlap, can run concurrently
+- ⚠ — overlapping files; serialize writes to shared files (SESSION_LOG, CURRENT_STATE)
+- ✗ — same domain, never concurrent
 
-1. This file.
-2. `EXEC_BRIEF_PORTAL_REDESIGN_R3_BUILD_UPGRADE_v1_0.md` — the phase brief. Pay attention to §1 (R3a audit comes BEFORE any code change) and §5 (R7 coordination note — what to do if R7 is running concurrently).
-3. `00_ARCHITECTURE/PORTAL_REDESIGN_R2_REPORT_v1_0.md` — R2's closure report. The Build Room's CTA in Chart Profile is the entry point R3 inherits; verify R2's CTA already points at `/clients/{id}/build`.
-4. `00_ARCHITECTURE/PORTAL_REDESIGN_VISION_v1_0.md` — §3.1 Surface 4 (Build mode three-pane cockpit), §4.3.3 (R3 sub-phase decomposition).
-5. `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` — §2 + §3 R3 row.
-6. The Consume chat shell as the model: `platform/src/components/consume/ConsumeChat.tsx` and `platform/src/components/chat/ChatShell.tsx`. R3 mirrors this composition for Build.
-7. The current Build chat being replaced: `platform/src/components/build/BuildChat.tsx`. R3 wholesale replaces this file.
-8. The five right-pane widgets being composed (REUSE, do not modify): `JourneyStrip.tsx`, `BriefPanel.tsx`, `InsightCards.tsx`, `MirrorPairsTable.tsx`, `PyramidStatusPanel.tsx` — all in `platform/src/components/build/`.
-9. Standard `CLAUDE.md §C` items 1–11.
+**Shared files (serialize writes — one session at a time):**
+- `00_ARCHITECTURE/SESSION_LOG.md`
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`
+- `CLAUDECODE_BRIEF.md` (this file)
 
-## Pre-flight gate
+## §3 — File lock declarations (per domain)
 
-In addition to the gate inside the EXEC_BRIEF:
+### BHISMA Engineering
+```
+may_touch:    platform/src/**, platform/tests/**, platform/briefs/**, platform/scripts/**
+must_not_touch: 00_ARCHITECTURE/**, 01_FACTS_LAYER/**, 06_LEARNING_LAYER/**, .geminirules
+exception:    may append to 00_ARCHITECTURE/SESSION_LOG.md at session close only
+```
 
-1. R0 closed.
-2. R2 closed (`PORTAL_REDESIGN_R2_REPORT_v1_0.md` exists with `status: COMPLETE`).
-3. No in-flight phase shares a `may_touch` glob with R3. R7 is the only other phase that may be in flight; R3 and R7 are parallelizable per VISION §4.3 — verify R7 (if running) hasn't already touched `BuildChat.tsx`.
-4. Working tree clean. Branch `redesign/r3-build-upgrade`.
+### MARSYS-JIS Governance
+```
+may_touch:    00_ARCHITECTURE/**, .geminirules, .gemini/project_state.md
+must_not_touch: platform/src/**, platform/tests/**, 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**
+```
 
-## Acceptance criteria
+### KARN Corpus Activation
+```
+may_touch:    01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**, 06_LEARNING_LAYER/**,
+              00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_*.md,
+              00_ARCHITECTURE/SESSION_LOG.md (append only)
+must_not_touch: platform/src/**, platform/tests/**, .geminirules
+```
 
-Session does not claim close until ALL of:
+### Project Ustad
+```
+workspace:    /Users/Dev/Vibe-Coding/Apps/Ustad/   (entirely separate repo)
+may_touch:    everything under Ustad/
+must_not_touch: /Users/Dev/Vibe-Coding/Apps/Madhav/** (this repo — zero overlap)
+```
 
-1. R3a audit committed at `00_ARCHITECTURE/PORTAL_REDESIGN_R3_HOOK_COMPAT_AUDIT_v1_0.md` with one of three verdicts (A direct compat, B thin adapter ≤80 lines, C substantial — splits).
-2. If verdict A or B: R3b deliverables landed (BuildChat replaced, BuildRightPane composed, build page updated).
-3. If verdict C: this session closes after R3a committed; R3b is authored as a follow-up brief and committed alongside the audit. The session closes acknowledging the split.
-4. EXEC_BRIEF §3 tests pass (unit + E2E + governance scripts exit 0).
-5. Test baseline preserved (no Consume regressions, no chat shell regressions, no build widget regressions).
-6. Closure report `00_ARCHITECTURE/PORTAL_REDESIGN_R3_REPORT_v1_0.md` at `status: COMPLETE`.
-7. Tracker §3 R3 row → `status: closed`. If R3 split into R3a/R3b, the tracker row's `sub_phases` array reflects each sub-phase's status.
-8. SESSION_LOG appended.
-9. This file flipped to `status: COMPLETE`.
+## §4 — Parallel session protocol rules
 
-## R7 coordination
+1. **One domain per session.** Engineering OR governance — never both in the same
+   session. If a task requires touching both, it must be two separate sessions
+   with a handoff commit between them.
 
-R7 is the polish phase running in `redesign/r7-polish` worktree alongside R3. Per VISION §4.3 R3+R7 are parallelizable. Two operational rules:
+2. **Declare file locks at session open.** Every session emits `may_touch` and
+   `must_not_touch` globs before any tool call. If two active briefs have
+   overlapping `may_touch`, they cannot run simultaneously.
 
-- If R7's worktree shows it has touched `BuildChat.tsx`, halt and reconcile with the native — that's a collision.
-- After R3b lands, R3's closure report adds a `follow_ups` block listing Build-side polish items R7 should pick up (a11y on the new ChatShell instance, mobile pass on the three-pane layout, etc.). R7 picks these up as a small follow-up commit on `redesign/r7-polish` before its PR opens.
+3. **Single-domain commits.** If an engineering session must append to SESSION_LOG.md
+   at close, that is the ONE allowed governance-file exception. Nothing else.
 
-## One-line summary
+4. **Branch naming encodes domain:**
+   - `feature/w*`, `feature/bhisma-*` → BHISMA Engineering
+   - `feature/m*`, `feature/governance-*` → MARSYS-JIS Governance
+   - `feature/karn-*`, `redesign/*` → KARN / Portal
+   - Any branch under Ustad repo → Ustad (isolated)
 
-Bring per-client Build to feature parity with Consume — same chat shell, same hook stack, plus the right-pane widgets composed.
+5. **Status hygiene:** When a session closes, the last act is setting its brief
+   `status: COMPLETE` (or PARKED/PARTIAL). A brief left at PENDING is a false signal.
 
----
+6. **Git lock check:** Before any commit, run `ls .git/*.lock`. Remove stale locks
+   from crashed sessions before committing.
+
+## §5 — Bootstrap quick-reference (new account or fresh context)
+
+Open the Madhav workspace folder in Cowork on the new account, then paste:
+
+**To continue BHISMA:**
+```
+BHISMA
+
+Pick up Project BHISMA. Read 00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md first,
+then CLAUDECODE_BRIEF.md and CURRENT_STATE_v1_0.md. Tell me current state and
+what the next session should be.
+```
+
+**To continue KARN:**
+```
+KARN
+
+Pick up Project KARN. Read 00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md first.
+Tell me which wave is next and what the next session should be.
+```
+
+**To continue full MARSYS-JIS:**
+```
+MARSYS
+
+Full project orientation. Read CLAUDE.md §C items 1–11 in order.
+Tell me active macro-phase, BHISMA status, KARN status, and what to work on next.
+```
+
+## §6 — Archived briefs
+
+### BHISMA Wave 2 (PARTIAL-COMPLETE)
+- All 58 code tasks complete. LLM_FIRST_PLANNER_ENABLED parked (flag false).
+- Commits: 2cd3e12 (W2-BUGS) → 8a14043 (W2-SCHEMA) → 731530b (W2-EVAL-A) →
+  a24d96d (W2-MANIFEST) → 4628660 (W2-PLANNER) → 77184e1 (W2-TRACE-A) →
+  f1282a1 (W2-INSTRUMENT) → 36d2ac0 (W2-TRACE-B) → 59d55ed (W2-EVAL-B) →
+  2fe3ba9 (W2-CTX-ASSEMBLY)
+- Lever 3 path: swap planner model → needs native NAP.
+
+### W2-UQE-ACTIVATE (PARKED)
+- 8 smoke rounds. Best: recall=0.750, precision=0.631. Thresholds: 0.80/0.90.
+- Lever 2 decision: classify() routing retained. commit: 14e4b02.
+
+### M4-D-S1 (COMPLETE)
+- M4 macro-phase CLOSED 2026-05-02. NAP.M4.7 APPROVED. commit: 80d5c51.
+
+### Portal Redesign (COMPLETE)
+- R0–R2, R4–R7 closed 2026-04-30. R3 deferred indefinitely.
+
+### W2-EVAL-A (COMPLETE)
+- commit: 731530b
