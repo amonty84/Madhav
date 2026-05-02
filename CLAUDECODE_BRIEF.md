@@ -1,5 +1,5 @@
 ---
-status: BLOCKED
+status: PARKED
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
@@ -161,6 +161,13 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 
 ---
+
+Native decision (2026-05-02): LEVER 2 — accept classify() routing,
+park LLM_FIRST_PLANNER_ENABLED at false. Non-timeout precision floor
+~0.63–0.69 across rounds 5/6/8 shows prompt calibration has reached
+diminishing returns against nemotron-super-49b-v1. No further smoke
+rounds. Revisit when: (a) NIM catalog adds a better-fit model, or
+(b) Lever 3 (Haiku/Flash planner) is authorized.
 
 ## Smoke results (Round 7 — model-swap probe; registry.ts NOT modified)
 
