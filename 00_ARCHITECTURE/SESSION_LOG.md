@@ -15284,4 +15284,4 @@ mode has NO shadow→production split per SHADOW_MODE_PROTOCOL §2 LL.7 row. Hel
 population in §5 LL.7 row (S4 seals at sub-phase close). Sub-phase-close red-team
 at M4-C-S4 per PHASE_M4C_PLAN §3.4 AC.M4C.S4.3.
 
-Commit: `<stamped-at-commit>` (feature/phase-o-observatory, 2026-05-02).
+Commit: 0c15a20 (feature/phase-o-observatory, 2026-05-02).
