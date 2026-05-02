@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "mechanism": "LL.4",
+  "artifact_type": "recommendation_prior",
+  "produced_during": "M4-B-S5-NAP-M45-EXECUTE",
+  "produced_on": "2026-05-02",
+  "phase": "M4-B",
+  "source_document": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md",
+  "source_document_version": "1.1",
+  "placement_rationale": "This file lives in 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ (NOT shadow/). It is a machine-readable view of LL4_PREDICTION_PRIOR_v1_0.md §4-§5 qualitative findings — a recommendation/diagnostic artifact, not a weight register subject to SHADOW_MODE_PROTOCOL §3 promotion rules. Per SHADOW_MODE_PROTOCOL §2 LL.4 row, LL.4 produces no shadow→production split at M4. The file is consumed as a prior recommendation by future M5 LL.5 prior-fitting work and by retrieval-time fallback weighting for signals not in the LL.1 promotion set; it does NOT carry per-edge or per-signal calibrated weights and does NOT govern the LL.1 production register.",
+  "consumer_contract": {
+    "is_weight_register": false,
+    "subject_to_shadow_promotion_rules": false,
+    "binds_at_m5_deployment": false,
+    "is_substitute_for_ll1_weights": false,
+    "is_discovery_layer": false,
+    "fallback_role": "Use as prior recommendation for signals NOT in the LL.1 promotion set, and as a retrieval-time hint for date-precision modulation. Once M5 LL.5 fits calibrated multipliers from prediction_ledger.jsonl outcomes, those calibrated multipliers supersede these qualitative tiers."
+  },
+  "global_modifier": {
+    "name": "date_precision",
+    "rule": "Modulate the basis-class and domain-class priors below by the date precision of the retrieval target.",
+    "tiers": [
+      {
+        "tier": "exact",
+        "definition": "Swiss-Ephemeris-grade date (year/month/day, ideally HH:MM)",
+        "temporal_engine_lit_rate_estimate": 0.58,
+        "source": "held_out partition mean lit_score for temporal_engine basis (n=229 expected_observations)",
+        "caveat": "Held-out figure is contaminated by selection bias toward precise dates per LL4 §2.2 H1; treat as upper bound under the contaminated regime."
+      },
+      {
+        "tier": "approx-month",
+        "definition": "Year + month known; day unknown or approximate",
+        "temporal_engine_lit_rate_estimate": 0.43,
+        "source": "training partition mean lit_score for temporal_engine basis (n=863 expected_observations)",
+        "caveat": "Training figure is the more honest baseline (no held-out selection bias) but still inherits LEL retrodictive_match labeling bias per LL4 §2.2 H2."
+      },
+      {
+        "tier": "approx-year",
+        "definition": "Year known; month/day unknown",
+        "temporal_engine_lit_rate_estimate": 0.37,
+        "source": "approx-month estimate × ~0.85 reduction (informal; no fit at n=37)",
+        "caveat": "Coefficient is informal — use only as a directional hint, not a calibrated multiplier."
+      }
+    ]
+  },
+  "domain_priors": [
+    {
+      "domain": "career",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score": 0.5016,
+      "n_signals_observed": 431,
+      "msr_bucket_size": 207,
+      "rationale": "Highest-n observed domain bucket. Lit-rate 0.50 in training; apply ~0.5-multiplier on temporal_engine retrievals from this domain. Modulate by global date_precision."
+    },
+    {
+      "domain": "general",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score": 0.2976,
+      "n_signals_observed": 168,
+      "msr_bucket_size": 15,
+      "rationale": "Worst-performing observed domain at 0.30 lit-rate. The under-performance is design — natal-permanent yoga signals (Pancha Mahapurusha cluster + ancillaries) fire only on a subset of events. Apply ~0.30-multiplier on general-bucket temporal retrievals AND consult LL3_DOMAIN_COHERENCE §5.1 R.LL3.2 for cluster-aware consolidation (treat 6-yoga cluster as one consolidated configuration rather than 6 independent firings)."
+    },
+    {
+      "domain": "relationship",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score": 0.4113,
+      "n_signals_observed": 124,
+      "msr_bucket_size": 39,
+      "rationale": "Mid-n observed domain. Lit-rate 0.41 in training; apply ~0.4-multiplier on temporal_engine retrievals. Modulate by global date_precision."
+    },
+    {
+      "domain": "health",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score": 0.4948,
+      "n_signals_observed": 97,
+      "msr_bucket_size": 31,
+      "rationale": "Mid-n observed domain. Lit-rate 0.49 in training; apply ~0.5-multiplier on temporal_engine retrievals. Modulate by global date_precision."
+    },
+    {
+      "domain": "financial",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score": 0.4638,
+      "n_signals_observed": 69,
+      "msr_bucket_size": 64,
+      "rationale": "Mid-n observed domain. Lit-rate 0.46 in training; apply ~0.45-multiplier on temporal_engine retrievals. Modulate by global date_precision."
+    },
+    {
+      "domain": "travel",
+      "qualitative_tier": "WEAK",
+      "mean_lit_score": 0.4000,
+      "n_signals_observed": 5,
+      "msr_bucket_size": 5,
+      "rationale": "Low-n observed domain (only 5 expected observations across 37 training events). Apply ~0.4-multiplier provisionally; re-tune after M5 LEL expansion improves coverage."
+    },
+    {
+      "domain": "psychological",
+      "qualitative_tier": "WEAK",
+      "mean_lit_score": 1.0000,
+      "n_signals_observed": 7,
+      "msr_bucket_size": 20,
+      "rationale": "Apparent 1.00 lit-rate is a sample-size artifact at n=7. Do not weight retrievals by this figure. Use unweighted MSR routing per LL3_DOMAIN_COHERENCE §5.1 R.LL3.3 with n=7 disclaimer attached at consumption time."
+    },
+    {
+      "domain": "spiritual",
+      "qualitative_tier": "WEAK",
+      "mean_lit_score": 1.0000,
+      "n_signals_observed": 6,
+      "msr_bucket_size": 94,
+      "rationale": "Apparent 1.00 lit-rate is a sample-size artifact at n=6. Do not weight retrievals by this figure. The bucket itself is large in MSR (94 signals) but heavily under-indexed by the rubric to date — see LL3_DOMAIN_COHERENCE §2 unobserved-bucket finding."
+    },
+    {
+      "domain": "education",
+      "qualitative_tier": "WEAK",
+      "mean_lit_score": 1.0000,
+      "n_signals_observed": 3,
+      "msr_bucket_size": 0,
+      "rationale": "Education is structurally absent from MSR's domain ontology (msr_domain_buckets.json); n=3 reflects manual annotation of career-bucket signals as education-flavored in match_notes, not formal MSR domain assignment. Treat as advisory."
+    },
+    {
+      "domain": "family",
+      "qualitative_tier": "WEAK",
+      "mean_lit_score": 1.0000,
+      "n_signals_observed": 1,
+      "msr_bucket_size": 20,
+      "rationale": "Apparent 1.00 lit-rate is a sample-size artifact at n=1. Do not weight retrievals by this figure. Use unweighted MSR routing per LL3_DOMAIN_COHERENCE §5.1 R.LL3.3 with n=1 disclaimer attached."
+    }
+  ],
+  "signal_class_priors": [
+    {
+      "basis": "classical_rule",
+      "qualitative_tier": "STRONG",
+      "mean_lit_score_training": 1.0000,
+      "mean_lit_score_held_out": 1.0000,
+      "n_observations_training": 29,
+      "n_observations_held_out": 12,
+      "rationale": "Perfect calibration in both partitions. When the rubric expects a classical-rule signal to fire, it fires. Apply full prior-weight credit to retrievals on classical-rule basis signals (most directly: natal-permanent yoga retrievals)."
+    },
+    {
+      "basis": "both",
+      "qualitative_tier": "STRONG",
+      "mean_lit_score_training": 1.0000,
+      "mean_lit_score_held_out": 1.0000,
+      "n_observations_training": 19,
+      "n_observations_held_out": 9,
+      "rationale": "Perfect calibration in both partitions. 'both' = signal supported by classical rule AND temporal-engine evaluation. Apply full prior-weight credit."
+    },
+    {
+      "basis": "temporal_engine",
+      "qualitative_tier": "MODERATE",
+      "mean_lit_score_training": 0.4267,
+      "mean_lit_score_held_out": 0.5808,
+      "n_observations_training": 863,
+      "n_observations_held_out": 229,
+      "rationale": "Temporal_engine signals carry the timing-error variance — they depend on date precision and the dasha/transit/yogini engine's correctness. Variance is interpreted as a date-precision artifact more than a model artifact (consistent with M3-D 10/10 CONSISTENT held-out sample at exact dates). Apply lit-rate weighted credit modulated by the global date_precision tier above."
+    }
+  ],
+  "n1_disclaimer": "All findings derive from a single native (n=1) corpus of 37 training events plus a 9-event held-out validity set. Recommendations are diagnostic priors, not statistically significant findings. Per MACRO_PLAN §3.5.A Principle 1. The held_out=0.913 figure must NOT be quoted as a clean validity number — it is contaminated by the held-out selection bias documented in LL4_PREDICTION_PRIOR §2.2 Hypothesis 1.",
+  "post_nap_m45_note": "This priors file was authored at M4-B-S5-NAP-M45-EXECUTE — same session that closed NAP.M4.5 with 30/30 LL.1 signals approved to production. The basis-class statistics in §3 of the LL.4 source document do NOT need refresh from the pass_2 demotions side (no demotions occurred). The priors above are unchanged from the LL4 v1.0 source document; this file is a machine-readable view of those qualitative findings, not a re-derivation."
+}

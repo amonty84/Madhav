@@ -1,13 +1,16 @@
 ---
 artifact: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md
-version: "1.0"
+version: "1.1"
 status: CURRENT
 produced_during: M4-B-S4-LL3-DOMAIN-COHERENCE
 produced_on: 2026-05-02
+amended_during: M4-B-S5-NAP-M45-EXECUTE
+amended_on: 2026-05-02
 mechanism: LL.4 Prediction Prior (recommendation document — does not contain weights)
 phase: M4-B
 parent_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md §3.2 (M4-B sub-phase scope)
 authoritative_protocol: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §2 (LL.4 row — prompt-optimization-discipline note; no weight register at M4)
+machine_readable_view: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json (added at v1.1; see §8)
 inputs_consulted:
   - 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json (37 training + 9 held-out events; rubric_option B)
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json (380 observed signals)
@@ -15,7 +18,7 @@ inputs_consulted:
   - 06_LEARNING_LAYER/OBSERVATIONS/msr_domain_buckets.json (495/499 signals across 10 domains)
   - 00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md (the 30 promotion-eligible context)
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md (sibling document, this session)
-ll2_stability_gate_decision_at_authoring: CONDITIONAL_PASS (unchanged by this document)
+ll2_stability_gate_decision_at_authoring: CONDITIONAL_PASS (v1.0); flipped to FULL_PASS at M4-B-S5 — see LL2_STABILITY_GATE_v1_0.md §5.1
 n1_disclaimer: |
   All findings derive from a single native (n=1) corpus of 37 training events plus a
   9-event held-out validity set. Recommendations are diagnostic priors, not statistically
@@ -354,10 +357,66 @@ observations to fit calibrated multipliers per LL.5.
     further reduced). Priors are recommendations, not bindings; not a
     substitute for LL.1 weights post-NAP.M4.5; not a discovery layer.
   - §6 changelog.
+- **v1.1 (2026-05-02, M4-B-S5-NAP-M45-EXECUTE):** Machine-readable view added.
+  Frontmatter `version` 1.0→1.1; `amended_during`/`amended_on` set;
+  `machine_readable_view` field added pointing at the new
+  `signal_weights/ll4_prediction_priors_v1_0.json` companion;
+  `ll2_stability_gate_decision_at_authoring` updated to note the v1.1 flip to
+  FULL_PASS happened at M4-B-S5 (this session) per `LL2_STABILITY_GATE §5.1`.
+  New §8 cross-references the JSON view (placement rationale + consumer
+  contract). NAP.M4.5 closed 30/30 approve-all in this session: §3 basis-class
+  statistics are unchanged (no demotions affected the calibration sample);
+  refresh-on-pass_2-demotion trigger from v1.0 footer is moot. §1–§6 prose
+  unchanged from v1.0 (data is unchanged).
 
 ---
 
-*End of LL4_PREDICTION_PRIOR_v1_0.md. Recommendation document; no shadow→production
-split. Re-evaluation triggers: NAP.M4.5 close (refresh §3 basis-class stats if
-pass_2 demotes affect the calibration sample); M5 entry (act on §5 tiers as M5 LL.5
-prior-fitting input).*
+## §8 — Machine-Readable Priors Cross-Reference (added v1.1)
+
+The qualitative findings of §4–§5 are mirrored in machine-readable JSON form at:
+
+`06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json`
+
+### Placement rationale
+
+The JSON file lives in `signal_weights/` (not `signal_weights/shadow/`). It is **not**
+a weight register subject to `SHADOW_MODE_PROTOCOL §3` shadow→production promotion
+rules. Per `SHADOW_MODE_PROTOCOL §2` LL.4 row, LL.4 produces no shadow-mode artifact
+and no promotion ladder at M4 — it is a recommendation document. The JSON is a
+machine-readable view of this document's §4–§5 qualitative findings, intended for:
+
+- M5 LL.5 prior-fitting input — once the prediction ledger has accumulated
+  enough true held-out outcomes, LL.5 calibration can fit numerical multipliers
+  starting from these qualitative tiers.
+- Retrieval-time fallback weighting for signals NOT in the LL.1 promotion set
+  (the JSON is consulted as a domain/basis prior when no per-signal LL.1 weight
+  is available).
+- Date-precision modulation of temporal_engine retrievals at consumption time.
+
+### Consumer contract (lifted verbatim from JSON `consumer_contract` block)
+
+- `is_weight_register: false` — does not contain per-signal calibrated weights.
+- `subject_to_shadow_promotion_rules: false` — not subject to two-pass approval
+  or NAP review (it is a view of an already-reviewed document).
+- `binds_at_m5_deployment: false` — recommendation, not enforcement.
+- `is_substitute_for_ll1_weights: false` — once LL.1 promotion completes
+  (now: 30 signals at production post-NAP.M4.5 2026-05-02), LL.1 weights
+  govern those 30 signals; the JSON priors are fallback-only.
+- `is_discovery_layer: false` — LL.4 reports what calibration data already
+  shows; LL.7 (M4-C) is the discovery prior for novel patterns.
+
+### Consistency with this document
+
+The JSON values are derived from §4 Table (`mean_lit_score` per domain) and §3
+Tables (`mean_lit_score` per basis class, training and held-out partitions). Any
+edit to §4 or §3 numerical values must be mirrored in the JSON in the same session;
+any edit to the JSON must update this document's §4 / §3 tables to adapted parity.
+This is a within-document mirror discipline (analogue of MP.1–MP.8 cross-document
+mirror discipline), enforced at session-close hygiene review.
+
+---
+
+*End of LL4_PREDICTION_PRIOR_v1_0.md v1.1. Recommendation document; no
+shadow→production split. Machine-readable view at the path in §8. Re-evaluation
+triggers: M5 entry (act on §5 tiers as M5 LL.5 prior-fitting input); future
+LEL expansion (refresh §3/§4 tables if event corpus grows materially).*

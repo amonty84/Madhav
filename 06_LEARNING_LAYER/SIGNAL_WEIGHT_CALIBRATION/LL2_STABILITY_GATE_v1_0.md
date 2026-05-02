@@ -1,26 +1,36 @@
 ---
 artifact: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md
-version: "1.0"
+version: "1.1"
 status: CURRENT
 produced_during: M4-B-S3-LL2-EDGE-WEIGHTS
 produced_on: 2026-05-02
+amended_during: M4-B-S5-NAP-M45-EXECUTE
+amended_on: 2026-05-02
 mechanism: LL.2 Graph Edge Weight Modulators (gate document — does not contain weights)
 phase: M4-B
 parent_phase_plan: 00_ARCHITECTURE/PHASE_M4_PLAN_v1_0.md §3.2 AC.M4B.3 (LL.1 stability gate documented in SESSION_LOG before first LL.2 shadow write)
 authoritative_protocol: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §3.5 (LL.2 promotion criteria)
-gate_decision: CONDITIONAL_PASS
-gate_decision_summary: "LL.2 may proceed in shadow mode only. LL.2 shadow → production promotion is BLOCKED until LL.1 NAP.M4.5 (pass_2) closes."
-re_evaluation_trigger: NAP.M4.5 close event (M4-B close per PHASE_M4_PLAN §3.2)
-related_acceptance_criteria: AC.S3.2 (M4-B-S3 brief) + AC.M4B.3 (PHASE_M4_PLAN)
+gate_decision: FULL_PASS
+gate_decision_summary: "LL.2 shadow writes permitted AND LL.2 production promotion now UNBLOCKED for the 30 LL.1 production signals. Re-evaluated 2026-05-02 after NAP.M4.5 closed 30/30 (100%) approve-all."
+re_evaluation_trigger: NAP.M4.5 close event (M4-B close per PHASE_M4_PLAN §3.2) — DISCHARGED 2026-05-02 at M4-B-S5
+related_acceptance_criteria: AC.S3.2 (M4-B-S3 brief) + AC.M4B.3 (PHASE_M4_PLAN) + AC.S5.6 (M4-B-S5 brief)
 ---
 
 # LL.2 STABILITY GATE — pre-shadow-write assessment
 
 ```
-GATE DECISION: CONDITIONAL_PASS (recorded 2026-05-02, M4-B-S3-LL2-EDGE-WEIGHTS).
-LL.2 shadow-mode writes ARE permitted at this M4-B-S3 session.
-LL.2 production promotion is BLOCKED until NAP.M4.5 (LL.1 pass_2) closes.
-The gate re-evaluates automatically at NAP.M4.5 close per §5 below.
+GATE DECISION: FULL_PASS (re-evaluated 2026-05-02, M4-B-S5-NAP-M45-EXECUTE).
+LL.2 shadow-mode writes remain permitted (carried from v1.0).
+LL.2 production promotion is now UNBLOCKED for edges whose BOTH endpoints are among
+the 30 LL.1 signals promoted to production at NAP.M4.5 (pass_2 approved 30/30 = 100%
+≥ 90% threshold from M4-B-S5 brief AC.S5.6).
+Per-edge promotion criteria (LL.2.a)–(d) are still evaluated at LL.2 promotion time —
+this gate only certifies (LL.2.e) is now satisfied for all 30 LL.1 signals.
+
+PRIOR DECISION (v1.0, recorded 2026-05-02 at M4-B-S3-LL2-EDGE-WEIGHTS):
+CONDITIONAL_PASS. Shadow writes permitted; production promotion blocked pending
+NAP.M4.5. That trigger has now fired and the gate has flipped per §5 re-evaluation
+protocol.
 ```
 
 ---
@@ -102,12 +112,20 @@ because no LL.1 weight is in production until NAP.M4.5 fires.
 ## §3 — Gate decision
 
 ```
-GATE DECISION: CONDITIONAL_PASS
+GATE DECISION (v1.1, 2026-05-02 M4-B-S5-NAP-M45-EXECUTE): FULL_PASS
 
-LL.2 shadow-mode writes ARE permitted at this M4-B-S3 session.
-LL.2 production promotion is BLOCKED until NAP.M4.5 (LL.1 pass_2) closes.
+LL.2 shadow-mode writes remain permitted.
+LL.2 production promotion is UNBLOCKED for edges whose both endpoints are among
+the 30 LL.1 signals promoted at NAP.M4.5.
 
-The gate re-evaluates automatically at NAP.M4.5 close per §5 below.
+Re-evaluation trigger from v1.0 §5: NAP.M4.5 close — DISCHARGED.
+NAP.M4.5 outcome: 30 approved / 0 held / 0 demoted (100% ≥ 90% AC.S5.6 threshold
+for FULL_PASS flip).
+
+—————
+
+PRIOR GATE DECISION (v1.0, 2026-05-02 M4-B-S3-LL2-EDGE-WEIGHTS): CONDITIONAL_PASS
+(retained for audit trail; superseded by v1.1 above)
 ```
 
 The decision is "conditional pass," not "pass." The unpacking:
@@ -200,6 +218,39 @@ cadence at counter = 3).
 ---
 
 ## §5 — Gate re-evaluation trigger
+
+**STATUS (post-v1.1):** The trigger event named below has fired and been discharged.
+The gate has been re-evaluated and flipped from CONDITIONAL_PASS → FULL_PASS as of
+2026-05-02 M4-B-S5-NAP-M45-EXECUTE. The re-evaluation event log is captured at §5.1
+below; the original trigger description (v1.0) is retained verbatim for audit-trail
+purposes.
+
+### §5.1 — Re-evaluation event log (v1.1, 2026-05-02)
+
+- **Trigger event:** NAP.M4.5 closed at M4-B-S5-NAP-M45-EXECUTE (this re-evaluating
+  session). Native verdict: 30 approved / 0 held / 0 demoted; joint-question verdict
+  for SIG.MSR.118/.119/.143 = (a) three independent calibrated phenomena.
+- **AC.S5.6 threshold check:** 30 of 30 signals approved = 100%, which exceeds the
+  ≥ 27/30 (≥ 90%) threshold for FULL_PASS flip per the M4-B-S5 brief.
+- **LL.1 production register state at re-evaluation:**
+  `signal_weights/production/ll1_weights_promoted_v1_0.json` outer
+  `weights_in_production_register: true`; per-signal `status: production` for all 30;
+  per-signal `approval_chain[0].pass_2_status: approved` for all 30.
+- **(LL.2.e) verdict:** SATISFIED for any edge (sig_A, sig_B) where both endpoints are
+  among the 30 promoted LL.1 signals. UNSATISFIED for edges incident to any of the
+  remaining 350 LL.1 signals (those still in shadow buckets: 285 insufficient
+  observations + 52 low match-rate + 13 high variance = 350).
+- **Per-edge promotion criteria (LL.2.a)–(d) status:** Unchanged by this re-evaluation
+  — those are evaluated per-edge at LL.2 promotion time (a future session). This gate
+  certifies only that (LL.2.e) no longer blocks the per-edge assessment.
+- **Decision:** FULL_PASS (recorded above at §3).
+- **Subsequent action this session:** This re-evaluation log lands; no LL.2 weight
+  computation or promotion is performed in this session (out of scope per the M4-B-S5
+  brief — `must_not_touch` includes
+  `signal_weights/shadow/ll2_edge_weights_v1_0.json`). Per-edge LL.2 promotion is
+  expected at a future M4-B or M4-C session under the LL.2-specific approval chain.
+
+### §5.2 — Original v1.0 trigger description (retained for audit trail)
 
 The gate re-evaluates **automatically** at the NAP.M4.5 close event. Specifically:
 
@@ -298,8 +349,20 @@ No HIGH or CRITICAL residuals.
   state at gate time, §3 decision, §4 rationale, §5 re-evaluation trigger
   (NAP.M4.5 close), §6 approval chain, §7 3 known residuals (3 LOW + 1 DEFERRED),
   §8 changelog. Gate next re-evaluates at NAP.M4.5 close.
+- **v1.1 (2026-05-02, M4-B-S5-NAP-M45-EXECUTE):** Re-evaluation. NAP.M4.5 closed
+  with 30 approved / 0 held / 0 demoted (100% ≥ 90% AC.S5.6 threshold). Decision
+  flipped CONDITIONAL_PASS → FULL_PASS. LL.2 production promotion now unblocked for
+  edges whose both endpoints are among the 30 promoted LL.1 signals (criterion
+  (LL.2.e) satisfied for that subset; edges incident to the remaining 350 shadow
+  signals still blocked). Frontmatter `version` 1.0→1.1, `gate_decision`
+  CONDITIONAL_PASS→FULL_PASS, `gate_decision_summary` updated, `re_evaluation_trigger`
+  appended with DISCHARGED note. New §5.1 records the re-evaluation event log;
+  §5.2 retains v1.0 trigger description for audit. §3 decision block flipped with
+  prior decision retained as audit trail. No per-edge LL.2 promotion executed this
+  session (out of scope per M4-B-S5 `must_not_touch`); per-edge promotion deferred
+  to a future M4-B or M4-C session under LL.2 approval chain.
 
 ---
 
-*End of LL2_STABILITY_GATE_v1_0.md. Gate is binding for M4-B-S3 LL.2 shadow writes
-and re-evaluates at NAP.M4.5 close per §5.*
+*End of LL2_STABILITY_GATE_v1_0.md v1.1. Gate is FULL_PASS as of 2026-05-02; per-edge
+LL.2 promotion under LL.2 approval chain at a future session.*

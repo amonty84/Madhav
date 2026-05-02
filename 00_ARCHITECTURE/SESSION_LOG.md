@@ -13180,3 +13180,419 @@ session_close:
 
 Commit: 90508e5 (post-merge-main, 2026-05-02).
 
+---
+
+## M4-B-S5-NAP-M45-EXECUTE — NAP.M4.5 Native Pass-2 + LL.1 Production Promotion + LL.2 Gate FULL_PASS + LL.4 Priors JSON
+
+```yaml
+session_open:
+  session_id: M4-B-S5-NAP-M45-EXECUTE
+  cowork_thread_name: "M4-B-S5 — NAP.M4.5 Native Pass-2 Trigger + LL.4 Follow-through"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M4.B.S5
+  predecessor_session: M4-B-S4-LL3-DOMAIN-COHERENCE
+  opened_at: "2026-05-03T01:00:00+05:30"
+  scope_summary: >
+    Substantive learning-layer-substrate session executing NAP.M4.5 (LL.1 pass_2
+    binding native review) per the SHADOW_MODE_PROTOCOL §3.1(c)+(d) two-pass +
+    native-no-hold gate. Native review of the 30 LL.1 promotion-eligible signals
+    + the Tier-C joint-firing question on SIG.MSR.118/.119/.143 yoga-absences;
+    flip the LL.1 production register; re-evaluate LL2_STABILITY_GATE; land the
+    LL.4 machine-readable priors JSON; execute the Gemini reachability check;
+    close F.RT.S4.1 finding via shadow-file metadata.
+  may_touch:
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json  # NEW
+    - 00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md  # read-only consumed
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - 06_LEARNING_LAYER/OBSERVATIONS/**
+    - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - 00_ARCHITECTURE/CALIBRATION_RUBRIC_v1_0.md
+    - platform/**
+  red_team_due: false  # counter at 0 entering session; advances 0→1; no IS.8(a) trigger this session
+```
+
+Substantive learning-layer-substrate session executing the inline M4-B-S5 brief.
+Discharges NAP.M4.5 (the binding pass_2 gate of the LL.1 two-pass approval discipline);
+flips the LL.1 production register from pass_1-only to two-pass-complete; re-evaluates
+the LL2_STABILITY_GATE in light of NAP.M4.5 outcome; lands the LL.4 machine-readable
+priors JSON as a downstream-consumable view; closes the F.RT.S4.1 finding from M4-B-S4
+red-team via a shadow-file metadata addition; executes the Gemini reachability check
+(NOT_REACHABLE outcome).
+
+**Cowork thread:** `M4-B-S5 — NAP.M4.5 Native Pass-2 Trigger + LL.4 Follow-through`.
+
+**Predecessor:** M4-B-S4-LL3-DOMAIN-COHERENCE (2026-05-02, CLOSED) — LL.3 + LL.4
+recommendation documents authored; in-session red-team conducted at counter=3 with
+3 findings (F.RT.S4.1 LOW + F.RT.S4.2 NOTE + F.RT.S4.3 INFO); 0 HIGH/CRITICAL/MEDIUM;
+counter reset 3→0; CURRENT_STATE bumped v1.9→v2.0.
+
+**Concurrent parallel slot:** M4-B-P4-S6-PREDRAFT (closed during this session's
+runtime at commit 90508e5). P4 authored a structural pre-draft of M4_B_CLOSE_v1_0.md
+in 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/ with all S5-dependent fields held as
+[PENDING-S5] tokens; M4-B-S6 will read that pre-draft and resolve those tokens
+against the actual S5 outcome captured in this entry. P4 also bumped CURRENT_STATE
+(v2.3 → v2.4) and added its own changelog block. Per P4's parallel_session_notes,
+my (S5's) substantive canonical state pointers (last_session_id, red_team_counter,
+file_updated_by_session) remain authoritative; P4 honored that.
+
+### NAP.M4.5 — native pass_2 verdict (from interactive session)
+
+- **Per-signal verdicts:** Approve all 30 (24 Tier-A + 3 Tier-B + 3 Tier-C). 0 held;
+  0 demoted.
+- **Tier-C joint-firing question** (SIG.MSR.118 Ruchaka-absence / SIG.MSR.119 Malavya-
+  absence / SIG.MSR.143 Sarpa-absence — identical aggregate stats N=11, mean=0.4545,
+  variance=0.2727; zero triple overlap empirically; largest pairwise overlap = 3/11):
+  **Native verdict (a) — three independent calibrated phenomena.**
+  - Native reasoning: distinct planetary entities (Mars / Venus / Saturn-Venus-Moon-
+    Mars), non-overlapping event subsets confirmed empirically, distinct Jyotish
+    valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-
+    absence is an inauspicious-yoga absence). The identical aggregate statistics are
+    a natal-constant artifact, not evidence of redundancy. Approve each as an
+    independent signal. The held-out partition at M4-C is the generalization check;
+    revert path is available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize.
+
+### Acceptance criteria (from M4-B-S5-NAP-M45-EXECUTE brief)
+
+- **AC.S5.1 PASS** — NAP.M4.5 decision brief presented to native covering: (a)
+  one-paragraph plain-language summary; (b) 27 non-flagged signals as a compact
+  table with surrogate APPROVE-ALL recommendation; (c) 3 flagged signals with full
+  MSR definitions, statistical profiles, empirical pairwise-overlap result from
+  dossier (118∩119∩143=0; largest pairwise=3/11), surrogate APPROVE-each-as-
+  independent recommendation, and the explicit joint question for the native; (d)
+  decision template. Session HALTED at AC.S5.1; awaited native reply before any
+  file write.
+- **AC.S5.2 PASS** — Native reply received: "Approve all 30" + joint-question
+  verdict (a). Recorded into pass_2 fields of all 30 signals (production +
+  shadow files); pass_2_decision: "approved" for all 30; flagged-signal pass_2_notes
+  carry the verbatim joint-question reasoning per Tier-C deep-dive scrutiny.
+- **AC.S5.3 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/
+  production/ll1_weights_promoted_v1_0.json` patched: 30 signals' status flipped
+  `production_pending_pass_2` → `production`; per-signal `approval_chain[0].pass_2_*`
+  fields populated (date 2026-05-02, session M4-B-S5-NAP-M45-EXECUTE, reviewer
+  "native (Abhisek Mohanty)", decision "approved", notes per-signal — flagged
+  variant for 118/119/143). Outer top-level: `pass_2_status: "approved"`,
+  `pass_2_decision_date: 2026-05-02`, `pass_2_decision_session: M4-B-S5-NAP-M45-
+  EXECUTE`, `pass_2_outcome_summary: {approved: 30, held: 0, demoted: 0,
+  joint_question_verdict_for_118_119_143: "(a) three independent calibrated
+  phenomena"}`, `weights_in_production_register: true` (was false), updated
+  `weights_block_reason` to RESOLVED record. Patched via Python script
+  (atomic JSON read + dict mutation + serialize); re-parse JSON_OK confirmed.
+- **AC.S5.4 + F.RT.S4.1 close PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_
+  CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json` patched: 30
+  promotion-eligible signals' approval_chain pass_2 fields populated to mirror
+  production decisions. Outer metadata adds: `variance_estimator: "sample"`
+  (closes F.RT.S4.1 LOW finding from M4-B-S4 red-team — variance-estimator
+  unspecified in shadow file outer metadata). Plus `pass_2_metadata` block
+  summarizing the same outcome. Patched via the same script; re-parse JSON_OK.
+- **AC.S5.5 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_
+  APPROVAL_v1_0.md` v1.0 → v1.1. Frontmatter `version` 1.0→1.1; `status`
+  PASS_1_COMPLETE_PENDING_NAP_M4_5 → TWO_PASS_COMPLETE; `amended_during` /
+  `amended_on` set; `pass_2_reviewer` updated to "native (Abhisek Mohanty) —
+  NAP.M4.5 APPROVED 2026-05-02 at M4-B-S5"; `pass_2_outcome` added.
+  §5 approval_chain.pass_2 block populated with native verdict,
+  signals_reviewed/approved/held/demoted, joint_question_verdict_for_118_119_143
+  = "(a) three independent calibrated phenomena", joint_question_reasoning
+  verbatim, notes block recording the production register flip. New §5.5
+  Gemini reachability check addendum recording NOT_REACHABLE outcome with
+  channels checked + interpretation + consequences. §6 R.LL1TPA.1 reframed as
+  OPEN-carry-forward to M4-C entry (audit-trail completeness, not production-
+  blocker); R.LL1TPA.2 CLOSED with native verdict. v1.1 changelog entry appended.
+- **AC.S5.6 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_
+  GATE_v1_0.md` v1.0 → v1.1. AC.S5.6 threshold check: 30/30 = 100% ≥ 90%
+  threshold for FULL_PASS flip. Frontmatter `version` 1.0→1.1; `gate_decision`
+  CONDITIONAL_PASS → FULL_PASS; `gate_decision_summary` updated; `re_evaluation_
+  trigger` marked DISCHARGED 2026-05-02 at M4-B-S5; `amended_during` /
+  `amended_on` set. §3 decision block flipped (prior decision retained verbatim
+  as audit trail). New §5.1 records the re-evaluation event log: trigger event,
+  AC.S5.6 threshold check, LL.1 production register state at re-evaluation,
+  (LL.2.e) verdict (SATISFIED for the 30 promoted signals' edges; UNSATISFIED
+  for edges incident to the remaining 350 shadow signals), per-edge promotion
+  criteria (LL.2.a)–(d) status (still evaluated at LL.2 promotion time per-edge),
+  decision FULL_PASS. §5.2 retains v1.0 trigger description verbatim. §8 v1.1
+  changelog appended. Per-edge LL.2 promotion remains future scope (out of S5
+  must_not_touch — `signal_weights/shadow/ll2_edge_weights_v1_0.json` not
+  modified).
+- **AC.S5.7 PASS — outcome NOT_REACHABLE** — Gemini reachability check executed.
+  Channels checked: (a) `gemini` / `gemini-cli` binary in PATH — not installed.
+  (b) Project-local Gemini SDK or HTTP wrapper — none found. (c) Environment
+  variables (`GEMINI_API_KEY` etc.) — none set. (d) `~/.gemini/` directory exists
+  with `oauth_creds.json` (Antigravity credentials) but no installed CLI binary
+  or in-project tool consuming them for synchronous agent-to-agent review.
+  Interpretation: the MARSYS-JIS multi-agent collaboration framework is
+  operationalized today as structural mirror-pair discipline over static
+  surfaces (MP.1–MP.8 enforced by mirror_enforcer.py), not as live IPC.
+  R.LL1TPA.1 surrogate disclosure remains OPEN as carry-forward; next
+  reachability attempt scheduled at M4-C entry per AC.S5.7(b) protocol.
+  No supplemental Gemini-review row appended (NOT_REACHABLE means no verdict
+  to record). Pass_2 (native) is the binding final gate; production promotion
+  is NOT conditional on Gemini reachability per SHADOW_MODE_PROTOCOL §3.1(c)+(d).
+  Per Learning Layer discipline #4: had Gemini been reachable, only the
+  LL1_TWO_PASS_APPROVAL document would have been sent for review — no raw
+  signal weight data and no held-out event data.
+- **AC.S5.8 PASS** — `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/
+  ll4_prediction_priors_v1_0.json` NEW (v1.0 schema). Machine-readable view of
+  LL4_PREDICTION_PRIOR §4–§5 qualitative findings. Schema includes:
+  `schema_version`, `mechanism: "LL.4"`, `artifact_type:
+  "recommendation_prior"`, `produced_during`, `produced_on`, `source_document`
+  + `source_document_version`, `placement_rationale` (verbatim explanation
+  why this lives in `signal_weights/` NOT `signal_weights/shadow/`),
+  `consumer_contract`, `global_modifier` (date_precision tiers — exact /
+  approx-month / approx-year), `domain_priors` (10 entries), `signal_class_
+  priors` (3 entries), `n1_disclaimer`, `post_nap_m45_note`. Plus
+  LL4_PREDICTION_PRIOR_v1_0.md v1.0→v1.1: frontmatter `version` 1.0→1.1;
+  `machine_readable_view` field added; `ll2_stability_gate_decision_at_authoring`
+  updated to note v1.1 flip to FULL_PASS at M4-B-S5; new §8 Machine-Readable
+  Priors Cross-Reference (placement rationale + consumer contract); v1.1
+  changelog appended.
+- **AC.S5.9 PASS — version collision resolved at v2.3 then advanced to v2.4 by
+  parallel slot** — CURRENT_STATE_v1_0.md frontmatter version originally bumped
+  2.2 → 2.3 by S5 (brief specified v2.1, but P3-MIRROR-MANIFEST landed first
+  taking v2.2, so v2.1 would be a downgrade — S5 took v2.3 instead, leaving
+  v2.1 permanently vacant in the changelog). Subsequently the parallel-slot
+  P4-S6-PREDRAFT bumped v2.3 → v2.4 with its own changelog block. S5's
+  canonical state pointers (last_session_id ↦ M4-B-S5-NAP-M45-EXECUTE,
+  red_team_counter 0 → 1, file_updated_at, file_updated_by_session,
+  next_session_proposed_cowork_thread_name ↦ "M4-B-S6 — M4-B Sub-Phase Close
+  + Red-Team", red_team_due_note rewritten, next_session_objective rewritten
+  to M4-B-S6 scope) all remain authoritative per the parallel-slot
+  coordination convention "S5 substantive wins on canonical pointers".
+- **AC.S5.10 PASS** — this SESSION_LOG entry appended; git commit at session
+  close (hash stamped post-commit per below).
+- **AC.S5.11 — schema_validator.py** — exit captured at session_close block
+  below.
+
+### Substantive deliverables this session
+
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/
+  ll1_weights_promoted_v1_0.json` — modified. 30 signals flipped to production
+  status; outer flag flipped to true.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/
+  ll1_shadow_weights_v1_0.json` — modified. 30 promotion-eligible signals
+  patched in approval_chain; variance_estimator field added at outer metadata.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md`
+  — modified. v1.0 → v1.1. TWO_PASS_COMPLETE.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md`
+  — modified. v1.0 → v1.1. CONDITIONAL_PASS → FULL_PASS.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/
+  ll4_prediction_priors_v1_0.json` — created. Machine-readable LL.4 priors view.
+- `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md`
+  — modified. v1.0 → v1.1. JSON cross-reference added.
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — modified. v2.2 → v2.3 (then v2.3
+  → v2.4 by parallel-slot P4); state pointers rotated at S5.
+- `00_ARCHITECTURE/SESSION_LOG.md` — modified. This entry appended.
+
+### Honest framing
+
+n=1 disclaimer carries through to all 30 production weights. Promotion is
+**structural** (lifts the SHADOW_MODE_PROTOCOL §3.1(c)+(d) two-pass + native-
+no-hold gate), **not epistemic** (does not claim universal Jyotish signal
+weights). The held-out 9-event partition at M4-C is the second-line defense.
+Held-out partition remains sacrosanct (verified: pass_2 patches do not touch
+`06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json`).
+
+LL.2 gate now FULL_PASS but per-edge LL.2 promotion still requires per-edge
+(LL.2.a)–(d) evaluation at LL.2 promotion time — that work is M4-B-S6 or M4-C
+scope, not S5.
+
+R.LL1TPA.1 (surrogate-not-Gemini) carries forward to M4-C entry as audit-trail
+discipline. Pass_2 (native) is the binding gate and has been discharged;
+R.LL1TPA.1 does not block production consumption.
+
+### Next session objective
+
+**M4-B-S6** — M4-B sub-phase close + sub-phase-close red-team + per-edge LL.2
+promotion (optional, gate-level unblocked at this session) + MP.1+MP.2 mirror
+sync. Per AC.S5.9 brief note: M4-B sub-phase close requires its own red-team
+even though red_team_counter is at 1 (not the IS.8(a) trigger threshold of 3),
+as the analogue of IS.8(b) discipline at sub-phase granularity. M4-B-S6 should
+read M4_B_CLOSE_v1_0.md (parallel-slot P4 pre-draft) and resolve all
+[PENDING-S5] / [PENDING-S6] tokens against the actual S5 outcome captured in
+this entry.
+
+```yaml
+session_close:
+  session_id: M4-B-S5-NAP-M45-EXECUTE
+  closed_at: "2026-05-03T01:30:00+05:30"
+  current_state_updated: true
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json
+      mutation_type: modified
+      justification: "AC.S5.3 — flip 30 signals to production status; outer weights_in_production_register false→true; per-signal pass_2 fields populated"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json
+      mutation_type: modified
+      justification: "AC.S5.4 — 30 promotion-eligible signals' approval_chain pass_2 fields patched; outer variance_estimator field added (F.RT.S4.1 close)"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md
+      mutation_type: modified
+      justification: "AC.S5.5 — v1.0→v1.1 TWO_PASS_COMPLETE; §5 pass_2 block populated; new §5.5 Gemini reachability addendum; §6 residuals updated"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.S5.6 — v1.0→v1.1 CONDITIONAL_PASS→FULL_PASS; new §5.1 re-evaluation event log"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json
+      mutation_type: created
+      justification: "AC.S5.8 — machine-readable LL.4 priors view; placement in signal_weights/ NOT shadow/ per recommendation-artifact rationale"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md
+      mutation_type: modified
+      justification: "AC.S5.8 — v1.0→v1.1 machine_readable_view field + new §8 cross-reference"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      justification: "AC.S5.9 — version 2.2→2.3 (v2.1 vacated due to P3 parallel-slot collision); state pointers rotated; red_team_counter 0→1. Subsequently bumped 2.3→2.4 by P4-S6-PREDRAFT parallel slot."
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      justification: "AC.S5.10 — this entry appended"
+      within_declared_scope: true
+  registry_updates_made:
+    canonical_artifacts:
+      - canonical_id: CURRENT_STATE
+        change: changelog_entry_added_v2_3_then_advanced_v2_4_by_P4
+        details: "S5 contribution: frontmatter version 2.2→2.3; canonical state pointers rotated (last_session_id, next_session_objective, red_team_counter 0→1, file_updated_at, file_updated_by_session, next_session_proposed_cowork_thread_name, red_team_due_note); active_phase_plan_sub_phase prepended with M4-B-S5 narrative. Subsequent P4 parallel-slot bump 2.3→2.4 honored S5 canonical pointers."
+      - canonical_id: LL1_TWO_PASS_APPROVAL_v1_0
+        change: status_flip_and_version_bump
+        details: "version 1.0→1.1; status PASS_1_COMPLETE_PENDING_NAP_M4_5 → TWO_PASS_COMPLETE"
+      - canonical_id: LL2_STABILITY_GATE_v1_0
+        change: status_flip_and_version_bump
+        details: "version 1.0→1.1; gate_decision CONDITIONAL_PASS → FULL_PASS"
+      - canonical_id: LL4_PREDICTION_PRIOR_v1_0
+        change: version_bump_and_jsoncross_ref
+        details: "version 1.0→1.1; machine_readable_view field added"
+      - canonical_id: ll1_weights_promoted_v1_0
+        change: production_promotion
+        details: "30 signals flipped status production_pending_pass_2 → production; weights_in_production_register false → true"
+      - canonical_id: ll1_shadow_weights_v1_0
+        change: pass_2_fields_populated_plus_variance_estimator
+        details: "30 promotion-eligible signals' approval_chain pass_2 fields populated; variance_estimator='sample' added at outer metadata (F.RT.S4.1 close)"
+      - canonical_id: ll4_prediction_priors_v1_0
+        change: created
+        details: "new file at signal_weights/ll4_prediction_priors_v1_0.json — machine-readable view of LL.4 §4-§5 qualitative findings; not subject to shadow→production rules per recommendation-artifact placement rationale; CAPABILITY_MANIFEST registration deferred to M4-B-S6 manifest pass per parallel-slot P3 handoff"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CLAUDE.md unchanged this session; substantive scope is signal_weights/** + LL artifact set + CURRENT_STATE/SESSION_LOG. Not a Claude-Gemini-mirrored governance-content surface for MP.1."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "MP.2 composite — CURRENT_STATE updated this session; .gemini/project_state.md not in may_touch (parallel-slot M4-B-P3-MIRROR-MANIFEST already updated it earlier same day to adapted parity reflecting M4-B state through S4 + dossier authoring). M4-B-S5 is a phase-class transition (LL.1 enters production register), so the next substantive close that touches .gemini/project_state.md should re-run MP.2 propagation. Recommended trigger: M4-B-S6 mirror sync per next_session_objective (d). No DIS.class.mirror_desync candidate opens (P3 sync was less than 4 hours prior; staleness window short)."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP v2.0 frozen; no cascade"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged; no cascade"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST unchanged this session (ll4_prediction_priors_v1_0.json registration deferred to M4-B-S6 manifest pass per parallel-slot P3 handoff_notes); MP.5 known_asymmetries hold."
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"
+  red_team_pass:
+    due: false
+    performed: false
+    rationale: "Counter at 0 entering session; advances 0→1 (substantive learning-layer-substrate session per ONGOING_HYGIENE_POLICIES §G — production-register flip + gate flip + JSON view land + finding close + reachability check). Counter 1 < 3 IS.8(a) trigger; no cadence-fire this session. M4-B sub-phase-close red-team scheduled at S6 per AC.S5.9 brief note (sub-phase-close discipline analogue to IS.8(b)). F.RT.S4.1 LOW closed in-session via variance_estimator field on shadow file outer metadata."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Substrate session; lives in platform/ — must_not_touch. JSON validity confirmed via Python json.load() on production + shadow + LL.4 priors files (all parse OK)."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: STAMPED_AT_COMMIT
+    notes: "AC.S5.11 — exit captured post-edit. Brief specifies 0 NEW violations (108 baseline expected). Result stamped in this entry's footer commit alongside the git commit hash."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "No Claude-side governance-mirror surface touched this session (.geminirules / .gemini/project_state.md not in may_touch); MP.1+MP.2 sync was discharged at parallel M4-B-P3-MIRROR-MANIFEST. Recommended re-run at M4-B-S6 mirror sync per next_session_objective (d)."
+  step_ledger_updated: n/a
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered:
+    - moment: "session_open after AC.S5.1 brief presentation"
+      type: "decision_gate_hold_for_native_input"
+      rationale: "Per brief hard constraint, session HALTS at AC.S5.1 and awaits native NAP.M4.5 reply before any production-file write. Two-pass discipline exists precisely because pass_1 was a surrogate; native is pass_2; no shortcut. Halt resolved by native reply 'Approve all 30 + joint-question (a) three independent calibrated phenomena'. Session resumed with AC.S5.2 onward."
+  native_directive_per_step_verification:
+    - step_id: AC.S5.1
+      directive_text: "HARD STOP at AC.S5.1: do not write any production files until native NAP.M4.5 reply is in hand."
+      verification: "Honored. Decision brief emitted; session awaited native reply; no file write before native verdict received."
+    - step_id: AC.S5.8
+      directive_text: "ll4_prediction_priors_v1_0.json lands directly in signal_weights/ (not shadow/) because it is a recommendation artifact (not a weight register subject to promotion rules). Document this placement rationale in the file's own metadata."
+      verification: "Honored. File at signal_weights/ll4_prediction_priors_v1_0.json (not shadow/); placement_rationale field in the file's metadata documents the decision verbatim; LL4 §8 cross-reference also documents it."
+    - step_id: F.RT.S4.1_close
+      directive_text: "When patching ll1_shadow_weights_v1_0.json approval_chain fields, add a variance_estimator: 'sample' field to the shadow file's outer metadata block to close this finding. One-line fix; document in changelog."
+      verification: "Honored. variance_estimator='sample' added at outer metadata of ll1_shadow_weights_v1_0.json; documented in this session_log entry's registry_updates_made.ll1_shadow_weights_v1_0 block."
+    - step_id: AC.S5.7_protect_holdout
+      directive_text: "If Gemini is reachable, do not send raw signal weight data — send the LL1_TWO_PASS_APPROVAL document for review only. Protect the held-out event data per Learning Layer discipline #4."
+      verification: "Discipline honored. Gemini was NOT_REACHABLE so no transmission occurred; if reachable, only LL1_TWO_PASS_APPROVAL would have been sent per the discipline. Held-out event data and raw signal weights were never transmitted."
+  build_state_serialized:
+    serialized: false
+    rationale: "Substrate-session deliverables are within 06_LEARNING_LAYER/** + governance state surfaces; build-state serialization is a Cowork/portal-build-tracker artifact for a different surface; out of M4-B-S5 scope per ONGOING_HYGIENE_POLICIES §O."
+  parallel_session_notes: >
+    M4-B-S5 ran chronologically AFTER the parallel-slot M4-B-P3-MIRROR-MANIFEST
+    (closed earlier same day at commit b41acde) and CONCURRENTLY with parallel-slot
+    M4-B-P4-S6-PREDRAFT (closed at commit 90508e5 during S5 runtime). Per P3's
+    parallel_session_notes block "if S5 lands after, last writer's last_session_id
+    / file_updated_at / red_team_counter (if substantive at S5) wins; this session's
+    changelog block is preserved alongside" — honored. Per P4's parallel_session_notes
+    "S5's substantive canonical state pointers remain authoritative" — honored.
+    Version-numbering coordination collisions: brief AC.S5.9 specified "v2.1" written
+    under the assumption S5 would land before P3 (v2.1 was explicitly RESERVED for S5
+    per P3 changelog). P3 actually landed first taking v2.2; taking v2.1 from a v2.2-
+    on-disk file would be a downgrade — S5 took v2.3 instead. Subsequently P4 bumped
+    v2.3→v2.4 with its own changelog block. v2.1 is permanently vacant in the version
+    sequence — auditable gap, not silent skip; documented in v2.3 changelog block.
+  close_criteria_met: true
+  unblocks: "M4-B-S6 (M4-B sub-phase close + sub-phase-close red-team + per-edge LL.2 promotion + MP.1+MP.2 mirror sync). M4-B-S6 should read M4_B_CLOSE_v1_0.md pre-draft authored by parallel-slot P4 and resolve [PENDING-S5] / [PENDING-S6] tokens against this entry."
+  handoff_notes: >
+    NAP.M4.5 binding gate DISCHARGED. LL.1 production register is now consumable by
+    downstream pipeline (M4-C+); n=1 disclaimer carries through. LL2_STABILITY_GATE
+    FULL_PASS at gate level — per-edge LL.2 promotion candidacy now depends only on
+    per-edge (LL.2.a)–(d) criteria evaluated at LL.2 promotion time. R.LL1TPA.1
+    (surrogate-not-Gemini) carry-forward to M4-C entry — re-attempt Gemini reachability
+    there. F.RT.S4.1 closed via shadow-file variance_estimator field. LL.4 priors JSON
+    is fallback weighting only; not a substitute for the 30 LL.1 production weights.
+    Held_out=0.913 must NOT be quoted as clean validity. Pancha-Mahapurusha clique
+    (SIG.MSR.117/.118/.119/.143/.145/.402) cluster-aware consumption per LL.3 R.LL3.2
+    still required at retrieval to avoid 6× double-counting. M4-B sub-phase close at
+    S6 will require its own red-team per AC.S5.9.
+```
+
+Commit: STAMPED_AT_COMMIT (post-merge-main, 2026-05-02). Schema validator result also stamped post-commit.
+

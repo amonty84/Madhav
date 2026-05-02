@@ -7,21 +7,21 @@
   "rubric_version": "1.0",
   "rubric_option": "B",
   "input_file": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json",
-  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md \u00a73 (NAP.M4.4 APPROVED 2026-05-02)",
+  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §3 (NAP.M4.4 APPROVED 2026-05-02)",
   "two_pass_approval_ref": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
   "pass_1_count": 30,
   "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
-  "pass_1_reviewer_kind": "surrogate-for-Gemini (Gemini unavailable synchronously per MACRO_PLAN \u00a7Multi-Agent)",
+  "pass_1_reviewer_kind": "surrogate-for-Gemini (Gemini unavailable synchronously per MACRO_PLAN §Multi-Agent)",
   "pass_1_date": "2026-05-02",
   "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
-  "pass_2_status": "pending_NAP.M4.5",
+  "pass_2_status": "approved",
   "pass_2_reviewer": "native",
   "pass_2_nap_id": "NAP.M4.5",
-  "pass_2_scheduled_at": "M4-B close per PHASE_M4_PLAN \u00a73.2",
+  "pass_2_scheduled_at": "M4-B close per PHASE_M4_PLAN §3.2",
   "production_status_field_value": "production_pending_pass_2",
-  "weights_in_production_register": false,
-  "weights_block_reason": "Pass_2 binding gate not yet discharged. Per SHADOW_MODE_PROTOCOL \u00a73.1(c)+(d), promotion completes only on two-pass approval AND native-no-hold. This file holds the pass_1-approved weights pending pass_2 sign-off; downstream pipeline operations must NOT consume weights from this file until status flips to 'production' (post-NAP.M4.5).",
-  "n1_disclaimer": "VALIDITY NOTICE: These calibration weights are derived from a single native's (n=1) life event corpus. They are provisional, subject to revision as the corpus grows, and must not be interpreted as universal Jyotish signal weights. Per MACRO_PLAN \u00a73.5.A Principle 1 \u2014 n=1 validity disclaimer.",
+  "weights_in_production_register": true,
+  "weights_block_reason": "RESOLVED 2026-05-02 NAP.M4.5: native approved all 30 signals; pass_2 binding gate discharged. Downstream pipeline may consume these weights with the n=1 disclaimer carried through. Held-out partition at M4-C is the second-line defense per SHADOW_MODE_PROTOCOL §5; any signal failing held-out generalization gets reverted.",
+  "n1_disclaimer": "VALIDITY NOTICE: These calibration weights are derived from a single native's (n=1) life event corpus. They are provisional, subject to revision as the corpus grows, and must not be interpreted as universal Jyotish signal weights. Per MACRO_PLAN §3.5.A Principle 1 — n=1 validity disclaimer.",
   "summary": {
     "total_promoted_pending_pass_2": 30,
     "by_tier_A_high_confidence": 24,
@@ -62,7 +62,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -73,13 +73,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -111,7 +113,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -122,13 +124,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -160,7 +164,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -171,13 +175,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -205,7 +211,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.8,
       "production_weight": 0.8,
@@ -216,13 +222,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -250,7 +258,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -261,13 +269,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -299,7 +309,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -310,13 +320,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -344,7 +356,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -355,13 +367,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -385,7 +399,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -396,13 +410,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -430,7 +446,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -441,13 +457,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -471,7 +489,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -482,13 +500,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -512,7 +532,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -523,13 +543,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -553,7 +575,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -564,13 +586,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -626,7 +650,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": 0.4545,
@@ -637,13 +661,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
         }
       ]
     },
@@ -699,7 +725,7 @@
           "lit_score": 0.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": 0.4545,
@@ -710,13 +736,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
         }
       ]
     },
@@ -772,7 +800,7 @@
           "lit_score": 0.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.4545,
       "production_weight": 0.4545,
@@ -783,13 +811,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a73.3 + \u00a76 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
         }
       ]
     },
@@ -845,7 +875,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.9091,
       "production_weight": 0.9091,
@@ -856,13 +886,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -886,7 +918,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -897,13 +929,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -927,7 +961,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -938,13 +972,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -968,7 +1004,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -979,13 +1015,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1009,7 +1047,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1020,13 +1058,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1050,7 +1090,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1061,13 +1101,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1091,7 +1133,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1102,13 +1144,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1132,7 +1176,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1143,13 +1187,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1173,7 +1219,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1184,13 +1230,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1214,7 +1262,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1225,13 +1273,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1255,7 +1305,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1266,13 +1316,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1296,7 +1348,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1307,13 +1359,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1337,7 +1391,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1348,13 +1402,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1410,7 +1466,7 @@
           "lit_score": 0.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 0.7273,
       "production_weight": 0.7273,
@@ -1421,13 +1477,15 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     },
@@ -1451,7 +1509,7 @@
           "lit_score": 1.0
         }
       ],
-      "status": "production_pending_pass_2",
+      "status": "production",
       "promotion_eligible": true,
       "shadow_weight": 1.0,
       "production_weight": 1.0,
@@ -1462,15 +1520,26 @@
           "pass_1_date": "2026-05-02",
           "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
           "pass_1_decision": "approved",
-          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md \u00a74 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
           "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
-          "pass_2_reviewer": "native",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
           "pass_2_nap_id": "NAP.M4.5",
-          "pass_2_status": "pending",
-          "pass_2_date": null,
-          "pass_2_session": null
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
         }
       ]
     }
+  },
+  "pass_2_decision_date": "2026-05-02",
+  "pass_2_decision_session": "M4-B-S5-NAP-M45-EXECUTE",
+  "pass_2_reviewer_resolved": "native (Abhisek Mohanty)",
+  "pass_2_outcome_summary": {
+    "approved": 30,
+    "held": 0,
+    "demoted": 0,
+    "joint_question_verdict_for_118_119_143": "(a) three independent calibrated phenomena"
   }
 }

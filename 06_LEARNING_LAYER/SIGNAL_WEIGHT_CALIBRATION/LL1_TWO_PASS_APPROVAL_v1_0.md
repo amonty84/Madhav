@@ -1,18 +1,21 @@
 ---
 artifact: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md
-version: "1.0"
-status: PASS_1_COMPLETE_PENDING_NAP_M4_5
+version: "1.1"
+status: TWO_PASS_COMPLETE
 produced_during: M4-B-S2-MIRROR-TWOPASS
 produced_on: 2026-05-02
+amended_during: M4-B-S5-NAP-M45-EXECUTE
+amended_on: 2026-05-02
 mechanism: LL.1
 phase: M4-B
 input_file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json
-governs: pass_1 of two-pass approval (SHADOW_MODE_PROTOCOL §3.1(c)) for the 30 promotion-eligible LL.1 signals
+governs: two-pass approval (SHADOW_MODE_PROTOCOL §3.1(c)) for the 30 promotion-eligible LL.1 signals; pass_1 + pass_2 both complete
 authoritative_protocol: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §3 (NAP.M4.4 APPROVED 2026-05-02)
 pass_1_reviewer: Claude-surrogate-M4-B-S2
 pass_1_reviewer_kind: surrogate-for-Gemini (Gemini unavailable synchronously per MACRO_PLAN §Multi-Agent)
-pass_2_reviewer: native (NAP.M4.5 — scheduled at M4-B close per PHASE_M4_PLAN §3.2)
-related_acceptance_criteria: AC.S2.1, AC.S2.3, AC.S2.4, AC.S2.5
+pass_2_reviewer: native (Abhisek Mohanty) — NAP.M4.5 APPROVED 2026-05-02 at M4-B-S5
+pass_2_outcome: 30 approved / 0 held / 0 demoted
+related_acceptance_criteria: AC.S2.1, AC.S2.3, AC.S2.4, AC.S2.5, AC.S5.5
 n1_disclaimer: |
   These calibration weights are derived from a single native's (n=1) life event corpus. They
   are provisional, subject to revision as the corpus grows, and must not be interpreted as
@@ -291,43 +294,110 @@ approval_chain:
   pass_2:
     role: native
     reviewer: native (Abhisek Mohanty)
-    review_date: null
-    review_session: null
+    review_date: 2026-05-02
+    review_session: M4-B-S5-NAP-M45-EXECUTE
     nap_id: NAP.M4.5
     nap_scheduled_at: M4-B close (per PHASE_M4_PLAN §3.2)
-    status: pending
+    nap_executed_at: M4-B-S5
+    status: APPROVED
+    signals_reviewed: 30
+    signals_approved: 30
+    signals_held: 0
+    signals_demoted: 0
+    joint_question_verdict_for_118_119_143: "(a) three independent calibrated phenomena"
+    joint_question_reasoning: |
+      Native reasoning: Ruchaka-absence, Malavya-absence, and Sarpa-absence operate on
+      distinct planetary entities (Mars / Venus / Saturn-Venus-Moon-Mars), fire on
+      non-overlapping event subsets (zero triple overlap empirically confirmed; largest
+      pairwise overlap = 3 of 11), and carry distinct Jyotish valences (Ruchaka-absence
+      and Malavya-absence are auspicious-yoga absences; Sarpa-absence is an
+      inauspicious-yoga absence). The identical aggregate statistics are a natal-constant
+      artifact, not evidence of redundancy. Approve each as an independent signal. The
+      held-out partition at M4-C is the generalization check; revert path is available
+      per SHADOW_MODE_PROTOCOL §5 if any fails to generalize.
     notes: |
-      Pass_2 = native spot-check of LL.1 weight assignments at M4-B close per the M4
-      NAP register. Pass_2 is the binding final gate per SHADOW_MODE_PROTOCOL §3.1(c)
-      ("two-pass approval") + §3.1(d) ("native notified, no hold"). Until pass_2
-      resolves, no signal weight is fully promoted to production; the production-pending
-      file at signal_weights/production/ll1_weights_promoted_v1_0.json carries
-      status: production_pending_pass_2 to surface this.
+      Pass_2 binding gate discharged. All 30 signals flipped from
+      production_pending_pass_2 to production in
+      signal_weights/production/ll1_weights_promoted_v1_0.json; outer
+      weights_in_production_register flipped false → true. Pass_1 surrogate verdict was
+      ratified by native pass_2 across the entire eligible set. n=1 epistemic disclaimer
+      rides through — promotion is structural, not a claim of universal validity.
   gemini_reachability_addendum:
-    status: "open — addendum will be appended if Gemini becomes reachable before M4-B close"
-    addendum_path: null
+    status: "see §5.5 below — Gemini reachability check executed during M4-B-S5; result recorded inline."
+    addendum_path: "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md §5.5"
 ```
+
+---
+
+## §5.5 — Gemini reachability check (M4-B-S5, 2026-05-02)
+
+Per AC.S5.7, this session attempted to reach Gemini for an independent supplemental
+review of LL1_TWO_PASS_APPROVAL (the document only — no raw signal weight data and no
+held-out event data, per Learning Layer discipline #4). Outcome:
+
+**Result: NOT_REACHABLE.**
+
+**Channels checked:**
+
+- `gemini` / `gemini-cli` binary in PATH — not installed.
+- Project-local Gemini SDK or HTTP wrapper (search across
+  `platform/scripts/`, `platform/src/`, `00_ARCHITECTURE/`) — none found. Hits for
+  `gemini` in source files refer to the static `.geminirules` /
+  `.gemini/project_state.md` mirror-pair surfaces, not a live communication channel.
+- Environment variables (`GEMINI_API_KEY`, etc.) — none set in session env.
+- `~/.gemini/` directory exists with `oauth_creds.json` (Antigravity credentials), but
+  no installed CLI binary or in-project tool that consumes them for synchronous
+  agent-to-agent review.
+
+**Interpretation.** The MARSYS-JIS multi-agent collaboration framework
+(`PROJECT_ARCHITECTURE_v2_2.md §D.11`, `GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md §K`) is
+operationalized today as **structural mirror-pair discipline over static surfaces**
+(MP.1–MP.8 enforced by `mirror_enforcer.py`), not as live IPC. The "Gemini-side" is
+authored when Gemini is invoked separately (e.g., via Antigravity sessions) and the two
+sides reconcile asynchronously through the mirror surfaces. There is no synchronous
+in-session channel from a Claude Code session to an active Gemini agent at the time of
+this check.
+
+**Consequence.**
+
+- No supplemental Gemini-review row appended to §5 `approval_chain.gemini_reachability_addendum`.
+- **R.LL1TPA.1 surrogate disclosure remains OPEN** (carry-forward) — next reachability
+  attempt scheduled at **M4-C entry** (M4-B → M4-C transition), per AC.S5.7(b)
+  protocol. If Gemini is reachable then, the addendum at §5 is appended at that time
+  with Gemini's verdict; if Gemini ratifies, R.LL1TPA.1 closes; if Gemini contests,
+  open `DIS.class.output_conflict` per `GOVERNANCE_INTEGRITY_PROTOCOL §K.2`.
+- Pass_2 (native) remains the binding final gate; production promotion is **not
+  conditional** on Gemini reachability per `SHADOW_MODE_PROTOCOL §3.1(c)+(d)`. The
+  reachability check is an audit-trail discipline, not a promotion gate.
+
+**Reachability check executed by:** Claude Code session M4-B-S5-NAP-M45-EXECUTE
+**Reachability check date:** 2026-05-02
+**Next reachability attempt:** at M4-C entry session (whichever first opens after
+M4-B close)
 
 ---
 
 ## §6 — Known residuals
 
-- **R.LL1TPA.1 (LOW) — surrogate-not-Gemini.** Pass_1 was performed by Claude-surrogate
-  rather than Gemini per the Multi-Agent Collaboration framework. Carry-forward: if
-  Gemini becomes reachable before M4-B close, append an addendum at this document's
-  §5 capturing Gemini's verdict; if Gemini ratifies, no further action; if Gemini
-  contests, open a `DIS.class.output_conflict` entry per
-  `GOVERNANCE_INTEGRITY_PROTOCOL §K.2`. Pass_2 (native) remains the binding gate
-  regardless. Severity LOW because (a) the surrogate role is flagged explicitly,
-  (b) production weights are gated by pass_2 anyway, (c) the surrogate applied the same
-  numerical rubric that any reviewer would apply.
-- **R.LL1TPA.2 (LOW) — Tier-C joint-firing question.** SIG.MSR.118, .119, .143 carry
-  identical descriptive statistics across 11 observations each; whether they are
-  three independent calibrated phenomena or one phenomenon counted three times is a
-  Jyotish-domain-knowledge question the native is best-placed to answer at NAP.M4.5.
-  No pass_1 action; flagged in §5 `flagged_for_pass_2_attention`. Severity LOW because
-  approving them in pass_1 does not promote them to production — the pass_2 gate is
-  exactly where this question is meant to resolve.
+- **R.LL1TPA.1 (LOW, OPEN — carry-forward to M4-C entry) — surrogate-not-Gemini.**
+  Pass_1 was performed by Claude-surrogate rather than Gemini per the Multi-Agent
+  Collaboration framework. Reachability check executed at M4-B-S5 (this session)
+  returned NOT_REACHABLE — no live channel from a Claude Code session to an active
+  Gemini agent exists today; see §5.5 above. Carry-forward: re-attempt reachability at
+  M4-C entry; if Gemini ratifies, R.LL1TPA.1 closes; if Gemini contests, open a
+  `DIS.class.output_conflict` entry per `GOVERNANCE_INTEGRITY_PROTOCOL §K.2`. Pass_2
+  (native) is the binding final gate and has been discharged 2026-05-02; this residual
+  is audit-trail completeness only, not a production-blocker. Severity LOW because
+  (a) the surrogate role was flagged explicitly throughout, (b) production weights are
+  now gated by pass_2 (discharged), (c) the surrogate applied the same numerical
+  rubric Gemini would apply.
+- **R.LL1TPA.2 (CLOSED 2026-05-02 NAP.M4.5) — Tier-C joint-firing question.**
+  SIG.MSR.118, .119, .143 carry identical descriptive statistics across 11 observations
+  each. Native verdict at pass_2: **(a) three independent calibrated phenomena** —
+  distinct planetary entities, non-overlapping event subsets (zero triple overlap;
+  largest pairwise overlap 3 of 11), distinct Jyotish valences (two auspicious-yoga
+  absences + one inauspicious-yoga absence). All three approved as independent signals.
+  Held-out partition at M4-C is the generalization check.
 - **R.LL1TPA.3 (LOW) — domain=unknown for 11 signals.** Domain mapping limitation
   inherited from M4-B-S1 (msr_domain_buckets.json keyed by MSR IDs; LEL semantic-class
   IDs CTR/CVG/SIG.NN/RPT/DSH absent). Cross-system reconciliation is M4-D scope per
@@ -355,8 +425,23 @@ No HIGH or CRITICAL residuals.
   `signal_weights/production/ll1_weights_promoted_v1_0.json` with status
   `production_pending_pass_2`. 5 known residuals enumerated at §6 (3 LOW + 1 DOC-ONLY +
   1 DEFERRED); 0 HIGH/CRITICAL.
+- **v1.1 (2026-05-02, M4-B-S5-NAP-M45-EXECUTE):** Pass_2 (NAP.M4.5) discharged.
+  Frontmatter `status` flipped `PASS_1_COMPLETE_PENDING_NAP_M4_5` → `TWO_PASS_COMPLETE`;
+  `version` bumped 1.0 → 1.1; pass_2_outcome added to frontmatter (30 approved / 0 held
+  / 0 demoted). §5 `approval_chain.pass_2` block populated with native verdict, joint-
+  question verdict for SIG.MSR.118/.119/.143 = (a) three independent calibrated
+  phenomena, and joint_question_reasoning. New §5.5 added recording Gemini reachability
+  check executed M4-B-S5 (result: NOT_REACHABLE; R.LL1TPA.1 carry-forward to M4-C
+  entry). §6 R.LL1TPA.1 reframed as OPEN-carry-forward (gemini-reachability audit-
+  trail, not a production-blocker); R.LL1TPA.2 CLOSED with native verdict. Production
+  file (`ll1_weights_promoted_v1_0.json`) and shadow file
+  (`ll1_shadow_weights_v1_0.json`) patched same session: 30 status flips
+  `production_pending_pass_2` → `production`; outer `weights_in_production_register`
+  flipped false → true; per-signal `approval_chain.pass_2_*` fields populated; shadow
+  outer metadata adds `variance_estimator: "sample"` (closes F.RT.S4.1 from M4-B-S4
+  red-team). 0 HIGH/CRITICAL residuals.
 
 ---
 
-*End of LL1_TWO_PASS_APPROVAL_v1_0.md. Pass_1 complete; pass_2 = NAP.M4.5 at M4-B
-close per `PHASE_M4_PLAN §3.2`.*
+*End of LL1_TWO_PASS_APPROVAL_v1_0.md v1.1. Two-pass complete; downstream pipeline may
+consume the 30 promoted weights with the n=1 disclaimer carried through.*
