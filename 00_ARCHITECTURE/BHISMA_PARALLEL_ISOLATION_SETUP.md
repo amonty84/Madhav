@@ -140,7 +140,9 @@ git merge --no-ff "feature/bhisma-w3/${SESSION_ID}" \
 git worktree remove "../Madhav-${SESSION_ID}"
 
 # 3. Delete the sub-branch (local + remote)
-git branch -d "feature/bhisma-w3/${SESSION_ID}"
+# Use -D not -d: sub-branches are only reachable from the umbrella, not from main,
+# so -d will always refuse. The merge in step 1 above ensures no work is lost.
+git branch -D "feature/bhisma-w3/${SESSION_ID}"
 git push origin --delete "feature/bhisma-w3/${SESSION_ID}" 2>/dev/null || true
 
 # 4. Push updated umbrella
@@ -328,7 +330,12 @@ Step 2 — If clean: merge feature/phase-o-observatory → main
   git push origin main
 
 Step 3 — Delete the 4 stale identical w2-* branches:
-  git branch -d w2-bugs w2-eval-a w2-manifest w2-schema
+  # Use -D (force), not -d. git branch -d checks reachability against the
+  # *current branch* (main), not all branches. Since eeb65d9 lives only on
+  # feature/phase-o-observatory and not yet in main, -d will refuse.
+  # -D is safe here because the commits ARE reachable from phase-o-observatory
+  # — no work is lost.
+  git branch -D w2-bugs w2-eval-a w2-manifest w2-schema
   git push origin --delete w2-bugs w2-eval-a w2-manifest w2-schema
 
 Step 4 — Continue Phase O sessions using worktrees from main or
