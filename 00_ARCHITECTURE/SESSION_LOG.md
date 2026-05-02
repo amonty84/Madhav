@@ -17157,3 +17157,176 @@ session_close:
 **S1.4 / S1.5 / S1.6 / S1.7 / S1.8 — five per-provider adapters (parallel-safe after S1.2)** and **S1.9 — Frontend scaffold (depends on S1.3 — i.e., now)** per OBSERVATORY_PLAN §5.1. S1.9 consumes [`platform/src/app/api/admin/observatory/openapi.yaml`](platform/src/app/api/admin/observatory/openapi.yaml) as its API contract. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-3-backend-api`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+---
+
+## USTAD_S1_7_DEEPSEEK_PROVIDER_ADAPTER — Phase O Observatory O.1 fourth implementation session (DeepSeek OpenAI-compatible Chat Completions adapter + 7-case test suite)
+
+**Date:** 2026-05-03 (concurrent-workstream session; Phase O sub-phase O.1; per-provider adapter — depends on S1.2 closed; parallel-safe with S1.4–S1.6 / S1.8 / S1.9 per OBSERVATORY_PLAN §6.1).
+
+**Brief:** Inline execution brief delivered via Cowork prompt (USTAD_S1_7 — DeepSeek Provider Adapter). Build `platform/src/lib/llm/providers/deepseek_observed.ts` — observed wrapper for the DeepSeek API (OpenAI-compatible Chat Completions) — plus its 7-case test suite. Worktree-isolated execution under `feature/phase-o-observatory-ustad-s1-7-deepseek` (cut from origin/feature/phase-o-observatory tip 0bec216). No new tables; OD.S1.3.1 same policy: extra fields land in parameters jsonb only.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_7_DEEPSEEK_PROVIDER_ADAPTER
+  cowork_thread_name: "ustad-s1-7-deepseek"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.1.S1.7
+  predecessor_session: USTAD_S1_2_LLMCLIENT_SHIM
+  current_state_version_at_open: v3.5
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/providers/deepseek_observed.ts
+      - platform/src/lib/llm/providers/__tests__/deepseek_observed.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/anthropic_observed.ts
+      - platform/src/lib/llm/providers/openai_observed.ts
+      - platform/src/lib/llm/providers/gemini_observed.ts
+      - platform/src/lib/llm/providers/nim_observed.ts
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - platform/src/components/**
+      - platform/src/app/**
+      - 00_ARCHITECTURE/**  # except SESSION_LOG.md per may_touch
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: platform/src/lib/llm/observability/types.ts
+      fingerprint_sha256: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a
+    - file: platform/src/lib/llm/observability/observe.ts
+      fingerprint_sha256: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0
+  red_team_due: false
+  notes: "USTAD_S1_7 — DeepSeek provider adapter (OpenAI-compatible Chat Completions). Worktree-isolated under feature/phase-o-observatory-ustad-s1-7-deepseek (cut from origin/feature/phase-o-observatory tip 0bec216). Parallel-safe with S1.4–S1.6/S1.8/S1.9 — disjoint may_touch (each owns one provider file). No new tables (OD.S1.3.1 same policy: extra fields land in parameters jsonb)."
+```
+
+### Body — substantive deliverables
+
+**W1. Adapter authored.** [`platform/src/lib/llm/providers/deepseek_observed.ts`](platform/src/lib/llm/providers/deepseek_observed.ts) (sha256 `2e1e4532abcd4f376c9752ab39cf77b34c567b080c09c73882cdfbfa1bbe209c`) — single-file adapter exposing `chatCompletion()` + `streamChatCompletion()` over DeepSeek's OpenAI-compatible Chat Completions endpoint (`POST /chat/completions`). Wraps the call with the S1.2 shim's `observe()` / `observeStream()`. Never touches `llm_usage_events` directly. Injects `stream_options.include_usage: true` on streaming calls so the final SSE chunk carries the `usage` block per OBSERVATORY_PLAN §4.6.
+
+**W2. Token-extraction semantics implemented per S1.7 brief / OBSERVATORY_PLAN §4.4.**
+  - `prompt_tokens` → `input_tokens`
+  - `completion_tokens` → `output_tokens`
+  - `prompt_cache_hit_tokens` → `cache_read_tokens` (DeepSeek bills cache hits ~10× cheaper than misses for V3 chat)
+  - `prompt_cache_miss_tokens` → **NOT** routed to any token-count column. The miss count semantically overlaps with `prompt_tokens` (it is the non-cached portion of the input) and adding it elsewhere would double-count input. Captured under `parameters.deepseek_cache_miss_tokens` for audit purposes. **Documented in the adapter's file-header comment block** (S1.7 brief AC requirement).
+  - `cache_write_tokens` = 0 (DeepSeek does not expose a separate cache-creation price)
+  - `reasoning_tokens` = 0 — DeepSeek R1 does not separately surface reasoning tokens in the `usage` block as of 2026-05-03; reasoning content rolls into `completion_tokens`. Marked with `REASONING_TOKEN_FUTURE` grep-anchor in the adapter for forward maintenance.
+
+**W3. provider_request_id capture.** Reads `x-request-id` (preferred) or `x-ds-request-id` (DeepSeek-specific) from response headers; null otherwise. Tested in cases 1 and 4.
+
+**W4. Error mapping (OpenAI-compatible error envelope).**
+  - `429` → `error_code='rate_limited'` (test 6)
+  - `5xx` → `error_code='server_error'` (test 7)
+  - `400 / 401 / 403` → `error_code` from `body.error.code` (or `.type` / `.message` / `http_<status>` fallback)
+  - Timeout / `AbortError` → propagates through observe() error path with `error_code='timeout'`. Note (header comment): `observe()` collapses all thrown errors to `status='error'`; the brief's `status='timeout'` is preserved as `error_code` rather than as a distinct status because the must_not_touch boundary excludes the observability shim.
+
+**W5. Test suite authored.** [`platform/src/lib/llm/providers/__tests__/deepseek_observed.test.ts`](platform/src/lib/llm/providers/__tests__/deepseek_observed.test.ts) (sha256 `4de808014add0f498e3c16f3ee27473e57af1ad2c4adac227977edb606f4fb33`) — 7 cases, fully unit-testable via injected `fetchImpl` (no external HTTP):
+  1. **Standard V3 call** — field mapping + provider_request_id capture (`x-request-id`).
+  2. **Cache hit extraction** — `prompt_cache_hit_tokens=80` → `cache_read_tokens=80`; `input_tokens=100` preserved.
+  3. **Cache-miss routing** — verifies `params[parameters]` JSON contains `deepseek_cache_miss_tokens=20`; verifies NO token-count column reflects the miss; verifies the request body snapshot is preserved (sans `messages`).
+  4. **Streaming** — SSE response with three chunks (final carrying `usage`); `streamChatCompletion()` yields all chunks; `observeStream()` accumulates final usage; `provider_request_id` from `x-ds-request-id` captured.
+  5. **R1 model call** — `model=deepseek-reasoner`; `usage` block without separate reasoning count → `reasoning_tokens=0` recorded; assistant message can carry `reasoning_content` (informational only).
+  6. **HTTP 429 → rate_limited** — error row persisted with `status='error'`, `error_code='rate_limited'`; `DeepSeekHTTPError` thrown to caller with `code='rate_limited'`.
+  7. **HTTP 500 → server_error** — error row persisted with `status='error'`, `error_code='server_error'`; thrown error has `code='server_error'`.
+
+**W6. Test execution result.** `vitest run src/lib/llm/providers/__tests__/deepseek_observed.test.ts` → **Test Files 1 passed (1); Tests 7 passed (7); Duration 324ms.**
+
+**W7. Type-check.** `tsc --noEmit` — zero errors mentioning `deepseek_observed.ts` or its test file. Pre-existing baseline TS errors in unrelated files (`tests/components/AppShell.test.tsx`, `tests/components/ReportGallery.test.tsx`) are inherited from earlier work; not in this session's may_touch.
+
+**W8. Governance scripts run.**
+  - `mirror_enforcer.py`: 0 findings; **exit 0**; 9 pairs checked (MP.1–MP.9); 9 passed; 2 declared claude_only (MP.6, MP.7). Clean.
+  - `schema_validator.py` (full corpus): **107 violations; exit 2**. Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch.
+  - `drift_detector.py`: **327 findings; exit 2**. Identical 327 carry-forward as S0.1 / S1.1 / S1.3 — all pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on canonical-corpus tree (declared in must_not_touch).
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_7_DEEPSEEK_PROVIDER_ADAPTER
+  closed_at: 2026-05-03T03:05:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/providers/deepseek_observed.ts, mutation: created, sha256_after: 2e1e4532abcd4f376c9752ab39cf77b34c567b080c09c73882cdfbfa1bbe209c, scope: in}
+    - {path: platform/src/lib/llm/providers/__tests__/deepseek_observed.test.ts, mutation: created, sha256_after: 4de808014add0f498e3c16f3ee27473e57af1ad2c4adac227977edb606f4fb33, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_7 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session — declared in must_not_touch"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude-side composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); Gemini-side .gemini/project_state.md unchanged — implementation-class session, mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.7 (per-provider adapter implementation, not plan revision)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Identical 327 carry-forward as S0.1/S1.1/S1.3 close — all HIGH findings are pre-existing fingerprint_mismatch residuals on canonical L1/L2.5/L3.5 entries. NONE introduced by this S1.7 session. Acceptable per ONGOING_HYGIENE_POLICIES §F WL.14G.02 + S0.1/S1.1/S1.3 close precedents."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    baseline_target: 107
+    rationale: "Identical to S1.3 close (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: 0, desync_pairs: [], rationale: "9 pairs checked; 9 passed; 2 declared claude_only. Clean."}
+  known_residuals:
+    - {finding_id: WL.14G.02, validator: drift_detector, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + Phase_14G_Lockdown_Verification / PHASE_14_FINDINGS_DISCHARGE_v1_0 D.2", rationale: "Pre-existing stale fingerprints in CANONICAL_ARTIFACTS; resolve at retirement pass"}
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1/S1.3 baseline note", rationale: "M2/Portal-era SESSION_LOG entries emit session_id-disagreement-heading violations; quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.7 session does not rotate CURRENT_STATE pointers; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized: {serialized: false, rationale: "Implementation-class concurrent-workstream session — main M5 thread build state captured at M4-D-S1 close is unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1 / S1.1 / S1.3 precedent."}
+  open_decisions:
+    - id: OD.S1.3.1
+      summary: "Full provider raw_payload — current schema (migration 038) has no raw_payload column on llm_usage_events. S1.4–S1.8 may need a separate llm_provider_raw_responses table if full provider payloads are required for forensic replay."
+      disposition_at_S1_7: "FOLLOWED — no schema change. The DeepSeek adapter records the request-body snapshot (sans messages) and `deepseek_cache_miss_tokens` under the existing `parameters` jsonb column. Full raw response payloads are NOT persisted by this adapter; if forensic replay later requires them, a follow-up schema migration is needed."
+    - id: OD.S1.7.1
+      summary: "Timeout status mapping — S1.7 brief specifies Timeout → status='timeout', but the S1.2 observe() shim (declared in must_not_touch) collapses all thrown errors to status='error'. The DeepSeek adapter preserves the timeout signal as error_code='timeout' under status='error' rather than touching the shim."
+      disposition: "DEFERRED. If status='timeout' is required end-to-end, a future shim revision (post-S1.8) should extend ObservedLLMResponse so adapters can mark timeouts distinctly. No test in S1.7 brief verifies status='timeout' directly."
+    - id: OD.S1.7.2
+      summary: "R1 reasoning-token reporting status (as of 2026-05-03)."
+      disposition: "UNCHANGED from brief — DeepSeek R1 does not separately expose reasoning_tokens in the usage block. Adapter records reasoning_tokens=0 and carries a REASONING_TOKEN_FUTURE grep-anchor for forward maintenance if a future API revision adds the field."
+  close_criteria_met: true
+  unblocks: "Phase O sub-phase O.1 next sessions per OBSERVATORY_PLAN §5.1: S1.4 / S1.5 / S1.6 / S1.8 (other parallel-safe per-provider adapters) and S1.9 (frontend scaffold; depends on S1.3 — already closed). O.1 close session integrates all adapters."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-7-deepseek
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.4 / S1.5 / S1.6 / S1.8 — remaining parallel-safe per-provider adapters** and **S1.9 — Frontend scaffold (depends on S1.3 — closed)** per OBSERVATORY_PLAN §5.1. After all five adapters close, S1.10–S1.12 (KPI tiles, charts, drill-down) build on S1.9; S1.13 wires end-to-end. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-7-deepseek`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
