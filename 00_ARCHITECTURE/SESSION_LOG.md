@@ -14485,3 +14485,245 @@ M4-C-S3 unblocks at the moment the M4-C-S1/S2 sub-phases complete AND the §2.3 
 - Mirror MP.1/MP.2: not propagated by this append (governance-aside; if the next substantive close touches `.geminirules` / `.gemini/project_state.md`, it should reflect the NAP.M4.6 verdict in adapted parity).
 
 Commit: af82d8e (feature/phase-o-observatory, 2026-05-03).
+
+---
+
+## M4-C-P6-S4-PREDRAFT — M4-C sub-phase close pre-draft (parallel governance slot to M4-C-S3)
+
+**Date:** 2026-05-03 (parallel governance slot to M4-C-S3 — LL.7 first artifact write per NAP.M4.6 Option B + 3 refinements; S3 has not yet landed at this session's close).
+**Class:** Governance-aside (pre-draft skeleton; per ONGOING_HYGIENE_POLICIES §G this class does not increment the red-team counter).
+**Brief:** CLAUDECODE_BRIEF M4-C-P6-S4-PREDRAFT (parallel slot to M4-C-S3).
+
+### session_open
+
+```yaml
+session_open:
+  session_id: M4-C-P6-S4-PREDRAFT
+  cowork_thread_name: "M4-C-P6 — M4-C sub-phase close pre-draft (parallel to S3)"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: M4.C.P6
+  predecessor_session: M4-B-P5-M4C-ENTRY-PREP (NAP.M4.6 verdict append, 2026-05-03 commit af82d8e); chronologically latest before this slot. M4-B sub-phase close at M4-B-S6-CLOSE (2026-05-03 commit 007c718) precedes that.
+  parallel_to: M4-C-S3 (not yet landed at this session's open; P6 takes CURRENT_STATE v2.7; S3 will take v2.8 or higher per current+1 convention)
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md (all 7 sections)
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md (used as structural template)
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md (v1.1 OPTION_B_APPROVED; §6 native verdict + 3 refinements)
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md (§3 promotion criteria + §2 LL.7 row)
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_LOG.md (M4-B-S6-CLOSE entry + NAP.M4.6 append; verified no M4-C-S* entries yet)
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      read_at: 2026-05-03T10:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      read_at: 2026-05-03T10:00:00+05:30
+  declared_scope:
+    may_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md (new)
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/**
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL7_*
+      - 06_LEARNING_LAYER/OBSERVATIONS/**
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (S3 owns this)
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - .geminirules
+      - .gemini/project_state.md
+      - platform/**
+  red_team_due: false
+  notes: "Parallel governance slot to M4-C-S3. Pre-draft skeleton authoring; no substantive Learning Layer state change. Same convention as M4-B-P4-S6-PREDRAFT (parallel to M4-B-S5)."
+```
+
+### body
+
+**Brief execution per AC.P6.1–AC.P6.4.**
+
+- **AC.P6.1 read-only consumption.** Read CLAUDE.md §C items 1–11 (loaded via system prompt). Read PHASE_M4C_PLAN_v1_0.md (all 7 sections — §1 scope, §2 entry gates, §3 sub-phase plan S1–S4, §4 parallel-slot opportunities, §5 known residuals, §6 NAP gates, §7 changelog). Read M4_B_CLOSE_v1_0.md as structural template (frontmatter + executive summary + §1 scope + §2 AC ledger + §3 deliverables + §4 NAP decisions + §5 LL status + §6 residuals + §7 red-team + §8 approval + §9 changelog — full nine-section template absorbed). Read NAP_M4_6_BRIEF_v1_0.md v1.1 (OPTION_B_APPROVED with three native refinements: `unconfirmed` rename, N≥3 threshold, 8 MED-tier LL.2 sanity-check anchor). Read SHADOW_MODE_PROTOCOL_v1_0.md §3 promotion criteria + §2 LL.7 row (native-only mode has no shadow→production split). Read SESSION_LOG.md M4-C entries (verified: only the NAP.M4.6 verdict append at af82d8e exists; no M4-C-S1, S2, or S3 entries yet — all S-dependent fields therefore remain [PENDING]). PASS.
+
+- **AC.P6.2 M4_C_CLOSE_v1_0.md authored — 9-section pre-draft, status DRAFT.** Created at `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md` v1.0 DRAFT. Nine sections written:
+  - §1 Scope — LL.5 retrieval ranking + LL.6 plan selection + LL.7 native-only discovery prior; sub-phase rounds S1–S4 + Px parallel slots (this P6 row populated); out-of-scope verification (LL.2 per-edge promotion deferred; LL.3 adapter weights M5+; LL.4 prompt refits future; LL.7 cohort M7+; LL.8 scaffold; M4 macro-phase close M4-D); §1.4 close-criteria summary [PENDING-S4].
+  - §2 AC ledger — PHASE_M4_PLAN §3.3 AC.M4C.1–5 [PENDING-S*]; PHASE_M4C_PLAN §3 per-sub-phase ACs (AC.M4C.S1.1–S1.5; AC.M4C.S2.1–S2.4; AC.M4C.S3.1–S3.5; AC.M4C.S4.1–S4.5) [PENDING-S*]; per-session brief ACs [PENDING-S*]; S4 close-checklist ACs [PENDING-S4].
+  - §3 Deliverables inventory — §3.1 9 expected substantive files (LL.5 shadow + design + stability gate; LL.6 shadow + design + stability gate; LL.7 native-only artifact + design; REDTEAM_M4C; this M4_C_CLOSE) with [PENDING-S*] tokens for path/version/commit/status. §3.2 governance-state rows (CURRENT_STATE chain; SESSION_LOG; CAPABILITY_MANIFEST; .geminirules; .gemini/project_state.md). §3.3 NOT-touched verification [PENDING-S4].
+  - §4 NAP decisions — NAP.M4.6 RESOLVED 2026-05-02 (Option B + 3 refinements: `unconfirmed` rename, N≥3 threshold, 8 MED-tier LL.2 sanity-check anchor) FULLY POPULATED with verdict text + verbatim native rationale + disposition writeback plan; NAP.M4.4 binding throughout M4-C unchanged; NAP.M4.7 cross-ref at M4-D scope (NOT M4-C); NAP.M4.1/2/3/5 cross-ref as resolved at M4-A / M4-B close.
+  - §5 LL status — LL.5 [PENDING-S1 — expected SHADOW_ACTIVE; promotion blocked at first write since N=0]; LL.6 [PENDING-S2 — expected SHADOW_ACTIVE]; LL.7 [PENDING-S3 — expected NATIVE_ARTIFACT_LIVE; algorithm + expected output shape per NAP_M4_6_BRIEF v1.1 §6.4 fully populated since the rubric is known: ~30–60 unconfirmed + 8 confirmed minimum + 0–3 contradicted + ~5–15 novel_candidate]; LL.8 SCAFFOLD unchanged.
+  - §6 Known residuals — §6.1 M4-C-substrate [PENDING-S4 — populate from M4-C-S1/S2/S3 in-session findings]; §6.2 inherited from M4-B (10 items): KR.M4A.RT.LOW.1 still OPEN (git tree-rewrite); GAP.M4A.04 PARTIAL_CLOSE deferred (no new data); R.LL1TPA.1 [PENDING-S1 — Gemini reachability re-check outcome at M4-C-S1 entry]; F.RT.S6.M.1 [PENDING-S1 — closed at M4-C-S1 mirror sync]; F.RT.S6.M.2 [PENDING-S* — closed at first M4-C manifest touch]; F.RT.S6.N.1 OPEN-still-carries-forward (next quarterly governance pass 2026-07-24); F.RT.S6.I.1 [PENDING-S* — opportunistic close]; LL.3 §5.1 R.LL3.1/2/3 [PENDING-S1 disposition]; LL.4 §5.4 informational; per-edge LL.2 promotion deferred. §6.3 M4-D / M5+ deferrals = 4 items (R.LL3.4 cross-domain activator extension; R.LL3.5 LEL inner-life expansion; R.LL3.6 yoga-absence cluster; R.LL3.7 CTR/CVG/SIG/RPT/DSH bucket decision). §6.4 inherited from earlier macro-phases = 17 items (mirror of M4_B_CLOSE §6.3 + cross-references).
+  - §7 Red-team — §7.1 IS.8(a) cadence trail in M4-C [PENDING-S1/S2/S3] (counter resets entering M4-C at 0 post M4-B-S6 IS.8(b) discharge); §7.2 IS.8(b)-class M4-C sub-phase-close red-team [PENDING-S4 — author or accept-as-discharged per S4 brief; expected 5 axes analogue of M4-B-S6 red-team adapted to M4-C-substrate: LL.5 shadow integrity / LL.6 shadow integrity / LL.7 algorithm integrity / surrogate disclosure if applicable / held-out partition sacrosanct]; §7.3 cadence forecast [PENDING-S4].
+  - §8 Approval — M4-C sub-phase close = internal AC gate, no NAP. NAP.M4.7 at M4-D macro-phase close. §8.2 surrogate-disclosure ledger carry-forward from M4-B with M4-C re-attempt outcomes [PENDING-S1/S2/S3].
+  - §9 Changelog — v1.0 DRAFT this session; v1.0 SEAL [PENDING-S4]. PASS.
+
+- **AC.P6.3 CURRENT_STATE — current+1; canonical pointers UNCHANGED; predraft_available field set.** Live read at write time = v2.6 (set by M4-B-S6-CLOSE). v2.7 = current+1 per the brief operational rule. Frontmatter `version: 2.6` → `version: 2.7`; v2.7 changelog block prepended at top of changelog list. Canonical state pointers UNCHANGED per AC.P6.3 hard_constraint: `last_session_id: M4-B-S6-CLOSE` preserved; `next_session_objective: M4-C-S1 — LL.5 DASHA-TRANSIT SYNERGY ...` preserved; `active_phase_plan_sub_phase: M4-B CLOSED 2026-05-03 ... M4-C INCOMING` preserved; `red_team_counter: 0` preserved; `file_updated_at: 2026-05-03T08:00:00+05:30` preserved; `file_updated_by_session: M4-B-S6-CLOSE` preserved. predraft_available block re-set: `predraft_available: M4_C_CLOSE_v1_0.md` + `predraft_status: DRAFT` + `predraft_authored_by: M4-C-P6-S4-PREDRAFT` + `predraft_authored_on: 2026-05-03` + `predraft_consumer: M4-C-S4 (sub-phase close — future)`. Historical record of prior M4_B_CLOSE pre-draft preserved in inline comment. session_notes: parallel governance slot per AC.P6.3. PASS.
+
+- **AC.P6.4 SESSION_LOG entry + commit + hash stamp.** This entry. Commit hash will be stamped post-commit per ONGOING_HYGIENE_POLICIES §F chore-commit pattern. PASS.
+
+### Hard constraints honored
+
+- **No S3 outcome pre-decision.** Every S3-dependent field in M4_C_CLOSE_v1_0.md is `[PENDING-S3]`. The known ground (NAP.M4.6 verdict + 3 refinements + expected output shape per NAP_M4_6_BRIEF v1.1 §6.4) is fully populated since it was approved 2026-05-02 and is not S3-dependent (it's S3-input). The novel-edge count, 8-MED-tier sanity-check pass/fail, and per-class final counts are all `[PENDING-S3]`. Honored.
+- **S1/S2 outcome check.** SESSION_LOG inspected at session entry: no M4-C-S1, S2, or S3 entries exist. Latest M4-related commits: af82d8e NAP.M4.6 verdict + ecd30a2 chore stamp + 4948a48 W2-UQE smoke. Therefore §2 + §5 rows for S1/S2/S3 stay as `[PENDING-S*]` rather than being filled from actual outcomes. Honored.
+- **CURRENT_STATE canonical pointers UNCHANGED.** S3 owns last_session_id and next_session_objective. This session preserved both. predraft_available was the only structural field re-set per AC.P6.3 explicit instruction. Honored.
+- **must_not_touch scope.** No write to signal_weights/**, LL7_*, OBSERVATIONS/**, CAPABILITY_MANIFEST.json (S3 owns), 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**, .geminirules, .gemini/project_state.md, platform/**. Honored.
+- **CURRENT_STATE version operational rule.** Read live file (v2.6 at read time per M4-B-S6-CLOSE seal); took v2.7 (current+1). When S3 lands it takes v2.8 or higher per same convention. parallel_session_notes documents the coordination. Honored.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: M4-C-P6-S4-PREDRAFT
+  closed_at: 2026-05-03T11:00:00+05:30
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md
+      mutation_type: created
+      sha256_before: null
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P6.2 deliverable — M4-C sub-phase close artifact pre-draft (9 sections, status DRAFT, [PENDING-S*] tokens for S1/S2/S3/S4-dependent fields)"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P6.3 — version bump v2.6 → v2.7; canonical state pointers UNCHANGED per AC.P6.3 hard_constraint; predraft_available block re-set to point to new M4_C_CLOSE_v1_0.md pre-draft per AC.P6.3 explicit instruction; v2.7 changelog block prepended"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.P6.4 — this session entry"
+      within_declared_scope: true
+  registry_updates_made:
+    capability_manifest: not_touched_per_must_not_touch
+    file_registry: not_applicable_post_phase_1B_cutover
+    canonical_artifacts:
+      - canonical_id: M4_C_CLOSE
+        change: NEW DRAFT
+        details: "M4-C sub-phase close artifact pre-draft; flips DRAFT → CLOSED at M4-C-S4 sub-phase close (S4 reads actual S1/S2/S3 outcomes and resolves [PENDING-S*] tokens)"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Governance-aside; CLAUDE.md not touched. Carry-forward to next substantive close that touches .geminirules per F.RT.S6.M.1 carry-forward (already pointing to M4-C-S1 entry)."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "Composite Claude-side state (CURRENT_STATE + SESSION_LOG) touched by this governance-aside session. Gemini-side .gemini/project_state.md sync deferred to first M4-C substantive close per F.RT.S6.M.1 carry-forward (M4-B-S6-CLOSE explicitly named M4-C-S1 entry as the propagation cycle for the cumulative S5 → S6 → P6 mirror delta)."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MACRO_PLAN unchanged"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST not touched per must_not_touch (S3 owns)"
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged"
+  red_team_pass:
+    due: false
+    performed: false
+    rationale: "Governance-aside class — pre-draft skeleton authoring. Per ONGOING_HYGIENE_POLICIES §G, governance-aside sessions do not increment counter. red_team_counter unchanged at 0 (set by M4-B-S6-CLOSE 1→0 IS.8(b) discharge)."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Governance-aside; lives in platform/ — must_not_touch. No corpus/engine state change. Recommend re-run at first M4-C substantive close to confirm no NEW violations from this slot."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: not_run
+    rationale: "Governance-aside; new artifact is markdown document (M4_C_CLOSE_v1_0.md DRAFT) consumed by future S4 session, not by automated schema_validator. Recommend re-run at M4-C-S1 entry or at S4 sealing to confirm no NEW violations."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "Governance-aside; .geminirules + .gemini/project_state.md not touched. Carry-forward to next substantive M4-C close (per F.RT.S6.M.1 already pointing to M4-C-S1 entry)."
+  current_state_updated: true
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Governance-aside session; no build-state to serialize."
+  parallel_session_notes: >
+    P6 ran as a parallel governance slot to M4-C-S3 (LL.7 first artifact write per
+    NAP.M4.6 Option B + 3 refinements; not yet landed at this session's close). P6
+    took CURRENT_STATE v2.7 per current+1 convention (live read v2.6 at the moment
+    of write). When S3 lands it takes v2.8 or higher per the same convention.
+    Canonical state pointers (last_session_id, next_session_objective,
+    active_phase_plan_sub_phase, red_team_counter, file_updated_at,
+    file_updated_by_session) UNCHANGED per AC.P6.3 hard constraint — S3 owns those
+    when it lands. predraft_available structural field re-set per AC.P6.3 explicit
+    instruction (does not race with S3; S3 will keep the field pointing to
+    M4_C_CLOSE_v1_0.md until M4-C-S4 consumes the deliverable). Conflict surfaces:
+    CURRENT_STATE.md (this file) and SESSION_LOG.md. At merge time the
+    chronologically-later close should appear in last_session_id with both
+    changelog entries preserved side-by-side. drift_detector.py /
+    schema_validator.py / mirror_enforcer.py to be re-run after merge.
+  close_criteria_met: true
+  unblocks: >
+    M4-C-S4 (M4-C sub-phase close) when all S1/S2/S3 sub-phases have completed.
+    The pre-draft skeleton at M4_C_CLOSE_v1_0.md is now available for consumption
+    at S4 — S4 reads actual S1/S2/S3 outcomes from sealed shadow registers + LL.5/
+    LL.6 design + stability gate artifacts + LL.7 native-only artifact + SESSION_LOG
+    entries and replaces every [PENDING-S*] token with verdict text or factual
+    outcome cite. M4-C-S3 is independent of this slot; its scope is LL.7 first
+    artifact write per NAP.M4.6 Option B + 3 refinements (algorithm + 8 MED-tier
+    sanity-check anchor verification). M4-C-S1 + S2 are independent and parallel-
+    safe per PHASE_M4C_PLAN §4.
+  handoff_notes: >
+    One new artifact available: M4_C_CLOSE_v1_0.md DRAFT (M4-C sub-phase close
+    artifact pre-draft, 9 sections, [PENDING-S*] tokens for S1/S2/S3/S4-dependent
+    fields). Sister artifact: PHASE_M4C_PLAN_v1_0.md DRAFT (forward-pointer plan
+    authored at M4-B-P5; flips DRAFT → CURRENT at M4-C-S1 open or amends-in-place
+    per actual M4-B exit conditions). Companion artifact: NAP_M4_6_BRIEF_v1_0.md
+    v1.1 OPTION_B_APPROVED (decision brief + native verdict 2026-05-02 — Option B
+    Classical-seeded with 3 refinements: `unconfirmed` rename, N≥3 threshold, 8
+    MED-tier LL.2 sanity-check anchor). Predecessor close artifact:
+    M4_B_CLOSE_v1_0.md CLOSED 2026-05-03 at M4-B-S6-CLOSE. M4-C-S1 entry-gate
+    cleared per PHASE_M4_PLAN §3.3 (LL.1 weights stable + N-threshold met clauses
+    both satisfied at full PASS) — M4-C-S1 may open at native discretion.
+```
+
+### Next session objective
+
+**M4-C-S1 (LL.5 retrieval-ranking first shadow write)** — first M4-C substantive
+session per `PHASE_M4C_PLAN §3.1`. S1 scope: §2 entry gates §2.1 (M4-B closed —
+DISCHARGED) + §2.3 (Gemini reachability re-check per R.LL1TPA.1 carry-forward) +
+§2.4 (SHADOW_MODE_PROTOCOL §3 unchanged) + first MP.1+MP.2 mirror sync per
+F.RT.S6.M.1 carry-forward + LL.3 §5.1 R.LL3.1/R.LL3.2/R.LL3.3 fix-before-prod
+disposition + LL.5 first shadow write + LL5_RANKER_DESIGN + LL5_STABILITY_GATE
+verdict (CONDITIONAL_PASS expected at first write since N=0). M4-C-S2 (LL.6
+plan-selection first shadow write) is parallel-safe with S1 per `PHASE_M4C_PLAN §4`.
+M4-C-S3 (LL.7 first artifact write per NAP.M4.6 Option B + 3 refinements) is
+sequenced after S1 + S2. M4-C-S4 (sub-phase close) consumes the pre-draft authored
+at this P6 session.
+
+Commit: `[PENDING — to be stamped post-commit]` (feature/phase-o-observatory, 2026-05-03).

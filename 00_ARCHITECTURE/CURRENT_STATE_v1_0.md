@@ -1,6 +1,6 @@
 ---
 artifact: CURRENT_STATE_v1_0.md
-version: 2.6
+version: 2.7
 status: LIVE
 produced_during: STEP_10_SESSION_LOG_SCHEMA (Step 0 → Step 15 governance rebuild)
 produced_on: 2026-04-24
@@ -54,6 +54,99 @@ consumers:
     `session_close.session_id`
   - Every session-close checklist from Step 10 onward
 changelog:
+  - v2.7 (2026-05-03, M4-C-P6-S4-PREDRAFT): Parallel-slot governance-aside session.
+    Authored as a forward-pointer pre-draft slot alongside (and not after) M4-C-S3
+    (LL.7 first artifact write per NAP.M4.6 Option B). At my read time the file was
+    at v2.6 (set by M4-B-S6-CLOSE 2026-05-03 commit 007c718); v2.7 is the next slot
+    per the brief hard_constraint operational rule "check the live file before
+    writing; take whatever is current + 1." S3 has not yet landed at the moment of
+    this close (no M4-C-S* commits in git log; latest M4-related commits are
+    af82d8e NAP.M4.6 verdict + ecd30a2 chore stamp + 4948a48 W2-UQE smoke); when
+    S3 lands it takes v2.8 (or higher) per the same current+1 convention.
+    parallel_session_notes: This session does NOT alter canonical state pointers
+    (`last_session_id`, `next_session_objective`, `active_phase_plan_sub_phase`,
+    `red_team_counter`, `file_updated_at`, `file_updated_by_session` all remain as
+    set by predecessor M4-B-S6-CLOSE at v2.6). The brief AC.P6.3 hard_constraint
+    explicitly stated "session_notes: parallel governance slot; CURRENT_STATE
+    canonical pointers (last_session_id, next_session_objective) must not be
+    overwritten — S3 owns them" — that constraint is honored. Single deliverable
+    (within may_touch only): a pre-draft of the M4-C sub-phase sealing artifact,
+    authored as a structural skeleton with all S1/S2/S3/S4-dependent fields held
+    as literal `[PENDING-S*]` tokens per the brief hard_constraint "Do not
+    pre-decide S3 outcomes (novel edge count, sanity-check result). Every
+    S3-dependent field is [PENDING-S3]." Brief also instructed to read S1+S2
+    SESSION_LOG entries if those sub-phases had closed by the time this session
+    ran and fill §2 + §5 rows from actual outcomes; check at write time confirmed
+    neither S1 nor S2 had closed yet — all S1/S2/S3/S4-dependent fields therefore
+    remain [PENDING-S*]; S4 reads actual outcomes at close.
+    Deliverables (within may_touch only):
+    (1) `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md` v1.0 DRAFT
+        — nine-section M4-C sub-phase close artifact pre-draft. §1 scope (3
+        mechanisms LL.5/LL.6/LL.7 native-only; sub-phase rounds S1–S4 + Px; out-of-
+        scope verification; §1.4 close-criteria summary [PENDING-S4]). §2 acceptance
+        criteria ledger (PHASE_M4_PLAN §3.3 AC.M4C.1–5 [PENDING]; PHASE_M4C_PLAN §3
+        per-sub-phase ACs [PENDING-S*]; per-session brief ACs [PENDING-S*]).
+        §3 deliverables inventory (9 expected substantive files + 5 governance-state
+        rows; [PENDING-S*] tokens for path/version/commit/status). §4 NAP decisions
+        — NAP.M4.6 RESOLVED 2026-05-02 (Option B + 3 refinements: `unconfirmed`
+        rename, N≥3 threshold, 8 MED-tier LL.2 sanity-check anchor) FULLY POPULATED
+        since the rubric is known; NAP.M4.4 binding throughout M4-C; NAP.M4.7 cross-
+        ref at M4-D scope; NAP.M4.1/2/3/5 cross-ref as resolved. §5 LL status
+        (LL.5 [PENDING-S1]; LL.6 [PENDING-S2]; LL.7 [PENDING-S3 — algorithm and
+        expected output shape per NAP_M4_6_BRIEF v1.1 §6.4 fully populated];
+        LL.8 SCAFFOLD unchanged). §6 known residuals (§6.1 M4-C-substrate
+        [PENDING-S4]; §6.2 inherited from M4-B = 10 items including KR.M4A.RT.LOW.1
+        OPEN, GAP.M4A.04 PARTIAL_CLOSE deferred, R.LL1TPA.1 [PENDING-S1],
+        F.RT.S6.M.1 [PENDING-S1 close], F.RT.S6.M.2 [PENDING-S* close],
+        F.RT.S6.N.1 OPEN-still-carries to next quarterly pass, F.RT.S6.I.1
+        [PENDING-S*], LL.3 §5.1 [PENDING-S1], LL.4 §5.4 informational, per-edge
+        LL.2 promotion deferred; §6.3 M4-D / M5+ deferrals = 4 items;
+        §6.4 inherited from earlier macro-phases = 17 items). §7 red-team (§7.1
+        IS.8(a) cadence trail [PENDING]; §7.2 IS.8(b)-class M4-C sub-phase-close
+        [PENDING-S4]; §7.3 cadence forecast [PENDING-S4]). §8 approval (M4-C
+        sub-phase close = internal AC gate, no NAP; NAP.M4.7 at M4-D macro-phase
+        close; surrogate-disclosure ledger carry-forward from M4-B). §9 changelog.
+        Authored under brief `M4-C-P6-S4-PREDRAFT`. Companion artifacts:
+        PHASE_M4C_PLAN_v1_0.md DRAFT (forward-pointer plan, M4-B-P5);
+        NAP_M4_6_BRIEF_v1_0.md v1.1 OPTION_B_APPROVED (decision brief, M4-B-P5 +
+        native verdict 2026-05-02). Predecessor close artifact: M4_B_CLOSE_v1_0.md
+        CLOSED 2026-05-03 at M4-B-S6-CLOSE.
+    (2) `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` v2.6 → v2.7 (this update; frontmatter
+        version + changelog entry; §2 canonical state pointers UNCHANGED per
+        AC.P6.3 hard_constraint; pre-draft availability fields RE-SET to point to
+        the new pre-draft artifact M4_C_CLOSE_v1_0.md per AC.P6.3 — predraft_available,
+        predraft_status, predraft_authored_by, predraft_authored_on, predraft_consumer
+        all populated; historical record of prior M4_B_CLOSE pre-draft preserved
+        in inline comment).
+    (3) `00_ARCHITECTURE/SESSION_LOG.md` — entry appended.
+    Read-only consumed: CLAUDE.md (§C items 1–11; project instructions); CURRENT_STATE
+    v2.6 §2 canonical state block; PHASE_M4C_PLAN_v1_0.md (all 7 sections);
+    M4_B_CLOSE_v1_0.md (sections 1–9 — used as structural template); NAP_M4_6_BRIEF_v1_0.md
+    v1.1 (entire — verdict + 3 refinements known); SHADOW_MODE_PROTOCOL_v1_0.md
+    (§3 promotion criteria + §2 LL.7 row); SESSION_LOG.md (M4-B-S6-CLOSE entry +
+    M4-B-P5 NAP.M4.6 verdict append).
+    Out-of-scope (per brief must_not_touch): `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/
+    signal_weights/**`, `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL7_*`,
+    `06_LEARNING_LAYER/OBSERVATIONS/**`, `00_ARCHITECTURE/CAPABILITY_MANIFEST.json`
+    (S3 owns this), `01_FACTS_LAYER/**`, `025_HOLISTIC_SYNTHESIS/**`, `.geminirules`,
+    `.gemini/project_state.md`, `platform/**`. Scope honored.
+    No red-team this session (governance-aside class — pre-draft skeleton authoring;
+    per ONGOING_HYGIENE_POLICIES §G governance asides do not increment counter).
+    red_team_counter unchanged at 0 (set by M4-B-S6-CLOSE 1→0 IS.8(b) discharge).
+    Mirror MP.1/MP.2 not propagated (governance-aside; carry-forward to first
+    substantive M4-C close that touches .geminirules / .gemini/project_state.md
+    per existing convention; F.RT.S6.M.1 MEDIUM finding from M4-B-S6 still binds
+    M4-C-S1 entry).
+    parallel_session_notes (S3 coordination): At write time S3 has not yet landed.
+    If S3 lands at v2.7 chronologically before this commit, version-conflict
+    arises — S3 should re-read the live file and take v2.8. This session's
+    AC.P6.3 hard_constraint is "current+1; check before writing"; same rule
+    applies to S3. last_session_id race: this session does NOT touch
+    last_session_id (canonical pointer UNCHANGED per AC.P6.3); S3 will write
+    its own last_session_id at S3 close. At merge time, S3's last_session_id
+    wins (it's a substantive close, this is governance-aside); this v2.7
+    changelog block sits below S3's. drift_detector.py / schema_validator.py /
+    mirror_enforcer.py to be re-run after merge.
   - v2.6 (2026-05-03, M4-B-S6-CLOSE, commit 007c718): **M4-B SUB-PHASE CLOSED.** Substantive close-class
     session. The M4-B sealing artifact `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/
     M4_B_CLOSE_v1_0.md` was sealed at this session — frontmatter `status: DRAFT` →
@@ -3077,22 +3170,26 @@ current_state:
   cross_check_authority: CURRENT_STATE           # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
 
   # ------------------------------------------------------------------
-  # Pre-draft availability flag — CLEARED at M4-B-S6-CLOSE (deliverable consumed)
+  # Pre-draft availability flag — RE-SET at M4-C-P6-S4-PREDRAFT (2026-05-03)
   # ------------------------------------------------------------------
-  # The pre-draft authored at M4-B-P4-S6-PREDRAFT (2026-05-02) was consumed at M4-B-S6-CLOSE
-  # (2026-05-03): every [PENDING-S5]/[PENDING-S6] token resolved against the actual S5 outcome,
-  # IS.8(b)-class red-team conducted in-document §7.2, and frontmatter status flipped
-  # DRAFT → CLOSED. The pre-draft mechanism is no longer needed; field cleared per brief
-  # AC.S6.5 ("predraft_available field cleared").
-  predraft_available: null
-  predraft_status: null
-  predraft_authored_by: null
-  predraft_authored_on: null
-  predraft_consumer: null
-  # Historical record (preserved): the pre-draft artifact at
+  # Set by M4-C-P6-S4-PREDRAFT (2026-05-03; this v2.7 update; parallel governance slot
+  # to M4-C-S3). Pre-draft skeleton authored at
+  # 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md with all S1/S2/S3/S4-
+  # dependent fields held as literal [PENDING-S*] tokens. Consumer = M4-C-S4
+  # sub-phase-close session (future). Same convention as M4-B-P4-S6-PREDRAFT (parallel
+  # to M4-B-S5; consumed at M4-B-S6-CLOSE).
+  predraft_available: M4_C_CLOSE_v1_0.md
+  predraft_status: DRAFT
+  predraft_authored_by: M4-C-P6-S4-PREDRAFT
+  predraft_authored_on: 2026-05-03
+  predraft_consumer: M4-C-S4 (sub-phase close — future)
+  # Historical record (preserved): the prior pre-draft artifact at
   # 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md was authored by
   # M4-B-P4-S6-PREDRAFT (2026-05-02; commit 90508e5) as DRAFT and consumed/sealed at
-  # M4-B-S6-CLOSE (2026-05-03) as CLOSED.
+  # M4-B-S6-CLOSE (2026-05-03; commit 007c718) as CLOSED. Field was cleared at S6
+  # close per brief AC.S6.5 and is now re-set by this M4-C-P6-S4-PREDRAFT entry per
+  # AC.P6.3. Cross-references the §3.2 governance-state row in the M4-C close
+  # artifact pre-draft.
 
   # ------------------------------------------------------------------
   # Parallel-session coordination notes (M4-B-P1-GAP-TRAVEL-CLOSE; transient — 2026-05-02)
