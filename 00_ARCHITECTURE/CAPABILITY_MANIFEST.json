@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 129,
+  "entry_count": 133,
   "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
@@ -2366,10 +2366,68 @@
       "interface_version": "1.0",
       "phase": "M4-B",
       "description": "LL.4 machine-readable prior view (M4-B-S5). Companion JSON for LL4_PREDICTION_PRIOR_v1_0.md \u00a74\u2013\u00a75 qualitative findings: 10 domain priors + 3 signal-class priors (classical_rule / both / temporal_engine) + date-precision global modifier. Placed in signal_weights/ (not shadow/) per recommendation-artifact rationale \u2014 not a weight register subject to shadow\u2192production rules; consumer contract documented in JSON.consumer_contract + LL4 \u00a78. Authored at NAP.M4.5 close (M4-B-S5)."
+    },
+    {
+      "canonical_id": "LL5_DASHA_TRANSIT_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.5 Dasha-Transit Synergy design document (M4-C-S1, parallel to M4-C-S2). Specifies per-signal dasha-transit axis-weight modulator algorithm, inputs (LL.1 promoted weights + LEL lit_source field), output schema for ll5_dasha_transit_v1_0.json, and shadow-mode constraints. Mechanism naming diverges from PHASE_M4C_PLAN \u00a73.1 \u2014 brief-driven instantiation as \"Dasha-Transit Synergy\" rather than the plan's \"Retrieval ranking learning\" framing; logged as R.LL5DESIGN.1 in S1's design \u00a76. Registered by parallel S2 session per S1 brief's may_touch deferral on manifest."
+    },
+    {
+      "canonical_id": "ll5_dasha_transit_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll5_dasha_transit_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.5 Dasha-Transit Synergy shadow register (M4-C-S1). Per-signal dasha-axis vs transit-axis weight modulator computed from training-partition LEL lit_source attribution. Held-out 9 events excluded. Shadow-status; no shadow\u2192production split this round. Registered by parallel M4-C-S2 session."
+    },
+    {
+      "canonical_id": "LL6_TEMPORAL_DENSITY_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.6 Temporal Density Modulator design document (M4-C-S2). Specifies per-event density_weight = 1 / log2(cluster_size + 1) computed over 365-day rolling window (\u00b1182 days) on 37 training events. Per-signal density-adjusted mean_lit_score applies weight to lit_score per observation then averages. \u00a76 H2 dense-cluster-inflation test rejected at n=37 (weighted-form gap_reduction \u22120.0069). Held-out 9-event partition sacrosanct."
+    },
+    {
+      "canonical_id": "ll6_temporal_density_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll6_temporal_density_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.6 Temporal Density Modulator shadow register (M4-C-S2). 37 events with cluster_size + density_weight (distribution {1:7, 2:10, 3:11, 4:8, 5:1}); 380 LL.1-observed signals with mean_lit_score_density_adjusted + delta + meaningful_flag (255 of 380 = 67% meaningful_flag at delta>0.1; mean delta 0.2202; max 0.5693). Summary block carries H2 dense-cluster-inflation test result (gap_reduction \u22120.0069 weighted; informational only \u2014 no LL.1 weight revision)."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03",
-  "manifest_version": "2.0",
-  "last_updated": "2026-05-03",
-  "last_updated_by": "M4-B-S6-CLOSE (M4-B sub-phase close marker; +1 entry: ll4_prediction_priors_v1_0; v1.9 \u2192 v2.0 clean M4-B-close marker)"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02",
+  "manifest_version": "2.1",
+  "last_updated": "2026-05-02",
+  "last_updated_by": "M4-C-S2-LL6-TEMPORAL-DENSITY"
 }

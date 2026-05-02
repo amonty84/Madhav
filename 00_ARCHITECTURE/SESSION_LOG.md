@@ -14995,4 +14995,293 @@ M4-C-P6-S4-PREDRAFT.
 
 Commit: f30f696 (feature/phase-o-observatory, 2026-05-02).
 
-Commit: 0934efb (feature/phase-o-observatory, 2026-05-03).
+---
+
+## M4-C-S2-LL6-TEMPORAL-DENSITY — LL.6 Temporal Density Modulator (first shadow write) + Manifest registration of LL.5+LL.6 pairs
+
+**Date:** 2026-05-02 (parallel-safe with M4-C-S1-LL5-DASHA-TRANSIT per PHASE_M4C_PLAN §4 LL.5 ⊥ LL.6 ruling; S1 landed first at v2.8 chronologically).
+**Class:** Substantive learning-layer-substrate (counter increment 1 → 2; second M4-C substantive session).
+**Brief:** CLAUDECODE_BRIEF M4-C-S2-LL6-TEMPORAL-DENSITY (parallel slot to M4-C-S1).
+
+### session_open
+
+```yaml
+session_open:
+  session_id: M4-C-S2-LL6-TEMPORAL-DENSITY
+  cowork_thread_name: "M4-C-S2 — LL.6 Temporal Density Modulator (Shadow)"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: M4.C.S2
+  predecessor_session: M4-C-S1-LL5-DASHA-TRANSIT (2026-05-02 — first M4-C substantive session, parallel pair partner; landed at v2.8 chronologically before this S2 close).
+  parallel_to: M4-C-S1-LL5-DASHA-TRANSIT (parallel-safe per PHASE_M4C_PLAN §4); also M4-C-P6-S4-PREDRAFT (governance-aside; landed at v2.7).
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md (§2 H1/H2/H3 hypothesis ledger)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md (§3 + §6 audit-trail + §7 n=1 disclaimer)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json (37 training + 9 held-out; rubric_option B)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json (380 observed signals)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md (event temporal distribution context)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md (sibling design-doc structural template)
+      read_at: 2026-05-02T14:00:00+05:30
+    - file: 00_ARCHITECTURE/SESSION_LOG.md (M4-C-P6-S4-PREDRAFT entry + M4-C-S1-LL5-DASHA-TRANSIT entry just appended)
+      read_at: 2026-05-02T14:00:00+05:30
+  declared_scope:
+    may_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md (new)
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll6_temporal_density_v1_0.json (new)
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (registers BOTH LL.5 + LL.6 pairs per AC.S2.4)
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/**
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_*
+      - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_*
+      - 06_LEARNING_LAYER/OBSERVATIONS/**
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - .geminirules (S1 owns mirror sync this round)
+      - .gemini/project_state.md (S1 owns mirror sync this round)
+      - platform/**
+  red_team_due: false
+  notes: "Substantive M4-C-S2 session, parallel-safe with M4-C-S1 per PHASE_M4C_PLAN §4. LL.6 = Temporal Density Modulator per brief; mechanism-naming divergence vs PHASE_M4C_PLAN §LL.6 (Plan Selection) tracked jointly with R.LL5DESIGN.1 from S1 — no new R-finding opened, brief binding per ONGOING_HYGIENE_POLICIES §C. Note: S1's SESSION_LOG entry (just appended) left a duplicate orphan `Commit: 0934efb` line at file end; S2 absorbs and removes the orphan as part of this append (clean-fix; no S1 entry content modified)."
+```
+
+### body
+
+**Brief execution per AC.S2.1–AC.S2.6.**
+
+- **AC.S2.1 read inputs.** Four sources consumed: (a) `lel_event_match_records.json` — 37 training + 9 held-out events; per-event `event_date_used` + `match_rate` + `expected_lit_signals` + `actual_lit_signals` parsed. Training-mean match_rate = 0.6300 (verified). Held-out-mean = 0.9133 (verified, cited in LL.4 §2.1). (b) `ll1_shadow_weights_v1_0.json` — 380 observed signals (signal_weights dict; per-signal `observations` list with `{event_id, lit_score}` tuples; mean_match_rate = mean(lit_score)). (c) `LIFE_EVENT_LOG_v1_2.md` — read TOC + Era 1–8 structure for temporal-distribution context (no per-event cluster computation needed from prose; dates are in lel_event_match_records.json). (d) `LL4_PREDICTION_PRIOR_v1_0.md §2.2` — three hypotheses for held_out>training gap: H1 decade-stratified selection bias (most likely); H2 (LL.4 framing) LEL retrodictive_match labeling bias; H3 honest generalization (least likely under n=37). The S2 brief reframes "H2" as "dense-cluster inflation" — distinct from LL.4's H2; treated as a companion hypothesis in §6 of the LL.6 design doc. PASS.
+
+- **AC.S2.2 LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md authored — 8 sections.** Created at `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md` v1.0 SHADOW. Eight sections:
+  - §1 Mechanism — per-event density_penalty applied to LL.1 lit_score contributions; LL.6 is a modulator of LL.1's per-signal mean (not a replacement, not promotion-eligible); informational consumer is LL.5/LL.7/M4-D.
+  - §2 Cluster detection algorithm — rolling 365-day window ±182 days inclusive of self; cluster_size ≥ 1 always; density_weight = 1 / log2(cluster_size + 1). Formula values for cs=1→1.0, cs=2→0.6309, cs=3→0.5, cs=4→0.4307, cs=5→0.3869. Brief enumeration error at cs=2 (brief says 0.585 vs formula 0.6309) documented; formula treated as authoritative. Cluster-size distribution in 37 training events: {1: 7, 2: 10, 3: 11, 4: 8, 5: 1}.
+  - §3 Impact analysis spec — per-signal density_adjusted_mean = mean(observation.lit_score × density_weight[observation.event_id]) across observations; delta = raw − adjusted (positive sign for shrinkage); meaningful_flag at delta > 0.1.
+  - §4 Shadow-mode constraints — binding hard-constraint formula application (per-event weight then mean; brief explicitly forbids the average-density-weights-first form); no LL.1 weight revision (informational only); shadow_status: SHADOW; held-out 9-event partition sacrosanct (excluded from cluster detection AND from impact analysis); two-pass approval not applicable this round.
+  - §5 Output schema for ll6_temporal_density_v1_0.json (outer metadata + summary block + events[] + signals[]; delta sign convention; floating-point near-zero handling).
+  - §6 LL.4 H2 dense-cluster-inflation test — finding REJECTED at n=37: weighted-form gap_reduction −0.0069 (gap effectively unchanged in wrong direction); plain-form −0.2487 (gap worsens). Both forms argue against dense-cluster inflation as a load-bearing explanation; LL.4 §2.2 H1 + H2 remain the load-bearing explanations of the held_out>training gap.
+  - §7 Known limitations (6 items: window heuristic; formula choice; event-symmetric not signal-anchored cluster; held-out not penalized; n=37 floor; no LL.2 interaction; brief enumeration error at cs=2).
+  - §8 Changelog.
+  PASS.
+
+- **AC.S2.3 ll6_temporal_density_v1_0.json computed and written.** Created at `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll6_temporal_density_v1_0.json`. Outer metadata per §5 schema (schema_version 1.0; mechanism LL.6; phase M4-C; produced_during M4-C-S2-LL6-TEMPORAL-DENSITY; produced_on 2026-05-02; design_doc_version 1.0; rubric_version 1.0 / rubric_option B; input_files [lel_event_match_records, ll1_shadow_weights]; training_events_used 37; held_out_events_excluded 9; cluster_window_days 365 / radius 182 / threshold 3; density_formula `1 / log2(cluster_size + 1)`; aggregation_rule_per_signal verbatim per brief hard constraint; meaningful_delta_threshold 0.1; promotion_criteria_ref SHADOW_MODE_PROTOCOL §3; shadow_status SHADOW; promotion_status shadow; kill_switch_state clear; partition training; n1_disclaimer verbatim per protocol §7). Events array: 37 entries (event_id, event_date_used, cluster_size, density_weight). Signals array: 380 entries (signal_id, mean_lit_score_raw, mean_lit_score_density_adjusted, delta, meaningful_flag, n_observations). Summary block: total_signals_observed 380; meaningful_adjustment_count 255 (67% at delta > 0.1); mean_delta_across_signals 0.2202; max_delta 0.5693; min_delta 0.0; cluster_size_distribution {1:7, 2:10, 3:11, 4:8, 5:1}; raw_training_mean 0.6300; density_adjusted_training_mean_weighted 0.6231; density_adjusted_training_mean_plain 0.3813; held_out_raw_mean 0.9133 (unchanged — held-out sacrosanct); h2_gap_raw +0.2834; h2_gap_adjusted_weighted +0.2902; h2_gap_reduction_weighted −0.0069 (gap grew slightly in wrong direction); h2_gap_adjusted_plain +0.5320; h2_gap_reduction_plain −0.2487 (gap worsens); h2_finding string. Python json.load() parse-clean (verified at write time per AC.S2.3). PASS.
+
+- **AC.S2.4 CAPABILITY_MANIFEST.json updated v2.0 → v2.1 — 4 entries registered.** Read live manifest at write time (manifest_version 2.0; entry_count 129). Appended four new entries: (1) `LL5_DASHA_TRANSIT_DESIGN_v1_0` (S1 design doc; status CURRENT); (2) `ll5_dasha_transit_v1_0` (S1 shadow JSON; status SHADOW); (3) `LL6_TEMPORAL_DENSITY_DESIGN_v1_0` (S2 design doc; status SHADOW); (4) `ll6_temporal_density_v1_0` (S2 shadow JSON; status SHADOW). entry_count 129 → 133. manifest_version "2.0" → "2.1". manifest_fingerprint extended with `+m4c_s2_ll6_2026-05-02`. last_updated 2026-05-02; last_updated_by M4-C-S2-LL6-TEMPORAL-DENSITY. Python json.load() parse-clean (verified). S1 brief explicitly deferred manifest-touch to S2 per S1 AC.S1.6 hard_constraint — discharged here in one pass for both S1+S2 LL pairs per brief AC.S2.4. S1 file paths read from PHASE_M4C_PLAN §LL.5 + actual artifact location on disk (not guessed). PASS.
+
+- **AC.S2.5 CURRENT_STATE updated.** Live read at write time = v2.8 (set by M4-C-S1-LL5-DASHA-TRANSIT just-landed; v2.7 was M4-C-P6-S4-PREDRAFT). Brief AC.S2.5 prescribed v2.8 expecting only S1 as parallel; in fact P6 also took a slot pushing S1 to v2.8. Per brief hard_constraint operational rule "current+1" this S2 takes v2.9. Frontmatter `version: 2.8` → `version: 2.9`; v2.9 changelog block prepended at top of changelog list. Canonical state pointers ROTATED: `last_session_id` → M4-C-S2-LL6-TEMPORAL-DENSITY (overrides S1 value M4-C-S1-LL5-DASHA-TRANSIT — chronologically-later last-writer-wins per parallel-coordination convention; S1's deliverables remain audit-trailed in v2.8 changelog block); `next_session_objective` rewritten → M4-C-S3 (LL.7 first artifact write per NAP.M4.6 OPTION_B_APPROVED Classical-seeded with 3 refinements); `red_team_counter` 1 → 2 (substantive increment from S1's post-write value of 1; per brief AC.S2.5 expected value); `active_phase_plan_sub_phase` extended with both S1+S2 done block; `file_updated_at` rotated to 2026-05-02T15:30:00+05:30; `file_updated_by_session` rotated to M4-C-S2-LL6-TEMPORAL-DENSITY; `parallel_session_notes` block rewritten for S1+S2 race coordination (replacing stale M4-B-P1/S3 block). PASS.
+
+- **AC.S2.6 SESSION_LOG entry + commit + hash stamp.** This entry. Commit hash will be stamped post-commit per ONGOING_HYGIENE_POLICIES §F chore-commit pattern matching prior M4 closes. Orphan duplicate `Commit: 0934efb` line left by S1's append (unintended duplicate at file end, after S1's own `Commit: f30f696`) absorbed and removed as part of this S2 append — clean-fix, no modification of S1 entry content. PASS.
+
+### Hard constraints honored
+
+- **Per-event-then-mean formula application.** density_weight applied to observation.lit_score per event in `signals[].mean_lit_score_density_adjusted` computation; result averaged across observations. Brief-forbidden alternative (`mean_lit_score_raw × mean(density_weights)`) NOT used; explicitly rejected in design doc §4 with rationale. Honored.
+- **No LL.1 weight revision.** Despite 67% of signals carrying meaningful_flag (delta > 0.1), no LL.1 shadow weight or LL.1 production weight modified. The 30 LL.1 promoted signals (M4-B-S5) unchanged. LL.6 output is informational only per shadow-mode discipline. Honored.
+- **Held-out partition sacrosanct.** 9 held-out events excluded from cluster detection AND from impact analysis (verified by explicit `partition == "training"` filter on lel_event_match_records.records). Held-out mean (0.9133) reported in §6 as the held-out reference unchanged; LL.6 did not see held-out lit_scores during computation. Honored.
+- **CURRENT_STATE version operational rule.** Read live file (v2.8 at read time per S1's just-landed close); took v2.9 (current+1). When (if) further parallel slots land, they take v3.0 or higher per the same convention. parallel_session_notes documents the S1+S2 coordination. Honored.
+- **CAPABILITY_MANIFEST registers S1 artifacts.** S1 brief left manifest to S2 per S1 AC.S1.6 hard_constraint; S2 brief AC.S2.4 mandates registration of BOTH S1 + S2 LL pairs in one pass; discharged here at v2.0 → v2.1 with 4 entries. S1 file paths read from PHASE_M4C_PLAN §3.1 / §LL.5 plus actual on-disk location (`signal_weights/shadow/ll5_dasha_transit_v1_0.json`); not guessed. Honored.
+- **must_not_touch scope.** No write to signal_weights/production/**, signal_weights/shadow/ll1_*, signal_weights/shadow/ll2_*, OBSERVATIONS/**, 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**, .geminirules, .gemini/project_state.md, platform/**. S1 owns mirror sync this round (discharged at S1 v2.8 close). Honored.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: M4-C-S2-LL6-TEMPORAL-DENSITY
+  closed_at: 2026-05-02T15:30:00+05:30
+  files_touched:
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md
+      mutation_type: created
+      sha256_before: null
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S2.2 deliverable — LL.6 design doc (8 sections; status SHADOW)"
+      within_declared_scope: true
+    - path: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll6_temporal_density_v1_0.json
+      mutation_type: created
+      sha256_before: null
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S2.3 deliverable — LL.6 shadow register (37 events + 380 signals; meaningful_adjustment_count 255; H2 test rejected)"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S2.4 — manifest_version 2.0 → 2.1; +4 entries; entry_count 129 → 133; S1 brief deferred manifest to S2"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S2.5 — version v2.8 → v2.9; canonical state pointers rotated; red_team_counter 1 → 2; parallel_session_notes rewritten for S1+S2 race"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: <stamped-at-commit>
+      sha256_after: <stamped-at-commit>
+      justification: "AC.S2.6 — this session entry + clean-fix orphan duplicate Commit: 0934efb line left by S1 append"
+      within_declared_scope: true
+  registry_updates_made:
+    capability_manifest:
+      version: "2.0 → 2.1"
+      entry_count: "129 → 133"
+      new_entries:
+        - LL5_DASHA_TRANSIT_DESIGN_v1_0
+        - ll5_dasha_transit_v1_0
+        - LL6_TEMPORAL_DENSITY_DESIGN_v1_0
+        - ll6_temporal_density_v1_0
+    file_registry: not_applicable_post_phase_1B_cutover
+    canonical_artifacts:
+      - canonical_id: LL6_TEMPORAL_DENSITY_DESIGN_v1_0
+        change: NEW v1.0 SHADOW
+        details: "LL.6 design doc (8 sections; mechanism + cluster detection + impact analysis + shadow constraints + output schema + H2 test + limitations + changelog)"
+      - canonical_id: ll6_temporal_density_v1_0
+        change: NEW v1.0 SHADOW
+        details: "LL.6 shadow register (37 events + 380 signals; meaningful_adjustment_count 255 of 380 = 67%; mean delta 0.2202; max 0.5693; H2 dense-cluster-inflation test REJECTED at n=37 — weighted-form gap_reduction −0.0069)"
+      - canonical_id: LL5_DASHA_TRANSIT_DESIGN_v1_0
+        change: REGISTRATION (artifact written by S1; manifest entry deferred per S1 AC.S1.6)
+        details: "LL.5 design doc (authored by parallel S1 session; registered here per AC.S2.4)"
+      - canonical_id: ll5_dasha_transit_v1_0
+        change: REGISTRATION (artifact written by S1; manifest entry deferred per S1 AC.S1.6)
+        details: "LL.5 shadow register (authored by parallel S1 session; registered here per AC.S2.4)"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CLAUDE.md not touched. S1 owned MP.1 + MP.2 mirror sync this parallel round (discharged at S1 v2.8 close, F.RT.S6.M.1 closed). S2 must_not_touch .geminirules per brief."
+    - pair_id: MP.2
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "Composite Claude-side state (CURRENT_STATE + SESSION_LOG) touched by this S2 substantive close. Gemini-side .gemini/project_state.md sync was discharged at S1 v2.8 close per S1 brief — no further touch this S2 session per brief must_not_touch."
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MACRO_PLAN unchanged"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M4_PLAN unchanged"
+    - pair_id: MP.5
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: false
+      rationale: "CAPABILITY_MANIFEST.json (Claude-side authoritative per CANONICAL_ARTIFACTS §2 MP.5) touched by this S2 close — manifest_version 2.0 → 2.1; +4 entries. Gemini-side mirror counterpart not updated (MP.5 declared Claude-authoritative; Gemini consumes by reference)."
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only; no Gemini-side action required"
+      claude_only: true
+    - pair_id: MP.7
+      claude_side_touched: true
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2"
+      claude_only: true
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged"
+  red_team_pass:
+    due: false
+    performed: false
+    rationale: "Substantive session — counter 1 → 2 (S1's post-write value 1 + S2 substantive increment). Counter has not reached 3 IS.8(a) trigger. Sub-phase-close-class red-team scheduled at M4-C-S4 per PHASE_M4C_PLAN §3.4 AC.M4C.S4.3 (analogue of M4-B-S6 red-team). Macro-phase-close IS.8(b) at M4-D close per PHASE_M4_PLAN §3.4 AC.M4D.4."
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: not_run
+    rationale: "Substantive session, but lives in platform/ — must_not_touch. Recommend re-run at M4-C-S3 close to confirm no NEW violations from this S1+S2 parallel-pair close."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: not_run
+    rationale: "Substantive session, but lives in platform/ — must_not_touch. New artifacts are markdown design doc + JSON shadow register + manifest update + CURRENT_STATE rotation. Recommend re-run at M4-C-S3 entry or M4-C-S4 close to confirm 108-baseline maintained from M4-B-S6-CLOSE."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: not_run
+    rationale: "S1 owned mirror sync this round (discharged at S1 v2.8 close); S2 must_not_touch .geminirules + .gemini/project_state.md. mirror_enforcer.py recommended re-run after both S1 + S2 commits land to confirm MP.1+MP.2 adapted-parity holds."
+  current_state_updated: true
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Learning-layer-substrate session; no consume/synthesis build-state to serialize."
+  parallel_session_notes: >
+    M4-C-S2 (this close) ran as a parallel-safe substantive session alongside
+    M4-C-S1-LL5-DASHA-TRANSIT per PHASE_M4C_PLAN §4 LL.5 ⊥ LL.6 ruling. Disjoint
+    file scopes by may_touch declaration: S1 owns LL5_*+ll5_*+`.geminirules`+
+    `.gemini/project_state.md`; S2 owns LL6_*+ll6_*+CAPABILITY_MANIFEST. Conflict
+    surface: CURRENT_STATE.md + SESSION_LOG.md (both touched by both sessions).
+    Race outcome at this commit: S1 landed first chronologically (v2.7 → v2.8;
+    last_session_id rotated to M4-C-S1; red_team_counter 0 → 1). S2 reads live
+    state and adapts: takes v2.9 (current+1; v2.8 is S1's slot); bumps counter
+    1 → 2 (substantive increment); overwrites last_session_id to M4-C-S2 per
+    last-writer-wins convention; S1's deliverables fully audit-trailed in v2.8
+    changelog block. CAPABILITY_MANIFEST registration of BOTH S1 + S2 LL pairs
+    discharged here at v2.0 → v2.1 with 4 entries per brief AC.S2.4 (S1 brief
+    deferred manifest to S2 per S1 AC.S1.6). Mirror MP.1+MP.2 sync was
+    discharged at S1 v2.8 close per S1 brief; S2 must_not_touch the mirror
+    surfaces per brief — no further mirror touch this session. SESSION_LOG
+    clean-fix: S1's append left a duplicate orphan `Commit: 0934efb` line at
+    file end (unintended; appears AFTER S1's own `Commit: f30f696` line); this
+    S2 append absorbs the orphan and removes it. S1 entry content unmodified.
+    Predecessor chain: M4-C-S1-LL5-DASHA-TRANSIT (parallel pair partner) →
+    M4-C-P6-S4-PREDRAFT (governance-aside; v2.7) → M4-B-P5-M4C-ENTRY-PREP
+    (NAP.M4.6 verdict append) → M4-B-S6-CLOSE (M4-B sub-phase sealed).
+    drift_detector.py / schema_validator.py / mirror_enforcer.py recommended
+    re-run after both S1 + S2 commits land.
+  close_criteria_met: true
+  unblocks: >
+    M4-C-S3 (LL.7 first artifact write per NAP.M4.6 OPTION_B_APPROVED Classical-
+    seeded with 3 refinements: `unconfirmed` rename, N≥3 threshold, 8 MED-tier LL.2
+    sanity-check anchor). LL.7 is sequenced after S1 + S2 per PHASE_M4C_PLAN §4
+    (LL.7 NOT parallel-safe with LL.5/LL.6 — LL.7's algorithm-per-OPTION_B reads
+    LL.5/LL.6 design choices; CDLM cross-domain linkage map as base prior).
+    S3 may also opportunistically: (i) re-attempt Gemini reachability per R.LL1TPA.1
+    carry-forward; (ii) execute per-edge LL.2 promotion for the 30-signal pass_2-
+    approved cohort if scope permits.
+  handoff_notes: >
+    Two new LL.6 artifacts: LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md v1.0 SHADOW
+    (8 sections) + signal_weights/shadow/ll6_temporal_density_v1_0.json (37 events
+    + 380 signals; meaningful_adjustment_count 255 of 380 = 67% at delta > 0.1;
+    mean delta 0.2202). H2 dense-cluster-inflation test on training mean
+    EMPIRICALLY REJECTED at n=37 (weighted-form gap_reduction −0.0069); informational
+    finding R.LL6FINDING.1 — LL.4 §2.2 H1 (decade-stratified selection bias) and
+    H2 (LEL retrodictive labeling bias) remain the load-bearing explanations of
+    the held_out (0.9133) > training (0.6300) gap. R.LL6DESIGN.1 (mechanism-naming
+    divergence) tracked jointly with R.LL5DESIGN.1 from S1; both flagged for next
+    M4-C governance pass / native review. Manifest v2.0 → v2.1 with 4 new entries
+    (S1 + S2 LL pairs registered together per S1 AC.S1.6 deferral). Companion
+    artifact: PHASE_M4C_PLAN_v1_0.md DRAFT (forward-pointer plan); Sister
+    artifacts: LL5_DASHA_TRANSIT_DESIGN_v1_0.md + ll5_dasha_transit_v1_0.json
+    (parallel S1 close); M4_C_CLOSE_v1_0.md DRAFT (M4-C-P6-S4-PREDRAFT pre-draft
+    skeleton; consumer M4-C-S4 future). Commit hash to be stamped post-commit per
+    ONGOING_HYGIENE_POLICIES §F.
+```
+
+### Next session objective
+
+**M4-C-S3 (LL.7 native-only discovery prior — first artifact write per NAP.M4.6 Option B).**
+LL.7 implements OPTION_B_APPROVED 2026-05-02 (Classical-seeded with 3 refinements:
+`unconfirmed` rename, N≥3 minimum threshold, 8 MED-tier LL.2 sanity-check anchor).
+S3 scope per PHASE_M4C_PLAN §3.3: §2 entry gates §2.1 + §2.2 (NAP.M4.6 issued —
+DISCHARGED) + §2.3 + §2.4; first LL.7 artifact write at
+`06_LEARNING_LAYER/discovery_priors/native_priors_M4C_v1_0.json`; LL.7 native-only
+mode has NO shadow→production split per SHADOW_MODE_PROTOCOL §2 LL.7 row. Held-out
+9 events sacrosanct. Pre-draft M4_C_CLOSE_v1_0.md DRAFT awaits S3 outcome
+population in §5 LL.7 row (S4 seals at sub-phase close). Sub-phase-close red-team
+at M4-C-S4 per PHASE_M4C_PLAN §3.4 AC.M4C.S4.3.
+
+Commit: `<stamped-at-commit>` (feature/phase-o-observatory, 2026-05-02).
