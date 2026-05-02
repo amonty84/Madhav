@@ -1,12 +1,13 @@
 ---
-status: PARTIAL
+status: PARTIAL-COMPLETE
 session_scope: Wave 2 — UQE LLM-first planner + context_assembly step
 authored: 2026-05-01
 authored_by: Claude Sonnet 4.6 (Cowork session)
 ac_w2_1_planner: PARKED (LLM_FIRST_PLANNER_ENABLED held false — 8 smoke rounds, Lever 2 native decision 14e4b02)
-ac_w2_2_context_assembly: PENDING (context_assembler.ts not yet written — W2-CTX-ASSEMBLY session queued)
+ac_w2_2_context_assembly: COMPLETE (W2-CTX-ASSEMBLY session 2026-05-02; flag default OFF, smoke flip pending)
+ac_w2_2_commit: 2fe3ba9
 ac_w2_3_nvidia_key: DEFERRED (gated on W2-UQE-ACTIVATE re-authorization as Lever 3)
-next_session: W2-CTX-ASSEMBLY (execute AC.W2.2 only; skip AC.W2.1 and AC.W2.3)
+next_session: TBD (W2-CTX-ASSEMBLY closed; AC.W2.1 PARKED + AC.W2.3 DEFERRED remain)
 ---
 
 # CLAUDECODE_BRIEF — Wave 2 UQE + Context Assembly
