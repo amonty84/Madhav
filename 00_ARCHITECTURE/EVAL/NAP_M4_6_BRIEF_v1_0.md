@@ -1,8 +1,8 @@
 ---
 artifact: 00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md
 canonical_id: NAP_M4_6_BRIEF
-version: "1.0"
-status: PENDING_NATIVE_DECISION
+version: "1.1"
+status: OPTION_B_APPROVED
 authored_by: M4-B-P5-M4C-ENTRY-PREP
 authored_on: 2026-05-02
 nap_id: NAP.M4.6
@@ -13,9 +13,23 @@ authoritative_spec: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md §LL-Appendix.B LL.7 + §
 related_artifacts:
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md (§5 recommendations + §4 LL.2 edge spot-check)
   - 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md (§5 prior-calibration recommendation)
-  - 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md (the cross-domain linkage map cited as Option B's classical prior)
+  - 025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md (the cross-domain linkage map — Option B's classical prior)
   - 06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §2 LL.7 row (native-only mode has no shadow→production split)
-decision_pending: true
+decision_pending: false
+decision_received_on: 2026-05-02
+decision_session: M4-B-P5-M4C-ENTRY-PREP (NAP-decisions append)
+native_verdict: Option B — Classical-seeded
+native_rationale: >
+  LL.7 starts from the CDLM edge map as a prior. Empirical co-activations either
+  confirm, contradict, or are silent on each CDLM edge. Classical-only edges (no
+  empirical support) are flagged as "unconfirmed." Lowers the discovery threshold
+  because the classical map guides where to look. The 8 MED-tier edges LL.2
+  already found are all confirmed CDLM edges — this option would have found them
+  too.
+native_refinements_to_option_B:
+  - "Rename `classical_only` support class to `unconfirmed` per native phrasing"
+  - "Lower the discovery threshold from N≥5 to N≥3 (or per-S3 calibration) — the classical map's guidance justifies the lower bar"
+  - "The 8 MED-tier LL.2 edges become the verification anchor for the algorithm at M4-C-S3 — re-finding them is a sanity check"
 changelog:
   - v1.0 (2026-05-02, M4-B-P5-M4C-ENTRY-PREP): Initial brief authored as a
     decision-pending artifact. Three options presented neutrally with
@@ -29,11 +43,13 @@ changelog:
 ## LL.7 Discovery Prior Rubric (native-only mode at M4-C)
 
 ```
-STATUS: PENDING NATIVE DECISION (2026-05-02).
-This brief is decision-pending. No LL.7 algorithm path is committed until the
-native issues a verdict per §3 Decision template. The verdict will be recorded
-in SESSION_LOG NAP-decisions append entry and stamped into the LL.7 artifact's
-frontmatter at M4-C-S3 first write.
+STATUS: OPTION_B_APPROVED (2026-05-02).
+NAP.M4.6 verdict received from native at M4-B-P5-M4C-ENTRY-PREP NAP-decisions
+append (2026-05-02): Option B — Classical-seeded. Three native refinements
+captured in frontmatter and §6 below. M4-C-S3 (LL.7 first artifact write) is
+unblocked; the algorithm follows §4.2 with the §6 refinements applied.
+The brief's §1–§4 body is preserved as authored 2026-05-02 for audit trail;
+§6 captures the verdict + refinements; v1.1 changelog records the decision.
 ```
 
 ---
@@ -372,7 +388,114 @@ column makes this visible but does not change the output shape.
 
 ---
 
+## §6 — Native verdict + refinements (added v1.1)
+
+### §6.1 — Verdict
+
+**Option B — Classical-seeded.** Recorded in SESSION_LOG NAP-decisions append
+entry of session M4-B-P5-M4C-ENTRY-PREP on 2026-05-02.
+
+### §6.2 — Native rationale (verbatim)
+
+> LL.7 starts from the CDLM edge map as a prior. Empirical co-activations
+> either confirm, contradict, or are silent on each CDLM edge. Classical-only
+> edges (no empirical support) are flagged as "unconfirmed." Lowers the
+> discovery threshold because the classical map guides where to look. The 8
+> MED-tier edges LL.2 already found are all confirmed CDLM edges — this option
+> would have found them too.
+
+### §6.3 — Refinements to Option B as authored
+
+The native's verdict ratifies Option B with three refinements relative to the
+brief's §1.3 + §4.2 specification. M4-C-S3 implements Option B with these
+refinements applied.
+
+**(a) Rename `classical_only` support class to `unconfirmed`.** The brief's
+§1.3 + §4.2 used `classical_only` as the label for CDLM edges with no empirical
+support in the 37-event training partition. Native renames this class to
+`unconfirmed`. The semantic is identical (CDLM edge present, no empirical
+co-firing in n=37); the label is sharper because it signals provisional status
+— the edge may surface empirical support as the LEL grows. The four-class
+output at M4-C-S3 becomes:
+
+| Support class | Meaning |
+|---|---|
+| `confirmed` | CDLM edge with empirical co-firings in N≥3 training events |
+| `contradicted` | CDLM edge with empirical co-firings in conflict with the classical direction (e.g., domain mismatch flagged in LL3 §3.2) |
+| `unconfirmed` | CDLM edge with no empirical support in the 37-event training partition (was `classical_only` in brief §1.3) |
+| `novel_candidate` | Empirical pattern (N≥3) absent from CDLM, flagged for native review |
+
+**(b) Lower the discovery threshold from N≥5 to N≥3.** The brief's §4.2
+expected output shape used N≥5 as the empirical-confirmation threshold for
+Option B (consistent with §1.3 Option A's N≥5 threshold, conservatively
+applied). Native's rationale: "Lowers the discovery threshold because the
+classical map guides where to look." The CDLM-as-prior structure means
+empirical confirmation is searching a small, classically-constrained edge space
+rather than the full co-activation space — so N≥3 is justifiable here even
+though N≥5 was conservative for Option A's unconstrained scan. M4-C-S3
+implements N≥3 as the default empirical-confirmation threshold; per-S3
+calibration may tune higher if noise floor warrants. SHADOW_MODE_PROTOCOL §3
+N≥3 minimum is honored either way.
+
+**(c) The 8 MED-tier LL.2 edges are the verification anchor.** Per native:
+"The 8 MED-tier edges LL.2 already found are all confirmed CDLM edges — this
+option would have found them too." M4-C-S3's algorithm implementation must
+re-find the 8 MED-tier edges as `confirmed` class entries. If the algorithm
+fails to re-find them, that is a sanity-check failure indicating an
+implementation bug, not a discovery — S3 halts and reports. The 8 edges' IDs
+are sourced from `06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/
+LL3_DOMAIN_COHERENCE_v1_0.md §4.1` at S3 entry.
+
+### §6.4 — Updated expected output shape
+
+With refinements (a), (b), (c) applied, the §4.2 expected output shape becomes:
+
+- ~30–60 `unconfirmed` edges (CDLM full inventory minus the confirmed subset).
+- 8 `confirmed` edges minimum (the LL.2 MED-tier sanity-check anchor) + any
+  additional CDLM edges that meet N≥3 in the 37-event training partition.
+- 0–3 `contradicted` edges (LL3 §3.2 found 0 mismatch flags structurally;
+  contradicted may be empty).
+- ~5–15 `novel_candidate` edges (intra-clique non-CDLM patterns at N≥3;
+  empirical count higher than the brief's N≥5 estimate).
+
+### §6.5 — Downstream consumers updated
+
+- **PHASE_M4C_PLAN_v1_0.md §3.3.** No edit required — §3.3 already named the
+  Option-B four-class algorithm; the refinements (renamed class label;
+  threshold N≥5 → N≥3; LL.2 8-edge sanity-check) are inherited at M4-C-S3 entry
+  via this brief's §6.
+- **LL.7 artifact frontmatter.** At M4-C-S3 first write,
+  `06_LEARNING_LAYER/discovery_priors/native_priors_M4C_v1_0.json` carries
+  `nap_m4_6_verdict: Option B` + `nap_m4_6_refinements: [unconfirmed,
+  threshold_N3, ll2_med_anchor]`.
+- **NAP_M4_6_BRIEF_v1_0.md status.** PENDING_NATIVE_DECISION → OPTION_B_APPROVED
+  (this v1.1 update).
+
+### §6.6 — What the native verdict does NOT change
+
+- §SHADOW_MODE_PROTOCOL §3 (NAP.M4.4) is unchanged. LL.7 native-only mode
+  retains no shadow→production split; native sign-off remains the gate per
+  §2 LL.7 row.
+- LL.7 cohort-mode scope remains M7+ per `MACRO_PLAN §LL-Appendix.A`. The
+  native-only verdict does not commit cohort-mode rubric.
+- M4-C-S1 (LL.5) and M4-C-S2 (LL.6) sub-phases remain ungated by NAP.M4.6 per
+  PHASE_M4C_PLAN §6.1; only S3 gates on this verdict.
+
+---
+
 ## §5 — Changelog
+
+- **v1.1 (2026-05-02, M4-B-P5-M4C-ENTRY-PREP NAP-decisions append):** Native
+  verdict received: Option B — Classical-seeded, with three refinements
+  captured in §6 (rename `classical_only` → `unconfirmed`; lower discovery
+  threshold N≥5 → N≥3; require 8 MED-tier LL.2 edges as `confirmed` sanity-
+  check anchor at S3 first write). Frontmatter status flipped
+  PENDING_NATIVE_DECISION → OPTION_B_APPROVED. New frontmatter fields:
+  `decision_pending`, `decision_received_on`, `decision_session`,
+  `native_verdict`, `native_rationale`, `native_refinements_to_option_B`. New
+  §6 added (verdict + verbatim rationale + per-refinement specification +
+  updated expected output shape + downstream consumers + non-changes). §1–§4
+  body preserved as authored 2026-05-02 for audit trail. M4-C-S3 unblocked.
 
 - **v1.0 (2026-05-02, M4-B-P5-M4C-ENTRY-PREP):** Initial brief.
   - §1 What NAP.M4.6 decides — context (LL.7 native-only mode); why the rubric
@@ -397,6 +520,7 @@ column makes this visible but does not change the output shape.
 
 ---
 
-*End of NAP_M4_6_BRIEF_v1_0.md. Awaiting native verdict per §3 Decision
-template. M4-C-S3 (LL.7 first artifact write) does not open until the verdict
-is recorded in SESSION_LOG.*
+*End of NAP_M4_6_BRIEF_v1_1.md. Native verdict received 2026-05-02: Option B —
+Classical-seeded, with three refinements captured in §6. M4-C-S3 (LL.7 first
+artifact write) is unblocked when its other entry gates (M4-B-S6 sealed;
+Gemini reachability re-check) are also satisfied per PHASE_M4C_PLAN §2.*

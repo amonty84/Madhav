@@ -14423,3 +14423,65 @@ session_close:
 
 Commit: 007c718 (feature/phase-o-observatory, 2026-05-03).
 schema_validator.py: exit=2 with 108 violations (matches the established 108-baseline; AC.S6.4 target met).
+
+---
+
+## M4-B-P5-M4C-ENTRY-PREP NAP-decisions append — NAP.M4.6 verdict (Option B APPROVED)
+
+**Date:** 2026-05-03 (post-S6-close NAP-decisions append; same session class as the original M4-B-P5 entry — governance-aside).
+**Convention:** Same as `M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append` for NAP.M4.4. The append captures the native verdict on a brief authored earlier; no substantive Learning Layer state change, no algorithm work, no data artifact.
+**Note on placement:** This append lands chronologically AFTER M4-B-S6-CLOSE because the native verdict arrived after S6 had sealed the M4-B sub-phase. M4-B-S6's `unblocks` clause already named "PHASE_M4C_PLAN v1.0 DRAFT available for brief authoring" — that pointer remains correct; this append discharges the NAP.M4.6 entry gate at PHASE_M4C_PLAN §2.2 so that M4-C-S3 can open when its other gates clear.
+
+### NAP.M4.6 verdict — Option B (Classical-seeded) — APPROVED
+
+Native rationale (verbatim):
+
+> LL.7 starts from the CDLM edge map as a prior. Empirical co-activations either
+> confirm, contradict, or are silent on each CDLM edge. Classical-only edges (no
+> empirical support) are flagged as "unconfirmed." Lowers the discovery threshold
+> because the classical map guides where to look. The 8 MED-tier edges LL.2
+> already found are all confirmed CDLM edges — this option would have found them
+> too.
+
+### Three refinements to Option B as authored in NAP_M4_6_BRIEF v1.0
+
+1. **Rename support class.** `classical_only` → `unconfirmed`. Semantic identical (CDLM edge present, no empirical co-firing in n=37); label sharper because it signals provisional status — the edge may surface empirical support as the LEL grows toward the 80-event milestone.
+2. **Lower discovery threshold.** N≥5 → N≥3 default for empirical confirmation of a CDLM edge. The classical map's guidance shrinks the search space to a small, classically-constrained edge set, which justifies the lower threshold relative to Option A's unconstrained scan. Per-S3 calibration may tune higher if noise floor warrants. SHADOW_MODE_PROTOCOL §3 N≥3 minimum is honored either way.
+3. **LL.2 8 MED-tier edges as sanity-check anchor.** M4-C-S3 algorithm must re-find the 8 MED-tier edges (per `LL3_DOMAIN_COHERENCE §4.1`) as `confirmed` class entries. Failure to re-find = implementation bug, not a discovery → S3 halts and reports.
+
+### Updated expected output shape at M4-C-S3 (per NAP_M4_6_BRIEF v1.1 §6.4)
+
+| Support class | Expected count |
+|---|---|
+| `unconfirmed` | ~30–60 (CDLM full inventory minus the confirmed subset) |
+| `confirmed` | 8 minimum (LL.2 MED-tier sanity-check anchor) + additional CDLM edges meeting N≥3 |
+| `contradicted` | 0–3 (LL3 §3.2 found 0 mismatch flags structurally; may be empty) |
+| `novel_candidate` | ~5–15 (intra-clique non-CDLM patterns at N≥3; higher than the brief's N≥5 estimate) |
+
+### Files touched
+
+- `00_ARCHITECTURE/EVAL/NAP_M4_6_BRIEF_v1_0.md` v1.0 → v1.1: frontmatter status `PENDING_NATIVE_DECISION` → `OPTION_B_APPROVED`; new fields (`decision_pending: false`, `decision_received_on: 2026-05-02`, `decision_session`, `native_verdict`, `native_rationale`, `native_refinements_to_option_B`); new §6 (verdict + verbatim rationale + per-refinement specification + updated output shape + downstream consumers + non-changes); v1.1 changelog entry; status banner + document trailer updated. §1–§4 body preserved as authored 2026-05-02 for audit trail.
+- `00_ARCHITECTURE/SESSION_LOG.md`: this append entry.
+
+### Files NOT touched (per session must_not_touch + canonical-pointer hard constraint)
+
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — NOT updated. Per the M4-A-S2-T3-SHADOW-PROTOCOL NAP-decisions append (NAP.M4.4) precedent, NAP-decisions appends do not bump CURRENT_STATE on their own. The verdict is reflected in the brief's status flip + this SESSION_LOG entry; CURRENT_STATE absorbs the effect at M4-C-S1 open (the session that actually consumes the verdict). Canonical state pointers (last_session_id, next_session_objective, file_updated_at, file_updated_by_session, red_team_counter) all remain UNCHANGED — set by M4-B-S6-CLOSE.
+- `06_LEARNING_LAYER/discovery_priors/native_priors_M4C_v1_0.json` — does not yet exist. Created at M4-C-S3 first write per PHASE_M4C_PLAN §3.3. Its frontmatter at creation will carry `nap_m4_6_verdict: Option B` + `nap_m4_6_refinements: [unconfirmed, threshold_N3, ll2_med_anchor]`.
+- `00_ARCHITECTURE/PHASE_M4C_PLAN_v1_0.md` — no edit required. §3.3 already named the Option-B four-class algorithm; the §6 refinements (renamed class label; threshold N≥3; LL.2 8-edge sanity-check) are inherited at M4-C-S3 entry via the brief's §6.
+
+### Effect on M4-C entry gates per PHASE_M4C_PLAN §2
+
+- §2.1 (M4-B closed) — DISCHARGED at M4-B-S6-CLOSE (commit 007c718, 2026-05-03).
+- §2.2 (NAP.M4.6 issued) — **DISCHARGED by this append.**
+- §2.3 (Gemini reachability re-check) — still pending; performed at M4-C-S1 entry per the carry-forward of R.LL1TPA.1.
+- §2.4 (SHADOW_MODE_PROTOCOL §3 unchanged) — confirmed; the verdict does not amend §3.
+
+M4-C-S3 unblocks at the moment the M4-C-S1/S2 sub-phases complete AND the §2.3 reachability re-check is recorded.
+
+### Class verdict + counter
+
+- Class: governance-aside NAP-decisions append (no algorithm work, no data artifact, no Learning Layer state change).
+- red_team_counter: unchanged (M4-B-S6-CLOSE's count remains authoritative; governance-aside per ONGOING_HYGIENE_POLICIES §G).
+- Mirror MP.1/MP.2: not propagated by this append (governance-aside; if the next substantive close touches `.geminirules` / `.gemini/project_state.md`, it should reflect the NAP.M4.6 verdict in adapted parity).
+
+Commit: <stamped-at-commit-end>.
