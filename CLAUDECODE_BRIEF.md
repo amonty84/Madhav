@@ -1,13 +1,16 @@
 ---
-status: PENDING
+status: BLOCKED
 session: W2-UQE-ACTIVATE
 scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
-round: 3
+round: 4
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
 flag_flipped: false
+round_4_blockers:
+  - NIM_TOOL_CALL_500 (constrained-decoding endpoint returning 25/25 hard 500s on smoke payload while direct chat + small tool-call probes return 200; not a prompt-fix issue)
+  - PROMPT_DOC_CODE_MIRROR_GAP (runtime SYSTEM_PROMPT in manifest_planner.ts is a hardcoded copy of PLANNER_PROMPT_v1_0.md §3; markdown-only edits do not propagate; §4 few-shots are not loaded at runtime at all)
 ---
 
 # CLAUDECODE_BRIEF — W2-UQE-ACTIVATE
@@ -125,6 +128,135 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 ```
 
 ---
+
+## Smoke results (Round 4 — second prompt attempt + NIM tool-call outage)
+
+```
+planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
+smoke_date: 2026-05-02 (Round 4 — prompt-fix v2 + NIM tool-call backend degraded)
+avg_tool_recall: 0.000
+avg_tool_precision: 0.000
+total: 25
+passed: 0
+failed: 25
+forbidden_violations: 0
+required_misses: 23
+pass_rate: 0.000
+flag_flipped: false
+exit_code: 1
+notes: |
+  Round 4 ran the second (and per brief §10, FINAL) prompt attempt. Smoke
+  did NOT meaningfully evaluate the prompt fix because of two independent
+  blockers discovered during execution.
+
+  PROMPT EDITS APPLIED THIS ROUND (PLANNER_PROMPT_v1_0.md only):
+    FIX 1 — Added a second remedial few-shot example (new §4.2,
+            "alignment character — gemstone / mantra") that selects
+            resonance_register alongside msr_sql + remedial_codex_query +
+            vector_search. The original Saturn-career remedial moves to
+            §4.1 ("recurring-pattern character"), and the interpretive
+            example renumbers to §4.3. A pre-example explanatory paragraph
+            calls out the pattern_register vs resonance_register split.
+    FIX 2 — Inserted a new R8 between the existing R7 and R8 (renumbering
+            "Output JSON only" to R9 and "If unanswerable" to R10):
+              R8. For remedial queries, ALWAYS include `msr_sql` at
+                  priority 1 — the remedy cannot be calibrated without
+                  first surfacing the implicated grahas/signals. Without
+                  msr_sql at priority 1, the plan is incomplete.
+            Also extended R7 with explicit text guidance on which lens
+            to pick (pattern_register for recurring-pattern queries,
+            resonance_register for alignment-character remedials), with
+            concrete examples in-rule.
+
+    No other rules were modified. PRIMARY_TOOL_NAMES, thresholds,
+    and any code outside the markdown were untouched per brief.
+
+  BLOCKER 1 — NIM TOOL-CALL BACKEND DEGRADED:
+    Two consecutive full smoke runs returned 25/25 hard "Internal Server
+    Error" responses on the constrained-decoding/tool-call path against
+    nvidia/llama-3.3-nemotron-super-49b-v1. Each entry retried 3 times via
+    the AI SDK; each retry got 500. None of the 25 entries produced a
+    valid plan, so neither the prompt-fix improvement nor any per-entry
+    score could be measured.
+
+    Live availability probes from this session:
+      curl POST /v1/chat/completions with plain message →
+          HTTP 200 in 16.4 s ("OK")
+      curl POST with tool_choice='required' + small submit_plan tool →
+          HTTP 200 in 64.3 s (valid tool_call returned)
+
+    So NIM is up generally and the tool-call grammar engine works on
+    small payloads, but the smoke's full-shape payload (~5K-token system +
+    compressed manifest in user, PlanInputJsonSchema with priority enum
+    [1,2,3] and integer min/max) is being rejected with 500. This is
+    independent of the prompt-fix edits — those live only in the markdown
+    file, which the runtime does not read (see Blocker 2). The 500s
+    appeared today; round 3 (yesterday) saw 21/25 valid plans with only
+    4 transient timeouts on the same code path.
+
+    The grammar issues fixed in round 2 (propertyNames, anyOf-of-const)
+    are still absent from PlanInputJsonSchema; nothing in the schema
+    has changed since round 3. Most likely diagnosis: NIM's
+    constrained-decoding service for nemotron-super-49b-v1 is
+    transiently degraded for higher-token payloads. A capacity/quota
+    issue or vendor-side outage cannot be ruled out from here.
+
+  BLOCKER 2 — PROMPT DOC/CODE MIRROR GAP (DISCOVERED THIS ROUND):
+    The runtime SYSTEM_PROMPT used by callLlmPlanner is a HARDCODED
+    TypeScript string constant at manifest_planner.ts:124, hand-copied
+    from PLANNER_PROMPT_v1_0.md §3. The markdown explicitly says
+    "verbatim — copy into code", but the runtime does not load the
+    markdown at all. Concretely:
+      - SYSTEM_PROMPT (lines 124-197) holds §3 verbatim only.
+      - §4 (few-shot examples) is NOT in the runtime prompt.
+      - §1, §2, §5 are reference/spec, also not in the runtime.
+
+    Implication for this round: even if the smoke's NIM 500s clear,
+    Round 4's markdown-only edits (Fix 1 + Fix 2) cannot influence
+    model behavior until SYSTEM_PROMPT in manifest_planner.ts is
+    updated to mirror the new R7 elaboration + R8 + renumbered R9/R10.
+    The new few-shot example (Fix 1) cannot influence model behavior
+    AT ALL until either (a) §4 is also injected into the runtime, or
+    (b) the few-shot's content is folded into the runtime SYSTEM_PROMPT
+    rules text.
+
+    This blocker explains why Round 3's Saturn-career few-shot was
+    cited as the cause of pattern_register over-generalization — but
+    that example was never actually in the runtime prompt. The actual
+    cause of the model's pattern-over-resonance bias is more likely
+    R7 listing pattern_register first, and/or the model's prior. This
+    needs revisiting in the next session.
+
+    The brief's may_touch scopes manifest_planner.ts to "fix only if
+    tsc errors found"; tsc is clean (9 baseline errors only, zero new),
+    so this session does NOT modify manifest_planner.ts. The mirror
+    update is left for native authorization in a follow-up session.
+
+  ACCEPTANCE STATE (Round 4):
+    AC.U.1 (tsc clean):        PASS  (9 baseline errors unchanged, zero new from prompt edit)
+    AC.U.2 (regression gate):  not re-run — fixture did not change
+    AC.U.3 (EVAL-B live):      INCONCLUSIVE — 25/25 returned 500 on NIM tool-call path
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) round-4 final per brief §10)
+
+  FINAL DETERMINATION:
+    Per brief hard constraint "do not iterate more than 2 rounds —
+    if still failing after 1 prompt fix, leave flag at false and
+    record findings." Round 4 was the second (final) prompt attempt;
+    smoke did not pass. Flag remains false. Two follow-ups needed
+    in the next authorized session:
+      (a) Mirror the Round-4 markdown edits into SYSTEM_PROMPT inside
+          manifest_planner.ts (or refactor to load from markdown so
+          this gap closes structurally).
+      (b) Re-run the smoke when NIM tool-call backend recovers; if
+          it still 500s on the full payload while small probes pass,
+          escalate to vendor.
+    These are infrastructure / mirror fixes, not the kind of "model
+    calibration round" the brief was capping. A model swap is NOT
+    yet warranted — the prompt change has never actually been
+    evaluated against the model.
+
+```
 
 ## Smoke results (Round 3 — post golden-set R7 reconciliation)
 

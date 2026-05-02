@@ -131,10 +131,21 @@ Hard rules:
       evaluation rubric.
   R7. For predictive or remedial queries, ALWAYS include `pattern_register`
       OR `resonance_register` at priority ≤ 2 — you must surface at least one
-      cross-domain lens before recommending action.
-  R8. Output JSON only — no preface, no trailing prose, no markdown fence.
-  R9. If the query is unanswerable from the available tools, return
-      tool_calls: [] and put the reason in query_intent_summary.
+      cross-domain lens before recommending action. Pick the lens by query
+      character: `pattern_register` when the query is about recurring
+      behavioral or timing patterns (e.g. "Saturn keeps causing friction in
+      my career"); `resonance_register` when the query is about aligning a
+      remedial action (gemstone, mantra, ritual, fast, charity) against the
+      cross-domain signal resonance the chart already carries (e.g. "should
+      I wear a yellow sapphire", "is this mantra appropriate").
+  R8. For remedial queries, ALWAYS include `msr_sql` at priority 1 — it is
+      the primary signal-retrieval surface for remedial reasoning. The
+      remedy cannot be calibrated without first surfacing the implicated
+      grahas/signals from MSR. `remedial_codex_query` alone, without
+      `msr_sql` at priority 1, is an incomplete remedial plan.
+  R9. Output JSON only — no preface, no trailing prose, no markdown fence.
+  R10. If the query is unanswerable from the available tools, return
+       tool_calls: [] and put the reason in query_intent_summary.
 
 Style rules:
 
@@ -148,11 +159,20 @@ Style rules:
 
 ## 4. Few-shot examples
 
-Two examples, both shown as `{ user_query, expected_plan }`. The actual
+Three examples, each shown as `{ user_query, expected_plan }`. The actual
 production call serialises only `user_query`; the expected_plan is the
 planner's target output.
 
-### 4.1 Remedial query
+The two remedial examples (4.1, 4.2) are paired deliberately to illustrate
+the R7 split between `pattern_register` and `resonance_register`. 4.1 is a
+recurring-pattern remedial — the native describes a repeating Saturn-career
+friction, so `pattern_register` is the right cross-domain lens. 4.2 is an
+alignment-character remedial — the native asks whether a specific remedial
+prescription (a gemstone) aligns with their chart's resonance, so
+`resonance_register` is the right lens. Both examples include `msr_sql` at
+priority 1 per R8.
+
+### 4.1 Remedial query — recurring-pattern character
 
 ```json
 {
@@ -193,7 +213,55 @@ planner's target output.
 }
 ```
 
-### 4.2 Interpretive query
+### 4.2 Remedial query — alignment character (gemstone / mantra)
+
+The native is asking whether a specific remedial action aligns with the
+cross-domain signal resonance their chart carries. This is an
+**alignment-character** remedial (gemstone, mantra, yellow sapphire, Mars
+propitiation, fasting, charity) — not a recurring-pattern question. The
+right cross-domain lens is `resonance_register`, not `pattern_register`.
+Per R8, `msr_sql` is at priority 1.
+
+```json
+{
+  "user_query": "Should I wear a yellow sapphire to strengthen Jupiter? Will it actually align with my chart?",
+  "expected_plan": {
+    "query_intent_summary": "Assess yellow-sapphire alignment with native's Jupiter resonance.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "planets": ["Jupiter"] },
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "Surface Jupiter-bearing signals across domains for alignment check."
+      },
+      {
+        "tool_name": "remedial_codex_query",
+        "params": { "planet": "Jupiter", "limit": 8 },
+        "token_budget": 700,
+        "priority": 1,
+        "reason": "Yellow-sapphire indications, contraindications, prerequisites for Jupiter."
+      },
+      {
+        "tool_name": "resonance_register",
+        "params": { "theme": "Jupiter-alignment" },
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Cross-domain resonance: does Jupiter-strengthening align with chart's signal pattern?"
+      },
+      {
+        "tool_name": "vector_search",
+        "params": { "query_text": "yellow sapphire Jupiter remedial alignment", "doc_type": ["domain_report"], "top_k": 6 },
+        "token_budget": 600,
+        "priority": 2,
+        "reason": "L3 long-form on gemstone-alignment principles for Jupiter."
+      }
+    ]
+  }
+}
+```
+
+### 4.3 Interpretive query
 
 ```json
 {
