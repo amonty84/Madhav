@@ -289,3 +289,14 @@ export const consumeTools = {
     },
   }),
 }
+
+/**
+ * Returns consumeTools with query_life_events conditionally included.
+ * When lelContextEnabled is false (blind mode), query_life_events is
+ * omitted entirely. This is the sole enforcement point for LEL exclusion.
+ */
+export function buildConsumeTools(lelContextEnabled: boolean) {
+  if (lelContextEnabled) return consumeTools
+  const { query_life_events: _excluded, ...blindTools } = consumeTools
+  return blindTools
+}

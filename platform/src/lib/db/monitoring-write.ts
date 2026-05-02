@@ -1,0 +1,145 @@
+/**
+ * monitoring-write.ts — fire-and-forget DB write helpers for the W2 monitoring
+ * tables (migrations 032–035). Each function inserts one row and never throws
+ * to the caller — DB errors are warn-logged internally so instrumentation
+ * never adds latency or failure modes to the request path.
+ *
+ * Row shape mirrors `monitoring-types.ts` 1:1; callers omit `id` and
+ * `created_at` (DB-defaulted).
+ */
+
+import 'server-only'
+import { getStorageClient } from '@/lib/storage'
+import { getModelMeta } from '@/lib/models/registry'
+import type {
+  LlmCallLogRow,
+  QueryPlanLogRow,
+  ToolExecutionLogRow,
+  ContextAssemblyLogRow,
+} from './monitoring-types'
+
+export async function writeLlmCallLog(
+  row: Omit<LlmCallLogRow, 'id' | 'created_at'>
+): Promise<void> {
+  try {
+    await getStorageClient().query(
+      `INSERT INTO llm_call_log
+        (query_id, conversation_id, call_stage, model_id, provider,
+         input_tokens, output_tokens, reasoning_tokens, latency_ms,
+         cost_usd, fallback_used, error_code, payload)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+      [
+        row.query_id,
+        row.conversation_id,
+        row.call_stage,
+        row.model_id,
+        row.provider,
+        row.input_tokens,
+        row.output_tokens,
+        row.reasoning_tokens,
+        row.latency_ms,
+        row.cost_usd,
+        row.fallback_used,
+        row.error_code,
+        row.payload === null || row.payload === undefined ? null : JSON.stringify(row.payload),
+      ]
+    )
+  } catch (err) {
+    console.warn('[mon] writeLlmCallLog failed:', err)
+  }
+}
+
+export async function writeQueryPlanLog(
+  row: Omit<QueryPlanLogRow, 'id' | 'created_at'>
+): Promise<void> {
+  try {
+    await getStorageClient().query(
+      `INSERT INTO query_plan_log
+        (query_id, conversation_id, chart_id, planner_model_id, query_text,
+         query_class, tool_count, plan_json, parsing_success, parse_error,
+         fallback_used, planner_latency_ms)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+       ON CONFLICT (query_id) DO NOTHING`,
+      [
+        row.query_id,
+        row.conversation_id,
+        row.chart_id,
+        row.planner_model_id,
+        row.query_text,
+        row.query_class,
+        row.tool_count,
+        row.plan_json === null || row.plan_json === undefined ? null : JSON.stringify(row.plan_json),
+        row.parsing_success,
+        row.parse_error,
+        row.fallback_used,
+        row.planner_latency_ms,
+      ]
+    )
+  } catch (err) {
+    console.warn('[mon] writeQueryPlanLog failed:', err)
+  }
+}
+
+export async function writeToolExecutionLog(
+  row: Omit<ToolExecutionLogRow, 'id' | 'created_at'>
+): Promise<void> {
+  try {
+    await getStorageClient().query(
+      `INSERT INTO tool_execution_log
+        (query_id, tool_name, params_json, status, rows_returned, latency_ms,
+         token_estimate, data_asset_id, error_code, served_from_cache,
+         fallback_used)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+      [
+        row.query_id,
+        row.tool_name,
+        row.params_json === null || row.params_json === undefined ? null : JSON.stringify(row.params_json),
+        row.status,
+        row.rows_returned,
+        row.latency_ms,
+        row.token_estimate,
+        row.data_asset_id,
+        row.error_code,
+        row.served_from_cache,
+        row.fallback_used,
+      ]
+    )
+  } catch (err) {
+    console.warn('[mon] writeToolExecutionLog failed:', err)
+  }
+}
+
+export async function writeContextAssemblyLog(
+  row: Omit<ContextAssemblyLogRow, 'id' | 'created_at' | 'total_tokens'>
+): Promise<void> {
+  try {
+    await getStorageClient().query(
+      `INSERT INTO context_assembly_log
+        (query_id, l1_tokens, l2_5_signal_tokens, l2_5_pattern_tokens,
+         l4_tokens, vector_tokens, cgm_tokens, synthesis_model_id,
+         model_max_context, b3_compliant, citation_count, verified_citations)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+       ON CONFLICT (query_id) DO NOTHING`,
+      [
+        row.query_id,
+        row.l1_tokens,
+        row.l2_5_signal_tokens,
+        row.l2_5_pattern_tokens,
+        row.l4_tokens,
+        row.vector_tokens,
+        row.cgm_tokens,
+        row.synthesis_model_id,
+        row.model_max_context,
+        row.b3_compliant,
+        row.citation_count,
+        row.verified_citations,
+      ]
+    )
+  } catch (err) {
+    console.warn('[mon] writeContextAssemblyLog failed:', err)
+  }
+}
+
+export function resolveProvider(modelId: string): string {
+  return getModelMeta(modelId)?.provider ?? 'unknown'
+}

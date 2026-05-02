@@ -9,7 +9,7 @@ interface Options {
   conversationId?: string
   initialMessages?: UIMessage[]
   onConversationCreated?: (id: string) => void
-  model?: string
+  stack?: string
   style?: string
 }
 
@@ -18,7 +18,7 @@ export function useChatSession({
   conversationId,
   initialMessages,
   onConversationCreated,
-  model,
+  stack,
   style,
 }: Options) {
   const [persistedId, setPersistedId] = useState<string | undefined>(conversationId)
@@ -76,15 +76,15 @@ export function useChatSession({
       if ((!trimmed && !hasFiles) || isStreaming) return
       chat.sendMessage(
         hasFiles ? { text: trimmed, files } : { text: trimmed },
-        { body: { chartId, conversationId: persistedId, model, style, ...extraBody } }
+        { body: { chartId, conversationId: persistedId, stack, style, ...extraBody } }
       )
     },
-    [chat, isStreaming, chartId, persistedId, model, style]
+    [chat, isStreaming, chartId, persistedId, stack, style]
   )
 
   const regenerate = useCallback(() => {
-    chat.regenerate({ body: { chartId, conversationId: persistedId, model, style } })
-  }, [chat, chartId, persistedId, model, style])
+    chat.regenerate({ body: { chartId, conversationId: persistedId, stack, style } })
+  }, [chat, chartId, persistedId, stack, style])
 
   const editAndResubmit = useCallback(
     (id: string, newText: string) => {
@@ -94,10 +94,10 @@ export function useChatSession({
       chat.setMessages(truncated)
       chat.sendMessage(
         { text: newText },
-        { body: { chartId, conversationId: persistedId, model, style } }
+        { body: { chartId, conversationId: persistedId, stack, style } }
       )
     },
-    [chat, chartId, persistedId, model, style]
+    [chat, chartId, persistedId, stack, style]
   )
 
   return {

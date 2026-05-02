@@ -1,24 +1,32 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import type { ModelId, StyleId } from '@/components/chat/ModelStylePicker'
-import { DEFAULT_MODEL_ID, isValidModelId } from '@/lib/models/registry'
+import type { StyleId } from '@/components/chat/ModelStylePicker'
+import {
+  DEFAULT_STACK_ID,
+  STACK_ROUTING,
+  type ModelStack,
+} from '@/lib/models/registry'
 
-const DEFAULT_MODEL: ModelId = DEFAULT_MODEL_ID
+export type { ModelStack }
+
+const DEFAULT_STACK: ModelStack = DEFAULT_STACK_ID
 const DEFAULT_STYLE: StyleId = 'acharya'
 const VALID_STYLES: StyleId[] = ['acharya', 'brief', 'client']
+
+const VALID_STACKS = Object.keys(STACK_ROUTING) as ModelStack[]
 
 function keyFor(chartId: string) {
   return `marsys-jis:consume-prefs:${chartId}`
 }
 
 interface Prefs {
-  model: ModelId
+  stack: ModelStack
   style: StyleId
 }
 
 export function useChatPreferences(chartId: string) {
-  const [prefs, setPrefs] = useState<Prefs>({ model: DEFAULT_MODEL, style: DEFAULT_STYLE })
+  const [prefs, setPrefs] = useState<Prefs>({ stack: DEFAULT_STACK, style: DEFAULT_STYLE })
 
   useEffect(() => {
     try {
@@ -27,16 +35,16 @@ export function useChatPreferences(chartId: string) {
       const parsed = JSON.parse(raw) as Partial<Prefs>
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPrefs({
-        model: parsed.model && isValidModelId(parsed.model) ? parsed.model : DEFAULT_MODEL,
+        stack: parsed.stack && VALID_STACKS.includes(parsed.stack) ? parsed.stack : DEFAULT_STACK,
         style: VALID_STYLES.includes(parsed.style as StyleId) ? (parsed.style as StyleId) : DEFAULT_STYLE,
       })
     } catch {}
   }, [chartId])
 
-  const setModel = useCallback(
-    (model: ModelId) => {
+  const setStack = useCallback(
+    (stack: ModelStack) => {
       setPrefs(cur => {
-        const next = { ...cur, model }
+        const next = { ...cur, stack }
         try {
           localStorage.setItem(keyFor(chartId), JSON.stringify(next))
         } catch {}
@@ -59,5 +67,5 @@ export function useChatPreferences(chartId: string) {
     [chartId]
   )
 
-  return { model: prefs.model, style: prefs.style, setModel, setStyle }
+  return { stack: prefs.stack, style: prefs.style, setStack, setStyle }
 }

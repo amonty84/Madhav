@@ -29,6 +29,9 @@ export type FeatureFlag =
   // BHISMA Stream 2 — LLM-first planner replaces classify+compose+plan_per_tool when ON.
   // Default OFF; old path remains reachable. Flip after smoke + post-BHISMA eval comparison.
   | 'LLM_FIRST_PLANNER_ENABLED'
+  // W2-CTX-ASSEMBLY: context assembly LLM step between retrieval and synthesis.
+  // Default OFF. Flip true after smoke verification. Model: STACK_ROUTING[stack].context_assembly.primary.
+  | 'CONTEXT_ASSEMBLY_ENABLED'
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   /** Enables the Trace Analytics tab and cross-query history aggregations. */
   | 'TRACE_ANALYTICS_ENABLED'
@@ -36,8 +39,8 @@ export type FeatureFlag =
   | 'COST_TRACKING_ENABLED'
   /** Enables MSR signal citation count check in synthesis_done trace step. */
   | 'CITATION_CHECK_ENABLED'
-  /** When false, o-series reasoning models that don't support streaming fall back to generateText. */
-  | 'REASONING_MODEL_STREAMING'
+  // REASONING_MODEL_STREAMING retired (BHISMA Wave 2) — o-series models removed from registry.
+  // All registry models use streamText; no generateText fallback path exists.
   // M3-W1-A2 — Discovery Engine flag gates (Pattern + Contradiction + Resonance + Cluster).
   // Default false at first commit, flipped true after smoke verification within the same session.
   /** Enables pattern_register retrieval tool. */
@@ -48,6 +51,20 @@ export type FeatureFlag =
   | 'DISCOVERY_RESONANCE_ENABLED'
   /** Enables cluster_atlas retrieval tool. */
   | 'DISCOVERY_CLUSTER_ENABLED'
+  // M4-FEAT-LEL-TOGGLE — Blind mode. When false, query_life_events is
+  // excluded from consumeTools and the query is tagged as a prospective
+  // blind-mode prediction. Default true (informed mode).
+  | 'LEL_CONTEXT_ENABLED'
+  // NVIDIA NIM — query-class-aware planner routing (BHISMA Wave 2 / UQE-4a).
+  // Default OFF; flip true after NVIDIA_NIM_API_KEY is provisioned and UQE-4a
+  // planner call site is wired. When ON, getNvidiaPlanner(queryClass) selects
+  // the NIM model; when OFF, FAMILY_WORKER for the synthesis model is used.
+  /** Routes UQE planner calls to NVIDIA NIM models by query class. */
+  | 'NVIDIA_PLANNER_ENABLED'
+  // W2-EVAL-A — Citation gate admin override. When true, the Layer-2 citation
+  // validator demotes ERROR to WARN so the response is still returned. Default
+  // OFF so missing-citation prescriptive queries hard-fail and surface in logs.
+  | 'CITATION_GATE_OVERRIDE'
 
 export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_MODE_ENABLED: true,
@@ -75,11 +92,13 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_DEGRADE_2_OF_3: false,
   // BHISMA Stream 2 — LLM-first planner. Default OFF; old path is the live one.
   LLM_FIRST_PLANNER_ENABLED: false,
+  // W2-CTX-ASSEMBLY — context assembly LLM step. Default OFF; flip after smoke.
+  CONTEXT_ASSEMBLY_ENABLED: false,
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   TRACE_ANALYTICS_ENABLED: true,
   COST_TRACKING_ENABLED: true,
   CITATION_CHECK_ENABLED: true,
-  REASONING_MODEL_STREAMING: true,
+  // REASONING_MODEL_STREAMING removed — retired above.
   // M3-W1-A2 Discovery Engine flag gates — flipped true after smoke verification
   // within the same session (AC.M3A.2 / AC.M3A.3). Set MARSYS_FLAG_DISCOVERY_*=false
   // in env to opt out of any individual surface.
@@ -87,6 +106,14 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   DISCOVERY_CONTRADICTION_ENABLED: true,
   DISCOVERY_RESONANCE_ENABLED: true,
   DISCOVERY_CLUSTER_ENABLED: true,
+  // M4-FEAT-LEL-TOGGLE — default true (informed mode).
+  // Override via MARSYS_FLAG_LEL_CONTEXT_ENABLED=false in env.
+  LEL_CONTEXT_ENABLED: true,
+  // NVIDIA NIM planner — ON (NVIDIA_NIM_API_KEY provisioned 2026-05-01).
+  // Routes UQE planner calls to NIM models by query class when stack=nim.
+  NVIDIA_PLANNER_ENABLED: true,
+  // W2-EVAL-A — Citation gate override OFF; ERROR fails loud by default.
+  CITATION_GATE_OVERRIDE: false,
 }
 
 // Numeric config keys (read via configService.getValue)

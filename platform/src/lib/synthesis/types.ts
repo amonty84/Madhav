@@ -25,6 +25,32 @@ export interface ChartContext {
   birth_place: string // e.g. "Bhubaneswar, Odisha, India"
 }
 
+/**
+ * W2-CTX-ASSEMBLY — Wrapping bundle returned by `contextAssembler()`.
+ *
+ * Wraps the (possibly LLM-compressed/reordered) ToolBundle[] together with
+ * per-layer token estimates and the model that ran the assembly pass.
+ * `tool_bundles` is the array passed downstream to synthesis when the
+ * CONTEXT_ASSEMBLY_ENABLED flag is ON; when OFF, route.ts skips this layer
+ * and forwards the raw ToolBundle[] directly (no behaviour change).
+ *
+ * `context_assembly_compressed: true` indicates the bundle has been processed
+ * by the assembler step — distinct from `context_assembly_model_id` which
+ * disambiguates pass-through (`'pass-through'`) from a real LLM compression.
+ */
+export interface ContextBundle {
+  tool_bundles: ToolBundle[]
+  context_assembly_compressed: true
+  context_assembly_model_id: string
+  context_assembly_latency_ms: number
+  l1_tokens: number
+  l2_5_tokens: number
+  l4_tokens: number
+  vector_tokens: number
+  cgm_tokens: number
+  total_tokens: number
+}
+
 export interface SynthesisRequest {
   query: string
   query_plan: QueryPlan
@@ -45,6 +71,13 @@ export interface SynthesisRequest {
   onAuditEvent?: (event: SynthesisAuditEvent) => void
   /** Phase 7: per-query opt-in for panel synthesis. Only active when PANEL_MODE_ENABLED=true. */
   panel_opt_in?: boolean
+  /** UQE-9 (W2-BUGS B2W-7): pre-allocated step_seq for the context_assembly trace
+   *  step. When present the orchestrator uses it; otherwise falls back to the
+   *  legacy `3 + nToolSteps` arithmetic. */
+  context_assembly_seq?: number
+  /** UQE-9 (W2-BUGS B2W-7): pre-allocated step_seq for the synthesis trace step
+   *  (start + done share this value). Falls back to `3 + nToolSteps + 1` when absent. */
+  synthesis_seq?: number
 }
 
 export interface SynthesisMetadata {
