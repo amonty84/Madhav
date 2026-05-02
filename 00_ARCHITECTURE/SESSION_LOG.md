@@ -16794,3 +16794,182 @@ session_close:
 Concurrently: M5-S1 (main-thread M5 macro-phase opening) remains the next main-thread session per CURRENT_STATE v3.5 main-thread canonical pointers UNCHANGED.
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-1-schema`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_2_LLMCLIENT_SHIM — Phase O Observatory O.1 second implementation session (provider-agnostic observability shim under platform/src/lib/llm/observability/ + 12-test suite)
+
+**Date:** 2026-05-03 (concurrent-workstream session; Phase O sub-phase O.1; second implementation session past S1.1 merge; concurrent with M5 INCOMING main thread).
+
+**Brief:** Inline execution brief delivered via Cowork prompt (USTAD_S1_2 — LLMClient Instrumentation Shim). Author the provider-agnostic observability shim that S1.4–S1.8 will plug into: types.ts + cost.ts + redaction.ts + persist.ts + observe.ts (with index.ts barrel) + tests covering all 10 brief acceptance cases. Worktree-isolated execution under `feature/phase-o-observatory-ustad-s1-2-llmclient-shim`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_2_LLMCLIENT_SHIM
+  cowork_thread_name: "ustad-s1-2-llmclient-shim"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.1.S1.2
+  predecessor_session: USTAD_S1_1_OBSERVATORY_SCHEMA
+  current_state_version_at_open: v3.5 (set by PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP 2026-05-02)
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/observability/{types,cost,redaction,persist,observe,index}.ts
+      - platform/src/lib/llm/__tests__/observability_{cost,redaction,persist,observe}.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/providers/**
+      - platform/src/components/**
+      - platform/src/app/**
+      - platform/migrations/**
+      - platform/src/lib/db/schema/**
+      - platform/src/lib/db/seed/**
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      - .geminirules
+      - .gemini/project_state.md
+      - platform/src/lib/observatory/**
+      - platform/src/lib/llm/types/**
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: 23d18c34c4a05ce7505c738cd07a249a88fd7cb95d4c7292a76b7ed66dce2c84
+    - file: 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      fingerprint_sha256: b2898c9fa9e38d6ac8683b55692d1ba96ab1d811f0964b92de89764bed6a86ae
+    - file: platform/src/lib/db/schema/observatory.ts
+      fingerprint_sha256: ec7079747b10c1fc384e7126a7519f20544bab1b7be40a154072f799ccc36e81
+  red_team_due: false
+  notes: "Phase O sub-phase O.1, second implementation session. Cuts from feature/phase-o-observatory tip (commit 5cf16fd, S1.1-merged). SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables (W1–W11)
+
+**W1. `types.ts` authored** (sha256 `907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a`). Provider-agnostic type surface: `ProviderName` literal union; `PipelineStage` literal union (6 stages per OBSERVATORY_PLAN §3.1); `CallStatus`; `TokenUsage` (5 fields); `ObservedLLMRequest` (request capture + identity context); `ObservedLLMResponse` (response capture + outcome); `PersistedObservation` re-exports `LlmUsageEventRow` from `db/schema/observatory.ts`; `CostResult`; `ObservatoryDb` minimal structural pg-style query interface (decouples shim from concrete pg.Pool import); `ZERO_USAGE` frozen constant.
+
+**W2. `cost.ts` authored** (sha256 `c28cbdbd502881219121cb0bd6e34efd7d4d54d354e6f0eab894c840341d70e2`). `computeCost(provider, model, usage, startedAt, db)` queries `llm_pricing_versions` for rows where `effective_from <= startedAt < effective_to` (treating null `effective_to` as infinity). Sums cost across all 5 token classes via `(tokens / 1_000_000) * price_per_million_usd`. Picks canonical `pricing_version_id` (prefers 'input' class row → universal across providers, falls back to first row). Throws `PricingNotFoundError` when no rows match (callers must handle).
+
+**W3. `redaction.ts` authored** (sha256 `a24a160deeed347fbeae7466ded0c71167e8aeecd71a00f024e6bfdd80af396c`). `defaultRedactionPolicy` = identity (full capture). `hashPromptPolicy` replaces `prompt_text`/`response_text`/`system_prompt` with sha256 hex (preserves nulls; leaves all other fields intact). Active policy resolved once at module init from `OBSERVATORY_HASH_PROMPTS` env (default → identity per task brief override of OBSERVATORY_PLAN §10 default). `getActivePolicy()` exported.
+
+**W4. `persist.ts` authored** (sha256 `c1fea869ca972e96e5ad712436ecc55a7737838b7f11586c374b5934efe0eafc`). `persistObservation(req, res, costResult, db)` applies the active redaction policy, computes `latency_ms = finished_at - started_at`, and INSERTs one row into `llm_usage_events` covering all 25 mapped columns. Catches all errors, logs to console.error, returns null. Never throws.
+
+**W5. `observe.ts` authored** (sha256 `be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0`). Two public entry points:
+- `observe<T>(request, providerCall, db)` — brackets the call with started_at/finished_at; on success persists with status='success' + provider's rawUsage; on provider error persists with status='error' + error_code (extracted from error.code → error.name → error.message → 'unknown_error') + zero usage, then re-throws the original provider error.
+- `observeStream<T>(request, streamCall, db)` — async generator; yields chunks pass-through; accumulates `TokenUsage` from final chunk's `finalUsage`; persists once at stream end (in finally{}) — success or error path.
+Both wrap all observability work in try/catch; observability errors NEVER surface to the caller.
+
+**W6. `index.ts` barrel authored** (sha256 `708ce5e49064076557432e93aa6ce1cbadfe1aaca274d2540db59fe6fa208ef4`). Single import surface for S1.4–S1.8 provider adapters.
+
+**W7. Test file `observability_cost.test.ts`** (sha256 `da78ef42fb3d5e46af633253c48c59128e89b62cdcad401af2903d9f2e60ad6b`). 3 tests: AC.1 (5-class sum: 1.0×3 + 0.5×15 + 2.0×0.3 + 0.1×3.75 + 0.05×60 = 14.475), AC.2 (boundary selection), AC.3 (PricingNotFoundError on empty result).
+
+**W8. Test file `observability_redaction.test.ts`** (sha256 `880f2332fb3b4ceeac4628b346db1e1c0aef51c1068d7c29952586fe52195e00`). 3 tests: AC.4 (default identity), AC.5 (hash policy correctness), bonus (null preservation).
+
+**W9. Test file `observability_persist.test.ts`** (sha256 `99fc7b3f3c7faef51c1997abcc8f7e5d1d82d250318a8d2ab2489ffa675a59a7`). 2 tests: AC.6 (DB throw → null returned), bonus (success path returns row + verifies INSERT params at indices 5/6/17/18/19/20).
+
+**W10. Test file `observability_observe.test.ts`** (sha256 `36aebd136ebb52dcc0158097632b406692acaf9bf6bb946b08aa40499fd85978`). 4 tests: AC.7 (observe success — response unmodified; cost = 1.05 USD for 100K input + 50K output anthropic claude-opus-4-6); AC.8 (observe error — status='error', error_code='rate_limit_exceeded'; provider error re-thrown); AC.9 (observeStream success — all 3 chunks yielded; usage accumulated; one INSERT at end); AC.10 (observeStream error mid-stream — partial chunks yielded; observation persisted with status='error'+error_code='upstream_error'; original error re-thrown).
+
+**Test results.** `vitest run src/lib/llm/__tests__/`: **4 test files, 12 tests passed, 0 failed**.
+
+**Typecheck.** `tsc --noEmit -p tsconfig.json`: 9 pre-existing errors in `tests/components/AppShell.test.tsx` + `ReportGallery.test.tsx` (same as S1.1 close noted; unaffected by this session). Zero TS errors in `platform/src/lib/llm/`.
+
+**W11. Governance scripts.**
+- `mirror_enforcer.py`: 0 findings; exit 0; 9 pairs checked; 9 passed; 2 declared claude_only. **PASS.**
+- `schema_validator.py` (full corpus): 107 violations; exit 2. Same 107 count as S1.1 close (no net change). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries; NONE introduced by this session. Acceptable per ONGOING_HYGIENE_POLICIES §F + S0.1/S1.1 baseline-target precedent.
+- `drift_detector.py`: 327 findings; exit 2. Same 327 carry-forward as S0.1/S1.1; NONE introduced. Acceptable per WL.14G.02.
+- `schema_validator.py --close-checklist`: 2 HIGH violations (`close_drift_detector_run_nonzero_exit` + `close_schema_validator_run_nonzero_exit`) — same governance-protocol gap S0.1/S1.1 close encountered. Brief AC ("schema_validator.py exits 0 or exit 2") + ONGOING_HYGIENE_POLICIES §F policy intent govern; close proceeds per S0.1/S1.1 precedent.
+- `schema_validator.py --handshake`: 0 violations; exit 0. **PASS.**
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_2_LLMCLIENT_SHIM
+  closed_at: 2026-05-03T02:25:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/observability/types.ts, mutation: created, sha256_after: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a, scope: in}
+    - {path: platform/src/lib/llm/observability/cost.ts, mutation: created, sha256_after: c28cbdbd502881219121cb0bd6e34efd7d4d54d354e6f0eab894c840341d70e2, scope: in}
+    - {path: platform/src/lib/llm/observability/redaction.ts, mutation: created, sha256_after: a24a160deeed347fbeae7466ded0c71167e8aeecd71a00f024e6bfdd80af396c, scope: in}
+    - {path: platform/src/lib/llm/observability/persist.ts, mutation: created, sha256_after: c1fea869ca972e96e5ad712436ecc55a7737838b7f11586c374b5934efe0eafc, scope: in}
+    - {path: platform/src/lib/llm/observability/observe.ts, mutation: created, sha256_after: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0, scope: in}
+    - {path: platform/src/lib/llm/observability/index.ts, mutation: created, sha256_after: 708ce5e49064076557432e93aa6ce1cbadfe1aaca274d2540db59fe6fa208ef4, scope: in}
+    - {path: platform/src/lib/llm/__tests__/observability_cost.test.ts, mutation: created, sha256_after: da78ef42fb3d5e46af633253c48c59128e89b62cdcad401af2903d9f2e60ad6b, scope: in}
+    - {path: platform/src/lib/llm/__tests__/observability_redaction.test.ts, mutation: created, sha256_after: 880f2332fb3b4ceeac4628b346db1e1c0aef51c1068d7c29952586fe52195e00, scope: in}
+    - {path: platform/src/lib/llm/__tests__/observability_persist.test.ts, mutation: created, sha256_after: 99fc7b3f3c7faef51c1997abcc8f7e5d1d82d250318a8d2ab2489ffa675a59a7, scope: in}
+    - {path: platform/src/lib/llm/__tests__/observability_observe.test.ts, mutation: created, sha256_after: 36aebd136ebb52dcc0158097632b406692acaf9bf6bb946b08aa40499fd85978, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_2 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Implementation-class session under mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.2 (shim implementation session)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Same 327 carry-forward as S0.1/S1.1 close. NONE introduced by this S1.2 session."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline_target
+    rationale: "Same 107 count as S1.1 close (no net change). NONE introduced. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: 0
+    desync_pairs: []
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.2 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1 precedent."
+  close_criteria_met: true
+  unblocks: "Phase O sub-phase O.1 next sessions per OBSERVATORY_PLAN §5.1: S1.4–S1.8 (per-provider adapters Anthropic / OpenAI / Gemini / DeepSeek / NIM) — all five depend on S1.2 closed; all five may run in parallel per OBSERVATORY_PLAN §6.1. S1.3 (Backend API for dashboard) was already unblocked by S1.1 and is parallel-safe."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-2-llmclient-shim
+    cut_from_commit: 5cf16fd
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.4–S1.8 (parallel) — per-provider adapters.** Five concurrent-safe sessions per OBSERVATORY_PLAN §6.1. Each adapter normalizes its provider's per-call usage shape into the shim's `TokenUsage` and calls `observe()` / `observeStream()` from `@/lib/llm/observability`. Adapters never touch `llm_usage_events` directly. **S1.3** (Backend API for dashboard) was unblocked by S1.1 and is parallel-safe with all O.1 sessions.
+
+Concurrently: M5-S1 (main-thread M5 macro-phase opening) remains the next main-thread session per CURRENT_STATE v3.5 main-thread canonical pointers UNCHANGED.
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-2-llmclient-shim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
