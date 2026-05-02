@@ -40,60 +40,60 @@
       "query": "What gemstone should I wear to strengthen my career?",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search"],
-      "required_tools": ["remedial_codex_query"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search", "resonance_register"],
+      "required_tools": ["remedial_codex_query", "resonance_register"],
       "forbidden_tools": ["temporal"],
-      "notes": "Career-domain remedial. remedial_codex_query supplies gemstone prescription (doc_type=l4_remedial). msr_sql identifies the planet to strengthen via career-domain signals (10H lord, Sun, Saturn). vector_search reaches the career L3 domain_report rag_chunks for diagnostic context. temporal is forbidden because the question is not transit-bound."
+      "notes": "Career-domain remedial. remedial_codex_query supplies gemstone prescription (doc_type=l4_remedial). msr_sql identifies the planet to strengthen via career-domain signals (10H lord, Sun, Saturn). vector_search reaches the career L3 domain_report rag_chunks for diagnostic context. resonance_register satisfies R7's predictive/remedial cross-domain-lens mandate: a gemstone is a remedial alignment between planet, native, and career domain — resonance is the right lens. temporal is forbidden because the question is not transit-bound."
     },
     {
       "id": "GT.002",
       "query": "Which mantra should I recite to support spiritual progress?",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search"],
-      "required_tools": ["remedial_codex_query"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search", "resonance_register"],
+      "required_tools": ["remedial_codex_query", "resonance_register"],
       "forbidden_tools": ["query_varshaphala", "temporal"],
-      "notes": "Spiritual-domain remedial. Mantra is a remedial_codex artifact (doc_type=l4_remedial). msr_sql surfaces Jupiter / Ketu / 9H signals in the spiritual domain. vector_search reaches the spirituality L3 domain_report. No annual-return or transit dependence."
+      "notes": "Spiritual-domain remedial. Mantra is a remedial_codex artifact (doc_type=l4_remedial). msr_sql surfaces Jupiter / Ketu / 9H signals in the spiritual domain. vector_search reaches the spirituality L3 domain_report. resonance_register satisfies R7's predictive/remedial cross-domain-lens mandate: a mantra aligns deity/planet vibration with the spiritual domain — resonance is the right lens. No annual-return or transit dependence."
     },
     {
       "id": "GT.003",
       "query": "Should I wear a yellow sapphire?",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql"],
-      "required_tools": ["remedial_codex_query", "msr_sql"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "resonance_register"],
+      "required_tools": ["remedial_codex_query", "msr_sql", "resonance_register"],
       "forbidden_tools": ["vector_search", "domain_report_query"],
-      "notes": "Single-stone remedial. remedial_codex_query holds the yellow-sapphire prescription rules (gemstone practice_type, planet=Jupiter). msr_sql returns Jupiter's natal signals — placement, dignity, and signal strength. The query has a precise structured answer; vector_search is forbidden because semantic retrieval would dilute the codex-grounded prescription."
+      "notes": "Single-stone remedial. remedial_codex_query holds the yellow-sapphire prescription rules (gemstone practice_type, planet=Jupiter). msr_sql returns Jupiter's natal signals — placement, dignity, and signal strength. resonance_register satisfies R7's predictive/remedial cross-domain-lens mandate: a yellow-sapphire prescription rests on Jupiter's resonance with the native — confirm the alignment before recommending the stone. The query has a precise structured answer; vector_search is forbidden because semantic retrieval would dilute the codex-grounded prescription."
     },
     {
       "id": "GT.004",
       "query": "What planetary remedies are recommended for my Mars?",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql"],
-      "required_tools": ["remedial_codex_query", "msr_sql"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "resonance_register"],
+      "required_tools": ["remedial_codex_query", "msr_sql", "resonance_register"],
       "forbidden_tools": ["temporal"],
-      "notes": "Single-planet remedial scoped to Mars. msr_sql for Mars-domain signals (planet=Mars, all signal_types). remedial_codex_query for the rituals/stones/mantras keyed to Mars (planet=Mars, all practice_types)."
+      "notes": "Single-planet remedial scoped to Mars. msr_sql for Mars-domain signals (planet=Mars, all signal_types). remedial_codex_query for the rituals/stones/mantras keyed to Mars (planet=Mars, all practice_types). resonance_register satisfies R7's predictive/remedial cross-domain-lens mandate: Mars-keyed remedies must be tuned to Mars's resonance with the native's domains — alignment lens before prescription."
     },
     {
       "id": "GT.005",
       "query": "Recommend a daily ritual to strengthen my chart's weakest planet.",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql"],
-      "required_tools": ["remedial_codex_query", "msr_sql"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "pattern_register"],
+      "required_tools": ["remedial_codex_query", "msr_sql", "pattern_register"],
       "forbidden_tools": ["query_varshaphala"],
-      "notes": "Whole-chart strength scan + remedial. msr_sql surfaces low-strength signals across grahas (signal_type=strength, valence=challenging). remedial_codex_query supplies the dinacharya / daily-practice prescription for the implicated planet."
+      "notes": "Whole-chart strength scan + remedial. msr_sql surfaces low-strength signals across grahas (signal_type=strength, valence=challenging). remedial_codex_query supplies the dinacharya / daily-practice prescription for the implicated planet. pattern_register satisfies R7's predictive/remedial cross-domain-lens mandate: identifying the chart's weakest planet is fundamentally a recurring-weakness-pattern question — pattern_register is the right lens, not resonance."
     },
     {
       "id": "GT.006",
       "query": "Are there fasting practices that would help my health?",
       "query_class": "remedial",
       "category": "remedial",
-      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search"],
-      "required_tools": ["remedial_codex_query", "vector_search"],
+      "expected_tools": ["remedial_codex_query", "msr_sql", "vector_search", "resonance_register"],
+      "required_tools": ["remedial_codex_query", "vector_search", "resonance_register"],
       "forbidden_tools": ["query_varshaphala"],
-      "notes": "Health-domain remedial. remedial_codex_query supplies the fasting/dinacharya prescription. vector_search reaches the health L3 domain_report (doc_type='domain_report') for diagnosis context. msr_sql identifies the implicated graha via health-domain signals."
+      "notes": "Health-domain remedial. remedial_codex_query supplies the fasting/dinacharya prescription. vector_search reaches the health L3 domain_report (doc_type='domain_report') for diagnosis context. msr_sql identifies the implicated graha via health-domain signals. resonance_register satisfies R7's predictive/remedial cross-domain-lens mandate: a fasting prescription aligns the body's rhythms with the implicated planet's resonance — alignment lens, not pattern."
     },
     {
       "id": "GT.007",
@@ -161,9 +161,9 @@
       "query_class": "predictive",
       "category": "predictive",
       "expected_tools": ["vector_search", "msr_sql", "pattern_register"],
-      "required_tools": ["vector_search", "msr_sql"],
+      "required_tools": ["vector_search", "msr_sql", "pattern_register"],
       "forbidden_tools": ["remedial_codex_query", "query_varshaphala"],
-      "notes": "Long-horizon dasha-based prediction. vector_search reaches the L5 lifetime timeline (doc_type='l5_timeline') for the Ketu MD arc 2027–2034. msr_sql supplies natal Ketu signals (planet=Ketu, forward_looking=true). pattern_register surfaces Ketu-keyed forward_looking patterns."
+      "notes": "Long-horizon dasha-based prediction. vector_search reaches the L5 lifetime timeline (doc_type='l5_timeline') for the Ketu MD arc 2027–2034. msr_sql supplies natal Ketu signals (planet=Ketu, forward_looking=true). pattern_register satisfies R7's predictive/remedial cross-domain-lens mandate by surfacing Ketu-keyed forward_looking patterns; promoted to required_tools so a predictive answer cannot ship without the cross-domain pattern lens."
     },
     {
       "id": "GT.014",
@@ -171,9 +171,9 @@
       "query_class": "predictive",
       "category": "predictive",
       "expected_tools": ["msr_sql", "pattern_register"],
-      "required_tools": ["msr_sql"],
+      "required_tools": ["msr_sql", "pattern_register"],
       "forbidden_tools": ["remedial_codex_query", "query_varshaphala", "timeline_query"],
-      "notes": "Live-transit prediction. msr_sql with planet=Saturn + temporal_activation=lit returns currently-active Saturn signals; pattern_register surfaces forward_looking Saturn patterns. The L5 timeline horizon is wrong for a live-transit question."
+      "notes": "Live-transit prediction. msr_sql with planet=Saturn + temporal_activation=lit returns currently-active Saturn signals; pattern_register satisfies R7's predictive/remedial cross-domain-lens mandate by surfacing forward_looking Saturn patterns and is promoted to required_tools. The L5 timeline horizon is wrong for a live-transit question."
     },
     {
       "id": "GT.015",
@@ -181,9 +181,9 @@
       "query_class": "predictive",
       "category": "predictive",
       "expected_tools": ["msr_sql", "pattern_register", "vector_search"],
-      "required_tools": ["msr_sql"],
+      "required_tools": ["msr_sql", "pattern_register"],
       "forbidden_tools": ["remedial_codex_query"],
-      "notes": "Annual-horizon prediction. msr_sql with domain=career + forward_looking=true + temporal_activation=ripening surfaces near-term career-positive signals. pattern_register adds forward_looking career yogas. vector_search reaches the career L3 domain_report for context."
+      "notes": "Annual-horizon prediction. msr_sql with domain=career + forward_looking=true + temporal_activation=ripening surfaces near-term career-positive signals. pattern_register satisfies R7's predictive/remedial cross-domain-lens mandate by adding forward_looking career yogas and is promoted to required_tools. vector_search reaches the career L3 domain_report for context."
     },
     {
       "id": "GT.016",
@@ -191,9 +191,9 @@
       "query_class": "predictive",
       "category": "predictive",
       "expected_tools": ["msr_sql", "pattern_register", "vector_search"],
-      "required_tools": ["msr_sql"],
+      "required_tools": ["msr_sql", "pattern_register"],
       "forbidden_tools": ["remedial_codex_query"],
-      "notes": "Forward-looking timing. msr_sql with forward_looking=true + temporal_activation=ripening returns ripening venture-positive signals. pattern_register adds forward_looking patterns. vector_search reaches L5 timeline (doc_type='l5_timeline') for upcoming favorable windows."
+      "notes": "Forward-looking timing. msr_sql with forward_looking=true + temporal_activation=ripening returns ripening venture-positive signals. pattern_register satisfies R7's predictive/remedial cross-domain-lens mandate by adding forward_looking patterns and is promoted to required_tools. vector_search reaches L5 timeline (doc_type='l5_timeline') for upcoming favorable windows."
     },
     {
       "id": "GT.017",

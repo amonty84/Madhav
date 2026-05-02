@@ -1,11 +1,12 @@
 {
   "$schema_version": "1.0",
-  "description": "W2-EVAL-B AC.V.3 regression baseline. Mock planner responses for the 25 golden_test_set entries. Each entry's mock_tool_calls mirror that entry's expected_tools, with required_tools mapped to priority 1 and the rest to priority 2. Scored against golden_test_set.json this baseline yields avg_tool_recall = 1.00 and avg_tool_precision = 1.00, well above the published thresholds (recall ≥ 0.80, precision ≥ 0.90). Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — see golden_test_set.json available_tools.",
+  "description": "W2-EVAL-B AC.V.3 regression baseline. Mock planner responses for the 25 golden_test_set entries. Each entry's mock_tool_calls mirror that entry's expected_tools, with required_tools and R7-mandated tools mapped to priority 1 and the rest to priority 2. Scored against golden_test_set.json this baseline yields avg_tool_recall = 1.00 and avg_tool_precision = 1.00, well above the published thresholds (recall ≥ 0.80, precision ≥ 0.90). Aligned 2026-05-02 (W2-UQE-ACTIVATE round 3) with PLANNER_PROMPT_v1_0.md R7: every predictive/remedial entry's expected_tools now contains pattern_register OR resonance_register at priority 1. Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — see golden_test_set.json available_tools.",
   "entries": [
     {
       "id": "GT.001",
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "career-domain remedial prescription (codex)" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — gemstone-planet-career resonance" },
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "career-domain signal lookup; identifies the planet to strengthen" },
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "career L3 domain_report narrative" }
       ]
@@ -14,6 +15,7 @@
       "id": "GT.002",
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "mantra prescription (codex)" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — mantra-deity-spirituality resonance" },
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "spirituality-domain signal lookup (Jupiter / Ketu / 9H)" },
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "spirituality L3 domain_report narrative" }
       ]
@@ -22,21 +24,24 @@
       "id": "GT.003",
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "yellow-sapphire suitability rules (codex)" },
-        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Jupiter natal placement, dignity, signal strength" }
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Jupiter natal placement, dignity, signal strength" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — yellow-sapphire-Jupiter resonance" }
       ]
     },
     {
       "id": "GT.004",
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mars-keyed remedial rituals/stones/mantras (codex)" },
-        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mars-domain signals" }
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mars-domain signals" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — Mars-domain remedial alignment" }
       ]
     },
     {
       "id": "GT.005",
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "daily-ritual / dinacharya prescription (codex)" },
-        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "low-strength signals across grahas" }
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "low-strength signals across grahas" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — weakest-planet pattern across the chart" }
       ]
     },
     {
@@ -44,6 +49,7 @@
       "mock_tool_calls": [
         { "tool_name": "remedial_codex_query", "params": {}, "token_budget": 800, "priority": 1, "reason": "fasting-practice prescription (codex)" },
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 1, "reason": "health L3 domain_report narrative" },
+        { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — fasting-planet-health resonance" },
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "health-domain signals" }
       ]
     },
@@ -95,21 +101,21 @@
       "mock_tool_calls": [
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 1, "reason": "L5 lifetime timeline (doc_type=l5_timeline) for Ketu MD arc" },
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "natal Ketu signals (forward_looking)" },
-        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "Ketu-keyed forward_looking patterns" }
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — Ketu-keyed forward_looking patterns" }
       ]
     },
     {
       "id": "GT.014",
       "mock_tool_calls": [
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "currently-active Saturn signals (planet=Saturn, temporal_activation=lit)" },
-        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "forward_looking Saturn patterns" }
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — forward_looking Saturn patterns" }
       ]
     },
     {
       "id": "GT.015",
       "mock_tool_calls": [
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "career-domain forward_looking, ripening signals" },
-        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "forward_looking career yogas" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — forward_looking career yogas" },
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "career L3 domain_report context" }
       ]
     },
@@ -117,7 +123,7 @@
       "id": "GT.016",
       "mock_tool_calls": [
         { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "ripening venture-positive signals (forward_looking, temporal_activation=ripening)" },
-        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "forward_looking patterns" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — forward_looking patterns" },
         { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "L5 timeline upcoming favorable windows" }
       ]
     },

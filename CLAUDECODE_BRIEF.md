@@ -1,12 +1,13 @@
 ---
 status: PENDING
 session: W2-UQE-ACTIVATE
-scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke)
+scope: UQE-ACTIVATE (LLM-first planner activation + EVAL-B smoke + golden-set R7 reconciliation)
 authored: 2026-05-02
-round: 2
+round: 3
 critical_path: false
 blocks: W2-MON-A (monitoring write integration smoke depends on planner being live)
 supersedes: W2-EVAL-A (status COMPLETE 2026-05-01 — archived below)
+flag_flipped: false
 ---
 
 # CLAUDECODE_BRIEF — W2-UQE-ACTIVATE
@@ -125,13 +126,119 @@ test(w2-uqe-activate): EVAL-B smoke results + planner state (flag held false)
 
 ---
 
-## Smoke results (fill in during session)
+## Smoke results (Round 3 — post golden-set R7 reconciliation)
 
 ```
 planner_model: nvidia/llama-3.3-nemotron-super-49b-v1
-smoke_date: 2026-05-02 (Round 2 — post EVAL-5 + nvidia.ts.chat() fix)
-avg_tool_recall: 0.620
-avg_tool_precision: 0.707
+smoke_date: 2026-05-02 (Round 3 — post golden-set R7 alignment)
+avg_tool_recall: 0.500
+avg_tool_precision: 0.667
+total: 25
+passed: 4
+failed: 21
+forbidden_violations: 0
+required_misses: 13
+pass_rate: 0.160
+flag_flipped: false
+exit_code: 1
+notes: |
+  Round 3 ran AFTER reconciling golden_test_set.json with PLANNER_PROMPT_v1_0.md
+  R7. Six remedial entries (GT.001-GT.006) had been authored before R7 existed
+  and were missing pattern_register/resonance_register from expected_tools;
+  four predictive entries (GT.013-GT.016) had pattern_register in expected
+  but not in required. Per the user-provided heuristic, the alignment-leaning
+  remedials (GT.001/002/003/004/006 — gemstone, mantra, yellow-sapphire, Mars
+  remedies, fasting-for-health) were labeled with resonance_register; the
+  pattern-recognition remedial (GT.005 — weakest planet) and the four
+  predictives kept pattern_register. regression_baseline.json was regenerated
+  with the R7-mandated tool at priority 1 in each affected mock.
+
+  Vitest regression gate: PASS (2/2 tests, recall=1.00 precision=1.00 against
+  the new fixture). tsc --noEmit: 9 baseline errors only, no new errors.
+  Live NIM: 21/25 entries returned a valid plan; 4 transient timeouts
+  (GT.015, GT.017, GT.024). No forbidden_violations.
+
+  RESIDUAL GAP — MODEL OVER-GENERALIZES PATTERN_REGISTER:
+    The user-provided heuristic ("resonance for remedial alignment, pattern
+    for recurring-pattern queries") is theoretically sound but does NOT
+    match the model's actual behavior. nemotron-super-49b-v1 picks
+    pattern_register for ALL remedial queries (GT.001/002/003/004/006 — all
+    five labeled with resonance_register received pattern_register from the
+    model instead). The model's behavior follows the few-shot example 4.1
+    in PLANNER_PROMPT_v1_0.md, which uses pattern_register for a remedial
+    Saturn-career query — the model generalizes that single example to all
+    remedials, regardless of alignment vs. pattern character.
+
+    Predicted vs. expected for the five mismatches:
+      GT.001 expected=[remedial_codex_query, msr_sql, vector_search, resonance_register]
+             predicted=[remedial_codex_query, pattern_register]
+             recall=0.25 precision=0.50 required_miss (resonance not picked)
+      GT.002 expected=[remedial_codex_query, msr_sql, vector_search, resonance_register]
+             predicted=[remedial_codex_query]
+             recall=0.25 required_miss (no R7 tool picked at all)
+      GT.003 expected=[remedial_codex_query, msr_sql, resonance_register]
+             predicted=[remedial_codex_query, pattern_register]
+             recall=0.33 precision=0.50 required_miss
+      GT.004 expected=[remedial_codex_query, msr_sql, resonance_register]
+             predicted=[remedial_codex_query]
+             recall=0.33 required_miss
+      GT.006 expected=[remedial_codex_query, msr_sql, vector_search, resonance_register]
+             predicted=[remedial_codex_query, pattern_register]
+             recall=0.25 precision=0.50 required_miss
+
+    Secondary gap — PARSIMONY: model picks 1-3 tools; golden expects 3-4
+    on remedials. R6 ("prefer the smallest set of tools that covers the
+    query") explicitly tells the model to be parsimonious. msr_sql and
+    vector_search are routinely dropped from the model's plan even when
+    the golden set considers them retrieval-correct. This is not a label
+    drift; it is a divergence between R6's parsimony pressure and the
+    multi-source retrieval the golden set encodes as "right."
+
+    The interpretive entries (GT.007/008/010/011/012) and the planetary
+    entries (GT.021) also under-recall in the same way: the model picks
+    [msr_sql, pattern_register] (sometimes adding resonance_register),
+    while expected_tools include vector_search / cgm_graph_walk that the
+    model omits.
+
+  ACCEPTANCE STATE (Round 3):
+    AC.U.1 (tsc clean):        PASS  (9 baseline errors unchanged, zero new)
+    AC.U.2 (regression gate):  PASS  (2/2 tests, recall=1.00 precision=1.00)
+    AC.U.3 (EVAL-B live):      FAIL  (recall=0.500, precision=0.667; thresholds 0.80/0.90)
+    AC.U.4 (flag flip):        SKIPPED — held pending AC.U.3
+    AC.U.5 (commit):           this commit (test(...) round-3 variant per brief §10)
+
+  RECOMMENDATION FOR ROUND 4:
+    The remaining gap is genuine prompt/model calibration, not label drift.
+    Two paths forward, both require native authorization (touching the
+    prompt is gated by must_not_touch on the prompt unless AC.U.3 fails for
+    a prompt reason — which it does):
+      (a) Add a second remedial few-shot to PLANNER_PROMPT_v1_0.md showing
+          resonance_register for an alignment-character remedial (e.g., a
+          gemstone query). Two-example calibration usually breaks
+          single-example over-generalization.
+      (b) Soften R6 for remedial/predictive queries — e.g., "for
+          remedial queries, msr_sql is required to identify the implicated
+          graha before any prescription can be calibrated." This pushes
+          the model toward 3-tool remedials and lifts recall directly.
+    Both should be tried before considering a model swap.
+
+  HISTORICAL — Round 2 (bcca8f8, pre golden-set R7 alignment):
+    avg_tool_recall=0.620, avg_tool_precision=0.707, passed=4/25.
+    Round 2 → Round 3 recall delta: -0.120. The drop is explained by adding
+    resonance_register to expected_tools while the model picks pattern_register;
+    each affected entry now intersects 1 fewer tool with predicted, while
+    expected size grew by 1, compounding both numerator-down and denominator-up.
+    Pattern-labeled entries (GT.005, GT.013-GT.016) saw recall improve as
+    expected; resonance-labeled entries (GT.001/002/003/004/006) regressed.
+
+  HISTORICAL — Round 2 ORIGINAL ENTRY (preserved below for audit):
+```
+
+```
+planner_model_round2: nvidia/llama-3.3-nemotron-super-49b-v1
+smoke_date_round2: 2026-05-02 (Round 2 — post EVAL-5 + nvidia.ts.chat() fix)
+avg_tool_recall_round2: 0.620
+avg_tool_precision_round2: 0.707
 total: 25
 passed: 4
 failed: 21
