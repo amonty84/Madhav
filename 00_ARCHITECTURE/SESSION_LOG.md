@@ -17956,3 +17956,162 @@ session_close:
 **S1.4 (Anthropic), S1.6 (Gemini), S1.7 (DeepSeek), S1.8 (NIM) — four remaining per-provider adapters (parallel-safe; same disjoint-may_touch pattern as S1.5)** and **S1.9 — Frontend scaffold (depends on S1.3)** per OBSERVATORY_PLAN §5.1. M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-5-openai`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_8_NIM_PROVIDER_ADAPTER — Phase O Observatory O.1 fifth provider-adapter session (NVIDIA NIM observed adapter — managed-catalog only — + 7-test suite)
+
+**Date:** 2026-05-03 (concurrent-workstream session; Phase O sub-phase O.1; fifth per-provider adapter session past S1.2 merge; concurrent with S1.4–S1.7/S1.9 and M5 INCOMING main thread).
+
+**Brief:** Inline execution brief delivered via Cowork prompt (USTAD_S1_8 — NVIDIA NIM Provider Adapter). Build the observed wrapper for NVIDIA NIM's NGC-hosted managed-catalog Chat Completions endpoint (OpenAI-compatible) under `platform/src/lib/llm/providers/nim_observed.ts` + 7-case test suite. Self-hosted NIM is explicitly v2-deferred per OBSERVATORY_PLAN §4.5 / §10 open-decision 7. Worktree-isolated execution under `feature/phase-o-observatory-ustad-s1-8-nim` (cut from umbrella tip 0bec216, S1.3-merged). Parallel-safe with S1.4 / S1.5 / S1.6 / S1.7 / S1.9 — disjoint may_touch.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_8_NIM_PROVIDER_ADAPTER
+  cowork_thread_name: "ustad-s1-8-nim"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.1.S1.8
+  predecessor_session: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  current_state_version_at_open: v3.5 (set by PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP 2026-05-02)
+  active_macro_phase: M5
+  concurrent_workstream: phase_o_observatory
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/providers/nim_observed.ts
+      - platform/src/lib/llm/providers/__tests__/nim_observed.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/anthropic_observed.ts
+      - platform/src/lib/llm/providers/openai_observed.ts
+      - platform/src/lib/llm/providers/gemini_observed.ts
+      - platform/src/lib/llm/providers/deepseek_observed.ts
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - platform/src/components/**
+      - platform/src/app/**
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/CANONICAL_ARTIFACTS_v1_0.md
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - 02_ANALYTICAL_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797
+    - file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b
+    - file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md
+      fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522
+    - file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md
+      fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4
+    - file: platform/src/lib/llm/observability/types.ts
+      fingerprint_sha256: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a
+    - file: platform/src/lib/llm/observability/observe.ts
+      fingerprint_sha256: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0
+  red_team_due: false
+  notes: "Phase O sub-phase O.1, fifth provider-adapter session (NIM). NIM is OpenAI-compatible Chat Completions; managed-catalog only per OBSERVATORY_PLAN §4.5; self-hosted v2 deferred. SESSION_OPEN handshake schema-validated 0 violations exit 0."
+```
+
+### Body — substantive deliverables
+
+**W1. `nim_observed.ts` authored** (sha256 `fe38dbeb1defb98299c64cd27bfb1c5b302ed55500da0e80f442c21b5e243083`). Provides `NimObservedClient` exposing `chatCompletion()` (non-streaming, wrapped via `observe()`) and `chatCompletionStream()` (SSE-streaming, wrapped via `observeStream()`). Always sets `stream: true` on the streaming path even when the caller omits it (NIM-doc requirement). Token extraction: `prompt_tokens → input_tokens`, `completion_tokens → output_tokens`; `cache_read_input_tokens` / `cache_creation_input_tokens` / `reasoning_tokens` extracted opportunistically (zero by default — NIM-hosted models in scope do not currently surface cache or reasoning token classes; documented in file header). `provider_request_id` from `x-request-id` response header preferred, client-side `randomUUID()` fallback when absent. Error mapping: `429 → rate_limited`; `5xx → server_error`; `4xx (non-429) → error.code` from payload or `http_error`. `NimObservedError.code` (not `errorCode`) — observe()'s extractErrorCode reads `err.code`, so persisted `error_code` column mirrors this. File-level comment lists all v1 in-scope models: `meta/llama-3.1-405b-instruct`, `meta/llama-3.3-70b-instruct`, `meta/llama-3.1-8b-instruct`, `deepseek-ai/deepseek-r1`, `nvidia/llama-3.3-nemotron-super-49b-v1`, `nvidia/nemotron-3-super-120b-a12b`, `nvidia/llama-3.1-nemotron-ultra-253b-v1`, `deepseek-ai/deepseek-v4-pro`, `qwen/qwen3-235b-a22b` — plus an explicit deferral note for self-hosted NIM (v2 scope per OBSERVATORY_PLAN §4.5).
+
+**W2. Test file `nim_observed.test.ts`** (sha256 `7b8e38bb8bb67ab0a820c23559055d7908f850a6fabd150384b13ed3d52a1791`). 7 tests covering all brief acceptance cases:
+- AC.1 standard non-streaming call — `provider='nim'`, `model='meta/llama-3.3-70b-instruct'`, `stream:false` body assertion, `x-request-id` propagation, `status='success'`.
+- AC.2 usage extraction — `prompt_tokens=12_345 → input_tokens`; `completion_tokens=678 → output_tokens`; cache + reasoning columns at 0 (verified at INSERT param indices 12–16).
+- AC.3 streaming — caller-omitted `stream` is forced to `true`; SSE chunks parse correctly; final-chunk `usage` block is accumulated via `observeStream`'s terminal sentinel; one INSERT at end with correct token counts and `x-request-id`.
+- AC.4 provider_request_id — header-supplied id preferred; injected fallback UUID generator picks up when header absent. Verified at INSERT param index 22.
+- AC.5 HTTP 429 → `status='error'`, `error_code='rate_limited'`. NimObservedError instance + `.code` field re-thrown.
+- AC.6 HTTP 500 → `status='error'`, `error_code='server_error'`.
+- AC.7 structural — file-level comment contains every v1 in-scope model identifier; verified by reading the source file at test time.
+
+**Test results.** `vitest run src/lib/llm/providers/__tests__/nim_observed.test.ts`: **1 file, 7 tests passed, 0 failed**.
+
+**Typecheck.** `tsc --noEmit -p tsconfig.json`: zero TS errors in `platform/src/lib/llm/providers/`. Pre-existing 9 errors in `tests/components/AppShell.test.tsx` + `ReportGallery.test.tsx` (same as S1.1 / S1.2 close — unaffected by this session).
+
+**W3. Governance scripts.**
+- `mirror_enforcer.py`: 0 findings; exit 0; 9 pairs checked; 9 passed; 2 declared claude_only. **PASS.**
+- `schema_validator.py` (full corpus): 107 violations; exit 2. Same 107 count as S1.2 close (no net change). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries; NONE introduced by this session. Acceptable per ONGOING_HYGIENE_POLICIES §F + S0.1/S1.1/S1.2 baseline-target precedent.
+- `drift_detector.py`: 327 findings; exit 2. Same 327 carry-forward as S0.1/S1.1/S1.2; NONE introduced. Acceptable per WL.14G.02.
+- Brief AC ("schema_validator.py exits 0 or exit 2") satisfied — exit 2.
+
+**OD.S1.3.1 finding.** No new tables required; no new jsonb parameter columns required. The adapter writes through the existing `llm_usage_events` schema via `observe()`/`observeStream()` → `persistObservation()`. NIM-specific request parameters (model, messages, temperature, top_p, max_tokens, frequency_penalty, presence_penalty, stop) are passed via the existing `parameters` jsonb column — no migration needed. Self-hosted NIM is explicitly v2-deferred per OBSERVATORY_PLAN §4.5 / §10 open-decision 7; if self-hosted lands in v2, GPU-utilization-derived cost will require a separate probe table (out of v1 scope).
+
+**Cache/reasoning token findings per model.** All in-scope NIM-hosted models currently expose only `prompt_tokens` / `completion_tokens` / `total_tokens` in their OpenAI-compatible `usage` blocks. Cache tokens (`cache_read_input_tokens`, `cache_creation_input_tokens`) and `reasoning_tokens` are NOT surfaced by any of: meta/llama-3.1-{405b,8b}-instruct, meta/llama-3.3-70b-instruct, deepseek-ai/deepseek-r1 (NIM hosting), nvidia/llama-3.3-nemotron-super-49b-v1, nvidia/nemotron-3-super-120b-a12b. Adapter records 0 for these classes. The extractor reads `cache_read_input_tokens` / `cache_creation_input_tokens` / `reasoning_tokens` opportunistically — if a future NIM-hosted model build does surface them, the adapter picks them up automatically without code change.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_8_NIM_PROVIDER_ADAPTER
+  closed_at: 2026-05-03T03:05:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/providers/nim_observed.ts, mutation: created, sha256_after: fe38dbeb1defb98299c64cd27bfb1c5b302ed55500da0e80f442c21b5e243083, scope: in}
+    - {path: platform/src/lib/llm/providers/__tests__/nim_observed.test.ts, mutation: created, sha256_after: 7b8e38bb8bb67ab0a820c23559055d7908f850a6fabd150384b13ed3d52a1791, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_8 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged this session"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Implementation-class session under mirror-update-funneling per OBSERVATORY_PLAN §6.3"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged; no cascade"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged; no cascade"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged; no cascade"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.8 (provider-adapter implementation session)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Same 327 carry-forward as S0.1/S1.1/S1.2 close. NONE introduced by this S1.8 session."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline_target
+    rationale: "Same 107 count as S1.2 close (no net change). NONE introduced. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: 0
+    desync_pairs: []
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.8 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2 precedent."
+  close_criteria_met: true
+  unblocks: "S2.x reconciliation work (per OBSERVATORY_PLAN §5.2) becomes unblocked once all five S1.4–S1.8 provider adapters land. S2.5 (DeepSeek + NIM manual-reconciliation UI) specifically depends on this S1.8 close. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-8-nim
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S1.4 / S1.5 / S1.6 / S1.7 — remaining four per-provider adapters (parallel-safe)** and **S1.9 — Frontend scaffold** per OBSERVATORY_PLAN §5.1. Once all five adapters (S1.4–S1.8) merge, **S2.x reconciliation work** unblocks. **S2.5 (DeepSeek + NIM manual-reconciliation UI)** specifically depends on this S1.8 close + S1.7 close. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-8-nim`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
