@@ -14745,7 +14745,7 @@ session_open:
   agent_name: claude-opus-4-7
   agent_version: claude-opus-4-7
   step_number_or_macro_phase: M4.C.S1
-  predecessor_session: M4-B-S6-CLOSE (M4-B sub-phase formally CLOSED, 2026-05-03 commit 007c718). Most-recent governance-aside parallel slot: M4-C-P6-S4-PREDRAFT (2026-05-03 commit 0934efb, set CURRENT_STATE v2.6→v2.7 with canonical pointers UNCHANGED + predraft_available block re-set to M4_C_CLOSE_v1_0.md DRAFT).
+  predecessor_session: "M4-B-S6-CLOSE (M4-B sub-phase formally CLOSED, 2026-05-03 commit 007c718). Most-recent governance-aside parallel slot — M4-C-P6-S4-PREDRAFT (2026-05-03 commit 0934efb, set CURRENT_STATE v2.6→v2.7 with canonical pointers UNCHANGED + predraft_available block re-set to M4_C_CLOSE_v1_0.md DRAFT)."
   parallel_to: M4-C-S2 (not yet landed; brief prescribes S2 as parallel-safe per PHASE_M4C_PLAN §4)
   mandatory_reading_confirmation:
     - file: CLAUDE.md
@@ -15700,7 +15700,7 @@ session_open:
   cowork_thread_name: "M4-C-S4 — M4-C Sub-Phase Close"
   agent: claude-opus-4-7
   opened_at: 2026-05-02T18:30:00+05:30
-  predecessor_session: M4-C-S3-LL7-DISCOVERY-PRIOR (2026-05-02 — third M4-C substantive session; LL.7 first SHADOW write under NAP.M4.6 OPTION_B_APPROVED + DECISION-2 literal CDLM construction). Preceding governance-aside parallel slots: M4-C-P6-S4-PREDRAFT (2026-05-03 — M4_C_CLOSE pre-draft skeleton) and M4-C-P7-M4D-ENTRY-PREP (2026-05-02 v3.1 — PHASE_M4D_PLAN DRAFT + NAP_M4_7_BRIEF PENDING_NATIVE_DECISION).
+  predecessor_session: "M4-C-S3-LL7-DISCOVERY-PRIOR (2026-05-02 — third M4-C substantive session; LL.7 first SHADOW write under NAP.M4.6 OPTION_B_APPROVED + DECISION-2 literal CDLM construction). Preceding governance-aside parallel slots — M4-C-P6-S4-PREDRAFT (2026-05-03 — M4_C_CLOSE pre-draft skeleton) and M4-C-P7-M4D-ENTRY-PREP (2026-05-02 v3.1 — PHASE_M4D_PLAN DRAFT + NAP_M4_7_BRIEF PENDING_NATIVE_DECISION)."
   parallel_to: NONE — single-track sub-phase close-class.
   current_state_version_at_open: v3.1 (set by M4-C-P7-M4D-ENTRY-PREP 2026-05-02 commit e9cf50e; canonical pointers UNCHANGED per AC.P7.4)
   active_macro_phase: M4
