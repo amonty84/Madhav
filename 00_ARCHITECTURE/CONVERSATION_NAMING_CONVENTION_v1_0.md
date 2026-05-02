@@ -1,6 +1,6 @@
 ---
 artifact: CONVERSATION_NAMING_CONVENTION_v1_0.md
-version: 1.4
+version: 1.5
 status: LIVING
 role: >
   Single source of truth for the conversation-naming convention used in Cowork
@@ -463,6 +463,80 @@ Model depth is deployed inside Claude Code where it has maximum leverage.
 
 ---
 
+## §10 — MARSYS session naming (M3 onward, Cowork sessions)
+
+Adopted 2026-05-02. Supersedes the ad-hoc `M3-WN-CN-DESCRIPTOR` format used during M3-A.
+
+### §10.1 — Format
+
+All Cowork sessions from M3 onward (including COW oversight sessions that are phase-specific) use:
+
+```
+MARSYS-{Mx}-R{round#}-S{session#}-{DESCRIPTOR}
+```
+
+- **`MARSYS`** — project anchor prefix. Fixed for all sessions on this project. Distinguishes MARSYS-JIS Cowork prompts from other projects in the same Anti-Gravity IDE.
+- **`{Mx}`** — macro-phase: `M3`, `M4`, `M5` … `M10`.
+- **`R{round#}`** — round number within the macro-phase, zero-padded to 1 digit (`R1`, `R2`, `R3`). A **round** is a parallel cluster of sessions that share no write targets; sessions within a round can run simultaneously.
+- **`S{session#}`** — session number within the round, zero-padded to 1 digit (`S1`, `S2`, `S3`).
+- **`{DESCRIPTOR}`** — 2–4 word screaming-snake-case label naming the primary deliverable (e.g., `M3A-CLOSE`, `LEL-V13`, `JH-EXPORT`, `ACHARYA-READINGS`).
+
+**Examples:**
+
+| Session ID | Meaning |
+|---|---|
+| `MARSYS-M3-R1-S1-M3A-CLOSE` | M3, Round 1, Session 1 — M3-A formal close |
+| `MARSYS-M3-R1-S2-M3B-CLOSE` | M3, Round 1, Session 2 — M3-B formal close (parallel with S1) |
+| `MARSYS-M3-R1-S3-LEL-V13` | M3, Round 1, Session 3 — LEL v1.3 event elicitation (parallel with S1+S2) |
+| `MARSYS-M3-R2-S1-TEMPORAL-VALIDATOR` | M3, Round 2, Session 1 — Temporal validator harness |
+| `MARSYS-M3-R3-S1-M3-CLOSE` | M3, Round 3, Session 1 — M3 macro-phase close (sequential) |
+| `MARSYS-M4-R1-S1-PHASE-PLAN` | M4, Round 1, Session 1 — M4 phase plan authoring |
+
+### §10.2 — Round semantics
+
+A **round** groups sessions that are safe to run in parallel — no shared write targets, no database state conflicts. Round boundaries enforce the dependency chain:
+
+- All sessions in round N must complete before any session in round N+1 opens.
+- Sessions within the same round may run simultaneously in separate Cowork windows / Anti-Gravity tabs.
+- Sequential sessions (no safe parallelism, or explicitly gated) are placed alone in their own round (`R{N}` containing a single `S1`).
+
+### §10.3 — CLAUDECODE_BRIEF first line
+
+Every CLAUDECODE_BRIEF produced for this project opens with the session ID on its own line:
+
+```
+# MARSYS-{Mx}-R{round#}-S{session#}-{DESCRIPTOR}
+```
+
+This allows the native to identify the brief at a glance and avoids project confusion when multiple briefs are open in the IDE.
+
+### §10.4 — Cowork thread naming
+
+The Cowork thread (conversation title) is set to the bare session ID:
+
+```
+MARSYS-M3-R1-S1-M3A-CLOSE
+```
+
+No `Madhav NN —` prefix for these sessions. The `MARSYS` prefix is the project anchor.
+
+### §10.5 — Cross-cutting workstream sessions
+
+LEL and PPL sessions that fall within a round use the same format:
+
+- `MARSYS-M3-R1-S3-LEL-V13` (LEL v1.3 update — part of M3-R1)
+- `MARSYS-PPL-R1-S1-SCAFFOLD` (PPL sessions not bound to a specific macro-phase use `PPL` in the Mx slot)
+
+### §10.6 — Backward compatibility
+
+Sessions before M3 (Steps 0–15, COW-01–03, M2A–E) retain their original naming. The MARSYS prefix applies from M3-R1-S1 onward. `CURRENT_STATE_v1_0.md`, `SESSION_LOG.md`, and `CAPABILITY_MANIFEST.json` reflect the old naming for historical entries and new naming for sessions from 2026-05-02 onward.
+
+### §10.7 — Round/session map (M3 authoritative; M4+ indicative)
+
+The full round/session breakdown per macro-phase is maintained as the **MARSYS-JIS Phase → Round → Session Map** (HTML artifact, Cowork session 2026-05-02). Reference the artifact for the complete breakdown and CLAUDECODE_BRIEF prompts. The map is updated at each macro-phase plan session (`MARSYS-M{x}-R1-S1-PHASE-PLAN`).
+
+---
+
 ## §7 — Update log
 
 - **2026-04-23 v1.0** — Initial. Produced during STEP_2_MACRO_PLAN_REVISION_SPEC. Rebuild-era names enumerated; post-rebuild format projected; session-open rule + pre-prompt template specified.
@@ -470,7 +544,8 @@ Model depth is deployed inside Claude Code where it has maximum leverage.
 - **2026-04-25 v1.2** — Added §8 M2 Milestone series. Supersedes §3 `BN` format for Claude Code sessions. Establishes `M2X-Plan` / `M2X-Exec` naming, full M2 milestone ledger (A–E), four-conversation rhythm per milestone, and `§model_deployment` brief section spec with model rationale. Added §9 COW ledger (moved from §5.5 inline). Produced during Madhav COW-02.
 - **2026-04-25 v1.4** — Produced during Madhav COW-03. Rewrote §8.5 checkpoint protocol to reflect the separated planning+execution session design. Added §8.5.1 (planning brief — universal 1-checkpoint Opus gate) and §8.5.2 (execution brief — varies by milestone). Universal rule: every brief, planning OR execution, starts on any model, runs §ORIENT, then fires CHECKPOINT 1 before any substantive work. No planning work before "Opus ready."; no execution work before the appropriate confirmation phrase. Updated §8.6 model matrix to show separate Plan/Exec checkpoint counts per milestone. Old combined-session §8.5 design (CP1=Opus, CP2=Sonnet in one session) is superseded.
 - **2026-04-25 v1.3** — Produced during Madhav COW-03. (1) Revised milestone groupings: M2A=B.1–B.3.5, M2B=B.4, M2C=B.5, M2D=B.6–B.8, M2E=B.9–B.10 — with rationale table. B.0 marked complete. (2) Added §8.5 checkpoint protocol: 2-checkpoint standard (infra), 3-checkpoint extended (M2B), 1-checkpoint single-model (M2C). Gates model switches in Google Anti-Gravity IDE via explicit user confirmation. (3) Added §8.6 model assignment matrix per milestone. (4) Updated executor reference to Google Anti-Gravity IDE (correcting prior "VS Code" error). (5) Updated §8.3 COW opening ritual: one-line scope proposal at session open. (6) Updated §8.4 model strings to reflect latest known versions (verify in Anti-Gravity). (7) Closed COW-02 in ledger; added COW-03.
+- **2026-05-02 v1.5** — Added §10 MARSYS session naming standard. New format `MARSYS-{Mx}-R{round#}-S{session#}-{DESCRIPTOR}` replaces ad-hoc M3-WN-CN naming used in early M3-A sessions. Applies from M3-R1-S1 onward. Sections: §10.1 format + examples, §10.2 round semantics (parallel-cluster definition), §10.3 CLAUDECODE_BRIEF first-line rule, §10.4 Cowork thread naming, §10.5 cross-cutting workstream sessions, §10.6 backward compatibility, §10.7 round/session map reference. Produced during M3-W1-A4-DIS009-DISPOSITION Cowork session (2026-05-02).
 
 ---
 
-*End of CONVERSATION_NAMING_CONVENTION_v1_0.md.*
+*End of CONVERSATION_NAMING_CONVENTION_v1_0.md v1.5.*

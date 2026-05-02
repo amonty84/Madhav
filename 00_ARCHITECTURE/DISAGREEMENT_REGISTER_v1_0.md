@@ -491,10 +491,20 @@ disagreement_register_entry:
       result: "Q2 soft gate: gemini_conflict annotation added to PATTERN_REGISTER. B.5 close NOT blocked per Q2 native decision 2026-04-27. Resolution deferred to post-B.5 scope."
       timestamp: 2026-04-27
       session_id: Madhav_M2A_Exec_11
-  status: open
-  resolution: null
-  resolved_on: null
-  resolved_by_session: null
+  status: resolved
+  resolution: >
+    R1 split — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    Root cause confirmed: PAT.008 claim_text attributed D9 Karakamsa governance to Saturn;
+    the correct Karakamsa lord is Mercury (AK Moon in D9 Gemini → Karakamsa = Gemini →
+    lord = Mercury). PAT.008 deprecated (deprecated_on: 2026-05-02). Two well-grounded
+    successor patterns authored in PATTERN_REGISTER_v1_2.json:
+    — PAT.008-AL (Saturn/Capricorn/AL): Saturn's sign-lordship of the D1 Arudha Lagna sign
+      imposes structural karmic discipline mandate over public identity; confidence HIGH.
+    — PAT.008-KMC (Mercury/Karakamsa/Gemini): Mercury as D9 Karakamsa sign-lord AND occupant
+      creates double binding of soul purpose to Mercury domain; confidence HIGH.
+    M3-A gate AC.M3A.4 (DIS.009 required terminal status) is hereby unblocked.
+  resolved_on: 2026-05-02
+  resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -505,6 +515,8 @@ disagreement_register_entry:
       linkage: registry_updated
     - path: 035_DISCOVERY_LAYER/PROMPTS/gemini/responses/2026-04-27_B5_revalidation_batch1_raw.md
       linkage: evidence
+    - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json
+      linkage: registry_updated   # PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored
 ```
 
 ---
@@ -555,10 +567,18 @@ disagreement_register_entry:
       description: "Adopt Sanjay Rath / BPHS synthesis (compute_chara.py default variant) as project-canonical. FORENSIC §5.3 retained as alternate-tradition record. Loses retrodictive-fit work done in B.5 sessions 16-25 that referenced Padakrama dates; opens DIS sub-entries for each affected event."
     - option_id: N3
       description: "Carry both. Maintain FORENSIC §5.3 (Padakrama) + engine BPHS variant side-by-side. DB rows tagged with explicit `system='chara_padakrama'` vs `system='chara_bphs'`. Resolution deferred to M9 multi-school triangulation per phase-plan policy. **DEFAULT** per PHASE_M3_PLAN §3.3 (\"every disagreement is *logged*, not *resolved by operator preference*; resolution waits for M9\")."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: verdict_recorded
+  resolution: >
+    N3 (carry both) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    FORENSIC §5.3 K.N. Rao Padakrama Chara MD sequence AND compute_chara.py BPHS-Sanjay-Rath
+    variant are maintained side-by-side in the DB. Rows tagged system='chara_padakrama'
+    (FORENSIC-sourced) vs system='chara_bphs' (engine-computed). No tradition is suppressed.
+    Substantive resolution deferred to M9 multi-school triangulation per PHASE_M3_PLAN §3.3
+    policy ("every disagreement is logged, not resolved by operator preference; resolution
+    waits for M9"). Context-dependency flag added: downstream synthesis must declare which
+    Chara tradition it draws from when citing a Chara MD date.
+  resolved_on: 2026-05-02
+  resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -623,10 +643,19 @@ disagreement_register_entry:
       description: "Adopt BPHS sign-to-lord count rule (movable forward, fixed/dual backward, count−1, 0→12). Drop the brief's hardcoded constants. Engine extensible; FORENSIC §5.3 retained as Padakrama alternate."
     - option_id: N3
       description: "Carry all three side-by-side as DIS.class.school_disagreement DB rows. Defer resolution to M9 multi-school triangulation. **DEFAULT** per phase-plan policy."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: verdict_recorded
+  resolution: >
+    N3 (carry all three side-by-side) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    All three Chara Dasha duration tables maintained in DB: (a) FORENSIC §5.3 K.N. Rao
+    Padakrama, (b) BPHS sign-to-lord count rule, (c) session-brief hardcoded constants.
+    Rows tagged system='chara_padakrama' / system='chara_bphs' / system='chara_brief_constants'.
+    The Padakrama table additional rules (AK sign reference, lord-in-own/7th, debilitation/
+    exaltation adjustments per K.N. Rao published text) are documented as an M9 encoding
+    target. Substantive resolution deferred to M9 multi-school triangulation per phase-plan
+    policy. Context-dependency flag: synthesis claims citing Chara Dasha durations must
+    declare which duration-rule tradition is the source.
+  resolved_on: 2026-05-02
+  resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
     side_a_before: null
     side_a_after: null
@@ -691,10 +720,18 @@ disagreement_register_entry:
       description: "Generate Jagannatha Hora export of Narayana Dasha for this chart per ED.1. Use JH export as cross-check reference. ETA: same as M3-D held-out cross-check window if JH export becomes part of the standard pipeline."
     - option_id: N3
       description: "Defer Narayana Dasha verification to M9 multi-school triangulation. compute_narayana.py output remains marked needs_verification=true; no synthesis claim treats it as settled until then. **DEFAULT** per phase-plan policy + ED.1 dependency status."
-  status: open
-  resolution: pending_native_verdict
-  resolved_on: null
-  resolved_by_session: null
+  status: verdict_recorded
+  resolution: >
+    N2 (JH export) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    Jagannatha Hora export of Narayana Dasha for this chart is the mandated verification
+    path per ED.1. The JH export is an M3-D deliverable: it forms part of AC.M3D.2
+    (held-out cross-check sample) and AC.M3D.1 (temporal validator pipeline). Until the
+    JH export cross-check is performed, compute_narayana.py output retains
+    needs_verification=true on all rows in the DB. No synthesis claim treats Narayana
+    Dasha output as settled until JH cross-check passes. Execution owner: M3-D Track D2
+    session (next scheduling unit after M3-A/M3-C closes).
+  resolved_on: 2026-05-02
+  resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
     side_a_before: null
     side_a_after: null

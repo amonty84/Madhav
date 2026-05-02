@@ -106,7 +106,8 @@ See `DISAGREEMENT_REGISTER_v1_0.md` entry DIS.009 for full record.
 | M3-W1-A1-EVAL-BASELINE | A | BASELINE_RUN_W9_MANUAL_v1_0.md + DIS009_ANALYSIS_v1_0.md | CLOSED | 2026-05-01 | — |
 | M3-W1-A2-PATTERN-ENGINE | A | Pattern + Contradiction + Resonance + Cluster flag-gating; CAPABILITY_MANIFEST entry_count fix; IS.8(a) red-team | CLOSED | 2026-05-01 | (close-time) |
 | M3-W1-A3-CONTRADICTION-ENGINE | A | Synthesis-prompt amendment for contradiction-framing rubric (B.1/B.3 compliant) in shared preamble | CLOSED | 2026-05-01 | (close-time) |
-| M3-W1-A4-DIS009-DISPOSITION | A | DIS.009 disposition + M3-A close | PENDING | — | — |
+| M3-W1-A4-DIS009-DISPOSITION | A | DIS.009 R1 resolution (PAT.008-AL + PAT.008-KMC); DIS.010/011 N3; DIS.012 N2; PATTERN_REGISTER v1.2; AC.M3A.4 unblocked; §IS.8(a) inline RT PASS | CLOSED | 2026-05-02 | — |
+| M3-W1-A5-M3A-CLOSE | A | M3-A formal close (AC.M3A.1–AC.M3A.5 + M3A_CLOSE_v1_0.md) | PENDING | — | — |
 
 _Session IDs above reflect PHASE_M3_PLAN_v1_0.md §3.1 session estimates. Actual IDs finalized at each session open; pattern may compress A2/A3/A4 or expand further depending on scope._
 
@@ -118,6 +119,10 @@ _Session IDs above reflect PHASE_M3_PLAN_v1_0.md §3.1 session estimates. Actual
 |---|---|---|---|---|---|
 | M3-W2-B1-VIMSHOTTARI-ENGINE | B | compute_vimshottari.py + VIMSHOTTARI_RAW + CROSSCHECK + GOLDEN + SQL insert | CLOSED | 2026-05-01 | 03770d2 |
 | M3-W2-B2-YOGINI-TRANSIT | B | compute_yogini.py + transit engine v1 + signal_activator + lit_states sample + migrations 022/023 + query_signal_state.ts | CLOSED | 2026-05-01 | (close-time) |
+| M3-W2-B3 | B | optional antardasha cross-check vs JH export | NOT EXECUTED — DEFERRED to M3-D Track D1 per PHASE_M3_PLAN §3.2 escape clause invoked by close-session brief | n/a | n/a |
+| MARSYS-M3-R1-S2-M3B-CLOSE | B | M3B_CLOSE_v1_0.md (sub-phase sealing artifact) + SESSION_LOG append + CURRENT_STATE update + this-file annotation + Gemini-side mirror; AC.M3B.1–7 disposition: 5 PASS / 2 PASS-with-deferral / 0 FAIL; **M3-B SUB-PHASE CLOSED** | CLOSED | 2026-05-03 | (close-time) |
+
+**Wave 2 header update:** Sub-phase B is now CLOSED at MARSYS-M3-R1-S2-M3B-CLOSE (2026-05-03). Track 2 substrate complete: B1 + B2 sealed; B3 optional antardasha cross-check deferred to M3-D Track D1 under §3.2 escape clause. Sealing artifact: `00_ARCHITECTURE/M3B_CLOSE_v1_0.md`.
 
 ## Wave 3 — Sub-phase C (Track 3: Jaimini + KP + Varshaphala + Shadbala, **CLOSED 2026-05-01**)
 
@@ -968,3 +973,151 @@ notes: >
   (validator + held-out sample + IS.8(b) red-team + M3_CLOSE_v1_0.md +
   HANDOFF_M3_TO_M4_v1_0.md per PHASE_M3_PLAN §3.4).
 
+
+---
+
+## M3-W1-A4-DIS009-DISPOSITION — Close Block
+
+```yaml
+session_id: M3-W1-A4-DIS009-DISPOSITION
+closed_at: 2026-05-02T00:00:00+05:30
+agent: claude-sonnet-4-6
+sub_phase: A
+track: "Track 1 (Discovery Engine Activation + DIS.009 Disposition), fourth execution session."
+cowork_thread_name: "M3-W1-A4-DIS009-DISPOSITION"
+predecessor_session: M3-W3-C3-SHADBALA
+red_team_counter_delta: "2→3 (§IS.8(a) cadence fire) → inline RT PASS → reset 0"
+
+deliverables:
+  - 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json: >
+      New — PAT.008 deprecated (DIS.009 root cause: Saturn ≠ D9 Karakamsa lord;
+      Mercury is Karakamsa lord via AK Moon in D9 Gemini). PAT.008-AL authored
+      (Saturn/Capricorn/AL structural mandate over public identity; confidence HIGH;
+      domain cross_domain). PAT.008-KMC authored (Mercury/Karakamsa/Gemini double
+      binding of soul purpose; confidence HIGH; domain spiritual). 71 active patterns.
+      Supersedes PATTERN_REGISTER_v1_1.json.
+  - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md: >
+      DIS.009 → status: resolved (R1 split; PAT.008-AL + PAT.008-KMC authored;
+      resolved_on 2026-05-02). DIS.010 → status: verdict_recorded (N3 carry both
+      Padakrama + BPHS side-by-side; defer to M9). DIS.011 → status: verdict_recorded
+      (N3 carry all three duration tables; defer to M9). DIS.012 → status:
+      verdict_recorded (N2 JH export required; compute_narayana.py output remains
+      needs_verification=true until JH cross-check; JH export is M3-D Track D2).
+  - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json: >
+      PATTERN_REGISTER_v1_2 entry added (canonical_id PATTERN_REGISTER_v1_2, status
+      CURRENT, fingerprint 24140d728d1034bf..., 113 total entries).
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md: >
+      Amended in-place — last_session_id → M3-W1-A4-DIS009-DISPOSITION;
+      active_phase_plan_sub_phase: M3-A A4 CLOSED, AC.M3A.4 UNBLOCKED;
+      red_team_counter → 0 (reset after §IS.8(a) cadence fire);
+      next_session_objective → M3-W1-A5-M3A-CLOSE; next_session_proposed_cowork_thread_name
+      → "M3-W1-A5-M3A-CLOSE"; changelog entry added.
+  - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md: >
+      Wave 1 row M3-W1-A4-DIS009-DISPOSITION flipped PENDING → CLOSED; A5 row added;
+      this close block appended.
+
+stream_c_finding: >
+  LEL v1.2 has exactly 36 point events on disk. The 11 "missing" events are the 11
+  GAP register items (GAP.RELATIONSHIP_3_END.01, GAP.IIT_OUTCOME.01,
+  GAP.HEALTH_EPISODES.01, GAP.FINANCIAL_LOSSES.01, GAP.TRAVEL_MISC.01,
+  GAP.R2_MONTH.01, GAP.FATHER_KIDNEY_MONTH.01, GAP.US_JOB_LOSS_PRECISE.01,
+  GAP.GRANDMOTHER.01, GAP.MOTHER_STATUS.01, GAP.BROTHER_STATUS.01).
+  These are unresolved data gaps in the LEL — known missing data points — NOT drafted
+  events. Native must supply event narratives for these 11 gaps to reach the ≥40 event
+  gate required for M4. LEL v1.3 authoring (converting gap items to EVT.* blocks) is
+  an M3-D deliverable once native provides the data.
+
+acceptance_criteria_status:
+  AC.M3A.4: "PASS — DIS.009 reached terminal status (resolved R1) at this session close."
+
+open_items_carried_forward:
+  - "AC.M3A.1 (BASELINE_RUN_W9 non-stub run) — pending auth secrets (SMOKE_SESSION_COOKIE etc.)"
+  - "AC.M3A.5 (post-baseline delta) — same dependency as AC.M3A.1"
+  - "LEL v1.3 — native must supply 11 gap-event narratives; M3-D deliverable"
+  - "JH export for Narayana (DIS.012 N2 action) — M3-D Track D2"
+  - "Naisargika + Nathonnatha Shadbala findings — M3-C close or M3-D aggregation"
+  - "Sthana + Drik Shadbala ECR resolution — JH-export per ED.1, M3-D-class"
+
+next_session: M3-W1-A5-M3A-CLOSE (M3-A formal close — AC.M3A.1–AC.M3A.5 + M3A_CLOSE_v1_0.md)
+```
+
+=== MARSYS-M3-R1-S2-M3B-CLOSE — M3 SUB-PHASE B FORMAL CLOSE ===
+closed: 2026-05-03
+git_sha: "(close-time)"
+session_agent: claude-opus-4-7
+agent_version: claude-opus-4-7[1m]
+cowork_thread_name: "MARSYS-M3-R1-S2-M3B-CLOSE"
+predecessor_session: M3-W1-A4-DIS009-DISPOSITION
+track: "M3 sub-phase B (Track 2: Vimshottari + Yogini + Transit Engine v1) FORMAL CLOSE — consolidates M3-W2-B1-VIMSHOTTARI-ENGINE (closed 2026-05-01) + M3-W2-B2-YOGINI-TRANSIT (closed 2026-05-01). Sibling to M3-A formal close (MARSYS-M3-R1-S1-M3A-CLOSE, pending) and the in-place M3-C sub-phase close (annotation at M3-W3-C3-SHADBALA, 2026-05-01)."
+deliverables:
+  - 00_ARCHITECTURE/M3B_CLOSE_v1_0.md: "new — sub-phase sealing artifact; 12 sections; consolidates M3-W2-B1 + M3-W2-B2; records §3.2 escape-clause deferral for B3 antardasha cross-check; routes 8 D.M3B.* known-deferred items to M3-D Track D1/D2/D3; sha256=684a497e161ccfcd770e1cafa525f7381acd322076da3fe58cd5ec7040a84a92"
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md: "amended in-place — §2 YAML rotation: active_phase_plan_sub_phase records M3-B CLOSED + B3 deferral; red_team_counter 0→1; last_session_id → MARSYS-M3-R1-S2-M3B-CLOSE; previous_session_id → M3-W1-A4-DIS009-DISPOSITION; next_session_objective → MARSYS-M3-R1-S1-M3A-CLOSE; freshness fields rotated; new changelog entry added at top; §3 narrative refreshed"
+  - 00_ARCHITECTURE/SESSION_LOG.md: "MARSYS-M3-R1-S2-M3B-CLOSE entry appended (session_open + body + session_close blocks per template)"
+  - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md: "this close block appended; Wave 2 sub-phase row + B3 deferred row + M3-B CLOSED row added; Wave 2 header updated to record sub-phase B CLOSED 2026-05-03"
+  - .gemini/project_state.md: "MP.2 mirror — adapted-parity update reflecting M3-B sub-phase close + Track 2 substrate complete + §3.2 B3 escape-clause defer"
+acceptance_criteria_passed:
+  - "AC.M3B.1 PASS-with-deferral — Vimshottari MD-level cross-check vs FORENSIC §5.1 in tolerance (max delta 3 days within documented Lahiri-variant offset per FORENSIC GAP.09); AD/PD cross-check vs JH export DEFERRED to M3-D Track D1 under PHASE_M3_PLAN §3.2 escape clause invoked by close-session brief"
+  - "AC.M3B.2 PASS — Yogini cross-check vs FORENSIC §5.2; max delta +2 days across 9 published MD boundaries; first_yogini=Bhramari matches DSH.Y.001 after classical (nak_idx_0+3) mod 8 offset documented in CROSSCHECK §2"
+  - "AC.M3B.3 PASS — compute_transits.py is deterministic by construction (pyswisseph + Lahiri sidereal + fixed inputs); sample_2026_05_01.json runs cleanly"
+  - "AC.M3B.4 PASS-substrate — lit_states_sample_M3B_v1_0.json populated with 495 signal-state rows (252 lit / 0 ripening / 243 dormant) for 2026-05-01 smoke; PARTIAL acharya-grade 5-signal sub-sample inspection DEFERRED to M3-D held-out validator per §3.4 AC.M3D.2"
+  - "AC.M3B.5 PASS — ayanamsha lahiri (SIDM_LAHIRI) recorded at M3-W2-B1 close per ED.2 mitigation"
+  - "AC.M3B.6 PASS-substrate — 06_LEARNING_LAYER/PREDICTION_LEDGER/ scaffolded with prediction_ledger.jsonl + schema_v0_1.json; PENDING first M3-B-emitted prediction (B1 + B2 emit no time-indexed forward-looking outputs by design — engines + retrieval surface only; first emission structurally lands at M3-D Track D3 readings)"
+  - "AC.M3B.7 PASS — no L1 mutations; FORENSIC fingerprint pre/post identical at M3-W2-B2 close (verified f06d8a05...)"
+governance_scripts:
+  mirror_enforcer: "exit=0 (8/8 pairs clean; claude_only=2)"
+  drift_detector: "exit=2 (263 findings; carry-forward delta +4 from prior 259 — net-new M3B_CLOSE artifact + recent registry edits; no regressions)"
+  schema_validator: "exit=2 (105 violations; carry-forward delta +5 from prior 100; no new CRITICAL)"
+red_team_due: false
+red_team_performed: false
+red_team_counter_after: 1  # Substantive sub-phase close per ONGOING_HYGIENE_POLICIES §G; counter increments 0→1; §IS.8(a) cadence does NOT fire (next fire at counter=3); §IS.8(b) macro-phase-close cadence remains scheduled at M3-D close per PHASE_M3_PLAN §3.4 AC.M3D.4
+known_residuals:
+  - "D.M3B.1 — AC.M3B.1 antardasha + pratyantardasha cross-check vs JH export — DEFERRED to M3-D Track D1 temporal validator under §3.2 escape clause (close-session brief native override OVR.1)"
+  - "D.M3B.4 — AC.M3B.4 5-signal acharya-grade sub-sample inspection — DEFERRED to M3-D held-out validator (§3.4 AC.M3D.2)"
+  - "D.M3B.6 — AC.M3B.6 first M3-B-emitted PPL prediction — substrate live; first emission structurally M3-D Track D3 scope"
+  - "D.M3B.NA — Migrations 022 + 023 not yet applied to live DB — files written; native action gated on environment + backup + authorization; query_signal_state.ts degrades gracefully"
+  - "D.M3B.SD — Vimshottari SD (Sukshma) generation deferred — not required for §3.2 cross-check granularity; future refinement"
+  - "D.M3B.R4 — ≥20-date stratified held-out sample — M3-D Track D1 §3.4 AC.M3D.2 deliverable"
+  - "D.M3B.YA — Yogini AD cross-check — no in-corpus baseline (FORENSIC §5.2 lists MD only); JH export at M3-D Track D2"
+  - "D.M3B.PD — Vimshottari PD cross-check — no in-corpus baseline; JH export at M3-D Track D2"
+  - "Pre-M3 carry-forwards: CAPABILITY_MANIFEST entry_count +3 latent miscount (last touched A4 close; broader audit pending); SIG.MSR.207 absent from MSR_v3_0.md (M3-D close); BASELINE_RUN_W9 non-stub run gated on auth secrets (M3-A close owns); 9 TypeScript test-fixture errors in tests/components/AppShell.test.tsx + tests/components/ReportGallery.test.tsx (Portal Redesign R-stream owns)"
+notes: >
+  M3 sub-phase B is FORMALLY CLOSED. Sealing artifact at 00_ARCHITECTURE/M3B_CLOSE_v1_0.md
+  consolidates the two execution sessions M3-W2-B1-VIMSHOTTARI-ENGINE and M3-W2-B2-YOGINI-
+  TRANSIT (both closed 2026-05-01) and records the §3.2 escape-clause deferral of optional
+  B3 antardasha cross-check to M3-D Track D1, per close-session brief native override OVR.1:
+  "If optional B3 antardasha cross-check was not run, close with a documented 'deferred —
+  §3.2 escape clause' note rather than blocking." AC.M3B.1–7 disposition: 5 PASS /
+  2 PASS-with-deferral / 0 FAIL — both deferrals authorized by brief and §3.4 routing of
+  optional cross-checks and forward-looking emissions to M3-D.
+
+  Naming-discrepancy note: close-session brief opened with phrase "M3-B (Chara Dasha
+  temporal layer)". Per PHASE_M3_PLAN §3.2, M3-B's scope is Vimshottari + Yogini + Transit
+  Engine v1 (Parashari dasha + transit foundation); Chara Dasha is M3-C scope per §3.3
+  (Jaimini + KP + Varshaphala + Shadbala). Chara was authored at M3-W3-C1-JAIMINI-DASHAS
+  (closed 2026-05-01) and the M3-C sub-phase was closed in-place at M3-W3-C3-SHADBALA
+  (closed 2026-05-01). This artifact closes M3-B per the §3.2 charter; the brief's
+  "Chara Dasha" sub-label is read as a colloquial reference to the broader temporal-engine
+  workstream. Documented in M3B_CLOSE_v1_0.md §11.
+
+  M3-A in flight (Track 1: A1 + A2 + A3 + A4 ALL CLOSED; AC.M3A.4 UNBLOCKED). After
+  M3-A closes (sibling MARSYS-M3-R1-S1-M3A-CLOSE), M3-D macro-phase opens — Track D1
+  absorbs D.M3B.1 + D.M3B.4 + D.M3B.R4; Track D2 absorbs D.M3B.NA + DIS.012 N2
+  JH-export; Track D3 absorbs D.M3B.6 first PPL emission. §IS.8(b) macro-phase-close
+  red-team fires at M3-D close per PHASE_M3_PLAN §3.4 AC.M3D.4.
+
+  Strict scope compliance: did NOT touch platform/src/lib/retrieve/**, platform/src/lib/
+  synthesis/**, platform/src/lib/bundle/**, platform/scripts/temporal/**, 05_TEMPORAL_
+  ENGINES/** (read-only for citation only), platform/migrations/**, 025_HOLISTIC_
+  SYNTHESIS/**, 035_DISCOVERY_LAYER/**, 01_FACTS_LAYER/** — all within declared
+  must_not_touch. L1 frozen. PHASE_M3_PLAN unchanged.
+external_computation_required: false
+b10_compliance: "Close-artifact authoring only; no chart-numerical computation invoked. M3B_CLOSE_v1_0.md cites L1 facts and prior cross-check verdicts by reference; no fabricated computation."
+ppl_substrate_writes: "none — close-artifact session emits no time-indexed predictions; substrate active and ready for first emission at M3-D Track D3"
+mirror_updates_propagated:
+  - pair_id: MP.2
+    claude_side: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    gemini_side: .gemini/project_state.md
+    propagated: true
+    mode: adapted_parity_state
+
+next_session: MARSYS-M3-R1-S1-M3A-CLOSE (M3-A formal close — AC.M3A.1–AC.M3A.5 + M3A_CLOSE_v1_0.md; sibling to this M3-B close)

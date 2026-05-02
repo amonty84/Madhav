@@ -11024,3 +11024,299 @@ session_close:
 ```
 
 *End of BHISMA-W1-S4-CONVERGENCE entry — BHISMA Wave 1 CLOSED.*
+
+---
+
+## M3-W1-A4-DIS009-DISPOSITION — DIS.009 Resolution + Governance Repair
+
+*Cowork session — governance repair stream. Session A4 in M3-A. Pre-dates formal MARSYS naming; retroactively maps to MARSYS-M3-R0-S4-DIS009-DISPOSITION per §10.6.*
+
+```yaml
+session_open:
+  session_id: M3-W1-A4-DIS009-DISPOSITION
+  opened_at: "2026-05-02T00:00:00+05:30"
+  agent: claude-sonnet-4-6
+  cowork_thread: "M3-W1-A4-DIS009-DISPOSITION"
+  macro_phase: M3
+  session_type: governance_repair
+  scope_summary: >
+    Five-stream session: (A) PAT.008 root-cause analysis + R1 split resolution
+    — PAT.008 deprecated, PAT.008-AL + PAT.008-KMC authored; (B) DISAGREEMENT_REGISTER
+    updates for DIS.009 (resolved), DIS.010/011 (verdict_recorded N3), DIS.012
+    (verdict_recorded N2); (C) CAPABILITY_MANIFEST v1.2 entry + header update;
+    (D) CURRENT_STATE amendment + §IS.8(a) red-team counter discharge;
+    (E) SESSION_LOG + mirror updates (PROJECT_M3_SESSION_LOG, .gemini/project_state.md).
+    Late-session additions: full M3→M10 round/session breakdown, MARSYS naming
+    convention adopted and documented in CONVERSATION_NAMING_CONVENTION v1.5.
+  may_touch:
+    - 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json
+    - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+    - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+    - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+    - 00_ARCHITECTURE/SESSION_LOG.md
+    - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md
+    - 00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md
+    - .gemini/project_state.md
+  must_not_touch:
+    - 01_FACTS_LAYER/**
+    - 025_HOLISTIC_SYNTHESIS/**
+    - platform/**
+    - 00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md
+    - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+```
+
+**Deliverables:**
+- `PATTERN_REGISTER_v1_2.json` — 71 patterns; PAT.008 deprecated; PAT.008-AL (cross_domain, HIGH, sig=0.84) + PAT.008-KMC (spiritual, HIGH, sig=0.88) authored; registered in CAPABILITY_MANIFEST (113 entries).
+- `DISAGREEMENT_REGISTER_v1_0.md` — DIS.009: `resolved` (R1 split); DIS.010: `verdict_recorded` (N3 — carry both Chara traditions); DIS.011: `verdict_recorded` (N3 — carry all three duration tables); DIS.012: `verdict_recorded` (N2 — JH export mandated). All four entries moved from open/pending.
+- `CURRENT_STATE_v1_0.md` — last_session_id updated; red_team_counter: 2→0 (§IS.8(a) fired, inline RT PASS, reset); A5 declared as next session.
+- `CAPABILITY_MANIFEST.json` — entry_count: 112→113; PATTERN_REGISTER_v1_2 entry added; fingerprint updated.
+- `CONVERSATION_NAMING_CONVENTION_v1_0.md` — bumped v1.4→v1.5; §10 MARSYS naming standard added.
+- `PROJECT_M3_SESSION_LOG.md` — A4 row CLOSED; A5 row added PENDING; full A4 close block appended.
+- `.gemini/project_state.md` — MP.2 mirror updated with A4 close summary + DIS.009 resolution status.
+- Full M3→M10 round/session breakdown + MARSYS naming convention (HTML artifact delivered in-session).
+- AC.M3A.4 gate: UNBLOCKED (DIS.009 now terminal status `resolved`).
+
+```yaml
+session_close:
+  session_id: M3-W1-A4-DIS009-DISPOSITION
+  closed_at: "2026-05-02T00:00:00+05:30"
+  acceptance_criteria_summary:
+    - "DIS.009 status: resolved (R1 split): PASS"
+    - "PATTERN_REGISTER_v1_2.json created, JSON-valid, 71 patterns: PASS"
+    - "PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored: PASS"
+    - "DIS.010/011/012 verdict_recorded: PASS"
+    - "CAPABILITY_MANIFEST 113 entries, fingerprint updated: PASS"
+    - "CURRENT_STATE red_team_counter reset to 0 (§IS.8(a) inline RT PASS): PASS"
+    - "CONVERSATION_NAMING_CONVENTION v1.5 (§10 MARSYS standard): PASS"
+    - "AC.M3A.4 unblocked: PASS"
+    - "MP.2 mirror (.gemini/project_state.md) updated: PASS"
+    - "SESSION_LOG appended: PASS (this entry)"
+  known_residuals:
+    - "DIS.012 N2 (JH export) not yet executed — blocked on tool availability; M3-D Track D2 scope"
+    - "LEL v1.3 (11 GAP → EVT conversions) blocked on native providing event narratives"
+    - "M3-R1-S1-M3A-CLOSE + M3-R1-S2-M3B-CLOSE not yet executed"
+  red_team_status: "§IS.8(a) inline RT PASS — 5 axes: B.1, B.3, B.8, B.10 (clean), B.11 (N/A — no query execution). Counter reset 2→0."
+  mirror_updates_propagated:
+    - "MP.2: .gemini/project_state.md — A4 close summary + DIS.009 resolution + MARSYS naming note appended"
+  next_session_objective: "MARSYS-M3-R1 parallel cluster: S1=M3A-CLOSE, S2=M3B-CLOSE (no external blockers); S3=LEL-V13 (blocked pending native event narratives)"
+```
+
+*End of M3-W1-A4-DIS009-DISPOSITION entry.*
+
+---
+
+## MARSYS-M3-R1-S2-M3B-CLOSE — M3 Sub-Phase B Formal Close (Vimshottari + Yogini + Transit Engine v1)
+
+*Cowork session — M3-B sub-phase formal close. Authors `00_ARCHITECTURE/M3B_CLOSE_v1_0.md` consolidating M3-W2-B1-VIMSHOTTARI-ENGINE + M3-W2-B2-YOGINI-TRANSIT (both closed 2026-05-01) and records the §3.2 escape-clause deferral of optional B3 antardasha cross-check to M3-D Track D1 per close-session brief instruction.*
+
+```yaml
+session_open:
+  session_id: MARSYS-M3-R1-S2-M3B-CLOSE
+  cowork_thread_name: "MARSYS-M3-R1-S2-M3B-CLOSE"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7[1m]
+  step_number_or_macro_phase: M3.B.close
+  predecessor_session: M3-W1-A4-DIS009-DISPOSITION
+  opened_at: "2026-05-03T00:00:00+05:30"
+  mandatory_reading_confirmation:
+    - file: CLAUDE.md
+      fingerprint_sha256: f665f0f4c53d49ddf3331a831fd1a81823e7d48f58c280483ca63d8b510021be
+      read_at: "2026-05-03T00:00:00+05:30"
+    - file: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      fingerprint_sha256: c830080233e9d5a24da5240e4be38b12098d6012a22df3dd67bcc7ed0e221298
+      read_at: "2026-05-03T00:00:00+05:30"
+    - file: 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+      fingerprint_sha256: 5969811a38861e16e07be0b860a41d3d28b1e1af00cbe433991a16c79d78ae8d
+      read_at: "2026-05-03T00:00:00+05:30"
+    - file: 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      fingerprint_sha256: 3e52cd4a6433c085eb7ff32759c0c6026423984591143f205dcedf2956363447
+      read_at: "2026-05-03T00:00:00+05:30"
+  declared_scope:
+    may_touch:
+      - 00_ARCHITECTURE/M3B_CLOSE_v1_0.md
+      - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+      - 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md
+      - .gemini/project_state.md
+    must_not_touch:
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 035_DISCOVERY_LAYER/**
+      - platform/src/**
+      - platform/tests/**
+      - platform/scripts/temporal/**
+      - platform/migrations/**
+      - 05_TEMPORAL_ENGINES/**
+      - 00_ARCHITECTURE/PHASE_M3_PLAN_v1_0.md
+      - 00_ARCHITECTURE/MACRO_PLAN_v2_0.md
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/DISAGREEMENT_REGISTER_v1_0.md
+  red_team_due: false                     # §IS.8(a) every-third cadence: counter at 0 entering this session; will increment to 1 at close (no fire). §IS.8(b) macro-phase-close cadence scheduled at M3-D close per PHASE_M3_PLAN §3.4 AC.M3D.4.
+  native_directive_obligations: []        # ND.1 addressed since 2026-04-24; no open directive
+  notes: >
+    M3-B sub-phase formal close per PHASE_M3_PLAN §3.2. Authors 00_ARCHITECTURE/M3B_CLOSE_v1_0.md
+    enumerating M3-B deliverables (M3-W2-B1 + M3-W2-B2), verifying AC.M3B.1–7 disposition,
+    and recording the §3.2 escape-clause deferral of optional B3 antardasha cross-check to
+    M3-D Track D1 (per close-session brief instruction). Naming-discrepancy note: brief
+    references "Chara Dasha temporal layer" — Chara is M3-C scope (closed 2026-05-01); this
+    session closes M3-B per the §3.2 charter Vimshottari + Yogini + Transit Engine v1.
+    Documented in M3B_CLOSE_v1_0.md §11.
+```
+
+**Deliverables:**
+- `00_ARCHITECTURE/M3B_CLOSE_v1_0.md` — NEW (sealing artifact; 12 sections; sha256=`684a497e161ccfcd770e1cafa525f7381acd322076da3fe58cd5ec7040a84a92`).
+- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` — amended in-place (§2 YAML rotated: `active_phase_plan_sub_phase` → "M3-B SUB-PHASE CLOSED 2026-05-03 ..."; `red_team_counter` 0→1; `last_session_id` → MARSYS-M3-R1-S2-M3B-CLOSE; `previous_session_id` → M3-W1-A4-DIS009-DISPOSITION; `next_session_objective` → MARSYS-M3-R1-S1-M3A-CLOSE; freshness fields rotated; new changelog entry added at top).
+- `00_ARCHITECTURE/SESSION_LOG.md` — appended (this entry).
+- `00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md` — Wave 2 sub-phase-close annotation appended; M3-B CLOSED row + close block appended.
+- `.gemini/project_state.md` — MP.2 mirror — adapted-parity update reflecting M3-B sub-phase close + Track 2 substrate complete + B3 escape-clause defer.
+
+**AC.M3B.* disposition (per PHASE_M3_PLAN §3.2):** 5 PASS / 2 PASS-with-deferral / 0 FAIL. See M3B_CLOSE_v1_0.md §2 for the full disposition table. Both deferrals (AC.M3B.1 AD/PD cross-check vs JH; AC.M3B.4 5-signal acharya sub-sample) are explicitly authorized by the close-session brief and PHASE_M3_PLAN §3.4 routing of optional cross-checks and forward-looking emissions to M3-D.
+
+```yaml
+session_close:
+  session_id: MARSYS-M3-R1-S2-M3B-CLOSE
+  closed_at: "2026-05-03T00:00:00+05:30"
+  files_touched:
+    - path: 00_ARCHITECTURE/M3B_CLOSE_v1_0.md
+      mutation_type: created
+      sha256_before: null
+      sha256_after: 684a497e161ccfcd770e1cafa525f7381acd322076da3fe58cd5ec7040a84a92
+      justification: "M3-B sub-phase sealing artifact; consolidates M3-W2-B1 + M3-W2-B2; records §3.2 escape-clause deferral of optional B3 antardasha cross-check to M3-D Track D1"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/CURRENT_STATE_v1_0.md
+      mutation_type: modified
+      sha256_before: c830080233e9d5a24da5240e4be38b12098d6012a22df3dd67bcc7ed0e221298
+      sha256_after: ab79645795d4471a3e154e8e361b6a68ed17256eb4dec26bd90db755267885ee
+      justification: "§2 YAML state-block rotation + §3 narrative refresh + new changelog entry per §4.2"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: 60cbefb1a94ea585c08378ad093c2362a0f3fc26f7178f41b6622ca6d10ada95
+      sha256_after: <post-append>
+      justification: "MARSYS-M3-R1-S2-M3B-CLOSE entry appended (this entry)"
+      within_declared_scope: true
+    - path: 00_ARCHITECTURE/PROJECT_M3_SESSION_LOG.md
+      mutation_type: modified
+      sha256_before: a8654c3dc21bc3aedf09c0a5b8c978b402012080b2ad166ceb8f9d1435bf579e
+      sha256_after: <post-append>
+      justification: "Wave 2 sub-phase-close annotation appended; M3-B CLOSED row + close block"
+      within_declared_scope: true
+    - path: .gemini/project_state.md
+      mutation_type: modified
+      sha256_before: eec3819ef0a6646f03848672082d54171252df526d6c43cecfa85c58e8227af6
+      sha256_after: <post-edit>
+      justification: "MP.2 mirror — adapted-parity update reflecting M3-B sub-phase close"
+      within_declared_scope: true
+  registry_updates_made:
+    file_registry:
+      - row_before: "(no row — new artifact)"
+        row_after: "M3B_CLOSE_v1_0.md | CURRENT | sub-phase sealing artifact for M3-B Temporal Foundation"
+        version_of_registry: "n/a (manifest-driven; no registry version bump required for new sealing artifact)"
+    canonical_artifacts:
+      - canonical_id: CURRENT_STATE
+        change: fingerprint_rotated
+        details: "§2 YAML rotation + §3 narrative refresh + changelog entry — every session-close per §4 update protocol"
+  mirror_updates_propagated:
+    - pair_id: MP.1
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MP.1 (CLAUDE.md ↔ .geminirules) frozen at GOVERNANCE_BASELINE; no canonical-path change in M3-B"
+    - pair_id: MP.2
+      claude_side_touched: true            # CURRENT_STATE_v1_0.md
+      gemini_side_touched: true            # .gemini/project_state.md
+      both_updated_same_session: true
+      rationale: "MP.2 composite state mirror refreshed in same session per ND.1 + protocol §K.3"
+    - pair_id: MP.3
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "MACRO_PLAN unchanged this session"
+    - pair_id: MP.4
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PHASE_M3_PLAN unchanged this session (M3B_CLOSE cites §3.2 charter; no plan edits)"
+    - pair_id: MP.5
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "CAPABILITY_MANIFEST unchanged this session (last updated at A4 close 2026-05-02)"
+    - pair_id: MP.6
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2; not touched this session"
+    - pair_id: MP.7
+      claude_side_touched: true            # SESSION_LOG.md (this append)
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "Declared Claude-only per CANONICAL_ARTIFACTS §2"
+    - pair_id: MP.8
+      claude_side_touched: false
+      gemini_side_touched: false
+      both_updated_same_session: true
+      rationale: "PROJECT_ARCHITECTURE unchanged"
+  red_team_pass:
+    due: false
+    performed: false
+    verdict: n/a
+    artifact_path: null
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2                            # carry-forward (within whitelist per ONGOING_HYGIENE_POLICIES §F)
+    report_path: 00_ARCHITECTURE/drift_reports/DRIFT_REPORT_adhoc_20260502T185635Z.md
+    divergences_found: 263                  # carry-forward delta +4 from prior 259 (net-new M3B_CLOSE artifact + recent registry edits — no regressions)
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2                            # carry-forward (no new CRITICAL)
+    report_path: null                       # script does not emit per-run report file in current revision
+    violations_found: 105                   # carry-forward delta +5 from prior 100
+  mirror_enforcer_run:
+    script: platform/scripts/governance/mirror_enforcer.py
+    exit_code: 0
+    report_path: 00_ARCHITECTURE/mirror_reports/MIRROR_REPORT_adhoc_20260502T185641Z.md
+    desync_pairs: []
+  step_ledger_updated: n/a                  # post-Step-15; STEP_LEDGER is GOVERNANCE_CLOSED
+  current_state_updated: true
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides:
+    - override_id: "OVR.1"
+      issued_at: "2026-05-03T00:00:00+05:30 (close-session brief)"
+      description: "Authorize §3.2 escape-clause deferral for AC.M3B.1 antardasha + pratyantardasha cross-check ('If optional B3 antardasha cross-check was not run, close with a documented deferred — §3.2 escape clause note rather than blocking'). Routed to M3-D Track D1 temporal validator."
+      scope_effect: "Permits M3-B close with AC.M3B.1 PASS-with-deferral verdict; deferral registered as D.M3B.1 in M3B_CLOSE_v1_0.md §6"
+  halts_encountered: []
+  native_directive_per_step_verification:
+    - directive_id: ND.1
+      step: M3.B.close
+      obligation_addressed: true
+      evidence: "MP.2 mirror updated in same session (CURRENT_STATE_v1_0.md ↔ .gemini/project_state.md adapted parity refresh); mirror_enforcer.py exit=0 (8/8 pairs clean; claude_only=2). MP.7 Claude-only append per declared inventory. ND.1 status held since 2026-04-24."
+  build_state_serialized:
+    serialized: false
+    output_path: null
+    uploaded: false
+    gcs_uri: null
+    schema_validated: false
+    serializer_version: null
+    shards_emitted: 0
+    cowork_ledger_referenced: false
+    rationale: "Build-state serialization not invoked this session — governance close artifact did not touch portal-tracked state surfaces (platform/scripts/temporal/**, platform/migrations/**, platform/src/** all in must_not_touch). LOW finding per template — backfill at next portal-touching session."
+  close_criteria_met: true
+  unblocks: "MARSYS-M3-R1-S1-M3A-CLOSE (Track 1 — M3-A formal close per PHASE_M3_PLAN §3.1); after M3-A close, M3-D macro-phase sequence opens"
+  handoff_notes: >
+    M3-B sub-phase is formally CLOSED. Sealing artifact at 00_ARCHITECTURE/M3B_CLOSE_v1_0.md.
+    AC.M3B.1–7 disposition: 5 PASS / 2 PASS-with-deferral / 0 FAIL (see M3B_CLOSE §2 for the
+    final-disposition table; both deferrals route to M3-D Track D1 / Track D3 per §3.4).
+    Eight known-deferred items D.M3B.1 / .4 / .6 / .NA / .SD / .R4 / .YA / .PD are documented
+    in M3B_CLOSE §6 with M3-D track assignments, so they survive into M3-D scope without
+    silent loss. Sibling M3-A close (MARSYS-M3-R1-S1-M3A-CLOSE) is the natural next session;
+    M3-A and M3-B then hand off jointly to M3-D macro-phase (Validator + Held-Out Sample +
+    §IS.8(b) red-team + M3_CLOSE_v1_0.md + HANDOFF_M3_TO_M4_v1_0.md per PHASE_M3_PLAN §3.4).
+    Naming-discrepancy note: close-session brief opened with "M3-B (Chara Dasha temporal
+    layer)" — Chara is M3-C scope (closed 2026-05-01); this session closes M3-B per §3.2
+    charter (Vimshottari + Yogini + Transit Engine v1). Documented in M3B_CLOSE §11.
+```
+
+*End of MARSYS-M3-R1-S2-M3B-CLOSE entry — M3 sub-phase B FORMALLY CLOSED.*

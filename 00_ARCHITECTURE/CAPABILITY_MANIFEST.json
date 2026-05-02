@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-28T00:00:00Z",
+  "generated_at": "2026-05-02T00:00:00+00:00",
   "generator_version": "1.0",
-  "entry_count": 112,
-  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
+  "entry_count": 114,
+  "fingerprint": "12c39cec4d1835cb36008cb21c35d8ea941023b116c830e9664f545591b727fd",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -61,15 +61,15 @@
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
       "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
-      "version": "1.2",
-      "status": "LOCKED",
+      "version": "1.6",
+      "status": "CLOSED",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
         "file"
       ],
       "interface_version": "1.0",
-      "fingerprint": "83ab441e9df30113df69bb8f3f9cbe2f92a8f5eb8ad7360d7a8f180b2b33a7e7",
+      "fingerprint": "1255e3e6f64eed0fe6079c94f9a8962d6e6c2e4366f4384e25577638281018e1",
       "native_id": "abhisek",
       "preferred_for": [
         "factual",
@@ -77,7 +77,8 @@
         "retrodictive"
       ],
       "cost_weight": 0.8,
-      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md"
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md",
+      "amendment_note": "v1.6 ported from feature/phase-o-observatory to main 2026-05-02. 46 events (35+11). Swiss Ephemeris computed (v1.4). PPL annotations (v1.5). GAP.M4A.04 partial close (v1.6)."
     },
     {
       "canonical_id": "SADE_SATI_CYCLES_ALL",
@@ -853,6 +854,23 @@
       "native_id": "abhisek",
       "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_0.json",
       "tool_binding": "pattern_register"
+    },
+    {
+      "canonical_id": "PATTERN_REGISTER_v1_2",
+      "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json",
+      "version": "1.2",
+      "status": "CURRENT",
+      "layer": "L3.5",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "fingerprint": "24140d728d1034bf537b536e16afafc00d04d6187688409e42e8e590060469c5",
+      "native_id": "abhisek",
+      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_2.json",
+      "supersedes": "PATTERN_REGISTER_v1_1 (035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_1.json)",
+      "amendment_note": "DIS.009 R1 resolution 2026-05-02: PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored. 71 active patterns. Authored by session M3-W1-A4-DIS009-DISPOSITION."
     },
     {
       "canonical_id": "RESONANCE_REGISTER_JSON",
@@ -1904,9 +1922,18 @@
         "LIFETIME_TIMELINE_v1_0"
       ],
       "fingerprint": "d234_timeline_query_v1_0_0_wave5"
+    },
+    {
+      "canonical_id": "CONVERSATION_NAMING_CONVENTION",
+      "path": "00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md",
+      "version": "1.5",
+      "status": "LIVING",
+      "layer": "governance",
+      "expose_to_chat": false,
+      "amendment_note": "\u00a710 MARSYS naming standard added 2026-05-02 (M3-W1-A4)"
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30",
+  "manifest_fingerprint": "ec1a8c25aaa64679...",
   "manifest_version": "1.7",
   "last_updated": "2026-05-01",
   "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
