@@ -491,18 +491,39 @@ disagreement_register_entry:
       result: "Q2 soft gate: gemini_conflict annotation added to PATTERN_REGISTER. B.5 close NOT blocked per Q2 native decision 2026-04-27. Resolution deferred to post-B.5 scope."
       timestamp: 2026-04-27
       session_id: Madhav_M2A_Exec_11
-  status: resolved
+    - step: reconciler_resolution
+      result: "Read-only structured analysis authored at M3-A entry: DIS009_ANALYSIS_v1_0.md frames evidence (§1) and three resolution options R1 (split), R2 (withdraw), R3 (re-ground) (§2) with Claude's recommendation R3-with-R1-fallback (§3). Read-only, modified no live artifact."
+      timestamp: 2026-05-01
+      session_id: M3-W1-A1-EVAL-BASELINE
+    - step: native_arbitration
+      result: "Native verdict: R3 (RE-GROUND). Specific rewrite direction provided: keep 'identity lock' framing; replace 'Saturn governs both the D9 Karakamsa and D1 AL' with explicit two-step language — Saturn as AL lord (direct), Saturn as dispositor of Mercury in Capricorn 10H Vargottama where Mercury rules the D9 Karakamsa (Gemini), creating the Saturn-Mercury identity axis across the Capricorn-Gemini spine. [EXTERNAL_COMPUTATION_REQUIRED] added with explicit JH-export spec (D9 chart for native 1984-02-05 10:43 IST Bhubaneswar; verify Moon D9 placement confirming Gemini Karakamsa; verify Mercury D1 placement in Capricorn). PATTERN_REGISTER PAT.008 status set to needs_verification; re_validation_status flipped gemini_conflict → resolved_pending_ecr."
+      timestamp: 2026-05-01
+      session_id: M3-W1-A4-DIS009-DISPOSITION
+    - step: native_arbitration
+      result: "NAP.M4.3 / AC.M4A.8 ruling: Option Y — carry forward. JH access not currently operationalised on native's hardware; M4 critical path is calibration not astrological re-derivation; DIS.009 R3 rewrite already encodes a stable needs_verification state. Match_rate filter per SHADOW_MODE_PROTOCOL_v1_0.md §3.2 (match_rate < 0.4 → shadow-only indefinitely) serves as the empirical cross-check on the asserted D9 chart state for the 35 D9-dependent MSR signals during M4-B calibration. Status remains resolved-R3 (pending ECR). KR.M3A.JH-EXPORT carries forward to HANDOFF_M4_TO_M5 inherited open items. Next pursuit window: M5 open (alongside Sthana + Drik Shadbala and Narayana Dasha JH verification per ED.1). Disposition recorded in 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md §4."
+      timestamp: 2026-05-02
+      session_id: M4-A-S2-T3-SHADOW-PROTOCOL
+    - step: native_arbitration
+      result: "Verdict R1 (SPLIT) — recorded on parallel main-branch governance work session M3-W1-A4 2026-05-02 (commit 9faaf99). PAT.008 deprecated (deprecated_on: 2026-05-02); two successor patterns authored in PATTERN_REGISTER_v1_2.json: PAT.008-AL (Saturn/Capricorn/AL) confidence HIGH, PAT.008-KMC (Mercury/Karakamsa/Gemini) confidence HIGH. M3-A gate AC.M3A.4 declared unblocked under R1. NOTE: This R1 verdict was recorded in parallel with the R3 path on feature/phase-o-observatory; both verdicts cite session M3-W1-A4-DIS009-DISPOSITION but reflect different downstream dispositions (R3 in-place rewrite vs R1 deprecate-and-split). Surfaced to GOV-MERGE 2026-05-03 as a DIS.class.governance_conflict requiring native re-arbitration. PATTERN_REGISTER_v1_0 retains the R3 in-place rewrite; PATTERN_REGISTER_v1_2 carries the R1 successor patterns; both files coexist in the merged tree pending re-arbitration."
+      timestamp: 2026-05-02
+      session_id: M3-W1-A4-DIS009-DISPOSITION
+  status: verdict_recorded
   resolution: >
-    R1 split — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
-    Root cause confirmed: PAT.008 claim_text attributed D9 Karakamsa governance to Saturn;
-    the correct Karakamsa lord is Mercury (AK Moon in D9 Gemini → Karakamsa = Gemini →
-    lord = Mercury). PAT.008 deprecated (deprecated_on: 2026-05-02). Two well-grounded
-    successor patterns authored in PATTERN_REGISTER_v1_2.json:
-    — PAT.008-AL (Saturn/Capricorn/AL): Saturn's sign-lordship of the D1 Arudha Lagna sign
-      imposes structural karmic discipline mandate over public identity; confidence HIGH.
-    — PAT.008-KMC (Mercury/Karakamsa/Gemini): Mercury as D9 Karakamsa sign-lord AND occupant
-      creates double binding of soul purpose to Mercury domain; confidence HIGH.
-    M3-A gate AC.M3A.4 (DIS.009 required terminal status) is hereby unblocked.
+    Two parallel native verdicts recorded — pending re-arbitration in next governance session.
+    Verdict R3 (RE-GROUND), 2026-05-01, M3-W1-A4-DIS009-DISPOSITION (feature/phase-o-observatory):
+    PAT.008 mechanism text rewritten in-place to make the two-step architecture explicit; AL
+    component L1-clean and active, D9 Karakamsa component carries [EXTERNAL_COMPUTATION_REQUIRED]
+    pending JH export per ED.1. Saturn-Mercury identity axis across the Capricorn-Gemini spine is
+    the corrected mechanism (Saturn → disposits → Mercury → rules → Karakamsa). M4-A-S2-T3-SHADOW-PROTOCOL
+    (2026-05-02) ratified resolved-R3 status under NAP.M4.3 Option Y carry-forward.
+    Verdict R1 (SPLIT), 2026-05-02, parallel main-branch session (commit 9faaf99): PAT.008
+    deprecated; successor patterns PAT.008-AL + PAT.008-KMC authored in PATTERN_REGISTER_v1_2.json.
+    Cross-branch surfacing: at GOV-MERGE 2026-05-03, both verdicts preserved in the merged tree —
+    PATTERN_REGISTER_v1_0.{md,json} carries R3 (in-place rewrite); PATTERN_REGISTER_v1_2.json carries
+    R1 (deprecate-and-split). Subsequent native arbitration session must reconcile (a) whether
+    R3-rewrite or R1-split is the canonical disposition, and (b) the consequent state of M4-era
+    work that proceeded under R3 framing (LL.1/LL.2/LL.3 calibration weights, NAP.M4.3
+    carry-forward, M4-A-S2-T3 shadow-protocol gate). Until then, status held at verdict_recorded.
   resolved_on: 2026-05-02
   resolved_by_session: M3-W1-A4-DIS009-DISPOSITION
   state_hashes:
@@ -512,11 +533,17 @@ disagreement_register_entry:
     side_b_after: null
   linked_artifacts:
     - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.json
-      linkage: registry_updated
+      linkage: remediation        # R3 in-place rewrite carrier
+    - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_0.md
+      linkage: remediation        # R3 in-place rewrite carrier
     - path: 035_DISCOVERY_LAYER/PROMPTS/gemini/responses/2026-04-27_B5_revalidation_batch1_raw.md
       linkage: evidence
     - path: 035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json
-      linkage: registry_updated   # PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored
+      linkage: registry_updated   # R1 successor patterns: PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored
+    - path: 00_ARCHITECTURE/DIS009_ANALYSIS_v1_0.md
+      linkage: evidence
+    - path: 00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md
+      linkage: native_arbitration_record
 ```
 
 ---
@@ -560,6 +587,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8 (every cross-school dasha disagreement opens a register entry; native arbitrates at M3-C close)."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating the BPHS-Sanjay-Rath vs K.N. Rao Padakrama Chara tradition fork at M3 scope. Carry both side-by-side per §3 N3 of this entry; revisit at M9 open."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama as project-canonical Chara tradition. compute_chara.py becomes a parser of the existing 144-row table, not a from-scratch computer; engine cannot extend beyond 2059 without external acharya extension."
@@ -569,7 +600,8 @@ disagreement_register_entry:
       description: "Carry both. Maintain FORENSIC §5.3 (Padakrama) + engine BPHS variant side-by-side. DB rows tagged with explicit `system='chara_padakrama'` vs `system='chara_bphs'`. Resolution deferred to M9 multi-school triangulation per phase-plan policy. **DEFAULT** per PHASE_M3_PLAN §3.3 (\"every disagreement is *logged*, not *resolved by operator preference*; resolution waits for M9\")."
   status: verdict_recorded
   resolution: >
-    N3 (carry both) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    N3 (carry both) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION
+    (supersedes the M3-PRE-D-GOVERNANCE-2026-05-01 default-N3 step recorded above).
     FORENSIC §5.3 K.N. Rao Padakrama Chara MD sequence AND compute_chara.py BPHS-Sanjay-Rath
     variant are maintained side-by-side in the DB. Rows tagged system='chara_padakrama'
     (FORENSIC-sourced) vs system='chara_bphs' (engine-computed). No tradition is suppressed.
@@ -636,6 +668,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating the three-way tradition fork (BPHS sign-to-lord rule vs K.N. Rao Padakrama vs brief hardcoded constants) at M3 scope. Carry all three side-by-side per §3 N3 of this entry; revisit at M9 open."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Adopt FORENSIC §5.3 K.N. Rao Padakrama duration table verbatim. Engine reduced to lookup, not derivation; full Padakrama rule set must be encoded in a future session if chart-extension capability is required."
@@ -645,7 +681,8 @@ disagreement_register_entry:
       description: "Carry all three side-by-side as DIS.class.school_disagreement DB rows. Defer resolution to M9 multi-school triangulation. **DEFAULT** per phase-plan policy."
   status: verdict_recorded
   resolution: >
-    N3 (carry all three side-by-side) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    N3 (carry all three side-by-side) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION
+    (supersedes the M3-PRE-D-GOVERNANCE-2026-05-01 default-N3 step recorded above).
     All three Chara Dasha duration tables maintained in DB: (a) FORENSIC §5.3 K.N. Rao
     Padakrama, (b) BPHS sign-to-lord count rule, (c) session-brief hardcoded constants.
     Rows tagged system='chara_padakrama' / system='chara_bphs' / system='chara_brief_constants'.
@@ -713,6 +750,10 @@ disagreement_register_entry:
       result: "Logged as DIS.class.school_disagreement per PHASE_M3_PLAN §3.3 AC.M3C.5 + §8. External verification required before any synthesis claim treats Narayana Dasha output as settled."
       timestamp: 2026-05-01
       session_id: M3-W3-C3-SHADBALA
+    - step: native_arbitration
+      result: "N3 (DEFAULT per phase-plan policy) — Defer to M9 multi-school triangulation. No in-corpus authoritative reference capable of arbitrating Narayana Dasha at M3 scope. compute_narayana.py output remains needs_verification=true; external acharya review or JH export per ED.1 carried as M4-class open item in HANDOFF_M3_TO_M4."
+      timestamp: 2026-05-01
+      session_id: M3-PRE-D-GOVERNANCE-2026-05-01
   resolution_options:
     - option_id: N1
       description: "Commission external Vedic acharya review for Narayana Dasha verification on this chart. Acharya outputs a 70-year MD table; engine output cross-checked against acharya. ETA: open."
@@ -722,7 +763,8 @@ disagreement_register_entry:
       description: "Defer Narayana Dasha verification to M9 multi-school triangulation. compute_narayana.py output remains marked needs_verification=true; no synthesis claim treats it as settled until then. **DEFAULT** per phase-plan policy + ED.1 dependency status."
   status: verdict_recorded
   resolution: >
-    N2 (JH export) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION.
+    N2 (JH export) — native verdict 2026-05-02, session M3-W1-A4-DIS009-DISPOSITION
+    (supersedes the M3-PRE-D-GOVERNANCE-2026-05-01 default-N3 step recorded above).
     Jagannatha Hora export of Narayana Dasha for this chart is the mandated verification
     path per ED.1. The JH export is an M3-D deliverable: it forms part of AC.M3D.2
     (held-out cross-check sample) and AC.M3D.1 (temporal validator pipeline). Until the

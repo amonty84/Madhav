@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://marsys-jis/06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records_schema.json",
+  "title": "LEL Event-Match Records Schema",
+  "description": "JSON Schema (draft-07) for 06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json. One record per LEL event. Cited at M4-A-T3-RUBRIC-SCHEMA (NAP.M4.1). Consumed by LL.1 Signal Weight Calibration (MACRO_PLAN_v2_0.md §LL-Appendix.B LL.1) and by signal_weights/ writes during M4-B. Required fields per PHASE_M4_PLAN_v1_0.md §3.1 AC.M4A.2. v1.1 adds rubric_option (outer + per-record), total_events, held_out_count, training_count, held_out_manifest at outer level (M4-A-INTEGRATION-PASS-R3).",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this schema document (frozen). Bumped when fields change.",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "rubric_version": {
+      "type": "string",
+      "description": "Version of CALIBRATION_RUBRIC_v1_0.md frozen at the time these records were scored. Required so a future re-scoring under a new rubric is comparable to the original."
+    },
+    "rubric_option": {
+      "type": "string",
+      "enum": ["A", "B", "C"],
+      "description": "Which rubric option (A/B/C from CALIBRATION_RUBRIC_v1_0.md) was approved by the native and used for all records in this file. Matches the per-record rubric_option field. Added v1.1 (M4-A-INTEGRATION-PASS-R3) after NAP.M4.1 approved Option B."
+    },
+    "produced_during": {
+      "type": "string",
+      "description": "Cowork or Claude Code session ID that produced this records file."
+    },
+    "produced_on": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the records file was authored (YYYY-MM-DD)."
+    },
+    "total_events": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total number of LEL events covered (training + held_out). Must equal len(records). At LEL v1.5: 46."
+    },
+    "held_out_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of held-out events. These records carry partition: held_out and are NEVER consumed by LL.1 writes per AC.M4A.4."
+    },
+    "training_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of training events (total_events - held_out_count). These records carry partition: training."
+    },
+    "held_out_manifest": {
+      "type": "object",
+      "description": "Summary of the held-out partition selection. Decade-stratified per AC.M4A.4 (≥20% of total events). Authoritative list of held-out event IDs.",
+      "properties": {
+        "total_held_out": { "type": "integer" },
+        "decade_distribution": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "held_out_event_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "selection_criteria": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "required": ["total_held_out", "decade_distribution", "held_out_event_ids"],
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "description": "One element per LEL event. Length must equal total_events (46 events at LEL v1.5).",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/event_match_record"
+      }
+    }
+  },
+  "required": ["schema_version", "rubric_version", "rubric_option", "produced_during", "produced_on", "total_events", "held_out_count", "training_count", "held_out_manifest", "records"],
+  "additionalProperties": false,
+  "definitions": {
+    "event_match_record": {
+      "type": "object",
+      "description": "A single per-event record. Cites the LEL event by event_id, the rubric version used to score, the resolved event date, and the per-signal expected/actual stacks with lit_scores per the rubric.",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "description": "LEL event ID. Must match an EVT.* row in 01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md.",
+          "pattern": "^EVT\\.[0-9]{4}\\.([0-9]{2}|XX)\\.([0-9]{2}|XX)\\.[0-9]{2}$"
+        },
+        "event_date_used": {
+          "type": "string",
+          "format": "date",
+          "description": "The concrete YYYY-MM-DD date used for proximity scoring. Resolution rule for fuzzy LEL dates is specified in CALIBRATION_RUBRIC_v1_0.md §3 (mid-month for month-exact; July 1 for approx_year; per-event override for proxy)."
+        },
+        "event_date_confidence": {
+          "type": "string",
+          "enum": ["exact", "approx-month", "approx-year", "proxy"],
+          "description": "Confidence level of the LEL event date as carried into this record. Determines which date-resolution rule was applied to event_date_used."
+        },
+        "rubric_version": {
+          "type": "string",
+          "description": "Version of CALIBRATION_RUBRIC_v1_0.md under which this specific record was scored. Should match the parent file's rubric_version unless this is a per-record override (rare; logged in match_notes if so)."
+        },
+        "rubric_option": {
+          "type": "string",
+          "enum": ["A", "B", "C"],
+          "description": "Which rubric option (A/B/C) was used to score this specific record. In the v1.1 file all records carry 'B' (NAP.M4.1 approved). Per-record field exists to support future mixed-option re-scoring in a single file. Added v1.1 (M4-A-INTEGRATION-PASS-R3)."
+        },
+        "partition": {
+          "type": "string",
+          "enum": ["training", "held_out"],
+          "description": "Which partition this event belongs to. Held-out events are NEVER consumed by LL.1 training writes per Learning Layer discipline #4 (PHASE_M4_PLAN AC.M4A.4). The held-out partition is decade-stratified, ≥9 events of the 46."
+        },
+        "expected_lit_signals": {
+          "type": "array",
+          "description": "The set of MSR signals that the LEL retrodictive_match block (or the temporal substrate's classical-rule expansion) names as expected to fire at this event. Each entry is the per-signal expected metadata.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signal_id": {
+                "type": "string",
+                "description": "MSR signal ID (SIG.MSR.NNN, CVG.NN, CTR.NN, RPT.*, or other namespace per FORENSIC). Must resolve to a row in MSR_v3_0.md or be flagged as classical-rule expansion in basis."
+              },
+              "signal_domain": {
+                "type": "string",
+                "enum": ["career", "education", "health", "relationship", "family", "financial", "psychological", "spiritual", "travel", "general"],
+                "description": "Primary domain assignment for this signal under the rubric's domain-mapping table. Multi-domain signals carry their primary; alternates may be recorded in match_notes."
+              },
+              "basis": {
+                "type": "string",
+                "enum": ["classical_rule", "temporal_engine", "both"],
+                "description": "Provenance of the expectation: classical_rule = drawn from MSR/CGM/UCN classical claim; temporal_engine = derived from M3 Vimshottari/Yogini/Chara/transit substrate; both = supported by both."
+              }
+            },
+            "required": ["signal_id", "signal_domain", "basis"],
+            "additionalProperties": false
+          }
+        },
+        "actual_lit_signals": {
+          "type": "array",
+          "description": "The set of MSR signals that actually fired (lit) at the event date per the activator output, scored under the rubric. May include signals not in expected_lit_signals (surplus matches) and may omit signals from expected_lit_signals (misses).",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signal_id": {
+                "type": "string",
+                "description": "MSR signal ID; must resolve to MSR_v3_0.md."
+              },
+              "lit_score": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "Numeric score in [0.0, 1.0] per the rubric's scoring scale. Under Option B: {0.0, 0.2, 0.5, 0.7, 1.0}. Under Option A: {0, 1}. Under Option C: typically inherits the per-event 1.0/0.5/0.0 single value."
+              },
+              "lit_source": {
+                "type": "string",
+                "enum": ["transit", "dasha", "both"],
+                "description": "Which axis of activation produced the lit_score. Per CALIBRATION_RUBRIC §2.2, dasha and transit axes are scored separately and combined per the rubric's combined-aggregator rule (default: max)."
+              }
+            },
+            "required": ["signal_id", "lit_score", "lit_source"],
+            "additionalProperties": false
+          }
+        },
+        "match_rate": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Per-event aggregate score per the rubric's aggregation rule. Under Option B: sum(lit_score for s in expected_lit_signals) / count(expected_lit_signals). Under Option C: single domain-match score. The downstream LL.1 input."
+        },
+        "match_notes": {
+          "type": "string",
+          "description": "Free-text notes on scoring decisions: per-signal partial-credit rationale, multi-domain assignments, per-event date-center overrides, surplus-match observations, activator quirks. Keep concise; this is the audit trail for the score."
+        },
+        "computation_session": {
+          "type": "string",
+          "description": "Cowork or Claude Code session ID under which this record was scored. Distinct from produced_during at the parent level when records are scored in batches across multiple sessions."
+        }
+      },
+      "required": [
+        "event_id",
+        "event_date_used",
+        "event_date_confidence",
+        "rubric_version",
+        "rubric_option",
+        "partition",
+        "expected_lit_signals",
+        "actual_lit_signals",
+        "match_rate",
+        "match_notes",
+        "computation_session"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

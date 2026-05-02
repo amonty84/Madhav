@@ -1,0 +1,1545 @@
+{
+  "schema_version": "1.0",
+  "mechanism": "LL.1",
+  "phase": "M4-B",
+  "produced_during": "M4-B-S2-MIRROR-TWOPASS",
+  "produced_on": "2026-05-02",
+  "rubric_version": "1.0",
+  "rubric_option": "B",
+  "input_file": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json",
+  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md §3 (NAP.M4.4 APPROVED 2026-05-02)",
+  "two_pass_approval_ref": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+  "pass_1_count": 30,
+  "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+  "pass_1_reviewer_kind": "surrogate-for-Gemini (Gemini unavailable synchronously per MACRO_PLAN §Multi-Agent)",
+  "pass_1_date": "2026-05-02",
+  "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+  "pass_2_status": "approved",
+  "pass_2_reviewer": "native",
+  "pass_2_nap_id": "NAP.M4.5",
+  "pass_2_scheduled_at": "M4-B close per PHASE_M4_PLAN §3.2",
+  "production_status_field_value": "production_pending_pass_2",
+  "weights_in_production_register": true,
+  "weights_block_reason": "RESOLVED 2026-05-02 NAP.M4.5: native approved all 30 signals; pass_2 binding gate discharged. Downstream pipeline may consume these weights with the n=1 disclaimer carried through. Held-out partition at M4-C is the second-line defense per SHADOW_MODE_PROTOCOL §5; any signal failing held-out generalization gets reverted.",
+  "n1_disclaimer": "VALIDITY NOTICE: These calibration weights are derived from a single native's (n=1) life event corpus. They are provisional, subject to revision as the corpus grows, and must not be interpreted as universal Jyotish signal weights. Per MACRO_PLAN §3.5.A Principle 1 — n=1 validity disclaimer.",
+  "summary": {
+    "total_promoted_pending_pass_2": 30,
+    "by_tier_A_high_confidence": 24,
+    "by_tier_B_high_confidence_with_tolerance": 3,
+    "by_tier_C_borderline_passing": 3,
+    "flagged_for_pass_2_attention": [
+      "SIG.MSR.118",
+      "SIG.MSR.119",
+      "SIG.MSR.143"
+    ]
+  },
+  "signal_weights": {
+    "CTR.01": {
+      "signal_id": "CTR.01",
+      "domain": "unknown",
+      "n_observations": 5,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.12.11.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2022.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2025.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.03.20.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "CTR.03": {
+      "signal_id": "CTR.03",
+      "domain": "unknown",
+      "n_observations": 5,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2016.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.XX.XX.03",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2022.10.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.05.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "CVG.02": {
+      "signal_id": "CVG.02",
+      "domain": "unknown",
+      "n_observations": 5,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.05.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.07.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "RPT.DSH.01": {
+      "signal_id": "RPT.DSH.01",
+      "domain": "unknown",
+      "n_observations": 4,
+      "mean_match_rate": 0.8,
+      "variance": 0.16,
+      "observations": [
+        {
+          "event_id": "EVT.2023.07.XX.01",
+          "lit_score": 0.2
+        },
+        {
+          "event_id": "EVT.2025.07.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.03.20.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.04.08.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.8,
+      "production_weight": 0.8,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.01": {
+      "signal_id": "SIG.01",
+      "domain": "unknown",
+      "n_observations": 4,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.12.11.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2025.07.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.03.20.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.04.08.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.09": {
+      "signal_id": "SIG.09",
+      "domain": "unknown",
+      "n_observations": 5,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2021.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.07.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2025.07.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2025.XX.XX.02",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.10": {
+      "signal_id": "SIG.10",
+      "domain": "unknown",
+      "n_observations": 4,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2021.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.XX.XX.03",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2022.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2026.04.08.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.12": {
+      "signal_id": "SIG.12",
+      "domain": "unknown",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2016.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2022.10.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.13": {
+      "signal_id": "SIG.13",
+      "domain": "unknown",
+      "n_observations": 4,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2021.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.XX.XX.03",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2023.05.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2025.XX.XX.02",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.15": {
+      "signal_id": "SIG.15",
+      "domain": "unknown",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.2013.12.11.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2021.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2022.XX.XX.02",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.013": {
+      "signal_id": "SIG.MSR.013",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.030": {
+      "signal_id": "SIG.MSR.030",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.118": {
+      "signal_id": "SIG.MSR.118",
+      "domain": "general",
+      "n_observations": 11,
+      "mean_match_rate": 0.4545,
+      "variance": 0.2727,
+      "observations": [
+        {
+          "event_id": "EVT.1984.02.05.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2000.XX.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2001.03.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2003.06.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2004.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2011.01.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2011.06.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.09.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2012.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2013.03.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.4545,
+      "production_weight": 0.4545,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
+        }
+      ]
+    },
+    "SIG.MSR.119": {
+      "signal_id": "SIG.MSR.119",
+      "domain": "general",
+      "n_observations": 11,
+      "mean_match_rate": 0.4545,
+      "variance": 0.2727,
+      "observations": [
+        {
+          "event_id": "EVT.1984.02.05.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2000.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2001.03.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2003.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2004.XX.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2011.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2011.06.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.09.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.XX.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2013.03.XX.01",
+          "lit_score": 0.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.4545,
+      "production_weight": 0.4545,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
+        }
+      ]
+    },
+    "SIG.MSR.143": {
+      "signal_id": "SIG.MSR.143",
+      "domain": "general",
+      "n_observations": 11,
+      "mean_match_rate": 0.4545,
+      "variance": 0.2727,
+      "observations": [
+        {
+          "event_id": "EVT.1984.02.05.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2000.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2001.03.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2003.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2004.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2011.01.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2011.06.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.09.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.XX.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2013.03.XX.01",
+          "lit_score": 0.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.4545,
+      "production_weight": 0.4545,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved (Tier-C borderline). mean=0.4545 var=0.2727 just above thresholds; identical descriptive statistics across SIG.MSR.{118,119,143} flagged for NAP.M4.5 native scrutiny: independent phenomena vs one phenomenon counted three times. See LL1_TWO_PASS_APPROVAL_v1_0.md §3.3 + §6 R.LL1TPA.2. Pass_2 = NAP.M4.5 binding final gate.",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native verdict on Tier-C joint-firing question = (a) three independent calibrated phenomena. Reasoning: distinct planetary entities (Mars/Venus/Saturn-Venus-Moon-Mars), non-overlapping event subsets (zero triple overlap empirically confirmed), distinct Jyotish valences (Ruchaka-absence + Malavya-absence are auspicious-yoga absences; Sarpa-absence is inauspicious-yoga absence). Identical aggregate statistics are a natal-constant artifact, not redundancy. Held-out partition at M4-C is the generalization check; revert path available per SHADOW_MODE_PROTOCOL §5 if any fails to generalize."
+        }
+      ]
+    },
+    "SIG.MSR.145": {
+      "signal_id": "SIG.MSR.145",
+      "domain": "general",
+      "n_observations": 11,
+      "mean_match_rate": 0.9091,
+      "variance": 0.0909,
+      "observations": [
+        {
+          "event_id": "EVT.1984.02.05.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2000.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2001.03.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2003.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2004.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2011.01.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2011.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2012.09.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2012.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2013.03.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.9091,
+      "production_weight": 0.9091,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.163": {
+      "signal_id": "SIG.MSR.163",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.170": {
+      "signal_id": "SIG.MSR.170",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.198": {
+      "signal_id": "SIG.MSR.198",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.229": {
+      "signal_id": "SIG.MSR.229",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.251": {
+      "signal_id": "SIG.MSR.251",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.278": {
+      "signal_id": "SIG.MSR.278",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.291": {
+      "signal_id": "SIG.MSR.291",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.295": {
+      "signal_id": "SIG.MSR.295",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.297": {
+      "signal_id": "SIG.MSR.297",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.300": {
+      "signal_id": "SIG.MSR.300",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.301": {
+      "signal_id": "SIG.MSR.301",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.391": {
+      "signal_id": "SIG.MSR.391",
+      "domain": "relationship",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1998.02.16.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2004.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2012.10.XX.01",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.402": {
+      "signal_id": "SIG.MSR.402",
+      "domain": "general",
+      "n_observations": 11,
+      "mean_match_rate": 0.7273,
+      "variance": 0.2182,
+      "observations": [
+        {
+          "event_id": "EVT.1984.02.05.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2000.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2001.03.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2003.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2004.XX.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.02",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2011.01.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2011.06.XX.01",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2012.09.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2012.XX.XX.02",
+          "lit_score": 0.0
+        },
+        {
+          "event_id": "EVT.2013.03.XX.01",
+          "lit_score": 0.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 0.7273,
+      "production_weight": 0.7273,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    },
+    "SIG.MSR.476": {
+      "signal_id": "SIG.MSR.476",
+      "domain": "health",
+      "n_observations": 3,
+      "mean_match_rate": 1.0,
+      "variance": 0.0,
+      "observations": [
+        {
+          "event_id": "EVT.1995.XX.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.06.XX.01",
+          "lit_score": 1.0
+        },
+        {
+          "event_id": "EVT.2007.XX.XX.03",
+          "lit_score": 1.0
+        }
+      ],
+      "status": "production",
+      "promotion_eligible": true,
+      "shadow_weight": 1.0,
+      "production_weight": 1.0,
+      "approval_chain": [
+        {
+          "pass_1_reviewer": "Claude-surrogate-M4-B-S2",
+          "pass_1_reviewer_kind": "surrogate-for-Gemini",
+          "pass_1_date": "2026-05-02",
+          "pass_1_session": "M4-B-S2-MIRROR-TWOPASS",
+          "pass_1_decision": "approved",
+          "pass_1_notes": "Pass_1 surrogate review approved. mean_match_rate>=0.4 AND variance<=0.3 AND N>=3 verified by direct re-read of shadow file. No demotion (mean<0.4 OR variance>0.3 not triggered). See LL1_TWO_PASS_APPROVAL_v1_0.md §4 for tier rationale. Pass_2 = NAP.M4.5 at M4-B close (binding final gate).",
+          "pass_1_reference": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+          "pass_2_reviewer": "native (Abhisek Mohanty)",
+          "pass_2_nap_id": "NAP.M4.5",
+          "pass_2_status": "approved",
+          "pass_2_date": "2026-05-02",
+          "pass_2_session": "M4-B-S5-NAP-M45-EXECUTE",
+          "pass_2_decision": "approved",
+          "pass_2_notes": "Pass_2 NAP.M4.5 native approval. Native approve-all of 30/30 signals after review of tier classification + Tier-C joint-firing analysis. Production gate lifted; n=1 disclaimer rides through. See LL1_TWO_PASS_APPROVAL_v1_0.md §5 pass_2 block."
+        }
+      ]
+    }
+  },
+  "pass_2_decision_date": "2026-05-02",
+  "pass_2_decision_session": "M4-B-S5-NAP-M45-EXECUTE",
+  "pass_2_reviewer_resolved": "native (Abhisek Mohanty)",
+  "pass_2_outcome_summary": {
+    "approved": 30,
+    "held": 0,
+    "demoted": 0,
+    "joint_question_verdict_for_118_119_143": "(a) three independent calibrated phenomena"
+  }
+}

@@ -3,7 +3,7 @@ artifact: 06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/README.md
 mechanism_id: LL.1
 mechanism_name: Signal weight calibration
 version: 1.0
-status: STUB
+status: ACTIVE-PENDING
 expose_to_chat: false
 native_id: "abhisek"
 layer: "L6"
@@ -20,7 +20,7 @@ provenance: 00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md §3.2
 # LL.1 — Signal Weight Calibration
 
 ```
-STATUS: STUB — activates at M4. Do not populate until M3 closed + CW.LEL events match MSR signals + CW.PPL prediction outcomes available.
+STATUS: ACTIVE-PENDING (M4-A) — M3 CLOSED 2026-05-01. LEL gate CLEARED (46 events). Awaiting calibration scoring rubric native-approval (Track T3 output) before first signal_weights/ write. Population begins at M4-B.
 ```
 
 ---
@@ -80,6 +80,8 @@ Full guardrail list: `00_ARCHITECTURE/LEARNING_LAYER_SCAFFOLD_DECISION_v1_0.md �
 ## Last update
 
 *No updates. Stub state at Step 11 scaffold close (2026-04-24).*
+
+*Updated M4-A-T2-PPL-INFRA (2026-05-01): STUB banner removed. Status: ACTIVE-PENDING. signal_weights/ directory not yet created — first write is M4-B scope per PHASE_M4_PLAN §3.2.*
 
 ---
 

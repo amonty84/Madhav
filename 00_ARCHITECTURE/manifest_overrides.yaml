@@ -133,6 +133,18 @@ mirror_pairs:
     mirror_mode: adapted_parity_summary
     authoritative_side: claude
 
+  MP.9:
+    description: "OBSERVATORY_PLAN_v1_0.md ↔ Gemini-side Phase O concurrent-workstream summary"
+    claude_side: "00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md"
+    gemini_side: "Phase O concurrent-workstream block in .geminirules §E + .gemini/project_state.md"
+    enforcement_rule: "Compare OBSERVATORY_PLAN version pointer, Phase O sub-phase status flags (O.0..O.4), and concurrent-workstream gate-status. FAIL on version disagreement or status-flag drift."
+    known_asymmetries:
+      - "Claude-side is the full 10-section plan with the 30-session matrix; Gemini-side carries the workstream pointer + active-status block only"
+      - "Per-session status updates land Claude-side at each session's SESSION_LOG entry; Gemini-side reflects sub-phase-level status only"
+    mirror_mode: adapted_parity_summary
+    authoritative_side: claude
+    declared_at_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
+
 additional_entries:
   - path: "06_LEARNING_LAYER/SCHEMAS/pattern_schema_v0_1.json"
     canonical_id: "PATTERN_SCHEMA_v0_1"

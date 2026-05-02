@@ -313,8 +313,8 @@
     },
     {
       "pattern_id": "PAT.008",
-      "claim_text": "Saturn's governance of both the D9 Karakamsa (soul purpose sign ruler) and the D1 Arudha Lagna (public identity) creates an architectural lock: spiritual evolution and material recognition advance or regress together, never independently.",
-      "mechanism": "Mercury occupies the D9 Karakamsa, making Mercury's soul purpose the chart's deepest spiritual driver. Saturn governs Capricorn, which is both the Arudha Lagna sign (10H) and exerts AmK governance. When Saturn disciplines Mercury's expression, it simultaneously refines both material public recognition (AL) and soul-purpose fulfillment (Karakamsa). The chart cannot produce spiritual advancement without commensurate material recognition, and vice versa — they are structurally yoked. Saturn transit activation (D1 Sade Sati + D60 Lagna past-karma) during Mercury MD enforces both dimensions simultaneously.",
+      "claim_text": "Saturn anchors the native's identity at two levels — as AL lord (direct: Arudha Lagna = Capricorn, Capricorn lord = Saturn) and as dispositor of Mercury, lord of the D9 Karakamsa — creating a Saturn-Mercury identity axis across the Capricorn-Gemini spine. Material public recognition (AL) and soul-purpose fulfillment (Karakamsa) cannot diverge without Saturn or Mercury breaking sign-relationship: spiritual evolution and material recognition advance or regress together, never independently.",
+      "mechanism": "Two-step architecture, not parallel governance. STEP 1 (direct, L1-clean): Arudha Lagna = Capricorn 10H (FORENSIC §17, derivation: Lagna Aries → lord Mars in 7th Libra; 10th from Libra = Capricorn). Capricorn lord = Saturn. Therefore Saturn governs the AL surface directly. STEP 2 (one-step-removed, via dispositorship): Atmakaraka = Moon (highest D1 longitude 27°02′); Moon's D9 sign = Gemini; therefore Karakamsa = Gemini, ruled by Mercury (not Saturn). Mercury occupies Capricorn 10H Vargottama (D1 Capricorn = D9 Capricorn), where Saturn is the sign lord — so Saturn DISPOSITS Mercury, and Mercury rules the D9 Karakamsa. The Saturn-Mercury identity axis runs across the Capricorn-Gemini spine: Saturn → (disposits) → Mercury → (rules) → Karakamsa. This is the actual mechanism behind the identity lock, not direct Saturn-governance of both surfaces. Saturn transit activation (D1 Sade Sati 2025–2028 + D60 Lagna past-karma) during Mercury MD (2010–2027) reaches both dimensions through this single architectural axis: AL via direct rulership, Karakamsa via Saturn-disciplines-Mercury-Vargottama. [EXTERNAL_COMPUTATION_REQUIRED: Jagannatha Hora export of native chart (1984-02-05, 10:43 IST, Bhubaneswar) D9 (Navamsa) to verify (a) Moon D9 placement = Gemini (confirming Karakamsa = Gemini = Mercury-ruled), and (b) Mercury D1 placement = Capricorn (confirming Vargottama dispositorship). Verification anchors the two-step axis; AL half is already L1-clean from FORENSIC §17 + classical Capricorn-Saturn rulership and does not require external verification.]",
       "domain": "spiritual",
       "signals_referenced": [
         "SIG.MSR.348",
@@ -350,8 +350,11 @@
       "created_at": "2026-04-26T19:18:29.847912+00:00",
       "created_by_session": "Madhav_M2A_Exec_9",
       "pass_1_actor": "claude_self",
-      "re_validation_status": "gemini_conflict",
-      "re_validation_event_id": "285487cb9dcc"
+      "re_validation_status": "resolved_pending_ecr",
+      "re_validation_event_id": "285487cb9dcc",
+      "status": "needs_verification",
+      "resolution_session": "M3-W1-A4-DIS009-DISPOSITION",
+      "resolution_note": "DIS.009 disposed via R3 (RE-GROUND) at M3-A close 2026-05-01. Mechanism rewritten to make the two-step architecture explicit: Saturn directly governs the AL (L1-clean), and Saturn disposits Mercury in Capricorn 10H Vargottama where Mercury rules the D9 Karakamsa (Gemini, since Karakamsa = Moon-D9-sign = Gemini). The original 'Saturn governs both the D9 Karakamsa and D1 AL' phrasing was literally false against L1 (Karakamsa lord = Mercury, not Saturn). The Saturn-Mercury Capricorn-Gemini identity axis is the corrected mechanism. AL half is L1-clean and active; D9 Karakamsa half carries [EXTERNAL_COMPUTATION_REQUIRED] per CLAUDE.md §I B.10 pending Jagannatha Hora D9 export per ED.1 (M3-B-class verification window). Status set to needs_verification until JH export confirms (a) Moon D9 = Gemini and (b) Mercury D1 = Capricorn."
     },
     {
       "pattern_id": "PAT.009",

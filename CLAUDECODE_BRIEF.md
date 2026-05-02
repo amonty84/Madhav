@@ -1,156 +1,84 @@
 ---
-# ROOT BRIEF DISPATCHER — read this first, then navigate to your domain brief.
+# ROOT BRIEF DISPATCHER — read this first, then go to the brief for your domain.
 # This file is NOT a session brief. It is a routing table.
-# A Claude Code or Cowork session opens this file, reads its domain row, and
+# A Claude Code session opens this file, reads its domain assignment, and
 # loads the domain-specific brief. It does NOT execute from this file.
 #
 # HARD RULE: Engineering sessions must_not_touch 00_ARCHITECTURE/ 01_FACTS_LAYER/ 06_LEARNING_LAYER/
 #            Governance sessions must_not_touch platform/src/ platform/tests/
 # Any commit mixing both domains is a scope violation and must be split.
-#
-# BOOTSTRAP TRIGGERS (for new Cowork conversations / new account):
-#   "BHISMA"  → read 00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md first
-#   "KARN"    → read 00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md first
-#   "USTAD"   → open /Users/Dev/Vibe-Coding/Apps/Ustad/ as workspace (separate repo)
-#   "MARSYS"  → read CLAUDE.md §C items 1–11 (full project orientation)
 ---
 
 # CLAUDECODE_BRIEF — Session Router
 
-## §1 — Domain map (all active workstreams)
+## §1 — Domain map
 
-| Domain | Bootstrap / Brief | Active? | Status | Next session |
-|--------|------------------|---------|--------|-------------|
-| BHISMA Engineering | `00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md` → `platform/CLAUDECODE_BRIEF.md` | NO | PARTIAL-COMPLETE — W2 code done; LLM planner PARKED (Lever 3 NAP needed) | W2-PLANNER-L3 (if Lever 3 authorized) |
-| MARSYS-JIS Governance (M5) | `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` → author M5-S1 brief | NO | M4 CLOSED 2026-05-02; M5 INCOMING | M5-S1 (not yet authored) |
-| KARN Corpus Activation | `00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md` → latest W* brief in `00_ARCHITECTURE/BRIEFS/` | NO | M2 CLOSED; M3 INCOMING | KARN-W9-M3-OPEN |
-| Project Ustad | `/Users/Dev/Vibe-Coding/Apps/Ustad/` (separate repo) | UNKNOWN | Check Ustad workspace directly | N/A from here |
-| Portal redesign | `00_ARCHITECTURE/PORTAL_REDESIGN_TRACKER_v1_0.md` | NO | COMPLETE 2026-04-30 (R0–R2, R4–R7 closed; R3 deferred) | — |
+| Domain | Brief location | Active? | Status |
+|--------|---------------|---------|--------|
+| Engineering (BHISMA / platform) | `platform/CLAUDECODE_BRIEF.md` | NO | PARTIAL-COMPLETE — Wave 2 code done; AC.W2.1 PARKED, AC.W2.3 DEFERRED |
+| Governance / M4-D | `00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M4D_S1.md` | NO | COMPLETE — M4 CLOSED 2026-05-02; M5 INCOMING |
+| Portal redesign | N/A | NO | COMPLETE 2026-04-30 (R0–R2, R4–R7 closed; R3 deferred) |
 
-## §2 — Parallel session anti-entanglement matrix
+## §2 — Current active sessions (as of 2026-05-02)
 
-Can sessions A and B run simultaneously? Check the matrix:
+**No active sessions.** All open workstreams have landed or been formally parked.
 
-| Session A → | BHISMA Eng | MARSYS Governance | KARN | Ustad |
-|-------------|-----------|-------------------|------|-------|
-| **BHISMA Engineering** | ✗ (same files) | ⚠ SESSION_LOG conflict | ✓ safe | ✓ safe |
-| **MARSYS Governance** | ⚠ SESSION_LOG conflict | ✗ (same files) | ⚠ 00_ARCH/ conflict | ✓ safe |
-| **KARN** | ✓ safe | ⚠ 00_ARCH/ conflict | ✗ (same files) | ✓ safe |
-| **Ustad** | ✓ safe | ✓ safe | ✓ safe | ✗ (same files) |
+### Engineering domain — wave 2 summary
+All 58 Wave 2 tasks complete. Commits: W2-BUGS (2cd3e12), W2-SCHEMA (8a14043),
+W2-EVAL-A (731530b), W2-MANIFEST (a24d96d), W2-PLANNER (4628660),
+W2-TRACE-A (77184e1), W2-INSTRUMENT (f1282a1), W2-TRACE-B (36d2ac0),
+W2-EVAL-B (59d55ed), W2-CTX-ASSEMBLY (2fe3ba9).
 
-**Legend:**
-- ✓ safe — no file overlap, can run concurrently
-- ⚠ — overlapping files; serialize writes to shared files (SESSION_LOG, CURRENT_STATE)
-- ✗ — same domain, never concurrent
+Open items (require native authorization before next session):
+- AC.W2.1 (LLM_FIRST_PLANNER_ENABLED): PARKED — Lever 3 model swap needs NAP.
+  Lever 3 path: swap planner from NIM nemotron-49B → Claude Haiku/Flash.
+- AC.W2.3 (NVIDIA_NIM_API_KEY + NVIDIA_PLANNER_ENABLED=true): DEFERRED — gated on Lever 3 NAP.
 
-**Shared files (serialize writes — one session at a time):**
-- `00_ARCHITECTURE/SESSION_LOG.md`
-- `00_ARCHITECTURE/CURRENT_STATE_v1_0.md`
-- `CLAUDECODE_BRIEF.md` (this file)
+### Governance domain — M4/M5 summary
+M4 CLOSED (commit 80d5c51, 2026-05-02). NAP.M4.7 APPROVED (pre-decided per brief;
+retroactively ratified — see SESSION_LOG M4-D-S1 entry). M5 INCOMING.
+Next governance session: **M5-S1** (first M5 session — read CURRENT_STATE_v1_0.md §2 for entry conditions).
+must_not_touch for any M5 session: platform/src/**, platform/tests/**
 
-## §3 — File lock declarations (per domain)
+## §3 — Parallel session protocol (anti-entanglement rules)
 
-### BHISMA Engineering
-```
-may_touch:    platform/src/**, platform/tests/**, platform/briefs/**, platform/scripts/**
-must_not_touch: 00_ARCHITECTURE/**, 01_FACTS_LAYER/**, 06_LEARNING_LAYER/**, .geminirules
-exception:    may append to 00_ARCHITECTURE/SESSION_LOG.md at session close only
-```
-
-### MARSYS-JIS Governance
-```
-may_touch:    00_ARCHITECTURE/**, .geminirules, .gemini/project_state.md
-must_not_touch: platform/src/**, platform/tests/**, 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**
-```
-
-### KARN Corpus Activation
-```
-may_touch:    01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**, 06_LEARNING_LAYER/**,
-              00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M2_*.md,
-              00_ARCHITECTURE/SESSION_LOG.md (append only)
-must_not_touch: platform/src/**, platform/tests/**, .geminirules
-```
-
-### Project Ustad
-```
-workspace:    /Users/Dev/Vibe-Coding/Apps/Ustad/   (entirely separate repo)
-may_touch:    everything under Ustad/
-must_not_touch: /Users/Dev/Vibe-Coding/Apps/Madhav/** (this repo — zero overlap)
-```
-
-## §4 — Parallel session protocol rules
+When running N sessions simultaneously:
 
 1. **One domain per session.** Engineering OR governance — never both in the same
    session. If a task requires touching both, it must be two separate sessions
    with a handoff commit between them.
 
 2. **Declare file locks at session open.** Every session emits `may_touch` and
-   `must_not_touch` globs before any tool call. If two active briefs have
-   overlapping `may_touch`, they cannot run simultaneously.
+   `must_not_touch` globs in its SESSION_OPEN artifact before any tool call.
+   If two active briefs have overlapping `may_touch`, they cannot run simultaneously.
 
 3. **Single-domain commits.** If an engineering session must append to SESSION_LOG.md
    at close, that is the ONE allowed governance-file exception. Nothing else.
 
 4. **Branch naming encodes domain:**
-   - `feature/w*`, `feature/bhisma-*` → BHISMA Engineering
-   - `feature/m*`, `feature/governance-*` → MARSYS-JIS Governance
-   - `feature/karn-*`, `redesign/*` → KARN / Portal
-   - Any branch under Ustad repo → Ustad (isolated)
+   - `feature/w*`, `feature/bhisma-*` → Engineering
+   - `feature/m*`, `feature/governance-*` → Governance
+   Seeing both patterns in one branch is a red flag.
 
-5. **Status hygiene:** When a session closes, the last act is setting its brief
-   `status: COMPLETE` (or PARKED/PARTIAL). A brief left at PENDING is a false signal.
+5. **Brief files live in their domain:**
+   - Engineering briefs: `platform/CLAUDECODE_BRIEF.md` (one active brief at a time)
+   - Governance briefs: `00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_<SESSION_ID>.md`
+   - Root CLAUDECODE_BRIEF.md: routing table only — never a session brief itself
 
-6. **Git lock check:** Before any commit, run `ls .git/*.lock`. Remove stale locks
-   from crashed sessions before committing.
+6. **Status hygiene:** When a session closes, the last act is setting its brief
+   `status: COMPLETE` (or PARKED/PARTIAL). A brief left at PENDING after its
+   session runs is a false signal for all future sessions.
 
-## §5 — Bootstrap quick-reference (new account or fresh context)
-
-Open the Madhav workspace folder in Cowork on the new account, then paste:
-
-**To continue BHISMA:**
-```
-BHISMA
-
-Pick up Project BHISMA. Read 00_ARCHITECTURE/PROJECT_BHISMA_BOOTSTRAP.md first,
-then CLAUDECODE_BRIEF.md and CURRENT_STATE_v1_0.md. Tell me current state and
-what the next session should be.
-```
-
-**To continue KARN:**
-```
-KARN
-
-Pick up Project KARN. Read 00_ARCHITECTURE/PROJECT_KARN_BOOTSTRAP.md first.
-Tell me which wave is next and what the next session should be.
-```
-
-**To continue full MARSYS-JIS:**
-```
-MARSYS
-
-Full project orientation. Read CLAUDE.md §C items 1–11 in order.
-Tell me active macro-phase, BHISMA status, KARN status, and what to work on next.
-```
-
-## §6 — Archived briefs
-
-### BHISMA Wave 2 (PARTIAL-COMPLETE)
-- All 58 code tasks complete. LLM_FIRST_PLANNER_ENABLED parked (flag false).
-- Commits: 2cd3e12 (W2-BUGS) → 8a14043 (W2-SCHEMA) → 731530b (W2-EVAL-A) →
-  a24d96d (W2-MANIFEST) → 4628660 (W2-PLANNER) → 77184e1 (W2-TRACE-A) →
-  f1282a1 (W2-INSTRUMENT) → 36d2ac0 (W2-TRACE-B) → 59d55ed (W2-EVAL-B) →
-  2fe3ba9 (W2-CTX-ASSEMBLY)
-- Lever 3 path: swap planner model → needs native NAP.
+## §4 — Archived briefs
 
 ### W2-UQE-ACTIVATE (PARKED)
-- 8 smoke rounds. Best: recall=0.750, precision=0.631. Thresholds: 0.80/0.90.
-- Lever 2 decision: classify() routing retained. commit: 14e4b02.
-
-### M4-D-S1 (COMPLETE)
-- M4 macro-phase CLOSED 2026-05-02. NAP.M4.7 APPROVED. commit: 80d5c51.
-
-### Portal Redesign (COMPLETE)
-- R0–R2, R4–R7 closed 2026-04-30. R3 deferred indefinitely.
+status: PARKED
+reason: 8 smoke rounds — best result recall=0.750, precision=0.631 vs. thresholds 0.80/0.90.
+lever_2_decision: classify() routing retained; LLM_FIRST_PLANNER_ENABLED stays false.
+lever_3_path: swap planner model to Haiku/Flash — requires native authorization.
+blocks: W2-MON-A (monitoring write integration smoke — gated on planner being live).
+commit: 14e4b02
 
 ### W2-EVAL-A (COMPLETE)
-- commit: 731530b
+status: COMPLETE
+commit: 731530b

@@ -2,7 +2,7 @@
 artifact: BHISMA_PLAN_v1_0.md
 canonical_id: BHISMA_PLAN_v1_0
 version: 1.0
-status: CURRENT
+status: SUPERSEDED
 authored_by: Claude (Cowork) 2026-05-01
 macro_phase: M3 — Temporal Animation (pre-M3 infrastructure elevation)
 project_code: BHISMA

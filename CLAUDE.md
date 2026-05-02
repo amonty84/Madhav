@@ -113,10 +113,11 @@ Any path in this snapshot that conflicts with `CANONICAL_ARTIFACTS_v1_0.md §1` 
 
 ## §E — Concurrent workstreams
 
-Two workstreams run concurrently with (not inside) the currently-active macro-phase and must not be forgotten when the rebuild banner is lifted:
+Three workstreams run concurrently with (not inside) the currently-active macro-phase and must not be forgotten when the rebuild banner is lifted:
 
 - **Life Event Log (LEL) v1.2** — canonical_id `LEL`, path `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md`, 36 events + 5 period summaries + 6 chronic patterns, Swiss-Ephemeris-populated `chart_states`, confidence 0.89. MACRO_PLAN_v2_0 names LEL as an M4 prerequisite with cadence **"Start immediately; do not defer."** Surfacing this workstream in §E closes GA.9 (previously unreferenced in CLAUDE.md). Ongoing maintenance: add new events as they happen; re-close via a minor version bump with Swiss-Ephemeris regeneration when events are added.
 - **Prospective Prediction Logging** — per `MACRO_PLAN_v2_0.md §Cross-cutting workstreams` + Learning Layer discipline rule #4 "held-out prospective data is sacrosanct; the model never sees outcome before prediction." Every time-indexed prediction a session emits is logged with its confidence, horizon, and falsifier before the outcome is observed. Scaffold/home lands at Step 11 (LEARNING_LAYER scaffold decision). Sessions that emit time-indexed predictions before Step 11 closes must still log them; the interim logging surface is `01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md` prediction subsection, flagged for migration when `06_LEARNING_LAYER/` is scaffolded.
+- **Phase O — LLM Cost & Usage Observatory** — canonical_id `OBSERVATORY_PLAN_v1_0`, path `00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md`, branch `feature/phase-o-observatory`, worktree `/Users/Dev/Vibe-Coding/Apps/Ustad/`, mirror pair MP.9. Super-admin-only governance instrument providing probabilistic, calibrated, auditable observability over LLM cost and usage across all five providers and every pipeline stage. Gate session S0.1 CLOSED 2026-05-02 (30 sessions total: O.0–O.4; 1 closed, 29 remaining). Next: S1.1 — Schema migrations. **Isolation rule:** no Ustad session touches Madhav files; no Madhav session touches Ustad files. Sessions routed via `CLAUDECODE_BRIEF.md` dispatcher.
 
 ## §F — Current execution position (You are here)
 

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-02T00:00:00+00:00",
+  "generated_at": "2026-04-28T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 114,
-  "fingerprint": "12c39cec4d1835cb36008cb21c35d8ea941023b116c830e9664f545591b727fd",
+  "entry_count": 139,
+  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -61,15 +61,15 @@
     {
       "canonical_id": "LIFE_EVENT_LOG_v1_2",
       "path": "01_FACTS_LAYER/LIFE_EVENT_LOG_v1_2.md",
-      "version": "1.6",
-      "status": "CLOSED",
+      "version": "1.2",
+      "status": "LOCKED",
       "layer": "L1",
       "expose_to_chat": true,
       "representations": [
         "file"
       ],
       "interface_version": "1.0",
-      "fingerprint": "1255e3e6f64eed0fe6079c94f9a8962d6e6c2e4366f4384e25577638281018e1",
+      "fingerprint": "83ab441e9df30113df69bb8f3f9cbe2f92a8f5eb8ad7360d7a8f180b2b33a7e7",
       "native_id": "abhisek",
       "preferred_for": [
         "factual",
@@ -77,8 +77,7 @@
         "retrodictive"
       ],
       "cost_weight": 0.8,
-      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md",
-      "amendment_note": "v1.6 ported from feature/phase-o-observatory to main 2026-05-02. 46 events (35+11). Swiss Ephemeris computed (v1.4). PPL annotations (v1.5). GAP.M4A.04 partial close (v1.6)."
+      "gcs_uri": "gs://madhav-marsys-sources/L1/facts/LIFE_EVENT_LOG_v1_2.md"
     },
     {
       "canonical_id": "SADE_SATI_CYCLES_ALL",
@@ -128,7 +127,7 @@
     {
       "canonical_id": "CDLM_v1_1",
       "path": "025_HOLISTIC_SYNTHESIS/CDLM_v1_1.md",
-      "version": "1.2",
+      "version": "1.3",
       "status": "LOCKED",
       "layer": "L2.5",
       "expose_to_chat": true,
@@ -136,7 +135,8 @@
         "file"
       ],
       "interface_version": "1.0",
-      "fingerprint": "3e64d5e512f37ee86152bac976f9f10a0355ceece9d1dce4fb874a8c0c13ed55",
+      "fingerprint": "21443a36f9e11f1a055c5c9b6ac42c006321e9acfc5f3de5f2fb1bc5940273be",
+      "last_modified": "2026-05-02",
       "native_id": "abhisek",
       "preferred_for": [
         "interpretive",
@@ -856,23 +856,6 @@
       "tool_binding": "pattern_register"
     },
     {
-      "canonical_id": "PATTERN_REGISTER_v1_2",
-      "path": "035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_2.json",
-      "version": "1.2",
-      "status": "CURRENT",
-      "layer": "L3.5",
-      "expose_to_chat": false,
-      "representations": [
-        "file"
-      ],
-      "interface_version": "1.0",
-      "fingerprint": "24140d728d1034bf537b536e16afafc00d04d6187688409e42e8e590060469c5",
-      "native_id": "abhisek",
-      "gcs_uri": "gs://madhav-marsys-sources/L3/registers/PATTERN_REGISTER_v1_2.json",
-      "supersedes": "PATTERN_REGISTER_v1_1 (035_DISCOVERY_LAYER/REGISTERS/PATTERN_REGISTER_v1_1.json)",
-      "amendment_note": "DIS.009 R1 resolution 2026-05-02: PAT.008 deprecated; PAT.008-AL + PAT.008-KMC authored. 71 active patterns. Authored by session M3-W1-A4-DIS009-DISPOSITION."
-    },
-    {
       "canonical_id": "RESONANCE_REGISTER_JSON",
       "path": "035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.json",
       "version": "1.0",
@@ -1171,7 +1154,29 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query pattern_register by domain/confidence/status. 'What patterns has the chart revealed?'",
-      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2"
+      "fingerprint": "32d34b0aba4890f2adf2179be52da4c2a1153b806dd230ee94c7b82b42352ff2",
+      "tool_name": "pattern_register",
+      "tool_description": "Queries discovery patterns by domain, forward_looking, confidence; surfaces revealed chart patterns.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "confidence_floor": {
+            "type": "number"
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "PATTERN_REGISTER_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_RESONANCES_L3",
@@ -1187,7 +1192,29 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query resonance_register by theme/signal_id/domain. 'What are the deep cross-domain resonances?'",
-      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7"
+      "fingerprint": "e7d5fe03402e88afb2401eebbe324fbcc7793e08a74e7f4c9acf5bb2bfa2a3a7",
+      "tool_name": "resonance_register",
+      "tool_description": "Returns deep cross-domain resonances bridging signal pairs by theme, domains, forward_looking.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "theme": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "RESONANCE_REGISTER_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_CLUSTERS",
@@ -1203,7 +1230,29 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query cluster_register by theme/domain/confidence. 'Which signals cluster together?'",
-      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00"
+      "fingerprint": "671fd734bb9ded5ac63d70d2d294486433c93d24ca56d7c049a55301b6c02d00",
+      "tool_name": "cluster_atlas",
+      "tool_description": "Returns signal clusters by dominant domain or graph seed hints; cross-domain groupings.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "graph_seed_hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "CLUSTER_ATLAS_v1_0"
     },
     {
       "canonical_id": "TOOL_QUERY_CONTRADICTIONS",
@@ -1219,7 +1268,29 @@
       "interface_version": "1.0",
       "phase": "14E",
       "description": "LLM tool: query contradiction_register by resolution_status/domain/conflict_type. 'What are the unresolved tensions?'",
-      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4"
+      "fingerprint": "0e028ddd11b6633ecdd07d4852e8201449708dddcb28e78292400896c53af5a4",
+      "tool_name": "contradiction_register",
+      "tool_description": "Returns unresolved cross-system contradictions by domain, resolution_status, conflict_type.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "resolution_status": {
+            "type": "string"
+          },
+          "conflict_type": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "low",
+      "linked_data_asset_id": "CONTRADICTION_REGISTER_v1_0"
     },
     {
       "canonical_id": "MIGRATION_018_L2_5_STRUCTURED",
@@ -1900,7 +1971,29 @@
         "REMEDIAL_CODEX_v2_0_PART1",
         "REMEDIAL_CODEX_v2_0_PART2"
       ],
-      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5"
+      "fingerprint": "d234_remedial_codex_query_v1_0_0_wave5",
+      "tool_name": "remedial_codex_query",
+      "tool_description": "Returns L4 remedial prescriptions: gemstone, mantra, yantra, devata, dinacharya, propitiation by planet.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "planet": {
+            "type": "string"
+          },
+          "practice_type": {
+            "type": "string"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "REMEDIAL_CODEX_v2_0"
     },
     {
       "canonical_id": "RETRIEVAL_TOOL_TIMELINE_QUERY",
@@ -1924,17 +2017,507 @@
       "fingerprint": "d234_timeline_query_v1_0_0_wave5"
     },
     {
-      "canonical_id": "CONVERSATION_NAMING_CONVENTION",
-      "path": "00_ARCHITECTURE/CONVERSATION_NAMING_CONVENTION_v1_0.md",
-      "version": "1.5",
-      "status": "LIVING",
-      "layer": "governance",
+      "canonical_id": "RETRIEVAL_TOOL_MSR_SQL",
+      "path": "platform/src/lib/retrieve/msr_sql.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
       "expose_to_chat": false,
-      "amendment_note": "\u00a710 MARSYS naming standard added 2026-05-02 (M3-W1-A4)"
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "Filters 499 MSR signals by domain/planet/signal_type/valence/temporal_activation/forward_looking/confidence \u2014 primary structured query path for L2.5 signals.",
+      "fingerprint": "w2_manifest_msr_sql_v1_0_0",
+      "tool_name": "msr_sql",
+      "tool_description": "Filters 499 MSR signals by domain, planet, signal_type, valence, temporal_activation, forward_looking, confidence.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "planets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "signal_type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "temporal_activation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entities_involved_any": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forward_looking": {
+            "type": "boolean"
+          },
+          "confidence_floor": {
+            "type": "number"
+          }
+        },
+        "required": []
+      },
+      "token_cost_hint": "hi",
+      "linked_data_asset_id": "MSR_v3_0"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_CGM_GRAPH_WALK",
+      "path": "platform/src/lib/retrieve/cgm_graph_walk.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "BFS traversal of CGM graph from seed nodes outward; returns visited nodes and edges by traversal depth. Backed by l25_cgm_nodes/l25_cgm_edges.",
+      "fingerprint": "w2_manifest_cgm_graph_walk_v1_0_0",
+      "tool_name": "cgm_graph_walk",
+      "tool_description": "Traverses CGM graph from seed nodes outward; returns nodes and edges by depth.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "graph_seed_hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "graph_traversal_depth": {
+            "type": "integer"
+          },
+          "edge_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "graph_seed_hints"
+        ]
+      },
+      "token_cost_hint": "med",
+      "linked_data_asset_id": "CGM"
+    },
+    {
+      "canonical_id": "RETRIEVAL_TOOL_VECTOR_SEARCH",
+      "path": "platform/src/lib/retrieve/vector_search.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "tool",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "retrieval_tool"
+      ],
+      "interface_version": "1.0",
+      "phase": "W2-MANIFEST",
+      "description": "Semantic vector retrieval over rag_chunks using Vertex AI embeddings; filterable by doc_type/layer; top_k results.",
+      "fingerprint": "w2_manifest_vector_search_v1_0_0",
+      "tool_name": "vector_search",
+      "tool_description": "Semantic vector retrieval over rag_chunks by query_text; filterable by doc_type, layer; top_k.",
+      "query_schema": {
+        "type": "object",
+        "properties": {
+          "query_text": {
+            "type": "string"
+          },
+          "doc_type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "layer": {
+            "type": "string"
+          },
+          "top_k": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query_text"
+        ]
+      },
+      "token_cost_hint": "hi",
+      "linked_data_asset_id": "RAG_CHUNKS"
+    },
+    {
+      "canonical_id": "SHADOW_MODE_PROTOCOL_v1_0",
+      "path": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md",
+      "version": "1.0.1",
+      "status": "APPROVED",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "Per-mechanism shadow-to-production discipline for the Learning Layer (LL.1\u2013LL.7); \u00a73 promotion criteria APPROVED at NAP.M4.4 (2026-05-02): N>=3, var<=0.3, two-pass approval, validity margin match_rate>=0.4. Authoritative gate for every LL weight write in M4-B and M4-C."
+    },
+    {
+      "canonical_id": "M4_A_CLOSE_v1_0",
+      "path": "00_ARCHITECTURE/M4_A_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "M4-A sub-phase sealing artifact (LEL Ground-Truth Spine). 8 sections; 10/10 ACs PASS; 1 doc-drift carry KR.M4A.CLOSE.1 (DISCHARGED at M4-B-S3); 1 LOW carry KR.M4A.RT.LOW.1 (commit 0793719 malformed root tree). Successor sub-phase: M4-B (LL.1\u2013LL.4 activation). M4 macro-phase remains active."
+    },
+    {
+      "canonical_id": "JH_EXPORT_DISPOSITION_v1_0",
+      "path": "00_ARCHITECTURE/EVAL/JH_EXPORT_DISPOSITION_v1_0.md",
+      "version": "1.0",
+      "status": "NATIVE_DECIDED",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "Native decision (NAP.M4.3 / AC.M4A.8) on KR.M3A.JH-EXPORT (DIS.009 verification path): Option Y \u2014 carry forward to M5. DIS.009 stays resolved-R3-pending-ECR. JH integration target: M5 alongside Sthana+Drik Shadbala ECR + Narayana Dasha ECR per ED.1."
+    },
+    {
+      "canonical_id": "LEL_GAP_AUDIT_v1_2",
+      "path": "06_LEARNING_LAYER/OBSERVATIONS/LEL_GAP_AUDIT_v1_0.md",
+      "version": "1.2",
+      "status": "COMPLETE",
+      "layer": "L_LEARNING",
+      "expose_to_chat": true,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-A",
+      "description": "LEL chronological-completeness audit against v1.6 corpus (46 events). 11 gaps flagged with native dispositions (NAP.M4.2): 1 partially_closed (GAP.M4A.04 travel post-LEL-v1.6-patch) + 5 deferred + 5 accept. \u00a75.5 documents B.10-strict full-close attempt audit verdict PARTIAL_CLOSE. Implements PHASE_M4_PLAN AC.M4A.7.",
+      "native_id": "abhisek"
+    },
+    {
+      "canonical_id": "LL1_TWO_PASS_APPROVAL_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL1_TWO_PASS_APPROVAL_v1_0.md",
+      "version": "1.0",
+      "status": "PASS_1_COMPLETE_PENDING_NAP_M4_5",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 two-pass approval pass_1 record for the 30 promotion-eligible signals. pass_1_reviewer = Claude-surrogate-M4-B-S2 (surrogate-for-Gemini, MACRO_PLAN \u00a7Multi-Agent flagged); 30 approved / 0 held / 0 demoted. pass_2 binding gate: native at NAP.M4.5 (M4-B close)."
+    },
+    {
+      "canonical_id": "ll1_shadow_weights_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 shadow signal-weight register (M4-B-S1). 380 signals observed across 37 training events (9 held-out excluded). Buckets: 30 promotion_eligible_pending_two_pass / 285 insufficient_observations / 52 shadow_indefinite_low_match_rate / 13 shadow_indefinite_high_variance. n=1 disclaimer binding."
+    },
+    {
+      "canonical_id": "ll1_weights_promoted_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/production/ll1_weights_promoted_v1_0.json",
+      "version": "1.0",
+      "status": "PRODUCTION_PENDING_PASS_2",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.1 production-pending register (M4-B-S2 pass_1 output). 30 signals; weights_in_production_register=false; downstream pipeline must NOT consume until pass_2 (NAP.M4.5) discharges. Tier-A=24 / Tier-B=3 / Tier-C=3 (SIG.MSR.118/.119/.143 yoga-absences flagged)."
+    },
+    {
+      "canonical_id": "NAP_M4_5_DOSSIER_v1_0",
+      "path": "00_ARCHITECTURE/EVAL/NAP_M4_5_DOSSIER_v1_0.md",
+      "version": "1.0",
+      "status": "AWAITING_NATIVE_REVIEW",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "Native-facing pass_2 dossier for NAP.M4.5 \u2014 binding gate for production promotion of the 30 LL.1 signals. 6 sections incl. full 30-signal table sorted by mean_match_rate, deep-dive on 3 Tier-C yoga-absences (joint-firing analysis: empirical signature of three independent phenomena, not one phenomenon counted three times), spot-check guide, and blank pass_2 decision-record template. ~20 min review."
+    },
+    {
+      "canonical_id": "LL2_EDGE_WEIGHT_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_EDGE_WEIGHT_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 graph edge weight modulator design document (authored before computation per AC.S3.3). \u00a73 deterministic algorithm; \u00a73.5 EMPIRICAL ADJUSTMENT \u2014 strict cross-domain filter relaxed at compute time given LEL training corpus is domain-stratified (every event fires actual_lit_signals from a single domain bucket); \u00a75 output schema; \u00a76 known limitations at n=37."
+    },
+    {
+      "canonical_id": "LL2_STABILITY_GATE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL2_STABILITY_GATE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 stability gate decision record (AC.S3.2 + AC.M4B.3). gate_decision = CONDITIONAL_PASS \u2014 LL.2 shadow writes permitted, production promotion BLOCKED until LL.1 NAP.M4.5 (pass_2) closes. Re-evaluation trigger: NAP.M4.5 close per \u00a75."
+    },
+    {
+      "canonical_id": "ll2_edge_weights_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll2_edge_weights_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.2 shadow edge-weight register (M4-B-S3). 9,922 edges (HIGH=0, MED=8 Pancha-Mahapurusha clique on SIG.MSR.117/.118/.119/.143/.145/.402, LOW=9,914, ZERO=0). cross_domain_count=0; intra_domain_count=9,922 per \u00a73.5 finding. All edges promotion_blocked pending NAP.M4.5. Held-out 9 events sacrosanct."
+    },
+    {
+      "canonical_id": "LL3_DOMAIN_COHERENCE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL3_DOMAIN_COHERENCE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.3 domain-bucket coherence diagnostic recommendation (M4-B-S4). 10-bucket MSR-anchored coverage: 134/495 signals (27%) never fired across 3 unobserved buckets (family/psychological/spiritual); education structurally absent. 7 recommendations: 3 fix-before-prod (R.LL3.1\u2013.3) + 4 investigate-in-M5 (R.LL3.4\u2013.7). Recommendation document only; no shadow\u2192production split per protocol \u00a72 LL.3 row."
+    },
+    {
+      "canonical_id": "LL4_PREDICTION_PRIOR_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL4_PREDICTION_PRIOR_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.4 qualitative-tier prediction prior recommendation (M4-B-S4). Training mean=0.630 / held_out=0.913 \u2014 held_out flagged as not a clean validity figure under H1 selection-bias hypothesis. classical_rule + both bases at 1.000 perfect calibration; temporal_engine 0.4267 = variance carrier. Tiers STRONG / MODERATE (0.4\u20130.5) / WEAK with date-precision modifier. Recommendation document only; no shadow\u2192production split per protocol \u00a72 LL.4 row."
+    },
+    {
+      "canonical_id": "ll4_prediction_priors_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/ll4_prediction_priors_v1_0.json",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "LL.4 machine-readable prior view (M4-B-S5). Companion JSON for LL4_PREDICTION_PRIOR_v1_0.md \u00a74\u2013\u00a75 qualitative findings: 10 domain priors + 3 signal-class priors (classical_rule / both / temporal_engine) + date-precision global modifier. Placed in signal_weights/ (not shadow/) per recommendation-artifact rationale \u2014 not a weight register subject to shadow\u2192production rules; consumer contract documented in JSON.consumer_contract + LL4 \u00a78. Authored at NAP.M4.5 close (M4-B-S5)."
+    },
+    {
+      "canonical_id": "LL5_DASHA_TRANSIT_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.5 Dasha-Transit Synergy design document (M4-C-S1, parallel to M4-C-S2). Specifies per-signal dasha-transit axis-weight modulator algorithm, inputs (LL.1 promoted weights + LEL lit_source field), output schema for ll5_dasha_transit_v1_0.json, and shadow-mode constraints. Mechanism naming diverges from PHASE_M4C_PLAN \u00a73.1 \u2014 brief-driven instantiation as \"Dasha-Transit Synergy\" rather than the plan's \"Retrieval ranking learning\" framing; logged as R.LL5DESIGN.1 in S1's design \u00a76. Registered by parallel S2 session per S1 brief's may_touch deferral on manifest."
+    },
+    {
+      "canonical_id": "ll5_dasha_transit_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll5_dasha_transit_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.5 Dasha-Transit Synergy shadow register (M4-C-S1). Per-signal dasha-axis vs transit-axis weight modulator computed from training-partition LEL lit_source attribution. Held-out 9 events excluded. Shadow-status; no shadow\u2192production split this round. Registered by parallel M4-C-S2 session."
+    },
+    {
+      "canonical_id": "LL6_TEMPORAL_DENSITY_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL6_TEMPORAL_DENSITY_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.6 Temporal Density Modulator design document (M4-C-S2). Specifies per-event density_weight = 1 / log2(cluster_size + 1) computed over 365-day rolling window (\u00b1182 days) on 37 training events. Per-signal density-adjusted mean_lit_score applies weight to lit_score per observation then averages. \u00a76 H2 dense-cluster-inflation test rejected at n=37 (weighted-form gap_reduction \u22120.0069). Held-out 9-event partition sacrosanct."
+    },
+    {
+      "canonical_id": "ll6_temporal_density_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll6_temporal_density_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.6 Temporal Density Modulator shadow register (M4-C-S2). 37 events with cluster_size + density_weight (distribution {1:7, 2:10, 3:11, 4:8, 5:1}); 380 LL.1-observed signals with mean_lit_score_density_adjusted + delta + meaningful_flag (255 of 380 = 67% meaningful_flag at delta>0.1; mean delta 0.2202; max 0.5693). Summary block carries H2 dense-cluster-inflation test result (gap_reduction \u22120.0069 weighted; informational only \u2014 no LL.1 weight revision)."
+    },
+    {
+      "canonical_id": "LL7_DISCOVERY_PRIOR_DESIGN_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL7_DISCOVERY_PRIOR_DESIGN_v1_0.md",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.7 Discovery Prior Rubric design document (M4-C-S3). Implements NAP.M4.6 Option B (classical-seeded) under DECISION-2 literal msr_anchors-clique CDLM construction approved 2026-05-02. Four-class taxonomy confirmed/unconfirmed/novel/contradicted (noise excluded). Empirical-confirmation gate = raw N\u22653 per NAP \u00a76.3(b) verbatim; density-weighted count reported alongside as informational per LL.6 design's H2-rejected stance. \u00a74 sanity-check: 8 MED-tier LL.2 anchors classify as `novel` (not `confirmed`) under literal construction \u2014 NAP \u00a76.2 anticipatory-rationale clarification recorded in NAP \u00a76.3.A v1.2. CF.LL7.1 CDLM-patch carry-forward flagged for M4-D/M5."
+    },
+    {
+      "canonical_id": "ll7_discovery_prior_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll7_discovery_prior_v1_0.json",
+      "version": "1.0",
+      "status": "SHADOW",
+      "layer": "L_LEARNING",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "structured_json"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "LL.7 Discovery Prior shadow register (M4-C-S3). CDLM literal msr_anchors-clique union over 81 cells = 136 unique edges (58 anchor signals). 37 training events; 9 held-out excluded. Density-weighted pair co-activations computed; threshold = raw N\u22653 (density-weighted reported alongside as informational, NOT the gate). Summary: 0 confirmed / 136 unconfirmed / 107 novel / 0 contradicted; 9867 noise pairs excluded; 243 emitted edges. Sanity-check gate sanity_anchor_novel_count=8 PASS \u2014 all 8 MED-tier LL.2 anchors carry cdlm_declared:false and support='novel'. Native-only mode \u2014 no shadow\u2192prod split per SHADOW_MODE_PROTOCOL \u00a72 LL.7 row."
+    },
+    {
+      "canonical_id": "M4_B_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_B_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-B",
+      "description": "M4-B sub-phase sealing artifact (LL.1-LL.4 activation). PHASE_M4_PLAN AC.M4B.1-10 = 10/10 PASS; in-document IS.8(b) red-team PASS_WITH_FINDINGS; 0 CRITICAL/HIGH; 4 carry-forwards (F.RT.S6.M.1 mirror DISCHARGED at M4-C-S1; F.RT.S6.M.2 manifest-entry CLOSED at this M4-C-S4 registration; F.RT.S6.N.1 parallel-version-coordination open; F.RT.S6.I.1 outer-metadata doc-hint open). Successor sub-phase: M4-C."
+    },
+    {
+      "canonical_id": "M4_C_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/M4_C_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-C",
+      "description": "M4-C sub-phase sealing artifact (LL.5/LL.6/LL.7 native-only activation). PHASE_M4_PLAN AC.M4C.1-5 = 5/5 PASS; per-session brief ACs S1.1-S4.9 = 32/32 PASS; in-document IS.8(b) red-team PASS 5/5 axes 0 findings. LL.5 Dasha-Transit axis-weight modulator first shadow write (380 signals); LL.6 Temporal Density Modulator first shadow write (255/380 meaningful adjustment, H2 rejected); LL.7 Discovery Prior first SHADOW write per NAP.M4.6 OPTION_B_APPROVED_LITERAL_CONSTRUCTION + DECISION-2 (243 edges = 107 novel + 136 unconfirmed; sanity 8/8 novel PASS; CF.LL7.1 deferred). DECISION-1 R.LL5DESIGN.1 mechanism-naming propagated to MACRO_PLAN v2.1 + PHASE_M4C_PLAN v1.0.1 + SHADOW_MODE_PROTOCOL v1.0.1. Successor sub-phase: M4-D (M4 macro-phase close)."
+    },
+    {
+      "canonical_id": "M4_CLOSE_v1_0",
+      "path": "06_LEARNING_LAYER/M4_CLOSE_v1_0.md",
+      "version": "1.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "M4-D",
+      "fingerprint": "1378f4f9d3a85a1893fd4e95df02f6c2efa4cc6fb10675f9b9ebdad57dbd3f11",
+      "last_modified": "2026-05-02",
+      "description": "M4 MACRO-PHASE sealing artifact (M4-D-S1 single-session substantive close). NAP.M4.7 APPROVED (pre-decided per execution brief; CF.LL7.1 = alpha CDLM patch parallel session M4-D-P1; KR.M4A.RT.LOW.1 = DEFER; R.LL1TPA.1 = FINAL_NOT_REACHABLE). IS.8(b) macro-phase-close red-team PASS 5/5 axes 0 findings (RT.1 LL.N computation discharge; RT.2 NAP.M4.1-7 verdicts; RT.3 shadow-mode discipline; RT.4 CURRENT_STATE v-sequence audit; RT.5 schema_validator baseline 108). Six sections: \u00a71 LL.1-LL.7 outcomes; \u00a72 NAP registry; \u00a73 carry-forward roster (35-item enumeration with final dispositions); \u00a74 IS.8(b) red-team verdicts; \u00a75 M5 setup recommendations (8 items); \u00a76 known asymmetries (R.LL1TPA.1 Gemini gap; CF.LL7.1 parallel patch; KR.M4A.RT.LOW.1 deferred tree). Successor macro-phase: M5."
+    },
+    {
+      "canonical_id": "OBSERVATORY_PLAN_v1_0",
+      "path": "00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_GOVERNANCE",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s0-1",
+      "fingerprint": "6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b",
+      "last_modified": "2026-05-02",
+      "description": "Phase O Observatory governance plan. Two-layer ledger (telemetry + reconciliation) over LLM cost & usage across five providers (Anthropic, OpenAI, Gemini, DeepSeek, NIM). 5-table data model: llm_usage_events, llm_pricing_versions, llm_provider_cost_reports, llm_cost_reconciliation, llm_budget_rules. 30-session O.0\u2013O.4 sub-phase decomposition with full session matrix. Wall-clock projections 4-way / 8-way concurrency. MP.9 mirror pair declared at this S0.1 close. Concurrent workstream alongside the main M-phase thread (currently M5 INCOMING)."
     }
   ],
-  "manifest_fingerprint": "ec1a8c25aaa64679...",
-  "manifest_version": "1.7",
-  "last_updated": "2026-05-01",
-  "last_updated_by": "KARN-W9-B2-BHISMA-LLM-PIPELINE (BHISMA \u00a74.9 token_count backfill)"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02",
+  "manifest_version": "2.6",
+  "last_updated": "2026-05-02",
+  "last_updated_by": "PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP"
 }

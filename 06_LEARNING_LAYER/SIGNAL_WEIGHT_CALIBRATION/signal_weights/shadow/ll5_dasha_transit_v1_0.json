@@ -1,0 +1,3839 @@
+{
+  "schema_version": "1.0",
+  "mechanism": "LL.5",
+  "phase": "M4-C",
+  "produced_during": "M4-C-S1-LL5-DASHA-TRANSIT",
+  "produced_on": "2026-05-02",
+  "design_doc_version": "1.0",
+  "design_doc_path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/LL5_DASHA_TRANSIT_DESIGN_v1_0.md",
+  "rubric_version": "1.0",
+  "rubric_option": "B",
+  "input_files": [
+    {
+      "path": "06_LEARNING_LAYER/OBSERVATIONS/lel_event_match_records.json",
+      "role": "primary"
+    },
+    {
+      "path": "06_LEARNING_LAYER/SIGNAL_WEIGHT_CALIBRATION/signal_weights/shadow/ll1_shadow_weights_v1_0.json",
+      "role": "signal_roster"
+    }
+  ],
+  "training_events_used": 37,
+  "held_out_excluded": 9,
+  "promotion_criteria_ref": "06_LEARNING_LAYER/SHADOW_MODE_PROTOCOL_v1_0.md \u00a73.5 (LL.5 promotion criteria \u2014 TBD; this cycle ships shadow-only)",
+  "n1_disclaimer": "VALIDITY NOTICE: These axis-weights are derived from a single native's (n=1) life event corpus. They are provisional, subject to revision as the corpus grows, and must not be interpreted as universal Jyotish dasha-vs-transit attribution rates. Per MACRO_PLAN \u00a73.5.A Principle 1 \u2014 n=1 validity disclaimer. Promotion does NOT lift this disclaimer; it lifts only the structural barrier between observation and downstream pipeline operation. LL.5-specific note: the lit_source distribution at n=37 is heavily skewed toward dasha attribution (410 dasha / 4 transit / 6 both across all observed activations); per-signal axis attributions in the LOW confidence tier (1\u20133 activations) are particularly unstable and must be read alongside the confidence_tier field, not as standalone calibrated rates.",
+  "variance_estimator": "sample",
+  "summary": {
+    "total_signals": 380,
+    "high_tier_count": 2,
+    "med_tier_count": 12,
+    "low_tier_count": 252,
+    "zero_tier_count": 114,
+    "dasha_dominant_count": 259,
+    "transit_dominant_count": 1,
+    "balanced_count": 6,
+    "dominant_definition": "dasha_dominant: dasha_weight > 0.6 | transit_dominant: dasha_weight < 0.4 | balanced: 0.4 <= dasha_weight <= 0.6 (signals with total_activations == 0 are in zero_tier_count and excluded from dominant/balanced buckets)"
+  },
+  "signals": [
+    {
+      "signal_id": "CTR.01",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CTR.02",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CTR.03",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CVG.01",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CVG.02",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CVG.04",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CVG.05",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "CVG.08",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "RPT.DSH.01",
+      "dasha_count": 4,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 4,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.01",
+      "dasha_count": 4,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 4,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.07",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.08",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.09",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.10",
+      "dasha_count": 4,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 4,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.11",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.12",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.13",
+      "dasha_count": 0,
+      "transit_count": 4,
+      "both_count": 0,
+      "total_activations": 4,
+      "dasha_weight": 0.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.14",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.15",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.001",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.002",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.003",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.005",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.007",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.008",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.009",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.010",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.011",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.012",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.013",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.014",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.015",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.016",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.017",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.018",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.019",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.020",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.022",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.023",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.024",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.027",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.028",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.029",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.030",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.031",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.032",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.034",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.035",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.036",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.037",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.038",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.039",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.044",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.045",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.046",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.047",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.049",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.050",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.051",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.053",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.054",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.056",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.057",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.058",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.061",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.062",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.063",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.064",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.065",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.067",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.068",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.070",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.071",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.072",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.073",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.076",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.079",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.080",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.081",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.082",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.085",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.086",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.087",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.088",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.089",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.090",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.093",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.094",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.096",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.097",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.098",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.099",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.100",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.101",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.102",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.103",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.104",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.105",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.106",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.107",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.108",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.109",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.110",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.111",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.112",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.114",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.116",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.117",
+      "dasha_count": 4,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 4,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.118",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.119",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.121",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.122",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.123",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.124",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.125",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.127",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.128",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.129",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.130",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.131",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.132",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.133",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.134",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.135",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.137",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.138",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.139",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.140",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.141",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.143",
+      "dasha_count": 5,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 5,
+      "dasha_weight": 1.0,
+      "confidence_tier": "MED",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.144",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.145",
+      "dasha_count": 10,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 10,
+      "dasha_weight": 1.0,
+      "confidence_tier": "HIGH",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.146",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.147",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.149",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.151",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.152",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.154",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.155",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.156",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.158",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.159",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.161",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.162",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.163",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.165",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.167",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.168",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.169",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.170",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.172",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.173",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.174",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.175",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.178",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.179",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.180",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.181",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.182",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.183",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.185",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.186",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.187",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.189",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.190",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.191",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.193",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.194",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.195",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.196",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.197",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.198",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.200",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.201",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.203",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.205",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.208",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.209",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.210",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.211",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.213",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.214",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.215",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.216",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.222",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.223",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.224",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.225",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.228",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.229",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.230",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.231",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.235",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.236",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.237",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.238",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.239",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.240",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.243",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.244",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.245",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.247",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.248",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.249",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.250",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.251",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.252",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.254",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.255",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.256",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.257",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.258",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.259",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.261",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.262",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.264",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.265",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.266",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.267",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.268",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.269",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.270",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.272",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.273",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.274",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.275",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.278",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.279",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.280",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.281",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.282",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.284",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.285",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.290",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.291",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.292",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.293",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.294",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.295",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.296",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.297",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.298",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.299",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.300",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.301",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.302",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.303",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.304",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.305",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.306",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.307",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.308",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.309",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.310",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.311",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.312",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.313",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.314",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.315",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.318",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.319",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.322",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.323",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.324",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.325",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.327",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.329",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.330",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.334",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.335",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.336",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.337",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.338",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.339",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.340",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.341",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.344",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.346",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.348",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.349",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.350",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.352",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.359",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.363",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.364",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.366",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.369",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.373",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.376",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.377",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.378",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.379",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.380",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.381",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.382",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.383",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.384",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.385",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.386",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.387",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.388",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.389",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.390",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.391",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.393",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.396",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.398",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.399",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.400",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.401",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.402",
+      "dasha_count": 8,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 8,
+      "dasha_weight": 1.0,
+      "confidence_tier": "HIGH",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.403",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.404",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.405",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.408",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.409",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.410",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.411",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.413",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.414",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.415",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.416",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.417",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.418",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.419",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.420",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.421",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.422",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.423",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.424",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.425",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.427",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.429",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.430",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.431",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.432",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.433",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.434",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.435",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.436",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.438",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.441",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.442",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.443",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.444",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.445",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.446",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.447",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 1,
+      "total_activations": 1,
+      "dasha_weight": 0.5,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.448",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.450",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.451",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.452",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.454",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.456",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.457",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.459",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.460",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.461",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.462",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.463",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.464",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.465",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.466",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.467",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.468",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.469",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.471",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.472",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.474",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.476",
+      "dasha_count": 3,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 3,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.479",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.480",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.483",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.484",
+      "dasha_count": 2,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 2,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.485",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.486",
+      "dasha_count": 1,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 1,
+      "dasha_weight": 1.0,
+      "confidence_tier": "LOW",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.491",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.493",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.494",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    },
+    {
+      "signal_id": "SIG.MSR.495",
+      "dasha_count": 0,
+      "transit_count": 0,
+      "both_count": 0,
+      "total_activations": 0,
+      "dasha_weight": null,
+      "confidence_tier": "ZERO",
+      "status": "shadow"
+    }
+  ]
+}
