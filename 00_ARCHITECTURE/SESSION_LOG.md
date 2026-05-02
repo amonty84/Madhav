@@ -17330,3 +17330,138 @@ session_close:
 **S1.4 / S1.5 / S1.6 / S1.8 — remaining parallel-safe per-provider adapters** and **S1.9 — Frontend scaffold (depends on S1.3 — closed)** per OBSERVATORY_PLAN §5.1. After all five adapters close, S1.10–S1.12 (KPI tiles, charts, drill-down) build on S1.9; S1.13 wires end-to-end. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-7-deepseek`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_6_GEMINI_PROVIDER_ADAPTER — Phase O Observatory O.1 third implementation session (Gemini provider adapter — observed wrapper for `generateContent` + `generateContentStream` per §4.3 of OBSERVATORY_PLAN)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_6_GEMINI_PROVIDER_ADAPTER
+  cowork_thread_name: ustad-s1-6-gemini
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.1.S1.6
+  predecessor_session: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  mandatory_reading_confirmation:
+    - {file: CLAUDE.md, fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md, fingerprint_sha256: 6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md, fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md, fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: platform/src/lib/llm/observability/types.ts, fingerprint_sha256: 907d4e082ba0e2a01cefe8328520882512f24aa89f53c6243c1e35a5a38aff6a, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: platform/src/lib/llm/observability/observe.ts, fingerprint_sha256: be9c4cd4a576a23930afad93525b72cfcde20e729720a199f8dfdaaefac8a2b0, read_at: 2026-05-03T11:30:00+05:30}
+    - {file: "platform/src/lib/llm/providers/gemini*.ts", fingerprint_sha256: "n/a — directory does not exist; fresh adapter per brief", read_at: 2026-05-03T11:30:00+05:30}
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/providers/gemini_observed.ts
+      - platform/src/lib/llm/providers/__tests__/gemini_observed.test.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/anthropic_observed.ts
+      - platform/src/lib/llm/providers/openai_observed.ts
+      - platform/src/lib/llm/providers/deepseek_observed.ts
+      - platform/src/lib/llm/providers/nim_observed.ts
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - platform/src/app/**
+      - platform/src/components/**
+      - 00_ARCHITECTURE/**
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 03_DOMAIN_REPORTS/**
+      - 06_LEARNING_LAYER/**
+      - .geminirules
+      - .gemini/project_state.md
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+  red_team_due: false
+  notes: "Phase O O.1 S1.6 — Gemini adapter; sibling-parallel with S1.4/S1.5/S1.7/S1.8."
+```
+
+### Body — substantive deliverables (W1–W4)
+
+**W1. Gemini-shaped envelope + token-extraction helper authored.** [`platform/src/lib/llm/providers/gemini_observed.ts`](platform/src/lib/llm/providers/gemini_observed.ts) (sha256 `c22503d68358ca2ca98e0a7876393fd6fdbaf5205672ef436a70b7062d6b6840`) — kept narrow enough to be SDK-agnostic (works with `@google/genai`, `@google/generative-ai`, or any thin fetch wrapper that surfaces the documented `usageMetadata` block). Public surface: `callGeminiObserved()` (non-streaming), `streamGeminiObserved()` (streaming). Helpers: `extractGeminiUsage()`, `buildProviderRequestId()`, `mapGeminiErrorCode()`. Token mapping per brief: `promptTokenCount→input_tokens`, `candidatesTokenCount→output_tokens`, `thoughtsTokenCount→reasoning_tokens` (Gemini 2.5 thinking models), `cachedContentTokenCount→cache_read_tokens`. `cache_write_tokens` left at 0 (Gemini does not separately report writes).
+
+**W2. provider_request_id limitation documented in file header.** Gemini does not return a stable per-request id in the response body. Adapter generates a client-side UUID via `randomUUID()` at call start and stores it in `provider_request_id`. If the SDK surface forwards an `x-goog-request-id` response header, the adapter appends it after a `:` separator (so the column carries `<uuid>:<x-goog-request-id>`). For streaming, the UUID is always emitted on the first chunk so the row records a non-null id even when no header is observed; any later chunk carrying the header overwrites with the composed form (observeStream takes the latest non-undefined value). Header lookup is case-insensitive. Reconciliation against the BigQuery billing export (S2.4) does not depend on this id — Gemini reconciliation joins on `(provider, model, time_bucket)` per §4.3.
+
+**W3. Free-tier handling + error mapping per brief.** Free-tier API keys may emit `usageMetadata` with all-zero counts; `computeCost` then yields `0.00` USD and the row persists with `status=success` (not error). Error mapping centralized in `mapGeminiErrorCode()`: `429→rate_limited`, `5xx→server_error`, `4xx→error.status / error.message / http_<code>` fall-through, timeout-shaped errors → `timeout`. The adapter wraps both the non-streaming and streaming call thunks in a try/catch that calls `annotateGeminiError()` to set `err.code = mapGeminiErrorCode(err)` only when no string code is already present (preserves caller-supplied codes; preserves stack trace by mutating in place). `observe()`'s generic `extractErrorCode` then picks up the mapped code and persists it under `error_code`.
+
+**W4. Test suite authored.** [`platform/src/lib/llm/providers/__tests__/gemini_observed.test.ts`](platform/src/lib/llm/providers/__tests__/gemini_observed.test.ts) (sha256 `31d0f0a8d7b4434dca41bd00f8550e9247858b3d41e15df5dd3a44405c2db553`). 11 `it` blocks covering all 8 brief acceptance items: (1) standard `generateContent` field mapping, (2) `usageMetadata` extraction across all 4 token types + zero-usage path, (3) Gemini 2.5 thinking path with `thoughtsTokenCount=25_000` and asserted cost 0.50 USD = 0.125 input + 0.25 output + 0.125 reasoning, (4) streaming usage from final chunk, (5) free-tier zero-cost call (verified `computed_cost_usd=0`, `status=success`, `error_code=null`, `pricing_version_id` still recorded for replay), (6) UUID-only path + header-appended path + telemetry-row format `^[0-9a-f-]{36}:goog-99$`, (7) 429 → persisted `error_code=rate_limited`, (8) 500 → persisted `error_code=server_error`. Mock DB `makeDb({freeTier?})` overrides pricing rows to zero for the free-tier case. Param-index map (`COL`) mirrors `observability/persist.ts` INSERT column order. **Result: 11/11 PASS** in 361ms.
+
+**Regression check.** Sister observability tests (`observability_observe.test.ts`, `observability_persist.test.ts`, `observability_redaction.test.ts`, `observability_cost.test.ts`) — 4 files / 12 tests — **all PASS**. Typecheck: pre-existing tsc errors in unrelated files (`tests/components/AppShell.test.tsx`, `tests/components/ReportGallery.test.tsx`); zero errors in `gemini_observed.ts` or its test file.
+
+**W5. Governance scripts run.**
+  - `mirror_enforcer.py`: 0 findings; **exit 0**; 9 pairs checked (MP.1–MP.9); 9 passed; 2 declared claude_only (MP.6, MP.7). Clean.
+  - `schema_validator.py` (full corpus): **107 violations; exit 2**. Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries — NONE introduced by this session. None of the 107 violations name a file from this session's `may_touch`.
+  - `drift_detector.py`: **327 findings; exit 2**. Identical 327 carry-forward as S0.1 / S1.1 / S1.3 — all pre-existing CANONICAL_ARTIFACTS fingerprint_mismatch residuals on canonical-corpus tree (declared in `must_not_touch`).
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_6_GEMINI_PROVIDER_ADAPTER
+  closed_at: 2026-05-03T03:08:00+05:30
+  files_touched:
+    - {path: platform/src/lib/llm/providers/gemini_observed.ts, mutation: created, sha256_after: c22503d68358ca2ca98e0a7876393fd6fdbaf5205672ef436a70b7062d6b6840, scope: in}
+    - {path: platform/src/lib/llm/providers/__tests__/gemini_observed.test.ts, mutation: created, sha256_after: 31d0f0a8d7b4434dca41bd00f8550e9247858b3d41e15df5dd3a44405c2db553, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_6 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged — declared in must_not_touch"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude-side composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); Gemini-side untouched per OBSERVATORY_PLAN §6.3 implementation-class funneling"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation session under §6.2 funneling"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.6 (read-only consumption; not a plan revision)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run:
+    script: platform/scripts/governance/drift_detector.py
+    exit_code: 2
+    divergences_found: 327
+    classification: known_residuals_pre_existing
+    rationale: "Identical 327 carry-forward as S0.1/S1.1/S1.3 close — all HIGH findings are pre-existing fingerprint_mismatch residuals on canonical L1/L2.5/L3.5 entries. NONE introduced by this S1.6 session. Acceptable per ONGOING_HYGIENE_POLICIES §F WL.14G.02."
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    baseline_target: 107
+    rationale: "Identical to S1.3 close (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch. Brief AC: 'schema_validator.py exits 0 or exit 2' — satisfied."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: 0, desync_pairs: [], rationale: "9 pairs checked; 9 passed; 2 declared claude_only. Clean."}
+  known_residuals:
+    - {finding_id: WL.14G.02, validator: drift_detector, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + Phase_14G_Lockdown_Verification / PHASE_14_FINDINGS_DISCHARGE_v1_0 D.2", rationale: "Pre-existing stale fingerprints in CANONICAL_ARTIFACTS; resolve at retirement pass"}
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1 baseline note", rationale: "M2/Portal-era SESSION_LOG entries emit session_id-disagreement-heading violations; quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.6 session does not rotate CURRENT_STATE pointers; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized: {serialized: false, rationale: "Implementation-class concurrent-workstream session — main M5 thread build state captured at M4-D-S1 close is unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1 / S1.1 / S1.3 precedent."}
+  open_decisions:
+    - id: OD.S1.3.1
+      summary: "Full provider raw_payload — current schema (migration 038) has no raw_payload column on llm_usage_events. S1.4–S1.8 may need a separate llm_provider_raw_responses table if full provider payloads are required for forensic replay."
+      disposition: "ACKNOWLEDGED — same disposition as S1.3. This S1.6 Gemini adapter does not persist a raw_payload (per OD.S1.3.1 + brief 'no new tables; parameters jsonb if needed'). The Gemini envelope's `response` field is opaque to the adapter and never written to the telemetry row. The `parameters` jsonb column captures the request-side params (already persisted by observability/persist.ts via request.parameters). If full provider payloads are needed for forensic replay, defer to a future llm_provider_raw_responses table per OD.S1.3.1."
+  close_criteria_met: true
+  unblocks: "Sister provider-adapter sessions S1.4/S1.5/S1.7/S1.8 remain parallel-safe (disjoint files under platform/src/lib/llm/providers/). S1.9 Frontend scaffold remains independently unblocked (depends on S1.3, not on adapters). Sub-phase O.1 close session (S1.13 wiring + e2e) gates on all 13 O.1 sessions per OBSERVATORY_PLAN §5.1."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-6-gemini
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+S1.4 / S1.5 / S1.7 / S1.8 (sibling provider adapters; parallel-safe — disjoint files), S1.9 (Frontend scaffold; depends on S1.3 — independently unblocked). Sub-phase O.1 close gated on all 13 O.1 sessions including S1.13 wiring per OBSERVATORY_PLAN §5.1. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-6-gemini`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
