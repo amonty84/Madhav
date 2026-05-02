@@ -17465,3 +17465,149 @@ session_close:
 S1.4 / S1.5 / S1.7 / S1.8 (sibling provider adapters; parallel-safe — disjoint files), S1.9 (Frontend scaffold; depends on S1.3 — independently unblocked). Sub-phase O.1 close gated on all 13 O.1 sessions including S1.13 wiring per OBSERVATORY_PLAN §5.1. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-6-gemini`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
+
+---
+
+## USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD
+
+**Cowork thread:** ustad-s1-9-frontend-scaffold
+**Closed:** 2026-05-03 (Phase O · O.1 · S1.9 — Observatory Frontend Scaffold)
+**Branch:** feature/phase-o-observatory-ustad-s1-9-frontend-scaffold (merges into umbrella feature/phase-o-observatory)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD
+  cowork_thread_name: "ustad-s1-9-frontend-scaffold"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.1.S1.9
+  predecessor_session: USTAD_S1_3_OBSERVATORY_BACKEND_API
+  declared_scope:
+    may_touch:
+      - platform/src/app/(super-admin)/observatory/layout.tsx
+      - platform/src/app/(super-admin)/observatory/page.tsx
+      - platform/src/app/(super-admin)/observatory/events/page.tsx
+      - platform/src/app/(super-admin)/observatory/budgets/page.tsx
+      - platform/src/lib/components/observatory/Layout.tsx
+      - platform/src/lib/components/observatory/AuthGate.tsx
+      - platform/src/lib/components/observatory/__tests__/AuthGate.test.tsx
+      - platform/src/lib/api-clients/observatory.ts
+      - platform/src/lib/config/feature_flags.ts
+      - 00_ARCHITECTURE/SESSION_LOG.md (close-time append only)
+    must_not_touch:
+      - platform/src/lib/components/observatory/{kpi,filters,charts,events}/**
+      - platform/src/app/api/**
+      - platform/src/lib/llm/**
+      - platform/migrations/**, platform/src/lib/db/**
+      - 00_ARCHITECTURE/** (except SESSION_LOG.md append)
+      - 01_FACTS_LAYER/**, 025_HOLISTIC_SYNTHESIS/**
+      - .geminirules, .gemini/project_state.md
+  red_team_due: false
+  native_directive_obligations: []
+  notes: "Implementation-class session per OBSERVATORY_PLAN §6.3 mirror-funneling rule; only S0.1 + sub-phase-close sessions trigger MP.9 cascade."
+```
+
+### Body summary
+
+**S1.9 deliverables.** Foundation surfaces the next three sessions (S1.10 KPI tiles + filters, S1.11 charts, S1.12 drill-down) build on top of:
+
+1. **Feature flag.** `OBSERVATORY_ENABLED` added to [`platform/src/lib/config/feature_flags.ts`](platform/src/lib/config/feature_flags.ts) (env override `MARSYS_FLAG_OBSERVATORY_ENABLED=true`; default `false`). Matches the existing flag pattern (type-union member + DEFAULT_FLAGS row + env-override resolution at constructor time per `loadEnvOverrides()`). The backend `_guard.ts` already uses the same env-var name directly; the new `getFlag('OBSERVATORY_ENABLED')` surface routes through the configService singleton for the frontend.
+
+2. **Route scaffold.** Next.js App Router route group [`(super-admin)/observatory/`](platform/src/app/(super-admin)/observatory/) — three skeleton pages (`page.tsx`, `events/page.tsx`, `budgets/page.tsx`) each rendering a single `<div data-testid="observatory-{section}-skeleton" />` placeholder. The route-group layout wraps everything in `<AuthGate><ObservatoryLayout>{children}</ObservatoryLayout></AuthGate>`, so the gate runs at the layout boundary and the section-pages only need to render their skeleton.
+
+3. **AuthGate (server component).** [`platform/src/lib/components/observatory/AuthGate.tsx`](platform/src/lib/components/observatory/AuthGate.tsx) — async server component, `import 'server-only'`. Two-stage gate: (a) flag off → renders "Observatory is disabled" `<main role="alert">` with the env-var hint; (b) flag on, no auth or non-super-admin or non-active → renders "Unauthorized" `<main role="alert">`; (c) otherwise renders children. Reads flags via `getFlag('OBSERVATORY_ENABLED')`; reads auth via `getServerUserWithProfile()` matching the pattern in [`platform/src/app/admin/layout.tsx`](platform/src/app/admin/layout.tsx).
+
+4. **Layout shell.** [`platform/src/lib/components/observatory/Layout.tsx`](platform/src/lib/components/observatory/Layout.tsx) — top bar (title "LLM Observatory", date-range picker placeholder `<div data-testid="date-range-placeholder">` for S1.10 to replace, disabled reload + settings buttons), left sidebar (Overview / Events / Budgets links + dimmed "Insights" with `aria-disabled="true"` for Phase O.4).
+
+5. **Typed API client.** [`platform/src/lib/api-clients/observatory.ts`](platform/src/lib/api-clients/observatory.ts) — five hand-written functions matching the openapi.yaml: `getSummary`, `getTimeseries`, `getBreakdowns`, `getEvents`, `getEvent`. Param types re-export `SummaryQueryInput`/`TimeseriesQueryInput`/`BreakdownsQueryInput`/`EventsQueryInput` from `@/lib/observatory/types` (the S1.3 contract). Response types come from the same module; full TypeScript coverage. Typed errors: `ObservatoryApiError` base + `UnauthorizedError` (401) + `ForbiddenError` (403) so the UI can branch on auth state vs API failure. URLSearchParams construction handles array filters (`provider`, `model`, `pipeline_stage`) by repeating the param name (matches OpenAPI `explode: true`). 401/403 bodies parsed into the typed error's `code` + `message` + `detail` fields.
+
+6. **Tests.** [`platform/src/lib/components/observatory/__tests__/AuthGate.test.tsx`](platform/src/lib/components/observatory/__tests__/AuthGate.test.tsx) — five tests, all green. (1) flag off → disabled message + no children + `getServerUserWithProfile` not called; (2) flag on, role=client + active → unauthorized + no children; (3) flag on, no user → unauthorized + no children; (4) flag on, role=super_admin + active → children rendered; (5) compile-time type assertion that `getSummary` returns `Promise<SummaryResponse>` (catches API-client drift from openapi.yaml types at build time).
+
+### Acceptance criteria — verification
+
+- ✅ `OBSERVATORY_ENABLED` added to feature_flags.ts, default `false`. Type union extended; DEFAULT_FLAGS entry added; env override `MARSYS_FLAG_OBSERVATORY_ENABLED` resolved by existing `loadEnvOverrides()` at constructor time.
+- ✅ Route renders for super-admin + flag on; blocked otherwise. Verified via 4 of the 5 unit tests (case 1 = flag off; case 2 = wrong role; case 3 = no auth; case 4 = super_admin admits children).
+- ✅ AuthGate is a server component. `import 'server-only'` declared; signature is `async function AuthGate(...)`; uses `getServerUserWithProfile()` from `@/lib/auth/access-control` which itself is `'server-only'`.
+- ✅ API client compiles with full TypeScript types matching openapi.yaml. `npx tsc --noEmit` reports zero errors in the files this session touched. (Pre-existing errors in `tests/components/AppShell.test.tsx` + `tests/components/ReportGallery.test.tsx` are out of scope and unchanged.)
+- ✅ All 4 brief tests pass. (Actually 5 tests: brief specifies 4 cases; the test file collapses #4 of the brief — API client compile-time typecheck — into a `describe` block paired with the AuthGate cases. Total: 5 passed / 5.)
+- ✅ schema_validator.py: exit 2 (107 violations identical to S1.3 baseline; no new HIGH/CRITICAL introduced — all 107 are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries; none name a file in this session's may_touch).
+- ✅ SESSION_LOG appended atomically with this entry.
+
+### Test count
+
+- vitest: **5 / 5 passed** (4 AuthGate behavioural + 1 compile-time API client type assertion).
+- tsc --noEmit on touched files: 0 errors.
+
+### Governance scripts run
+
+- `schema_validator.py` (full corpus, --session-id USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD): **107 violations; exit 2**. Identical to umbrella baseline. All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session.
+- `drift_detector.py` / `mirror_enforcer.py`: not run in-worktree (implementation-class session under `OBSERVATORY_PLAN §6.3` mirror-funneling rule; declared `must_not_touch` for `.geminirules` + `.gemini/project_state.md` + `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` means no mirror cascade obligated and no manifest fingerprint rotation expected). Per S1.3 close precedent.
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S1_9_OBSERVATORY_FRONTEND_SCAFFOLD
+  closed_at: 2026-05-03T13:30:00+05:30
+  files_touched:
+    - {path: platform/src/lib/config/feature_flags.ts, mutation: modified, sha256_before: ff4664aea24acb8a5dfcbf232d580b1f2d5c473962e40b6071802715c72a2096, sha256_after: ccc98a3dba6502b3f508e00124baaaffce09f5ce00bc700e5b03dc71664ce68f, scope: in, justification: "Add OBSERVATORY_ENABLED flag (type union + DEFAULT_FLAGS row); env override MARSYS_FLAG_OBSERVATORY_ENABLED"}
+    - {path: platform/src/lib/components/observatory/AuthGate.tsx, mutation: created, sha256_after: fee05c6619714697cae92e687696d9393e55b811a86f82e5e7ad59a1eedf96a1, scope: in}
+    - {path: platform/src/lib/components/observatory/Layout.tsx, mutation: created, sha256_after: 38925f0ed2c30ab1538c8ba0cee2302f5a7e79148d4036cc09efab9ef2cae71e, scope: in}
+    - {path: platform/src/lib/components/observatory/__tests__/AuthGate.test.tsx, mutation: created, sha256_after: 21ef5d24f004a9192239cd69e1025883a675cc232eadf6152f9cf15f75c9d560, scope: in}
+    - {path: platform/src/lib/api-clients/observatory.ts, mutation: created, sha256_after: 103b69abfc2a71e72b4ab7906bb0eabfcd190be57879e393701b944afe09663a, scope: in}
+    - {path: 'platform/src/app/(super-admin)/observatory/layout.tsx', mutation: created, sha256_after: 507bf0cab1d7b835bcb699c6a48a2372294b3dddf16bb621e6a27442c4f4a685, scope: in}
+    - {path: 'platform/src/app/(super-admin)/observatory/page.tsx', mutation: created, sha256_after: 1d32d52ae108957373a5d920c0801ef91f683cb53c3b808dea56431c47765adf, scope: in}
+    - {path: 'platform/src/app/(super-admin)/observatory/events/page.tsx', mutation: created, sha256_after: 6f9f30c4b2707517ef87b82ce112b05a715702ae305b6a1d15d7a7033dee7de0, scope: in}
+    - {path: 'platform/src/app/(super-admin)/observatory/budgets/page.tsx', mutation: created, sha256_after: 4cb43a5765679a2f54a46c339564ded823715629f907846c9a8e52fea35ea6df, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: modified, scope: in, change: "this entry appended atomically at close per brief"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "USTAD_S1_9 entry appended"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged — declared in must_not_touch (implementation-class)"}
+    - {pair_id: MP.2, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Claude composite touched only via SESSION_LOG append (MP.7 claude-only sub-component); .gemini/project_state.md must_not_touch — implementation-class per OBSERVATORY_PLAN §6.3 mirror-update funneling"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged — implementation-class under registry-update funneling per OBSERVATORY_PLAN §6.2"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at this S1.9 (frontend scaffold consumes the plan, does not revise it)"}
+  red_team_pass: {due: false, performed: false, verdict: n/a, artifact_path: null}
+  drift_detector_run: {script: platform/scripts/governance/drift_detector.py, exit_code: not_run_in_worktree, rationale: "Implementation-class session under OBSERVATORY_PLAN §6.3 mirror-funneling rule; canonical-artifact tree declared in must_not_touch — no fingerprint rotation expected. Per S1.3 close precedent."}
+  schema_validator_run:
+    script: platform/scripts/governance/schema_validator.py
+    exit_code: 2
+    violations_found: 107
+    classification: at_baseline
+    baseline_target: 107
+    rationale: "Identical to S1.3 close baseline (107). All HIGH findings are pre-existing SESSION_LOG-entry residuals from M2/Portal-era entries. NONE introduced by this session. None of the 107 violations name a file from this session's may_touch."
+  mirror_enforcer_run: {script: platform/scripts/governance/mirror_enforcer.py, exit_code: not_run_in_worktree, rationale: "Per S1.3 close precedent — implementation-class session, no mirror cascade obligated"}
+  known_residuals:
+    - {finding_id: SESSION_LOG_HEADING_LEGACY, validator: schema_validator, severity: MEDIUM, booking_reference: "ONGOING_HYGIENE_POLICIES §F + S1.1 baseline note", rationale: "M2/Portal-era SESSION_LOG entries emit session_id-disagreement-heading violations; quarterly governance pass next due 2026-07-24"}
+  step_ledger_updated: false
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S1.9 session; per-session SESSION_LOG entry is the audit trail; pointer rotation batches at sub-phase close (O.1) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized: {serialized: false, rationale: "Implementation-class concurrent-workstream session; main M5 thread build state captured at M4-D-S1 close is unaffected. ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1 + S1.1 + S1.3 precedent."}
+  open_decisions: []
+  close_criteria_met: true
+  unblocks: "S1.10 (KPI tiles + Filters bar), S1.11 (Charts), S1.12 (Drill-down event explorer + side panel) — all parallel-safe per OBSERVATORY_PLAN §6.1 file-tree partitioning, since each owns a disjoint subtree under platform/src/lib/components/observatory/. S1.13 (wiring + e2e) gates on S1.10–S1.12 closing."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s1-9-frontend-scaffold
+    cut_from_commit: 0bec216
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+S1.10 / S1.11 / S1.12 — three UI component sessions (KPI tiles, Charts, Drill-down). All can run in parallel after this S1.9 close per `OBSERVATORY_PLAN §6.1`. They consume the AuthGate + Layout shell + typed API client this session lands. S1.13 wiring + e2e is the funnel session that follows.
+
+Commit: appended at session-close in `feature/phase-o-observatory-ustad-s1-9-frontend-scaffold`. Worktree merges back to `feature/phase-o-observatory` umbrella per brief teardown sequence.
