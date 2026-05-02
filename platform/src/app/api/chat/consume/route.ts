@@ -40,6 +40,8 @@ import { createToolCache, executeWithCache } from '@/lib/cache/index'
 import { loadManifest } from '@/lib/bundle/manifest_reader'
 import { runAll, summarize } from '@/lib/validators/index'
 import { createOrchestrator } from '@/lib/synthesis/index'
+import { contextAssembler } from '@/lib/synthesis/context_assembler'
+import type { ContextBundle } from '@/lib/synthesis/types'
 import { validateCitations } from '@/lib/synthesis/citation_check'
 // PipelineError import removed — citation gate no longer throws post-stream (see citation_error trace event)
 import { createAuditConsumer } from '@/lib/audit/consumer'
@@ -473,6 +475,29 @@ export async function POST(request: Request) {
     const audienceTier = isSuperAdmin ? 'super_admin' as const : 'client' as const
     const panelOptIn = body.panel_opt_in === true
 
+    // W2-CTX-ASSEMBLY: optional LLM-based context compression step. When the
+    // flag is OFF (default) we forward validToolResults to synthesis unchanged
+    // — zero behaviour change. When ON, the assembler model compresses /
+    // reorders the bundle and returns a ContextBundle whose tool_bundles are
+    // passed downstream in place of validToolResults.
+    let assembledBundle: ContextBundle | null = null
+    let synthesisToolResults: ToolBundle[] = validToolResults
+    if (configService.getFlag('CONTEXT_ASSEMBLY_ENABLED')) {
+      const ctxLlmSeq = nextSeq()
+      const assemblerModelId = STACK_ROUTING[selectedStack].context_assembly.primary
+      assembledBundle = await contextAssembler(
+        validToolResults,
+        queryPlan,
+        assemblerModelId,
+        {
+          queryId,
+          conversationId: finalConversationId,
+          stepSeq: ctxLlmSeq,
+        },
+      )
+      synthesisToolResults = assembledBundle.tool_bundles
+    }
+
     // UQE-9: pre-allocate context_assembly seq first (single_model_strategy
     // emits context_assembly before synthesis_done), then the synthesis seq
     // shared by start (here) and done (in onFinish inside the orchestrator).
@@ -500,7 +525,7 @@ export async function POST(request: Request) {
       query: queryText,
       query_plan: queryPlan,
       bundle,
-      tool_results: validToolResults,
+      tool_results: synthesisToolResults,
       conversation_history: messages
         .filter(m => m.role === 'user' || m.role === 'assistant')
         .slice(0, -1)  // exclude current user message; synthesize() appends it via `query`
@@ -604,12 +629,16 @@ export async function POST(request: Request) {
           }
 
           // ── MON-8: context_assembly_log write ──────────────────────────
-          // Per-layer token breakdown derived from the validToolResults grouped
-          // by source-canonical-id (B.10: Math.ceil(str.length / 4) when no
-          // SDK-side count is available).
+          // Per-layer token breakdown. When CONTEXT_ASSEMBLY_ENABLED ran, the
+          // ContextBundle returned by contextAssembler already carries per-
+          // layer counts on the (possibly compressed) bundle — prefer those
+          // so the log reflects what synthesis actually saw. Otherwise group
+          // validToolResults inline by source-canonical-id (B.10:
+          // Math.ceil(str.length / 4) when no SDK-side count is available).
+          const sourceBundles = assembledBundle?.tool_bundles ?? validToolResults
           const tokensFor = (predicate: (toolName: string) => boolean): number => {
             let chars = 0
-            for (const tb of validToolResults) {
+            for (const tb of sourceBundles) {
               if (!predicate(tb.tool_name)) continue
               for (const r of tb.results) chars += r.content.length
             }
@@ -617,7 +646,7 @@ export async function POST(request: Request) {
           }
           void writeContextAssemblyLog({
             query_id: queryId,
-            l1_tokens: tokensFor(n => [
+            l1_tokens: assembledBundle?.l1_tokens ?? tokensFor(n => [
               'chart_facts_query', 'divisional_query', 'kp_query',
               'manifest_query', 'query_kp_ruling_planets', 'query_varshaphala',
               'saham_query', 'temporal', 'timeline_query',
@@ -629,9 +658,9 @@ export async function POST(request: Request) {
               'pattern_register', 'resonance_register',
               'contradiction_register', 'cluster_atlas',
             ].includes(n)),
-            l4_tokens: tokensFor(n => ['remedial_codex_query', 'domain_report_query'].includes(n)),
-            vector_tokens: tokensFor(n => n === 'vector_search'),
-            cgm_tokens: tokensFor(n => n === 'cgm_graph_walk'),
+            l4_tokens: assembledBundle?.l4_tokens ?? tokensFor(n => ['remedial_codex_query', 'domain_report_query'].includes(n)),
+            vector_tokens: assembledBundle?.vector_tokens ?? tokensFor(n => n === 'vector_search'),
+            cgm_tokens: assembledBundle?.cgm_tokens ?? tokensFor(n => n === 'cgm_graph_walk'),
             synthesis_model_id: modelId,
             model_max_context: modelMeta.maxInputTokens ?? null,
             b3_compliant: citationCheck.gate_result === 'PASS',
