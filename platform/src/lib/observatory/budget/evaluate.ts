@@ -192,10 +192,19 @@ function coerceThresholds(value: unknown): AlertThreshold[] {
       typeof (v as { pct?: unknown }).pct === 'number' &&
       typeof (v as { channel?: unknown }).channel === 'string'
     ) {
-      out.push({
+      const entry: AlertThreshold = {
         pct: (v as { pct: number }).pct,
         channel: (v as { channel: string }).channel,
-      })
+      }
+      // ND.S3.2.1 fix — preserve channel_target so the dispatcher can route
+      // webhook alerts to the stored URL after a DB round-trip. Only attach
+      // when the source value is a non-empty string; null/undefined/empty
+      // collapse to absence (no explicit `undefined` key in the result).
+      const target = (v as { channel_target?: unknown }).channel_target
+      if (typeof target === 'string' && target.length > 0) {
+        entry.channel_target = target
+      }
+      out.push(entry)
     }
   }
   return out

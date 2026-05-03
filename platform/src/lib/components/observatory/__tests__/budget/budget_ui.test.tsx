@@ -4,8 +4,8 @@
 // Render the components with React Testing Library against a stubbed API
 // client (createBudgetRule) — no fetches actually leave jsdom.
 
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 
 // API-client mock for the form's submit path.
 const createBudgetRuleMock = vi.fn()
@@ -14,9 +14,14 @@ vi.mock('@/lib/api-clients/observatory', () => ({
   evaluateBudgets: vi.fn(async () => ({ results: [] })),
 }))
 
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ refresh: vi.fn() }),
+}))
+
 import { BudgetStatusChip } from '../../budget/BudgetStatusChip'
 import { BudgetRuleCard } from '../../budget/BudgetRuleCard'
 import { CreateBudgetRuleForm } from '../../budget/CreateBudgetRuleForm'
+import { RunEvaluationButton } from '../../budget/RunEvaluationButton'
 import type {
   BudgetEvaluationResult,
   BudgetRuleRow,
@@ -216,5 +221,66 @@ describe('CreateBudgetRuleForm', () => {
     // The default seeded thresholds (80/log, 95/email) should round-trip.
     expect(payload.alert_thresholds).toHaveLength(2)
     expect(onCreated).toHaveBeenCalledTimes(1)
+  })
+})
+
+// USTAD_S3_4 — closes S3.3 AC.6: the button now POSTs the scheduled-run
+// endpoint that both evaluates AND dispatches alerts, instead of the GET
+// endpoint that only evaluated.
+describe('RunEvaluationButton — wired to POST /evaluate/run (USTAD_S3_4)', () => {
+  let originalFetch: typeof globalThis.fetch
+  let fetchMock: ReturnType<typeof vi.fn>
+
+  beforeEach(() => {
+    originalFetch = globalThis.fetch
+    fetchMock = vi.fn()
+    globalThis.fetch = fetchMock as unknown as typeof globalThis.fetch
+  })
+
+  afterEach(() => {
+    globalThis.fetch = originalFetch
+  })
+
+  it('9. clicking the button fires POST /evaluate/run and shows evaluated/fired counts', async () => {
+    fetchMock.mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          evaluated_count: 3,
+          alerts_fired_count: 2,
+          dispatch_results: [
+            {
+              rule_id: 'rule-A',
+              outcomes: [{ channel: 'log', success: true }],
+            },
+            {
+              rule_id: 'rule-B',
+              outcomes: [{ channel: 'log', success: true }],
+            },
+          ],
+          evaluated_at: '2026-05-03T10:00:00Z',
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
+      ),
+    )
+
+    render(<RunEvaluationButton />)
+    fireEvent.click(screen.getByTestId('budgets-run-evaluation'))
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(1)
+    })
+    const [url, init] = fetchMock.mock.calls[0]
+    expect(url).toBe('/api/admin/observatory/budget-rules/evaluate/run')
+    expect((init as RequestInit).method).toBe('POST')
+
+    await waitFor(() => {
+      const fb = screen.getByTestId('budgets-run-feedback')
+      expect(fb.textContent).toMatch(/Evaluated 3 rules/)
+      expect(fb.textContent).toMatch(/2 alerts fired/)
+    })
+    // No dispatch errors → secondary line is absent.
+    expect(
+      screen.queryByTestId('budgets-run-dispatch-errors'),
+    ).not.toBeInTheDocument()
   })
 })
