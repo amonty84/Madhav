@@ -131,15 +131,17 @@ export const MODELS: ModelMeta[] = [
   },
 
   // ── Google — Gemini ─────────────────────────────────────────────────────────
-  // Worker: gemini-2.0-flash-lite  |  Mid: gemini-2.5-flash  |  Premium: gemini-2.5-pro
+  // Worker: gemini-2.5-flash-lite  |  Mid: gemini-2.5-flash  |  Premium: gemini-2.5-pro
   //
-  // gemini-2.0-flash-lite is the dedicated planner/worker: $0.015/$0.06 per 1M,
-  // supports tool-use, 1M context window, 8K max output.
+  // gemini-2.5-flash-lite is the dedicated planner/worker: confirmed live on
+  // Google OpenAI-compat endpoint (HTTP 200, smoke test 2026-05-03).
+  // Replaces gemini-2.0-flash-lite which was dropped from the OpenAI-compat
+  // endpoint (HTTP 404 confirmed 2026-05-03 — all variant IDs tested).
   {
-    id: 'gemini-2.0-flash-lite',
+    id: 'gemini-2.5-flash-lite',
     provider: 'google',
     tier: 'worker',
-    label: 'Gemini 2.0 Flash Lite',
+    label: 'Gemini 2.5 Flash Lite',
     hint: 'Lightest Google model — planner + quick answers',
     speedTier: 'fast',
     maxOutputTokens: 8_192,
@@ -341,35 +343,57 @@ export const MODELS: ModelMeta[] = [
   // All models served via NVIDIA's free endpoint (https://integrate.api.nvidia.com/v1).
   // Cost fields reflect the free tier ($0.00) — update if billing is activated.
   //
-  // Confirmed-live models as of 2026-05-02 catalog check:
-  //   moonshotai/kimi-k2-instruct            ✅ — synthesis primary
-  //   nvidia/llama-3.3-nemotron-super-49b-v1 ✅ — deep planner (Nemotron Ultra successor)
-  //   nvidia/nemotron-3-super-120b-a12b      ✅ — context_assembly + fast planner
-  //   meta/llama-3.1-8b-instruct             ✅ — worker
+  // ── Comprehensive scan 2026-05-03 (nim_synthesis_candidates.mjs) ────────────
+  // Active (✅):
+  //   mistralai/mistral-large-3-675b-instruct-2512   ✅  554ms  675B — ctx TBD (likely 128K)
+  //   openai/gpt-oss-120b                            ✅  425ms  120B — ctx TBD; replied "?"
+  //   openai/gpt-oss-20b                             ✅  364ms   20B — ctx TBD; replied "?"
+  //   nvidia/nemotron-3-super-120b-a12b              ✅ 4662ms  120B — 1M ctx CONFIRMED ✓ synthesis primary
+  //   nvidia/llama-3.3-nemotron-super-49b-v1         ✅ 6776ms   49B — ctx ~128K (Llama 3.3 base)
   //
-  // Dead / removed from NIM free tier (do not route traffic here):
-  //   deepseek-ai/deepseek-v4-pro            ⏱ TIMEOUT (no free-tier access)
-  //   nvidia/llama-3.1-nemotron-ultra-253b-v1 ❌ HTTP 404 (not on free tier)
-  //   qwen/qwen3-235b-a22b                   ⚠️ HTTP 410 EOL
-  //   All other DeepSeek + Qwen models       ❌/⚠️ 404 or EOL
+  // Timing out at 30s (do not route synthesis traffic here):
+  //   deepseek-ai/deepseek-v4-flash    ⏱ — was ✅ 13.6s on 2026-05-02; NIM free tier pulled?
+  //   deepseek-ai/deepseek-v4-pro      ⏱ — was ⏱ on 2026-05-02 as well (never served)
+  //   deepseek-ai/deepseek-v3.2        ⏱ — new in catalog, too slow for free tier
+  //   deepseek-ai/deepseek-v3.1-terminus ⏱
+  //   moonshotai/kimi-k2.6             ⏱ — newer variant of kimi-k2-instruct, not serving
+  //   moonshotai/kimi-k2-thinking      ⏱
+  //   qwen/qwen3.5-397b-a17b           ⏱
+  //   meta/llama-3.1-405b-instruct     ⏱
+  //   meta/llama-3.1-8b-instruct       ⏱ — was ✅ 2026-05-02; now removed/degraded
+  //
+  // Dead (HTTP 404/410):
+  //   nvidia/llama-3.1-nemotron-ultra-253b-v1  ❌ 404 — not on free tier
+  //   qwen/qwen3-235b-a22b                     ⚠️ 410 EOL
+  //
+  // 1M context verdict (2026-05-03):
+  //   ONLY nvidia/nemotron-3-super-120b-a12b has CONFIRMED 1M context + is actively serving.
+  //   All DeepSeek models (the natural 1M candidates) are currently unavailable on NIM free tier.
+  //   Mistral Large 3 675B is active and promising but context window UNVERIFIED
+  //   (run nim_1m_context_scan.mjs to confirm — if ≥1M it becomes the preferred synthesis model).
+  //   moonshotai/kimi-k2-instruct: active but 256K only → does NOT meet Whole-Chart-Read minimum.
+  //
+  // Synthesis routing update 2026-05-03:
+  //   nemotron-3-super-120b-a12b promoted to synthesis primary (only confirmed 1M ctx).
+  //   kimi-k2-instruct retained in registry (256K) but removed from synthesis routing.
   //
   // Planner routing (via getNvidiaPlanner / getNvidiaContextAssembler):
-  //   multi_domain | remedial | holistic → nemotron-super-49b-v1  (deep CoT, Nemotron Ultra successor)
-  //   planetary | dasha | transit        → nemotron-3-super-120b  (fast structured JSON, 1M ctx)
-  //   context_assembly                   → nemotron-3-super-120b  (1M ctx, RULER-1M 91.64)
-  //   summarization / fallback           → llama-3.1-8b           (worker)
+  //   multi_domain | remedial | holistic → nemotron-super-49b-v1   (deep CoT, 6.8s cold-start)
+  //   planetary | dasha | transit        → nemotron-3-super-120b   (fast JSON, 356ms, 1M ctx)
+  //   context_assembly                   → nemotron-3-super-120b   (1M ctx, RULER-1M 91.64)
+  //   summarization / fallback / worker  → nemotron-3-super-120b
 
   // — User-selectable synthesis models —
   {
-    // DEPRECATED 2026-05-02 — smoke test: ⏱ timeout (no HTTP headers in 15s on
-    // NIM free tier). Likely not yet available on free endpoint or heavily queued.
-    // Removed from STACK_ROUTING; retained as a selectable model ID for when/if
-    // NVIDIA makes it available. Do not route synthesis traffic here until re-tested.
+    // TIMEOUT 2026-05-02 + 2026-05-03 — both smoke tests: no HTTP headers in 15s.
+    // Not available on NIM free tier. deepseek-ai/deepseek-v4-flash also times out.
+    // Retained for when/if NVIDIA activates DeepSeek V4 on the free endpoint.
+    // Do not route synthesis traffic here until re-tested and confirmed ✅.
     id: 'deepseek-ai/deepseek-v4-pro',
     provider: 'nvidia',
     tier: 'premium',
     label: 'DeepSeek V4 Pro (NIM) [unavailable]',
-    hint: 'UNAVAILABLE on NIM free tier — timeout on smoke test 2026-05-02',
+    hint: 'UNAVAILABLE on NIM free tier — timeout on smoke tests 2026-05-02 + 2026-05-03',
     speedTier: 'deep',
     maxInputTokens: 1_000_000,  // Whole-Chart-Read: full L2.5 corpus in one pass
     maxOutputTokens: 32_768,
@@ -410,6 +434,45 @@ export const MODELS: ModelMeta[] = [
     costPer1MOutput: 0.00,
   },
 
+  {
+    // NIM SYNTHESIS FALLBACK (2026-05-03) — nim_1m_context_scan.mjs: ✅ 374ms, 1M ctx confirmed.
+    // 30B reasoning model (Nemotron nano omni variant). Ranked #2 of 2 confirmed-1M NIM models.
+    // Serves as synthesis fallback behind nemotron-3-super-120b-a12b (#1, 120B).
+    // Both are free on NIM; both have confirmed 1M context for Whole-Chart-Read.
+    id: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning',
+    provider: 'nvidia',
+    tier: 'worker',
+    label: 'Nemotron 3 Nano 30B Reasoning',
+    hint: 'NIM synthesis fallback — 1M context confirmed, 374ms. Reasoning model.',
+    speedTier: 'fast',
+    maxInputTokens: 1_000_000,  // confirmed by nim_1m_context_scan.mjs 2026-05-03
+    maxOutputTokens: 32_768,
+    capabilities: [],
+    role: 'both',
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
+
+  {
+    // NEW 2026-05-03 — nim_synthesis_candidates.mjs: ✅ HTTP 200 in 554ms.
+    // 675B total params (likely MoE). Context window UNVERIFIED — run nim_1m_context_scan.mjs.
+    // If context_length ≥ 1M this becomes the preferred NIM synthesis model (largest active params).
+    // Excluded from Whole-Chart-Read synthesis routing until context is confirmed ≥ 1M.
+    // maxInputTokens omitted until confirmed; supportsWholeChartRead() will return false.
+    id: 'mistralai/mistral-large-3-675b-instruct-2512',
+    provider: 'nvidia',
+    tier: 'premium',
+    label: 'Mistral Large 3 675B (NIM)',
+    hint: 'NIM: 675B confirmed active 554ms. ⚠ Context window unverified — not yet routed for synthesis.',
+    speedTier: 'deep',
+    // maxInputTokens: 1_000_000,  // uncomment + confirm via nim_1m_context_scan.mjs
+    maxOutputTokens: 32_768,
+    capabilities: [],  // tool-use capability unverified
+    role: 'synthesis',  // pending context confirmation before routing
+    costPer1MInput: 0.00,
+    costPer1MOutput: 0.00,
+  },
+
   // — Internal planner-only models —
   {
     // DEEP PLANNER MODEL — confirmed live on NIM free tier (catalog check 2026-05-02).
@@ -429,22 +492,23 @@ export const MODELS: ModelMeta[] = [
     costPer1MOutput: 0.00,
   },
   {
-    // CONTEXT ASSEMBLY MODEL (CALL_TYPE_ROUTING.context_assembly.primary).
+    // NIM SYNTHESIS PRIMARY (2026-05-03) + CONTEXT ASSEMBLY MODEL.
     // 120B total / 12B active hybrid Mamba-Transformer.
     // 1M-token context window — PRACTICAL (linear-time Mamba layers, not quadratic
     // attention). RULER-1M score: 91.64 — highest long-context recall on NIM.
-    // Used for the context_assembly pipeline step: receives all retrieved tool
-    // outputs and compresses/reorders them before handing to synthesis.
+    // Promoted to synthesis primary 2026-05-03: only confirmed 1M ctx model actively
+    // serving on NIM free tier after DeepSeek and Qwen models went offline.
+    // Also handles context_assembly, planner_fast, and worker pipeline steps.
     id: 'nvidia/nemotron-3-super-120b-a12b',
     provider: 'nvidia',
     tier: 'mid',
     label: 'Nemotron 3 Super 120B',
-    hint: 'Context assembly — 1M practical context, RULER-1M 91.64 (internal only)',
+    hint: 'NIM synthesis primary — 1M context confirmed, RULER-1M 91.64. Also context assembly + planner.',
     speedTier: 'balanced',
     maxInputTokens: 1_000_000,  // linear-time Mamba — 1M is practical, not theoretical
     maxOutputTokens: 65_536,
     capabilities: [],
-    role: 'planner',
+    role: 'both',  // promoted from 'planner' — synthesis primary as of 2026-05-03
     costPer1MInput: 0.00,
     costPer1MOutput: 0.00,
   },
@@ -465,12 +529,15 @@ export const MODELS: ModelMeta[] = [
     costPer1MOutput: 0.00,
   },
   {
-    // Summarization worker / fallback. Minimal latency, minimal cost.
+    // DEGRADED 2026-05-03 — smoke test: ⏱ TIMEOUT (was ✅ HTTP 200 on 2026-05-02).
+    // Likely removed or overloaded on NIM free tier. NIM worker role has been
+    // transferred to nvidia/nemotron-3-super-120b-a12b (confirmed live, 356ms).
+    // Retained as historical record; STACK_ROUTING no longer routes here.
     id: 'meta/llama-3.1-8b-instruct',
     provider: 'nvidia',
     tier: 'worker',
-    label: 'Llama 3.1 8B',
-    hint: 'NVIDIA worker — summarization and lightweight planning (internal only)',
+    label: 'Llama 3.1 8B [degraded]',
+    hint: 'TIMEOUT on NIM free tier 2026-05-03 — do not use. Was worker; replaced by nemotron-3-super-120b.',
     speedTier: 'fast',
     maxOutputTokens: 8_192,
     capabilities: [],
@@ -485,9 +552,9 @@ export const MODELS: ModelMeta[] = [
 // overrides this. DEFAULT_MODEL_ID is now derived from the default stack —
 // kept for backward compatibility with call sites that read it directly.
 export const DEFAULT_STACK_ID = 'nim' as const
-// Updated 2026-05-02: deepseek-ai/deepseek-v4-pro timed out on NIM free tier smoke test.
-// Routing now via kimi-k2-instruct (✅ confirmed live). DEFAULT_MODEL_ID updated to match.
-export const DEFAULT_MODEL_ID = 'moonshotai/kimi-k2-instruct' // NIM stack synthesis primary
+// Updated 2026-05-03: kimi-k2-instruct removed from synthesis (256K ctx — fails 340K minimum).
+// nemotron-3-super-120b-a12b is the only confirmed 1M ctx model actively serving on NIM free tier.
+export const DEFAULT_MODEL_ID = 'nvidia/nemotron-3-super-120b-a12b' // NIM stack synthesis primary
 
 /**
  * Title generator always uses the worker of the same family as the user's
@@ -564,10 +631,10 @@ export const PROVIDER_LABEL: Record<Provider, string> = {
  */
 export const FAMILY_WORKER: Record<Provider, string> = {
   anthropic: 'claude-haiku-4-5',                // tier=worker  $1.00/$5.00
-  google:    'gemini-2.0-flash-lite',            // tier=worker  $0.015/$0.06
+  google:    'gemini-2.5-flash-lite',            // tier=worker  $0.015/$0.06  (was gemini-2.0-flash-lite, dropped from OpenAI-compat 2026-05-03)
   openai:    'gpt-4.1-nano',                     // tier=worker  $0.05/$0.20  (was gpt-4o-mini)
   deepseek:  'deepseek-v4-flash',                // tier=mid     $0.14/$0.28  (was deepseek-chat)
-  nvidia:    'meta/llama-3.1-8b-instruct',       // tier=worker  $0.00 (free NIM endpoint)
+  nvidia:    'nvidia/nemotron-3-super-120b-a12b', // tier=worker  $0.00 (llama-3.1-8b timed out 2026-05-03; nemotron-3 confirmed ✅ 356ms)
 }
 
 const ULTIMATE_WORKER_FALLBACK = 'claude-haiku-4-5'
@@ -621,7 +688,7 @@ export const NVIDIA_FAST_PLANNER_QUERY_CLASSES = [
  *                                          replaces: nemotron-ultra-253b-v1 (❌ HTTP 404 on free tier)
  *   planetary | dasha | transit         → nemotron-3-super-120b-a12b       (✅ HTTP 200 598ms)
  *                                          replaces: qwen3-235b-a22b        (⚠️ HTTP 410 EOL)
- *   everything else                     → llama-3.1-8b-instruct            (worker, minimal latency)
+ *   everything else                     → nemotron-3-super-120b-a12b       (worker; llama-3.1-8b timed out 2026-05-03)
  */
 export function getNvidiaPlanner(queryClass: string): string {
   if ((NVIDIA_DEEP_PLANNER_QUERY_CLASSES as readonly string[]).includes(queryClass)) {
@@ -634,7 +701,8 @@ export function getNvidiaPlanner(queryClass: string): string {
     // Replaced with nemotron-3-super-120b-a12b (✅ 598ms, 1M ctx, RULER-1M 91.64).
     return 'nvidia/nemotron-3-super-120b-a12b'
   }
-  return 'meta/llama-3.1-8b-instruct'
+  // llama-3.1-8b timed out on 2026-05-03 smoke test; nemotron-3-super is confirmed live
+  return 'nvidia/nemotron-3-super-120b-a12b'
 }
 
 /**
@@ -667,10 +735,12 @@ export function getNvidiaContextAssembler(): string {
  * available on the free tier again.
  */
 export function getNvidiaSynthesisModel(): string {
-  // Updated 2026-05-02: deepseek-ai/deepseek-v4-pro timed out; catalog check
-  // confirmed all DeepSeek/Qwen NIM models are EOL or 404 on free tier.
-  // kimi-k2-instruct is the only confirmed-live synthesis-capable model.
-  return 'moonshotai/kimi-k2-instruct'
+  // Updated 2026-05-03: kimi-k2-instruct removed — 256K context fails 340K Whole-Chart-Read minimum.
+  // All DeepSeek models timing out on NIM free tier (v4-flash was ✅ on 2026-05-02, now ⏱).
+  // nemotron-3-super-120b-a12b is the ONLY confirmed 1M ctx model actively serving on free tier.
+  // When DeepSeek V4 Flash comes back online on NIM, reassign to 'deepseek-ai/deepseek-v4-flash'.
+  // When mistral-large-3-675b context is confirmed ≥ 1M, reassign to that (675B > 120B).
+  return 'nvidia/nemotron-3-super-120b-a12b'
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -738,11 +808,11 @@ export const STACK_PRIMARY_PROVIDER: Record<ModelStack, Provider> = {
  * — planner / worker entries: both support tool-use where required
  *
  * ─── Stack synthesis context windows ────────────────────────────────────────
- *   NIM       deepseek-ai/deepseek-v4-pro    1M   free
- *   Anthropic claude-opus-4-7                1M   $5/$25 per 1M
- *   Gemini    gemini-2.5-pro                 2M   $1.25–$2.50/$10–$15 per 1M
- *   GPT       gpt-4.1                        1M   $2/$8 per 1M
- *   DeepSeek  deepseek-v4-pro                1M   $1.74/$3.48 per 1M (post-promo)
+ *   NIM       nvidia/nemotron-3-super-120b-a12b  1M   free  (DeepSeek V4 unavail 2026-05-03)
+ *   Anthropic claude-opus-4-7                    1M   $5/$25 per 1M
+ *   Gemini    gemini-2.5-pro                     2M   $1.25–$2.50/$10–$15 per 1M
+ *   GPT       gpt-4.1                            1M   $2/$8 per 1M
+ *   DeepSeek  deepseek-v4-pro                    1M   $1.74/$3.48 per 1M (post-promo)
  */
 export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: string; fallback: string }>> = {
 
@@ -772,24 +842,28 @@ export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: strin
   //   llama-3.3-nemotron-super-49b-v1 (new), meta/llama-3.1-8b-instruct.
   nim: {
     synthesis: {
-      primary:  'moonshotai/kimi-k2-instruct',              // ✅ 1T MoE, 256K ctx, 5.5s
-      fallback: 'gemini-2.5-pro',                           // 2M ctx, paid fallback
+      // Updated 2026-05-03: nemotron-3-super-120b promoted from planner to synthesis primary.
+      // Only confirmed-1M-context model actively serving on NIM free tier.
+      // kimi-k2-instruct removed (256K only — fails Whole-Chart-Read 340K minimum).
+      // DeepSeek V4 Flash (was ✅ 13.6s on 2026-05-02) is now timing out — NIM free tier pulled.
+      primary:  'nvidia/nemotron-3-super-120b-a12b',                  // ✅ 120B, 1M ctx, 653ms
+      fallback: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning',    // ✅  30B, 1M ctx, 374ms — both free NIM
     },
     planner_deep: {
-      primary:  'nvidia/llama-3.3-nemotron-super-49b-v1',   // ✅ 49B, 744ms, Nemotron Ultra successor
-      fallback: 'moonshotai/kimi-k2-instruct',              // ✅ 256K ctx, tool-use
+      primary:  'nvidia/llama-3.3-nemotron-super-49b-v1',   // ✅ 49B, 6.8s cold-start, deep CoT
+      fallback: 'nvidia/nemotron-3-super-120b-a12b',        // ✅ 1M ctx fallback (kimi removed: 256K)
     },
     planner_fast: {
-      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 598ms, fast structured output
-      fallback: 'meta/llama-3.1-8b-instruct',               // ✅ 8B fallback, slow but live
+      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 356ms, fast structured output
+      fallback: 'nvidia/llama-3.3-nemotron-super-49b-v1',   // ✅ 49B fallback (llama-3.1-8b timed out 2026-05-03)
     },
     context_assembly: {
-      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 1M ctx, RULER-1M 91.64, 598ms
-      fallback: 'moonshotai/kimi-k2-instruct',              // ✅ 256K ctx fallback
+      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 1M ctx, RULER-1M 91.64
+      fallback: 'nvidia/llama-3.3-nemotron-super-49b-v1',   // ✅ 49B fallback (kimi removed: 256K)
     },
     worker: {
-      primary:  'meta/llama-3.1-8b-instruct',               // ✅ 8B, free, live
-      fallback: 'claude-haiku-4-5',                         // prompt-caching, reliable
+      primary:  'nvidia/nemotron-3-super-120b-a12b',        // ✅ 356ms, confirmed live 2026-05-03
+      fallback: 'claude-haiku-4-5',                         // prompt-caching, reliable paid fallback
     },
   },
 
@@ -832,14 +906,14 @@ export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: strin
     },
     planner_fast: {
       primary:  'gemini-2.5-flash',                         // 1M ctx, fast + cheap
-      fallback: 'gemini-2.0-flash-lite',                    // $0.015, ultra-cheap
+      fallback: 'gemini-2.5-flash-lite',                    // $0.015, ultra-cheap (replaced gemini-2.0-flash-lite 2026-05-03)
     },
     context_assembly: {
       primary:  'gemini-2.5-flash',                         // 1M ctx, cost-efficient
       fallback: 'gemini-2.5-pro',                           // 2M ctx fallback
     },
     worker: {
-      primary:  'gemini-2.0-flash-lite',                    // $0.015/$0.06, tool-use
+      primary:  'gemini-2.5-flash-lite',                    // $0.015/$0.06, tool-use (replaced gemini-2.0-flash-lite, HTTP 404 2026-05-03)
       fallback: 'gemini-2.5-flash',                         // 1M ctx fallback
     },
   },

@@ -31,10 +31,9 @@ __pycache__/
 # Failed git rewrite leftovers (crashed session artifacts)
 .git.failed-rewrite-*/
 
-# NVIDIA NIM ad-hoc test scripts (not source — one-off diagnostics)
-platform/scripts/nim_*.mjs
-platform/scripts/run_nim_*.command
+# NVIDIA NIM diagnostic report output (not source)
 NVIDIA_NIM_LLM_Report.docx
+# platform/scripts/nim_*.mjs — removed 2026-05-03: scripts are tracked diagnostic tools, not scratch
 
 # Git worktree sibling directories (created by parallel session setup)
 # Pattern: ../Madhav-{session-id}/ — these are worktrees, not subdirectories,
