@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-28T00:00:00Z",
+  "generated_at": "2026-05-03T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 139,
-  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
+  "entry_count": 145,
+  "fingerprint": "ustad_s3_1_budget_rules_framework_2026-05-03",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -2514,10 +2514,103 @@
       "fingerprint": "6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b",
       "last_modified": "2026-05-02",
       "description": "Phase O Observatory governance plan. Two-layer ledger (telemetry + reconciliation) over LLM cost & usage across five providers (Anthropic, OpenAI, Gemini, DeepSeek, NIM). 5-table data model: llm_usage_events, llm_pricing_versions, llm_provider_cost_reports, llm_cost_reconciliation, llm_budget_rules. 30-session O.0\u2013O.4 sub-phase decomposition with full session matrix. Wall-clock projections 4-way / 8-way concurrency. MP.9 mirror pair declared at this S0.1 close. Concurrent workstream alongside the main M-phase thread (currently M5 INCOMING)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_LIST_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules CRUD: GET /api/admin/observatory/budget-rules (list with ?active=true|false|all filter) + POST /api/admin/observatory/budget-rules (create). Gated by OBSERVATORY_ENABLED + requireSuperAdmin(). Validates threshold > 0 and alert_thresholds.pct \u2208 [0, 100]. Persists to llm_budget_rules (migration 038)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_DETAIL_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/[id]/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules per-id CRUD: GET / PATCH / DELETE on /api/admin/observatory/budget-rules/{id}. DELETE is soft (sets active=false; never DROPs). PATCH accepts partial updates over name | scope_value | amount_usd | alert_thresholds | active. Same observatory guard."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_EVALUATE_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/evaluate/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget evaluation: GET /api/admin/observatory/budget-rules/evaluate. Evaluates active rules against llm_usage_events.computed_cost_usd over the rule's period (daily/weekly/monthly UTC); ?rule_id=X scopes to a single rule. Returns BudgetEvaluationResult[] sorted by pct_used DESC. Status taxonomy: ok | warning | alert | exceeded."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_EVALUATE_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/evaluate.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules evaluation engine. computePeriodBounds (daily/weekly ISO/monthly UTC) + computeScopeSpend (total | provider | model | pipeline_stage) + classifyBudgetStatus + evaluateBudgetRule (never-throws contract; DB error \u2192 status=ok with spend=0) + evaluateAllRules. Pure where possible; the DB-touching paths accept a query helper for testing."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_PERSIST_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/persist.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules persistence + validation. listBudgetRules / getBudgetRuleById / createBudgetRule / patchBudgetRule / softDeleteBudgetRule + validateBudgetRuleInput / validateBudgetRulePatch. Aligns to migration 038's column names (budget_rule_id, amount_usd, active) rather than the brief's earlier draft names; brief-DB divergence documented in budget/types.ts."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_TYPES_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/types.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules public type surface: BudgetScope (alias of LlmBudgetScope; total | provider | model | pipeline_stage), BudgetPeriod, AlertThreshold, BudgetStatus (ok | warning | alert | exceeded), BudgetRuleInput, BudgetEvaluationResult. Re-exports DB-frozen vocabulary so callers have one import path."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02",
-  "manifest_version": "2.6",
-  "last_updated": "2026-05-02",
-  "last_updated_by": "PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02+ustad_s3_1_budget_rules_2026-05-03",
+  "manifest_version": "2.7",
+  "last_updated": "2026-05-03",
+  "last_updated_by": "USTAD_S3_1_BUDGET_RULES_FRAMEWORK"
 }

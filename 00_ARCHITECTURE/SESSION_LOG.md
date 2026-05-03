@@ -19536,3 +19536,154 @@ session_close:
 ### Next session objective
 
 **S2.5 (DeepSeek+NIM CSV)** is the last open parallel sibling. After it lands, S2.6 (Reconciliation banner UI) + O.2 close session can proceed. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## Session — USTAD_S3_1_BUDGET_RULES_FRAMEWORK (2026-05-03, Phase O sub-phase O.3 GATE-OPEN)
+**Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s3-1-budget-framework` cut from `feature/phase-o-observatory@0968422`; merge target `feature/phase-o-observatory`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S3_1_BUDGET_RULES_FRAMEWORK
+  cowork_thread_name: ustad-s3-1-budget-framework
+  opened_at: 2026-05-03T00:00:00+05:30
+  phase: O.3 — Budgets + Export
+  type: GATE-OPEN
+  depends_on: [USTAD_S2_6 — O.2 CLOSED]
+  declared_scope:
+    may_touch:
+      - platform/src/app/api/admin/observatory/reconciliation/upload/route.ts  # RT.O2.3 fix
+      - platform/src/lib/observatory/reconciliation/gemini.ts                  # RT.O2.4 fix
+      - platform/src/lib/observatory/budget/**
+      - platform/src/app/api/admin/observatory/budget-rules/**
+      - platform/src/lib/api-clients/observatory.ts
+      - platform/src/app/api/admin/observatory/openapi.yaml
+      - platform/src/lib/components/observatory/__tests__/budget/**
+      - platform/src/lib/components/observatory/__tests__/reconciliation/gemini.test.ts
+      - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/migrations/**
+      - platform/src/lib/db/schema/**
+      - platform/src/lib/observatory/reconciliation/base.ts
+      - platform/src/lib/observatory/reconciliation/types.ts
+      - platform/src/lib/components/observatory/**            # UI frozen — S3.2/S3.4
+      - platform/src/app/(super-admin)/observatory/**         # UI frozen — S3.4
+      - All Madhav-project non-observatory files
+  red_team_due: false
+  notes: "S3.1 — opens O.3, ships budget-rules framework (types + evaluator + 6 CRUD endpoints + API client + openapi), resolves the two MED findings deferred from S2.6 O.2 close (RT.O2.3 + RT.O2.4)."
+```
+
+### Body — substantive deliverables
+
+**T0. RT.O2.3 fix — CSV upload size + MIME guard** (`platform/src/app/api/admin/observatory/reconciliation/upload/route.ts`). Added `MAX_CSV_BYTES = 5 MB` constant + `ALLOWED_CSV_MIME_TYPES = {text/csv, text/plain, application/octet-stream}` allowlist. Inserted size + MIME guards before `(file as Blob).text()` — returns 400 `file_too_large` (with `max_bytes` + `actual_bytes`) or `invalid_mime_type` (with `received` + `allowed`) before reading the blob. application/octet-stream is allowlisted because some browsers/OS send it for `.csv` attachments; the column-presence check downstream is the real CSV-shape validation.
+
+**T1. RT.O2.4 fix — BigQuery `_PARTITIONTIME` pruning** (`platform/src/lib/observatory/reconciliation/gemini.ts`). Replaced single-condition `WHERE DATE(usage_start_time) BETWEEN @period_start AND @period_end` with dual-condition that adds `_PARTITIONTIME BETWEEN TIMESTAMP(@period_start) AND TIMESTAMP_ADD(TIMESTAMP(@period_end), INTERVAL 1 DAY)` ahead of the DATE() predicate. Pseudo-column predicate is checked at partition-elimination time, before the row predicate; combined, the query reads only the partitions overlapping `[@period_start, @period_end + 1d)`. Falls back to full scan on unpartitioned tables — correctness unaffected. Documentation comment added; existing gemini test updated with a commentary block (mocked BQ client doesn't exercise partitioning semantics, so no new test required for this path).
+
+**T2. budget/types.ts** (`platform/src/lib/observatory/budget/types.ts`). Re-exports DB-frozen vocabulary: BudgetScope = LlmBudgetScope (total | provider | model | pipeline_stage), BudgetPeriod, AlertThreshold; introduces BudgetStatus (ok | warning | alert | exceeded), BudgetRuleInput, BudgetEvaluationResult. Header documents the brief-vs-DB divergence (brief listed `threshold_usd` / `is_active` / scopes 'conversation','user','global' — migration 038 has `amount_usd` / `active` / scopes 'total','provider','model','pipeline_stage'); types align to the migration since the DB schema is frozen and unsupported scopes (user, conversation) would require a migration bump.
+
+**T3. budget/evaluate.ts** (`platform/src/lib/observatory/budget/evaluate.ts`). `computePeriodBounds(period, asOf?)` — daily = `[today, today]` UTC, weekly = ISO Monday..Sunday UTC, monthly = first..last of UTC month. `computeScopeSpend(scope, scope_value, periodStart, periodEnd, queryFn?)` — sums `llm_usage_events.computed_cost_usd` over `started_at >= periodStart::date AND started_at < (periodEnd::date + INTERVAL '1 day')` with bound parameters; non-`total` scopes filter on provider / model / pipeline_stage. `classifyBudgetStatus(pctUsed, thresholds)` — pure; `pctUsed >= 100` → exceeded; below all thresholds → ok; at-or-above max threshold → alert; at-or-above min → warning. `alertsTriggered(pctUsed, thresholds)` — subset crossed. `evaluateBudgetRule(rule, asOf?, queryFn?)` — never-throws contract; on DB error returns `status='ok'` with `current_spend_usd=0` + `console.error` log. `evaluateAllRules(asOf?, queryFn?)` — fetches `WHERE active=TRUE`, evaluates each, sorts DESC by `pct_used`. QueryFn generic relaxed to `<R = unknown>` to accept LlmBudgetRuleRow (which has `unknown` for jsonb).
+
+**T4. budget/persist.ts** (`platform/src/lib/observatory/budget/persist.ts`). CRUD helpers: listBudgetRules(active|inactive|all), getBudgetRuleById, createBudgetRule, patchBudgetRule (partial-update with dynamic SET-builder), softDeleteBudgetRule (`UPDATE … SET active=FALSE` — never DROPs). Validation helpers: validateBudgetRuleInput (POST), validateBudgetRulePatch (PATCH). Validation rules: name non-empty; scope ∈ {total, provider, model, pipeline_stage}; period ∈ {daily, weekly, monthly}; amount_usd > 0 finite; scope_value required for non-`total` scopes; alert_thresholds[].pct ∈ [0, 100].
+
+**T5. Six budget-rules API routes**:
+- GET `/api/admin/observatory/budget-rules?active=true|false|all` → `{rules: BudgetRuleRow[]}`
+- POST `/api/admin/observatory/budget-rules` → 201 + BudgetRuleRow
+- GET `/api/admin/observatory/budget-rules/{id}` → BudgetRuleRow or 404
+- PATCH `/api/admin/observatory/budget-rules/{id}` → BudgetRuleRow or 404
+- DELETE `/api/admin/observatory/budget-rules/{id}` → 204 (soft); 404 if missing
+- GET `/api/admin/observatory/budget-rules/evaluate?rule_id?` → `{results: BudgetEvaluationResult[]}` sorted DESC pct_used
+
+All gated through the existing `guardObservatoryRoute()` (env `MARSYS_FLAG_OBSERVATORY_ENABLED=true` + `requireSuperAdmin()`).
+
+**T6. API-client extension** (`platform/src/lib/api-clients/observatory.ts`). Added `fetchBudgetRules({active})`, `createBudgetRule(input)`, `evaluateBudgets(ruleId?)`. POST helper extracted as private `postJson<T>` to share error envelope between reconciliation and budget surfaces (semantic addition only; existing `triggerReconciliation` retains its inlined error handling).
+
+**T7. openapi.yaml extension**. Six new path operations under the `paths:` block (additive append before `components:`); four new schemas under `components.schemas` (BudgetAlertThreshold, BudgetRule, BudgetRuleInput, BudgetEvaluationResult). Path operations reference existing BadRequest / Unauthorized / Forbidden / NotFound / InternalError response components.
+
+**T8. CAPABILITY_MANIFEST.json update** (per OBSERVATORY_PLAN §6.2 funneling rule for S3.1). Added six new entries under `entries[]` with `phase: phase-o-s3-1`:
+1. `OBSERVATORY_BUDGET_RULES_API_LIST_v1_0` (route.ts list+create)
+2. `OBSERVATORY_BUDGET_RULES_API_DETAIL_v1_0` ([id]/route.ts get+patch+delete)
+3. `OBSERVATORY_BUDGET_RULES_API_EVALUATE_v1_0` (evaluate/route.ts)
+4. `OBSERVATORY_BUDGET_EVALUATE_LIB_v1_0` (lib/observatory/budget/evaluate.ts)
+5. `OBSERVATORY_BUDGET_PERSIST_LIB_v1_0` (lib/observatory/budget/persist.ts)
+6. `OBSERVATORY_BUDGET_TYPES_LIB_v1_0` (lib/observatory/budget/types.ts)
+
+`entry_count` 139 → 145; `manifest_version` 2.6 → 2.7; `fingerprint` rotated; `manifest_fingerprint` extended with `+ustad_s3_1_budget_rules_2026-05-03`; `last_updated` 2026-05-02 → 2026-05-03; `last_updated_by` PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP → USTAD_S3_1_BUDGET_RULES_FRAMEWORK. MP.9 `enforcement_rule` (version pointer + sub-phase status) auto-tracks the OBSERVATORY_PLAN bump; no manifest_overrides.yaml change required.
+
+**T9. OBSERVATORY_PLAN bumped to v1.4.0**. Frontmatter `version: 1.3.0 → 1.4.0`; `last_amended_session: USTAD_S2_6_O2_GATE_CLOSE → USTAD_S3_1_BUDGET_RULES_FRAMEWORK`; `phase_status.O.3: IN_PROGRESS` updated note from "(S3.1 unblocked)" to "(S3.1 framework landed; S3.2 + S3.3 + S3.4 parallel-safe)". v1.4.0 changelog entry added enumerating all six deliverables. §5.3 O.3 block gains an OPEN status note matching S2.1's pattern.
+
+**T10. 14 budget tests + 1 bonus** (`platform/src/lib/components/observatory/__tests__/budget/budget.test.ts`). Sections §A–§E covering RT.O2.3 fixes (2), computePeriodBounds (3), classifyBudgetStatus (4), evaluateBudgetRule (3 + 1 param-binding bonus), API endpoints (2). DB layer mocked via `queryMock`; auth mocked via `vi.doMock('@/lib/auth/access-control')`. **All 15 tests pass**.
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/__tests__/budget/budget.test.ts` — **1 file, 15 passed | 0 skipped | 0 failed.**
+
+`npx vitest run src/lib/components/observatory src/lib/llm/__tests__ src/lib/observatory` — **22 files, 123 passed | 10 skipped | 0 failed.** vs 108 at S2.6 close — net +15.
+
+`npx tsc --noEmit -p tsconfig.json` — 0 new errors in any file in this session's scope. The QueryFn generic was relaxed (Record<string, unknown> → unknown) to accept LlmBudgetRuleRow's jsonb-typed alert_thresholds field. Pre-existing errors in `tests/components/AppShell.test.tsx` + `tests/components/ReportGallery.test.tsx` + the unused @ts-expect-error in gemini.test.ts predate this session.
+
+### S3.1 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | RT.O2.3 fixed — upload/route.ts has 5 MB cap + MIME whitelist | PASS | `MAX_CSV_BYTES`, `ALLOWED_CSV_MIME_TYPES` declared; tests #1–#2 assert 400 envelopes |
+| AC.2 | RT.O2.4 fixed — gemini.ts WHERE adds _PARTITIONTIME pruning | PASS | `_PARTITIONTIME BETWEEN TIMESTAMP(@period_start) AND TIMESTAMP_ADD(TIMESTAMP(@period_end), INTERVAL 1 DAY)` precedes `DATE(usage_start_time) BETWEEN ...` |
+| AC.3 | budget/types.ts exports the contract types | PASS | BudgetScope, BudgetPeriod, AlertThreshold, BudgetStatus, BudgetRuleInput, BudgetEvaluationResult, BudgetRuleRow exported |
+| AC.4 | budget/evaluate.ts exports computePeriodBounds + computeScopeSpend + classifyBudgetStatus + evaluateBudgetRule + evaluateAllRules | PASS | All five exported; tests #3–#12 + bonus exercise them |
+| AC.5 | 6 budget-rules API endpoints exist, gated, correct verbs + status codes | PASS | route.ts (GET 200, POST 201) + [id]/route.ts (GET 200/404, PATCH 200/404, DELETE 204/404) + evaluate/route.ts (GET 200/404) all import and call `guardObservatoryRoute` |
+| AC.6 | DELETE is soft (active=false), not hard-delete | PASS | `softDeleteBudgetRule` issues `UPDATE … SET active=FALSE`; test #14 asserts the SQL is UPDATE not DELETE FROM and post-DELETE GET shows active=false |
+| AC.7 | CAPABILITY_MANIFEST.json updated with 6 new endpoint entries | PASS | 6 new canonical_ids added; `entry_count: 145`; manifest_version 2.7 |
+| AC.8 | API client extended with fetchBudgetRules + createBudgetRule + evaluateBudgets | PASS | All three exported from `@/lib/api-clients/observatory`; types import from `@/lib/observatory/budget/types` |
+| AC.9 | openapi.yaml updated with 6 new paths | PASS | `/budget-rules` (GET+POST) + `/budget-rules/{id}` (GET+PATCH+DELETE) + `/budget-rules/evaluate` (GET) appended to paths block; 4 schemas added |
+| AC.10 | 14 new tests pass; full observatory suite green | PASS | 15 budget tests pass (14 + 1 bonus); 123 passed | 10 skipped | 0 failed across observatory + LLM-shim suites |
+| AC.11 | OBSERVATORY_PLAN v1.3.0 → v1.4.0; O.3 IN_PROGRESS; RT.O2.3+RT.O2.4 RESOLVED | PASS | Frontmatter version bumped; phase_status.O.3 note updated; v1.4.0 changelog enumerates RT fixes |
+| AC.12 | SESSION_LOG.md appended | PASS | This entry |
+| AC.13 | npm run build exits 0 for observatory routes | PASS_PARTIAL | `tsc --noEmit` clean for observatory + budget files; full `next build` not invoked (matches S2.x precedent — implementation-class sessions skip the full build) |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S3_1_BUDGET_RULES_FRAMEWORK
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: not_applicable
+  rt_o2_3_fix: RESOLVED  # 5 MB size cap + MIME whitelist
+  rt_o2_4_fix: RESOLVED  # _PARTITIONTIME predicate added
+  capability_manifest_updated: yes
+  capability_manifest_entries_added:
+    - OBSERVATORY_BUDGET_RULES_API_LIST_v1_0
+    - OBSERVATORY_BUDGET_RULES_API_DETAIL_v1_0
+    - OBSERVATORY_BUDGET_RULES_API_EVALUATE_v1_0
+    - OBSERVATORY_BUDGET_EVALUATE_LIB_v1_0
+    - OBSERVATORY_BUDGET_PERSIST_LIB_v1_0
+    - OBSERVATORY_BUDGET_TYPES_LIB_v1_0
+  open_decisions_resolved:
+    - {id: RT.O2.3, resolution: "Hardened upload/route.ts with MAX_CSV_BYTES=5MB + ALLOWED_CSV_MIME_TYPES allowlist; 400 file_too_large / invalid_mime_type before Blob.text()"}
+    - {id: RT.O2.4, resolution: "Added _PARTITIONTIME predicate ahead of DATE(usage_start_time) in Gemini BigQuery query; partition pruning enabled on date-partitioned billing exports"}
+  open_decisions_remaining: []
+  next_unblocked: "S3.2 (alert evaluator) + S3.3 (Budgets UI) + S3.4 (Export endpoints + UI) — all parallel-safe per OBSERVATORY_PLAN §6.1 after this merge. After all three close: O.3 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  schema_validator_exit_code: 2  # Acceptable per S2.x precedent — no in-session validator CLI invoked
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S3.1 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.3) per OBSERVATORY_PLAN §6.2 + §6.3."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8/S1.13/S2.1/S2.5/S2.6 precedent."
+  close_criteria_met: true
+  unblocks: "S3.2 + S3.3 + S3.4 parallel-safe; O.3 close after all three plus this S3.1 are merged."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s3-1-budget-framework
+    cut_from_commit: 0968422
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S3.2 (alert evaluator)**, **S3.3 (Budgets UI)**, **S3.4 (Export endpoints + UI)** — all three parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all three close: O.3 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).

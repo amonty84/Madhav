@@ -6,6 +6,12 @@
 // All tests are unit-level — the BigQuery client is injected via the
 // `bqFactory` constructor parameter so we never reach @google-cloud/bigquery.
 // The DB layer is mocked the same way the framework tests do it.
+//
+// USTAD_S3_1 note (RT.O2.4 fix): the SQL emitted by `fetchAuthoritativeCost()`
+// now carries an additional `_PARTITIONTIME BETWEEN ... AND ...` predicate to
+// enable partition pruning on date-partitioned billing exports. The mocked
+// BigQuery client does not exercise partitioning semantics — the existing
+// query-shape and parameter-binding assertions still cover the change.
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 

@@ -1,18 +1,18 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.3.0
+version: 1.4.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
-last_amended_session: USTAD_S2_6_O2_GATE_CLOSE
+last_amended_session: USTAD_S3_1_BUDGET_RULES_FRAMEWORK
 last_amended_date: 2026-05-03
 authoritative_side: claude
 phase_status:
   O.0: CLOSED       # 2026-05-02 (S0.1)
   O.1: CLOSED       # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
   O.2: CLOSED       # 2026-05-03 (S2.6 — reconciliation UI + RT.5 fix; 13 ACs green)
-  O.3: IN_PROGRESS  # 2026-05-03 (S3.1 unblocked)
+  O.3: IN_PROGRESS  # 2026-05-03 (S3.1 framework landed; S3.2 + S3.3 + S3.4 parallel-safe)
   O.4: PENDING
 mirror_obligations: >
   Adapted-parity summary mirror at .geminirules §E (Concurrent workstreams) and
@@ -28,6 +28,44 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v1.4.0 (2026-05-03, USTAD_S3_1_BUDGET_RULES_FRAMEWORK): O.3 OPEN.
+    Sub-phase O.3 marked IN_PROGRESS; S3.1 framework session CLOSED.
+    Landed the budget-rules framework: types
+    (`platform/src/lib/observatory/budget/types.ts` — BudgetScope alias of
+    LlmBudgetScope, BudgetPeriod, AlertThreshold, BudgetStatus
+    {ok|warning|alert|exceeded}, BudgetRuleInput, BudgetEvaluationResult);
+    evaluation engine
+    (`platform/src/lib/observatory/budget/evaluate.ts` — computePeriodBounds
+    daily/weekly-ISO/monthly UTC, computeScopeSpend over total | provider |
+    model | pipeline_stage, classifyBudgetStatus, evaluateBudgetRule
+    never-throws contract, evaluateAllRules sorted DESC by pct_used);
+    persistence + validation
+    (`platform/src/lib/observatory/budget/persist.ts`); six API endpoints
+    (`/api/admin/observatory/budget-rules` GET list + POST create,
+    `/api/admin/observatory/budget-rules/{id}` GET/PATCH/DELETE,
+    `/api/admin/observatory/budget-rules/evaluate` GET) all gated by the
+    shared observatory guard; DELETE is soft (active=false, never DROPs).
+    API client (`platform/src/lib/api-clients/observatory.ts`) extended
+    with fetchBudgetRules / createBudgetRule / evaluateBudgets.
+    openapi.yaml extended with all six paths + four schemas. **Resolves the
+    two MED findings carried over from O.2 close:** RT.O2.3 — upload route
+    now hard-caps at 5 MB and validates MIME via an allowlist
+    {text/csv, text/plain, application/octet-stream}, returning 400
+    file_too_large / invalid_mime_type before reading the blob; RT.O2.4 —
+    Gemini BigQuery query adds `_PARTITIONTIME BETWEEN ... AND ...` ahead
+    of the existing `DATE(usage_start_time)` predicate to enable partition
+    pruning on date-partitioned billing exports (correctness unaffected
+    on unpartitioned tables). CAPABILITY_MANIFEST.json bumped to 2.7
+    (entry_count 139 → 145; six new entries with phase=phase-o-s3-1).
+    14 brief-required tests + 1 bonus pass; full observatory + LLM-shim
+    suite 123 passed | 10 skipped, 0 failed (vs 108 at S2.6 close — net
+    +15). Field-naming divergence from the brief (brief listed
+    `threshold_usd` / `is_active` / scopes 'conversation','user','global';
+    DB-frozen migration 038 has `amount_usd` / `active` / scopes
+    'total','provider','model','pipeline_stage') resolved by aligning
+    types to the migration; documented in budget/types.ts header
+    comment. Sub-phases S3.2 (alert evaluator), S3.3 (Budgets UI), S3.4
+    (Export endpoints + UI) all parallel-safe per §6.1 after this merge.
   - v1.3.0 (2026-05-03, USTAD_S2_6_O2_GATE_CLOSE): O.2 GATE CLOSE.
     All six S2.x sessions S2.1–S2.6 carry `close_criteria_met: true`. This
     session lands the reconciliation UI surface (banner + history page +
@@ -409,6 +447,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 | S3.4 | Export endpoints + UI | platform/src/app/api/observatory/export/**, platform/src/components/observatory/Export.tsx, tests | All other O.3 surfaces | O.1 closed | CSV/Parquet export of usage events with filters; super-admin only |
 
 **O.3 close criteria.** All four sessions closed; first budget rule fires in dev when synthetic spend crosses threshold. IS.8(b)-class red-team.
+
+**O.3 OPEN 2026-05-03 by USTAD_S3_1_BUDGET_RULES_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/budget/{types,evaluate,persist}.ts` + 3 route files: `budget-rules/route.ts`, `budget-rules/[id]/route.ts`, `budget-rules/evaluate/route.ts`). API-client extension and openapi.yaml additions complete. **Resolves the two MED findings deferred from the S2.6 O.2 close**: RT.O2.3 (CSV upload size + MIME guard) and RT.O2.4 (BigQuery `_PARTITIONTIME` partition pruning). Per-session reconcilers S3.2/S3.3/S3.4 are unblocked and parallel-safe per §6.1.
 
 ### §5.4 — Sub-phase O.4: Advanced Analytics (6 sessions)
 
