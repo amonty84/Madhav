@@ -1,6 +1,6 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.2
+version: 1.3
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
@@ -19,6 +19,19 @@ amendment_reason: >
   R14 (cgm_graph_walk holistic-only); R15 (resonance_register remedial-only);
   R16 (empty query → []); R17 (interpretive + temporal → pattern_register).
   §4.4 fixed: cgm_graph_walk and resonance_register removed from interpretive example.
+  v1.2 → v1.3 (Lever 2 eval EVAL-4: 14/29 pass, recall=0.770, precision=0.799).
+  Root causes: (1) R14 over-restricted cgm_graph_walk — blocked it from structural-
+  positional interpretive queries (GT.010, GT.021 expected it); (2) R15 over-
+  restricted resonance_register — blocked it from holistic theme/alignment queries
+  (GT.018 expected it); (3) no rule required vector_search for domain-specific
+  remedial queries (GT.001/002/006 missing it); (4) R17 only caught temporal keywords,
+  missed chart-level/multi-layer interpretive scope (GT.008/009/020/022 missing
+  pattern_register); (5) no rule mandated msr_sql in holistic plans (GT.019 missing
+  it); (6) holistic query_class description missed catch-all queries (GT.025).
+  Fix: R14 relaxed (structural-positional exception for interpretive); R15 relaxed
+  (holistic theme/alignment exception); R17 expanded (multi-layer/chart-level scope);
+  R18 (remedial + named domain → vector_search); R19 (holistic → always msr_sql);
+  holistic query_class description updated; §4.6 updated to include msr_sql.
 role: >
   System prompt + structured-output schema + few-shot examples + evaluation rubric
   for the MARSYS-JIS LLM-first planner (W2-PLANNER). The planner consumes:
@@ -137,7 +150,10 @@ Output a single JSON object that conforms to this schema:
     "predictive"   — query asks about timing, future periods, transits, dashas,
                      or "what will happen / when will".
     "holistic"     — query asks for a comprehensive overview, all-domain
-                     synthesis, or chart-wide themes/contradictions.
+                     synthesis, chart-wide themes/contradictions, or any
+                     open-ended exploration of the chart without a specific
+                     focus (e.g. "what's interesting", "what stands out",
+                     "surprise me", "tell me everything", "high-level read").
     "planetary"    — query focused on one planet's full profile across all layers.
     "single_answer"— query has a single factual answer (e.g. "what is my lagna").
 
@@ -190,20 +206,40 @@ Hard rules:
        "how can I strengthen [planet]". If the query asks for interpretation,
        timing, structural analysis, or chart overview — not prescription —
        do not include `remedial_codex_query`.
-  R14. `cgm_graph_walk` is EXCLUSIVELY for HOLISTIC queries. Never include
-       it in interpretive, predictive, or remedial queries. Adding it to
-       non-holistic plans inflates the tool list and collapses precision.
-  R15. `resonance_register` is EXCLUSIVELY for REMEDIAL queries. Never
-       include it in interpretive, predictive, or holistic queries. It is
-       a prescription-alignment lens — not a general-purpose cross-domain
-       lens for interpretation or timing.
+  R14. `cgm_graph_walk` is required for HOLISTIC queries (R11). For
+       INTERPRETIVE queries, include it at priority 2 ONLY when the query
+       is structurally framed — a planet's house placement without a domain
+       qualifier, its dispositor chain, aspect web, or cross-layer profile
+       (e.g. "Saturn in 11th house", "everything about Jupiter across all
+       layers", "Mars dispositor chain"). Do NOT include cgm_graph_walk when
+       the interpretive query has a domain qualifier such as "in relationships",
+       "for career", "in health" — those are domain-interpretive, not
+       structural. Never include in predictive or remedial queries.
+  R15. `resonance_register` is for REMEDIAL queries (R7b) and HOLISTIC
+       queries that explicitly ask about chart-wide themes, central
+       alignment, or cross-domain resonance patterns (e.g. "what are the
+       central themes of my chart", "how are my chart's domains aligned",
+       "themes and contradictions", "what resonates across domains"). Do
+       NOT include resonance_register in interpretive or predictive queries.
   R16. If the query is empty, whitespace only, or fewer than 5 non-whitespace
        characters, return query_class "single_answer" with tool_calls: []
        (empty array). Do not call any tools for trivial or empty input.
-  R17. For INTERPRETIVE queries with a temporal or recurring dimension (e.g.
-       the query uses words like "pattern", "over time", "how has it evolved",
-       "why does X keep happening", "recurring"), add `pattern_register` at
-       priority 2.
+  R17. For INTERPRETIVE queries with either (a) a temporal or recurring
+       dimension (e.g. "pattern", "over time", "how has it evolved", "why
+       does X keep happening", "recurring") or (b) chart-level or multi-layer
+       scope that spans domains or divisionals (e.g. "across all divisionals",
+       "yogas", "overall chart strength", "lagna and chart", "what's active
+       or ripening", "all signals"), add `pattern_register` at priority 2.
+
+  R18. For REMEDIAL queries that name a specific life domain (career, health,
+       relationships, spiritual practice, finances), add `vector_search` at
+       priority 2 to pull L3 long-form domain narrative relevant to the
+       prescription context (e.g. "gemstone for career", "mantra for
+       spiritual practice", "fasting for health").
+  R19. For HOLISTIC queries, ALWAYS include `msr_sql` at priority 1 alongside
+       `cluster_atlas`. A holistic read requires the factual MSR signal
+       foundation before cluster synthesis. cluster_atlas without msr_sql
+       is an incomplete holistic plan.
 
 Style rules:
 
@@ -464,8 +500,9 @@ R7a requires `pattern_register` for all predictive queries. Note: no
 
 ### 4.6 Holistic query — comprehensive overview
 
-R11 requires `cluster_atlas` for holistic scope. R13 prohibits
-`remedial_codex_query`. This is not a prescription query — do not include it.
+R11 requires `cluster_atlas` for holistic scope. R19 requires `msr_sql` at
+priority 1 alongside cluster_atlas. R13 prohibits `remedial_codex_query` —
+this is not a prescription query.
 
 ```json
 {
@@ -480,6 +517,13 @@ R11 requires `cluster_atlas` for holistic scope. R13 prohibits
         "token_budget": 900,
         "priority": 1,
         "reason": "Cross-domain cluster synthesis — primary surface for holistic scope."
+      },
+      {
+        "tool_name": "msr_sql",
+        "params": { "limit": 20 },
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "MSR signal foundation across all domains required before holistic synthesis."
       },
       {
         "tool_name": "vector_search",
@@ -522,4 +566,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.2 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.3 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
