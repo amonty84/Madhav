@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ReconciliationBanner } from './reconciliation'
 
 export function ObservatoryLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,6 +37,9 @@ export function ObservatoryLayout({ children }: { children: React.ReactNode }) {
           </button>
         </div>
       </header>
+      {/* USTAD_S2_6 — reconciliation status strip, sits between top bar and
+          the nav/main split. Renders nothing when there is no history. */}
+      <ReconciliationBanner />
       <div className="flex flex-1">
         <nav
           data-testid="observatory-sidebar"
@@ -59,6 +63,15 @@ export function ObservatoryLayout({ children }: { children: React.ReactNode }) {
                 className="block rounded px-2 py-1 hover:bg-muted"
               >
                 Events
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/observatory/reconciliation"
+                data-testid="observatory-nav-reconciliation"
+                className="block rounded px-2 py-1 hover:bg-muted"
+              >
+                Reconciliation
               </Link>
             </li>
             <li>

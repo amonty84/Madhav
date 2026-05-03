@@ -18,6 +18,11 @@ import type {
   TimeseriesQueryInput,
   TimeseriesResponse,
 } from '@/lib/observatory/types'
+import type {
+  ProviderName,
+  ProviderReconcileResult,
+  ReconciliationHistoryResponse,
+} from '@/lib/observatory/reconciliation/types'
 
 const BASE = '/api/admin/observatory'
 
@@ -143,4 +148,70 @@ export async function getEvents(params: EventsParams): Promise<EventsResponse> {
 
 export async function getEvent(id: string): Promise<EventDetailResponse> {
   return fetchJson<EventDetailResponse>(`/event/${encodeURIComponent(id)}`)
+}
+
+// ── Reconciliation (O.2; USTAD_S2_6) ─────────────────────────────────────
+
+export interface FetchReconciliationHistoryParams {
+  provider?: ProviderName | string
+  limit?: number
+  offset?: number
+}
+
+export interface TriggerReconciliationBody {
+  provider: ProviderName
+  period_start: string
+  period_end: string
+}
+
+export async function fetchReconciliationHistory(
+  params: FetchReconciliationHistoryParams = {},
+): Promise<ReconciliationHistoryResponse> {
+  const qs = new URLSearchParams()
+  if (params.provider) qs.set('provider', params.provider)
+  if (params.limit !== undefined) qs.set('limit', String(params.limit))
+  if (params.offset !== undefined) qs.set('offset', String(params.offset))
+  const path = qs.size > 0
+    ? `/reconciliation/history?${qs.toString()}`
+    : '/reconciliation/history'
+  return fetchJson<ReconciliationHistoryResponse>(path)
+}
+
+export async function triggerReconciliation(
+  body: TriggerReconciliationBody,
+): Promise<ProviderReconcileResult> {
+  const response = await fetch(`${BASE}/reconciliation`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+  })
+  if (response.ok) return (await response.json()) as ProviderReconcileResult
+
+  let code = 'UNKNOWN'
+  let message = `Observatory API request failed (${response.status})`
+  let detail: string | undefined
+  try {
+    const errBody = (await response.json()) as {
+      error?: string | { code?: string; message?: string; detail?: string }
+      message?: string
+    }
+    if (typeof errBody.error === 'string') {
+      code = errBody.error
+      message = errBody.message ?? message
+    } else if (errBody.error) {
+      code = errBody.error.code ?? code
+      message = errBody.error.message ?? message
+      detail = errBody.error.detail
+    }
+  } catch {
+    // body wasn't JSON; keep defaults
+  }
+
+  if (response.status === 401) throw new UnauthorizedError(code, message, detail)
+  if (response.status === 403) throw new ForbiddenError(code, message, detail)
+  throw new ObservatoryApiError(response.status, code, message, detail)
 }
