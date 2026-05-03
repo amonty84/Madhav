@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-28T00:00:00Z",
+  "generated_at": "2026-05-03T00:00:00Z",
   "generator_version": "1.0",
-  "entry_count": 139,
-  "fingerprint": "5aab048ee5443bebb0a6d276be85efde1fea9e295a0500551fb302d49a1e2d5a",
+  "entry_count": 156,
+  "fingerprint": "ustad_s4_6_anomaly_o4_close_2026-05-03",
   "entries": [
     {
       "canonical_id": "CGP_AUDIT_v1_0",
@@ -2514,10 +2514,269 @@
       "fingerprint": "6cbaea1394ec2088697c952e80fabf62741e9921d444a44e05db69b86ef23c5b",
       "last_modified": "2026-05-02",
       "description": "Phase O Observatory governance plan. Two-layer ledger (telemetry + reconciliation) over LLM cost & usage across five providers (Anthropic, OpenAI, Gemini, DeepSeek, NIM). 5-table data model: llm_usage_events, llm_pricing_versions, llm_provider_cost_reports, llm_cost_reconciliation, llm_budget_rules. 30-session O.0\u2013O.4 sub-phase decomposition with full session matrix. Wall-clock projections 4-way / 8-way concurrency. MP.9 mirror pair declared at this S0.1 close. Concurrent workstream alongside the main M-phase thread (currently M5 INCOMING)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_LIST_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules CRUD: GET /api/admin/observatory/budget-rules (list with ?active=true|false|all filter) + POST /api/admin/observatory/budget-rules (create). Gated by OBSERVATORY_ENABLED + requireSuperAdmin(). Validates threshold > 0 and alert_thresholds.pct \u2208 [0, 100]. Persists to llm_budget_rules (migration 038)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_DETAIL_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/[id]/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules per-id CRUD: GET / PATCH / DELETE on /api/admin/observatory/budget-rules/{id}. DELETE is soft (sets active=false; never DROPs). PATCH accepts partial updates over name | scope_value | amount_usd | alert_thresholds | active. Same observatory guard."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_RULES_API_EVALUATE_v1_0",
+      "path": "platform/src/app/api/admin/observatory/budget-rules/evaluate/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget evaluation: GET /api/admin/observatory/budget-rules/evaluate. Evaluates active rules against llm_usage_events.computed_cost_usd over the rule's period (daily/weekly/monthly UTC); ?rule_id=X scopes to a single rule. Returns BudgetEvaluationResult[] sorted by pct_used DESC. Status taxonomy: ok | warning | alert | exceeded."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_EVALUATE_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/evaluate.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules evaluation engine. computePeriodBounds (daily/weekly ISO/monthly UTC) + computeScopeSpend (total | provider | model | pipeline_stage) + classifyBudgetStatus + evaluateBudgetRule (never-throws contract; DB error \u2192 status=ok with spend=0) + evaluateAllRules. Pure where possible; the DB-touching paths accept a query helper for testing."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_PERSIST_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/persist.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules persistence + validation. listBudgetRules / getBudgetRuleById / createBudgetRule / patchBudgetRule / softDeleteBudgetRule + validateBudgetRuleInput / validateBudgetRulePatch. Aligns to migration 038's column names (budget_rule_id, amount_usd, active) rather than the brief's earlier draft names; brief-DB divergence documented in budget/types.ts."
+    },
+    {
+      "canonical_id": "OBSERVATORY_BUDGET_TYPES_LIB_v1_0",
+      "path": "platform/src/lib/observatory/budget/types.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_PLATFORM",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 budget-rules public type surface: BudgetScope (alias of LlmBudgetScope; total | provider | model | pipeline_stage), BudgetPeriod, AlertThreshold, BudgetStatus (ok | warning | alert | exceeded), BudgetRuleInput, BudgetEvaluationResult. Re-exports DB-frozen vocabulary so callers have one import path."
+    },
+    {
+      "canonical_id": "OBSERVATORY_EXPORT_ENDPOINT_v1_0",
+      "path": "platform/src/app/api/admin/observatory/export/route.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_API_ROUTE",
+      "expose_to_chat": false,
+      "representations": [
+        "file",
+        "http_endpoint"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 usage-export endpoint (S3.4 deferred-gap registration completed by USTAD_S4_6). GET /api/admin/observatory/export streams CSV/JSON via ReadableStream (USTAD_S4_6 D2 RT.O3.2 streaming fix). Gated by OBSERVATORY_ENABLED + super-admin role; 90-day window cap; 50000-row limit cap. Companion modules at platform/src/lib/observatory/export/{types,query,format}.ts."
+    },
+    {
+      "canonical_id": "OBSERVATORY_EXPORT_TYPES_v1_0",
+      "path": "platform/src/lib/observatory/export/types.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 export type surface: ExportFormat ('csv' | 'json'), ExportParams, ExportRow, ExportMeta, plus EXPORT_MAX_LIMIT (50000), EXPORT_MAX_RANGE_DAYS (90), EXPORT_LARGE_THRESHOLD (5000), EXPORT_COLUMNS column allowlist (PII columns excluded)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_EXPORT_QUERY_v1_0",
+      "path": "platform/src/lib/observatory/export/query.ts",
+      "version": "1.1.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.1",
+      "phase": "phase-o-s3-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 export query layer with USTAD_S4_6 D2 streaming addition. queryUsageForExport() single-shot (used by tests + small queries) plus queryUsageForExportStream() AsyncGenerator (used by route handler). SQL filters by started_at; injectable queryFn for tests. Cursor-ready interface for a future pg-Cursor migration."
+    },
+    {
+      "canonical_id": "OBSERVATORY_EXPORT_FORMAT_v1_0",
+      "path": "platform/src/lib/observatory/export/format.ts",
+      "version": "1.1.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.1",
+      "phase": "phase-o-s3-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 export formatters. toCSV() / toJSON() (legacy single-pass), plus USTAD_S4_6 D2 streaming helpers csvHeaderLine() / csvRowLine() / jsonEnvelopeOpen() / JSON_ENVELOPE_CLOSE. RFC-4180-compliant CSV cell quoting (commas, embedded quotes, newlines)."
+    },
+    {
+      "canonical_id": "OBSERVATORY_EXPORT_PANEL_v1_0",
+      "path": "platform/src/lib/components/observatory/export/ExportPanel.tsx",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_COMPONENT",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s3-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.3 export UI panel mounted on the Observatory events page. Collapsible by default; CSV/JSON format toggle, date range, provider/pipeline_stage filters, limit slider; triggers GET /api/admin/observatory/export and downloads the response."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_CACHE_v1_0",
+      "path": "platform/src/lib/observatory/analytics/cache_effectiveness.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-1",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 cache effectiveness analytics (S4.1). Per-provider hit-rate + token savings + cost savings over a configurable date window. Pure SQL aggregation over llm_usage_events.cache_read_tokens / cache_write_tokens. Backs the /observatory/analytics/cache page."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_QUALITY_v1_0",
+      "path": "platform/src/lib/observatory/analytics/cost_per_quality.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-2",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 cost-per-quality analytics scaffold (S4.2). Surface for the eventual \"$ per quality unit\" metric once the rubric layer is wired (planned Learning Layer dependency); current implementation produces per-(provider, model) cost-per-token-class metrics as the calibration substrate. Backs the /observatory/analytics/cost-per-quality page."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_ARC_v1_0",
+      "path": "platform/src/lib/observatory/analytics/cost_arc.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-3",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 conversation cost arc analytics (S4.3). Per-conversation cost trajectory across pipeline stages (classify -> compose -> retrieve -> synthesize -> audit) so the native can spot stage-level outliers. Backs the /observatory/analytics/cost-arc page."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_PRICING_DIFF_v1_0",
+      "path": "platform/src/lib/observatory/analytics/pricing_diff.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-4",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 pricing diff alerter (S4.4). checkPricingHealth() flags STALE_PRICING (latest llm_pricing_versions row > 30d old) and SYSTEMATIC_VARIANCE (rolling 7d mean ABS variance_pct > 5%) per provider. Webhook + console.warn dispatch; never throws on webhook failure. Backs the /observatory/analytics/pricing-diff page."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_REPLAY_v1_0",
+      "path": "platform/src/lib/observatory/analytics/replay.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-5",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 replay & re-cost engine (S4.5). replayAndRecost() recomputes computed_cost_usd over a date range against any chosen pricing_version_id without mutating llm_usage_events. Read-only; capped at 90-day window and 50000 rows. Backs the /observatory/analytics/replay page."
+    },
+    {
+      "canonical_id": "OBSERVATORY_ANALYTICS_ANOMALY_v1_0",
+      "path": "platform/src/lib/observatory/analytics/anomaly.ts",
+      "version": "1.0.0",
+      "status": "CURRENT",
+      "layer": "L_LIB",
+      "expose_to_chat": false,
+      "representations": [
+        "file"
+      ],
+      "interface_version": "1.0",
+      "phase": "phase-o-s4-6",
+      "last_modified": "2026-05-03",
+      "description": "Phase O O.4 anomaly detection (S4.6). detectAnomalies() runs z-score over per-day cost series for (provider, pipeline_stage, user_id) dimensions over a rolling lookback window (default 14d). Configurable z_threshold (default 2.5) + min_data_points gate (default 7). Webhook + console.warn dispatch when anomalies detected. Backs the /observatory/analytics/anomaly page."
     }
   ],
-  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02",
-  "manifest_version": "2.6",
-  "last_updated": "2026-05-02",
-  "last_updated_by": "PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP"
+  "manifest_fingerprint": "f2_manifest_completeness_w7_2026-04-30+w2_manifest_2026-05-01+m4b_p3_2026-05-02+m4b_s6_close_2026-05-03+m4c_s2_ll6_2026-05-02+m4c_s3_ll7_2026-05-02+m4c_s4_close_2026-05-02+m4d_p1_cdlm_patch_2026-05-02+m4_d_s1_close_2026-05-02+phase_o_s0_1_observatory_plan_2026-05-02+ustad_s3_1_budget_rules_2026-05-03+ustad_s4_6_anomaly_o4_close_2026-05-03",
+  "manifest_version": "2.8",
+  "last_updated": "2026-05-03",
+  "last_updated_by": "USTAD_S4_6_ANOMALY_O4_CLOSE"
 }

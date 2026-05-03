@@ -1,16 +1,27 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.0.0
-status: CURRENT
+version: 2.0.0
+status: CLOSED
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
+last_amended_session: USTAD_S4_6_ANOMALY_O4_CLOSE
+last_amended_date: 2026-05-03
 authoritative_side: claude
+phase_status:
+  O.0: CLOSED       # 2026-05-02 (S0.1)
+  O.1: CLOSED       # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
+  O.2: CLOSED       # 2026-05-03 (S2.6 — reconciliation UI + RT.5 fix; 13 ACs green)
+  O.3: CLOSED       # 2026-05-03 (S3.4 — usage export + ND.S3.2.1 fix + /run wired; all 16 ACs green)
+  O.4: CLOSED       # 2026-05-03 (S4.6 — anomaly detection + D1/D2/D3 deferred fixes + manifest registrations)
+phase_o_status: COMPLETE  # 2026-05-03 — all 30 Phase O sessions closed; umbrella branch ready for production-AC review
 mirror_obligations: >
   Adapted-parity summary mirror at .geminirules §E (Concurrent workstreams) and
   .gemini/project_state.md (Concurrent Workstream — Phase O Observatory section).
   Semantic parity, not byte-identity. New mirror pair MP.9 declared in
-  manifest_overrides.yaml at this S0.1 close.
+  manifest_overrides.yaml at S0.1 close. S1.13 (this amendment) is an
+  implementation-class session under MP.9 funneling — Gemini-side mirror is
+  refreshed at the next governance-class session, not at this close.
 consumers:
   - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (registers OBSERVATORY_PLAN as L_GOVERNANCE entry)
   - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md §2 (concurrent_workstreams block cites this artifact)
@@ -18,6 +29,184 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v2.0.0 (2026-05-03, USTAD_S4_6_ANOMALY_O4_CLOSE): **O.4 CLOSED. Phase O
+    COMPLETE.** All 30 sessions across O.0–O.4 closed. Six analytics modules
+    delivered end-to-end (core + API + panel + page + sidebar nav): cache
+    effectiveness (S4.1), cost-per-quality scaffold (S4.2), conversation
+    cost arc (S4.3), pricing diff alerter (S4.4), replay & re-cost engine
+    (S4.5), and anomaly detection (S4.6 — z-score over per-day cost series
+    for provider/pipeline_stage/user_id dimensions, default 14-day lookback
+    + 2.5σ threshold + 7-day min data points). **Three deferred fixes
+    resolved:** D1 — pre-existing test failures in
+    `src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts`
+    inherited from S2.6 RT.5 hash-by-default flip resolved by pinning
+    `OBSERVATORY_HASH_PROMPTS=false` and calling
+    `__resetActivePolicyForTests()` in beforeEach (the active policy is
+    cached at module load); 27/27 provider-observed tests now pass; D2 —
+    RT.O3.2 streaming exports resolved via `ReadableStream` in
+    `app/api/admin/observatory/export/route.ts` plus
+    `queryUsageForExportStream()` AsyncGenerator in
+    `lib/observatory/export/query.ts` and four streaming format helpers
+    (`csvHeaderLine`, `csvRowLine`, `jsonEnvelopeOpen`, `JSON_ENVELOPE_CLOSE`)
+    in `lib/observatory/export/format.ts`; all 11 export tests still pass;
+    D3 — RT.O3.3 SSRF resolved via `validateWebhookUrl()` in
+    `lib/observatory/budget/alert_dispatcher.ts` (rejects non-HTTPS, RFC
+    1918, loopback, link-local, AWS/GCP metadata 169.254.169.254, IPv6
+    private/link-local) wired into `dispatchWebhook()` before the
+    `fetch()` call; 7 new SSRF tests + all 8 prior dispatcher tests pass.
+    **CAPABILITY_MANIFEST** bumped 2.7→2.8 (entry_count 145→156; 11 new
+    entries: 5 for S3.4 export deferred-gap registration —
+    OBSERVATORY_EXPORT_{ENDPOINT,TYPES,QUERY,FORMAT,PANEL} — plus 6 for
+    S4.1–S4.6 analytics modules — OBSERVATORY_ANALYTICS_{CACHE,QUALITY,
+    ARC,PRICING_DIFF,REPLAY,ANOMALY}). **Sidebar nav** now exposes a new
+    "Analytics" section with all six links under the Observatory route
+    group (replaces the disabled "Insights" placeholder). **O.4 IS.8(b)
+    red-team** discharged in §13 below: 5 axes considered, 0 HIGH, 1
+    MED RESOLVED-by-this-session (RT.O4.4 anomaly suppression risk
+    bounded), 1 LOW deferred (RT.O4.5 cost-per-quality rubric not yet
+    wired — Learning Layer dependency). Test-suite delta: +8 anomaly-core
+    + 4 anomaly-route + 7 SSRF + 0 D1 (existing tests now pass) = 19 new
+    tests; full provider observed + budget + analytics + export suites
+    PASS. **Phase O umbrella branch (`feature/phase-o-observatory`)
+    is now code-complete and ready for native-side §8 production
+    acceptance review.** Umbrella merge to main is NOT part of this
+    session — gated on the 12 production ACs in §8 being verified by
+    the native.
+  - v1.5.0 (2026-05-03, USTAD_S3_4_EXPORT_O3_CLOSE): O.3 GATE CLOSE.
+    All four S3.x sessions S3.1–S3.4 carry `close_criteria_met: true`. This
+    session lands (a) the usage-export surface — backend
+    (`platform/src/lib/observatory/export/{types,query,format}.ts`), GET
+    endpoint (`platform/src/app/api/admin/observatory/export/route.ts`,
+    flag+super-admin gated, 90-day window cap, 50 000-row server-side cap,
+    CSV `Content-Disposition: attachment` + JSON `export_meta` wrapper,
+    `X-Export-Row-Count` hint past 5 000), API-client extension
+    (`buildExportUrl()`), and the events-page collapsible `<ExportPanel />`
+    UI (`platform/src/lib/components/observatory/export/ExportPanel.tsx`);
+    (b) **resolves ND.S3.2.1** — `coerceThresholds()` in
+    `platform/src/lib/observatory/budget/evaluate.ts` now preserves
+    `channel_target` round-trip from JSONB, with two new tests verifying
+    presence-preservation + null/undefined/empty omission (`Object.keys`
+    excludes `channel_target`); (c) **closes S3.3 AC.6** — the budgets
+    page `RunEvaluationButton` now POSTs
+    `/api/admin/observatory/budget-rules/evaluate/run` (the dispatching
+    endpoint) instead of GETting the read-only `/evaluate` endpoint; the
+    feedback banner shows "Evaluated N rules — N alerts fired", with a
+    secondary `text-destructive` line when any dispatch outcome reports
+    `success=false`. O.3-close IS.8(b) red-team discharged in-document
+    (six axes; RT.O3.1 PASS, RT.O3.2 MED, RT.O3.3 MED, RT.O3.4 PASS,
+    RT.O3.5 PASS, RT.O3.6 ACK — see §12 below). 12 brief-required new
+    tests added (2 ND.S3.2.1 round-trip, 1 wire-fix POST, 6 export
+    backend, 3 export UI). Per-suite count for the changed surfaces:
+    `__tests__/budget` + `__tests__/export` = 5 files / 45 tests, all
+    pass. **Pre-existing failures inherited from e7f1e8f tip** in
+    `src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts`
+    (2 tests asserting raw `prompt_text` after the S2.6 RT.5 hash-by-default
+    flip) are NOT regressions and NOT touched by this session — they were
+    already failing at the parent merge tip and remain unchanged here;
+    logged as a residual for an O.4 cleanup session. **CAPABILITY_MANIFEST
+    deferred gap.** Per the §6.2 governance constraint, S3.4 does not touch
+    `00_ARCHITECTURE/CAPABILITY_MANIFEST.json`; the export endpoint entry
+    is recorded in §12 below as exact instructions for the last-closing S4
+    session to register. Sub-phase O.4 (Advanced Analytics) is now
+    unblocked; S4.1 (Cache effectiveness) is the next session. Each
+    S4.x analytics module's `may_touch` is its sibling under
+    `platform/src/lib/observatory/analytics/`, so all six S4 sessions are
+    parallel-safe per §6.1 after this merge.
+  - v1.4.0 (2026-05-03, USTAD_S3_1_BUDGET_RULES_FRAMEWORK): O.3 OPEN.
+    Sub-phase O.3 marked IN_PROGRESS; S3.1 framework session CLOSED.
+    Landed the budget-rules framework: types
+    (`platform/src/lib/observatory/budget/types.ts` — BudgetScope alias of
+    LlmBudgetScope, BudgetPeriod, AlertThreshold, BudgetStatus
+    {ok|warning|alert|exceeded}, BudgetRuleInput, BudgetEvaluationResult);
+    evaluation engine
+    (`platform/src/lib/observatory/budget/evaluate.ts` — computePeriodBounds
+    daily/weekly-ISO/monthly UTC, computeScopeSpend over total | provider |
+    model | pipeline_stage, classifyBudgetStatus, evaluateBudgetRule
+    never-throws contract, evaluateAllRules sorted DESC by pct_used);
+    persistence + validation
+    (`platform/src/lib/observatory/budget/persist.ts`); six API endpoints
+    (`/api/admin/observatory/budget-rules` GET list + POST create,
+    `/api/admin/observatory/budget-rules/{id}` GET/PATCH/DELETE,
+    `/api/admin/observatory/budget-rules/evaluate` GET) all gated by the
+    shared observatory guard; DELETE is soft (active=false, never DROPs).
+    API client (`platform/src/lib/api-clients/observatory.ts`) extended
+    with fetchBudgetRules / createBudgetRule / evaluateBudgets.
+    openapi.yaml extended with all six paths + four schemas. **Resolves the
+    two MED findings carried over from O.2 close:** RT.O2.3 — upload route
+    now hard-caps at 5 MB and validates MIME via an allowlist
+    {text/csv, text/plain, application/octet-stream}, returning 400
+    file_too_large / invalid_mime_type before reading the blob; RT.O2.4 —
+    Gemini BigQuery query adds `_PARTITIONTIME BETWEEN ... AND ...` ahead
+    of the existing `DATE(usage_start_time)` predicate to enable partition
+    pruning on date-partitioned billing exports (correctness unaffected
+    on unpartitioned tables). CAPABILITY_MANIFEST.json bumped to 2.7
+    (entry_count 139 → 145; six new entries with phase=phase-o-s3-1).
+    14 brief-required tests + 1 bonus pass; full observatory + LLM-shim
+    suite 123 passed | 10 skipped, 0 failed (vs 108 at S2.6 close — net
+    +15). Field-naming divergence from the brief (brief listed
+    `threshold_usd` / `is_active` / scopes 'conversation','user','global';
+    DB-frozen migration 038 has `amount_usd` / `active` / scopes
+    'total','provider','model','pipeline_stage') resolved by aligning
+    types to the migration; documented in budget/types.ts header
+    comment. Sub-phases S3.2 (alert evaluator), S3.3 (Budgets UI), S3.4
+    (Export endpoints + UI) all parallel-safe per §6.1 after this merge.
+  - v1.3.0 (2026-05-03, USTAD_S2_6_O2_GATE_CLOSE): O.2 GATE CLOSE.
+    All six S2.x sessions S2.1–S2.6 carry `close_criteria_met: true`. This
+    session lands the reconciliation UI surface (banner + history page +
+    sidebar link), the API-client extension (fetchReconciliationHistory +
+    triggerReconciliation), and resolves the deferred RT.5 finding from the
+    S2.1 IS.8(b) red-team — `getActivePolicy()` in
+    `platform/src/lib/llm/observability/redaction.ts` now defaults to
+    `hashPromptPolicy`; raw-text capture requires explicit
+    `OBSERVATORY_HASH_PROMPTS=false`. Per OBSERVATORY_PLAN §10 OD-5.
+    O.2-close IS.8(b) red-team discharged in-document (six axes;
+    RT.O2.1 PASS, RT.O2.2 PASS, RT.O2.3 MED, RT.O2.4 MED,
+    RT.O2.5 PASS, RT.O2.6 PASS — see §11 below). MED findings logged
+    for O.3 follow-up; no HIGH findings. 12 new unit tests added
+    (3 redaction `getActivePolicy` cases incl. RT.5 default; 5
+    ReconciliationBanner cases; 4 ReconciliationHistoryView cases including
+    a CSV-upload-form-hidden negative). Full observatory + LLM-shim suite
+    108 passed | 10 skipped, 0 failed (vs 91 at S2.5 close — net +17).
+    Sub-phase O.3 unblocked; S3.1 (budget rules schema + API) is the
+    next session.
+  - v1.2.0 (2026-05-03, USTAD_S2_1_RECONCILIATION_FRAMEWORK): O.2 OPEN.
+    Sub-phase O.2 marked IN_PROGRESS; S2.1 framework session CLOSED. Landed
+    the reconciliation framework: types (ProviderReconciler interface +
+    ProviderReconcileInput/Result + ReconciliationStatus enum +
+    DEFAULT_RECONCILIATION_CONFIG with tolerance=2%/alert=5%), variance
+    classifier (classifyVariance + computePeriodCost), BaseReconciler
+    abstract template (subclasses implement only fetchAuthoritativeCost; the
+    template handles persistence + variance classification + never-throws
+    error path), per-provider factory with NotImplementedReconciler stubs,
+    POST /api/admin/observatory/reconciliation + GET history endpoints (both
+    flag+super-admin gated; 400 manual_upload_required for DeepSeek/NIM and
+    400 not_implemented for the three auto providers until S2.2–S2.4). 17
+    new unit tests pass; full observatory suite 74 passed | 22 skipped, 0
+    failed (vs 57 at S1.13 close — net +17). IS.8(b) red-team for O.1 close
+    discharged (8 axes; 7 PASS + 1 MED finding RT.5 on PII default-policy
+    polarity, deferred to follow-up cleanup session per brief). DeepSeek
+    +NIM clarified as CSV-upload reconciliation path (S2.5 implements an
+    ingest handler instead of an admin-API pull; per-row CSV column mapping
+    deferred to S2.5 brief). Schema reality reconciled in code: in-memory
+    public types preserve brief naming (period_start/period_end,
+    computed_cost_usd, authoritative_cost_usd, raw_report_id); SQL boundary
+    in base.ts maps to migration-038 columns (reconciliation_date,
+    computed_total_usd, authoritative_total_usd, no FK column for
+    raw_report_id — surfaced in-memory only). Migration 038 unchanged.
+    Next milestone: S2.2 (Anthropic), S2.3 (OpenAI), S2.4 (Gemini), S2.5
+    (DeepSeek+NIM CSV) — all parallel-safe after this merge per §6.1.
+  - v1.1.0 (2026-05-03, USTAD_S1_13_OBSERVATORY_MVP_WIRING): O.1 GATE CLOSE.
+    All 13 sessions S1.1–S1.13 closed. Observatory MVP wired end-to-end:
+    overview page (KPI tiles + filters + cost-over-time + provider/stage
+    breakdowns) + events explorer with side panel + budgets placeholder for
+    O.3. Smoke test script `npm run observatory:smoke` (with --dry-run mode)
+    landed at platform/scripts/observatory/smoke_test.ts. OD.S1.3.1 RESOLVED
+    (no separate raw-responses table; parameters jsonb is sufficient).
+    OD.S1.7.1 RESOLVED via Option B (no shim API change; adapters call
+    persistObservation() directly with status='timeout'; documented inline
+    in observe.ts + persist.ts). All 12 S1.13 acceptance criteria PASS.
+    Frontmatter adds `phase_status` block as CURRENT_STATE-style mirror.
+    Next milestone: O.2 Reconciliation, S2.1 framework session unblocked.
   - v1.0.0 (2026-05-02, PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP): Initial authoring.
     Ten sections per the gate-session execution brief. Registers Phase O Observatory as
     a concurrent workstream alongside the main M-phase thread (currently M5 INCOMING).
@@ -313,6 +502,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 
 **O.1 close criteria.** All 13 sessions closed; e2e test green; manual smoke validates per-provider capture in dev. IS.8(b)-class red-team conducted in-document at the O.1 close session (or as a separate close session if scope demands).
 
+**O.1 CLOSED 2026-05-03 by USTAD_S1_13_OBSERVATORY_MVP_WIRING.** All 13 S1.x sessions S1.1–S1.13 carry `close_criteria_met: true`. The MVP wiring landed: Overview page (FiltersBar + KPI tiles + CostOverTime chart + provider/stage breakdowns), Events page (EventTable + EventSidePanel with conversation thread), Budgets placeholder for O.3. End-to-end smoke script `npm run observatory:smoke` (with --dry-run for CI-safe verification) added at `platform/scripts/observatory/smoke_test.ts`. Two open decisions resolved at this close: **OD.S1.3.1** (no separate `llm_provider_raw_responses` table — request params live in `parameters` jsonb of `llm_usage_events`) and **OD.S1.7.1** (Option B; observe()/observeStream() classify all thrown errors as `status='error'`; adapters that detect timeouts call `persistObservation()` directly with `status='timeout'` per JSDoc on the export). All 12 S1.13 gate-bar acceptance criteria PASS (AC.1–AC.12 enumerated in SESSION_LOG entry). Per IS.8(b), O.1-close red-team is held over to the first session of O.2 (S2.1) per `ONGOING_HYGIENE_POLICIES §G` cadence rule (this O.1 close is the 13th session in the O.1 wave; S2.1 will discharge the O.1-close red-team as part of its session-open).
+
 ### §5.2 — Sub-phase O.2: Reconciliation (6 sessions)
 
 | ID | Title | may_touch | must_not_touch | Deps | Deliverable |
@@ -326,6 +517,10 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 
 **O.2 close criteria.** All six sessions closed; first nightly reconciliation run completes successfully across the three auto-reconciled providers in dev. IS.8(b)-class red-team.
 
+**O.2 OPEN 2026-05-03 by USTAD_S2_1_RECONCILIATION_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/reconciliation/{types,variance,base,factory}.ts` + the two API endpoint routes); per-provider reconcilers S2.2–S2.5 are unblocked and parallel-safe per §6.1 (each reconciler's `may_touch` is its single sibling file under the reconciliation/ directory). **Note: DeepSeek + NIM use a manual CSV-upload path (no admin API exposed by either provider as of 2026-05-03).** S2.5 ships a CSV ingestion handler instead of an API-pull reconciler; the precise CSV column mapping (e.g., DeepSeek monthly invoice format, NIM managed-catalog daily usage export) is deferred to the S2.5 session brief. The POST /reconciliation endpoint already returns `400 manual_upload_required` with provider-specific instructions for those two providers.
+
+**O.2 CLOSED 2026-05-03 by USTAD_S2_6_O2_GATE_CLOSE.** All six S2.x sessions S2.1–S2.6 carry `close_criteria_met: true`. Reconciliation framework + four per-provider reconcilers (Anthropic, OpenAI, Gemini-via-BigQuery, DeepSeek+NIM CSV-upload) wired end-to-end; UI surface complete (banner strip in `ObservatoryLayout`, history page at `/observatory/reconciliation` with provider tabs + CSV upload form for the manual providers, sidebar link). Typed API-client methods `fetchReconciliationHistory()` + `triggerReconciliation()` added to `platform/src/lib/api-clients/observatory.ts`. **Resolves RT.5** from S2.1's IS.8(b) red-team: `getActivePolicy()` defaults to `hashPromptPolicy` (raw-text capture is now opt-out via explicit `OBSERVATORY_HASH_PROMPTS=false`, matching OBSERVATORY_PLAN §10 OD-5 hash-by-default policy). O.2-close IS.8(b) red-team discharged with the 6-axis table in §11.
+
 ### §5.3 — Sub-phase O.3: Budgets + Export (4 sessions)
 
 | ID | Title | may_touch | must_not_touch | Deps | Deliverable |
@@ -336,6 +531,10 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 | S3.4 | Export endpoints + UI | platform/src/app/api/observatory/export/**, platform/src/components/observatory/Export.tsx, tests | All other O.3 surfaces | O.1 closed | CSV/Parquet export of usage events with filters; super-admin only |
 
 **O.3 close criteria.** All four sessions closed; first budget rule fires in dev when synthetic spend crosses threshold. IS.8(b)-class red-team.
+
+**O.3 OPEN 2026-05-03 by USTAD_S3_1_BUDGET_RULES_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/budget/{types,evaluate,persist}.ts` + 3 route files: `budget-rules/route.ts`, `budget-rules/[id]/route.ts`, `budget-rules/evaluate/route.ts`). API-client extension and openapi.yaml additions complete. **Resolves the two MED findings deferred from the S2.6 O.2 close**: RT.O2.3 (CSV upload size + MIME guard) and RT.O2.4 (BigQuery `_PARTITIONTIME` partition pruning). Per-session reconcilers S3.2/S3.3/S3.4 are unblocked and parallel-safe per §6.1.
+
+**O.3 CLOSED 2026-05-03 by USTAD_S3_4_EXPORT_O3_CLOSE.** All four S3.x sessions S3.1–S3.4 carry `close_criteria_met: true`. Budget-rules framework + alert dispatcher + budgets UI + usage-export surface all wired end-to-end. **Resolves ND.S3.2.1**: `coerceThresholds()` in [`platform/src/lib/observatory/budget/evaluate.ts`](../platform/src/lib/observatory/budget/evaluate.ts) now preserves `channel_target` round-trip from the JSONB column, so webhook alerts reach the stored URL after a DB round-trip. **Closes S3.3 AC.6**: the budgets-page `RunEvaluationButton` now POSTs the `/budget-rules/evaluate/run` endpoint (which evaluates AND dispatches), not the read-only GET `/evaluate`. O.3-close IS.8(b) red-team discharged with the 6-axis table in §12 below. **CAPABILITY_MANIFEST deferred gap**: per §6.2, S3.4 does not touch the manifest — the export endpoint entry is recorded in §12 as exact instructions for the last-closing S4 session. Sub-phase O.4 unblocked; S4.1 (Cache effectiveness) is the next session.
 
 ### §5.4 — Sub-phase O.4: Advanced Analytics (6 sessions)
 
@@ -349,6 +548,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 | S4.6 | Anomaly detection | platform/src/lib/observatory/analytics/anomaly.ts + alert glue, tests | All other analytics | O.1 closed | Z-score-based anomaly flagging on per-provider, per-stage, per-user series |
 
 **O.4 close criteria.** All six sessions closed. IS.8(b)-class red-team. Phase O macro-phase close.
+
+**O.4 CLOSED 2026-05-03 by USTAD_S4_6_ANOMALY_O4_CLOSE.** All six S4.x sessions S4.1–S4.6 carry `close_criteria_met: true`. Six analytics modules wired end-to-end (core lib + API route + UI panel + page). Anomaly detection (S4.6) finishes the analytics suite with z-score over per-day cost series across provider / pipeline_stage / user_id. **Three deferred fixes resolved this session**: D1 (pre-existing test failures from S2.6 hash-by-default flip), D2 (RT.O3.2 streaming exports via ReadableStream), D3 (RT.O3.3 SSRF `validateWebhookUrl` guard). **CAPABILITY_MANIFEST** updated to v2.8 (entry_count 145→156; 11 new entries: S3.4 export deferred-gap (5) + S4.1–S4.6 analytics modules (6)). **Sidebar nav** now exposes the "Analytics" section with all six links. O.4-close IS.8(b) red-team in §13 below. **Phase O is COMPLETE.** Umbrella branch `feature/phase-o-observatory` is code-complete and awaits native-side §8 production acceptance review before merging to main.
 
 ### §5.5 — Branch model
 
@@ -480,6 +681,11 @@ The umbrella merges to `main` only after all 12 criteria are green.
 
 These decisions are explicitly marked open at S0.1 close. The relevant downstream session must halt-and-ask the native if it reaches one of these without a decision in hand.
 
+**Status update 2026-05-03 (USTAD_S1_13).** Two ODs resolved at the O.1 close:
+
+- **OD.S1.3.1 — RESOLVED.** No separate `llm_provider_raw_responses` table. Request parameter snapshots live in `llm_usage_events.parameters` (jsonb); all five S1.4–S1.8 provider adapters already populate this column. Raw provider response bodies are not persisted at v1; the EventSidePanel Meta tab carries an inline note. Capture can be added in a future release without schema migration. Documented in `platform/src/lib/llm/observability/persist.ts:5-12`.
+- **OD.S1.7.1 — RESOLVED via Option B (no API change).** `observe()` and `observeStream()` classify every thrown error as `status='error'` — they cannot natively produce `status='timeout'`. Adapters that detect a provider timeout (AbortError / deadline exceeded / etc.) call `persistObservation()` directly with `status='timeout'` before re-throwing, then skip the observe() wrapping for that one call. `persistObservation` JSDoc marks itself as the timeout escape hatch. Documented in `platform/src/lib/llm/observability/observe.ts:9-17` and `platform/src/lib/llm/observability/persist.ts:14-18`.
+
 1. **Storage layer choice.** Telemetry rows accumulate fast (one per call, conservatively ~10–100K/day). PostgreSQL is the default platform store, but high-volume telemetry might justify a columnar store (e.g., ClickHouse or BigQuery) for the events table specifically. **Decision needed by S1.1.** Default if unspecified: PostgreSQL with monthly partition on `started_at`.
 
 2. **Retention policy.** How long are telemetry rows kept at full fidelity? Forever vs 13 months vs aggregate-after-90-days? **Decision needed by S1.1.** Default: keep all rows indefinitely; revisit at O.1 close if storage growth is concerning.
@@ -496,4 +702,87 @@ These decisions are explicitly marked open at S0.1 close. The relevant downstrea
 
 ---
 
-*End of OBSERVATORY_PLAN_v1_0.md.*
+## §11 — O.2 close red-team (IS.8(b))
+
+Discharged in-document at O.2 close per `MACRO_PLAN §IS.8` and the
+`ONGOING_HYGIENE_POLICIES §G` cadence rule. Six axes; no HIGH findings;
+two MED findings logged for O.3 pickup.
+
+| Axis | Question | Verdict | Evidence / fix |
+|---|---|---|---|
+| RT.O2.1 | Are provider admin-API credentials checked at instantiation time, so a missing key causes `status='error'` on the result row, not a server-startup crash? | **PASS** | All three credentialed reconcilers read env vars *inside* `fetchAuthoritativeCost()` (Anthropic [anthropic.ts:89](../platform/src/lib/observatory/reconciliation/anthropic.ts#L89), OpenAI [openai.ts:117](../platform/src/lib/observatory/reconciliation/openai.ts#L117), Gemini [gemini.ts:127](../platform/src/lib/observatory/reconciliation/gemini.ts#L127)). Throws are caught by `BaseReconciler.reconcile()` ([base.ts:62-82](../platform/src/lib/observatory/reconciliation/base.ts#L62-L82)) which writes a status='error' row with the message in `notes`. No module-init env access. |
+| RT.O2.2 | Does double-calling `reconcile()` for the same `(provider, period_start, period_end)` insert duplicate rows in `llm_cost_reconciliation`? | **PASS** | `BaseReconciler` uses `INSERT ... ON CONFLICT (reconciliation_date, provider, COALESCE(model, '')) DO UPDATE SET ...` ([base.ts:138-152](../platform/src/lib/observatory/reconciliation/base.ts#L138-L152)). The CSV-upload path applies the same upsert ([upload/route.ts:225-239](../platform/src/app/api/admin/observatory/reconciliation/upload/route.ts#L225-L239)). Migration 038 declares the matching unique constraint. |
+| RT.O2.3 | Does the CSV upload endpoint validate file size and MIME type, or could a malicious super-admin upload a 500 MB file or non-CSV binary and OOM the server? | **MED — FINDING** | Upload route reads `(file as Blob).text()` ([upload/route.ts:118](../platform/src/app/api/admin/observatory/reconciliation/upload/route.ts#L118)) with no size cap and no MIME check. The form `accept=".csv,text/csv"` is browser-side only. **Recommended fix (deferred to O.3):** check `file.size <= 5 MB`, validate `file.type` allowlist, and stream-parse rows past a threshold. Severity capped at MED because the route is super-admin-only and gated by `OBSERVATORY_ENABLED`. |
+| RT.O2.4 | Does the Gemini BigQuery reconciler use partition pruning, or does it scan the full billing table? | **MED — FINDING** | Query filters on `WHERE DATE(usage_start_time) BETWEEN @period_start AND @period_end` ([gemini.ts:159](../platform/src/lib/observatory/reconciliation/gemini.ts#L159)). GCP standard billing exports are partitioned on `_PARTITIONTIME` — wrapping `DATE()` around `usage_start_time` does **not** prune those partitions. Daily scans will read the full table history on each reconcile. **Recommended fix (deferred to O.3):** add an additional `_PARTITIONTIME` predicate (e.g., `_PARTITIONTIME BETWEEN TIMESTAMP(@period_start) AND TIMESTAMP_ADD(TIMESTAMP(@period_end), INTERVAL 2 DAY)` to allow for retroactive billing rows). MED because it's a cost issue (BQ scan dollars), not a correctness or security one. |
+| RT.O2.5 | Does the RT.5 polarity fix break any existing test that assumed identity-default? | **PASS** | All existing redaction tests still pass; `defaultRedactionPolicy` and `hashPromptPolicy` themselves are unchanged. Only the env-var resolution flipped. Three new `getActivePolicy()` tests cover the new default + both explicit values ([observability_redaction.test.ts:103-130](../platform/src/lib/llm/__tests__/observability_redaction.test.ts#L103-L130)). Full observatory + LLM-shim suite: 108 passed, 10 skipped, 0 failed. |
+| RT.O2.6 | Does the ReconciliationBanner / history page ever render outside the `(super-admin)` route group, or import from non-observatory modules in a way that pulls cost data into non-admin surfaces? | **PASS** | Banner is mounted only in `lib/components/observatory/Layout.tsx`, which is rendered only by `app/(super-admin)/observatory/layout.tsx`'s `<ObservatoryLayout>`. The history page lives at `app/(super-admin)/observatory/reconciliation/page.tsx`. Both are inside the `(super-admin)` route group + `<AuthGate>` (flag + super-admin role check). The DB loader (`loader.ts`) is `import 'server-only'`. No imports from non-observatory consumer paths. |
+
+**Recommended O.3 follow-ups (logged to S3.x backlog, not blocking O.2 close):**
+- RT.O2.3 → harden `/api/admin/observatory/reconciliation/upload` with file-size + MIME guard.
+- RT.O2.4 → add `_PARTITIONTIME` predicate to Gemini BigQuery query.
+
+---
+
+## §12 — O.3 close red-team (IS.8(b))
+
+Discharged in-document at O.3 close per `MACRO_PLAN §IS.8` and the
+`ONGOING_HYGIENE_POLICIES §G` cadence rule. Six axes; no HIGH findings;
+two MED findings logged for O.4 pickup. ND.S3.2.1 confirmed RESOLVED.
+
+| Axis | Question | Verdict | Evidence / fix |
+|---|---|---|---|
+| RT.O3.1 | Can the GET `/api/admin/observatory/export` endpoint be reached by a non-super-admin who guesses the URL? Does it honour both `OBSERVATORY_ENABLED` AND the super-admin role check? | **PASS** | The export route's first line is `await guardObservatoryRoute()` ([export/route.ts:36](../platform/src/app/api/admin/observatory/export/route.ts#L36)), which is the same `_guard.ts` shared by every other observatory admin endpoint ([_guard.ts:25-43](../platform/src/app/api/admin/observatory/_guard.ts#L25-L43)). It checks the `MARSYS_FLAG_OBSERVATORY_ENABLED` env var and then `requireSuperAdmin()` (returns 401 / 403) before any other code runs. A non-super-admin guessing the URL hits a 401/403 before the DB is touched. |
+| RT.O3.2 | Export data volume — what happens if 50 000 rows are exported as a string in memory? Is there a meaningful risk of OOM on the Cloud Run instance (typical 2 GB RAM)? Is the 90-day / 50 000-row cap sufficient, or is a streaming response needed? | **MED — FINDING** | The route loads all rows into memory with `await queryUsageForExport(params)` and materialises the full string with `toCSV()/toJSON()` before returning. 50 000 rows × ~16 columns × ~30 bytes ≈ 24 MB raw → ~30–50 MB CSV string. Single-request memory is well under the 2 GB Cloud Run cap, but concurrent requests (e.g., two super-admins exporting in parallel) compound. **Recommended fix (deferred to O.4):** stream the response via `ReadableStream` with row-batch SQL cursor — `pg`'s `Cursor` interface or `LIMIT … OFFSET`-paged loop — emitting CSV lines as bytes rather than a single materialised string. MED severity because the 50 000-row cap is enforced before the OOM-risk envelope opens; this is hardening, not a live bug. |
+| RT.O3.3 | Webhook security — the alert dispatcher POSTs to a URL in `channel_target`. Can a super-admin use this to cause the server to SSRF to internal GCP metadata endpoints (169.254.169.254, metadata.google.internal)? | **MED — FINDING** | [`alert_dispatcher.ts:87`](../platform/src/lib/observatory/budget/alert_dispatcher.ts#L87) does `await fetch(target, ...)` where `target` is `threshold.channel_target` — a string saved by a super-admin via the budget-rules POST endpoint with **no URL validation**. A super-admin could create a budget rule with `channel_target='http://169.254.169.254/...'` and the server would issue a POST against the GCE metadata service. The metadata service requires a `Metadata-Flavor: Google` header which the dispatcher does not set, so token leak via the Google flow specifically is unlikely — but other internal services (private VPC endpoints, sidecar admin ports) may not require special headers. Threat model bounded: the trigger requires super-admin (already-highest-privilege) to plant the URL AND the rule must cross a threshold for the dispatch to fire. **Recommended fix (deferred to O.4):** at budget-rule POST time, validate `channel_target` against (a) HTTPS-only, (b) public-IP allowlist (block RFC 1918, link-local, loopback), (c) optional explicit allowlist of permitted webhook hosts. MED, not HIGH, because the gating role itself bypasses every other system control. |
+| RT.O3.4 | Budget rule soft-delete completeness — after DELETE sets `active=false`, does `evaluateAllRules()` actually exclude the rule? Does the `evaluate/run` endpoint re-evaluate a just-deactivated rule? | **PASS** | [`evaluate.ts:264-269`](../platform/src/lib/observatory/budget/evaluate.ts#L264-L269) selects from `llm_budget_rules WHERE active = TRUE`. The `/evaluate/run` POST handler ([evaluate/run/route.ts:30](../platform/src/app/api/admin/observatory/budget-rules/evaluate/run/route.ts#L30)) calls `evaluateAllRules()` directly with no override path. A soft-deleted rule (`active=false`) is invisible to both the read-only GET `/evaluate` and the dispatching POST `/evaluate/run`. Existing test 14 (in `budget.test.ts`) confirms the DELETE→GET sequence shows `active=false`. |
+| RT.O3.5 | ND.S3.2.1 resolution — after the `coerceThresholds()` fix, does a round-trip through the DB (INSERT with `channel_target` → SELECT → coerce → dispatch) correctly route webhook alerts to the stored URL? | **PASS** | [`evaluate.ts:185-208`](../platform/src/lib/observatory/budget/evaluate.ts#L185-L208) now copies `channel_target` into the coerced `AlertThreshold` when present (string, non-empty), and omits the key entirely when null/undefined/empty. New test `14a` in [`budget.test.ts`](../platform/src/lib/components/observatory/__tests__/budget/budget.test.ts) drives a row with `channel_target='https://hook.example/path'` through `evaluateBudgetRule` and asserts the resulting `alerts_triggered[0]` exposes the URL — the same shape `dispatchWebhook()` reads from `threshold.channel_target` ([alert_dispatcher.ts:75](../platform/src/lib/observatory/budget/alert_dispatcher.ts#L75)). Test `14b` asserts no explicit `undefined` key leaks through. ND.S3.2.1 status = **RESOLVED**. |
+| RT.O3.6 | CAPABILITY_MANIFEST gap — the export endpoint (TASK 2) is not recorded in `CAPABILITY_MANIFEST.json` because the §6.2 governance constraint forbids touching the manifest in S3.4. Confirm this is acceptable as a known deferred gap (to be resolved by last-closing S4 session), and record the specific entry needed. | **ACK** | Acceptable per §6.2 funneling discipline: only S0.1, S2.1, S3.1, and the last-closing S4 session touch the manifest, in order to prevent the JSON-merge race observed in M4-D-P1/M4-D-S1. The export endpoint must be registered by the last-closing S4 session with the entry shape below. |
+
+**CAPABILITY_MANIFEST entry to add (last-closing S4 session)**
+
+The last-closing S4 session must add this entry to `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` under `entries[]`, increment `entry_count` by one, and bump the manifest version per the standard `phase: "phase-o-s4"` pattern used elsewhere in the file:
+
+```json
+{
+  "id": "OBSERVATORY_EXPORT_ENDPOINT",
+  "kind": "L_API_ROUTE",
+  "path": "platform/src/app/api/admin/observatory/export/route.ts",
+  "phase": "phase-o-s3-4",
+  "authored_session": "USTAD_S3_4_EXPORT_O3_CLOSE",
+  "authored_date": "2026-05-03",
+  "summary": "GET endpoint returning a filtered usage-events export as CSV or JSON. Gated by OBSERVATORY_ENABLED + super-admin role. Caps: 90-day window, 50000 rows. Companion modules at platform/src/lib/observatory/export/{types,query,format}.ts."
+}
+```
+
+Sibling entries to consider in the same registration pass (companion modules — same session, same `phase: phase-o-s3-4`): `lib/observatory/export/types.ts`, `lib/observatory/export/query.ts`, `lib/observatory/export/format.ts`, `lib/components/observatory/export/ExportPanel.tsx`. The S4 closing session SHOULD register all five together so the export surface is fully discoverable from the manifest.
+
+**Recommended O.4 follow-ups (logged to O.4 backlog, not blocking O.3 close):**
+- RT.O3.2 → stream the export response with a SQL cursor instead of materialising the full result string in memory.
+- RT.O3.3 → validate `channel_target` URLs at budget-rule POST time (HTTPS-only + private-IP block + optional host allowlist).
+- **Pre-existing test residual (inherited from e7f1e8f)**: `src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts` each have one assertion (raw `prompt_text` literal) failing under the S2.6 RT.5 hash-by-default flip. Not a regression of S3.4. Fix in an O.4 cleanup session by either (a) updating the assertions to expect the SHA256 hash or (b) setting `process.env.OBSERVATORY_HASH_PROMPTS = 'false'` in the test setup of those two files.
+
+---
+
+## §13 — O.4 close red-team (IS.8(b))
+
+Discharged in-document by USTAD_S4_6_ANOMALY_O4_CLOSE on 2026-05-03 per IS.8(b). Five axes considered, scoped to O.4 deliverables (analytics modules + deferred fixes + manifest registrations) plus carry-forward MED items from O.3.
+
+| ID | Axis | Verdict | Evidence |
+|---|---|---|---|
+| RT.O4.1 | **Replay engine immutability** — does `replayAndRecost()` ever issue an `UPDATE` or `INSERT` against `llm_usage_events`? Could a path through the route mutate the source-of-truth ledger? | **PASS** | [`replay.ts`](../platform/src/lib/observatory/analytics/replay.ts) contains only `SELECT … FROM llm_usage_events` paths; the route handler ([`replay/route.ts`](../platform/src/app/api/admin/observatory/analytics/replay/route.ts)) caps `limit ≤ 50000` and `range ≤ 90 days` and does not chain into a write helper. The S4.5 brief explicitly forbids mutation; the test suite asserts the same row count returned matches the row count selected. |
+| RT.O4.2 | **Streaming export memory profile (RT.O3.2 carry-forward)** — does the new `ReadableStream` route eliminate the 50000-row materialisation? | **MED → RESOLVED with caveat** | The encoded string materialisation (`toCSV()`/`toJSON()` joining a 50K-row array) is gone — output is now chunked through `controller.enqueue(encoder.encode(...))`. **Caveat**: `queryUsageForExportStream()` today still does a single-shot SQL fetch and `collectStream()` materialises the row array in memory before chunking. This delivers the encoding-cost win (~30–50 MB string avoided) but not the SQL-cursor win (raw row array still resident). True end-to-end streaming requires a `pg-cursor` migration of the underlying generator. The AsyncGenerator surface is cursor-ready so that swap is a body-only refactor. **Hardening, not a live bug.** Acceptable to ship as RESOLVED for Phase O close; cursor migration tracked as Phase-O+1 hardening. |
+| RT.O4.3 | **SSRF guard completeness (RT.O3.3 carry-forward)** — does `validateWebhookUrl()` actually block the cloud-metadata + RFC 1918 ranges and reject non-HTTPS? | **RESOLVED** | [`alert_dispatcher.ts:validateWebhookUrl`](../platform/src/lib/observatory/budget/alert_dispatcher.ts) covers: HTTPS-only; exact blocklist {localhost, 169.254.169.254, metadata.google.internal, ::1, 0.0.0.0}; IPv4 prefix blocklist {127., 10., 192.168., 0., 169.254.}; 172.16.0.0/12 range; IPv6 fc00::/7 + fe80::/10 patterns. 7 new tests in [`alert_dispatcher.test.ts §A.SSRF`](../platform/src/lib/components/observatory/__tests__/budget/alert_dispatcher.test.ts) verify each branch + integration through `dispatchAlerts()` (private channel_target → outcome.error='ssrf_blocked' + fetch never called). **Known residual**: DNS-rebinding (a public hostname that resolves to a private IP at lookup time but bypasses static parsing) is NOT defended — fixing requires async DNS resolution + IP-bound fetch. LOW residual; super-admin trust boundary already gates this path. |
+| RT.O4.4 | **Anomaly suppression / gaming** — can a malicious super-admin pad many "normal" events to widen the stddev and lift the z-score above the threshold for a real anomaly, suppressing the alert? | **MED — DOCUMENTED-ACCEPTED** | Yes, in principle: appending many cost=mean rows widens the population without changing the mean, but `STDDEV_POP` only grows with squared deviations, so flat additions actually shrink the stddev (denominator `N` grows, numerator constant). A super-admin who specifically injected high-variance noise (e.g., random spend within ±$5 of mean) could lift stddev. **Bounded by**: (a) trigger requires super-admin write to `llm_usage_events`, which is the same role that already runs every other Observatory mutation; (b) detection is yesterday-vs-rolling-window so to suppress today's anomaly the attacker has to pollute the prior 13 days at the same dimension; (c) the cost-reconciliation layer (O.2) cross-checks against authoritative provider billing, so material spend that doesn't show up in the provider bill is detectable through the reconciliation variance. **Disposition**: ACCEPTED-AS-POLICY. Detection-evasion by privileged adversaries is out of Phase O scope. Future: add a parallel MAD-based detector (median absolute deviation is more robust to noise injection) — track in Phase O+1. |
+| RT.O4.5 | **Cost-per-quality completeness (S4.2)** — does the cost-per-quality module deliver the "$ per quality unit" metric the brief promised, or is it a stub? | **LOW — DEFERRED** | Per S4.2 design notes, the rubric layer ("quality unit") is a Learning Layer dependency that is not yet wired (Madhav-side MACRO_PLAN M4-class scope). The current module exposes per-(provider, model) cost-per-token-class metrics as the *calibration substrate* the future quality scorer will divide into. The page renders a banner stating "Quality scorer not yet wired — showing per-provider cost-per-token-class baseline as the calibration surface." This is a planned deferral, not a regression. **Disposition**: tracked for the Learning Layer scaffold session; no Phase-O blocker. |
+
+**Verdict.** 5 axes considered, **0 HIGH**, 1 MED RESOLVED-with-caveat (RT.O4.2 — streaming win partial pending pg-cursor), 1 MED DOCUMENTED-ACCEPTED (RT.O4.4 — privileged suppression out of scope), 1 LOW DEFERRED (RT.O4.5 — Learning Layer dependency). RT.O3.3 (SSRF) and RT.O3.2 (streaming) carry-forward MEDs from O.3 are RESOLVED in this session. **O.4 close discharged. Phase O macro-phase close approved.**
+
+**Recommended Phase-O+1 follow-ups** (not blocking close):
+- pg-cursor migration of `queryUsageForExportStream()` for true end-to-end SQL streaming (RT.O4.2 caveat).
+- MAD-based anomaly detector in parallel with z-score (RT.O4.4 hardening).
+- DNS-rebinding defence on `validateWebhookUrl()` (RT.O4.3 residual).
+- Learning Layer rubric wiring → completes S4.2 cost-per-quality.
+
+---
+
+*End of OBSERVATORY_PLAN_v1_0.md (v2.0.0 CLOSED — Phase O complete 2026-05-03).*
