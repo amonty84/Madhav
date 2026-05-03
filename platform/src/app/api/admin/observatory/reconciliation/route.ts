@@ -26,6 +26,7 @@ import {
 } from '@/lib/observatory/reconciliation/factory'
 import type { ProviderReconciler } from '@/lib/observatory/reconciliation/types'
 import { GeminiReconciler } from '@/lib/observatory/reconciliation/gemini'
+import { OpenAIReconciler } from '@/lib/observatory/reconciliation/openai'
 
 /** Per-session-merged provider replacements: when a sub-phase ships its
  *  concrete reconciler (S2.2 Anthropic, S2.3 OpenAI, S2.4 Gemini, …) the
@@ -34,6 +35,7 @@ import { GeminiReconciler } from '@/lib/observatory/reconciliation/gemini'
  *  into the factory itself (S2.5 close). */
 function resolveReconciler(provider: ProviderName): ProviderReconciler {
   if (provider === 'gemini') return new GeminiReconciler()
+  if (provider === 'openai') return new OpenAIReconciler()
   return getReconciler(provider)
 }
 
