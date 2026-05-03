@@ -18940,6 +18940,151 @@ session_close:
 
 ---
 
+## Session — USTAD_S2_6_O2_GATE_CLOSE (2026-05-03, Phase O sub-phase O.2 GATE CLOSE)
+**Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s2-6-o2-gate-close` cut from `feature/phase-o-observatory@d788d0b`; merge target `feature/phase-o-observatory`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_6_O2_GATE_CLOSE
+  cowork_thread_name: ustad-s2-6-o2-gate-close
+  opened_at: 2026-05-03T00:00:00+05:30
+  phase: O.2 — Reconciliation
+  type: GATE_CLOSE
+  depends_on: [USTAD_S2_1, USTAD_S2_2, USTAD_S2_3, USTAD_S2_4, USTAD_S2_5]
+  rules_load:
+    - {file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md, version_at_open: 1.2.0}
+    - {file: platform/src/lib/observatory/reconciliation/types.ts}
+    - {file: platform/src/app/api/admin/observatory/reconciliation/history/route.ts}
+    - {file: platform/src/lib/api-clients/observatory.ts}
+    - {file: platform/src/app/(super-admin)/observatory/layout.tsx}
+    - {file: platform/src/lib/llm/observability/redaction.ts}
+  declared_scope:
+    may_touch:
+      - platform/src/lib/llm/observability/redaction.ts
+      - platform/src/lib/llm/__tests__/observability_redaction.test.ts
+      - platform/src/lib/api-clients/observatory.ts
+      - platform/src/lib/components/observatory/reconciliation/**
+      - platform/src/lib/components/observatory/Layout.tsx
+      - platform/src/app/(super-admin)/observatory/reconciliation/**
+      - platform/src/lib/components/observatory/__tests__/reconciliation/**
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/observatory/reconciliation/**
+      - platform/src/app/api/admin/observatory/**
+      - platform/migrations/**
+      - platform/src/lib/db/**
+      - All Madhav-project non-observatory files
+  red_team_due: true   # O.2 sub-phase close requires IS.8(b) per MACRO_PLAN §IS.8(b)
+  notes: "S2.6 — closes O.2: reconciliation UI surface (banner + history page + sidebar link), API-client extension, RT.5 polarity fix in redaction.ts, six-axis O.2 red-team."
+```
+
+### Body — substantive deliverables
+
+**W1. RT.5 fix — `platform/src/lib/llm/observability/redaction.ts`.** Inverts `getActivePolicy()`'s default polarity. Before: `OBSERVATORY_HASH_PROMPTS=true` → hash; unset / anything else → identity (raw capture). After: `OBSERVATORY_HASH_PROMPTS=false` → identity (explicit opt-out); unset / 'true' / anything else → hash. Aligns with OBSERVATORY_PLAN §10 OD-5 (hash-by-default) and discharges the deferred MED finding from S2.1's IS.8(b) red-team. Resolution recorded in OBSERVATORY_PLAN v1.3.0 changelog + §5.2 O.2 CLOSED note. Three new tests for `getActivePolicy()` cover the new default + both explicit values; the existing `defaultRedactionPolicy` and `hashPromptPolicy` shape tests are untouched and still pass.
+
+**W2. API client extension — `platform/src/lib/api-clients/observatory.ts`.** Adds `fetchReconciliationHistory({ provider?, limit?, offset? }) → Promise<ReconciliationHistoryResponse>` (GET `/api/admin/observatory/reconciliation/history`) and `triggerReconciliation({ provider, period_start, period_end }) → Promise<ProviderReconcileResult>` (POST `/api/admin/observatory/reconciliation`). Reuses the existing `ObservatoryApiError` / `UnauthorizedError` / `ForbiddenError` typed-error hierarchy. The POST helper is a hand-rolled fetch (rather than reusing `fetchJson`) so it can serialize the JSON body and surface the route's union-shaped error envelopes (`{ error: 'manual_upload_required', ... }` vs `{ error: 'not_implemented', ... }` vs the standard `{ error: { code, message } }`).
+
+**W3. ReconciliationBanner — `platform/src/lib/components/observatory/reconciliation/{ReconciliationBanner,ReconciliationBannerView,StatusChip,loader,index}.{ts,tsx}`.** Server-component banner that renders one chip per provider with reconciliation history. Split into `ReconciliationBanner` (async server wrapper that calls the DB loader) and `ReconciliationBannerView` (pure presentation, takes rows as a prop) so unit tests don't need to stub the DB. Loader uses `SELECT DISTINCT ON (provider) ... ORDER BY provider, reconciliation_date DESC, reconciled_at DESC` — one row per provider with history, sorted across providers by recency. Empty history → empty fragment (not an error). Status colour palette: matched=green, variance_within_tolerance=amber, variance_alert=red, missing_authoritative=grey, error=orange. Mounted in `lib/components/observatory/Layout.tsx` between the topbar and the nav/main split (interpretation of brief's "between top bar and main page slot" — the topbar lives in `ObservatoryLayout`, not the route layout).
+
+**W4. Reconciliation history page — `platform/src/app/(super-admin)/observatory/reconciliation/page.tsx` + `lib/components/observatory/reconciliation/ReconciliationHistoryView.tsx`.** Server-rendered page with: heading, six provider tabs (All | Anthropic | OpenAI | Gemini | DeepSeek | NIM) URL-driven via `?provider=`, a 50-row table sorted by reconciliation_date DESC + reconciled_at DESC with status chips per row, and a multipart CSV upload form visible only when no provider filter or when `?provider=deepseek|nim` (the manual-upload providers). Form posts directly to `/api/admin/observatory/reconciliation/upload` (the existing S2.5 endpoint). Empty state: "No reconciliation runs yet. Trigger a reconciliation from the API or upload a CSV for DeepSeek/NIM."
+
+**W5. Sidebar link — `lib/components/observatory/Layout.tsx`.** Added "Reconciliation" link between "Events" and "Budgets" per brief.
+
+**W6. Unit tests — 12 new** across three suites:
+- `observability_redaction.test.ts`: 3 new `getActivePolicy()` cases (RT.5 default unset → hash; 'false' → identity; 'true' → hash) — also captures + restores `OBSERVATORY_HASH_PROMPTS` env in `afterEach`.
+- `reconciliation/ReconciliationBanner.test.tsx`: 5 cases — empty rows render nothing; matched/variance_alert/missing_authoritative chip rendering with correct dot colour + provider label + variance %; defensive dedup-by-provider.
+- `reconciliation/ReconciliationHistoryView.test.tsx`: 4 cases — empty state message; table rows with chips for each status; CSV upload visible when provider=deepseek with provider select defaulting to 'deepseek'; CSV upload hidden when provider=anthropic.
+
+Brief target was 10 new tests; actual is 12 (two defensive negatives bonus).
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/__tests__/reconciliation src/lib/llm/__tests__/observability_redaction.test.ts` — 8 files, 62 passed | 0 failed. Includes the 12 new tests + all existing reconciliation/redaction suites.
+
+`npx vitest run src/lib/components/observatory src/lib/llm/__tests__ src/lib/observatory` (broader regression sweep) — 21 files, 108 passed | 10 skipped | 0 failed. Net +17 vs S2.5's 91. No regressions.
+
+`SKIP_ENV_VALIDATION=true npm run build` — Next.js compile step `✓ Compiled successfully in 4.3s`. TypeScript verification fails at `platform/src/lib/observatory/reconciliation/gemini.ts:282` (BigQuery dynamic-import cast — pre-existing from S2.4 merge; in this session's `must_not_touch`). Same situation as at S2.4 + S2.5 close. **AC.13 is PASS for observatory routes**: every file authored or amended in this session type-checks clean (Next.js compile validates this); the gemini.ts pre-existing issue predates and is out-of-scope.
+
+`npx tsc --noEmit -p tsconfig.json` — 0 errors in any file in this session's scope (`reconciliation/ReconciliationBanner*.tsx`, `ReconciliationHistoryView.tsx`, `StatusChip.tsx`, `loader.ts`, `reconciliation/page.tsx`, `Layout.tsx`, `redaction.ts`, `observatory.ts` API client, all new test files). Pre-existing errors carry over from S2.4 (gemini.ts) + main (AppShell, ReportGallery test files); none introduced here.
+
+### O.2 close IS.8(b) red-team — 6 axes
+
+| Axis | Question | Verdict | One-line evidence / fix |
+|---|---|---|---|
+| RT.O2.1 | Are admin-API credentials checked at instantiation time, so a missing key surfaces as `status='error'` not a startup crash? | **PASS** | All env reads happen inside `fetchAuthoritativeCost()` (anthropic.ts:89, openai.ts:117, gemini.ts:127); BaseReconciler catches throws and writes `status='error'` rows. |
+| RT.O2.2 | Does double-calling `reconcile()` for the same `(provider, period_start, period_end)` write duplicate rows? | **PASS** | Both BaseReconciler (base.ts:138-152) and the upload route (upload/route.ts:225-239) use `INSERT … ON CONFLICT (reconciliation_date, provider, COALESCE(model, '')) DO UPDATE`. Migration 038 declares the matching unique constraint. |
+| RT.O2.3 | Does the CSV upload endpoint validate file size + MIME, or could a 500 MB file OOM the server? | **MED FINDING** | `upload/route.ts:118` reads `(file as Blob).text()` with no size cap and no MIME check (form `accept=".csv"` is browser-side only). Recommended fix (deferred to O.3): file.size ≤ 5 MB + MIME allowlist + streaming parse past threshold. Severity capped at MED — super-admin-only + flag-gated. |
+| RT.O2.4 | Does the Gemini BigQuery query use partition pruning, or scan the full billing table? | **MED FINDING** | Query filters `WHERE DATE(usage_start_time) BETWEEN @period_start AND @period_end` (gemini.ts:159). GCP standard billing exports are partitioned on `_PARTITIONTIME` — wrapping `DATE()` around `usage_start_time` does not prune partitions. Recommended fix (deferred to O.3): add `_PARTITIONTIME BETWEEN ... AND TIMESTAMP_ADD(...,INTERVAL 2 DAY)` predicate. MED — cost issue, not correctness. |
+| RT.O2.5 | Does the RT.5 polarity fix break any existing test that assumed identity-default? | **PASS** | All 5 existing redaction tests still pass; full observatory + LLM-shim suite 108 passed | 10 skipped, 0 failed. |
+| RT.O2.6 | Does the banner / history page render outside `(super-admin)` route group, or pull cost data into non-admin surfaces? | **PASS** | Banner mounted only in `lib/components/observatory/Layout.tsx`, rendered only by `app/(super-admin)/observatory/layout.tsx`'s `<ObservatoryLayout>`. History page lives at `app/(super-admin)/observatory/reconciliation/page.tsx`. Both inside `(super-admin)` group + `<AuthGate>` (flag + role check). DB loader is `import 'server-only'`. No imports from non-observatory consumer paths. |
+
+**HIGH findings: none.** MED findings RT.O2.3 + RT.O2.4 logged for O.3 follow-up (see OBSERVATORY_PLAN §11). No close-blocker.
+
+### S2.6 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | RT.5 fix in redaction.ts — unset OBSERVATORY_HASH_PROMPTS → hash (not identity) | PASS | `resolvePolicy()` rewritten in `redaction.ts:46-52`; only explicit `'false'` opts out. |
+| AC.2 | RT.5 regression test passes; existing redaction tests updated + green | PASS | 3 new `getActivePolicy()` tests + 5 existing tests pass; `defaultRedactionPolicy` / `hashPromptPolicy` shapes unchanged. |
+| AC.3 | fetchReconciliationHistory + triggerReconciliation added to API client | PASS | Both functions added with typed return values + error-envelope handling for the union-shaped POST response. |
+| AC.4 | ReconciliationBanner renders status chips; empty history → empty fragment | PASS | View tests #1 + #2 + #3 + #4 cover empty, matched, variance_alert, missing_authoritative. |
+| AC.5 | ReconciliationBanner mounted in observatory layout | PASS | `<ReconciliationBanner />` rendered between header and nav/main split in `ObservatoryLayout`. |
+| AC.6 | /observatory/reconciliation page exists with history table + CSV upload form | PASS | `app/(super-admin)/observatory/reconciliation/page.tsx` exists; uses `ReconciliationHistoryView`; tests #8 + #9 + #10 pass. |
+| AC.7 | Reconciliation sidebar link added to Layout.tsx | PASS | Link inserted between Events and Budgets, `data-testid="observatory-nav-reconciliation"`. |
+| AC.8 | O.2 red-team table in SESSION_CLOSE (6 axes) | PASS | Table above + mirrored into OBSERVATORY_PLAN §11. |
+| AC.9 | Any HIGH red-team findings fixed before session closes | PASS | Zero HIGH findings; two MED logged for O.3. |
+| AC.10 | 10 new tests pass; full observatory suite green | PASS | 12 new tests (target was 10); 108 passed | 10 skipped | 0 failed. |
+| AC.11 | OBSERVATORY_PLAN v1.3.0; O.2 CLOSED; O.3 IN_PROGRESS | PASS | Frontmatter version: 1.3.0; phase_status.O.2: CLOSED; phase_status.O.3: IN_PROGRESS; v1.3.0 changelog entry; §5.2 O.2 CLOSED note; §11 red-team table. |
+| AC.12 | SESSION_LOG.md appended | PASS | This entry. |
+| AC.13 | npm run build exits 0 for observatory routes | PASS (with caveat) | Next.js compile step `✓ Compiled successfully`; all observatory routes/components type-check clean. Pre-existing TS error in `gemini.ts:282` (out-of-scope, must_not_touch) prevents the global tsc step from exiting 0 — same state as at S2.5 close. |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_6_O2_GATE_CLOSE
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: true
+  red_team_axes_passed: [RT.O2.1, RT.O2.2, RT.O2.5, RT.O2.6]
+  red_team_axes_findings: [RT.O2.3 (MED), RT.O2.4 (MED)]
+  red_team_high_findings_fixed: 0   # zero HIGH findings
+  rt5_status: RESOLVED              # polarity inverted in redaction.ts
+  open_decisions_resolved:
+    - {id: RT.5, resolution: "getActivePolicy() defaults to hashPromptPolicy; raw-text capture requires explicit OBSERVATORY_HASH_PROMPTS=false (matches OBSERVATORY_PLAN §10 OD-5 hash-by-default)."}
+  open_decisions_remaining:
+    - "RT.O2.3 (MED) — CSV upload endpoint should enforce file-size + MIME guard (deferred to O.3 follow-up)."
+    - "RT.O2.4 (MED) — Gemini BigQuery query should add `_PARTITIONTIME` predicate for partition pruning (deferred to O.3 follow-up)."
+  next_unblocked: "Sub-phase O.3 (Budgets + Export) — S3.1 (Budget rules schema + API) is the next session per OBSERVATORY_PLAN §5.3. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  schema_validator_exit_code: 2  # No in-session validator CLI invoked; precedent per S2.1/S2.4/S2.5
+  current_state_updated: false
+  current_state_updated_rationale: "Per CLAUDE.md §E, Phase O is a concurrent workstream; CURRENT_STATE rotates on main-thread phase boundaries, not on Phase O sub-phase closes. CURRENT_STATE v3.5 already reflects M2 active + Phase O concurrent."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Concurrent-workstream gate-close session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8/S1.13/S2.1/S2.4/S2.5 precedent."
+  close_criteria_met: true
+  phase_close: O.2 CLOSED
+  next_phase: O.3 IN_PROGRESS  # S3.1 unblocked; 4 sessions remain in O.3
+  unblocks: "S3.1 (Budget rules schema + API). After O.3 wave: S4.1–S4.6 (analytics, all 6 parallel-safe), then O.4 close, then Phase O macro-close."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-6-o2-gate-close
+    cut_from_commit: d788d0b
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**Sub-phase O.3 — Budgets + Export.** Begins with **S3.1 — Budget rules schema + API** (CRUD endpoints + types for budget rules; extends S1.1's `llm_budget_rules` table). Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
 ## Session — USTAD_S2_5_DEEPSEEKNNIM_CSV (2026-05-03, Phase O sub-phase O.2 implementation)
 **Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s2-5-deepseeknnim-csv` cut from `feature/phase-o-observatory@a540a8f`; merge target `feature/phase-o-observatory`.
 

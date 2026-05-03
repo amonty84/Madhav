@@ -1,14 +1,22 @@
 // Tests — redaction policies.
-// Cases (per USTAD_S1_2 brief acceptance list 4–5):
+// Cases (per USTAD_S1_2 brief acceptance list 4–5 + USTAD_S2_6 RT.5 fix):
 //   4. defaultRedactionPolicy is identity (no field changes).
 //   5. hashPromptPolicy replaces prompt_text / response_text / system_prompt
 //      with sha256 hex; all other fields unchanged.
+//   6. getActivePolicy() defaults to hashPromptPolicy when
+//      OBSERVATORY_HASH_PROMPTS is unset (RT.5: hash-by-default).
+//   7. getActivePolicy() returns defaultRedactionPolicy only when
+//      OBSERVATORY_HASH_PROMPTS='false' (explicit opt-out).
+//   8. getActivePolicy() returns hashPromptPolicy when
+//      OBSERVATORY_HASH_PROMPTS='true'.
 
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { createHash } from 'node:crypto'
 
 import {
+  __resetActivePolicyForTests,
   defaultRedactionPolicy,
+  getActivePolicy,
   hashPromptPolicy,
 } from '../observability/redaction'
 import type {
@@ -98,5 +106,34 @@ describe('hashPromptPolicy', () => {
     expect(request.prompt_text).toBeNull()
     expect(request.system_prompt).toBeNull()
     expect(response.response_text).toBeNull()
+  })
+})
+
+describe('getActivePolicy (RT.5 — hash-by-default)', () => {
+  const ENV_KEY = 'OBSERVATORY_HASH_PROMPTS'
+  const originalValue = process.env[ENV_KEY]
+
+  afterEach(() => {
+    if (originalValue === undefined) delete process.env[ENV_KEY]
+    else process.env[ENV_KEY] = originalValue
+    __resetActivePolicyForTests()
+  })
+
+  it('returns hashPromptPolicy when OBSERVATORY_HASH_PROMPTS is unset (RT.5 default)', () => {
+    delete process.env[ENV_KEY]
+    __resetActivePolicyForTests()
+    expect(getActivePolicy()).toBe(hashPromptPolicy)
+  })
+
+  it("returns defaultRedactionPolicy when OBSERVATORY_HASH_PROMPTS='false' (explicit opt-out)", () => {
+    process.env[ENV_KEY] = 'false'
+    __resetActivePolicyForTests()
+    expect(getActivePolicy()).toBe(defaultRedactionPolicy)
+  })
+
+  it("returns hashPromptPolicy when OBSERVATORY_HASH_PROMPTS='true'", () => {
+    process.env[ENV_KEY] = 'true'
+    __resetActivePolicyForTests()
+    expect(getActivePolicy()).toBe(hashPromptPolicy)
   })
 })

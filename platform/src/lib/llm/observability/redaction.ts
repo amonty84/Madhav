@@ -1,11 +1,14 @@
 // Redaction policies for prompt / response / system_prompt capture.
 //
-// Per OBSERVATORY_PLAN §10 open-decision 5 (and the §9 PII risk row): default
-// behavior in this shim is full capture (defaultRedactionPolicy = identity).
-// Setting OBSERVATORY_HASH_PROMPTS=true at module-init time switches to
-// hashPromptPolicy, which replaces the three text fields with sha256 hex
-// digests so an event row records "we saw text of this content-hash" without
-// retaining the text itself.
+// Per OBSERVATORY_PLAN §10 open-decision 5 (hash-by-default) and the RT.5
+// finding from the S2.1 IS.8(b) red-team: the active policy defaults to
+// `hashPromptPolicy`. Raw-text capture requires an explicit opt-out via
+// `OBSERVATORY_HASH_PROMPTS=false`; any other value (including unset) keeps
+// the hashing policy active.
+//
+// hashPromptPolicy replaces prompt_text / response_text / system_prompt with
+// sha256 hex digests so an event row records "we saw text of this
+// content-hash" without retaining the text itself.
 //
 // The active policy is resolved once at module init; tests that need to
 // exercise the inactive policy import it directly rather than fighting env
@@ -43,11 +46,13 @@ export const hashPromptPolicy: RedactionPolicy = (req, res) => ({
 })
 
 function resolvePolicy(): RedactionPolicy {
+  // Hash-by-default per OBSERVATORY_PLAN §10 OD-5 (RT.5 fix). Only an explicit
+  // string 'false' opts out; unset / any other value keeps hashing on.
   const flag = process.env.OBSERVATORY_HASH_PROMPTS
-  if (flag && flag.toLowerCase() === 'true') {
-    return hashPromptPolicy
+  if (typeof flag === 'string' && flag.toLowerCase() === 'false') {
+    return defaultRedactionPolicy
   }
-  return defaultRedactionPolicy
+  return hashPromptPolicy
 }
 
 let _activePolicy: RedactionPolicy = resolvePolicy()

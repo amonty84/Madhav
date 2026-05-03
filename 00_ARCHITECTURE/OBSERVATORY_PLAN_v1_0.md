@@ -1,18 +1,18 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.2.0
+version: 1.3.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
-last_amended_session: USTAD_S2_1_RECONCILIATION_FRAMEWORK
+last_amended_session: USTAD_S2_6_O2_GATE_CLOSE
 last_amended_date: 2026-05-03
 authoritative_side: claude
 phase_status:
   O.0: CLOSED       # 2026-05-02 (S0.1)
   O.1: CLOSED       # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
-  O.2: IN_PROGRESS  # 2026-05-03 (S2.1 — reconciliation framework + IS.8(b) red-team)
-  O.3: PENDING
+  O.2: CLOSED       # 2026-05-03 (S2.6 — reconciliation UI + RT.5 fix; 13 ACs green)
+  O.3: IN_PROGRESS  # 2026-05-03 (S3.1 unblocked)
   O.4: PENDING
 mirror_obligations: >
   Adapted-parity summary mirror at .geminirules §E (Concurrent workstreams) and
@@ -28,6 +28,25 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v1.3.0 (2026-05-03, USTAD_S2_6_O2_GATE_CLOSE): O.2 GATE CLOSE.
+    All six S2.x sessions S2.1–S2.6 carry `close_criteria_met: true`. This
+    session lands the reconciliation UI surface (banner + history page +
+    sidebar link), the API-client extension (fetchReconciliationHistory +
+    triggerReconciliation), and resolves the deferred RT.5 finding from the
+    S2.1 IS.8(b) red-team — `getActivePolicy()` in
+    `platform/src/lib/llm/observability/redaction.ts` now defaults to
+    `hashPromptPolicy`; raw-text capture requires explicit
+    `OBSERVATORY_HASH_PROMPTS=false`. Per OBSERVATORY_PLAN §10 OD-5.
+    O.2-close IS.8(b) red-team discharged in-document (six axes;
+    RT.O2.1 PASS, RT.O2.2 PASS, RT.O2.3 MED, RT.O2.4 MED,
+    RT.O2.5 PASS, RT.O2.6 PASS — see §11 below). MED findings logged
+    for O.3 follow-up; no HIGH findings. 12 new unit tests added
+    (3 redaction `getActivePolicy` cases incl. RT.5 default; 5
+    ReconciliationBanner cases; 4 ReconciliationHistoryView cases including
+    a CSV-upload-form-hidden negative). Full observatory + LLM-shim suite
+    108 passed | 10 skipped, 0 failed (vs 91 at S2.5 close — net +17).
+    Sub-phase O.3 unblocked; S3.1 (budget rules schema + API) is the
+    next session.
   - v1.2.0 (2026-05-03, USTAD_S2_1_RECONCILIATION_FRAMEWORK): O.2 OPEN.
     Sub-phase O.2 marked IN_PROGRESS; S2.1 framework session CLOSED. Landed
     the reconciliation framework: types (ProviderReconciler interface +
@@ -378,6 +397,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 
 **O.2 OPEN 2026-05-03 by USTAD_S2_1_RECONCILIATION_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/reconciliation/{types,variance,base,factory}.ts` + the two API endpoint routes); per-provider reconcilers S2.2–S2.5 are unblocked and parallel-safe per §6.1 (each reconciler's `may_touch` is its single sibling file under the reconciliation/ directory). **Note: DeepSeek + NIM use a manual CSV-upload path (no admin API exposed by either provider as of 2026-05-03).** S2.5 ships a CSV ingestion handler instead of an API-pull reconciler; the precise CSV column mapping (e.g., DeepSeek monthly invoice format, NIM managed-catalog daily usage export) is deferred to the S2.5 session brief. The POST /reconciliation endpoint already returns `400 manual_upload_required` with provider-specific instructions for those two providers.
 
+**O.2 CLOSED 2026-05-03 by USTAD_S2_6_O2_GATE_CLOSE.** All six S2.x sessions S2.1–S2.6 carry `close_criteria_met: true`. Reconciliation framework + four per-provider reconcilers (Anthropic, OpenAI, Gemini-via-BigQuery, DeepSeek+NIM CSV-upload) wired end-to-end; UI surface complete (banner strip in `ObservatoryLayout`, history page at `/observatory/reconciliation` with provider tabs + CSV upload form for the manual providers, sidebar link). Typed API-client methods `fetchReconciliationHistory()` + `triggerReconciliation()` added to `platform/src/lib/api-clients/observatory.ts`. **Resolves RT.5** from S2.1's IS.8(b) red-team: `getActivePolicy()` defaults to `hashPromptPolicy` (raw-text capture is now opt-out via explicit `OBSERVATORY_HASH_PROMPTS=false`, matching OBSERVATORY_PLAN §10 OD-5 hash-by-default policy). O.2-close IS.8(b) red-team discharged with the 6-axis table in §11.
+
 ### §5.3 — Sub-phase O.3: Budgets + Export (4 sessions)
 
 | ID | Title | may_touch | must_not_touch | Deps | Deliverable |
@@ -550,6 +571,27 @@ These decisions are explicitly marked open at S0.1 close. The relevant downstrea
 6. **Whether to declare a new mirror pair MP.9** (OBSERVATORY_PLAN ↔ Gemini-side observability summary). **Decision needed at S0.1 close** (i.e., this session). Default: declare MP.9 with `adapted_parity_summary` mode; semantic parity, not byte-identity. Resolution at this S0.1 close: **MP.9 declared** in `manifest_overrides.yaml` with claude_side `00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md`, gemini_side `.geminirules §E + .gemini/project_state.md` Phase O block.
 
 7. **Whether self-hosted NIM should be added to v2 scope.** As of 2026-05-02, the project's NIM use is managed-catalog only. Adding self-hosted NIM (cost-derived from GPU utilization) is a substantial v2 effort. **Decision deferred to post-Phase-O-close native review.**
+
+---
+
+## §11 — O.2 close red-team (IS.8(b))
+
+Discharged in-document at O.2 close per `MACRO_PLAN §IS.8` and the
+`ONGOING_HYGIENE_POLICIES §G` cadence rule. Six axes; no HIGH findings;
+two MED findings logged for O.3 pickup.
+
+| Axis | Question | Verdict | Evidence / fix |
+|---|---|---|---|
+| RT.O2.1 | Are provider admin-API credentials checked at instantiation time, so a missing key causes `status='error'` on the result row, not a server-startup crash? | **PASS** | All three credentialed reconcilers read env vars *inside* `fetchAuthoritativeCost()` (Anthropic [anthropic.ts:89](../platform/src/lib/observatory/reconciliation/anthropic.ts#L89), OpenAI [openai.ts:117](../platform/src/lib/observatory/reconciliation/openai.ts#L117), Gemini [gemini.ts:127](../platform/src/lib/observatory/reconciliation/gemini.ts#L127)). Throws are caught by `BaseReconciler.reconcile()` ([base.ts:62-82](../platform/src/lib/observatory/reconciliation/base.ts#L62-L82)) which writes a status='error' row with the message in `notes`. No module-init env access. |
+| RT.O2.2 | Does double-calling `reconcile()` for the same `(provider, period_start, period_end)` insert duplicate rows in `llm_cost_reconciliation`? | **PASS** | `BaseReconciler` uses `INSERT ... ON CONFLICT (reconciliation_date, provider, COALESCE(model, '')) DO UPDATE SET ...` ([base.ts:138-152](../platform/src/lib/observatory/reconciliation/base.ts#L138-L152)). The CSV-upload path applies the same upsert ([upload/route.ts:225-239](../platform/src/app/api/admin/observatory/reconciliation/upload/route.ts#L225-L239)). Migration 038 declares the matching unique constraint. |
+| RT.O2.3 | Does the CSV upload endpoint validate file size and MIME type, or could a malicious super-admin upload a 500 MB file or non-CSV binary and OOM the server? | **MED — FINDING** | Upload route reads `(file as Blob).text()` ([upload/route.ts:118](../platform/src/app/api/admin/observatory/reconciliation/upload/route.ts#L118)) with no size cap and no MIME check. The form `accept=".csv,text/csv"` is browser-side only. **Recommended fix (deferred to O.3):** check `file.size <= 5 MB`, validate `file.type` allowlist, and stream-parse rows past a threshold. Severity capped at MED because the route is super-admin-only and gated by `OBSERVATORY_ENABLED`. |
+| RT.O2.4 | Does the Gemini BigQuery reconciler use partition pruning, or does it scan the full billing table? | **MED — FINDING** | Query filters on `WHERE DATE(usage_start_time) BETWEEN @period_start AND @period_end` ([gemini.ts:159](../platform/src/lib/observatory/reconciliation/gemini.ts#L159)). GCP standard billing exports are partitioned on `_PARTITIONTIME` — wrapping `DATE()` around `usage_start_time` does **not** prune those partitions. Daily scans will read the full table history on each reconcile. **Recommended fix (deferred to O.3):** add an additional `_PARTITIONTIME` predicate (e.g., `_PARTITIONTIME BETWEEN TIMESTAMP(@period_start) AND TIMESTAMP_ADD(TIMESTAMP(@period_end), INTERVAL 2 DAY)` to allow for retroactive billing rows). MED because it's a cost issue (BQ scan dollars), not a correctness or security one. |
+| RT.O2.5 | Does the RT.5 polarity fix break any existing test that assumed identity-default? | **PASS** | All existing redaction tests still pass; `defaultRedactionPolicy` and `hashPromptPolicy` themselves are unchanged. Only the env-var resolution flipped. Three new `getActivePolicy()` tests cover the new default + both explicit values ([observability_redaction.test.ts:103-130](../platform/src/lib/llm/__tests__/observability_redaction.test.ts#L103-L130)). Full observatory + LLM-shim suite: 108 passed, 10 skipped, 0 failed. |
+| RT.O2.6 | Does the ReconciliationBanner / history page ever render outside the `(super-admin)` route group, or import from non-observatory modules in a way that pulls cost data into non-admin surfaces? | **PASS** | Banner is mounted only in `lib/components/observatory/Layout.tsx`, which is rendered only by `app/(super-admin)/observatory/layout.tsx`'s `<ObservatoryLayout>`. The history page lives at `app/(super-admin)/observatory/reconciliation/page.tsx`. Both are inside the `(super-admin)` route group + `<AuthGate>` (flag + super-admin role check). The DB loader (`loader.ts`) is `import 'server-only'`. No imports from non-observatory consumer paths. |
+
+**Recommended O.3 follow-ups (logged to S3.x backlog, not blocking O.2 close):**
+- RT.O2.3 → harden `/api/admin/observatory/reconciliation/upload` with file-size + MIME guard.
+- RT.O2.4 → add `_PARTITIONTIME` predicate to Gemini BigQuery query.
 
 ---
 
