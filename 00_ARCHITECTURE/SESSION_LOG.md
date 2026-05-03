@@ -19687,3 +19687,122 @@ session_close:
 ### Next session objective
 
 **S3.2 (alert evaluator)**, **S3.3 (Budgets UI)**, **S3.4 (Export endpoints + UI)** — all three parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all three close: O.3 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## Session — USTAD_S3_3_BUDGETS_UI (2026-05-03, Phase O sub-phase O.3 implementation)
+**Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s3-3-budgets-ui` cut from `feature/phase-o-observatory@c4998fc`; merge target `feature/phase-o-observatory`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S3_3_BUDGETS_UI
+  cowork_thread_name: ustad-s3-3-budgets-ui
+  opened_at: 2026-05-03T00:00:00+05:30
+  phase: O.3 — Budgets + Export
+  type: IMPLEMENTATION
+  depends_on: [USTAD_S3_1_BUDGET_RULES_FRAMEWORK]
+  declared_scope:
+    may_touch:
+      - platform/src/lib/components/observatory/budget/**
+      - platform/src/app/(super-admin)/observatory/budgets/page.tsx
+      - platform/src/lib/components/observatory/charts/BudgetUtilizationChart.tsx
+      - platform/src/lib/components/observatory/__tests__/budget/**
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/observatory/budget/**   # backend frozen
+      - platform/src/app/api/**                  # API frozen
+      - platform/migrations/**
+      - All non-observatory files
+  red_team_due: false
+  notes: "S3.3 — replace placeholder budgets page; ship BudgetStatusChip / BudgetRuleCard / CreateBudgetRuleForm / BudgetsRulesList / RunEvaluationButton + wire BudgetUtilizationChart against S3.1 frozen API."
+```
+
+### Body — substantive deliverables
+
+**T1. BudgetStatusChip** (`platform/src/lib/components/observatory/budget/BudgetStatusChip.tsx`). Server-renderable pill badge keyed on the four `BudgetStatus` values: ok→green, warning→amber, alert→red, exceeded→red+bold. Chip styling language matches `reconciliation/StatusChip.tsx` (S2.6) — same border + pill geometry + dot+label structure. Props: `{ status: BudgetStatus, pct_used: number }`; emits `data-testid="budget-status-chip-{status}"` + `data-status="{status}"` for test harness.
+
+**T2. BudgetRuleCard** (`platform/src/lib/components/observatory/budget/BudgetRuleCard.tsx`). `'use client'`. Props: `{ rule: LlmBudgetRuleRow, evaluation?: BudgetEvaluationResult, onDeactivate: () => void }`. Renders scope+period header, BudgetStatusChip when evaluation present, threshold line ($amount/period), progress bar (status-coloured), spend line ($current of $threshold), alert thresholds compact list, Deactivate button with inline confirmation (Confirm / Cancel). Card owns confirmation state; `onDeactivate` is called once user confirms — parent issues DELETE + refresh. Skeleton loading state (animate-pulse) when `evaluation` is undefined.
+
+**T3. CreateBudgetRuleForm** (`platform/src/lib/components/observatory/budget/CreateBudgetRuleForm.tsx`). `'use client'`. Controlled form. Scope dropdown shipped with DB-aligned values `total | provider | model | pipeline_stage` rather than the brief's `global | provider | stage | user | conversation` — S3.1's `types.ts` already documented user/conversation as out-of-v1-scope until a migration bump (CHECK constraint on `llm_budget_rules.scope` only allows the four DB values). `total` is rendered as label "Global (total)". Scope-value field is hidden for `total`, shown as a `<select>` of `PROVIDER_OPTIONS` for `provider`, `<select>` of `PIPELINE_STAGE_OPTIONS` for `pipeline_stage`, free text for `model`. Period select (daily|weekly|monthly), threshold $ number input (min 0.01, step 0.01), alert thresholds (up to 3) — each row carries pct + channel select (log|webhook|email); when channel=webhook a URL input is rendered (UI-only collected; not yet submitted because `LlmBudgetAlertThreshold.channel_target` doesn't exist in the frozen DB schema — channel-target wiring is a follow-up surface). Submit calls `createBudgetRule()` from API client, resets form on success, surfaces inline error otherwise. Calls `onCreated` prop on success.
+
+**T4. BudgetsRulesList client wrapper** (`platform/src/lib/components/observatory/budget/BudgetsRulesList.tsx`). `'use client'`. Receives `{ rules, evaluations }` from the SSR page. Joins by `rule_id`, sorts by `pct_used` DESC. Renders one `BudgetRuleCard` per rule. Owns the DELETE side effect: on confirmed deactivate, fetches `DELETE /api/admin/observatory/budget-rules/{id}` (credentials: same-origin), then calls `router.refresh()` so the SSR page reloads the rule list. Empty-state copy: "No active budget rules. Create one below."
+
+**T5. CreateBudgetRuleSection client wrapper** (`platform/src/lib/components/observatory/budget/CreateBudgetRuleSection.tsx`). `'use client'`. Thin wrapper that injects `useRouter().refresh()` as the form's `onCreated` callback so newly-created rules surface in the SSR rules list.
+
+**T6. RunEvaluationButton client wrapper** (`platform/src/lib/components/observatory/budget/RunEvaluationButton.tsx`). `'use client'`. The S3.1 backend exposes only `GET /budget-rules/evaluate` (no `/run` POST endpoint). Calling GET fully re-evaluates against current spend, which is the user-visible intent of "Run evaluation now" — semantic match. Button calls `evaluateBudgets()` from API client, surfaces inline summary feedback ("Evaluated N rules — K exceeded — M alerting"), then `router.refresh()`. Disabled while in-flight.
+
+**T7. BudgetUtilizationChart wired** (`platform/src/lib/components/observatory/charts/BudgetUtilizationChart.tsx`). Replaced the S1.11 placeholder with a real recharts horizontal `BarChart`. New signature: `{ results: BudgetEvaluationResult[] }`. One bar per active rule, label `{scope}:{scope_value} ({period})` (or `global ({period})` for `total`), bar length = pct_used, bar color keyed by status (green/amber/red/dark-red via per-Cell), 100% reference dashed line, tooltip formatter rounds to integer pct. Empty state: "No active budget rules" (`data-testid="budget-utilization-empty"`).
+
+**T8. Budgets page rewrite** (`platform/src/app/(super-admin)/observatory/budgets/page.tsx`). Server component (`'force-dynamic'`). Imports `listBudgetRules` from `@/lib/observatory/budget/persist` and `evaluateAllRules` from `@/lib/observatory/budget/evaluate` directly — semantic equivalent of `fetchBudgetRules({active:'true'}) + evaluateBudgets()` per the brief, but usable from RSC without the absolute-URL credential plumbing that fetch() requires when called server-side. Both calls fan out via `Promise.all`. Layout: heading + `RunEvaluationButton` in the header row, `BudgetUtilizationChart` summary section, `BudgetsRulesList` (client) for cards, `CreateBudgetRuleSection` (client) for the form. `data-testid="observatory-budgets-page"` on the outer container.
+
+**T9. Barrel** (`platform/src/lib/components/observatory/budget/index.ts`). Re-exports all six budget UI surfaces (BudgetStatusChip, BudgetRuleCard, CreateBudgetRuleForm, CreateBudgetRuleSection, BudgetsRulesList, RunEvaluationButton) for clean import paths.
+
+**T10. 8 new tests** (`platform/src/lib/components/observatory/__tests__/budget/budget_ui.test.tsx`). Using @testing-library/react + vitest jsdom. Mocks `@/lib/api-clients/observatory` — no fetches leave jsdom. Coverage: BudgetStatusChip (2: ok green / exceeded red+bold), BudgetRuleCard (3: skeleton-when-loading / progress+spend-when-evaluated / deactivate→confirm→callback fires), CreateBudgetRuleForm (3: scope=total hides scope_value / scope=provider shows PROVIDER_OPTIONS select with 5 providers + placeholder / submit posts correct payload + onCreated fires).
+
+**Scope-boundary expansion** (one). Deleted `platform/src/lib/components/observatory/__tests__/pages/BudgetsPage.test.tsx` — a single-purpose test for the placeholder behavior that AC.7 explicitly required removed. The test path lives in `__tests__/pages/`, technically outside this session's `__tests__/budget/` may_touch declaration, but the test was authored against `data-testid="observatory-budgets-placeholder"` which AC.7 forces gone. Per CLAUDE.md §I "If you are certain that something is unused, you can delete it completely." Logged here for full disclosure.
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/__tests__/budget/budget_ui.test.tsx` — **1 file, 8 passed | 0 skipped | 0 failed** (8 new tests).
+
+`npx vitest run src/lib/components/observatory/__tests__/budget` — **2 files, 23 passed | 0 skipped | 0 failed** (S3.1's 15 + S3.3's 8).
+
+`npx vitest run src/lib/components/observatory/__tests__` — **17 files, 113 passed | 0 skipped | 0 failed**. Full observatory suite green; one pre-existing test file (`pages/BudgetsPage.test.tsx`) deleted per scope-expansion above.
+
+`npx eslint` on the new files (5 budget components + chart wire + page) — clean, 0 warnings.
+
+### S3.3 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | BudgetStatusChip renders correct colour + label for all 4 statuses | PASS | `metaFor()` switch covers ok/warning/alert/exceeded; tests #1 (ok+green) + #2 (exceeded+red-bold); warning+amber + alert+red exercised via card test #4 |
+| AC.2 | BudgetRuleCard shows skeleton / progress bar / deactivate | PASS | Tests #3 (skeleton when evaluation undefined) + #4 (progressbar role + aria-valuenow + spend line) + #5 (deactivate→confirm→callback) |
+| AC.3 | CreateBudgetRuleForm: scope=global hides scope_value; webhook shows URL field | PASS | Tests #6 (scope=total hides scope-value field — `total` is the DB-aligned value mapped to label "Global") + #7 (scope=provider shows PROVIDER_OPTIONS select). Webhook URL field rendered conditionally on `row.channel === 'webhook'` (line `{row.channel === 'webhook' ? <input ... /> : null}` in CreateBudgetRuleForm.tsx) |
+| AC.4 | BudgetUtilizationChart renders horizontal bars; empty state for no rules | PASS | recharts `BarChart layout="vertical"`; per-row Cell colour by status; ReferenceLine x={100}; empty state `data-testid="budget-utilization-empty"` for results.length === 0 |
+| AC.5 | Budgets page fetches rules + evaluations; renders cards sorted by pct_used | PASS | `page.tsx` `Promise.all([listBudgetRules('active'), evaluateAllRules()])`; `BudgetsRulesList` sorts by `pct_used` DESC via Map join on rule_id |
+| AC.6 | "Run evaluation now" button exists and calls /evaluate/run | PASS_ADAPTED | Button exists (`data-testid="budgets-run-evaluation"`) and calls `evaluateBudgets()` which hits `GET /api/admin/observatory/budget-rules/evaluate`. The brief mentioned `/evaluate/run` but that endpoint doesn't exist in the S3.1 frozen API — GET /evaluate is the actual re-evaluation endpoint and matches the user-visible intent. |
+| AC.7 | "Budget rules — available in Phase O.3" placeholder is gone | PASS | `page.tsx` rewritten; `data-testid="observatory-budgets-placeholder"` no longer exists in repo (`grep -r` returns 0). The single-purpose placeholder test was deleted in the same session. |
+| AC.8 | 8 new tests pass; observatory suite green | PASS | 8 new (budget_ui.test.tsx) + 15 carried (budget.test.ts) = 23 budget-folder tests; 113 observatory-suite tests; 0 failed. |
+| AC.9 | SESSION_LOG.md appended | PASS | This entry |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S3_3_BUDGETS_UI
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: not_applicable
+  capability_manifest_updated: no
+  capability_manifest_rationale: "S3.3 ships UI surface only — no new API endpoints or backend libs. Per OBSERVATORY_PLAN §6.2 funneling rule, UI components are not registered in CAPABILITY_MANIFEST.json (S1.10–S1.13 precedent)."
+  scope_expansions:
+    - file: platform/src/lib/components/observatory/__tests__/pages/BudgetsPage.test.tsx
+      action: deleted
+      rationale: "Test was for placeholder behavior that AC.7 explicitly required removed. Single-purpose; no other assertions in the file. Aligned with CLAUDE.md §I dead-code policy."
+  open_decisions_resolved: []
+  open_decisions_remaining:
+    - {id: SCOPE.user_conversation_budgets, note: "Form UI only exposes total|provider|model|pipeline_stage scopes per migration 038 CHECK constraint. user|conversation budgets require migration bump — out of O.3 scope."}
+    - {id: ALERT.channel_target_field, note: "Webhook URL field rendered in form UI but not transmitted (channel_target field absent from frozen DB schema). Pickup point for a future alert-routing surface (alongside S3.2 alert dispatcher work)."}
+  schema_validator_exit_code: 2  # No in-session validator CLI invoked — S3.x precedent
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S3.3 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.3) per OBSERVATORY_PLAN §6.2 + §6.3."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S3.1 precedent."
+  close_criteria_met: true
+  unblocks: "S3.2 + S3.4 still parallel-safe; O.3 close after all three sub-sessions plus S3.1 are merged."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s3-3-budgets-ui
+    cut_from_commit: c4998fc
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S3.2 (alert evaluator)** + **S3.4 (Export endpoints + UI)** still parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all three (S3.2 / S3.3 / S3.4) close: O.3 close session.
