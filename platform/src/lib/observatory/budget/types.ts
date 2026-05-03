@@ -29,7 +29,20 @@ import type {
 
 export type BudgetScope = LlmBudgetScope
 export type BudgetPeriod = LlmBudgetPeriod
-export type AlertThreshold = LlmBudgetAlertThreshold
+
+/** App-layer view of a single alert threshold inside a budget rule.
+ *
+ *  This is a superset of the DB-level `LlmBudgetAlertThreshold`: it adds
+ *  `channel_target` (the webhook URL when `channel === 'webhook'`; unused
+ *  otherwise). The field is optional and additive — the DB layer treats the
+ *  whole `alert_thresholds` value as JSONB, so widening the app-layer type is
+ *  safe. Authored by USTAD_S3_2_ALERT_DISPATCHER. */
+export interface AlertThreshold {
+  pct: number
+  channel: string
+  /** Webhook URL for `channel === 'webhook'`. Unused for `log` / `email`. */
+  channel_target?: string
+}
 
 /** ok: pct_used is below every alert_threshold.
  *  warning: pct_used is at-or-above the lowest alert_threshold but below the
