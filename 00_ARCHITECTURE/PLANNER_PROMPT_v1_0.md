@@ -1,21 +1,24 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.1
+version: 1.2
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
 amended_on: 2026-05-03
 amendment_reason: >
-  Lever 2 eval (29 cases) showed tool_recall=0.572, tool_precision=0.514.
-  Root causes: (1) planner fired remedial_codex_query on all query types
-  (precision collapse); (2) pattern_register missed in all predictive queries
-  (R7 was ambiguous — "predictive OR remedial" with OR between tools);
-  (3) cluster_atlas never selected for holistic queries (no rule existed).
-  Fix: add R7a/R7b (split predictive vs remedial lens), R11 (holistic →
-  cluster_atlas), R12 (holistic contradictions → contradiction_register),
-  R13 (hard prohibition on remedial_codex_query in non-remedial queries).
-  Add query_class to §3 output schema and all §4 few-shot expected plans.
-  Add §4.5 (predictive example) and §4.6 (holistic example).
+  v1.1 → v1.2 (Lever 2 eval EVAL-3: 6/29 pass, recall=0.750, precision=0.588).
+  Root causes: (1) §4.4 few-shot demonstrated cgm_graph_walk + resonance_register
+  in an interpretive example — model followed it, collapsing precision on all 12
+  interpretive cases; (2) R7b "choose between" framing for remedial lens caused
+  resonance_register to be under-selected (expected 5/6 remedial but was omitted
+  in favor of pattern_register); (3) cgm_graph_walk firing on non-holistic queries
+  (no restriction rule); (4) resonance_register firing on non-remedial queries (no
+  restriction rule); (5) empty query returned tools instead of []; (6) pattern_register
+  missed on interpretive queries with temporal/recurring dimension (GT.009).
+  Fix: R7b changed to ALWAYS-resonance_register + also-pattern_register when pattern;
+  R14 (cgm_graph_walk holistic-only); R15 (resonance_register remedial-only);
+  R16 (empty query → []); R17 (interpretive + temporal → pattern_register).
+  §4.4 fixed: cgm_graph_walk and resonance_register removed from interpretive example.
 role: >
   System prompt + structured-output schema + few-shot examples + evaluation rubric
   for the MARSYS-JIS LLM-first planner (W2-PLANNER). The planner consumes:
@@ -159,14 +162,13 @@ Hard rules:
        patterns before projecting forward. Do NOT substitute `resonance_register`
        for `pattern_register` in predictive plans — `resonance_register` is
        for remedial alignment only.
-  R7b. For REMEDIAL queries, choose the cross-domain lens by query character:
-       use `pattern_register` when the query is about a recurring pattern the
-       native wants to act on (e.g. "Saturn keeps causing friction in my
-       career", "ritual for my chart's weakest planet");
-       use `resonance_register` when the query asks whether a specific
-       prescription (gemstone, mantra, ritual, fasting, charity) aligns with
-       the chart's existing cross-domain resonance (e.g. "should I wear a
-       yellow sapphire", "is this mantra appropriate for me").
+  R7b. For REMEDIAL queries, ALWAYS include `resonance_register` at priority
+       ≤ 2 — it is the default cross-domain prescription-alignment lens for
+       every remedial query (gemstone, mantra, ritual, propitiation, or
+       "what should I do about [planet]"). ALSO include `pattern_register`
+       when the query describes a recurring pattern the native wants to act
+       on (e.g. "Saturn keeps causing", "chart's weakest planet", "ritual for
+       a repeating problem"). Both tools may appear together in a remedial plan.
   R8.  For REMEDIAL queries, ALWAYS include `msr_sql` at priority 1. The
        remedy cannot be calibrated without first surfacing the implicated
        grahas/signals from MSR. `remedial_codex_query` alone, without
@@ -188,6 +190,20 @@ Hard rules:
        "how can I strengthen [planet]". If the query asks for interpretation,
        timing, structural analysis, or chart overview — not prescription —
        do not include `remedial_codex_query`.
+  R14. `cgm_graph_walk` is EXCLUSIVELY for HOLISTIC queries. Never include
+       it in interpretive, predictive, or remedial queries. Adding it to
+       non-holistic plans inflates the tool list and collapses precision.
+  R15. `resonance_register` is EXCLUSIVELY for REMEDIAL queries. Never
+       include it in interpretive, predictive, or holistic queries. It is
+       a prescription-alignment lens — not a general-purpose cross-domain
+       lens for interpretation or timing.
+  R16. If the query is empty, whitespace only, or fewer than 5 non-whitespace
+       characters, return query_class "single_answer" with tool_calls: []
+       (empty array). Do not call any tools for trivial or empty input.
+  R17. For INTERPRETIVE queries with a temporal or recurring dimension (e.g.
+       the query uses words like "pattern", "over time", "how has it evolved",
+       "why does X keep happening", "recurring"), add `pattern_register` at
+       priority 2.
 
 Style rules:
 
@@ -227,6 +243,14 @@ holistic queries; `remedial_codex_query` is absent (R13).
 
 **R13 reminder:** `remedial_codex_query` is absent from §4.4, §4.5, §4.6.
 A non-remedial plan that includes `remedial_codex_query` fails the eval.
+
+**R14 reminder:** `cgm_graph_walk` appears ONLY in §4.6 (holistic). It is
+absent from all interpretive (§4.4), predictive (§4.5), and remedial
+(§4.1–§4.3) examples. Adding it to non-holistic plans is a precision error.
+
+**R15 reminder:** `resonance_register` appears ONLY in §4.1–§4.3 (remedial).
+It is absent from §4.4 (interpretive), §4.5 (predictive), §4.6 (holistic).
+Adding it to non-remedial plans is a precision error.
 
 ### 4.1 Remedial query — recurring-pattern character
 
@@ -368,6 +392,12 @@ search needed.
 
 ### 4.4 Interpretive query
 
+Interpretive queries are answered with `msr_sql` (signals) and `vector_search`
+(L3 narrative). R14 prohibits `cgm_graph_walk` in interpretive plans (holistic
+only). R15 prohibits `resonance_register` in interpretive plans (remedial only).
+The plan below is intentionally two-tool — adding cgm_graph_walk or
+resonance_register here inflates predictions and collapses precision.
+
 ```json
 {
   "user_query": "How does my Mars in the 8th house actually express in relationships?",
@@ -381,20 +411,6 @@ search needed.
         "token_budget": 800,
         "priority": 1,
         "reason": "Pull all Mars-relationship signals; foundation for interpretation."
-      },
-      {
-        "tool_name": "cgm_graph_walk",
-        "params": { "graph_seed_hints": ["PLN.Mars", "HSE.8"], "graph_traversal_depth": 2 },
-        "token_budget": 700,
-        "priority": 1,
-        "reason": "Walk Mars and 8H neighborhoods; pick up dispositors and aspects."
-      },
-      {
-        "tool_name": "resonance_register",
-        "params": { "domains": ["relationships"], "theme": "Mars-Venus" },
-        "token_budget": 400,
-        "priority": 2,
-        "reason": "Cross-domain resonance lens on Mars-relationships dynamics."
       },
       {
         "tool_name": "vector_search",
@@ -506,4 +522,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.1 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.2 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
