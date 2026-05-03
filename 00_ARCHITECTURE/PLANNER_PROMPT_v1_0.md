@@ -1,11 +1,32 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.5
+version: 1.6
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
 amended_on: 2026-05-03
 amendment_reason: >
+  v1.5 → v1.6 (Lever 2 EVAL-6 run 2: 21/29 pass, recall=0.911 ✓, precision=0.945 ✓,
+  thresholds MET; 8 stable prompt-side failures remain across runs). Goal: make eval
+  deterministic by eliminating variance between timeout-heavy and timeout-free runs.
+  Root causes: (1) §4.8 yogas example included vector_search — gold expects only
+  [msr_sql, pattern_register], causing GT.009 precision=0.67; (2) GT.010 (Saturn in
+  11th house) never gets cgm_graph_walk despite R14 — no few-shot anchored planet-in-
+  house → structural topology; (3) GT.008/GT.022 (chart-level/divisional scope) miss
+  pattern_register — R17(b) examples in §4.8 cover yogas but not Lagna/divisional
+  wording; (4) GT.017 (comprehensive overview) swallowed by §4.7 lightweight pattern
+  after §4.6 was changed to domain-specific — "comprehensive" now has no matching
+  few-shot and falls to catch-all; (5) GT.025 real failure revealed: same §4.7
+  gravitational pull; (6) GT.002 (mantra for spiritual progress) still missing
+  vector_search — §4.2 explicitly teaches no-vector_search for alignment remedial,
+  overriding R18 despite "spiritual" appearing in the domain list.
+  Fix: §4.8 vector_search removed (GT.009); §4.9 new structural-positional example
+  [msr_sql, cgm_graph_walk] for planet-in-house (GT.010, GT.021); §4.10 new chart-
+  level multi-layer example [msr_sql, pattern_register, vector_search] for Lagna/
+  divisional scope (GT.008, GT.022); R19 extended to cover "comprehensive" scope
+  words as msr_sql triggers alongside explicit domain names (GT.017); §4.7 note
+  tightened to exclude "comprehensive" type queries; R18 clarified to fire for ALL
+  remedial types including alignment-character when domain word present (GT.002).
   v1.1 → v1.2 (Lever 2 eval EVAL-3: 6/29 pass, recall=0.750, precision=0.588).
   Root causes: (1) §4.4 few-shot demonstrated cgm_graph_walk + resonance_register
   in an interpretive example — model followed it, collapsing precision on all 12
@@ -283,14 +304,22 @@ Hard rules:
        `vector_search` at priority 2 to pull L3 domain narrative for the
        prescription context. Trigger examples: "gemstone for career",
        "mantra for spiritual practice", "fasting for health",
-       "ritual for relationships".
-  R19. Include `msr_sql` at priority 1 alongside `cluster_atlas` ONLY when
-       the holistic query explicitly names specific life domains together
+       "ritual for relationships". This rule fires for ALL remedial query
+       types — alignment-character (gemstone, mantra) AND pattern-character
+       (recurring-pattern, weakest planet) alike. A domain word always
+       triggers `vector_search`, even when the query also asks about
+       gemstone or mantra alignment (e.g. "mantra for spiritual progress"
+       → add `vector_search` despite being alignment-character).
+  R19. Include `msr_sql` at priority 1 alongside `cluster_atlas` in two
+       cases: (a) the query explicitly names specific life domains together
        (e.g. "career and marriage", "health and relationships", "career +
-       marriage + health"). For holistic queries that do NOT name specific
-       domains — including "comprehensive overview", "life path", "everything",
-       "high-level read", "what's interesting" — `msr_sql` is NOT required.
-       Let `cluster_atlas` carry the holistic scope alone.
+       marriage + health"); OR (b) the query signals comprehensive scope
+       using words like "comprehensive", "full synthesis", "complete picture",
+       "all about my chart", "life path", or "all major domains". For
+       lightweight curiosity queries that fit NEITHER case — including
+       "high-level read", "what's interesting", "what stands out", "surprise
+       me", "what's notable" — `msr_sql` is NOT required. Let `cluster_atlas`
+       carry the holistic scope alone for those queries.
   R20. For HOLISTIC queries asking how domains INTERACT or AFFECT each other
        (e.g. "how does my career interact with marriage", "career + marriage +
        health interaction", "how are these domains connected"), use
@@ -313,7 +342,7 @@ Style rules:
 
 ## 4. Few-shot examples
 
-Six examples covering remedial, interpretive, predictive, and holistic
+Ten examples covering remedial, interpretive, predictive, and holistic
 query classes. Each shown as `{ user_query, expected_plan }`. The actual
 production call serialises only `user_query`; the expected_plan is the
 planner's target output. Every expected_plan includes a `query_class` field.
@@ -340,9 +369,11 @@ holistic queries; `remedial_codex_query` is absent (R13).
 **R13 reminder:** `remedial_codex_query` is absent from §4.4, §4.5, §4.6.
 A non-remedial plan that includes `remedial_codex_query` fails the eval.
 
-**R14 reminder:** `cgm_graph_walk` appears ONLY in §4.6 (holistic). It is
-absent from all interpretive (§4.4), predictive (§4.5), and remedial
-(§4.1–§4.3) examples. Adding it to non-holistic plans is a precision error.
+**R14 reminder:** `cgm_graph_walk` appears in §4.6 (holistic topology) and
+§4.9 (structural-positional interpretive: planet-in-house, dispositor chain,
+aspect web). It is absent from domain-qualified interpretive (§4.4), holistic
+catch-all (§4.7), predictive (§4.5), and remedial (§4.1–§4.3) examples.
+Adding it outside of these two cases is a precision error.
 
 **R15 reminder:** `resonance_register` appears ONLY in §4.1–§4.3 (remedial).
 It is absent from §4.4 (interpretive), §4.5 (predictive), §4.6 (holistic).
@@ -627,10 +658,14 @@ would be omitted — see §4.7.
 ### 4.7 Holistic query — lightweight catch-all
 
 Lightweight/curiosity holistic queries ("what's interesting", "high-level read",
-"what stands out") require only `cluster_atlas` + `pattern_register`. R14 says
-cgm_graph_walk is OPTIONAL for holistic — omit it for catch-all queries (R6).
-R19 says msr_sql is ONLY for comprehensive multi-domain queries — omit it here.
-Resist the urge to add more tools; the lean two-tool plan is the correct output.
+"what stands out", "surprise me", "what's notable") require only `cluster_atlas`
++ `pattern_register`. This pattern does NOT apply to queries using "comprehensive",
+"full synthesis", "everything about my chart", "complete picture", or "all major
+domains" — those trigger §4.6's fuller plan (R19 case b). R14 says cgm_graph_walk
+is OPTIONAL for holistic — omit it for catch-all queries (R6). R19 says msr_sql is
+for comprehensive or domain-named holistic queries only — omit it here. Resist the
+urge to add more tools; the lean two-tool plan is the correct output for open
+curiosity queries.
 
 ```json
 {
@@ -660,11 +695,12 @@ Resist the urge to add more tools; the lean two-tool plan is the correct output.
 
 ### 4.8 Interpretive query — chart-level yogas (multi-layer scope)
 
-R17(b) fires here: yogas span multiple layers and divisionals (chart-level scope),
-so `pattern_register` is required at priority 2. R14 says `cgm_graph_walk` is NOT
-included — this query does not ask about structural topology (dispositors, aspect
-web); it asks about yoga combinations. R15 prohibits `resonance_register` in
-interpretive plans.
+R17(b) fires here: yogas span multiple chart layers, so `pattern_register` is
+required at priority 2. R14 prohibits `cgm_graph_walk` — yoga identification is
+not a structural-topology query (no dispositor chain or aspect web). `vector_search`
+is intentionally absent — yoga identification is answered from MSR signals + pattern
+register, not L3 long-form narrative. Compare §4.10 for chart-strength queries that
+DO require `vector_search`.
 
 ```json
 {
@@ -685,14 +721,85 @@ interpretive plans.
         "params": {},
         "token_budget": 400,
         "priority": 2,
-        "reason": "R17: yogas span multiple chart layers — chart-level scope triggers pattern_register."
+        "reason": "R17(b): yogas span multiple chart layers — chart-level scope triggers pattern_register."
+      }
+    ]
+  }
+}
+```
+
+### 4.9 Interpretive query — structural-positional (planet-in-house)
+
+R14 fires here: "Saturn in 11th house" is a planet's house placement without a
+domain qualifier — the prototypical structural-positional interpretive query.
+Include `cgm_graph_walk` at priority 2 to surface the dispositor chain and
+aspect web. `vector_search` is intentionally absent — structural topology is
+answered from MSR + CGM graph, not L3 long-form narrative. Compare §4.4 for
+domain-qualified interpretive (e.g. "Mars in 8th for relationships") where
+`cgm_graph_walk` is omitted and `vector_search` is used instead.
+
+```json
+{
+  "user_query": "What does Saturn in the 11th house mean for my chart?",
+  "expected_plan": {
+    "query_class": "interpretive",
+    "query_intent_summary": "Interpret Saturn-11H structural placement and dispositor chain.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "planets": ["Saturn"], "houses": ["11"] },
+        "token_budget": 800,
+        "priority": 1,
+        "reason": "Pull all Saturn-11H signals; foundation for house placement interpretation."
+      },
+      {
+        "tool_name": "cgm_graph_walk",
+        "params": { "start_node": "Saturn", "graph_traversal_depth": 2 },
+        "token_budget": 500,
+        "priority": 2,
+        "reason": "R14: planet-in-house structural query — CGM walk surfaces dispositor chain and aspect web."
+      }
+    ]
+  }
+}
+```
+
+### 4.10 Interpretive query — chart-level multi-layer (Lagna / divisional scope)
+
+R17(b) fires here: "Lagna lord", "chart strength", "across divisionals", "Mars
+across divisionals" all signal chart-level or multi-layer scope, triggering
+`pattern_register` at priority 2. Unlike §4.8 (yoga identification — no vector_search),
+chart-strength and manifestation queries DO require `vector_search` for L3 narrative
+on how the overall strength pattern plays out. `cgm_graph_walk` is absent — this is
+not a structural-topology query.
+
+```json
+{
+  "user_query": "How strong is my Lagna and how does that chart strength show up in my life?",
+  "expected_plan": {
+    "query_class": "interpretive",
+    "query_intent_summary": "Assess Lagna lord strength and chart-wide vitality patterns.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "limit": 15 },
+        "token_budget": 800,
+        "priority": 1,
+        "reason": "Pull signals spanning all domains to assess overall chart strength."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "R17(b): Lagna + chart strength = chart-level multi-layer scope."
       },
       {
         "tool_name": "vector_search",
-        "params": { "query_text": "yogas chart combinations active", "doc_type": ["domain_report"], "top_k": 6 },
+        "params": { "query_text": "Lagna lord chart strength vitality life manifestation", "doc_type": ["domain_report"], "top_k": 6 },
         "token_budget": 600,
         "priority": 2,
-        "reason": "L3 narrative on yoga combinations and their manifestation."
+        "reason": "L3 narrative on how Lagna strength and vitality manifest across domains."
       }
     ]
   }
@@ -714,4 +821,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.5 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.6 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
