@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  planner-regression:
+    name: Planner Regression Gate
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    defaults:
+      run:
+        working-directory: platform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: platform/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Planner regression gate (mocked — no LLM)
+        # Replays fixtures/regression_baseline.json through the scoring path.
+        # Asserts tool_recall >= RECALL_THRESHOLD and tool_precision >= PRECISION_THRESHOLD
+        # as defined in planner_smoke_runner.ts. No live LLM calls; no secrets required.
+        run: npm run eval:planner-regression
