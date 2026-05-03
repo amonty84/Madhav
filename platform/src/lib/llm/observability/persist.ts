@@ -1,6 +1,20 @@
 // persistObservation — apply the active redaction policy, then INSERT one row
 // into llm_usage_events. NEVER throws: observability errors must not break
 // the caller (the chat path keeps working even when telemetry can't write).
+//
+// OD.S1.3.1 — RESOLVED 2026-05-03 (USTAD_S1_13). No separate
+// `llm_provider_raw_responses` table. Request parameter snapshots live in the
+// `parameters` jsonb column of llm_usage_events (all five S1.4–S1.8 adapters
+// already populate it). Raw provider response bodies are not persisted at v1;
+// the Meta tab of EventSidePanel surfaces this as a documented note. Capture
+// can be added in a future release without schema migration (the column is
+// jsonb).
+//
+// OD.S1.7.1 — RESOLVED 2026-05-03 (USTAD_S1_13) via Option B (no API change).
+// observe()/observeStream() classify all thrown errors as status='error'.
+// Adapters that detect a provider timeout call persistObservation() directly
+// with status='timeout' before re-throwing. This function is therefore the
+// timeout escape hatch — see the JSDoc on the export below.
 
 import { getActivePolicy } from './redaction'
 import type {
@@ -46,6 +60,19 @@ const INSERT_SQL = `
   RETURNING *
 `
 
+/**
+ * INSERT one llm_usage_events row from an observed request/response pair.
+ *
+ * Provider adapters (S1.4–S1.8) call this directly — bypassing observe() — when
+ * they need to record a status the wrapper can't produce on its own. Today
+ * the only such status is `timeout`: observe()/observeStream() classify every
+ * thrown error as `error`, so an adapter that detects a provider timeout (e.g.
+ * AbortError from a per-request deadline) must build the ObservedLLMResponse
+ * itself with `status: 'timeout'` and call this function before re-throwing.
+ *
+ * Use observe() in the success/error case; use this function as the timeout
+ * escape hatch and for any other adapter-classified terminal status.
+ */
 export async function persistObservation(
   req: ObservedLLMRequest,
   res: ObservedLLMResponse,
