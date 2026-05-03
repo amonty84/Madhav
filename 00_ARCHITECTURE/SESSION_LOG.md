@@ -19280,3 +19280,114 @@ session_close:
 ### Next session objective
 
 **S2.2 (Anthropic) / S2.4 (Gemini) / S2.5 (DeepSeek+NIM CSV)** remain parallel-safe per OBSERVATORY_PLAN §6.1. After all four reconcilers (S2.2/S2.3/S2.4/S2.5) close, S2.6 (Reconciliation banner UI) + O.2 close session can proceed. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+
+---
+
+## USTAD_S2_2_ANTHROPIC_RECONCILER (2026-05-03)
+
+**Closed:** 2026-05-03
+**Phase:** O.2 — Reconciliation (sub-session 1 of 4 parallel; siblings S2.3 / S2.4 / S2.5 already merged)
+**Type:** IMPLEMENTATION
+**Worktree:** `feature/phase-o-observatory-ustad-s2-2-anthropic-reconciler` cut from umbrella `a540a8f`
+**Merge target:** `feature/phase-o-observatory`
+
+**One-line summary.** Replaced the `NotImplementedReconciler` stub for Anthropic with `AnthropicReconciler` — a `BaseReconciler` subclass that pulls token usage from `https://api.anthropic.com/v1/organizations/usage`, prices it against `llm_pricing_versions` (preferring dedicated `cache_write` / `cache_read` rows; falling back to 1.25× / 0.1× input multipliers when absent), follows `next_page` pagination cursors, and surfaces unpriced models in `notes` without failing the run. Wired into the route via `factory.getReconciler('anthropic')` — picked up automatically by the existing `resolveReconciler` fallthrough that S2.3/S2.4 introduced. POST `/reconciliation` with `provider='anthropic'` now returns 200 instead of 400 not_implemented.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_2_ANTHROPIC_RECONCILER
+  cowork_thread_name: ustad-s2-2-anthropic-reconciler
+  agent_name: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.2.S2.2
+  predecessor_session: USTAD_S2_1_RECONCILIATION_FRAMEWORK
+  declared_scope:
+    may_touch:
+      - platform/src/lib/observatory/reconciliation/anthropic.ts (new)
+      - platform/src/lib/observatory/reconciliation/factory.ts (replace anthropic stub)
+      - platform/src/lib/components/observatory/__tests__/reconciliation/**
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/observatory/reconciliation/base.ts
+      - platform/src/lib/observatory/reconciliation/types.ts
+      - platform/src/lib/observatory/reconciliation/variance.ts
+      - platform/migrations/**
+      - All Madhav-project non-observatory files
+  red_team_due: false
+  notes: "S2.2 — Anthropic admin-API reconciler. Parallel-safe with S2.3/S2.4/S2.5; siblings already merged."
+```
+
+### Body — substantive deliverables
+
+**W1. anthropic.ts** (`platform/src/lib/observatory/reconciliation/anthropic.ts`, NEW). Exports `AnthropicReconciler extends BaseReconciler`. The implemented `fetchAuthoritativeCost`:
+(a) checks `process.env.ANTHROPIC_ADMIN_API_KEY` and throws `'ANTHROPIC_ADMIN_API_KEY not configured'` when absent (caught by base → status='error');
+(b) issues GET requests to `https://api.anthropic.com/v1/organizations/usage` with `x-api-key`, `anthropic-version: 2023-06-01`, `anthropic-beta: billing-2025-02` headers and `start_date`/`end_date` query params;
+(c) follows `next_page` cursors as long as `has_more: true` (capped at 50 pages);
+(d) maps 401/403 → `'…lacks billing:read scope'`, 404 → `'…verify beta header'`, AbortError on 30s timeout → `'Anthropic admin API timeout'`;
+(e) for each `data[].model`, looks up pricing in `llm_pricing_versions` (provider='anthropic', model=$model, effective_from <= period_end+1day) and computes cost = sum over models of `(input × input_price + output × output_price + cache_creation × cache_write_price + cache_read × cache_read_price) / 1e6`. Cache prices prefer dedicated `cache_write` / `cache_read` rows; fall back to `input × 1.25` (write) / `input × 0.1` (read). Models with no pricing rows accumulate in `unpricedModels` instance state and contribute zero cost. The override on `reconcile()` post-processes the BaseReconciler result by appending `unpriced_models=…` to `notes` (in-memory), satisfying AC.5 without requiring a base.ts edit.
+
+**W2. factory.ts** (`platform/src/lib/observatory/reconciliation/factory.ts`, MODIFIED). Single-line change inside `getReconciler`: `if (provider === 'anthropic') return new AnthropicReconciler()`. OpenAI/Gemini already short-circuit upstream in `route.ts:resolveReconciler` (S2.3/S2.4 pattern); DeepSeek/NIM still return `NotImplementedReconciler` and are special-cased to `manual_upload_required` at the API boundary; this change lets `getReconciler('anthropic')` return the real implementation.
+
+**W3. anthropic.test.ts** (`platform/src/lib/components/observatory/__tests__/reconciliation/anthropic.test.ts`, NEW). 6 tests covering all S2.2 acceptance criteria:
+1. **happy-path cost math** — single-model response with input=1000, output=400, cache_creation=200, cache_read=500 against opus-4-6 pricing → asserts `0.0495` (manual: 0.015 + 0.030 + 0.00375 + 0.00075). Headers + URL params verified.
+2. **pagination** — first page `has_more=true, next_page=cursor-page-2`, second page `has_more=false`. Asserts both pages summed (0.045 + 0.0225 = 0.0675) + second URL contains `page=cursor-page-2`.
+3. **missing API key** — env unset → `status='error'`, `notes` contains `ANTHROPIC_ADMIN_API_KEY`, fetch never called.
+4. **403 from API** — mock fetch returns 403 → `status='error'`, `notes` contains `billing:read`.
+5. **unknown model in pricing** — pricing query returns `[]` → `authoritative_cost_usd=0`, `status` not 'error', `notes` contains `unpriced_models=claude-future-X`.
+6. **POST /reconciliation provider='anthropic' returns 200** — full route load with mocked `requireSuperAdmin`, mocked DB queries + fetch → asserts `status === 200` (no longer the S2.1 stub's 400).
+
+**W4. reconciliation.test.ts** (`platform/src/lib/components/observatory/__tests__/reconciliation/reconciliation.test.ts`, MODIFIED). Removed the obsolete "returns 400 not_implemented for Anthropic" test (the stub-stage assertion is no longer true). Replaced with a 3-line comment pointer to `anthropic.test.ts`. Other existing tests retained.
+
+### Tests + build verification
+
+`./node_modules/.bin/vitest run src/lib/components/observatory/__tests__/reconciliation` (worktree-local) — **22 passed in the reconciliation suite at branch tip** (16 framework tests preserved minus the removed stub test + 6 new anthropic tests). Full observatory sweep (`src/lib/components/observatory src/lib/observatory`) — **59 passed | 10 skipped | 0 failed**.
+
+`./node_modules/.bin/tsc --noEmit` — no errors introduced in observatory paths.
+
+### S2.2 acceptance criteria — gate-bar table
+
+| AC  | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | `anthropic.ts` exports `AnthropicReconciler` extends `BaseReconciler` | PASS | `export class AnthropicReconciler extends BaseReconciler` |
+| AC.2 | Cache pricing (1.25× write, 0.1× read) applied in cost computation | PASS | Test 1 asserts opus cache_write@18.75 (=15×1.25) and cache_read@1.50 (=15×0.1) summed correctly; fallback path applies multipliers to input price |
+| AC.3 | Pagination handled; partial pages summed correctly | PASS | Test 2 — two pages with separate model rows; total = sum across pages; `next_page` cursor passed in second request |
+| AC.4 | Missing API key → `status='error'`, no throw | PASS | Test 3 — env unset → reconcile returns `{status:'error', notes:'…ANTHROPIC_ADMIN_API_KEY…'}` without throwing; fetch not called |
+| AC.5 | Unknown model in pricing → cost=0 for that model, `notes` populated | PASS | Test 5 — `notes` contains `unpriced_models=claude-future-X`, `authoritative_cost_usd === 0`, status not 'error' |
+| AC.6 | POST `/reconciliation` with `provider='anthropic'` no longer returns 404/400 not_implemented | PASS | Test 6 — `response.status === 200`; `body.provider === 'anthropic'`, `body.status` not 'error' |
+| AC.7 | 6 new tests pass; observatory suite green | PASS | 6 new in `anthropic.test.ts` all pass; full observatory suite 59 passed / 10 skipped / 0 failed |
+| AC.8 | SESSION_LOG.md appended | PASS | This entry |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_2_ANTHROPIC_RECONCILER
+  closed_at: 2026-05-03
+  red_team_due_was_discharged: false
+  red_team_table: []
+  open_decisions: []
+  next_unblocked: "S2.5 (DeepSeek+NIM CSV) remains the last open parallel sibling. After S2.5 + this S2.2 land: S2.6 (banner UI) + O.2 close session."
+  schema_validator_exit_code: 2
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S2.2 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.2) per OBSERVATORY_PLAN §6.2 + §6.3 funneling — same precedent as S2.1/S2.3/S2.4."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8/S1.13/S2.1/S2.3/S2.4 precedent."
+  close_criteria_met: true
+  unblocks: "S2.5 remains parallel-safe. After S2.5 closes: S2.6 (banner UI) + O.2 close."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-2-anthropic-reconciler
+    cut_from_commit: a540a8f
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S2.5 (DeepSeek+NIM CSV)** is the last open parallel sibling. After it lands, S2.6 (Reconciliation banner UI) + O.2 close session can proceed. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).

@@ -9,6 +9,7 @@
 // returns a stub for them so the framework's shape is uniform.
 
 import { BaseReconciler, type FetchAuthoritativeCostResult } from './base'
+import { AnthropicReconciler } from './anthropic'
 import {
   NotImplementedError,
   type ProviderName,
@@ -37,5 +38,6 @@ export const MANUAL_UPLOAD_PROVIDERS: ReadonlySet<ProviderName> = new Set([
 ])
 
 export function getReconciler(provider: ProviderName): ProviderReconciler {
+  if (provider === 'anthropic') return new AnthropicReconciler()
   return new NotImplementedReconciler(provider)
 }
