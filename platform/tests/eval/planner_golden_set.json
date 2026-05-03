@@ -1,6 +1,6 @@
 {
   "$schema_version": "1.0",
-  "description": "Golden test set for the MARSYS-JIS query planner. 25 labeled query → expected_tool_plan pairs across 6 categories. Used by W2-EVAL-B to score planner quality with tool_recall and tool_precision metrics. Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — the 8 primary tools the LLM-first planner is allowed to call.",
+  "description": "Golden test set for the MARSYS-JIS query planner. 29 labeled query → expected_tool_plan pairs across 6 categories. Used by W2-EVAL-B to score planner quality with tool_recall and tool_precision metrics. Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — the 8 primary tools the LLM-first planner is allowed to call. Extended at BHISMA-W2-S-D close (2026-05-03) to satisfy the brief's predictive≥5 + edge_case≥5 floor (added GT.026 dasha-timing predictive; GT.027 empty-query, GT.028 single-punctuation, GT.029 overloaded-holistic edge cases).",
   "native_context": {
     "name": "Abhisek Mohanty",
     "birth_date": "1984-02-05",
@@ -12,10 +12,10 @@
   "category_distribution": {
     "remedial": 6,
     "interpretive": 6,
-    "predictive": 4,
+    "predictive": 5,
     "holistic": 4,
     "planetary": 3,
-    "edge_case": 2
+    "edge_case": 5
   },
   "available_tools": [
     "remedial_codex_query",
@@ -284,6 +284,46 @@
       "required_tools": [],
       "forbidden_tools": ["temporal", "query_varshaphala", "remedial_codex_query", "timeline_query"],
       "notes": "Edge case: open-ended ambiguous prompt. A correct planner should reach for L2.5 discovery surfaces (patterns, contradictions, resonances, clusters) rather than time-bound or remedial tools. No required_tools because any non-empty subset of the four discovery registers is acceptable."
+    },
+    {
+      "id": "GT.026",
+      "query": "According to my Vimshottari Dasha sequence, when does my Mercury period begin and what will it activate?",
+      "query_class": "predictive",
+      "category": "predictive",
+      "expected_tools": ["msr_sql", "pattern_register", "vector_search"],
+      "required_tools": ["msr_sql", "pattern_register"],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Dasha-timing predictive (BHISMA-W2-S-D gap-close: predictive entry #5). The brief specified `l1_facts_query` + `msr_sql`, but `l1_facts_query` is not a primary tool (W2-MANIFEST AC.M.1 limits the planner to 8 primary tools). Mapped to the constrained surface: msr_sql for Mercury-domain forward_looking signals; pattern_register satisfies R7's predictive cross-domain-lens mandate (Mercury-keyed forward_looking patterns) and is promoted to required_tools; vector_search reaches the L5 lifetime timeline (doc_type='l5_timeline') for the MD arc. Note: the native is currently in Mercury MD (ends 2027-08-21 per native_context); the planner must surface the active arc, not a forecast of a future onset."
+    },
+    {
+      "id": "GT.027",
+      "query": "",
+      "query_class": "interpretive",
+      "category": "edge_case",
+      "expected_tools": [],
+      "required_tools": [],
+      "forbidden_tools": ["remedial_codex_query", "temporal", "query_varshaphala", "timeline_query"],
+      "notes": "Edge case: empty query. The planner must not error or hang; circuit-breaker / fallback must return a minimal plan (zero tool_calls is acceptable). recall is undefined for empty expected_tools and counts as 1.0 by smoke_runner convention; precision is 1.0 when the planner also returns zero tools (empty/empty case). No tool is required to fire; remedial/temporal/varshaphala/timeline tools are forbidden because they would represent the planner inventing intent the user did not express."
+    },
+    {
+      "id": "GT.028",
+      "query": "?",
+      "query_class": "interpretive",
+      "category": "edge_case",
+      "expected_tools": [],
+      "required_tools": [],
+      "forbidden_tools": ["remedial_codex_query", "temporal", "query_varshaphala", "timeline_query"],
+      "notes": "Edge case: degenerate single-punctuation query. The planner must return a graceful no-op plan (zero tool_calls acceptable) without crashing. Same scoring convention as GT.027. Forbidden tools mirror GT.027 — invoking a time-bound or remedial tool on a single character is hallucinated intent."
+    },
+    {
+      "id": "GT.029",
+      "query": "Tell me everything about everything in my entire chart in full detail with all possible combinations and permutations and every possible interpretation",
+      "query_class": "holistic",
+      "category": "edge_case",
+      "expected_tools": ["msr_sql", "pattern_register", "cluster_atlas", "cgm_graph_walk", "vector_search"],
+      "required_tools": [],
+      "forbidden_tools": ["remedial_codex_query"],
+      "notes": "Edge case: overloaded holistic prompt. The planner must not hang or run unbounded — budget arbitration (W2-PLANNER ADR-6) is expected to trim the plan to fit the synthesis-model context envelope. expected_tools enumerates the holistic L2.5 surface a budget-unconstrained planner would select; required_tools is empty because budget arbitration may legitimately prune any single tool. remedial_codex_query is forbidden because the prompt expresses no remedial intent."
     }
   ]
 }

@@ -17,6 +17,8 @@
     "audit:replay": "tsx scripts/audit/replay.ts",
     "audit:smoke": "tsx scripts/audit/smoke.ts",
     "checkpoint:eval": "tsx src/scripts/checkpoints/eval.ts",
+    "eval:planner": "tsx --conditions=react-server tests/eval/planner_smoke_runner.ts",
+    "eval:planner-regression": "vitest run tests/eval/planner_regression_gate.test.ts",
     "cutover:stage1-smoke": "tsx scripts/cutover/stage1_smoke.ts",
     "cutover:phase12-smoke": "tsx scripts/cutover/stage1_phase12_smoke.ts",
     "trace:smoke": "tsx scripts/trace/trace_smoke.ts"

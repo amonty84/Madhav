@@ -1,6 +1,6 @@
 {
   "$schema_version": "1.0",
-  "description": "W2-EVAL-B AC.V.3 regression baseline. Mock planner responses for the 25 golden_test_set entries. Each entry's mock_tool_calls mirror that entry's expected_tools, with required_tools and R7-mandated tools mapped to priority 1 and the rest to priority 2. Scored against golden_test_set.json this baseline yields avg_tool_recall = 1.00 and avg_tool_precision = 1.00, well above the published thresholds (recall ≥ 0.80, precision ≥ 0.90). Aligned 2026-05-02 (W2-UQE-ACTIVATE round 3) with PLANNER_PROMPT_v1_0.md R7: every predictive/remedial entry's expected_tools now contains pattern_register OR resonance_register at priority 1. Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — see golden_test_set.json available_tools.",
+  "description": "W2-EVAL-B AC.V.3 regression baseline. Mock planner responses for the 29 golden_test_set entries. Each entry's mock_tool_calls mirror that entry's expected_tools, with required_tools and R7-mandated tools mapped to priority 1 and the rest to priority 2. Scored against golden_test_set.json this baseline yields avg_tool_recall = 1.00 and avg_tool_precision = 1.00, well above the published thresholds (recall ≥ 0.80, precision ≥ 0.90). Aligned 2026-05-02 (W2-UQE-ACTIVATE round 3) with PLANNER_PROMPT_v1_0.md R7: every predictive/remedial entry's expected_tools now contains pattern_register OR resonance_register at priority 1. Constrained to PRIMARY_TOOL_NAMES (W2-MANIFEST AC.M.1) — see golden_test_set.json available_tools. Extended at BHISMA-W2-S-D close (2026-05-03) with mocks for GT.026–GT.029 (predictive #5 + 3 new edge cases). GT.027 and GT.028 carry empty mock_tool_calls — by smoke_runner.scoreEntry() convention, empty-predicted vs empty-expected scores recall=1, precision=1.",
   "entries": [
     {
       "id": "GT.001",
@@ -198,6 +198,32 @@
         { "tool_name": "contradiction_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — contradictions" },
         { "tool_name": "resonance_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — resonances" },
         { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 2, "reason": "discovery surface — clusters" }
+      ]
+    },
+    {
+      "id": "GT.026",
+      "mock_tool_calls": [
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 1, "reason": "Mercury-domain forward_looking signals + dasha-tagged signals" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 1, "reason": "R7 cross-domain lens — Mercury-keyed forward_looking patterns" },
+        { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "L5 lifetime timeline (doc_type='l5_timeline') for Mercury MD arc" }
+      ]
+    },
+    {
+      "id": "GT.027",
+      "mock_tool_calls": []
+    },
+    {
+      "id": "GT.028",
+      "mock_tool_calls": []
+    },
+    {
+      "id": "GT.029",
+      "mock_tool_calls": [
+        { "tool_name": "msr_sql", "params": {}, "token_budget": 800, "priority": 2, "reason": "holistic signal sweep (post-budget-arbitration)" },
+        { "tool_name": "pattern_register", "params": {}, "token_budget": 800, "priority": 2, "reason": "named yogas across the chart" },
+        { "tool_name": "cluster_atlas", "params": {}, "token_budget": 800, "priority": 2, "reason": "dominant cross-domain clusters" },
+        { "tool_name": "cgm_graph_walk", "params": {}, "token_budget": 800, "priority": 2, "reason": "cross-domain conceptual traversal" },
+        { "tool_name": "vector_search", "params": {}, "token_budget": 800, "priority": 2, "reason": "L3 domain_report narratives" }
       ]
     }
   ]

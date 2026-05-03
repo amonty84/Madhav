@@ -3,7 +3,7 @@
  * planner_ab_compare.ts — W2-EVAL-B AC.V.2
  *
  * Runs both the legacy `classify()` router (tools_authorized output) and the
- * new `callLlmPlanner()` (tool_calls output) against `golden_test_set.json`,
+ * new `callLlmPlanner()` (tool_calls output) against `planner_golden_set.json`,
  * then prints a side-by-side per-entry comparison plus aggregate metrics.
  *
  *   --dry-run   Skip live LLM calls. Uses a query_class-keyed heuristic stub
@@ -52,7 +52,7 @@ const DRY_RUN_CLASSIFY_STUB: Record<string, string[]> = {
 
 function loadGoldenSet(): GoldenSet {
   const here = path.dirname(fileURLToPath(import.meta.url))
-  const p = path.resolve(here, 'golden_test_set.json')
+  const p = path.resolve(here, 'planner_golden_set.json')
   return JSON.parse(readFileSync(p, 'utf-8')) as GoldenSet
 }
 

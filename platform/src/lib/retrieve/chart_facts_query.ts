@@ -12,6 +12,7 @@ import crypto from 'crypto'
 import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
+import { writeToolExecutionLog } from '@/lib/db/monitoring-write'
 import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
 
 const TOOL_NAME = 'chart_facts_query'
@@ -137,7 +138,31 @@ function buildOrderBy(rank_by?: RankBy): string {
 
 async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
+  try {
+    return await retrieveImpl(plan, params, start)
+  } catch (err) {
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: (params ?? null) as Record<string, unknown> | null,
+      status: 'error',
+      rows_returned: 0,
+      latency_ms: Date.now() - start,
+      token_estimate: 0,
+      data_asset_id: 'FORENSIC',
+      error_code: err instanceof Error ? err.message : String(err),
+      served_from_cache: false,
+      fallback_used: false,
+    })
+    throw err
+  }
+}
 
+async function retrieveImpl(
+  plan: QueryPlan,
+  params: Record<string, unknown> | undefined,
+  start: number,
+): Promise<ToolBundle> {
   // Merge plan-embedded params with direct params (direct params take precedence)
   const embedded = (plan as unknown as Record<string, unknown>).chart_facts_query as ChartFactsQueryInput | undefined
   const p: ChartFactsQueryInput = { ...embedded, ...(params as ChartFactsQueryInput | undefined) }
@@ -219,6 +244,20 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
   }
 
   telemetry.recordLatency(TOOL_NAME, 'retrieve', latency_ms)
+
+  void writeToolExecutionLog({
+    query_id: plan.query_plan_id,
+    tool_name: TOOL_NAME,
+    params_json: bundle.invocation_params as Record<string, unknown>,
+    status: results.length === 0 ? 'zero_rows' : 'ok',
+    rows_returned: results.length,
+    latency_ms,
+    token_estimate: Math.ceil(JSON.stringify(results).length / 4),
+    data_asset_id: 'FORENSIC',
+    error_code: null,
+    served_from_cache: false,
+    fallback_used: false,
+  })
 
   return bundle
 }

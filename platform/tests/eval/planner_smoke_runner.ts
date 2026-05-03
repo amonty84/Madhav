@@ -2,7 +2,7 @@
 /**
  * planner_smoke_runner.ts — W2-EVAL-B AC.V.1
  *
- * CLI scorer for `callLlmPlanner` against `golden_test_set.json`. Computes
+ * CLI scorer for `callLlmPlanner` against `planner_golden_set.json`. Computes
  * per-entry tool_recall / tool_precision plus required/forbidden gate
  * outcomes, aggregates them, and exits non-zero when the macro-averaged
  * thresholds are not met.
@@ -190,7 +190,7 @@ export async function runSmoke(
 
 export function loadGoldenSet(filePath?: string): GoldenSet {
   const here = path.dirname(fileURLToPath(import.meta.url))
-  const resolved = filePath ?? path.resolve(here, 'golden_test_set.json')
+  const resolved = filePath ?? path.resolve(here, 'planner_golden_set.json')
   return JSON.parse(readFileSync(resolved, 'utf-8')) as GoldenSet
 }
 

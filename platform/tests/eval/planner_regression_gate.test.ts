@@ -54,10 +54,10 @@ function loadJson<T>(relative: string): T {
 }
 
 describe('planner regression gate (mocked)', () => {
-  const golden = loadJson<GoldenSet>('golden_test_set.json')
+  const golden = loadJson<GoldenSet>('planner_golden_set.json')
   const baseline = loadJson<BaselineFile>('fixtures/regression_baseline.json')
 
-  it('baseline covers every golden_test_set entry by id', () => {
+  it('baseline covers every planner_golden_set entry by id', () => {
     const goldenIds = new Set(golden.entries.map(e => e.id))
     const baselineIds = new Set(baseline.entries.map(e => e.id))
     expect(goldenIds.size).toBe(baselineIds.size)

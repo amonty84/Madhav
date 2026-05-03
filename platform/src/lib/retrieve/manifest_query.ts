@@ -14,6 +14,7 @@ import { getStorageClient } from '@/lib/storage'
 import { validate } from '@/lib/schemas'
 import { telemetry } from '@/lib/telemetry'
 import { getFlag } from '@/lib/config'
+import { writeToolExecutionLog } from '@/lib/db/monitoring-write'
 import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
 
 const TOOL_NAME = 'manifest_query'
@@ -127,10 +128,48 @@ function emptyBundle(start: number): ToolBundle {
 
 async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
+  try {
+    return await retrieveImpl(plan, params, start)
+  } catch (err) {
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: (params ?? null) as Record<string, unknown> | null,
+      status: 'error',
+      rows_returned: 0,
+      latency_ms: Date.now() - start,
+      token_estimate: 0,
+      data_asset_id: 'CAPABILITY_MANIFEST',
+      error_code: err instanceof Error ? err.message : String(err),
+      served_from_cache: false,
+      fallback_used: false,
+    })
+    throw err
+  }
+}
 
+async function retrieveImpl(
+  plan: QueryPlan,
+  params: Record<string, unknown> | undefined,
+  start: number,
+): Promise<ToolBundle> {
   // Feature-flag guard — return empty bundle immediately, no file read
   if (!getFlag('MANIFEST_QUERY_ENABLED')) {
-    return emptyBundle(start)
+    const bundle = emptyBundle(start)
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: bundle.invocation_params as Record<string, unknown>,
+      status: 'zero_rows',
+      rows_returned: 0,
+      latency_ms: bundle.latency_ms,
+      token_estimate: 0,
+      data_asset_id: 'CAPABILITY_MANIFEST',
+      error_code: null,
+      served_from_cache: false,
+      fallback_used: false,
+    })
+    return bundle
   }
 
   // Resolve the question to score against
@@ -170,6 +209,20 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
         'sha256:' + crypto.createHash('sha256').update('manifest_unavailable').digest('hex'),
       schema_version: '1.0',
     }
+
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: warningBundle.invocation_params as Record<string, unknown>,
+      status: 'error',
+      rows_returned: 0,
+      latency_ms,
+      token_estimate: 0,
+      data_asset_id: 'CAPABILITY_MANIFEST',
+      error_code: err instanceof Error ? err.message : 'manifest_read_failed',
+      served_from_cache: false,
+      fallback_used: false,
+    })
 
     return warningBundle
   }
@@ -227,6 +280,20 @@ async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Prom
   }
 
   telemetry.recordLatency(TOOL_NAME, 'retrieve', latency_ms)
+
+  void writeToolExecutionLog({
+    query_id: plan.query_plan_id,
+    tool_name: TOOL_NAME,
+    params_json: bundle.invocation_params as Record<string, unknown>,
+    status: results.length === 0 ? 'zero_rows' : 'ok',
+    rows_returned: results.length,
+    latency_ms,
+    token_estimate: Math.ceil(JSON.stringify(results).length / 4),
+    data_asset_id: 'CAPABILITY_MANIFEST',
+    error_code: null,
+    served_from_cache: false,
+    fallback_used: false,
+  })
 
   return bundle
 }

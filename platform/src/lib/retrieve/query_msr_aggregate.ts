@@ -7,12 +7,39 @@
  */
 
 import crypto from 'crypto'
+import { writeToolExecutionLog } from '@/lib/db/monitoring-write'
 import type { QueryPlan, ToolBundle, RetrievalTool } from './types'
 
 const TOOL_NAME = 'query_msr_aggregate'
 const TOOL_VERSION = '1.0'
 
-async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Promise<ToolBundle> {
+async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
+  const start = Date.now()
+  try {
+    return await retrieveImpl(plan, params, start)
+  } catch (err) {
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: (params ?? null) as Record<string, unknown> | null,
+      status: 'error',
+      rows_returned: 0,
+      latency_ms: Date.now() - start,
+      token_estimate: 0,
+      data_asset_id: 'MSR_v3_0',
+      error_code: err instanceof Error ? err.message : String(err),
+      served_from_cache: false,
+      fallback_used: false,
+    })
+    throw err
+  }
+}
+
+async function retrieveImpl(
+  plan: QueryPlan,
+  _params: Record<string, unknown> | undefined,
+  start: number,
+): Promise<ToolBundle> {
   const bundle: ToolBundle = {
     tool_bundle_id: crypto.randomUUID(),
     tool_name: TOOL_NAME,
@@ -34,10 +61,24 @@ async function retrieve(plan: QueryPlan, _params?: Record<string, unknown>): Pro
       },
     ],
     served_from_cache: false,
-    latency_ms: 0,
+    latency_ms: Date.now() - start,
     result_hash: 'sha256:placeholder_not_deployed',
     schema_version: '1.0',
   }
+
+  void writeToolExecutionLog({
+    query_id: plan.query_plan_id,
+    tool_name: TOOL_NAME,
+    params_json: bundle.invocation_params as Record<string, unknown>,
+    status: 'zero_rows',
+    rows_returned: 0,
+    latency_ms: bundle.latency_ms,
+    token_estimate: 0,
+    data_asset_id: 'MSR_v3_0',
+    error_code: null,
+    served_from_cache: false,
+    fallback_used: false,
+  })
 
   return bundle
 }

@@ -17095,3 +17095,170 @@ session_close:
 
 *End of MARSYS-M3-R1-S2-M3B-CLOSE entry — M3 sub-phase B FORMALLY CLOSED.*
 
+## BHISMA-W2 — Wave 2 Combined Entry (S-A through S-D) — Universal Query Engine + Observability sprint CLOSED
+
+**Date:** 2026-05-03 (combined entry per BHISMA-W2-S-D §5; S-A and S-B ran in parallel against disjoint scopes; S-C applied migrations against the live DB; S-D ran the integration verification + Lever 2 + sealing).
+
+**Brief sequence:** `CLAUDECODE_BRIEF_BHISMA_SA_v1_0.md` → `CLAUDECODE_BRIEF_BHISMA_SB_v1_0.md` (parallel) → `CLAUDECODE_BRIEF_BHISMA_SC_v1_0.md` → `CLAUDECODE_BRIEF_BHISMA_SD_v1_0.md`. All four briefs `status: COMPLETE` at end of S-D close.
+
+**Sealing artifact:** `00_ARCHITECTURE/BHISMA_W2_CLOSE_v1_0.md` (NEW; 8-section close-template per S-D §4 brief schema; canonical_id `BHISMA_W2_CLOSE`).
+
+### session_open
+
+```yaml
+session_open:
+  session_ids:
+    - BHISMA-W2-S-A
+    - BHISMA-W2-S-B
+    - BHISMA-W2-S-C
+    - BHISMA-W2-S-D
+  cowork_thread_name: "bhisma-w2-combined"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: BHISMA.W2.CLOSE
+  predecessor_session: USTAD_S1_1_OBSERVATORY_SCHEMA
+  current_state_version_at_open: v3.5 (set by PHASE_O_S0_1; unchanged through Wave 2 — Wave 2 did not touch CURRENT_STATE)
+  active_macro_phase: M5
+  concurrent_workstream: bhisma_wave_2
+  declared_scope:
+    may_touch:
+      # S-A
+      - platform/src/lib/pipeline/universal_query_engine.ts
+      - platform/tests/pipeline/universal_query_engine.test.ts
+      - platform/src/lib/llm/observability/**
+      # S-B
+      - platform/tests/eval/planner_smoke_runner.ts
+      - platform/tests/eval/planner_regression_gate.test.ts
+      - platform/tests/eval/planner_golden_set.json
+      - platform/tests/eval/fixtures/regression_baseline.json
+      - 00_ARCHITECTURE/RETENTION_POLICY_v1_0.md
+      # S-C
+      - platform/migrations/032_llm_call_log.sql
+      - platform/migrations/033_query_plan_log.sql
+      - platform/migrations/034_tool_execution_log.sql
+      # S-D
+      - 00_ARCHITECTURE/BHISMA_W2_CLOSE_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+      - CLAUDECODE_BRIEF_BHISMA_SA_v1_0.md  # frontmatter status flips
+      - CLAUDECODE_BRIEF_BHISMA_SB_v1_0.md
+      - CLAUDECODE_BRIEF_BHISMA_SC_v1_0.md
+      - CLAUDECODE_BRIEF_BHISMA_SD_v1_0.md
+    must_not_touch:
+      - 01_FACTS_LAYER/**
+      - 025_HOLISTIC_SYNTHESIS/**
+      - 06_LEARNING_LAYER/**
+      - 03_DOMAIN_REPORTS/**
+      - /Users/Dev/Vibe-Coding/Apps/Ustad/**
+      - CLAUDE.md
+      - 00_ARCHITECTURE/BHISMA_PLAN_v1_0.md
+      - 00_ARCHITECTURE/BHISMA_WAVE2_PLAN_v1_1.md
+  red_team_due: false
+  notes: "Combined Wave 2 entry. Sub-session governance handshakes were emitted in-session by S-A/B/C/D individually; this combined entry rolls them up at wave close per S-D §5 brief instruction. No new CRITICAL findings introduced. All 4 brief frontmatters set to status: COMPLETE at S-D close."
+```
+
+### Body — substantive deliverables (W1–W4 across S-A/S-B/S-C/S-D)
+
+**W1 (S-A) — UQE pipeline completion + MON instrumentation.** `platform/src/lib/pipeline/universal_query_engine.ts` authored as the LLM-first planning entry point: orchestrates `callLlmPlanner` → `budget_arbiter` → `emitTrace` with `PlannerError` failure-loud envelope (ADR-3) and circuit-breaker fallback. Six new UQE plan() unit tests added to `platform/tests/pipeline/universal_query_engine.test.ts` covering: arbitrated tool_calls happy path; budget arbitration when planner exceeds synthesis-model envelope; circuit-breaker-open fallback (planner not invoked); PlannerError fallback path; trace event forwarding; queryId correlation. MON emission instrumentation: writers to `llm_call_log` / `query_plan_log` / `tool_execution_log` wired with synchronous-emit semantics, `BHISMA-B1 observability flags default true` test green. **Test-count delta: +83 (1019 → 1102 passing).**
+
+**W2 (S-B) — EVAL scaffolding + SCHEMA retention.** `platform/tests/eval/planner_smoke_runner.ts` authored (CLI scorer; macro-averaged `tool_recall` / `tool_precision`; thresholds 0.80 / 0.90; exit non-zero when thresholds missed). `platform/tests/eval/planner_regression_gate.test.ts` authored (mocked CI gate replaying `fixtures/regression_baseline.json` against the smoke-runner scoring path). `platform/tests/eval/planner_golden_set.json` authored at 25 cases across 6 categories (remedial=6, interpretive=6, predictive=4, holistic=4, planetary=3, edge_case=2). `00_ARCHITECTURE/RETENTION_POLICY_v1_0.md` authored (SCHEMA stream; 36-month retention floor for production telemetry, 12-month soft-delete window, monthly partition rotation). S-B explicitly flagged the `predictive=4` and `edge_case=2` shortfall as a coverage gap to close at S-D.
+
+**W3 (S-C) — DB schema migrations applied.** Migrations `032_llm_call_log.sql`, `033_query_plan_log.sql`, `034_tool_execution_log.sql` applied against the live Cloud SQL (PostgreSQL) instance per the Phase 11A storage convention. MON tables LIVE; emission paths from W1 now have a destination. (Wave 1 §6 deferred this; absorbed into Wave 2 SCHEMA stream.)
+
+**W4 (S-D) — Integration verification + Lever 2 + Wave close.**
+- **Full test suite re-run.** `npx tsc --noEmit` → exit 2 (9 errors in 2 pre-existing files). `npx vitest run --reporter=verbose` → exit 1 (1102 passing / 54 failing / 12 skipped across 1168 tests in 122 files). All 27 failing test files classified `pre_existing` in `BHISMA_W2_CLOSE §5`; no Wave-2-introduced regressions. UQE plan(), observability adapters, `planner_regression_gate` at 29 cases all PASS.
+- **EVAL coverage gap closed.** `planner_golden_set.json` extended from 25 → 29 entries: GT.026 (predictive #5: Mercury MD timing, mapped to constrained primary-tool surface since `l1_facts_query` is not in PRIMARY_TOOL_NAMES); GT.027 (edge_case: empty query, empty `expected_tools`, smoke-runner empty/empty scoring convention yields recall=1, precision=1); GT.028 (edge_case: single-`?` punctuation, same convention); GT.029 (edge_case: overloaded holistic, full L2.5 expected_tools, `required_tools=[]` because budget arbitration may legitimately prune any single tool). `category_distribution` updated to `{remedial:6, interpretive:6, predictive:5, holistic:4, planetary:3, edge_case:5}`. `regression_baseline.json` extended with mirrored mocks (GT.027 + GT.028 carry empty `mock_tool_calls`). Regression gate re-run: **2/2 PASS** (`baseline covers every planner_golden_set entry by id` + `avg_tool_recall ≥ 0.80 and avg_tool_precision ≥ 0.90`). Note: brief §2 specified "28 cases" but the arithmetic (25 + 4 = 29) was honored; AC.§7 says ≥28 so 29 satisfies.
+- **NIM provider probe.** `https://integrate.api.nvidia.com/v1/chat/completions` with `meta/llama-3.1-8b-instruct` + 5-token `max_tokens` payload returned `HTTP 200` in 1.001s. **Provider HEALTHY.**
+- **Lever 2 EVAL-2 executed live against NIM.** Aggregate: `total=29 / passed=4 / failed=25 / pass_rate=0.138 / avg_tool_recall=0.710 (threshold 0.80) / avg_tool_precision=0.579 (threshold 0.90) / forbidden_violations=3 / required_misses=9 / errors=1`. **Verdict: FAIL.** Recommendation HOLD on `LLM_FIRST_PLANNER_ENABLED` flip — full diagnostic + two unblock paths in `BHISMA_W2_CLOSE §4`. Raw run captured at `/tmp/bhisma_lever2_report.txt`.
+- **Sealing artifact authored.** `00_ARCHITECTURE/BHISMA_W2_CLOSE_v1_0.md` created with all 8 brief-template sections (Executive Summary, Session Outcomes, Stream Completion, Lever 2 Report, Pre-Existing Test Failures catalogue, Open Items, ADR Status, Post-Wave 2 Roadmap). All 6 ADRs marked instrumented (ADR-5 with the explicit "flag OFF pending Lever 2" caveat).
+- **Brief frontmatters.** `CLAUDECODE_BRIEF_BHISMA_SD_v1_0.md` flipped `status: NOT_STARTED → IN_PROGRESS` at session open; flipped to `COMPLETE` at session close after AC.§7 verification. The S-A/S-B/S-C briefs were already at `status: COMPLETE` and were not modified by S-D.
+
+### Hard constraints honored
+
+- **Did NOT flip `LLM_FIRST_PLANNER_ENABLED`** — recorded as native action in `BHISMA_W2_CLOSE §4` per S-D §8 hard constraint #1.
+- **Did NOT add CI workflow gate** — listed PENDING in `BHISMA_W2_CLOSE §6` per S-D §8 hard constraint #2.
+- **SESSION_LOG appended only** — no edits to existing entries; this entry is append-only at the bottom per S-D §8 hard constraint #3.
+- **`platform/src/**` and `platform/migrations/**` honored as `must_not_touch` for S-D scope** — only `platform/tests/eval/*.json` modified at S-D (golden set + regression baseline), as permitted by S-D §6 may_touch.
+
+### session_close
+
+```yaml
+session_close:
+  session_ids:
+    - BHISMA-W2-S-A
+    - BHISMA-W2-S-B
+    - BHISMA-W2-S-C
+    - BHISMA-W2-S-D
+  closed_at: 2026-05-03T15:00:00+05:30
+  files_touched_at_S_D:
+    - {path: 00_ARCHITECTURE/BHISMA_W2_CLOSE_v1_0.md, mutation: created, scope: in}
+    - {path: 00_ARCHITECTURE/SESSION_LOG.md, mutation: appended, scope: in, change: "this entry appended atomically"}
+    - {path: platform/tests/eval/planner_golden_set.json, mutation: modified, scope: in, change: "extended 25 → 29 entries; category_distribution updated; description note added"}
+    - {path: platform/tests/eval/fixtures/regression_baseline.json, mutation: modified, scope: in, change: "extended 25 → 29 mock entries (GT.027/028 with empty mock_tool_calls); description note added"}
+    - {path: CLAUDECODE_BRIEF_BHISMA_SD_v1_0.md, mutation: modified, scope: in, change: "frontmatter status NOT_STARTED → IN_PROGRESS → COMPLETE"}
+  registry_updates_made:
+    canonical_artifacts:
+      - {canonical_id: SESSION_LOG, change: fingerprint_rotated, details: "BHISMA-W2 combined entry appended"}
+      - {canonical_id: BHISMA_W2_CLOSE, change: created, details: "NEW canonical artifact; status CURRENT; sealed by BHISMA-W2-S-D"}
+  mirror_updates_propagated:
+    - {pair_id: MP.1, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CLAUDE.md / .geminirules unchanged — declared in must_not_touch"}
+    - {pair_id: MP.2, claude_side_touched: false, gemini_side_touched: false, both_updated_same_session: true, rationale: "CURRENT_STATE / .gemini/project_state.md unchanged this wave (Wave 2 is concurrent-workstream, not macro-phase progression)"}
+    - {pair_id: MP.3, both_updated_same_session: true, rationale: "MACRO_PLAN unchanged"}
+    - {pair_id: MP.4, both_updated_same_session: true, rationale: "PHASE_B_PLAN unchanged"}
+    - {pair_id: MP.5, both_updated_same_session: true, rationale: "CAPABILITY_MANIFEST unchanged"}
+    - {pair_id: MP.6, claude_only: true, both_updated_same_session: true, rationale: "Declared Claude-only; not touched"}
+    - {pair_id: MP.7, claude_side_touched: true, gemini_side_touched: false, both_updated_same_session: true, rationale: "Declared Claude-only (SESSION_LOG); appended atomically at this close"}
+    - {pair_id: MP.8, both_updated_same_session: true, rationale: "PROJECT_ARCHITECTURE unchanged"}
+    - {pair_id: MP.9, both_updated_same_session: true, rationale: "OBSERVATORY_PLAN unchanged at Wave 2 — Phase O is concurrent in the Ustad worktree per §E isolation rule"}
+  red_team_pass:
+    due: false
+    performed: false
+    verdict: n/a
+    artifact_path: null
+  governance_scripts_run: not_run_at_S_D
+  governance_scripts_run_rationale: >
+    Per S-D §6 may_touch / must_not_touch, governance scripts (drift_detector.py, schema_validator.py,
+    mirror_enforcer.py) live under platform/scripts/governance/** and are out of scope for the S-D
+    test-fixtures-only edit set. Their last clean run was at the USTAD_S1_1_OBSERVATORY_SCHEMA close
+    earlier on 2026-05-03 (mirror_enforcer.py exit 0; schema_validator.py 107 violations carry-forward;
+    drift_detector.py 327 carry-forward). No CANONICAL_ARTIFACTS / mirror surfaces were touched at S-D
+    that would invalidate those exit codes.
+  step_ledger_updated: n/a
+  current_state_updated: false
+  current_state_update_rationale: >
+    Wave 2 is a concurrent-workstream sprint, not a macro-phase progression. M5 remains the active
+    macro-phase. CURRENT_STATE will be updated at M5 sub-phase progression, not at Wave 2 close.
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification:
+    - directive_id: ND.1
+      step: BHISMA.W2.CLOSE
+      obligation_addressed: true
+      evidence: "MP.1–MP.9 untouched at S-D except MP.7 (SESSION_LOG, declared Claude-only). No mirror-side counterpart required."
+  build_state_serialized:
+    serialized: false
+    output_path: null
+    rationale: "Wave 2 close artifact does not touch portal-tracked state surfaces; per ONGOING_HYGIENE_POLICIES §F LOW-finding precedent, backfill at next portal-touching session."
+  close_criteria_met: true
+  acceptance_criteria_disposition:
+    - {ac: "Full tsc + vitest run complete; report in BHISMA_W2_CLOSE §5", verdict: PASS}
+    - {ac: "EVAL golden set extended to ≥28 cases (predictive=5, edge_case=5)", verdict: PASS, actual: 29}
+    - {ac: "planner_regression_gate.test.ts still PASS after golden set extension", verdict: PASS, evidence: "2/2 tests passed; recall=1.00 precision=1.00 on mocked baseline"}
+    - {ac: "Lever 2 report in BHISMA_W2_CLOSE §4 (PASS, FAIL, or BLOCKED with explanation)", verdict: PASS_OF_AC, lever_2_outcome: FAIL_THRESHOLDS}
+    - {ac: "BHISMA_W2_CLOSE_v1_0.md created with all 8 sections", verdict: PASS}
+    - {ac: "SESSION_LOG.md appended with Wave 2 combined entry", verdict: PASS, evidence: "this entry"}
+  unblocks: "Native review of Lever 2 §4 recommendation paths (planner-model upgrade vs prompt tightening) → potential LLM_FIRST_PLANNER_ENABLED flip; W3-DB-MIGRATIONS pickup; BHISMA-W2-S1-DISCOVERY-FRESHNESS"
+  handoff_notes: >
+    BHISMA Wave 2 is FORMALLY CLOSED. Sealing artifact at 00_ARCHITECTURE/BHISMA_W2_CLOSE_v1_0.md.
+    All 5 streams (UQE 15 / MON 10 / TRACE 10 / SCHEMA 6 / EVAL 5) marked COMPLETE in §3 of the
+    close artifact. Lever 2 verdict is FAIL (recall 0.710, precision 0.579 — both under threshold);
+    HOLD on flag flip with two unblock paths recommended. Twenty-seven pre-existing failing test
+    files catalogued in §5 — none introduced by Wave 2; tracked for Phase 11B / synthesis-layer
+    remediation. M5 (Probabilistic Engine) macro-phase remains active and runs independently.
+    Phase O (Observatory) concurrent workstream continues in the Ustad worktree per §E isolation.
+```
+
+*End of BHISMA-W2 combined entry — Wave 2 (Universal Query Engine + Observability) FORMALLY CLOSED.*
+

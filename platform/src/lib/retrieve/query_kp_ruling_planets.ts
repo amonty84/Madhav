@@ -21,6 +21,7 @@
 
 import crypto from 'crypto'
 import { getStorageClient } from '@/lib/storage'
+import { writeToolExecutionLog } from '@/lib/db/monitoring-write'
 import type { QueryPlan, ToolBundle, ToolBundleResult, RetrievalTool } from './types'
 
 const TOOL_NAME = 'query_kp_ruling_planets'
@@ -46,8 +47,33 @@ interface KpSublordsRow {
   computed_by: string
 }
 
-async function retrieve(_plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
+async function retrieve(plan: QueryPlan, params?: Record<string, unknown>): Promise<ToolBundle> {
   const start = Date.now()
+  try {
+    return await retrieveImpl(plan, params, start)
+  } catch (err) {
+    void writeToolExecutionLog({
+      query_id: plan.query_plan_id,
+      tool_name: TOOL_NAME,
+      params_json: (params ?? null) as Record<string, unknown> | null,
+      status: 'error',
+      rows_returned: 0,
+      latency_ms: Date.now() - start,
+      token_estimate: 0,
+      data_asset_id: 'KP_SUBLORDS',
+      error_code: err instanceof Error ? err.message : String(err),
+      served_from_cache: false,
+      fallback_used: false,
+    })
+    throw err
+  }
+}
+
+async function retrieveImpl(
+  plan: QueryPlan,
+  params: Record<string, unknown> | undefined,
+  start: number,
+): Promise<ToolBundle> {
   const input = (params ?? {}) as QueryKpRulingPlanetsInput
   const chartId = input.chart_id ?? DEFAULT_CHART_ID
   const ayanamsha = input.ayanamsha ?? 'lahiri'
@@ -110,7 +136,9 @@ async function retrieve(_plan: QueryPlan, params?: Record<string, unknown>): Pro
       .update(JSON.stringify(results.map(r => r.content).sort()))
       .digest('hex')
 
-  return {
+  const latency_ms = Date.now() - start
+
+  const bundle: ToolBundle = {
     tool_bundle_id: crypto.randomUUID(),
     tool_name: TOOL_NAME,
     tool_version: TOOL_VERSION,
@@ -121,10 +149,26 @@ async function retrieve(_plan: QueryPlan, params?: Record<string, unknown>): Pro
     },
     results,
     served_from_cache: false,
-    latency_ms: Date.now() - start,
+    latency_ms,
     result_hash,
     schema_version: '1.0',
   }
+
+  void writeToolExecutionLog({
+    query_id: plan.query_plan_id,
+    tool_name: TOOL_NAME,
+    params_json: bundle.invocation_params as Record<string, unknown>,
+    status: results.length === 0 ? 'zero_rows' : 'ok',
+    rows_returned: results.length,
+    latency_ms,
+    token_estimate: Math.ceil(JSON.stringify(results).length / 4),
+    data_asset_id: 'KP_SUBLORDS',
+    error_code: null,
+    served_from_cache: false,
+    fallback_used: false,
+  })
+
+  return bundle
 }
 
 export const tool: RetrievalTool = {
