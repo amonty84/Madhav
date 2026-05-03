@@ -4772,23 +4772,33 @@ current_state:
   concurrent_workstreams:
     phase_o_observatory:
       active_since: 2026-05-02
+      closed_at: 2026-05-03                        # USTAD_S4_6 macro-close
       gate_session: S0.1
       gate_session_id: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
       gate_status: closed
-      phase_status: active_o_0_closed              # O.0 closed; O.1 ready
+      phase_status: COMPLETE                       # O.0–O.4 all closed; macro-phase complete
+      o_0_status: CLOSED
+      o_1_status: CLOSED
+      o_2_status: CLOSED
+      o_3_status: CLOSED
+      o_4_status: CLOSED
+      closing_session_id: USTAD_S4_6_ANOMALY_O4_CLOSE
       plan_artifact: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
-      plan_version: 1.0.0
-      plan_status: CURRENT
-      manifest_entry: OBSERVATORY_PLAN_v1_0       # registered at v2.6 manifest bump
-      mirror_pair: MP.9                            # declared at this S0.1 close in manifest_overrides.yaml
-      next_sessions: "parallel-safe per OBSERVATORY_PLAN §5 (5 provider-adapters S1.4–S1.8 can run concurrently after S1.2 closes; 4 reconcilers S2.2–S2.5 after S2.1; 6 analytics S4.1–S4.6 after O.1 closes)"
+      plan_version: 2.0.0
+      plan_status: CLOSED
+      manifest_entry: OBSERVATORY_PLAN_v1_0        # entry_count 145 → 156 at this close (manifest v2.8)
+      manifest_version_at_close: "2.8"
+      mirror_pair: MP.9                            # mirror parity: COMPLETE on both sides as of USTAD_S4_6
+      next_sessions: "Phase O complete. Umbrella branch feature/phase-o-observatory is code-complete; merge to main is gated on the 12 production acceptance criteria in OBSERVATORY_PLAN §8 being verified by the native (NOT done in S4.6)."
       branch: feature/phase-o-observatory
       umbrella_branch_pushed_to_origin: true
+      umbrella_merge_to_main_status: pending_native_production_ac_review
       sub_branch_convention: "feature/phase-o-observatory/<kebab-id> per non-gate session, kebab map in PHASE_O_CLAUDE_CODE_PROMPTS.md"
       session_count: 30                            # S0.1 + 13 (O.1) + 6 (O.2) + 4 (O.3) + 6 (O.4)
-      sessions_closed_count: 1                     # S0.1 only at this state snapshot
-      sessions_remaining: 29
-      next_session_objective: "S1.1 — Schema migrations (5 tables under platform/db/migrations/*observatory* + idempotent pricing seed v1)"
+      sessions_closed_count: 30                    # all closed as of USTAD_S4_6 (2026-05-03)
+      sessions_remaining: 0
+      next_session_objective: "Phase O macro-close complete as of USTAD_S4_6 (2026-05-03). All 30 sessions closed. Umbrella branch feature/phase-o-observatory ready for merge to main after §8 production ACs verified by native."
+      o_4_red_team_verdict: "PASS_WITH_FINDINGS — 0 HIGH; RT.O3.2 streaming + RT.O3.3 SSRF carry-forward MEDs RESOLVED; RT.O4.4 anomaly-suppression DOCUMENTED-ACCEPTED; RT.O4.5 cost-per-quality LOW-DEFERRED pending Learning Layer wiring (see OBSERVATORY_PLAN §13)"
       ethical_framing_anchor: "MACRO_PLAN §Ethical Framework — disclosure tier 1 (super-admin only) by default; cost figures never surfaced to chat path"
       working_aid: PHASE_O_CLAUDE_CODE_PROMPTS.md  # 30-session prompts for Claude Code execution
 

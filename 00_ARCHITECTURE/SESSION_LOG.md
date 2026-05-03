@@ -20124,3 +20124,34 @@ tests_added: 11
 tests_total_pass: 1232
 close_criteria_met: true
 ---
+
+---
+session_id: USTAD_S4_6
+title: Anomaly Detection + Phase O Macro-Close
+sub_phase: O.4 (CLOSED) / Phase O COMPLETE
+status: CLOSED
+umbrella_tip_before: cc4e3055383d169c852fd0c23d41ff81f4040970
+deliverables:
+  - platform/src/lib/observatory/analytics/anomaly.ts (z-score detection over per-day cost series; webhook + console.warn dispatch)
+  - platform/src/lib/observatory/analytics/__tests__/anomaly.test.ts (8 tests)
+  - platform/src/app/api/admin/observatory/analytics/anomaly/route.ts (GET endpoint)
+  - platform/src/app/api/admin/observatory/analytics/anomaly/run/route.ts (POST trigger)
+  - platform/src/app/api/admin/observatory/analytics/anomaly/__tests__/route.test.ts (4 tests)
+  - platform/src/lib/components/observatory/analytics/AnomalyPanel.tsx (client component)
+  - platform/src/app/(super-admin)/observatory/analytics/anomaly/page.tsx (server page)
+  - platform/src/lib/components/observatory/Layout.tsx (Analytics sidebar nav with all 6 links — replaces disabled Insights placeholder)
+  - D1 RESOLVED — platform/src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts pin OBSERVATORY_HASH_PROMPTS=false + __resetActivePolicyForTests() (27/27 PASS)
+  - D2 RESOLVED — platform/src/app/api/admin/observatory/export/route.ts converted to ReadableStream; queryUsageForExportStream() AsyncGenerator added in lib/observatory/export/query.ts; csvHeaderLine/csvRowLine/jsonEnvelopeOpen/JSON_ENVELOPE_CLOSE streaming helpers in lib/observatory/export/format.ts
+  - D3 RESOLVED — validateWebhookUrl() in lib/observatory/budget/alert_dispatcher.ts blocks non-HTTPS, RFC1918, loopback, link-local, 169.254.169.254, IPv6 fc00::/7 + fe80::/10 (7 new tests in alert_dispatcher.test.ts §A.SSRF)
+  - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json v2.7 → v2.8 (entry_count 145 → 156; +5 S3.4 export deferred-gap entries + 6 S4.1–S4.6 analytics module entries)
+  - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md v1.5.0 CURRENT → v2.0.0 CLOSED; phase_o_status COMPLETE; §13 O.4 IS.8(b) red-team appended (5 axes; 0 HIGH; RT.O3.2 + RT.O3.3 carry-forward MEDs RESOLVED; RT.O4.4 anomaly-suppression DOCUMENTED-ACCEPTED; RT.O4.5 cost-per-quality LOW-DEFERRED)
+  - .geminirules §E Phase O block updated to v2.0.0 CLOSED / phase_o_status COMPLETE (semantic parity, MP.9)
+  - .gemini/project_state.md "Concurrent Workstream — Phase O Observatory" section updated to CLOSED 2026-05-03 / COMPLETE
+  - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md concurrent_workstreams.phase_o_observatory: phase_status COMPLETE; sessions_closed_count 30; closed_at 2026-05-03
+tests_added: 19
+tests_total_pass: focused_suite 65/65; full-suite delta vs umbrella tip = 2 fewer pre-existing failures (D1 fixes), 0 new failures introduced
+red_team: O.4 IS.8(b) PASS_WITH_FINDINGS (see OBSERVATORY_PLAN §13) — 0 HIGH; MED [RT.O3.2 RESOLVED-with-caveat, RT.O3.3 RESOLVED, RT.O4.4 DOCUMENTED-ACCEPTED]; LOW [RT.O4.5 DEFERRED]
+o4_closed: true
+phase_o_complete: true
+close_criteria_met: true
+---

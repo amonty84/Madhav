@@ -23,7 +23,10 @@ import { NextResponse } from 'next/server'
 
 vi.mock('server-only', () => ({}))
 
-import { dispatchAlerts } from '@/lib/observatory/budget/alert_dispatcher'
+import {
+  dispatchAlerts,
+  validateWebhookUrl,
+} from '@/lib/observatory/budget/alert_dispatcher'
 import type { BudgetEvaluationResult } from '@/lib/observatory/budget/types'
 
 // ---------------------------------------------------------------------------
@@ -196,6 +199,75 @@ describe('§A — dispatchAlerts', () => {
     const dispatch = await dispatchAlerts(result)
     expect(dispatch.rule_id).toBe('rule-fixture-1')
     expect(dispatch.outcomes).toEqual([])
+  })
+})
+
+// ---------------------------------------------------------------------------
+// §A.SSRF — RT.O3.3 SSRF guard (USTAD_S4_6 D3 fix)
+// ---------------------------------------------------------------------------
+
+describe('§A.SSRF — validateWebhookUrl', () => {
+  it('passes a public HTTPS URL', () => {
+    expect(() => validateWebhookUrl('https://hook.example/path')).not.toThrow()
+    expect(() => validateWebhookUrl('https://hooks.slack.com/services/T/B/X')).not.toThrow()
+  })
+
+  it('rejects HTTP (non-HTTPS)', () => {
+    expect(() => validateWebhookUrl('http://hook.example/path')).toThrow(
+      /https_required/,
+    )
+  })
+
+  it('rejects localhost / 127.x / 0.0.0.0', () => {
+    expect(() => validateWebhookUrl('https://localhost/x')).toThrow(/private_endpoint/)
+    expect(() => validateWebhookUrl('https://127.0.0.1/x')).toThrow(/private_ip/)
+    expect(() => validateWebhookUrl('https://0.0.0.0/x')).toThrow(/private_endpoint/)
+  })
+
+  it('rejects RFC 1918 ranges (10/8, 192.168/16, 172.16–31)', () => {
+    expect(() => validateWebhookUrl('https://10.0.0.5/x')).toThrow(/private_ip/)
+    expect(() => validateWebhookUrl('https://192.168.1.1/x')).toThrow(/private_ip/)
+    expect(() => validateWebhookUrl('https://172.16.0.1/x')).toThrow(/private_ip/)
+    expect(() => validateWebhookUrl('https://172.31.255.255/x')).toThrow(/private_ip/)
+    // outside the RFC1918 172 range — still public, must NOT be blocked
+    expect(() => validateWebhookUrl('https://172.32.0.1/x')).not.toThrow()
+    expect(() => validateWebhookUrl('https://172.15.0.1/x')).not.toThrow()
+  })
+
+  it('rejects link-local + cloud metadata endpoints', () => {
+    expect(() => validateWebhookUrl('https://169.254.169.254/x')).toThrow(/private_endpoint/)
+    expect(() => validateWebhookUrl('https://169.254.0.1/x')).toThrow(/private_ip/)
+    expect(() => validateWebhookUrl('https://metadata.google.internal/x')).toThrow(
+      /private_endpoint/,
+    )
+  })
+
+  it('rejects malformed URLs', () => {
+    expect(() => validateWebhookUrl('not-a-url')).toThrow(/invalid_url/)
+  })
+
+  it('dispatchWebhook with private channel_target returns ssrf_blocked outcome', async () => {
+    const fetchMock = vi.fn()
+    globalThis.fetch = fetchMock as unknown as typeof globalThis.fetch
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const result = makeResult({
+      alerts_triggered: [
+        {
+          pct: 80,
+          channel: 'webhook',
+          channel_target: 'http://10.0.0.5/leak',
+        },
+      ],
+    })
+    const dispatch = await dispatchAlerts(result)
+    expect(dispatch.outcomes).toHaveLength(1)
+    expect(dispatch.outcomes[0].success).toBe(false)
+    expect(dispatch.outcomes[0].error).toMatch(/ssrf_blocked/)
+    // fetch must NOT be called once SSRF is detected
+    expect(fetchMock).not.toHaveBeenCalled()
+
+    warnSpy.mockRestore()
   })
 })
 

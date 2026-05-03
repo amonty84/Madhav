@@ -83,15 +83,69 @@ export function ObservatoryLayout({ children }: { children: React.ReactNode }) {
                 Budgets
               </Link>
             </li>
-            <li>
-              <span
-                data-testid="observatory-nav-insights"
-                aria-disabled="true"
-                title="Phase O.4 — not yet available"
-                className="block rounded px-2 py-1 text-muted-foreground opacity-50"
+            <li className="mt-3">
+              <div
+                data-testid="observatory-nav-analytics-header"
+                className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
               >
-                Insights
-              </span>
+                Analytics
+              </div>
+              <ul className="ml-2 mt-1 flex flex-col gap-1">
+                <li>
+                  <Link
+                    href="/observatory/analytics/cache"
+                    data-testid="observatory-nav-analytics-cache"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Cache Effectiveness
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/observatory/analytics/cost-per-quality"
+                    data-testid="observatory-nav-analytics-cost-per-quality"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Cost per Quality
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/observatory/analytics/cost-arc"
+                    data-testid="observatory-nav-analytics-cost-arc"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Conversation Cost Arc
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/observatory/analytics/pricing-diff"
+                    data-testid="observatory-nav-analytics-pricing-diff"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Pricing Diff Monitor
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/observatory/analytics/replay"
+                    data-testid="observatory-nav-analytics-replay"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Replay & Re-cost
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/observatory/analytics/anomaly"
+                    data-testid="observatory-nav-analytics-anomaly"
+                    className="block rounded px-2 py-1 hover:bg-muted"
+                  >
+                    Anomaly Detection
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>

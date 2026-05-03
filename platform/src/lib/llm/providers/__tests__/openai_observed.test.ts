@@ -72,12 +72,33 @@ const ctx: ObservationContext = {
   pipeline_stage: 'synthesize',
 }
 
+// S2.6 RT.5 flipped OBSERVATORY_HASH_PROMPTS so unset → hash. The active
+// policy is cached at module-load in observability/redaction.ts, so we
+// pin the env var BEFORE the test file's adapter modules resolve and use
+// __resetActivePolicyForTests to re-read it once the override is in place.
+// These tests assert the adapter's raw token/cost capture path, not the
+// PII hashing redactor — testing the non-hashed code path explicitly.
+// (D1 fix in USTAD_S4_6.)
+import { __resetActivePolicyForTests } from '@/lib/llm/observability/redaction'
+
+const originalHashEnv = process.env.OBSERVATORY_HASH_PROMPTS
+process.env.OBSERVATORY_HASH_PROMPTS = 'false'
+__resetActivePolicyForTests()
+
 let consoleErrorSpy: ReturnType<typeof vi.spyOn>
 beforeEach(() => {
   consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+  process.env.OBSERVATORY_HASH_PROMPTS = 'false'
+  __resetActivePolicyForTests()
 })
 afterEach(() => {
   consoleErrorSpy.mockRestore()
+  if (originalHashEnv === undefined) {
+    delete process.env.OBSERVATORY_HASH_PROMPTS
+  } else {
+    process.env.OBSERVATORY_HASH_PROMPTS = originalHashEnv
+  }
+  __resetActivePolicyForTests()
 })
 
 // ===========================================================================
