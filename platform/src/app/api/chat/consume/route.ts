@@ -52,6 +52,7 @@ import { res } from '@/lib/errors'
 import {
   writeLlmCallLog,
   writeQueryPlanLog,
+  writeToolExecutionLog,
   writeContextAssemblyLog,
   resolveProvider,
 } from '@/lib/db/monitoring-write'
@@ -334,6 +335,15 @@ export async function POST(request: Request) {
       queryPlan.tools_authorized = plannerTools
     }
 
+    // W2-TRACE-A: map from tool_name → planner-supplied params.
+    // When the LLM planner is active, these narrow the retrieve call
+    // (e.g. msr_sql gets { planet:'SATURN', valence:'negative' }).
+    // When planSchema is null (classify() fallback), map is empty and
+    // executeWithCache receives undefined — no behaviour change.
+    const plannerParamsMap = new Map<string, Record<string, unknown>>(
+      planSchema?.tool_calls.map(tc => [tc.tool_name, tc.params]) ?? []
+    )
+
     // UQE-9 (W2-BUGS B2W-7) — atomic per-request step_seq counter. Replaces
     // every hard-coded `step_seq: N` and `step_seq: 3 + idx` arithmetic so
     // parallel tools and synthesis can never collide on the same logical seq.
@@ -418,7 +428,7 @@ export async function POST(request: Request) {
         if (!t) return null
         const toolStart = Date.now()
         try {
-          const result = await executeWithCache(t, queryPlan, cache)
+          const result = await executeWithCache(t, queryPlan, cache, plannerParamsMap.get(toolName))
           traceEmitter.emitStep({
             event: 'step_done',
             query_id: queryId,
@@ -794,6 +804,11 @@ export async function POST(request: Request) {
   // rather than emitting malformed tool calls.
   const toolsForModel = supports(modelId, 'tool-use') ? buildConsumeTools(lelContextEnabled) : undefined
 
+  // Synthesis-time tool calls (consumeTools / buildConsumeTools) need a stable
+  // query_id to land in tool_execution_log. The v2 pipeline pre-allocates one;
+  // the legacy path mints its own here so onStepFinish can correlate rows.
+  const queryId = crypto.randomUUID()
+
   const result = streamText({
     model: resolveModel(modelId),
     messages: modelMessages,
@@ -811,6 +826,37 @@ export async function POST(request: Request) {
     ...(googleProviderOptions(modelId) && {
       providerOptions: googleProviderOptions(modelId),
     }),
+    onStepFinish: ({ toolCalls, toolResults }) => {
+      // Log each tool call that happened during this synthesis step.
+      // The retrieve-tools path (executeWithCache) logs itself — this hook
+      // only fires for consumeTools (structured tools + chart tools called
+      // during streamText). Fire-and-forget: never throw to the caller.
+      if (!toolCalls?.length) return
+      for (let i = 0; i < toolCalls.length; i++) {
+        const tc = toolCalls[i]
+        const tr = toolResults?.[i] as { result?: unknown } | undefined
+        const result = tr?.result
+        const rowsReturned =
+          result != null
+            ? Array.isArray(result)
+              ? result.length
+              : 1
+            : 0
+        void writeToolExecutionLog({
+          query_id: queryId,
+          tool_name: tc.toolName,
+          params_json: (tc as { args?: Record<string, unknown> }).args ?? {},
+          status: result != null ? 'success' : 'error',
+          rows_returned: rowsReturned,
+          latency_ms: null,
+          token_estimate: null,
+          data_asset_id: null,
+          error_code: null,
+          served_from_cache: false,
+          fallback_used: false,
+        })
+      }
+    },
     onFinish: ({ finishReason: reason, providerMetadata, usage }) => {
       finishReason = reason
       const meta = providerMetadata?.anthropic as

@@ -22,28 +22,34 @@ export async function executeWithCache(
   tool: RetrievalTool,
   plan: QueryPlan,
   cache?: RequestScopedToolCache,
+  plannerParams?: Record<string, unknown>,
 ): Promise<ToolBundle> {
   if (!cache) {
-    return await tool.retrieve(plan)
+    return await tool.retrieve(plan, plannerParams)
   }
 
-  const params: Record<string, unknown> = {
+  const cacheKey: Record<string, unknown> = {
     query_class: plan.query_class,
     domains: [...(plan.domains ?? [])].sort(),
     planets: [...(plan.planets ?? [])].sort(),
     forward_looking: plan.forward_looking,
     dasha_context_required: plan.dasha_context_required ?? false,
+    // Include planner params in cache key so different param sets don't alias.
+    // Sort keys for determinism.
+    ...(plannerParams && Object.keys(plannerParams).length > 0
+      ? { planner_params: Object.fromEntries(Object.entries(plannerParams).sort()) }
+      : {}),
   }
 
   // Use synchronous getPromise so concurrent calls with the same params
   // share the SAME promise (coalescing) before either has awaited it.
-  const existing = cache.getPromise(tool.name, params)
+  const existing = cache.getPromise(tool.name, cacheKey)
   if (existing) {
     const cached = await existing
     return { ...cached, served_from_cache: true }
   }
 
-  const promise = tool.retrieve(plan)
-  cache.put(tool.name, params, promise)
+  const promise = tool.retrieve(plan, plannerParams)
+  cache.put(tool.name, cacheKey, promise)
   return await promise
 }

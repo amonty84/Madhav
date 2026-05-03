@@ -145,6 +145,9 @@ Every session ends by emitting the SESSION_CLOSE artifact per `00_ARCHITECTURE/S
 
 ## §I — Operating principles (summarized)
 
+**File placement rule (enforced since 2026-05-04).** Before creating or saving any file, consult `00_ARCHITECTURE/ROOT_FILE_POLICY.md`. Nothing lands at the project root unless it is in ROOT_FILE_POLICY §2's exhaustive list. Every other file type has a designated folder. Use the §4 decision tree when in doubt.
+
+
 The full principle list is `PROJECT_ARCHITECTURE_v2_2.md §B — Architectural Principles (Non-Negotiable)` (B.1–B.12, preserved verbatim from v2.1). Cross-cutting substrates are in `MACRO_PLAN_v2_0.md §Learning Layer` and `§System Integrity Substrate`. The five most-violated principles, surfaced here as inline reminders (seeded from GROUNDING_AUDIT_v1_0.md finding patterns):
 
 - **B.1 — Facts/Interpretation separation.** Facts live at L1; derivations at the L1/L2.5 boundary with explicit ledger; interpretations at L2.5+ only. Mixing layers destroys auditability. *(L2 Analytical Layer archived Phase 14F 2026-04-28; L2.5 is the first active synthesis layer.)*

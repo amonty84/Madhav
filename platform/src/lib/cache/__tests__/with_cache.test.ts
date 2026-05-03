@@ -55,7 +55,7 @@ describe('executeWithCache', () => {
       const result = await executeWithCache(tool, plan)
 
       expect(tool.retrieve).toHaveBeenCalledOnce()
-      expect(tool.retrieve).toHaveBeenCalledWith(plan)
+      expect(tool.retrieve).toHaveBeenCalledWith(plan, undefined)
       expect(result.tool_bundle_id).toBe('bundle-wc-1')
     })
 

@@ -221,7 +221,10 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           execute: async () => {
             const t = getTool(toolName)
             if (!t) return { error: `Tool ${toolName} not found` }
-            const toolBundle = await executeWithCache(t, query_plan, cache)
+            // W2-TRACE-A: thread planner-supplied params if the plan carries them.
+            const richToolCalls = (query_plan as { tool_calls?: Array<{ tool_name: string; params: Record<string, unknown> }> }).tool_calls ?? []
+            const plannerParams = richToolCalls.find(tc => tc.tool_name === toolName)?.params
+            const toolBundle = await executeWithCache(t, query_plan, cache, plannerParams)
             return { results: toolBundle.results, tool_name: toolName }
           },
         })
