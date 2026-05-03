@@ -242,23 +242,9 @@ describe('POST /api/admin/observatory/reconciliation', () => {
     expect(body.provider).toBe('nim')
   })
 
-  it('returns 400 not_implemented for Anthropic (S2.1 stub)', async () => {
-    queryMock.mockImplementation(async () => ({ rows: [] }))
-    const { POST } = await loadRoute()
-    const request = new Request('http://x/api/admin/observatory/reconciliation', {
-      method: 'POST',
-      body: JSON.stringify({
-        provider: 'anthropic',
-        period_start: '2026-05-01',
-        period_end: '2026-05-01',
-      }),
-    })
-    const response = await POST(request)
-    expect(response.status).toBe(400)
-    const body = await response.json()
-    expect(body.error).toBe('not_implemented')
-    expect(body.provider).toBe('anthropic')
-  })
+  // Anthropic stub-not-implemented test removed at S2.2 — `AnthropicReconciler`
+  // is now wired into the factory. End-to-end success behavior is asserted in
+  // `./anthropic.test.ts`.
 
   it('returns 400 not_implemented for Gemini (S2.1 stub)', async () => {
     queryMock.mockImplementation(async () => ({ rows: [] }))
