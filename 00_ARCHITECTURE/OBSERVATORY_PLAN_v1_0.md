@@ -1,19 +1,19 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.4.0
+version: 1.5.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
-last_amended_session: USTAD_S3_1_BUDGET_RULES_FRAMEWORK
+last_amended_session: USTAD_S3_4_EXPORT_O3_CLOSE
 last_amended_date: 2026-05-03
 authoritative_side: claude
 phase_status:
   O.0: CLOSED       # 2026-05-02 (S0.1)
   O.1: CLOSED       # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
   O.2: CLOSED       # 2026-05-03 (S2.6 — reconciliation UI + RT.5 fix; 13 ACs green)
-  O.3: IN_PROGRESS  # 2026-05-03 (S3.1 framework landed; S3.2 + S3.3 + S3.4 parallel-safe)
-  O.4: PENDING
+  O.3: CLOSED       # 2026-05-03 (S3.4 — usage export + ND.S3.2.1 fix + /run wired; all 16 ACs green)
+  O.4: IN_PROGRESS  # 2026-05-03 (unblocked; S4.1 is the first session)
 mirror_obligations: >
   Adapted-parity summary mirror at .geminirules §E (Concurrent workstreams) and
   .gemini/project_state.md (Concurrent Workstream — Phase O Observatory section).
@@ -28,6 +28,46 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v1.5.0 (2026-05-03, USTAD_S3_4_EXPORT_O3_CLOSE): O.3 GATE CLOSE.
+    All four S3.x sessions S3.1–S3.4 carry `close_criteria_met: true`. This
+    session lands (a) the usage-export surface — backend
+    (`platform/src/lib/observatory/export/{types,query,format}.ts`), GET
+    endpoint (`platform/src/app/api/admin/observatory/export/route.ts`,
+    flag+super-admin gated, 90-day window cap, 50 000-row server-side cap,
+    CSV `Content-Disposition: attachment` + JSON `export_meta` wrapper,
+    `X-Export-Row-Count` hint past 5 000), API-client extension
+    (`buildExportUrl()`), and the events-page collapsible `<ExportPanel />`
+    UI (`platform/src/lib/components/observatory/export/ExportPanel.tsx`);
+    (b) **resolves ND.S3.2.1** — `coerceThresholds()` in
+    `platform/src/lib/observatory/budget/evaluate.ts` now preserves
+    `channel_target` round-trip from JSONB, with two new tests verifying
+    presence-preservation + null/undefined/empty omission (`Object.keys`
+    excludes `channel_target`); (c) **closes S3.3 AC.6** — the budgets
+    page `RunEvaluationButton` now POSTs
+    `/api/admin/observatory/budget-rules/evaluate/run` (the dispatching
+    endpoint) instead of GETting the read-only `/evaluate` endpoint; the
+    feedback banner shows "Evaluated N rules — N alerts fired", with a
+    secondary `text-destructive` line when any dispatch outcome reports
+    `success=false`. O.3-close IS.8(b) red-team discharged in-document
+    (six axes; RT.O3.1 PASS, RT.O3.2 MED, RT.O3.3 MED, RT.O3.4 PASS,
+    RT.O3.5 PASS, RT.O3.6 ACK — see §12 below). 12 brief-required new
+    tests added (2 ND.S3.2.1 round-trip, 1 wire-fix POST, 6 export
+    backend, 3 export UI). Per-suite count for the changed surfaces:
+    `__tests__/budget` + `__tests__/export` = 5 files / 45 tests, all
+    pass. **Pre-existing failures inherited from e7f1e8f tip** in
+    `src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts`
+    (2 tests asserting raw `prompt_text` after the S2.6 RT.5 hash-by-default
+    flip) are NOT regressions and NOT touched by this session — they were
+    already failing at the parent merge tip and remain unchanged here;
+    logged as a residual for an O.4 cleanup session. **CAPABILITY_MANIFEST
+    deferred gap.** Per the §6.2 governance constraint, S3.4 does not touch
+    `00_ARCHITECTURE/CAPABILITY_MANIFEST.json`; the export endpoint entry
+    is recorded in §12 below as exact instructions for the last-closing S4
+    session to register. Sub-phase O.4 (Advanced Analytics) is now
+    unblocked; S4.1 (Cache effectiveness) is the next session. Each
+    S4.x analytics module's `may_touch` is its sibling under
+    `platform/src/lib/observatory/analytics/`, so all six S4 sessions are
+    parallel-safe per §6.1 after this merge.
   - v1.4.0 (2026-05-03, USTAD_S3_1_BUDGET_RULES_FRAMEWORK): O.3 OPEN.
     Sub-phase O.3 marked IN_PROGRESS; S3.1 framework session CLOSED.
     Landed the budget-rules framework: types
@@ -450,6 +490,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 
 **O.3 OPEN 2026-05-03 by USTAD_S3_1_BUDGET_RULES_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/budget/{types,evaluate,persist}.ts` + 3 route files: `budget-rules/route.ts`, `budget-rules/[id]/route.ts`, `budget-rules/evaluate/route.ts`). API-client extension and openapi.yaml additions complete. **Resolves the two MED findings deferred from the S2.6 O.2 close**: RT.O2.3 (CSV upload size + MIME guard) and RT.O2.4 (BigQuery `_PARTITIONTIME` partition pruning). Per-session reconcilers S3.2/S3.3/S3.4 are unblocked and parallel-safe per §6.1.
 
+**O.3 CLOSED 2026-05-03 by USTAD_S3_4_EXPORT_O3_CLOSE.** All four S3.x sessions S3.1–S3.4 carry `close_criteria_met: true`. Budget-rules framework + alert dispatcher + budgets UI + usage-export surface all wired end-to-end. **Resolves ND.S3.2.1**: `coerceThresholds()` in [`platform/src/lib/observatory/budget/evaluate.ts`](../platform/src/lib/observatory/budget/evaluate.ts) now preserves `channel_target` round-trip from the JSONB column, so webhook alerts reach the stored URL after a DB round-trip. **Closes S3.3 AC.6**: the budgets-page `RunEvaluationButton` now POSTs the `/budget-rules/evaluate/run` endpoint (which evaluates AND dispatches), not the read-only GET `/evaluate`. O.3-close IS.8(b) red-team discharged with the 6-axis table in §12 below. **CAPABILITY_MANIFEST deferred gap**: per §6.2, S3.4 does not touch the manifest — the export endpoint entry is recorded in §12 as exact instructions for the last-closing S4 session. Sub-phase O.4 unblocked; S4.1 (Cache effectiveness) is the next session.
+
 ### §5.4 — Sub-phase O.4: Advanced Analytics (6 sessions)
 
 | ID | Title | may_touch | must_not_touch | Deps | Deliverable |
@@ -632,6 +674,46 @@ two MED findings logged for O.3 pickup.
 **Recommended O.3 follow-ups (logged to S3.x backlog, not blocking O.2 close):**
 - RT.O2.3 → harden `/api/admin/observatory/reconciliation/upload` with file-size + MIME guard.
 - RT.O2.4 → add `_PARTITIONTIME` predicate to Gemini BigQuery query.
+
+---
+
+## §12 — O.3 close red-team (IS.8(b))
+
+Discharged in-document at O.3 close per `MACRO_PLAN §IS.8` and the
+`ONGOING_HYGIENE_POLICIES §G` cadence rule. Six axes; no HIGH findings;
+two MED findings logged for O.4 pickup. ND.S3.2.1 confirmed RESOLVED.
+
+| Axis | Question | Verdict | Evidence / fix |
+|---|---|---|---|
+| RT.O3.1 | Can the GET `/api/admin/observatory/export` endpoint be reached by a non-super-admin who guesses the URL? Does it honour both `OBSERVATORY_ENABLED` AND the super-admin role check? | **PASS** | The export route's first line is `await guardObservatoryRoute()` ([export/route.ts:36](../platform/src/app/api/admin/observatory/export/route.ts#L36)), which is the same `_guard.ts` shared by every other observatory admin endpoint ([_guard.ts:25-43](../platform/src/app/api/admin/observatory/_guard.ts#L25-L43)). It checks the `MARSYS_FLAG_OBSERVATORY_ENABLED` env var and then `requireSuperAdmin()` (returns 401 / 403) before any other code runs. A non-super-admin guessing the URL hits a 401/403 before the DB is touched. |
+| RT.O3.2 | Export data volume — what happens if 50 000 rows are exported as a string in memory? Is there a meaningful risk of OOM on the Cloud Run instance (typical 2 GB RAM)? Is the 90-day / 50 000-row cap sufficient, or is a streaming response needed? | **MED — FINDING** | The route loads all rows into memory with `await queryUsageForExport(params)` and materialises the full string with `toCSV()/toJSON()` before returning. 50 000 rows × ~16 columns × ~30 bytes ≈ 24 MB raw → ~30–50 MB CSV string. Single-request memory is well under the 2 GB Cloud Run cap, but concurrent requests (e.g., two super-admins exporting in parallel) compound. **Recommended fix (deferred to O.4):** stream the response via `ReadableStream` with row-batch SQL cursor — `pg`'s `Cursor` interface or `LIMIT … OFFSET`-paged loop — emitting CSV lines as bytes rather than a single materialised string. MED severity because the 50 000-row cap is enforced before the OOM-risk envelope opens; this is hardening, not a live bug. |
+| RT.O3.3 | Webhook security — the alert dispatcher POSTs to a URL in `channel_target`. Can a super-admin use this to cause the server to SSRF to internal GCP metadata endpoints (169.254.169.254, metadata.google.internal)? | **MED — FINDING** | [`alert_dispatcher.ts:87`](../platform/src/lib/observatory/budget/alert_dispatcher.ts#L87) does `await fetch(target, ...)` where `target` is `threshold.channel_target` — a string saved by a super-admin via the budget-rules POST endpoint with **no URL validation**. A super-admin could create a budget rule with `channel_target='http://169.254.169.254/...'` and the server would issue a POST against the GCE metadata service. The metadata service requires a `Metadata-Flavor: Google` header which the dispatcher does not set, so token leak via the Google flow specifically is unlikely — but other internal services (private VPC endpoints, sidecar admin ports) may not require special headers. Threat model bounded: the trigger requires super-admin (already-highest-privilege) to plant the URL AND the rule must cross a threshold for the dispatch to fire. **Recommended fix (deferred to O.4):** at budget-rule POST time, validate `channel_target` against (a) HTTPS-only, (b) public-IP allowlist (block RFC 1918, link-local, loopback), (c) optional explicit allowlist of permitted webhook hosts. MED, not HIGH, because the gating role itself bypasses every other system control. |
+| RT.O3.4 | Budget rule soft-delete completeness — after DELETE sets `active=false`, does `evaluateAllRules()` actually exclude the rule? Does the `evaluate/run` endpoint re-evaluate a just-deactivated rule? | **PASS** | [`evaluate.ts:264-269`](../platform/src/lib/observatory/budget/evaluate.ts#L264-L269) selects from `llm_budget_rules WHERE active = TRUE`. The `/evaluate/run` POST handler ([evaluate/run/route.ts:30](../platform/src/app/api/admin/observatory/budget-rules/evaluate/run/route.ts#L30)) calls `evaluateAllRules()` directly with no override path. A soft-deleted rule (`active=false`) is invisible to both the read-only GET `/evaluate` and the dispatching POST `/evaluate/run`. Existing test 14 (in `budget.test.ts`) confirms the DELETE→GET sequence shows `active=false`. |
+| RT.O3.5 | ND.S3.2.1 resolution — after the `coerceThresholds()` fix, does a round-trip through the DB (INSERT with `channel_target` → SELECT → coerce → dispatch) correctly route webhook alerts to the stored URL? | **PASS** | [`evaluate.ts:185-208`](../platform/src/lib/observatory/budget/evaluate.ts#L185-L208) now copies `channel_target` into the coerced `AlertThreshold` when present (string, non-empty), and omits the key entirely when null/undefined/empty. New test `14a` in [`budget.test.ts`](../platform/src/lib/components/observatory/__tests__/budget/budget.test.ts) drives a row with `channel_target='https://hook.example/path'` through `evaluateBudgetRule` and asserts the resulting `alerts_triggered[0]` exposes the URL — the same shape `dispatchWebhook()` reads from `threshold.channel_target` ([alert_dispatcher.ts:75](../platform/src/lib/observatory/budget/alert_dispatcher.ts#L75)). Test `14b` asserts no explicit `undefined` key leaks through. ND.S3.2.1 status = **RESOLVED**. |
+| RT.O3.6 | CAPABILITY_MANIFEST gap — the export endpoint (TASK 2) is not recorded in `CAPABILITY_MANIFEST.json` because the §6.2 governance constraint forbids touching the manifest in S3.4. Confirm this is acceptable as a known deferred gap (to be resolved by last-closing S4 session), and record the specific entry needed. | **ACK** | Acceptable per §6.2 funneling discipline: only S0.1, S2.1, S3.1, and the last-closing S4 session touch the manifest, in order to prevent the JSON-merge race observed in M4-D-P1/M4-D-S1. The export endpoint must be registered by the last-closing S4 session with the entry shape below. |
+
+**CAPABILITY_MANIFEST entry to add (last-closing S4 session)**
+
+The last-closing S4 session must add this entry to `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` under `entries[]`, increment `entry_count` by one, and bump the manifest version per the standard `phase: "phase-o-s4"` pattern used elsewhere in the file:
+
+```json
+{
+  "id": "OBSERVATORY_EXPORT_ENDPOINT",
+  "kind": "L_API_ROUTE",
+  "path": "platform/src/app/api/admin/observatory/export/route.ts",
+  "phase": "phase-o-s3-4",
+  "authored_session": "USTAD_S3_4_EXPORT_O3_CLOSE",
+  "authored_date": "2026-05-03",
+  "summary": "GET endpoint returning a filtered usage-events export as CSV or JSON. Gated by OBSERVATORY_ENABLED + super-admin role. Caps: 90-day window, 50000 rows. Companion modules at platform/src/lib/observatory/export/{types,query,format}.ts."
+}
+```
+
+Sibling entries to consider in the same registration pass (companion modules — same session, same `phase: phase-o-s3-4`): `lib/observatory/export/types.ts`, `lib/observatory/export/query.ts`, `lib/observatory/export/format.ts`, `lib/components/observatory/export/ExportPanel.tsx`. The S4 closing session SHOULD register all five together so the export surface is fully discoverable from the manifest.
+
+**Recommended O.4 follow-ups (logged to O.4 backlog, not blocking O.3 close):**
+- RT.O3.2 → stream the export response with a SQL cursor instead of materialising the full result string in memory.
+- RT.O3.3 → validate `channel_target` URLs at budget-rule POST time (HTTPS-only + private-IP block + optional host allowlist).
+- **Pre-existing test residual (inherited from e7f1e8f)**: `src/lib/llm/providers/__tests__/{anthropic,openai}_observed.test.ts` each have one assertion (raw `prompt_text` literal) failing under the S2.6 RT.5 hash-by-default flip. Not a regression of S3.4. Fix in an O.4 cleanup session by either (a) updating the assertions to expect the SHA256 hash or (b) setting `process.env.OBSERVATORY_HASH_PROMPTS = 'false'` in the test setup of those two files.
 
 ---
 

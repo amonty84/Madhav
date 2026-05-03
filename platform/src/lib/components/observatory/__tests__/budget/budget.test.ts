@@ -298,7 +298,51 @@ describe('§E — Budget rules API endpoints', () => {
     expect(body.active).toBe(true)
   })
 
-  it('14. DELETE /budget-rules/[id] → 204 (soft-delete) + GET shows active=false', async () => {
+  it('14a. ND.S3.2.1 — coerceThresholds preserves channel_target when present (round-trip)', async () => {
+    // The DB row's alert_thresholds JSONB carries { pct, channel, channel_target };
+    // post-fix evaluateBudgetRule must surface channel_target on the
+    // alerts_triggered entry that the dispatcher consumes.
+    queryMock.mockResolvedValueOnce({ rows: [{ total_cost_usd: 90 }] })
+    const rule = makeRule({
+      amount_usd: 100,
+      alert_thresholds: [
+        {
+          pct: 80,
+          channel: 'webhook',
+          channel_target: 'https://hook.example/path',
+        },
+      ],
+    })
+    const result = await evaluateBudgetRule(rule)
+    expect(result.alerts_triggered).toHaveLength(1)
+    expect(result.alerts_triggered[0]).toEqual({
+      pct: 80,
+      channel: 'webhook',
+      channel_target: 'https://hook.example/path',
+    })
+  })
+
+  it('14b. ND.S3.2.1 — coerceThresholds omits channel_target when source is null/undefined/empty', async () => {
+    queryMock.mockResolvedValueOnce({ rows: [{ total_cost_usd: 90 }] })
+    const rule = makeRule({
+      amount_usd: 100,
+      alert_thresholds: [
+        // Three entries: one with channel_target=null, one undefined, one empty string.
+        { pct: 50, channel: 'log', channel_target: null },
+        { pct: 60, channel: 'log' },
+        { pct: 70, channel: 'log', channel_target: '' },
+      ] as unknown as { pct: number; channel: string }[],
+    })
+    const result = await evaluateBudgetRule(rule)
+    expect(result.alerts_triggered).toHaveLength(3)
+    for (const triggered of result.alerts_triggered) {
+      // Avoid an explicit `undefined` key leaking through; the property must
+      // be absent (Object.keys does not list it).
+      expect(Object.keys(triggered)).not.toContain('channel_target')
+    }
+  })
+
+  it('15. DELETE /budget-rules/[id] → 204 (soft-delete) + GET shows active=false', async () => {
     // First call: the DELETE soft-delete UPDATE
     queryMock.mockResolvedValueOnce({
       rows: [{ budget_rule_id: 'br-existing-1' }],

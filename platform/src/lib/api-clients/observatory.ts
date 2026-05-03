@@ -28,6 +28,7 @@ import type {
   BudgetRuleInput,
   BudgetRuleRow,
 } from '@/lib/observatory/budget/types'
+import type { ExportParams } from '@/lib/observatory/export/types'
 
 const BASE = '/api/admin/observatory'
 
@@ -290,4 +291,21 @@ export async function evaluateBudgets(
     ? `/budget-rules/evaluate?rule_id=${encodeURIComponent(ruleId)}`
     : '/budget-rules/evaluate'
   return fetchJson<{ results: BudgetEvaluationResult[] }>(path)
+}
+
+// ── Usage export (O.3; USTAD_S3_4) ───────────────────────────────────────
+
+/** Build the GET /export URL with all query params encoded. The export
+ *  endpoint streams a file response, so the UI navigates the browser
+ *  directly to this URL (no JS fetch); that lets the browser handle the
+ *  download dialog without us having to materialise the file in memory. */
+export function buildExportUrl(params: ExportParams): string {
+  const qs = new URLSearchParams()
+  qs.set('format', params.format)
+  qs.set('date_start', params.date_start)
+  qs.set('date_end', params.date_end)
+  if (params.provider) qs.set('provider', params.provider)
+  if (params.pipeline_stage) qs.set('pipeline_stage', params.pipeline_stage)
+  if (params.limit !== undefined) qs.set('limit', String(params.limit))
+  return `${BASE}/export?${qs.toString()}`
 }
