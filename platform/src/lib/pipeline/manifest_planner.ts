@@ -118,7 +118,12 @@ const PlanInputJsonSchema: JSONSchema7 = {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// System prompt — loaded at module init from PLANNER_PROMPT_v1_0.md §3 + §4.
+// System prompt — loaded lazily on first call from PLANNER_PROMPT_v1_0.md
+// §3 + §4. Lazy because module-init readFileSync breaks Cloud Build: the
+// builder runs `next build` with cwd=/app, where path.join(cwd,'..',
+// '00_ARCHITECTURE',…) resolves to the filesystem root and ENOENTs. Reading
+// at first call lets MARSYS_REPO_ROOT (set in Dockerfile runner stage) point
+// at /app where the file actually lives.
 // ────────────────────────────────────────────────────────────────────────────
 //
 // Why load from markdown instead of hardcoding (W2-UQE-ACTIVATE round 5):
@@ -126,19 +131,16 @@ const PlanInputJsonSchema: JSONSchema7 = {
 //   remedial few-shot (resonance_register for alignment-character remedials)
 //   never reached the runtime, because SYSTEM_PROMPT was a hand-copied string
 //   constant of §3 only. §4 (few-shots) had never been at runtime at all.
-//   Loading at module init eliminates the drift permanently: the markdown is
-//   the single source of truth.
+//   Loading from disk eliminates the drift permanently: the markdown is the
+//   single source of truth.
 //
 // query_class is now part of §3 directly (PLANNER_PROMPT v1.1 amendment
 // 2026-05-03). The old QUERY_CLASS_EXTENSION constant is removed; the
 // markdown is the single source of truth for the full schema.
 
-const PROMPT_PATH = path.join(
-  process.cwd(),
-  '..',
-  '00_ARCHITECTURE',
-  'PLANNER_PROMPT_v1_0.md',
-)
+function repoRoot(): string {
+  return process.env.MARSYS_REPO_ROOT ?? path.join(process.cwd(), '..')
+}
 
 function extractSystemPromptBody(md: string): string {
   // §3 is "## 3. System prompt (verbatim — copy into code)" followed by a
@@ -172,31 +174,28 @@ function extractFewShotSection(md: string): string {
   return md.slice(startIdx, endIdx).trimEnd()
 }
 
-function buildSystemPrompt(): string {
-  const md = readFileSync(PROMPT_PATH, 'utf-8')
+let _systemPromptCache: string | null = null
+
+function getSystemPrompt(): string {
+  if (_systemPromptCache !== null) return _systemPromptCache
+  const promptPath = path.join(repoRoot(), '00_ARCHITECTURE', 'PLANNER_PROMPT_v1_0.md')
+  const md = readFileSync(promptPath, 'utf-8')
   const body = extractSystemPromptBody(md)
   const fewShots = extractFewShotSection(md)
-  return `${body}\n\n---\n\n${fewShots}\n`
+  _systemPromptCache = `${body}\n\n---\n\n${fewShots}\n`
+  return _systemPromptCache
 }
-
-const SYSTEM_PROMPT = buildSystemPrompt()
 
 // ────────────────────────────────────────────────────────────────────────────
 // Manifest loading (read-once, lazy)
 // ────────────────────────────────────────────────────────────────────────────
 
-const MANIFEST_PATH = path.join(
-  process.cwd(),
-  '..',
-  '00_ARCHITECTURE',
-  'CAPABILITY_MANIFEST.json',
-)
-
 let _manifestCache: CapabilityManifest | null = null
 
 function loadManifest(): CapabilityManifest {
   if (_manifestCache) return _manifestCache
-  const raw = readFileSync(MANIFEST_PATH, 'utf-8')
+  const manifestPath = path.join(repoRoot(), '00_ARCHITECTURE', 'CAPABILITY_MANIFEST.json')
+  const raw = readFileSync(manifestPath, 'utf-8')
   _manifestCache = JSON.parse(raw) as CapabilityManifest
   return _manifestCache
 }
@@ -253,7 +252,7 @@ export async function callLlmPlanner(
   try {
     result = await generateText({
       model: resolveModel(plannerModelId),
-      system: SYSTEM_PROMPT,
+      system: getSystemPrompt(),
       messages: [{ role: 'user', content: userMessage }],
       temperature: 0,
       // maxRetries: 0 — NIM free-tier is queue-based. Without this, the AI SDK
@@ -354,4 +353,10 @@ export async function callLlmPlanner(
 // runs without hitting the filesystem twice in a row.
 export function __resetManifestCacheForTests(): void {
   _manifestCache = null
+}
+
+// Exported for tests only — same purpose as __resetManifestCacheForTests, for
+// the lazy system-prompt cache.
+export function __resetSystemPromptForTests(): void {
+  _systemPromptCache = null
 }
