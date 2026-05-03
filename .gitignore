@@ -39,3 +39,9 @@ NVIDIA_NIM_LLM_Report.docx
 # Pattern: ../Madhav-{session-id}/ — these are worktrees, not subdirectories,
 # but listing them here prevents accidental tracking if someone nests them.
 # Actual worktree exclusion is handled by git automatically.
+
+# BHISMA Wave 2 — NIM debugging scripts (local probes, not committed)
+platform/scripts/nim_catalog_check.mjs
+platform/scripts/nim_model_test.mjs
+platform/scripts/run_nim_catalog_check.command
+platform/scripts/run_nim_test.command

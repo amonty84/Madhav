@@ -44,15 +44,6 @@ const NIM_HEADERS_TIMEOUT_MS = 90_000
  * race both signals so whichever fires first wins.
  */
 function nimFetch(url: RequestInfo | URL, init?: RequestInit): Promise<Response> {
-  // NIM_DEBUG_BODY=1: log the first 3000 chars of the request body to stderr.
-  // Used to diff AI SDK wire format against raw-fetch probes. Remove once
-  // Lever 2 is unblocked.
-  if (process.env.NIM_DEBUG_BODY && init?.body) {
-    const body = init.body
-    const snippet = typeof body === 'string' ? body.slice(0, 3000) : '(non-string body)'
-    process.stderr.write(`[nim-debug] → ${snippet}\n`)
-  }
-
   const timeoutSignal = AbortSignal.timeout(NIM_HEADERS_TIMEOUT_MS)
   const signal =
     init?.signal
