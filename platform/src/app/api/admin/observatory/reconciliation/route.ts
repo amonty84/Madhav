@@ -24,6 +24,18 @@ import {
   MANUAL_UPLOAD_PROVIDERS,
   getReconciler,
 } from '@/lib/observatory/reconciliation/factory'
+import type { ProviderReconciler } from '@/lib/observatory/reconciliation/types'
+import { GeminiReconciler } from '@/lib/observatory/reconciliation/gemini'
+
+/** Per-session-merged provider replacements: when a sub-phase ships its
+ *  concrete reconciler (S2.2 Anthropic, S2.3 OpenAI, S2.4 Gemini, …) the
+ *  factory stub is replaced here without disturbing the not-yet-shipped
+ *  provider stubs. Once all five reconcilers are merged, this map collapses
+ *  into the factory itself (S2.5 close). */
+function resolveReconciler(provider: ProviderName): ProviderReconciler {
+  if (provider === 'gemini') return new GeminiReconciler()
+  return getReconciler(provider)
+}
 
 const VALID_PROVIDERS: ReadonlySet<ProviderName> = new Set([
   'anthropic',
@@ -99,7 +111,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const reconciler = getReconciler(parsed.provider)
+    const reconciler = resolveReconciler(parsed.provider)
     const result = await reconciler.reconcile(
       parsed,
       DEFAULT_RECONCILIATION_CONFIG,
