@@ -20090,3 +20090,20 @@ tests_total_pass: 1284
 deferred: []
 close_criteria_met: true
 ---
+
+---
+session_id: USTAD_S4_3
+title: Conversation Cost Arc
+sub_phase: O.4
+status: CLOSED
+umbrella_tip_before: 40dbe96
+deliverables:
+  - platform/src/lib/observatory/analytics/cost_arc.ts
+  - GET /api/admin/observatory/analytics/cost-arc
+  - GET /api/admin/observatory/analytics/cost-arc/[conversationId]
+  - ConversationCostArcPanel.tsx
+  - platform/src/app/(super-admin)/observatory/analytics/cost-arc/page.tsx
+tests_added: 11
+tests_total_pass: 1272
+close_criteria_met: true
+---
