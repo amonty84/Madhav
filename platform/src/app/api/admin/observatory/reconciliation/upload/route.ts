@@ -58,6 +58,18 @@ const UPLOAD_PROVIDERS: ReadonlySet<string> = new Set(['deepseek', 'nim'])
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
 const RAW_PAYLOAD_ROW_CAP = 1000
 
+// RT.O2.3 fix (USTAD_S3_1): hard 5 MB cap before reading the file into memory,
+// and MIME-type allowlist so a non-CSV blob (image, archive, etc.) is rejected
+// with a 400 instead of being parsed as text. application/octet-stream is
+// allowed because some browsers/OS send it for .csv attachments; the actual
+// CSV-shape validation is the column-presence check downstream.
+const MAX_CSV_BYTES = 5 * 1024 * 1024
+const ALLOWED_CSV_MIME_TYPES: ReadonlySet<string> = new Set([
+  'text/csv',
+  'text/plain',
+  'application/octet-stream',
+])
+
 export async function POST(request: Request) {
   const auth = await guardObservatoryRoute()
   if (auth instanceof NextResponse) return auth
@@ -109,6 +121,29 @@ export async function POST(request: Request) {
   if (!file || typeof file === 'string' || typeof (file as Blob).text !== 'function') {
     return NextResponse.json(
       { error: 'invalid_input', message: 'A "file" form field with a CSV upload is required.' },
+      { status: 400 },
+    )
+  }
+
+  // RT.O2.3 fix: size + MIME guards before any read.
+  const blob = file as Blob & { type?: string; size?: number }
+  if (typeof blob.size === 'number' && blob.size > MAX_CSV_BYTES) {
+    return NextResponse.json(
+      {
+        error: 'file_too_large',
+        max_bytes: MAX_CSV_BYTES,
+        actual_bytes: blob.size,
+      },
+      { status: 400 },
+    )
+  }
+  if (blob.type && !ALLOWED_CSV_MIME_TYPES.has(blob.type)) {
+    return NextResponse.json(
+      {
+        error: 'invalid_mime_type',
+        received: blob.type,
+        allowed: Array.from(ALLOWED_CSV_MIME_TYPES),
+      },
       { status: 400 },
     )
   }

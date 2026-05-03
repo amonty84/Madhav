@@ -23,6 +23,11 @@ import type {
   ProviderReconcileResult,
   ReconciliationHistoryResponse,
 } from '@/lib/observatory/reconciliation/types'
+import type {
+  BudgetEvaluationResult,
+  BudgetRuleInput,
+  BudgetRuleRow,
+} from '@/lib/observatory/budget/types'
 
 const BASE = '/api/admin/observatory'
 
@@ -214,4 +219,75 @@ export async function triggerReconciliation(
   if (response.status === 401) throw new UnauthorizedError(code, message, detail)
   if (response.status === 403) throw new ForbiddenError(code, message, detail)
   throw new ObservatoryApiError(response.status, code, message, detail)
+}
+
+// ── Budget rules (O.3; USTAD_S3_1) ───────────────────────────────────────
+
+export interface FetchBudgetRulesParams {
+  /** When 'true' / 'false' — narrow to active or inactive only. */
+  active?: 'true' | 'false' | 'all'
+}
+
+export async function fetchBudgetRules(
+  params: FetchBudgetRulesParams = {},
+): Promise<{ rules: BudgetRuleRow[] }> {
+  const qs = new URLSearchParams()
+  if (params.active && params.active !== 'all') qs.set('active', params.active)
+  const path = qs.size > 0 ? `/budget-rules?${qs.toString()}` : '/budget-rules'
+  return fetchJson<{ rules: BudgetRuleRow[] }>(path)
+}
+
+async function postJson<TResponse>(
+  path: string,
+  body: unknown,
+): Promise<TResponse> {
+  const response = await fetch(`${BASE}${path}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
+    body: JSON.stringify(body),
+  })
+  if (response.ok) return (await response.json()) as TResponse
+
+  let code = 'UNKNOWN'
+  let message = `Observatory API request failed (${response.status})`
+  let detail: string | undefined
+  try {
+    const errBody = (await response.json()) as {
+      error?: string | { code?: string; message?: string; detail?: string }
+      message?: string
+    }
+    if (typeof errBody.error === 'string') {
+      code = errBody.error
+      message = errBody.message ?? message
+    } else if (errBody.error) {
+      code = errBody.error.code ?? code
+      message = errBody.error.message ?? message
+      detail = errBody.error.detail
+    }
+  } catch {
+    // body wasn't JSON; keep defaults
+  }
+
+  if (response.status === 401) throw new UnauthorizedError(code, message, detail)
+  if (response.status === 403) throw new ForbiddenError(code, message, detail)
+  throw new ObservatoryApiError(response.status, code, message, detail)
+}
+
+export async function createBudgetRule(
+  input: BudgetRuleInput,
+): Promise<BudgetRuleRow> {
+  return postJson<BudgetRuleRow>('/budget-rules', input)
+}
+
+export async function evaluateBudgets(
+  ruleId?: string,
+): Promise<{ results: BudgetEvaluationResult[] }> {
+  const path = ruleId
+    ? `/budget-rules/evaluate?rule_id=${encodeURIComponent(ruleId)}`
+    : '/budget-rules/evaluate'
+  return fetchJson<{ results: BudgetEvaluationResult[] }>(path)
 }

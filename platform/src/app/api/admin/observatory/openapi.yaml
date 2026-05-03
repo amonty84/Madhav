@@ -330,6 +330,151 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '500': { $ref: '#/components/responses/InternalError' }
 
+  # ── Budget rules (O.3; USTAD_S3_1) ──────────────────────────────────────
+  /budget-rules:
+    get:
+      tags: [observatory]
+      summary: List all budget rules
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema: { type: string, enum: [true, false, all], default: all }
+          description: Filter by `active` column. Default `all` returns both active and inactive rules.
+      responses:
+        '200':
+          description: List of budget rules.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [rules]
+                properties:
+                  rules:
+                    type: array
+                    items: { $ref: '#/components/schemas/BudgetRule' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+    post:
+      tags: [observatory]
+      summary: Create a budget rule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BudgetRuleInput' }
+      responses:
+        '201':
+          description: Rule created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BudgetRule' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /budget-rules/{id}:
+    get:
+      tags: [observatory]
+      summary: Fetch a single budget rule by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Single rule.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BudgetRule' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+    patch:
+      tags: [observatory]
+      summary: Partial update of a budget rule
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:              { type: string }
+                scope_value:       { type: string, nullable: true }
+                amount_usd:        { type: number, exclusiveMinimum: 0 }
+                alert_thresholds:
+                  type: array
+                  items: { $ref: '#/components/schemas/BudgetAlertThreshold' }
+                active:            { type: boolean }
+      responses:
+        '200':
+          description: Updated rule.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BudgetRule' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+    delete:
+      tags: [observatory]
+      summary: Soft-delete a budget rule (active=false)
+      description: |
+        DELETE is soft — sets `active=false` so the audit trail and any
+        prior alerts remain queryable. The row is never removed.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '204':
+          description: Soft-deleted; no body.
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /budget-rules/evaluate:
+    get:
+      tags: [observatory]
+      summary: Evaluate active budget rules against current spend
+      description: |
+        Without `rule_id`, evaluates every active rule and returns results
+        sorted by `pct_used` descending. With `rule_id`, evaluates a single
+        rule (which may be inactive) and returns a one-element array.
+      parameters:
+        - name: rule_id
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Evaluation results.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [results]
+                properties:
+                  results:
+                    type: array
+                    items: { $ref: '#/components/schemas/BudgetEvaluationResult' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
 components:
   parameters:
     From:
@@ -631,3 +776,81 @@ components:
           type: array
           items: { $ref: "#/components/schemas/ReconciliationHistoryRow" }
         total: { type: integer, minimum: 0 }
+
+    # ── Budget rules (O.3; USTAD_S3_1) ────────────────────────────────────
+    BudgetAlertThreshold:
+      type: object
+      required: [pct, channel]
+      properties:
+        pct:     { type: number, minimum: 0, maximum: 100 }
+        channel: { type: string, description: 'Routing channel: log|email|webhook|...' }
+    BudgetRule:
+      type: object
+      description: |
+        Budget rule row mirroring `llm_budget_rules` (migration 038). Rule
+        scope is one of total | provider | model | pipeline_stage; the
+        `active=false` state is the soft-delete tombstone.
+      required:
+        [budget_rule_id, name, scope, period, amount_usd, alert_thresholds,
+         active, created_at, updated_at]
+      properties:
+        budget_rule_id:    { type: string, format: uuid }
+        name:              { type: string }
+        scope:
+          type: string
+          enum: [total, provider, model, pipeline_stage]
+        scope_value:       { type: string, nullable: true }
+        period:
+          type: string
+          enum: [daily, weekly, monthly]
+        amount_usd:        { type: number }
+        alert_thresholds:
+          type: array
+          items: { $ref: '#/components/schemas/BudgetAlertThreshold' }
+        created_by_user_id: { type: string, nullable: true }
+        active:            { type: boolean }
+        created_at:        { type: string, format: date-time }
+        updated_at:        { type: string, format: date-time }
+    BudgetRuleInput:
+      type: object
+      required: [name, scope, period, amount_usd, alert_thresholds]
+      properties:
+        name:              { type: string, minLength: 1 }
+        scope:
+          type: string
+          enum: [total, provider, model, pipeline_stage]
+        scope_value:       { type: string, nullable: true }
+        period:
+          type: string
+          enum: [daily, weekly, monthly]
+        amount_usd:        { type: number, exclusiveMinimum: 0 }
+        alert_thresholds:
+          type: array
+          items: { $ref: '#/components/schemas/BudgetAlertThreshold' }
+        active:            { type: boolean, default: true }
+    BudgetEvaluationResult:
+      type: object
+      required:
+        [rule_id, name, scope, period, period_start, period_end, amount_usd,
+         current_spend_usd, pct_used, status, alerts_triggered]
+      properties:
+        rule_id:           { type: string, format: uuid }
+        name:              { type: string }
+        scope:
+          type: string
+          enum: [total, provider, model, pipeline_stage]
+        scope_value:       { type: string, nullable: true }
+        period:
+          type: string
+          enum: [daily, weekly, monthly]
+        period_start:      { type: string, format: date }
+        period_end:        { type: string, format: date }
+        amount_usd:        { type: number }
+        current_spend_usd: { type: number }
+        pct_used:          { type: number }
+        status:
+          type: string
+          enum: [ok, warning, alert, exceeded]
+        alerts_triggered:
+          type: array
+          items: { $ref: '#/components/schemas/BudgetAlertThreshold' }

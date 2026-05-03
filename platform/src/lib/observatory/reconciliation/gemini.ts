@@ -146,6 +146,11 @@ export class GeminiReconciler extends BaseReconciler {
       tableId.replace(/`/g, '') +
       '`'
 
+    // _PARTITIONTIME prunes date-partitioned GCP billing exports (RT.O2.4 fix).
+    // Falls back to full scan on unpartitioned tables — correctness unaffected.
+    // The pseudo-column predicate is checked at partition-elimination time,
+    // before the DATE(usage_start_time) row predicate; combined, the query
+    // reads only the partitions that overlap [@period_start, @period_end + 1d).
     const sql =
       'SELECT\n' +
       '  sku.description                                AS sku_description,\n' +
@@ -156,7 +161,10 @@ export class GeminiReconciler extends BaseReconciler {
       '  ), 0))                                         AS total_credits\n' +
       'FROM ' + fqTable + '\n' +
       'WHERE\n' +
-      '  DATE(usage_start_time) BETWEEN @period_start AND @period_end\n' +
+      '  _PARTITIONTIME BETWEEN\n' +
+      '    TIMESTAMP(@period_start) AND\n' +
+      '    TIMESTAMP_ADD(TIMESTAMP(@period_end), INTERVAL 1 DAY)\n' +
+      '  AND DATE(usage_start_time) BETWEEN @period_start AND @period_end\n' +
       '  AND (\n' +
       "    LOWER(service.description) LIKE '%generative language%'\n" +
       "    OR LOWER(service.description) LIKE '%vertex ai%'\n" +
