@@ -11,6 +11,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# Repo root for any code path that resolves files under 00_ARCHITECTURE
+# during `next build`. Builder cwd=/app, and `path.join(cwd,'..',…)` would
+# escape to the filesystem root and ENOENT — see manifest_planner.ts.
+ENV MARSYS_REPO_ROOT=/app
 ARG NEXT_PUBLIC_FIREBASE_API_KEY
 ENV NEXT_PUBLIC_FIREBASE_API_KEY=$NEXT_PUBLIC_FIREBASE_API_KEY
 ARG NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
