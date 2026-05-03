@@ -19049,3 +19049,146 @@ session_close:
 ### Next session objective
 
 S2.6 — Reconciliation banner UI (depends on S2.2 + S2.3 + S2.4 + S2.5 all being merged into `feature/phase-o-observatory`). Surfaces unresolved variance alerts and missing-authoritative rows from `llm_cost_reconciliation` to the super-admin dashboard. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## USTAD_S2_4 — Gemini GCP Cloud Billing Reconciler (2026-05-03)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_4
+  cowork_thread_name: ustad-s2-4-gemini-reconciler
+  phase: O.2 — Reconciliation
+  type: IMPLEMENTATION
+  depends_on: [USTAD_S2_1]
+  red_team_due: false
+  may_touch:
+    - platform/src/lib/observatory/reconciliation/gemini.ts            # new
+    - platform/src/lib/observatory/reconciliation/gemini_sku_map.ts    # new
+    - platform/src/app/api/admin/observatory/reconciliation/route.ts
+    - platform/src/lib/components/observatory/__tests__/reconciliation/**
+    - platform/package.json
+    - platform/package-lock.json
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - platform/src/lib/observatory/reconciliation/base.ts
+    - platform/src/lib/observatory/reconciliation/types.ts
+    - platform/src/lib/observatory/reconciliation/variance.ts
+    - platform/migrations/**
+    - Any non-observatory file
+  mirror_propagation_required: false
+```
+
+### work performed
+
+1. Created `platform/src/lib/observatory/reconciliation/gemini_sku_map.ts` —
+   additive SKU→model-id map (Gemini 1.5 Pro/Flash, 2.0 Flash, 2.5 Pro/Flash
+   Preview, plus Context caching SKUs). `skuToModelId()` does
+   case-insensitive prefix match with whitespace normalization; returns
+   `null` for any SKU not in the map (free tier, other GCP services in the
+   same billing export, future SKUs) — deliberately not an error, the
+   reconciler logs unrecognised SKUs in `notes`.
+2. Created `platform/src/lib/observatory/reconciliation/gemini.ts` —
+   `GeminiReconciler extends BaseReconciler { provider = 'gemini' }`.
+   - Data source: GCP Cloud Billing **BigQuery export** (no Gemini admin
+     API exists; matches OBSERVATORY_PLAN §4.3).
+   - Required env vars: `GCP_BILLING_PROJECT_ID`,
+     `GCP_BILLING_DATASET_ID`, `GCP_BILLING_TABLE_ID` — any missing →
+     throw with explicit env-var name in message; BaseReconciler turns
+     into `status='error'`.
+   - BQ query (parameterized; `@period_start` / `@period_end` typed as
+     DATE) groups by `sku.description` and SUMs `cost` + `credits` per SKU.
+     Service filter matches both "Generative Language" and "Vertex AI"
+     descriptions (covers both Gemini deployment surfaces).
+   - Per row: skuToModelId → null → log + skip; net_cost = total_cost +
+     total_credits → ≤0 → free-tier (record in raw_payload, contributes 0
+     to authoritative); otherwise sum into `recognised_cost_usd`.
+   - 60s timeout via setTimeout + `job.cancel()`; cancel/abort/timeout
+     errors mapped to "BigQuery billing query timeout".
+   - BigQuery client constructor-injectable (`bqFactory`) for unit tests;
+     production lazy-imports `@google-cloud/bigquery` and constructs
+     `new BigQuery({ projectId })` (uses ADC, same pattern as
+     `@google-cloud/storage`).
+   - Overrides `reconcile()` to append unrecognised-SKU annotation to the
+     in-memory result.notes (raw_payload retains the durable record).
+3. Wired into POST endpoint via a small `resolveReconciler()` helper in
+   `route.ts` (factory.ts left untouched per may_touch — when S2.2/S2.3/
+   S2.5 land, the helper will merge into `getReconciler()` itself at S2.5
+   close).
+4. Added `@google-cloud/bigquery: ^7.9.4` to `platform/package.json`
+   `dependencies`. Production-only; tests do not require it (BQ client is
+   injected).
+5. Tests — `platform/src/lib/components/observatory/__tests__/reconciliation/gemini.test.ts`
+   ships **9 unit tests** (≥ brief's 7-test floor):
+   - skuToModelId: known SKU, case-insensitive + double-space tolerance,
+     Context caching, unknown→null (no throw), free-tier→null + sanity.
+   - GeminiReconciler.reconcile(): happy path (input+output for
+     gemini-1.5-pro, asserts cost + raw_payload), mixed SKUs (unrecognised
+     in notes; cost = recognised only), free-tier net=0 (status='matched',
+     free_tier_row_count=1), missing env (status='error', factory not
+     invoked).
+6. Updated existing `reconciliation.test.ts` POST test for Gemini —
+   replaced "expects not_implemented stub" with "expects route invokes
+   real reconciler; env-unset path returns status='error' with
+   `GCP_BILLING_PROJECT_ID not configured` in notes".
+
+### test results
+
+```
+RUN  v4.1.4
+Test Files  2 passed (2)
+     Tests  26 passed (26)
+   Duration  ~183ms
+```
+
+(17 framework tests preserved + 9 new Gemini tests.)
+
+### unrecognized SKU pattern (notes format)
+
+When `skuToModelId(sku)` returns null for one or more rows in a billing
+period, the reconciler emits this annotation appended to the standard
+notes line:
+
+```
+unrecognized_skus=[<sku_desc_1>, <sku_desc_2>, …]
+```
+
+The full per-SKU rollup (recognised + unrecognised, with total_cost,
+total_credits, net_cost, model_id, recognised flag) is durably persisted
+in `llm_provider_cost_reports.raw_payload` for re-cost / replay (S4.5).
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_4
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: not_due
+  open_decisions:
+    - "Vertex-hosted Gemini SKU descriptions may differ from Generative Language API descriptions; first real billing-export pull will surface unknowns → add to gemini_sku_map.ts (additive)"
+    - "RT.5 PII default-polarity inversion (deferred MED from S2.1 — still open; not in S2.4 scope)"
+  next_unblocked: "S2.2 (Anthropic), S2.3 (OpenAI), S2.5 (DeepSeek+NIM CSV) — all parallel-safe alongside this merge per OBSERVATORY_PLAN §6.1; S2.6 + O.2 close gate on all four."
+  schema_validator_exit_code: 2  # No in-session validator CLI invoked; precedent per S2.1
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S2.4 session; CURRENT_STATE pointer rotation batches at O.2 close per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; same precedent as S2.1."
+  close_criteria_met: true
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-4-gemini-reconciler
+    cut_from_commit: a540a8f
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+After S2.2 / S2.3 / S2.5 also land: **S2.6 — Reconciliation banner UI**
+(per OBSERVATORY_PLAN §5.2 close), then **O.2 close session**.
