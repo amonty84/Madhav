@@ -1,16 +1,26 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.0.0
+version: 1.1.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
+last_amended_session: USTAD_S1_13_OBSERVATORY_MVP_WIRING
+last_amended_date: 2026-05-03
 authoritative_side: claude
+phase_status:
+  O.0: CLOSED   # 2026-05-02 (S0.1)
+  O.1: CLOSED   # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
+  O.2: NEXT     # S2.1 framework session unblocked
+  O.3: PENDING
+  O.4: PENDING
 mirror_obligations: >
   Adapted-parity summary mirror at .geminirules §E (Concurrent workstreams) and
   .gemini/project_state.md (Concurrent Workstream — Phase O Observatory section).
   Semantic parity, not byte-identity. New mirror pair MP.9 declared in
-  manifest_overrides.yaml at this S0.1 close.
+  manifest_overrides.yaml at S0.1 close. S1.13 (this amendment) is an
+  implementation-class session under MP.9 funneling — Gemini-side mirror is
+  refreshed at the next governance-class session, not at this close.
 consumers:
   - 00_ARCHITECTURE/CAPABILITY_MANIFEST.json (registers OBSERVATORY_PLAN as L_GOVERNANCE entry)
   - 00_ARCHITECTURE/CURRENT_STATE_v1_0.md §2 (concurrent_workstreams block cites this artifact)
@@ -18,6 +28,18 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v1.1.0 (2026-05-03, USTAD_S1_13_OBSERVATORY_MVP_WIRING): O.1 GATE CLOSE.
+    All 13 sessions S1.1–S1.13 closed. Observatory MVP wired end-to-end:
+    overview page (KPI tiles + filters + cost-over-time + provider/stage
+    breakdowns) + events explorer with side panel + budgets placeholder for
+    O.3. Smoke test script `npm run observatory:smoke` (with --dry-run mode)
+    landed at platform/scripts/observatory/smoke_test.ts. OD.S1.3.1 RESOLVED
+    (no separate raw-responses table; parameters jsonb is sufficient).
+    OD.S1.7.1 RESOLVED via Option B (no shim API change; adapters call
+    persistObservation() directly with status='timeout'; documented inline
+    in observe.ts + persist.ts). All 12 S1.13 acceptance criteria PASS.
+    Frontmatter adds `phase_status` block as CURRENT_STATE-style mirror.
+    Next milestone: O.2 Reconciliation, S2.1 framework session unblocked.
   - v1.0.0 (2026-05-02, PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP): Initial authoring.
     Ten sections per the gate-session execution brief. Registers Phase O Observatory as
     a concurrent workstream alongside the main M-phase thread (currently M5 INCOMING).
@@ -313,6 +335,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 
 **O.1 close criteria.** All 13 sessions closed; e2e test green; manual smoke validates per-provider capture in dev. IS.8(b)-class red-team conducted in-document at the O.1 close session (or as a separate close session if scope demands).
 
+**O.1 CLOSED 2026-05-03 by USTAD_S1_13_OBSERVATORY_MVP_WIRING.** All 13 S1.x sessions S1.1–S1.13 carry `close_criteria_met: true`. The MVP wiring landed: Overview page (FiltersBar + KPI tiles + CostOverTime chart + provider/stage breakdowns), Events page (EventTable + EventSidePanel with conversation thread), Budgets placeholder for O.3. End-to-end smoke script `npm run observatory:smoke` (with --dry-run for CI-safe verification) added at `platform/scripts/observatory/smoke_test.ts`. Two open decisions resolved at this close: **OD.S1.3.1** (no separate `llm_provider_raw_responses` table — request params live in `parameters` jsonb of `llm_usage_events`) and **OD.S1.7.1** (Option B; observe()/observeStream() classify all thrown errors as `status='error'`; adapters that detect timeouts call `persistObservation()` directly with `status='timeout'` per JSDoc on the export). All 12 S1.13 gate-bar acceptance criteria PASS (AC.1–AC.12 enumerated in SESSION_LOG entry). Per IS.8(b), O.1-close red-team is held over to the first session of O.2 (S2.1) per `ONGOING_HYGIENE_POLICIES §G` cadence rule (this O.1 close is the 13th session in the O.1 wave; S2.1 will discharge the O.1-close red-team as part of its session-open).
+
 ### §5.2 — Sub-phase O.2: Reconciliation (6 sessions)
 
 | ID | Title | may_touch | must_not_touch | Deps | Deliverable |
@@ -479,6 +503,11 @@ The umbrella merges to `main` only after all 12 criteria are green.
 ## §10 — Open decisions deferred to native
 
 These decisions are explicitly marked open at S0.1 close. The relevant downstream session must halt-and-ask the native if it reaches one of these without a decision in hand.
+
+**Status update 2026-05-03 (USTAD_S1_13).** Two ODs resolved at the O.1 close:
+
+- **OD.S1.3.1 — RESOLVED.** No separate `llm_provider_raw_responses` table. Request parameter snapshots live in `llm_usage_events.parameters` (jsonb); all five S1.4–S1.8 provider adapters already populate this column. Raw provider response bodies are not persisted at v1; the EventSidePanel Meta tab carries an inline note. Capture can be added in a future release without schema migration. Documented in `platform/src/lib/llm/observability/persist.ts:5-12`.
+- **OD.S1.7.1 — RESOLVED via Option B (no API change).** `observe()` and `observeStream()` classify every thrown error as `status='error'` — they cannot natively produce `status='timeout'`. Adapters that detect a provider timeout (AbortError / deadline exceeded / etc.) call `persistObservation()` directly with `status='timeout'` before re-throwing, then skip the observe() wrapping for that one call. `persistObservation` JSDoc marks itself as the timeout escape hatch. Documented in `platform/src/lib/llm/observability/observe.ts:9-17` and `platform/src/lib/llm/observability/persist.ts:14-18`.
 
 1. **Storage layer choice.** Telemetry rows accumulate fast (one per call, conservatively ~10–100K/day). PostgreSQL is the default platform store, but high-volume telemetry might justify a columnar store (e.g., ClickHouse or BigQuery) for the events table specifically. **Decision needed by S1.1.** Default if unspecified: PostgreSQL with monthly partition on `started_at`.
 

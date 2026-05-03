@@ -5,6 +5,15 @@
 //      persistObservation (cost computed locally; pricing_version_id frozen).
 //   3. Never lets observability errors surface to the caller — the original
 //      provider response (or thrown error) passes through untouched.
+//
+// OD.S1.7.1 — RESOLVED 2026-05-03 (USTAD_S1_13). Both observe() and
+// observeStream() classify every thrown error as `status: 'error'`. They do
+// NOT distinguish a provider timeout (AbortError, deadline exceeded, etc.)
+// from any other thrown error — the wrapper has no provider-specific
+// knowledge. Adapters that detect a timeout call persistObservation()
+// directly with `status: 'timeout'` before re-throwing, then skip the
+// observe() wrapping for that specific call. See persistObservation() JSDoc
+// for the escape-hatch contract.
 
 import { computeCost } from './cost'
 import { persistObservation } from './persist'
