@@ -129,10 +129,9 @@ const PlanInputJsonSchema: JSONSchema7 = {
 //   Loading at module init eliminates the drift permanently: the markdown is
 //   the single source of truth.
 //
-// Output schema extension (W2-PLANNER) — appended to the markdown body since
-// §3 in the doc predates the query_class addition. This is the only piece of
-// the runtime prompt not in the markdown today; folding it into the markdown
-// is a follow-up.
+// query_class is now part of §3 directly (PLANNER_PROMPT v1.1 amendment
+// 2026-05-03). The old QUERY_CLASS_EXTENSION constant is removed; the
+// markdown is the single source of truth for the full schema.
 
 const PROMPT_PATH = path.join(
   process.cwd(),
@@ -140,14 +139,6 @@ const PROMPT_PATH = path.join(
   '00_ARCHITECTURE',
   'PLANNER_PROMPT_v1_0.md',
 )
-
-const QUERY_CLASS_EXTENSION = `
-Output schema extension (W2-PLANNER):
-
-  In addition to the schema above, also include a top-level \`query_class\`
-  field. Pick exactly one of: "remedial" | "interpretive" | "predictive" |
-  "holistic" | "planetary" | "single_answer". This field drives downstream
-  bundle assembly and synthesis-guidance routing.`
 
 function extractSystemPromptBody(md: string): string {
   // §3 is "## 3. System prompt (verbatim — copy into code)" followed by a
@@ -185,7 +176,7 @@ function buildSystemPrompt(): string {
   const md = readFileSync(PROMPT_PATH, 'utf-8')
   const body = extractSystemPromptBody(md)
   const fewShots = extractFewShotSection(md)
-  return `${body}\n${QUERY_CLASS_EXTENSION}\n\n---\n\n${fewShots}\n`
+  return `${body}\n\n---\n\n${fewShots}\n`
 }
 
 const SYSTEM_PROMPT = buildSystemPrompt()

@@ -1,9 +1,21 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.0
+version: 1.1
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
+amended_on: 2026-05-03
+amendment_reason: >
+  Lever 2 eval (29 cases) showed tool_recall=0.572, tool_precision=0.514.
+  Root causes: (1) planner fired remedial_codex_query on all query types
+  (precision collapse); (2) pattern_register missed in all predictive queries
+  (R7 was ambiguous — "predictive OR remedial" with OR between tools);
+  (3) cluster_atlas never selected for holistic queries (no rule existed).
+  Fix: add R7a/R7b (split predictive vs remedial lens), R11 (holistic →
+  cluster_atlas), R12 (holistic contradictions → contradiction_register),
+  R13 (hard prohibition on remedial_codex_query in non-remedial queries).
+  Add query_class to §3 output schema and all §4 few-shot expected plans.
+  Add §4.5 (predictive example) and §4.6 (holistic example).
 role: >
   System prompt + structured-output schema + few-shot examples + evaluation rubric
   for the MARSYS-JIS LLM-first planner (W2-PLANNER). The planner consumes:
@@ -100,6 +112,7 @@ Inputs you receive:
 Output a single JSON object that conforms to this schema:
 
   {
+    "query_class": "remedial" | "interpretive" | "predictive" | "holistic" | "planetary" | "single_answer",
     "query_intent_summary": "<≤20 words>",
     "tool_calls": [
       {
@@ -112,6 +125,18 @@ Output a single JSON object that conforms to this schema:
       ...
     ]
   }
+
+  query_class rules:
+    "remedial"     — query asks for prescriptions, gemstones, mantras, rituals,
+                     fasting, propitiation, or "what should I do about [planet]".
+    "interpretive" — query asks what something means in the chart (house,
+                     planet, yoga, divisional chart, aspect).
+    "predictive"   — query asks about timing, future periods, transits, dashas,
+                     or "what will happen / when will".
+    "holistic"     — query asks for a comprehensive overview, all-domain
+                     synthesis, or chart-wide themes/contradictions.
+    "planetary"    — query focused on one planet's full profile across all layers.
+    "single_answer"— query has a single factual answer (e.g. "what is my lagna").
 
 Hard rules:
 
@@ -129,23 +154,40 @@ Hard rules:
   R6. Prefer the smallest set of tools that covers the query. Adding tools
       "to be safe" is a calibration error and will be flagged by the
       evaluation rubric.
-  R7. For predictive or remedial queries, ALWAYS include `pattern_register`
-      OR `resonance_register` at priority ≤ 2 — you must surface at least one
-      cross-domain lens before recommending action. Pick the lens by query
-      character: `pattern_register` when the query is about recurring
-      behavioral or timing patterns (e.g. "Saturn keeps causing friction in
-      my career"); `resonance_register` when the query is about aligning a
-      remedial action (gemstone, mantra, ritual, fast, charity) against the
-      cross-domain signal resonance the chart already carries (e.g. "should
-      I wear a yellow sapphire", "is this mantra appropriate").
-  R8. For remedial queries, ALWAYS include `msr_sql` at priority 1 — it is
-      the primary signal-retrieval surface for remedial reasoning. The
-      remedy cannot be calibrated without first surfacing the implicated
-      grahas/signals from MSR. `remedial_codex_query` alone, without
-      `msr_sql` at priority 1, is an incomplete remedial plan.
-  R9. Output JSON only — no preface, no trailing prose, no markdown fence.
+  R7a. For PREDICTIVE queries, ALWAYS include `pattern_register` at priority
+       ≤ 2. Predictive timing requires surfacing recurring cross-domain
+       patterns before projecting forward. Do NOT substitute `resonance_register`
+       for `pattern_register` in predictive plans — `resonance_register` is
+       for remedial alignment only.
+  R7b. For REMEDIAL queries, choose the cross-domain lens by query character:
+       use `pattern_register` when the query is about a recurring pattern the
+       native wants to act on (e.g. "Saturn keeps causing friction in my
+       career", "ritual for my chart's weakest planet");
+       use `resonance_register` when the query asks whether a specific
+       prescription (gemstone, mantra, ritual, fasting, charity) aligns with
+       the chart's existing cross-domain resonance (e.g. "should I wear a
+       yellow sapphire", "is this mantra appropriate for me").
+  R8.  For REMEDIAL queries, ALWAYS include `msr_sql` at priority 1. The
+       remedy cannot be calibrated without first surfacing the implicated
+       grahas/signals from MSR. `remedial_codex_query` alone, without
+       `msr_sql` at priority 1, is an incomplete remedial plan.
+  R9.  Output JSON only — no preface, no trailing prose, no markdown fence.
   R10. If the query is unanswerable from the available tools, return
        tool_calls: [] and put the reason in query_intent_summary.
+  R11. For HOLISTIC queries, ALWAYS include `cluster_atlas` at priority ≤ 2.
+       Holistic queries include: comprehensive overview, life path, all
+       domains, everything about the chart, central themes. `cluster_atlas`
+       is the primary cross-domain synthesis surface for holistic scope.
+  R12. For holistic queries asking about contradictions, tensions, or central
+       themes (e.g. "what are the contradictions", "central themes of my
+       chart"), ALSO include `contradiction_register` at priority ≤ 2.
+  R13. NEVER include `remedial_codex_query` in interpretive, predictive, or
+       holistic queries. `remedial_codex_query` is ONLY for queries that
+       explicitly ask for prescription or action: gemstones, mantras,
+       rituals, fasting, propitiation, "what should I do about [planet]",
+       "how can I strengthen [planet]". If the query asks for interpretation,
+       timing, structural analysis, or chart overview — not prescription —
+       do not include `remedial_codex_query`.
 
 Style rules:
 
@@ -159,29 +201,32 @@ Style rules:
 
 ## 4. Few-shot examples
 
-Four examples, each shown as `{ user_query, expected_plan }`. The actual
+Six examples covering remedial, interpretive, predictive, and holistic
+query classes. Each shown as `{ user_query, expected_plan }`. The actual
 production call serialises only `user_query`; the expected_plan is the
-planner's target output.
+planner's target output. Every expected_plan includes a `query_class` field.
 
-The first three examples (4.1, 4.2, 4.3) are three remedial queries placed
-adjacently on purpose — they illustrate the R7 lens-choice decision across
-two distinct remedial characters. The lens heuristic is:
+**R7b lens-choice heuristic (remedial queries):**
 
   - **`pattern_register`** for recurring-pattern remedials — the native
     describes a behavior or signal that repeats across time and asks
-    what to do about the pattern itself. Examples: "Saturn keeps causing
-    friction in my career" (§4.1), "ritual for my chart's weakest
-    planet" (§4.3 — the weakness is a recurring-signal pattern).
+    what to do about the pattern itself (§4.1, §4.3).
 
   - **`resonance_register`** for alignment-character remedials — the
     native asks whether a specific prescription (gemstone, mantra,
-    yellow sapphire, Mars propitiation, fasting, charity) aligns with
-    the cross-domain signal resonance the chart already carries.
-    Example: "should I wear a yellow sapphire?" (§4.2).
+    yellow sapphire, propitiation, fasting, charity) aligns with the
+    chart's cross-domain signal resonance (§4.2).
 
 All three remedial examples include `msr_sql` at priority 1 per R8.
-Example 4.4 is an interpretive query, included to show the shape of a
-non-remedial plan.
+
+**R7a (predictive):** §4.5 illustrates `pattern_register` always required
+for predictive queries; never `resonance_register`.
+
+**R11 (holistic):** §4.6 illustrates `cluster_atlas` always required for
+holistic queries; `remedial_codex_query` is absent (R13).
+
+**R13 reminder:** `remedial_codex_query` is absent from §4.4, §4.5, §4.6.
+A non-remedial plan that includes `remedial_codex_query` fails the eval.
 
 ### 4.1 Remedial query — recurring-pattern character
 
@@ -189,6 +234,7 @@ non-remedial plan.
 {
   "user_query": "I keep getting Saturn-related friction in my career. What can I actually do about it?",
   "expected_plan": {
+    "query_class": "remedial",
     "query_intent_summary": "Remedial actions for Saturn friction in career domain.",
     "tool_calls": [
       {
@@ -243,6 +289,7 @@ is forbidden.
 {
   "user_query": "Should I wear a yellow sapphire to strengthen Jupiter? Will it actually align with my chart?",
   "expected_plan": {
+    "query_class": "remedial",
     "query_intent_summary": "Assess yellow-sapphire alignment with native's Jupiter resonance.",
     "tool_calls": [
       {
@@ -290,6 +337,7 @@ search needed.
 {
   "user_query": "Recommend a daily ritual to strengthen my chart's weakest planet.",
   "expected_plan": {
+    "query_class": "remedial",
     "query_intent_summary": "Daily ritual targeting the chart's weakest-planet recurring-pattern.",
     "tool_calls": [
       {
@@ -324,6 +372,7 @@ search needed.
 {
   "user_query": "How does my Mars in the 8th house actually express in relationships?",
   "expected_plan": {
+    "query_class": "interpretive",
     "query_intent_summary": "Interpret Mars-8H influence on relationships domain.",
     "tool_calls": [
       {
@@ -359,6 +408,89 @@ search needed.
 }
 ```
 
+### 4.5 Predictive query — upcoming dasha period
+
+R7a requires `pattern_register` for all predictive queries. Note: no
+`remedial_codex_query` (R13 — this is not a prescription query).
+
+```json
+{
+  "user_query": "What can I expect from the upcoming Ketu Mahadasha starting in 2027?",
+  "expected_plan": {
+    "query_class": "predictive",
+    "query_intent_summary": "Forward-looking read of Ketu Mahadasha starting 2027.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "planets": ["Ketu"], "forward_looking": true },
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "Pull all Ketu-bearing signals; foundational for dasha projection."
+      },
+      {
+        "tool_name": "vector_search",
+        "params": { "query_text": "Ketu Mahadasha expectations themes", "doc_type": ["domain_report"], "top_k": 6 },
+        "token_budget": 600,
+        "priority": 1,
+        "reason": "Long-form L3 narrative on Ketu dasha across domains."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": { "planets": ["Ketu"], "forward_looking": true },
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Recurring Ketu patterns across domains for dasha-period projection."
+      }
+    ]
+  }
+}
+```
+
+### 4.6 Holistic query — comprehensive overview
+
+R11 requires `cluster_atlas` for holistic scope. R13 prohibits
+`remedial_codex_query`. This is not a prescription query — do not include it.
+
+```json
+{
+  "user_query": "Give me a comprehensive overview of my life path across all major domains.",
+  "expected_plan": {
+    "query_class": "holistic",
+    "query_intent_summary": "Comprehensive cross-domain life-path synthesis.",
+    "tool_calls": [
+      {
+        "tool_name": "cluster_atlas",
+        "params": {},
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "Cross-domain cluster synthesis — primary surface for holistic scope."
+      },
+      {
+        "tool_name": "vector_search",
+        "params": { "query_text": "life path domains career relationships health", "doc_type": ["domain_report"], "top_k": 8 },
+        "token_budget": 700,
+        "priority": 1,
+        "reason": "L3 long-form narrative across all major life domains."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Cross-domain recurring patterns that shape the life-path arc."
+      },
+      {
+        "tool_name": "cgm_graph_walk",
+        "params": { "graph_traversal_depth": 2 },
+        "token_budget": 500,
+        "priority": 2,
+        "reason": "CGM graph walk to surface cross-planet structural relationships."
+      }
+    ]
+  }
+}
+```
+
 ## 5. Evaluation rubric (5 criteria × 0–2 each → 0–10)
 
 | # | Criterion              | 0 (fail)                         | 1 (partial)                              | 2 (pass)                                                 |
@@ -374,4 +506,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.0 · authored 2026-05-01 · consumed by W2-PLANNER (Round 2)*
+*PLANNER_PROMPT v1.1 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
