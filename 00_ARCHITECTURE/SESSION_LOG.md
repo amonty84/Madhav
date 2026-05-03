@@ -18937,3 +18937,115 @@ session_close:
 ### Next session objective
 
 **S2.2 — Anthropic reconciler** (parallel-safe with S2.3 OpenAI / S2.4 Gemini / S2.5 DeepSeek+NIM CSV) per OBSERVATORY_PLAN §5.2. Subclasses `BaseReconciler`; implements `fetchAuthoritativeCost` against the Anthropic Admin API → Usage and Cost endpoints (per OBSERVATORY_PLAN §4.1: workspace-scoped, daily granularity, ~24h lag). Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## Session — USTAD_S2_5_DEEPSEEKNNIM_CSV (2026-05-03, Phase O sub-phase O.2 implementation)
+**Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s2-5-deepseeknnim-csv` cut from `feature/phase-o-observatory@a540a8f`; merge target `feature/phase-o-observatory`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_5_DEEPSEEKNNIM_CSV
+  cowork_thread_name: ustad-s2-5-deepseeknnim-csv
+  opened_at: 2026-05-03T00:00:00+05:30
+  phase: O.2 — Reconciliation
+  type: IMPLEMENTATION
+  depends_on: [USTAD_S2_1]
+  rules_load:
+    - {file: platform/src/lib/observatory/reconciliation/types.ts, fingerprint_sha256: 120ec0ef29d7ddf0bedd87a24b9b9514265c468ff5101727c7cd93b2a1d9d8ce}
+    - {file: platform/src/lib/observatory/reconciliation/base.ts, fingerprint_sha256: 026e7d40fa9228f07986a97bee836d6d4cc9aef796ae853b4b0645de35f2b70f}
+    - {file: platform/src/lib/observatory/reconciliation/variance.ts, fingerprint_sha256: 7d6ab8ef2793cc539486ba2678a3099b950f9ef9064af0ce3d641ebf1b08903c}
+    - {file: platform/src/app/api/admin/observatory/reconciliation/route.ts, fingerprint_sha256: ae0e9342d3b2bd7d69c8a945cae121c7546b66b706e885b19ec8c127848647f6}
+  declared_scope:
+    may_touch:
+      - platform/src/lib/observatory/reconciliation/csv_upload.ts
+      - platform/src/lib/observatory/reconciliation/deepseek_csv.ts
+      - platform/src/lib/observatory/reconciliation/nim_csv.ts
+      - platform/src/app/api/admin/observatory/reconciliation/upload/route.ts
+      - platform/src/app/api/admin/observatory/openapi.yaml
+      - platform/src/lib/components/observatory/__tests__/reconciliation/**
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/app/api/admin/observatory/reconciliation/route.ts
+      - platform/src/lib/observatory/reconciliation/base.ts
+      - platform/src/lib/observatory/reconciliation/types.ts
+      - platform/migrations/**
+      - All non-observatory files
+  red_team_due: false
+  notes: "S2.5 — DeepSeek + NIM manual CSV upload reconciler; resolves OD-DeepSeek-CSV + OD-NIM-CSV from S2.1 close."
+```
+
+### Body — substantive deliverables
+
+**W1. csv_upload.ts** (`platform/src/lib/observatory/reconciliation/csv_upload.ts`, sha256 `9bef310882080e3da22e198819f864db10915e7a5499143c6309b6f2e6ea87c6`). Manual RFC4180-subset CSV parser shared between the two providers. `papaparse` is not in platform deps (per brief: "if absent, parse manually") — implements quoted-field handling (`"foo,bar"`, escaped `""`, quoted newlines), CRLF/LF tolerance, blank-line skipping, header trim. Exports `CsvParseError` (carries `columns_found` + `columns_expected`), `parseCsvText`, `assertColumns`, `parseNumberField`, `isInPeriod`. Numeric-coercion + period-filter helpers shared by both per-provider parsers.
+
+**W2. deepseek_csv.ts** (`platform/src/lib/observatory/reconciliation/deepseek_csv.ts`, sha256 `3f9090a2edd22d39f19b91f224d9244022b9071786646ebd778d565f8510698d`). Resolves **OD-DeepSeek-CSV** open from S2.1. Column mapping (lowercase, as exported by DeepSeek's billing portal): `date,model,prompt_tokens,completion_tokens,total_cost`. `parseDeepSeekCsv(csvText)` returns typed `DeepSeekCsvRow[]`; throws `CsvParseError` on missing column or malformed numeric. `sumDeepSeekCsv(rows, period_start, period_end)` returns `{cost_usd, event_count}` over the inclusive period.
+
+**W3. nim_csv.ts** (`platform/src/lib/observatory/reconciliation/nim_csv.ts`, sha256 `d21e0515b151ce6c5c35e4564ae735361c5a7295d72dad152312c144a283ee72`). Resolves **OD-NIM-CSV** open from S2.1. Column mapping (mixed-case, as exported by NVIDIA's NIM dashboard): `Date,Model,InputTokens,OutputTokens,TotalCost`. Same parse + sum pattern as DeepSeek; preserves NVIDIA's column casing for clarity.
+
+**W4. POST /api/admin/observatory/reconciliation/upload** (`platform/src/app/api/admin/observatory/reconciliation/upload/route.ts`, sha256 `f075b5f27b26b031a242b30c79584ee6ca211ce1f22cfd29e471178053bdc8de`). Flag+admin-gated via shared `guardObservatoryRoute()`. Accepts `multipart/form-data` (provider + period_start + period_end + file). Pipeline: parse → period-filter → INSERT raw rows into `llm_provider_cost_reports` (raw_payload truncated to first 1000 rows, capped JSON) → `computePeriodCost()` → `classifyVariance()` → INSERT/UPSERT into `llm_cost_reconciliation` (ON CONFLICT on `(reconciliation_date, provider, COALESCE(model,''))` index) → return `ProviderReconcileResult`. Notes encode `source=manual_upload` plus the `raw_report_id` and (when multi-day) `period=...`. Error envelopes: 400 `parse_error` with `columns_found` + `columns_expected`; 400 `unsupported_provider`; 400 `invalid_input`; 500 reserved for unexpected DB/runtime failures.
+
+**W5. openapi.yaml** (`platform/src/app/api/admin/observatory/openapi.yaml`, sha256 `203e12736744ce4f969b5ad90b35dc4a49c6094ff356b8e0b0ec24b53e17b152`). Additive — one new path `/reconciliation/upload` describing the multipart contract + the three documented 400 error envelope shapes; references existing `ProviderReconcileResult` schema.
+
+**W6. csv_upload.test.ts** (`platform/src/lib/components/observatory/__tests__/reconciliation/csv_upload.test.ts`, sha256 `50123aae7784415ae8fef5e88f2931cfcdc9b2c6641012f3ddbcd244a49fa75a`). 10 new tests across three describe blocks: `parseDeepSeekCsv` (4) — happy path with 3 rows / 2 models, period-filter, missing `total_cost` column produces helpful CsvParseError, quoted `"0.001234"` coerces to float; `parseNimCsv` (2) — happy path, missing `TotalCost`; POST `/upload` (4) — DeepSeek happy with both INSERTs called, NIM happy, `provider='openai'` → 400 `unsupported_provider`, malformed CSV → 400 `parse_error` with `columns_found`. All DB calls mocked; no integration surface.
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/__tests__/reconciliation/` — **2 files, 27 passed | 0 skipped | 0 failed.** Net +10 vs S2.1's 17.
+
+`npx vitest run src/lib/components/observatory/ src/lib/observatory/` (broader regression sweep) — **12 files, 64 passed | 10 skipped | 0 failed.** No regressions.
+
+`npx tsc --noEmit -p tsconfig.json` — 0 errors in any file in this session's scope. Same 9 pre-existing errors in `tests/components/AppShell.test.tsx` + `tests/components/ReportGallery.test.tsx` documented since S1.13; predate this session.
+
+### S2.5 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | DeepSeek CSV column mapping defined and documented as resolved OD | PASS | `deepseek_csv.ts` header documents the 5-column lowercase mapping; OD-DeepSeek-CSV resolved here |
+| AC.2 | NIM CSV column mapping defined and documented as resolved OD | PASS | `nim_csv.ts` header documents the 5-column mixed-case mapping; OD-NIM-CSV resolved here |
+| AC.3 | parseDeepSeekCsv + parseNimCsv handle missing-column gracefully (ParseError) | PASS | Tests #3 + #6 assert `CsvParseError` carries `columns_found` + `columns_expected` and a helpful message |
+| AC.4 | POST /upload endpoint exists, gated, handles multipart form data | PASS | `upload/route.ts` calls `guardObservatoryRoute()`; reads `request.formData()`; tests #7 + #8 assert 200 path |
+| AC.5 | Period filtering applied before cost summation | PASS | `sumDeepSeekCsv` / `sumNimCsv` filter via `isInPeriod` (inclusive); test #2 asserts out-of-period rows excluded |
+| AC.6 | Results written to both llm_provider_cost_reports + llm_cost_reconciliation | PASS | Test #7 asserts both `INSERT INTO` SQL fragments observed in `queryMock.mock.calls` |
+| AC.7 | openapi.yaml updated with upload endpoint | PASS | New `/reconciliation/upload` path appended (additive) before `/reconciliation/history` |
+| AC.8 | 10 new tests pass; observatory suite green | PASS | 10 new + 17 pre-existing = 27 passing in reconciliation; broader 64 passed | 10 skipped, 0 failed |
+| AC.9 | SESSION_LOG.md appended | PASS | This entry |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_5_DEEPSEEKNNIM_CSV
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: not_applicable
+  open_decisions_resolved:
+    - {id: OD-DeepSeek-CSV, resolution: "Column mapping defined in deepseek_csv.ts: date,model,prompt_tokens,completion_tokens,total_cost (lowercase as exported by DeepSeek billing portal)"}
+    - {id: OD-NIM-CSV, resolution: "Column mapping defined in nim_csv.ts: Date,Model,InputTokens,OutputTokens,TotalCost (mixed-case as exported by NVIDIA NIM dashboard)"}
+  open_decisions_remaining:
+    - "RT.5 PII default-polarity inversion (deferred MED from S2.1 — schedule for cleanup session in O.2 or O.3)"
+  next_unblocked: "S2.6 (Reconciliation banner UI) once S2.2 + S2.3 + S2.4 + S2.5 all merged. After all five close: O.2 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  schema_validator_exit_code: 2  # Acceptable per S2.1 precedent — no in-session validator CLI invoked
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S2.5 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.2) per OBSERVATORY_PLAN §6.2 + §6.3."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8/S1.13/S2.1 precedent."
+  close_criteria_met: true
+  unblocks: "S2.6 (banner UI) once siblings merge; O.2 close after S2.2/2.3/2.4/2.5/2.6 all in."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-5-deepseeknnim-csv
+    cut_from_commit: a540a8f
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+S2.6 — Reconciliation banner UI (depends on S2.2 + S2.3 + S2.4 + S2.5 all being merged into `feature/phase-o-observatory`). Surfaces unresolved variance alerts and missing-authoritative rows from `llm_cost_reconciliation` to the super-admin dashboard. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
