@@ -19806,3 +19806,113 @@ session_close:
 ### Next session objective
 
 **S3.2 (alert evaluator)** + **S3.4 (Export endpoints + UI)** still parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all three (S3.2 / S3.3 / S3.4) close: O.3 close session.
+
+---
+
+## Session — USTAD_S3_2_ALERT_DISPATCHER (2026-05-03, Phase O sub-phase O.3 IMPLEMENTATION)
+**Environment**: Claude Code; worktree `feature/phase-o-observatory-ustad-s3-2-alert-dispatcher` cut from `feature/phase-o-observatory@c4998fc`; merge target `feature/phase-o-observatory`.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S3_2_ALERT_DISPATCHER
+  cowork_thread_name: ustad-s3-2-alert-dispatcher
+  opened_at: 2026-05-03T00:00:00+05:30
+  phase: O.3 — Budgets + Export
+  type: IMPLEMENTATION
+  depends_on: [USTAD_S3_1_BUDGET_RULES_FRAMEWORK]
+  declared_scope:
+    may_touch:
+      - platform/src/lib/observatory/budget/alert_dispatcher.ts                  # new
+      - platform/src/app/api/admin/observatory/budget-rules/evaluate/run/route.ts  # new
+      - platform/src/lib/components/observatory/__tests__/budget/**
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/src/lib/observatory/budget/evaluate.ts                          # frozen
+      - platform/src/lib/observatory/budget/types.ts                             # frozen — see scope deviation note
+      - platform/migrations/**
+      - platform/src/lib/components/observatory/**                               # UI — S3.3 scope
+      - platform/src/app/(super-admin)/observatory/**                            # UI — S3.3/S3.4 scope
+      - All non-observatory files
+  red_team_due: false
+  notes: "S3.2 — adds the alert dispatcher (log/webhook/email-stub) + scheduled run endpoint. Cloud Scheduler will call POST /evaluate/run on cadence; same OBSERVATORY_ENABLED + super_admin gate as the rest of the observatory admin API."
+```
+
+### Body — substantive deliverables
+
+**T0. Scope-deviation note — types.ts additive widening.** The S3.2 brief's `must_not_touch` lists `platform/src/lib/observatory/budget/types.ts` as frozen, but Task 1 explicitly authorizes adding `channel_target?: string` to `AlertThreshold` in that file. The two are reconciled by treating the explicit task instruction as overriding the freeze for this single additive optional field. The change converts `AlertThreshold` from a re-export of `LlmBudgetAlertThreshold` (the DB schema interface) to a standalone interface that is a *superset* of it. The DB schema is unchanged; the JSONB `alert_thresholds` column accepts the wider shape transparently. No existing call site breaks because the field is optional. Recorded here in case a future audit flags the diff against `must_not_touch`.
+
+**T1. budget/alert_dispatcher.ts** (`platform/src/lib/observatory/budget/alert_dispatcher.ts`). Exports `dispatchAlerts(result: BudgetEvaluationResult): Promise<DispatchResult>` plus the two outcome types (`DispatchOutcome` / `DispatchResult`). Iterates `result.alerts_triggered` (already populated by S3.1's evaluator); for each crossed threshold, dispatches per channel:
+- `log` — `console.warn` with rule_id + scope + scope_value + pct_used + threshold_pct + status; `outcome.success=true`.
+- `webhook` — POST to `threshold.channel_target` with `{ rule_id, scope, scope_value, period, status, pct_used, threshold_usd, current_spend_usd, triggered_at }` (Content-Type: application/json) and a 5 s `AbortController` timeout. Non-2xx → `success=false`, `error=webhook_http_<status>`; network/abort errors → `success=false`, `error=webhook_error:<message>`; missing `channel_target` → `success=false`, `error=webhook_missing_channel_target`.
+- `email` — MVP stub. `console.info` logs an alert line; outcome is `success=true` with sentinel `error='email_not_configured_stub'` so callers can distinguish stub-success from real-success. Real delivery is O.4 / post-Phase-O.
+- any other channel — `success=false`, `error='unknown_channel:<channel>'`.
+
+Never throws. All failure modes flatten into `DispatchOutcome.error`. `WEBHOOK_TIMEOUT_MS = 5_000` is the only tunable.
+
+**T2. POST /evaluate/run endpoint** (`platform/src/app/api/admin/observatory/budget-rules/evaluate/run/route.ts`). Empty-body POST gated through the existing `guardObservatoryRoute()` (env `MARSYS_FLAG_OBSERVATORY_ENABLED=true` + `requireSuperAdmin()`). Cloud Scheduler authenticates as a super-admin service account — no scheduler bypass. Logic:
+1. `evaluateAllRules()` over every active rule.
+2. For each result with `status !== 'ok'`, increment `alertsFiredCount` and call `dispatchAlerts(result)`.
+3. Return `{ evaluated_count, alerts_fired_count, dispatch_results, evaluated_at }` (HTTP 200).
+4. If `evaluateAllRules` throws, return 500 `{ error: 'evaluation_failed', message }`.
+
+**T3. 8 new tests** (`platform/src/lib/components/observatory/__tests__/budget/alert_dispatcher.test.ts`).
+- §A — `dispatchAlerts` (7): channel=log success; webhook 200 (asserts URL + headers + body fields); webhook 500 (success=false, `webhook_http_500`); webhook AbortError-style network error (no throw, `webhook_error:` captured); email stub (success=true, sentinel error); unknown channel; empty `alerts_triggered`.
+- §B — POST `/evaluate/run` endpoint (1): two active rules (rule-A spend=10, rule-B spend=95) against amount_usd=100 with an 80% log-channel threshold; asserts `evaluated_count=2`, `alerts_fired_count=1`, `dispatch_results[0].rule_id='rule-B'`, single log-outcome with `success=true`. DB query helper + auth mocked via `vi.doMock`; module reset between tests.
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/__tests__/budget` — **2 files, 23 passed | 0 skipped | 0 failed.** (15 pre-existing budget tests + 8 new alert_dispatcher tests.)
+
+`npx vitest run src/lib/components/observatory/__tests__` — **18 files, 114 passed | 0 skipped | 0 failed.** Full observatory suite green vs prior baseline (net +8 from this session).
+
+### S3.2 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | alert_dispatcher.ts exports dispatchAlerts — never throws | PASS | Single async export; `try/catch` wraps fetch; AbortError test (#4) confirms no-throw |
+| AC.2 | channel_target added to AlertThreshold type | PASS | types.ts redefined as standalone interface with `channel_target?: string` |
+| AC.3 | webhook dispatch: POST with correct body + 5s timeout | PASS | `WEBHOOK_TIMEOUT_MS = 5_000`; AbortController set; test #2 asserts URL + Content-Type + body fields |
+| AC.4 | email channel: stub logs + success=true | PASS | `console.info` line + outcome `{success: true, error: 'email_not_configured_stub'}`; test #5 |
+| AC.5 | POST /evaluate/run exists, gated, calls evaluateAllRules + dispatchAlerts | PASS | New route.ts; `guardObservatoryRoute()` first call; eval + dispatch loop; test #8 |
+| AC.6 | Run endpoint returns evaluated_count + alerts_fired_count + dispatch_results | PASS | Response object includes all four fields incl. `evaluated_at`; test #8 asserts each |
+| AC.7 | 8 new tests pass; observatory suite green | PASS | 8/8 new + 23/23 budget + 114/114 full observatory |
+| AC.8 | SESSION_LOG.md appended | PASS | This entry |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S3_2_ALERT_DISPATCHER
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: not_applicable
+  capability_manifest_updated: no
+  capability_manifest_update_rationale: "S3.2 ships two new files (alert_dispatcher.ts + /evaluate/run/route.ts). Per OBSERVATORY_PLAN §6.2 funneling rule, manifest entry additions for S3.2/S3.3/S3.4 batch at O.3 close (the gate-close session) — implementation sub-sessions do not rotate the manifest. Same precedent as S2.1–S2.6 implementation sessions in the O.2 arc."
+  open_decisions_resolved: []
+  open_decisions_remaining:
+    - {id: ND.S3.2.1, note: "evaluate.ts coerceThresholds() strips channel_target during JSONB → AlertThreshold coercion, so production webhook delivery requires a future minor extension to preserve the field. Out of S3.2 scope (evaluate.ts is frozen); test fixtures construct BudgetEvaluationResult directly with channel_target intact, so the dispatcher path is fully exercised. Resolve at O.3 close or in a follow-up minor."}
+  next_unblocked: "S3.3 (Budgets UI) + S3.4 (Export endpoints + UI) — both still parallel-safe per OBSERVATORY_PLAN §6.1. After all three (S3.2, S3.3, S3.4) close: O.3 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  schema_validator_exit_code: 2  # Acceptable per S2.x/S3.1 precedent — no in-session validator CLI invoked
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S3.2 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.3) per OBSERVATORY_PLAN §6.2 + §6.3."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides:
+    - {note: "Brief listed types.ts as must_not_touch but Task 1 explicitly required adding channel_target to AlertThreshold there; reconciled by treating the explicit task instruction as overriding the freeze for one additive optional field. Documented in T0 above."}
+  halts_encountered: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S2.x/S3.1 precedent."
+  close_criteria_met: true
+  unblocks: "S3.3 + S3.4 (parallel-safe); O.3 close after all three plus S3.1 are merged."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s3-2-alert-dispatcher
+    cut_from_commit: c4998fc
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S3.3 (Budgets UI)** + **S3.4 (Export endpoints + UI)** — both parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all three (S3.2, S3.3, S3.4) close: O.3 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
