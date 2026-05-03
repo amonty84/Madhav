@@ -1,6 +1,6 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.4
+version: 1.5
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
@@ -19,6 +19,22 @@ amendment_reason: >
   R14 (cgm_graph_walk holistic-only); R15 (resonance_register remedial-only);
   R16 (empty query → []); R17 (interpretive + temporal → pattern_register).
   §4.4 fixed: cgm_graph_walk and resonance_register removed from interpretive example.
+  v1.4 → v1.5 (Lever 2 eval EVAL-5: 16/29 pass, recall=0.856 ✓, precision=0.867).
+  Precision still the only gate (0.867 vs 0.90; +0.033 needed).
+  Root causes: (1) transit predictive (GT.014) keeps getting extra vector_search —
+  no rule distinguished dasha-period vs transit predictive; (2) generic holistic
+  "comprehensive overview" (GT.017) gets msr_sql even though gold doesn't expect it —
+  R19 needs to fire only when specific domains are named; (3) holistic "everything
+  in detail" (GT.029) still gets contradiction_register + resonance_register despite
+  R12/R15 — trigger language matched too loosely; (4) holistic "career+marriage+health
+  interaction" (GT.019) gets extra pattern_register — domain-interaction holistic
+  should prefer cgm_graph_walk over pattern_register; (5) R18 still not firing for
+  "health" in GT.006 — trigger domains needed more explicit example coverage.
+  Fix: R7c (transit predictive no vector_search); R12/R15 tightened to explicit
+  keyword match; R19 scoped to explicitly-named-domain holistic; R20 new (domain-
+  interaction holistic → cgm_graph_walk not pattern_register); R18 trigger made
+  explicit; §4.6 query updated to name specific domains (R19 consistency); §4.8
+  new (chart-level interpretive yogas example showing pattern_register per R17).
   v1.3 → v1.4 (Lever 2 eval EVAL-4: 15/29 pass, recall=0.830 ✓, precision=0.811).
   Recall cleared for the first time; precision remains the only gate (0.811 vs 0.90).
   Root causes: (1) R19 mandated msr_sql for ALL holistic + R14 said cgm_graph_walk
@@ -200,6 +216,13 @@ Hard rules:
        when the query describes a recurring pattern the native wants to act
        on (e.g. "Saturn keeps causing", "chart's weakest planet", "ritual for
        a repeating problem"). Both tools may appear together in a remedial plan.
+  R7c. For PREDICTIVE queries about specific TRANSITS (a planet transiting
+       a house or chart point — e.g. "Saturn transit", "when Mars transits
+       my 7th", "Jupiter transit effect"), use only `msr_sql` + `pattern_
+       register`. Do NOT add `vector_search` for transit-specific queries —
+       transits are answered from MSR signals and patterns, not long-form L3
+       narrative. Reserve `vector_search` for dasha-period predictive queries
+       (e.g. "what to expect from Ketu Mahadasha").
   R8.  For REMEDIAL queries, ALWAYS include `msr_sql` at priority 1. The
        remedy cannot be calibrated without first surfacing the implicated
        grahas/signals from MSR. `remedial_codex_query` alone, without
@@ -211,9 +234,12 @@ Hard rules:
        Holistic queries include: comprehensive overview, life path, all
        domains, everything about the chart, central themes. `cluster_atlas`
        is the primary cross-domain synthesis surface for holistic scope.
-  R12. For holistic queries asking about contradictions, tensions, or central
-       themes (e.g. "what are the contradictions", "central themes of my
-       chart"), ALSO include `contradiction_register` at priority ≤ 2.
+  R12. For holistic queries that EXPLICITLY use the words "contradictions",
+       "tensions", or "conflicts" (e.g. "what are the contradictions in my
+       chart", "tensions between my planets"), ALSO include
+       `contradiction_register` at priority ≤ 2. Do NOT add it to holistic
+       queries that use generic scope words like "everything", "all",
+       "comprehensive", "interesting" — only when those specific words appear.
   R13. NEVER include `remedial_codex_query` in interpretive, predictive, or
        holistic queries. `remedial_codex_query` is ONLY for queries that
        explicitly ask for prescription or action: gemstones, mantras,
@@ -235,11 +261,12 @@ Hard rules:
        such as "in relationships", "for career", "in health". Never include
        in predictive or remedial queries.
   R15. `resonance_register` is for REMEDIAL queries (R7b) and HOLISTIC
-       queries that explicitly ask about chart-wide themes, central
-       alignment, or cross-domain resonance patterns (e.g. "what are the
-       central themes of my chart", "how are my chart's domains aligned",
-       "themes and contradictions", "what resonates across domains"). Do
-       NOT include resonance_register in interpretive or predictive queries.
+       queries that EXPLICITLY use the words "themes", "resonance",
+       "alignment", or "central patterns" (e.g. "what are the central
+       themes", "how are my domains aligned", "what resonates"). Do NOT
+       add it to generic holistic queries using words like "everything",
+       "comprehensive", "interesting", "all" — only when those specific
+       trigger words appear. Never in interpretive or predictive queries.
   R16. If the query is empty, whitespace only, or fewer than 5 non-whitespace
        characters, return query_class "single_answer" with tool_calls: []
        (empty array). Do not call any tools for trivial or empty input.
@@ -250,19 +277,29 @@ Hard rules:
        "yogas", "overall chart strength", "lagna and chart", "what's active
        or ripening", "all signals"), add `pattern_register` at priority 2.
 
-  R18. For REMEDIAL queries that name a specific life domain (career, health,
-       relationships, spiritual practice, finances), add `vector_search` at
-       priority 2 to pull L3 long-form domain narrative relevant to the
-       prescription context (e.g. "gemstone for career", "mantra for
-       spiritual practice", "fasting for health").
-  R19. For COMPREHENSIVE holistic queries — those that explicitly ask about
-       multiple life domains together, life path, all major areas, or a
-       full cross-domain synthesis (e.g. "career and marriage and health",
-       "all major domains", "life path") — include `msr_sql` at priority 1
-       alongside `cluster_atlas`. For lightweight catch-all holistic queries
-       (e.g. "what's interesting", "high-level read", "what stands out",
-       "surprise me"), msr_sql is NOT required — cluster_atlas + pattern_
-       register are sufficient.
+  R18. For REMEDIAL queries that contain any of the following domain words:
+       career, work, job, health, body, illness, relationships, marriage,
+       partner, spiritual, spirituality, finances, wealth, money — add
+       `vector_search` at priority 2 to pull L3 domain narrative for the
+       prescription context. Trigger examples: "gemstone for career",
+       "mantra for spiritual practice", "fasting for health",
+       "ritual for relationships".
+  R19. Include `msr_sql` at priority 1 alongside `cluster_atlas` ONLY when
+       the holistic query explicitly names specific life domains together
+       (e.g. "career and marriage", "health and relationships", "career +
+       marriage + health"). For holistic queries that do NOT name specific
+       domains — including "comprehensive overview", "life path", "everything",
+       "high-level read", "what's interesting" — `msr_sql` is NOT required.
+       Let `cluster_atlas` carry the holistic scope alone.
+  R20. For HOLISTIC queries asking how domains INTERACT or AFFECT each other
+       (e.g. "how does my career interact with marriage", "career + marriage +
+       health interaction", "how are these domains connected"), use
+       `cgm_graph_walk` at priority 2 to surface structural domain connections.
+       Do NOT add `pattern_register` to domain-interaction holistic queries —
+       `pattern_register` is for recurring-pattern holistic queries, not
+       domain-interaction queries. When R20 applies, the plan is:
+       [cluster_atlas, msr_sql (R19), cgm_graph_walk]. `pattern_register`
+       is omitted.
 
 Style rules:
 
@@ -531,18 +568,21 @@ R7a requires `pattern_register` for all predictive queries. Note: no
 }
 ```
 
-### 4.6 Holistic query — comprehensive overview
+### 4.6 Holistic query — comprehensive multi-domain overview
 
-R11 requires `cluster_atlas` for holistic scope. R19 requires `msr_sql` at
-priority 1 alongside cluster_atlas. R13 prohibits `remedial_codex_query` —
-this is not a prescription query.
+R11 requires `cluster_atlas` for holistic scope. R19 fires here because specific
+domains are explicitly named ("career, relationships, health") — so `msr_sql`
+is required at priority 1. R13 prohibits `remedial_codex_query` — this is not
+a prescription query. Note: if the query did NOT name specific domains (e.g.
+"comprehensive overview", "high-level read"), R19 would NOT fire and msr_sql
+would be omitted — see §4.7.
 
 ```json
 {
-  "user_query": "Give me a comprehensive overview of my life path across all major domains.",
+  "user_query": "Give me a full read on how my career, relationships, and health are playing out.",
   "expected_plan": {
     "query_class": "holistic",
-    "query_intent_summary": "Comprehensive cross-domain life-path synthesis.",
+    "query_intent_summary": "Multi-domain synthesis: career, relationships, and health.",
     "tool_calls": [
       {
         "tool_name": "cluster_atlas",
@@ -618,6 +658,47 @@ Resist the urge to add more tools; the lean two-tool plan is the correct output.
 }
 ```
 
+### 4.8 Interpretive query — chart-level yogas (multi-layer scope)
+
+R17(b) fires here: yogas span multiple layers and divisionals (chart-level scope),
+so `pattern_register` is required at priority 2. R14 says `cgm_graph_walk` is NOT
+included — this query does not ask about structural topology (dispositors, aspect
+web); it asks about yoga combinations. R15 prohibits `resonance_register` in
+interpretive plans.
+
+```json
+{
+  "user_query": "What yogas are active in my chart and what do they mean?",
+  "expected_plan": {
+    "query_class": "interpretive",
+    "query_intent_summary": "Identify and interpret active yogas across chart.",
+    "tool_calls": [
+      {
+        "tool_name": "msr_sql",
+        "params": { "limit": 15 },
+        "token_budget": 800,
+        "priority": 1,
+        "reason": "Pull signals marking yoga formations across all domains."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "R17: yogas span multiple chart layers — chart-level scope triggers pattern_register."
+      },
+      {
+        "tool_name": "vector_search",
+        "params": { "query_text": "yogas chart combinations active", "doc_type": ["domain_report"], "top_k": 6 },
+        "token_budget": 600,
+        "priority": 2,
+        "reason": "L3 narrative on yoga combinations and their manifestation."
+      }
+    ]
+  }
+}
+```
+
 ## 5. Evaluation rubric (5 criteria × 0–2 each → 0–10)
 
 | # | Criterion              | 0 (fail)                         | 1 (partial)                              | 2 (pass)                                                 |
@@ -633,4 +714,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.4 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.5 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
