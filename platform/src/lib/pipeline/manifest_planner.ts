@@ -107,7 +107,7 @@ const PlanInputJsonSchema: JSONSchema7 = {
           tool_name: { type: 'string' },
           params: { type: 'object' },
           token_budget: { type: 'integer', minimum: 100, maximum: 2000 },
-          priority: { type: 'integer', enum: [1, 2, 3] },
+          priority: { type: 'integer', minimum: 1, maximum: 3 },
           reason: { type: 'string' },
         },
         required: ['tool_name', 'params', 'token_budget', 'priority', 'reason'],

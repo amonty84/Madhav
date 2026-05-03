@@ -14,7 +14,7 @@
  * JSON report to stdout, human-readable summary to stderr.
  *
  * Env:
- *   PLANNER_MODEL_ID  (default: meta/llama-3.1-8b-instruct)
+ *   PLANNER_MODEL_ID  (default: nvidia/llama-3.3-nemotron-super-49b-v1)
  *   CHART_ID          (default: test-native)
  *
  * Usage: npx tsx --conditions=react-server platform/tests/eval/planner_smoke_runner.ts
@@ -241,7 +241,7 @@ export function formatSummary(aggregate: AggregateResult, results: EvalResult[])
 // ────────────────────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-  const modelId = process.env.PLANNER_MODEL_ID ?? 'meta/llama-3.1-8b-instruct'
+  const modelId = process.env.PLANNER_MODEL_ID ?? 'nvidia/llama-3.3-nemotron-super-49b-v1'
   const chartId = process.env.CHART_ID ?? 'test-native'
 
   // Lazy import: pulls server-only deps (resolver) only at CLI runtime.
