@@ -27,7 +27,8 @@ export type FeatureFlag =
   | 'PANEL_DEGRADE_2_OF_3'
   // PER_TOOL_PLANNER_ENABLED retired BHISMA-B1 §6.2: was never flipped true; removed from route.ts.
   // BHISMA Stream 2 — LLM-first planner replaces classify+compose+plan_per_tool when ON.
-  // Default OFF; old path remains reachable. Flip after smoke + post-BHISMA eval comparison.
+  // Default ON since Lever-2 gate cleared (2026-05-04, recall 0.940 / precision 0.945).
+  // Set MARSYS_FLAG_LLM_FIRST_PLANNER_ENABLED=false in env to revert to legacy path.
   | 'LLM_FIRST_PLANNER_ENABLED'
   // W2-CTX-ASSEMBLY: context assembly LLM step between retrieval and synthesis.
   // Default OFF. Flip true after smoke verification. Model: STACK_ROUTING[stack].context_assembly.primary.
@@ -95,7 +96,7 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   CHECKPOINT_8_5_PREDICTION_EXTRACT: false,
   // Phase 7 — Panel Mode (all default OFF)
   PANEL_DEGRADE_2_OF_3: false,
-  // BHISMA Stream 2 — LLM-first planner. Default OFF; old path is the live one.
+  // BHISMA Stream 2 — LLM-first planner. Default ON (Lever-2 cleared 2026-05-04).
   LLM_FIRST_PLANNER_ENABLED: true,
   // W2-CTX-ASSEMBLY — context assembly LLM step. Default OFF; flip after smoke.
   CONTEXT_ASSEMBLY_ENABLED: false,
