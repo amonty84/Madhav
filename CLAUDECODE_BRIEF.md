@@ -15,7 +15,7 @@
 
 | Domain | Brief location | Active? | Status |
 |--------|---------------|---------|--------|
-| Engineering (BHISMA / platform) | `platform/CLAUDECODE_BRIEF.md` | NO | PARTIAL-COMPLETE — Wave 2 code done; AC.W2.1 PARKED, AC.W2.3 DEFERRED |
+| Engineering (BHISMA / platform) | `platform/CLAUDECODE_BRIEF.md` | NO | LEVER-2-CLOSED 2026-05-04 — `LLM_FIRST_PLANNER_ENABLED=true` (fa75e1a); PLANNER_PROMPT v1.6 (recall 0.940, precision 0.945). AC.W2.3 DEFERRED (gated on Lever 3 NAP). GT.002/GT.025 deferred to post-E2E review. |
 | Governance / M4-D | `00_ARCHITECTURE/BRIEFS/CLAUDECODE_BRIEF_M4D_S1.md` | NO | COMPLETE — M4 CLOSED 2026-05-02; M5 INCOMING |
 | Portal redesign | N/A | NO | COMPLETE 2026-04-30 (R0–R2, R4–R7 closed; R3 deferred) |
 
@@ -71,13 +71,13 @@ When running N sessions simultaneously:
 
 ## §4 — Archived briefs
 
-### W2-UQE-ACTIVATE (PARKED)
-status: PARKED
+### W2-UQE-ACTIVATE (LEVER-2-CLOSED)
+status: LEVER-2-CLOSED
 reason: 8 smoke rounds — best result recall=0.750, precision=0.631 vs. thresholds 0.80/0.90.
-lever_2_decision: classify() routing retained; LLM_FIRST_PLANNER_ENABLED stays false.
-lever_3_path: swap planner model to Haiku/Flash — requires native authorization.
-blocks: W2-MON-A (monitoring write integration smoke — gated on planner being live).
-commit: 14e4b02
+lever_2_decision: `LLM_FIRST_PLANNER_ENABLED=true` baked default in production (commit fa75e1a, 2026-05-04). PLANNER_PROMPT v1.6 (recall 0.940, precision 0.945). Native authorized production deployment; planner live at amjis-web-00044-sn5. R14/R15 relaxations accepted provisionally — re-evaluate after E2E traffic accumulates (GT.002/GT.025).
+lever_3_path: swap planner model to Haiku/Flash — requires native authorization (AC.W2.3 still DEFERRED).
+blocks: W2-MON-A now unblocked for native authorization decision on Lever 3.
+commit: 14e4b02 (original park); fa75e1a (lever-2 enable)
 
 ### W2-EVAL-A (COMPLETE)
 status: COMPLETE

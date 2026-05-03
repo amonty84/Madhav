@@ -62,7 +62,7 @@ Every Claude session, at open, reads the following in order before any substanti
 2. `00_ARCHITECTURE/CAPABILITY_MANIFEST.json` — **new single source of truth** for the canonical-path + artifact catalog (Phase 1B cutover 2026-04-27). Replaces the dual `FILE_REGISTRY` + `CANONICAL_ARTIFACTS` registries. Mirror pairs declared in `00_ARCHITECTURE/manifest_overrides.yaml` `mirror_pairs:` section. `CANONICAL_ARTIFACTS_v1_0.md` retained in place as SUPERSEDED historical record — read it for audit trail only; governance tooling now reads from the manifest. `drift_detector.py`, `schema_validator.py`, `mirror_enforcer.py` default to manifest mode (`*_USE_MANIFEST=true`).
 3. `00_ARCHITECTURE/PROJECT_ARCHITECTURE_v2_2.md` (canonical_id `PROJECT_ARCHITECTURE`) — governing blueprint. Re-read relevant sections as needed.
 4. `00_ARCHITECTURE/MACRO_PLAN_v2_0.md` (canonical_id `MACRO_PLAN`) — ten-macro-phase strategic arc M1–M10, Learning Layer substrate, System Integrity Substrate per ND.1, Ethical Framework, External Dependency Graph, per-phase schema, Meta-Governance, Multi-Agent Collaboration, Post-M10 Framing. Orientation only — do not pre-build for phases later than the current one.
-5. `00_ARCHITECTURE/PHASE_B_PLAN_v1_0.md` (canonical_id `PHASE_B_PLAN`) — active M2 execution plan (B.0–B.10). Read the sections that name the current sub-phase; skim the rest. First M2 session must execute the v1.0.3 amendment cycle (WARN.2/3/5/7 cleanup + B.0 scope refresh) before executing any B.X sub-phase.
+5. **Active phase plan** — `PHASE_M5_PLAN_v1_0.md` (TBD; to be authored at M5-S1 open). Prior plans all SUPERSEDED-AS-COMPLETE: `PHASE_B_PLAN_v1_0.md` (M2, closed 2026-05-01), `PHASE_M3_PLAN_v1_0.md` (M3, closed 2026-05-01), `PHASE_M4_PLAN_v1_0.md` (M4, closed 2026-05-02). Consult `CURRENT_STATE_v1_0.md §2` for the active sub-phase at session open.
 6. `00_ARCHITECTURE/GOVERNANCE_INTEGRITY_PROTOCOL_v1_0.md` (canonical_id `GOVERNANCE_INTEGRITY_PROTOCOL`, status CURRENT since Step 8 close) — governs session-open/close, drift/schema/mirror enforcement, disagreement protocol, meta-rules. Re-read axes §C.1–§C.6 + §K disagreement protocol at session open.
 7. `00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md` + `00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md` — the handshake + close-checklist schemas the session emits. See §G + §H below.
 8. `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (canonical_id `CURRENT_STATE`, LIVE) — the authoritative "you are here" state pointer. Answers in one read: which macro-phase is active, which phase-plan sub-phase is in flight, which session last closed, and what the next session is committed to. Updated at every session close. Authoritative since Step 15 close (2026-04-24); STEP_LEDGER retired per §F. `STEP_LEDGER_v1_0.md` is retained as a historical record (status `GOVERNANCE_CLOSED`) — read it only for audit trail, not for current state.
@@ -123,15 +123,17 @@ Three workstreams run concurrently with (not inside) the currently-active macro-
 
 **Authoritative source of truth: `00_ARCHITECTURE/CURRENT_STATE_v1_0.md` (LIVE; authoritative since Step 15 close 2026-04-24).** Read §2 of that file for the canonical state block. The governance rebuild (Step 0 → Step 15) is **closed** — `GOVERNANCE_BASELINE_v1_0.md` is the sealing artifact. `STEP_LEDGER_v1_0.md` is retired (status `GOVERNANCE_CLOSED`); consult it only for historical audit trail.
 
-At the moment of Step 15 close (2026-04-24):
+At the close of M4-D-S1 (2026-05-02) — M4 MACRO-PHASE CLOSED; M4→M5 TRANSITION:
 
-- **Active macro-phase:** M2 — Corpus Activation (resumed; governance rebuild closed).
-- **Active phase-plan expansion:** `PHASE_B_PLAN_v1_0.md` v1.0.2 → amend to v1.0.3 as first act of M2 resumption (WARN.2/3/5/7 cleanup per `ONGOING_HYGIENE_POLICIES_v1_0.md §I`).
+- **Active macro-phase:** M5 — INCOMING. M2 (Corpus Activation), M3 (Temporal Animation / Discovery Layer), and M4 (Calibration + LEL Ground-Truth Spine) are all CLOSED. Sealing artifacts: `00_ARCHITECTURE/M2_CLOSE_v1_0.md`, `00_ARCHITECTURE/M3_CLOSE_v1_0.md`, `06_LEARNING_LAYER/M4_CLOSE_v1_0.md`.
+- **Active phase-plan:** `PHASE_M5_PLAN_v1_0.md` — TBD (to be authored at M5-S1 open). Prior plans SUPERSEDED-AS-COMPLETE: `PHASE_B_PLAN_v1_0.md` (M2), `PHASE_M3_PLAN_v1_0.md` (M3), `PHASE_M4_PLAN_v1_0.md` (M4).
+- **Last session:** M4-D-S1 (2026-05-02) — M4 macro-phase close. IS.8(b) red-team PASS 5/5. NAP.M4.7 APPROVED.
+- **Next session:** M5-S1 — open M5 macro-phase; read `MACRO_PLAN_v2_0.md §M5` scope; draft `PHASE_M5_PLAN_v1_0.md`.
 - **Governance step:** Step 0 → Step 15 rebuild `GOVERNANCE_CLOSED`. Steady-state: quarterly governance pass per `ONGOING_HYGIENE_POLICIES §H`; next due 2026-07-24.
-- **ND status:** ND.1 (Mirror Discipline) addressed 2026-04-24 at Step 7 close. No open directive.
-- **Rebuild findings:** all 32 GA.N findings resolved, accepted-as-policy, or explicitly deferred per `GOVERNANCE_BASELINE_v1_0.md §2`. Deferred items tracked in `ONGOING_HYGIENE_POLICIES §I` + `§K`.
-
-**Phase 11A Platform Cutover note (2026-04-28).** `NEW_QUERY_PIPELINE_ENABLED` and `AUDIT_ENABLED` are now **default true** in `platform/src/lib/config/feature_flags.ts`. The new query pipeline (`classify → compose → retrieve → synthesize → audit`) is the default behavior for the Consume tab. The legacy code path is still in the codebase (Phase 11B scope for deletion) but is now the explicit opt-out branch. To revert: set `MARSYS_FLAG_NEW_QUERY_PIPELINE_ENABLED=false` in env. To validate Stage 1: `npm run cutover:stage1-smoke` (requires `SMOKE_SESSION_COOKIE` + `SMOKE_CHART_ID`; see script header for instructions). Phase 11B (legacy deletion) gates on Stage 1 smoke passing ✅ and native acceptance.
+- **ND status:** ND.1 (Mirror Discipline) `addressed` 2026-04-24 at Step 7 close. No open directive.
+- **red_team_counter:** 0 (reset at M4 macro-phase-close IS.8(b) discharge).
+- **Concurrent workstreams:** Phase O Observatory COMPLETE (2026-05-03; branch merged to main; live at amjis-web-00044-sn5 behind `MARSYS_FLAG_OBSERVATORY_ENABLED=true`). BHISMA Wave 2 Lever 2 CLOSED (2026-05-04; `LLM_FIRST_PLANNER_ENABLED=true` commit fa75e1a; AC.W2.3 DEFERRED pending Lever 3 NAP).
+- **Active feature flags:** `NEW_QUERY_PIPELINE_ENABLED=true`, `AUDIT_ENABLED=true`, `LLM_FIRST_PLANNER_ENABLED=true`, `MARSYS_FLAG_OBSERVATORY_ENABLED=true`, all `DISCOVERY_*_ENABLED=true`.
 
 ## §G — Session-open handshake (reference)
 
@@ -194,4 +196,4 @@ Daily sessions. Closed-artifact-per-session discipline — one phase or one step
 
 ---
 
-*End of CLAUDE.md v2.0 (amended Step 15 — GOVERNANCE_BASELINE_CLOSE 2026-04-24). Governance rebuild closed; steady-state M2 execution active.*
+*End of CLAUDE.md v2.0 (last amended 2026-05-04 — §C #5 + §F updated to M5 INCOMING; MP.1 mirror propagated to .geminirules same session). Governance rebuild closed; M4 CLOSED 2026-05-02; M5 active.*
