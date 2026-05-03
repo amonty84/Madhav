@@ -81,7 +81,7 @@ export function BudgetUtilizationChart({ results }: BudgetUtilizationChartProps)
           />
           <YAxis type="category" dataKey="label" width={220} tick={{ fontSize: 12 }} />
           <Tooltip
-            formatter={(value: number) => [`${Math.round(value)}%`, 'Utilisation']}
+            formatter={(value) => [`${Math.round(Number(value))}%`, 'Utilisation']}
           />
           <ReferenceLine x={100} stroke="#64748b" strokeDasharray="4 4" />
           <Bar dataKey="pct_used">

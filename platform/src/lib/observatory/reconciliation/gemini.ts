@@ -287,7 +287,7 @@ export class GeminiReconciler extends BaseReconciler {
 
   private async resolveClient(projectId: string): Promise<BigQueryLike> {
     if (this.bqFactory) return this.bqFactory(projectId)
-    const mod = (await import('@google-cloud/bigquery')) as {
+    const mod = (await import('@google-cloud/bigquery')) as unknown as {
       BigQuery: new (opts: { projectId: string }) => BigQueryLike
     }
     return new mod.BigQuery({ projectId })

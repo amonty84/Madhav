@@ -94,8 +94,8 @@ export function CostPerQualityPanel({
                 <XAxis dataKey="pipeline_stage" tick={{ fontSize: 12 }} />
                 <YAxis tickFormatter={(v: number) => formatCostUSD(v)} />
                 <Tooltip
-                  formatter={(v: number) => formatCostUSD(v)}
-                  labelFormatter={(label: string) => `Stage: ${label}`}
+                  formatter={(v) => formatCostUSD(Number(v))}
+                  labelFormatter={(label) => `Stage: ${String(label)}`}
                 />
                 <Bar dataKey="total_cost_usd">
                   {stages.map((s) => (

@@ -23,6 +23,7 @@ import {
   type ExportFormat,
   type ExportMeta,
   type ExportParams,
+  type ExportRow,
 } from '@/lib/observatory/export/types'
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
@@ -114,7 +115,7 @@ export async function GET(request: Request) {
   // / `rows.join('\n')` materialisation. A future revision can split
   // meta-first vs rows-trailer to truly stream from the cursor.
   const fmt: ExportFormat = params.format
-  let collected: Awaited<ReturnType<typeof collectStream>>
+  let collected: ExportRow[]
   try {
     collected = await collectStream(queryUsageForExportStream(params))
   } catch (err) {
