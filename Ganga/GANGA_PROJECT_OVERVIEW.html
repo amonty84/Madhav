@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Ganga — Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e2e8f0; padding: 28px 24px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.8px; }
+  .tagline { font-size: 14px; color: #64748b; margin-top: 4px; margin-bottom: 32px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .card { background: #1a1a2e; border: 1px solid #2d2d44; border-radius: 10px; padding: 18px 20px; }
+  .card-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 700; margin-bottom: 10px; }
+  .status-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #1e1e30; font-size: 13px; }
+  .status-row:last-child { border-bottom: none; }
+  .badge { font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 7px; }
+  .badge-red { background: #7f1d1d; color: #fca5a5; }
+  .badge-green { background: #14532d; color: #86efac; }
+  .badge-yellow { background: #713f12; color: #fde68a; }
+  .badge-blue { background: #1e3a5f; color: #93c5fd; }
+  .badge-gray { background: #1e293b; color: #94a3b8; }
+  .gate-flow { display: flex; align-items: center; gap: 0; margin: 24px 0; overflow-x: auto; padding: 4px 0; }
+  .gate-box { background: #1a1a2e; border: 2px solid #2d2d44; border-radius: 8px; padding: 14px 16px; min-width: 160px; flex-shrink: 0; text-align: center; }
+  .gate-box.active { border-color: #f59e0b; }
+  .gate-box.blocked { opacity: 0.5; }
+  .gate-label { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .gate-name { font-size: 13px; font-weight: 600; color: #e2e8f0; margin-bottom: 6px; }
+  .gate-count { font-size: 11px; color: #94a3b8; }
+  .arrow { font-size: 20px; color: #334155; padding: 0 8px; flex-shrink: 0; }
+  .ws-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+  .ws-table th { text-align: left; color: #64748b; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid #2d2d44; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .ws-table td { padding: 8px 10px; border-bottom: 1px solid #1a1a2e; color: #cbd5e1; vertical-align: top; }
+  .ws-table tr:hover td { background: #1a1a2e; }
+  .ws-highlight td { background: #0f1a0f !important; color: #e2e8f0; }
+  .ws-highlight td:first-child { color: #4ade80; font-weight: 700; }
+  .blocker-box { background: #1a0f0f; border: 1px solid #7f1d1d; border-left: 4px solid #ef4444; border-radius: 8px; padding: 16px 18px; margin-bottom: 24px; }
+  .blocker-title { font-size: 12px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .blocker-text { font-size: 13px; color: #fca5a5; line-height: 1.6; }
+  .blocker-fix { font-size: 12px; color: #94a3b8; margin-top: 8px; background: #110d0d; border-radius: 4px; padding: 8px 10px; font-family: monospace; }
+  .next-box { background: #0f1a0f; border: 1px solid #166534; border-radius: 10px; padding: 20px; margin-top: 24px; }
+  .next-title { font-size: 13px; font-weight: 700; color: #4ade80; margin-bottom: 12px; }
+  .step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+  .step-num { background: #166534; color: #4ade80; font-size: 11px; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 13px; color: #cbd5e1; line-height: 1.5; }
+  .step-text code { background: #1a2e1a; color: #86efac; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+  .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 700; margin: 24px 0 12px; }
+</style>
+</head>
+<body>
+
+<h1>Project Ganga</h1>
+<div class="tagline">Platform Elevation + Synthesis Quality Sprint · MARSYS-JIS · Opened 2026-05-04 · 114 items · 11 workstreams</div>
+
+<!-- Blocker -->
+<div class="blocker-box">
+  <div class="blocker-title">🔴 Production Blocker Active</div>
+  <div class="blocker-text">LLM planner has <strong>never successfully fired in production</strong>. <code style="background:#2d1515;color:#fca5a5;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">deepseek-v4-flash</code> → routes to <code style="background:#2d1515;color:#fca5a5;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">deepseek-reasoner</code> → rejects <code style="background:#2d1515;color:#fca5a5;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">toolChoice</code> → 100% fallback to deterministic classify(). <code style="background:#2d1515;color:#fca5a5;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:11px">plan_json=NULL</code> on every query.</div>
+  <div class="blocker-fix">Fix: 6 edits to registry.ts · Brief: CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md (ready) · Execute AFTER Gate 0 (G0) closes</div>
+</div>
+
+<!-- Status cards -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Gate Status</div>
+    <div class="status-row"><span>G0 — LLM Stack Audit</span><span class="badge badge-red">NOT STARTED</span></div>
+    <div class="status-row"><span>G1 — Production Fix + E2E</span><span class="badge badge-gray">BLOCKED ON G0</span></div>
+    <div class="status-row"><span>G2 — Platform Hardening</span><span class="badge badge-gray">BLOCKED ON G1</span></div>
+    <div class="status-row"><span>G3 — Synthesis Quality</span><span class="badge badge-gray">BLOCKED ON G2</span></div>
+    <div class="status-row"><span>G4 — Integration + Close</span><span class="badge badge-gray">BLOCKED ON G3</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">BHISMA → Ganga Handoff State</div>
+    <div class="status-row"><span>Planner prompt v1.6</span><span class="badge badge-green">GATE MET</span></div>
+    <div class="status-row"><span>LLM_FIRST_PLANNER_ENABLED</span><span class="badge badge-green">true (fa75e1a)</span></div>
+    <div class="status-row"><span>DeepSeek planner fires in prod</span><span class="badge badge-red">NEVER</span></div>
+    <div class="status-row"><span>CI regression gate</span><span class="badge badge-green">LIVE</span></div>
+    <div class="status-row"><span>MON tables (3)</span><span class="badge badge-green">LIVE</span></div>
+    <div class="status-row"><span>Synthesis prompt governance</span><span class="badge badge-red">ZERO</span></div>
+  </div>
+</div>
+
+<!-- Gate flow -->
+<div class="section-title">Gate Flow</div>
+<div class="gate-flow">
+  <div class="gate-box active">
+    <div class="gate-label">G0 · NOW</div>
+    <div class="gate-name">LLM Stack Audit</div>
+    <div class="gate-count">K: 3 items</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="gate-box blocked">
+    <div class="gate-label">G1 · After G0</div>
+    <div class="gate-name">Prod Fix + E2E</div>
+    <div class="gate-count">A+B: 2 items</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="gate-box blocked">
+    <div class="gate-label">G2 · After G1 · Parallel</div>
+    <div class="gate-name">Platform Hardening</div>
+    <div class="gate-count">C+D+E+F+G+H+I+J: ~34 items</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="gate-box blocked" style="border-color:#166534;opacity:1">
+    <div class="gate-label" style="color:#4ade80">G3 · HIGHEST VALUE</div>
+    <div class="gate-name" style="color:#4ade80">Synthesis Quality</div>
+    <div class="gate-count" style="color:#86efac">L: 24 items · Sequential</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="gate-box blocked">
+    <div class="gate-label">G4 · Close</div>
+    <div class="gate-name">Integration + Close</div>
+    <div class="gate-count">1 session</div>
+  </div>
+</div>
+
+<!-- Workstream table -->
+<div class="section-title">11 Workstreams</div>
+<table class="ws-table">
+  <thead>
+    <tr><th>WS</th><th>Name</th><th>Gate</th><th>Items</th><th>Status</th><th>Highest Priority Item</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>K</strong></td><td>LLM Stack Review</td><td>G0</td><td>3</td><td><span class="badge badge-red">BLOCKING</span></td><td>K.1 Full model × stack × role matrix audit</td></tr>
+    <tr><td><strong>A</strong></td><td>Production Blocker Fix</td><td>G1</td><td>1</td><td><span class="badge badge-yellow">BLOCKED on G0</span></td><td>A.1 deepseek-v4-flash → deepseek-chat (brief ready)</td></tr>
+    <tr><td><strong>B</strong></td><td>E2E Baseline Observation</td><td>G1</td><td>1</td><td><span class="badge badge-gray">PENDING</span></td><td>B.1 8 targeted queries + SQL pull</td></tr>
+    <tr><td><strong>C</strong></td><td>Planner Quality</td><td>G2</td><td>5</td><td><span class="badge badge-gray">PENDING</span></td><td>C.1 GT.002 fix (alignment remedial + "spiritual" domain)</td></tr>
+    <tr><td><strong>D</strong></td><td>Retrieval Quality</td><td>G2</td><td>5</td><td><span class="badge badge-gray">PENDING</span></td><td>D.1 cgm_graph_walk zero_rows on single seed</td></tr>
+    <tr><td><strong>E</strong></td><td>Test Coverage</td><td>G2</td><td>5</td><td><span class="badge badge-gray">PENDING</span></td><td>E.1 manifest_planner.test.ts AI SDK mock</td></tr>
+    <tr><td><strong>F</strong></td><td>NIM Stack</td><td>G2</td><td>3</td><td><span class="badge badge-gray">PENDING</span></td><td>F.1 NIM API key + SLA verification</td></tr>
+    <tr><td><strong>G</strong></td><td>Observability + MON</td><td>G2</td><td>4</td><td><span class="badge badge-gray">PENDING</span></td><td>G.1 Wire plan_json to TracePanel QueryDNAPanel</td></tr>
+    <tr><td><strong>H</strong></td><td>CI/CD + Cleanup</td><td>G2</td><td>3</td><td><span class="badge badge-gray">PENDING</span></td><td>H.1 CI green on main post-fix</td></tr>
+    <tr><td><strong>I</strong></td><td>Trace UI Enhancement</td><td>G2</td><td>4</td><td><span class="badge badge-gray">PENDING</span></td><td>I.1 Display plannerParams in QueryDNAPanel</td></tr>
+    <tr><td><strong>J</strong></td><td>Design System Alignment</td><td>G2</td><td>2</td><td><span class="badge badge-gray">PENDING</span></td><td>J.1 TracePanel palette vs portal R7 design system</td></tr>
+    <tr class="ws-highlight"><td><strong>L</strong></td><td><strong>Synthesis Quality ★</strong></td><td>G3</td><td><strong>24</strong></td><td><span class="badge badge-green">HIGHEST VALUE</span></td><td>L.1.1 Author SYNTHESIS_PROMPT_v1_0.md</td></tr>
+  </tbody>
+</table>
+
+<!-- Next steps -->
+<div class="next-box">
+  <div class="next-title">▶ Immediate Next Actions</div>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text"><strong>Author G0 brief</strong> — <code>CLAUDECODE_BRIEF_GANGA_G0_S1_v1_0.md</code>. Ask Claude to author it in this conversation or a new Ganga conversation. Scope: audit registry.ts model matrix, evaluate NIM model options, output MODEL_REGISTRY_v1_0.md.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text"><strong>Execute G0 in Antigravity</strong> — Paste into Claude Code: <code>"Read CLAUDECODE_BRIEF_GANGA_G0_S1_v1_0.md and execute it."</code></div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text"><strong>Execute PF-S1 (G1)</strong> — Paste into Claude Code: <code>"Read CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md and execute it."</code> — 6 edits to registry.ts, ~30 min.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text"><strong>Run 8 E2E queries</strong> — First time the LLM planner fires in production. Pull query_plan_log SQL. Observe plan_json non-NULL.</div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-text"><strong>Open new Ganga conversation</strong> — Select Madhav workspace, paste: <code>"GANGA — Pick up Project Ganga. Read PROJECT_GANGA_BOOTSTRAP.md in 00_ARCHITECTURE/ first..."</code></div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:32px;font-size:11px;color:#334155">
+  Project Ganga · MARSYS-JIS · 114 items · 11 workstreams · Authored 2026-05-04
+</div>
+
+</body>
+</html>

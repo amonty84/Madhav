@@ -2,7 +2,7 @@
 artifact: BHISMA_FINAL_PLAN_v1_0.md
 canonical_id: BHISMA_FINAL_PLAN
 version: 1.0
-status: CURRENT
+status: SUPERSEDED (2026-05-04 — see PROJECT_GANGA_PLAN_v1_0.md)
 authored_by: Claude (Cowork — BHISMA-FINAL-PLAN session) 2026-05-04
 macro_phase: M3/M5 — parallel engineering elevation sprint
 project_code: BHISMA
