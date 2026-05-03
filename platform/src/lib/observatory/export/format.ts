@@ -37,3 +37,24 @@ export function toCSV(rows: ExportRow[]): string {
 export function toJSON(rows: ExportRow[], meta: ExportMeta): string {
   return JSON.stringify({ export_meta: meta, rows })
 }
+
+// USTAD_S4_6 D2 streaming helpers. Used by the route's ReadableStream
+// branch so the formatter never sees the full row collection at once.
+
+/** CSV header line (no trailing newline). */
+export function csvHeaderLine(): string {
+  return EXPORT_COLUMNS.map(csvCell).join(',')
+}
+
+/** Encode one CSV row (no trailing newline). */
+export function csvRowLine(row: ExportRow): string {
+  return EXPORT_COLUMNS.map((col) => csvCell(row[col])).join(',')
+}
+
+/** JSON envelope opener: `{"export_meta":{...},"rows":[`. */
+export function jsonEnvelopeOpen(meta: ExportMeta): string {
+  return `{"export_meta":${JSON.stringify(meta)},"rows":[`
+}
+
+/** JSON envelope closer: `]}`. */
+export const JSON_ENVELOPE_CLOSE = ']}'

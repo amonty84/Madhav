@@ -67,6 +67,71 @@ function buildWebhookPayload(
   }
 }
 
+/**
+ * RT.O3.3 SSRF guard (USTAD_S4_6 D3 fix).
+ *
+ * Validates a webhook target URL synchronously without DNS resolution.
+ * Throws if the URL is not HTTPS or if the hostname is a literal IP that
+ * sits inside a private/loopback/link-local range, or if it equals the
+ * AWS/GCP metadata endpoint `169.254.169.254`. Static parsing is enough
+ * here because:
+ *   (a) the threat model is super-admin-side mis-configuration; and
+ *   (b) we don't want a network hop on every dispatch just to resolve a
+ *       hostname.
+ *
+ * A future hardening pass MAY add an async `dnsLookup()` step (and re-bind
+ * the resolved IP into `fetch()` to defeat DNS-rebinding). MED-severity
+ * fix per the O.3 close red-team — see RT.O3.3 in OBSERVATORY_PLAN §12.
+ */
+export function validateWebhookUrl(url: string): void {
+  let parsed: URL
+  try {
+    parsed = new URL(url)
+  } catch {
+    throw new Error('ssrf_blocked: invalid_url')
+  }
+  if (parsed.protocol !== 'https:') {
+    throw new Error('ssrf_blocked: https_required')
+  }
+  const host = parsed.hostname.toLowerCase()
+  // IPv6 literals come bracketed in URL.hostname (`[::1]` → `::1`); strip.
+  const stripped = host.startsWith('[') && host.endsWith(']')
+    ? host.slice(1, -1)
+    : host
+  // Cloud-metadata endpoint + common loopback names.
+  const BLOCKED_EXACT = new Set([
+    'localhost',
+    '169.254.169.254',
+    'metadata.google.internal',
+    '::1',
+    '0.0.0.0',
+  ])
+  if (BLOCKED_EXACT.has(stripped)) {
+    throw new Error('ssrf_blocked: private_endpoint')
+  }
+  // IPv4 private + loopback prefixes.
+  const PRIVATE_PREFIXES = ['127.', '10.', '192.168.', '0.', '169.254.']
+  if (PRIVATE_PREFIXES.some((p) => stripped.startsWith(p))) {
+    throw new Error('ssrf_blocked: private_ip')
+  }
+  // 172.16.0.0/12 — 172.16.x through 172.31.x.
+  const m = stripped.match(/^172\.(\d+)\./)
+  if (m) {
+    const second = parseInt(m[1], 10)
+    if (second >= 16 && second <= 31) {
+      throw new Error('ssrf_blocked: private_ip')
+    }
+  }
+  // IPv6 unique-local fc00::/7 (covers fc and fd prefixes).
+  if (/^f[cd][0-9a-f]{2}:/.test(stripped)) {
+    throw new Error('ssrf_blocked: private_ip')
+  }
+  // IPv6 link-local fe80::/10.
+  if (/^fe[89ab][0-9a-f]:/.test(stripped)) {
+    throw new Error('ssrf_blocked: private_ip')
+  }
+}
+
 async function dispatchWebhook(
   threshold: AlertThreshold,
   result: BudgetEvaluationResult,
@@ -79,6 +144,17 @@ async function dispatchWebhook(
       channel: threshold.channel,
       success: false,
       error: 'webhook_missing_channel_target',
+    }
+  }
+  try {
+    validateWebhookUrl(target)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'ssrf_blocked'
+    return {
+      threshold,
+      channel: 'webhook',
+      success: false,
+      error: message,
     }
   }
   const controller = new AbortController()

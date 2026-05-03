@@ -9,8 +9,13 @@
 
 import { NextResponse } from 'next/server'
 import { guardObservatoryRoute } from '../_guard'
-import { queryUsageForExport } from '@/lib/observatory/export/query'
-import { toCSV, toJSON } from '@/lib/observatory/export/format'
+import { queryUsageForExportStream } from '@/lib/observatory/export/query'
+import {
+  csvHeaderLine,
+  csvRowLine,
+  jsonEnvelopeOpen,
+  JSON_ENVELOPE_CLOSE,
+} from '@/lib/observatory/export/format'
 import {
   EXPORT_LARGE_THRESHOLD,
   EXPORT_MAX_LIMIT,
@@ -95,9 +100,23 @@ export async function GET(request: Request) {
     pipeline_stage: pipelineStage,
   }
 
-  let rows
+  // RT.O3.2 — stream the response via ReadableStream so a 50 000-row
+  // export does not materialise as a single ~50 MB string before flush.
+  // The `queryUsageForExportStream()` AsyncGenerator delegates to the
+  // existing query path today; the surface is cursor-ready so the body
+  // can swap to a real DB cursor without touching this handler.
+  //
+  // We drain the generator once up front so we can emit `row_count` in
+  // the JSON envelope's meta block and set the `X-Export-Row-Count`
+  // header before the response is dispatched. The streaming win comes
+  // from chunking the formatted output (CSV lines / JSON row objects)
+  // rather than from a single massive `JSON.stringify({rows: [...]})`
+  // / `rows.join('\n')` materialisation. A future revision can split
+  // meta-first vs rows-trailer to truly stream from the cursor.
+  const fmt: ExportFormat = params.format
+  let collected: Awaited<ReturnType<typeof collectStream>>
   try {
-    rows = await queryUsageForExport(params)
+    collected = await collectStream(queryUsageForExportStream(params))
   } catch (err) {
     console.error('[admin/observatory/export] query failed', err)
     return NextResponse.json(
@@ -107,24 +126,46 @@ export async function GET(request: Request) {
   }
 
   const meta: ExportMeta = {
-    row_count: rows.length,
+    row_count: collected.length,
     date_start: params.date_start,
     date_end: params.date_end,
     generated_at: new Date().toISOString(),
-    format: params.format,
+    format: fmt,
     provider: params.provider ?? null,
     pipeline_stage: params.pipeline_stage ?? null,
   }
 
+  const encoder = new TextEncoder()
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
+      if (fmt === 'csv') {
+        controller.enqueue(encoder.encode(csvHeaderLine() + '\n'))
+        for (const row of collected) {
+          controller.enqueue(encoder.encode(csvRowLine(row) + '\n'))
+        }
+      } else {
+        controller.enqueue(encoder.encode(jsonEnvelopeOpen(meta)))
+        let first = true
+        for (const row of collected) {
+          const prefix = first ? '' : ','
+          controller.enqueue(encoder.encode(prefix + JSON.stringify(row)))
+          first = false
+        }
+        controller.enqueue(encoder.encode(JSON_ENVELOPE_CLOSE))
+      }
+      controller.close()
+    },
+  })
+
   const headers: Record<string, string> = {}
-  if (rows.length > EXPORT_LARGE_THRESHOLD) {
-    headers['X-Export-Row-Count'] = String(rows.length)
+  if (collected.length > EXPORT_LARGE_THRESHOLD) {
+    headers['X-Export-Row-Count'] = String(collected.length)
   }
 
-  if (params.format === 'csv') {
+  if (fmt === 'csv') {
     const filename =
       `observatory-export-${params.date_start}-${params.date_end}.csv`
-    return new NextResponse(toCSV(rows), {
+    return new NextResponse(stream, {
       status: 200,
       headers: {
         ...headers,
@@ -134,11 +175,22 @@ export async function GET(request: Request) {
     })
   }
 
-  return new NextResponse(toJSON(rows, meta), {
+  return new NextResponse(stream, {
     status: 200,
     headers: {
       ...headers,
       'Content-Type': 'application/json; charset=utf-8',
     },
   })
+}
+
+/** Helper — materialise an AsyncGenerator into an array. Today the body
+ *  delegates to a single SQL fetch; a future cursor-paged variant can
+ *  skip materialisation entirely. */
+async function collectStream<T>(
+  gen: AsyncGenerator<T, void, void>,
+): Promise<T[]> {
+  const out: T[] = []
+  for await (const item of gen) out.push(item)
+  return out
 }
