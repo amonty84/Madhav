@@ -20073,3 +20073,20 @@ session_close:
 ### Next session objective
 
 **S4.1 — Cache effectiveness** (first of six S4.x sessions in sub-phase O.4 Advanced Analytics). All six S4.x sessions are parallel-safe per §6.1; the last-closing one carries the batched CAPABILITY_MANIFEST update including this S3.4 session's deferred export-endpoint entry per OBSERVATORY_PLAN §12. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+session_id: USTAD_S4_4
+title: Pricing Diff Alerter
+sub_phase: O.4
+status: CLOSED
+umbrella_tip_before: 40dbe96
+deliverables:
+  - platform/src/lib/observatory/analytics/pricing_diff.ts
+  - GET /api/admin/observatory/analytics/pricing-diff
+  - POST /api/admin/observatory/analytics/pricing-diff/run
+  - PricingDiffPanel.tsx
+  - platform/src/app/(super-admin)/observatory/analytics/pricing-diff/page.tsx
+tests_added: 11
+tests_total_pass: 1232
+close_criteria_met: true
+---
