@@ -265,6 +265,13 @@ export async function callLlmPlanner(
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: userMessage }],
       temperature: 0,
+      // maxRetries: 0 — NIM free-tier is queue-based. Without this, the AI SDK
+      // retries an AbortError (headers-timeout) up to 3 times; the queued-then-
+      // aborted request comes back as HTTP 500 on retry, masking the real cause.
+      // With 0 retries the AbortError surfaces cleanly as PlannerError so the
+      // caller can decide to retry or fall back. The 90s nimFetch timeout gives
+      // ample headroom for NIM queue waits before aborting at all.
+      maxRetries: 0,
       tools: {
         submit_plan: tool({
           description:

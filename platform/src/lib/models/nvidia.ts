@@ -17,13 +17,26 @@ import type { LanguageModel } from 'ai'
  *
  * We pass a custom fetch wrapper that aborts after NIM_HEADERS_TIMEOUT_MS
  * with no HTTP response headers. Combined with maxRetries: 0 on synthesis
- * streamText calls this caps the hang at ~30 s → fast error → user can retry
- * or switch stacks rather than waiting indefinitely.
+ * streamText calls and planner generateText calls this caps the hang at
+ * ~90 s → fast error → user can retry or switch stacks rather than waiting
+ * indefinitely. 90 s chosen to accommodate NIM queue waits (worst observed:
+ * ~46 s end-to-end under load; original 30 s limit fired too early).
  */
 const NVIDIA_NIM_BASE_URL = 'https://integrate.api.nvidia.com/v1'
 
-/** Abort if NIM doesn't send HTTP headers within this window. */
-const NIM_HEADERS_TIMEOUT_MS = 30_000
+/**
+ * Abort if NIM doesn't send HTTP headers within this window.
+ *
+ * Why 90s: NIM free-tier is queue-based. Under load the endpoint can take
+ * 30–60s before sending *any* HTTP headers (the request sits in queue before
+ * a GPU slot opens). The original 30s limit caused AbortError → AI SDK retry
+ * → the queued-then-aborted request returned 500 on retry → PlannerError.
+ * 90s gives generous headroom for cold-start queue waits observed in testing
+ * (worst measured: ~46s end-to-end under load). Once headers arrive, the
+ * response body streams at full GPU throughput and is not affected by this
+ * deadline.
+ */
+const NIM_HEADERS_TIMEOUT_MS = 90_000
 
 /**
  * Wrap the platform fetch so every NIM request races against a hard deadline.
