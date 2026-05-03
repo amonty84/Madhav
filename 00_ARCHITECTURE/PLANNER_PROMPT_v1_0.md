@@ -1,6 +1,6 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.3
+version: 1.4
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
@@ -19,6 +19,20 @@ amendment_reason: >
   R14 (cgm_graph_walk holistic-only); R15 (resonance_register remedial-only);
   R16 (empty query → []); R17 (interpretive + temporal → pattern_register).
   §4.4 fixed: cgm_graph_walk and resonance_register removed from interpretive example.
+  v1.3 → v1.4 (Lever 2 eval EVAL-4: 15/29 pass, recall=0.830 ✓, precision=0.811).
+  Recall cleared for the first time; precision remains the only gate (0.811 vs 0.90).
+  Root causes: (1) R19 mandated msr_sql for ALL holistic + R14 said cgm_graph_walk
+  "required for holistic" — combined with catch-all expansion, every holistic query
+  (including lightweight GT.024/.025/.029) got the full 5-tool suite; gold expects
+  only [cluster_atlas, pattern_register] for lightweight holistic, giving precision
+  2/5=0.40 on those cases; (2) R18 (remedial+domain→vector_search) not firing despite
+  clear domain names in GT.001/.002 — root cause: no few-shot demonstrates R18 in
+  action; (3) GT.014 extra vector_search persists on transit predictive — R6 "prefer
+  fewer tools" not strong enough.
+  Fix: R14 changed from "required for holistic" to "optional, add when structural
+  topology explicitly relevant"; R19 scoped to comprehensive holistic only (multi-
+  domain, life-path, all-areas); R6 strengthened; §4.1 updated to add vector_search
+  (R18 few-shot demonstration); §4.7 added (lightweight holistic 2-tool example).
   v1.2 → v1.3 (Lever 2 eval EVAL-4: 14/29 pass, recall=0.770, precision=0.799).
   Root causes: (1) R14 over-restricted cgm_graph_walk — blocked it from structural-
   positional interpretive queries (GT.010, GT.021 expected it); (2) R15 over-
@@ -170,9 +184,10 @@ Hard rules:
   R5. Use priority 1 only for tools whose results are required to answer the
       query. Priority 2 = nice-to-have supporting evidence. Priority 3 =
       cross-checks that may be skipped under tight budgets.
-  R6. Prefer the smallest set of tools that covers the query. Adding tools
-      "to be safe" is a calibration error and will be flagged by the
-      evaluation rubric.
+  R6. Use the MINIMUM set of tools that directly answers the query. When in
+      doubt whether a tool is needed, OMIT it. Every tool must be justified
+      by a specific query signal — not added "for completeness" or "to be
+      safe". Over-fetching is a precision error penalised by the rubric.
   R7a. For PREDICTIVE queries, ALWAYS include `pattern_register` at priority
        ≤ 2. Predictive timing requires surfacing recurring cross-domain
        patterns before projecting forward. Do NOT substitute `resonance_register`
@@ -206,15 +221,19 @@ Hard rules:
        "how can I strengthen [planet]". If the query asks for interpretation,
        timing, structural analysis, or chart overview — not prescription —
        do not include `remedial_codex_query`.
-  R14. `cgm_graph_walk` is required for HOLISTIC queries (R11). For
-       INTERPRETIVE queries, include it at priority 2 ONLY when the query
-       is structurally framed — a planet's house placement without a domain
-       qualifier, its dispositor chain, aspect web, or cross-layer profile
-       (e.g. "Saturn in 11th house", "everything about Jupiter across all
-       layers", "Mars dispositor chain"). Do NOT include cgm_graph_walk when
-       the interpretive query has a domain qualifier such as "in relationships",
-       "for career", "in health" — those are domain-interpretive, not
-       structural. Never include in predictive or remedial queries.
+  R14. `cgm_graph_walk` is OPTIONAL for HOLISTIC queries — add it at
+       priority 2 only when the query explicitly asks about structural chart
+       topology, planet connectivity, aspect web, or cross-planet
+       relationships. For lightweight catch-all holistic queries (e.g.
+       "what's interesting", "high-level read", "what stands out"), omit it.
+       For INTERPRETIVE queries, include it at priority 2 ONLY when the
+       query is structurally framed — a planet's house placement without a
+       domain qualifier, its dispositor chain, aspect web, or cross-layer
+       profile (e.g. "Saturn in 11th house", "everything about Jupiter
+       across all layers", "Mars dispositor chain"). Do NOT include
+       cgm_graph_walk when the interpretive query has a domain qualifier
+       such as "in relationships", "for career", "in health". Never include
+       in predictive or remedial queries.
   R15. `resonance_register` is for REMEDIAL queries (R7b) and HOLISTIC
        queries that explicitly ask about chart-wide themes, central
        alignment, or cross-domain resonance patterns (e.g. "what are the
@@ -236,10 +255,14 @@ Hard rules:
        priority 2 to pull L3 long-form domain narrative relevant to the
        prescription context (e.g. "gemstone for career", "mantra for
        spiritual practice", "fasting for health").
-  R19. For HOLISTIC queries, ALWAYS include `msr_sql` at priority 1 alongside
-       `cluster_atlas`. A holistic read requires the factual MSR signal
-       foundation before cluster synthesis. cluster_atlas without msr_sql
-       is an incomplete holistic plan.
+  R19. For COMPREHENSIVE holistic queries — those that explicitly ask about
+       multiple life domains together, life path, all major areas, or a
+       full cross-domain synthesis (e.g. "career and marriage and health",
+       "all major domains", "life path") — include `msr_sql` at priority 1
+       alongside `cluster_atlas`. For lightweight catch-all holistic queries
+       (e.g. "what's interesting", "high-level read", "what stands out",
+       "surprise me"), msr_sql is NOT required — cluster_atlas + pattern_
+       register are sufficient.
 
 Style rules:
 
@@ -290,6 +313,9 @@ Adding it to non-remedial plans is a precision error.
 
 ### 4.1 Remedial query — recurring-pattern character
 
+This query names a specific life domain ("career") — R18 requires `vector_search`
+at priority 2 to pull L3 domain narrative for the prescription context.
+
 ```json
 {
   "user_query": "I keep getting Saturn-related friction in my career. What can I actually do about it?",
@@ -312,18 +338,25 @@ Adding it to non-remedial plans is a precision error.
         "reason": "Surface forward-looking career signals involving Saturn."
       },
       {
+        "tool_name": "resonance_register",
+        "params": { "domains": ["career"], "theme": "Saturn-career" },
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Default prescription-alignment lens for remedial query per R7b."
+      },
+      {
         "tool_name": "pattern_register",
         "params": { "domains": ["career"], "forward_looking": true },
         "token_budget": 400,
         "priority": 2,
-        "reason": "Confirm cross-domain Saturn-career pattern before prescribing."
+        "reason": "Recurring Saturn-career pattern; this is a pattern-type remedial per R7b."
       },
       {
-        "tool_name": "contradiction_register",
-        "params": { "domains": ["career"], "resolution_status": "open" },
-        "token_budget": 200,
-        "priority": 3,
-        "reason": "Flag any open Saturn-career contradiction so remedy is calibrated."
+        "tool_name": "vector_search",
+        "params": { "query_text": "Saturn career remedies propitiation", "doc_type": ["domain_report"], "top_k": 5 },
+        "token_budget": 500,
+        "priority": 2,
+        "reason": "R18: query names 'career' domain — pull L3 domain narrative for prescription context."
       }
     ]
   }
@@ -551,6 +584,40 @@ this is not a prescription query.
 }
 ```
 
+### 4.7 Holistic query — lightweight catch-all
+
+Lightweight/curiosity holistic queries ("what's interesting", "high-level read",
+"what stands out") require only `cluster_atlas` + `pattern_register`. R14 says
+cgm_graph_walk is OPTIONAL for holistic — omit it for catch-all queries (R6).
+R19 says msr_sql is ONLY for comprehensive multi-domain queries — omit it here.
+Resist the urge to add more tools; the lean two-tool plan is the correct output.
+
+```json
+{
+  "user_query": "Give me a high-level read of my chart — what stands out?",
+  "expected_plan": {
+    "query_class": "holistic",
+    "query_intent_summary": "Open-ended catch-all overview of salient chart signals.",
+    "tool_calls": [
+      {
+        "tool_name": "cluster_atlas",
+        "params": {},
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "Primary cross-domain cluster surface — the right starting point for any holistic scan."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Recurring cross-domain patterns — surfaces what stands out across the chart."
+      }
+    ]
+  }
+}
+```
+
 ## 5. Evaluation rubric (5 criteria × 0–2 each → 0–10)
 
 | # | Criterion              | 0 (fail)                         | 1 (partial)                              | 2 (pass)                                                 |
@@ -566,4 +633,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.3 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.4 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
