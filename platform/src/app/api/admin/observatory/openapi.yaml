@@ -233,6 +233,67 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
         '500': { $ref: '#/components/responses/InternalError' }
+  /reconciliation/upload:
+    post:
+      tags: [observatory]
+      summary: Upload a billing CSV for DeepSeek or NIM and reconcile
+      description: |
+        Authored by USTAD_S2_5_DEEPSEEKNNIM_CSV (Phase O sub-phase O.2). The
+        two providers without an admin/billing API (DeepSeek, NIM
+        managed-catalog) reconcile via super-admin CSV upload from each
+        provider's billing portal. The endpoint parses the CSV, sums
+        `total_cost`/`TotalCost` over the period, persists raw rows to
+        `llm_provider_cost_reports` (truncated to first 1000 rows), runs
+        variance classification, and writes to `llm_cost_reconciliation` —
+        producing the same `ProviderReconcileResult` shape as the auto-API
+        reconcilers so downstream consumers don't special-case manual
+        providers.
+
+        DeepSeek expected columns:
+          `date,model,prompt_tokens,completion_tokens,total_cost`
+        NIM expected columns:
+          `Date,Model,InputTokens,OutputTokens,TotalCost`
+
+        Missing columns produce 400 `parse_error` with `columns_found` +
+        `columns_expected` so the super-admin can re-export the CSV with the
+        correct columns.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [provider, period_start, period_end, file]
+              properties:
+                provider:
+                  type: string
+                  enum: [deepseek, nim]
+                period_start:
+                  type: string
+                  format: date
+                period_end:
+                  type: string
+                  format: date
+                file:
+                  type: string
+                  format: binary
+                  description: |
+                    CSV file exported from the provider's billing portal.
+      responses:
+        '200':
+          description: ProviderReconcileResult.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProviderReconcileResult' }
+        '400':
+          description: |
+            Bad input. Body shapes:
+              `{error:'parse_error',message,columns_found,columns_expected}`,
+              `{error:'unsupported_provider',provider}`,
+              `{error:'invalid_input',message}`.
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
   /reconciliation/history:
     get:
       tags: [observatory]
