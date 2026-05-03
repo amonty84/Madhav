@@ -20107,3 +20107,20 @@ tests_added: 11
 tests_total_pass: 1272
 close_criteria_met: true
 ---
+
+---
+session_id: USTAD_S4_4
+title: Pricing Diff Alerter
+sub_phase: O.4
+status: CLOSED
+umbrella_tip_before: 40dbe96
+deliverables:
+  - platform/src/lib/observatory/analytics/pricing_diff.ts
+  - GET /api/admin/observatory/analytics/pricing-diff
+  - POST /api/admin/observatory/analytics/pricing-diff/run
+  - PricingDiffPanel.tsx
+  - platform/src/app/(super-admin)/observatory/analytics/pricing-diff/page.tsx
+tests_added: 11
+tests_total_pass: 1232
+close_criteria_met: true
+---
