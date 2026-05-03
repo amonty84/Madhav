@@ -24,6 +24,17 @@ import {
   MANUAL_UPLOAD_PROVIDERS,
   getReconciler,
 } from '@/lib/observatory/reconciliation/factory'
+import { OpenAIReconciler } from '@/lib/observatory/reconciliation/openai'
+
+// Per-provider real-reconciler dispatch. Sessions S2.2–S2.4 add their entries
+// here as they land; absent providers fall through to the framework stub
+// (factory.getReconciler), which throws NotImplementedError. Keeping the
+// dispatch local to route.ts avoids touching the framework's factory.ts and
+// keeps S2.X scope boundaries clean.
+function resolveReconciler(provider: ProviderName) {
+  if (provider === 'openai') return new OpenAIReconciler()
+  return getReconciler(provider)
+}
 
 const VALID_PROVIDERS: ReadonlySet<ProviderName> = new Set([
   'anthropic',
@@ -99,7 +110,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const reconciler = getReconciler(parsed.provider)
+    const reconciler = resolveReconciler(parsed.provider)
     const result = await reconciler.reconcile(
       parsed,
       DEFAULT_RECONCILIATION_CONFIG,

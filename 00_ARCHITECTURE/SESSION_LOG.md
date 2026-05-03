@@ -18937,3 +18937,91 @@ session_close:
 ### Next session objective
 
 **S2.2 — Anthropic reconciler** (parallel-safe with S2.3 OpenAI / S2.4 Gemini / S2.5 DeepSeek+NIM CSV) per OBSERVATORY_PLAN §5.2. Subclasses `BaseReconciler`; implements `fetchAuthoritativeCost` against the Anthropic Admin API → Usage and Cost endpoints (per OBSERVATORY_PLAN §4.1: workspace-scoped, daily granularity, ~24h lag). Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## USTAD_S2_3_OPENAI_RECONCILER (2026-05-03)
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_3_OPENAI_RECONCILER
+  cowork_thread_name: ustad-s2-3-openai-reconciler
+  phase: O.2 — Reconciliation
+  type: IMPLEMENTATION
+  depends_on: [USTAD_S2_1_RECONCILIATION_FRAMEWORK]
+  cut_from_commit: a540a8f
+  worktree_branch: feature/phase-o-observatory-ustad-s2-3-openai-reconciler
+  merge_target: feature/phase-o-observatory
+  may_touch:
+    - platform/src/lib/observatory/reconciliation/openai.ts (new)
+    - platform/src/app/api/admin/observatory/reconciliation/route.ts
+    - platform/src/lib/components/observatory/__tests__/reconciliation/**
+    - 00_ARCHITECTURE/SESSION_LOG.md
+  must_not_touch:
+    - platform/src/lib/observatory/reconciliation/base.ts
+    - platform/src/lib/observatory/reconciliation/types.ts
+    - platform/src/lib/observatory/reconciliation/variance.ts
+    - platform/migrations/**
+    - any non-observatory file
+```
+
+### Body
+
+OpenAI organization usage reconciler delivered. Subclasses `BaseReconciler` and implements `fetchAuthoritativeCost` with a two-step strategy: (1) preferred path queries `GET /v1/organization/costs` for direct USD; (2) on HTTP 404 the implementation falls through to `GET /v1/organization/usage/completions` and prices the per-model token aggregates against `llm_pricing_versions` rows effective at the period's midpoint. The endpoint actually used is recorded in `raw_payload.meta.endpoint_used` (audit trail persisted to `llm_provider_cost_reports`).
+
+Pagination follows the OpenAI Pages convention (`has_more` + `next_page` cursor) until exhausted; each request is bounded by a 30s `AbortController` timeout that maps to the message "OpenAI usage API timeout". `OPENAI_ADMIN_API_KEY` env-var is required (distinct from the model-API key used by `openai_observed.ts` — the admin key needs `org:read` or `billing:read` scope); 401/403 responses surface as `"OpenAI admin API key missing or lacks org:read scope"`. Models present in the OpenAI usage payload but absent from `llm_pricing_versions` contribute `0` USD and are recorded under `raw_payload.meta.unknown_models` for audit (the in-memory `notes` field is owned by `BaseReconciler` and reserved for `raw_report_id` + period span).
+
+Wiring lives in `route.ts` via a local `resolveReconciler` dispatch that delegates non-OpenAI providers to the existing `factory.getReconciler` (which still throws `NotImplementedError` for the four un-implemented providers). This keeps S2.3's footprint inside its declared `may_touch` set — `factory.ts` is left untouched so S2.2/S2.4/S2.5 add their dispatch entries the same way as they land.
+
+### Acceptance criteria
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | OpenAIReconciler subclass exists | PASS | `platform/src/lib/observatory/reconciliation/openai.ts:122` |
+| AC.2 | Two-endpoint strategy (/costs primary, /completions fallback) | PASS | `fetchFromCosts` throws `CostsEndpointUnavailable` on 404; `fetchAuthoritativeCost` catches and calls `fetchFromCompletions` |
+| AC.3 | endpoint_used recorded in raw_payload.meta | PASS | Both branches emit `meta.endpoint_used`; verified by Test 1 + Test 2 |
+| AC.4 | Cursor pagination | PASS | `do/while (cursor)` loop on both endpoints; verified by Test 4 |
+| AC.5 | OPENAI_ADMIN_API_KEY env guard | PASS | `process.env.OPENAI_ADMIN_API_KEY` check; verified by Test 5 |
+| AC.6 | 401/403 → org:read scope error | PASS | `'OpenAI admin API key missing or lacks org:read scope'` thrown for both statuses; verified by Test 6 |
+| AC.7 | Timeout maps to "OpenAI usage API timeout" | PASS | `openaiFetch` AbortController catches AbortError → throws fixed message |
+| AC.8 | Unknown model → cost=0, recorded for audit | PASS | `unknownModels[]` collected and surfaced in `raw_payload.meta.unknown_models` |
+| AC.9 | route.ts wires real OpenAIReconciler | PASS | `resolveReconciler` dispatch in route.ts:34; non-OpenAI providers fall through to factory stub |
+| AC.10 | 6 new tests pass | PASS | `npx vitest run …/reconciliation/openai_reconciler.test.ts` → 6 passed |
+| AC.11 | Full reconciliation suite remains green | PASS | `npx vitest run …/reconciliation/` → 23 passed (17 prior + 6 new), 0 failed |
+| AC.12 | factory.ts + base.ts + types.ts + variance.ts untouched | PASS | `git diff --stat` shows only declared `may_touch` files modified |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_3_OPENAI_RECONCILER
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: false
+  red_team_due_rationale: "Per ONGOING_HYGIENE_POLICIES §F + OBSERVATORY_PLAN red-team cadence: implementation-class concurrent-workstream sessions inside O.2 do not own a fresh red-team pass. The O.2-close session (after S2.6) is the gate that owns the next observatory red-team."
+  open_decisions: []
+  next_unblocked: "S2.2 (Anthropic), S2.4 (Gemini), S2.5 (DeepSeek+NIM CSV) — all remaining parallel-safe siblings. Then S2.6 (banner UI) + O.2 close session."
+  schema_validator_exit_code: 2  # Acceptable per S2.1 precedent — no in-session validator CLI invoked
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S2.3 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.2) per OBSERVATORY_PLAN §6.2 + §6.3 funneling — same precedent as S2.1."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; defers per S2.1 precedent."
+  close_criteria_met: true
+  unblocks: "S2.2 / S2.4 / S2.5 remain parallel-safe. After all four reconcilers close: S2.6 (banner UI) + O.2 close."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-3-openai-reconciler
+    cut_from_commit: a540a8f
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S2.2 (Anthropic) / S2.4 (Gemini) / S2.5 (DeepSeek+NIM CSV)** remain parallel-safe per OBSERVATORY_PLAN §6.1. After all four reconcilers (S2.2/S2.3/S2.4/S2.5) close, S2.6 (Reconciliation banner UI) + O.2 close session can proceed. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
