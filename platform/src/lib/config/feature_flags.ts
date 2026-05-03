@@ -96,7 +96,7 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   // Phase 7 — Panel Mode (all default OFF)
   PANEL_DEGRADE_2_OF_3: false,
   // BHISMA Stream 2 — LLM-first planner. Default OFF; old path is the live one.
-  LLM_FIRST_PLANNER_ENABLED: false,
+  LLM_FIRST_PLANNER_ENABLED: true,
   // W2-CTX-ASSEMBLY — context assembly LLM step. Default OFF; flip after smoke.
   CONTEXT_ASSEMBLY_ENABLED: false,
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
