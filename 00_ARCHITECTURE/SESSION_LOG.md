@@ -18787,3 +18787,153 @@ session_close:
 ### Next session objective
 
 **S2.1 — Reconciliation framework** per OBSERVATORY_PLAN §5.2. Builds the generic reconciliation engine + scheduler scaffolding that S2.2/S2.3/S2.4 (Anthropic / OpenAI / Gemini auto-reconcilers) and S2.5 (DeepSeek + NIM manual-reconciliation UI) will plug into. S2.1 also discharges the deferred O.1-close IS.8(b)-class red-team as part of its session-open per `ONGOING_HYGIENE_POLICIES §G`. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
+
+---
+
+## USTAD_S2_1_RECONCILIATION_FRAMEWORK — Phase O sub-phase O.2 OPEN — 2026-05-03
+
+Phase O sub-phase O.2 OPEN. Landed the reconciliation framework — types,
+variance classifier, BaseReconciler abstract template, factory with
+NotImplementedReconciler stubs, two API endpoints (POST trigger + GET
+history) — and discharged the IS.8(b)-class red-team carry-forward from
+the O.1 close (per `ONGOING_HYGIENE_POLICIES §G`). Bumped OBSERVATORY_PLAN
+to v1.2.0; flipped O.2 status `pending` → `IN_PROGRESS`. Per-provider
+reconcilers S2.2 (Anthropic), S2.3 (OpenAI), S2.4 (Gemini), S2.5
+(DeepSeek+NIM CSV) are unblocked and parallel-safe per §6.1. Worktree:
+`feature/phase-o-observatory-ustad-s2-1-reconciliation-framework` cut from
+umbrella at 83d5456.
+
+### session_open
+
+```yaml
+session_open:
+  session_id: USTAD_S2_1_RECONCILIATION_FRAMEWORK
+  cowork_thread_name: "ustad-s2-1-reconciliation-framework"
+  agent_name: claude-opus-4-7
+  agent_version: claude-opus-4-7
+  step_number_or_macro_phase: PHASE_O.O.2.S2.1
+  predecessor_session: USTAD_S1_13_OBSERVATORY_MVP_WIRING
+  mandatory_reading_confirmation:
+    - {file: CLAUDE.md, fingerprint_sha256: 16eb577dc84d0d33ef7c2919f3d1a4690fb8eed6fb6b3426783544474e489797}
+    - {file: 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md, fingerprint_sha256: 3ad84471d667ff1f155267aaf0543f3d526d6c60d117f07cf6c0e31ec0ea6b82}
+    - {file: 00_ARCHITECTURE/SESSION_OPEN_TEMPLATE_v1_0.md, fingerprint_sha256: 81f8678b803ad516d82467cd67c005588fa2da8a5dfbeb1b42b05ebdcbabb522}
+    - {file: 00_ARCHITECTURE/SESSION_CLOSE_TEMPLATE_v1_0.md, fingerprint_sha256: fd4202d3f548fd0322ee8bab537439b8069ff779dde289d1fb49c0c6f5de59b4}
+    - {file: platform/src/lib/db/schema/observatory.ts, fingerprint_sha256: ec7079747b10c1fc384e7126a7519f20544bab1b7be40a154072f799ccc36e81}
+    - {file: platform/migrations/038_observatory_schema.sql, fingerprint_sha256: 08930ef649e41c5e901bb5c89f261fd433a22f0a2c53a109acf76495387bf342}
+    - {file: platform/src/lib/llm/observability/persist.ts, fingerprint_sha256: 947f1260f693fa41fdc1a39c7c1862f18a263b799ee8379e4bd9d8beef88dab0}
+    - {file: platform/src/lib/observatory/queries.ts, fingerprint_sha256: 8f82baa4f4dc99fce7ab812b2d2a102237b5580517d5ab1487b6d645d2231153}
+  declared_scope:
+    may_touch:
+      - platform/src/lib/observatory/reconciliation/**
+      - platform/src/app/api/admin/observatory/reconciliation/**
+      - platform/src/lib/observatory/types.ts
+      - platform/src/lib/components/observatory/__tests__/reconciliation/**
+      - platform/src/app/api/admin/observatory/openapi.yaml
+      - 00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md
+      - 00_ARCHITECTURE/SESSION_LOG.md
+    must_not_touch:
+      - platform/migrations/**
+      - platform/src/lib/db/schema/observatory.ts
+      - platform/src/lib/llm/observability/**
+      - platform/src/lib/llm/providers/**
+      - platform/src/lib/components/observatory/{kpi,filters,charts,events,pages,Layout,AuthGate}**
+      - platform/src/app/(super-admin)/observatory/**
+      - .geminirules
+      - .gemini/project_state.md
+      - All Madhav-project non-observatory files
+  red_team_due: true
+  red_team_kind: IS.8(b) — O.1 sub-phase close (carry-forward from S1.13 close)
+  notes: "S2.1 — opens O.2 + discharges deferred IS.8(b) red-team for O.1; framework only."
+```
+
+### Body — substantive deliverables
+
+**RT. IS.8(b) red-team for O.1 close discharged.** Eight axes audited; 7 PASS + 1 MED finding. No HIGH findings. Full table in §session_close.red_team_table below. Summary: RT.5 (PII discipline) — `OBSERVATORY_HASH_PROMPTS` defaults to identity policy when env var unset; OBSERVATORY_PLAN §10 OD-5 specifies hash-by-default. Recommended fix: invert default polarity. **Deferred to a follow-up cleanup session in O.2 or O.3** per brief MED-defer rule.
+
+**W1. types.ts** (`platform/src/lib/observatory/reconciliation/types.ts`, sha256 `120ec0ef29d7ddf0bedd87a24b9b9514265c468ff5101727c7cd93b2a1d9d8ce`). Exports `ProviderName`, `ProviderReconcileInput` (provider + period_start + period_end), `ProviderReconcileResult` (full result shape including raw_report_id), `ReconciliationStatus` (5 values incl. `'error'`), `ReconciliationConfig` + `DEFAULT_RECONCILIATION_CONFIG` (tolerance=2.0, alert=5.0), `ProviderReconciler` interface, `ReconciliationHistoryRow` + `ReconciliationHistoryResponse` (used by GET history), `NotImplementedError` (used by API surface to disambiguate stub calls). Public field naming preserves the brief's spec; the SQL boundary in base.ts maps to migration-038 column names.
+
+**W2. variance.ts** (`platform/src/lib/observatory/reconciliation/variance.ts`, sha256 `7d6ab8ef2793cc539486ba2678a3099b950f9ef9064af0ce3d641ebf1b08903c`). Exports `classifyVariance(computed, authoritative, config)` (pure function — null/undef/NaN→missing_authoritative; zero-vs-zero→matched; zero-vs-nonzero→variance_alert; otherwise variance_pct vs tolerance/alert thresholds) and `computePeriodCost(provider, period_start, period_end)` (queries `llm_usage_events` for SUM(computed_cost_usd) + COUNT(*) over the half-open `[start, end+1day)` window, using `started_at` for index alignment with `idx_llm_usage_events_started_at` rather than `created_at` per brief literal — documented inline).
+
+**W3. base.ts** (`platform/src/lib/observatory/reconciliation/base.ts`, sha256 `026e7d40fa9228f07986a97bee836d6d4cc9aef796ae853b4b0645de35f2b70f`). `BaseReconciler` abstract template. Subclasses S2.2–S2.5 implement only `fetchAuthoritativeCost(input) → {cost_usd, raw_payload}`. The template orchestrates: try-fetch → INSERT `llm_provider_cost_reports` (returns `report_id`) → `computePeriodCost` → `classifyVariance` → INSERT/UPSERT `llm_cost_reconciliation` (ON CONFLICT on the `(reconciliation_date, provider, COALESCE(model,''))` unique index → DO UPDATE → set reconciled_at=NOW()) → return result. Every error path returns `status='error'` with explanatory `notes`; never throws. Multi-day periods echo full span in `notes` (e.g., `period=2026-05-01..2026-05-07`).
+
+**W4. factory.ts** (`platform/src/lib/observatory/reconciliation/factory.ts`, sha256 `c33f0b1b0e03f49ce2dfc4bebb0db42d571b95def0b9d2a9c0e5cec4d6cdbe16`). `getReconciler(provider)` returns a `NotImplementedReconciler` for every provider in S2.1; `MANUAL_UPLOAD_PROVIDERS` set marks DeepSeek + NIM as upstream-special-cased. S2.2–S2.5 each replace the relevant arm of this factory in-place.
+
+**W5. POST /api/admin/observatory/reconciliation** (`platform/src/app/api/admin/observatory/reconciliation/route.ts`, sha256 `ae0e9342d3b2bd7d69c8a945cae121c7546b66b706e885b19ec8c127848647f6`). Flag+admin-gated. Body validated (provider enum + ISO date + period_end >= period_start). DeepSeek/NIM → 400 `manual_upload_required` with provider-specific instructions; auto providers (Anthropic/OpenAI/Gemini) → 400 `not_implemented` until S2.2–S2.4 land. Genuine internal failures → 500 (DB outage etc.). Never 500s on the not-implemented or manual-upload paths.
+
+**W6. GET /api/admin/observatory/reconciliation/history** (`platform/src/app/api/admin/observatory/reconciliation/history/route.ts`, sha256 `9f87c02276e065ad8ff4d50c9f3fe0e4c835bcc2085f991fc00680a7ba8eb701`). Flag+admin-gated. Optional `provider` filter; `limit` (default 50, max 200); `offset`. Two queries: COUNT(*) for `total`, then ordered LIMIT/OFFSET page. Maps schema columns (`reconciliation_date`, `computed_total_usd`, `authoritative_total_usd`) → public response fields (`period_start`, `period_end`, `computed_cost_usd`, `authoritative_cost_usd`); period_end parsed from `notes` `period=...` marker for multi-day spans.
+
+**W7. openapi.yaml** (`platform/src/app/api/admin/observatory/openapi.yaml`, sha256 `a036ffca5e46e3b167af7c4b6ce91caf8bba16e817f526d52fdaefc57d0bd6b5`). Two new paths (`/reconciliation`, `/reconciliation/history`) + three schemas (`ProviderReconcileResult`, `ReconciliationHistoryRow`, `ReconciliationHistoryResponse`). Additive append only.
+
+**W8. Unit tests** (`platform/src/lib/components/observatory/__tests__/reconciliation/reconciliation.test.ts`, sha256 `dab798495efba8ac9442064728b35322ae92b214e9ec26f4fa8a0c1a934ae636`). 17 tests across three describe blocks: `classifyVariance` (7) — boundary cases at tolerance/alert + null/undef/NaN + zero-cost arms; `BaseReconciler.reconcile()` (3) — successful path writes both tables, fetcher-throw → status=error, variance > alert → variance_alert; `POST /reconciliation` (7) — DeepSeek + NIM manual_upload_required, Anthropic + Gemini not_implemented, invalid date format, period_end < period_start, flag-off → 403. All pass under vitest.
+
+**W9. OBSERVATORY_PLAN bump** (`00_ARCHITECTURE/OBSERVATORY_PLAN_v1_0.md`, sha256 `25d3b8fb23bdf58e5a0f0ec05d8a6b94c4944d369128cee31467cafc2ce3a01c`). Version 1.1.0 → 1.2.0. `phase_status.O.2: NEXT` → `IN_PROGRESS`. Changelog adds the v1.2.0 entry with the framework + IS.8(b) red-team summary + DeepSeek/NIM CSV-upload note. §5.2 close-criteria block extended with the open note + manual-upload guidance for S2.5.
+
+### Tests + build verification
+
+`npx vitest run src/lib/components/observatory/ src/lib/observatory/ src/lib/llm/__tests__/ src/lib/db/__tests__/observatory_schema.test.ts` — **16 files, 74 passed | 22 skipped, 0 failed.** Net +17 vs S1.13's 57; 22 DB-bound tests skip cleanly without `OBSERVATORY_TEST_DATABASE_URL`.
+
+`npx tsc --noEmit -p tsconfig.json` — 0 errors in any file in this session's scope. Same 9 pre-existing errors in `tests/components/AppShell.test.tsx` + `tests/components/ReportGallery.test.tsx` that S1.13 documented; predate this session.
+
+`npm run build` — TS phase passes (`✓ Compiled successfully in 4.6s`, `Finished TypeScript in 3.8s`). Prerender fails on `/login` with the same `FirebaseError: auth/invalid-api-key` S1.13 documented (no `.env` in CI). Observatory routes are dynamic-rendered (`force-dynamic`) and don't prerender → AC.12 satisfied.
+
+### S2.1 acceptance criteria — gate-bar table
+
+| AC | Description | Status | Evidence |
+|---|---|---|---|
+| AC.1 | IS.8(b) red-team table present in SESSION_CLOSE (8 axes) | PASS | session_close.red_team_table below: 8 axes (RT.1–RT.8), 7 PASS + 1 MED finding |
+| AC.2 | Any HIGH findings fixed before close | PASS | No HIGH findings; RT.5 MED deferred per brief MED-defer rule |
+| AC.3 | reconciliation/types.ts exports all 5 types/interfaces | PASS | ProviderName / ProviderReconcileInput / ProviderReconcileResult / ReconciliationStatus / ReconciliationConfig / ProviderReconciler / ReconciliationHistoryRow / ReconciliationHistoryResponse / NotImplementedError all exported |
+| AC.4 | reconciliation/variance.ts — classifyVariance + computePeriodCost | PASS | Both exports present; 7 unit tests cover classifyVariance |
+| AC.5 | reconciliation/base.ts — BaseReconciler abstract class | PASS | Exported; 3 unit tests via TestReconciler subclass |
+| AC.6 | POST /reconciliation gated, returns 400 (not 500) for unimplemented; manual_upload_required for DeepSeek/NIM | PASS | 4 endpoint tests verify the four arms; 1 test verifies 403 when flag off |
+| AC.7 | GET /reconciliation/history gated, paginated rows | PASS | Endpoint exists; route delegates to gated `query()` with COUNT(*) + LIMIT/OFFSET |
+| AC.8 | openapi.yaml updated with 2 new endpoints | PASS | Two new paths + three new schemas appended; existing paths untouched |
+| AC.9 | 12+ unit tests pass; full observatory suite green | PASS | 17 new tests pass (≥12 requirement satisfied); full observatory suite 74 passed | 22 skipped, 0 failed |
+| AC.10 | OBSERVATORY_PLAN O.2 = IN_PROGRESS; version = 1.2.0 | PASS | Frontmatter `version: 1.2.0`, `phase_status.O.2: IN_PROGRESS`, changelog v1.2.0 entry added |
+| AC.11 | SESSION_LOG.md appended | PASS | This entry |
+| AC.12 | npm run build exits 0 for observatory routes | PASS | TS phase ✓ Compiled successfully; observatory routes dynamic-rendered (no prerender); /login Firebase failure pre-existing per S1.13 |
+
+### session_close
+
+```yaml
+session_close:
+  session_id: USTAD_S2_1_RECONCILIATION_FRAMEWORK
+  closed_at: 2026-05-03T00:00:00+05:30
+  red_team_due_was_discharged: true
+  red_team_table:
+    - {axis: RT.1, name: "API security — flag + super-admin gate", verdict: PASS, evidence: "All 5 (now 7 with S2.1) endpoints route through guardObservatoryRoute; 401/403 paths covered; no leak vector"}
+    - {axis: RT.2, name: "Data integrity — persistObservation error paths", verdict: PASS, evidence: "try/catch + return null in persist.ts:121-125; no rethrow; PG row-level isolation handles concurrency"}
+    - {axis: RT.3, name: "Schema correctness — covers 5 providers", verdict: PASS, evidence: "parameters jsonb absorbs provider-specific shapes; cache_*/reasoning_tokens columns nullable+default 0 cover provider variance"}
+    - {axis: RT.4, name: "Cost accuracy — Anthropic 1.25× / 0.1×", verdict: PASS, evidence: "Verified against pricing seed: opus-4-6 cache_write 18.75/15=1.25; cache_read 1.50/15=0.10"}
+    - {axis: RT.5, name: "PII discipline — hash pipeline default", verdict: FINDING_MED, evidence: "redaction.ts:48-53 defaults to identity (raw capture) when OBSERVATORY_HASH_PROMPTS unset; OBSERVATORY_PLAN §10 OD-5 specifies 'Default: hash; never raw without explicit override'", recommended_fix: "Invert default polarity: hashPromptPolicy when env unset; require OBSERVATORY_HASH_PROMPTS=false to opt out", deferral: "Logged for follow-up cleanup session in O.2 or O.3 per brief MED-defer rule"}
+    - {axis: RT.6, name: "Flag isolation — observatory imports side-effects", verdict: PASS, evidence: "Observatory imports don't auto-execute side effects; flag read only at request time in _guard.ts"}
+    - {axis: RT.7, name: "UI data exposure — non-admin path", verdict: PASS, evidence: "All UI pages under (super-admin) route group; layout-level AuthGate; api-client only hits /api/admin/* which are flag+role-gated"}
+    - {axis: RT.8, name: "Test coverage hollowness — assertions check real outputs", verdict: PASS, evidence: "57 pre-existing tests assert KPI math, cursor decode, redaction hashing, breakdowns, etc. — not pass-through; DB tests skip cleanly"}
+  open_decisions:
+    - "DeepSeek CSV invoice column mapping (S2.5 to specify exact format)"
+    - "NIM managed-catalog daily usage CSV column mapping (S2.5 to specify)"
+    - "RT.5 PII default-polarity inversion (deferred MED — schedule for cleanup session in O.2 or O.3)"
+  next_unblocked: "S2.2 (Anthropic), S2.3 (OpenAI), S2.4 (Gemini), S2.5 (DeepSeek+NIM CSV) — all parallel after this merge per OBSERVATORY_PLAN §6.1"
+  schema_validator_exit_code: 2  # Acceptable per brief precedent — no in-session validator CLI invoked
+  current_state_updated: false
+  current_state_updated_rationale: "Implementation-class S2.1 session does not rotate CURRENT_STATE pointers; pointer rotation batches at sub-phase close (O.2) per OBSERVATORY_PLAN §6.2 + §6.3 funneling."
+  session_log_appended: true
+  disagreement_register_entries_opened: []
+  disagreement_register_entries_resolved: []
+  native_overrides: []
+  halts_encountered: []
+  native_directive_per_step_verification: []
+  build_state_serialized:
+    serialized: false
+    rationale: "Implementation-class concurrent-workstream session; ONGOING_HYGIENE_POLICIES §O obligation defers to next main-thread substantive session per S0.1/S1.1/S1.2/S1.8/S1.13 precedent."
+  close_criteria_met: true
+  unblocks: "S2.2 (Anthropic reconciler) + S2.3 (OpenAI reconciler) + S2.4 (Gemini Cloud Billing reconciler) + S2.5 (DeepSeek + NIM manual CSV upload UI) — all four parallel-safe after this merge per OBSERVATORY_PLAN §6.1. After all four close: S2.6 (Reconciliation banner UI) + O.2 close session. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED)."
+  branch_state:
+    worktree_branch: feature/phase-o-observatory-ustad-s2-1-reconciliation-framework
+    cut_from_commit: 83d5456
+    merge_target: feature/phase-o-observatory
+```
+
+### Next session objective
+
+**S2.2 — Anthropic reconciler** (parallel-safe with S2.3 OpenAI / S2.4 Gemini / S2.5 DeepSeek+NIM CSV) per OBSERVATORY_PLAN §5.2. Subclasses `BaseReconciler`; implements `fetchAuthoritativeCost` against the Anthropic Admin API → Usage and Cost endpoints (per OBSERVATORY_PLAN §4.1: workspace-scoped, daily granularity, ~24h lag). Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).

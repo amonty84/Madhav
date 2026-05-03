@@ -187,6 +187,87 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
         '500': { $ref: '#/components/responses/InternalError' }
+  /reconciliation:
+    post:
+      tags: [observatory]
+      summary: Trigger a reconciliation run for one (provider, period)
+      description: |
+        Authored by USTAD_S2_1_RECONCILIATION_FRAMEWORK (Phase O sub-phase
+        O.2). For DeepSeek + NIM (no admin API), returns 400 with
+        `error: manual_upload_required`. For Anthropic / OpenAI / Gemini, S2.1
+        returns 400 with `error: not_implemented` until S2.2–S2.4 land the
+        per-provider reconcilers. Successful runs return a
+        ProviderReconcileResult and persist rows to llm_provider_cost_reports
+        + llm_cost_reconciliation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [provider, period_start, period_end]
+              properties:
+                provider:
+                  type: string
+                  enum: [anthropic, openai, gemini, deepseek, nim]
+                period_start:
+                  type: string
+                  format: date
+                  description: ISO date YYYY-MM-DD (inclusive).
+                period_end:
+                  type: string
+                  format: date
+                  description: ISO date YYYY-MM-DD (inclusive).
+      responses:
+        '200':
+          description: ProviderReconcileResult.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProviderReconcileResult' }
+        '400':
+          description: |
+            Bad input, unimplemented provider, or manual-upload provider. Body
+            shapes: `{error:'manual_upload_required',provider,instructions}`,
+            `{error:'not_implemented',provider,message}`, or the standard
+            BadRequest error envelope.
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /reconciliation/history:
+    get:
+      tags: [observatory]
+      summary: Paginated history of reconciliation runs
+      description: |
+        Authored by USTAD_S2_1_RECONCILIATION_FRAMEWORK. Returns rows from
+        llm_cost_reconciliation, newest first. `period_start` reflects
+        `reconciliation_date`; `period_end` is parsed from the `period=...`
+        marker in `notes` for multi-day spans (single-day periods echo
+        period_start).
+      parameters:
+        - name: provider
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [anthropic, openai, gemini, deepseek, nim]
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+        - name: offset
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, default: 0 }
+      responses:
+        '200':
+          description: Paginated reconciliation rows.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReconciliationHistoryResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
 
 components:
   parameters:
@@ -433,3 +514,59 @@ components:
         feature_flag_state: { nullable: true }
         client_ip_hash: { type: string, nullable: true }
         created_at: { type: string, format: date-time }
+
+    ProviderReconcileResult:
+      type: object
+      description: |
+        In-memory result of a single reconciliation run. Public field names
+        (period_start, period_end, computed_cost_usd, authoritative_cost_usd,
+        raw_report_id) preserve the framework API; the SQL persistence layer
+        maps these to the migration-038 column names (reconciliation_date,
+        computed_total_usd, authoritative_total_usd) per base.ts.
+      required:
+        [provider, period_start, period_end, authoritative_cost_usd,
+         computed_cost_usd, variance_usd, variance_pct, status, event_count,
+         raw_report_id]
+      properties:
+        provider:
+          type: string
+          enum: [anthropic, openai, gemini, deepseek, nim]
+        period_start: { type: string, format: date }
+        period_end:   { type: string, format: date }
+        authoritative_cost_usd: { type: number }
+        computed_cost_usd:      { type: number }
+        variance_usd:           { type: number }
+        variance_pct:           { type: number }
+        status:
+          type: string
+          enum:
+            [matched, variance_within_tolerance, variance_alert,
+             missing_authoritative, error]
+        event_count:    { type: integer, minimum: 0 }
+        raw_report_id:  { type: string }
+        notes:          { type: string }
+    ReconciliationHistoryRow:
+      type: object
+      required:
+        [reconciliation_id, provider, period_start, period_end, status,
+         computed_cost_usd, created_at]
+      properties:
+        reconciliation_id: { type: string, format: uuid }
+        provider:
+          type: string
+          enum: [anthropic, openai, gemini, deepseek, nim]
+        period_start: { type: string, format: date }
+        period_end:   { type: string, format: date }
+        status:       { type: string }
+        variance_pct: { type: number, nullable: true }
+        computed_cost_usd:      { type: number }
+        authoritative_cost_usd: { type: number, nullable: true }
+        created_at:   { type: string, format: date-time }
+    ReconciliationHistoryResponse:
+      type: object
+      required: [rows, total]
+      properties:
+        rows:
+          type: array
+          items: { $ref: "#/components/schemas/ReconciliationHistoryRow" }
+        total: { type: integer, minimum: 0 }

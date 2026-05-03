@@ -1,17 +1,17 @@
 ---
 artifact: OBSERVATORY_PLAN_v1_0.md
 canonical_id: OBSERVATORY_PLAN_v1_0
-version: 1.1.0
+version: 1.2.0
 status: CURRENT
 authored_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
 authored_date: 2026-05-02
-last_amended_session: USTAD_S1_13_OBSERVATORY_MVP_WIRING
+last_amended_session: USTAD_S2_1_RECONCILIATION_FRAMEWORK
 last_amended_date: 2026-05-03
 authoritative_side: claude
 phase_status:
-  O.0: CLOSED   # 2026-05-02 (S0.1)
-  O.1: CLOSED   # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
-  O.2: NEXT     # S2.1 framework session unblocked
+  O.0: CLOSED       # 2026-05-02 (S0.1)
+  O.1: CLOSED       # 2026-05-03 (S1.13 — MVP wired, all 12 ACs green)
+  O.2: IN_PROGRESS  # 2026-05-03 (S2.1 — reconciliation framework + IS.8(b) red-team)
   O.3: PENDING
   O.4: PENDING
 mirror_obligations: >
@@ -28,6 +28,32 @@ consumers:
   - Every Phase O session S0.1 → S4.6 (the gate session is THIS plan; subsequent sessions read §5 + their own brief)
   - drift_detector.py + schema_validator.py (cross-checks against the canonical-id registration)
 changelog:
+  - v1.2.0 (2026-05-03, USTAD_S2_1_RECONCILIATION_FRAMEWORK): O.2 OPEN.
+    Sub-phase O.2 marked IN_PROGRESS; S2.1 framework session CLOSED. Landed
+    the reconciliation framework: types (ProviderReconciler interface +
+    ProviderReconcileInput/Result + ReconciliationStatus enum +
+    DEFAULT_RECONCILIATION_CONFIG with tolerance=2%/alert=5%), variance
+    classifier (classifyVariance + computePeriodCost), BaseReconciler
+    abstract template (subclasses implement only fetchAuthoritativeCost; the
+    template handles persistence + variance classification + never-throws
+    error path), per-provider factory with NotImplementedReconciler stubs,
+    POST /api/admin/observatory/reconciliation + GET history endpoints (both
+    flag+super-admin gated; 400 manual_upload_required for DeepSeek/NIM and
+    400 not_implemented for the three auto providers until S2.2–S2.4). 17
+    new unit tests pass; full observatory suite 74 passed | 22 skipped, 0
+    failed (vs 57 at S1.13 close — net +17). IS.8(b) red-team for O.1 close
+    discharged (8 axes; 7 PASS + 1 MED finding RT.5 on PII default-policy
+    polarity, deferred to follow-up cleanup session per brief). DeepSeek
+    +NIM clarified as CSV-upload reconciliation path (S2.5 implements an
+    ingest handler instead of an admin-API pull; per-row CSV column mapping
+    deferred to S2.5 brief). Schema reality reconciled in code: in-memory
+    public types preserve brief naming (period_start/period_end,
+    computed_cost_usd, authoritative_cost_usd, raw_report_id); SQL boundary
+    in base.ts maps to migration-038 columns (reconciliation_date,
+    computed_total_usd, authoritative_total_usd, no FK column for
+    raw_report_id — surfaced in-memory only). Migration 038 unchanged.
+    Next milestone: S2.2 (Anthropic), S2.3 (OpenAI), S2.4 (Gemini), S2.5
+    (DeepSeek+NIM CSV) — all parallel-safe after this merge per §6.1.
   - v1.1.0 (2026-05-03, USTAD_S1_13_OBSERVATORY_MVP_WIRING): O.1 GATE CLOSE.
     All 13 sessions S1.1–S1.13 closed. Observatory MVP wired end-to-end:
     overview page (KPI tiles + filters + cost-over-time + provider/stage
@@ -349,6 +375,8 @@ Phase O has five sub-phases with 30 sessions total. Every session has a stable s
 | S2.6 | Reconciliation banner UI | platform/src/components/observatory/ReconciliationBanner.tsx, tests | All other reconcilers | S2.1, S2.2, S2.3, S2.4 (any one of the auto reconcilers writes a `variance_alert` row to drive banner) | Banner surfacing variance alerts on the Observatory page |
 
 **O.2 close criteria.** All six sessions closed; first nightly reconciliation run completes successfully across the three auto-reconciled providers in dev. IS.8(b)-class red-team.
+
+**O.2 OPEN 2026-05-03 by USTAD_S2_1_RECONCILIATION_FRAMEWORK.** Framework landed (`platform/src/lib/observatory/reconciliation/{types,variance,base,factory}.ts` + the two API endpoint routes); per-provider reconcilers S2.2–S2.5 are unblocked and parallel-safe per §6.1 (each reconciler's `may_touch` is its single sibling file under the reconciliation/ directory). **Note: DeepSeek + NIM use a manual CSV-upload path (no admin API exposed by either provider as of 2026-05-03).** S2.5 ships a CSV ingestion handler instead of an API-pull reconciler; the precise CSV column mapping (e.g., DeepSeek monthly invoice format, NIM managed-catalog daily usage export) is deferred to the S2.5 session brief. The POST /reconciliation endpoint already returns `400 manual_upload_required` with provider-specific instructions for those two providers.
 
 ### §5.3 — Sub-phase O.3: Budgets + Export (4 sessions)
 
