@@ -20075,18 +20075,18 @@ session_close:
 **S4.1 — Cache effectiveness** (first of six S4.x sessions in sub-phase O.4 Advanced Analytics). All six S4.x sessions are parallel-safe per §6.1; the last-closing one carries the batched CAPABILITY_MANIFEST update including this S3.4 session's deferred export-endpoint entry per OBSERVATORY_PLAN §12. Concurrently: M5-S1 main-thread session remains pending per CURRENT_STATE v3.5 (UNCHANGED).
 
 ---
-session_id: USTAD_S4_2
-title: Cost Per Quality Analytics (stub)
+session_id: USTAD_S4_5
+title: Replay & Re-cost Engine
 sub_phase: O.4
 status: CLOSED
 umbrella_tip_before: 40dbe96
 deliverables:
-  - platform/src/lib/observatory/analytics/cost_per_quality.ts
-  - GET /api/admin/observatory/analytics/cost-per-quality
-  - CostPerQualityPanel.tsx (probe not wired banner)
-  - platform/src/app/(super-admin)/observatory/analytics/cost-per-quality/page.tsx
-open_decision: quality_probe_wired=false; will update when audit-stage probe spec lands
-tests_added: 12
-tests_total_pass: 1268
+  - platform/src/lib/observatory/analytics/replay.ts (READ-ONLY; never mutates events)
+  - POST /api/admin/observatory/analytics/replay
+  - GET /api/admin/observatory/analytics/replay/pricing-versions
+  - ReplayPanel.tsx
+  - platform/src/app/(super-admin)/observatory/analytics/replay/page.tsx
+tests_added: 16
+tests_total_pass: 1256
 close_criteria_met: true
 ---
