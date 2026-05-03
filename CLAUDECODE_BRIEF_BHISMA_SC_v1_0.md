@@ -20,6 +20,7 @@ Start the Cloud SQL Auth Proxy in a terminal:
 ```bash
 cloud-sql-proxy --port 5433 madhav-astrology:asia-south1:amjis-postgres
 # Leave this terminal running throughout this session.
+# NOTE: proxy runs on 5433 (not 5432) — local Postgres holds 5432.
 ```
 
 **Set `status: IN_PROGRESS` at session open. Set `status: COMPLETE` only after ALL acceptance criteria pass.**
@@ -40,7 +41,7 @@ S-A and S-B are both COMPLETE. Migrations 032–036 in `platform/migrations/` ar
 cd /Users/Dev/Vibe-Coding/Apps/Madhav/platform
 
 # Verify proxy is reachable
-psql postgresql://amjis_app@127.0.0.1:5433/amjis -c "\l" 2>&1 | head -10
+psql "postgresql://amjis_app@127.0.0.1:5433/amjis" -c "\l" 2>&1 | head -10
 
 # List pending migrations (check which have already been applied vs pending)
 ls migrations/ | sort | tail -20
@@ -173,7 +174,7 @@ CLAUDE.md
 
 ## §4 Acceptance Criteria
 
-- [ ] Cloud SQL Auth Proxy reachable at 127.0.0.1:5432 (verified in §1)
+- [ ] Cloud SQL Auth Proxy reachable at 127.0.0.1:5433 (verified in §1)
 - [ ] All 5 migrations applied without error (032–036)
 - [ ] All 4 monitoring tables exist with correct schema (column names and types match §2)
 - [ ] Analytics views exist (cost_by_model, tool_health, grounding_health) and return without error
