@@ -363,3 +363,124 @@ describe('Contradiction-framing rubric in shared preamble', () => {
     expect(rendered).toContain('Phase 7 deliverable')
   })
 })
+
+// ---------------------------------------------------------------------------
+// GANGA-P3-R4-S1 — Synthesis integration gates (AC.7, AC.8, AC.9, AC.11)
+// ---------------------------------------------------------------------------
+
+describe('Synthesis integration gates — GANGA-P3-R4-S1', () => {
+  // Active templates that inherit buildOpeningBlock() and carry the new gates.
+  const ACTIVE_QUERY_CLASSES: QueryClass[] = [
+    'factual',
+    'interpretive',
+    'predictive',
+    'cross_domain',
+    'discovery',
+    'holistic',
+    'remedial',
+  ]
+
+  // AC.7 — PRESCRIPTIVE_CITATION_GATE present in all 7 active rendered templates
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'AC.7 template "%s": PRESCRIPTIVE_CITATION_GATE (→ citation format) is present',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('CITATION GATE')
+      // Eval checks for (→ ...) format — verify the gate instructs this format
+      expect(rendered).toContain('(→ SIG.MSR.NNN)')
+      expect(rendered).toContain('(→ FORENSIC.')
+    },
+  )
+
+  // AC.8 — All five B.11 layer names (acronyms) present in all 7 active rendered templates
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'AC.8 template "%s": all five L2.5 layer acronyms (MSR, UCN, CDLM, CGM, RM) are present',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('MSR')
+      expect(rendered).toContain('UCN')
+      expect(rendered).toContain('CDLM')
+      expect(rendered).toContain('CGM')
+      // RM appears via the B11_EXPLICIT_LAYER_GATE
+      expect(rendered).toContain('Resonance Map')
+    },
+  )
+
+  // AC.8 — B11_EXPLICIT_LAYER_GATE full names present (for model comprehension)
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'AC.8 template "%s": B11 gate names Unified Chart Narrative and Causal Graph Model',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('Unified Chart Narrative')
+      expect(rendered).toContain('Causal Graph Model')
+      expect(rendered).toContain('Cross-Domain Linkage Matrix')
+    },
+  )
+
+  // AC.3 — CALIBRATION_LANGUAGE_GATE present in all 7 active rendered templates
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'AC.3 template "%s": CALIBRATION_LANGUAGE_GATE is present with probabilistic language instruction',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('CALIBRATION GATE')
+      expect(rendered).toContain('suggests')
+      expect(rendered).toContain('indicates')
+      // Oracular language forbidden
+      expect(rendered).toContain('will happen')  // appears in the "do not write" list
+      expect(rendered).toContain('without doubt')
+    },
+  )
+
+  // AC.9 — All 8 templates (including cross_native stub) at version 2.0+
+  it.each([...ACTIVE_QUERY_CLASSES, 'cross_native'] as QueryClass[])(
+    'AC.9 template "%s": version is 2.0',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      expect(tmpl.version).toBe('2.0')
+    },
+  )
+
+  // Citation format update: (→ FORENSIC.<id>) replaces [F.<id>] in CITATION_DISCIPLINE
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'Citation format: template "%s" uses (→ FORENSIC.<id>) format in shared preamble',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      // New format from updated CITATION_DISCIPLINE
+      expect(rendered).toContain('(→ FORENSIC.<id>)')
+      expect(rendered).toContain('(→ SIG.MSR.NNN)')
+    },
+  )
+
+  // B.10 NO_FABRICATION: updated to require (→ FORENSIC.<id>) citation for degrees
+  it.each(ACTIVE_QUERY_CLASSES)(
+    'B.10 template "%s": NO_FABRICATION gate requires inline (→ FORENSIC.<id>) for degree values',
+    (qc) => {
+      const registry = getDefaultRegistry()
+      const tmpl = registry.get(qc, 'super_admin', 'single_model')
+      const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+      expect(rendered).toContain('[EXTERNAL_COMPUTATION_REQUIRED')
+      expect(rendered).toContain('B.10 audit')
+    },
+  )
+
+  // cross_native stub remains isolated from the new gates
+  it('cross_native stub does not carry synthesis gates (Phase 7 stub integrity)', () => {
+    const registry = getDefaultRegistry()
+    const tmpl = registry.get('cross_native', 'super_admin', 'single_model')
+    const rendered = renderTemplate(tmpl, SAMPLE_VARIABLES, 'acharya')
+    expect(rendered).not.toContain('CITATION GATE')
+    expect(rendered).not.toContain('CALIBRATION GATE')
+    expect(rendered).not.toContain('B.11 WHOLE-CHART-READ PROTOCOL')
+  })
+})

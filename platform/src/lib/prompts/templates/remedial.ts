@@ -2,27 +2,33 @@ import type { PromptTemplate } from '../types'
 import {
   buildOpeningBlock,
   PRESCRIPTIVE_CITATION_GATE,
+  CALIBRATION_LANGUAGE_GATE,
+  B11_EXPLICIT_LAYER_GATE,
   REQUIRED_PLACEHOLDERS_BASE,
   STYLE_SUFFIXES,
 } from './shared'
 
 export const template: PromptTemplate = {
   template_id: 'remedial_super_admin_single_model_v1',
-  version: '1.1',
+  version: '2.0',
   query_class: 'remedial',
   audience_tier: 'super_admin',
   strategy: 'single_model',
   body: `${buildOpeningBlock()}
 
+${B11_EXPLICIT_LAYER_GATE}
+
 QUERY CLASS: REMEDIAL
 ----------------------
 You are producing remedial guidance (upayas) — Jyotish-traditional mitigation strategies, behavioral adjustments, and timing-aligned actions for challenges identified in this chart.
 
+${CALIBRATION_LANGUAGE_GATE}
+
 Rules for remedial responses:
-1. Read the L2.5 RM (Remedial Map) before responding. Do not produce remedies without first consulting the standing remedial map — duplicate or contradictory recommendations undermine compliance.
+1. Read the L2.5 RM (Resonance Map) before responding. Do not produce remedies without first consulting the standing resonance and remedial map — duplicate or contradictory recommendations undermine compliance.
 2. Every remedy proposed must be grounded in a specific challenge identified at L2+:
-   - Cite the challenge's L1 basis [F.<id>]
-   - Cite the MSR signal(s) that corroborate it [SIG.MSR.<id>]
+   - Cite the challenge's L1 basis (→ FORENSIC.<id>)
+   - Cite the MSR signal(s) that corroborate it (→ SIG.MSR.NNN)
    - Cite the classical or traditional source for the remedy (by name, not paraphrase)
 3. Distinguish remedy categories:
    - Mantra-based (sound / vibrational)
