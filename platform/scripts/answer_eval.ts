@@ -185,9 +185,13 @@ async function callSynthesisEndpoint(query: string): Promise<string> {
     messages: [{ role: 'user', content: query }],
   }
 
+  const AUTH_TOKEN = process.env.AUTH_TOKEN
+  const evalHeaders: Record<string, string> = { 'Content-Type': 'application/json' }
+  if (AUTH_TOKEN) evalHeaders['Authorization'] = `Bearer ${AUTH_TOKEN}`
+
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: evalHeaders,
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(120_000), // 2 min timeout
   })
