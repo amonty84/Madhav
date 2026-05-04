@@ -955,10 +955,10 @@ export async function POST(request: Request) {
     generateMessageId: createIdGenerator({ prefix: 'msg', size: 16 }),
     messageMetadata: ({ part }) => {
       if (part.type === 'start' && isFirstTurn) {
-        return { conversationId: finalConversationId, model: modelId, stack: selectedStack }
+        return { conversationId: finalConversationId, model: modelId, stack: selectedStack, queryId }
       }
       if (part.type === 'start') {
-        return { model: modelId, stack: selectedStack }
+        return { model: modelId, stack: selectedStack, queryId }
       }
       // Emitted after streamText.onFinish has run, so finishReason is set.
       if (part.type === 'finish' && finishReason === 'length') {

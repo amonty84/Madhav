@@ -83,6 +83,8 @@ export function useChatSession({
   )
 
   const regenerate = useCallback(() => {
+    lastSeenQueryId.current = undefined
+    setCurrentQueryId(undefined)
     chat.regenerate({ body: { chartId, conversationId: persistedId, stack, style } })
   }, [chat, chartId, persistedId, stack, style])
 
@@ -92,6 +94,9 @@ export function useChatSession({
       if (idx === -1) return
       const truncated = chat.messages.slice(0, idx)
       chat.setMessages(truncated)
+      // Reset queryId so TracePanel clears and waits for the new query's ID
+      lastSeenQueryId.current = undefined
+      setCurrentQueryId(undefined)
       chat.sendMessage(
         { text: newText },
         { body: { chartId, conversationId: persistedId, stack, style } }
