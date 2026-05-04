@@ -22,7 +22,7 @@ purpose: >
 as_of: 2026-05-04
 current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P2-R2-S2-CIRCUIT-BREAKER (CLOSED 2026-05-04)
+last_session: GANGA-P3-R1-S1-SYNTH-PROMPT (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
@@ -34,7 +34,7 @@ immediate_next_action: >
   2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
   3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
 open_items_count: 109
-completed_items_count: 11
+completed_items_count: 13
 ```
 
 ---
@@ -138,14 +138,14 @@ completed_items_count: 11
 #### L.1 Synthesis Prompt Architecture
 | ID | Item | Status | Session |
 |---|---|---|---|
-| L.1.1 | Author SYNTHESIS_PROMPT_v1_0.md skeleton | ⬜ pending | G3-S1 |
-| L.1.2 | Jyotish methodology enforcement (B.11 encoded) | ⬜ pending | G3-S1 |
-| L.1.3 | Citation schema (B.3 discipline encoded) | ⬜ pending | G3-S1 |
-| L.1.4 | Disclosure-tier structure | ⬜ pending | G3-S1 |
-| L.1.5 | Per-query-class synthesis variants | ⬜ pending | G3-S1 |
-| L.1.6 | Counterfactual check instruction | ⬜ pending | G3-S1 |
-| L.1.7 | Worked examples section (3 acharya-grade examples) | ⬜ pending | G3-S1 |
-| L.1.8 | Output schema: structured sections per query class | ⬜ pending | G3-S1 |
+| L.1.1 | Author SYNTHESIS_PROMPT_v1_0.md skeleton | ✅ done 2026-05-04 | GANGA-P3-R1-S1 |
+| L.1.2 | Jyotish methodology enforcement (B.11 encoded) | ✅ done 2026-05-04 | GANGA-P3-R1-S1 |
+| L.1.3 | Citation schema (B.3 discipline encoded) | ✅ done 2026-05-04 | GANGA-P3-R1-S1 |
+| L.1.4 | Disclosure-tier structure | ✅ done 2026-05-04 | GANGA-P3-R1-S1 |
+| L.1.5 | Per-query-class synthesis variants | ⬜ deferred → SYNTHESIS_PROMPT_v1_1.md (needs baseline first) |
+| L.1.6 | Counterfactual check instruction | ✅ done 2026-05-04 | GANGA-P3-R1-S1 (encoded in §4.4) |
+| L.1.7 | Worked examples section (3 acharya-grade examples) | ⬜ deferred → v1_1 (after eval baseline) |
+| L.1.8 | Output schema: structured sections per query class | ✅ done 2026-05-04 | GANGA-P3-R1-S1 (§4) |
 
 #### L.2 Acharya-Grade Answer Evaluation
 | ID | Item | Status | Session |
