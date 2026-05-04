@@ -182,7 +182,7 @@ async function callSynthesisEndpoint(query: string): Promise<string> {
   const body = {
     chartId: CHART_ID,
     stack: EVAL_STACK,
-    messages: [{ role: 'user', content: query }],
+    messages: [{ role: 'user', parts: [{ type: 'text', text: query }] }],
   }
 
   const AUTH_TOKEN = process.env.AUTH_TOKEN
@@ -222,14 +222,21 @@ async function callSynthesisEndpoint(query: string): Promise<string> {
           if (data === '[DONE]') continue
           try {
             const parsed = JSON.parse(data)
-            // Handle various streaming formats
-            if (typeof parsed === 'string') text += parsed
+            // Vercel AI UI message stream format (x-vercel-ai-ui-message-stream)
+            if (parsed.type === 'text-delta' && parsed.delta) text += parsed.delta
+            else if (parsed.type === 'error') throw new Error(parsed.errorText ?? 'stream error')
+            // Legacy / OpenAI-compatible formats
+            else if (typeof parsed === 'string') text += parsed
             else if (parsed.text) text += parsed.text
             else if (parsed.choices?.[0]?.delta?.content) text += parsed.choices[0].delta.content
             else if (parsed.content) text += parsed.content
-          } catch {
-            // Raw text chunk
-            if (data && data !== '[DONE]') text += data
+          } catch (e) {
+            if (e instanceof Error && e.message !== 'stream error') {
+              // Raw text chunk (JSON parse failed)
+              if (data && data !== '[DONE]') text += data
+            } else {
+              throw e
+            }
           }
         }
       }
