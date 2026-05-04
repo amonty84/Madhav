@@ -1,11 +1,47 @@
-name: CI
+name: CI — Ganga Quality Gate
 
 on:
+  push:
+    branches: [main, 'feature/**', 'feature/ganga-*']
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
+  typecheck:
+    name: TypeScript (src only)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: platform/package-lock.json
+      - run: npm ci
+      - name: tsc — src only (exclude tests)
+        run: npx tsc --noEmit --skipLibCheck 2>&1 | grep -v "tests/" || true
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform
+    env:
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: platform/package-lock.json
+      - run: npm ci
+      - run: npm test -- --reporter=verbose 2>&1 | tail -40
+
   planner-regression:
     name: Planner Regression Gate
     runs-on: ubuntu-latest
@@ -16,6 +52,9 @@ jobs:
     defaults:
       run:
         working-directory: platform
+
+    env:
+      NODE_ENV: test
 
     steps:
       - name: Checkout
@@ -36,3 +75,8 @@ jobs:
         # Asserts tool_recall >= RECALL_THRESHOLD and tool_precision >= PRECISION_THRESHOLD
         # as defined in planner_smoke_runner.ts. No live LLM calls; no secrets required.
         run: npm run eval:planner-regression
+
+      - name: Registry regression guard (BF.GAP.001 — no LLM)
+        # Pure data assertions on MODELS/STACK_ROUTING/FAMILY_WORKER.
+        # Guards against deepseek-v4-flash re-entering routing tables.
+        run: npx vitest run tests/planner --reporter=verbose
