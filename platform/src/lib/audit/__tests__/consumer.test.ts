@@ -13,6 +13,11 @@ vi.mock('@/lib/telemetry/index', () => ({
   telemetry: { recordError: (...a: unknown[]) => mockRecordError(...a) },
 }))
 
+let mockFlagValue = false
+vi.mock('@/lib/config/index', () => ({
+  getFlag: (_name: string) => mockFlagValue,
+}))
+
 import { createAuditConsumer, type AuditConsumerContext } from '../consumer'
 import type { SynthesisAuditEvent } from '@/lib/synthesis/types'
 import type { QueryPlan } from '@/lib/router/types'
@@ -201,5 +206,71 @@ describe('createAuditConsumer — failure isolation', () => {
       c => (c as string[])[1] === 'prediction_log_failed'
     )
     expect(errCall).toBeDefined()
+  })
+})
+
+// ── L.5.1: checkpoint-derived prediction path ─────────────────────────────────
+
+const checkpointPrediction = {
+  prediction_text: 'Major career event in Jupiter dasha window Q3 2026',
+  confidence: 0.78,
+  horizon_start: '2026-07-01',
+  horizon_end: '2026-09-30',
+  falsifier: 'No significant career event by 2026-09-30',
+  subject: 'native:abhisek',
+}
+
+describe('createAuditConsumer — L.5.1 checkpoint-derived prediction', () => {
+  beforeEach(() => {
+    mockFlagValue = false
+  })
+
+  it('Test A: event.prediction set + flag ON → logPrediction called with checkpoint data', async () => {
+    mockFlagValue = true
+    const consumer = createAuditConsumer(makeContext())
+    consumer(makeAuditEvent({ prediction: checkpointPrediction }))
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(mockLogPrediction).toHaveBeenCalledOnce()
+    const [arg] = mockLogPrediction.mock.calls[0] as [Record<string, unknown>]
+    expect(arg.prediction_text).toBe(checkpointPrediction.prediction_text)
+    expect(arg.confidence).toBe(0.78)
+    expect(arg.query_id).toBe('plan-001')
+    // Sacrosanct: no outcome field
+    expect(arg.outcome).toBeUndefined()
+  })
+
+  it('Test B: event.prediction absent + flag OFF → heuristic path runs', async () => {
+    mockFlagValue = false
+    const consumer = createAuditConsumer(makeContext())
+    consumer(makeAuditEvent({
+      prediction: undefined,
+      final_output: 'Career advancement in 2026 to 2027 at 70% confidence.',
+    }))
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    // Heuristic path fires (query_class=predictive, has year range + confidence)
+    expect(mockLogPrediction).toHaveBeenCalledOnce()
+    const [arg] = mockLogPrediction.mock.calls[0] as [Record<string, unknown>]
+    // Heuristic path sets horizon from regex, not checkpoint payload
+    expect(arg.prediction_text).toBeDefined()
+    expect(arg.confidence).toBeDefined()
+  })
+
+  it('Test C: event.prediction set BUT flag OFF → heuristic fallback runs, not checkpoint path', async () => {
+    mockFlagValue = false
+    const consumer = createAuditConsumer(makeContext())
+    consumer(makeAuditEvent({
+      prediction: checkpointPrediction,
+      final_output: 'Career advancement in 2026 to 2027 at 70% confidence.',
+    }))
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    // Heuristic path fires (flag is OFF so checkpoint path is skipped)
+    expect(mockLogPrediction).toHaveBeenCalledOnce()
+    const [arg] = mockLogPrediction.mock.calls[0] as [Record<string, unknown>]
+    // The heuristic path uses extractPredictionHint which reads from final_output,
+    // so prediction_text will be from output, not the checkpoint payload text
+    expect(arg.prediction_text).not.toBe(checkpointPrediction.prediction_text)
   })
 })

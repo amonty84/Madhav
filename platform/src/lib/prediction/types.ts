@@ -24,6 +24,10 @@ export interface PredictionRow extends Required<Prediction> {
   outcome: string | null
   outcome_observed_at: string | null
   calibration_bucket: string | null
+  /** Brier score contribution: (confidence − outcome_binary)². NULL for partial/unobservable. */
+  brier_score: number | null
+  /** Native annotation on why a refuted/partial prediction went wrong. */
+  correction_note: string | null
 }
 
 export interface ListOpenPredictionsParams {

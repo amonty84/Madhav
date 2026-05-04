@@ -20,11 +20,14 @@ function OutcomeForm({ prediction, onRecorded }: {
   onRecorded: (updated: PredictionRow) => void
 }) {
   const [selectedOutcome, setSelectedOutcome] = useState<PredictionOutcome | ''>('')
+  const [correctionNote, setCorrectionNote] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
 
   const today = new Date().toISOString().split('T')[0]
   const horizonNotYetBegun = prediction.horizon_start > today
+
+  const showCorrectionNote = selectedOutcome === 'refuted' || selectedOutcome === 'partial'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -32,19 +35,25 @@ function OutcomeForm({ prediction, onRecorded }: {
 
     startTransition(async () => {
       try {
+        const body: Record<string, string> = { outcome: selectedOutcome }
+        if (showCorrectionNote && correctionNote.trim()) {
+          body.correction_note = correctionNote.trim()
+        }
         const res = await fetch(`/api/audit/predictions/${prediction.id}/outcome`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ outcome: selectedOutcome }),
+          body: JSON.stringify(body),
         })
         if (!res.ok) {
-          const body = (await res.json()) as { error?: string }
-          setError(body.error ?? 'Failed to record outcome')
+          const json = (await res.json()) as { error?: string }
+          setError(json.error ?? 'Failed to record outcome')
           return
         }
         const { prediction: updated } = (await res.json()) as { prediction: PredictionRow }
         onRecorded(updated)
         setError(null)
+        setCorrectionNote('')
+        setSelectedOutcome('')
       } catch {
         setError('Network error — please try again')
       }
@@ -60,34 +69,52 @@ function OutcomeForm({ prediction, onRecorded }: {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-wrap items-center gap-2 mt-2">
-      <select
-        value={selectedOutcome}
-        onChange={(e) => setSelectedOutcome(e.target.value as PredictionOutcome)}
-        aria-label="Select outcome"
-        className={cn(
-          'rounded border border-border bg-background px-2 py-1 text-xs',
-          'focus:outline-none focus:ring-2 focus:ring-ring'
-        )}
-        disabled={isPending}
-      >
-        <option value="">Select outcome…</option>
-        {OUTCOMES.map((o) => (
-          <option key={o} value={o}>{o}</option>
-        ))}
-      </select>
-      <button
-        type="submit"
-        disabled={!selectedOutcome || isPending}
-        className={cn(
-          'rounded border border-border px-2 py-1 text-xs transition-colors',
-          'hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-        )}
-      >
-        {isPending ? 'Saving…' : 'Record'}
-      </button>
-      {error && <span role="alert" className="text-xs text-destructive">{error}</span>}
+    <form onSubmit={handleSubmit} className="mt-2 space-y-2">
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          value={selectedOutcome}
+          onChange={(e) => setSelectedOutcome(e.target.value as PredictionOutcome)}
+          aria-label="Select outcome"
+          className={cn(
+            'rounded border border-border bg-background px-2 py-1 text-xs',
+            'focus:outline-none focus:ring-2 focus:ring-ring'
+          )}
+          disabled={isPending}
+        >
+          <option value="">Select outcome…</option>
+          {OUTCOMES.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          disabled={!selectedOutcome || isPending}
+          className={cn(
+            'rounded border border-border px-2 py-1 text-xs transition-colors',
+            'hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          )}
+        >
+          {isPending ? 'Saving…' : 'Record'}
+        </button>
+        {error && <span role="alert" className="text-xs text-destructive">{error}</span>}
+      </div>
+      {showCorrectionNote && (
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-1">
+            Correction note (optional)
+          </label>
+          <textarea
+            value={correctionNote}
+            onChange={e => setCorrectionNote(e.target.value)}
+            placeholder="What did the instrument get wrong? How should it reason differently?"
+            rows={3}
+            disabled={isPending}
+            className="w-full rounded-md border bg-background px-3 py-2 text-sm
+                       focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+          />
+        </div>
+      )}
     </form>
   )
 }
