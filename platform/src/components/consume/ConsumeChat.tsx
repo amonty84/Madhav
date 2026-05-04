@@ -17,7 +17,7 @@ import {
   LayoutGrid,
   List,
 } from 'lucide-react'
-import { stackPicker } from '@/lib/models/registry'
+import { stackPicker, getModelMeta, PROVIDER_LABEL } from '@/lib/models/registry'
 import { ChatShell } from '@/components/chat/ChatShell'
 import { ConversationSidebar } from '@/components/chat/ConversationSidebar'
 import { AdaptiveMessageList } from '@/components/chat/AdaptiveMessageList'
@@ -327,6 +327,18 @@ export function ConsumeChat({
 
   const displayMessages = branches.viewingMessages ?? session.messages
   const messagesEmpty = displayMessages.length === 0
+
+  const lastAssistantMeta = useMemo(() => {
+    const msg = [...displayMessages].reverse().find(m => m.role === 'assistant')
+    const meta = msg?.metadata as Record<string, unknown> | undefined
+    const modelId = meta?.model as string | undefined
+    const stackLabel = meta?.stack as string | undefined
+    if (!modelId) return stackLabel ?? null
+    const m = getModelMeta(modelId)
+    if (!m) return stackLabel ?? null
+    return `${m.label} · ${PROVIDER_LABEL[m.provider]}`
+  }, [displayMessages])
+
   const lastMessage = displayMessages[displayMessages.length - 1]
   const showPendingAssistant =
     session.isStreaming &&
@@ -478,6 +490,22 @@ export function ConsumeChat({
                     Retry
                   </button>
                 )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const msgs = session.messages
+                    const lastAssistant = [...msgs].reverse().findIndex(m => m.role === 'assistant')
+                    if (lastAssistant >= 0) {
+                      session.setMessages(msgs.slice(0, msgs.length - lastAssistant))
+                    } else {
+                      session.setMessages([])
+                    }
+                  }}
+                  className="shrink-0 text-destructive/50 hover:text-destructive text-[11px] leading-none"
+                  aria-label="Dismiss error"
+                >
+                  ✕
+                </button>
               </div>
             </div>
           )
@@ -499,13 +527,20 @@ export function ConsumeChat({
             </div>
           )}
           <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-2 px-4 py-1.5">
-            <ModelStylePicker
-              stack={stack}
-              style={style}
-              onStackChange={setStack}
-              onStyleChange={setStyle}
-              disabled={session.isStreaming || branches.isViewingArchived}
-            />
+            <div className="flex items-center gap-1">
+              <ModelStylePicker
+                stack={stack}
+                style={style}
+                onStackChange={setStack}
+                onStyleChange={setStyle}
+                disabled={session.isStreaming || branches.isViewingArchived}
+              />
+              {lastAssistantMeta && (
+                <span className="text-[10px] text-brand-gold/40 font-mono ml-1 hidden sm:inline">
+                  {lastAssistantMeta}
+                </span>
+              )}
+            </div>
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setLelContextEnabled(v => !v)}
