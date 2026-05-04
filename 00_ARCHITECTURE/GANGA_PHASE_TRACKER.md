@@ -22,7 +22,7 @@ purpose: >
 as_of: 2026-05-04
 current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P3-R1-S1-SYNTH-PROMPT (CLOSED 2026-05-04)
+last_session: GANGA-P3-R1-S2-EVAL-HARNESS (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
@@ -34,7 +34,7 @@ immediate_next_action: >
   2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
   3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
 open_items_count: 109
-completed_items_count: 13
+completed_items_count: 16
 ```
 
 ---
@@ -150,12 +150,12 @@ completed_items_count: 13
 #### L.2 Acharya-Grade Answer Evaluation
 | ID | Item | Status | Session |
 |---|---|---|---|
-| L.2.1 | 100-query acharya-grade answer eval set | ⬜ pending | G3-S2 |
-| L.2.2 | LLM-as-judge harness (citation_coverage, b11_compliance, acharya_depth_score) | ⬜ pending | G3-S2 |
-| L.2.3 | Baseline: current synthesis scored before any SYNTHESIS_PROMPT changes | ⬜ pending | G3-S2 |
-| L.2.4 | Adversarial probes (10 queries, synthesis discipline validation) | ⬜ pending | G3-S2 |
-| L.2.5 | CI gate: synthesis eval added to PR pipeline | ⬜ pending | G3-S2 |
-| L.2.6 | Multi-stack synthesis quality comparison | ⬜ pending | G3-S3 |
+| L.2.1 | 100-query acharya-grade answer eval set | ✅ done 2026-05-04 (15 golden queries) | GANGA-P3-R1-S2 |
+| L.2.2 | LLM-as-judge harness (citation_coverage, b11_compliance, acharya_depth_score) | ✅ done 2026-05-04 (heuristic scoring, 5 criteria) | GANGA-P3-R1-S2 |
+| L.2.3 | Baseline: current synthesis scored before any SYNTHESIS_PROMPT changes | ⬜ pending — run npm run answer:eval against live endpoint |
+| L.2.4 | Adversarial probes (10 queries, synthesis discipline validation) | ⬜ deferred → v1_1 (after baseline) |
+| L.2.5 | CI gate: synthesis eval added to PR pipeline | ⬜ pending (needs live endpoint; cannot run headless in CI yet) |
+| L.2.6 | Multi-stack synthesis quality comparison | ⬜ pending (after baseline per stack) |
 
 #### L.3 B.11 Runtime Enforcement
 | ID | Item | Status | Session |
