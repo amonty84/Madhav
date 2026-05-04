@@ -77,7 +77,7 @@ describe('P1 — Layer Separation', () => {
 
 describe('P2 — Citation Validator', () => {
   it('pass: valid citations present', async () => {
-    const text = 'The placement [F.087] suggests career strength [SIG.MSR.CAREER_001].'
+    const text = 'The placement suggests career strength SIG.MSR.087.'
     const result = await p2Validator.validate(text)
     expect(result.vote).toBe('pass')
   })
@@ -88,12 +88,12 @@ describe('P2 — Citation Validator', () => {
     expect(result.vote).toBe('pass')
   })
 
-  it('fail: malformed citation — ID exceeds max length', async () => {
-    const longSigId = 'SIG.MSR.' + 'A'.repeat(95)
-    const text = `The native [${longSigId}] indicates strength.`
+  it('warn: no SIG.MSR.NNN citations with interpretive content', async () => {
+    // Old SIG.MSR.CAREER_001 style (non-3-digit) is not matched by current regex.
+    // Interpretive content + no citations → warn.
+    const text = 'This suggests a strong career period without signal reference.'
     const result = await p2Validator.validate(text)
-    expect(result.vote).toBe('fail')
-    expect(result.reason).toMatch(/malformed/)
+    expect(result.vote).toBe('warn')
   })
 
   it('fail: non-string input', async () => {
@@ -108,8 +108,8 @@ describe('P2 — Citation Validator', () => {
     expect(result.reason).toMatch(/no citations/)
   })
 
-  it('pass: valid FORENSIC citation', async () => {
-    const text = 'See [FORENSIC.MOON_DISPOSITOR] for context. Mars indicates strength [F.001].'
+  it('pass: multiple SIG.MSR.NNN citations', async () => {
+    const text = 'Per SIG.MSR.001 and SIG.MSR.142, Mars indicates strength in the 10th house.'
     const result = await p2Validator.validate(text)
     expect(result.vote).toBe('pass')
   })

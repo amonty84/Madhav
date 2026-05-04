@@ -39,6 +39,7 @@ import { getTool } from '@/lib/retrieve/index'
 import { createToolCache, executeWithCache } from '@/lib/cache/index'
 import { loadManifest } from '@/lib/bundle/manifest_reader'
 import { runAll, summarize } from '@/lib/validators/index'
+import type { ValidationResult } from '@/lib/validators/types'
 import { createOrchestrator } from '@/lib/synthesis/index'
 import { contextAssembler } from '@/lib/synthesis/context_assembler'
 import type { ContextBundle } from '@/lib/synthesis/types'
@@ -54,6 +55,7 @@ import {
   writeQueryPlanLog,
   writeToolExecutionLog,
   writeContextAssemblyLog,
+  writeObservatoryQueryEvent,
   resolveProvider,
 } from '@/lib/db/monitoring-write'
 
@@ -187,9 +189,6 @@ export async function POST(request: Request) {
   }
 
   let isFirstTurn = false
-  // Fire the first-turn conversation insert in parallel with the model call so
-  // it doesn't block TTFT. onFinish awaits this before persisting messages.
-  let pendingConversationInsert: Promise<void> | null = null
 
   if (conversationId) {
     const existing = await getConversation({ id: conversationId, userId: user.uid, isSuperAdmin })
@@ -199,12 +198,22 @@ export async function POST(request: Request) {
   } else {
     conversationId = crypto.randomUUID()
     isFirstTurn = true
-    pendingConversationInsert = insertConversationWithId({
-      id: conversationId,
-      chartId,
-      userId: user.uid,
-      module: 'consume',
-    })
+    // BUG-1: eager insert before streaming so turn-2 can always find the row.
+    // ON CONFLICT DO NOTHING makes this idempotent on retry.
+    try {
+      await insertConversationWithId({
+        id: conversationId,
+        chartId,
+        userId: user.uid,
+        module: 'consume',
+      })
+    } catch (err) {
+      const msg = String(err).toLowerCase()
+      if (!msg.includes('duplicate') && !msg.includes('unique') && !msg.includes('conflict')) {
+        return res.internal('Failed to initialize conversation. Please retry.')
+      }
+      // duplicate key = row already exists from a retry → safe to continue
+    }
   }
 
   const finalConversationId = conversationId
@@ -229,6 +238,7 @@ export async function POST(request: Request) {
         role: m.role as 'user' | 'assistant',
         content: extractText(m.parts ?? []),
       }))
+      .filter(m => m.content.length > 0)
     // Pre-allocate query_id so it's stable across planner + classify and can be
     // used by all monitoring write helpers, even when the planner runs before
     // classify() generates the QueryPlan.
@@ -409,6 +419,19 @@ export async function POST(request: Request) {
       },
     })
 
+    // BUG-9: B.11 Whole-Chart-Read enforcement — ensure at least one L2.5 tool
+    // is in tools_authorized. A query that only selects L1 tools violates B.11.
+    // These are the canonical L2.5 retrieval tool names per inferLayer().
+    {
+      const L2_5_TOOLS = ['msr_sql', 'query_msr_aggregate', 'pattern_register',
+        'resonance_register', 'cluster_atlas', 'contradiction_register', 'cgm_graph_walk']
+      const hasL2_5 = queryPlan.tools_authorized.some(t => L2_5_TOOLS.includes(t))
+      if (!hasL2_5) {
+        queryPlan.tools_authorized.push('msr_sql', 'cgm_graph_walk')
+        console.log('[consume:v2] B.11 enforcement: added msr_sql + cgm_graph_walk to tools_authorized')
+      }
+    }
+
     const cache = createToolCache()
     const toolFetchWallStart = Date.now()
     // UQE-9: pre-allocate one seq per tool BEFORE the parallel emissions so
@@ -503,9 +526,14 @@ export async function POST(request: Request) {
     // — zero behaviour change. When ON, the assembler model compresses /
     // reorders the bundle and returns a ContextBundle whose tool_bundles are
     // passed downstream in place of validToolResults.
+    // BUG-8: NIM stack bypasses context assembly — assembler model has empty
+    // capabilities and degrades signal IDs. Force off for NIM regardless of flag.
+    const effectiveContextAssembly =
+      configService.getFlag('CONTEXT_ASSEMBLY_ENABLED') && selectedStack !== 'nim'
+
     let assembledBundle: ContextBundle | null = null
     let synthesisToolResults: ToolBundle[] = validToolResults
-    if (configService.getFlag('CONTEXT_ASSEMBLY_ENABLED')) {
+    if (effectiveContextAssembly) {
       const ctxLlmSeq = nextSeq()
       const assemblerModelId = STACK_ROUTING[selectedStack].context_assembly.primary
       assembledBundle = await contextAssembler(
@@ -543,6 +571,11 @@ export async function POST(request: Request) {
       },
     })
 
+    // BUG-2: mutable holder populated by onValidatorResults callback (fires from
+    // single_model_strategy onFinish, BEFORE onAuditEvent fires). The audit
+    // consumer closes over the same array reference, so validators_run is non-empty.
+    const validatorResultsHolder: ValidationResult[] = []
+
     const orchestrator = createOrchestrator({ panel_opt_in: panelOptIn })
     const { result, methodologyBlockHolder } = await orchestrator.synthesize({
       query: queryText,
@@ -555,7 +588,8 @@ export async function POST(request: Request) {
         .map(m => ({
           role: m.role as 'user' | 'assistant',
           content: extractText(m.parts ?? []),
-        })),
+        }))
+        .filter(m => m.content.length > 0),
       selected_model_id: modelId,
       style,
       audience_tier: audienceTier,
@@ -570,13 +604,15 @@ export async function POST(request: Request) {
       panel_opt_in: panelOptIn,
       context_assembly_seq: contextAssemblySeq,
       synthesis_seq: synthesisSeq,
+      // BUG-2: callback fires from single_model_strategy onFinish before onAuditEvent.
+      onValidatorResults: (r) => { validatorResultsHolder.push(...r) },
       // AUDIT_ENABLED retired BHISMA-B1 §6.2: always-on; flag removed from type union.
       onAuditEvent: createAuditConsumer({
         query_text: queryText,
         query_plan: queryPlan,
         bundle,
         tool_results: validToolResults,
-        validator_results: bundleValidations,
+        validator_results: validatorResultsHolder,
         disclosure_tier: audienceTier,
       }),
     })
@@ -611,9 +647,11 @@ export async function POST(request: Request) {
         try {
           const assistantMsg = finalMessages.filter((m) => m.role === 'assistant').at(-1)
           const outputText = extractText(assistantMsg?.parts ?? [])
+          // BUG-6: prefer assembled bundle when context assembly ran, so citation
+          // verification checks against the signal IDs synthesis actually saw.
           const assembledContextJson = JSON.stringify({
             bundle,
-            tool_results: validToolResults,
+            tool_results: assembledBundle?.tool_bundles ?? validToolResults,
           })
           const citationCheck = validateCitations(outputText, assembledContextJson, queryPlan.query_class)
           const overrideOn = configService.getFlag('CITATION_GATE_OVERRIDE')
@@ -726,21 +764,27 @@ export async function POST(request: Request) {
           console.error('[consume:v2] citation gate error', err)
         }
 
-        // TODO(G.3): per-query observatory rollup event with query_class, stack,
-        // total_latency_ms, cost_usd is NOT currently emitted here. The observed
-        // providers (anthropic_observed, deepseek_observed, nim_observed) auto-emit
-        // per-LLM-call observatory events at the SDK level, but those events don't
-        // carry pipeline-level fields (query_class, selected_stack). To wire
-        // AnalyticsTab/Observatory "cost per query" view, add an emitObservatoryEvent
-        // call here using the existing observatory client pattern from
-        // lib/api-clients/observatory.ts after this onFinish is reached, passing
-        // { query_id, query_class: queryPlan.query_class, stack: selectedStack,
-        //   total_latency_ms: Date.now() - setupStart, model: modelId }.
+        // G.3: per-query observatory rollup event — resolves the TODO that
+        // previously left llm_usage_events empty from the pipeline's perspective.
+        // Fire-and-forget; failure is warn-logged, never throws.
+        void writeObservatoryQueryEvent({
+          queryId,
+          conversationId: finalConversationId,
+          userId: user.uid,
+          modelId,
+          queryClass: queryPlan.query_class,
+          stack: selectedStack,
+          queryText,
+          responseText:
+            extractText(
+              finalMessages.filter(m => m.role === 'assistant').at(-1)?.parts ?? []
+            ) || null,
+          setupStart,
+        })
 
         // Emit trace done sentinel so SSE endpoint closes the stream
         traceEmitter.emitStep({ event: 'done', query_id: queryId })
         try {
-          if (pendingConversationInsert) await pendingConversationInsert
           await replaceConversationMessages({
             conversationId: finalConversationId,
             messages: finalMessages,
@@ -923,9 +967,6 @@ export async function POST(request: Request) {
     },
     onFinish: async ({ messages: finalMessages }) => {
       try {
-        // First-turn insert was fired in parallel with the stream; await it
-        // before writing messages so the FK (messages.conversation_id) is valid.
-        if (pendingConversationInsert) await pendingConversationInsert
         await replaceConversationMessages({
           conversationId: finalConversationId,
           messages: finalMessages,

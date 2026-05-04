@@ -43,6 +43,12 @@ vi.mock('@/lib/retrieve/index', () => ({
   })),
 }))
 
+// Mock validators — runAll is called in onFinish (BUG-2); must be mocked
+// so the audit test doesn't wait on real validator logic.
+vi.mock('@/lib/validators/index', () => ({
+  runAll: vi.fn().mockResolvedValue([]),
+}))
+
 // Mock cache
 vi.mock('@/lib/cache/index', () => ({
   executeWithCache: vi.fn().mockResolvedValue({
@@ -475,9 +481,9 @@ describe('SingleModelOrchestrator — audit event', () => {
     const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
 
     // Capture and invoke the onFinish callback
-    let capturedOnFinish: ((args: { finishReason: string; usage: { inputTokens: number; outputTokens: number } }) => void) | undefined
+    let capturedOnFinish: ((args: { finishReason: string; usage: { inputTokens: number; outputTokens: number } }) => Promise<void> | void) | undefined
 
-    mockStreamText.mockImplementation((args: { onFinish?: (e: { finishReason: string; usage: { inputTokens: number; outputTokens: number } }) => void }) => {
+    mockStreamText.mockImplementation((args: { onFinish?: (e: { finishReason: string; usage: { inputTokens: number; outputTokens: number } }) => Promise<void> | void }) => {
       capturedOnFinish = args.onFinish
       return makeMockStreamResult()
     })
@@ -486,8 +492,8 @@ describe('SingleModelOrchestrator — audit event', () => {
     const request = makeRequest()
     await orchestrator.synthesize(request)
 
-    // Simulate the stream finishing
-    capturedOnFinish?.({ finishReason: 'stop', usage: { inputTokens: 100, outputTokens: 50 } })
+    // Simulate the stream finishing — await so async validators complete
+    await capturedOnFinish?.({ finishReason: 'stop', usage: { inputTokens: 100, outputTokens: 50 } })
 
     // Verify audit event was logged
     const auditCall = consoleSpy.mock.calls.find(call =>

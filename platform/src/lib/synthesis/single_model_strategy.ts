@@ -37,6 +37,7 @@ import { runCheckpoint5_5 } from '@/lib/checkpoints/checkpoint_5_5'
 import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
 import { countSignalCitations } from './citation_check'
+import { runAll } from '@/lib/validators/index'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 import { checkB11Compliance } from './b11_guard'
 import { assembleContext, type LayerContext } from './context_assembler'
@@ -430,7 +431,11 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         // strip any stray <think>…</think> from the final text before downstream
         // use so neither the audit, methodology-block extractor, nor the trace
         // payload preview accidentally captures reasoning content.
-        const isR1 = selected_model_id === 'deepseek-reasoner'
+        // BUG-4: broaden guard to cover all thinking models (deepseek-v4-pro etc.)
+        const isThinkingModel =
+          selected_model_id === 'deepseek-reasoner' ||
+          getModelMeta(selected_model_id)?.hint?.toLowerCase().includes('thinking') ||
+          false
         // G.4: DeepSeek synthesis latency instrumentation.
         // If synthesisLatencyMs >> per-call latency in llm_call_log, the bottleneck
         // is context assembly (pre-stream); if approximately equal, it is the LLM.
@@ -444,14 +449,24 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           )
         }
         const rawText = text ?? ''
-        const { reasoning: r1Reasoning, answer: cleanText } = isR1
+        const { reasoning: r1Reasoning, answer: _cleanAnswer } = isThinkingModel
           ? extractReasoningTrace(rawText)
           : { reasoning: '', answer: stripThinkBlocks(rawText) }
+        // BUG-4: for thinking models whose entire output is inside <think> blocks,
+        // the answer after stripping is empty — fall back to the reasoning content.
+        let cleanText = (isThinkingModel && _cleanAnswer === '' && r1Reasoning)
+          ? r1Reasoning
+          : _cleanAnswer
 
         // Synchronous extraction — before any await — so the value is
         // available when the 'finish' SSE part fires in the route handler.
-        const mbMatch = cleanText.match(/^```marsys_methodology_block\n([\s\S]*?)\n```/m)
+        // BUG-5: also strip the fence from cleanText so stored messages don't
+        // accumulate methodology blocks on each turn.
+        const mbMatch = cleanText.match(/^```marsys_methodology_block\n([\s\S]*?)\n```\n?/m)
         methodologyBlockHolder.value = mbMatch ? mbMatch[1].trim() : null
+        if (mbMatch) {
+          cleanText = cleanText.replace(mbMatch[0], '').trim()
+        }
 
         // ── Trace: synthesis done ─────────────────────────────────────────────
         // Fire-and-forget — never awaited.
@@ -487,7 +502,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
               },
               payload: {
                 prompt_preview: cleanText.slice(0, 500),
-                ...(isR1 && r1Reasoning ? { reasoning_trace: r1Reasoning.slice(0, 4000) } : {}),
+                ...(isThinkingModel && r1Reasoning ? { reasoning_trace: r1Reasoning.slice(0, 4000) } : {}),
               },
             },
           })
@@ -516,7 +531,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           provider: resolveProvider(selected_model_id),
           input_tokens: usage?.inputTokens ?? null,
           output_tokens: usage?.outputTokens ?? null,
-          reasoning_tokens: isR1 && r1Reasoning
+          reasoning_tokens: isThinkingModel && r1Reasoning
             ? Math.ceil(r1Reasoning.length / 4)
             : null,
           latency_ms: synthesisLatencyMs,
@@ -567,6 +582,13 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
             : undefined,
           prediction: c8_5Result?.prediction,
         }
+
+        // BUG-2: compute synthesis-stage validators and notify the caller via
+        // onValidatorResults before onAuditEvent fires. The route's
+        // validatorResultsHolder (closed over by createAuditConsumer) gets
+        // populated here, so validators_run is non-empty in the audit record.
+        const synthesisValidations = await runAll(cleanText, 'synthesis', { query_plan })
+        request.onValidatorResults?.(synthesisValidations)
 
         telemetry.recordMetric('synthesis', 'audit_event', 1, {
           event_type: 'synthesis_complete',
