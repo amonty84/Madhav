@@ -20,20 +20,24 @@ purpose: >
 
 ```yaml
 as_of: 2026-05-04
-current_gate: G0 (LLM Stack Audit — PREREQUISITE, NOT YET STARTED)
-active_brief: CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md (G1 production fix — ready to execute after G0)
+current_gate: G1 (Production Fix + E2E — READY)
+current_session: null
+last_session: GANGA-P1-R1-S1-STACK-AUDIT (CLOSED 2026-05-04)
+active_brief: CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md (PF-S1 — queued for GANGA-P1-R2-S1; recoverable from git aeb7929)
 active_sessions: []
 blocking_item: >
-  BF.GAP.001 — DeepSeek model ID mismatch (deepseek-v4-flash → deepseek-reasoner).
-  LLM planner has never successfully fired in production.
-  All queries running on deterministic classify() fallback.
-  Fix brief exists (PF-S1). Execute AFTER Gate 0 closes.
+  BF.GAP.001 — DeepSeek model ID mismatch ROOT-CAUSE CONFIRMED in GANGA-P1-R1-S1.
+  Fix specified in MODEL_REGISTRY_v1_0.md §6.1 (5 model-ID replacements +
+  1 alias un-deprecation in registry.ts). LLM planner still has never fired
+  in production; fix lands in GANGA-P1-R2-S1.
 immediate_next_action: >
-  1. Author CLAUDECODE_BRIEF_GANGA_G0_S1_v1_0.md (LLM stack audit brief)
-  2. Execute G0-S1 in Antigravity (Claude Code). Output: MODEL_REGISTRY_v1_0.md.
-  3. Once G0 closes: trigger "Read CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md and execute it."
-open_items_count: 114
-completed_items_count: 0
+  1. Execute GANGA-P1-R2-S1-PLANNER-FIX in /Apps/Ganga/ worktree (feature/ganga-umbrella).
+  2. Pre-flight: re-stage CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md from git aeb7929 if wanted.
+  3. Apply 6 edits to platform/src/lib/models/registry.ts per MODEL_REGISTRY_v1_0.md §6.1.
+  4. Deploy + smoke (assert plan_json non-NULL on a DeepSeek-stack test query).
+  5. Close G1, increment completed_items_count, append entry to session log.
+open_items_count: 111
+completed_items_count: 3
 ```
 
 ---
@@ -42,8 +46,8 @@ completed_items_count: 0
 
 | Gate | Name | Status | Sessions | Key Output | Blocks |
 |---|---|---|---|---|---|
-| **G0** | LLM Stack Audit | 🔴 NOT STARTED | G0-S1 (not yet run) | MODEL_REGISTRY_v1_0.md | All other gates |
-| G1 | Production Fix + E2E | ⏸️ BLOCKED on G0 | G1-S1 (brief ready), B.1 observation | plan_json non-NULL first time | Gate 2 |
+| **G0** | LLM Stack Audit | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R1-S1 ✅ CLOSED | MODEL_REGISTRY_v1_0.md ✅ + GANGA_STACK_AUDIT_v1_0.md ✅ (verdict PASS) | — |
+| G1 | Production Fix + E2E | 🟡 READY — unblocked by G0 completion | GANGA-P1-R2-S1 (PF-S1 brief queued), B.1 observation | plan_json non-NULL first time | Gate 2 |
 | G2 | Platform Hardening | ⏸️ BLOCKED on G1 | 5-6 parallel sessions | Planner v1.7, retrieval fixes, test fixes | Gate 3 |
 | G3 | Synthesis Quality | ⏸️ BLOCKED on G2 | 3-4 sequential sessions | SYNTHESIS_PROMPT v1.0, eval harness, B.11 | Gate 4 |
 | G4 | Integration + Close | ⏸️ BLOCKED on G3 | 1 session | GANGA_CLOSE_v1_0.md | — |
@@ -55,9 +59,9 @@ completed_items_count: 0
 ### Workstream K — LLM Stack Review (Gate 0)
 | ID | Item | Status | Session |
 |---|---|---|---|
-| K.1 | Model × stack × role matrix audit | ⬜ pending | G0-S1 |
-| K.2 | NIM model selection (nemotron-49B vs alternatives) | ⬜ pending | G0-S1 |
-| K.3 | Author MODEL_REGISTRY_v1_0.md | ⬜ pending | G0-S1 |
+| K.1 | Model × stack × role matrix audit | ✅ done 2026-05-04 | GANGA-P1-R1-S1 |
+| K.2 | NIM model selection (nemotron-49B + PlanInputJsonSchema mechanism) | ✅ done 2026-05-04 | GANGA-P1-R1-S1 |
+| K.3 | Author MODEL_REGISTRY_v1_0.md | ✅ done 2026-05-04 | GANGA-P1-R1-S1 |
 
 ### Workstream A — Production Blocker Fix (Gate 1)
 | ID | Item | Status | Session |
@@ -185,6 +189,9 @@ completed_items_count: 0
 
 | Item | Completed | Session | Notes |
 |---|---|---|---|
+| K.1 — Model × stack × role matrix audit | 2026-05-04 | GANGA-P1-R1-S1 | 5 stacks × 5 roles confirmed; BF.GAP.001 root-caused |
+| K.2 — NIM evaluation (PlanInputJsonSchema mechanism) | 2026-05-04 | GANGA-P1-R1-S1 | Recommend KEEP — do not migrate |
+| K.3 — MODEL_REGISTRY_v1_0.md authored | 2026-05-04 | GANGA-P1-R1-S1 | + GANGA_STACK_AUDIT_v1_0.md (G0 PASS) |
 | Planner prompt v1.6 (recall=0.940, precision=0.945) | 2026-05-04 | BHISMA Phase 1 | GATE MET |
 | LLM_FIRST_PLANNER_ENABLED=true | 2026-05-04 | fa75e1a | Planner code ON but never fired in prod |
 | CI regression gate | 2026-05-04 | BHISMA-CI-S1 | .github/workflows/ci.yml live |
