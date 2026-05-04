@@ -23,7 +23,8 @@
     "cutover:stage1-smoke": "tsx scripts/cutover/stage1_smoke.ts",
     "cutover:phase12-smoke": "tsx scripts/cutover/stage1_phase12_smoke.ts",
     "trace:smoke": "tsx scripts/trace/trace_smoke.ts",
-    "observatory:smoke": "tsx scripts/observatory/smoke_test.ts"
+    "observatory:smoke": "tsx scripts/observatory/smoke_test.ts",
+    "answer:eval": "npx tsx scripts/answer_eval.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.71",
