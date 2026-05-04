@@ -187,7 +187,8 @@ async function callSynthesisEndpoint(query: string): Promise<string> {
 
   const AUTH_TOKEN = process.env.AUTH_TOKEN
   const evalHeaders: Record<string, string> = { 'Content-Type': 'application/json' }
-  if (AUTH_TOKEN) evalHeaders['Authorization'] = `Bearer ${AUTH_TOKEN}`
+  // Server uses cookie-based session auth (__session); Bearer fallback for forward compat
+  if (AUTH_TOKEN) evalHeaders['Cookie'] = `__session=${AUTH_TOKEN}`
 
   const res = await fetch(url, {
     method: 'POST',
