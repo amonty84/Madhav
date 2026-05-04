@@ -251,6 +251,14 @@ interface StepCardProps {
   step: TraceStep
 }
 
+// TODO(I.4): tool_execution_log does not yet carry per-tool quality score fields
+// (relevance, coverage, token_efficiency). The scorecard below reads from
+// step.payload.items (trace-side data) which gives score distribution for
+// vector_search but not structured relevance/coverage/efficiency scores.
+// To surface those, add score columns to tool_execution_log (migration required)
+// and wire GET /api/audit/[query_id] to return them alongside payload items.
+// Until then, the scorecard degrades to payload-derived stats (score dist,
+// layer/doc-type breakdowns) and shows no structured quality metrics.
 export function RetrievalScorecard({ step }: StepCardProps) {
   const items = step.payload.items ?? []
   if (items.length === 0) return null

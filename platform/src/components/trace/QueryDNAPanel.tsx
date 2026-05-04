@@ -14,7 +14,7 @@
  */
 
 import { useState } from 'react'
-import { ChevronDown, ChevronUp, Sparkles, AlertTriangle } from 'lucide-react'
+import { ChevronDown, ChevronUp, ChevronRight, Sparkles, AlertTriangle } from 'lucide-react'
 import type { TraceStep, TraceQueryPlan, TraceToolCallSpec } from '@/lib/trace/types'
 
 interface Props {
@@ -105,8 +105,38 @@ function priorityDot(priority: 1 | 2 | 3 | undefined): string {
 
 // ── Component ────────────────────────────────────────────────────────────────
 
+// ── Per-tool params collapse state ───────────────────────────────────────────
+
+function ToolParamsTable({ params }: { params: Record<string, unknown> }) {
+  const entries = Object.entries(params).filter(([, v]) => v !== undefined && v !== null)
+  if (entries.length === 0) return null
+  const compact = entries.length <= 4
+  return (
+    <div className="mt-1 ml-1 border-l border-[rgba(212,175,55,0.15)] pl-2">
+      <table className="w-full text-[9px] font-mono">
+        <tbody>
+          {entries.slice(0, compact ? entries.length : 4).map(([k, v]) => (
+            <tr key={k}>
+              <td className="text-[rgba(212,175,55,0.55)] pr-2 align-top whitespace-nowrap">{k}</td>
+              <td className="text-[rgba(252,226,154,0.75)] break-all">{String(v)}</td>
+            </tr>
+          ))}
+          {!compact && entries.length > 4 && (
+            <tr>
+              <td colSpan={2} className="text-[rgba(212,175,55,0.35)] pt-0.5">
+                +{entries.length - 4} more params
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 export function QueryDNAPanel({ steps }: Props) {
   const [collapsed, setCollapsed] = useState(false)
+  const [expandedToolParams, setExpandedToolParams] = useState<Set<string>>(new Set())
 
   // Find planning step — accept either legacy 'classify' or BHISMA-B2 'plan'.
   const planStep = steps.find(s => s.step_name === 'plan' || s.step_name === 'classify')
@@ -138,8 +168,8 @@ export function QueryDNAPanel({ steps }: Props) {
   const synthesisGuidance = plan?.synthesis_guidance
 
   const tools = toolCalls && toolCalls.length > 0
-    ? toolCalls.map(tc => ({ name: tc.tool_name, priority: tc.priority, reason: tc.reason }))
-    : (plan?.tools_authorized ?? []).map(name => ({ name, priority: undefined, reason: undefined }))
+    ? toolCalls.map(tc => ({ name: tc.tool_name, priority: tc.priority, reason: tc.reason, params: tc.params }))
+    : (plan?.tools_authorized ?? []).map(name => ({ name, priority: undefined, reason: undefined, params: undefined }))
 
   const domains = plan?.domains ?? []
   const seeds = plan?.graph_seed_hints ?? []
@@ -203,29 +233,61 @@ export function QueryDNAPanel({ steps }: Props) {
             </div>
           )}
 
-          {/* Tools row */}
+          {/* Tools row — I.1: each tool badge has a chevron when params exist */}
           {tools.length > 0 && (
             <div>
               <div className="text-[9px] font-bold uppercase tracking-[0.12em] text-[rgba(212,175,55,0.4)] mb-1">Tools authorized</div>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-col gap-1">
                 {tools.map((tool, i) => {
                   const kind = inferToolKind(tool.name)
                   const titleParts: string[] = [tool.name]
                   if (tool.priority) titleParts.push(`priority ${tool.priority}`)
                   if (tool.reason) titleParts.push(tool.reason)
+                  const hasParams = tool.params && Object.keys(tool.params).length > 0
+                  const paramsExpanded = expandedToolParams.has(`${tool.name}-${i}`)
+                  const toggleParams = () => {
+                    setExpandedToolParams(prev => {
+                      const next = new Set(prev)
+                      if (next.has(`${tool.name}-${i}`)) next.delete(`${tool.name}-${i}`)
+                      else next.add(`${tool.name}-${i}`)
+                      return next
+                    })
+                  }
                   return (
-                    <span
-                      key={`${tool.name}-${i}`}
-                      title={titleParts.join(' — ')}
-                      className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded border ${TOOL_KIND_STYLE[kind]}`}
-                    >
-                      <span className="font-mono">{tool.name}</span>
-                      {tool.priority && (
-                        <span className="text-[8px] opacity-60 font-mono" aria-label={`priority ${tool.priority}`}>
-                          {priorityDot(tool.priority)}
+                    <div key={`${tool.name}-${i}`}>
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span
+                          title={titleParts.join(' — ')}
+                          className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded border ${TOOL_KIND_STYLE[kind]}`}
+                        >
+                          <span className="font-mono">{tool.name}</span>
+                          {tool.priority && (
+                            <span className="text-[8px] opacity-60 font-mono" aria-label={`priority ${tool.priority}`}>
+                              {priorityDot(tool.priority)}
+                            </span>
+                          )}
                         </span>
+                        {hasParams && (
+                          <button
+                            type="button"
+                            onClick={toggleParams}
+                            className="inline-flex items-center gap-0.5 text-[9px] text-[rgba(212,175,55,0.45)] hover:text-[rgba(212,175,55,0.75)] transition-colors"
+                            title="Toggle planner params"
+                          >
+                            {paramsExpanded
+                              ? <ChevronDown size={9} />
+                              : <ChevronRight size={9} />}
+                            <span>params</span>
+                          </button>
+                        )}
+                        {tool.reason && (
+                          <span className="text-[9px] text-[rgba(212,175,55,0.4)] italic truncate max-w-[200px]">{tool.reason}</span>
+                        )}
+                      </div>
+                      {hasParams && paramsExpanded && (
+                        <ToolParamsTable params={tool.params as Record<string, unknown>} />
                       )}
-                    </span>
+                    </div>
                   )
                 })}
               </div>

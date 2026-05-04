@@ -78,6 +78,13 @@ interface CostBreakdown {
   total_usd: number
 }
 
+// TODO(I.3): cost_usd in llm_call_log is currently null for all stacks
+// (synthesis writes cost_usd: null in single_model_strategy.ts MON-5).
+// Once cost_usd is populated in the DB, prefer DB-backed value fetched from
+// GET /api/audit/[query_id] over this client-side computation.
+// Token pricing constants needed for NIM (nvidia) free-tier: currently
+// costPer1MInput/Output are non-zero in the registry, so NIM queries will
+// compute a non-zero client-side cost even though NIM is billed separately.
 function extractCost(steps: TraceStep[]): CostBreakdown {
   const llmSteps = steps.filter(s => s.step_type === 'llm' && s.status === 'done')
   const rows: Array<{ label: string; usd: number }> = []
@@ -90,7 +97,11 @@ function extractCost(steps: TraceStep[]): CostBreakdown {
     if (!modelId || (inputTokens === 0 && outputTokens === 0)) continue
 
     const meta = getModelMeta(modelId)
-    if (!meta) continue
+    if (!meta) {
+      // Unknown model — show N/A row so the step is visible without crashing
+      rows.push({ label: modelId, usd: NaN })
+      continue
+    }
 
     const usd =
       (inputTokens / 1_000_000) * meta.costPer1MInput +
@@ -113,7 +124,10 @@ function fmtMs(ms: number | null | undefined): string {
   return `${(ms / 1000).toFixed(2)}s`
 }
 
-function fmtCost(usd: number): string {
+// I.3: fmtCost handles null (N/A) and zero ($0) distinctly.
+// null = cost not available (unknown model or no tokens); zero = model is free tier.
+function fmtCost(usd: number | null | undefined): string {
+  if (usd == null) return 'N/A'
   if (usd === 0) return '$0'
   if (usd < 0.001) return `<$0.001`
   if (usd < 0.01) return `$${usd.toFixed(4)}`
@@ -192,7 +206,7 @@ export function CostPerformanceBar({ steps, comparisonAvgMs }: Props) {
           </div>
 
           <span className="text-[11px] font-semibold text-[rgba(252,226,154,0.85)] tabular-nums ml-auto">
-            {fmtCost(cost.total_usd)}
+            {cost.rows.some(r => isNaN(r.usd)) ? 'N/A' : fmtCost(cost.total_usd)}
           </span>
         </div>
       )}

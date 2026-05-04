@@ -46,7 +46,7 @@ import { validateCitations } from '@/lib/synthesis/citation_check'
 // PipelineError import removed — citation gate no longer throws post-stream (see citation_error trace event)
 import { createAuditConsumer } from '@/lib/audit/consumer'
 import { traceEmitter } from '@/lib/trace/emitter'
-import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload } from '@/lib/trace/types'
+import type { TraceStep, TraceChunkItem, TraceDataSummary, TracePayload, TraceQueryPlan, TraceToolCallSpec } from '@/lib/trace/types'
 import type { ToolBundle, ToolBundleResult } from '@/lib/retrieve/index'
 import { res } from '@/lib/errors'
 import {
@@ -367,9 +367,22 @@ export async function POST(request: Request) {
         latency_ms: Date.now() - classifyStart,
         data_summary: {
           result: queryPlan.query_class,
+          query_class: queryPlan.query_class,
           confidence: queryPlan.router_confidence,
+          planning_confidence: queryPlan.router_confidence,
         },
-        payload: {},
+        // G.1: wire plan_json tool calls + full query plan to QueryDNAPanel
+        payload: {
+          query_plan: {
+            ...(queryPlan as unknown as TraceQueryPlan),
+            query_intent_summary: (planSchema as unknown as Record<string, unknown> | null)?.query_intent_summary as string | undefined,
+            planning_rationale: (planSchema as unknown as Record<string, unknown> | null)?.planning_rationale as string | undefined,
+            synthesis_guidance: (planSchema as unknown as Record<string, unknown> | null)?.synthesis_guidance as string | undefined,
+            planning_model_id: plannerModelIdUsed ?? undefined,
+            planning_latency_ms: plannerLatencyMs ?? undefined,
+          } as TraceQueryPlan,
+          tool_calls: planSchema?.tool_calls as unknown as TraceToolCallSpec[] | undefined,
+        },
       },
     })
 
@@ -712,6 +725,17 @@ export async function POST(request: Request) {
         } catch (err) {
           console.error('[consume:v2] citation gate error', err)
         }
+
+        // TODO(G.3): per-query observatory rollup event with query_class, stack,
+        // total_latency_ms, cost_usd is NOT currently emitted here. The observed
+        // providers (anthropic_observed, deepseek_observed, nim_observed) auto-emit
+        // per-LLM-call observatory events at the SDK level, but those events don't
+        // carry pipeline-level fields (query_class, selected_stack). To wire
+        // AnalyticsTab/Observatory "cost per query" view, add an emitObservatoryEvent
+        // call here using the existing observatory client pattern from
+        // lib/api-clients/observatory.ts after this onFinish is reached, passing
+        // { query_id, query_class: queryPlan.query_class, stack: selectedStack,
+        //   total_latency_ms: Date.now() - setupStart, model: modelId }.
 
         // Emit trace done sentinel so SSE endpoint closes the stream
         traceEmitter.emitStep({ event: 'done', query_id: queryId })
