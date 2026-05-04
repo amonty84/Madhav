@@ -20,24 +20,21 @@ purpose: >
 
 ```yaml
 as_of: 2026-05-04
-current_gate: G1 (Production Fix + E2E — READY)
+current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P1-R1-S1-STACK-AUDIT (CLOSED 2026-05-04)
-active_brief: CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md (PF-S1 — queued for GANGA-P1-R2-S1; recoverable from git aeb7929)
+last_session: GANGA-P1-R2-S1-PLANNER-FIX (CLOSED 2026-05-04)
+active_brief: null
 active_sessions: []
-blocking_item: >
-  BF.GAP.001 — DeepSeek model ID mismatch ROOT-CAUSE CONFIRMED in GANGA-P1-R1-S1.
-  Fix specified in MODEL_REGISTRY_v1_0.md §6.1 (5 model-ID replacements +
-  1 alias un-deprecation in registry.ts). LLM planner still has never fired
-  in production; fix lands in GANGA-P1-R2-S1.
+blocking_item: null
+note: >
+  BF.GAP.001 fixed. Observation checkpoint recommended before P2-R1-S2 (E2E-OBS)
+  but code sessions can proceed.
 immediate_next_action: >
-  1. Execute GANGA-P1-R2-S1-PLANNER-FIX in /Apps/Ganga/ worktree (feature/ganga-umbrella).
-  2. Pre-flight: re-stage CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md from git aeb7929 if wanted.
-  3. Apply 6 edits to platform/src/lib/models/registry.ts per MODEL_REGISTRY_v1_0.md §6.1.
-  4. Deploy + smoke (assert plan_json non-NULL on a DeepSeek-stack test query).
-  5. Close G1, increment completed_items_count, append entry to session log.
-open_items_count: 111
-completed_items_count: 3
+  1. Execute GANGA-P2-R1-S1-CI-GATE (GitHub Actions CI + planner regression tests).
+  2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
+  3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
+open_items_count: 109
+completed_items_count: 5
 ```
 
 ---
@@ -47,8 +44,8 @@ completed_items_count: 3
 | Gate | Name | Status | Sessions | Key Output | Blocks |
 |---|---|---|---|---|---|
 | **G0** | LLM Stack Audit | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R1-S1 ✅ CLOSED | MODEL_REGISTRY_v1_0.md ✅ + GANGA_STACK_AUDIT_v1_0.md ✅ (verdict PASS) | — |
-| G1 | Production Fix + E2E | 🟡 READY — unblocked by G0 completion | GANGA-P1-R2-S1 (PF-S1 brief queued), B.1 observation | plan_json non-NULL first time | Gate 2 |
-| G2 | Platform Hardening | ⏸️ BLOCKED on G1 | 5-6 parallel sessions | Planner v1.7, retrieval fixes, test fixes | Gate 3 |
+| **G1** | Production Fix + E2E | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R2-S1 ✅ CLOSED | BF.GAP.001 fixed (deepseek-chat in routing tables) | — |
+| **G2** | Platform Hardening | 🟡 READY — unblocked by G1 completion | GANGA-P2-R1-S1 (CI-GATE), GANGA-P2-R2-S1 (NIM-COMPAT), GANGA-P2-R2-S2 (CIRCUIT-BREAKER) | CI gate + NIM hardening + circuit breaker | Gate 3 |
 | G3 | Synthesis Quality | ⏸️ BLOCKED on G2 | 3-4 sequential sessions | SYNTHESIS_PROMPT v1.0, eval harness, B.11 | Gate 4 |
 | G4 | Integration + Close | ⏸️ BLOCKED on G3 | 1 session | GANGA_CLOSE_v1_0.md | — |
 
@@ -66,7 +63,7 @@ completed_items_count: 3
 ### Workstream A — Production Blocker Fix (Gate 1)
 | ID | Item | Status | Session |
 |---|---|---|---|
-| A.1 | deepseek-v4-flash → deepseek-chat in registry.ts | ⬜ pending | G1-S1 (brief: BHISMA_PF_S1) |
+| A.1 | deepseek-v4-flash → deepseek-chat in registry.ts | ✅ done 2026-05-04 | GANGA-P1-R2-S1 |
 
 ### Workstream B — E2E Baseline (Gate 1)
 | ID | Item | Status | Session |
