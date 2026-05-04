@@ -28,7 +28,7 @@ import {
   supports,
   type ModelStack,
 } from '@/lib/models/registry'
-import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions, deepseekProviderOptions } from '@/lib/models/resolver'
 import { configService } from '@/lib/config/index'
 import { classify } from '@/lib/router/router'
 import { callLlmPlanner, PlannerError, type PlanSchema } from '@/lib/pipeline/manifest_planner'
@@ -250,6 +250,7 @@ export async function POST(request: Request) {
     let plannerFallbackUsed = false
     if (configService.getFlag('LLM_FIRST_PLANNER_ENABLED')) {
       const plannerModelId = STACK_ROUTING[selectedStack].planner_fast.primary
+      const plannerFallbackModelId = STACK_ROUTING[selectedStack].planner_fast.fallback
       plannerModelIdUsed = plannerModelId
       const plannerStartedAt = Date.now()
       try {
@@ -261,6 +262,7 @@ export async function POST(request: Request) {
             chartId,
             (event) => traceEmitter.emitStep(event),
             preAllocatedQueryId,
+            plannerFallbackModelId,
           ),
         )
         plannerLatencyMs = Date.now() - plannerStartedAt
@@ -890,9 +892,13 @@ export async function POST(request: Request) {
     // for a dead NIM endpoint is ~30 s, not 5+ minutes.
     ...(modelMeta.provider === 'nvidia' && { maxRetries: 0 }),
     // Google-specific: disable safety filters + cap thinking budget.
-    // See resolver.googleProviderOptions for full rationale.
-    ...(googleProviderOptions(modelId) && {
-      providerOptions: googleProviderOptions(modelId),
+    // DeepSeek V4 Pro: activate thinking=enabled for synthesis CoT.
+    // Merge at the top-level provider key — no model is both google and deepseek.
+    ...((googleProviderOptions(modelId) || deepseekProviderOptions(modelId, 'synthesis')) && {
+      providerOptions: {
+        ...(googleProviderOptions(modelId)?.google && { google: googleProviderOptions(modelId)!.google }),
+        ...(deepseekProviderOptions(modelId, 'synthesis')?.deepseek && { deepseek: deepseekProviderOptions(modelId, 'synthesis')!.deepseek }),
+      },
     }),
     onStepFinish: ({ toolCalls, toolResults }) => {
       // Log each tool call that happened during this synthesis step.

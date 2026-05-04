@@ -881,22 +881,52 @@ function TraceTimeline({
 
 interface ContentProps {
   queryId: string | null
+  steps?: TraceStep[]
+  done?: boolean
+  error?: string | null
+  planningActive?: boolean
+  planningModel?: string | null
+  toolsSelected?: string[] | null
+  queryIntentSummary?: string | null
 }
 
 type HistorySubTab = 'list' | 'analytics'
 
-export function TracePanelContent({ queryId }: ContentProps) {
+export function TracePanelContent({
+  queryId,
+  steps: stepsProp,
+  done: doneProp,
+  error: errorProp,
+  planningActive: planningActiveProp,
+  planningModel: planningModelProp,
+}: ContentProps) {
   const [activeTab, setActiveTab] = useState<'live' | 'history'>('live')
+  const [viewTab, setViewTab] = useState<'steps' | 'pipeline'>('pipeline')
   const [historySubTab, setHistorySubTab] = useState<HistorySubTab>('list')
   const [historyQueryId, setHistoryQueryId] = useState<string | null>(null)
   const [historyList, setHistoryList] = useState<TraceHistoryRow[]>([])
   const [historyLoaded, setHistoryLoaded] = useState(false)
   const [selectedStep, setSelectedStep] = useState<TraceStep | null>(null)
 
+  const isControlled = stepsProp !== undefined
   const effectiveQueryId = activeTab === 'live' ? queryId : historyQueryId
   const isHistorical = activeTab === 'history'
+  const streamQueryId = isControlled && activeTab === 'live' ? null : effectiveQueryId
 
-  const { steps, done, error } = useTraceStream(effectiveQueryId, isHistorical)
+  const {
+    steps: streamSteps,
+    done: streamDone,
+    error: streamError,
+    planningActive: streamPlanningActive,
+    planningModel: streamPlanningModel,
+  } = useTraceStream(streamQueryId, isHistorical)
+
+  const isLiveControlled = isControlled && activeTab === 'live'
+  const steps = isLiveControlled ? (stepsProp ?? []) : streamSteps
+  const done = isLiveControlled ? (doneProp ?? false) : streamDone
+  const error = isLiveControlled ? (errorProp ?? null) : streamError
+  const planningActive = isLiveControlled ? (planningActiveProp ?? false) : streamPlanningActive
+  const planningModel = isLiveControlled ? (planningModelProp ?? null) : streamPlanningModel
 
   // Compute 10-query rolling-avg total latency for the cost/perf comparison
   const comparisonAvgMs = useMemo(() => {
@@ -1046,18 +1076,55 @@ export function TracePanelContent({ queryId }: ContentProps) {
         /* Live / single-query view */
         <>
           <QueryDNAPanel steps={steps} />
-          <div className="flex-1 flex overflow-hidden min-h-0">
-            <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
-              <TraceTimeline
-                steps={steps}
-                selectedSeq={selectedStep?.step_seq ?? null}
-                onSelect={s => setSelectedStep(s)}
-              />
-            </div>
-            <div className="flex-1 overflow-hidden flex flex-col">
-              <ContextInspector steps={steps} selectedStep={selectedStep} />
+          {/* Inner tab bar: Pipeline Flow (default) vs Steps */}
+          <div className="flex items-center px-3 py-1.5 border-b border-[rgba(212,175,55,0.08)] bg-[rgba(13,10,5,0.4)] flex-shrink-0">
+            <div className="flex gap-px bg-[rgba(5,3,1,0.6)] rounded p-0.5">
+              <button
+                type="button"
+                onClick={() => setViewTab('pipeline')}
+                className={`px-2.5 py-0.5 rounded text-[10px] font-semibold transition-colors ${
+                  viewTab === 'pipeline'
+                    ? 'bg-[rgba(212,175,55,0.12)] text-[rgba(252,226,154,0.95)]'
+                    : 'text-[rgba(212,175,55,0.45)] hover:text-[rgba(252,226,154,0.85)]'
+                }`}
+              >
+                Pipeline Flow
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewTab('steps')}
+                className={`px-2.5 py-0.5 rounded text-[10px] font-semibold transition-colors ${
+                  viewTab === 'steps'
+                    ? 'bg-[rgba(212,175,55,0.12)] text-[rgba(252,226,154,0.95)]'
+                    : 'text-[rgba(212,175,55,0.45)] hover:text-[rgba(252,226,154,0.85)]'
+                }`}
+              >
+                Steps
+              </button>
             </div>
           </div>
+          {viewTab === 'steps' ? (
+            <div className="flex-1 flex overflow-hidden min-h-0">
+              <div className="w-[300px] flex-shrink-0 overflow-hidden flex flex-col">
+                <TraceTimeline
+                  steps={steps}
+                  selectedSeq={selectedStep?.step_seq ?? null}
+                  onSelect={s => setSelectedStep(s)}
+                />
+              </div>
+              <div className="flex-1 overflow-hidden flex flex-col">
+                <ContextInspector steps={steps} selectedStep={selectedStep} />
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto min-h-0">
+              <PipelineFlowView
+                steps={steps}
+                planningActive={planningActive}
+                planningModel={planningModel}
+              />
+            </div>
+          )}
         </>
       )}
 
@@ -1068,6 +1135,240 @@ export function TracePanelContent({ queryId }: ContentProps) {
           <TimelineBar steps={steps} />
         </>
       )}
+    </div>
+  )
+}
+
+// ── PipelineFlowView — structured pipeline command centre ─────────────────────
+
+const ALL_RETRIEVAL_TOOLS = [
+  'msr_sql', 'pattern_register', 'resonance_register', 'cluster_atlas',
+  'contradiction_register', 'temporal', 'query_msr_aggregate', 'cgm_graph_walk',
+  'manifest_query', 'vector_search', 'kp_query', 'saham_query',
+  'divisional_query', 'chart_facts_query', 'domain_report_query',
+  'remedial_codex_query', 'timeline_query', 'query_signal_state',
+  'query_kp_ruling_planets', 'query_varshaphala',
+] as const
+
+function PfRow({
+  icon, name, dim, meta, pulse,
+}: {
+  icon: string; name: string; dim?: boolean; meta?: string; pulse?: boolean
+}) {
+  return (
+    <div className={`flex items-center gap-2 px-2 py-1.5 rounded ${pulse ? 'animate-pulse bg-[rgba(212,175,55,0.04)]' : ''}`}>
+      <span className="w-4 flex-shrink-0 text-[11px]">{icon}</span>
+      <span className={`flex-1 text-[11px] font-medium truncate ${dim ? 'text-[rgba(212,175,55,0.35)]' : 'text-[rgba(252,226,154,0.85)]'}`}>{name}</span>
+      {meta && <span className={`text-[10px] font-mono flex-shrink-0 ${dim ? 'text-[rgba(212,175,55,0.3)]' : 'text-[rgba(212,175,55,0.55)]'}`}>{meta}</span>}
+    </div>
+  )
+}
+
+function PfStepRow({ step, label }: { step: TraceStep; label: string }) {
+  const isDone = step.status === 'done'
+  const isRunning = step.status === 'running'
+  const isError = step.status === 'error'
+  const icon = isDone ? '✅' : isRunning ? '🔄' : isError ? '❌' : '⬜'
+  const model = step.data_summary.model
+    ?.replace(/^claude-haiku-/, 'haiku-')
+    .replace(/^claude-sonnet-/, 'sonnet-')
+    .replace(/^claude-opus-/, 'opus-')
+    .replace(/nvidia\//i, '')
+    .replace(/@.*$/, '') ?? ''
+  const count = step.data_summary.rows_returned != null
+    ? `${step.data_summary.rows_returned}r`
+    : step.data_summary.chunks_returned != null
+    ? `${step.data_summary.chunks_returned}c`
+    : ''
+  const errMsg = isError
+    ? (step.payload.error_message ?? step.data_summary.error_reason ?? 'error')
+    : null
+  return (
+    <div className={`flex items-center gap-2 px-2 py-1.5 rounded ${isRunning ? 'animate-pulse bg-[rgba(212,175,55,0.04)]' : ''}`}>
+      <span className="w-4 flex-shrink-0 text-[11px]">{icon}</span>
+      <span className="flex-1 text-[11px] font-medium text-[rgba(252,226,154,0.85)] truncate">
+        {label.replace(/_/g, ' ')}
+      </span>
+      {count && <span className="text-[10px] font-mono text-[rgba(212,175,55,0.5)] flex-shrink-0">{count}</span>}
+      {model && <span className="text-[10px] font-mono text-[rgba(180,140,240,0.7)] flex-shrink-0">{model}</span>}
+      {isDone && step.latency_ms != null && (
+        <span className="text-[10px] font-mono text-[rgba(212,175,55,0.55)] flex-shrink-0">{fmtMs(step.latency_ms)}</span>
+      )}
+      {errMsg && (
+        <span className="text-[10px] text-[rgba(240,150,120,0.8)] truncate max-w-[120px]">{errMsg}</span>
+      )}
+    </div>
+  )
+}
+
+function PfToolRow({
+  toolName, step, priority, notSelected,
+}: {
+  toolName: string
+  step: TraceStep | undefined
+  priority: 1 | 2 | 3 | undefined
+  notSelected?: boolean
+}) {
+  const isDone = step?.status === 'done'
+  const isRunning = step?.status === 'running'
+  const isError = step?.status === 'error'
+  const icon = notSelected ? '⬜' : isDone ? '✅' : isRunning ? '🔄' : isError ? '❌' : '⬜'
+  const priColor = priority === 1
+    ? 'text-[rgba(244,209,96,0.9)]'
+    : priority === 2
+    ? 'text-[rgba(200,200,200,0.75)]'
+    : 'text-[rgba(140,140,140,0.65)]'
+  const count = step?.data_summary.rows_returned != null
+    ? `${step.data_summary.rows_returned}r`
+    : step?.data_summary.chunks_returned != null
+    ? `${step.data_summary.chunks_returned}c`
+    : ''
+  return (
+    <div className={`flex items-center gap-2 px-3 py-1 ${notSelected ? 'opacity-40' : ''} ${isRunning ? 'animate-pulse' : ''}`}>
+      <span className="w-3.5 flex-shrink-0 text-[10px]">{icon}</span>
+      <span className={`flex-1 text-[10px] font-mono truncate ${notSelected ? 'text-[rgba(212,175,55,0.5)]' : 'text-[rgba(252,226,154,0.75)]'}`}>
+        {toolName}
+      </span>
+      {priority && !notSelected && <span className={`text-[9px] font-bold flex-shrink-0 ${priColor}`}>P{priority}</span>}
+      {count && <span className="text-[10px] font-mono text-[rgba(212,175,55,0.45)] flex-shrink-0">{count}</span>}
+      {step?.latency_ms != null && (
+        <span className="text-[10px] font-mono text-[rgba(212,175,55,0.45)] flex-shrink-0">{fmtMs(step.latency_ms)}</span>
+      )}
+      {notSelected && <span className="text-[9px] text-[rgba(212,175,55,0.3)] flex-shrink-0">not selected</span>}
+    </div>
+  )
+}
+
+function PipelineFlowView({
+  steps,
+  planningActive,
+  planningModel,
+}: {
+  steps: TraceStep[]
+  planningActive: boolean
+  planningModel: string | null
+}) {
+  const [notSelectedOpen, setNotSelectedOpen] = useState(false)
+
+  const plannerStep  = steps.find(s => s.step_name === 'llm_planner')
+  const classifyStep = steps.find(s => s.step_name === 'classify')
+  const composeStep  = steps.find(s => s.step_name === 'compose_bundle' || s.step_name === 'compose')
+  const ctxStep      = steps.find(s => s.step_name === 'context_assembly')
+  const synthStep    = steps.find(s => s.step_name === 'synthesis_done' || s.step_name === 'synthesis')
+  const citationStep = steps.find(s => s.step_name.startsWith('citation'))
+  const validatorSteps = steps.filter(s => s.step_name.startsWith('validate_'))
+
+  const toolSteps = steps.filter(s => (ALL_RETRIEVAL_TOOLS as readonly string[]).includes(s.step_name))
+
+  const toolsAuthorized: string[] =
+    plannerStep?.payload.query_plan?.tools_authorized ??
+    classifyStep?.payload.query_plan?.tools_authorized ??
+    toolSteps.map(s => s.step_name)
+
+  const priorityMap: Record<string, 1 | 2 | 3> = {}
+  const toolCallsList = plannerStep?.payload.tool_calls ?? classifyStep?.payload.tool_calls
+  if (toolCallsList) {
+    for (const tc of toolCallsList) priorityMap[tc.tool_name] = tc.priority
+  }
+
+  const notSelectedTools = (ALL_RETRIEVAL_TOOLS as readonly string[]).filter(
+    t => !toolsAuthorized.includes(t),
+  )
+
+  const showPlannerThinking = planningActive && !plannerStep
+  const hasAnyContent = steps.length > 0 || planningActive
+
+  return (
+    <div className="px-3 py-3">
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-[10px] font-bold text-[rgba(212,175,55,0.55)] tracking-[0.14em] uppercase">Pipeline Flow</span>
+        {toolSteps.length > 0 && (
+          <span className="text-[9px] px-1.5 py-0.5 rounded border bg-[rgba(212,175,55,0.04)] text-[rgba(212,175,55,0.5)] border-[rgba(212,175,55,0.15)]">
+            {toolSteps.length} tools ran
+          </span>
+        )}
+      </div>
+
+      {!hasAnyContent && (
+        <div className="text-[11px] text-[rgba(212,175,55,0.35)] text-center py-6">
+          No pipeline data yet. Run a query to see the flow.
+        </div>
+      )}
+
+      {/* LLM Planner */}
+      {showPlannerThinking && (
+        <PfRow
+          icon="⏳"
+          name={`LLM Planner thinking…${planningModel ? ` (${planningModel.replace(/^claude-/, '')})` : ''}`}
+          pulse
+        />
+      )}
+      {plannerStep && (
+        <PfStepRow step={plannerStep} label="LLM Planner" />
+      )}
+
+      {/* Classify */}
+      {classifyStep && <PfStepRow step={classifyStep} label="Classify" />}
+
+      {/* Compose Bundle */}
+      {composeStep && <PfStepRow step={composeStep} label="Compose Bundle" />}
+
+      {/* Tool Fetch section */}
+      {(toolsAuthorized.length > 0 || toolSteps.length > 0) && (
+        <div className="border border-[rgba(212,175,55,0.10)] rounded my-2">
+          <div className="flex items-center gap-1.5 px-2 py-1 bg-[rgba(212,175,55,0.04)] border-b border-[rgba(212,175,55,0.08)]">
+            <span className="text-[9px] font-bold text-[rgba(212,175,55,0.45)] tracking-wider">⇉ TOOL FETCH — PARALLEL</span>
+            <span className="text-[9px] text-[rgba(212,175,55,0.3)] ml-auto">{toolsAuthorized.length} selected</span>
+          </div>
+          {toolsAuthorized.map(toolName => (
+            <PfToolRow
+              key={toolName}
+              toolName={toolName}
+              step={toolSteps.find(s => s.step_name === toolName)}
+              priority={priorityMap[toolName] as 1 | 2 | 3 | undefined}
+            />
+          ))}
+          {notSelectedTools.length > 0 && (
+            <div className="border-t border-[rgba(212,175,55,0.06)]">
+              <button
+                type="button"
+                onClick={() => setNotSelectedOpen(v => !v)}
+                className="w-full flex items-center gap-1 px-3 py-1.5 text-left hover:bg-[rgba(212,175,55,0.02)] transition-colors"
+              >
+                <span className="text-[9px] text-[rgba(212,175,55,0.35)] font-semibold uppercase tracking-wider">
+                  {notSelectedOpen ? '▾' : '›'} {notSelectedTools.length} tools not selected
+                </span>
+              </button>
+              {notSelectedOpen && notSelectedTools.map(toolName => (
+                <PfToolRow key={toolName} toolName={toolName} step={undefined} priority={undefined} notSelected />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Context Assembly */}
+      {ctxStep ? (
+        <PfStepRow step={ctxStep} label="Context Assembly" />
+      ) : hasAnyContent ? (
+        <PfRow icon="⏭" name="Context Assembly" dim meta="skipped (NIM stack)" />
+      ) : null}
+
+      {/* Synthesis */}
+      {synthStep && <PfStepRow step={synthStep} label="Synthesis" />}
+
+      {/* Citation Gate */}
+      {citationStep && <PfStepRow step={citationStep} label="Citation Gate" />}
+
+      {/* Validators */}
+      {validatorSteps.map(step => (
+        <PfStepRow
+          key={step.step_seq}
+          step={step}
+          label={step.step_name.replace(/^validate_/, 'Validator: ').replace(/_/g, ' ')}
+        />
+      ))}
     </div>
   )
 }

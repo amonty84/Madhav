@@ -30,7 +30,7 @@ import 'server-only'
 
 import { generateText } from 'ai'
 
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
 import { getModelMeta } from '@/lib/models/registry'
 import { traceEmitter } from '@/lib/trace/emitter'
 import { telemetry } from '@/lib/telemetry/index'
@@ -233,6 +233,11 @@ export async function contextAssembler(
       maxOutputTokens: 8000,
       maxRetries: 0,
       abortSignal: assemblerSignal,
+      // Apply Google safety overrides when the assembler model is a Gemini model.
+      // Returns undefined for all non-Google models — spread is a no-op.
+      ...(googleProviderOptions(modelId) && {
+        providerOptions: googleProviderOptions(modelId),
+      }),
     })
     usage = result.usage
     assembled = parseAssemblerOutput(result.text, toolBundles)

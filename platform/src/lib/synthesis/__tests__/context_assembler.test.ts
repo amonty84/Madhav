@@ -6,6 +6,7 @@ vi.mock('server-only', () => ({}))
 
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => 'mock-model'),
+  googleProviderOptions: vi.fn(() => undefined),
 }))
 vi.mock('@/lib/trace/emitter', () => ({
   traceEmitter: { emitStep: vi.fn() },

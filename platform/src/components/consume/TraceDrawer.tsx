@@ -6,6 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { useTraceStream } from '@/hooks/useTraceStream'
 import { TracePanelContent } from '@/components/trace/TracePanel'
 
 interface Props {
@@ -15,6 +16,10 @@ interface Props {
 }
 
 export function TraceDrawer({ queryId, open, onOpenChange }: Props) {
+  // Only subscribe when the drawer is open to avoid stale SSE connections.
+  const { steps, done, error, planningActive, planningModel, toolsSelected, queryIntentSummary } =
+    useTraceStream(open ? queryId : null, false)
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
@@ -28,7 +33,16 @@ export function TraceDrawer({ queryId, open, onOpenChange }: Props) {
           </SheetTitle>
         </SheetHeader>
         <div className="flex-1 min-h-0 overflow-hidden">
-          <TracePanelContent queryId={queryId} />
+          <TracePanelContent
+            queryId={queryId}
+            steps={steps}
+            done={done}
+            error={error}
+            planningActive={planningActive}
+            planningModel={planningModel}
+            toolsSelected={toolsSelected}
+            queryIntentSummary={queryIntentSummary}
+          />
         </div>
       </SheetContent>
     </Sheet>

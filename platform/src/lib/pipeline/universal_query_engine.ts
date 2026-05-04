@@ -31,7 +31,7 @@ import {
   type PlanSchema,
 } from './manifest_planner'
 import { arbitrateBudgets, type BudgetArbiterConfig } from './budget_arbiter'
-import type { PlanningStartEvent, PlanningDoneEvent } from '@/lib/trace/types'
+import type { TraceEvent } from '@/lib/trace/types'
 
 export interface ConversationTurn {
   role: 'user' | 'assistant'
@@ -64,7 +64,7 @@ export interface UniversalQueryEngineOptions {
   /** Inject a custom breaker for tests; default uses the module singleton. */
   circuitBreaker?: PlannerCircuitBreaker
   /** SSE planning trace hook — forwarded into the underlying planner. */
-  emitTrace?: (event: PlanningStartEvent | PlanningDoneEvent) => void
+  emitTrace?: (event: TraceEvent) => void
   /** Inject a stub planner for tests; defaults to the real callLlmPlanner. */
   plannerFn?: CallLlmPlannerFn
 }
