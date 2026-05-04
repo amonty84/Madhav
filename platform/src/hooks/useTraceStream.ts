@@ -15,12 +15,24 @@ export interface TraceState {
   steps: TraceStep[]
   done: boolean
   error: string | null
+  planningActive: boolean
+  planningModel: string | null
+  manifestToolCount: number | null
+  toolsSelected: string[] | null
+  planningDoneAt: number | null
+  queryIntentSummary: string | null
 }
 
 export function useTraceStream(queryId: string | null, historical = false): TraceState {
   const [steps, setSteps] = useState<TraceStep[]>([])
   const [done, setDone] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [planningActive, setPlanningActive] = useState(false)
+  const [planningModel, setPlanningModel] = useState<string | null>(null)
+  const [manifestToolCount, setManifestToolCount] = useState<number | null>(null)
+  const [toolsSelected, setToolsSelected] = useState<string[] | null>(null)
+  const [planningDoneAt, setPlanningDoneAt] = useState<number | null>(null)
+  const [queryIntentSummary, setQueryIntentSummary] = useState<string | null>(null)
   const esRef = useRef<EventSource | null>(null)
   const activeQueryId = useRef<string | null>(null)
 
@@ -38,6 +50,12 @@ export function useTraceStream(queryId: string | null, historical = false): Trac
     setSteps([])
     setDone(false)
     setError(null)
+    setPlanningActive(false)
+    setPlanningModel(null)
+    setManifestToolCount(null)
+    setToolsSelected(null)
+    setPlanningDoneAt(null)
+    setQueryIntentSummary(null)
     activeQueryId.current = queryId
 
     // EventSource doesn't support custom headers — pass mode as a URL query param instead.
@@ -52,6 +70,21 @@ export function useTraceStream(queryId: string | null, historical = false): Trac
         if (event.event === 'done') {
           setDone(true)
           es.close()
+          return
+        }
+
+        if (event.event === 'planning_start') {
+          setPlanningActive(true)
+          setPlanningModel(event.planner_model_id ?? null)
+          setManifestToolCount(event.manifest_tool_count ?? null)
+          return
+        }
+
+        if (event.event === 'planning_done') {
+          setPlanningActive(false)
+          setToolsSelected(event.tools_selected ?? null)
+          setPlanningDoneAt(Date.now())
+          setQueryIntentSummary(event.query_intent_summary ?? null)
           return
         }
 
@@ -86,5 +119,15 @@ export function useTraceStream(queryId: string | null, historical = false): Trac
     }
   }, [queryId, historical])
 
-  return { steps, done, error }
+  return {
+    steps,
+    done,
+    error,
+    planningActive,
+    planningModel,
+    manifestToolCount,
+    toolsSelected,
+    planningDoneAt,
+    queryIntentSummary,
+  }
 }
