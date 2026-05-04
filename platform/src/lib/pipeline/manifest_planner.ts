@@ -58,6 +58,34 @@ export class PlannerError extends Error {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Retry helpers — timeout-only retry gate
+// ────────────────────────────────────────────────────────────────────────────
+
+const MAX_PLANNER_RETRIES = 1
+const PLANNER_RETRY_DELAY_MS = 2000
+
+function isTimeoutError(err: unknown): boolean {
+  if (err instanceof Error) {
+    const msg = err.message.toLowerCase()
+    return (
+      msg.includes('timeout') ||
+      msg.includes('aborted') ||
+      msg.includes('network') ||
+      msg.includes('enotfound') ||
+      msg.includes('econnreset') ||
+      msg.includes('econnrefused') ||
+      msg.includes('cannot connect') ||
+      err.name === 'AbortError'
+    )
+  }
+  return false
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Zod schema for generateObject() structured output
 // ────────────────────────────────────────────────────────────────────────────
 
@@ -249,29 +277,65 @@ export async function callLlmPlanner(
   // against PlanSchemaZod before populating `toolCall.input`.
   const start = Date.now()
   let result
-  try {
-    result = await generateText({
-      model: resolveModel(plannerModelId),
-      system: getSystemPrompt(),
-      messages: [{ role: 'user', content: userMessage }],
-      temperature: 0,
-      // maxRetries: 0 — NIM free-tier is queue-based. Without this, the AI SDK
-      // retries an AbortError (headers-timeout) up to 3 times; the queued-then-
-      // aborted request comes back as HTTP 500 on retry, masking the real cause.
-      // With 0 retries the AbortError surfaces cleanly as PlannerError so the
-      // caller can decide to retry or fall back. The 90s nimFetch timeout gives
-      // ample headroom for NIM queue waits before aborting at all.
-      maxRetries: 0,
-      tools: {
-        submit_plan: tool({
-          description:
-            'Submit the planned tool calls for the native query. Call this exactly once with the full plan; do not emit prose.',
-          inputSchema: jsonSchema<PlanSchema>(PlanInputJsonSchema),
-        }),
-      },
-      toolChoice: 'required',
-    })
-  } catch (err) {
+  let lastErr: unknown
+  for (let attempt = 0; attempt <= MAX_PLANNER_RETRIES; attempt++) {
+    try {
+      result = await generateText({
+        model: resolveModel(plannerModelId),
+        system: getSystemPrompt(),
+        messages: [{ role: 'user', content: userMessage }],
+        temperature: 0,
+        // maxRetries: 0 — NIM free-tier is queue-based. Without this, the AI SDK
+        // retries an AbortError (headers-timeout) up to 3 times; the queued-then-
+        // aborted request comes back as HTTP 500 on retry, masking the real cause.
+        // With 0 retries the AbortError surfaces cleanly so isTimeoutError() can
+        // gate our own single retry. The 90s nimFetch timeout gives ample headroom
+        // for NIM queue waits before aborting at all.
+        maxRetries: 0,
+        tools: {
+          submit_plan: tool({
+            description:
+              'Submit the planned tool calls for the native query. Call this exactly once with the full plan; do not emit prose.',
+            inputSchema: jsonSchema<PlanSchema>(PlanInputJsonSchema),
+          }),
+        },
+        toolChoice: 'required',
+      })
+      break
+    } catch (err) {
+      lastErr = err
+      if (isTimeoutError(err) && attempt < MAX_PLANNER_RETRIES) {
+        console.warn(
+          `[manifest_planner] timeout on attempt ${attempt + 1}, retrying...`,
+        )
+        await sleep(PLANNER_RETRY_DELAY_MS)
+        continue
+      }
+      if (queryId) {
+        void writeLlmCallLog({
+          query_id: queryId,
+          conversation_id: null,
+          call_stage: 'planner',
+          model_id: plannerModelId,
+          provider: resolveProvider(plannerModelId),
+          input_tokens: null,
+          output_tokens: null,
+          reasoning_tokens: null,
+          latency_ms: Date.now() - start,
+          cost_usd: null,
+          fallback_used: false,
+          error_code: err instanceof Error ? err.message : String(err),
+          payload: null,
+        })
+      }
+      throw new PlannerError(
+        `LLM planner call failed: ${err instanceof Error ? err.message : String(err)}`,
+        err,
+      )
+    }
+  }
+  if (!result) {
+    // Exhausted retries on timeout errors — log and throw
     if (queryId) {
       void writeLlmCallLog({
         query_id: queryId,
@@ -285,13 +349,13 @@ export async function callLlmPlanner(
         latency_ms: Date.now() - start,
         cost_usd: null,
         fallback_used: false,
-        error_code: err instanceof Error ? err.message : String(err),
+        error_code: lastErr instanceof Error ? lastErr.message : String(lastErr),
         payload: null,
       })
     }
     throw new PlannerError(
-      `LLM planner call failed: ${err instanceof Error ? err.message : String(err)}`,
-      err,
+      `LLM planner call failed: ${lastErr instanceof Error ? lastErr.message : String(lastErr)}`,
+      lastErr,
     )
   }
   const latency_ms = Date.now() - start

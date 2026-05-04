@@ -1,11 +1,18 @@
 ---
 artifact: PLANNER_PROMPT_v1_0.md
-version: 1.6
+version: 1.7
 status: CURRENT
 produced_during: W2-MANIFEST (UQE-4a part 2)
 produced_on: 2026-05-01
-amended_on: 2026-05-03
+amended_on: 2026-05-04
 amendment_reason: >
+  v1.6 → v1.7 (GANGA-P2-R1-S3): 5 targeted fixes from E2E-OBS observation.
+  (1) §4.2 preamble scoped to gemstone-only; mantra/spiritual still fires R18 per
+  contradiction resolution. (2) §4.11 new holistic few-shot for dual R12+R15
+  trigger queries (central themes + contradictions → all 4 registers). (3) R19
+  note added: R12/R15 scope words do not trigger msr_sql. (4) R14 extended:
+  divisional structural queries omit vector_search. (5) manifest_planner.ts:
+  1-retry + 2s backoff on timeout-class errors (GT.021 infrastructure fix).
   v1.5 → v1.6 (Lever 2 EVAL-6 run 2: 21/29 pass, recall=0.911 ✓, precision=0.945 ✓,
   thresholds MET; 8 stable prompt-side failures remain across runs). Goal: make eval
   deterministic by eliminating variance between timeout-heavy and timeout-free runs.
@@ -280,7 +287,14 @@ Hard rules:
        across all layers", "Mars dispositor chain"). Do NOT include
        cgm_graph_walk when the interpretive query has a domain qualifier
        such as "in relationships", "for career", "in health". Never include
-       in predictive or remedial queries.
+       in predictive or remedial queries. For INTERPRETIVE queries asking
+       specifically about DIVISIONAL CHART placement or a planet's position
+       across multiple vargas (e.g. "Mars across all divisionals", "which
+       planets are in the 8th house across vargas", "show me D9 placements"),
+       do NOT add `vector_search` — divisional placement reads are answered
+       from MSR signals and the CGM graph, not L3 long-form narrative. Include
+       `cgm_graph_walk` at priority 2 (per the structural-positional rule) and
+       omit `vector_search`.
   R15. `resonance_register` is for REMEDIAL queries (R7b) and HOLISTIC
        queries that EXPLICITLY use the words "themes", "resonance",
        "alignment", or "central patterns" (e.g. "what are the central
@@ -319,7 +333,13 @@ Hard rules:
        lightweight curiosity queries that fit NEITHER case — including
        "high-level read", "what's interesting", "what stands out", "surprise
        me", "what's notable" — `msr_sql` is NOT required. Let `cluster_atlas`
-       carry the holistic scope alone for those queries.
+       carry the holistic scope alone for those queries. This also applies to
+       holistic queries whose scope is defined by trigger words for R12/R15
+       (contradictions, themes, resonance, alignment) rather than by explicit
+       domain names or comprehensive-scope words. A query like "what are the
+       central themes and contradictions" fits neither R19 case (a) nor (b) —
+       omit `msr_sql` even though the plan uses contradiction_register and
+       resonance_register.
   R20. For HOLISTIC queries asking how domains INTERACT or AFFECT each other
        (e.g. "how does my career interact with marriage", "career + marriage +
        health interaction", "how are these domains connected"), use
@@ -431,48 +451,57 @@ at priority 2 to pull L3 domain narrative for the prescription context.
 }
 ```
 
-### 4.2 Remedial query — alignment character (gemstone / mantra)
+### 4.2 Remedial query — alignment character (mantra + domain word)
 
-The native is asking whether a specific remedial action aligns with the
-cross-domain signal resonance their chart carries. This is an
-**alignment-character** remedial (gemstone, mantra, yellow sapphire, Mars
-propitiation, fasting, charity) — not a recurring-pattern question. The
-right cross-domain lens is `resonance_register`, not `pattern_register`.
+The native is asking which mantra supports a specific domain of life. This is an
+**alignment-character** remedial (mantra, gemstone, propitiation, fasting, charity)
+— the right cross-domain lens is `resonance_register`, not `pattern_register`.
 Per R8, `msr_sql` is at priority 1.
 
-`vector_search` is intentionally **not** in this plan. Alignment queries
-are answered from MSR signals + the remedial codex + the resonance lens;
-they do not require semantic text search across L3 long-form. Adding it
-inflates the plan and trips precision on entries where `vector_search`
-is forbidden.
+**R18 fires here** because the query contains "spiritual" — a domain word in R18's
+trigger list. Domain word + any remedial query type = `vector_search` required to
+pull the L3 domain narrative for prescription context. This applies whether the
+query is alignment-character OR pattern-character — the domain word overrides the
+alignment vs. pattern distinction for `vector_search`.
+
+**Contrast: gemstone queries without a domain word** (e.g. "Should I wear yellow
+sapphire?") do NOT include `vector_search` — "yellow sapphire" and "Jupiter" are not
+domain words. R18 does not fire; omit `vector_search` for those queries.
 
 ```json
 {
-  "user_query": "Should I wear a yellow sapphire to strengthen Jupiter? Will it actually align with my chart?",
+  "user_query": "Which mantra should I recite to support my spiritual growth?",
   "expected_plan": {
     "query_class": "remedial",
-    "query_intent_summary": "Assess yellow-sapphire alignment with native's Jupiter resonance.",
+    "query_intent_summary": "Identify a mantra aligned with the native's spiritual domain signals.",
     "tool_calls": [
       {
         "tool_name": "msr_sql",
-        "params": { "planets": ["Jupiter"] },
+        "params": { "domains": ["spiritual"] },
         "token_budget": 900,
         "priority": 1,
-        "reason": "Surface Jupiter-bearing signals across domains for alignment check."
+        "reason": "Surface spiritual-domain signals (Jupiter, 9H, Ketu) for mantra alignment."
       },
       {
         "tool_name": "remedial_codex_query",
-        "params": { "planet": "Jupiter", "limit": 8 },
+        "params": { "limit": 8 },
         "token_budget": 700,
         "priority": 1,
-        "reason": "Yellow-sapphire indications, contraindications, prerequisites for Jupiter."
+        "reason": "Mantra prescriptions from the remedial codex for the spiritual domain."
       },
       {
         "tool_name": "resonance_register",
-        "params": { "theme": "Jupiter-alignment" },
+        "params": { "theme": "spiritual-alignment" },
         "token_budget": 400,
         "priority": 2,
-        "reason": "Cross-domain resonance: does Jupiter-strengthening align with chart's signal pattern?"
+        "reason": "Cross-domain resonance: confirm mantra aligns with chart's spiritual signal pattern."
+      },
+      {
+        "tool_name": "vector_search",
+        "params": { "query_text": "spiritual practice mantra", "doc_type": ["domain_report"], "top_k": 5 },
+        "token_budget": 500,
+        "priority": 2,
+        "reason": "R18: 'spiritual' domain word — pull L3 spiritual-domain narrative for prescription context."
       }
     ]
   }
@@ -738,6 +767,13 @@ answered from MSR + CGM graph, not L3 long-form narrative. Compare §4.4 for
 domain-qualified interpretive (e.g. "Mars in 8th for relationships") where
 `cgm_graph_walk` is omitted and `vector_search` is used instead.
 
+**This same structural-no-vector_search rule applies to single-planet deep-dive
+queries** — "Tell me everything about Jupiter in my chart", "full profile of
+Mars", "everything about [planet]" — these are planetary-profile structural
+queries answered from MSR + pattern_register + CGM graph. Do NOT add
+`vector_search`; add `cgm_graph_walk` + `pattern_register` per R14/R17(b).
+Same rule applies to divisional placement queries (see R14 note).
+
 ```json
 {
   "user_query": "What does Saturn in the 11th house mean for my chart?",
@@ -806,6 +842,60 @@ not a structural-topology query.
 }
 ```
 
+### 4.11 Holistic query — discovery-register-rich open-ended exploration
+
+This query uses "central themes" (R15 trigger → resonance_register) AND
+"contradictions" (R12 trigger → contradiction_register). When BOTH triggers
+appear in the same holistic query, all four discovery registers activate:
+cluster_atlas + pattern_register + contradiction_register + resonance_register.
+R19 does NOT fire here — no specific domains named, no "comprehensive" scope
+word — so `msr_sql` is correctly absent. Compare §4.7 (no trigger words →
+lean 2-tool plan) and §4.6 (domain names → msr_sql fires via R19).
+
+**R15 trigger note:** the word "themes" (including "central themes") alone is
+sufficient to fire R15 and add `resonance_register`. The word "resonates" need
+not appear — "central themes" IS the trigger.
+
+```json
+{
+  "user_query": "What are the central themes and contradictions in my chart?",
+  "expected_plan": {
+    "query_class": "holistic",
+    "query_intent_summary": "Holistic scan for central themes, contradictions, and resonance patterns.",
+    "tool_calls": [
+      {
+        "tool_name": "cluster_atlas",
+        "params": {},
+        "token_budget": 900,
+        "priority": 1,
+        "reason": "R11: cluster_atlas required for all holistic queries — primary synthesis surface."
+      },
+      {
+        "tool_name": "pattern_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "Recurring cross-domain patterns — foundation for theme identification."
+      },
+      {
+        "tool_name": "contradiction_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "R12: query explicitly uses 'contradictions' and 'tension' — contradiction register required."
+      },
+      {
+        "tool_name": "resonance_register",
+        "params": {},
+        "token_budget": 400,
+        "priority": 2,
+        "reason": "R15: query explicitly uses 'central themes' and 'resonates' — resonance register required."
+      }
+    ]
+  }
+}
+```
+
 ## 5. Evaluation rubric (5 criteria × 0–2 each → 0–10)
 
 | # | Criterion              | 0 (fail)                         | 1 (partial)                              | 2 (pass)                                                 |
@@ -821,4 +911,4 @@ with the rubric and the failing scores. ≥7 admits the plan to retrieval.
 
 ---
 
-*PLANNER_PROMPT v1.6 · authored 2026-05-01 · amended 2026-05-03 · consumed by W2-PLANNER*
+*PLANNER_PROMPT v1.7 · authored 2026-05-01 · amended 2026-05-04 · consumed by W2-PLANNER*
