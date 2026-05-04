@@ -22,7 +22,7 @@ purpose: >
 as_of: 2026-05-04
 current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P3-R1-S2-EVAL-HARNESS (CLOSED 2026-05-04)
+last_session: GANGA-P3-R2-S1-B11-ENFORCE (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
@@ -34,7 +34,7 @@ immediate_next_action: >
   2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
   3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
 open_items_count: 109
-completed_items_count: 16
+completed_items_count: 19
 ```
 
 ---
@@ -160,9 +160,9 @@ completed_items_count: 16
 #### L.3 B.11 Runtime Enforcement
 | ID | Item | Status | Session |
 |---|---|---|---|
-| L.3.1 | Holistic floor gate in UQE (soft warning) | ⬜ pending | G3-S2 |
-| L.3.2 | Post-synthesis L2.5 citation coverage audit | ⬜ pending | G3-S2 |
-| L.3.3 | B.11 violation counter in AnalyticsTab | ⬜ pending | G3-S3 |
+| L.3.1 | Holistic floor gate in UQE (soft warning) | ✅ done 2026-05-04 (b11_guard.ts + B11_VIOLATION log) | GANGA-P3-R2-S1 |
+| L.3.2 | Post-synthesis L2.5 citation coverage audit | ⬜ pending (needs live eval baseline first) |
+| L.3.3 | B.11 violation counter in AnalyticsTab | ⬜ pending (deferred — needs UI session) |
 
 #### L.4 Context Assembler
 | ID | Item | Status | Session |
