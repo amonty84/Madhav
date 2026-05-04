@@ -22,7 +22,7 @@ purpose: >
 as_of: 2026-05-04
 current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P2-R2-S1-NIM-COMPAT (CLOSED 2026-05-04)
+last_session: GANGA-P2-R2-S2-CIRCUIT-BREAKER (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
@@ -34,7 +34,7 @@ immediate_next_action: >
   2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
   3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
 open_items_count: 109
-completed_items_count: 9
+completed_items_count: 11
 ```
 
 ---
