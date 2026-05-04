@@ -38,6 +38,7 @@ import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
 import { countSignalCitations } from './citation_check'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
+import { checkB11Compliance } from './b11_guard'
 
 import type {
   SynthesisRequest,
@@ -238,6 +239,27 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       role: m.role,
       content: m.content,
     }))
+
+    // ── B.11 Whole-Chart-Read guard ───────────────────────────────────────────
+    // Check that the assembled context contains the required L2.5 layers before
+    // invoking the synthesis LLM. Zero overhead in the happy path (string scan).
+    {
+      const b11 = checkB11Compliance(renderedPrompt)
+      if (!b11.compliant) {
+        console.log(JSON.stringify({
+          event: 'B11_VIOLATION',
+          missing: b11.missingLayers,
+          present: b11.presentLayers,
+          query_id: query_plan.query_plan_id ?? null,
+          query_class: query_plan.query_class,
+        }))
+        // Prepend the annotation to the context so the synthesis LLM is aware
+        // of the partial compliance and can note it in its answer.
+        if (b11.annotation) {
+          renderedPrompt = b11.annotation + '\n\n' + renderedPrompt
+        }
+      }
+    }
 
     const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
       ? {
