@@ -22,7 +22,7 @@ purpose: >
 as_of: 2026-05-04
 current_gate: G2 (Platform Hardening — READY)
 current_session: null
-last_session: GANGA-P1-R2-S1-PLANNER-FIX (CLOSED 2026-05-04)
+last_session: GANGA-P2-R1-S1-CI-GATE (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
@@ -34,7 +34,7 @@ immediate_next_action: >
   2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
   3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
 open_items_count: 109
-completed_items_count: 5
+completed_items_count: 7
 ```
 
 ---
@@ -115,7 +115,7 @@ completed_items_count: 5
 ### Workstream H — CI/CD + Cleanup (Gate 2)
 | ID | Item | Status | Session |
 |---|---|---|---|
-| H.1 | CI gate green on main post-PF-S1 | ⬜ pending | G1-S1 (verify) |
+| H.1 | CI gate green on main post-PF-S1 | ✅ done 2026-05-04 | GANGA-P2-R1-S1 |
 | H.2 | Feature flag audit: retire deprecated flags | ⬜ pending | G2-S6 |
 | H.3 | Phase 11B legacy deletion | 🔒 GATED (7-day soak) | post-G2 |
 
