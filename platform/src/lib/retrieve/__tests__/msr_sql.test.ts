@@ -228,4 +228,47 @@ describe('msr_sql tool', () => {
     const sqlString = callArgs[0] as string
     expect(sqlString).not.toContain('DROP TABLE')
   })
+
+  // D.2 — finance/wealth domain confidence_floor default
+  it('D.2: finance domain uses 0.35 confidence_floor by default (not 0.6)', async () => {
+    mockQuery.mockResolvedValue({ rows: [baseSignal], rowCount: 1 })
+
+    const plan: QueryPlan = { ...basePlan, domains: ['finance'] }
+    await tool.retrieve(plan)
+
+    const callArgs = mockQuery.mock.calls[0]
+    // $5 (index 4) = confidence_floor
+    expect(callArgs[1][4]).toBe(0.35)
+  })
+
+  it('D.2: wealth domain uses 0.35 confidence_floor by default', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    const plan: QueryPlan = { ...basePlan, domains: ['wealth'] }
+    await tool.retrieve(plan)
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][4]).toBe(0.35)
+  })
+
+  it('D.2: non-finance domain still uses 0.6 confidence_floor', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    const plan: QueryPlan = { ...basePlan, domains: ['career'] }
+    await tool.retrieve(plan)
+
+    const callArgs = mockQuery.mock.calls[0]
+    expect(callArgs[1][4]).toBe(0.6)
+  })
+
+  it('D.2: explicit confidence_floor overrides domain-specific default for finance', async () => {
+    mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+    const plan: QueryPlan = { ...basePlan, domains: ['finance'] }
+    await tool.retrieve(plan, { confidence_floor: 0.5 })
+
+    const callArgs = mockQuery.mock.calls[0]
+    // Explicit 0.5 should win over the 0.35 domain default
+    expect(callArgs[1][4]).toBe(0.5)
+  })
 })

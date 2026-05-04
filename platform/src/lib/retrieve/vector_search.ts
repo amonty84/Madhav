@@ -33,6 +33,13 @@ const DEFAULT_NATIVE_ID = 'abhisek_mohanty'
 const VERTEX_MODEL = 'text-multilingual-embedding-002'
 const VERTEX_EMBED_DIM = 768
 
+// [D.5 TODO] Author L3/spiritual_domain_report.md — needed for mantra/spiritual
+// remedial retrieval. Until that document is indexed, vector_search({ doc_type:
+// ["domain_report"] }) will return [] for spiritual/remedial queries. The
+// function handles empty results safely (returns [] bundle, no throw).
+// When authored: ingest with doc_type="domain_report", layer="L3" so the
+// existing SQL_VECTOR_SEARCH query picks it up via the doc_type filter.
+
 // ---------------------------------------------------------------------------
 // SQL
 // ---------------------------------------------------------------------------
