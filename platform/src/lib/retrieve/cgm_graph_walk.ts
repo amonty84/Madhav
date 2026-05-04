@@ -56,6 +56,18 @@ const SQL_FETCH_NODES = `
   WHERE node_id = ANY($1::text[])
 `.trim()
 
+// Fallback: when BFS yields 0 results for a seed node that has no edges,
+// surface the top-5 MSR signals whose planet OR domain matches the seed names.
+// $1 = native_id, $2 = seed node names (text[])
+const SQL_FALLBACK_MSR = `
+  SELECT signal_id, claim_text, domain, confidence
+  FROM msr_signals
+  WHERE native_id = $1
+    AND (planet = ANY($2::text[]) OR domain = ANY($2::text[]))
+  ORDER BY confidence DESC
+  LIMIT 5
+`.trim()
+
 // ---------------------------------------------------------------------------
 // Row types
 // ---------------------------------------------------------------------------
@@ -71,6 +83,13 @@ interface NodeRow {
   node_id: string
   node_type: string
   metadata: Record<string, unknown> | null
+}
+
+interface MsrFallbackRow {
+  signal_id: string
+  claim_text: string
+  domain: string
+  confidence: number
 }
 
 // ---------------------------------------------------------------------------
@@ -201,6 +220,38 @@ async function retrieveImpl(
     frontier = nextFrontier
   }
 
+  // --- Fallback: if BFS yielded zero results, surface MSR signals for the seed nodes ---
+  let fallback_used = false
+  if (results.length === 0) {
+    console.warn(
+      JSON.stringify({
+        event: 'cgm_graph_walk_zero_rows_fallback',
+        seeds,
+        depth,
+        msg: 'BFS returned 0 results; falling back to MSR signals for seed nodes',
+      }),
+    )
+    try {
+      const { rows: fallbackRows } = await storage.query<MsrFallbackRow>(SQL_FALLBACK_MSR, [
+        nativeId,
+        seeds,
+      ])
+      for (const row of fallbackRows) {
+        results.push({
+          content: `[CGM_FALLBACK] ${row.claim_text}`,
+          source_canonical_id: 'MSR',
+          signal_id: row.signal_id,
+          confidence: Number(row.confidence),
+        })
+      }
+      fallback_used = fallbackRows.length > 0
+    } catch (fallbackErr) {
+      console.warn(
+        `[cgm_graph_walk] MSR fallback query failed: ${fallbackErr instanceof Error ? fallbackErr.message : String(fallbackErr)}`,
+      )
+    }
+  }
+
   // --- Build and validate bundle ---
   const result_hash =
     'sha256:' +
@@ -220,6 +271,7 @@ async function retrieveImpl(
       seeds,
       depth,
       edge_type_filter: edgeTypeFilter,
+      fallback_used,
     },
     results,
     served_from_cache: false,
@@ -248,7 +300,7 @@ async function retrieveImpl(
     data_asset_id: 'CGM_GRAPH',
     error_code: null,
     served_from_cache: false,
-    fallback_used: false,
+    fallback_used,
   })
 
   return bundle

@@ -319,6 +319,36 @@ describe('vector_search tool', () => {
     })
   })
 
+  describe('D.5: empty result set safety', () => {
+    it('returns empty ToolBundle (not throwing) when doc_type=["domain_report"] yields no rows', async () => {
+      // Simulate: no spiritual/domain_report chunks indexed yet
+      mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+      const plan: QueryPlan = {
+        ...basePlan,
+        query_text: 'mantra spiritual progress karma',
+        vector_search_filter: { doc_type: ['domain_report'] },
+      }
+
+      // Must not throw — must return a valid empty bundle
+      const bundle = await tool.retrieve(plan)
+
+      expect(bundle.results).toHaveLength(0)
+      expect(bundle.tool_name).toBe('vector_search')
+      expect(bundle.schema_version).toBe('1.0')
+    })
+
+    it('returns empty ToolBundle (not throwing) when result set is empty for any doc_type filter', async () => {
+      mockQuery.mockResolvedValue({ rows: [], rowCount: 0 })
+
+      const bundle = await tool.retrieve(basePlan)
+
+      expect(() => bundle).not.toThrow()
+      expect(bundle.results).toHaveLength(0)
+      expect(bundle.result_hash).toMatch(/^sha256:[0-9a-f]{64}$/)
+    })
+  })
+
   describe('doc_type and layer filter', () => {
     it('backward compat: no filter → null params at positions [2] and [3]', async () => {
       await tool.retrieve(basePlan)
