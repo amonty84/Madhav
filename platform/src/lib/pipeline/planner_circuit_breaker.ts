@@ -12,8 +12,14 @@
  *
  * Trip counter increments on:
  *   - PlannerError thrown by callLlmPlanner
+ *   - PlannerCompatibilityError — fast-open immediately (deterministic failure)
  *   - timeout (Promise.race against timeoutMs)
  *   - any error whose message contains a 5xx hint from the provider
+ *
+ * Per-stack tracking: pass a stackKey to call() to isolate failures.
+ * One stack opening does not open others. Default key: 'default'.
+ *
+ * getMetrics(): returns current state snapshot for monitoring dashboard.
  *
  * Module-level singleton. Survives across requests in the same Node
  * process (separate Cloud Run instances trip independently — desired:
@@ -29,11 +35,21 @@ export interface CircuitBreakerOptions {
   failureThreshold: number
   recoveryMs: number
   timeoutMs: number
+  /** Maximum recoveryMs backoff on repeated half-open failures (default: 300_000ms). */
+  maxRecoveryMs: number
+}
+
+export interface CircuitMetric {
+  stack: string
+  state: CircuitState
+  failureCount: number
+  lastFailureAt: number | null
+  consecutiveSuccesses: number
 }
 
 export class PlannerCircuitOpenError extends Error {
-  constructor() {
-    super('Planner circuit breaker is open — request rejected')
+  constructor(stack?: string) {
+    super(`Planner circuit breaker is open — request rejected${stack ? ` (stack: ${stack})` : ''}`)
     this.name = 'PlannerCircuitOpenError'
   }
 }
@@ -45,6 +61,7 @@ const DEFAULT_OPTIONS: CircuitBreakerOptions = {
   // median latency 6–8s; 3s was speculative pre-data. Non-timeout subset
   // shows recall=0.736, precision=0.694 (rounds 5-6). 5s covers ~90% of calls.
   timeoutMs: 5_000,
+  maxRecoveryMs: 300_000,
 }
 
 function looksLike5xx(err: unknown): boolean {
@@ -53,15 +70,57 @@ function looksLike5xx(err: unknown): boolean {
   return /\b5\d\d\b/.test(msg)
 }
 
+/** Duck-type check for PlannerCompatibilityError without importing nvidia.ts (avoids server-only). */
+function isCompatibilityError(err: unknown): boolean {
+  return !!(
+    err &&
+    typeof err === 'object' &&
+    (err as Record<string, unknown>).isCompatibilityError === true
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Per-stack state
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface StackState {
+  state: CircuitState
+  failures: number
+  openedAt: number
+  consecutiveSuccesses: number
+  lastFailureAt: number | null
+  currentRecoveryMs: number
+}
+
+function freshStackState(initialRecoveryMs: number): StackState {
+  return {
+    state: 'closed',
+    failures: 0,
+    openedAt: 0,
+    consecutiveSuccesses: 0,
+    lastFailureAt: null,
+    currentRecoveryMs: initialRecoveryMs,
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PlannerCircuitBreaker
+// ─────────────────────────────────────────────────────────────────────────────
+
 export class PlannerCircuitBreaker {
   private readonly opts: CircuitBreakerOptions
+  // Legacy single-stack state (for call() without stackKey — backward compat)
   private _state: CircuitState = 'closed'
   private failures = 0
   private openedAt = 0
+  // Per-stack state map
+  private stacks: Map<string, StackState> = new Map()
 
   constructor(options?: Partial<CircuitBreakerOptions>) {
     this.opts = { ...DEFAULT_OPTIONS, ...options }
   }
+
+  // ── Legacy single-stack accessors (backward compat) ────────────────────────
 
   get state(): CircuitState {
     if (this._state === 'open' && Date.now() - this.openedAt >= this.opts.recoveryMs) {
@@ -74,10 +133,97 @@ export class PlannerCircuitBreaker {
     this._state = 'closed'
     this.failures = 0
     this.openedAt = 0
+    this.stacks.clear()
   }
 
-  async call(fn: () => Promise<PlanSchema>): Promise<PlanSchema> {
-    // Refresh state (handles closed→half-open transition).
+  // ── Per-stack state helpers ────────────────────────────────────────────────
+
+  private getStack(key: string): StackState {
+    if (!this.stacks.has(key)) {
+      this.stacks.set(key, freshStackState(this.opts.recoveryMs))
+    }
+    return this.stacks.get(key)!
+  }
+
+  private resolveStackState(ss: StackState): CircuitState {
+    if (ss.state === 'open' && Date.now() - ss.openedAt >= ss.currentRecoveryMs) {
+      ss.state = 'half-open'
+    }
+    return ss.state
+  }
+
+  private openStack(ss: StackState): void {
+    ss.state = 'open'
+    ss.openedAt = Date.now()
+    ss.lastFailureAt = Date.now()
+  }
+
+  private failStack(ss: StackState, current: CircuitState): void {
+    ss.lastFailureAt = Date.now()
+    if (current === 'half-open') {
+      // Probe failed — re-open with doubled timeout (exponential backoff).
+      ss.currentRecoveryMs = Math.min(ss.currentRecoveryMs * 2, this.opts.maxRecoveryMs)
+      this.openStack(ss)
+    } else {
+      ss.failures += 1
+      if (ss.failures >= this.opts.failureThreshold) {
+        this.openStack(ss)
+      }
+    }
+  }
+
+  private succeedStack(ss: StackState): void {
+    ss.state = 'closed'
+    ss.failures = 0
+    ss.openedAt = 0
+    ss.consecutiveSuccesses += 1
+    // Reset backoff on clean recovery.
+    ss.currentRecoveryMs = this.opts.recoveryMs
+  }
+
+  // ── getMetrics ─────────────────────────────────────────────────────────────
+
+  /**
+   * Returns a snapshot of per-stack circuit state for the monitoring dashboard.
+   * Includes the legacy 'default' stack plus any named stacks that have been used.
+   */
+  getMetrics(): CircuitMetric[] {
+    const metrics: CircuitMetric[] = []
+
+    // Legacy single-stack (exposed as 'default' for backward compat)
+    metrics.push({
+      stack: 'default',
+      state: this.state,
+      failureCount: this.failures,
+      lastFailureAt: this.openedAt > 0 ? this.openedAt : null,
+      consecutiveSuccesses: 0,
+    })
+
+    for (const [key, ss] of this.stacks.entries()) {
+      metrics.push({
+        stack: key,
+        state: this.resolveStackState(ss),
+        failureCount: ss.failures,
+        lastFailureAt: ss.lastFailureAt,
+        consecutiveSuccesses: ss.consecutiveSuccesses,
+      })
+    }
+
+    return metrics
+  }
+
+  // ── call (legacy — no stackKey) ────────────────────────────────────────────
+
+  /**
+   * Legacy call signature — uses single global state for backward compat.
+   * Prefer call(fn, stackKey) for per-stack isolation.
+   */
+  async call(fn: () => Promise<PlanSchema>, stackKey?: string): Promise<PlanSchema> {
+    if (stackKey) {
+      return this._callWithStack(fn, stackKey)
+    }
+
+    // Legacy path: single global state
     const current = this.state
 
     if (current === 'open') {
@@ -93,12 +239,18 @@ export class PlannerCircuitBreaker {
 
     try {
       const result = await Promise.race([fn(), timeoutPromise])
-      // Success: half-open probe passed → closed; closed already → reset failures.
       this._state = 'closed'
       this.failures = 0
       this.openedAt = 0
       return result
     } catch (err) {
+      // Compatibility errors fast-open immediately — they are deterministic.
+      if (isCompatibilityError(err)) {
+        this._state = 'open'
+        this.openedAt = Date.now()
+        throw err
+      }
+
       const counts =
         err instanceof PlannerError ||
         (err instanceof Error && err.message.startsWith('Planner call timed out')) ||
@@ -106,7 +258,6 @@ export class PlannerCircuitBreaker {
 
       if (counts) {
         if (current === 'half-open') {
-          // Probe failed — re-open immediately.
           this._state = 'open'
           this.openedAt = Date.now()
         } else {
@@ -116,6 +267,48 @@ export class PlannerCircuitBreaker {
             this.openedAt = Date.now()
           }
         }
+      }
+      throw err
+    } finally {
+      if (timer) clearTimeout(timer)
+    }
+  }
+
+  // ── per-stack call ─────────────────────────────────────────────────────────
+
+  private async _callWithStack(fn: () => Promise<PlanSchema>, stackKey: string): Promise<PlanSchema> {
+    const ss = this.getStack(stackKey)
+    const current = this.resolveStackState(ss)
+
+    if (current === 'open') {
+      throw new PlannerCircuitOpenError(stackKey)
+    }
+
+    let timer: ReturnType<typeof setTimeout> | null = null
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        reject(new Error(`Planner call timed out after ${this.opts.timeoutMs}ms`))
+      }, this.opts.timeoutMs)
+    })
+
+    try {
+      const result = await Promise.race([fn(), timeoutPromise])
+      this.succeedStack(ss)
+      return result
+    } catch (err) {
+      // Compatibility errors fast-open without waiting for failure threshold.
+      if (isCompatibilityError(err)) {
+        this.openStack(ss)
+        throw err
+      }
+
+      const counts =
+        err instanceof PlannerError ||
+        (err instanceof Error && err.message.startsWith('Planner call timed out')) ||
+        looksLike5xx(err)
+
+      if (counts) {
+        this.failStack(ss, current)
       }
       throw err
     } finally {
