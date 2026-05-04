@@ -212,8 +212,8 @@ export const MODELS: ModelMeta[] = [
     id: 'deepseek-v4-flash',
     provider: 'deepseek',
     tier: 'mid',
-    label: 'DeepSeek V4 Flash',
-    hint: 'DeepSeek Stack planner/worker — 1M context, $0.14 input',
+    label: 'DeepSeek V4 Flash [internal label only]',
+    hint: '⚠ Not a valid DeepSeek API model ID — API maps this to deepseek-reasoner which rejects toolChoice. Use deepseek-chat for planner/worker calls. Retain entry in case DeepSeek publishes this ID officially.',
     speedTier: 'fast',
     maxInputTokens: 1_000_000,
     maxOutputTokens: 8_192,
@@ -231,9 +231,9 @@ export const MODELS: ModelMeta[] = [
     id: 'deepseek-chat',
     provider: 'deepseek',
     tier: 'mid',
-    label: 'DeepSeek V3 (deprecated)',
-    hint: '⚠ Deprecated alias → V4 Flash. Will stop working 2026-07-24.',
-    speedTier: 'balanced',
+    label: 'DeepSeek Chat (V4 Flash)',
+    hint: 'DeepSeek planner + worker — non-thinking, supports tool_choice. API alias for V4 Flash non-thinking.',
+    speedTier: 'fast',
     maxOutputTokens: 8_192,
     capabilities: ['tool-use'],
     role: 'both',
@@ -633,7 +633,7 @@ export const FAMILY_WORKER: Record<Provider, string> = {
   anthropic: 'claude-haiku-4-5',                // tier=worker  $1.00/$5.00
   google:    'gemini-2.5-flash-lite',            // tier=worker  $0.015/$0.06  (was gemini-2.0-flash-lite, dropped from OpenAI-compat 2026-05-03)
   openai:    'gpt-4.1-nano',                     // tier=worker  $0.05/$0.20  (was gpt-4o-mini)
-  deepseek:  'deepseek-v4-flash',                // tier=mid     $0.14/$0.28  (was deepseek-chat)
+  deepseek:  'deepseek-chat',                     // non-thinking, supports tool_choice; deepseek-v4-flash is not a valid API model ID
   nvidia:    'nvidia/nemotron-3-super-120b-a12b', // tier=worker  $0.00 (llama-3.1-8b timed out 2026-05-03; nemotron-3 confirmed ✅ 356ms)
 }
 
@@ -958,15 +958,15 @@ export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: strin
       fallback: 'deepseek-v4-flash',                        // cheaper fallback
     },
     planner_fast: {
-      primary:  'deepseek-v4-flash',                        // $0.14/$0.28, fast JSON
+      primary:  'deepseek-chat',                            // non-thinking, supports toolChoice — deepseek-v4-flash is not a valid API ID
       fallback: 'deepseek-v4-pro',                          // fallback with thinking=false
     },
     context_assembly: {
-      primary:  'deepseek-v4-flash',                        // 1M ctx, cheapest option
+      primary:  'deepseek-chat',                            // non-thinking, correct API ID
       fallback: 'deepseek-v4-pro',                          // 1M ctx, thinking=false
     },
     worker: {
-      primary:  'deepseek-v4-flash',                        // $0.14/$0.28, minimal latency
+      primary:  'deepseek-chat',                            // non-thinking, correct API ID
       fallback: 'deepseek-v4-pro',                          // fallback
     },
   },
