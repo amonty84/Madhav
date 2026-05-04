@@ -2,6 +2,135 @@ import 'server-only'
 import { createOpenAI } from '@ai-sdk/openai'
 import type { LanguageModel } from 'ai'
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PlannerCompatibilityError — thrown when NIM rejects toolChoice or
+// response_format. These errors are DETERMINISTIC: retrying will always fail.
+// The circuit breaker (planner_circuit_breaker.ts) fast-opens on this type.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export class PlannerCompatibilityError extends Error {
+  readonly isCompatibilityError = true
+  constructor(message: string, cause?: unknown) {
+    super(message)
+    this.name = 'PlannerCompatibilityError'
+    if (cause) this.cause = cause
+  }
+}
+
+/** Patterns that indicate a deterministic NIM toolChoice/format rejection. */
+const COMPAT_ERROR_PATTERNS = [
+  /does not support tool.?choice/i,
+  /does not support response.?format/i,
+  /tool.?choice.*not supported/i,
+  /response.?format.*not supported/i,
+  /function.?call.*not supported/i,
+  /parallel.?tool.?calls.*not supported/i,
+]
+
+/**
+ * Classify an error message against known NIM compatibility rejection patterns.
+ * Returns true if the error is a deterministic toolChoice/format incompatibility.
+ */
+export function isNimCompatibilityError(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err)
+  return COMPAT_ERROR_PATTERNS.some(pat => pat.test(msg))
+}
+
+/**
+ * Re-throw as PlannerCompatibilityError if the error matches a NIM
+ * toolChoice/response_format rejection pattern; otherwise rethrow as-is.
+ * Call this in catch blocks around NIM planner invocations.
+ */
+export function classifyNimError(err: unknown): never {
+  if (isNimCompatibilityError(err)) {
+    throw new PlannerCompatibilityError(
+      `NIM model rejected toolChoice/response_format: ${err instanceof Error ? err.message : String(err)}`,
+      err,
+    )
+  }
+  throw err
+}
+
+/**
+ * Retry guard: returns false for PlannerCompatibilityError (deterministic
+ * failures that will always fail — retrying wastes latency and quota).
+ * Returns true for transient errors (rate-limits, timeouts, 5xx).
+ */
+export function shouldRetryNimError(err: unknown): boolean {
+  if (err instanceof PlannerCompatibilityError) return false
+  if (err && typeof err === 'object' && (err as Record<string, unknown>).isCompatibilityError) return false
+  return true
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PlanInputJsonSchema pre-flight validation
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface PlanInputSchemaValidation {
+  valid: boolean
+  warnings: string[]
+}
+
+/**
+ * Pre-flight check for PlanInputJsonSchema shape before sending to NIM.
+ * Logs a warning (non-blocking) if the schema looks malformed.
+ * Does NOT throw — a malformed schema should still attempt the call;
+ * the API will surface a cleaner error than a pre-flight abort.
+ */
+export function validatePlanInputJsonSchema(schema: unknown): PlanInputSchemaValidation {
+  const warnings: string[] = []
+
+  if (schema === null || schema === undefined) {
+    warnings.push('PlanInputJsonSchema is null/undefined')
+    return { valid: false, warnings }
+  }
+
+  if (typeof schema !== 'object') {
+    warnings.push(`PlanInputJsonSchema is not an object (got ${typeof schema})`)
+    return { valid: false, warnings }
+  }
+
+  const s = schema as Record<string, unknown>
+
+  if (s.type !== 'object') {
+    warnings.push(`PlanInputJsonSchema.type expected 'object', got '${s.type}'`)
+  }
+
+  if (!s.properties || typeof s.properties !== 'object') {
+    warnings.push('PlanInputJsonSchema.properties is missing or not an object')
+  } else {
+    const props = s.properties as Record<string, unknown>
+    if (!props.tool_calls) {
+      warnings.push('PlanInputJsonSchema.properties.tool_calls is missing — NIM planner will likely fail schema validation')
+    }
+  }
+
+  return { valid: warnings.length === 0, warnings }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Planner mode logging
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type PlannerMode = 'toolchoice' | 'schema'
+
+/**
+ * Emit a structured log entry noting which planner path is being used.
+ * 'toolchoice' = generateText with toolChoice:'required' (standard NIM path).
+ * 'schema'     = generateObject with response_format:json_schema (non-NIM path).
+ * Call once per planner invocation before the LLM call to enable per-request tracing.
+ */
+export function logPlannerMode(mode: PlannerMode, modelId: string, queryId?: string): void {
+  if (process.env.NODE_ENV === 'test') return
+  console.log(JSON.stringify({
+    event: 'planner_mode_selected',
+    planner_mode: mode,
+    model_id: modelId,
+    query_id: queryId ?? null,
+    ts: Date.now(),
+  }))
+}
+
 /**
  * NVIDIA NIM provider — OpenAI-compatible endpoint.
  * Models: Nemotron Ultra 253B, Qwen3-235B-A22B, Llama-3.1-8B, DeepSeek V4 Pro.
