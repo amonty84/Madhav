@@ -16,7 +16,7 @@ export async function POST(
 
   const { id } = await params
 
-  let body: { outcome?: string; observation?: string }
+  let body: { outcome?: string; observation?: string; correction_note?: string }
   try {
     body = await request.json()
   } catch {
@@ -54,7 +54,7 @@ export async function POST(
   }
 
   try {
-    const updated = await recordOutcome({ id, outcome, observation: body.observation })
+    const updated = await recordOutcome({ id, outcome, observation: body.observation, correction_note: body.correction_note })
     if (!updated) return res.notFound()
     return NextResponse.json({ ok: true, prediction: updated })
   } catch (err) {

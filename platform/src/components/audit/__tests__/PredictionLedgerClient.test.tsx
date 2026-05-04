@@ -19,6 +19,8 @@ const openPred: PredictionRow = {
   outcome: null,
   outcome_observed_at: null,
   calibration_bucket: null,
+  brier_score: null,
+  correction_note: null,
 }
 
 const closedPred: PredictionRow = {

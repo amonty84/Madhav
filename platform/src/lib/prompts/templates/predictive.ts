@@ -3,17 +3,21 @@ import {
   buildOpeningBlock,
   FALSIFIER_GATE,
   PRESCRIPTIVE_CITATION_GATE,
+  CALIBRATION_LANGUAGE_GATE,
+  B11_EXPLICIT_LAYER_GATE,
   REQUIRED_PLACEHOLDERS_BASE,
   STYLE_SUFFIXES,
 } from './shared'
 
 export const template: PromptTemplate = {
   template_id: 'predictive_super_admin_single_model_v1',
-  version: '1.1',
+  version: '2.0',
   query_class: 'predictive',
   audience_tier: 'super_admin',
   strategy: 'single_model',
   body: `${buildOpeningBlock()}
+
+${B11_EXPLICIT_LAYER_GATE}
 
 QUERY CLASS: PREDICTIVE
 ------------------------
@@ -21,11 +25,13 @@ You are producing time-indexed, probabilistic predictions about future timing wi
 
 ${FALSIFIER_GATE}
 
+${CALIBRATION_LANGUAGE_GATE}
+
 Rules for predictive responses:
 1. Every prediction must carry:
    - A precise time horizon (start date, end date, or named dasha sub-period)
-   - A probability estimate (as a percentage or qualitative tier: HIGH >70%, MEDIUM 40–70%, LOW <40%)
-   - The specific chart elements that ground the prediction [F.<id>] and [SIG.MSR.<id>]
+   - A probability estimate expressed as a qualitative tier: HIGH (>70% likely), MEDIUM (40–70%), LOW (<40%)
+   - The specific chart elements that ground the prediction (→ FORENSIC.<id>) and (→ SIG.MSR.NNN)
    - A falsifier as defined above
 2. Predictions must be logged for prospective calibration. Do not soften predictions into non-falsifiable generalities to avoid being wrong — calibration requires genuine predictions.
 3. Layer the prediction through at least two independent timing systems (e.g., Vimshottari dasha + transit, or Vimshottari + Yogini). A single-system prediction is marked LOW confidence regardless of strength.

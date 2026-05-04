@@ -146,11 +146,11 @@ describe('pattern_register tool', () => {
     expect(bundle.results[0].signal_id).toBe('PAT-002')
   })
 
-  it('returns empty results for unknown domain', async () => {
+  it('falls back to full register for unknown domain (UQE-7)', async () => {
     const plan: QueryPlan = { ...basePlan, domains: ['finance'] }
     const bundle = await tool.retrieve(plan)
 
-    expect(bundle.results).toHaveLength(0)
+    expect(bundle.results.length).toBeGreaterThan(0)
   })
 
   it('maps fields correctly: content includes claim_text and mechanism', async () => {

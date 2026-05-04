@@ -46,7 +46,7 @@ export async function insertConversationWithId(params: {
   module: ConversationModule
 }): Promise<void> {
   await query(
-    'INSERT INTO conversations (id, chart_id, user_id, module, title) VALUES ($1,$2,$3,$4,NULL)',
+    'INSERT INTO conversations (id, chart_id, user_id, module, title) VALUES ($1,$2,$3,$4,NULL) ON CONFLICT (id) DO NOTHING',
     [params.id, params.chartId, params.userId, params.module]
   )
 }

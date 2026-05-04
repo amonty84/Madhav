@@ -32,13 +32,24 @@ vi.mock('ai', () => ({
 vi.mock('@/lib/models/registry', () => ({
   DEFAULT_MODEL_ID: 'claude-haiku-4-5',
   TITLE_MODEL_ID: 'claude-haiku-4-5',
+  DEFAULT_STACK_ID: 'nim',
   getModelMeta: vi.fn(() => ({ maxOutputTokens: 64000 })),
   isValidModelId: vi.fn(() => false),
   supports: vi.fn(() => false),
+  STACK_ROUTING: {
+    nim: {
+      synthesis: { primary: 'claude-haiku-4-5', fallback: 'claude-haiku-4-5' },
+      planner_deep: { primary: 'claude-haiku-4-5', fallback: 'claude-haiku-4-5' },
+      planner_fast: { primary: 'claude-haiku-4-5', fallback: 'claude-haiku-4-5' },
+      context_assembly: { primary: 'claude-haiku-4-5', fallback: 'claude-haiku-4-5' },
+      worker: { primary: 'claude-haiku-4-5', fallback: 'claude-haiku-4-5' },
+    },
+  },
 }))
 
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: vi.fn(() => ({ id: 'claude-haiku-4-5' })),
+  googleProviderOptions: vi.fn(() => null),
 }))
 
 vi.mock('@/lib/claude/consume-tools', () => ({
@@ -85,6 +96,21 @@ vi.mock('@/lib/validators/index', () => ({
 
 vi.mock('@/lib/synthesis/index', () => ({
   createOrchestrator: vi.fn(),
+}))
+
+vi.mock('@/lib/synthesis/context_assembler', () => ({
+  contextAssembler: vi.fn().mockResolvedValue({
+    tool_bundles: [],
+    context_assembly_compressed: true,
+    context_assembly_model_id: 'pass-through',
+    context_assembly_latency_ms: 0,
+    l1_tokens: 0,
+    l2_5_tokens: 0,
+    l4_tokens: 0,
+    vector_tokens: 0,
+    cgm_tokens: 0,
+    total_tokens: 0,
+  }),
 }))
 
 // ── Import after mocks ────────────────────────────────────────────────────────
@@ -254,7 +280,7 @@ describe('Flag OFF — auth failure', () => {
 
     expect(res.status).toBe(401)
     const body = await res.json()
-    expect(body.error).toBe('unauthorized')
+    expect(body.error.code).toBe('AUTH_UNAUTHENTICATED')
   })
 })
 
@@ -272,7 +298,7 @@ describe('Flag OFF — missing chartId', () => {
 
     expect(res.status).toBe(400)
     const body = await res.json()
-    expect(body.error).toBe('chartId and messages are required')
+    expect(body.error.detail).toBe('chartId and messages are required')
   })
 })
 

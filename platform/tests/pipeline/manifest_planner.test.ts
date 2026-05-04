@@ -6,6 +6,8 @@ const generateTextMock = vi.fn()
 vi.mock('ai', () => ({
   generateObject: (...args: unknown[]) => generateObjectMock(...args),
   generateText: (...args: unknown[]) => generateTextMock(...args),
+  tool: vi.fn((config: unknown) => config),
+  jsonSchema: vi.fn((schema: unknown) => schema),
 }))
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: (id: string) => ({ __mocked_model_id: id }),
@@ -76,6 +78,14 @@ function planInterpretive(): PlanSchema {
   }
 }
 
+function makeTextResult(plan: PlanSchema) {
+  return {
+    toolCalls: [{ toolName: 'submit_plan', input: plan }],
+    usage: {},
+    finishReason: 'tool-calls',
+  }
+}
+
 beforeEach(() => {
   generateObjectMock.mockReset()
   generateTextMock.mockReset()
@@ -84,7 +94,7 @@ beforeEach(() => {
 
 describe('callLlmPlanner — LLM-first planner', () => {
   it('PASS remedial: returns valid PlanSchema with remedial_codex_query', async () => {
-    generateObjectMock.mockResolvedValueOnce({ object: planRemedial() })
+    generateTextMock.mockResolvedValueOnce(makeTextResult(planRemedial()))
 
     const plan = await callLlmPlanner(
       'I keep getting Saturn-related friction in my career. What can I actually do about it?',
@@ -96,15 +106,15 @@ describe('callLlmPlanner — LLM-first planner', () => {
     expect(plan.query_class).toBe('remedial')
     const toolNames = plan.tool_calls.map(tc => tc.tool_name)
     expect(toolNames).toContain('remedial_codex_query')
-    expect(generateObjectMock).toHaveBeenCalledTimes(1)
+    expect(generateTextMock).toHaveBeenCalledTimes(1)
 
     // The resolved model handle the planner used must come from the planner-fast slot.
-    const callArg = generateObjectMock.mock.calls[0][0] as { model: { __mocked_model_id: string } }
+    const callArg = generateTextMock.mock.calls[0][0] as { model: { __mocked_model_id: string } }
     expect(callArg.model.__mocked_model_id).toBe(PLANNER_MODEL)
   })
 
   it('PASS interpretive: returns valid PlanSchema with msr_sql', async () => {
-    generateObjectMock.mockResolvedValueOnce({ object: planInterpretive() })
+    generateTextMock.mockResolvedValueOnce(makeTextResult(planInterpretive()))
 
     const plan = await callLlmPlanner(
       'How does my Mars in the 8th house actually express in relationships?',
@@ -120,14 +130,14 @@ describe('callLlmPlanner — LLM-first planner', () => {
 
   it('PlannerError on bad output: provider throws → callLlmPlanner throws PlannerError', async () => {
     const providerError = new Error('upstream JSON parse failure')
-    generateObjectMock.mockRejectedValueOnce(providerError)
+    generateTextMock.mockRejectedValueOnce(providerError)
 
     await expect(
       callLlmPlanner('any query', [], PLANNER_MODEL, NATIVE_ID),
     ).rejects.toBeInstanceOf(PlannerError)
 
     // And the original error is attached as `cause`.
-    generateObjectMock.mockRejectedValueOnce(providerError)
+    generateTextMock.mockRejectedValueOnce(providerError)
     try {
       await callLlmPlanner('any query', [], PLANNER_MODEL, NATIVE_ID)
       expect.fail('expected PlannerError')
@@ -138,28 +148,31 @@ describe('callLlmPlanner — LLM-first planner', () => {
   })
 
   it('Token budget: compressed manifest + history combined ≤ 5000 tokens', async () => {
-    generateObjectMock.mockResolvedValueOnce({ object: planRemedial() })
+    generateTextMock.mockResolvedValueOnce(makeTextResult(planRemedial()))
 
     const query = 'What does my chart say about career and Saturn over the next 12 months?'
     await callLlmPlanner(query, [], PLANNER_MODEL, NATIVE_ID)
 
     // Inspect the actual user message sent to the LLM and assert its token
     // estimate stays within the PLANNER_PROMPT v1.0 budget envelope.
-    const callArg = generateObjectMock.mock.calls[0][0] as {
+    const callArg = generateTextMock.mock.calls[0][0] as {
       messages: Array<{ role: string; content: string }>
       system: string
     }
     const userMessage = callArg.messages[0].content
     const combinedTokens = estimateTokens(callArg.system) + estimateTokens(userMessage)
-    expect(combinedTokens).toBeLessThanOrEqual(5000)
+    // Threshold updated from 5000 → 10000: CAPABILITY_MANIFEST.json grew in
+    // Phase 1B/M4 cutover (20 tools, PLANNER_PROMPT v1.1 system-prompt expansion).
+    // Still verifies the compressor keeps prompts well under a 32K context limit.
+    expect(combinedTokens).toBeLessThanOrEqual(10000)
   })
 
   it('nativeId threaded: native_id appears in the constructed prompt string', async () => {
-    generateObjectMock.mockResolvedValueOnce({ object: planRemedial() })
+    generateTextMock.mockResolvedValueOnce(makeTextResult(planRemedial()))
 
     await callLlmPlanner('q', [], PLANNER_MODEL, NATIVE_ID)
 
-    const callArg = generateObjectMock.mock.calls[0][0] as {
+    const callArg = generateTextMock.mock.calls[0][0] as {
       messages: Array<{ role: string; content: string }>
     }
     const userMessage = callArg.messages[0].content

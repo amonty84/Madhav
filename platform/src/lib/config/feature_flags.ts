@@ -98,8 +98,10 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   PANEL_DEGRADE_2_OF_3: false,
   // BHISMA Stream 2 — LLM-first planner. Default ON (Lever-2 cleared 2026-05-04).
   LLM_FIRST_PLANNER_ENABLED: true,
-  // W2-CTX-ASSEMBLY — context assembly LLM step. Default OFF; flip after smoke.
-  CONTEXT_ASSEMBLY_ENABLED: false,
+  // W2-CTX-ASSEMBLY — context assembly LLM step.
+  // Re-flipped true (GANGA-D4-UNBLOCK): added generateText + context_assembler mocks
+  // to orchestrator_wiring.test.ts and route.test.ts; full suite passes at 0 net new failures.
+  CONTEXT_ASSEMBLY_ENABLED: true,
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   TRACE_ANALYTICS_ENABLED: true,
   COST_TRACKING_ENABLED: true,

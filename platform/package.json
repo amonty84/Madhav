@@ -7,6 +7,7 @@
     "dev:clean": "pkill -f 'next dev' 2>/dev/null; rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
+    "test": "vitest run",
     "lint": "eslint",
     "etl:msr": "tsx src/scripts/etl/msr_etl.ts",
     "manifest:build": "tsx src/scripts/manifest/build.ts",
@@ -22,7 +23,9 @@
     "cutover:stage1-smoke": "tsx scripts/cutover/stage1_smoke.ts",
     "cutover:phase12-smoke": "tsx scripts/cutover/stage1_phase12_smoke.ts",
     "trace:smoke": "tsx scripts/trace/trace_smoke.ts",
-    "observatory:smoke": "tsx scripts/observatory/smoke_test.ts"
+    "observatory:smoke": "tsx scripts/observatory/smoke_test.ts",
+    "answer:eval": "npx tsx scripts/answer_eval.ts",
+    "embedding:freshness": "npx tsx --conditions=react-server scripts/retrieval/embedding_freshness_check.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.71",

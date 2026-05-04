@@ -68,7 +68,8 @@ export async function listPredictions(
   const result = await query<PredictionRow>(
     `SELECT id, query_id, created_at, prediction_text, confidence,
             horizon_start, horizon_end, falsifier, subject,
-            outcome, outcome_observed_at, calibration_bucket
+            outcome, outcome_observed_at, calibration_bucket,
+            brier_score, correction_note
      FROM prediction_ledger
      WHERE ${where}
      ORDER BY ${orderCol}`,
@@ -82,6 +83,7 @@ export interface RecordOutcomeParams {
   id: string
   outcome: PredictionOutcome
   observation?: string
+  correction_note?: string
 }
 
 export async function recordOutcome(params: RecordOutcomeParams): Promise<PredictionRow | null> {
@@ -93,12 +95,58 @@ export async function recordOutcome(params: RecordOutcomeParams): Promise<Predic
            WHEN $1 = 'confirmed' THEN 'true_positive'
            WHEN $1 = 'refuted' THEN 'false_positive'
            ELSE 'partial_or_unobservable'
-         END
+         END,
+         brier_score = CASE
+           WHEN $1 = 'confirmed' THEN POWER(confidence - 1.0, 2)
+           WHEN $1 = 'refuted'   THEN POWER(confidence - 0.0, 2)
+           ELSE NULL
+         END,
+         correction_note = $3
      WHERE id = $2
      RETURNING id, query_id, created_at, prediction_text, confidence,
                horizon_start, horizon_end, falsifier, subject,
-               outcome, outcome_observed_at, calibration_bucket`,
-    [params.outcome, params.id]
+               outcome, outcome_observed_at, calibration_bucket,
+               brier_score, correction_note`,
+    [params.outcome, params.id, params.correction_note ?? null]
   )
   return result.rows[0] ?? null
+}
+
+export interface CalibrationMetrics {
+  mean_brier_score: number | null
+  closed_count: number
+  confirmed_count: number
+  refuted_count: number
+  partial_count: number
+}
+
+export async function computeCalibrationMetrics(
+  subject = 'native:abhisek'
+): Promise<CalibrationMetrics> {
+  const result = await query<{
+    mean_brier_score: string | null
+    closed_count: string
+    confirmed_count: string
+    refuted_count: string
+    partial_count: string
+  }>(
+    `SELECT
+       AVG(brier_score) AS mean_brier_score,
+       COUNT(*) AS closed_count,
+       SUM(CASE WHEN outcome = 'confirmed' THEN 1 ELSE 0 END) AS confirmed_count,
+       SUM(CASE WHEN outcome = 'refuted' THEN 1 ELSE 0 END) AS refuted_count,
+       SUM(CASE WHEN outcome IN ('partial', 'unobservable') THEN 1 ELSE 0 END) AS partial_count
+     FROM prediction_ledger
+     WHERE outcome IS NOT NULL AND subject = $1`,
+    [subject]
+  )
+
+  const row = result.rows[0]
+  return {
+    mean_brier_score: row?.mean_brier_score != null ? parseFloat(row.mean_brier_score) : null,
+    closed_count: parseInt(row?.closed_count ?? '0', 10),
+    confirmed_count: parseInt(row?.confirmed_count ?? '0', 10),
+    refuted_count: parseInt(row?.refuted_count ?? '0', 10),
+    partial_count: parseInt(row?.partial_count ?? '0', 10),
+  }
 }

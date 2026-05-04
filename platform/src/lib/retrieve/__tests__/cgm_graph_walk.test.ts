@@ -84,15 +84,23 @@ beforeEach(() => {
 // ---------------------------------------------------------------------------
 
 describe('cgm_graph_walk tool', () => {
-  it('returns empty ToolBundle when feature flag disabled', async () => {
-    vi.mocked(getFlag).mockReturnValue(false)
+  // CGM_GRAPH_WALK_ENABLED was retired (BHISMA-B1 §6.2): the tool is always-on.
+  // This test was updated (E.3 fix) to reflect the post-retirement behaviour:
+  // the BFS runs unconditionally when seeds are present; getFlag has no effect.
+  it('always-on: BFS runs even when getFlag returns false (flag was retired)', async () => {
+    vi.mocked(getFlag).mockReturnValue(false) // no-op for this tool; gate removed
+
+    // Seed has no edges → BFS returns 0 rows; MSR fallback also returns 0
+    mockQuery
+      .mockResolvedValueOnce({ rows: [] }) // BFS edges
+      .mockResolvedValueOnce({ rows: [] }) // MSR fallback
 
     const bundle = await tool.retrieve(basePlan)
 
-    expect(bundle.results).toHaveLength(0)
     expect(bundle.tool_name).toBe('cgm_graph_walk')
-    // No DB call should have been made
-    expect(mockQuery).not.toHaveBeenCalled()
+    expect(bundle.results).toHaveLength(0)
+    // BFS did run — DB was called (at least the edges fetch)
+    expect(mockQuery).toHaveBeenCalled()
   })
 
   it('returns empty ToolBundle when no seed hints', async () => {
@@ -297,5 +305,53 @@ describe('cgm_graph_walk tool', () => {
     // Only 3 DB calls: 2 for level 0, 1 edge query for level 1 (no nodes to fetch)
     expect(mockQuery).toHaveBeenCalledTimes(3)
     expect(bundle.results).toHaveLength(1)
+  })
+
+  it('D.1: falls back to MSR signals when BFS yields zero rows for seed node with no edges', async () => {
+    // Seed node 'SomeNodeWithNoEdges' returns no edges at any level
+    mockQuery
+      .mockResolvedValueOnce({ rows: [] }) // BFS level 0 edges: none
+      // MSR fallback query
+      .mockResolvedValueOnce({
+        rows: [
+          { signal_id: 'msr-fallback-1', claim_text: 'Saturn delays then rewards', domain: 'career', confidence: 0.85 },
+          { signal_id: 'msr-fallback-2', claim_text: 'Saturn in 10th gives obstacles', domain: 'career', confidence: 0.80 },
+        ],
+      })
+
+    const plan: QueryPlan = {
+      ...basePlan,
+      graph_seed_hints: ['SomeNodeWithNoEdges'],
+      graph_traversal_depth: 1,
+    }
+
+    const bundle = await tool.retrieve(plan)
+
+    // Should return fallback results
+    expect(bundle.results).toHaveLength(2)
+    // Each result should be labeled [CGM_FALLBACK]
+    expect(bundle.results[0].content).toContain('[CGM_FALLBACK]')
+    expect(bundle.results[1].content).toContain('[CGM_FALLBACK]')
+    // signal_id from MSR
+    expect(bundle.results[0].signal_id).toBe('msr-fallback-1')
+    // invocation_params.fallback_used should be true
+    expect((bundle.invocation_params as Record<string, unknown>).fallback_used).toBe(true)
+  })
+
+  it('D.1: returns empty bundle when BFS yields zero rows AND MSR fallback also empty', async () => {
+    // Seed node exists but no edges, AND no MSR signals match
+    mockQuery
+      .mockResolvedValueOnce({ rows: [] }) // BFS level 0 edges: none
+      .mockResolvedValueOnce({ rows: [] }) // MSR fallback: also empty
+
+    const plan: QueryPlan = {
+      ...basePlan,
+      graph_seed_hints: ['SomeNodeWithNoEdgesOrMsrSignals'],
+    }
+
+    const bundle = await tool.retrieve(plan)
+
+    expect(bundle.results).toHaveLength(0)
+    expect((bundle.invocation_params as Record<string, unknown>).fallback_used).toBe(false)
   })
 })

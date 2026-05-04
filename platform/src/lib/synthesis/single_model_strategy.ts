@@ -37,7 +37,10 @@ import { runCheckpoint5_5 } from '@/lib/checkpoints/checkpoint_5_5'
 import { runCheckpoint8_5 } from '@/lib/checkpoints/checkpoint_8_5'
 import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from '@/lib/checkpoints/types'
 import { countSignalCitations } from './citation_check'
+import { runAll } from '@/lib/validators/index'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
+import { checkB11Compliance } from './b11_guard'
+import { assembleContext, type LayerContext } from './context_assembler'
 
 import type {
   SynthesisRequest,
@@ -239,6 +242,90 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       content: m.content,
     }))
 
+    // ── Context assembler metadata log ───────────────────────────────────────
+    // Map the assembled context pieces to LayerContext objects and call
+    // assembleContext() to log assembly metadata (included artifacts, token
+    // estimate, B.11 compliance) for monitoring. Does not replace FUB-2/FUB-3;
+    // the assembled string is informational only — renderedPrompt is already built.
+    {
+      const assemblerLayers: LayerContext[] = []
+
+      if (vsResults.length > 0) {
+        const vsContent = vsResults.map(r => r.content).join('\n')
+        assemblerLayers.push({
+          layer: 'L1',
+          artifactId: 'FORENSIC',
+          content: vsContent,
+          tokenEstimate: Math.ceil(vsContent.length / 4),
+          priority: 1,
+        })
+        // Detect L2.5 artifacts in vector_search results
+        const l25Artifacts = ['MSR', 'UCN', 'CDLM', 'CGM', 'RM'] as const
+        for (const artifact of l25Artifacts) {
+          const matching = vsResults.filter(r =>
+            r.content.toLowerCase().includes(artifact.toLowerCase()) ||
+            (r.signal_id ?? '').toUpperCase().startsWith(artifact)
+          )
+          if (matching.length > 0) {
+            const content = matching.map(r => r.content).join('\n')
+            assemblerLayers.push({
+              layer: 'L2_5',
+              artifactId: artifact,
+              content,
+              tokenEstimate: Math.ceil(content.length / 4),
+              priority: 1,
+            })
+          }
+        }
+      }
+
+      if (nonVsResults.length > 0) {
+        const l3Content = nonVsResults.flatMap(tb => tb.results.map(r => r.content)).join('\n')
+        assemblerLayers.push({
+          layer: 'L3',
+          artifactId: 'query_retrieval',
+          content: l3Content,
+          tokenEstimate: Math.ceil(l3Content.length / 4),
+          priority: 2,
+        })
+      }
+
+      const assemblyResult = assembleContext(assemblerLayers, {
+        queryId: query_plan.query_plan_id,
+        requiredLayers: ['MSR', 'UCN', 'CGM'],
+      })
+
+      console.log(JSON.stringify({
+        event: 'context_assembler_metadata',
+        included_artifacts: assemblyResult.includedArtifacts,
+        dropped_artifacts: assemblyResult.droppedArtifacts,
+        total_token_estimate: assemblyResult.totalTokenEstimate,
+        b11_compliant: assemblyResult.b11Compliant,
+        query_id: query_plan.query_plan_id ?? null,
+      }))
+    }
+
+    // ── B.11 Whole-Chart-Read guard ───────────────────────────────────────────
+    // Check that the assembled context contains the required L2.5 layers before
+    // invoking the synthesis LLM. Zero overhead in the happy path (string scan).
+    {
+      const b11 = checkB11Compliance(renderedPrompt)
+      if (!b11.compliant) {
+        console.log(JSON.stringify({
+          event: 'B11_VIOLATION',
+          missing: b11.missingLayers,
+          present: b11.presentLayers,
+          query_id: query_plan.query_plan_id ?? null,
+          query_class: query_plan.query_class,
+        }))
+        // Prepend the annotation to the context so the synthesis LLM is aware
+        // of the partial compliance and can note it in its answer.
+        if (b11.annotation) {
+          renderedPrompt = b11.annotation + '\n\n' + renderedPrompt
+        }
+      }
+    }
+
     const systemMessage: ModelMessage = supports(selected_model_id, 'prompt-caching')
       ? {
           role: 'system',
@@ -334,20 +421,52 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         usage?: { inputTokens?: number; outputTokens?: number }
         text?: string
       }) => {
+        // G.4: capture wall-clock latency once at onFinish entry for consistent
+        // use in trace + deepseek instrumentation. Compare synthesisLatencyMs
+        // against llm_call_log.latency_ms (same query_id) to separate LLM
+        // call latency from pre-stream context-assembly overhead.
+        const synthesisLatencyMs = Date.now() - synthesisStartMs
+
         // BHISMA-B1 §3.4 — defensive: even with extractReasoningMiddleware,
         // strip any stray <think>…</think> from the final text before downstream
         // use so neither the audit, methodology-block extractor, nor the trace
         // payload preview accidentally captures reasoning content.
-        const isR1 = selected_model_id === 'deepseek-reasoner'
+        // BUG-4: broaden guard to cover all thinking models (deepseek-v4-pro etc.)
+        const isThinkingModel =
+          selected_model_id === 'deepseek-reasoner' ||
+          getModelMeta(selected_model_id)?.hint?.toLowerCase().includes('thinking') ||
+          false
+        // G.4: DeepSeek synthesis latency instrumentation.
+        // If synthesisLatencyMs >> per-call latency in llm_call_log, the bottleneck
+        // is context assembly (pre-stream); if approximately equal, it is the LLM.
+        if (selected_model_id.startsWith('deepseek')) {
+          console.warn(
+            '[synthesis][deepseek] latency_ms=%d query_id=%s model=%s finish=%s',
+            synthesisLatencyMs,
+            query_plan.query_plan_id,
+            selected_model_id,
+            finishReason,
+          )
+        }
         const rawText = text ?? ''
-        const { reasoning: r1Reasoning, answer: cleanText } = isR1
+        const { reasoning: r1Reasoning, answer: _cleanAnswer } = isThinkingModel
           ? extractReasoningTrace(rawText)
           : { reasoning: '', answer: stripThinkBlocks(rawText) }
+        // BUG-4: for thinking models whose entire output is inside <think> blocks,
+        // the answer after stripping is empty — fall back to the reasoning content.
+        let cleanText = (isThinkingModel && _cleanAnswer === '' && r1Reasoning)
+          ? r1Reasoning
+          : _cleanAnswer
 
         // Synchronous extraction — before any await — so the value is
         // available when the 'finish' SSE part fires in the route handler.
-        const mbMatch = cleanText.match(/^```marsys_methodology_block\n([\s\S]*?)\n```/m)
+        // BUG-5: also strip the fence from cleanText so stored messages don't
+        // accumulate methodology blocks on each turn.
+        const mbMatch = cleanText.match(/^```marsys_methodology_block\n([\s\S]*?)\n```\n?/m)
         methodologyBlockHolder.value = mbMatch ? mbMatch[1].trim() : null
+        if (mbMatch) {
+          cleanText = cleanText.replace(mbMatch[0], '').trim()
+        }
 
         // ── Trace: synthesis done ─────────────────────────────────────────────
         // Fire-and-forget — never awaited.
@@ -369,7 +488,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
               status: 'done',
               started_at: new Date(synthesisStartMs).toISOString(),
               completed_at: new Date().toISOString(),
-              latency_ms: Date.now() - synthesisStartMs,
+              latency_ms: synthesisLatencyMs,
               data_summary: {
                 model: selected_model_id,
                 input_tokens: usage?.inputTokens ?? 0,
@@ -383,7 +502,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
               },
               payload: {
                 prompt_preview: cleanText.slice(0, 500),
-                ...(isR1 && r1Reasoning ? { reasoning_trace: r1Reasoning.slice(0, 4000) } : {}),
+                ...(isThinkingModel && r1Reasoning ? { reasoning_trace: r1Reasoning.slice(0, 4000) } : {}),
               },
             },
           })
@@ -412,10 +531,14 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           provider: resolveProvider(selected_model_id),
           input_tokens: usage?.inputTokens ?? null,
           output_tokens: usage?.outputTokens ?? null,
-          reasoning_tokens: isR1 && r1Reasoning
+          reasoning_tokens: isThinkingModel && r1Reasoning
             ? Math.ceil(r1Reasoning.length / 4)
             : null,
-          latency_ms: Date.now() - synthesisStartMs,
+          latency_ms: synthesisLatencyMs,
+          // TODO(G.2): cost_usd is null — compute from (input_tokens/1M)*costPer1MInput +
+          // (output_tokens/1M)*costPer1MOutput using getModelMeta(selected_model_id).
+          // Blocked on confirming all three stacks (anthropic/deepseek/nvidia) populate
+          // usage tokens reliably before writing a non-null value here.
           cost_usd: null,
           fallback_used: false,
           error_code: finishReason === 'error' ? finishReason : null,
@@ -459,6 +582,13 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
             : undefined,
           prediction: c8_5Result?.prediction,
         }
+
+        // BUG-2: compute synthesis-stage validators and notify the caller via
+        // onValidatorResults before onAuditEvent fires. The route's
+        // validatorResultsHolder (closed over by createAuditConsumer) gets
+        // populated here, so validators_run is non-empty in the audit record.
+        const synthesisValidations = await runAll(cleanText, 'synthesis', { query_plan })
+        request.onValidatorResults?.(synthesisValidations)
 
         telemetry.recordMetric('synthesis', 'audit_event', 1, {
           event_type: 'synthesis_complete',

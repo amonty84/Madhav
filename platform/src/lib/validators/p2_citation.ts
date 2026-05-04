@@ -5,7 +5,9 @@ import { INTERPRETIVE_KEYWORDS } from './constants'
 const VALIDATOR_ID = 'p2_citation'
 const VALIDATOR_VERSION = '1.0.0'
 
-const CITATION_EXTRACT_PATTERN = /\[(F\.\w+|FORENSIC\.\w+|SIG\.MSR\.\w+)\]/g
+// BUG-3: match the format synthesis prompts actually emit — bare SIG.MSR.NNN
+// or (→ SIG.MSR.NNN) — not the legacy square-bracket format.
+const CITATION_EXTRACT_PATTERN = /\bSIG\.MSR\.\d{3}\b/g
 
 const MAX_CITATION_LENGTH = 100
 
@@ -40,7 +42,7 @@ async function validate(
   }
 
   const matches = [...input.matchAll(CITATION_EXTRACT_PATTERN)]
-  const citationIds = matches.map((m) => m[1])
+  const citationIds = matches.map((m) => m[0])
 
   // Check for malformed citations
   const malformed = citationIds.filter(isMalformed)

@@ -102,7 +102,9 @@ export function validateCitations(
   let layer2_verified = 0
   let layer2_leaked = 0
   for (const id of distinctIds) {
-    if (assembledContextJson.includes(id)) layer2_verified += 1
+    // BUG-7: word-boundary check prevents SIG.MSR.001 matching inside SIG.MSR.0010
+    const idPattern = new RegExp(`\\b${id.replace(/\./g, '\\.')}\\b`)
+    if (idPattern.test(assembledContextJson)) layer2_verified += 1
     else layer2_leaked += 1
   }
 

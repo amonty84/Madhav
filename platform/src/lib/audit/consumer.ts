@@ -3,6 +3,7 @@ import 'server-only'
 import { telemetry } from '@/lib/telemetry/index'
 import { writeAuditLog } from './writer'
 import { logPrediction } from '@/lib/prediction/writer'
+import { getFlag } from '@/lib/config/index'
 import type { AuditEvent, ValidatorRecord, ToolCallRecord } from './types'
 import type { SynthesisAuditEvent } from '@/lib/synthesis/types'
 import type { QueryPlan } from '@/lib/router/types'
@@ -67,9 +68,21 @@ export function createAuditConsumer(
       )
     })
 
-    // Heuristic prediction extraction.
-    // TODO (Phase 6): replace with checkpoint-derived structured prediction object.
-    if (isPredictiveContext(ctx.query_plan, event.final_output)) {
+    // L.5.1: checkpoint-derived prediction (Phase 6 path, flag-gated).
+    // Sacrosanct: no outcome field is set here — outcome is always a separate post-hoc write.
+    if (event.prediction && getFlag('CHECKPOINT_8_5_PREDICTION_EXTRACT')) {
+      logPrediction({
+        ...event.prediction,
+        query_id: event.query_plan_id,
+      }).catch(err => {
+        telemetry.recordError(
+          'audit_consumer',
+          'prediction_log_failed',
+          err instanceof Error ? err : new Error(String(err))
+        )
+      })
+    } else if (isPredictiveContext(ctx.query_plan, event.final_output)) {
+      // Heuristic fallback (pre-Phase-6 behavior preserved).
       const extracted = extractPredictionHint(event.final_output, event.query_plan_id)
       if (extracted) {
         logPrediction(extracted).catch(err => {

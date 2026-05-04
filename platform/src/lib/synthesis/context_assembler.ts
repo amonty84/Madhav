@@ -18,6 +18,12 @@
  * `context_assembly` emit inside SingleModelOrchestrator continues to fire
  * after this step — they coexist (different seqs) so the trace UI can read
  * either.
+ *
+ * ── Token-budgeted layer assembler (GANGA-P3-R2-S2) ─────────────────────────
+ * assembleContext() is a pure, synchronous utility that packs LayerContext
+ * objects into a token-budgeted string for the synthesis LLM. No LLM calls.
+ * Used by single_model_strategy.ts to log assembly metadata and verify B.11
+ * compliance on the assembled context.
  */
 
 import 'server-only'
@@ -25,6 +31,7 @@ import 'server-only'
 import { generateText } from 'ai'
 
 import { resolveModel } from '@/lib/models/resolver'
+import { getModelMeta } from '@/lib/models/registry'
 import { traceEmitter } from '@/lib/trace/emitter'
 import { telemetry } from '@/lib/telemetry/index'
 import type { QueryPlan, ToolBundle } from '@/lib/retrieve/types'
@@ -203,6 +210,20 @@ export async function contextAssembler(
   let assembled: ToolBundle[] | null = null
   let errorMsg: string | null = null
 
+  // Retry + timeout guard — applies to ALL providers, not just NIM.
+  //
+  // Without maxRetries: 0, the AI SDK retries errors up to 3 times.
+  // For NIM: each call can hang 90s (nimFetch AbortSignal.timeout) → 3×90s = 270s.
+  // For Anthropic/Gemini/OpenAI: large retrieval bundles can take 20-40s per call →
+  // 3×40s = 120s, which hits Cloud Run maxDuration before synthesis even starts.
+  // maxRetries: 0 ensures the first error surfaces immediately → passThrough.
+  //
+  // AbortSignal.timeout(15_000): hard-caps any single assembler call at 15s.
+  // Context assembly is a JSON-reorder step, not open-ended synthesis — 15s is
+  // generous. On abort the catch fires, errorMsg is set, passThrough returns the
+  // original bundles unchanged, and synthesis proceeds normally.
+  const assemblerSignal = AbortSignal.timeout(15_000)
+
   try {
     const result = await generateText({
       model: resolveModel(modelId),
@@ -210,12 +231,19 @@ export async function contextAssembler(
       messages: [{ role: 'user', content: userPrompt }],
       temperature: 0,
       maxOutputTokens: 8000,
+      maxRetries: 0,
+      abortSignal: assemblerSignal,
     })
     usage = result.usage
     assembled = parseAssemblerOutput(result.text, toolBundles)
     if (!assembled) errorMsg = 'parse_or_schema_mismatch'
   } catch (err) {
-    errorMsg = err instanceof Error ? err.message : String(err)
+    // BUG-CA-3: err.message can be undefined for AI SDK AbortError / timeout wrapper
+    // objects whose Error subclass never sets message in the constructor.
+    // undefined ?? 'unknown_error' = 'unknown_error' — the exact string seen in
+    // production traces. Fall through: rawMsg → err.name → 'llm_call_error'.
+    const rawMsg = err instanceof Error ? err.message : String(err)
+    errorMsg = rawMsg || (err instanceof Error ? err.name : null) || 'llm_call_error'
     telemetry.recordError(
       'context_assembler',
       'llm_call_failed',
@@ -240,11 +268,29 @@ export async function contextAssembler(
         started_at: startedAtIso,
         completed_at: new Date().toISOString(),
         latency_ms: latencyMs,
-        data_summary: { model: modelId, result: errorMsg ?? 'unknown_error' },
+        data_summary: { model: modelId, result: errorMsg ?? 'llm_call_error' },
         payload: {},
       },
     })
-    return passThrough(toolBundles, 'pass-through', latencyMs)
+    // BUG-CA-4: wrap passThrough in try/catch — countTokens iterates tb.results
+    // and accesses r.content.length; if any result has content:undefined, it throws
+    // TypeError which propagates to route.ts outer catch → HTTP 500 → no response.
+    try {
+      return passThrough(toolBundles, 'pass-through', latencyMs)
+    } catch {
+      return {
+        tool_bundles: toolBundles,
+        context_assembly_compressed: true,
+        context_assembly_model_id: 'pass-through',
+        context_assembly_latency_ms: latencyMs,
+        l1_tokens: 0,
+        l2_5_tokens: 0,
+        l4_tokens: 0,
+        vector_tokens: 0,
+        cgm_tokens: 0,
+        total_tokens: 0,
+      }
+    }
   }
 
   const tokens = countTokens(assembled)
@@ -295,5 +341,159 @@ export async function contextAssembler(
     vector_tokens: tokens.vector,
     cgm_tokens: tokens.cgm,
     total_tokens: tokens.total,
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Token-budgeted layer assembler (GANGA-P3-R2-S2 — CTX-ASSEMBLER)
+//
+// Pure, synchronous — no LLM calls. Packs LayerContext objects into a
+// token-budgeted string with section headers for the synthesis LLM.
+// Checks B.11 compliance on the assembled output via checkB11Compliance.
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { checkB11Compliance } from './b11_guard'
+
+export interface LayerContext {
+  /** e.g. 'L1', 'L2_5', 'L3' */
+  layer: 'L1' | 'L2_5' | 'L3'
+  /** e.g. 'MSR', 'UCN', 'CGM', 'query_retrieval', 'FORENSIC' */
+  artifactId: string
+  content: string
+  /** Rough token estimate: Math.ceil(content.length / 4) */
+  tokenEstimate: number
+  /** 1 = highest (keep even if budget tight); 3 = lowest (drop first) */
+  priority: number
+}
+
+export interface AssemblyOptions {
+  /** Total token budget for assembled context (default: 12000) */
+  maxTokens: number
+  /** Artifact IDs that must be included even if over budget */
+  requiredLayers: string[]
+  queryId?: string
+}
+
+export interface AssemblyResult {
+  /** The final packed string for the synthesis LLM */
+  assembledContext: string
+  /** Which artifact IDs made it into the assembly */
+  includedArtifacts: string[]
+  /** Which were dropped due to budget */
+  droppedArtifacts: string[]
+  totalTokenEstimate: number
+  /** True if required L2.5 layers (MSR, UCN, CGM) are present */
+  b11Compliant: boolean
+}
+
+const DEFAULT_ASSEMBLY_OPTIONS: AssemblyOptions = {
+  maxTokens: 12_000,
+  requiredLayers: ['MSR', 'UCN', 'CGM'],
+}
+
+const LAYER_HEADERS: Record<string, string> = {
+  L1:   'L1: CHART FACTS',
+  L2_5: 'L2.5: HOLISTIC SYNTHESIS',
+  L3:   'L3: QUERY RETRIEVAL',
+}
+
+const ARTIFACT_LABELS: Record<string, string> = {
+  MSR:             'MSR — MASTER SIGNAL REGISTER',
+  UCN:             'UCN — UNIFIED CHART NARRATIVE',
+  CDLM:            'CDLM — CROSS-DOMAIN LINKAGE MATRIX',
+  CGM:             'CGM — CAUSAL GRAPH MODEL',
+  RM:              'RM — RESONANCE MAP',
+  FORENSIC:        'FORENSIC — CHART FACTS',
+  query_retrieval: 'QUERY RETRIEVAL',
+}
+
+/**
+ * Assembles a token-budgeted context payload from layer contexts.
+ *
+ * Ordering:
+ *   1. Required layers (requiredLayers match) — always included even if over budget
+ *   2. Optional layers sorted by priority ascending (1 = keep first)
+ *
+ * Section headers separate layers so the synthesis LLM can navigate them.
+ * Calls checkB11Compliance on the assembled string to set b11Compliant.
+ */
+export function assembleContext(
+  layers: LayerContext[],
+  options?: Partial<AssemblyOptions>,
+): AssemblyResult {
+  const opts: AssemblyOptions = { ...DEFAULT_ASSEMBLY_OPTIONS, ...options }
+  const requiredSet = new Set(opts.requiredLayers)
+
+  // Partition: required vs optional
+  const required = layers.filter(l => requiredSet.has(l.artifactId))
+  const optional = layers
+    .filter(l => !requiredSet.has(l.artifactId))
+    .sort((a, b) => a.priority - b.priority)
+
+  const included: LayerContext[] = []
+  const droppedArtifacts: string[] = []
+  let totalTokens = 0
+
+  // Always include required layers (warn if over budget, but include anyway)
+  for (const layer of required) {
+    included.push(layer)
+    totalTokens += layer.tokenEstimate
+  }
+
+  if (totalTokens > opts.maxTokens) {
+    console.warn(JSON.stringify({
+      event: 'context_assembler_budget_exceeded_by_required',
+      required_tokens: totalTokens,
+      max_tokens: opts.maxTokens,
+      query_id: opts.queryId ?? null,
+    }))
+  }
+
+  // Greedily pack optional layers within remaining budget
+  for (const layer of optional) {
+    if (totalTokens + layer.tokenEstimate <= opts.maxTokens) {
+      included.push(layer)
+      totalTokens += layer.tokenEstimate
+    } else {
+      droppedArtifacts.push(layer.artifactId)
+    }
+  }
+
+  // Format the assembled string with section headers
+  // Group by layer type for clean separation
+  const sections: string[] = []
+  const layerOrder: Array<'L1' | 'L2_5' | 'L3'> = ['L1', 'L2_5', 'L3']
+  for (const layerType of layerOrder) {
+    const layerItems = included.filter(l => l.layer === layerType)
+    if (layerItems.length === 0) continue
+
+    sections.push(`=== ${LAYER_HEADERS[layerType] ?? layerType} ===`)
+    for (const item of layerItems) {
+      const label = ARTIFACT_LABELS[item.artifactId] ?? item.artifactId
+      sections.push(`\n--- ${label} ---`)
+      sections.push(item.content)
+    }
+  }
+
+  const assembledContext = sections.join('\n')
+
+  // Check B.11 compliance on the assembled output
+  const b11Result = checkB11Compliance(assembledContext)
+
+  if (!b11Result.compliant) {
+    console.log(JSON.stringify({
+      event: 'context_assembler_b11_partial',
+      missing: b11Result.missingLayers,
+      present: b11Result.presentLayers,
+      query_id: opts.queryId ?? null,
+    }))
+  }
+
+  return {
+    assembledContext,
+    includedArtifacts: included.map(l => l.artifactId),
+    droppedArtifacts,
+    totalTokenEstimate: totalTokens,
+    b11Compliant: b11Result.compliant,
   }
 }

@@ -20,6 +20,7 @@ import { useState, useMemo } from 'react'
 import { X, ChevronRight, ChevronDown, Clock, Layers, Database, Zap, AlertCircle, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import { useTraceStream } from '@/hooks/useTraceStream'
 import type { TraceStep, TraceChunkItem, TraceHistoryRow } from '@/lib/trace/types'
+import { getModelMeta } from '@/lib/models/registry'
 import { QueryDNAPanel } from './QueryDNAPanel'
 import { CostPerformanceBar } from './CostPerformanceBar'
 import { RetrievalScorecard, RetrievalEfficiency } from './RetrievalScorecard'
@@ -32,6 +33,16 @@ interface Props {
   isSuperAdmin: boolean
   onClose: () => void
 }
+
+// TODO(J.1): TracePanel and QueryDNAPanel use hardcoded rgba() colour values.
+// Once the R7 portal design system publishes CSS variables (e.g. --color-gold,
+// --color-violet, --color-error) or Tailwind tokens, replace the inline rgba()
+// strings below with those tokens. Track missing tokens as design-system-owner
+// requests. Current palette reference: §5.1 warm-gold scheme (BHISMA-B3).
+// TODO(J.2): TracePanel has no React context dependencies beyond useTraceStream
+// (which is self-contained). No missing providers identified for R7 shell
+// integration. If a ThemeProvider or AuthContext is added to the R7 shell,
+// verify TracePanel doesn't duplicate its own provider.
 
 // ── Step type display config (warm tonal palette per BHISMA §5.1) ─────────────
 
@@ -479,6 +490,44 @@ function ContextInspector({
                 <span className="text-[rgba(252,226,154,0.85)]">{selectedStep.data_summary.model}</span>
               </>
             )}
+            {/* G.2: LLM step additional fields — stack/provider, tokens, estimated cost */}
+            {selectedStep.step_type === 'llm' && selectedStep.data_summary.model && (() => {
+              const meta = getModelMeta(selectedStep.data_summary.model)
+              const inTok = selectedStep.data_summary.input_tokens ?? 0
+              const outTok = selectedStep.data_summary.output_tokens ?? 0
+              const costUsd = meta && (inTok + outTok) > 0
+                ? (inTok / 1_000_000) * meta.costPer1MInput + (outTok / 1_000_000) * meta.costPer1MOutput
+                : null
+              return (
+                <>
+                  {meta?.provider && (
+                    <>
+                      <span className="text-[rgba(212,175,55,0.55)]">Stack</span>
+                      <span className="text-[rgba(252,226,154,0.75)]">{meta.provider}</span>
+                    </>
+                  )}
+                  {inTok > 0 && (
+                    <>
+                      <span className="text-[rgba(212,175,55,0.55)]">Prompt tok</span>
+                      <span className="text-[rgba(252,226,154,0.75)] tabular-nums">{fmtTokens(inTok)}</span>
+                    </>
+                  )}
+                  {outTok > 0 && (
+                    <>
+                      <span className="text-[rgba(212,175,55,0.55)]">Completion tok</span>
+                      <span className="text-[rgba(252,226,154,0.75)] tabular-nums">{fmtTokens(outTok)}</span>
+                    </>
+                  )}
+                  <span className="text-[rgba(212,175,55,0.55)]">Est. cost</span>
+                  <span className="text-[rgba(252,226,154,0.75)] tabular-nums">
+                    {costUsd == null ? 'N/A' : costUsd < 0.001 ? '<$0.001' : `$${costUsd.toFixed(4)}`}
+                  </span>
+                  {/* TODO(G.2): cost_usd is computed client-side from model registry pricing.
+                      Replace with DB-backed value from GET /api/audit/[query_id] once
+                      llm_call_log.cost_usd is populated (currently null in monitoring-write). */}
+                </>
+              )
+            })()}
             {selectedStep.data_summary.chunks_returned != null && (
               <>
                 <span className="text-[rgba(212,175,55,0.55)]">Chunks</span>

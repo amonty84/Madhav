@@ -17,6 +17,11 @@ const TOOL_NAME = 'msr_sql'
 const TOOL_VERSION = '1.0.0'
 const DEFAULT_NATIVE_ID = 'abhisek_mohanty'
 const DEFAULT_CONFIDENCE_FLOOR = 0.6
+// Finance/wealth signals often cluster in the 0.35–0.60 range and are useful
+// for synthesis; the global 0.6 floor over-filters them. Apply a lower default
+// so medium-confidence finance signals reach the synthesizer.
+const FINANCE_WEALTH_CONFIDENCE_FLOOR = 0.35
+const FINANCE_WEALTH_DOMAINS = new Set(['finance', 'wealth'])
 
 const SQL = `
   SELECT * FROM msr_signals
@@ -61,8 +66,18 @@ async function retrieveImpl(
   start: number,
 ): Promise<ToolBundle> {
   const nativeId = (params?.native_id as string | undefined) ?? DEFAULT_NATIVE_ID
+
+  // If an explicit confidence_floor is provided by the caller, honour it.
+  // Otherwise, apply domain-specific defaults: finance/wealth use a lower floor
+  // (0.35) so medium-confidence signals in that range are not filtered out.
+  const explicitFloor = params?.confidence_floor as number | undefined
+  const isFinanceWealthQuery = plan.domains.some(d => FINANCE_WEALTH_DOMAINS.has(d))
   const confidenceFloor =
-    (params?.confidence_floor as number | undefined) ?? DEFAULT_CONFIDENCE_FLOOR
+    explicitFloor !== undefined
+      ? explicitFloor
+      : isFinanceWealthQuery
+        ? FINANCE_WEALTH_CONFIDENCE_FLOOR
+        : DEFAULT_CONFIDENCE_FLOOR
 
   // Build nullable array params — pass null when the filter is unused so that
   // the SQL `IS NULL OR ... ANY(...)` clause becomes a no-op.

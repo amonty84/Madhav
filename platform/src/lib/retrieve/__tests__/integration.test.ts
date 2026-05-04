@@ -12,10 +12,11 @@ vi.mock('@/lib/telemetry', () => ({
 import { RETRIEVAL_TOOLS, getTool } from '../index'
 
 describe('RETRIEVAL_TOOLS registry integration', () => {
-  it('has exactly 17 tools', () => {
+  it('has exactly 20 tools', () => {
     // 10 original + kp_query + saham_query + divisional_query (W4-R2) + chart_facts_query (W4-R3)
     // + domain_report_query + remedial_codex_query + timeline_query (W5-R2 M2-D234-BUNDLE)
-    expect(RETRIEVAL_TOOLS).toHaveLength(17)
+    // + query_signal_state + query_kp_ruling_planets + query_varshaphala (D-series)
+    expect(RETRIEVAL_TOOLS).toHaveLength(20)
   })
 
   it('getTool("msr_sql") returns the MSR SQL tool', () => {
