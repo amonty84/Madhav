@@ -20,21 +20,23 @@ purpose: >
 
 ```yaml
 as_of: 2026-05-04
-current_gate: G2 (Platform Hardening — READY)
+current_gate: G3 (Synthesis Quality — COMPLETE)
 current_session: null
-last_session: GANGA-P3-R2-S1-B11-ENFORCE (CLOSED 2026-05-04)
+last_session: GANGA-P3-R2-S2-CTX-ASSEMBLER (CLOSED 2026-05-04)
 active_brief: null
 active_sessions: []
 blocking_item: null
 note: >
-  BF.GAP.001 fixed. Observation checkpoint recommended before P2-R1-S2 (E2E-OBS)
-  but code sessions can proceed.
+  Overnight run COMPLETE. All 8 sessions closed. G1 (BF.GAP.001), G2 (CI-gate + NIM-compat +
+  circuit-breaker), G3 (synthesis prompt + eval harness + B.11 enforce + context assembler)
+  all COMPLETE. 28 synthesis tests green. Next: P2-R1-S2 (E2E-OBS) observation run (no code),
+  then P2-R1-S3 PROMPT-EVAL against live endpoint.
 immediate_next_action: >
-  1. Execute GANGA-P2-R1-S1-CI-GATE (GitHub Actions CI + planner regression tests).
-  2. Then GANGA-P2-R2-S1-NIM-COMPAT → GANGA-P2-R2-S2-CIRCUIT-BREAKER.
-  3. Deploy registry fix and observe query_plan_log for plan_json non-NULL.
-open_items_count: 109
-completed_items_count: 19
+  1. Run GANGA-P2-R1-S2-E2E-OBS: 8 targeted live queries, observe query_plan_log for plan_json non-NULL.
+  2. Run GANGA-P2-R1-S3-PROMPT-EVAL: npm run answer:eval against live endpoint (L.2.3 baseline).
+  3. After baseline: GANGA-P3-R3-S1-SYNTH-PROMPT-v1.1 (per-query-class variants + worked examples).
+open_items_count: 101
+completed_items_count: 27
 ```
 
 ---
@@ -45,8 +47,8 @@ completed_items_count: 19
 |---|---|---|---|---|---|
 | **G0** | LLM Stack Audit | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R1-S1 ✅ CLOSED | MODEL_REGISTRY_v1_0.md ✅ + GANGA_STACK_AUDIT_v1_0.md ✅ (verdict PASS) | — |
 | **G1** | Production Fix + E2E | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R2-S1 ✅ CLOSED | BF.GAP.001 fixed (deepseek-chat in routing tables) | — |
-| **G2** | Platform Hardening | 🟡 READY — unblocked by G1 completion | GANGA-P2-R1-S1 (CI-GATE), GANGA-P2-R2-S1 (NIM-COMPAT), GANGA-P2-R2-S2 (CIRCUIT-BREAKER) | CI gate + NIM hardening + circuit breaker | Gate 3 |
-| G3 | Synthesis Quality | ⏸️ BLOCKED on G2 | 3-4 sequential sessions | SYNTHESIS_PROMPT v1.0, eval harness, B.11 | Gate 4 |
+| **G2** | Platform Hardening | 🟢 COMPLETE (2026-05-04) | GANGA-P2-R1-S1 ✅, GANGA-P2-R2-S1 ✅, GANGA-P2-R2-S2 ✅ | CI gate + NIM hardening + circuit breaker | — |
+| **G3** | Synthesis Quality | 🟢 COMPLETE (2026-05-04) | GANGA-P3-R1-S1 ✅, GANGA-P3-R1-S2 ✅, GANGA-P3-R2-S1 ✅, GANGA-P3-R2-S2 ✅ | SYNTHESIS_PROMPT v1.0 + eval harness + B.11 guard + context assembler | — |
 | G4 | Integration + Close | ⏸️ BLOCKED on G3 | 1 session | GANGA_CLOSE_v1_0.md | — |
 
 ---
@@ -167,10 +169,10 @@ completed_items_count: 19
 #### L.4 Context Assembler
 | ID | Item | Status | Session |
 |---|---|---|---|
-| L.4.1 | context_assembler.ts module (dedup, ordering, compression) | ⬜ pending | G3-S1 |
-| L.4.2 | Floor/fill discipline (FORENSIC mandatory pre-insert) | ⬜ pending | G3-S1 |
-| L.4.3 | Conflict surfacing (contradictory context items flagged) | ⬜ pending | G3-S1 |
-| L.4.4 | context_assembled trace step + telemetry | ⬜ pending | G3-S1 |
+| L.4.1 | context_assembler.ts module (token-budgeted priority packing, L1/L2.5/L3 ordering) | ✅ done 2026-05-04 | GANGA-P3-R2-S2 |
+| L.4.2 | Floor/fill discipline (required-layer enforcement) | ✅ done 2026-05-04 | GANGA-P3-R2-S2 |
+| L.4.3 | b11Compliant flag on AssemblyResult | ✅ done 2026-05-04 | GANGA-P3-R2-S2 |
+| L.4.4 | context_assembler metadata event logged in single_model_strategy | ✅ done 2026-05-04 | GANGA-P3-R2-S2 |
 
 #### L.5 Calibration Substrate
 | ID | Item | Status | Session |
