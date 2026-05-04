@@ -31,6 +31,7 @@ import 'server-only'
 import { generateText } from 'ai'
 
 import { resolveModel } from '@/lib/models/resolver'
+import { getModelMeta } from '@/lib/models/registry'
 import { traceEmitter } from '@/lib/trace/emitter'
 import { telemetry } from '@/lib/telemetry/index'
 import type { QueryPlan, ToolBundle } from '@/lib/retrieve/types'
@@ -209,6 +210,20 @@ export async function contextAssembler(
   let assembled: ToolBundle[] | null = null
   let errorMsg: string | null = null
 
+  // Retry + timeout guard — applies to ALL providers, not just NIM.
+  //
+  // Without maxRetries: 0, the AI SDK retries errors up to 3 times.
+  // For NIM: each call can hang 90s (nimFetch AbortSignal.timeout) → 3×90s = 270s.
+  // For Anthropic/Gemini/OpenAI: large retrieval bundles can take 20-40s per call →
+  // 3×40s = 120s, which hits Cloud Run maxDuration before synthesis even starts.
+  // maxRetries: 0 ensures the first error surfaces immediately → passThrough.
+  //
+  // AbortSignal.timeout(15_000): hard-caps any single assembler call at 15s.
+  // Context assembly is a JSON-reorder step, not open-ended synthesis — 15s is
+  // generous. On abort the catch fires, errorMsg is set, passThrough returns the
+  // original bundles unchanged, and synthesis proceeds normally.
+  const assemblerSignal = AbortSignal.timeout(15_000)
+
   try {
     const result = await generateText({
       model: resolveModel(modelId),
@@ -216,12 +231,19 @@ export async function contextAssembler(
       messages: [{ role: 'user', content: userPrompt }],
       temperature: 0,
       maxOutputTokens: 8000,
+      maxRetries: 0,
+      abortSignal: assemblerSignal,
     })
     usage = result.usage
     assembled = parseAssemblerOutput(result.text, toolBundles)
     if (!assembled) errorMsg = 'parse_or_schema_mismatch'
   } catch (err) {
-    errorMsg = err instanceof Error ? err.message : String(err)
+    // BUG-CA-3: err.message can be undefined for AI SDK AbortError / timeout wrapper
+    // objects whose Error subclass never sets message in the constructor.
+    // undefined ?? 'unknown_error' = 'unknown_error' — the exact string seen in
+    // production traces. Fall through: rawMsg → err.name → 'llm_call_error'.
+    const rawMsg = err instanceof Error ? err.message : String(err)
+    errorMsg = rawMsg || (err instanceof Error ? err.name : null) || 'llm_call_error'
     telemetry.recordError(
       'context_assembler',
       'llm_call_failed',
@@ -246,11 +268,29 @@ export async function contextAssembler(
         started_at: startedAtIso,
         completed_at: new Date().toISOString(),
         latency_ms: latencyMs,
-        data_summary: { model: modelId, result: errorMsg ?? 'unknown_error' },
+        data_summary: { model: modelId, result: errorMsg ?? 'llm_call_error' },
         payload: {},
       },
     })
-    return passThrough(toolBundles, 'pass-through', latencyMs)
+    // BUG-CA-4: wrap passThrough in try/catch — countTokens iterates tb.results
+    // and accesses r.content.length; if any result has content:undefined, it throws
+    // TypeError which propagates to route.ts outer catch → HTTP 500 → no response.
+    try {
+      return passThrough(toolBundles, 'pass-through', latencyMs)
+    } catch {
+      return {
+        tool_bundles: toolBundles,
+        context_assembly_compressed: true,
+        context_assembly_model_id: 'pass-through',
+        context_assembly_latency_ms: latencyMs,
+        l1_tokens: 0,
+        l2_5_tokens: 0,
+        l4_tokens: 0,
+        vector_tokens: 0,
+        cgm_tokens: 0,
+        total_tokens: 0,
+      }
+    }
   }
 
   const tokens = countTokens(assembled)
