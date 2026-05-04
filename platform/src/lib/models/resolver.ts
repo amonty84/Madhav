@@ -66,6 +66,39 @@ export function resolveWorkerModel(synthesisModelId: string): string {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// DeepSeek provider options — thinking mode
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * DeepSeek V4 Pro thinking-mode config for streamText `providerOptions`.
+ *
+ * deepseek-v4-pro is a dual-mode model. For synthesis we want thinking=enabled
+ * (chain-of-thought reasoning before the answer). For planner calls we want
+ * thinking=disabled to get fast structured JSON without CoT overhead.
+ *
+ * Returns undefined for non-deepseek-v4-pro model IDs — deepseek-chat and
+ * deepseek-reasoner must not receive a thinking providerOption.
+ *
+ * SDK note: @ai-sdk/deepseek ≥2.0.x exposes thinking via
+ * providerOptions.deepseek.thinking.type ('enabled' | 'disabled').
+ */
+export function deepseekProviderOptions(
+  modelId: string,
+  mode: 'synthesis' | 'planner' = 'synthesis',
+):
+  | { deepseek: { thinking: { type: 'enabled' | 'disabled' } } }
+  | undefined {
+  const meta = getModelMeta(modelId)
+  if (meta?.provider !== 'deepseek') return undefined
+  if (modelId !== 'deepseek-v4-pro') return undefined
+  return {
+    deepseek: {
+      thinking: { type: mode === 'synthesis' ? 'enabled' : 'disabled' },
+    },
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Google provider options — safety settings + thinking budget
 // ─────────────────────────────────────────────────────────────────────────────
 

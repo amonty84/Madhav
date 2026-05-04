@@ -22,7 +22,7 @@ import type { TraceChunkItem } from '@/lib/trace/types'
 import type { ModelMessage, ToolSet } from 'ai'
 import { z } from 'zod'
 
-import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions, deepseekProviderOptions } from '@/lib/models/resolver'
 import { getModelMeta, supports } from '@/lib/models/registry'
 import { stripThinkBlocks, extractReasoningTrace } from './think_block_filter'
 import { getDefaultRegistry } from '@/lib/prompts/index'
@@ -409,8 +409,13 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       // Google-specific: disable safety filters (Jyotish content triggers
       // DANGEROUS_CONTENT mid-stream) + cap thinking budget (avoids 30-90s
       // hang before first visible token). See resolver.googleProviderOptions.
-      ...(googleProviderOptions(selected_model_id) && {
-        providerOptions: googleProviderOptions(selected_model_id),
+      // DeepSeek V4 Pro: activate thinking=enabled for synthesis CoT.
+      // Merge at the top-level provider key — no model is both google and deepseek.
+      ...((googleProviderOptions(selected_model_id) || deepseekProviderOptions(selected_model_id, 'synthesis')) && {
+        providerOptions: {
+          ...(googleProviderOptions(selected_model_id)?.google && { google: googleProviderOptions(selected_model_id)!.google }),
+          ...(deepseekProviderOptions(selected_model_id, 'synthesis')?.deepseek && { deepseek: deepseekProviderOptions(selected_model_id, 'synthesis')!.deepseek }),
+        },
       }),
       onFinish: async ({
         finishReason,

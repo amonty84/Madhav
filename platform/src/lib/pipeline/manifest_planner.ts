@@ -24,14 +24,14 @@ import path from 'node:path'
 import { generateText, jsonSchema, tool } from 'ai'
 import type { JSONSchema7 } from 'json-schema'
 import { z } from 'zod'
-import { resolveModel } from '@/lib/models/resolver'
+import { resolveModel, googleProviderOptions } from '@/lib/models/resolver'
 import {
   compressManifest,
   compressedManifestToString,
   type CapabilityManifest,
 } from '@/lib/pipeline/manifest_compressor'
 import { buildPlannerContext } from '@/lib/pipeline/planner_context_builder'
-import type { PlanningStartEvent, PlanningDoneEvent } from '@/lib/trace/types'
+import type { PlanningStartEvent, PlanningDoneEvent, TraceEvent } from '@/lib/trace/types'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -58,11 +58,20 @@ export class PlannerError extends Error {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// Retry helpers — timeout-only retry gate
+// Retry helpers — timeout + rate-limit retry gate
 // ────────────────────────────────────────────────────────────────────────────
 
 const MAX_PLANNER_RETRIES = 1
 const PLANNER_RETRY_DELAY_MS = 2000
+
+function isRateLimitError(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false
+  const e = err as { status?: number; statusCode?: number; message?: string }
+  if (e.status === 429 || e.statusCode === 429) return true
+  if (typeof e.message === 'string' && e.message.includes('429')) return true
+  if (typeof e.message === 'string' && e.message.toLowerCase().includes('rate')) return true
+  return false
+}
 
 function isTimeoutError(err: unknown): boolean {
   if (err instanceof Error) {
@@ -237,8 +246,9 @@ export async function callLlmPlanner(
   conversationHistory: Array<{ role: string; content: string }>,
   plannerModelId: string,
   nativeId: string,
-  emitTrace?: (event: PlanningStartEvent | PlanningDoneEvent) => void,
+  emitTrace?: (event: TraceEvent) => void,
   queryId?: string,
+  fallbackModelId?: string,
 ): Promise<PlanSchema> {
   const manifest = loadManifest()
   const compressed = compressManifest(manifest)
@@ -261,6 +271,30 @@ export async function callLlmPlanner(
   }
   const userMessage = JSON.stringify(userPayload)
 
+  // Capture timing before emitting step_start so started_at is accurate.
+  const plannerStepStart = new Date().toISOString()
+  const plannerStartMs = Date.now()
+  const stepQueryId = queryId ?? nativeId
+
+  emitTrace?.({
+    event: 'step_start',
+    query_id: stepQueryId,
+    step: {
+      query_id: stepQueryId,
+      step_seq: 0,
+      step_name: 'llm_planner',
+      step_type: 'llm',
+      status: 'running',
+      started_at: plannerStepStart,
+      data_summary: {
+        model: plannerModelId,
+        planner_active: true,
+        tool_count: compressed.length,
+      },
+      payload: {},
+    },
+  })
+
   // nativeId doubles as the SSE query_id for the request that owns this plan.
   emitTrace?.({
     event: 'planning_start',
@@ -278,10 +312,16 @@ export async function callLlmPlanner(
   const start = Date.now()
   let result
   let lastErr: unknown
+  let activeModelId = plannerModelId
+  let fallbackWasUsed = false
   for (let attempt = 0; attempt <= MAX_PLANNER_RETRIES; attempt++) {
+    activeModelId = (attempt > 0 && fallbackModelId && isRateLimitError(lastErr))
+      ? fallbackModelId
+      : plannerModelId
+    fallbackWasUsed = activeModelId !== plannerModelId
     try {
       result = await generateText({
-        model: resolveModel(plannerModelId),
+        model: resolveModel(activeModelId),
         system: getSystemPrompt(),
         messages: [{ role: 'user', content: userMessage }],
         temperature: 0,
@@ -300,10 +340,21 @@ export async function callLlmPlanner(
           }),
         },
         toolChoice: 'required',
+        // Apply Google safety overrides when the planner model is a Gemini model.
+        // Returns undefined for all non-Google models — spread is a no-op.
+        ...(googleProviderOptions(activeModelId) && {
+          providerOptions: googleProviderOptions(activeModelId),
+        }),
       })
       break
     } catch (err) {
       lastErr = err
+      if (isRateLimitError(err) && attempt === 0 && fallbackModelId) {
+        console.warn(
+          `[manifest_planner] 429 on primary ${plannerModelId}, retrying with fallback ${fallbackModelId}`,
+        )
+        continue
+      }
       if (isTimeoutError(err) && attempt < MAX_PLANNER_RETRIES) {
         console.warn(
           `[manifest_planner] timeout on attempt ${attempt + 1}, retrying...`,
@@ -316,16 +367,35 @@ export async function callLlmPlanner(
           query_id: queryId,
           conversation_id: null,
           call_stage: 'planner',
-          model_id: plannerModelId,
-          provider: resolveProvider(plannerModelId),
+          model_id: activeModelId,
+          provider: resolveProvider(activeModelId),
           input_tokens: null,
           output_tokens: null,
           reasoning_tokens: null,
           latency_ms: Date.now() - start,
           cost_usd: null,
-          fallback_used: false,
+          fallback_used: fallbackWasUsed,
           error_code: err instanceof Error ? err.message : String(err),
           payload: null,
+        })
+      }
+      {
+        const errMsg = err instanceof Error ? err.message : String(err)
+        emitTrace?.({
+          event: 'step_error',
+          query_id: stepQueryId,
+          step: {
+            query_id: stepQueryId,
+            step_seq: 0,
+            step_name: 'llm_planner',
+            step_type: 'llm',
+            status: 'error',
+            started_at: plannerStepStart,
+            completed_at: new Date().toISOString(),
+            latency_ms: Date.now() - plannerStartMs,
+            data_summary: { model: activeModelId, planner_active: false, error_reason: errMsg },
+            payload: { error_message: errMsg },
+          },
         })
       }
       throw new PlannerError(
@@ -335,22 +405,41 @@ export async function callLlmPlanner(
     }
   }
   if (!result) {
-    // Exhausted retries on timeout errors — log and throw
+    // Exhausted retries on timeout/rate-limit errors — log and throw
     if (queryId) {
       void writeLlmCallLog({
         query_id: queryId,
         conversation_id: null,
         call_stage: 'planner',
-        model_id: plannerModelId,
-        provider: resolveProvider(plannerModelId),
+        model_id: activeModelId,
+        provider: resolveProvider(activeModelId),
         input_tokens: null,
         output_tokens: null,
         reasoning_tokens: null,
         latency_ms: Date.now() - start,
         cost_usd: null,
-        fallback_used: false,
+        fallback_used: fallbackWasUsed,
         error_code: lastErr instanceof Error ? lastErr.message : String(lastErr),
         payload: null,
+      })
+    }
+    {
+      const errMsg = lastErr instanceof Error ? lastErr.message : String(lastErr)
+      emitTrace?.({
+        event: 'step_error',
+        query_id: stepQueryId,
+        step: {
+          query_id: stepQueryId,
+          step_seq: 0,
+          step_name: 'llm_planner',
+          step_type: 'llm',
+          status: 'error',
+          started_at: plannerStepStart,
+          completed_at: new Date().toISOString(),
+          latency_ms: Date.now() - plannerStartMs,
+          data_summary: { model: activeModelId, planner_active: false, error_reason: errMsg },
+          payload: { error_message: errMsg },
+        },
       })
     }
     throw new PlannerError(
@@ -365,14 +454,14 @@ export async function callLlmPlanner(
       query_id: queryId,
       conversation_id: null,
       call_stage: 'planner',
-      model_id: plannerModelId,
-      provider: resolveProvider(plannerModelId),
+      model_id: activeModelId,
+      provider: resolveProvider(activeModelId),
       input_tokens: result.usage?.inputTokens ?? null,
       output_tokens: result.usage?.outputTokens ?? null,
       reasoning_tokens: null,
       latency_ms,
       cost_usd: null,
-      fallback_used: false,
+      fallback_used: fallbackWasUsed,
       error_code: null,
       payload: null,
     })
@@ -380,18 +469,88 @@ export async function callLlmPlanner(
 
   const submitCall = result.toolCalls.find(tc => tc.toolName === 'submit_plan')
   if (!submitCall) {
-    throw new PlannerError(
-      `LLM planner did not produce a submit_plan tool call ` +
-        `(toolCalls=${result.toolCalls.length}, finishReason=${result.finishReason})`,
-    )
+    const errMsg = `LLM planner did not produce a submit_plan tool call (toolCalls=${result.toolCalls.length}, finishReason=${result.finishReason})`
+    emitTrace?.({
+      event: 'step_error',
+      query_id: stepQueryId,
+      step: {
+        query_id: stepQueryId,
+        step_seq: 0,
+        step_name: 'llm_planner',
+        step_type: 'llm',
+        status: 'error',
+        started_at: plannerStepStart,
+        completed_at: new Date().toISOString(),
+        latency_ms: Date.now() - plannerStartMs,
+        data_summary: { model: activeModelId, planner_active: false, error_reason: errMsg },
+        payload: { error_message: errMsg },
+      },
+    })
+    throw new PlannerError(errMsg)
   }
   const parsed = PlanSchemaZod.safeParse(submitCall.input)
   if (!parsed.success) {
-    throw new PlannerError(
-      `LLM planner returned schema-invalid output: ${parsed.error.message}`,
-      parsed.error,
-    )
+    const errMsg = `LLM planner returned schema-invalid output: ${parsed.error.message}`
+    emitTrace?.({
+      event: 'step_error',
+      query_id: stepQueryId,
+      step: {
+        query_id: stepQueryId,
+        step_seq: 0,
+        step_name: 'llm_planner',
+        step_type: 'llm',
+        status: 'error',
+        started_at: plannerStepStart,
+        completed_at: new Date().toISOString(),
+        latency_ms: Date.now() - plannerStartMs,
+        data_summary: { model: activeModelId, planner_active: false, error_reason: errMsg },
+        payload: { error_message: errMsg },
+      },
+    })
+    throw new PlannerError(errMsg, parsed.error)
   }
+
+  emitTrace?.({
+    event: 'step_done',
+    query_id: stepQueryId,
+    step: {
+      query_id: stepQueryId,
+      step_seq: 0,
+      step_name: 'llm_planner',
+      step_type: 'llm',
+      status: 'done',
+      started_at: plannerStepStart,
+      completed_at: new Date().toISOString(),
+      latency_ms: Date.now() - plannerStartMs,
+      data_summary: {
+        model: activeModelId,
+        planner_active: true,
+        tool_count: parsed.data.tool_calls.length,
+        query_class: parsed.data.query_class,
+      },
+      payload: {
+        query_plan: {
+          query_class: parsed.data.query_class,
+          tools_authorized: parsed.data.tool_calls.map(tc => tc.tool_name),
+          tool_calls: parsed.data.tool_calls.map(tc => ({
+            tool_name: tc.tool_name,
+            params: tc.params,
+            priority: tc.priority,
+            reason: tc.reason,
+          })),
+          query_intent_summary: parsed.data.query_intent_summary,
+          planning_model_id: activeModelId,
+          planning_latency_ms: latency_ms,
+        },
+        tool_calls: parsed.data.tool_calls.map(tc => ({
+          tool_name: tc.tool_name,
+          params: tc.params,
+          priority: tc.priority,
+          reason: tc.reason,
+        })),
+      },
+    },
+  })
 
   emitTrace?.({
     event: 'planning_done',

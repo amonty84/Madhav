@@ -11,6 +11,7 @@ vi.mock('ai', () => ({
 }))
 vi.mock('@/lib/models/resolver', () => ({
   resolveModel: (id: string) => ({ __mocked_model_id: id }),
+  googleProviderOptions: (_id: string) => undefined,
 }))
 
 // Import AFTER the mocks are registered.
@@ -178,5 +179,48 @@ describe('callLlmPlanner — LLM-first planner', () => {
     const userMessage = callArg.messages[0].content
     expect(userMessage).toContain(NATIVE_ID)
     expect(userMessage).toContain('"native_id"')
+  })
+
+  it('AC.6 — 429 on primary triggers one retry with fallback model', async () => {
+    const rateLimitError = Object.assign(new Error('Rate limit exceeded'), { status: 429 })
+    const FALLBACK_MODEL = 'mock-planner-fallback'
+
+    // First call (primary) throws 429; second call (fallback) succeeds.
+    generateTextMock
+      .mockRejectedValueOnce(rateLimitError)
+      .mockResolvedValueOnce(makeTextResult(planRemedial()))
+
+    const plan = await callLlmPlanner(
+      'What remedies are good for Saturn friction?',
+      [],
+      PLANNER_MODEL,
+      NATIVE_ID,
+      undefined,
+      undefined,
+      FALLBACK_MODEL,
+    )
+
+    expect(plan.query_class).toBe('remedial')
+    expect(generateTextMock).toHaveBeenCalledTimes(2)
+
+    // First call should use the primary model.
+    const firstCall = generateTextMock.mock.calls[0][0] as { model: { __mocked_model_id: string } }
+    expect(firstCall.model.__mocked_model_id).toBe(PLANNER_MODEL)
+
+    // Second call should use the fallback model.
+    const secondCall = generateTextMock.mock.calls[1][0] as { model: { __mocked_model_id: string } }
+    expect(secondCall.model.__mocked_model_id).toBe(FALLBACK_MODEL)
+  })
+
+  it('AC.6 — 429 without fallback propagates as PlannerError', async () => {
+    const rateLimitError = Object.assign(new Error('Rate limit exceeded'), { status: 429 })
+    generateTextMock.mockRejectedValueOnce(rateLimitError)
+
+    await expect(
+      callLlmPlanner('any query', [], PLANNER_MODEL, NATIVE_ID),
+    ).rejects.toBeInstanceOf(PlannerError)
+
+    // Only one call — no fallback provided.
+    expect(generateTextMock).toHaveBeenCalledTimes(1)
   })
 })

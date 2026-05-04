@@ -951,11 +951,11 @@ export const STACK_ROUTING: Record<ModelStack, Record<CallType, { primary: strin
   deepseek: {
     synthesis: {
       primary:  'deepseek-v4-pro',                          // 1M ctx, thinking, $1.74/$3.48
-      fallback: 'deepseek-v4-flash',                        // 1M ctx, non-thinking fallback
+      fallback: 'deepseek-chat',                            // non-thinking, valid API ID (was: deepseek-v4-flash — INVALID)
     },
     planner_deep: {
       primary:  'deepseek-v4-pro',                          // thinking=false for JSON speed
-      fallback: 'deepseek-v4-flash',                        // cheaper fallback
+      fallback: 'deepseek-chat',                            // non-thinking, valid API ID (was: deepseek-v4-flash — INVALID)
     },
     planner_fast: {
       primary:  'deepseek-chat',                            // non-thinking, supports toolChoice — deepseek-v4-flash is not a valid API ID
