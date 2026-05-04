@@ -74,10 +74,16 @@ function aggregateErrorRate(rows: TraceHistoryRow[]): {
   total: number
   errors: number
   fallbacks: number
+  avg_tool_count: number | null
 } {
   const errors = rows.filter(r => r.has_error).length
   const fallbacks = rows.filter(r => r.planning_confidence === 0).length
-  return { total: rows.length, errors, fallbacks }
+  // I.2: average tool count per plan across queries that have tools_used data
+  const withTools = rows.filter(r => r.tools_used && r.tools_used.length > 0)
+  const avg_tool_count = withTools.length > 0
+    ? Math.round((withTools.reduce((s, r) => s + (r.tools_used?.length ?? 0), 0) / withTools.length) * 10) / 10
+    : null
+  return { total: rows.length, errors, fallbacks, avg_tool_count }
 }
 
 // ── Donut chart (SVG) ────────────────────────────────────────────────────────
@@ -244,14 +250,21 @@ function ToolFrequency({ data, totalQueries }: { data: Array<{ tool: string; cou
 
 // ── Error / fallback KPIs ────────────────────────────────────────────────────
 
-function ErrorPanel({ rate }: { rate: { total: number; errors: number; fallbacks: number } }) {
+function ErrorPanel({ rate }: { rate: { total: number; errors: number; fallbacks: number; avg_tool_count: number | null } }) {
   const errPct = rate.total > 0 ? Math.round((rate.errors / rate.total) * 100) : 0
   const fbkPct = rate.total > 0 ? Math.round((rate.fallbacks / rate.total) * 100) : 0
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-4 gap-2">
       <div className="px-2 py-2 bg-[rgba(212,175,55,0.04)] border border-[rgba(212,175,55,0.10)]">
         <div className="text-[8px] uppercase tracking-[0.1em] text-[rgba(212,175,55,0.45)]">Queries</div>
         <div className="text-[18px] font-bold text-[rgba(252,226,154,0.85)] tabular-nums">{rate.total}</div>
+      </div>
+      {/* I.2: avg tool count per plan */}
+      <div className="px-2 py-2 bg-[rgba(212,175,55,0.04)] border border-[rgba(212,175,55,0.10)]">
+        <div className="text-[8px] uppercase tracking-[0.1em] text-[rgba(212,175,55,0.45)]">Avg tools/plan</div>
+        <div className="text-[18px] font-bold text-[rgba(252,226,154,0.85)] tabular-nums">
+          {rate.avg_tool_count != null ? rate.avg_tool_count : <span className="text-[rgba(212,175,55,0.4)] text-[12px]">—</span>}
+        </div>
       </div>
       <div className={`px-2 py-2 border ${rate.fallbacks > 0 ? 'bg-[rgba(220,140,60,0.08)] border-[rgba(220,140,60,0.25)]' : 'bg-[rgba(212,175,55,0.04)] border-[rgba(212,175,55,0.10)]'}`}>
         <div className="text-[8px] uppercase tracking-[0.1em] text-[rgba(212,175,55,0.45)]">Fallbacks</div>

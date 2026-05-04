@@ -420,11 +420,29 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
         usage?: { inputTokens?: number; outputTokens?: number }
         text?: string
       }) => {
+        // G.4: capture wall-clock latency once at onFinish entry for consistent
+        // use in trace + deepseek instrumentation. Compare synthesisLatencyMs
+        // against llm_call_log.latency_ms (same query_id) to separate LLM
+        // call latency from pre-stream context-assembly overhead.
+        const synthesisLatencyMs = Date.now() - synthesisStartMs
+
         // BHISMA-B1 §3.4 — defensive: even with extractReasoningMiddleware,
         // strip any stray <think>…</think> from the final text before downstream
         // use so neither the audit, methodology-block extractor, nor the trace
         // payload preview accidentally captures reasoning content.
         const isR1 = selected_model_id === 'deepseek-reasoner'
+        // G.4: DeepSeek synthesis latency instrumentation.
+        // If synthesisLatencyMs >> per-call latency in llm_call_log, the bottleneck
+        // is context assembly (pre-stream); if approximately equal, it is the LLM.
+        if (selected_model_id.startsWith('deepseek')) {
+          console.warn(
+            '[synthesis][deepseek] latency_ms=%d query_id=%s model=%s finish=%s',
+            synthesisLatencyMs,
+            query_plan.query_plan_id,
+            selected_model_id,
+            finishReason,
+          )
+        }
         const rawText = text ?? ''
         const { reasoning: r1Reasoning, answer: cleanText } = isR1
           ? extractReasoningTrace(rawText)
@@ -455,7 +473,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
               status: 'done',
               started_at: new Date(synthesisStartMs).toISOString(),
               completed_at: new Date().toISOString(),
-              latency_ms: Date.now() - synthesisStartMs,
+              latency_ms: synthesisLatencyMs,
               data_summary: {
                 model: selected_model_id,
                 input_tokens: usage?.inputTokens ?? 0,
@@ -501,7 +519,11 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           reasoning_tokens: isR1 && r1Reasoning
             ? Math.ceil(r1Reasoning.length / 4)
             : null,
-          latency_ms: Date.now() - synthesisStartMs,
+          latency_ms: synthesisLatencyMs,
+          // TODO(G.2): cost_usd is null — compute from (input_tokens/1M)*costPer1MInput +
+          // (output_tokens/1M)*costPer1MOutput using getModelMeta(selected_model_id).
+          // Blocked on confirming all three stacks (anthropic/deepseek/nvidia) populate
+          // usage tokens reliably before writing a non-null value here.
           cost_usd: null,
           fallback_used: false,
           error_code: finishReason === 'error' ? finishReason : null,
