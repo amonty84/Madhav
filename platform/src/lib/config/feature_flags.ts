@@ -99,12 +99,9 @@ export const DEFAULT_FLAGS: Record<FeatureFlag, boolean> = {
   // BHISMA Stream 2 — LLM-first planner. Default ON (Lever-2 cleared 2026-05-04).
   LLM_FIRST_PLANNER_ENABLED: true,
   // W2-CTX-ASSEMBLY — context assembly LLM step.
-  // REVERTED (GANGA-P2-R1-S4): flag flip to true caused orchestrator_wiring.test.ts
-  // and route.test.ts failures — those tests don't mock generateText and the assembler
-  // LLM call fails (CloudSQLConnectorError / missing DB creds in test env). Unit tests
-  // (context_assembler.test.ts 4/4) pass; prod smoke requires proxy + DB.
-  // Next action: add generateText mock to orchestrator_wiring + route tests, then re-flip.
-  CONTEXT_ASSEMBLY_ENABLED: false,
+  // Re-flipped true (GANGA-D4-UNBLOCK): added generateText + context_assembler mocks
+  // to orchestrator_wiring.test.ts and route.test.ts; full suite passes at 0 net new failures.
+  CONTEXT_ASSEMBLY_ENABLED: true,
   // BHISMA-B1 §6.2 — New observability flags (all default ON)
   TRACE_ANALYTICS_ENABLED: true,
   COST_TRACKING_ENABLED: true,

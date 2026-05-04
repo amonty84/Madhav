@@ -150,11 +150,11 @@ describe('contradiction_register tool', () => {
     expect(ids).toContain('CON-003')
   })
 
-  it('returns empty results for unknown domain', async () => {
+  it('falls back to full register for unknown domain (UQE-7)', async () => {
     const plan: QueryPlan = { ...basePlan, domains: ['spirituality'] }
     const bundle = await tool.retrieve(plan)
 
-    expect(bundle.results).toHaveLength(0)
+    expect(bundle.results.length).toBeGreaterThan(0)
   })
 
   it('uses fixed confidence value of 0.8', async () => {

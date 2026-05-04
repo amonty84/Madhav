@@ -13,11 +13,13 @@ vi.mock('@/lib/models/resolver', () => ({
   isReasoningModel: vi.fn(() => false),
   resolveWorkerModel: vi.fn((id: string) => id ?? 'claude-haiku-4-5'),
   supportsStreaming: vi.fn(() => true),
+  googleProviderOptions: vi.fn(() => null),
 }))
 
 const mockStreamText = vi.fn()
 vi.mock('ai', () => ({
   streamText: (...args: unknown[]) => mockStreamText(...args),
+  generateText: vi.fn().mockResolvedValue({ text: '[]' }),
   stepCountIs: vi.fn((n: number) => ({ type: 'stepCount', value: n })),
   smoothStream: vi.fn(() => (stream: unknown) => stream),
   tool: vi.fn((config: unknown) => config),
