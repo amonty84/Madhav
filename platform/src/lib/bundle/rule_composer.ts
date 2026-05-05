@@ -156,9 +156,9 @@ function isDomainReport(asset: AssetEntry): boolean {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function normaliseRole(role: string): BundleEntryRole {
-  const valid: BundleEntryRole[] = ['floor', 'interpretive', 'predictive', 'discovery', 'holistic']
+  const valid: BundleEntryRole[] = ['floor', 'interpretive', 'predictive', 'discovery', 'holistic', 'remedial', 'domain_report', 'temporal_engine']
   if (valid.includes(role as BundleEntryRole)) return role as BundleEntryRole
-  // cross_native_meta gets stored as 'floor' in the bundle schema (only floor is valid for that case)
+  // cross_native_meta gets stored as 'floor' (bundle schema does not define a cross_native role)
   return 'floor'
 }
 

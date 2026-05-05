@@ -43,6 +43,11 @@ const CLUSTER = makeAsset('CLUSTER_ATLAS_v1_0', '035_DISCOVERY_LAYER/REGISTERS/C
 const RESONANCE = makeAsset('RESONANCE_REGISTER_v1_0', '035_DISCOVERY_LAYER/REGISTERS/RESONANCE_REGISTER_v1_0.md')
 const EXTRA = makeAsset('MSR_v3_0', '025_HOLISTIC_SYNTHESIS/MSR_v3_0.md')
 
+// W6-R1 fixtures — remedial codex + spiritual domain report
+const REMEDIAL_P1 = makeAsset('REMEDIAL_CODEX_v2_0_PART1', '04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART1.md')
+const REMEDIAL_P2 = makeAsset('REMEDIAL_CODEX_v2_0_PART2', '04_REMEDIAL_CODEX/REMEDIAL_CODEX_v2_0_PART2.md')
+const REPORT_SPIRITUAL = makeAsset('REPORT_SPIRITUAL_v1_1', '03_DOMAIN_REPORTS/REPORT_SPIRITUAL_v1_1.md')
+
 const ALL_ASSETS = [FORENSIC, CGM, UCN, CDLM, RM, LEL, SADE, PATTERN, CONTRADICTION, CLUSTER, RESONANCE, EXTRA]
 
 const MOCK_MANIFEST: ManifestData = {
@@ -51,8 +56,18 @@ const MOCK_MANIFEST: ManifestData = {
   byId: new Map(ALL_ASSETS.map(e => [e.canonical_id, e])),
 }
 
+// Extended manifest for W6-R1 rules
+const W6_ASSETS = [...ALL_ASSETS, REMEDIAL_P1, REMEDIAL_P2, REPORT_SPIRITUAL]
+const W6_MANIFEST: ManifestData = {
+  fingerprint: 'mock-fingerprint-w6',
+  entries: W6_ASSETS,
+  byId: new Map(W6_ASSETS.map(e => [e.canonical_id, e])),
+}
+
+const loadManifestMock = vi.fn().mockResolvedValue(MOCK_MANIFEST)
+
 vi.mock('../manifest_reader', () => ({
-  loadManifest: vi.fn().mockResolvedValue(MOCK_MANIFEST),
+  loadManifest: (...args: unknown[]) => loadManifestMock(...args),
   resetCache: vi.fn(),
   getTier1Entries: (data: ManifestData) => data.entries.filter(e => e.expose_to_chat && e.status === 'CURRENT'),
 }))
@@ -77,6 +92,13 @@ function makePlan(
     manifest_fingerprint: 'mock-fingerprint',
     schema_version: '1.0',
   }
+}
+
+function makePlanWith(
+  query_class: QueryPlan['query_class'],
+  overrides: Partial<QueryPlan> = {},
+): QueryPlan {
+  return { ...makePlan(query_class), ...overrides }
 }
 
 function ids(bundle: Awaited<ReturnType<typeof import('../rule_composer')['compose']>>) {
@@ -248,15 +270,76 @@ describe('compose — holistic', () => {
 })
 
 describe('compose — remedial', () => {
-  it('includes only floor assets', async () => {
+  it('includes floor assets when REMEDIAL_CODEX absent from manifest', async () => {
+    // Default mock manifest has no REMEDIAL_CODEX — remedialRule fires PATH B (no-op)
+    loadManifestMock.mockResolvedValueOnce(MOCK_MANIFEST)
     const { compose } = await import('../rule_composer')
     const bundle = await compose(makePlan('remedial'))
     const bundleIds = ids(bundle)
     expect(bundleIds).toContain('FORENSIC_ASTROLOGICAL_DATA_v8_0')
     expect(bundleIds).toContain('CGM')
-    // No special rule for remedial
     expect(bundleIds).not.toContain('UCN_v4_0')
     expect(bundleIds).not.toContain('LEL')
+  })
+
+  it('includes REMEDIAL_CODEX entries when present in manifest', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const bundle = await compose(makePlan('remedial'))
+    const bundleIds = ids(bundle)
+    expect(bundleIds).toContain('FORENSIC_ASTROLOGICAL_DATA_v8_0')
+    expect(bundleIds).toContain('REMEDIAL_CODEX_v2_0_PART1')
+    expect(bundleIds).toContain('REMEDIAL_CODEX_v2_0_PART2')
+    expect(bundle.mandatory_context.length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('remedial entries carry role remedial', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const bundle = await compose(makePlan('remedial'))
+    const codexEntry = bundle.mandatory_context.find(
+      e => e.canonical_id === 'REMEDIAL_CODEX_v2_0_PART1',
+    )
+    expect(codexEntry?.role).toBe('remedial')
+  })
+})
+
+describe('compose — spiritual domain (compose_bundle spiritual fix)', () => {
+  it('returns ≥ 1 entry for spiritual domain query', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const plan = makePlanWith('remedial', { domains: ['spiritual'] })
+    const bundle = await compose(plan)
+    expect(bundle.mandatory_context.length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('includes REPORT_SPIRITUAL_v1_1 when spiritual domain is set', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const plan = makePlanWith('remedial', { domains: ['spiritual'] })
+    const bundle = await compose(plan)
+    const bundleIds = ids(bundle)
+    expect(bundleIds).toContain('REPORT_SPIRITUAL_v1_1')
+  })
+
+  it('domain_report entries carry role domain_report', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const plan = makePlanWith('remedial', { domains: ['spiritual'] })
+    const bundle = await compose(plan)
+    const spiritualEntry = bundle.mandatory_context.find(
+      e => e.canonical_id === 'REPORT_SPIRITUAL_v1_1',
+    )
+    expect(spiritualEntry?.role).toBe('domain_report')
+  })
+
+  it('factual query with spiritual domain also includes the report', async () => {
+    loadManifestMock.mockResolvedValueOnce(W6_MANIFEST)
+    const { compose } = await import('../rule_composer')
+    const plan = makePlanWith('factual', { domains: ['spiritual'] })
+    const bundle = await compose(plan)
+    expect(ids(bundle)).toContain('REPORT_SPIRITUAL_v1_1')
+    expect(bundle.mandatory_context.length).toBeGreaterThanOrEqual(1)
   })
 })
 
