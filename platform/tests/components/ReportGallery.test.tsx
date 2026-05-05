@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ReportGallery } from '@/components/consume/ReportGallery'
@@ -10,8 +10,10 @@ const makeReport = (id: string, domain: string, updatedAt: string): Report => ({
   title: `${domain} Report`,
   updated_at: updatedAt,
   chart_id: 'chart1',
-  content: '',
   created_at: updatedAt,
+  native_id: 'native1',
+  storage_path: `/reports/${id}`,
+  version: '1',
 })
 
 const REPORTS: Report[] = [

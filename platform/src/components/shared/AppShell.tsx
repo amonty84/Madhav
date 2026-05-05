@@ -6,7 +6,7 @@ import { MobileNavSheet } from './MobileNavSheet'
 export type { BreadcrumbSegment }
 
 interface AppShellProps {
-  children: ReactNode
+  children?: ReactNode
   user: { uid: string; email?: string; name?: string }
   profile: { role: 'super_admin' | 'admin' | 'client'; status?: string }
   breadcrumb?: BreadcrumbSegment[]

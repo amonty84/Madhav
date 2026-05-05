@@ -16,6 +16,7 @@ import type {
   QueryPlanLogRow,
   ToolExecutionLogRow,
   ContextAssemblyLogRow,
+  ObservatoryQueryEventInput,
 } from './monitoring-types'
 
 export async function writeLlmCallLog(
@@ -142,4 +143,47 @@ export async function writeContextAssemblyLog(
 
 export function resolveProvider(modelId: string): string {
   return getModelMeta(modelId)?.provider ?? 'unknown'
+}
+
+export async function writeObservatoryQueryEvent(
+  input: ObservatoryQueryEventInput
+): Promise<void> {
+  try {
+    const now = new Date()
+    const latencyMs = Math.round(now.getTime() - input.setupStart.getTime())
+    const provider = resolveProvider(input.modelId)
+    const promptText = input.queryText.length > 4000
+      ? input.queryText.slice(0, 4000)
+      : input.queryText
+    const responseText = input.responseText !== null && input.responseText.length > 4000
+      ? input.responseText.slice(0, 4000)
+      : input.responseText
+    await getStorageClient().query(
+      `INSERT INTO llm_usage_events
+        (conversation_id, prompt_id, user_id, provider, model, pipeline_stage,
+         prompt_text, response_text, status, latency_ms, started_at, finished_at,
+         parameters, input_tokens, output_tokens, cache_read_tokens,
+         cache_write_tokens, reasoning_tokens)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
+               NULL, NULL, NULL, NULL, NULL)
+       ON CONFLICT (prompt_id) DO NOTHING`,
+      [
+        input.conversationId ?? 'unknown',
+        input.queryId,
+        input.userId,
+        provider,
+        input.modelId,
+        'other',
+        promptText,
+        responseText,
+        'success',
+        latencyMs,
+        input.setupStart,
+        now,
+        JSON.stringify({ query_class: input.queryClass, stack: input.stack }),
+      ]
+    )
+  } catch (err) {
+    console.warn('[mon] writeObservatoryQueryEvent failed:', err)
+  }
 }

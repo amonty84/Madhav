@@ -20,50 +20,52 @@ purpose: >
 ## §1 — Current State Block
 
 ```yaml
-as_of: 2026-05-04 (G3 COMPLETE — live eval passed, Gemini stack)
-current_gate: >
-  G3 COMPLETE. Live answer:eval (Gemini stack, port 3001, v2.0 templates) 2026-05-04:
-  pass=93% (13/14) · layer_coverage=96% · b10=100% · b11=100% · citations=100% · calibration=81%.
-  All 6 AC thresholds cleared. Two non-blocking residuals:
-  GQ-002 HTTP 500 (server crash on that query — reproducible, investigate separately).
-  GQ-003 calibration=0% (Gemini oracular on one factual query — not a gate blocker).
-  G4 (GANGA-CLOSE) is now unblocked. PHASE11B still gated 2026-05-11.
-active_sessions: none
-planner_state: >
-  v1.7 SHIPPED (deda7ee / f0bea21). recall=0.954-0.966, precision=0.950-0.951.
-  Both thresholds met (≥0.940 recall, ≥0.945 precision). Stable stochastic residuals:
-  GT.002 (recall=0.75), GT.017 (prec=0.80), GT.025 (recall=0.50) — not blockers.
-  NOTE: manifest_planner.ts uses generateText+tool-call (NOT generateObject).
-  Token-budget threshold: 10000 (grown CAPABILITY_MANIFEST).
-test_suite_baseline: >
-  As of 5eeb39d: 17 failing files / 11 failing tests (pre-existing residuals only).
-  SYNTH-INTEGRATION (2eea11a) added 0 new failures — 134/134 pass.
-synth_prompt_state: >
-  All 8 templates at v2.0. Citation format corrected to (→ FORENSIC.<id>) / (→ SIG.MSR.NNN).
-  PRESCRIPTIVE_CITATION_GATE applied to all 8. CALIBRATION_LANGUAGE_GATE applied to
-  predictive / holistic / cross_domain. B11_EXPLICIT_LAYER_GATE applied to all 8.
-  Live eval target: pass≥80%, citations≥70%, calibration≥65%, b10≥85%, layer_coverage≥80%, b11≥85%.
-  Run: npm run answer:eval with CHART_ID=362f9f17-95a5-490b-a5a7-027d3e0efda0 + __session cookie.
-immediate_next_actions: >
-  1. [CODE — GATED 2026-05-11] PHASE11B-CLEAN (H.2 flag audit + H.3 legacy deletion)
-  2. [CODE — FINAL] GANGA-CLOSE (seal GANGA_CLOSE_v1_0.md; merge umbrella; update CURRENT_STATE)
-  3. [INVESTIGATE — non-blocking] GQ-002 HTTP 500 root cause (crashes both stacks on that query)
-open_items_count: 114
-completed_items_count: ~55
-sessions_remaining: 1 live-eval + 1 gated (PHASE11B) + 1 final (GANGA-CLOSE)
+as_of: 2026-05-05
+current_gate: G-UX COMPLETE — PLANNER-FIX-S1 CLOSED — NIM PLANNER BLOCKER OPEN
+last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, branch feature/planner-fix-s1, 3 commits, not yet merged)
+active_brief: null
+active_sessions: []
+blocking_item: >
+  NIM-LATENCY: nemotron-3-super-120b-a12b timing out at >15s on NIM free tier.
+  Circuit reset + timeoutMs=15s shipped (PLANNER-FIX-S1) but planner still cannot
+  complete within the new timeout — NIM model latency has degraded since the
+  598ms benchmark on 2026-05-03. All queries fall back to classify() path;
+  plan_json remains NULL across all stacks using NIM planner_fast.
+  Secondary: compose_bundle() fallback returns 0 tools for spiritual/remedial
+  queries — root cause documented in GANGA-GQ002-BUG-v1_0.md.
+note: >
+  PLANNER-FIX-S1 (2026-05-05): writeObservatoryQueryEvent implemented
+  (monitoring-write.ts + monitoring-types.ts). POST /api/admin/planner/reset-circuit
+  created (super_admin gated, returns metrics). timeoutMs raised 5s→15s.
+  tsc --noEmit exits 0 (5 pre-existing type errors fixed). 203 tests pass.
+  GQ-002 root cause: compose_bundle 0-tool fallback for spiritual class.
+  All 3 branches (feature/chat-s1, feature/stack-s1) merged to main.
+  feature/planner-fix-s1 ready to merge (clean, no conflicts expected).
+immediate_next_action: >
+  1. Merge feature/planner-fix-s1 to main (clean).
+  2. Profile NIM nemotron-3-super-120b-a12b actual p50/p95 latency via nim_model_test.mjs.
+     If >15s: either raise timeoutMs to 30s OR swap nim.planner_fast.primary to
+     a confirmed-fast model (kimi-k2-instruct at 5497ms is within 15s).
+  3. Investigate compose_bundle() 0-tool output for query_class=remedial/spiritual.
+     Root cause doc: 00_ARCHITECTURE/GANGA-GQ002-BUG-v1_0.md.
+  4. Re-run E2E obs (8 queries) to verify plan_json non-NULL after model fix.
+completed_items_count: 42
+open_items_count: 99
 ```
 
 ---
 
 ## §2 — Gate Status Board
 
-| Gate | Name | Status | Key Output | Notes |
-|---|---|---|---|---|
-| **G0** | LLM Stack Audit | 🟢 COMPLETE | MODEL_REGISTRY_v1_0.md, GANGA_STACK_AUDIT_v1_0.md | GANGA-P1-R1-S1 ✅ |
-| **G1** | Production Fix + E2E | 🟡 CODE COMPLETE | BF.GAP.001 fixed (deepseek-chat); CI gate live | E2E-OBS observation still pending (no code) |
-| **G2** | Platform Hardening | 🟠 NEAR COMPLETE | PROMPT-EVAL ✅ v1.7, MON-DASHBOARD ✅, DB-MIGRATIONS ✅ (D.4 reverted) | D.4-UNBLOCK (small fix) ⏳, PHASE11B 🔒 2026-05-11 |
-| **G3** | Synthesis Quality | 🟢 COMPLETE | SYNTH-PROMPT ✅, EVAL-HARNESS ✅, B11-GUARD ✅, CTX-ASSEMBLER ✅, CALIBRATION ✅, SYNTH-INTEGRATION ✅ | Live eval 93% pass (Gemini, 2026-05-04) — all 6 thresholds cleared |
-| G4 | Integration + Close | 🟠 UNBLOCKED | GANGA_CLOSE_v1_0.md | G3 cleared — PHASE11B gated 2026-05-11; GANGA-CLOSE ready |
+| Gate | Name | Status | Sessions | Key Output | Blocks |
+|---|---|---|---|---|---|
+| **G0** | LLM Stack Audit | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R1-S1 ✅ | MODEL_REGISTRY_v1_0.md + GANGA_STACK_AUDIT_v1_0.md | — |
+| **G1** | Production Fix + E2E | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R2-S1 ✅ | BF.GAP.001 fixed (deepseek-chat routing) | — |
+| **G2** | Platform Hardening | 🟢 COMPLETE (2026-05-04) | GANGA-P2-R1-S1 ✅, GANGA-P2-R2-S1 ✅, GANGA-P2-R2-S2 ✅ | CI gate + NIM hardening + circuit breaker | — |
+| **G3** | Synthesis Quality | 🟢 COMPLETE (2026-05-04) | GANGA-P3-R1-S1 ✅, GANGA-P3-R1-S2 ✅, GANGA-P3-R2-S1 ✅, GANGA-P3-R2-S2 ✅ | SYNTHESIS_PROMPT v1.0 + eval + B.11 guard | — |
+| **G-UX** | UX Hardening + Trace | 🟢 COMPLETE (2026-05-05) | GANGA-CHAT-S1 ✅, GANGA-STACK-S1 ✅, GANGA-TRACE-S1 ✅ | Error dismiss, model indicator, provider options, PipelineFlowView | — |
+| **G-FIX** | Planner + Observability Fix | 🟡 MERGED PENDING | GANGA-PLANNER-FIX-S1 ✅ (branch not yet merged) | Circuit reset endpoint, writeObservatoryQueryEvent, timeoutMs=15s | NIM latency blocker remains |
+| G4 | Integration + Close | ⏸️ BLOCKED on NIM-LATENCY | 1 session | GANGA_CLOSE_v1_0.md | NIM planner must fire reliably |
 
 ---
 

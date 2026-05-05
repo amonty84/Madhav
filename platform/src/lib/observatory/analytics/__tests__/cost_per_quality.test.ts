@@ -78,8 +78,8 @@ describe('queryCostPerQuality', () => {
     expect(synth.total_events).toBe(40)
     expect(synth.total_cost_usd).toBeCloseTo(0.5, 6)
     expect(synth.avg_cost_per_event_usd).toBeCloseTo(0.0125, 6)
-    expect(synth.total_input_tokens).toBe(4000n)
-    expect(synth.total_output_tokens).toBe(2000n)
+    expect(synth.total_input_tokens).toBe(BigInt(4000))
+    expect(synth.total_output_tokens).toBe(BigInt(2000))
     expect(synth.avg_latency_ms).toBe(250)
 
     expect(result.totals.total_events).toBe(90)
