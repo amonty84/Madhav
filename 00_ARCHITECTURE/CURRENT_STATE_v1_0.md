@@ -4802,11 +4802,48 @@ current_state:
       ethical_framing_anchor: "MACRO_PLAN §Ethical Framework — disclosure tier 1 (super-admin only) by default; cost figures never surfaced to chat path"
       working_aid: PHASE_O_CLAUDE_CODE_PROMPTS.md  # 30-session prompts for Claude Code execution
 
+    project_ganga:
+      active_since: 2026-05-04
+      closed_at: 2026-05-05                        # GANGA-CLOSE sealed
+      gate_session: GANGA-P1-R1-S1
+      phase_status: COMPLETE                       # All 7 gates G0/G1/G2/G3/G-UX/G-FIX/G4 closed
+      description: >
+        LLM Stack Audit + Platform Hardening + Synthesis Quality sprint.
+        Superseded BHISMA Wave 2 as the comprehensive platform elevation.
+      gates_complete: [G0, G1, G2, G3, G-UX, G-FIX, G4]
+      closing_artifact: 00_ARCHITECTURE/GANGA_CLOSE_v1_0.md
+      umbrella_branch: feature/ganga-umbrella
+      merge_status: MERGED_TO_MAIN                 # All sub-branches merged to main by 2026-05-05
+      key_commits: [e4ea6e7, 722a401, 5eeb39d, 2eea11a, 52578b4, 103a4be, 6f9d86c, 03d3031]
+      eval_baseline_anthropic:
+        as_of: 2026-05-05
+        stack: anthropic
+        planner_model: claude-haiku-4-5
+        kw: 0.83
+        sig: 1.00
+        syn: 0.50                                  # stub — ANTHROPIC_API_KEY missing in eval env; re-run needed
+        wtd: 0.75
+        plan_json_not_null: true
+        planner_latency_ms: 1700-3300
+      platform_flags_at_close:
+        LLM_FIRST_PLANNER_ENABLED: true
+        NEW_QUERY_PIPELINE_ENABLED: true
+        AUDIT_ENABLED: true
+        MARSYS_FLAG_OBSERVATORY_ENABLED: true
+        CONTEXT_ASSEMBLY_ENABLED: true
+        DISCOVERY_ALL: true
+      deferred_items:
+        - DEF-1: per-stack timeoutMs override NIM=30s (planner_circuit_breaker.ts)
+        - DEF-2: compose_bundle() 0-tool fix for spiritual/remedial class
+        - DEF-7: re-run answer:eval with ANTHROPIC_API_KEY for real synthesis scores
+        - DEF-6: PHASE11B legacy deletion safe after 2026-05-11
+      worktree: /Users/Dev/Vibe-Coding/Apps/Ganga/  # retained; feature/ganga-umbrella still exists
+
   # ------------------------------------------------------------------
   # Freshness metadata (for drift detection)
   # ------------------------------------------------------------------
-  file_updated_at: 2026-05-02T22:30:00+05:30
-  file_updated_by_session: PHASE_O_S0_1_OBSERVATORY_GOVERNANCE_BOOTSTRAP
+  file_updated_at: 2026-05-05T23:59:00+05:30
+  file_updated_by_session: GANGA-CLOSE-G4
   cross_check_hash: >
     Derived from the tuple (active_governance_step, last_session_id, next_governance_step)
     = (Step_15 completed, M4-D-S1, null). ROTATED from v3.3 — M4-D-S1 is the
