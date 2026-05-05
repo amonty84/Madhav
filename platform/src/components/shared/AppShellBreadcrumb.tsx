@@ -20,6 +20,7 @@ export function AppShellBreadcrumb({
   const pathname = usePathname()
   // Consume chat has its own header — breadcrumb is redundant there
   if (pathname.includes('/consume')) return null
+  if (segments.length === 0) return null
 
   return (
     <nav

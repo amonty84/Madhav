@@ -54,7 +54,6 @@ function makeBqClient(rows: BigQueryRow[]): BigQueryLike {
       }
       return [job]
     },
-    // @ts-expect-error — exposed for assertion access
     _lastOptions: () => lastOptions,
   } as BigQueryLike & { _lastOptions: () => BigQueryJobOptions | undefined }
 }

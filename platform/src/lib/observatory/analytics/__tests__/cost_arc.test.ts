@@ -30,7 +30,7 @@ import {
 describe('queryTopConversations', () => {
   it('groups by conversation_id and sorts by total_cost_usd DESC', async () => {
     const captured: { sql: string; params: unknown[] } = { sql: '', params: [] }
-    const stub: QueryFn = vi.fn(async (sql, params) => {
+    const stub = vi.fn(async (sql, params) => {
       captured.sql = sql
       captured.params = params ?? []
       return {
@@ -59,7 +59,7 @@ describe('queryTopConversations', () => {
       }
     })
 
-    const out = await queryTopConversations(stub, {
+    const out = await queryTopConversations(stub as unknown as QueryFn, {
       date_start: '2026-04-01T00:00:00Z',
       date_end: '2026-04-30T00:00:00Z',
     })
@@ -87,25 +87,25 @@ describe('queryTopConversations', () => {
 
   it('clamps limit to [1, MAX] and falls back to default when omitted', async () => {
     let lastLimit: unknown = null
-    const stub: QueryFn = vi.fn(async (_sql, params) => {
+    const stub = vi.fn(async (_sql, params) => {
       lastLimit = (params ?? [])[2]
       return { rows: [] }
     })
 
-    await queryTopConversations(stub, {
+    await queryTopConversations(stub as unknown as QueryFn, {
       date_start: '2026-04-01T00:00:00Z',
       date_end: '2026-04-30T00:00:00Z',
     })
     expect(lastLimit).toBe(TOP_CONVERSATIONS_DEFAULT_LIMIT)
 
-    await queryTopConversations(stub, {
+    await queryTopConversations(stub as unknown as QueryFn, {
       date_start: '2026-04-01T00:00:00Z',
       date_end: '2026-04-30T00:00:00Z',
       limit: 5_000,
     })
     expect(lastLimit).toBe(TOP_CONVERSATIONS_MAX_LIMIT)
 
-    await queryTopConversations(stub, {
+    await queryTopConversations(stub as unknown as QueryFn, {
       date_start: '2026-04-01T00:00:00Z',
       date_end: '2026-04-30T00:00:00Z',
       limit: 0,
@@ -114,7 +114,7 @@ describe('queryTopConversations', () => {
   })
 
   it('uses conversation_id as the display name when conversation_name is null', async () => {
-    const stub: QueryFn = vi.fn(async () => ({
+    const stub = vi.fn(async () => ({
       rows: [
         {
           conversation_id: 'conv-X',
@@ -128,7 +128,7 @@ describe('queryTopConversations', () => {
         },
       ],
     }))
-    const out = await queryTopConversations(stub, {
+    const out = await queryTopConversations(stub as unknown as QueryFn, {
       date_start: '2026-04-01T00:00:00Z',
       date_end: '2026-04-30T00:00:00Z',
     })
@@ -146,7 +146,7 @@ describe('queryConversationArc', () => {
     const captured: { sql: string; params: unknown[] } = { sql: '', params: [] }
     // Three events with costs 0.10, 0.20, 0.05 → cumulative [0.10, 0.30, 0.35].
     // The simulated DB has already applied the window function.
-    const stub: QueryFn = vi.fn(async (sql, params) => {
+    const stub = vi.fn(async (sql, params) => {
       captured.sql = sql
       captured.params = params ?? []
       return {
@@ -188,7 +188,7 @@ describe('queryConversationArc', () => {
       }
     })
 
-    const out = await queryConversationArc(stub, 'conv-1')
+    const out = await queryConversationArc(stub as unknown as QueryFn,'conv-1')
 
     // SQL contract: window function with PARTITION BY conversation_id +
     // ORDER BY started_at ASC, between unbounded preceding and current row.
@@ -220,15 +220,15 @@ describe('queryConversationArc', () => {
   })
 
   it('returns null when the conversation has no events', async () => {
-    const stub: QueryFn = vi.fn(async () => ({ rows: [] }))
-    const out = await queryConversationArc(stub, 'conv-missing')
+    const stub = vi.fn(async () => ({ rows: [] }))
+    const out = await queryConversationArc(stub as unknown as QueryFn,'conv-missing')
     expect(out).toBeNull()
   })
 
   it('coerces string-encoded numerics from the driver into numbers', async () => {
     // Some pg drivers return numeric/float8 as strings under certain configs.
     // The mapper must coerce them so consumers can do arithmetic.
-    const stub: QueryFn = vi.fn(async () => ({
+    const stub = vi.fn(async () => ({
       rows: [
         {
           event_id: 'evt-1',
@@ -243,7 +243,7 @@ describe('queryConversationArc', () => {
         },
       ],
     }))
-    const out = await queryConversationArc(stub, 'conv-1')
+    const out = await queryConversationArc(stub as unknown as QueryFn,'conv-1')
     if (!out) throw new Error('expected non-null arc')
     expect(typeof out.turns[0].computed_cost_usd).toBe('number')
     expect(typeof out.turns[0].cumulative_cost_usd).toBe('number')

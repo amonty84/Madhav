@@ -41,10 +41,11 @@ export class PlannerCircuitOpenError extends Error {
 const DEFAULT_OPTIONS: CircuitBreakerOptions = {
   failureThreshold: 3,
   recoveryMs: 300_000,
-  // Raised 3s→5s W2-UQE-ACTIVATE (2026-05-02): nemotron-super-49b-v1
-  // median latency 6–8s; 3s was speculative pre-data. Non-timeout subset
-  // shows recall=0.736, precision=0.694 (rounds 5-6). 5s covers ~90% of calls.
-  timeoutMs: 5_000,
+  // Raised 5s→15s 2026-05-05 GANGA-PLANNER-FIX-S1:
+  // 5s timeout tripped the breaker on providers with >5s cold-start (nemotron-49B: 6.8s).
+  // 15s covers known worst-case cold-starts across all confirmed-live NIM models.
+  // The breaker's purpose is to stop sustained outages, not catch slow cold-starts.
+  timeoutMs: 15_000,
 }
 
 function looksLike5xx(err: unknown): boolean {
@@ -74,6 +75,14 @@ export class PlannerCircuitBreaker {
     this._state = 'closed'
     this.failures = 0
     this.openedAt = 0
+  }
+
+  getMetrics(): { state: CircuitState; failures: number; openedAt: number | null } {
+    return {
+      state: this.state,
+      failures: this.failures,
+      openedAt: this.openedAt > 0 ? this.openedAt : null,
+    }
   }
 
   async call(fn: () => Promise<PlanSchema>): Promise<PlanSchema> {

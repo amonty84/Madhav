@@ -79,3 +79,15 @@ export interface ContextAssemblyLogRow {
   verified_citations: number | null
   created_at: string
 }
+
+export interface ObservatoryQueryEventInput {
+  queryId: string
+  conversationId: string | null
+  userId: string
+  modelId: string
+  queryClass: string
+  stack: string
+  queryText: string
+  responseText: string | null
+  setupStart: Date
+}
