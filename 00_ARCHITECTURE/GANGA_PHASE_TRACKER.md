@@ -19,21 +19,27 @@ purpose: >
 ## §1 — Current State Block
 
 ```yaml
-as_of: 2026-05-04
-current_gate: G0 (LLM Stack Audit — PREREQUISITE, NOT YET STARTED)
-active_brief: CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md (G1 production fix — ready to execute after G0)
+as_of: 2026-05-05
+last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, commit 8142da4)
+current_gate: G0 (LLM Stack Audit — circuit reset done; planner still timing out >15s)
+active_brief: null
 active_sessions: []
 blocking_item: >
-  BF.GAP.001 — DeepSeek model ID mismatch (deepseek-v4-flash → deepseek-reasoner).
-  LLM planner has never successfully fired in production.
-  All queries running on deterministic classify() fallback.
-  Fix brief exists (PF-S1). Execute AFTER Gate 0 closes.
+  RC-A: NIM nemotron-3-super-120b-a12b exceeds 15s timeout. Circuit reset and timeoutMs
+  raised to 15s (PLANNER-FIX-S1), but planner calls still time out. Plan_json remains
+  NULL; queries run on classify() fallback. Root cause in GANGA-GQ002-BUG-v1_0.md.
 immediate_next_action: >
-  1. Author CLAUDECODE_BRIEF_GANGA_G0_S1_v1_0.md (LLM stack audit brief)
-  2. Execute G0-S1 in Antigravity (Claude Code). Output: MODEL_REGISTRY_v1_0.md.
-  3. Once G0 closes: trigger "Read CLAUDECODE_BRIEF_BHISMA_PF_S1_v1_0.md and execute it."
+  1. Merge feature/planner-fix-s1 to main; re-run E2E obs (verify plan_json non-NULL).
+  2. Investigate NIM p50/p95 latency; raise timeoutMs to 30s or swap planner model.
+  3. Audit compose_bundle() fallback tool selection for factual/spiritual query class.
 open_items_count: 114
-completed_items_count: 0
+completed_items_count: 3
+completed_this_session:
+  - CHANGE-1: writeObservatoryQueryEvent implemented (monitoring-write.ts)
+  - CHANGE-2: POST /api/admin/planner/reset-circuit admin endpoint created
+  - CHANGE-3: timeoutMs raised 5s→15s in planner_circuit_breaker.ts
+  - AC.1: tsc --noEmit exits 0 (pre-existing type errors fixed)
+  - AC.8: GQ-002 root cause documented (GANGA-GQ002-BUG-v1_0.md)
 ```
 
 ---
