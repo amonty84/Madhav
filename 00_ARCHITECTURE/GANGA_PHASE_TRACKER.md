@@ -20,26 +20,36 @@ purpose: >
 
 ```yaml
 as_of: 2026-05-05
-last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, commit 8142da4)
-current_gate: G0 (LLM Stack Audit — circuit reset done; planner still timing out >15s)
+current_gate: G-UX COMPLETE — PLANNER-FIX-S1 CLOSED — NIM PLANNER BLOCKER OPEN
+last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, branch feature/planner-fix-s1, 3 commits, not yet merged)
 active_brief: null
 active_sessions: []
 blocking_item: >
-  RC-A: NIM nemotron-3-super-120b-a12b exceeds 15s timeout. Circuit reset and timeoutMs
-  raised to 15s (PLANNER-FIX-S1), but planner calls still time out. Plan_json remains
-  NULL; queries run on classify() fallback. Root cause in GANGA-GQ002-BUG-v1_0.md.
+  NIM-LATENCY: nemotron-3-super-120b-a12b timing out at >15s on NIM free tier.
+  Circuit reset + timeoutMs=15s shipped (PLANNER-FIX-S1) but planner still cannot
+  complete within the new timeout — NIM model latency has degraded since the
+  598ms benchmark on 2026-05-03. All queries fall back to classify() path;
+  plan_json remains NULL across all stacks using NIM planner_fast.
+  Secondary: compose_bundle() fallback returns 0 tools for spiritual/remedial
+  queries — root cause documented in GANGA-GQ002-BUG-v1_0.md.
+note: >
+  PLANNER-FIX-S1 (2026-05-05): writeObservatoryQueryEvent implemented
+  (monitoring-write.ts + monitoring-types.ts). POST /api/admin/planner/reset-circuit
+  created (super_admin gated, returns metrics). timeoutMs raised 5s→15s.
+  tsc --noEmit exits 0 (5 pre-existing type errors fixed). 203 tests pass.
+  GQ-002 root cause: compose_bundle 0-tool fallback for spiritual class.
+  All 3 branches (feature/chat-s1, feature/stack-s1) merged to main.
+  feature/planner-fix-s1 ready to merge (clean, no conflicts expected).
 immediate_next_action: >
-  1. Merge feature/planner-fix-s1 to main; re-run E2E obs (verify plan_json non-NULL).
-  2. Investigate NIM p50/p95 latency; raise timeoutMs to 30s or swap planner model.
-  3. Audit compose_bundle() fallback tool selection for factual/spiritual query class.
-open_items_count: 114
-completed_items_count: 3
-completed_this_session:
-  - CHANGE-1: writeObservatoryQueryEvent implemented (monitoring-write.ts)
-  - CHANGE-2: POST /api/admin/planner/reset-circuit admin endpoint created
-  - CHANGE-3: timeoutMs raised 5s→15s in planner_circuit_breaker.ts
-  - AC.1: tsc --noEmit exits 0 (pre-existing type errors fixed)
-  - AC.8: GQ-002 root cause documented (GANGA-GQ002-BUG-v1_0.md)
+  1. Merge feature/planner-fix-s1 to main (clean).
+  2. Profile NIM nemotron-3-super-120b-a12b actual p50/p95 latency via nim_model_test.mjs.
+     If >15s: either raise timeoutMs to 30s OR swap nim.planner_fast.primary to
+     a confirmed-fast model (kimi-k2-instruct at 5497ms is within 15s).
+  3. Investigate compose_bundle() 0-tool output for query_class=remedial/spiritual.
+     Root cause doc: 00_ARCHITECTURE/GANGA-GQ002-BUG-v1_0.md.
+  4. Re-run E2E obs (8 queries) to verify plan_json non-NULL after model fix.
+completed_items_count: 42
+open_items_count: 99
 ```
 
 ---
@@ -48,11 +58,13 @@ completed_this_session:
 
 | Gate | Name | Status | Sessions | Key Output | Blocks |
 |---|---|---|---|---|---|
-| **G0** | LLM Stack Audit | 🔴 NOT STARTED | G0-S1 (not yet run) | MODEL_REGISTRY_v1_0.md | All other gates |
-| G1 | Production Fix + E2E | ⏸️ BLOCKED on G0 | G1-S1 (brief ready), B.1 observation | plan_json non-NULL first time | Gate 2 |
-| G2 | Platform Hardening | ⏸️ BLOCKED on G1 | 5-6 parallel sessions | Planner v1.7, retrieval fixes, test fixes | Gate 3 |
-| G3 | Synthesis Quality | ⏸️ BLOCKED on G2 | 3-4 sequential sessions | SYNTHESIS_PROMPT v1.0, eval harness, B.11 | Gate 4 |
-| G4 | Integration + Close | ⏸️ BLOCKED on G3 | 1 session | GANGA_CLOSE_v1_0.md | — |
+| **G0** | LLM Stack Audit | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R1-S1 ✅ | MODEL_REGISTRY_v1_0.md + GANGA_STACK_AUDIT_v1_0.md | — |
+| **G1** | Production Fix + E2E | 🟢 COMPLETE (2026-05-04) | GANGA-P1-R2-S1 ✅ | BF.GAP.001 fixed (deepseek-chat routing) | — |
+| **G2** | Platform Hardening | 🟢 COMPLETE (2026-05-04) | GANGA-P2-R1-S1 ✅, GANGA-P2-R2-S1 ✅, GANGA-P2-R2-S2 ✅ | CI gate + NIM hardening + circuit breaker | — |
+| **G3** | Synthesis Quality | 🟢 COMPLETE (2026-05-04) | GANGA-P3-R1-S1 ✅, GANGA-P3-R1-S2 ✅, GANGA-P3-R2-S1 ✅, GANGA-P3-R2-S2 ✅ | SYNTHESIS_PROMPT v1.0 + eval + B.11 guard | — |
+| **G-UX** | UX Hardening + Trace | 🟢 COMPLETE (2026-05-05) | GANGA-CHAT-S1 ✅, GANGA-STACK-S1 ✅, GANGA-TRACE-S1 ✅ | Error dismiss, model indicator, provider options, PipelineFlowView | — |
+| **G-FIX** | Planner + Observability Fix | 🟡 MERGED PENDING | GANGA-PLANNER-FIX-S1 ✅ (branch not yet merged) | Circuit reset endpoint, writeObservatoryQueryEvent, timeoutMs=15s | NIM latency blocker remains |
+| G4 | Integration + Close | ⏸️ BLOCKED on NIM-LATENCY | 1 session | GANGA_CLOSE_v1_0.md | NIM planner must fire reliably |
 
 ---
 
