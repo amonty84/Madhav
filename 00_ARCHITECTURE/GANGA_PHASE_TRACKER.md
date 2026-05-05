@@ -21,7 +21,7 @@ purpose: >
 ```yaml
 as_of: 2026-05-05
 current_gate: G-UX COMPLETE — PLANNER-FIX-S1 CLOSED — NIM PLANNER BLOCKER OPEN
-last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, branch feature/planner-fix-s1, 3 commits, not yet merged)
+last_session: GANGA-PLANNER-FIX-S1 (CLOSED 2026-05-05, merged to main at 03d3031)
 active_brief: null
 active_sessions: []
 blocking_item: >
@@ -63,7 +63,7 @@ open_items_count: 99
 | **G2** | Platform Hardening | 🟢 COMPLETE (2026-05-04) | GANGA-P2-R1-S1 ✅, GANGA-P2-R2-S1 ✅, GANGA-P2-R2-S2 ✅ | CI gate + NIM hardening + circuit breaker | — |
 | **G3** | Synthesis Quality | 🟢 COMPLETE (2026-05-04) | GANGA-P3-R1-S1 ✅, GANGA-P3-R1-S2 ✅, GANGA-P3-R2-S1 ✅, GANGA-P3-R2-S2 ✅ | SYNTHESIS_PROMPT v1.0 + eval + B.11 guard | — |
 | **G-UX** | UX Hardening + Trace | 🟢 COMPLETE (2026-05-05) | GANGA-CHAT-S1 ✅, GANGA-STACK-S1 ✅, GANGA-TRACE-S1 ✅ | Error dismiss, model indicator, provider options, PipelineFlowView | — |
-| **G-FIX** | Planner + Observability Fix | 🟡 MERGED PENDING | GANGA-PLANNER-FIX-S1 ✅ (branch not yet merged) | Circuit reset endpoint, writeObservatoryQueryEvent, timeoutMs=15s | NIM latency blocker remains |
+| **G-FIX** | Planner + Observability Fix | 🟢 COMPLETE (2026-05-05) | GANGA-PLANNER-FIX-S1 ✅ (merged 03d3031) | Circuit reset endpoint, writeObservatoryQueryEvent, timeoutMs=15s | NIM latency blocker remains |
 | G4 | Integration + Close | ⏸️ BLOCKED on NIM-LATENCY | 1 session | GANGA_CLOSE_v1_0.md | NIM planner must fire reliably |
 
 ---
