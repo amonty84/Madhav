@@ -62,7 +62,7 @@ def load_fixtures(path: Path, ids_filter: list[str] | None) -> list[dict[str, An
 
 
 def build_request_body(query: str, chart_id: str) -> bytes:
-    payload = {
+    payload: dict = {
         "chartId": chart_id,
         "messages": [
             {
@@ -72,6 +72,9 @@ def build_request_body(query: str, chart_id: str) -> bytes:
             }
         ],
     }
+    stack = os.environ.get("EVAL_STACK", "")
+    if stack:
+        payload["stack"] = stack
     return json.dumps(payload).encode("utf-8")
 
 
