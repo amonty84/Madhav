@@ -20,7 +20,7 @@
           "version": { "type": "string" },
           "content_hash": { "type": "string" },
           "token_count": { "type": "integer", "minimum": 0 },
-          "role": { "type": "string", "enum": ["floor", "interpretive", "predictive", "discovery", "holistic"] },
+          "role": { "type": "string", "enum": ["floor", "interpretive", "predictive", "discovery", "holistic", "remedial", "domain_report", "temporal_engine"] },
           "source": { "type": "string", "enum": ["rule_composer", "bundle_augmenter", "planner"] }
         }
       }

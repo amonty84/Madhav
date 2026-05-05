@@ -38,6 +38,12 @@ export class PlannerCircuitOpenError extends Error {
   }
 }
 
+// Per-stack timeout overrides — added 2026-05-05 GANGA-DEFERRED
+// NIM free-tier full-prompt latency exceeds 15s; raise its timeout only.
+const STACK_TIMEOUT_OVERRIDES: Partial<Record<string, number>> = {
+  nim: 30_000,
+}
+
 const DEFAULT_OPTIONS: CircuitBreakerOptions = {
   failureThreshold: 3,
   recoveryMs: 300_000,
@@ -85,7 +91,7 @@ export class PlannerCircuitBreaker {
     }
   }
 
-  async call(fn: () => Promise<PlanSchema>): Promise<PlanSchema> {
+  async call(fn: () => Promise<PlanSchema>, stack?: string): Promise<PlanSchema> {
     // Refresh state (handles closed→half-open transition).
     const current = this.state
 
@@ -93,11 +99,13 @@ export class PlannerCircuitBreaker {
       throw new PlannerCircuitOpenError()
     }
 
+    const effectiveTimeout = (stack ? STACK_TIMEOUT_OVERRIDES[stack] : undefined) ?? this.opts.timeoutMs
+
     let timer: ReturnType<typeof setTimeout> | null = null
     const timeoutPromise = new Promise<never>((_, reject) => {
       timer = setTimeout(() => {
-        reject(new Error(`Planner call timed out after ${this.opts.timeoutMs}ms`))
-      }, this.opts.timeoutMs)
+        reject(new Error(`Planner call timed out after ${effectiveTimeout}ms`))
+      }, effectiveTimeout)
     })
 
     try {
