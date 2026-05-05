@@ -103,13 +103,13 @@ These items were scoped out or deliberately deferred during the sprint. They bel
 
 | ID | Item | Owner | Notes |
 |---|---|---|---|
-| DEF-1 | per-stack `timeoutMs` override (NIM=30s, others=15s) | Ganga follow-on | NIM free-tier latency >15s on full-prompt. planner_circuit_breaker.ts DEFAULT_OPTIONS.timeoutMs currently 15s globally. Per-stack override would isolate NIM degradation from Anthropic path. |
-| DEF-2 | `compose_bundle()` 0-tool fix for spiritual/remedial query class | Ganga follow-on | classify() fallback returns 0 tools for spiritual class. Documented in `00_ARCHITECTURE/GANGA-GQ002-BUG-v1_0.md`. Fix: add spiritual domain to compose_bundle() tool selection logic. |
+| DEF-1 | per-stack `timeoutMs` override (NIM=30s, others=15s) | ✅ RESOLVED (feature/ganga-deferred) | `call(fn, stack?)` now resolves effective timeout via `STACK_TIMEOUT_OVERRIDES[stack] ?? opts.timeoutMs`. NIM=30s; all other stacks keep 15s. route.ts unchanged (stack param optional). |
+| DEF-2 | `compose_bundle()` 0-tool fix for spiritual/remedial query class | ✅ RESOLVED (feature/ganga-deferred) | Two-layer bug: (1) `bundle.schema.json` only allowed 5 roles and silently coerced W6-R1 entries to `floor`; (2) `normaliseRole()` didn't recognise `remedial`/`domain_report`/`temporal_engine`. Both fixed. `spiritual` domain path via `domainReportRule` → `REPORT_SPIRITUAL_v1_1` now works end-to-end. |
 | DEF-3 | G.3: per-query observatory rollup (writeObservatoryQueryEvent wired but cost_usd null) | Ganga follow-on | cost_usd population requires token pricing constants per stack in writeLlmCallLog. |
 | DEF-4 | I.4: tool_execution_log quality score columns | Ganga follow-on | Migration required for schema additions. |
 | DEF-5 | J.1: TracePanel design-system token sweep | Ganga follow-on | Awaiting R7 CSS variables publication. |
 | DEF-6 | PHASE11B legacy deletion | Post-soak | 7-day soak from 2026-05-04 → safe to delete 2026-05-11. |
-| DEF-7 | Re-run answer:eval with ANTHROPIC_API_KEY set | Immediate | Get real synthesis scores for eval baseline. runner.py now respects EVAL_STACK env var (commit pending). |
+| DEF-7 | Re-run answer:eval with ANTHROPIC_API_KEY set | ⏸️ OPEN | Get real synthesis scores. runner.py EVAL_STACK fix committed (797b5e3). Run: `EVAL_STACK=anthropic ANTHROPIC_API_KEY=<key> python3 platform/scripts/eval/runner.py` |
 | DEF-8 | NIM planner model swap or timeout raise | NIM-maintenance | kimi-k2-instruct dead on NIM free tier. nemotron-3-super-120b-a12b >15s. Swap to a live model or raise NIM timeout when NIM tier improves. |
 
 ---

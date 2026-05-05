@@ -26,13 +26,13 @@ active_brief: null
 active_sessions: []
 blocking_item: null
 note: >
-  2026-05-05 (GANGA CLOSED): All 7 gates G0/G1/G2/G3/G-UX/G-FIX/G4 COMPLETE.
-  Planner confirmed firing on Anthropic stack (4/4 fixtures plan_json non-NULL,
-  claude-haiku-4-5 at 1.7-3.3s). GANGA_CLOSE_v1_0.md sealed. Deferred: NIM per-stack
-  timeout override (DEF-1); compose_bundle 0-tool for spiritual class (DEF-2);
-  re-run answer:eval with ANTHROPIC_API_KEY for real synthesis scores (DEF-7).
-  runner.py EVAL_STACK commit pending. PHASE11B deletion safe after 2026-05-11.
-  Update CURRENT_STATE_v1_0.md in Madhav repo to record Ganga COMPLETE.
+  2026-05-05 (GANGA CLOSED + deferred items resolved): All 7 gates COMPLETE.
+  Planner confirmed on Anthropic stack (4/4 fixtures plan_json non-NULL, haiku-4-5 1.7-3.3s).
+  DEF-1 RESOLVED: per-stack NIM timeout 30s (feature/ganga-deferred).
+  DEF-2 RESOLVED: compose_bundle spiritual/remedial two-layer bug fixed
+  (bundle.schema.json roles + normaliseRole()) via feature/ganga-deferred.
+  DEF-7 OPEN: re-run answer:eval with ANTHROPIC_API_KEY for real synthesis scores.
+  PHASE11B deletion safe after 2026-05-11. CURRENT_STATE Madhav updated (fc1ca6d).
 eval_baseline_anthropic_2026-05-05:
   fixtures: F001/F007/F013/F017
   kw: 0.83
@@ -47,8 +47,8 @@ immediate_next_action: >
      git commit -m "fix(eval): runner.py respects EVAL_STACK env var"
   2. Re-run eval with ANTHROPIC_API_KEY set to get real synthesis scores.
   3. GANGA-CLOSE (G4) — now unblocked. Seal GANGA_CLOSE_v1_0.md + update CURRENT_STATE.
-  4. Deferred: per-stack timeoutMs override in planner_circuit_breaker.ts (NIM=30s).
-  5. Deferred: compose_bundle() 0-tool fix for spiritual/remedial class.
+  4. DONE: per-stack timeoutMs override NIM=30s (feature/ganga-deferred).
+  5. DONE: compose_bundle() spiritual/remedial fix (feature/ganga-deferred).
 completed_items_count: 44
 open_items_count: 97
 ```
