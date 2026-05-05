@@ -140,11 +140,21 @@ export interface PanelAuditPayload {
  * streamText's onFinish (before the 'finish' SSE part fires), allowing the
  * route to include methodology_block in the finish-part messageMetadata.
  */
+export interface SynthesisUsage {
+  inputTokens?: number
+  outputTokens?: number
+  cacheReadInputTokens?: number
+  cacheCreationInputTokens?: number
+}
+
 export interface SynthesisResult {
   result: StreamTextResult<ToolSet, never>
   metadata: SynthesisMetadata
   /** Optional — only populated by SingleModelOrchestrator. Panel path leaves this absent → null. */
   methodologyBlockHolder?: { value: string | null }
+  /** Mutable container populated synchronously in streamText.onFinish — allows the outer
+   *  onFinish in the route to read synthesis token counts for observatory telemetry. */
+  usageHolder?: { value: SynthesisUsage | null }
 }
 
 export interface SynthesisOrchestrator {

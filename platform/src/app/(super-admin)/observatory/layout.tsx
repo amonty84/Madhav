@@ -1,19 +1,38 @@
 import type { Metadata } from 'next'
-import { AuthGate } from '@/lib/components/observatory/AuthGate'
-import { ObservatoryLayout } from '@/lib/components/observatory/Layout'
+import { redirect } from 'next/navigation'
+import { getServerUserWithProfile } from '@/lib/auth/access-control'
+import { AppShell } from '@/components/shared/AppShell'
+import { ObservatorySubNav } from '@/components/observatory/ObservatorySubNav'
 
 export const metadata: Metadata = {
   title: 'Observatory — MARSYS-JIS',
 }
 
-export default function ObservatorySectionLayout({
+export default async function ObservatorySectionLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const ctx = await getServerUserWithProfile()
+  if (!ctx) redirect('/login')
+  if (ctx.profile.role !== 'super_admin') redirect('/dashboard')
+  if (ctx.profile.status !== 'active') redirect('/login')
+
   return (
-    <AuthGate>
-      <ObservatoryLayout>{children}</ObservatoryLayout>
-    </AuthGate>
+    <AppShell
+      user={ctx.user}
+      profile={ctx.profile}
+      breadcrumb={[
+        { label: 'Roster', href: '/dashboard' },
+        { label: 'Observatory', href: '/observatory', current: false },
+      ]}
+    >
+      <div className="flex h-full min-h-0">
+        <ObservatorySubNav />
+        <div className="flex-1 overflow-auto">
+          {children}
+        </div>
+      </div>
+    </AppShell>
   )
 }

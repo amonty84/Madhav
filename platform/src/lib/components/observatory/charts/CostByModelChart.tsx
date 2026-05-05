@@ -3,6 +3,7 @@
 import {
   Bar,
   BarChart,
+  Cell,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -12,14 +13,15 @@ import {
 
 import type { BreakdownsResponse } from '@/lib/observatory/types'
 
-import { formatCostUSD, formatTokenCount } from './utils'
+import { colorForProvider, colorForDimension, formatCostUSD, formatTokenCount } from './utils'
 
 const TOP_N = 15
-const BAR_COLOR = '#6366f1'
+const DEFAULT_BAR_COLOR = '#d4af37'
 const OTHER_COLOR = '#94a3b8'
 
 export interface CostByModelChartProps {
   data: BreakdownsResponse | null
+  dimension?: 'provider' | 'pipeline_stage' | 'model'
   loading?: boolean
   error?: Error | null
   onRetry?: () => void
@@ -88,6 +90,7 @@ function ModelTooltip({
 
 export function CostByModelChart({
   data,
+  dimension = 'model',
   loading = false,
   error = null,
   onRetry,
@@ -159,7 +162,19 @@ export function CostByModelChart({
             tick={{ fontSize: 12 }}
           />
           <Tooltip content={<ModelTooltip />} />
-          <Bar dataKey="cost_usd" fill={BAR_COLOR} />
+          <Bar dataKey="cost_usd">
+            {rows.map((row) => {
+              let fill = DEFAULT_BAR_COLOR
+              if (row.isOther) {
+                fill = OTHER_COLOR
+              } else if (dimension === 'provider') {
+                fill = colorForProvider(row.label)
+              } else if (dimension === 'pipeline_stage') {
+                fill = colorForDimension('pipeline_stage', row.label)
+              }
+              return <Cell key={row.label} fill={fill} />
+            })}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
       {/* Color-distinguish the "Other" row via legend hint */}

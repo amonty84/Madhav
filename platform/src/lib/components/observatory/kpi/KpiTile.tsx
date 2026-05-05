@@ -82,7 +82,7 @@ export function KpiTile({
     <div
       data-testid={testId}
       title={title}
-      className="flex h-full flex-col justify-between rounded-md border bg-card p-4"
+      className="flex h-full flex-col justify-between rounded-md border border-[rgba(212,175,55,0.15)] bg-[var(--brand-charcoal,oklch(0.10_0.012_70))] p-4"
     >
       <div>
         <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>

@@ -26,6 +26,12 @@ export interface LlmCallLogRow {
   fallback_used: boolean | null
   error_code: string | null
   payload: unknown | null
+  // TRACE-T1 additions (migration 040) — all optional/nullable for backward compat
+  decision_alternatives?: unknown | null
+  decision_reasoning?: string | null
+  prompt_template_id?: string | null
+  prompt_template_version?: string | null
+  parent_call_id?: string | null
   created_at: string
 }
 
@@ -46,6 +52,8 @@ export interface QueryPlanLogRow {
   created_at: string
 }
 
+export type ToolExecutionErrorClass = 'OK' | 'TIMEOUT' | 'AUTH' | 'MALFORMED_RESPONSE' | 'EMPTY'
+
 export interface ToolExecutionLogRow {
   id: string
   query_id: string
@@ -59,6 +67,14 @@ export interface ToolExecutionLogRow {
   error_code: string | null
   served_from_cache: boolean | null
   fallback_used: boolean | null
+  // TRACE-T1 additions (migration 040) — all optional/nullable for backward compat
+  raw_result_count?: number | null
+  kept_result_count?: number | null
+  dropped_items?: unknown | null
+  kept_items?: unknown | null
+  tool_input_payload?: unknown | null
+  tool_output_summary?: unknown | null
+  error_class?: ToolExecutionErrorClass | null
   created_at: string
 }
 
@@ -90,4 +106,10 @@ export interface ObservatoryQueryEventInput {
   queryText: string
   responseText: string | null
   setupStart: Date
+  /** Token counts from the AI SDK response — optional; pass when available. */
+  inputTokens?: number | null
+  outputTokens?: number | null
+  cacheReadTokens?: number | null
+  cacheWriteTokens?: number | null
+  reasoningTokens?: number | null
 }

@@ -358,6 +358,8 @@ export async function contextAssembler(
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { checkB11Compliance } from './b11_guard'
+import { writeContextAssemblyLog } from '@/lib/db/trace/context_assembly_writer'
+import type { ContextAssemblyItem } from '@/lib/db/trace/context_assembly_writer'
 
 export interface LayerContext {
   /** e.g. 'L1', 'L2_5', 'L3' */
@@ -492,6 +494,37 @@ export function assembleContext(
       present: b11Result.presentLayers,
       query_id: opts.queryId ?? null,
     }))
+  }
+
+  // TRACE-T1: emit per-item assembly rows when a queryId is available.
+  if (opts.queryId) {
+    const stepId = `assemble:${opts.queryId}`
+    const budget = opts.maxTokens
+    let committedTokens = 0
+    const traceItems: ContextAssemblyItem[] = []
+    let rank = 0
+
+    // Mirror the pack order: required first (all included), then optional (sorted by priority)
+    for (const layer of [...required, ...optional]) {
+      const isIncluded = included.includes(layer)
+      const mappedLayer: ContextAssemblyItem['layer'] =
+        layer.layer === 'L1' ? 'L1' : 'L2_5'
+      traceItems.push({
+        query_id: opts.queryId!,
+        assembly_step_id: stepId,
+        item_rank: rank++,
+        source_bundle: layer.layer,
+        source_item_id: layer.artifactId,
+        layer: mappedLayer,
+        token_cost: layer.tokenEstimate,
+        status: isIncluded ? 'INCLUDED' : 'DROPPED',
+        drop_reason: isIncluded ? undefined : 'BUDGET_EXCEEDED',
+        cumulative_tokens_at_decision: committedTokens,
+        budget_at_decision: budget,
+      })
+      if (isIncluded) committedTokens += layer.tokenEstimate
+    }
+    writeContextAssemblyLog(traceItems)
   }
 
   return {

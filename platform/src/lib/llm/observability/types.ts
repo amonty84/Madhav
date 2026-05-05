@@ -22,6 +22,9 @@ export type PipelineStage =
   | 'synthesize'
   | 'audit'
   | 'other'
+  | 'planner'
+  | 'title'
+  | 'history_summary'
 
 export type CallStatus = 'success' | 'error' | 'timeout'
 

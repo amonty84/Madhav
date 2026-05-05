@@ -183,6 +183,16 @@ async function retrieveImpl(
     error_code: null,
     served_from_cache: false,
     fallback_used: false,
+    raw_result_count: rows.length,
+    kept_result_count: results.length,
+    dropped_items: [],
+    kept_items: results.slice(0, 200).map(r => ({
+      item_id: r.signal_id ?? r.source_canonical_id,
+      score: r.confidence ?? null,
+      contribution_tokens: null,
+    })),
+    tool_input_payload: bundle.invocation_params,
+    error_class: 'OK',
   })
 
   return bundle

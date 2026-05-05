@@ -55,9 +55,11 @@ import {
   writeQueryPlanLog,
   writeToolExecutionLog,
   writeContextAssemblyLog,
-  writeObservatoryQueryEvent,
   resolveProvider,
 } from '@/lib/db/monitoring-write'
+import { persistObservation, computeCost } from '@/lib/llm/observability'
+import { getStorageClient } from '@/lib/storage'
+import type { ProviderName, TokenUsage } from '@/lib/llm/observability/types'
 
 // ── Trace helpers ─────────────────────────────────────────────────────────────
 
@@ -766,24 +768,6 @@ export async function POST(request: Request) {
           console.error('[consume:v2] citation gate error', err)
         }
 
-        // G.3: per-query observatory rollup event — resolves the TODO that
-        // previously left llm_usage_events empty from the pipeline's perspective.
-        // Fire-and-forget; failure is warn-logged, never throws.
-        void writeObservatoryQueryEvent({
-          queryId,
-          conversationId: finalConversationId,
-          userId: user.uid,
-          modelId,
-          queryClass: queryPlan.query_class,
-          stack: selectedStack,
-          queryText,
-          responseText:
-            extractText(
-              finalMessages.filter(m => m.role === 'assistant').at(-1)?.parts ?? []
-            ) || null,
-          setupStart,
-        })
-
         // Emit trace done sentinel so SSE endpoint closes the stream
         traceEmitter.emitStep({ event: 'done', query_id: queryId })
         try {
@@ -795,6 +779,7 @@ export async function POST(request: Request) {
             generateConversationTitle(finalMessages, {
               queryId,
               conversationId: finalConversationId,
+              userId: user.uid,
             }).then((title: string | null) => {
               if (title) void updateConversationTitle(finalConversationId, title)
             })
@@ -1019,7 +1004,7 @@ export async function POST(request: Request) {
 
 async function generateConversationTitle(
   messages: UIMessage[],
-  monCtx?: { queryId?: string; conversationId?: string | null },
+  monCtx?: { queryId?: string; conversationId?: string | null; userId?: string },
 ): Promise<string | null> {
   const firstUser = messages.find(m => m.role === 'user')
   if (!firstUser) return null
@@ -1051,6 +1036,7 @@ async function generateConversationTitle(
     return fallbackTitle(text)
   } finally {
     if (monCtx?.queryId) {
+      const latency_ms = Date.now() - start
       void writeLlmCallLog({
         query_id: monCtx.queryId,
         conversation_id: monCtx.conversationId ?? null,
@@ -1060,12 +1046,53 @@ async function generateConversationTitle(
         input_tokens: usage?.inputTokens ?? null,
         output_tokens: usage?.outputTokens ?? null,
         reasoning_tokens: null,
-        latency_ms: Date.now() - start,
+        latency_ms,
         cost_usd: null,
         fallback_used: false,
         error_code: errorCode,
         payload: null,
       })
+      // OBS-S1: Observatory per-call telemetry (title stage)
+      {
+        const obsStartedAt = new Date(start)
+        const obsFinishedAt = new Date(start + latency_ms)
+        const obsUsage: TokenUsage = {
+          input_tokens: usage?.inputTokens ?? 0,
+          output_tokens: usage?.outputTokens ?? 0,
+          cache_read_tokens: 0,
+          cache_write_tokens: 0,
+          reasoning_tokens: 0,
+        }
+        const obsProvider = (resolveProvider(TITLE_MODEL_ID) ?? 'unknown') as ProviderName
+        const obsDb = getStorageClient()
+        void (async () => {
+          const costResult = await computeCost(obsProvider, TITLE_MODEL_ID, obsUsage, obsStartedAt, obsDb).catch(() => null)
+          await persistObservation(
+            {
+              provider: obsProvider,
+              model: TITLE_MODEL_ID,
+              prompt_text: null,
+              system_prompt: null,
+              parameters: { model: TITLE_MODEL_ID },
+              conversation_id: monCtx.conversationId ?? monCtx.queryId ?? 'unknown',
+              conversation_name: null,
+              prompt_id: `${monCtx.queryId}:title`,
+              user_id: monCtx.userId ?? 'native',
+              pipeline_stage: 'title',
+            },
+            {
+              response_text: null,
+              usage: obsUsage,
+              status: errorCode ? 'error' : 'success',
+              error_code: errorCode ?? undefined,
+              started_at: obsStartedAt,
+              finished_at: obsFinishedAt,
+            },
+            costResult,
+            obsDb,
+          )
+        })()
+      }
     }
   }
 }

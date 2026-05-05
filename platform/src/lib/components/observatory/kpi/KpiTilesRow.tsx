@@ -17,6 +17,7 @@ export interface KpiTilesRowProps {
   loading?: boolean
   error?: boolean
   onRetry?: () => void
+  mode?: 'hero3' | 'full'
 }
 
 type Tone = 'good' | 'bad' | 'neutral'
@@ -42,8 +43,62 @@ export function KpiTilesRow({
   loading = false,
   error = false,
   onRetry,
+  mode = 'full',
 }: KpiTilesRowProps) {
   const tileBaseProps = { loading, error, onRetry }
+
+  // hero3 mode: 3 large tiles above the fold
+  if (mode === 'hero3') {
+    const costDelta = summary
+      ? buildDelta(summary.total_cost_usd, summary.total_cost_usd_delta, true)
+      : null
+    const latencyDelta = summary
+      ? buildDelta(summary.p50_latency_ms, summary.p50_latency_ms_delta, true)
+      : null
+    return (
+      <div
+        data-testid="kpi-tiles-row-hero"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-3"
+      >
+        <KpiTile
+          testId="kpi-cost-hero"
+          label="Total cost"
+          value={
+            summary ? (
+              <span className="text-2xl font-bold text-[var(--brand-gold,oklch(0.78_0.13_80))]">
+                {formatUsd(summary.total_cost_usd)}
+              </span>
+            ) : undefined
+          }
+          delta={costDelta}
+          loading={loading && !summary}
+          error={error}
+          onRetry={onRetry}
+          title="Total computed cost across all LLM calls in the selected period"
+        />
+        <KpiTile
+          testId="kpi-requests-hero"
+          label="LLM Calls"
+          value={summary ? formatRequests(summary.total_requests) : undefined}
+          loading={loading && !summary}
+          error={error}
+          onRetry={onRetry}
+          title="Total number of individual LLM API calls (planner + synthesis)"
+        />
+        <KpiTile
+          testId="kpi-latency-hero"
+          label="Avg latency"
+          value={summary ? formatLatencyMs(summary.p50_latency_ms) : undefined}
+          secondary={summary ? `p95 ${formatLatencyMs(summary.p95_latency_ms)}` : undefined}
+          delta={latencyDelta}
+          loading={loading && !summary}
+          error={error}
+          onRetry={onRetry}
+          title="Median (p50) and 95th-percentile LLM call latency"
+        />
+      </div>
+    )
+  }
 
   if (loading || error || !summary) {
     return (

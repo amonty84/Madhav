@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PROJECT GANGA — Phased Execution Plan v1.0</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0F1E; padding: 0 16px 32px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 12px; min-width: 800px; }
+    .hdr { background: #0F172A; margin: 0 -16px 16px; padding: 16px; border-bottom: 2px solid #1E293B; text-align: center; }
+    .hdr h1 { font-size: 20px; font-weight: 700; color: #F1F5F9; margin-bottom: 5px; letter-spacing: .3px; }
+    .hdr p { font-size: 12px; color: #64748B; }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; padding-top: 4px; }
+    .ld { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #94A3B8; }
+    .lc { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .phase { border-radius: 8px; overflow: hidden; border: 1px solid; margin-bottom: 16px; }
+    .ph { padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .ph h2 { font-size: 13px; font-weight: 700; }
+    .ph em { font-size: 11px; opacity: .75; font-style: normal; }
+    .pb { padding: 12px; background: #0A0F1E; }
+    .rl { font-size: 11px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; color: #64748B; }
+    .badge { background: #1E293B; font-size: 9px; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+    .row { display: flex; gap: 8px; margin-bottom: 10px; }
+    .sc { flex: 1; background: #0F172A; border-radius: 6px; padding: 10px 12px 9px; border-left: 3px solid; }
+    .si { font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; margin-bottom: 3px; }
+    .st { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 5px; }
+    .sd { font-size: 11px; color: #94A3B8; line-height: 1.5; margin-bottom: 5px; }
+    .sw { font-size: 10px; color: #475569; font-family: 'Courier New', monospace; }
+    /* Phase 1 */
+    .p1 { border-color: #3B82F6; }
+    .p1 .ph { background: rgba(30,58,138,.5); }
+    .p1 .ph h2 { color: #93C5FD; }
+    .p1 .rl { color: #60A5FA; }
+    .p1 .sc { border-left-color: #3B82F6; }
+    .p1 .si { color: #93C5FD; }
+    /* Phase 2 */
+    .p2 { border-color: #F59E0B; }
+    .p2 .ph { background: rgba(120,53,15,.5); }
+    .p2 .ph h2 { color: #FCD34D; }
+    .p2 .rl { color: #FBBF24; }
+    .p2 .sc { border-left-color: #F59E0B; }
+    .p2 .si { color: #FCD34D; }
+    .p2 .badge { color: #FBBF24; }
+    /* Phase 3 */
+    .p3 { border-color: #10B981; }
+    .p3 .ph { background: rgba(6,78,59,.55); }
+    .p3 .ph h2 { color: #6EE7B7; }
+    .p3 .rl { color: #34D399; }
+    .p3 .sc { border-left-color: #10B981; }
+    .p3 .si { color: #6EE7B7; }
+    .p3 .badge { color: #34D399; }
+    /* Phase 4 */
+    .p4 { border-color: #A855F7; }
+    .p4 .ph { background: rgba(46,16,101,.55); }
+    .p4 .ph h2 { color: #C4B5FD; }
+    .p4 .rl { color: #A78BFA; }
+    .p4 .sc { border-left-color: #A855F7; }
+    .p4 .si { color: #C4B5FD; }
+    /* Utilities */
+    .cp { background: #1E293B; border: 1px dashed #475569; border-radius: 6px; padding: 10px; text-align: center; margin: 10px 0; }
+    .cp h3 { font-size: 12px; font-weight: 600; color: #94A3B8; margin-bottom: 4px; }
+    .cp p { font-size: 11px; color: #64748B; }
+    .gd { background: #0D1829; border: 1px solid #1E293B; border-radius: 5px; padding: 8px 14px; margin: 8px 0; text-align: center; font-size: 11px; font-weight: 600; color: #64748B; }
+    .arr { text-align: center; color: #334155; font-size: 15px; margin: 6px 0; }
+    .gate-full { background: #0D1829; border: 1px solid #2D3F55; border-radius: 6px; padding: 10px; margin: 12px 0; text-align: center; font-size: 11px; font-weight: 600; color: #64748B; }
+    .foot { text-align: center; padding: 16px 0 4px; font-size: 10px; color: #1E293B; }
+    code { font-family: 'Courier New', monospace; font-size: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="hdr">
+    <h1>PROJECT GANGA — Phased Execution Plan</h1>
+    <p>4 Phases · 11 Rounds · 17 Sessions · Maximum Parallelization · Google Anti-Gravity IDE (Claude Code Extension)</p>
+  </div>
+
+  <div class="legend">
+    <div class="ld"><div class="lc" style="background:#3B82F6"></div>P1 Foundation</div>
+    <div class="ld"><div class="lc" style="background:#F59E0B"></div>P2 Hardening</div>
+    <div class="ld"><div class="lc" style="background:#10B981"></div>P3 Synthesis Quality</div>
+    <div class="ld"><div class="lc" style="background:#A855F7"></div>P4 Close</div>
+    <div class="ld"><div class="lc" style="background:#334155;border:1px dashed #64748B"></div>Observation Checkpoint</div>
+    <div class="ld">⚡ = Parallel round (all sessions run simultaneously)</div>
+  </div>
+
+  <!-- ═══════════════════════ PHASE 1 ═══════════════════════ -->
+  <div class="phase p1">
+    <div class="ph">
+      <h2>PHASE 1 — FOUNDATION</h2>
+      <em>2 rounds · 2 sessions · Sequential · Gates G0 + G1</em>
+    </div>
+    <div class="pb">
+      <div class="rl">ROUND 1 — Sequential (session must close before Round 2 starts)</div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P1-R1-S1</div>
+          <div class="st">STACK-AUDIT</div>
+          <div class="sd">G0 — LLM Stack Audit: K.1 model decision matrix (5 providers × 4 roles × cost/latency), K.2 NIM latency + toolChoice eval, K.3 author <code>MODEL_REGISTRY_v1_0.md</code>. Author 3 Ganga governance docs. Setup worktree: create <code>feature/ganga-umbrella</code> branch from main, <code>git worktree add /path/to/Ganga feature/ganga-umbrella</code>. Clean up stray <code>Madhav/Ganga/</code> subfolder (violates ROOT_FILE_POLICY).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Madhav/ · Working tree: /Apps/Ganga/ (created by this session)</div>
+        </div>
+      </div>
+
+      <div class="rl">ROUND 2 — Sequential (after Round 1 closes and is committed)</div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P1-R2-S1</div>
+          <div class="st">PLANNER-FIX</div>
+          <div class="sd">G1 — DeepSeek Model-ID Fix: <code>registry.ts</code> 6 targeted changes only. (1) <code>FAMILY_WORKER['deepseek']</code>: 'deepseek-v4-flash' → 'deepseek-chat'. (2) <code>STACK_ROUTING.deepseek.planner_fast.primary</code>. (3) <code>.context_assembly.primary</code>. (4) <code>.worker.primary</code>. (5) Un-deprecate deepseek-chat entry label/hint. (6) Add warning to deepseek-v4-flash entry. <code>tsc --noEmit</code> + <code>npm test</code> PASS. Do NOT touch <code>manifest_planner.ts</code>.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · File scope: platform/src/lib/models/registry.ts ONLY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cp">
+    <h3>⏱ OBSERVATION CHECKPOINT — 24 to 48 hours</h3>
+    <p>Watch live production traffic on <code>amjis-web-00044-sn5</code> · Confirm planner fires on DeepSeek stack (plan_json ≠ NULL in query_plan_log) · Confirm synthesis deepseek-v4-pro still unaffected · Confirm LLM-first planner hit rate improving</p>
+  </div>
+
+  <div class="arr">▼</div>
+
+  <!-- ═══════════════════════ PHASE 2 ═══════════════════════ -->
+  <div class="phase p2">
+    <div class="ph">
+      <h2>PHASE 2 — HARDENING</h2>
+      <em>3 rounds · 8 sessions · Max 4-way parallel · Gate G2</em>
+    </div>
+    <div class="pb">
+
+      <div class="rl">⚡ ROUND 1 — 4 PARALLEL <span class="badge">paste all 4 prompts simultaneously into Anti-Gravity</span></div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P2-R1-S1</div>
+          <div class="st">CI-GATE</div>
+          <div class="sd">A-series: CI/CD gate — <code>.github/workflows/ci.yml</code> + planner regression test suite. Mocked, no LLM calls, no secrets. PR gate on planner accuracy delta. planner_test_harness.ts mock fixtures.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R1-S1/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P2-R1-S2</div>
+          <div class="st">E2E-OBS</div>
+          <div class="sd">Live E2E observation — NO code changes. Root cause GT.002 ("spiritual domain" / "mantra" prompts) + GT.025 ("interesting about chart"). Document observed planner behavior. R14/R15 relaxation re-evaluation data collection.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R1-S2/ · Read-only observation</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P2-R1-S3</div>
+          <div class="st">PROMPT-EVAL</div>
+          <div class="sd">Planner prompt v1.7 — GT.002/GT.025 targeted few-shot fixes after E2E observation data. R14/R15 full re-evaluation. Recall + precision re-measurement vs v1.6 baseline (0.940/0.945). Update PLANNER_PROMPT_v1_0.md.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R1-S3/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P2-R1-S4</div>
+          <div class="st">DB-MIGRATIONS</div>
+          <div class="sd">Apply pending migrations 022–037 via Cloud SQL Auth Proxy. D-series: observatory telemetry tables, synthesis audit extensions, planner trace persistence. Migration smoke test after each apply.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R1-S4/ · Requires: Cloud SQL Auth Proxy running</div>
+        </div>
+      </div>
+
+      <div class="gd">↓ All 4 R1 sub-worktrees merge back to /Apps/Ganga/ · tsc --noEmit PASS on merged state · Then proceed to Round 2</div>
+
+      <div class="rl">⚡ ROUND 2 — 2 PARALLEL <span class="badge">2 simultaneous sessions</span></div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P2-R2-S1</div>
+          <div class="st">NIM-COMPAT</div>
+          <div class="sd">B-series: NIM stack compatibility — nemotron-49B tool-use hardening, <code>PlanInputJsonSchema</code> validation + error path, NIM-specific retry logic, toolChoice rejection graceful fallback. Verify NIM planner path end-to-end.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R2-S1/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P2-R2-S2</div>
+          <div class="st">CIRCUIT-BREAKER</div>
+          <div class="sd">C-series: Planner circuit breaker hardening — enhanced per-stack failure tracking, breaker half-open state, graceful degradation to <code>classify()</code>, circuit breaker metrics exposed to observatory.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R2-S2/</div>
+        </div>
+      </div>
+
+      <div class="gd">↓ R2 sub-worktrees merge to /Apps/Ganga/ before Round 3</div>
+
+      <div class="rl">⚡ ROUND 3 — 2 PARALLEL <span class="badge">2 simultaneous sessions</span></div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P2-R3-S1</div>
+          <div class="st">MON-DASHBOARD</div>
+          <div class="sd">F-series: Monitoring dashboard — LLM cost visibility per stack/model, planner hit/miss rate gauges, per-stack p50/p95 latency charts, circuit breaker status. Integrates with Observatory (<code>MARSYS_FLAG_OBSERVATORY_ENABLED=true</code>).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R3-S1/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P2-R3-S2</div>
+          <div class="st">PHASE11B-CLEAN</div>
+          <div class="sd">H-series: Legacy deletion — remove deprecated code paths, old LLM-first stubs, leftover Supabase remnants post-migration. ⚠️ HARD GATE: do not start before 7-day production soak from Planner-Fix deploy is confirmed.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P2-R3-S2/ · GATE: 7-day soak confirmation required</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="gate-full">🔀 GATE 2 → GATE 3 · Merge all P2 sub-worktrees → /Apps/Ganga/ · Full <code>tsc --noEmit</code> + <code>npm test</code> PASS required · Then start Phase 3</div>
+  <div class="arr">▼</div>
+
+  <!-- ═══════════════════════ PHASE 3 ═══════════════════════ -->
+  <div class="phase p3">
+    <div class="ph">
+      <h2>PHASE 3 — SYNTHESIS QUALITY</h2>
+      <em>4 rounds · 6 sessions · Workstream L (GAP.013–017) · Gate G3</em>
+    </div>
+    <div class="pb">
+
+      <div class="rl">⚡ ROUND 1 — 2 PARALLEL <span class="badge">2 simultaneous sessions</span></div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P3-R1-S1</div>
+          <div class="st">SYNTH-PROMPT</div>
+          <div class="sd">L.1: Synthesis prompt governance — author <code>SYNTHESIS_PROMPT_v1_0.md</code>. B.11 whole-chart-read protocol wire-in: MSR+UCN+CDLM+CGM+RM pre-read mandate. Layer traversal rules. Prompt versioning + evaluation criteria definition. Closes GAP.013 (zero synthesis governance).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P3-R1-S1/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P3-R1-S2</div>
+          <div class="st">EVAL-HARNESS</div>
+          <div class="sd">L.2: Answer eval harness — golden query set, synthesis scoring rubric (layer coverage, derivation ledger presence, citation completeness). Baseline recall/precision. <code>answer_eval.ts</code> + <code>npm run answer:eval</code> CLI. Closes GAP.014 (no answer eval).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P3-R1-S2/</div>
+        </div>
+      </div>
+
+      <div class="gd">↓ R1 sessions merge to /Apps/Ganga/ before Round 2</div>
+
+      <div class="rl">⚡ ROUND 2 — 2 PARALLEL <span class="badge">2 simultaneous sessions</span></div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P3-R2-S1</div>
+          <div class="st">B11-ENFORCE</div>
+          <div class="sd">L.3: B.11 runtime enforcement — L2.5 holistic-synthesis pre-check guard wired into <code>route.ts</code> + <code>single_model_strategy.ts</code>. Blocks synthesis pipeline if MSR/UCN/CDLM/CGM/RM routing was not attempted. Audit log on bypass. Closes GAP.015 (no B.11 runtime enforcement).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P3-R2-S1/</div>
+        </div>
+        <div class="sc">
+          <div class="si">GANGA-P3-R2-S2</div>
+          <div class="st">CTX-ASSEMBLER</div>
+          <div class="sd">L.4: Context assembler — <code>context_assembler.ts</code>: token budgeting per layer (L1/L2.5/L3), multi-layer context packing, synthesis window management, structured canonical artifact injection into synthesis prompt. Closes GAP.016 (no context assembler).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Creates: /Apps/Ganga-P3-R2-S2/</div>
+        </div>
+      </div>
+
+      <div class="gd">↓ R2 sessions merge to /Apps/Ganga/ before Round 3</div>
+
+      <div class="rl">ROUND 3 — Sequential (requires R1 + R2 merged into umbrella)</div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P3-R3-S1</div>
+          <div class="st">CALIBRATION</div>
+          <div class="sd">L.5: Calibration substrate — wire prediction logging into synthesis flow. Confidence calibration + uncertainty quantification per prediction. Temporal prediction hooks with horizon + falsifier. Prospective sacrosanct rule (held-out data never seen before prediction). Closes GAP.017 (calibration not wired).</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Working tree: /Apps/Ganga/ (umbrella, sequential)</div>
+        </div>
+      </div>
+
+      <div class="rl">ROUND 4 — Sequential (integration + full eval run)</div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P3-R4-S1</div>
+          <div class="st">SYNTH-INTEGRATION</div>
+          <div class="sd">End-to-end synthesis stack integration eval — run full golden-set against live stack. Pass threshold: ≥ 80% scoring rubric. Merge all P3 sub-worktrees → /Apps/Ganga/. Full <code>tsc --noEmit</code> + <code>npm test</code> + <code>npm run answer:eval</code> suite. Gate G3 evaluation artifact authored.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ · Post-merge integration run on umbrella</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="gate-full">🔀 GATE 3 → GATE 4 · Eval PASS ≥ 80% required · Merge /Apps/Ganga/ → main · Deploy new production revision · Verify live</div>
+  <div class="arr">▼</div>
+
+  <!-- ═══════════════════════ PHASE 4 ═══════════════════════ -->
+  <div class="phase p4">
+    <div class="ph">
+      <h2>PHASE 4 — CLOSE</h2>
+      <em>1 round · 1 session · Sequential · Gate G4 · Project close</em>
+    </div>
+    <div class="pb">
+      <div class="rl">ROUND 1 — Sequential (final project close session)</div>
+      <div class="row">
+        <div class="sc">
+          <div class="si">GANGA-P4-R1-S1</div>
+          <div class="st">GANGA-CLOSE</div>
+          <div class="sd">G4 Integration + Close — final <code>tsc --noEmit</code> + full <code>npm test</code> + E2E smoke test. Mark all 114 <code>GANGA_PHASE_TRACKER.md</code> items ✅ COMPLETE. Update <code>CLAUDECODE_BRIEF.md</code> (root) to remove Ganga routing. Update <code>CURRENT_STATE_v1_0.md</code>. Seal <code>PROJECT_GANGA_PLAN_v1_0.md</code> as COMPLETE. Merge /Apps/Ganga/ → main with final gate commit. Delete umbrella worktree + branch. Append final entry to <code>PROJECT_GANGA_SESSION_LOG.md</code>.</div>
+          <div class="sw">Open Anti-Gravity at: /Apps/Ganga/ → merges to main → worktree deleted at close</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">MARSYS-JIS · Project Ganga Execution Plan v1.0 · Generated 2026-05-04 · 00_ARCHITECTURE/GANGA_EXECUTION_PLAN_v1_0.html</div>
+
+</body>
+</html>

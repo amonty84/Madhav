@@ -4814,7 +4814,9 @@ current_state:
       closing_artifact: 00_ARCHITECTURE/GANGA_CLOSE_v1_0.md
       umbrella_branch: feature/ganga-umbrella
       merge_status: MERGED_TO_MAIN                 # All sub-branches merged to main by 2026-05-05
-      key_commits: [e4ea6e7, 722a401, 5eeb39d, 2eea11a, 52578b4, 103a4be, 6f9d86c, 03d3031]
+      key_commits: [e4ea6e7, 722a401, 5eeb39d, 2eea11a, 52578b4, 103a4be, 6f9d86c, 03d3031, 797b5e3, f19cf32]
+      deferred_branch: feature/ganga-deferred
+      deferred_branch_commit: 7f49fae  # DEF-1 NIM timeout 30s + DEF-2 compose_bundle fix + close artifact update
       eval_baseline_anthropic:
         as_of: 2026-05-05
         stack: anthropic

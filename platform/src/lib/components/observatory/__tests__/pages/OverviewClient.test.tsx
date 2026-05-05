@@ -85,9 +85,9 @@ describe('OverviewClient (S1.13 wiring)', () => {
       expect(api.getBreakdowns).toHaveBeenCalledTimes(3)
     })
 
-    // Empty-state markers from the chart components surface after fetch resolves.
+    // When total_requests === 0, the overview shows the empty state instead of charts.
     await waitFor(() => {
-      expect(screen.getByTestId('cost-over-time-empty')).toBeInTheDocument()
+      expect(screen.getByTestId('observatory-empty-state')).toBeInTheDocument()
     })
   })
 

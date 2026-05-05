@@ -17,6 +17,9 @@
 import { generateText } from 'ai'
 import { resolveModel } from '@/lib/models/resolver'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
+import { persistObservation, computeCost } from '@/lib/llm/observability'
+import { getStorageClient } from '@/lib/storage'
+import type { ProviderName, TokenUsage } from '@/lib/llm/observability/types'
 
 const MAX_TURNS = 2
 const MAX_TOKENS_PER_TURN = 300
@@ -91,6 +94,7 @@ async function summarizeHistory(
     throw err
   } finally {
     if (queryId) {
+      const latency_ms = Date.now() - start
       void writeLlmCallLog({
         query_id: queryId,
         conversation_id: null,
@@ -100,12 +104,53 @@ async function summarizeHistory(
         input_tokens: usage?.inputTokens ?? null,
         output_tokens: usage?.outputTokens ?? null,
         reasoning_tokens: null,
-        latency_ms: Date.now() - start,
+        latency_ms,
         cost_usd: null,
         fallback_used: false,
         error_code: errorCode,
         payload: null,
       })
+      // OBS-S1: Observatory per-call telemetry (history_summary stage)
+      {
+        const obsStartedAt = new Date(start)
+        const obsFinishedAt = new Date(start + latency_ms)
+        const obsUsage: TokenUsage = {
+          input_tokens: usage?.inputTokens ?? 0,
+          output_tokens: usage?.outputTokens ?? 0,
+          cache_read_tokens: 0,
+          cache_write_tokens: 0,
+          reasoning_tokens: 0,
+        }
+        const obsProvider = (resolveProvider(workerModelId) ?? 'unknown') as ProviderName
+        const obsDb = getStorageClient()
+        void (async () => {
+          const costResult = await computeCost(obsProvider, workerModelId, obsUsage, obsStartedAt, obsDb).catch(() => null)
+          await persistObservation(
+            {
+              provider: obsProvider,
+              model: workerModelId,
+              prompt_text: null,
+              system_prompt: null,
+              parameters: { model: workerModelId },
+              conversation_id: queryId,
+              conversation_name: null,
+              prompt_id: `${queryId}:history_summary`,
+              user_id: 'native',
+              pipeline_stage: 'history_summary',
+            },
+            {
+              response_text: null,
+              usage: obsUsage,
+              status: errorCode ? 'error' : 'success',
+              error_code: errorCode ?? undefined,
+              started_at: obsStartedAt,
+              finished_at: obsFinishedAt,
+            },
+            costResult,
+            obsDb,
+          )
+        })()
+      }
     }
   }
 

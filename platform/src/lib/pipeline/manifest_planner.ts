@@ -33,6 +33,10 @@ import {
 import { buildPlannerContext } from '@/lib/pipeline/planner_context_builder'
 import type { PlanningStartEvent, PlanningDoneEvent, TraceEvent } from '@/lib/trace/types'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
+import { writePlanAlternatives } from '@/lib/db/trace/plan_alternatives_writer'
+import { persistObservation, computeCost } from '@/lib/llm/observability'
+import { getStorageClient } from '@/lib/storage'
+import type { ProviderName, TokenUsage } from '@/lib/llm/observability/types'
 
 // ────────────────────────────────────────────────────────────────────────────
 // PlanSchema (TS) + PlannerError
@@ -467,6 +471,55 @@ export async function callLlmPlanner(
     })
   }
 
+  // OBS-S1: Observatory per-call telemetry (planner stage)
+
+  // Fire-and-forget — must not add latency to the planning path.
+  {
+    const obsStartedAt = new Date(start)
+    const obsFinishedAt = new Date(start + latency_ms)
+    const obsUsage: TokenUsage = {
+      input_tokens: result.usage?.inputTokens ?? 0,
+      output_tokens: result.usage?.outputTokens ?? 0,
+      cache_read_tokens: 0,
+      cache_write_tokens: 0,
+      reasoning_tokens: 0,
+    }
+    const obsProvider = (resolveProvider(activeModelId) ?? 'unknown') as ProviderName
+    const obsDb = getStorageClient()
+    void (async () => {
+      const costResult = await computeCost(
+        obsProvider,
+        activeModelId,
+        obsUsage,
+        obsStartedAt,
+        obsDb,
+      ).catch(() => null)
+      await persistObservation(
+        {
+          provider: obsProvider,
+          model: activeModelId,
+          prompt_text: null,
+          system_prompt: null,
+          parameters: { model: activeModelId, temperature: 0, fallback_used: fallbackWasUsed },
+          conversation_id: queryId ?? nativeId,
+          conversation_name: null,
+          prompt_id: `${queryId ?? nativeId}:planner`,
+          user_id: 'native',
+          pipeline_stage: 'planner',
+        },
+        {
+          response_text: null,
+          usage: obsUsage,
+          status: 'success',
+          started_at: obsStartedAt,
+          finished_at: obsFinishedAt,
+        },
+        costResult,
+        obsDb,
+      )
+    })()
+  }
+
   const submitCall = result.toolCalls.find(tc => tc.toolName === 'submit_plan')
   if (!submitCall) {
     const errMsg = `LLM planner did not produce a submit_plan tool call (toolCalls=${result.toolCalls.length}, finishReason=${result.finishReason})`
@@ -560,6 +613,24 @@ export async function callLlmPlanner(
     query_intent_summary: parsed.data.query_intent_summary,
     planner_latency_ms: latency_ms,
   })
+
+  // TRACE-T1: Emit plan alternatives for selected tool_calls.
+  // PlanSchema only carries selected tools (tool_calls[]); there is no
+  // excluded_bundles field in the current schema.
+  // TODO(TRACE-T2): when the planner prompt is extended to return rejected bundles,
+  // add excluded_bundles here.
+  if (queryId) {
+    const obsDb = getStorageClient()
+    writePlanAlternatives(
+      parsed.data.tool_calls.map(tc => ({
+        query_id: queryId,
+        bundle_name: tc.tool_name,
+        was_selected: true,
+        rationale: tc.reason,
+      })),
+      obsDb,
+    )
+  }
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(

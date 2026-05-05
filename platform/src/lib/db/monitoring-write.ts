@@ -27,8 +27,11 @@ export async function writeLlmCallLog(
       `INSERT INTO llm_call_log
         (query_id, conversation_id, call_stage, model_id, provider,
          input_tokens, output_tokens, reasoning_tokens, latency_ms,
-         cost_usd, fallback_used, error_code, payload)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+         cost_usd, fallback_used, error_code, payload,
+         decision_alternatives, decision_reasoning,
+         prompt_template_id, prompt_template_version, parent_call_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
+               $14, $15, $16, $17, $18)`,
       [
         row.query_id,
         row.conversation_id,
@@ -43,6 +46,12 @@ export async function writeLlmCallLog(
         row.fallback_used,
         row.error_code,
         row.payload === null || row.payload === undefined ? null : JSON.stringify(row.payload),
+        row.decision_alternatives === null || row.decision_alternatives === undefined
+          ? null : JSON.stringify(row.decision_alternatives),
+        row.decision_reasoning ?? null,
+        row.prompt_template_id ?? null,
+        row.prompt_template_version ?? null,
+        row.parent_call_id ?? null,
       ]
     )
   } catch (err) {
@@ -89,8 +98,11 @@ export async function writeToolExecutionLog(
       `INSERT INTO tool_execution_log
         (query_id, tool_name, params_json, status, rows_returned, latency_ms,
          token_estimate, data_asset_id, error_code, served_from_cache,
-         fallback_used)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+         fallback_used,
+         raw_result_count, kept_result_count, dropped_items, kept_items,
+         tool_input_payload, tool_output_summary, error_class)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,
+               $12, $13, $14, $15, $16, $17, $18)`,
       [
         row.query_id,
         row.tool_name,
@@ -103,6 +115,17 @@ export async function writeToolExecutionLog(
         row.error_code,
         row.served_from_cache,
         row.fallback_used,
+        row.raw_result_count ?? null,
+        row.kept_result_count ?? null,
+        row.dropped_items === null || row.dropped_items === undefined
+          ? null : JSON.stringify(row.dropped_items),
+        row.kept_items === null || row.kept_items === undefined
+          ? null : JSON.stringify(row.kept_items),
+        row.tool_input_payload === null || row.tool_input_payload === undefined
+          ? null : JSON.stringify(row.tool_input_payload),
+        row.tool_output_summary === null || row.tool_output_summary === undefined
+          ? null : JSON.stringify(row.tool_output_summary),
+        row.error_class ?? 'OK',
       ]
     )
   } catch (err) {
@@ -158,14 +181,61 @@ export async function writeObservatoryQueryEvent(
     const responseText = input.responseText !== null && input.responseText.length > 4000
       ? input.responseText.slice(0, 4000)
       : input.responseText
+
+    const inputTokens = input.inputTokens ?? null
+    const outputTokens = input.outputTokens ?? null
+    const cacheReadTokens = input.cacheReadTokens ?? null
+    const cacheWriteTokens = input.cacheWriteTokens ?? null
+    const reasoningTokens = input.reasoningTokens ?? null
+
+    // Compute cost from pricing table when token counts are available
+    let computedCostUsd: number | null = null
+    let pricingVersionId: string | null = null
+    if (inputTokens !== null && outputTokens !== null) {
+      try {
+        const db = getStorageClient()
+        const pricingRows = await db.query<{
+          pricing_version_id: string
+          token_class: string
+          price_per_million_usd: number
+        }>(
+          `SELECT pricing_version_id, token_class, price_per_million_usd
+           FROM llm_pricing_versions
+           WHERE provider = $1 AND model = $2
+             AND effective_from <= $3
+             AND (effective_to IS NULL OR effective_to > $3)`,
+          [provider, input.modelId, input.setupStart.toISOString()]
+        )
+        if (pricingRows.rows.length > 0) {
+          const tokenMap: Record<string, number | null> = {
+            input: inputTokens,
+            output: outputTokens,
+            cache_read: cacheReadTokens,
+            cache_write: cacheWriteTokens,
+            reasoning: reasoningTokens,
+          }
+          let total = 0
+          for (const row of pricingRows.rows) {
+            const tokens = tokenMap[row.token_class] ?? 0
+            if (tokens > 0) total += (tokens / 1_000_000) * row.price_per_million_usd
+            if (row.token_class === 'input') pricingVersionId = row.pricing_version_id
+            else pricingVersionId ??= row.pricing_version_id
+          }
+          computedCostUsd = total
+        }
+      } catch {
+        // pricing lookup failure is non-fatal
+      }
+    }
+
     await getStorageClient().query(
       `INSERT INTO llm_usage_events
         (conversation_id, prompt_id, user_id, provider, model, pipeline_stage,
          prompt_text, response_text, status, latency_ms, started_at, finished_at,
          parameters, input_tokens, output_tokens, cache_read_tokens,
-         cache_write_tokens, reasoning_tokens)
+         cache_write_tokens, reasoning_tokens, computed_cost_usd, pricing_version_id)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
-               NULL, NULL, NULL, NULL, NULL)
+               $14, $15, $16, $17, $18, $19, $20)
        ON CONFLICT (prompt_id) DO NOTHING`,
       [
         input.conversationId ?? 'unknown',
@@ -181,6 +251,13 @@ export async function writeObservatoryQueryEvent(
         input.setupStart,
         now,
         JSON.stringify({ query_class: input.queryClass, stack: input.stack }),
+        inputTokens,
+        outputTokens,
+        cacheReadTokens,
+        cacheWriteTokens,
+        reasoningTokens,
+        computedCostUsd,
+        pricingVersionId,
       ]
     )
   } catch (err) {

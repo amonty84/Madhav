@@ -108,6 +108,27 @@ const PRICING_V1: PricingSeedRow[] = [
 
   { provider: 'nim', model: 'meta/llama-3.3-70b-instruct',  token_class: 'input',  price_per_million_usd: 0.90, source_url: 'https://build.nvidia.com' },
   { provider: 'nim', model: 'meta/llama-3.3-70b-instruct',  token_class: 'output', price_per_million_usd: 0.90, source_url: 'https://build.nvidia.com' },
+
+  // ---------------------------------------------------------------------------
+  // Additional model aliases — real model IDs observed in llm_usage_events that
+  // differ from the canonical names above. Rates mirror the closest canonical.
+  // ---------------------------------------------------------------------------
+
+  // claude-opus-4-7: same price tier as claude-opus-4-6 until Anthropic publishes
+  // separate pricing. Update when official rates are available.
+  { provider: 'anthropic', model: 'claude-opus-4-7',   token_class: 'input',       price_per_million_usd: 15.00, source_url: 'https://www.anthropic.com/pricing' },
+  { provider: 'anthropic', model: 'claude-opus-4-7',   token_class: 'output',      price_per_million_usd: 75.00, source_url: 'https://www.anthropic.com/pricing' },
+  { provider: 'anthropic', model: 'claude-opus-4-7',   token_class: 'cache_write', price_per_million_usd: 18.75, source_url: 'https://www.anthropic.com/pricing' },
+  { provider: 'anthropic', model: 'claude-opus-4-7',   token_class: 'cache_read',  price_per_million_usd:  1.50, source_url: 'https://www.anthropic.com/pricing' },
+
+  // deepseek-v4-pro: mirrors deepseek-chat rates until DeepSeek publishes V4 pricing.
+  { provider: 'deepseek', model: 'deepseek-v4-pro', token_class: 'input',      price_per_million_usd: 0.27, source_url: 'https://api-docs.deepseek.com/quick_start/pricing' },
+  { provider: 'deepseek', model: 'deepseek-v4-pro', token_class: 'output',     price_per_million_usd: 1.10, source_url: 'https://api-docs.deepseek.com/quick_start/pricing' },
+  { provider: 'deepseek', model: 'deepseek-v4-pro', token_class: 'cache_read', price_per_million_usd: 0.07, source_url: 'https://api-docs.deepseek.com/quick_start/pricing' },
+
+  // nvidia/nemotron-3-super-120b-a12b: mirrors llama-405b managed catalog tier.
+  { provider: 'nim', model: 'nvidia/nemotron-3-super-120b-a12b', token_class: 'input',  price_per_million_usd: 3.00, source_url: 'https://build.nvidia.com' },
+  { provider: 'nim', model: 'nvidia/nemotron-3-super-120b-a12b', token_class: 'output', price_per_million_usd: 3.00, source_url: 'https://build.nvidia.com' },
 ]
 
 export async function seedObservatoryPricingV1(): Promise<{

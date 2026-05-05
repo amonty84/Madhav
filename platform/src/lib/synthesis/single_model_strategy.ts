@@ -39,6 +39,9 @@ import type { Checkpoint45Result, Checkpoint55Result, Checkpoint85Result } from 
 import { countSignalCitations } from './citation_check'
 import { runAll } from '@/lib/validators/index'
 import { writeLlmCallLog, resolveProvider } from '@/lib/db/monitoring-write'
+import { persistObservation, computeCost } from '@/lib/llm/observability'
+import { getStorageClient } from '@/lib/storage'
+import type { ProviderName, TokenUsage } from '@/lib/llm/observability/types'
 import { checkB11Compliance } from './b11_guard'
 import { assembleContext, type LayerContext } from './context_assembler'
 
@@ -48,6 +51,7 @@ import type {
   SynthesisMetadata,
   SynthesisAuditEvent,
   SynthesisOrchestrator,
+  SynthesisUsage,
 } from './types'
 
 // Token-budget constants for pre-fetched content injection (FUB-2 + FUB-3)
@@ -357,6 +361,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
     // Populated synchronously at the top of onFinish (before any await), so
     // it is set by the time the 'finish' SSE part fires in toUIMessageStreamResponse.
     const methodologyBlockHolder: { value: string | null } = { value: null }
+    const usageHolder: { value: SynthesisUsage | null } = { value: null }
 
     // UQE-16 — Per-style output token cap. Prevents over-elaboration by capping
     // the synthesis response at a style-appropriate ceiling well below the model's
@@ -473,6 +478,16 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           cleanText = cleanText.replace(mbMatch[0], '').trim()
         }
 
+        // Synchronously capture token counts before any await — matches the
+        // methodologyBlockHolder pattern so the outer onFinish can forward them
+        // to writeObservatoryQueryEvent for cost computation.
+        usageHolder.value = {
+          inputTokens: usage?.inputTokens,
+          outputTokens: usage?.outputTokens,
+          cacheReadInputTokens: (usage as { cacheReadInputTokens?: number })?.cacheReadInputTokens,
+          cacheCreationInputTokens: (usage as { cacheCreationInputTokens?: number })?.cacheCreationInputTokens,
+        }
+
         // ── Trace: synthesis done ─────────────────────────────────────────────
         // Fire-and-forget — never awaited.
         {
@@ -550,6 +565,55 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
           payload: null,
         })
 
+        // OBS-S1: Observatory per-call telemetry (synthesis stage)
+        // Fire-and-forget — must not block the response stream.
+        {
+          const obsStartedAt = new Date(synthesisStartMs)
+          const obsFinishedAt = new Date(synthesisStartMs + synthesisLatencyMs)
+          const obsUsage: TokenUsage = {
+            input_tokens: usage?.inputTokens ?? 0,
+            output_tokens: usage?.outputTokens ?? 0,
+            cache_read_tokens: (usage as { cacheReadInputTokens?: number })?.cacheReadInputTokens ?? 0,
+            cache_write_tokens: (usage as { cacheCreationInputTokens?: number })?.cacheCreationInputTokens ?? 0,
+            reasoning_tokens: isThinkingModel && r1Reasoning ? Math.ceil(r1Reasoning.length / 4) : 0,
+          }
+          const obsProvider = (resolveProvider(selected_model_id) ?? 'unknown') as ProviderName
+          const obsDb = getStorageClient()
+          void (async () => {
+            const costResult = await computeCost(
+              obsProvider,
+              selected_model_id,
+              obsUsage,
+              obsStartedAt,
+              obsDb,
+            ).catch(() => null)
+            await persistObservation(
+              {
+                provider: obsProvider,
+                model: selected_model_id,
+                prompt_text: null,
+                system_prompt: null,
+                parameters: { model: selected_model_id, temperature: synthesisTemperature },
+                conversation_id: conversation_id ?? query_plan.query_plan_id,
+                conversation_name: null,
+                prompt_id: `${query_plan.query_plan_id}:synthesis`,
+                user_id: 'native',
+                pipeline_stage: 'synthesize',
+              },
+              {
+                response_text: null,
+                usage: obsUsage,
+                status: finishReason === 'error' ? 'error' : 'success',
+                error_code: finishReason === 'error' ? finishReason : undefined,
+                started_at: obsStartedAt,
+                finished_at: obsFinishedAt,
+              },
+              costResult,
+              obsDb,
+            )
+          })()
+        }
+
         // ── Hook 3: Checkpoint 8.5 (post-synthesize) ─────────────────────────
         // Runs async in onFinish after stream completes. Halt verdict is logged
         // to telemetry but cannot stop the response already sent to the user;
@@ -604,7 +668,7 @@ export class SingleModelOrchestrator implements SynthesisOrchestrator {
       },
     })
 
-    return { result, metadata, methodologyBlockHolder }
+    return { result, metadata, methodologyBlockHolder, usageHolder }
   }
 }
 
